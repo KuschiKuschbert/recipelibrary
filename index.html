@@ -523,13 +523,15 @@ async function loadData() {
 }
 
 // ── Filter Setup ──────────────────────────────────────
+function toArr(v) { return Array.isArray(v) ? v : []; }
+
 function buildFilters() {
   const cuisines = new Set(), proteins = new Set(), tags = new Set(), cats = new Set();
   for (const r of allRecipes) {
-    if (r.cui) cuisines.add(r.cui);
-    if (r.protein) r.protein.forEach(p => proteins.add(p));
-    if (r.tags) r.tags.forEach(t => { if (typeof t === 'string') tags.add(t); });
-    if (r.cat) cats.add(r.cat);
+    if (r.cui && typeof r.cui === 'string') cuisines.add(r.cui);
+    toArr(r.protein).forEach(p => { if (p) proteins.add(p); });
+    toArr(r.tags).forEach(t => { if (typeof t === 'string') tags.add(t); });
+    if (r.cat && typeof r.cat === 'string') cats.add(r.cat);
   }
   fillSelect('filterCuisine', [...cuisines].sort(), 'Cuisine');
   fillSelect('filterProtein', [...proteins].sort(), 'Protein');
@@ -565,12 +567,12 @@ function applyFilters() {
 
   filtered = allRecipes.filter(r => {
     if (terms.length) {
-      const hay = [r.name||'', r.cui||'', ...(r.protein||[]), ...(r.tags||[]), ...(r.ing||[]), r.cat||''].join(' ').toLowerCase();
+      const hay = [r.name||'', r.cui||'', ...toArr(r.protein), ...toArr(r.tags), ...toArr(r.ing), r.cat||''].join(' ').toLowerCase();
       if (!terms.every(t => hay.includes(t))) return false;
     }
     if (cuisine && r.cui !== cuisine) return false;
-    if (protein && !(r.protein||[]).includes(protein)) return false;
-    if (tag && !(r.tags||[]).includes(tag)) return false;
+    if (protein && !toArr(r.protein).includes(protein)) return false;
+    if (tag && !toArr(r.tags).includes(tag)) return false;
     if (cat && r.cat !== cat) return false;
     return true;
   });
@@ -607,11 +609,13 @@ function cardHTML(r) {
   const cui = r.cui ? `<div class="card-cuisine">${esc(r.cui)}</div>` : '';
 
   let badges = '';
-  if (r.protein && r.protein.length) {
-    badges += r.protein.map(p => `<span class="badge badge-protein">${esc(p)}</span>`).join('');
+  const rProteins = toArr(r.protein);
+  const rTags = toArr(r.tags);
+  if (rProteins.length) {
+    badges += rProteins.map(p => `<span class="badge badge-protein">${esc(p)}</span>`).join('');
   }
-  if (r.tags && r.tags.length) {
-    badges += r.tags.filter(t => typeof t === 'string').slice(0, 3)
+  if (rTags.length) {
+    badges += rTags.filter(t => typeof t === 'string').slice(0, 3)
       .map(t => `<span class="badge badge-tag">${esc(t)}</span>`).join('');
   }
   if (r.cat) badges += `<span class="badge badge-cat">${esc(r.cat)}</span>`;
