@@ -471,42 +471,42 @@ let filtered = [];
 let currentPage = 1;
 
 // ── Data Loading ──────────────────────────────────────
+const INDEX_FILES = [
+  'claude_index_01_H-B.json',
+  'claude_index_02_B.json',
+  'claude_index_03_B-C.json',
+  'claude_index_04_C.json',
+  'claude_index_05_C-F.json',
+  'claude_index_06_F-G.json',
+  'claude_index_07_G-I.json',
+  'claude_index_08_I-M.json',
+  'claude_index_09_M-O.json',
+  'claude_index_10_O-P.json',
+  'claude_index_11_P-R.json',
+  'claude_index_12_R-S.json',
+  'claude_index_13_S.json',
+  'claude_index_14_S-V.json',
+  'claude_index_15_V-T.json',
+];
+
 async function loadData() {
   const base = window.location.href.replace(/\/[^/]*$/, '');
+  const all = [];
+  let loaded = 0;
+  const loadingText = document.querySelector('.loading-text');
 
-  // Known index file patterns — try zero-padded and non-padded with all known range labels
-  const ranges = [
-    'H-B','B','B-C','C','C-F','F-G','G-I','I-M','M-O',
-    'O-P','P-R','R-S','S','S-V','V-T',
-    'A-B','A-C','A-G','G-S','S-Z','T-Z','U-Z',
-    'Z-B','D-G','G-H','H-L','L-N','N-P','S-T','C-D','G-A','A-B','B-C'
-  ];
-
-  const candidates = new Set();
-  for (let i = 1; i <= 21; i++) {
-    const pad = i.toString().padStart(2, '0');
-    for (const r of ranges) {
-      candidates.add(`${base}/claude_index/claude_index_${pad}_${r}.json`);
-      candidates.add(`${base}/claude_index/claude_index_${i}_${r}.json`);
-    }
-  }
-
-  // HEAD-check all candidates in parallel
-  const found = [];
-  const checks = await Promise.allSettled(
-    [...candidates].map(url =>
-      fetch(url, { method: 'HEAD' }).then(r => r.ok ? url : null)
+  const fetches = await Promise.allSettled(
+    INDEX_FILES.map(f =>
+      fetch(`${base}/claude_index/${f}`)
+        .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(data => {
+          loaded++;
+          if (loadingText) loadingText.textContent = `Loading recipes... (${loaded}/${INDEX_FILES.length} files)`;
+          return data;
+        })
     )
   );
-  for (const c of checks) {
-    if (c.status === 'fulfilled' && c.value) found.push(c.value);
-  }
 
-  // Fetch actual data
-  const all = [];
-  const fetches = await Promise.allSettled(
-    found.sort().map(url => fetch(url).then(r => r.json()))
-  );
   for (const f of fetches) {
     if (f.status === 'fulfilled' && f.value && f.value.recipes) {
       all.push(...f.value.recipes);
