@@ -2,10 +2,6 @@
 .DS_Store
 Thumbs.db
 
-# Full library files — too large for Git without LFS
-# Add these via Git LFS or keep in Google Drive
-../../kitchen_library_*.json
-
 # Temp
 *.tmp
 *.log
