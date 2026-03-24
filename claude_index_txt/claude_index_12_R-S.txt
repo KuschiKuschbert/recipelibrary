@@ -1,6 +1,6 @@
 KUSCHI KITCHEN LIBRARY — Part 12/15 (R-S) — 1600 recipes
 Format: Name  [Category] [Cuisine] [p:protein] [t:tags] ingredients
-──────────────────────────────────────────────────────
+───────────────────────────────────────────────────────
 
 Rosemary, Bacon, And Tomato Frittata  [Breakfast] [American] [p:beef,pork,egg] [t:vegetarian,gluten-free]  ›  Red potatoes · Eggs · Grated parmesan cheese · Milk · Minced fresh rosemary · Salt and ground black pepper to taste · Bacon · Tomato
 Rosemary- And Parmesan-crusted Pork Chops  [Dinner] [American] [p:pork,egg]  ›  Cooking spray · All-purpose flour · Egg · Dry bread crumbs · Grated parmesan cheese · Dried rosemary · Ground paprika · Salt and ground black pepper to taste

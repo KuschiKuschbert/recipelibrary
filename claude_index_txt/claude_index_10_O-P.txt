@@ -1,6 +1,6 @@
 KUSCHI KITCHEN LIBRARY — Part 10/15 (O-P) — 1600 recipes
 Format: Name  [Category] [Cuisine] [p:protein] [t:tags] ingredients
-──────────────────────────────────────────────────────
+───────────────────────────────────────────────────────
 
 One-pan Roasted Veggie Salad Bowl  [Meal] [American] [t:vegetarian,vegan,gluten-free]  ›  Sweet potato · Cauliflower florets · Brussels sprouts · Olive oil · Salt · Pepper · Garlic powder · Mixed greens
 One-pan Salmon And Egg Bake  [Dinner] [American] [p:beef,seafood,egg] [t:gluten-free]  ›  Salmon · Egg · Olive oil · Spinach · Garlic · Lemon · Salt · Pepper

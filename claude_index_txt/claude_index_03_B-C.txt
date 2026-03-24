@@ -1,6 +1,6 @@
 KUSCHI KITCHEN LIBRARY — Part 3/15 (B-C) — 1600 recipes
 Format: Name  [Category] [Cuisine] [p:protein] [t:tags] ingredients
-──────────────────────────────────────────────────────
+───────────────────────────────────────────────────────
 
 Butter Mochi Cupcakes  [Dessert] [Pacific] [p:egg] [t:vegetarian,gluten-free]  ›  Box mochiko · Powdered sugar · Baking powder · Stick unsalted butter · Coconut milk · Evaporated milk · Eggs · Vanilla extract
 Butter Noodles  [] [p:egg] [t:vegetarian]  ›  Eggs · Butter · All-purpose flour · Salt · Baking powder

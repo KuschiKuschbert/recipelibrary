@@ -1,6 +1,6 @@
 KUSCHI KITCHEN LIBRARY — Part 2/15 (B) — 1600 recipes
 Format: Name  [Category] [Cuisine] [p:protein] [t:tags] ingredients
-──────────────────────────────────────────────────────
+───────────────────────────────────────────────────────
 
 Banana, Date And Walnut Muffins  [Breakfast] [American] [p:egg] [t:vegetarian]  ›  Whole wheat flour · White sugar · Old-fashioned oats · Baking powder · Baking soda · Ground cinnamon · Ripe · Eggs
 Banana, Peanut Butter & Nutty Chocolate Madeleines  [Snacks] [European] [p:egg] [t:vegetarian]  ›  All-purpose flour · Overripe bananas · Bar nutty chocolate · Eggs · Peanut butter · Milk · Brown sugar

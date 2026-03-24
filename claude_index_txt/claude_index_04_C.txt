@@ -1,6 +1,6 @@
 KUSCHI KITCHEN LIBRARY — Part 4/15 (C) — 1600 recipes
 Format: Name  [Category] [Cuisine] [p:protein] [t:tags] ingredients
-──────────────────────────────────────────────────────
+───────────────────────────────────────────────────────
 
 Chicken Salad With Crème Fraîche And Rye  [] [p:chicken]  ›  Skin-on · Olive oil · Kosher salt and freshly ground black pepper · Fresh fava beans (from about  0.75 lb. pods) or frozen · Fennel bulb · Scallion · Coarsely chopped fresh tarragon · Sherry vinegar or red wine vinegar
 Chicken Salad With Haricots Verts  [] [p:chicken] [t:gluten-free]  ›  Fennel seeds · Herbes de provence · Kosher salt · 0.5–4-lb. chicken · Small waxy potatoes · . haricots verts · Shallot · 0.5 garlic clove

@@ -1,6 +1,6 @@
 KUSCHI KITCHEN LIBRARY — Part 8/15 (I-M) — 1600 recipes
 Format: Name  [Category] [Cuisine] [p:protein] [t:tags] ingredients
-──────────────────────────────────────────────────────
+───────────────────────────────────────────────────────
 
 Instant Pot No-bean Turkey Chili  [Dinner] [p:pork,turkey] [t:gluten-free]  ›  Ground turkey · Turkey italian sausage · Diced tomatoes · Condensed tomato soup · Chili seasoning mix · Garlic powder · Cumin · Smoked paprika
 Instant Pot Nola Red Beans And Rice  [Dinner] [Southern] [p:chicken,beef,pork,offal] [t:gluten-free]  ›  Olive oil · Pork neck bones · Bacon · Green pepper · Celery · Onion · Ground white pepper · Ground thyme

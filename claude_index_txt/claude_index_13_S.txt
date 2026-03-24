@@ -1,6 +1,6 @@
 KUSCHI KITCHEN LIBRARY — Part 13/15 (S) — 1600 recipes
 Format: Name  [Category] [Cuisine] [p:protein] [t:tags] ingredients
-──────────────────────────────────────────────────────
+───────────────────────────────────────────────────────
 
 Smoky Tangy Greens And Beans  [] [p:chicken,pork] [t:gluten-free]  ›  Unsalted butter · Coarse fresh breadcrumbs · Kosher salt · Vegetable oil · Smoked bacon · Onion · Of garlic · Crushed red pepper flakes
 Smoky Tomato Sauce  [] [p:seafood]  ›  Ripe tomatoes · Anchovy fillets packed in oil · Garlic clove · Harissa paste · Red wine vinegar · Extra-virgin olive oil plus more for serving · Kosher salt · Freshly ground pepper

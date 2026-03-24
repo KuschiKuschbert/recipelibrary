@@ -1,6 +1,6 @@
 KUSCHI KITCHEN LIBRARY — Part 5/15 (C-F) — 1600 recipes
 Format: Name  [Category] [Cuisine] [p:protein] [t:tags] ingredients
-──────────────────────────────────────────────────────
+───────────────────────────────────────────────────────
 
 Cranberry-chipotle Fruit Conserve  [] [t:vegetarian,vegan,gluten-free]  ›  Pure maple syrup · Water · Apple cider vinegar · Chopped dried apricots · Chopped dried peaches · Sweetend dried cranberries · Garlic cloves · Salt
 Cranberry-fig Sauce  [] [t:vegetarian,gluten-free]  ›  . unsalted butter · Shallot · . finely chopped rosemary · . fresh (or frozen) cranberries · . dried turkish figs · (packed) light brown sugar · Balsamic vinegar · Kosher salt
