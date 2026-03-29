@@ -353,7 +353,30 @@ body {
   text-transform: uppercase; color: var(--gold);
   margin-bottom: 12px; opacity: 0.8;
 }
-.modal-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+.modal-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.modal-scale {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 20px;
+}
+.modal-scale label { font-size: 12px; color: var(--text3); white-space: nowrap; }
+.modal-scale input {
+  width: 72px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 13px;
+  font-family: inherit;
+}
+.modal-scale input:focus { outline: none; border-color: var(--gold); }
+.modal-scale-factor { font-size: 12px; color: var(--gold); font-style: italic; }
 .modal-section {
   font-size: 11px; font-weight: 600; letter-spacing: 2px;
   text-transform: uppercase; color: var(--gold);
@@ -1049,9 +1072,12 @@ function cardHTML(r) {
 }
 
 // ── Modal ─────────────────────────────────────
+let currentRecipe = null;
+
 function openRecipe(id) {
   const r = RECIPES.find(x => x.id === id);
   if (!r) return;
+  currentRecipe = r;
 
   const overlay = document.getElementById('modalOverlay');
   const modal = document.getElementById('modal');
@@ -1064,10 +1090,8 @@ function openRecipe(id) {
 
   const elements = r.elements.map(e => `<span class="element-chip">${esc(e)}</span>`).join('');
 
-  const ings = r.ingredients.map(i => {
-    const prep = i.prep ? ` <span class="ing-prep">— ${esc(i.prep)}</span>` : '';
-    return `<div class="ing-qty">${esc(i.qty) || '·'}</div><div class="ing-item">${esc(i.item)}${prep}</div>`;
-  }).join('');
+  const baseYield = parseYieldNum(r.yield);
+  const ingsHTML = buildIngsHTML(r.ingredients, 1);
 
   const steps = r.method_steps.map(s => `<li>${esc(s)}</li>`).join('');
   const service = r.service.map(s => `<li>${esc(s)}</li>`).join('');
@@ -1080,10 +1104,15 @@ function openRecipe(id) {
     <div class="modal-title">${esc(r.name)}</div>
     <div class="modal-type">${esc(r.type)} · Yield: ${esc(r.yield)}</div>
     <div class="modal-badges">${badges}</div>
+    <div class="modal-scale">
+      <label>Scale to pax:</label>
+      <input type="number" id="scaleInput" min="1" value="${baseYield}" oninput="rescale(this.value)" />
+      <span class="modal-scale-factor" id="scaleFactor"></span>
+    </div>
     <div class="modal-section">Elements</div>
     <div class="modal-elements">${elements}</div>
     <div class="modal-section">Ingredients</div>
-    <div class="modal-ing">${ings}</div>
+    <div class="modal-ing" id="ingGrid">${ingsHTML}</div>
     <div class="modal-section">Prep Method</div>
     <ol class="modal-steps">${steps}</ol>
     <div class="modal-section">On the Day — Service</div>
@@ -1095,6 +1124,50 @@ function openRecipe(id) {
   modal.scrollTop = 0;
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+}
+
+// ── Scaler helpers ────────────────────────────
+function parseYieldNum(y) {
+  const m = String(y || '').match(/[\d.]+/);
+  return m ? parseFloat(m[0]) : 1;
+}
+
+function scaleQtyStr(qtyStr, factor) {
+  if (!qtyStr || factor === 1) return qtyStr || '';
+  // Match leading number (including fractions like ½ ¼ ¾)
+  const fracMap = { '½': 0.5, '¼': 0.25, '¾': 0.75, '⅓': 0.333, '⅔': 0.667 };
+  let str = String(qtyStr).trim();
+  // Replace unicode fractions first
+  for (const [sym, val] of Object.entries(fracMap)) {
+    str = str.replace(sym, val);
+  }
+  const m = str.match(/^([\d.]+)(.*)/);
+  if (!m) return qtyStr; // non-numeric qty — return unchanged
+  const num = parseFloat(m[1]);
+  const rest = m[2]; // unit + anything after
+  const scaled = num * factor;
+  const display = scaled % 1 === 0 ? String(scaled) : parseFloat(scaled.toFixed(2)).toString();
+  return display + rest;
+}
+
+function buildIngsHTML(ingredients, factor) {
+  return ingredients.map(i => {
+    const scaledQty = scaleQtyStr(i.qty, factor);
+    const prep = i.prep ? ` <span class="ing-prep">— ${esc(i.prep)}</span>` : '';
+    return `<div class="ing-qty">${esc(scaledQty) || '·'}</div><div class="ing-item">${esc(i.item)}${prep}</div>`;
+  }).join('');
+}
+
+function rescale(val) {
+  if (!currentRecipe) return;
+  const pax = parseFloat(val);
+  if (!pax || pax <= 0) return;
+  const base = parseYieldNum(currentRecipe.yield);
+  const factor = pax / base;
+  const factorEl = document.getElementById('scaleFactor');
+  if (factorEl) factorEl.textContent = factor !== 1 ? `× ${factor.toFixed(2)}` : '';
+  const grid = document.getElementById('ingGrid');
+  if (grid) grid.innerHTML = buildIngsHTML(currentRecipe.ingredients, factor);
 }
 
 function closeModal() {
