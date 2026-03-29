@@ -467,6 +467,38 @@
   }
   .modal-meta span { color: var(--text2); }
 
+  .modal-scale {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    margin-bottom: 20px;
+  }
+  .modal-scale label {
+    font-size: 12px;
+    color: var(--text3);
+    white-space: nowrap;
+  }
+  .modal-scale input {
+    width: 68px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 6px;
+    padding: 5px 8px;
+    font-size: 13px;
+    font-family: inherit;
+  }
+  .modal-scale input:focus { outline: none; border-color: var(--gold); }
+  .modal-scale-factor {
+    font-size: 12px;
+    color: var(--gold);
+    font-style: italic;
+  }
+
   .modal-section {
     font-size: 11px; font-weight: 600; letter-spacing: 2px;
     text-transform: uppercase; color: var(--gold);
@@ -639,6 +671,7 @@ const PAGE_SIZE = 60;
 let allRecipes = [];
 let filtered = [];
 let currentPage = 1;
+let currentRecipe = null;
 
 // ── Data Loading ──────────────────────────────────────
 const INDEX_FILES = [
@@ -937,6 +970,7 @@ async function openRecipe(id) {
     const detail = await fetchDetail(info.letter);
     const recipe = detail.find(r => r.id === id);
     if (!recipe) throw new Error('Recipe not in detail file');
+    currentRecipe = recipe;
     modal.innerHTML = renderRecipeDetail(recipe);
     modal.scrollTop = 0;
   } catch(e) {
@@ -948,6 +982,7 @@ async function openRecipe(id) {
 function closeModal() {
   document.getElementById('modalOverlay').classList.remove('open');
   document.body.style.overflow = '';
+  currentRecipe = null;
 }
 
 function renderRecipeDetail(r) {
@@ -971,10 +1006,18 @@ function renderRecipeDetail(r) {
   if (r.yield) meta.push(`Yield: <span>${esc(r.yield)}</span>`);
   if (meta.length) html += `<div class="modal-meta">${meta.join(' · ')}</div>`;
 
+  // ── Pax Scaler ──
+  const baseYield = parseModalYield(r.yield);
+  html += `<div class="modal-scale">
+    <label>Scale to pax:</label>
+    <input type="number" id="modalScaleInput" min="1" value="${baseYield}" oninput="rescaleModal(this.value)" />
+    <span class="modal-scale-factor" id="modalScaleFactor"></span>
+  </div>`;
+
   const ings = toArr(r.ingredients).filter(i => i && i.item);
   if (ings.length) {
     html += `<div class="modal-section">Ingredients</div>`;
-    html += `<div class="modal-ing">`;
+    html += `<div class="modal-ing" id="modalIngGrid">`;
     for (const i of ings) {
       const qty = [i.qty || '', i.unit || ''].filter(Boolean).join(' ');
       const prep = i.prep ? ` <span class="ing-prep">— ${esc(i.prep)}</span>` : '';
@@ -1032,6 +1075,41 @@ async function copyRecipeText(id) {
     const btn = document.querySelector('.modal-copy-btn');
     if (btn) { btn.textContent = 'Copied!'; setTimeout(() => btn.textContent = 'Copy as text', 1500); }
   });
+}
+
+// ── Pax Scaler ────────────────────────────────────────
+function parseModalYield(y) {
+  const m = String(y || '').match(/\d+/);
+  return m ? parseInt(m[0]) : 4;
+}
+
+function scaleModalQty(qty, factor) {
+  const n = parseFloat(qty);
+  if (isNaN(n) || factor === 1) return qty ?? '';
+  const s = n * factor;
+  return s % 1 === 0 ? String(s) : s.toFixed(1);
+}
+
+function rescaleModal(val) {
+  if (!currentRecipe) return;
+  const pax = parseInt(val);
+  if (!pax || pax < 1) return;
+  const base = parseModalYield(currentRecipe.yield);
+  const factor = pax / base;
+
+  const factorEl = document.getElementById('modalScaleFactor');
+  if (factorEl) factorEl.textContent = factor !== 1 ? `× ${factor.toFixed(2)}` : '';
+
+  const grid = document.getElementById('modalIngGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  for (const i of toArr(currentRecipe.ingredients).filter(i => i && i.item)) {
+    const scaled = scaleModalQty(i.qty, factor);
+    const qty = [scaled, i.unit || ''].filter(Boolean).join(' ');
+    const prep = i.prep ? ` <span class="ing-prep">— ${esc(i.prep)}</span>` : '';
+    grid.innerHTML += `<div class="ing-qty">${esc(qty) || '·'}</div>`;
+    grid.innerHTML += `<div class="ing-item">${esc(i.item)}${prep}</div>`;
+  }
 }
 
 // ── Init ──────────────────────────────────────────────
