@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riviera House — Prep Chef Recipes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0C0C0C;
+  --bg2: #141414;
+  --surface: rgba(255,255,255,0.04);
+  --surface-hover: rgba(255,255,255,0.07);
+  --glass: rgba(20,20,20,0.85);
+  --gold: #C9A96E;
+  --gold-light: #E0C99A;
+  --gold-dim: rgba(201,169,110,0.15);
+  --accent: #D4634B;
+  --text: #F0EDE8;
+  --text2: #B0AAA0;
+  --text3: #706B63;
+  --border: rgba(255,255,255,0.08);
+  --border-hover: rgba(201,169,110,0.3);
+  --green: #7BAE6E;
+  --green-bg: rgba(123,174,110,0.12);
+  --blue: #6E9ABE;
+  --blue-bg: rgba(110,154,190,0.12);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Nav Back Link ── */
+.nav-back {
+  padding: 20px 32px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.nav-back a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text3);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-back a:hover { color: var(--gold); }
+
+/* ── Hero ── */
+.hero {
+  text-align: center;
+  padding: 50px 24px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(201,169,110,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  opacity: 0.8;
+}
+.hero-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(32px, 6vw, 52px);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.hero-title em { font-style: italic; color: var(--gold); }
+.hero-sub {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--text2);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+.hero-sub b { color: var(--gold-light); font-weight: 500; }
+
+/* ── Search ── */
+.search-wrap {
+  max-width: 680px;
+  margin: 32px auto 0;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.search-glass {
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.search-glass:focus-within {
+  border-color: var(--border-hover);
+  box-shadow: 0 0 0 1px rgba(201,169,110,0.1), 0 20px 60px rgba(0,0,0,0.3);
+}
+.search-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+}
+.search-icon { width: 20px; height: 20px; flex-shrink: 0; opacity: 0.4; }
+.search-input {
+  flex: 1;
+  background: none;
+  border: none;
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text);
+  outline: none;
+  font-family: inherit;
+}
+.search-input::placeholder { color: var(--text3); }
+
+/* ── Filter Pills ── */
+.filters-wrap {
+  max-width: 680px;
+  margin: 16px auto 0;
+  padding: 0 24px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.filter-pill {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--text2);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.25s;
+  appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23706B63'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 32px;
+}
+.filter-pill:hover { border-color: var(--border-hover); color: var(--text); }
+.filter-pill.active { background: var(--gold-dim); border-color: var(--gold); color: var(--gold-light); }
+.clear-btn {
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 100px;
+  color: var(--text3);
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.clear-btn:hover { color: var(--accent); }
+
+/* ── Results Bar ── */
+.results-bar {
+  max-width: 1200px;
+  margin: 28px auto 0;
+  padding: 0 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.results-bar.visible { opacity: 1; }
+.results-count {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text);
+}
+.results-count span { color: var(--gold); }
+
+/* ── Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+  padding: 20px 32px 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── Card ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  animation: fadeUp 0.4s ease both;
+}
+.card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.card:hover {
+  border-color: var(--border-hover);
+  background: var(--surface-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+}
+.card:hover::before { opacity: 1; }
+.card-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+.card-type {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+.card-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 100px;
+  line-height: 1.4;
+}
+.badge-course {
+  background: rgba(212,99,75,0.12);
+  color: #E08070;
+  border: 1px solid rgba(212,99,75,0.2);
+}
+.badge-diet {
+  background: var(--green-bg);
+  color: var(--green);
+  border: 1px solid rgba(123,174,110,0.2);
+}
+.badge-method {
+  background: var(--blue-bg);
+  color: var(--blue);
+  border: 1px solid rgba(110,154,190,0.2);
+}
+.card-elements {
+  font-size: 13px;
+  color: var(--text3);
+  line-height: 1.7;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.card-elements strong { color: var(--text2); font-weight: 400; }
+
+/* ── Empty ── */
+.empty {
+  text-align: center;
+  padding: 80px 24px;
+  font-size: 16px;
+  color: var(--text3);
+  font-weight: 300;
+  grid-column: 1 / -1;
+}
+
+/* ── Modal ── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  max-width: 700px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 36px;
+  position: relative;
+  transform: translateY(20px) scale(0.97);
+  transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.modal-overlay.open .modal { transform: translateY(0) scale(1); }
+.modal-close {
+  position: sticky; top: 0; float: right;
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; cursor: pointer;
+  color: var(--text3); font-size: 18px;
+  transition: all 0.2s; z-index: 1;
+}
+.modal-close:hover { border-color: var(--gold); color: var(--gold); }
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; font-weight: 700;
+  color: var(--text); line-height: 1.25;
+  margin-bottom: 6px; padding-right: 44px;
+}
+.modal-type {
+  font-size: 12px; font-weight: 500; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 12px; opacity: 0.8;
+}
+.modal-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+.modal-section {
+  font-size: 11px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+  margin: 24px 0 12px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.modal-elements {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 4px;
+}
+.element-chip {
+  font-size: 13px; color: var(--text2);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px; padding: 4px 12px;
+}
+.modal-ing {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.ing-qty { color: var(--gold-light); font-weight: 500; text-align: right; white-space: nowrap; }
+.ing-item { color: var(--text); }
+.ing-prep { color: var(--text3); font-style: italic; }
+.modal-steps { list-style: none; counter-reset: step; padding: 0; }
+.modal-steps li {
+  counter-increment: step;
+  font-size: 14px; line-height: 1.8;
+  color: var(--text);
+  padding: 10px 0 10px 44px;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+}
+.modal-steps li:last-child { border-bottom: none; }
+.modal-steps li::before {
+  content: counter(step);
+  position: absolute; left: 0; top: 10px;
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--gold-dim); color: var(--gold);
+  font-size: 12px; font-weight: 600;
+  border-radius: 8px;
+}
+.modal-subsection {
+  font-size: 13px; font-weight: 600;
+  color: var(--text2); margin: 16px 0 8px;
+  letter-spacing: 0.5px;
+}
+.modal-note {
+  font-size: 13px; color: var(--text3);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 10px 14px; margin-top: 16px;
+  line-height: 1.6;
+}
+.label-box {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 20px; padding: 8px 14px;
+  background: var(--gold-dim); border: 1px solid rgba(201,169,110,0.3);
+  border-radius: 10px;
+  font-size: 12px; font-weight: 500; color: var(--gold-light);
+  letter-spacing: 0.5px;
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: center;
+  padding: 32px 24px;
+  border-top: 1px solid var(--border);
+  margin-top: 20px;
+}
+.footer-text { font-size: 12px; color: var(--text3); font-weight: 300; letter-spacing: 0.5px; }
+.footer-text a { color: var(--gold); text-decoration: none; }
+
+/* ── Responsive ── */
+@media (max-width: 680px) {
+  .hero { padding: 36px 20px 16px; }
+  .search-wrap, .filters-wrap { padding: 0 16px; }
+  .grid { padding: 16px; gap: 12px; grid-template-columns: 1fr; }
+  .results-bar { padding: 0 20px; }
+  .nav-back { padding: 16px 20px 0; }
+  .modal { padding: 20px; border-radius: 16px; }
+  .modal-title { font-size: 22px; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.grid .card:nth-child(1) { animation-delay: 0s; }
+.grid .card:nth-child(2) { animation-delay: 0.04s; }
+.grid .card:nth-child(3) { animation-delay: 0.08s; }
+.grid .card:nth-child(4) { animation-delay: 0.12s; }
+.grid .card:nth-child(n+5) { animation-delay: 0.16s; }
+</style>
+</head>
+<body>
+
+<div class="nav-back">
+  <a href="../index.html">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Kitchen Library
+  </a>
+</div>
+
+<div class="hero">
+  <div class="hero-label">PrepFlow · Riviera House</div>
+  <h1 class="hero-title">The <em>Riviera</em> Kitchen</h1>
+  <p class="hero-sub"><b id="totalCount">12</b> prep-chef recipes — batch production, service notes, plating guides.</p>
+</div>
+
+<div class="search-wrap" id="searchWrap">
+  <div class="search-glass">
+    <div class="search-inner">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" class="search-input" id="search" placeholder="Search dishes, proteins, methods…" autocomplete="off" spellcheck="false">
+    </div>
+  </div>
+</div>
+
+<div class="filters-wrap">
+  <select class="filter-pill" id="filterCourse"><option value="">Course</option></select>
+  <select class="filter-pill" id="filterProtein"><option value="">Protein</option></select>
+  <select class="filter-pill" id="filterDiet"><option value="">Dietary</option></select>
+  <button class="clear-btn" id="clearBtn">Clear all</button>
+</div>
+
+<div class="results-bar visible" id="resultsBar">
+  <div class="results-count" id="resultsCount"><span>12</span> recipes</div>
+  <div></div>
+</div>
+
+<div id="content"></div>
+
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modal"></div>
+</div>
+
+<div class="footer">
+  <div class="footer-text">Riviera House Prep Chef Recipes · <a href="../index.html">Kitchen Library</a> · Built with PrepFlow</div>
+</div>
+
+<script>
+const RECIPES = [
+  {
+    id: "arancini",
+    name: "Chorizo & Mozzarella Arancini",
+    subtitle: "Lemon & Thyme Aioli · Romesco",
+    type: "Canape / Tapas",
+    course: "Canape",
+    protein: ["pork", "dairy"],
+    diet: ["Gluten-Free"],
+    method: "Deep Fry",
+    yield: "80 large (100g)",
+    label: "Arancini - Large",
+    elements: ["Arancini (3 per serve)", "Romesco", "Lemon Thyme Aioli", "Microherbs"],
+    ingredients: [
+      { qty: "5 kg", item: "Arborio Rice" },
+      { qty: "1 kg", item: "Chorizo", prep: "finely diced" },
+      { qty: "600 g", item: "Mozzarella — Whole", prep: "grated" },
+      { qty: "400 g", item: "Brown Onion", prep: "blitzed in food processor" },
+      { qty: "5 L", item: "Water" },
+      { qty: "200 ml", item: "Chicken Stock Concentrate" },
+      { qty: "600 g", item: "Cheddar Cheese — Whole Vintage", prep: "grated" },
+      { qty: "150 g", item: "Parmesan — Grana Padano", prep: "grated" },
+      { qty: "800 g", item: "Spicy Capsicum Dip" },
+      { qty: "1 kg", item: "Roasted Capsicum", prep: "blitzed" },
+      { qty: "750 ml", item: "White Wine" },
+      { qty: "200 g", item: "Garlic — Crushed" },
+      { qty: "50 g", item: "Salt Flakes", prep: "adjust to taste" },
+      { qty: "30 g", item: "Pepper — Cracked", prep: "adjust to taste" },
+      { qty: "", item: "GF Flour + GF Breadcrumbs", prep: "for coating" },
+      { qty: "", item: "Eggs", prep: "beaten, for coating" },
+    ],
+    method_steps: [
+      "Sauté finely diced brown onion over medium heat until golden. Add crushed garlic and chorizo, cook 1–2 minutes until chorizo browns. Deglaze with white wine.",
+      "Add rice, spicy capsicum dip, onion/garlic/chorizo mix to a deep bain. Cover with water and chicken stock concentrate, salt and pepper. Stir to combine.",
+      "Cover bain with lid. Bake at 160°C for 20 minutes, stir, then bake another 20 minutes until water is fully absorbed.",
+      "Transfer rice to a bain-marie and refrigerate (or freeze) until fully cooled.",
+      "Grate all three cheeses. Stir into cooled rice along with diced roasted capsicum until fully incorporated.",
+      "Weigh rice into 50g portions and roll into balls.",
+      "Set up coating station: beaten eggs, GF flour, GF breadcrumbs. Roll balls in flour, dip in egg, coat thoroughly in breadcrumbs.",
+      "Place on parchment-lined tray and freeze until solid. Vacuum seal (SEAL ONLY — do not vacuum to avoid squashing). Defrost in fridge 24 hours before service.",
+    ],
+    service: [
+      "Deep fry arancini until heated through — check with skewer. Season immediately with salt flakes.",
+      "Warm Romesco on stove or in microwave.",
+      "Place ½ cup warm Romesco as base on each plate. Arrange 3 arancini on top.",
+      "Add a dot of Lemon Thyme Aioli on each arancini. Garnish with freshly cut microherbs.",
+    ],
+    note: "DO NOT vacuum seal — seal only. Defrost minimum 24 hours in fridge before frying.",
+  },
+  {
+    id: "calamari",
+    name: "Calamari Fritti",
+    subtitle: "Lemon Dill Aioli · Crispy Capers",
+    type: "Canape / Tapas",
+    course: "Canape",
+    protein: ["seafood"],
+    diet: ["Gluten-Free"],
+    method: "Deep Fry",
+    yield: "Scalable",
+    label: "Calamari",
+    elements: ["Calamari & Baby Octopus", "Flour Mix", "Lemon Dill Aioli", "Crispy Capers"],
+    ingredients: [
+      { qty: "2 kg", item: "Pineapple Cut Squid Strips", prep: "tenderised, defrosted" },
+      { qty: "1 kg", item: "Baby Octopus" },
+      { qty: "500 g", item: "Rice Flour" },
+      { qty: "100 g", item: "GF Corn Flour" },
+      { qty: "20 g", item: "Salt" },
+      { qty: "100 g", item: "Lemon Pepper Seasoning" },
+      { qty: "500 g", item: "Baby Capers" },
+    ],
+    method_steps: [
+      "STORAGE: When calamari and octopus arrive, portion immediately — 15 pieces calamari + 3 baby octopus per 500ml PC. Label, store in freezer crate labelled Calamari.",
+      "FLOUR MIX: Combine rice flour, GF corn flour, salt, pepper and lemon pepper seasoning. Mix thoroughly, transfer to labelled PCs, store in fridge.",
+      "CAPERS: Drain thoroughly and pat dry with chux. Store in PC lined with chux to absorb excess moisture. Refrigerate.",
+    ],
+    service: [
+      "Heat oil in fryers. Fry capers 30 seconds – 1 minute until crispy. Drain on chux-lined bowl.",
+      "Coat calamari strips and baby octopus evenly in flour mix.",
+      "Fry calamari immediately for ~1 minute until crispy. Do not overcrowd basket.",
+      "Season with pinch of salt while hot.",
+      "TAPAS: Base of 1–2 tbsp lemon dill aioli. Arrange calamari and baby octopus on top. Sprinkle crispy capers, garnish with microgreens.",
+      "CANAPE: Small dot of aioli in bamboo boat. Calamari on top, finish with crispy capers.",
+    ],
+    note: null,
+  },
+  {
+    id: "oysters-kilpatrick",
+    name: "Kilpatrick Oysters",
+    subtitle: "Crispy Speck · Lea & Perrins · Rock Salt",
+    type: "Canape",
+    course: "Canape",
+    protein: ["seafood", "pork"],
+    diet: ["Gluten-Free"],
+    method: "Bake",
+    yield: "Scalable",
+    label: "Oysters Kilpatrick",
+    elements: ["Oysters", "Diced Speck", "Kilpatrick Sauce", "Rock Salt", "Lemon"],
+    ingredients: [
+      { qty: "", item: "Oysters", prep: "defrost 24 hrs in fridge" },
+      { qty: "500 g", item: "Speck", prep: "finely diced" },
+      { qty: "250 ml", item: "GF Worcestershire Sauce" },
+      { qty: "¼ cup", item: "BBQ Sauce" },
+      { qty: "1 tsp", item: "Tabasco" },
+      { qty: "2 tbsp", item: "Dried Parsley" },
+      { qty: "2 kg", item: "Rock Salt" },
+      { qty: "4", item: "Lemons", prep: "sliced" },
+    ],
+    method_steps: [
+      "OYSTERS: Remove from freezer 24 hours before event and defrost in fridge. Finely dice speck into PC, refrigerate.",
+      "KILPATRICK SAUCE: Mix GF Worcestershire, BBQ sauce, tabasco and dried parsley. Decant into squeezy bottle and label.",
+      "GARNISH: Slice lemons, store in labelled PC in fridge.",
+    ],
+    service: [
+      "Bunch aluminium foil into a bain tray so oysters can be pressed in and held stable.",
+      "Arrange oysters on foil-lined tray. Add 1–2 tsp Kilpatrick sauce onto each oyster. Add 1 tsp diced speck per oyster.",
+      "Bake at 180°C for 10 minutes or until golden.",
+      "Spread rock salt ~1 inch thick on serving tray. Place baked oysters on salt. Garnish with rocket/microgreens and lemon slices.",
+    ],
+    note: null,
+  },
+  {
+    id: "veal-meatballs",
+    name: "Slow Cooked Veal Meatballs",
+    subtitle: "Romesco Sugo · Toasted Focaccia · Gremolata",
+    type: "Tapas",
+    course: "Tapas",
+    protein: ["veal"],
+    diet: ["Gluten-Free"],
+    method: "Slow Bake",
+    yield: "90 balls @ 80g",
+    label: "Meatballs",
+    elements: ["Meatballs", "Romesco Sugo", "Focaccia", "Gremolata", "Manchego"],
+    ingredients: [
+      { qty: "5 kg", item: "Veal Mince" },
+      { qty: "600 g", item: "GF Breadcrumbs" },
+      { qty: "¾ loaf", item: "GF Bread Loaf", prep: "blitzed into chunks" },
+      { qty: "4", item: "Brown Onions", prep: "blitzed" },
+      { qty: "20", item: "Garlic Cloves", prep: "blitzed" },
+      { qty: "400 g", item: "Parmesan Cheese", prep: "blitzed" },
+      { qty: "500 ml", item: "Thickened Cream" },
+      { qty: "½ cup", item: "Flat Leaf Italian Parsley", prep: "finely chopped" },
+      { qty: "½ cup", item: "Basil", prep: "finely chopped" },
+      { qty: "½ cup", item: "Oregano", prep: "finely chopped" },
+      { qty: "1 tbsp", item: "Mixed Italian Herbs — Dried" },
+      { qty: "2 tbsp", item: "Salt" },
+      { qty: "2 tbsp", item: "Pepper" },
+      { qty: "5", item: "Eggs" },
+    ],
+    method_steps: [
+      "Blitz onion and garlic in food processor. Mix into breadcrumbs — squeeze so onion juices wet the crumbs.",
+      "Combine breadcrumb mix with veal mince, parmesan, cream, salt, pepper and herbs. Mix thoroughly.",
+      "Wet hands to prevent sticking. Roll mixture into 80g balls.",
+      "Place meatballs in deep bain, cover generously with romesco sauce.",
+      "Bake in preheated oven at 150°C for 1 hour. Allow to cool in sauce before portioning.",
+      "Store in round or rectangle PCs in serves of 3. Distribute romesco across all serves. Label and freeze in crate labelled Meatballs.",
+    ],
+    service: [
+      "Reheat in microwave. Check internal temperature and continue heating if needed.",
+      "Place reheated meatballs and sauce in medium serving bowl.",
+      "Toast 3× 2cm thick focaccia slices until golden on both sides.",
+      "Top with thinly grated Manchego and gremolata.",
+    ],
+    note: "Prep time ~45 mins per 90 balls.",
+  },
+  {
+    id: "chicken-skewer",
+    name: "Lemon Pepper Chicken Skewer",
+    subtitle: "Herbed Labneh · Crumbled Feta · Microherbs",
+    type: "Tapas",
+    course: "Tapas",
+    protein: ["chicken", "dairy"],
+    diet: ["Gluten-Free"],
+    method: "Oven Roast",
+    yield: "Scalable",
+    label: "Chicken Skewers",
+    elements: ["Chicken Skewers", "Herbed Labneh", "Crumbled Feta", "Microherbs"],
+    ingredients: [
+      { qty: "5 kg", item: "Chicken Thigh", prep: "diced 1 inch" },
+      { qty: "200 ml", item: "Olive Oil" },
+      { qty: "150 g", item: "Lemon Pepper Seasoning" },
+      { qty: "500 ml", item: "Limoncello" },
+      { qty: "6", item: "Lemons", prep: "juice & zest" },
+      { qty: "100 g", item: "Honey or Castor Sugar" },
+      { qty: "1 bunch", item: "Fresh Thyme" },
+      { qty: "2 kg", item: "Greek Yogurt", prep: "for labneh" },
+      { qty: "2 large", item: "Cucumber", prep: "finely diced, no seeds" },
+      { qty: "1 bunch", item: "Dill" },
+      { qty: "1 bunch", item: "Mint" },
+      { qty: "1 bunch", item: "Parsley" },
+      { qty: "2 punnets", item: "Microherbs — Garnish" },
+    ],
+    method_steps: [
+      "Combine oil, lemon pepper, limoncello, lemon juice/zest, honey and thyme. Dice chicken into 1-inch pieces and coat in marinade.",
+      "Thread 3 pieces per 12cm wooden skewer. Refrigerate overnight in bain-marie if possible. Store in 500ml PCs (1 serve = 3 skewers), freeze.",
+      "LABNEH: Line holy bain with 3× chux. Add yogurt on top, cover with more chux. Hang overnight in fridge.",
+      "Once hung, mix labneh with finely chopped parsley, dill, mint, lemon zest and finely diced cucumber (no seeds). Season with lemon juice, salt and pepper. Refrigerate.",
+    ],
+    service: [
+      "Preheat oven to 180°C.",
+      "Lay skewers flat on tray (not overlapping). Roast 10 minutes.",
+      "Place a heaped tablespoon of herbed labneh in centre of plate. Arrange 3 skewers. Add crumbled feta and green microherb garnish.",
+    ],
+    note: null,
+  },
+  {
+    id: "chorizo-potatoes",
+    name: "Crispy Fried Chorizo Potatoes",
+    subtitle: "Lemon Thyme Aioli · Shallots",
+    type: "Canape",
+    course: "Canape",
+    protein: ["pork"],
+    diet: ["Gluten-Free", "Dairy-Free"],
+    method: "Deep Fry",
+    yield: "Scalable",
+    label: "Chorizo Potatoes",
+    elements: ["Smashed Potatoes", "Chorizo", "Lemon Thyme Aioli", "Shallots"],
+    ingredients: [
+      { qty: "10 kg", item: "White Washed Potatoes" },
+      { qty: "2 kg", item: "Chorizo", prep: "sliced lengthwise then diagonally at 45°" },
+      { qty: "1 bunch", item: "Shallots", prep: "thinly sliced at 45°" },
+      { qty: "", item: "Mayonnaise", prep: "to dress" },
+    ],
+    method_steps: [
+      "Bake potatoes at 180°C for 35–40 minutes until soft. Cool.",
+      "Smash cooled potatoes into uneven pieces — aim for 6–8 pieces per large potato.",
+      "Store potato pieces in labelled PCs, refrigerate.",
+      "Slice chorizo lengthwise then cut 5mm wide at 45° angle. Slice shallots thinly at 45°. Store separately in labelled PCs.",
+    ],
+    service: [
+      "Deep fry cooled potato pieces until crispy.",
+      "Add chorizo slices to basket and cook 20–30 seconds.",
+      "Transfer to large metal bowl. Add mayo and sliced shallots, season to taste, toss to coat.",
+      "Serve 4–5 pieces in bamboo boats with bamboo fork.",
+    ],
+    note: null,
+  },
+  {
+    id: "lamb-cutlet",
+    name: "Chargrilled Lamb Cutlet",
+    subtitle: "Riviera House Emulsion · Rocket",
+    type: "Tapas",
+    course: "Tapas",
+    protein: ["lamb"],
+    diet: ["Gluten-Free", "Dairy-Free"],
+    method: "Chargrill + Oven",
+    yield: "3 per plate",
+    label: "Lamb Cutlets",
+    elements: ["Lamb Cutlets (3 per plate)", "Riviera House Emulsion", "Rocket"],
+    ingredients: [
+      { qty: "", item: "Lamb Cutlets", prep: "frenched" },
+      { qty: "", item: "Salt Flakes" },
+      { qty: "", item: "Cracked Pepper" },
+      { qty: "", item: "Rocket", prep: "fresh, for garnish" },
+    ],
+    method_steps: [
+      "French the cutlets. Season generously with salt and pepper.",
+      "Two days before event: place in bain lined with clean chux, cover, label, refrigerate.",
+    ],
+    service: [
+      "Heat large frying pan. Sear each side of cutlets until nicely coloured.",
+      "Transfer to bain, bake in oven 10 minutes at 180°C.",
+      "Lay bed of rocket on small plate. Arrange 3 cutlets neatly on top.",
+      "Generously drizzle Riviera House Emulsion over cutlets, ensuring each is well-coated.",
+    ],
+    note: "Season cutlets two days before event for best flavour development.",
+  },
+  {
+    id: "fish-slider",
+    name: "Crispy Reef Fish Slider",
+    subtitle: "Lemon Caper Aioli · Rocket · Brioche",
+    type: "Canape",
+    course: "Canape",
+    protein: ["seafood"],
+    diet: [],
+    method: "Deep Fry",
+    yield: "50 sliders",
+    label: "Fish Slider",
+    elements: ["Battered Reef Fish", "Lemon Caper Aioli", "Rocket", "Brioche Bun"],
+    ingredients: [
+      { qty: "2.5 kg", item: "Reef Fish", prep: "cut into 70g pieces" },
+      { qty: "1 kg", item: "Self Raising Flour" },
+      { qty: "1 L", item: "Sparkling Water", prep: "cold" },
+      { qty: "200 g", item: "Lemon", prep: "juice & zest" },
+      { qty: "1 kg", item: "Kewpie Mayo" },
+      { qty: "½ bunch", item: "Dill — Fresh", prep: "finely chopped" },
+      { qty: "500 g", item: "Rocket" },
+      { qty: "500 g", item: "Baby Capers", prep: "drained" },
+      { qty: "50", item: "Brioche Slider Buns" },
+      { qty: "50 g", item: "Salt Flakes" },
+      { qty: "30 g", item: "Cracked Pepper" },
+      { qty: "20 g", item: "Garlic Powder" },
+      { qty: "20 g", item: "Onion Powder" },
+    ],
+    method_steps: [
+      "Defrost fish in fridge 2 days before event. Cut into ~70g pieces the day before.",
+      "BATTER: Mix flour, onion powder, garlic powder, salt, pepper. Whisk in cold sparkling water until pancake-batter consistency.",
+      "PART COOK: Preheat deep fryer. Dip fish in batter, shake off excess, fry in batches of 5–6 for ~1 minute to seal batter only. Drain on wire rack.",
+      "Store part-cooked fish in bain-marie lined with baking paper, single layer. Wrap, label, refrigerate.",
+      "LEMON CAPER AIOLI: Strain and dry capers, zest lemons. Combine capers, lemon zest, mayo, salt and pepper. Adjust seasoning, refrigerate in PC.",
+      "BRIOCHE: Remove from freezer, separate tops/bottoms, store in fridge wrapped in glad wrap.",
+    ],
+    service: [
+      "Warm brioche at 170°C for 10 minutes.",
+      "Finish frying part-cooked fish until golden and crispy.",
+      "Place brioche base on platter, add small handful of rocket. Place fish on rocket. Add generous amount of lemon caper aioli.",
+      "Top with brioche lid, secure with skewer.",
+    ],
+    note: null,
+  },
+  {
+    id: "beef-kofta",
+    name: "Beef Kofta",
+    subtitle: "Spicy Capsicum Sauce · Pita · Rocket",
+    type: "Canape",
+    course: "Canape",
+    protein: ["beef"],
+    diet: ["Dairy-Free"],
+    method: "Oven Bake",
+    yield: "50 koftas",
+    label: "Beef Kofta",
+    elements: ["Beef Kofta", "Spicy Capsicum Sauce", "Rocket", "Mini Pita", "Fresh Herbs"],
+    ingredients: [
+      { qty: "4 kg", item: "Beef Mince" },
+      { qty: "300 g", item: "Brown Onion", prep: "finely diced" },
+      { qty: "1.5 kg", item: "Spicy Capsicum Dip" },
+      { qty: "50", item: "Mini Pita Breads" },
+      { qty: "2 bunches", item: "Flat Leaf Parsley" },
+      { qty: "100 g", item: "Garlic — Crushed" },
+      { qty: "2 bunches", item: "Mint — Fresh" },
+      { qty: "10 g", item: "Ground Cumin" },
+      { qty: "10 g", item: "Ground Coriander" },
+      { qty: "10 g", item: "Ground Cinnamon" },
+      { qty: "50 g", item: "Salt Flakes" },
+      { qty: "30 g", item: "Cracked Pepper" },
+      { qty: "10 g", item: "Paprika" },
+      { qty: "4 bags", item: "Rocket" },
+    ],
+    method_steps: [
+      "Sauté finely diced onion and garlic until translucent.",
+      "Combine beef mince, browned onion/garlic, finely chopped mint, cumin, coriander, cinnamon, pepper, paprika and salt. Mix thoroughly.",
+      "Fry 1 tbsp of mix to taste. Adjust seasoning.",
+      "Roll mince into 50g balls, shape into football shape.",
+      "Lay in bain-marie lined with baking paper. Cover and freeze.",
+      "Vacuum seal 40 koftas per bag. Label and return to freezer. Defrost 24 hours before use.",
+      "PITA: Defrost 24 hours ahead. Cut in half, line in bain-marie, cover and refrigerate.",
+      "Finely chop parsley and mint, store in labelled PC.",
+    ],
+    service: [
+      "Bake koftas in bain at 180°C for 20 minutes.",
+      "Warm pita at 170°C for 10 minutes.",
+      "Open pita, place in large bamboo boat. Add small amount of rocket, then a kofta.",
+      "Top with dollop of spicy capsicum sauce and chopped herbs. Arrange neatly on platter.",
+    ],
+    note: null,
+  },
+  {
+    id: "camembert-cigars",
+    name: "Camembert, Pecan & Cranberry Cigars",
+    subtitle: "Thyme Infused Honey · Microherbs",
+    type: "Canape",
+    course: "Canape",
+    protein: ["dairy"],
+    diet: ["Vegetarian"],
+    method: "Deep Fry",
+    yield: "~50 cigars",
+    label: "Camembert Cigars",
+    elements: ["Filo Cigars", "Thyme Infused Honey", "Microherbs"],
+    ingredients: [
+      { qty: "620 g", item: "Camembert", prep: "cut into 1cm × 10cm sticks" },
+      { qty: "300 g", item: "Pecans", prep: "finely chopped" },
+      { qty: "300 g", item: "Dried Cranberries", prep: "finely chopped" },
+      { qty: "1 bunch", item: "Fresh Thyme" },
+      { qty: "300 g", item: "Honey" },
+      { qty: "2", item: "Cinnamon Sticks" },
+      { qty: "30 g", item: "Salt Flakes" },
+      { qty: "20 g", item: "Cracked Pepper" },
+      { qty: "2 packets", item: "Filo Pastry" },
+      { qty: "50 g", item: "Garlic — Crushed" },
+      { qty: "2 punnets", item: "Microherbs — Garnish" },
+    ],
+    method_steps: [
+      "Melt butter. Cut camembert into 1cm thick × 10cm long sticks. Finely chop pecans and cranberries.",
+      "Lay 2 sheets filo on clean surface, brush top with melted butter. Cut sheets in half lengthwise, then each half into 3 long strips.",
+      "Place cheese on narrow end of each strip, add 1 tsp pecan/cranberry mix. Fold sides in and roll tightly like a spring roll.",
+      "Freeze on parchment-lined tray until solid. Vacuum seal for storage. Defrost in fridge 24 hours before use.",
+      "HONEY: Combine honey, thyme, salt and cinnamon stick in pot. Warm over low heat, simmer 10 minutes. Transfer to PC and allow to continue infusing.",
+    ],
+    service: [
+      "Deep fry cigars ~2 minutes until golden brown.",
+      "Arrange on platter. Drizzle with thyme-infused honey.",
+      "Garnish with chopped pecans, cranberries, microgreens and edible flowers.",
+    ],
+    note: null,
+  },
+  {
+    id: "romesco",
+    name: "Romesco",
+    subtitle: "House Sauce",
+    type: "Sauce / Base",
+    course: "Sauce",
+    protein: [],
+    diet: ["Vegetarian", "Gluten-Free", "Dairy-Free"],
+    method: "Simmer",
+    yield: "Batch",
+    label: "Romesco",
+    elements: ["Romesco Sauce"],
+    ingredients: [
+      { qty: "1 large tin", item: "Grilled Capsicum", prep: "drained & blitzed" },
+      { qty: "1 large tin", item: "Passata" },
+      { qty: "500 g", item: "Brown Onion", prep: "blitzed" },
+      { qty: "1 cup", item: "Crushed Garlic", prep: "blitzed" },
+      { qty: "2 bunches", item: "Basil", prep: "chopped" },
+      { qty: "50 g", item: "Salt" },
+      { qty: "30 g", item: "Pepper" },
+      { qty: "1 cup", item: "Thickened Cream" },
+    ],
+    method_steps: [
+      "Heat olive oil in pan. Sauté onions and garlic until translucent.",
+      "Blend sautéed onions/garlic with capsicum, passata, basil, salt, pepper and a pinch of sugar until smooth.",
+      "Pour into large pot and simmer 1.5–2 hours until flavours develop. Taste and adjust.",
+      "Portion into PCs, label and freeze. Remove from freezer as needed.",
+    ],
+    service: [
+      "Heat on stovetop or microwave until hot. Use as base or accompany as needed.",
+    ],
+    note: null,
+  },
+  {
+    id: "riviera-emulsion",
+    name: "Riviera House Emulsion",
+    subtitle: "House Sauce",
+    type: "Sauce / Base",
+    course: "Sauce",
+    protein: [],
+    diet: ["Vegetarian", "Gluten-Free", "Dairy-Free"],
+    method: "Blend",
+    yield: "Batch",
+    label: "Emulsion",
+    elements: ["Riviera Emulsion"],
+    ingredients: [
+      { qty: "1 kg", item: "Fresh or Canned Apricots" },
+      { qty: "2 bunches", item: "Dill" },
+      { qty: "4 bunches", item: "Coriander", prep: "roots removed" },
+      { qty: "4 bunches", item: "Flat Leaf Parsley" },
+      { qty: "1 kg", item: "Lemon", prep: "juice & zest" },
+      { qty: "200 ml", item: "Red Wine Vinegar" },
+      { qty: "600 ml", item: "Olive Oil" },
+      { qty: "200 g", item: "Castor Sugar" },
+      { qty: "300 g", item: "Fresh Jalapeños" },
+      { qty: "100 g", item: "Garlic Cloves" },
+      { qty: "", item: "Salt Flakes & Cracked Pepper", prep: "to taste" },
+    ],
+    method_steps: [
+      "Peel lemon rind with potato peeler, juice lemons. Trim coriander roots, roughly chop all herbs.",
+      "In food processor, combine apricots, dill, coriander, parsley, lemon juice/zest, red wine vinegar, olive oil, jalapeños, garlic, castor sugar, salt and pepper.",
+      "Blend until smooth. Taste and adjust salt/sugar to balance.",
+      "Transfer to PC, label and refrigerate. For bulk: add olive oil over top before freezing to prevent freezer burn.",
+    ],
+    service: [
+      "Serve cold or room temperature. Drizzle generously over protein.",
+    ],
+    note: "Add extra olive oil on top before freezing to prevent freezer burn.",
+  },
+];
+
+// ── Filter population ─────────────────────────
+function populateFilters() {
+  const courses = new Set(), proteins = new Set(), diets = new Set();
+  RECIPES.forEach(r => {
+    if (r.course) courses.add(r.course);
+    r.protein.forEach(p => proteins.add(p));
+    r.diet.forEach(d => diets.add(d));
+  });
+  fillSelect('filterCourse', [...courses].sort(), 'Course');
+  fillSelect('filterProtein', [...proteins].sort(), 'Protein');
+  fillSelect('filterDiet', [...diets].sort(), 'Dietary');
+}
+
+function fillSelect(id, items, label) {
+  const sel = document.getElementById(id);
+  sel.innerHTML = `<option value="">${label}</option>` +
+    items.map(i => `<option value="${esc(i)}">${esc(i)}</option>`).join('');
+}
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Filter & Search ───────────────────────────
+let filtered = [...RECIPES];
+
+function applyFilters() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  const course = document.getElementById('filterCourse').value;
+  const protein = document.getElementById('filterProtein').value;
+  const diet = document.getElementById('filterDiet').value;
+  const terms = q ? q.split(/\s+/) : [];
+
+  document.querySelectorAll('.filter-pill').forEach(el => {
+    el.classList.toggle('active', el.value !== '');
+  });
+
+  filtered = RECIPES.filter(r => {
+    if (terms.length) {
+      const hay = [r.name, r.subtitle, r.type, r.method,
+        ...r.protein, ...r.diet, ...r.elements,
+        r.ingredients.map(i => i.item).join(' ')
+      ].join(' ').toLowerCase();
+      if (!terms.every(t => hay.includes(t))) return false;
+    }
+    if (course && r.course !== course) return false;
+    if (protein && !r.protein.includes(protein)) return false;
+    if (diet && !r.diet.includes(diet)) return false;
+    return true;
+  });
+
+  render();
+}
+
+function render() {
+  const count = filtered.length;
+  document.getElementById('resultsCount').innerHTML = `<span>${count}</span> recipe${count !== 1 ? 's' : ''}`;
+  document.getElementById('totalCount').textContent = count;
+
+  const content = document.getElementById('content');
+  if (!count) {
+    content.innerHTML = '<div class="grid"><div class="empty">No recipes found. Try different keywords or clear filters.</div></div>';
+    return;
+  }
+  content.innerHTML = '<div class="grid">' + filtered.map(cardHTML).join('') + '</div>';
+}
+
+function cardHTML(r) {
+  const badges = [
+    ...r.protein.map(p => `<span class="badge badge-course">${esc(p)}</span>`),
+    ...r.diet.map(d => `<span class="badge badge-diet">${esc(d)}</span>`),
+    r.method ? `<span class="badge badge-method">${esc(r.method)}</span>` : ''
+  ].join('');
+
+  const elements = r.elements.slice(0,4).join(' · ');
+
+  return `<div class="card" onclick="openRecipe('${r.id}')">
+    <div class="card-name">${esc(r.name)}</div>
+    <div class="card-type">${esc(r.type)} · ${esc(r.yield)}</div>
+    <div class="card-badges">${badges}</div>
+    <div class="card-elements">${esc(elements)}</div>
+  </div>`;
+}
+
+// ── Modal ─────────────────────────────────────
+function openRecipe(id) {
+  const r = RECIPES.find(x => x.id === id);
+  if (!r) return;
+
+  const overlay = document.getElementById('modalOverlay');
+  const modal = document.getElementById('modal');
+
+  const badges = [
+    ...r.protein.map(p => `<span class="badge badge-course">${esc(p)}</span>`),
+    ...r.diet.map(d => `<span class="badge badge-diet">${esc(d)}</span>`),
+    r.method ? `<span class="badge badge-method">${esc(r.method)}</span>` : ''
+  ].join('');
+
+  const elements = r.elements.map(e => `<span class="element-chip">${esc(e)}</span>`).join('');
+
+  const ings = r.ingredients.map(i => {
+    const prep = i.prep ? ` <span class="ing-prep">— ${esc(i.prep)}</span>` : '';
+    return `<div class="ing-qty">${esc(i.qty) || '·'}</div><div class="ing-item">${esc(i.item)}${prep}</div>`;
+  }).join('');
+
+  const steps = r.method_steps.map(s => `<li>${esc(s)}</li>`).join('');
+  const service = r.service.map(s => `<li>${esc(s)}</li>`).join('');
+
+  const note = r.note ? `<div class="modal-note">⚠ ${esc(r.note)}</div>` : '';
+  const label = `<div class="label-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> Label: DATE MADE · ${esc(r.label)}</div>`;
+
+  modal.innerHTML = `
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-title">${esc(r.name)}</div>
+    <div class="modal-type">${esc(r.type)} · Yield: ${esc(r.yield)}</div>
+    <div class="modal-badges">${badges}</div>
+    <div class="modal-section">Elements</div>
+    <div class="modal-elements">${elements}</div>
+    <div class="modal-section">Ingredients</div>
+    <div class="modal-ing">${ings}</div>
+    <div class="modal-section">Prep Method</div>
+    <ol class="modal-steps">${steps}</ol>
+    <div class="modal-section">On the Day — Service</div>
+    <ol class="modal-steps">${service}</ol>
+    ${note}
+    ${label}
+  `;
+
+  modal.scrollTop = 0;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── Event listeners ───────────────────────────
+let debounce;
+document.getElementById('search').addEventListener('input', () => {
+  clearTimeout(debounce);
+  debounce = setTimeout(applyFilters, 180);
+});
+['filterCourse','filterProtein','filterDiet'].forEach(id =>
+  document.getElementById(id).addEventListener('change', applyFilters)
+);
+document.getElementById('clearBtn').addEventListener('click', () => {
+  document.getElementById('search').value = '';
+  ['filterCourse','filterProtein','filterDiet'].forEach(id =>
+    document.getElementById(id).value = ''
+  );
+  applyFilters();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('modalOverlay').classList.contains('open')) {
+    closeModal();
+  }
+});
+
+// ── Init ──────────────────────────────────────
+populateFilters();
+render();
+</script>
+</body>
+</html>
