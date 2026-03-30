@@ -6,6 +6,11 @@
 (function () {
   const STORAGE_KITCHEN = 'kuschi_user_recipes_kitchen_v1';
   const STORAGE_RIVIERA = 'kuschi_user_recipes_riviera_v1';
+  const STORAGE_MASTER = 'kuschi_master_ingredients_v1';
+  const STORAGE_ORDER_OVERRIDES = 'kuschi_riviera_order_overrides_v1';
+  const STORAGE_ORDER_EXTRAS = 'kuschi_riviera_order_extras_v1';
+
+  const ZONE_IDS = ['freezer', 'coldroom', 'drystore', 'other'];
 
   function safeParse(json, fallback) {
     try {
@@ -14,6 +19,133 @@
     } catch {
       return fallback;
     }
+  }
+
+  function safeParseObject(json, fallback) {
+    try {
+      const v = JSON.parse(json);
+      return v && typeof v === 'object' && !Array.isArray(v) ? v : fallback;
+    } catch {
+      return fallback;
+    }
+  }
+
+  function safeParseExtraList(json) {
+    try {
+      const v = JSON.parse(json);
+      return Array.isArray(v) ? v : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function normalizeIngName(s) {
+    return String(s || '')
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, ' ');
+  }
+
+  function loadMaster() {
+    return safeParse(localStorage.getItem(STORAGE_MASTER) || '[]', []);
+  }
+
+  function saveMaster(arr) {
+    localStorage.setItem(STORAGE_MASTER, JSON.stringify(arr));
+  }
+
+  /** Add or update default storage zone for an ingredient (master list). */
+  function upsertMasterIngredient(name, defaultZone) {
+    const raw = String(name || '').trim();
+    if (!raw) return null;
+    const z = ZONE_IDS.indexOf(defaultZone) >= 0 ? defaultZone : 'other';
+    const display = titleCaseWords(raw);
+    const list = loadMaster();
+    const key = normalizeIngName(raw);
+    let idx = list.findIndex(function (x) {
+      return normalizeIngName(x.name) === key;
+    });
+    if (idx >= 0) {
+      list[idx].name = display;
+      list[idx].defaultZone = z;
+    } else {
+      list.push({ id: 'ing-' + Date.now().toString(36), name: display, defaultZone: z });
+      idx = list.length - 1;
+    }
+    saveMaster(list);
+    return list[idx];
+  }
+
+  function resolveDefaultZone(itemName) {
+    const key = normalizeIngName(itemName);
+    const found = loadMaster().find(function (x) {
+      return normalizeIngName(x.name) === key;
+    });
+    return found && found.defaultZone ? found.defaultZone : 'other';
+  }
+
+  function loadOrderOverrides() {
+    return safeParseObject(localStorage.getItem(STORAGE_ORDER_OVERRIDES) || '{}', {});
+  }
+
+  function saveOrderOverrides(obj) {
+    localStorage.setItem(STORAGE_ORDER_OVERRIDES, JSON.stringify(obj));
+  }
+
+  function loadOrderExtras() {
+    return safeParseExtraList(localStorage.getItem(STORAGE_ORDER_EXTRAS) || '[]');
+  }
+
+  function saveOrderExtras(arr) {
+    localStorage.setItem(STORAGE_ORDER_EXTRAS, JSON.stringify(arr));
+  }
+
+  function addOrderExtra(name, zone, orderQty) {
+    const list = loadOrderExtras();
+    const z = ZONE_IDS.indexOf(zone) >= 0 ? zone : 'other';
+    const row = {
+      id: 'extra-' + Date.now().toString(36),
+      name: titleCaseWords(String(name).trim()),
+      zone: z,
+      orderQty: String(orderQty || '').trim(),
+    };
+    list.push(row);
+    saveOrderExtras(list);
+    return row;
+  }
+
+  function updateOrderExtra(id, patch) {
+    const list = loadOrderExtras();
+    const idx = list.findIndex(function (x) {
+      return x.id === id;
+    });
+    if (idx < 0) return;
+    Object.assign(list[idx], patch);
+    saveOrderExtras(list);
+  }
+
+  function removeOrderExtra(id) {
+    saveOrderExtras(
+      loadOrderExtras().filter(function (x) {
+        return x.id !== id;
+      })
+    );
+  }
+
+  function exportMaster() {
+    return JSON.stringify(loadMaster(), null, 2);
+  }
+
+  function exportOrderBundle() {
+    return JSON.stringify(
+      {
+        masterIngredients: loadMaster(),
+        orderOverrides: loadOrderOverrides(),
+        orderExtras: loadOrderExtras(),
+      },
+      null,
+      2
+    );
   }
 
   function slugId(name) {
@@ -243,5 +375,17 @@
     exportKitchen: exportKitchen,
     exportRiviera: exportRiviera,
     USER_LETTER: '_USER',
+    ZONE_IDS: ZONE_IDS,
+    loadMaster: loadMaster,
+    upsertMasterIngredient: upsertMasterIngredient,
+    resolveDefaultZone: resolveDefaultZone,
+    loadOrderOverrides: loadOrderOverrides,
+    saveOrderOverrides: saveOrderOverrides,
+    loadOrderExtras: loadOrderExtras,
+    addOrderExtra: addOrderExtra,
+    updateOrderExtra: updateOrderExtra,
+    removeOrderExtra: removeOrderExtra,
+    exportMaster: exportMaster,
+    exportOrderBundle: exportOrderBundle,
   };
 })();

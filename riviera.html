@@ -6,39 +6,9 @@
 <title>Riviera House — Prep Chef Recipes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/theme.css">
 <style>
-:root {
-  --bg: #0C0C0C;
-  --bg2: #141414;
-  --surface: rgba(255,255,255,0.04);
-  --surface-hover: rgba(255,255,255,0.07);
-  --glass: rgba(20,20,20,0.85);
-  --gold: #C9A96E;
-  --gold-light: #E0C99A;
-  --gold-dim: rgba(201,169,110,0.15);
-  --accent: #D4634B;
-  --text: #F0EDE8;
-  --text2: #B0AAA0;
-  --text3: #706B63;
-  --border: rgba(255,255,255,0.08);
-  --border-hover: rgba(201,169,110,0.3);
-  --green: #7BAE6E;
-  --green-bg: rgba(123,174,110,0.12);
-  --blue: #6E9ABE;
-  --blue-bg: rgba(110,154,190,0.12);
-  --radius: 16px;
-  --radius-sm: 10px;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* ── Nav Back Link ── */
+/* ── Nav back ─────────────────────────────────────── */
 .nav-back {
   padding: 20px 32px 0;
   max-width: 1200px;
@@ -97,122 +67,7 @@ body {
 }
 .hero-sub b { color: var(--gold-light); font-weight: 500; }
 
-/* ── Search ── */
-.search-wrap {
-  max-width: 680px;
-  margin: 32px auto 0;
-  padding: 0 24px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.search-glass {
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 6px;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-.search-glass:focus-within {
-  border-color: var(--border-hover);
-  box-shadow: 0 0 0 1px rgba(201,169,110,0.1), 0 20px 60px rgba(0,0,0,0.3);
-}
-.search-inner {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 16px;
-}
-.search-icon { width: 20px; height: 20px; flex-shrink: 0; opacity: 0.4; }
-.search-input {
-  flex: 1;
-  background: none;
-  border: none;
-  font-size: 17px;
-  font-weight: 400;
-  color: var(--text);
-  outline: none;
-  font-family: inherit;
-}
-.search-input::placeholder { color: var(--text3); }
-
-/* ── Filter Pills ── */
-.filters-wrap {
-  max-width: 680px;
-  margin: 16px auto 0;
-  padding: 0 24px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.filter-pill {
-  padding: 8px 16px;
-  font-size: 13px;
-  font-weight: 500;
-  font-family: inherit;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  color: var(--text2);
-  cursor: pointer;
-  outline: none;
-  transition: all 0.25s;
-  appearance: none; -webkit-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23706B63'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-  padding-right: 32px;
-}
-.filter-pill:hover { border-color: var(--border-hover); color: var(--text); }
-.filter-pill.active { background: var(--gold-dim); border-color: var(--gold); color: var(--gold-light); }
-.clear-btn {
-  padding: 8px 18px;
-  font-size: 13px;
-  font-weight: 500;
-  font-family: inherit;
-  background: none;
-  border: 1px solid transparent;
-  border-radius: 100px;
-  color: var(--text3);
-  cursor: pointer;
-  transition: all 0.25s;
-}
-.clear-btn:hover { color: var(--accent); }
-
-/* ── Results Bar ── */
-.results-bar {
-  max-width: 1200px;
-  margin: 28px auto 0;
-  padding: 0 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.results-bar.visible { opacity: 1; }
-.results-count {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--text);
-}
-.results-count span { color: var(--gold); }
-
-/* ── Grid ── */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 16px;
-  padding: 20px 32px 32px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* ── Card ── */
+/* ── Card (Riviera) ─────────────────────────────────── */
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -303,166 +158,68 @@ body {
   grid-column: 1 / -1;
 }
 
-/* ── Modal ── */
-.modal-overlay {
-  position: fixed; inset: 0; z-index: 1000;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  display: flex; align-items: center; justify-content: center;
-  padding: 24px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s;
-}
-.modal-overlay.open { opacity: 1; pointer-events: all; }
-.modal {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  max-width: 700px;
-  width: 100%;
+/* Recipe detail modal (Riviera) — base shell in theme.css */
+#modalOverlay .modal {
   max-height: 88vh;
-  overflow-y: auto;
   padding: 36px;
-  position: relative;
-  transform: translateY(20px) scale(0.97);
-  transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
-  scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent;
 }
-.modal-overlay.open .modal { transform: translateY(0) scale(1); }
-.modal-close {
-  position: sticky; top: 0; float: right;
-  width: 36px; height: 36px;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 10px; cursor: pointer;
-  color: var(--text3); font-size: 18px;
-  transition: all 0.2s; z-index: 1;
-}
-.modal-close:hover { border-color: var(--gold); color: var(--gold); }
-.modal-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 26px; font-weight: 700;
-  color: var(--text); line-height: 1.25;
-  margin-bottom: 6px; padding-right: 44px;
-}
-.modal-type {
-  font-size: 12px; font-weight: 500; letter-spacing: 1px;
-  text-transform: uppercase; color: var(--gold);
-  margin-bottom: 12px; opacity: 0.8;
-}
-.modal-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
-.modal-scale {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
-  margin-bottom: 20px;
-}
-.modal-scale label { font-size: 12px; color: var(--text3); white-space: nowrap; }
-.modal-scale input {
-  width: 72px;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  color: var(--text);
-  border-radius: 6px;
-  padding: 5px 8px;
-  font-size: 13px;
-  font-family: inherit;
-}
-.modal-scale input:focus { outline: none; border-color: var(--gold); }
-.modal-scale-factor { font-size: 12px; color: var(--gold); font-style: italic; }
-.modal-section {
-  font-size: 11px; font-weight: 600; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--gold);
-  margin: 24px 0 12px; padding-bottom: 6px;
-  border-bottom: 1px solid var(--border);
+#modalOverlay .modal-badges { margin-bottom: 16px; }
+#modalOverlay .modal-scale input { width: 72px; }
+#modalOverlay .modal-ing { line-height: 1.8; }
+#modalOverlay .modal-steps li {
+  line-height: 1.8;
+  padding: 10px 0 10px 44px;
 }
 .modal-elements {
-  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
 }
 .element-chip {
-  font-size: 13px; color: var(--text2);
+  font-size: 13px;
+  color: var(--text2);
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 8px; padding: 4px 12px;
-}
-.modal-ing {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 4px 12px;
-  font-size: 14px;
-  line-height: 1.8;
-}
-.ing-qty { color: var(--gold-light); font-weight: 500; text-align: right; white-space: nowrap; }
-.ing-item { color: var(--text); }
-.ing-prep { color: var(--text3); font-style: italic; }
-.modal-steps { list-style: none; counter-reset: step; padding: 0; }
-.modal-steps li {
-  counter-increment: step;
-  font-size: 14px; line-height: 1.8;
-  color: var(--text);
-  padding: 10px 0 10px 44px;
-  position: relative;
-  border-bottom: 1px solid var(--border);
-}
-.modal-steps li:last-child { border-bottom: none; }
-.modal-steps li::before {
-  content: counter(step);
-  position: absolute; left: 0; top: 10px;
-  width: 28px; height: 28px;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--gold-dim); color: var(--gold);
-  font-size: 12px; font-weight: 600;
   border-radius: 8px;
+  padding: 4px 12px;
 }
 .modal-subsection {
-  font-size: 13px; font-weight: 600;
-  color: var(--text2); margin: 16px 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text2);
+  margin: 16px 0 8px;
   letter-spacing: 0.5px;
 }
 .modal-note {
-  font-size: 13px; color: var(--text3);
+  font-size: 13px;
+  color: var(--text3);
   background: var(--surface);
   border: 1px solid var(--border);
   border-left: 3px solid var(--gold);
   border-radius: 0 8px 8px 0;
-  padding: 10px 14px; margin-top: 16px;
+  padding: 10px 14px;
+  margin-top: 16px;
   line-height: 1.6;
 }
 .label-box {
-  display: inline-flex; align-items: center; gap: 8px;
-  margin-top: 20px; padding: 8px 14px;
-  background: var(--gold-dim); border: 1px solid rgba(201,169,110,0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 8px 14px;
+  background: var(--gold-dim);
+  border: 1px solid rgba(201, 169, 110, 0.3);
   border-radius: 10px;
-  font-size: 12px; font-weight: 500; color: var(--gold-light);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gold-light);
   letter-spacing: 0.5px;
 }
 
-/* ── Footer ── */
-.footer {
-  text-align: center;
-  padding: 32px 24px;
-  border-top: 1px solid var(--border);
-  margin-top: 20px;
-}
-.footer-text { font-size: 12px; color: var(--text3); font-weight: 300; letter-spacing: 0.5px; }
-.footer-text a { color: var(--gold); text-decoration: none; }
-
-/* ── Responsive ── */
 @media (max-width: 680px) {
   .hero { padding: 36px 20px 16px; }
-  .search-wrap, .filters-wrap { padding: 0 16px; }
-  .grid { padding: 16px; gap: 12px; grid-template-columns: 1fr; }
-  .results-bar { padding: 0 20px; }
   .nav-back { padding: 16px 20px 0; }
-  .modal { padding: 20px; border-radius: 16px; }
-  .modal-title { font-size: 22px; }
 }
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(12px); }
@@ -474,30 +231,103 @@ body {
 .grid .card:nth-child(4) { animation-delay: 0.12s; }
 .grid .card:nth-child(n+5) { animation-delay: 0.16s; }
 
-.hero-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
-.hero-actions button, .form-primary-btn {
-  display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; font-size: 13px; font-weight: 500;
-  letter-spacing: 0.5px; color: var(--gold); background: var(--gold-dim); border: 1px solid rgba(201,169,110,0.3);
-  border-radius: 100px; font-family: inherit; cursor: pointer; transition: all 0.25s;
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
 }
-.hero-actions button:hover { background: rgba(201,169,110,0.25); border-color: var(--gold); color: var(--gold-light); }
-#addRivieraOverlay .modal, #orderListOverlay .modal { max-width: 600px; }
-.form-row { margin-bottom: 14px; }
-.form-row label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
-.form-row input, .form-row textarea {
-  width: 100%; background: var(--bg2); border: 1px solid var(--border); color: var(--text);
-  border-radius: 10px; padding: 10px 12px; font-size: 14px; font-family: inherit;
+.hero-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--gold);
+  background: var(--gold-dim);
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  border-radius: 100px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.25s;
 }
-.form-row textarea { min-height: 80px; resize: vertical; }
-.ing-row-r { display: grid; grid-template-columns: 1fr 2fr 1fr 36px; gap: 8px; margin-bottom: 8px; align-items: center; }
+.hero-actions button:hover {
+  background: rgba(201, 169, 110, 0.25);
+  border-color: var(--gold);
+  color: var(--gold-light);
+}
+#addRivieraOverlay .modal { max-width: 600px; }
+#orderListOverlay .modal.order-list-modal {
+  max-width: min(920px, 100vw - 32px);
+}
+.form-row textarea { min-height: 80px; }
+.ing-row-r {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 36px;
+  gap: 8px;
+  margin-bottom: 8px;
+  align-items: center;
+}
 .ing-row-r input { padding: 8px; font-size: 13px; }
-.btn-secondary { padding: 8px 14px; font-size: 12px; font-weight: 500; font-family: inherit;
-  background: var(--surface); border: 1px solid var(--border); border-radius: 10px; color: var(--text2); cursor: pointer; }
-.order-list-section { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
-.order-list-section h4 { font-size: 14px; color: var(--gold); margin-bottom: 10px; }
-.order-list-section ul { list-style: none; padding: 0; margin: 0; font-size: 14px; color: var(--text2); line-height: 1.6; }
-.order-list-section li { padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
-@media (max-width: 680px) { .ing-row-r { grid-template-columns: 1fr 1fr; } }
+.order-zone-block { margin-bottom: 20px; }
+.order-zone-head {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.order-line-row {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) 120px 32px;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.order-line-row.order-line-muted { opacity: 0.45; }
+.order-line-row input[type='text'],
+.order-line-row select {
+  width: 100%;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 12px;
+  font-family: inherit;
+}
+.order-line-row input[type='text']:focus,
+.order-line-row select:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.order-line-name { color: var(--text); font-weight: 500; }
+.order-line-hint { color: var(--text3); font-size: 12px; line-height: 1.35; }
+.order-add-hint { font-size: 12px; color: var(--text3); margin-bottom: 12px; line-height: 1.5; }
+.order-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+@media (max-width: 860px) {
+  .order-line-row {
+    grid-template-columns: 22px 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+  .order-line-row .order-line-name { grid-column: 2 / -1; }
+  .order-line-row .order-line-hint { grid-column: 2 / -1; }
+  .order-line-row .ord-inc { grid-row: 3; grid-column: 1; }
+  .order-line-row .ord-order-qty { grid-row: 3; grid-column: 2; }
+  .order-line-row .ord-zone { grid-row: 3; grid-column: 3; }
+  .order-line-row .ord-remove { grid-row: 1; grid-column: 3; justify-self: end; }
+}
+@media (max-width: 680px) {
+  .ing-row-r { grid-template-columns: 1fr 1fr; }
+}
 
 </style>
 </head>
@@ -545,12 +375,29 @@ body {
 
 
 <div class="modal-overlay" id="orderListOverlay" onclick="if(event.target===this)closeOrderListModal()">
-  <div class="modal">
+  <div class="modal order-list-modal">
     <button type="button" class="modal-close" onclick="closeOrderListModal()">✕</button>
-    <div class="modal-title" style="margin-bottom:12px">Combined order list</div>
-    <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Every ingredient line from all Riviera recipes (including your saved recipes on this device).</p>
+    <div class="modal-title" style="margin-bottom:12px">Order list by storage</div>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Grouped as Freezer, Cold room, Dry store, then Other. Set order quantities and zones; data stays on this device. Recipe lines show a recipe-qty hint.</p>
     <div id="orderListBody"></div>
-    <div style="margin-top:16px"><button type="button" class="btn-secondary" onclick="copyOrderListText()">Copy as text</button></div>
+    <div class="modal-section" style="margin-top:20px">Add ingredient</div>
+    <p class="order-add-hint">Saves to your master ingredient list (default zone for matching names) and adds a line to this order.</p>
+    <div class="form-row"><label for="ordNewName">Name</label><input id="ordNewName" type="text" placeholder="e.g. Sumac" autocomplete="off" /></div>
+    <div class="form-row"><label for="ordNewZone">Storage</label>
+      <select id="ordNewZone">
+        <option value="freezer">Freezer</option>
+        <option value="coldroom">Cold room</option>
+        <option value="drystore">Dry store</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <div class="form-row"><label for="ordNewQty">Order quantity</label><input id="ordNewQty" type="text" placeholder="e.g. 2 kg" autocomplete="off" /></div>
+    <button type="button" class="btn-secondary" onclick="submitOrderListAdd()">Add to master &amp; list</button>
+    <div class="order-actions">
+      <button type="button" class="btn-secondary" onclick="copyOrderListText()">Copy as text</button>
+      <button type="button" class="btn-secondary" onclick="copyOrderBundleJson()">Copy order data JSON</button>
+      <button type="button" class="btn-secondary" onclick="copyMasterIngredientsJson()">Copy master ingredients JSON</button>
+    </div>
   </div>
 </div>
 
@@ -587,7 +434,7 @@ body {
 </div>
 
 <div class="footer">
-  <div class="footer-text">Riviera House Prep Chef Recipes · <a href="index.html">Kitchen Library</a> · Built with PrepFlow</div>
+  <div class="footer-text">Riviera House prep set · <a href="index.html">Kitchen Library</a> · Personal static site (GitHub Pages)</div>
 </div>
 
 <script src="assets/user-recipes.js"></script>
@@ -1063,39 +910,234 @@ function mergeRivieraRecipes() {
 }
 let RECIPES = mergeRivieraRecipes();
 
+const ZONE_ORDER = ['freezer', 'coldroom', 'drystore', 'other'];
+const ZONE_LABELS = { freezer: 'Freezer', coldroom: 'Cold room', drystore: 'Dry store', other: 'Other' };
+
+function escAttr(s) {
+  return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+}
+
+function buildOrderLinesFlat() {
+  const Kr = window.KuschiUserRecipes;
+  if (!Kr) return [];
+  const overrides = Kr.loadOrderOverrides();
+  const out = [];
+  RECIPES = mergeRivieraRecipes();
+  for (const r of RECIPES) {
+    const ings = r.ingredients || [];
+    ings.forEach((i, idx) => {
+      if (!i || !i.item) return;
+      const lineKey = r.id + '::' + idx;
+      const o = overrides[lineKey] || {};
+      const recipeQty = i.qty != null && String(i.qty).trim() !== '' ? String(i.qty).trim() : '';
+      const prep = i.prep ? ' — ' + i.prep : '';
+      const recipeQtyDisplay = (recipeQty + prep) || '—';
+      const defaultZone = Kr.resolveDefaultZone(i.item);
+      let zone = o.zone;
+      if (!zone || Kr.ZONE_IDS.indexOf(zone) < 0) zone = defaultZone;
+      let orderQty = o.orderQty;
+      if (orderQty == null || orderQty === '') orderQty = recipeQty;
+      const included = o.included !== false;
+      out.push({
+        kind: 'recipe',
+        lineKey,
+        item: i.item,
+        recipeQtyDisplay,
+        orderQty: String(orderQty),
+        zone,
+        included,
+      });
+    });
+  }
+  Kr.loadOrderExtras().forEach((ex) => {
+    out.push({
+      kind: 'extra',
+      lineKey: 'extra::' + ex.id,
+      extraId: ex.id,
+      item: ex.name,
+      recipeQtyDisplay: '—',
+      orderQty: ex.orderQty || '',
+      zone: Kr.ZONE_IDS.indexOf(ex.zone) >= 0 ? ex.zone : 'other',
+      included: true,
+    });
+  });
+  return out;
+}
+
+function linesGroupedByZone(lines) {
+  const by = { freezer: [], coldroom: [], drystore: [], other: [] };
+  for (const line of lines) {
+    const z = ZONE_ORDER.indexOf(line.zone) >= 0 ? line.zone : 'other';
+    by[z].push(line);
+  }
+  for (const z of ZONE_ORDER) {
+    by[z].sort((a, b) => a.item.localeCompare(b.item, undefined, { sensitivity: 'base' }));
+  }
+  return by;
+}
+
+function setRecipeOverride(lineKey, patch) {
+  const Kr = KuschiUserRecipes;
+  const all = Kr.loadOrderOverrides();
+  const prev = all[lineKey] || {};
+  all[lineKey] = Object.assign({}, prev, patch);
+  Kr.saveOrderOverrides(all);
+}
+
+function zoneSelectHtml(selected, className, dataKind, dataKey) {
+  const attrs =
+    'class="' + className + '" data-kind="' + dataKind + '" ' +
+    (dataKind === 'recipe' ? 'data-line-key="' + escAttr(dataKey) + '"' : 'data-extra-id="' + escAttr(dataKey) + '"');
+  let h = '<select ' + attrs + '>';
+  for (const z of ZONE_ORDER) {
+    h += '<option value="' + z + '"' + (z === selected ? ' selected' : '') + '>' + esc(ZONE_LABELS[z]) + '</option>';
+  }
+  h += '</select>';
+  return h;
+}
+
+function renderOrderListBody() {
+  const body = document.getElementById('orderListBody');
+  if (!body || !window.KuschiUserRecipes) return;
+  const lines = buildOrderLinesFlat();
+  const grouped = linesGroupedByZone(lines);
+  let html = '';
+  for (const z of ZONE_ORDER) {
+    const rows = grouped[z];
+    if (!rows.length) continue;
+    html += '<div class="order-zone-block">';
+    html += '<div class="order-zone-head">' + esc(ZONE_LABELS[z]) + '</div>';
+    for (const line of rows) {
+      const muted = !line.included ? ' order-line-muted' : '';
+      const chk = line.included ? ' checked' : '';
+      if (line.kind === 'recipe') {
+        html +=
+          '<div class="order-line-row' + muted + '" data-kind="recipe">' +
+          '<input type="checkbox" class="ord-inc"' + chk + ' data-line-key="' + escAttr(line.lineKey) + '" title="Include in copy" />' +
+          '<div class="order-line-name">' + esc(line.item) + '</div>' +
+          '<div class="order-line-hint">Recipe: ' + esc(line.recipeQtyDisplay) + '</div>' +
+          '<input type="text" class="ord-order-qty" data-line-key="' + escAttr(line.lineKey) + '" value="' + escAttr(line.orderQty) + '" placeholder="Order qty" />' +
+          zoneSelectHtml(line.zone, 'ord-zone', 'recipe', line.lineKey) +
+          '<span class="ord-remove"></span>' +
+          '</div>';
+      } else {
+        html +=
+          '<div class="order-line-row" data-kind="extra">' +
+          '<span class="ord-inc"></span>' +
+          '<div class="order-line-name">' + esc(line.item) + '</div>' +
+          '<div class="order-line-hint">Manual line</div>' +
+          '<input type="text" class="ord-order-qty-extra" data-extra-id="' + escAttr(line.extraId) + '" value="' + escAttr(line.orderQty) + '" placeholder="Order qty" />' +
+          zoneSelectHtml(line.zone, 'ord-zone-extra', 'extra', line.extraId) +
+          '<button type="button" class="btn-secondary ord-remove" data-extra-id="' + escAttr(line.extraId) + '">✕</button>' +
+          '</div>';
+      }
+    }
+    html += '</div>';
+  }
+  if (!html) {
+    html = '<p style="font-size:14px;color:var(--text3)">No lines yet. Add recipes or use Add ingredient below.</p>';
+  }
+  body.innerHTML = html;
+
+  body.querySelectorAll('.ord-inc[data-line-key]').forEach((el) => {
+    el.addEventListener('change', () => {
+      setRecipeOverride(el.getAttribute('data-line-key'), { included: el.checked });
+      renderOrderListBody();
+    });
+  });
+  body.querySelectorAll('.ord-order-qty[data-line-key]').forEach((el) => {
+    el.addEventListener('change', () => {
+      setRecipeOverride(el.getAttribute('data-line-key'), { orderQty: el.value });
+    });
+  });
+  body.querySelectorAll('select.ord-zone[data-line-key]').forEach((el) => {
+    el.addEventListener('change', () => {
+      setRecipeOverride(el.getAttribute('data-line-key'), { zone: el.value });
+      renderOrderListBody();
+    });
+  });
+  body.querySelectorAll('.ord-order-qty-extra').forEach((el) => {
+    el.addEventListener('change', () => {
+      KuschiUserRecipes.updateOrderExtra(el.getAttribute('data-extra-id'), { orderQty: el.value });
+    });
+  });
+  body.querySelectorAll('select.ord-zone-extra').forEach((el) => {
+    el.addEventListener('change', () => {
+      KuschiUserRecipes.updateOrderExtra(el.getAttribute('data-extra-id'), { zone: el.value });
+      renderOrderListBody();
+    });
+  });
+  body.querySelectorAll('button.ord-remove[data-extra-id]').forEach((el) => {
+    el.addEventListener('click', () => {
+      KuschiUserRecipes.removeOrderExtra(el.getAttribute('data-extra-id'));
+      renderOrderListBody();
+    });
+  });
+}
 
 function closeOrderListModal() {
   document.getElementById('orderListOverlay').classList.remove('open');
+  document.body.style.overflow = '';
 }
-let orderListPlain = '';
+
 function openOrderListModal() {
-  const body = document.getElementById('orderListBody');
-  body.innerHTML = '';
-  orderListPlain = '';
-  for (const r of RECIPES) {
-    const sec = document.createElement('div');
-    sec.className = 'order-list-section';
-    const h = document.createElement('h4');
-    h.textContent = r.name;
-    sec.appendChild(h);
-    const ul = document.createElement('ul');
-    orderListPlain += r.name + '\n';
-    for (const i of r.ingredients) {
-      const li = document.createElement('li');
-      const q = (i.qty != null && i.qty !== '') ? String(i.qty) + ' ' : '';
-      const prep = i.prep ? ' — ' + i.prep : '';
-      li.textContent = q + i.item + prep;
-      ul.appendChild(li);
-      orderListPlain += '  - ' + q + i.item + prep + '\n';
-    }
-    orderListPlain += '\n';
-    sec.appendChild(ul);
-    body.appendChild(sec);
-  }
+  RECIPES = mergeRivieraRecipes();
+  renderOrderListBody();
   document.getElementById('orderListOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
+
 function copyOrderListText() {
-  navigator.clipboard.writeText(orderListPlain).then(() => alert('Order list copied'));
+  const lines = buildOrderLinesFlat().filter((l) => l.included);
+  const byZone = { freezer: [], coldroom: [], drystore: [], other: [] };
+  lines.forEach((l) => {
+    const z = ZONE_ORDER.indexOf(l.zone) >= 0 ? l.zone : 'other';
+    byZone[z].push(l);
+  });
+  let text = '';
+  for (const z of ZONE_ORDER) {
+    const arr = byZone[z];
+    if (!arr.length) continue;
+    arr.sort((a, b) => a.item.localeCompare(b.item, undefined, { sensitivity: 'base' }));
+    text += ZONE_LABELS[z].toUpperCase() + '\n';
+    arr.forEach((l) => {
+      const q = String(l.orderQty || '').trim() || '(set order qty)';
+      text += '- ' + l.item + ': ' + q;
+      if (l.kind === 'recipe' && l.recipeQtyDisplay && l.recipeQtyDisplay !== '—') {
+        text += ' (recipe: ' + l.recipeQtyDisplay + ')';
+      }
+      text += '\n';
+    });
+    text += '\n';
+  }
+  const out = text.trim() || '(nothing included — tick checkboxes or add lines)';
+  navigator.clipboard.writeText(out).then(() => alert('Order list copied'));
+}
+
+function copyOrderBundleJson() {
+  if (!window.KuschiUserRecipes) return;
+  navigator.clipboard.writeText(KuschiUserRecipes.exportOrderBundle()).then(() => alert('Order bundle JSON copied'));
+}
+
+function copyMasterIngredientsJson() {
+  if (!window.KuschiUserRecipes) return;
+  navigator.clipboard.writeText(KuschiUserRecipes.exportMaster()).then(() => alert('Master ingredients JSON copied'));
+}
+
+function submitOrderListAdd() {
+  if (!window.KuschiUserRecipes) return;
+  const name = document.getElementById('ordNewName').value.trim();
+  if (!name) {
+    alert('Enter a name');
+    return;
+  }
+  const zone = document.getElementById('ordNewZone').value;
+  const qty = document.getElementById('ordNewQty').value.trim();
+  KuschiUserRecipes.upsertMasterIngredient(name, zone);
+  KuschiUserRecipes.addOrderExtra(name, zone, qty);
+  document.getElementById('ordNewName').value = '';
+  document.getElementById('ordNewQty').value = '';
+  renderOrderListBody();
 }
 function closeAddRivieraModal() {
   document.getElementById('addRivieraOverlay').classList.remove('open');
