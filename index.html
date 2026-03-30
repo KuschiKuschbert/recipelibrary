@@ -331,6 +331,105 @@
   .hero-nav { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; align-items: center; }
   button.hero-nav-link { cursor: pointer; font: inherit; border: none; }
   .hero-nav-cluster button.hero-nav-link { min-width: 0; }
+
+  /* Hero: single “+ Add” expands into recipe / kitchen book */
+  .hero-add-split {
+    display: inline-flex;
+    vertical-align: middle;
+    border-radius: 100px;
+    border: 1px solid rgba(201, 169, 110, 0.3);
+    background: var(--gold-dim);
+    overflow: hidden;
+    transition: box-shadow 0.25s;
+  }
+  .hero-add-split:hover {
+    box-shadow: 0 6px 20px rgba(201, 169, 110, 0.12);
+  }
+  .hero-add-inner {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 42px;
+  }
+  .hero-add-split .hero-nav-link {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+  }
+  .hero-add-trigger.hero-nav-link {
+    border-radius: 100px;
+    transition: opacity 0.2s ease;
+  }
+  .hero-add-pair {
+    display: flex;
+    align-items: stretch;
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transition: max-width 0.38s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.28s ease;
+  }
+  .hero-add-split.expanded .hero-add-pair {
+    max-width: 340px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .hero-add-split.expanded .hero-add-trigger {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .hero-add-divider {
+    width: 1px;
+    flex-shrink: 0;
+    align-self: stretch;
+    background: rgba(201, 169, 110, 0.35);
+  }
+  .hero-add-pair .hero-nav-link {
+    border-radius: 0;
+    white-space: nowrap;
+    min-width: 0;
+    padding: 10px 14px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .hero-add-pair .hero-nav-link:first-of-type {
+    border-radius: 100px 0 0 100px;
+    padding-left: 18px;
+  }
+  .hero-add-pair .hero-nav-link:last-of-type {
+    border-radius: 0 100px 100px 0;
+    padding-right: 18px;
+  }
+  .hero-add-pair .hero-nav-link:hover {
+    background: rgba(201, 169, 110, 0.25);
+    color: var(--gold-light);
+  }
+  @media (max-width: 420px) {
+    .hero-add-split.expanded .hero-add-pair {
+      max-width: min(340px, calc(100vw - 48px));
+    }
+    .hero-add-pair .hero-nav-link {
+      font-size: 12px;
+      padding: 10px 10px;
+    }
+    .hero-add-pair .hero-nav-link:first-of-type { padding-left: 14px; }
+    .hero-add-pair .hero-nav-link:last-of-type { padding-right: 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-add-pair,
+    .hero-add-trigger.hero-nav-link {
+      transition: none;
+    }
+  }
   #addRecipeOverlay .modal { max-width: 560px; }
   .ing-row { display: grid; grid-template-columns: 72px 56px 1fr 1fr 36px; gap: 8px; margin-bottom: 8px; align-items: center; }
   .ing-row input { padding: 8px; font-size: 13px; }
@@ -349,7 +448,16 @@
   <p class="hero-sub"><b id="totalCount">38,363</b> recipes — professionally formatted, metric, density-converted, searchable.</p>
   <div class="hero-nav">
     <div class="hero-nav-cluster">
-      <button type="button" class="hero-nav-link" onclick="openAddRecipeModal()">+ Add recipe</button>
+      <div class="hero-add-split" id="heroAddSplit">
+        <div class="hero-add-inner">
+          <button type="button" class="hero-nav-link hero-add-trigger" id="heroAddTrigger" aria-expanded="false" aria-controls="heroAddPair" onclick="event.stopPropagation(); toggleHeroAddSplit();">+ Add</button>
+          <div class="hero-add-pair" id="heroAddPair" role="group" aria-label="Choose what to add" aria-hidden="true">
+            <button type="button" class="hero-nav-link" tabindex="-1" onclick="event.stopPropagation(); heroPickAddRecipe();">+ Add recipe</button>
+            <span class="hero-add-divider" aria-hidden="true"></span>
+            <button type="button" class="hero-nav-link" tabindex="-1" onclick="event.stopPropagation(); heroPickAddKitchenBook();">+ Kitchen book</button>
+          </div>
+        </div>
+      </div>
       <button type="button" class="hero-nav-link" onclick="openPageQrModal()" title="QR code to open this page on your phone">QR</button>
     </div>
     <span class="hero-custom-books" id="heroCustomBookLinks" style="display:contents"></span>
@@ -752,10 +860,19 @@ document.addEventListener('keydown', e => {
       closePageQrModal();
     } else if (document.getElementById('modalOverlay').classList.contains('open')) {
       closeModal();
+    } else if (document.getElementById('heroAddSplit') && document.getElementById('heroAddSplit').classList.contains('expanded')) {
+      closeHeroAddSplit();
     } else {
       document.getElementById('search').blur();
     }
   }
+});
+
+document.addEventListener('click', (e) => {
+  const split = document.getElementById('heroAddSplit');
+  if (!split || !split.classList.contains('expanded')) return;
+  if (split.contains(e.target)) return;
+  closeHeroAddSplit();
 });
 
 // Sticky search background on scroll
@@ -1197,7 +1314,45 @@ async function formatKitchenRecipeWithGemini() {
   }
 }
 
+function syncHeroAddPairA11y(expanded) {
+  const pair = document.getElementById('heroAddPair');
+  if (!pair) return;
+  pair.setAttribute('aria-hidden', expanded ? 'false' : 'true');
+  pair.querySelectorAll('button').forEach(b => {
+    if (expanded) b.removeAttribute('tabindex');
+    else b.setAttribute('tabindex', '-1');
+  });
+}
+
+function toggleHeroAddSplit() {
+  const el = document.getElementById('heroAddSplit');
+  const t = document.getElementById('heroAddTrigger');
+  if (!el || !t) return;
+  const open = el.classList.toggle('expanded');
+  t.setAttribute('aria-expanded', open ? 'true' : 'false');
+  syncHeroAddPairA11y(open);
+}
+
+function closeHeroAddSplit() {
+  const el = document.getElementById('heroAddSplit');
+  const t = document.getElementById('heroAddTrigger');
+  if (el) el.classList.remove('expanded');
+  if (t) t.setAttribute('aria-expanded', 'false');
+  syncHeroAddPairA11y(false);
+}
+
+function heroPickAddRecipe() {
+  closeHeroAddSplit();
+  openAddRecipeModal();
+}
+
+function heroPickAddKitchenBook() {
+  closeHeroAddSplit();
+  openAddKitchenBookModal();
+}
+
 function openAddRecipeModal() {
+  closeHeroAddSplit();
   document.getElementById('addRecipeOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
   document.getElementById('arIngRows').innerHTML = '';
@@ -1266,11 +1421,11 @@ function refreshCustomBookNav() {
     '<a href="kitchen-book.html?b=' + encodeURIComponent(b.id) + '" class="hero-nav-link">' + esc(b.name) +
     ' <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></a>'
   );
-  parts.push('<button type="button" class="hero-nav-link" onclick="openAddKitchenBookModal()">+ Kitchen book</button>');
   wrap.innerHTML = parts.join('');
 }
 
 function openAddKitchenBookModal() {
+  closeHeroAddSplit();
   const o = document.getElementById('addKitchenBookOverlay');
   const inp = document.getElementById('newKitchenBookName');
   if (inp) inp.value = '';
