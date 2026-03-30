@@ -602,13 +602,23 @@
 </div>
 
 <div class="footer">
-  <div class="footer-text">Riviera House prep set · <a href="index.html">Kitchen Library</a> · Personal static site (GitHub Pages)</div>
+  <div class="footer-text">Riviera House prep set · <a href="index.html">Kitchen Library</a> · <button type="button" class="footer-qr-btn" onclick="openPageQrModal()">Phone QR</button> · Personal static site (GitHub Pages)</div>
   <div class="footer-riviera-admin" id="rivieraAdminChrome">
     <button type="button" class="btn-text riv-admin-btn" id="rivieraAdminOpenBtn" onclick="openRivieraAdminModal()">Admin</button>
     <span id="rivieraAdminUnlockedStrip" class="riv-admin-unlocked" style="display:none">
       <button type="button" class="btn-text riv-admin-btn" onclick="rivieraAdminLock()">Lock</button>
       <button type="button" class="btn-text riv-admin-btn" onclick="rivieraRestoreHiddenBuiltins()">Restore hidden built-ins</button>
     </span>
+  </div>
+</div>
+
+<div class="modal-overlay" id="pageQrOverlay" onclick="if(event.target===this)closePageQrModal()">
+  <div class="modal" style="max-width:360px;text-align:center">
+    <button type="button" class="modal-close" onclick="closePageQrModal()">✕</button>
+    <div class="modal-title" style="margin-bottom:12px">Open this page on your phone</div>
+    <p style="font-size:12px;color:var(--text3);margin:0 0 16px;line-height:1.55;text-align:left">Scan the code to open the same address in the phone browser. Browsing recipes works immediately. <strong>Paste &amp; format</strong> (Gemini) still needs an API key saved <em>on that phone</em> — never put keys in a QR code or URL (anyone who scans can steal quota). Your apprentice can create a free key in <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio</a> once per device, or you’d need a private server proxy (key stays on the server).</p>
+    <div id="pageQrCanvasWrap" style="display:flex;justify-content:center;min-height:222px;align-items:center;margin-bottom:12px"></div>
+    <p id="pageQrUrl" style="font-size:11px;color:var(--text3);word-break:break-all;text-align:left;margin:0"></p>
   </div>
 </div>
 
@@ -626,6 +636,7 @@
 <script src="assets/recipe-gemini-format.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js" crossorigin="anonymous"></script>
 <script src="assets/recipe-import-helpers.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js" crossorigin="anonymous"></script>
 <script>
 const BUILTIN_RECIPES = [
   {
@@ -1237,11 +1248,55 @@ function openRivieraAdminModal() {
   if (el) setTimeout(() => el.focus(), 50);
 }
 
+function openPageQrModal() {
+  const overlay = document.getElementById('pageQrOverlay');
+  const wrap = document.getElementById('pageQrCanvasWrap');
+  const urlP = document.getElementById('pageQrUrl');
+  if (!overlay || !wrap || !urlP) return;
+  const url = window.location.href.split('#')[0];
+  urlP.textContent = url;
+  wrap.innerHTML = '';
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (typeof QRCode === 'undefined') {
+    wrap.innerHTML = '<span style="color:#e8a0a0;font-size:13px">QR library failed to load.</span>';
+    return;
+  }
+  const canvas = document.createElement('canvas');
+  wrap.appendChild(canvas);
+  QRCode.toCanvas(
+    canvas,
+    url,
+    {
+      width: 220,
+      margin: 2,
+      color: { dark: '#c9a96eff', light: '#1a1a1fff' },
+    },
+    function (err) {
+      if (err) {
+        wrap.innerHTML = '<span style="color:#e8a0a0;font-size:13px">' + (err.message || String(err)) + '</span>';
+      }
+    }
+  );
+}
+
+function closePageQrModal() {
+  const overlay = document.getElementById('pageQrOverlay');
+  if (overlay) overlay.classList.remove('open');
+  if (!document.getElementById('modalOverlay').classList.contains('open') &&
+      !document.getElementById('orderListOverlay').classList.contains('open') &&
+      !document.getElementById('addRivieraOverlay').classList.contains('open') &&
+      !document.getElementById('rivieraAdminOverlay').classList.contains('open')) {
+    document.body.style.overflow = '';
+  }
+}
+
 function closeRivieraAdminModal() {
   document.getElementById('rivieraAdminOverlay').classList.remove('open');
   if (!document.getElementById('modalOverlay').classList.contains('open') &&
       !document.getElementById('orderListOverlay').classList.contains('open') &&
-      !document.getElementById('addRivieraOverlay').classList.contains('open')) {
+      !document.getElementById('addRivieraOverlay').classList.contains('open') &&
+      !document.getElementById('pageQrOverlay').classList.contains('open')) {
     document.body.style.overflow = '';
   }
 }
@@ -1648,7 +1703,12 @@ function renderOrderListBody() {
 
 function closeOrderListModal() {
   document.getElementById('orderListOverlay').classList.remove('open');
-  document.body.style.overflow = '';
+  if (!document.getElementById('modalOverlay').classList.contains('open') &&
+      !document.getElementById('addRivieraOverlay').classList.contains('open') &&
+      !document.getElementById('rivieraAdminOverlay').classList.contains('open') &&
+      !document.getElementById('pageQrOverlay').classList.contains('open')) {
+    document.body.style.overflow = '';
+  }
 }
 
 function openOrderListModal() {
@@ -2202,7 +2262,12 @@ function rescale(val) {
 
 function closeModal() {
   document.getElementById('modalOverlay').classList.remove('open');
-  document.body.style.overflow = '';
+  if (!document.getElementById('orderListOverlay').classList.contains('open') &&
+      !document.getElementById('addRivieraOverlay').classList.contains('open') &&
+      !document.getElementById('rivieraAdminOverlay').classList.contains('open') &&
+      !document.getElementById('pageQrOverlay').classList.contains('open')) {
+    document.body.style.overflow = '';
+  }
 }
 
 // ── Event listeners ───────────────────────────
@@ -2225,6 +2290,8 @@ document.addEventListener('keydown', e => {
   if (e.key !== 'Escape') return;
   if (document.getElementById('rivieraAdminOverlay').classList.contains('open')) {
     closeRivieraAdminModal();
+  } else if (document.getElementById('pageQrOverlay').classList.contains('open')) {
+    closePageQrModal();
   } else if (document.getElementById('orderListOverlay').classList.contains('open')) {
     closeOrderListModal();
   } else if (document.getElementById('addRivieraOverlay').classList.contains('open')) {
