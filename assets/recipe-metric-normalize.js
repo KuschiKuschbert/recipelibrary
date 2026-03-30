@@ -2,6 +2,7 @@
  * Deterministic imperial → metric normalization for recipe ingredients (browser).
  * US customary cup = 236.5882365 ml (not US legal 240 ml — documented for reproducibility).
  * Volume → mass only when ingredient matches a density entry or category fallback.
+ * Quantities are chef-rounded (sensible g/ml/L/kg steps, not raw IEEE floats).
  */
 (function (global) {
   /** US liquid cup in ml */
@@ -188,26 +189,89 @@
     return null;
   }
 
-  function formatQtyMassG(g) {
-    if (g >= 1000) {
-      var kg = g / 1000;
-      var ks = kg >= 10 ? kg.toFixed(1) : kg.toFixed(2);
-      ks = ks.replace(/\.?0+$/, '');
-      return { qty: ks, unit: 'kg' };
-    }
-    if (g < 10) return { qty: String(Math.round(g * 10) / 10), unit: 'g' };
-    return { qty: String(Math.round(g)), unit: 'g' };
+  var SPICE_HINT = /salt|pepper|spice|ground\s|powder|cinnamon|nutmeg|cloves?|cardamom|paprika|cumin|coriander|turmeric|ginger\s|za'?atar|garam\s+masala|chili\s+powder|chilli\s+powder|oregano|thyme|basil|rosemary|dried\s+herb|yeast|baking\s+powder|baking\s+soda|bicarb/i;
+
+  function isSpiceyItem(item) {
+    return SPICE_HINT.test(normItem(item));
   }
 
-  function formatQtyVolumeMl(ml) {
-    if (ml >= 1000) {
-      var L = ml / 1000;
-      var ls = L >= 10 ? L.toFixed(1) : L.toFixed(2);
-      ls = ls.replace(/\.?0+$/, '');
-      return { qty: ls, unit: 'L' };
+  /** Trim trailing zeros; avoid float noise in display */
+  function qtyString(n) {
+    if (!isFinite(n) || n < 0) return '0';
+    var r = Math.round(n * 1000) / 1000;
+    var s = r.toFixed(3);
+    return s.replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '');
+  }
+
+  /**
+   * Kitchen-friendly gram rounding: coarser as amounts grow; finer for small spices.
+   */
+  function chefRoundMassG(g, item) {
+    if (!(g > 0) || !isFinite(g)) return 0;
+    var spice = isSpiceyItem(item);
+    if (g < 3) {
+      if (spice) return Math.round(g * 4) / 4;
+      return Math.round(g * 2) / 2;
     }
-    if (ml < 10) return { qty: String(Math.round(ml * 10) / 10), unit: 'ml' };
-    return { qty: String(Math.round(ml)), unit: 'ml' };
+    if (g < 30) {
+      if (spice) return Math.round(g * 2) / 2;
+      return Math.round(g);
+    }
+    if (g < 200) return Math.round(g / 5) * 5;
+    if (g < 1000) return Math.round(g / 10) * 10;
+    return g;
+  }
+
+  /**
+   * Snap ml to steps that match how cooks measure (5 ml ≈ 1 tsp, 15 ml ≈ 1 tbsp).
+   */
+  function chefRoundVolumeMl(ml, item) {
+    if (!(ml > 0) || !isFinite(ml)) return 0;
+    var spice = isSpiceyItem(item);
+    if (ml < 20) {
+      var step = spice ? 2.5 : 5;
+      return Math.round(ml / step) * step;
+    }
+    if (ml < 250) return Math.round(ml / 5) * 5;
+    if (ml < 1000) return Math.round(ml / 10) * 10;
+    return ml;
+  }
+
+  /** kg display: quarters when small, halves, then coarser */
+  function chefRoundKg(kg) {
+    if (!(kg > 0) || !isFinite(kg)) return 0;
+    if (kg < 1.5) return Math.round(kg * 4) / 4;
+    if (kg < 5) return Math.round(kg * 2) / 2;
+    if (kg < 25) return Math.round(kg * 2) / 2;
+    return Math.round(kg);
+  }
+
+  /** Litres: quarter-litre steps when practical */
+  function chefRoundLiters(L) {
+    if (!(L > 0) || !isFinite(L)) return 0;
+    if (L < 3) return Math.round(L * 4) / 4;
+    if (L < 15) return Math.round(L * 2) / 2;
+    return Math.round(L * 10) / 10;
+  }
+
+  function formatQtyMassG(g, item) {
+    var itemRef = item != null ? item : '';
+    if (g >= 1000) {
+      var kg = chefRoundKg(g / 1000);
+      return { qty: qtyString(kg), unit: 'kg' };
+    }
+    var rg = chefRoundMassG(g, itemRef);
+    return { qty: qtyString(rg), unit: 'g' };
+  }
+
+  function formatQtyVolumeMl(ml, item) {
+    var itemRef = item != null ? item : '';
+    if (ml >= 1000) {
+      var L = chefRoundLiters(ml / 1000);
+      return { qty: qtyString(L), unit: 'L' };
+    }
+    var rm = chefRoundVolumeMl(ml, itemRef);
+    return { qty: qtyString(rm), unit: 'ml' };
   }
 
   /**
@@ -224,8 +288,8 @@
     var mf = metricUnitFactors(rest);
     if (mf) {
       var numM = pn.value;
-      if (mf.factorToG) return formatQtyMassG(numM * mf.factorToG);
-      if (mf.factorToMl) return formatQtyVolumeMl(numM * mf.factorToMl);
+      if (mf.factorToG) return formatQtyMassG(numM * mf.factorToG, item);
+      if (mf.factorToMl) return formatQtyVolumeMl(numM * mf.factorToMl, item);
     }
 
     for (var i = 0; i < UNIT_SPECS.length; i++) {
@@ -234,14 +298,14 @@
       if (!um) continue;
       var n = pn.value;
       if (spec.gPer != null) {
-        return formatQtyMassG(n * spec.gPer);
+        return formatQtyMassG(n * spec.gPer, item);
       }
       var ml = n * spec.mlPer;
       var rho = densityForItem(item);
       if (rho != null && rho > 0) {
-        return formatQtyMassG(ml * rho);
+        return formatQtyMassG(ml * rho, item);
       }
-      return formatQtyVolumeMl(ml);
+      return formatQtyVolumeMl(ml, item);
     }
 
     return null;
@@ -341,5 +405,7 @@
     /** Exposed for tests / debugging */
     convertAmountPhrase: convertAmountPhrase,
     kitchenRowToPhrase: kitchenRowToPhrase,
+    chefRoundMassG: chefRoundMassG,
+    chefRoundVolumeMl: chefRoundVolumeMl,
   };
 })(typeof window !== 'undefined' ? window : this);
