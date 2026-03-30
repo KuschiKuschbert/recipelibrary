@@ -6,15 +6,17 @@ on:
     paths:
       - "claude_index/**"
       - "recipe_detail/**"
-      - "scripts/check-recipe-shards.py"
+      - "scripts/**"
       - "index.html"
+      - ".github/workflows/recipe-shards.yml"
   pull_request:
     branches: [main]
     paths:
       - "claude_index/**"
       - "recipe_detail/**"
-      - "scripts/check-recipe-shards.py"
+      - "scripts/**"
       - "index.html"
+      - ".github/workflows/recipe-shards.yml"
 
 jobs:
   check:
