@@ -159,6 +159,13 @@
   .ar-gemini-saved-strip .btn-text-gemini:hover {
     color: var(--gold-light);
   }
+  .ar-proxy-details summary {
+    font-size: 12px;
+    color: var(--text3);
+    cursor: pointer;
+    user-select: none;
+  }
+  .ar-proxy-details summary::-webkit-details-marker { color: var(--gold); }
 
   /* ── Recipe card (index) ─────────────────────────── */
   .card {
@@ -413,7 +420,17 @@
         <div class="form-row" style="flex:2;min-width:220px"><label for="arGeminiKey">Gemini API key</label><input id="arGeminiKey" type="password" autocomplete="off" placeholder="AIza…" /></div>
         <button type="button" class="btn-secondary" onclick="saveKitchenGeminiKey()" style="margin-bottom:2px">Remember on device</button>
       </div>
-      <div class="form-row"><label for="arPasteRaw">Recipe text</label><textarea id="arPasteRaw" placeholder="Paste ingredients and method here…" style="min-height:160px"></textarea></div>
+      <div class="form-row"><label for="arRecipeUrl">Recipe page URL (optional)</label><input type="url" id="arRecipeUrl" inputmode="url" autocomplete="off" placeholder="https://…" /></div>
+      <div class="form-row"><label for="arRecipeFile">Upload PDF, DOCX, or image (optional)</label><input type="file" id="arRecipeFile" accept=".pdf,.docx,application/pdf,image/*,application/vnd.openxmlformats-officedocument.wordprocessingml.document" /></div>
+      <details class="ar-proxy-details" style="margin-bottom:14px">
+        <summary>Optional fetch proxy (for recipe URLs when the site blocks the browser)</summary>
+        <p class="ar-format-help" style="margin-top:10px">Deploy <code>workers/recipe-fetch-proxy.js</code> on Cloudflare Workers, then paste your worker base URL (no path; <code>?url=…</code> is added automatically).</p>
+        <div class="ar-format-key-row">
+          <div class="form-row" style="flex:2;min-width:200px"><label for="arProxyUrl">Proxy base URL</label><input type="url" id="arProxyUrl" placeholder="https://your-worker.workers.dev" autocomplete="off" /></div>
+          <button type="button" class="btn-secondary" onclick="saveKitchenFetchProxy()" style="margin-bottom:2px">Save proxy</button>
+        </div>
+      </details>
+      <div class="form-row"><label for="arPasteRaw">Recipe text</label><textarea id="arPasteRaw" placeholder="Or paste ingredients and method here…" style="min-height:120px"></textarea></div>
       <button type="button" class="btn-secondary" id="arFormatBtn" onclick="formatKitchenRecipeWithGemini()">Format into manual form</button>
       <p class="ar-format-status" id="arFormatStatus"></p>
     </div>
@@ -430,6 +447,8 @@
 
 <script src="assets/user-recipes.js"></script>
 <script src="assets/recipe-gemini-format.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js" crossorigin="anonymous"></script>
+<script src="assets/recipe-import-helpers.js"></script>
 <script>
 const PAGE_SIZE = 60;
 let allRecipes = [];
@@ -932,7 +951,21 @@ function setAddRecipeTab(which) {
   tabM.setAttribute('aria-selected', isManual);
   tabF.classList.toggle('active', !isManual);
   tabF.setAttribute('aria-selected', !isManual);
-  if (which === 'format') updateKitchenGeminiKeyUi();
+  if (which === 'format') {
+    updateKitchenGeminiKeyUi();
+    syncKitchenImportUi();
+  }
+}
+
+function syncKitchenImportUi() {
+  const p = document.getElementById('arProxyUrl');
+  if (p && window.KuschiRecipeGemini) p.value = KuschiRecipeGemini.loadProxyUrl();
+}
+
+function saveKitchenFetchProxy() {
+  const v = document.getElementById('arProxyUrl').value.trim();
+  if (window.KuschiRecipeGemini) KuschiRecipeGemini.saveProxyUrl(v);
+  alert(v ? 'Fetch proxy URL saved on this device.' : 'Fetch proxy URL cleared.');
 }
 
 function updateKitchenGeminiKeyUi() {
@@ -1018,6 +1051,10 @@ async function formatKitchenRecipeWithGemini() {
   const statusEl = document.getElementById('arFormatStatus');
   const btn = document.getElementById('arFormatBtn');
   const apiKey = getKitchenGeminiApiKeyForRequest();
+  const fileEl = document.getElementById('arRecipeFile');
+  const urlEl = document.getElementById('arRecipeUrl');
+  const file = fileEl && fileEl.files && fileEl.files[0];
+  const pageUrl = urlEl && urlEl.value.trim();
   const raw = document.getElementById('arPasteRaw').value.trim();
   statusEl.textContent = '';
   statusEl.classList.remove('error');
@@ -1031,31 +1068,50 @@ async function formatKitchenRecipeWithGemini() {
     statusEl.classList.add('error');
     return;
   }
-  if (!raw) {
-    statusEl.textContent = 'Paste some recipe text first.';
+  if (!file && !pageUrl && !raw) {
+    statusEl.textContent = 'Paste recipe text, enter a recipe URL, or choose a file.';
     statusEl.classList.add('error');
     return;
   }
   const systemText =
-    'You convert arbitrary recipe text into structured data for a personal home recipe library (not restaurant prep cards). ' +
-    'Use metric units (g, kg, ml, L, °C) when amounts are known. Split ingredient amounts into qty and unit when possible. ' +
+    'You convert arbitrary recipe content into structured data for a personal home recipe library (not restaurant prep cards). ' +
+    'Ignore ads, navigation, and non-recipe text. Use metric units (g, kg, ml, L, °C) when amounts are known. ' +
+    'Split ingredient amounts into qty and unit when possible. ' +
     'Infer protein tags (lowercase: chicken, beef, fish, pork, lamb, dairy, eggs, etc.) and dietary tags when reasonable. ' +
     'Leave unknown optional fields empty or use empty arrays.';
-
-  const userText = 'Convert this recipe into the required JSON shape.\n\n---\n' + raw;
 
   btn.disabled = true;
   statusEl.textContent = 'Formatting…';
 
   try {
-    const parsed = await KuschiRecipeGemini.generateStructured(
-      apiKey,
-      systemText,
-      userText,
-      KuschiRecipeGemini.SCHEMA_KITCHEN
-    );
+    let parsed;
+    const schema = KuschiRecipeGemini.SCHEMA_KITCHEN;
+    if (file && window.KuschiRecipeImport) {
+      const prep = await KuschiRecipeImport.preparePayloadFromFile(file);
+      if (prep.kind === 'parts') {
+        parsed = await KuschiRecipeGemini.generateStructuredFromParts(apiKey, systemText, prep.parts, schema);
+      } else {
+        const userText = 'Convert this recipe into the required JSON shape.\n\n---\n' + prep.text;
+        parsed = await KuschiRecipeGemini.generateStructured(apiKey, systemText, userText, schema);
+      }
+    } else if (pageUrl) {
+      if (!/^https?:\/\//i.test(pageUrl)) {
+        throw new Error('URL must start with http:// or https://');
+      }
+      if (!window.KuschiRecipeImport) throw new Error('recipe-import-helpers.js failed to load.');
+      const proxy = KuschiRecipeGemini.loadProxyUrl();
+      const plain = await KuschiRecipeImport.fetchUrlThenPlainText(pageUrl, proxy);
+      if (!plain.trim()) throw new Error('No text could be extracted from that page.');
+      const userText = 'Convert this recipe into the required JSON shape.\n\n---\n' + plain;
+      parsed = await KuschiRecipeGemini.generateStructured(apiKey, systemText, userText, schema);
+    } else {
+      const userText = 'Convert this recipe into the required JSON shape.\n\n---\n' + raw;
+      parsed = await KuschiRecipeGemini.generateStructured(apiKey, systemText, userText, schema);
+    }
     applyKitchenRecipeJsonToForm(parsed);
     document.getElementById('arPasteRaw').value = '';
+    if (fileEl) fileEl.value = '';
+    if (urlEl) urlEl.value = '';
     statusEl.textContent = 'Done — review the manual tab and save when ready.';
     setAddRecipeTab('manual');
   } catch (e) {
@@ -1072,6 +1128,11 @@ function openAddRecipeModal() {
   addKitchenIngRow();
   setAddRecipeTab('manual');
   updateKitchenGeminiKeyUi();
+  syncKitchenImportUi();
+  const rf = document.getElementById('arRecipeFile');
+  const ru = document.getElementById('arRecipeUrl');
+  if (rf) rf.value = '';
+  if (ru) ru.value = '';
   const st = document.getElementById('arFormatStatus');
   if (st) {
     st.textContent = '';

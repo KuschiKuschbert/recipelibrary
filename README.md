@@ -10,6 +10,9 @@ Personal recipe library hosted on **GitHub Pages**: searchable catalog, metric-o
 | [riviera.html](riviera.html) | Riviera prep set (built-in cards + user-added Riviera recipes), **order list by storage** (freezer → cold room → dry store → other) with local master ingredients |
 | [assets/theme.css](assets/theme.css) | Shared dark theme tokens, search shell, filters, modal shell, footer |
 | [assets/user-recipes.js](assets/user-recipes.js) | `localStorage` helpers: kitchen recipes, Riviera recipes, master ingredients, Riviera order overrides / extras, JSON export |
+| [assets/recipe-gemini-format.js](assets/recipe-gemini-format.js) | Gemini JSON extraction for add-recipe (Kitchen + Riviera); optional fetch proxy helpers |
+| [assets/recipe-import-helpers.js](assets/recipe-import-helpers.js) | File upload (PDF / DOCX / image) and HTML→text for URL import |
+| [workers/recipe-fetch-proxy.js](workers/recipe-fetch-proxy.js) | Optional Cloudflare Worker to fetch recipe URLs (bypass browser CORS) |
 | `claude_index/` | Compact index JSON shards for search |
 | `recipe_detail/detail_*.json` | Full recipe payloads (main library), keyed by first letter of name |
 | `pdf/` | Category reference PDFs |
@@ -25,6 +28,13 @@ There is **no server**. “Save” actions write to **this browser’s** `localS
 - Manual order lines: `kuschi_riviera_order_extras_v1`
 
 Use **Copy JSON backup** / **Copy order data JSON** / **Copy master ingredients JSON** in the UIs to paste into files and commit from a dev machine if you want git-backed backups.
+
+- Gemini API key (add-recipe **Paste & format**): `kuschi_gemini_api_key_v1`
+- Optional recipe **fetch proxy** URL (same tab, for importing from recipe URLs when the site blocks browser `fetch`): `kuschi_recipe_fetch_proxy_v1`
+
+### Recipe URL import (CORS)
+
+GitHub Pages cannot fetch most third-party recipe sites directly. To use **Recipe page URL** in the add-recipe modal, deploy the optional worker in [`workers/recipe-fetch-proxy.js`](workers/recipe-fetch-proxy.js) to **Cloudflare Workers** (or similar), then paste the worker’s **base URL** (e.g. `https://your-worker.workers.dev`) into the modal’s proxy field and click **Save proxy**. The app calls `GET {proxy}?url={encoded recipe URL}` and sends the returned HTML through Gemini.
 
 ## Index schema (`claude_index`)
 

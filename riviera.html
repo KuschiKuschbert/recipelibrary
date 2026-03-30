@@ -106,6 +106,13 @@
 .ar-gemini-saved-strip .btn-text-gemini:hover {
   color: var(--gold-light);
 }
+.ar-proxy-details summary {
+  font-size: 12px;
+  color: var(--text3);
+  cursor: pointer;
+  user-select: none;
+}
+.ar-proxy-details summary::-webkit-details-marker { color: var(--gold); }
 
 /* ── Hero ── */
 .hero {
@@ -573,7 +580,17 @@
         <div class="form-row" style="flex:2;min-width:220px"><label for="rvGeminiKey">Gemini API key</label><input id="rvGeminiKey" type="password" autocomplete="off" placeholder="AIza…" /></div>
         <button type="button" class="btn-secondary" onclick="saveRivieraGeminiKey()" style="margin-bottom:2px">Remember on device</button>
       </div>
-      <div class="form-row"><label for="rvPasteRaw">Recipe text</label><textarea id="rvPasteRaw" placeholder="Paste ingredients, prep, service…" style="min-height:160px"></textarea></div>
+      <div class="form-row"><label for="rvRecipeUrl">Recipe page URL (optional)</label><input type="url" id="rvRecipeUrl" inputmode="url" autocomplete="off" placeholder="https://…" /></div>
+      <div class="form-row"><label for="rvRecipeFile">Upload PDF, DOCX, or image (optional)</label><input type="file" id="rvRecipeFile" accept=".pdf,.docx,application/pdf,image/*,application/vnd.openxmlformats-officedocument.wordprocessingml.document" /></div>
+      <details class="ar-proxy-details" style="margin-bottom:14px">
+        <summary>Optional fetch proxy (for recipe URLs when the site blocks the browser)</summary>
+        <p class="ar-format-help" style="margin-top:10px">Deploy <code>workers/recipe-fetch-proxy.js</code> on Cloudflare Workers, then paste your worker base URL (same as Kitchen Library; shared storage).</p>
+        <div class="ar-format-key-row">
+          <div class="form-row" style="flex:2;min-width:200px"><label for="rvProxyUrl">Proxy base URL</label><input type="url" id="rvProxyUrl" placeholder="https://your-worker.workers.dev" autocomplete="off" /></div>
+          <button type="button" class="btn-secondary" onclick="saveRivieraFetchProxy()" style="margin-bottom:2px">Save proxy</button>
+        </div>
+      </details>
+      <div class="form-row"><label for="rvPasteRaw">Recipe text</label><textarea id="rvPasteRaw" placeholder="Or paste ingredients, prep, service…" style="min-height:120px"></textarea></div>
       <button type="button" class="btn-secondary" id="rvFormatBtn" onclick="formatRivieraRecipeWithGemini()">Format into manual form</button>
       <p class="ar-format-status" id="rvFormatStatus"></p>
     </div>
@@ -607,6 +624,8 @@
 
 <script src="assets/user-recipes.js"></script>
 <script src="assets/recipe-gemini-format.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js" crossorigin="anonymous"></script>
+<script src="assets/recipe-import-helpers.js"></script>
 <script>
 const BUILTIN_RECIPES = [
   {
@@ -1707,7 +1726,21 @@ function setRivieraAddTab(which) {
   tabM.setAttribute('aria-selected', isManual);
   tabF.classList.toggle('active', !isManual);
   tabF.setAttribute('aria-selected', !isManual);
-  if (which === 'format') updateRivieraGeminiKeyUi();
+  if (which === 'format') {
+    updateRivieraGeminiKeyUi();
+    syncRivieraImportUi();
+  }
+}
+
+function syncRivieraImportUi() {
+  const p = document.getElementById('rvProxyUrl');
+  if (p && window.KuschiRecipeGemini) p.value = KuschiRecipeGemini.loadProxyUrl();
+}
+
+function saveRivieraFetchProxy() {
+  const v = document.getElementById('rvProxyUrl').value.trim();
+  if (window.KuschiRecipeGemini) KuschiRecipeGemini.saveProxyUrl(v);
+  alert(v ? 'Fetch proxy URL saved on this device.' : 'Fetch proxy URL cleared.');
 }
 
 function updateRivieraGeminiKeyUi() {
@@ -1800,6 +1833,10 @@ async function formatRivieraRecipeWithGemini() {
   const statusEl = document.getElementById('rvFormatStatus');
   const btn = document.getElementById('rvFormatBtn');
   const apiKey = getRivieraGeminiApiKeyForRequest();
+  const fileEl = document.getElementById('rvRecipeFile');
+  const urlEl = document.getElementById('rvRecipeUrl');
+  const file = fileEl && fileEl.files && fileEl.files[0];
+  const pageUrl = urlEl && urlEl.value.trim();
   const raw = document.getElementById('rvPasteRaw').value.trim();
   statusEl.textContent = '';
   statusEl.classList.remove('error');
@@ -1813,13 +1850,14 @@ async function formatRivieraRecipeWithGemini() {
     statusEl.classList.add('error');
     return;
   }
-  if (!raw) {
-    statusEl.textContent = 'Paste some recipe text first.';
+  if (!file && !pageUrl && !raw) {
+    statusEl.textContent = 'Paste recipe text, enter a recipe URL, or choose a file.';
     statusEl.classList.add('error');
     return;
   }
   const systemText =
-    'You convert arbitrary recipe text into structured data for a professional prep-chef recipe card (Riviera / event kitchen style). ' +
+    'You convert arbitrary recipe content into structured data for a professional prep-chef recipe card (Riviera / event kitchen style). ' +
+    'Ignore ads, navigation, and non-recipe text. ' +
     'Ingredient qty must be a single string per line (e.g. "500 g", "2 L", "1 kg") — combine number and unit in qty, not separate columns. ' +
     'Put kitchen prep / production steps in method_steps. Put service or plating-only steps in service when the source clearly separates them; otherwise use method_steps and leave service empty or minimal. ' +
     'Infer protein tags lowercase (pork, dairy, seafood, chicken, beef, etc.) and diet (e.g. Gluten-Free). ' +
@@ -1827,20 +1865,38 @@ async function formatRivieraRecipeWithGemini() {
     'elements lists named plating components when mentioned. label is a short prep/kitchen label; use the recipe name if unsure. ' +
     'subtitle is for secondary line (sauces, pairings). Leave unknown optional fields empty or use empty arrays.';
 
-  const userText = 'Convert this recipe into the required JSON shape.\n\n---\n' + raw;
-
   btn.disabled = true;
   statusEl.textContent = 'Formatting…';
 
   try {
-    const parsed = await KuschiRecipeGemini.generateStructured(
-      apiKey,
-      systemText,
-      userText,
-      KuschiRecipeGemini.SCHEMA_RIVIERA
-    );
+    let parsed;
+    const schema = KuschiRecipeGemini.SCHEMA_RIVIERA;
+    if (file && window.KuschiRecipeImport) {
+      const prep = await KuschiRecipeImport.preparePayloadFromFile(file);
+      if (prep.kind === 'parts') {
+        parsed = await KuschiRecipeGemini.generateStructuredFromParts(apiKey, systemText, prep.parts, schema);
+      } else {
+        const userText = 'Convert this recipe into the required JSON shape.\n\n---\n' + prep.text;
+        parsed = await KuschiRecipeGemini.generateStructured(apiKey, systemText, userText, schema);
+      }
+    } else if (pageUrl) {
+      if (!/^https?:\/\//i.test(pageUrl)) {
+        throw new Error('URL must start with http:// or https://');
+      }
+      if (!window.KuschiRecipeImport) throw new Error('recipe-import-helpers.js failed to load.');
+      const proxy = KuschiRecipeGemini.loadProxyUrl();
+      const plain = await KuschiRecipeImport.fetchUrlThenPlainText(pageUrl, proxy);
+      if (!plain.trim()) throw new Error('No text could be extracted from that page.');
+      const userText = 'Convert this recipe into the required JSON shape.\n\n---\n' + plain;
+      parsed = await KuschiRecipeGemini.generateStructured(apiKey, systemText, userText, schema);
+    } else {
+      const userText = 'Convert this recipe into the required JSON shape.\n\n---\n' + raw;
+      parsed = await KuschiRecipeGemini.generateStructured(apiKey, systemText, userText, schema);
+    }
     applyRivieraRecipeJsonToForm(parsed);
     document.getElementById('rvPasteRaw').value = '';
+    if (fileEl) fileEl.value = '';
+    if (urlEl) urlEl.value = '';
     statusEl.textContent = 'Done — review the manual tab and save when ready.';
     setRivieraAddTab('manual');
   } catch (e) {
@@ -1856,6 +1912,11 @@ function openAddRivieraModal() {
   addRivIngRow();
   setRivieraAddTab('manual');
   updateRivieraGeminiKeyUi();
+  syncRivieraImportUi();
+  const rf = document.getElementById('rvRecipeFile');
+  const ru = document.getElementById('rvRecipeUrl');
+  if (rf) rf.value = '';
+  if (ru) ru.value = '';
   const st = document.getElementById('rvFormatStatus');
   if (st) {
     st.textContent = '';
