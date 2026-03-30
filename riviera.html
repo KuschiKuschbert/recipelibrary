@@ -563,6 +563,7 @@
 <script src="assets/recipe-gemini-format.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js" crossorigin="anonymous"></script>
 <script src="assets/recipe-import-helpers.js"></script>
+<script src="assets/recipe-metric-normalize.js"></script>
 <script src="assets/qrcodejs-1.0.0.min.js"></script>
 <script src="assets/screen-wake.js"></script>
 <script>
@@ -1481,7 +1482,7 @@ async function formatRivieraRecipeWithGemini() {
   const systemText =
     'You convert arbitrary recipe content into structured data for a professional prep-chef recipe card (Riviera / event kitchen style). ' +
     'Ignore ads, navigation, and non-recipe text. ' +
-    'Ingredient qty must be a single string per line (e.g. "500 g", "2 L", "1 kg") — combine number and unit in qty, not separate columns. ' +
+    'Ingredient qty must be a single string per line — combine number and unit in qty (e.g. "500 g", "2 cups", "1 lb"); imperial or metric from the source is OK — a script will normalize to metric. ' +
     'Put kitchen prep / production steps in method_steps. Put service or plating-only steps in service when the source clearly separates them; otherwise use method_steps and leave service empty or minimal. ' +
     'Infer protein tags lowercase (pork, dairy, seafood, chicken, beef, etc.) and diet (e.g. Gluten-Free). ' +
     'type is like "Canape / Tapas" or "Canape"; course like "Canape" or "Other". ' +
@@ -1516,6 +1517,7 @@ async function formatRivieraRecipeWithGemini() {
       const userText = 'Convert this recipe into the required JSON shape.\n\n---\n' + raw;
       parsed = await KuschiRecipeGemini.generateStructured(apiKey, systemText, userText, schema);
     }
+    if (window.KuschiRecipeMetric) parsed = KuschiRecipeMetric.normalizeGeminiRiviera(parsed);
     applyRivieraRecipeJsonToForm(parsed);
     document.getElementById('rvPasteRaw').value = '';
     if (fileEl) fileEl.value = '';
@@ -1565,7 +1567,7 @@ function submitRivieraRecipe() {
       return;
     }
   }
-  const ingredients = [];
+  let ingredients = [];
   document.querySelectorAll('#rvIngRows .ing-row-r').forEach(row => {
     const qty = row.querySelector('.rv-qty').value.trim();
     const item = row.querySelector('.rv-item').value.trim();
@@ -1575,6 +1577,7 @@ function submitRivieraRecipe() {
     if (prep) o.prep = prep;
     ingredients.push(o);
   });
+  if (window.KuschiRecipeMetric) ingredients = KuschiRecipeMetric.normalizeRivieraIngredients(ingredients);
   const method_steps = document.getElementById('rvSteps').value.split('\n').map(s => s.trim()).filter(Boolean);
   const service = document.getElementById('rvService').value.split('\n').map(s => s.trim()).filter(Boolean);
   const protein = document.getElementById('rvProtein').value.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);

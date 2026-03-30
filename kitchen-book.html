@@ -536,6 +536,7 @@
 <script src="assets/recipe-gemini-format.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js" crossorigin="anonymous"></script>
 <script src="assets/recipe-import-helpers.js"></script>
+<script src="assets/recipe-metric-normalize.js"></script>
 <script src="assets/qrcodejs-1.0.0.min.js"></script>
 <script src="assets/screen-wake.js"></script>
 <script>
@@ -1104,7 +1105,7 @@ async function formatKitchenRecipeWithGemini() {
   }
   const systemText =
     'You convert arbitrary recipe content into structured data for a personal home recipe library (not restaurant prep cards). ' +
-    'Ignore ads, navigation, and non-recipe text. Use metric units (g, kg, ml, L, °C) when amounts are known. ' +
+    'Ignore ads, navigation, and non-recipe text. Extract amounts and units faithfully from the source (imperial or metric is OK — a script will normalize to metric). ' +
     'Split ingredient amounts into qty and unit when possible. ' +
     'Infer protein tags (lowercase: chicken, beef, fish, pork, lamb, dairy, eggs, etc.) and dietary tags when reasonable. ' +
     'Leave unknown optional fields empty or use empty arrays.';
@@ -1133,6 +1134,7 @@ async function formatKitchenRecipeWithGemini() {
       const userText = 'Convert this recipe into the required JSON shape.\n\n---\n' + raw;
       parsed = await KuschiRecipeGemini.generateStructured(apiKey, systemText, userText, schema);
     }
+    if (window.KuschiRecipeMetric) parsed = KuschiRecipeMetric.normalizeGeminiKitchen(parsed);
     applyKitchenRecipeJsonToForm(parsed);
     document.getElementById('arPasteRaw').value = '';
     if (fileEl) fileEl.value = '';
@@ -1174,7 +1176,7 @@ function addKitchenIngRow() {
 function submitBookRecipe() {
   const name = document.getElementById('arName').value.trim();
   if (!name) { alert('Please enter a recipe name'); return; }
-  const ingredients = [];
+  let ingredients = [];
   document.querySelectorAll('#arIngRows .ing-row').forEach(row => {
     const item = row.querySelector('.ar-item').value.trim();
     if (!item) return;
@@ -1185,6 +1187,7 @@ function submitBookRecipe() {
       prep: row.querySelector('.ar-prep').value.trim() || null
     });
   });
+  if (window.KuschiRecipeMetric) ingredients = KuschiRecipeMetric.normalizeKitchenIngredients(ingredients);
   const instructions = document.getElementById('arMethod').value.split('\n').map(s => s.trim()).filter(Boolean);
   const protein = document.getElementById('arProtein').value.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
   const tags = document.getElementById('arTags').value.split(',').map(s => s.trim()).filter(Boolean);
