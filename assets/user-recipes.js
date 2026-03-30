@@ -25,6 +25,69 @@
     return 'user-' + (base || 'recipe') + '-' + Date.now().toString(36);
   }
 
+  /** Lower rest of word after first char (ASCII letters only per segment). */
+  function capitalizeWord(word) {
+    if (!word) return word;
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+  }
+
+  /** Title case for recipe names: small words stay lower mid-phrase; hyphenated words OK. */
+  function titleCaseRecipeName(s) {
+    if (!s || typeof s !== 'string') return s;
+    const small = new Set([
+      'a', 'an', 'the', 'and', 'or', 'nor', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with',
+      'from', 'as', 'by', 'per', 'vs', 'via', 'et', 'aux', 'au', 'la', 'le', 'de', 'du', 'des',
+    ]);
+    const words = s.trim().split(/\s+/).filter(Boolean);
+    return words
+      .map(function (w, i) {
+        if (w === '&') return '&';
+        const lower = w.toLowerCase();
+        if (i > 0 && i < words.length - 1 && small.has(lower)) return lower;
+        if (lower.includes('-')) {
+          return lower.split('-').map(function (p) { return capitalizeWord(p); }).join('-');
+        }
+        return capitalizeWord(w);
+      })
+      .join(' ');
+  }
+
+  /** Title case every word (ingredients, elements, dietary labels). */
+  function titleCaseWords(s) {
+    if (!s || typeof s !== 'string') return s;
+    return s
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean)
+      .map(function (w) {
+        if (w === '&') return '&';
+        if (w.toLowerCase().includes('-')) {
+          return w
+            .split('-')
+            .map(function (p) { return capitalizeWord(p); })
+            .join('-');
+        }
+        return capitalizeWord(w);
+      })
+      .join(' ');
+  }
+
+  /** First alphabetic character upper; rest unchanged (good for method lines). */
+  function capitalizeFirstLetter(s) {
+    if (!s || typeof s !== 'string') return s;
+    const t = s.trim();
+    if (!t) return t;
+    const idx = t.search(/[a-zA-Z]/);
+    if (idx === -1) return t;
+    return t.slice(0, idx) + t.charAt(idx).toUpperCase() + t.slice(idx + 1);
+  }
+
+  function normStr(s) {
+    if (s == null || s === '') return null;
+    const t = String(s).trim();
+    return t ? t : null;
+  }
+
   function loadKitchen() {
     return safeParse(localStorage.getItem(STORAGE_KITCHEN) || '[]', []);
   }
@@ -75,16 +138,29 @@
 
   function addKitchenRecipe(payload) {
     var list = loadKitchen();
+    var rawName = String(payload.name || 'Untitled').trim();
+    var ingredients = (payload.ingredients || []).map(function (i) {
+      if (!i || !i.item) return i;
+      return {
+        qty: i.qty != null && i.qty !== '' ? String(i.qty).trim() : null,
+        unit: i.unit != null && i.unit !== '' ? String(i.unit).trim() : null,
+        item: titleCaseWords(String(i.item).trim()),
+        prep: i.prep ? titleCaseWords(String(i.prep).trim()) : null,
+      };
+    });
+    var instructions = (payload.instructions || []).map(function (line) {
+      return capitalizeFirstLetter(String(line).trim());
+    }).filter(Boolean);
     var rec = {
-      id: payload.id || slugId(payload.name),
-      name: String(payload.name || 'Untitled').trim(),
-      yield: payload.yield || null,
-      cuisine: payload.cuisine || null,
-      category: payload.category || null,
+      id: payload.id || slugId(rawName),
+      name: titleCaseRecipeName(rawName) || 'Untitled',
+      yield: normStr(payload.yield),
+      cuisine: payload.cuisine ? titleCaseRecipeName(normStr(payload.cuisine)) : null,
+      category: payload.category ? titleCaseRecipeName(normStr(payload.category)) : null,
       protein: payload.protein || [],
       tags: payload.tags || [],
-      ingredients: payload.ingredients || [],
-      instructions: payload.instructions || [],
+      ingredients: ingredients,
+      instructions: instructions,
       source: 'user',
     };
     list.push(rec);
@@ -100,22 +176,46 @@
 
   function addRivieraRecipe(payload) {
     var list = loadRiviera();
+    var rawName = String(payload.name || 'Untitled').trim();
+    var displayName = titleCaseRecipeName(rawName) || 'Untitled';
+    var ingredients = (payload.ingredients || []).map(function (i) {
+      if (!i || !i.item) return i;
+      var row = {
+        qty: i.qty != null && i.qty !== '' ? String(i.qty).trim() : '',
+        item: titleCaseWords(String(i.item).trim()),
+      };
+      if (i.prep) row.prep = titleCaseWords(String(i.prep).trim());
+      return row;
+    });
+    var method_steps = (payload.method_steps || []).map(function (line) {
+      return capitalizeFirstLetter(String(line).trim());
+    }).filter(Boolean);
+    var service = (payload.service || []).map(function (line) {
+      return capitalizeFirstLetter(String(line).trim());
+    }).filter(Boolean);
+    var elements = (payload.elements || []).map(function (el) {
+      return titleCaseWords(String(el).trim());
+    }).filter(Boolean);
+    var diet = (payload.diet || []).map(function (d) {
+      return titleCaseWords(String(d).trim());
+    }).filter(Boolean);
+    var rawLabel = payload.label ? String(payload.label).trim() : '';
     var rec = {
-      id: payload.id || slugId(payload.name),
-      name: String(payload.name || 'Untitled').trim(),
-      subtitle: payload.subtitle || '',
-      type: payload.type || 'Custom',
-      course: payload.course || 'Other',
+      id: payload.id || slugId(rawName),
+      name: displayName,
+      subtitle: payload.subtitle ? titleCaseRecipeName(String(payload.subtitle).trim()) : '',
+      type: payload.type ? titleCaseRecipeName(String(payload.type).trim()) : 'Custom',
+      course: payload.course ? titleCaseRecipeName(String(payload.course).trim()) : 'Other',
       protein: Array.isArray(payload.protein) ? payload.protein : [],
-      diet: Array.isArray(payload.diet) ? payload.diet : [],
-      method: payload.method || '',
-      yield: payload.yield || '',
-      label: payload.label || payload.name || 'Custom',
-      elements: Array.isArray(payload.elements) ? payload.elements : [],
-      ingredients: payload.ingredients || [],
-      method_steps: Array.isArray(payload.method_steps) ? payload.method_steps : [],
-      service: Array.isArray(payload.service) ? payload.service : [],
-      note: payload.note || null,
+      diet: diet,
+      method: payload.method ? titleCaseRecipeName(String(payload.method).trim()) : '',
+      yield: payload.yield != null ? String(payload.yield).trim() : '',
+      label: rawLabel ? titleCaseRecipeName(rawLabel) : displayName,
+      elements: elements,
+      ingredients: ingredients,
+      method_steps: method_steps,
+      service: service,
+      note: payload.note ? capitalizeFirstLetter(String(payload.note).trim()) : null,
     };
     list.push(rec);
     saveRiviera(list);
