@@ -1,8 +1,8 @@
 /**
  * Deterministic imperial → metric normalization for recipe ingredients (browser).
  * US customary cup = 236.5882365 ml (not US legal 240 ml — documented for reproducibility).
- * Volume → mass only when ingredient matches a density entry or category fallback.
- * Quantities are chef-rounded (sensible g/ml/L/kg steps, not raw IEEE floats).
+ * Volume → mass only for **solids** when density is known. **Liquids** stay in ml/L
+ * (even if density exists). Quantities are chef-rounded (sensible g/ml/L/kg steps).
  */
 (function (global) {
   /** US liquid cup in ml */
@@ -104,6 +104,171 @@
       if (n.indexOf(key) >= 0) return DENSITY_BY_INGREDIENT[i][1];
     }
     return null;
+  }
+
+  /** Treat as solid even if name contains a liquid-looking substring */
+  var SOLID_OVERRIDES = [
+    'cream cheese',
+    'mascarpone',
+    'ricotta',
+    'peanut butter',
+    'almond butter',
+    'nut butter',
+    'cocoa butter',
+    'coconut butter',
+    'butter',
+    'shortening',
+    'lard',
+    'tahini',
+    'dry mustard',
+    'mustard powder',
+    'mustard seed',
+    'powdered milk',
+    'milk powder',
+    'chocolate chip',
+    'chocolate bar',
+    'cream of tartar',
+    'ice cream',
+  ];
+
+  /** Substring match (longer phrases first) → pourable / cup-measured as liquid */
+  var LIQUID_SUBSTRINGS = [
+    'coconut milk',
+    'coconut cream',
+    'evaporated milk',
+    'condensed milk',
+    'sweetened condensed',
+    'heavy cream',
+    'whipping cream',
+    'double cream',
+    'single cream',
+    'sour cream',
+    'crème fraîche',
+    'creme fraiche',
+    'half and half',
+    'half-and-half',
+    'buttermilk',
+    'chicken stock',
+    'beef stock',
+    'vegetable stock',
+    'fish stock',
+    'chicken broth',
+    'beef broth',
+    'vegetable broth',
+    'mushroom stock',
+    'dashi',
+    'olive oil',
+    'vegetable oil',
+    'coconut oil',
+    'sesame oil',
+    'sunflower oil',
+    'canola oil',
+    'grapeseed oil',
+    'peanut oil',
+    'cooking oil',
+    'truffle oil',
+    'chili oil',
+    'chilli oil',
+    'soy sauce',
+    'fish sauce',
+    'worcestershire',
+    'hot sauce',
+    'vanilla extract',
+    'almond extract',
+    'maple syrup',
+    'golden syrup',
+    'corn syrup',
+    'agave',
+    'rice wine',
+    'mirin',
+    'lemon juice',
+    'lime juice',
+    'orange juice',
+    'tomato juice',
+    'apple juice',
+    'pineapple juice',
+    'cranberry juice',
+    'pomegranate juice',
+    'passion fruit juice',
+    'ginger juice',
+    'rose water',
+    'orange blossom water',
+    'simple syrup',
+    'grenadine',
+    'triple sec',
+    'cointreau',
+    'grand marnier',
+    'liqueur',
+    'vermouth',
+    'sherry',
+    'port wine',
+    'red wine',
+    'white wine',
+    'cooking wine',
+    'marsala',
+    'madeira',
+    'brandy',
+    'rum',
+    'whiskey',
+    'whisky',
+    'vodka',
+    'gin',
+    'tequila',
+    'coconut water',
+    'sparkling water',
+    'soda water',
+    'club soda',
+    'tonic water',
+    'cola',
+    'stout',
+    'lager',
+    'cider',
+    'beer',
+    'ale',
+    'porter',
+    'vinegar',
+    'balsamic',
+    'malt vinegar',
+    'rice vinegar',
+    'wine vinegar',
+    'apple cider vinegar',
+    'mayonnaise',
+    'aioli',
+    'ketchup',
+    'dijon mustard',
+    'wholegrain mustard',
+    'mustard',
+    'bbq sauce',
+    'barbecue sauce',
+    'hoisin',
+    'oyster sauce',
+    'teriyaki',
+    'molasses',
+    'honey',
+    'yoghurt',
+    'yogurt',
+    'kefir',
+    'milk',
+    'stock',
+    'broth',
+    'water',
+    'juice',
+    'wine',
+    'oil',
+    'syrup',
+  ];
+
+  function isLiquidItem(item) {
+    var n = normItem(item);
+    if (!n) return false;
+    var j;
+    for (j = 0; j < SOLID_OVERRIDES.length; j++) {
+      if (n.indexOf(SOLID_OVERRIDES[j]) >= 0) return false;
+    }
+    for (j = 0; j < LIQUID_SUBSTRINGS.length; j++) {
+      if (n.indexOf(LIQUID_SUBSTRINGS[j]) >= 0) return true;
+    }
+    return false;
   }
 
   function replaceUnicodeFractions(s) {
@@ -302,7 +467,7 @@
       }
       var ml = n * spec.mlPer;
       var rho = densityForItem(item);
-      if (rho != null && rho > 0) {
+      if (rho != null && rho > 0 && !isLiquidItem(item)) {
         return formatQtyMassG(ml * rho, item);
       }
       return formatQtyVolumeMl(ml, item);
