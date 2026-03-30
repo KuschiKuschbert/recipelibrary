@@ -5,8 +5,8 @@ alwaysApply: true
 
 # Git workflow — kitchen library
 
-- Work on a **feature branch** (e.g. `improvement/short-description`). Do not commit large features directly to `main` without review and local checks.
-- After each meaningful change, **verify in a browser** (static server from repo root): affected pages load, modals work, search still works.
+- **Default agent flow:** See [ship-after-change.mdc](ship-after-change.mdc) — test → commit if clean → push unless the user opts out.
+- For **larger features**, prefer a **feature branch** (e.g. `improvement/short-description`), then merge to `main` after checks. Small fixes on `main` are fine for this personal site.
+- After meaningful UI changes, **verify in a browser** (static server from repo root): affected pages load, modals work, search/order list as relevant.
 - Use **Conventional Commits**: `feat(html):`, `fix(riviera):`, `chore(cursor):`, `docs:`.
-- **Commit often** with small, logical messages; **push the branch regularly** for backup.
-- Merge to `main` only when smoke tests pass on your machine.
+- **Commit often** with small, logical messages; **push regularly** so GitHub / Pages stay current.

@@ -11,6 +11,16 @@ Read before large edits to HTML, JSON recipe data, or `.cursor` rules.
 
 Static **GitHub Pages** site: main catalog ([index.html](index.html)), Riviera prep-chef set ([riviera.html](riviera.html)). Optimized for a small kitchen tablet.
 
+## Agent shipping (after you change code)
+
+Matches [.cursor/rules/ship-after-change.mdc](../../rules/ship-after-change.mdc) — do this by default when finishing a task unless the user says not to commit/push.
+
+1. **Test** — `node --check` on any edited `assets/*.js`; when HTML/behaviour changed, quick static server from repo root + browser spot-check on affected pages if you can.
+2. **Commit** — Conventional Commits; small, focused messages.
+3. **Push** — `git push origin` the current branch (`main` is normal for small updates).
+
+Skip only if the user explicitly opts out.
+
 ## Directories
 
 | Path | Role |

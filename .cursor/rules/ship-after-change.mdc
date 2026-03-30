@@ -1,0 +1,18 @@
+---
+description: After implementing changes — test, commit if clean, push (unless user opts out)
+alwaysApply: true
+---
+
+# Ship after change (kitchen library)
+
+When you **finish a coherent change** (or task batch) in this repo:
+
+1. **Test** — Run checks that fit the edit:
+   - Edited **`assets/*.js`**: `node --check <file>` (must pass).
+   - Touched **HTML / behaviour**: quick local static server from repo root and spot-check affected pages (load, modals, search/order list) when practical.
+2. **Commit** — If checks pass, `git add` the right paths and commit with **Conventional Commits** (`feat:`, `fix:`, `docs:`, `chore:`) per [git-workflow.mdc](git-workflow.mdc).
+3. **Push** — `git push origin <current-branch>` so `origin` (and GitHub Pages) stay up to date.
+
+**Do not** skip commit/push by default. **Only** skip if the user explicitly says not to (e.g. “don’t commit”, “WIP only”).
+
+If the user is on **`main`** and asks to ship, committing and pushing **`main`** is OK for this personal site when tests pass.
