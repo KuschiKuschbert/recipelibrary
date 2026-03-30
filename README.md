@@ -63,7 +63,7 @@ Counts in the HTML hero update from loaded data; README stats are illustrative �
 
 Scripts in `scripts/` update **`recipe_detail/`** (source of truth for full text) and **`claude_index/`** (compact list/search). The main site does not call translation APIs.
 
-1. **Optional:** `pip install -r scripts/requirements-translation.txt` — improves Latin-script detection (`lingua`) and enables **Argos Translate** locally.
+1. **Optional:** `pip install argostranslate` (or `pip install -r scripts/requirements-translation.txt` — note `lingua` may need a newer Python than 3.9 on some systems). After Argos is installed, fetch models: `python3 scripts/install_argos_pairs.py es pt` (add `fr it de` etc. as needed).
 2. **Detect:** `python3 scripts/detect-nonenglish-recipes.py` → writes `reports/translation_candidates.jsonl` (add `--no-lingua` if you skip pip).
 3. **Translate:** install Argos language pairs you need, then e.g.  
    `python3 scripts/translate_recipes.py --candidates-file reports/translation_candidates.jsonl --backend argos`  

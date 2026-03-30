@@ -2,7 +2,7 @@
 # pip install -r scripts/requirements-translation.txt
 #
 # detect-nonenglish-recipes.py: improves Latin-script detection (es/pt/hr/tr, …)
-lingua-language-detector>=2.2.0
+lingua-language-detector>=2.0.2,<2.1
 
 # translate_recipes.py --backend argos (install language pairs via argos CLI or package API)
 argostranslate>=1.9.0
