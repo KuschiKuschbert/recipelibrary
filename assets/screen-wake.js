@@ -41,13 +41,14 @@
   }
 
   async function release() {
-    if (!sentinel) return;
+    const s = sentinel;
+    if (!s) return;
     try {
-      await sentinel.release();
+      await s.release();
     } catch (_) {
       /* ignore */
     }
-    sentinel = null;
+    if (sentinel === s) sentinel = null;
   }
 
   async function acquire() {
