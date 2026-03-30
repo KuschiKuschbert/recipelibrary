@@ -490,6 +490,17 @@ let currentPage = 1;
 let currentRecipe = null;
 
 // ── Data Loading ──────────────────────────────────────
+/** Origin + directory of the current page (works for /repo, /repo/, /repo/index.html). */
+function siteBaseUrl() {
+  const { origin, pathname: p } = window.location;
+  if (/\.html?$/i.test(p)) {
+    const dir = p.slice(0, p.lastIndexOf('/'));
+    return dir ? origin + dir : origin;
+  }
+  const stripped = p.replace(/\/$/, '') || '';
+  return stripped ? origin + stripped : origin;
+}
+
 const INDEX_FILES = [
   'claude_index_01_1-B.json',
   'claude_index_02_B-C.json',
@@ -509,7 +520,7 @@ const INDEX_FILES = [
 ];
 
 async function loadData() {
-  const base = window.location.href.replace(/\/[^/]*$/, '');
+  const base = siteBaseUrl();
   const all = [];
   let loaded = 0;
   const loadingText = document.querySelector('.loading-text');
@@ -774,12 +785,27 @@ function buildRecipeIndex() {
 
 async function fetchDetail(letter) {
   if (detailCache[letter]) return detailCache[letter];
-  const base = window.location.href.replace(/\/[^/]*$/, '');
+  const base = siteBaseUrl();
   const resp = await fetch(`${base}/recipe_detail/detail_${letter}.json`);
   if (!resp.ok) throw new Error(`Detail file not found for "${letter}"`);
   const data = await resp.json();
   detailCache[letter] = data;
   return data;
+}
+
+/** Detail shards may be a JSON array (legacy) or an object map keyed by recipe id. */
+function findRecipeInDetailPayload(payload, id) {
+  if (payload == null) return undefined;
+  const sid = String(id);
+  if (Array.isArray(payload)) {
+    return payload.find((r) => r && String(r.id) === sid);
+  }
+  if (typeof payload === 'object') {
+    const byKey = payload[sid];
+    if (byKey && typeof byKey === 'object') return byKey;
+    return Object.values(payload).find((r) => r && typeof r === 'object' && String(r.id) === sid);
+  }
+  return undefined;
 }
 
 async function openRecipe(id) {
@@ -808,7 +834,7 @@ async function openRecipe(id) {
       throw new Error('User recipe missing from storage');
     }
     const detail = await fetchDetail(info.letter);
-    const recipe = detail.find(r => r.id === id);
+    const recipe = findRecipeInDetailPayload(detail, id);
     if (!recipe) throw new Error('Recipe not in detail file');
     currentRecipe = recipe;
     modal.innerHTML = renderRecipeDetail(recipe);
@@ -922,7 +948,7 @@ async function copyRecipeText(id) {
   if (!info) return;
   const detail = detailCache[info.letter];
   if (!detail) return;
-  const r = detail.find(x => x.id === id);
+  const r = findRecipeInDetailPayload(detail, id);
   if (!r) return;
 
   let text = r.name + '\n';
