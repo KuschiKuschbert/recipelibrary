@@ -33,6 +33,30 @@ Static **GitHub Pages** site: main catalog ([index.html](index.html)), Riviera p
 - **Casing on save:** [assets/user-recipes.js](assets/user-recipes.js) applies title case to names, ingredient lines, labels, etc.; method/service lines get a leading capital only; **yield** and **qty** strings are left as typed; **protein** / **tags** on the kitchen page stay lowercase for filters.
 - **Backup:** Use JSON copy buttons in the UIs to paste into files and commit from a dev machine if desired.
 
+## Riviera “Prep Chef” PDF vs built-ins (dedupe on add)
+
+The house **Recipes for Prep Chef** PDF uses longer titles than the site cards. Saving a new Riviera recipe from the add modal runs **dedupe** so PDF-style names do not create a second copy of an existing built-in or an existing user-saved Riviera recipe.
+
+- **Logic:** [assets/user-recipes.js](assets/user-recipes.js) — `normalizeRivieraNameForDedupe`, `coreRivieraNameForDedupe` (text before first ` with `), `findRivieraDuplicate(name, BUILTIN_RECIPES)`, optional third arg overrides the user list (defaults to `loadRiviera()`). Explicit `RIVIERA_PREP_CHEF_ALIAS_TO_ID` maps normalized PDF headings to built-in `id`.
+- **Hook:** [riviera.html](riviera.html) `submitRivieraRecipe()` calls `findRivieraDuplicate` before `addRivieraRecipe`; on match, shows an alert and does not save.
+
+| PDF-style title (concept) | Built-in `id` in `BUILTIN_RECIPES` |
+|---------------------------|-------------------------------------|
+| Chorizo and Mozzarella Arancini… | `arancini` |
+| Calamari Fritti… | `calamari` |
+| Kilpatrick Oyster… | `oysters-kilpatrick` |
+| Slow Cooked Veal Meatballs… | `veal-meatballs` |
+| Lemon Pepper Chicken Skewer with Tzatziki… | `chicken-skewer` (site card: Herbed Labneh) |
+| Crispy Fried Chorizo Potatoes… | `chorizo-potatoes` |
+| Chargrilled Lamb Cutlet… | `lamb-cutlet` |
+| Crispy Reef Fish Slider… | `fish-slider` |
+| Romesco | `romesco` |
+| Riviera House Emulsion | `riviera-emulsion` |
+| Camembert, Pecan & Cranberry Cigars… | `camembert-cigars` |
+| Beef Kofta… | `beef-kofta` |
+
+**In the PDF but not as separate built-in cards** (safe to add as user recipes without hitting built-in dedupe): Lemon & Dill Aioli, Lemon & Thyme Aioli, Vodka Sauce, Whipped Butter.
+
 ## Theme and units
 
 - **Theme:** [.cursor/rules/theme.mdc](.cursor/rules/theme.mdc) — canonical shared styles live in [assets/theme.css](assets/theme.css).

@@ -917,11 +917,56 @@ function escAttr(s) {
   return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 }
 
+/** Same logic as user-recipes normalizeIngName — groups duplicate shopping lines. */
+function normalizeOrderItemKey(s) {
+  return String(s || '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, ' ');
+}
+
+const MERGED_LINE_KEYS_SEP = '|||';
+
+/**
+ * One row per ingredient per zone: merges e.g. Salt Flakes from multiple recipes.
+ * Overrides stay per recipe line key; edits apply to all keys in the group.
+ */
+function mergeOrderListRecipeLines(recipeLines) {
+  const map = new Map();
+  for (const line of recipeLines) {
+    const gkey = line.zone + '::' + normalizeOrderItemKey(line.item);
+    if (!map.has(gkey)) {
+      map.set(
+        gkey,
+        Object.assign({}, line, {
+          mergedLineKeys: [line.lineKey],
+        })
+      );
+    } else {
+      const ex = map.get(gkey);
+      ex.mergedLineKeys.push(line.lineKey);
+      const parts = (ex.recipeQtyDisplay || '')
+        .split(' · ')
+        .map((p) => p.trim())
+        .filter((p) => p && p !== '—');
+      const add = line.recipeQtyDisplay && line.recipeQtyDisplay !== '—' ? line.recipeQtyDisplay.trim() : '';
+      if (add && parts.indexOf(add) < 0) parts.push(add);
+      ex.recipeQtyDisplay = parts.length ? parts.join(' · ') : '—';
+      const a = String(ex.orderQty || '').trim();
+      const b = String(line.orderQty || '').trim();
+      if (a && b && a !== b) ex.orderQty = a + '; ' + b;
+      else ex.orderQty = a || b;
+      ex.included = ex.included && line.included;
+    }
+  }
+  return Array.from(map.values());
+}
+
 function buildOrderLinesFlat() {
   const Kr = window.KuschiUserRecipes;
   if (!Kr) return [];
   const overrides = Kr.loadOrderOverrides();
-  const out = [];
+  const recipeOut = [];
   RECIPES = mergeRivieraRecipes();
   for (const r of RECIPES) {
     const ings = r.ingredients || [];
@@ -938,7 +983,7 @@ function buildOrderLinesFlat() {
       let orderQty = o.orderQty;
       if (orderQty == null || orderQty === '') orderQty = recipeQty;
       const included = o.included !== false;
-      out.push({
+      recipeOut.push({
         kind: 'recipe',
         lineKey,
         item: i.item,
@@ -949,6 +994,8 @@ function buildOrderLinesFlat() {
       });
     });
   }
+  const mergedRecipes = mergeOrderListRecipeLines(recipeOut);
+  const out = mergedRecipes;
   Kr.loadOrderExtras().forEach((ex) => {
     out.push({
       kind: 'extra',
@@ -976,18 +1023,26 @@ function linesGroupedByZone(lines) {
   return by;
 }
 
-function setRecipeOverride(lineKey, patch) {
+function setRecipeOverridesBatch(lineKeys, patch) {
   const Kr = KuschiUserRecipes;
   const all = Kr.loadOrderOverrides();
-  const prev = all[lineKey] || {};
-  all[lineKey] = Object.assign({}, prev, patch);
+  lineKeys.forEach(function (k) {
+    if (!k) return;
+    all[k] = Object.assign({}, all[k] || {}, patch);
+  });
   Kr.saveOrderOverrides(all);
 }
 
-function zoneSelectHtml(selected, className, dataKind, dataKey) {
+function setRecipeOverride(lineKey, patch) {
+  setRecipeOverridesBatch([lineKey], patch);
+}
+
+function zoneSelectHtml(selected, className, dataKind, mergedKeysAttr, extraId) {
   const attrs =
-    'class="' + className + '" data-kind="' + dataKind + '" ' +
-    (dataKind === 'recipe' ? 'data-line-key="' + escAttr(dataKey) + '"' : 'data-extra-id="' + escAttr(dataKey) + '"');
+    'class="' + className + '" data-kind="' + dataKind + '"' +
+    (dataKind === 'recipe'
+      ? ' data-merged-keys="' + mergedKeysAttr + '"'
+      : ' data-extra-id="' + escAttr(extraId) + '"');
   let h = '<select ' + attrs + '>';
   for (const z of ZONE_ORDER) {
     h += '<option value="' + z + '"' + (z === selected ? ' selected' : '') + '>' + esc(ZONE_LABELS[z]) + '</option>';
@@ -1011,13 +1066,16 @@ function renderOrderListBody() {
       const muted = !line.included ? ' order-line-muted' : '';
       const chk = line.included ? ' checked' : '';
       if (line.kind === 'recipe') {
+        const keysEsc = (line.mergedLineKeys || [line.lineKey])
+          .map(escAttr)
+          .join(MERGED_LINE_KEYS_SEP);
         html +=
           '<div class="order-line-row' + muted + '" data-kind="recipe">' +
-          '<input type="checkbox" class="ord-inc"' + chk + ' data-line-key="' + escAttr(line.lineKey) + '" title="Include in copy" />' +
+          '<input type="checkbox" class="ord-inc"' + chk + ' data-merged-keys="' + keysEsc + '" title="Include in copy" />' +
           '<div class="order-line-name">' + esc(line.item) + '</div>' +
           '<div class="order-line-hint">Recipe: ' + esc(line.recipeQtyDisplay) + '</div>' +
-          '<input type="text" class="ord-order-qty" data-line-key="' + escAttr(line.lineKey) + '" value="' + escAttr(line.orderQty) + '" placeholder="Order qty" />' +
-          zoneSelectHtml(line.zone, 'ord-zone', 'recipe', line.lineKey) +
+          '<input type="text" class="ord-order-qty" data-merged-keys="' + keysEsc + '" value="' + escAttr(line.orderQty) + '" placeholder="Order qty" />' +
+          zoneSelectHtml(line.zone, 'ord-zone', 'recipe', keysEsc, null) +
           '<span class="ord-remove"></span>' +
           '</div>';
       } else {
@@ -1027,7 +1085,7 @@ function renderOrderListBody() {
           '<div class="order-line-name">' + esc(line.item) + '</div>' +
           '<div class="order-line-hint">Manual line</div>' +
           '<input type="text" class="ord-order-qty-extra" data-extra-id="' + escAttr(line.extraId) + '" value="' + escAttr(line.orderQty) + '" placeholder="Order qty" />' +
-          zoneSelectHtml(line.zone, 'ord-zone-extra', 'extra', line.extraId) +
+          zoneSelectHtml(line.zone, 'ord-zone-extra', 'extra', '', line.extraId) +
           '<button type="button" class="btn-secondary ord-remove" data-extra-id="' + escAttr(line.extraId) + '">✕</button>' +
           '</div>';
       }
@@ -1039,20 +1097,23 @@ function renderOrderListBody() {
   }
   body.innerHTML = html;
 
-  body.querySelectorAll('.ord-inc[data-line-key]').forEach((el) => {
+  body.querySelectorAll('.ord-inc[data-merged-keys]').forEach((el) => {
     el.addEventListener('change', () => {
-      setRecipeOverride(el.getAttribute('data-line-key'), { included: el.checked });
+      const keys = el.getAttribute('data-merged-keys').split(MERGED_LINE_KEYS_SEP);
+      setRecipeOverridesBatch(keys, { included: el.checked });
       renderOrderListBody();
     });
   });
-  body.querySelectorAll('.ord-order-qty[data-line-key]').forEach((el) => {
+  body.querySelectorAll('.ord-order-qty[data-merged-keys]').forEach((el) => {
     el.addEventListener('change', () => {
-      setRecipeOverride(el.getAttribute('data-line-key'), { orderQty: el.value });
+      const keys = el.getAttribute('data-merged-keys').split(MERGED_LINE_KEYS_SEP);
+      setRecipeOverridesBatch(keys, { orderQty: el.value });
     });
   });
-  body.querySelectorAll('select.ord-zone[data-line-key]').forEach((el) => {
+  body.querySelectorAll('select.ord-zone[data-merged-keys]').forEach((el) => {
     el.addEventListener('change', () => {
-      setRecipeOverride(el.getAttribute('data-line-key'), { zone: el.value });
+      const keys = el.getAttribute('data-merged-keys').split(MERGED_LINE_KEYS_SEP);
+      setRecipeOverridesBatch(keys, { zone: el.value });
       renderOrderListBody();
     });
   });
@@ -1157,6 +1218,14 @@ function addRivIngRow() {
 function submitRivieraRecipe() {
   const name = document.getElementById('rvName').value.trim();
   if (!name) { alert('Enter a name'); return; }
+  if (window.KuschiUserRecipes) {
+    const dup = KuschiUserRecipes.findRivieraDuplicate(name, BUILTIN_RECIPES);
+    if (dup) {
+      const who = dup.type === 'builtin' ? 'built-in recipe' : 'saved recipe on this device';
+      alert('That name matches an existing ' + who + ': “' + dup.name + '”. Use a different name or keep using the existing card.');
+      return;
+    }
+  }
   const ingredients = [];
   document.querySelectorAll('#rvIngRows .ing-row-r').forEach(row => {
     const qty = row.querySelector('.rv-qty').value.trim();

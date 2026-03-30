@@ -354,6 +354,103 @@
     return rec;
   }
 
+  /**
+   * Normalize a Riviera recipe title for dedupe matching (Prep Chef PDF vs built-ins).
+   * Lowercase, & → and, commas/punctuation → spaces, collapse whitespace.
+   */
+  function normalizeRivieraNameForDedupe(s) {
+    if (!s) return '';
+    var t = String(s).trim().toLowerCase();
+    t = t.replace(/&/g, ' and ');
+    t = t.replace(/,/g, ' ');
+    t = t.replace(/[—–\-]+/g, ' ');
+    t = t.replace(/[^\w\s]/g, ' ');
+    t = t.replace(/\s+/g, ' ').trim();
+    return t;
+  }
+
+  /** First segment before " with " for matching mains that have long PDF subtitles. */
+  function coreRivieraNameForDedupe(s) {
+    var n = normalizeRivieraNameForDedupe(s);
+    var idx = n.indexOf(' with ');
+    if (idx > 0) return n.slice(0, idx).trim();
+    return n;
+  }
+
+  /**
+   * Normalized titles from "Recipes for Prep Chef" PDF → built-in id.
+   * Keeps re-adding the same dish under PDF wording from creating a user duplicate.
+   */
+  var RIVIERA_PREP_CHEF_ALIAS_TO_ID = {
+    'chorizo and mozzarella arancini with lemon and thyme aioli': 'arancini',
+    'chorizo and mozzarella arancini with lemon and thyme': 'arancini',
+    'calamari fritti with riviera house aioli crispy capers': 'calamari',
+    'kilpatrick oyster crispy speck lea and perrins worcestershire': 'oysters-kilpatrick',
+    'kilpatrick oyster': 'oysters-kilpatrick',
+    'slow cooked veal meatballs with romesco sugo and toasted focaccia': 'veal-meatballs',
+    'lemon pepper chicken skewer with tzatziki and crumbled feta': 'chicken-skewer',
+    'crispy fried chorizo potatoes with lemon thyme aioli': 'chorizo-potatoes',
+    'chargrilled lamb cutlet with riviera house emulsion': 'lamb-cutlet',
+    'crispy reef fish slider lemon caper aioli and roquette': 'fish-slider',
+    'beef kofta spicy capsicum and pita': 'beef-kofta',
+    'camembert pecan and cranberry cigars with thyme infused honey': 'camembert-cigars',
+  };
+
+  /**
+   * @param {string} candidateName - raw name from add form
+   * @param {Array<{id:string,name:string}>} builtinRecipes - e.g. BUILTIN_RECIPES from riviera.html
+   * @param {Array<{id:string,name:string}>|null} userRecipes - defaults to loadRiviera()
+   * @returns {{type:'builtin'|'user', id:string, name:string}|null}
+   */
+  function findRivieraDuplicate(candidateName, builtinRecipes, userRecipes) {
+    var builtins = Array.isArray(builtinRecipes) ? builtinRecipes : [];
+    var users = userRecipes == null ? loadRiviera() : userRecipes;
+    if (!Array.isArray(users)) users = [];
+    if (!candidateName || !String(candidateName).trim()) return null;
+    var n = normalizeRivieraNameForDedupe(candidateName);
+    var core = coreRivieraNameForDedupe(candidateName);
+    if (!n) return null;
+
+    function builtinHit(id, displayName) {
+      return { type: 'builtin', id: id, name: displayName };
+    }
+    function userHit(rec) {
+      return { type: 'user', id: rec.id, name: rec.name };
+    }
+
+    var aliasId = RIVIERA_PREP_CHEF_ALIAS_TO_ID[n];
+    if (aliasId == null && core !== n) aliasId = RIVIERA_PREP_CHEF_ALIAS_TO_ID[core];
+    if (aliasId != null) {
+      var foundByAlias = builtins.find(function (r) {
+        return r.id === aliasId;
+      });
+      if (foundByAlias) return builtinHit(foundByAlias.id, foundByAlias.name);
+    }
+
+    var i;
+    for (i = 0; i < builtins.length; i++) {
+      var b = builtins[i];
+      if (!b || !b.name) continue;
+      var bn = normalizeRivieraNameForDedupe(b.name);
+      var bc = coreRivieraNameForDedupe(b.name);
+      if (n === bn || n === bc || core === bn || core === bc) {
+        return builtinHit(b.id, b.name);
+      }
+    }
+
+    for (i = 0; i < users.length; i++) {
+      var u = users[i];
+      if (!u || !u.name) continue;
+      var un = normalizeRivieraNameForDedupe(u.name);
+      var uc = coreRivieraNameForDedupe(u.name);
+      if (n === un || n === uc || core === un || core === uc) {
+        return userHit(u);
+      }
+    }
+
+    return null;
+  }
+
   function exportKitchen() {
     return JSON.stringify(loadKitchen(), null, 2);
   }
@@ -387,5 +484,9 @@
     removeOrderExtra: removeOrderExtra,
     exportMaster: exportMaster,
     exportOrderBundle: exportOrderBundle,
+    normalizeRivieraNameForDedupe: normalizeRivieraNameForDedupe,
+    coreRivieraNameForDedupe: coreRivieraNameForDedupe,
+    findRivieraDuplicate: findRivieraDuplicate,
+    RIVIERA_PREP_CHEF_ALIAS_TO_ID: RIVIERA_PREP_CHEF_ALIAS_TO_ID,
   };
 })();
