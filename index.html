@@ -347,6 +347,18 @@
     border: none;
     font-family: inherit;
   }
+  .hero-nav .hero-nav-link {
+    line-height: 1.25;
+    box-sizing: border-box;
+  }
+  .hero-nav .hero-nav-link svg {
+    display: block;
+    flex-shrink: 0;
+  }
+  .hero-nav-cluster > button.hero-nav-link {
+    min-height: 42px;
+    align-items: center;
+  }
   .hero-nav-cluster button.hero-nav-link { min-width: 0; }
 
   /* Hero: single “+ Add” expands into recipe / kitchen book */
@@ -377,6 +389,7 @@
   .hero-add-trigger.hero-nav-link {
     border-radius: 100px;
     transition: opacity 0.2s ease;
+    white-space: nowrap;
   }
   .hero-add-pair {
     display: flex;
@@ -468,9 +481,6 @@
     cursor: pointer;
     box-sizing: border-box;
     padding: var(--hero-pill-pad-y) var(--hero-pill-pad-x);
-  }
-  .hero-books-panel .hero-nav-link svg:first-of-type {
-    flex-shrink: 0;
   }
   #addRecipeOverlay .modal { max-width: 560px; }
   .ing-row { display: grid; grid-template-columns: 72px 56px 1fr 1fr 36px; gap: 8px; margin-bottom: 8px; align-items: center; }
