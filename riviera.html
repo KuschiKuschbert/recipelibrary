@@ -324,9 +324,58 @@
   .order-line-row .ord-order-qty { grid-row: 3; grid-column: 2; }
   .order-line-row .ord-zone { grid-row: 3; grid-column: 3; }
   .order-line-row .ord-remove { grid-row: 1; grid-column: 3; justify-self: end; }
+  .order-line-sub {
+    grid-template-columns: 22px 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    padding-left: 8px;
+  }
+  .order-line-sub .order-sub-label:first-of-type { grid-row: 1; grid-column: 1; }
+  .order-line-sub .order-sub-label:nth-of-type(2) { grid-row: 1; grid-column: 2; }
+  .order-line-sub .order-line-hint { grid-column: 2 / -1; grid-row: 2; }
+  .order-line-sub .ord-extra-qty { grid-row: 3; grid-column: 2; }
+  .order-line-sub .ord-remove-extra { grid-row: 3; grid-column: 3; justify-self: end; }
 }
 @media (max-width: 680px) {
   .ing-row-r { grid-template-columns: 1fr 1fr; }
+}
+
+.footer-riviera-admin {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 12px;
+}
+.riv-admin-btn {
+  background: none;
+  border: none;
+  color: var(--text3);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  text-decoration: underline;
+  padding: 4px 8px;
+}
+.riv-admin-btn:hover { color: var(--gold); }
+.riv-admin-unlocked .riv-admin-btn { margin: 0 4px; }
+
+.order-line-block { margin-bottom: 0; }
+.order-line-sub {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) 120px 32px;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  padding: 4px 0 8px 28px;
+  color: var(--text3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.order-sub-label { color: var(--text3); }
+.modal-admin-actions {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 </style>
@@ -435,6 +484,23 @@
 
 <div class="footer">
   <div class="footer-text">Riviera House prep set · <a href="index.html">Kitchen Library</a> · Personal static site (GitHub Pages)</div>
+  <div class="footer-riviera-admin" id="rivieraAdminChrome">
+    <button type="button" class="btn-text riv-admin-btn" id="rivieraAdminOpenBtn" onclick="openRivieraAdminModal()">Admin</button>
+    <span id="rivieraAdminUnlockedStrip" class="riv-admin-unlocked" style="display:none">
+      <button type="button" class="btn-text riv-admin-btn" onclick="rivieraAdminLock()">Lock</button>
+      <button type="button" class="btn-text riv-admin-btn" onclick="rivieraRestoreHiddenBuiltins()">Restore hidden built-ins</button>
+    </span>
+  </div>
+</div>
+
+<div class="modal-overlay" id="rivieraAdminOverlay" onclick="if(event.target===this)closeRivieraAdminModal()">
+  <div class="modal" style="max-width:400px">
+    <button type="button" class="modal-close" onclick="closeRivieraAdminModal()">✕</button>
+    <div class="modal-title" style="margin-bottom:12px">Riviera admin</div>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:12px">Enter PIN to unlock hide/remove on this tab. Session clears when you close the tab.</p>
+    <div class="form-row"><label for="rivieraAdminPinInput">PIN</label><input id="rivieraAdminPinInput" type="password" inputmode="numeric" autocomplete="off" maxlength="12" /></div>
+    <button type="button" class="form-primary-btn" onclick="submitRivieraAdminPin()">Unlock</button>
+  </div>
 </div>
 
 <script src="assets/user-recipes.js"></script>
@@ -909,7 +975,7 @@ const BUILTIN_RECIPES = [
     label: "Lemon Thyme Aioli",
     elements: ["Lemon Thyme Aioli"],
     ingredients: [
-      { qty: "1 kg", item: "Kewpie Mayonnaise" },
+      { qty: "1 kg", item: "Kewpie Mayo" },
       { qty: "3", item: "Lemons", prep: "juice & zest" },
       { qty: "1 bunch", item: "Fresh Thyme" },
       { qty: "20 g", item: "Salt" },
@@ -1015,9 +1081,83 @@ const BUILTIN_RECIPES = [
   },
 ];
 
+const RIVIERA_ADMIN_PIN = '052610';
+const SS_RIVIERA_ADMIN = 'kuschi_riviera_admin_session';
+
+function isRivieraAdminUnlocked() {
+  try {
+    return sessionStorage.getItem(SS_RIVIERA_ADMIN) === '1';
+  } catch (e) {
+    return false;
+  }
+}
+
+function setRivieraAdminSession(on) {
+  try {
+    if (on) sessionStorage.setItem(SS_RIVIERA_ADMIN, '1');
+    else sessionStorage.removeItem(SS_RIVIERA_ADMIN);
+  } catch (e) {
+    /* ignore */
+  }
+  updateRivieraAdminChrome();
+}
+
+function updateRivieraAdminChrome() {
+  const strip = document.getElementById('rivieraAdminUnlockedStrip');
+  if (strip) strip.style.display = isRivieraAdminUnlocked() ? 'inline' : 'none';
+}
+
+function openRivieraAdminModal() {
+  const el = document.getElementById('rivieraAdminPinInput');
+  if (el) el.value = '';
+  document.getElementById('rivieraAdminOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (el) setTimeout(() => el.focus(), 50);
+}
+
+function closeRivieraAdminModal() {
+  document.getElementById('rivieraAdminOverlay').classList.remove('open');
+  if (!document.getElementById('modalOverlay').classList.contains('open') &&
+      !document.getElementById('orderListOverlay').classList.contains('open') &&
+      !document.getElementById('addRivieraOverlay').classList.contains('open')) {
+    document.body.style.overflow = '';
+  }
+}
+
+function submitRivieraAdminPin() {
+  const v = (document.getElementById('rivieraAdminPinInput') || {}).value;
+  if (String(v || '').trim() === RIVIERA_ADMIN_PIN) {
+    setRivieraAdminSession(true);
+    closeRivieraAdminModal();
+  } else {
+    alert('Incorrect PIN.');
+  }
+}
+
+function rivieraAdminLock() {
+  setRivieraAdminSession(false);
+}
+
+function rivieraRestoreHiddenBuiltins() {
+  if (!isRivieraAdminUnlocked()) return;
+  if (!confirm('Show all hidden built-in recipes again on this device?')) return;
+  if (window.KuschiUserRecipes) KuschiUserRecipes.restoreAllHiddenRivieraBuiltins();
+  RECIPES = mergeRivieraRecipes();
+  populateFilters();
+  applyFilters();
+}
+
+function isBuiltinRecipeId(id) {
+  return BUILTIN_RECIPES.some((b) => b.id === id);
+}
+
 function mergeRivieraRecipes() {
-  const u = (window.KuschiUserRecipes && KuschiUserRecipes.loadRiviera()) || [];
-  return u.concat(BUILTIN_RECIPES);
+  const Kr = window.KuschiUserRecipes;
+  const u = (Kr && Kr.loadRiviera()) || [];
+  const hiddenRaw = Kr && Kr.loadRivieraHiddenBuiltinIds ? Kr.loadRivieraHiddenBuiltinIds() : [];
+  const hidden = new Set(Array.isArray(hiddenRaw) ? hiddenRaw : []);
+  const builtins = BUILTIN_RECIPES.filter((r) => !hidden.has(r.id));
+  return u.concat(builtins);
 }
 let RECIPES = mergeRivieraRecipes();
 
@@ -1028,12 +1168,19 @@ function escAttr(s) {
   return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 }
 
-/** Same logic as user-recipes normalizeIngName — groups duplicate shopping lines. */
-function normalizeOrderItemKey(s) {
-  return String(s || '')
-    .trim()
-    .toLowerCase()
-    .replace(/\s+/g, ' ');
+function orderListMergeGroupKey(zone, item) {
+  const Kr = window.KuschiUserRecipes;
+  if (Kr && typeof Kr.canonicalOrderMergeKey === 'function') {
+    return zone + '::' + Kr.canonicalOrderMergeKey(item);
+  }
+  return (
+    zone +
+    '::' +
+    String(item || '')
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, ' ')
+  );
 }
 
 const MERGED_LINE_KEYS_SEP = '|||';
@@ -1045,17 +1192,19 @@ const MERGED_LINE_KEYS_SEP = '|||';
 function mergeOrderListRecipeLines(recipeLines) {
   const map = new Map();
   for (const line of recipeLines) {
-    const gkey = line.zone + '::' + normalizeOrderItemKey(line.item);
+    const gkey = orderListMergeGroupKey(line.zone, line.item);
     if (!map.has(gkey)) {
       map.set(
         gkey,
         Object.assign({}, line, {
           mergedLineKeys: [line.lineKey],
+          extraIds: [],
         })
       );
     } else {
       const ex = map.get(gkey);
       ex.mergedLineKeys.push(line.lineKey);
+      if (String(line.item || '').length > String(ex.item || '').length) ex.item = line.item;
       const parts = (ex.recipeQtyDisplay || '')
         .split(' · ')
         .map((p) => p.trim())
@@ -1071,6 +1220,37 @@ function mergeOrderListRecipeLines(recipeLines) {
     }
   }
   return Array.from(map.values());
+}
+
+function foldOrderExtrasIntoMergedRecipes(mergedRecipeLines, extras, Kr) {
+  const rows = mergedRecipeLines.map((r) =>
+    Object.assign({}, r, { extraIds: r.extraIds ? r.extraIds.slice() : [] })
+  );
+  const consumed = new Set();
+  (extras || []).forEach((ex) => {
+    if (!ex || !ex.id) return;
+    const canonEx = Kr.canonicalOrderMergeKey(ex.name);
+    const z = Kr.ZONE_IDS.indexOf(ex.zone) >= 0 ? ex.zone : 'other';
+    const hit = rows.find(
+      (row) =>
+        row.kind === 'recipe' &&
+        row.zone === z &&
+        Kr.canonicalOrderMergeKey(row.item) === canonEx
+    );
+    if (!hit) return;
+    hit.extraIds.push(ex.id);
+    consumed.add(ex.id);
+    const mq = String(ex.orderQty || '').trim();
+    const manualBit = mq ? 'Manual: ' + mq : 'Manual line';
+    const cur = hit.recipeQtyDisplay || '';
+    if (cur && cur !== '—') {
+      if (cur.indexOf(manualBit) < 0) hit.recipeQtyDisplay = cur + ' · ' + manualBit;
+    } else {
+      hit.recipeQtyDisplay = manualBit;
+    }
+  });
+  const leftover = (extras || []).filter((ex) => ex && ex.id && !consumed.has(ex.id));
+  return { rows, leftoverExtras: leftover };
 }
 
 function buildOrderLinesFlat() {
@@ -1106,8 +1286,9 @@ function buildOrderLinesFlat() {
     });
   }
   const mergedRecipes = mergeOrderListRecipeLines(recipeOut);
-  const out = mergedRecipes;
-  Kr.loadOrderExtras().forEach((ex) => {
+  const fold = foldOrderExtrasIntoMergedRecipes(mergedRecipes, Kr.loadOrderExtras(), Kr);
+  const out = fold.rows;
+  fold.leftoverExtras.forEach((ex) => {
     out.push({
       kind: 'extra',
       lineKey: 'extra::' + ex.id,
@@ -1165,6 +1346,11 @@ function zoneSelectHtml(selected, className, dataKind, mergedKeysAttr, extraId) 
 function renderOrderListBody() {
   const body = document.getElementById('orderListBody');
   if (!body || !window.KuschiUserRecipes) return;
+  const Kr = KuschiUserRecipes;
+  const extrasById = {};
+  Kr.loadOrderExtras().forEach((ex) => {
+    if (ex && ex.id) extrasById[ex.id] = ex;
+  });
   const lines = buildOrderLinesFlat();
   const grouped = linesGroupedByZone(lines);
   let html = '';
@@ -1180,6 +1366,12 @@ function renderOrderListBody() {
         const keysEsc = (line.mergedLineKeys || [line.lineKey])
           .map(escAttr)
           .join(MERGED_LINE_KEYS_SEP);
+        const extraIds = line.extraIds || [];
+        const foldedAttr =
+          extraIds.length > 0
+            ? ' data-folded-extras="' + extraIds.map(escAttr).join(MERGED_LINE_KEYS_SEP) + '"'
+            : '';
+        html += '<div class="order-line-block"' + foldedAttr + '>';
         html +=
           '<div class="order-line-row' + muted + '" data-kind="recipe">' +
           '<input type="checkbox" class="ord-inc"' + chk + ' data-merged-keys="' + keysEsc + '" title="Include in copy" />' +
@@ -1189,6 +1381,26 @@ function renderOrderListBody() {
           zoneSelectHtml(line.zone, 'ord-zone', 'recipe', keysEsc, null) +
           '<span class="ord-remove"></span>' +
           '</div>';
+        extraIds.forEach((xid) => {
+          const ex = extrasById[xid];
+          if (!ex) return;
+          html +=
+            '<div class="order-line-sub">' +
+            '<span class="order-sub-label">↳</span>' +
+            '<span class="order-sub-label">Manual</span>' +
+            '<div class="order-line-hint">' + esc(ex.name) + '</div>' +
+            '<input type="text" class="ord-extra-qty" data-extra-id="' +
+            escAttr(xid) +
+            '" value="' +
+            escAttr(ex.orderQty || '') +
+            '" placeholder="Order qty" />' +
+            '<span></span>' +
+            '<button type="button" class="btn-secondary ord-remove-extra" data-extra-id="' +
+            escAttr(xid) +
+            '">✕</button>' +
+            '</div>';
+        });
+        html += '</div>';
       } else {
         html +=
           '<div class="order-line-row" data-kind="extra">' +
@@ -1225,6 +1437,24 @@ function renderOrderListBody() {
     el.addEventListener('change', () => {
       const keys = el.getAttribute('data-merged-keys').split(MERGED_LINE_KEYS_SEP);
       setRecipeOverridesBatch(keys, { zone: el.value });
+      const block = el.closest('.order-line-block');
+      const folded = block && block.getAttribute('data-folded-extras');
+      if (folded && Kr) {
+        folded.split(MERGED_LINE_KEYS_SEP).forEach((xid) => {
+          if (xid) Kr.updateOrderExtra(xid, { zone: el.value });
+        });
+      }
+      renderOrderListBody();
+    });
+  });
+  body.querySelectorAll('.ord-extra-qty').forEach((el) => {
+    el.addEventListener('change', () => {
+      Kr.updateOrderExtra(el.getAttribute('data-extra-id'), { orderQty: el.value });
+    });
+  });
+  body.querySelectorAll('button.ord-remove-extra').forEach((el) => {
+    el.addEventListener('click', () => {
+      Kr.removeOrderExtra(el.getAttribute('data-extra-id'));
       renderOrderListBody();
     });
   });
@@ -1486,6 +1716,13 @@ function openRecipe(id) {
 
   const note = r.note ? `<div class="modal-note">⚠ ${esc(r.note)}</div>` : '';
   const label = `<div class="label-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> Label: DATE MADE · ${esc(r.label)}</div>`;
+  const adminActions = isRivieraAdminUnlocked()
+    ? `<div class="modal-admin-actions">${
+        isBuiltinRecipeId(r.id)
+          ? '<button type="button" class="btn-secondary" onclick="rivieraHideCurrentBuiltin()">Hide from my list</button>'
+          : '<button type="button" class="btn-secondary" onclick="rivieraRemoveCurrentUserRecipe()">Remove recipe</button>'
+      }</div>`
+    : '';
 
   modal.innerHTML = `
     <button class="modal-close" onclick="closeModal()">✕</button>
@@ -1507,11 +1744,41 @@ function openRecipe(id) {
     <ol class="modal-steps">${service}</ol>
     ${note}
     ${label}
+    ${adminActions}
   `;
 
   modal.scrollTop = 0;
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+}
+
+function rivieraHideCurrentBuiltin() {
+  if (!currentRecipe || !isBuiltinRecipeId(currentRecipe.id) || !window.KuschiUserRecipes) return;
+  if (
+    !confirm(
+      'Hide this built-in from your Riviera list on this device? You can restore all hidden built-ins from the footer while Admin is unlocked.'
+    )
+  ) {
+    return;
+  }
+  KuschiUserRecipes.hideRivieraBuiltin(currentRecipe.id);
+  closeModal();
+  RECIPES = mergeRivieraRecipes();
+  populateFilters();
+  applyFilters();
+}
+
+function rivieraRemoveCurrentUserRecipe() {
+  if (!currentRecipe || isBuiltinRecipeId(currentRecipe.id) || !window.KuschiUserRecipes) return;
+  if (!confirm('Remove this saved recipe from this device? This cannot be undone except from a JSON backup.')) return;
+  if (!KuschiUserRecipes.removeRivieraRecipe(currentRecipe.id)) {
+    alert('Could not remove recipe (not found in saved list).');
+    return;
+  }
+  closeModal();
+  RECIPES = mergeRivieraRecipes();
+  populateFilters();
+  applyFilters();
 }
 
 // ── Scaler helpers ────────────────────────────
@@ -1581,7 +1848,9 @@ document.getElementById('clearBtn').addEventListener('click', () => {
 });
 document.addEventListener('keydown', e => {
   if (e.key !== 'Escape') return;
-  if (document.getElementById('orderListOverlay').classList.contains('open')) {
+  if (document.getElementById('rivieraAdminOverlay').classList.contains('open')) {
+    closeRivieraAdminModal();
+  } else if (document.getElementById('orderListOverlay').classList.contains('open')) {
     closeOrderListModal();
   } else if (document.getElementById('addRivieraOverlay').classList.contains('open')) {
     closeAddRivieraModal();
@@ -1591,6 +1860,15 @@ document.addEventListener('keydown', e => {
 });
 
 // ── Init ──────────────────────────────────────
+(function () {
+  const pinEl = document.getElementById('rivieraAdminPinInput');
+  if (pinEl) {
+    pinEl.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') submitRivieraAdminPin();
+    });
+  }
+})();
+updateRivieraAdminChrome();
 populateFilters();
 render();
 </script>

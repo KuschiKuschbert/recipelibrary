@@ -9,6 +9,7 @@
   const STORAGE_MASTER = 'kuschi_master_ingredients_v1';
   const STORAGE_ORDER_OVERRIDES = 'kuschi_riviera_order_overrides_v1';
   const STORAGE_ORDER_EXTRAS = 'kuschi_riviera_order_extras_v1';
+  const STORAGE_RIVIERA_HIDDEN_BUILTINS = 'kuschi_riviera_hidden_builtin_ids_v1';
 
   const ZONE_IDS = ['freezer', 'coldroom', 'drystore', 'other'];
 
@@ -39,11 +40,31 @@
     }
   }
 
+  /**
+   * Canonical key for order-list merging and master ingredient matching.
+   * Stronger than the old normalizeIngName: NFKC, & → and, dash variants → space,
+   * punctuation stripped, optional synonym collapse (e.g. Kewpie Mayonnaise → kewpie mayo).
+   */
+  function canonicalOrderMergeKey(s) {
+    var t = String(s || '').trim();
+    try {
+      if (t.normalize) t = t.normalize('NFKC');
+    } catch (e) {
+      /* ignore */
+    }
+    t = t.toLowerCase();
+    t = t.replace(/&/g, ' and ');
+    t = t.replace(/[—–\-−]/g, ' ');
+    t = t.replace(/[^a-z0-9\s\u00C0-\u024F]/g, ' ');
+    t = t.replace(/\s+/g, ' ').trim();
+    t = t.replace(/\bkewpie\s+mayonnaise\b/g, 'kewpie mayo');
+    t = t.replace(/\bdill\s+fresh\b/g, 'dill');
+    t = t.replace(/\bfresh\s+dill\b/g, 'dill');
+    return t;
+  }
+
   function normalizeIngName(s) {
-    return String(s || '')
-      .trim()
-      .toLowerCase()
-      .replace(/\s+/g, ' ');
+    return canonicalOrderMergeKey(s);
   }
 
   function loadMaster() {
@@ -234,6 +255,46 @@
 
   function saveRiviera(list) {
     localStorage.setItem(STORAGE_RIVIERA, JSON.stringify(list));
+  }
+
+  function loadRivieraHiddenBuiltinIds() {
+    return safeParse(localStorage.getItem(STORAGE_RIVIERA_HIDDEN_BUILTINS) || '[]', []);
+  }
+
+  function saveRivieraHiddenBuiltinIds(ids) {
+    var seen = {};
+    var out = [];
+    (ids || []).forEach(function (id) {
+      var s = String(id || '').trim();
+      if (!s || seen[s]) return;
+      seen[s] = true;
+      out.push(s);
+    });
+    localStorage.setItem(STORAGE_RIVIERA_HIDDEN_BUILTINS, JSON.stringify(out));
+  }
+
+  function hideRivieraBuiltin(id) {
+    var s = String(id || '').trim();
+    if (!s) return;
+    var list = loadRivieraHiddenBuiltinIds();
+    if (list.indexOf(s) < 0) list.push(s);
+    saveRivieraHiddenBuiltinIds(list);
+  }
+
+  function restoreAllHiddenRivieraBuiltins() {
+    saveRivieraHiddenBuiltinIds([]);
+  }
+
+  function removeRivieraRecipe(id) {
+    var s = String(id || '').trim();
+    if (!s) return false;
+    var list = loadRiviera();
+    var next = list.filter(function (r) {
+      return r && r.id !== s;
+    });
+    if (next.length === list.length) return false;
+    saveRiviera(next);
+    return true;
   }
 
   function toIndexRow(full) {
@@ -470,6 +531,12 @@
     saveKitchen: saveKitchen,
     loadRiviera: loadRiviera,
     saveRiviera: saveRiviera,
+    loadRivieraHiddenBuiltinIds: loadRivieraHiddenBuiltinIds,
+    saveRivieraHiddenBuiltinIds: saveRivieraHiddenBuiltinIds,
+    hideRivieraBuiltin: hideRivieraBuiltin,
+    restoreAllHiddenRivieraBuiltins: restoreAllHiddenRivieraBuiltins,
+    removeRivieraRecipe: removeRivieraRecipe,
+    canonicalOrderMergeKey: canonicalOrderMergeKey,
     toIndexRow: toIndexRow,
     kitchenToDetail: kitchenToDetail,
     addKitchenRecipe: addKitchenRecipe,
@@ -494,5 +561,6 @@
     coreRivieraNameForDedupe: coreRivieraNameForDedupe,
     findRivieraDuplicate: findRivieraDuplicate,
     RIVIERA_PREP_CHEF_ALIAS_TO_ID: RIVIERA_PREP_CHEF_ALIAS_TO_ID,
+    STORAGE_RIVIERA_HIDDEN_BUILTINS: STORAGE_RIVIERA_HIDDEN_BUILTINS,
   };
 })();
