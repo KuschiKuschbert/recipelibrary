@@ -133,6 +133,32 @@
     min-width: 180px;
     margin-bottom: 0;
   }
+  .ar-format-key-row[hidden],
+  .ar-gemini-saved-strip[hidden] {
+    display: none !important;
+  }
+  .ar-gemini-saved-strip {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+    font-size: 12px;
+    color: var(--text3);
+  }
+  .ar-gemini-saved-strip .btn-text-gemini {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    font-size: 12px;
+    color: var(--gold);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  .ar-gemini-saved-strip .btn-text-gemini:hover {
+    color: var(--gold-light);
+  }
 
   /* ── Recipe card (index) ─────────────────────────── */
   .card {
@@ -378,7 +404,12 @@
     </div>
     <div id="arPanelFormat" role="tabpanel" aria-labelledby="arTabFormat" hidden>
       <p class="ar-format-help">Paste messy text (blog, screenshot OCR, notes). Uses <strong>Google Gemini</strong> — create a key in <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio</a>, then in <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Google Cloud → Credentials</a> restrict it to the <strong>Generative Language API</strong> and your site under <strong>HTTP referrers</strong> (plus <code>http://localhost:*</code> for local testing). Paste the key below (saved in this browser only; never put keys in git). <strong>Free usage:</strong> keep billing off for that Cloud project so you only use the free quota. If a key was ever shared publicly, delete it in AI Studio and make a new one. Sending text to Google applies their terms.</p>
-      <div class="ar-format-key-row" style="margin-bottom:14px">
+      <div id="arGeminiKeySavedStrip" class="ar-gemini-saved-strip" hidden>
+        <span>API key saved on this device.</span>
+        <button type="button" class="btn-secondary" onclick="showKitchenGeminiKeyEditor()">Change</button>
+        <button type="button" class="btn-text-gemini" onclick="removeKitchenGeminiKey()">Remove</button>
+      </div>
+      <div id="arGeminiKeySection" class="ar-format-key-row" style="margin-bottom:14px">
         <div class="form-row" style="flex:2;min-width:220px"><label for="arGeminiKey">Gemini API key</label><input id="arGeminiKey" type="password" autocomplete="off" placeholder="AIza…" /></div>
         <button type="button" class="btn-secondary" onclick="saveKitchenGeminiKey()" style="margin-bottom:2px">Remember on device</button>
       </div>
@@ -901,11 +932,54 @@ function setAddRecipeTab(which) {
   tabM.setAttribute('aria-selected', isManual);
   tabF.classList.toggle('active', !isManual);
   tabF.setAttribute('aria-selected', !isManual);
+  if (which === 'format') updateKitchenGeminiKeyUi();
+}
+
+function updateKitchenGeminiKeyUi() {
+  const section = document.getElementById('arGeminiKeySection');
+  const strip = document.getElementById('arGeminiKeySavedStrip');
+  const input = document.getElementById('arGeminiKey');
+  if (!section || !strip || !window.KuschiRecipeGemini) return;
+  const saved = KuschiRecipeGemini.loadApiKey().trim();
+  if (saved) {
+    strip.hidden = false;
+    section.hidden = true;
+    if (input) input.value = '';
+  } else {
+    strip.hidden = true;
+    section.hidden = false;
+  }
+}
+
+function showKitchenGeminiKeyEditor() {
+  const section = document.getElementById('arGeminiKeySection');
+  const strip = document.getElementById('arGeminiKeySavedStrip');
+  if (section) section.hidden = false;
+  if (strip) strip.hidden = true;
+  const input = document.getElementById('arGeminiKey');
+  if (input) {
+    input.focus();
+  }
+}
+
+function removeKitchenGeminiKey() {
+  if (window.KuschiRecipeGemini) KuschiRecipeGemini.saveApiKey('');
+  const input = document.getElementById('arGeminiKey');
+  if (input) input.value = '';
+  updateKitchenGeminiKeyUi();
+}
+
+function getKitchenGeminiApiKeyForRequest() {
+  const typed = document.getElementById('arGeminiKey').value.trim();
+  if (typed) return typed;
+  if (window.KuschiRecipeGemini) return KuschiRecipeGemini.loadApiKey().trim();
+  return '';
 }
 
 function saveKitchenGeminiKey() {
   const k = document.getElementById('arGeminiKey').value.trim();
   if (window.KuschiRecipeGemini) KuschiRecipeGemini.saveApiKey(k);
+  updateKitchenGeminiKeyUi();
   alert(k ? 'API key saved in this browser only (shared with Riviera page).' : 'Stored API key cleared.');
 }
 
@@ -943,7 +1017,7 @@ function applyKitchenRecipeJsonToForm(obj) {
 async function formatKitchenRecipeWithGemini() {
   const statusEl = document.getElementById('arFormatStatus');
   const btn = document.getElementById('arFormatBtn');
-  const apiKey = document.getElementById('arGeminiKey').value.trim();
+  const apiKey = getKitchenGeminiApiKeyForRequest();
   const raw = document.getElementById('arPasteRaw').value.trim();
   statusEl.textContent = '';
   statusEl.classList.remove('error');
@@ -997,9 +1071,7 @@ function openAddRecipeModal() {
   document.getElementById('arIngRows').innerHTML = '';
   addKitchenIngRow();
   setAddRecipeTab('manual');
-  const sk = window.KuschiRecipeGemini ? KuschiRecipeGemini.loadApiKey() : '';
-  const keyInput = document.getElementById('arGeminiKey');
-  if (keyInput) keyInput.value = sk || '';
+  updateKitchenGeminiKeyUi();
   const st = document.getElementById('arFormatStatus');
   if (st) {
     st.textContent = '';

@@ -80,6 +80,32 @@
   min-width: 180px;
   margin-bottom: 0;
 }
+.ar-format-key-row[hidden],
+.ar-gemini-saved-strip[hidden] {
+  display: none !important;
+}
+.ar-gemini-saved-strip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 12px;
+  color: var(--text3);
+}
+.ar-gemini-saved-strip .btn-text-gemini {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-size: 12px;
+  color: var(--gold);
+  cursor: pointer;
+  text-decoration: underline;
+}
+.ar-gemini-saved-strip .btn-text-gemini:hover {
+  color: var(--gold-light);
+}
 
 /* ── Hero ── */
 .hero {
@@ -538,7 +564,12 @@
     </div>
     <div id="rvPanelFormat" role="tabpanel" aria-labelledby="rvTabFormat" hidden>
       <p class="ar-format-help">Paste messy text (blog, OCR, notes). Uses <strong>Google Gemini</strong> — key from <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio</a>; restrict in <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Cloud → Credentials</a> (API + HTTP referrers). Same saved key as the Kitchen Library page. <strong>Free quota:</strong> do not enable billing on that Cloud project. Rotate any key that was ever exposed. Output maps to Riviera prep fields. Sending text to Google applies their terms.</p>
-      <div class="ar-format-key-row" style="margin-bottom:14px">
+      <div id="rvGeminiKeySavedStrip" class="ar-gemini-saved-strip" hidden>
+        <span>API key saved on this device.</span>
+        <button type="button" class="btn-secondary" onclick="showRivieraGeminiKeyEditor()">Change</button>
+        <button type="button" class="btn-text-gemini" onclick="removeRivieraGeminiKey()">Remove</button>
+      </div>
+      <div id="rvGeminiKeySection" class="ar-format-key-row" style="margin-bottom:14px">
         <div class="form-row" style="flex:2;min-width:220px"><label for="rvGeminiKey">Gemini API key</label><input id="rvGeminiKey" type="password" autocomplete="off" placeholder="AIza…" /></div>
         <button type="button" class="btn-secondary" onclick="saveRivieraGeminiKey()" style="margin-bottom:2px">Remember on device</button>
       </div>
@@ -1629,11 +1660,52 @@ function setRivieraAddTab(which) {
   tabM.setAttribute('aria-selected', isManual);
   tabF.classList.toggle('active', !isManual);
   tabF.setAttribute('aria-selected', !isManual);
+  if (which === 'format') updateRivieraGeminiKeyUi();
+}
+
+function updateRivieraGeminiKeyUi() {
+  const section = document.getElementById('rvGeminiKeySection');
+  const strip = document.getElementById('rvGeminiKeySavedStrip');
+  const input = document.getElementById('rvGeminiKey');
+  if (!section || !strip || !window.KuschiRecipeGemini) return;
+  const saved = KuschiRecipeGemini.loadApiKey().trim();
+  if (saved) {
+    strip.hidden = false;
+    section.hidden = true;
+    if (input) input.value = '';
+  } else {
+    strip.hidden = true;
+    section.hidden = false;
+  }
+}
+
+function showRivieraGeminiKeyEditor() {
+  const section = document.getElementById('rvGeminiKeySection');
+  const strip = document.getElementById('rvGeminiKeySavedStrip');
+  if (section) section.hidden = false;
+  if (strip) strip.hidden = true;
+  const input = document.getElementById('rvGeminiKey');
+  if (input) input.focus();
+}
+
+function removeRivieraGeminiKey() {
+  if (window.KuschiRecipeGemini) KuschiRecipeGemini.saveApiKey('');
+  const input = document.getElementById('rvGeminiKey');
+  if (input) input.value = '';
+  updateRivieraGeminiKeyUi();
+}
+
+function getRivieraGeminiApiKeyForRequest() {
+  const typed = document.getElementById('rvGeminiKey').value.trim();
+  if (typed) return typed;
+  if (window.KuschiRecipeGemini) return KuschiRecipeGemini.loadApiKey().trim();
+  return '';
 }
 
 function saveRivieraGeminiKey() {
   const k = document.getElementById('rvGeminiKey').value.trim();
   if (window.KuschiRecipeGemini) KuschiRecipeGemini.saveApiKey(k);
+  updateRivieraGeminiKeyUi();
   alert(k ? 'API key saved in this browser only (shared with Kitchen Library).' : 'Stored API key cleared.');
 }
 
@@ -1680,7 +1752,7 @@ function applyRivieraRecipeJsonToForm(obj) {
 async function formatRivieraRecipeWithGemini() {
   const statusEl = document.getElementById('rvFormatStatus');
   const btn = document.getElementById('rvFormatBtn');
-  const apiKey = document.getElementById('rvGeminiKey').value.trim();
+  const apiKey = getRivieraGeminiApiKeyForRequest();
   const raw = document.getElementById('rvPasteRaw').value.trim();
   statusEl.textContent = '';
   statusEl.classList.remove('error');
@@ -1736,9 +1808,7 @@ function openAddRivieraModal() {
   document.getElementById('rvIngRows').innerHTML = '';
   addRivIngRow();
   setRivieraAddTab('manual');
-  const sk = window.KuschiRecipeGemini ? KuschiRecipeGemini.loadApiKey() : '';
-  const keyInput = document.getElementById('rvGeminiKey');
-  if (keyInput) keyInput.value = sk || '';
+  updateRivieraGeminiKeyUi();
   const st = document.getElementById('rvFormatStatus');
   if (st) {
     st.textContent = '';
