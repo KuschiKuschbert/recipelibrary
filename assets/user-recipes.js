@@ -394,6 +394,12 @@
     'crispy reef fish slider lemon caper aioli and roquette': 'fish-slider',
     'beef kofta spicy capsicum and pita': 'beef-kofta',
     'camembert pecan and cranberry cigars with thyme infused honey': 'camembert-cigars',
+    'lemon and dill aioli': 'lemon-dill-aioli',
+    'lemon dill aioli': 'lemon-dill-aioli',
+    'lemon and thyme aioli': 'lemon-thyme-aioli',
+    'lemon thyme aioli': 'lemon-thyme-aioli',
+    'vodka sauce': 'vodka-sauce',
+    'whipped butter': 'whipped-butter',
   };
 
   /**

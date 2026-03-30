@@ -61,11 +61,13 @@ The house **Recipes for Prep Chef** PDF uses longer titles than the site cards. 
 | Chargrilled Lamb Cutlet… | `lamb-cutlet` |
 | Crispy Reef Fish Slider… | `fish-slider` |
 | Romesco | `romesco` |
+| Lemon & Dill Aioli | `lemon-dill-aioli` |
+| Lemon & Thyme Aioli | `lemon-thyme-aioli` |
+| Vodka Sauce | `vodka-sauce` |
+| Whipped Butter | `whipped-butter` |
 | Riviera House Emulsion | `riviera-emulsion` |
 | Camembert, Pecan & Cranberry Cigars… | `camembert-cigars` |
 | Beef Kofta… | `beef-kofta` |
-
-**In the PDF but not as separate built-in cards** (safe to add as user recipes without hitting built-in dedupe): Lemon & Dill Aioli, Lemon & Thyme Aioli, Vodka Sauce, Whipped Butter.
 
 ## Theme and units
 
