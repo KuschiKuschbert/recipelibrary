@@ -537,7 +537,7 @@
     </div>
     </div>
     <div id="rvPanelFormat" role="tabpanel" aria-labelledby="rvTabFormat" hidden>
-      <p class="ar-format-help">Paste messy text (blog, OCR, notes). Uses <strong>Google Gemini</strong> free tier — <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio</a> key, restrict by HTTP referrer. Same key as the Kitchen Library page. Output maps to Riviera prep fields (prep vs service, single-string ingredient qty). Sending text to Google applies their terms.</p>
+      <p class="ar-format-help">Paste messy text (blog, OCR, notes). Uses <strong>Google Gemini</strong> — key from <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio</a>; restrict in <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Cloud → Credentials</a> (API + HTTP referrers). Same saved key as the Kitchen Library page. <strong>Free quota:</strong> do not enable billing on that Cloud project. Rotate any key that was ever exposed. Output maps to Riviera prep fields. Sending text to Google applies their terms.</p>
       <div class="ar-format-key-row" style="margin-bottom:14px">
         <div class="form-row" style="flex:2;min-width:220px"><label for="rvGeminiKey">Gemini API key</label><input id="rvGeminiKey" type="password" autocomplete="off" placeholder="AIza…" /></div>
         <button type="button" class="btn-secondary" onclick="saveRivieraGeminiKey()" style="margin-bottom:2px">Remember on device</button>
