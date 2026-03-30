@@ -636,7 +636,7 @@
 <script src="assets/recipe-gemini-format.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js" crossorigin="anonymous"></script>
 <script src="assets/recipe-import-helpers.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js" crossorigin="anonymous"></script>
+<script src="assets/qrcodejs-1.0.0.min.js"></script>
 <script>
 const BUILTIN_RECIPES = [
   {
@@ -1262,22 +1262,19 @@ function openPageQrModal() {
     wrap.innerHTML = '<span style="color:#e8a0a0;font-size:13px">QR library failed to load.</span>';
     return;
   }
-  const canvas = document.createElement('canvas');
-  wrap.appendChild(canvas);
-  QRCode.toCanvas(
-    canvas,
-    url,
-    {
+  try {
+    new QRCode(wrap, {
+      text: url,
       width: 220,
-      margin: 2,
-      color: { dark: '#c9a96eff', light: '#1a1a1fff' },
-    },
-    function (err) {
-      if (err) {
-        wrap.innerHTML = '<span style="color:#e8a0a0;font-size:13px">' + (err.message || String(err)) + '</span>';
-      }
-    }
-  );
+      height: 220,
+      colorDark: '#c9a96e',
+      colorLight: '#1a1a1f',
+      correctLevel: QRCode.CorrectLevel.M,
+    });
+  } catch (err) {
+    wrap.innerHTML =
+      '<span style="color:#e8a0a0;font-size:13px">' + (err && err.message ? err.message : String(err)) + '</span>';
+  }
 }
 
 function closePageQrModal() {
