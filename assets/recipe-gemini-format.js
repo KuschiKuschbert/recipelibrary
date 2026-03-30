@@ -6,7 +6,7 @@
   var LEGACY_KITCHEN_KEY = 'kuschi_kitchen_gemini_key_v1';
   var STORAGE_KEY = 'kuschi_gemini_api_key_v1';
   var PROXY_STORAGE_KEY = 'kuschi_recipe_fetch_proxy_v1';
-  var MODEL = 'gemini-2.0-flash';
+  var MODEL = 'gemini-2.5-flash';
 
   var SCHEMA_KITCHEN = {
     type: 'OBJECT',
