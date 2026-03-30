@@ -1,0 +1,11 @@
+---
+description: Kuschi dark theme, typography, and tablet-friendly layout for HTML pages
+globs:
+  - "**/*.html"
+---
+
+# Theme and layout (kitchen pages)
+
+- **Canonical look:** Match [index.html](index.html) — `:root` CSS variables (`--bg`, `--gold`, `--glass`, etc.), **Inter** + **Playfair Display**, dark surfaces, gold accents, glass search panels, pill controls.
+- **Do not** introduce a separate palette, light theme default, or unrelated fonts on kitchen-facing pages.
+- **Tablet / density:** Use fluid type (`clamp`) where the page already does; ensure primary tap targets are at least ~44×44px; respect `prefers-reduced-motion` for heavy transitions; prefer `rem` / `%` / `clamp` over fixed px for typography and main layout; include a correct `viewport` meta.

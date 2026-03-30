@@ -1,0 +1,12 @@
+---
+description: Branching, testing before push, frequent commits for this repo
+alwaysApply: true
+---
+
+# Git workflow — kitchen library
+
+- Work on a **feature branch** (e.g. `improvement/short-description`). Do not commit large features directly to `main` without review and local checks.
+- After each meaningful change, **verify in a browser** (static server from repo root): affected pages load, modals work, search still works.
+- Use **Conventional Commits**: `feat(html):`, `fix(riviera):`, `chore(cursor):`, `docs:`.
+- **Commit often** with small, logical messages; **push the branch regularly** for backup.
+- Merge to `main` only when smoke tests pass on your machine.

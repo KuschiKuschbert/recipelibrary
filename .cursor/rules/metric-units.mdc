@@ -1,0 +1,14 @@
+---
+description: Metric-first recipe quantities in JSON and copy
+globs:
+  - "claude_index/**/*.json"
+  - "kitchen_library*.json"
+  - "recipe_detail/**/*.json"
+  - "**/*.md"
+---
+
+# Metric units
+
+- Prefer **metric** in recipe text and structured amounts: g, kg, ml, L, °C.
+- Use consistent abbreviations; avoid imperial-only strings unless you intentionally add dual labels.
+- When cleaning imported data, normalize toward metric when the source allows.
