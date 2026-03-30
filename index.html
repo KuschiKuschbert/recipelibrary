@@ -430,25 +430,31 @@
       transition: none;
     }
   }
-  /* Hero: each custom kitchen book — name expands to Open book | + Add recipe */
-  .hero-book-split .hero-book-trigger.hero-nav-link {
-    max-width: min(220px, 72vw);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  /* Hero: one “Kitchen books” control expands to show all custom books */
+  .hero-books-split .hero-books-panel.hero-add-pair {
+    flex-wrap: wrap;
     justify-content: center;
+    align-content: center;
+    gap: 6px 8px;
+    padding: 8px 12px;
+    box-sizing: border-box;
   }
-  .hero-book-split.expanded .hero-add-pair {
-    max-width: 380px;
+  .hero-books-split.expanded .hero-books-panel {
+    max-width: min(720px, 92vw);
   }
-  .hero-add-pair a.hero-nav-link {
+  .hero-books-panel.hero-add-pair .hero-nav-link,
+  .hero-books-panel.hero-add-pair .hero-nav-link:first-of-type,
+  .hero-books-panel.hero-add-pair .hero-nav-link:last-of-type {
+    border-radius: 100px;
     text-decoration: none;
     cursor: pointer;
     box-sizing: border-box;
+    font-size: 12px;
+    padding: 8px 14px;
   }
   @media (max-width: 420px) {
-    .hero-book-split.expanded .hero-add-pair {
-      max-width: min(380px, calc(100vw - 48px));
+    .hero-books-split.expanded .hero-books-panel {
+      max-width: calc(100vw - 40px);
     }
   }
   #addRecipeOverlay .modal { max-width: 560px; }
@@ -481,7 +487,12 @@
       </div>
       <button type="button" class="hero-nav-link" onclick="openPageQrModal()" title="QR code to open this page on your phone">QR</button>
     </div>
-    <span class="hero-custom-books" id="heroCustomBookLinks" style="display:contents"></span>
+    <div class="hero-add-split hero-books-split" id="heroBooksSplit" hidden>
+      <div class="hero-add-inner">
+        <button type="button" class="hero-nav-link hero-add-trigger" id="heroBooksTrigger" aria-expanded="false" aria-controls="heroBooksPanel" onclick="event.stopPropagation(); toggleHeroBooksSplit();">Kitchen books <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+        <div class="hero-add-pair hero-books-panel" id="heroBooksPanel" role="group" aria-label="Open a kitchen book" aria-hidden="true"></div>
+      </div>
+    </div>
     <a href="riviera.html" class="hero-nav-link">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       Riviera
@@ -526,7 +537,7 @@
   <div class="modal" id="addRecipeModalBox">
     <button type="button" class="modal-close" onclick="closeAddRecipeModal()">✕</button>
     <div class="modal-title" style="margin-bottom:16px">Add recipe</div>
-    <p id="arAddRecipeIntro" style="font-size:13px;color:var(--text3);margin-bottom:16px;line-height:1.55">Saved on this device (browser). Export JSON from the button below to back up or commit.</p>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:16px;line-height:1.55">Saved on this device (browser). Export JSON from the button below to back up or commit.</p>
     <div class="ar-modal-tabs" role="tablist" aria-label="Add recipe mode">
       <button type="button" role="tab" class="active" id="arTabManual" aria-selected="true" onclick="setAddRecipeTab('manual')">Manual</button>
       <button type="button" role="tab" id="arTabFormat" aria-selected="false" onclick="setAddRecipeTab('format')">Paste &amp; format</button>
@@ -618,8 +629,6 @@ let allRecipes = [];
 let filtered = [];
 let currentPage = 1;
 let currentRecipe = null;
-/** When set, add-recipe modal saves into this kitchen book instead of main user kitchen. */
-let pendingAddRecipeBookId = null;
 
 // ── Data Loading ──────────────────────────────────────
 /** Origin + directory of the current page (works for /repo, /repo/, /repo/index.html). */
@@ -710,11 +719,6 @@ function fillSelect(id, items, label) {
 function esc(s) {
   if (!s) return '';
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-function escAttr(s) {
-  if (s == null) return '';
-  return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 }
 
 // ── Filtering & Search ────────────────────────────────
@@ -890,8 +894,8 @@ document.addEventListener('keydown', e => {
       closeModal();
     } else if (document.getElementById('heroAddSplit') && document.getElementById('heroAddSplit').classList.contains('expanded')) {
       closeHeroAddSplit();
-    } else if (document.querySelector('.hero-book-split.expanded')) {
-      closeAllHeroBookSplits();
+    } else if (document.getElementById('heroBooksSplit') && !document.getElementById('heroBooksSplit').hidden && document.getElementById('heroBooksSplit').classList.contains('expanded')) {
+      closeHeroBooksSplit();
     } else {
       document.getElementById('search').blur();
     }
@@ -903,9 +907,10 @@ document.addEventListener('click', (e) => {
   if (split && split.classList.contains('expanded') && !split.contains(e.target)) {
     closeHeroAddSplit();
   }
-  document.querySelectorAll('.hero-book-split.expanded').forEach((el) => {
-    if (!el.contains(e.target)) closeHeroBookSplitEl(el);
-  });
+  const booksSplit = document.getElementById('heroBooksSplit');
+  if (booksSplit && !booksSplit.hidden && booksSplit.classList.contains('expanded') && !booksSplit.contains(e.target)) {
+    closeHeroBooksSplit();
+  }
 });
 
 // Sticky search background on scroll
@@ -1155,22 +1160,7 @@ function rescaleModal(val) {
 }
 
 
-function syncAddRecipeModalIntro() {
-  const el = document.getElementById('arAddRecipeIntro');
-  if (!el) return;
-  if (pendingAddRecipeBookId && window.KuschiUserRecipes && KuschiUserRecipes.getCustomBook) {
-    const meta = KuschiUserRecipes.getCustomBook(pendingAddRecipeBookId);
-    if (meta) {
-      el.innerHTML = 'Saved to <strong>' + esc(meta.name) + '</strong> on this device. Export JSON backs up this book’s recipes.';
-      return;
-    }
-  }
-  el.textContent = 'Saved on this device (browser). Export JSON from the button below to back up or commit.';
-}
-
 function closeAddRecipeModal() {
-  pendingAddRecipeBookId = null;
-  syncAddRecipeModalIntro();
   document.getElementById('addRecipeOverlay').classList.remove('open');
   if (!document.getElementById('modalOverlay').classList.contains('open') &&
       !document.getElementById('pageQrOverlay').classList.contains('open') &&
@@ -1377,6 +1367,7 @@ function toggleHeroAddSplit() {
   const t = document.getElementById('heroAddTrigger');
   if (!el || !t) return;
   const open = el.classList.toggle('expanded');
+  if (open) closeHeroBooksSplit();
   t.setAttribute('aria-expanded', open ? 'true' : 'false');
   syncHeroAddPairA11y(open);
 }
@@ -1391,7 +1382,7 @@ function closeHeroAddSplit() {
 
 function heroPickAddRecipe() {
   closeHeroAddSplit();
-  openAddRecipeModal(undefined);
+  openAddRecipeModal();
 }
 
 function heroPickAddKitchenBook() {
@@ -1399,62 +1390,37 @@ function heroPickAddKitchenBook() {
   openAddKitchenBookModal();
 }
 
-function syncHeroBookSplitA11y(splitEl, expanded) {
-  if (!splitEl) return;
-  const pair = splitEl.querySelector('.hero-add-pair');
-  const t = splitEl.querySelector('.hero-book-trigger');
+function syncHeroBooksPanelA11y(expanded) {
+  const pair = document.getElementById('heroBooksPanel');
+  const t = document.getElementById('heroBooksTrigger');
   if (pair) {
     pair.setAttribute('aria-hidden', expanded ? 'false' : 'true');
-    pair.querySelectorAll('button, a').forEach((node) => {
-      if (expanded) node.removeAttribute('tabindex');
-      else node.setAttribute('tabindex', '-1');
+    pair.querySelectorAll('a').forEach((a) => {
+      if (expanded) a.removeAttribute('tabindex');
+      else a.setAttribute('tabindex', '-1');
     });
   }
   if (t) t.setAttribute('aria-expanded', expanded ? 'true' : 'false');
 }
 
-function closeHeroBookSplitEl(splitEl) {
-  if (!splitEl) return;
-  splitEl.classList.remove('expanded');
-  syncHeroBookSplitA11y(splitEl, false);
+function closeHeroBooksSplit() {
+  const el = document.getElementById('heroBooksSplit');
+  if (el) el.classList.remove('expanded');
+  syncHeroBooksPanelA11y(false);
 }
 
-function closeAllHeroBookSplits() {
-  document.querySelectorAll('.hero-book-split.expanded').forEach((el) => closeHeroBookSplitEl(el));
+function toggleHeroBooksSplit() {
+  const el = document.getElementById('heroBooksSplit');
+  const t = document.getElementById('heroBooksTrigger');
+  if (!el || !t || el.hidden) return;
+  const open = el.classList.toggle('expanded');
+  if (open) closeHeroAddSplit();
+  syncHeroBooksPanelA11y(open);
 }
 
-function toggleHeroBookSplit(splitEl) {
-  if (!splitEl || !splitEl.classList.contains('hero-book-split')) return;
-  const opening = !splitEl.classList.contains('expanded');
-  if (opening) {
-    closeHeroAddSplit();
-    document.querySelectorAll('.hero-book-split.expanded').forEach((el) => {
-      if (el !== splitEl) closeHeroBookSplitEl(el);
-    });
-    splitEl.classList.add('expanded');
-    syncHeroBookSplitA11y(splitEl, true);
-  } else {
-    closeHeroBookSplitEl(splitEl);
-  }
-}
-
-function heroPickAddBookRecipe(bookId) {
-  const id = bookId != null ? String(bookId).trim() : '';
-  if (!id) return;
-  closeAllHeroBookSplits();
-  openAddRecipeModal(id);
-}
-
-function openAddRecipeModal(forBookId) {
+function openAddRecipeModal() {
   closeHeroAddSplit();
-  closeAllHeroBookSplits();
-  if (forBookId === undefined) {
-    pendingAddRecipeBookId = null;
-  } else {
-    const t = String(forBookId || '').trim();
-    pendingAddRecipeBookId = t || null;
-  }
-  syncAddRecipeModalIntro();
+  closeHeroBooksSplit();
   document.getElementById('addRecipeOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
   document.getElementById('arIngRows').innerHTML = '';
@@ -1496,7 +1462,7 @@ function submitKitchenRecipe() {
   const instructions = document.getElementById('arMethod').value.split('\n').map(s => s.trim()).filter(Boolean);
   const protein = document.getElementById('arProtein').value.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
   const tags = document.getElementById('arTags').value.split(',').map(s => s.trim()).filter(Boolean);
-  const payload = {
+  KuschiUserRecipes.addKitchenRecipe({
     name,
     yield: document.getElementById('arYield').value.trim() || null,
     cuisine: document.getElementById('arCuisine').value.trim() || null,
@@ -1505,59 +1471,40 @@ function submitKitchenRecipe() {
     tags,
     ingredients,
     instructions
-  };
-  if (pendingAddRecipeBookId && KuschiUserRecipes.addBookRecipe) {
-    const bid = pendingAddRecipeBookId;
-    KuschiUserRecipes.addBookRecipe(bid, payload);
-    closeAddRecipeModal();
-    window.location.href = 'kitchen-book.html?b=' + encodeURIComponent(bid);
-    return;
-  }
-  KuschiUserRecipes.addKitchenRecipe(payload);
+  });
   closeAddRecipeModal();
   location.reload();
 }
 function exportKitchenBackup() {
-  if (pendingAddRecipeBookId && KuschiUserRecipes.exportBookRecipes) {
-    const t = KuschiUserRecipes.exportBookRecipes(pendingAddRecipeBookId);
-    navigator.clipboard.writeText(t).then(() => alert('This book’s recipes JSON copied to clipboard'));
-    return;
-  }
   const t = KuschiUserRecipes.exportKitchen();
   navigator.clipboard.writeText(t).then(() => alert('Kitchen user recipes JSON copied to clipboard'));
 }
 
 
 function refreshCustomBookNav() {
-  const wrap = document.getElementById('heroCustomBookLinks');
-  if (!wrap || !window.KuschiUserRecipes || !KuschiUserRecipes.listCustomBooks) return;
+  const root = document.getElementById('heroBooksSplit');
+  const panel = document.getElementById('heroBooksPanel');
+  if (!root || !panel || !window.KuschiUserRecipes || !KuschiUserRecipes.listCustomBooks) return;
   const books = KuschiUserRecipes.listCustomBooks();
   const chevron =
-    ' <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>';
-  const parts = books.map((b, i) => {
-    let sid = String(b.id).replace(/[^a-zA-Z0-9_-]/g, '_');
-    if (!sid) sid = 'b' + i;
-    const pairId = 'heroBookPair-' + sid;
-    const label = 'Actions for ' + b.name;
-    return (
-      '<div class="hero-add-split hero-book-split" data-book-id="' + escAttr(b.id) + '">' +
-      '<div class="hero-add-inner">' +
-      '<button type="button" class="hero-nav-link hero-add-trigger hero-book-trigger" aria-expanded="false" aria-controls="' + escAttr(pairId) + '" onclick="event.stopPropagation(); toggleHeroBookSplit(this.closest(\'.hero-book-split\'));">' +
-      esc(b.name) + chevron + '</button>' +
-      '<div class="hero-add-pair" id="' + escAttr(pairId) + '" role="group" aria-label="' + escAttr(label) + '" aria-hidden="true">' +
-      '<a href="kitchen-book.html?b=' + encodeURIComponent(b.id) + '" class="hero-nav-link" onclick="event.stopPropagation();">Open book</a>' +
-      '<span class="hero-add-divider" aria-hidden="true"></span>' +
-      '<button type="button" class="hero-nav-link" onclick="event.stopPropagation(); heroPickAddBookRecipe(this.closest(\'.hero-book-split\').dataset.bookId);">+ Add recipe</button>' +
-      '</div></div></div>'
-    );
-  });
-  wrap.innerHTML = parts.join('');
-  wrap.querySelectorAll('.hero-book-split').forEach((el) => syncHeroBookSplitA11y(el, false));
+    ' <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>';
+  if (books.length === 0) {
+    closeHeroBooksSplit();
+    root.hidden = true;
+    panel.innerHTML = '';
+    return;
+  }
+  root.hidden = false;
+  panel.innerHTML = books.map(b =>
+    '<a href="kitchen-book.html?b=' + encodeURIComponent(b.id) + '" class="hero-nav-link" onclick="event.stopPropagation(); closeHeroBooksSplit();">' +
+    esc(b.name) + chevron + '</a>'
+  ).join('');
+  syncHeroBooksPanelA11y(root.classList.contains('expanded'));
 }
 
 function openAddKitchenBookModal() {
   closeHeroAddSplit();
-  closeAllHeroBookSplits();
+  closeHeroBooksSplit();
   const o = document.getElementById('addKitchenBookOverlay');
   const inp = document.getElementById('newKitchenBookName');
   if (inp) inp.value = '';
@@ -1592,7 +1539,7 @@ function submitNewKitchenBook() {
 // ── Init ──────────────────────────────────────────────
 function openPageQrModal() {
   closeHeroAddSplit();
-  closeAllHeroBookSplits();
+  closeHeroBooksSplit();
   const overlay = document.getElementById('pageQrOverlay');
   const wrap = document.getElementById('pageQrCanvasWrap');
   const urlP = document.getElementById('pageQrUrl');
