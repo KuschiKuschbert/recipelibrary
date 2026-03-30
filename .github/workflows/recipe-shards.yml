@@ -3,8 +3,18 @@ name: Recipe shards
 on:
   push:
     branches: [main]
+    paths:
+      - "claude_index/**"
+      - "recipe_detail/**"
+      - "scripts/check-recipe-shards.py"
+      - "index.html"
   pull_request:
     branches: [main]
+    paths:
+      - "claude_index/**"
+      - "recipe_detail/**"
+      - "scripts/check-recipe-shards.py"
+      - "index.html"
 
 jobs:
   check:

@@ -1,0 +1,10 @@
+{
+  "preserve_substrings": [
+    "q.b.",
+    "Q.B.",
+    "pax",
+    "°C",
+    "°F"
+  ],
+  "notes": "Substrings wrapped in zero-width placeholders during translation and restored after. Extend as needed."
+}

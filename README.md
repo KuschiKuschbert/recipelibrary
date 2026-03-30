@@ -16,6 +16,8 @@ Personal recipe library hosted on **GitHub Pages**: searchable catalog, metric-o
 | [workers/recipe-fetch-proxy.js](workers/recipe-fetch-proxy.js) | Optional Cloudflare Worker to fetch recipe URLs (bypass browser CORS) |
 | `claude_index/` | Compact index JSON shards for search |
 | `recipe_detail/detail_*.json` | Full recipe payloads (main library), keyed by first letter of name |
+| `scripts/detect-nonenglish-recipes.py`, `translate_recipes.py`, `sync_claude_index_from_detail.py`, `repartition_detail_shards.py` | Optional pipeline to translate catalog text and keep index/detail aligned (see below) |
+| `scripts/check-recipe-shards.py` | Verify every `claude_index` id resolves in the expected `recipe_detail` shard |
 | `pdf/` | Category reference PDFs |
 
 ## Local and device data
@@ -56,6 +58,24 @@ Each index entry is shaped like:
 ```
 
 Counts in the HTML hero update from loaded data; README stats are illustrative — regenerate from your shards if you need exact numbers.
+
+## Translating non-English recipes (offline pipeline)
+
+Scripts in `scripts/` update **`recipe_detail/`** (source of truth for full text) and **`claude_index/`** (compact list/search). The main site does not call translation APIs.
+
+1. **Optional:** `pip install -r scripts/requirements-translation.txt` — improves Latin-script detection (`lingua`) and enables **Argos Translate** locally.
+2. **Detect:** `python3 scripts/detect-nonenglish-recipes.py` → writes `reports/translation_candidates.jsonl` (add `--no-lingua` if you skip pip).
+3. **Translate:** install Argos language pairs you need, then e.g.  
+   `python3 scripts/translate_recipes.py --candidates-file reports/translation_candidates.jsonl --backend argos`  
+   Alternatives: `--backend libretranslate` (set `LIBRETRANSLATE_URL`, optional `LIBRETRANSLATE_API_KEY`) or `--backend deepl` (`DEEPL_AUTH_KEY`, optional `DEEPL_FREE=1` for api-free host). Use `--dry-run` on translate to count non-ASCII strings without writing. Glossary: [`scripts/translation_glossary.json`](scripts/translation_glossary.json).
+4. **Sync index:** `python3 scripts/sync_claude_index_from_detail.py --ids-from reports/translation_candidates.jsonl`  
+   Or `--all-in-index` to refresh every catalog entry from detail (slow, loads all detail files).
+5. **Repartition detail (only if a recipe `name`’s first ASCII letter changed):**  
+   `python3 scripts/repartition_detail_shards.py`  
+   Otherwise the site may load the wrong `detail_{letter}.json` for that id.
+6. **Verify:** `python3 scripts/check-recipe-shards.py` (must exit 0).
+
+Shared helpers: [`scripts/recipe_pipeline_lib.py`](scripts/recipe_pipeline_lib.py).
 
 ## Claude / search
 

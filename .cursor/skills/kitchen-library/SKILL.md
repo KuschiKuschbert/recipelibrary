@@ -34,6 +34,7 @@ Skip only if the user explicitly opts out.
 | [kitchen-book.html](kitchen-book.html) | Per-device **kitchen books** (`?b=id`): search, add recipe (manual + Gemini), QR, **order list** (per-book storage), **Admin** PIN for delete book / remove recipe |
 | `assets/screen-wake.js` | **Keep screen on** toggle (`[data-kuschi-wake]`) — shown in recipe detail modals only |
 | `scraped_raw/`, `pdf/` | Source / export artifacts |
+| `scripts/detect-nonenglish-recipes.py`, `translate_recipes.py`, `sync_claude_index_from_detail.py`, `repartition_detail_shards.py` | Optional: translate catalog text to English, sync `claude_index` from `recipe_detail`, repartition detail shards after name changes — see [README.md](../../../README.md) |
 
 ## User data (client-side)
 

@@ -1,0 +1,11 @@
+# Optional deps for recipe translation pipeline (local / offline).
+# pip install -r scripts/requirements-translation.txt
+#
+# detect-nonenglish-recipes.py: improves Latin-script detection (es/pt/hr/tr, …)
+lingua-language-detector>=2.2.0
+
+# translate_recipes.py --backend argos (install language pairs via argos CLI or package API)
+argostranslate>=1.9.0
+
+# Optional: translate_recipes.py --backend deepl (set DEEPL_AUTH_KEY)
+requests>=2.28.0
