@@ -6,6 +6,6 @@ globs:
 
 # Theme and layout (kitchen pages)
 
-- **Canonical tokens + shared UI:** [assets/theme.css](assets/theme.css) is the single source for `:root` variables (`--bg`, `--gold`, `--glass`, etc.), the search shell, filter pills, results bar, shared modal shell, footer, form helpers, `@keyframes spin`, and base `.grid`. [index.html](index.html) and [riviera.html](riviera.html) link `assets/theme.css` first, then keep **page-only** rules in a small inline `<style>` (hero, cards, Riviera nav, order-list rows, etc.).
+- **Canonical tokens + shared UI:** [assets/theme.css](assets/theme.css) is the single source for `:root` variables (`--bg`, `--gold`, `--glass`, etc.), the search shell, filter pills, results bar, shared modal shell, footer, form helpers, `@keyframes spin`, and base `.grid`. [index.html](index.html), [kitchen-book.html](kitchen-book.html), and [riviera.html](riviera.html) link `assets/theme.css` first, then keep **page-only** rules in a small inline `<style>` (hero, cards, Riviera nav, order-list rows, etc.).
 - **Typography:** **Inter** + **Playfair Display** (loaded in each HTML head). Do not switch to unrelated fonts or a separate default palette on kitchen pages.
 - **Tablet / density:** Use fluid type (`clamp`) where the page already does; ensure primary tap targets are at least ~44×44px; respect `prefers-reduced-motion` for heavy transitions; prefer `rem` / `%` / `clamp` over fixed px for typography and main layout; include a correct `viewport` meta.

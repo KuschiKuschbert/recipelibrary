@@ -1,6 +1,6 @@
 /**
  * Screen Wake Lock toggle for kitchen / recipe views (GitHub Pages, HTTPS).
- * Binds to elements with [data-kuschi-wake]; hides them and .footer-wake when unsupported.
+ * Binds to elements with [data-kuschi-wake]; hides them when Wake Lock is unsupported.
  */
 (function () {
   const SEL = '[data-kuschi-wake]';
@@ -16,19 +16,12 @@
 
   function sync() {
     const nodes = Array.from(document.querySelectorAll(SEL));
-    const footers = Array.from(document.querySelectorAll('.footer-wake'));
     if (!supported()) {
       nodes.forEach((el) => {
         el.hidden = true;
       });
-      footers.forEach((w) => {
-        w.hidden = true;
-      });
       return;
     }
-    footers.forEach((w) => {
-      w.hidden = false;
-    });
     const on = Boolean(sentinel);
     nodes.forEach((el) => {
       el.hidden = false;

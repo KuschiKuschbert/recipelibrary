@@ -10,8 +10,24 @@
   const STORAGE_ORDER_OVERRIDES = 'kuschi_riviera_order_overrides_v1';
   const STORAGE_ORDER_EXTRAS = 'kuschi_riviera_order_extras_v1';
   const STORAGE_RIVIERA_HIDDEN_BUILTINS = 'kuschi_riviera_hidden_builtin_ids_v1';
+  const STORAGE_CUSTOM_BOOKS = 'kuschi_custom_kitchen_books_v1';
 
   const ZONE_IDS = ['freezer', 'coldroom', 'drystore', 'other'];
+
+  function bookRecipesStorageKey(bookId) {
+    return 'kuschi_book_' + String(bookId || '').trim() + '_recipes_v1';
+  }
+
+  function slugifyBookId(name) {
+    var s = String(name || '')
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+    return s || 'kitchen';
+  }
 
   function safeParse(json, fallback) {
     try {
@@ -421,8 +437,7 @@
     };
   }
 
-  function addKitchenRecipe(payload) {
-    var list = loadKitchen();
+  function kitchenRecordFromPayload(payload) {
     var rawName = String(payload.name || 'Untitled').trim();
     var ingredients = (payload.ingredients || []).map(function (i) {
       if (!i || !i.item) return i;
@@ -436,7 +451,7 @@
     var instructions = (payload.instructions || []).map(function (line) {
       return capitalizeFirstLetter(String(line).trim());
     }).filter(Boolean);
-    var rec = {
+    return {
       id: payload.id || slugId(rawName),
       name: titleCaseRecipeName(rawName) || 'Untitled',
       yield: normStr(payload.yield),
@@ -448,9 +463,97 @@
       instructions: instructions,
       source: 'user',
     };
+  }
+
+  function addKitchenRecipe(payload) {
+    var list = loadKitchen();
+    var rec = kitchenRecordFromPayload(payload);
     list.push(rec);
     saveKitchen(list);
     return rec;
+  }
+
+  function listCustomBooks() {
+    return safeParse(localStorage.getItem(STORAGE_CUSTOM_BOOKS) || '[]', []);
+  }
+
+  function saveCustomBooksRegistry(books) {
+    localStorage.setItem(STORAGE_CUSTOM_BOOKS, JSON.stringify(books || []));
+  }
+
+  function getCustomBook(bookId) {
+    var id = String(bookId || '').trim();
+    var books = listCustomBooks();
+    for (var i = 0; i < books.length; i++) {
+      if (books[i] && books[i].id === id) return books[i];
+    }
+    return null;
+  }
+
+  function createCustomBook(name) {
+    var displayName = titleCaseRecipeName(String(name || 'Untitled').trim()) || 'Untitled';
+    var base = slugifyBookId(name);
+    var books = listCustomBooks();
+    var id = base;
+    var n = 2;
+    while (books.some(function (b) { return b && b.id === id; })) {
+      id = base + '-' + n;
+      n++;
+    }
+    var entry = { id: id, name: displayName, createdAt: new Date().toISOString() };
+    books.push(entry);
+    saveCustomBooksRegistry(books);
+    localStorage.setItem(bookRecipesStorageKey(id), '[]');
+    return entry;
+  }
+
+  function deleteCustomBook(bookId) {
+    var id = String(bookId || '').trim();
+    if (!id) return false;
+    var books = listCustomBooks();
+    var next = books.filter(function (b) { return b && b.id !== id; });
+    if (next.length === books.length) return false;
+    saveCustomBooksRegistry(next);
+    localStorage.removeItem(bookRecipesStorageKey(id));
+    return true;
+  }
+
+  function loadBookRecipes(bookId) {
+    var id = String(bookId || '').trim();
+    if (!id) return [];
+    return safeParse(localStorage.getItem(bookRecipesStorageKey(id)) || '[]', []);
+  }
+
+  function saveBookRecipes(bookId, list) {
+    var id = String(bookId || '').trim();
+    if (!id) return;
+    localStorage.setItem(bookRecipesStorageKey(id), JSON.stringify(list || []));
+  }
+
+  function addBookRecipe(bookId, payload) {
+    var list = loadBookRecipes(bookId);
+    var rec = kitchenRecordFromPayload(payload);
+    list.push(rec);
+    saveBookRecipes(bookId, list);
+    return rec;
+  }
+
+  function getBookRecipeById(bookId, recipeId) {
+    return loadBookRecipes(bookId).find(function (r) {
+      return r && r.id === recipeId;
+    });
+  }
+
+  function removeBookRecipe(bookId, recipeId) {
+    var list = loadBookRecipes(bookId);
+    var next = list.filter(function (r) { return r && r.id !== recipeId; });
+    if (next.length === list.length) return false;
+    saveBookRecipes(bookId, next);
+    return true;
+  }
+
+  function exportBookRecipes(bookId) {
+    return JSON.stringify(loadBookRecipes(bookId), null, 2);
   }
 
   function getKitchenById(id) {
@@ -632,7 +735,19 @@
     toIndexRow: toIndexRow,
     kitchenToDetail: kitchenToDetail,
     addKitchenRecipe: addKitchenRecipe,
+    kitchenRecordFromPayload: kitchenRecordFromPayload,
     getKitchenById: getKitchenById,
+    listCustomBooks: listCustomBooks,
+    getCustomBook: getCustomBook,
+    createCustomBook: createCustomBook,
+    deleteCustomBook: deleteCustomBook,
+    loadBookRecipes: loadBookRecipes,
+    saveBookRecipes: saveBookRecipes,
+    addBookRecipe: addBookRecipe,
+    getBookRecipeById: getBookRecipeById,
+    removeBookRecipe: removeBookRecipe,
+    exportBookRecipes: exportBookRecipes,
+    bookRecipesStorageKey: bookRecipesStorageKey,
     addRivieraRecipe: addRivieraRecipe,
     exportKitchen: exportKitchen,
     exportRiviera: exportRiviera,

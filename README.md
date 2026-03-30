@@ -6,7 +6,8 @@ Personal recipe library hosted on **GitHub Pages**: searchable catalog, metric-o
 
 | Area | Purpose |
 |------|---------|
-| [index.html](index.html) | Main library UI — loads `claude_index/` shards, recipe detail from `recipe_detail/`, merges **user recipes** from the browser |
+| [index.html](index.html) | Main library UI — loads `claude_index/` shards, recipe detail from `recipe_detail/`, merges **user recipes** from the browser; **+ Kitchen book** and pills for custom books |
+| [kitchen-book.html](kitchen-book.html) | User-created **kitchen books** (`?b=book-id`): local recipes only, same add-recipe flow as the main library (manual + Gemini) |
 | [riviera.html](riviera.html) | Riviera prep set (built-in cards + user-added Riviera recipes), **order list by storage** (freezer → cold room → dry store → other) with local master ingredients |
 | [assets/theme.css](assets/theme.css) | Shared dark theme tokens, search shell, filters, modal shell, footer |
 | [assets/user-recipes.js](assets/user-recipes.js) | `localStorage` helpers: kitchen recipes, Riviera recipes, master ingredients, Riviera order overrides / extras, JSON export |
@@ -22,6 +23,8 @@ Personal recipe library hosted on **GitHub Pages**: searchable catalog, metric-o
 There is **no server**. “Save” actions write to **this browser’s** `localStorage`:
 
 - Kitchen recipes: `kuschi_user_recipes_kitchen_v1`
+- Custom kitchen book registry: `kuschi_custom_kitchen_books_v1`
+- Per-book recipes: `kuschi_book_<id>_recipes_v1` (one key per book)
 - Riviera recipes: `kuschi_user_recipes_riviera_v1`
 - Master ingredients (default storage zone per name): `kuschi_master_ingredients_v1`
 - Riviera order line overrides: `kuschi_riviera_order_overrides_v1`

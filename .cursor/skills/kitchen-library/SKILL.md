@@ -9,7 +9,7 @@ Read before large edits to HTML, JSON recipe data, or `.cursor` rules.
 
 ## Purpose
 
-Static **GitHub Pages** site: main catalog ([index.html](index.html)), Riviera prep-chef set ([riviera.html](riviera.html)). Optimized for a small kitchen tablet.
+Static **GitHub Pages** site: main catalog ([index.html](index.html)), user-defined **kitchen books** ([kitchen-book.html?b=…](kitchen-book.html)), Riviera prep-chef set ([riviera.html](riviera.html)). Optimized for a small kitchen tablet.
 
 ## Agent shipping (after you change code)
 
@@ -30,11 +30,14 @@ Skip only if the user explicitly opts out.
 | `recipe_detail/detail_*.json` | Full recipe payloads keyed by first letter of name |
 | `kitchen_library_*.json` | Additional library chunks |
 | `assets/user-recipes.js` | **localStorage** helpers (browser-only) — see keys below |
+| [kitchen-book.html](kitchen-book.html) | Per-device **kitchen books** (`?b=id`): search, add recipe (manual + Gemini), QR |
+| `assets/screen-wake.js` | **Keep screen on** toggle (`[data-kuschi-wake]`) — shown in recipe detail modals only |
 | `scraped_raw/`, `pdf/` | Source / export artifacts |
 
 ## User data (client-side)
 
 - **Kitchen** recipes: `kuschi_user_recipes_kitchen_v1` — merged into the main list; detail view does **not** use `recipe_detail/` fetch for `user-*` ids.
+- **Custom kitchen books:** `kuschi_custom_kitchen_books_v1` — JSON array of `{ id, name, createdAt }`. Per-book recipes: `kuschi_book_<id>_recipes_v1` (same shape as kitchen user recipes). Open [kitchen-book.html](kitchen-book.html) with query `?b=<id>`; home page **+ Kitchen book** and per-book link pills. Helpers: `listCustomBooks`, `createCustomBook`, `deleteCustomBook`, `loadBookRecipes`, `addBookRecipe`, `getBookRecipeById`, `removeBookRecipe`, `exportBookRecipes` on [assets/user-recipes.js](assets/user-recipes.js).
 - **Riviera** recipes: `kuschi_user_recipes_riviera_v1` — prepended to visible built-ins in [riviera.html](riviera.html) (see hidden built-ins below).
 - **Riviera hidden built-ins:** `kuschi_riviera_hidden_builtin_ids_v1` — JSON array of built-in recipe `id` strings to hide on this device only. Helpers: `loadRivieraHiddenBuiltinIds`, `hideRivieraBuiltin`, `restoreAllHiddenRivieraBuiltins` in [assets/user-recipes.js](assets/user-recipes.js). `mergeRivieraRecipes()` filters `BUILTIN_RECIPES` against this list. Order overrides may still contain keys for hidden recipes until edited or cleared.
 - **Riviera admin session:** `sessionStorage` key `kuschi_riviera_admin_session` — value `1` when unlocked. Footer **Admin** opens PIN entry; correct PIN sets the session (fixed value `RIVIERA_ADMIN_PIN` in [riviera.html](riviera.html)). **Lock** clears the session. While unlocked: recipe detail modal shows **Hide from my list** (built-ins) or **Remove recipe** (user-saved); footer **Restore hidden built-ins** clears the hidden-id list. PIN is only casual protection (visible in source).

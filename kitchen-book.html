@@ -3,11 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Kuschi Kitchen Library</title>
+<title>Kitchen book — Kuschi Library</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/theme.css">
 <style>
+  .nav-back {
+    padding: 20px 32px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .nav-back a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-back a:hover { color: var(--gold); }
+
   /* ── Hero / Header (index) ─────────────────────────── */
   .hero {
     text-align: center;
@@ -342,21 +359,22 @@
 </head>
 <body>
 
+<div id="stateInvalid" class="hero" style="display:none;padding-top:48px">
+  <div class="nav-back"><a href="index.html">← Kitchen Library</a></div>
+  <p class="hero-sub" id="invalidMsg" style="max-width:520px;margin:24px auto 0"></p>
+</div>
+
+<div id="stateMain" style="display:none">
+<div class="nav-back"><a href="index.html">← Kitchen Library</a></div>
 <div class="hero">
-  <div class="hero-label">Kuschi · Recipe Library</div>
-  <h1 class="hero-title">The <em>Kitchen</em> Library</h1>
-  <p class="hero-sub"><b id="totalCount">38,363</b> recipes — professionally formatted, metric, density-converted, searchable.</p>
+  <div class="hero-label">Kuschi · Kitchen book</div>
+  <h1 class="hero-title" id="bookHeroTitle">…</h1>
+  <p class="hero-sub"><b id="bookCount">0</b> recipes · saved on this device only.</p>
   <div class="hero-nav">
     <div class="hero-nav-cluster">
       <button type="button" class="hero-nav-link" onclick="openAddRecipeModal()">+ Add recipe</button>
-      <button type="button" class="hero-nav-link" onclick="openPageQrModal()" title="QR code to open this page on your phone">QR</button>
+      <button type="button" class="hero-nav-link" onclick="openPageQrModal()" title="QR code to open this book on your phone">QR</button>
     </div>
-    <span class="hero-custom-books" id="heroCustomBookLinks" style="display:contents"></span>
-    <a href="riviera.html" class="hero-nav-link">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      Riviera House Kitchen
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
-    </a>
   </div>
 </div>
 
@@ -364,33 +382,17 @@
   <div class="search-glass">
     <div class="search-inner">
       <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" class="search-input" id="search" placeholder="Search recipes, ingredients, cuisines..." autocomplete="off" spellcheck="false">
+      <input type="text" class="search-input" id="search" placeholder="Search this book…" autocomplete="off" spellcheck="false">
       <span class="search-shortcut">/</span>
     </div>
   </div>
 </div>
 
-<div class="filters-wrap">
-  <select class="filter-pill" id="filterCuisine"><option value="">Cuisine</option></select>
-  <select class="filter-pill" id="filterProtein"><option value="">Protein</option></select>
-  <select class="filter-pill" id="filterTag"><option value="">Dietary</option></select>
-  <select class="filter-pill" id="filterCat"><option value="">Category</option></select>
-  <button class="clear-btn" id="clearBtn">Clear all</button>
-</div>
-
 <div class="results-bar" id="resultsBar">
   <div class="results-count" id="resultsCount"></div>
-  <div class="results-meta" id="resultsMeta"></div>
-</div>
-
-<div id="loading" class="loading">
-  <div class="loader"></div>
-  <div class="loading-text">Loading recipes...</div>
 </div>
 
 <div id="content"></div>
-<div id="pagination" class="pagination"></div>
-
 
 <div class="modal-overlay" id="addRecipeOverlay" onclick="if(event.target===this)closeAddRecipeModal()">
   <div class="modal" id="addRecipeModalBox">
@@ -413,8 +415,8 @@
     <button type="button" class="btn-secondary" onclick="addKitchenIngRow()">+ Ingredient row</button>
     <div class="form-row" style="margin-top:16px"><label for="arMethod">Method (one step per line)</label><textarea id="arMethod" placeholder="1. First step…"></textarea></div>
     <div class="add-form-actions">
-      <button type="button" class="primary" onclick="submitKitchenRecipe()">Save recipe</button>
-      <button type="button" class="btn-secondary" onclick="exportKitchenBackup()">Copy JSON backup</button>
+      <button type="button" class="primary" onclick="submitBookRecipe()">Save recipe</button>
+      <button type="button" class="btn-secondary" onclick="exportBookBackup()">Copy JSON backup</button>
     </div>
     </div>
     <div id="arPanelFormat" role="tabpanel" aria-labelledby="arTabFormat" hidden>
@@ -445,36 +447,29 @@
   </div>
 </div>
 
+
+
 <div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
   <div class="modal" id="modal"></div>
 </div>
 
 <div class="footer" id="footer" style="display:none">
-  <div class="footer-text">Kuschi Kitchen Library v3.0 · <a href="riviera.html">Riviera House</a> · <a href="https://github.com/KuschiKuschbert/recipelibrary" target="_blank">GitHub</a></div>
-</div>
-
-
-<div class="modal-overlay" id="addKitchenBookOverlay" onclick="if(event.target===this)closeAddKitchenBookModal()">
-  <div class="modal" style="max-width:420px">
-    <button type="button" class="modal-close" onclick="closeAddKitchenBookModal()">✕</button>
-    <div class="modal-title" style="margin-bottom:12px">New kitchen book</div>
-    <p style="font-size:13px;color:var(--text3);margin:0 0 16px;line-height:1.55">A separate recipe list for another kitchen or event. Stored on this device only.</p>
-    <div class="form-row"><label for="newKitchenBookName">Name</label><input id="newKitchenBookName" type="text" placeholder="e.g. Pop-up bar" autocomplete="off" /></div>
-    <div class="add-form-actions" style="margin-top:8px">
-      <button type="button" class="primary" onclick="submitNewKitchenBook()">Create &amp; open</button>
-    </div>
+  <div class="footer-text">
+    <button type="button" class="btn-secondary" onclick="deleteThisKitchenBook()" style="margin-right:12px;font-size:12px">Delete this kitchen book…</button>
+    · <a href="riviera.html">Riviera House</a> · <a href="https://github.com/KuschiKuschbert/recipelibrary" target="_blank">GitHub</a>
   </div>
 </div>
 
 <div class="modal-overlay" id="pageQrOverlay" onclick="if(event.target===this)closePageQrModal()">
   <div class="modal" style="max-width:360px;text-align:center">
     <button type="button" class="modal-close" onclick="closePageQrModal()">✕</button>
-    <div class="modal-title" style="margin-bottom:12px">Open this page on your phone</div>
-    <p style="font-size:12px;color:var(--text3);margin:0 0 16px;line-height:1.55;text-align:left">Scan to open this page in your phone's browser.</p>
+    <div class="modal-title" style="margin-bottom:12px">Open this book on your phone</div>
+    <p style="font-size:12px;color:var(--text3);margin:0 0 16px;line-height:1.55;text-align:left">Scan to open this kitchen book in your phone's browser.</p>
     <div id="pageQrCanvasWrap" style="display:flex;justify-content:center;min-height:222px;align-items:center;margin-bottom:12px"></div>
     <p id="pageQrUrl" style="font-size:11px;color:var(--text3);word-break:break-all;text-align:left;margin:0"></p>
   </div>
 </div>
+
 
 <script src="assets/user-recipes.js"></script>
 <script src="assets/recipe-gemini-format.js"></script>
@@ -483,150 +478,67 @@
 <script src="assets/qrcodejs-1.0.0.min.js"></script>
 <script src="assets/screen-wake.js"></script>
 <script>
-const PAGE_SIZE = 60;
+const params = new URLSearchParams(window.location.search);
+const CURRENT_BOOK_ID = (params.get('b') || params.get('id') || '').trim();
+
 let allRecipes = [];
 let filtered = [];
-let currentPage = 1;
 let currentRecipe = null;
 
-// ── Data Loading ──────────────────────────────────────
-const INDEX_FILES = [
-  'claude_index_01_1-B.json',
-  'claude_index_02_B-C.json',
-  'claude_index_03_C.json',
-  'claude_index_04_C.json',
-  'claude_index_05_C-F.json',
-  'claude_index_06_F-G.json',
-  'claude_index_07_G-H.json',
-  'claude_index_08_H-L.json',
-  'claude_index_09_L-N.json',
-  'claude_index_10_N-P.json',
-  'claude_index_11_P-R.json',
-  'claude_index_12_R-S.json',
-  'claude_index_13_S.json',
-  'claude_index_14_S-T.json',
-  'claude_index_15_T-Z.json',
-];
-
-async function loadData() {
-  const base = window.location.href.replace(/\/[^/]*$/, '');
-  const all = [];
-  let loaded = 0;
-  const loadingText = document.querySelector('.loading-text');
-
-  const fetches = await Promise.allSettled(
-    INDEX_FILES.map(f =>
-      fetch(`${base}/claude_index/${f}`)
-        .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-        .then(data => {
-          loaded++;
-          if (loadingText) loadingText.textContent = `Loading recipes... (${loaded}/${INDEX_FILES.length} files)`;
-          return data;
-        })
-    )
-  );
-
-  for (const f of fetches) {
-    if (f.status === 'fulfilled' && f.value && f.value.recipes) {
-      all.push(...f.value.recipes);
-    }
-  }
-
-  // Deduplicate by id
-  const seen = new Set();
-  return all.filter(r => {
-    if (!r.id || seen.has(r.id)) return false;
-    seen.add(r.id);
-    return true;
-  });
-}
-
-// ── Filter Setup ──────────────────────────────────────
 function toArr(v) { return Array.isArray(v) ? v : []; }
-
-function buildFilters() {
-  const cuisines = new Set(), proteins = new Set(), tags = new Set(), cats = new Set();
-  for (const r of allRecipes) {
-    if (r.cui && typeof r.cui === 'string') cuisines.add(r.cui);
-    toArr(r.protein).forEach(p => { if (p) proteins.add(p); });
-    toArr(r.tags).forEach(t => { if (typeof t === 'string') tags.add(t); });
-    if (r.cat && typeof r.cat === 'string') cats.add(r.cat);
-  }
-  fillSelect('filterCuisine', [...cuisines].sort(), 'Cuisine');
-  fillSelect('filterProtein', [...proteins].sort(), 'Protein');
-  fillSelect('filterTag', [...tags].sort(), 'Dietary');
-  fillSelect('filterCat', [...cats].sort(), 'Category');
-}
-
-function fillSelect(id, items, label) {
-  const sel = document.getElementById(id);
-  sel.innerHTML = `<option value="">${label}</option>` +
-    items.map(i => `<option value="${esc(i)}">${esc(i)}</option>`).join('');
-}
 
 function esc(s) {
   if (!s) return '';
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// ── Filtering & Search ────────────────────────────────
-function applyFilters() {
-  const t0 = performance.now();
-  const q = document.getElementById('search').value.toLowerCase().trim();
-  const cuisine = document.getElementById('filterCuisine').value;
-  const protein = document.getElementById('filterProtein').value;
-  const tag = document.getElementById('filterTag').value;
-  const cat = document.getElementById('filterCat').value;
-  const terms = q ? q.split(/\s+/) : [];
-
-  // Update pill active state
-  document.querySelectorAll('.filter-pill').forEach(el => {
-    el.classList.toggle('active', el.value !== '');
-  });
-
-  filtered = allRecipes.filter(r => {
-    if (terms.length) {
-      const hay = [r.name||'', r.cui||'', ...toArr(r.protein), ...toArr(r.tags), ...toArr(r.ing), r.cat||''].join(' ').toLowerCase();
-      if (!terms.every(t => hay.includes(t))) return false;
-    }
-    if (cuisine && r.cui !== cuisine) return false;
-    if (protein && !toArr(r.protein).includes(protein)) return false;
-    if (tag && !toArr(r.tags).includes(tag)) return false;
-    if (cat && r.cat !== cat) return false;
-    return true;
-  });
-
-  const dt = (performance.now() - t0).toFixed(1);
-  currentPage = 1;
-  render(dt);
+function bookMeta() {
+  return window.KuschiUserRecipes && KuschiUserRecipes.getCustomBook
+    ? KuschiUserRecipes.getCustomBook(CURRENT_BOOK_ID)
+    : null;
 }
 
-// ── Rendering ─────────────────────────────────────────
-function render(dt) {
-  const bar = document.getElementById('resultsBar');
-  bar.classList.add('visible');
-  document.getElementById('resultsCount').innerHTML =
-    `<span>${filtered.length.toLocaleString()}</span> recipe${filtered.length !== 1 ? 's' : ''}`;
-  document.getElementById('resultsMeta').textContent = dt ? `${dt}ms` : '';
+function loadRecipes() {
+  const meta = bookMeta();
+  if (!meta) return;
+  document.getElementById('bookHeroTitle').textContent = meta.name;
+  const rows = KuschiUserRecipes.loadBookRecipes(CURRENT_BOOK_ID).map(KuschiUserRecipes.toIndexRow);
+  allRecipes = rows;
+  filtered = [...allRecipes];
+  document.getElementById('bookCount').textContent = String(rows.length);
+  applyFilters();
+}
 
+function applyFilters() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  const terms = q ? q.split(/\s+/) : [];
+  filtered = allRecipes.filter(r => {
+    if (!terms.length) return true;
+    const hay = [r.name||'', r.cui||'', ...toArr(r.protein), ...toArr(r.tags), ...toArr(r.ing), r.cat||''].join(' ').toLowerCase();
+    return terms.every(t => hay.includes(t));
+  });
+  const rc = document.getElementById('resultsCount');
+  if (rc) {
+    rc.textContent = filtered.length === allRecipes.length
+      ? `${filtered.length} recipes`
+      : `${filtered.length} of ${allRecipes.length}`;
+  }
+  render();
+}
+
+function render() {
   const content = document.getElementById('content');
   if (!filtered.length) {
-    content.innerHTML = '<div class="empty">No recipes found. Try different keywords or clear your filters.</div>';
-    document.getElementById('pagination').innerHTML = '';
+    content.innerHTML = '<div class="empty">No recipes yet. Use + Add recipe or adjust search.</div>';
     return;
   }
-
-  const start = (currentPage - 1) * PAGE_SIZE;
-  const page = filtered.slice(start, start + PAGE_SIZE);
-  content.innerHTML = '<div class="grid">' + page.map(cardHTML).join('') + '</div>';
-  renderPagination();
+  content.innerHTML = '<div class="grid">' + filtered.map(cardHTML).join('') + '</div>';
 }
 
 function cardHTML(r) {
   const name = esc(r.name || 'Untitled');
   const nameAttr = name.replace(/'/g, "\\'");
   const cui = r.cui ? `<div class="card-cuisine">${esc(r.cui)}</div>` : '';
-
   let badges = '';
   const rProteins = toArr(r.protein);
   const rTags = toArr(r.tags);
@@ -638,10 +550,8 @@ function cardHTML(r) {
       .map(t => `<span class="badge badge-tag">${esc(t)}</span>`).join('');
   }
   if (r.cat) badges += `<span class="badge badge-cat">${esc(r.cat)}</span>`;
-
   const ings = (r.ing || []).slice(0, 8).map(i => `<strong>${esc(i)}</strong>`).join(' · ');
   const rid = esc(r.id || '');
-
   return `<div class="card" onclick="openRecipe('${rid}')" style="cursor:pointer">
     <div class="card-header">
       <div class="card-name">${name}</div>
@@ -666,66 +576,12 @@ function copyName(btn, name) {
   });
 }
 
-// ── Pagination ────────────────────────────────────────
-function renderPagination() {
-  const total = Math.ceil(filtered.length / PAGE_SIZE);
-  const pag = document.getElementById('pagination');
-  if (total <= 1) { pag.innerHTML = ''; return; }
-
-  let html = `<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage<=1?'disabled':''}>
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-  </button>`;
-
-  for (const p of pageRange(currentPage, total)) {
-    if (p === '...') html += '<span class="page-dots">…</span>';
-    else html += `<button class="page-btn ${p===currentPage?'active':''}" onclick="goPage(${p})">${p}</button>`;
-  }
-
-  html += `<button class="page-btn" onclick="goPage(${currentPage+1})" ${currentPage>=total?'disabled':''}>
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-  </button>`;
-
-  pag.innerHTML = html;
-}
-
-function pageRange(cur, total) {
-  if (total <= 7) return Array.from({length:total},(_,i)=>i+1);
-  const p = [1];
-  if (cur > 3) p.push('...');
-  for (let i = Math.max(2,cur-1); i <= Math.min(total-1,cur+1); i++) p.push(i);
-  if (cur < total-2) p.push('...');
-  p.push(total);
-  return p;
-}
-
-function goPage(p) {
-  const total = Math.ceil(filtered.length / PAGE_SIZE);
-  if (p < 1 || p > total) return;
-  currentPage = p;
-  render();
-  document.getElementById('searchWrap').scrollIntoView({ behavior: 'smooth' });
-}
-
-// ── Event Listeners ───────────────────────────────────
 let debounce;
 document.getElementById('search').addEventListener('input', () => {
   clearTimeout(debounce);
   debounce = setTimeout(applyFilters, 180);
 });
 
-['filterCuisine','filterProtein','filterTag','filterCat'].forEach(id =>
-  document.getElementById(id).addEventListener('change', applyFilters)
-);
-
-document.getElementById('clearBtn').addEventListener('click', () => {
-  document.getElementById('search').value = '';
-  ['filterCuisine','filterProtein','filterTag','filterCat'].forEach(id =>
-    document.getElementById(id).value = ''
-  );
-  applyFilters();
-});
-
-// Keyboard shortcuts
 document.addEventListener('keydown', e => {
   if (e.key === '/' && !['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) {
     e.preventDefault();
@@ -734,8 +590,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     if (document.getElementById('addRecipeOverlay').classList.contains('open')) {
       closeAddRecipeModal();
-    } else if (document.getElementById('addKitchenBookOverlay') && document.getElementById('addKitchenBookOverlay').classList.contains('open')) {
-      closeAddKitchenBookModal();
     } else if (document.getElementById('pageQrOverlay').classList.contains('open')) {
       closePageQrModal();
     } else if (document.getElementById('modalOverlay').classList.contains('open')) {
@@ -746,97 +600,31 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// Sticky search background on scroll
-const searchWrap = document.getElementById('searchWrap');
-const observer = new IntersectionObserver(
-  ([e]) => searchWrap.classList.toggle('stuck', !e.isIntersecting),
-  { threshold: [1], rootMargin: '-1px 0px 0px 0px' }
-);
-observer.observe(searchWrap);
-
-// ── Recipe Detail Modal ───────────────────────────────
-const detailCache = {};
-const recipeIndex = {};
-
-function buildRecipeIndex() {
-  for (const r of allRecipes) {
-    let letter = 'Z';
-    if (r.id && String(r.id).startsWith('user-')) {
-      letter = (window.KuschiUserRecipes && KuschiUserRecipes.USER_LETTER) || '_USER';
-    } else {
-      for (const c of (r.name || '')) {
-        if (/[a-zA-Z]/.test(c)) { letter = c.toUpperCase(); break; }
-      }
-    }
-    recipeIndex[r.id] = { letter, name: r.name };
-  }
-}
-
-async function fetchDetail(letter) {
-  if (detailCache[letter]) return detailCache[letter];
-  const base = window.location.href.replace(/\/[^/]*$/, '');
-  const resp = await fetch(`${base}/recipe_detail/detail_${letter}.json`);
-  if (!resp.ok) throw new Error(`Detail file not found for "${letter}"`);
-  const data = await resp.json();
-  detailCache[letter] = data;
-  return data;
-}
-
-async function openRecipe(id) {
-  const overlay = document.getElementById('modalOverlay');
+function openRecipe(id) {
+  const full = KuschiUserRecipes.getBookRecipeById(CURRENT_BOOK_ID, id);
+  if (!full) return;
+  currentRecipe = KuschiUserRecipes.kitchenToDetail(full);
   const modal = document.getElementById('modal');
-  overlay.classList.add('open');
+  modal.innerHTML = renderBookRecipeDetail(currentRecipe);
+  modal.scrollTop = 0;
+  if (window.KuschiScreenWake) KuschiScreenWake.sync();
+  document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
-
-  if (window.KuschiUserRecipes && id && String(id).startsWith('user-')) {
-    const full = KuschiUserRecipes.getKitchenById(id);
-    if (full) {
-      currentRecipe = KuschiUserRecipes.kitchenToDetail(full);
-      modal.innerHTML = renderRecipeDetail(currentRecipe);
-      modal.scrollTop = 0;
-      if (window.KuschiScreenWake) KuschiScreenWake.sync();
-      return;
-    }
-  }
-
-  modal.innerHTML = '<div class="modal-loading"><div class="loader"></div>Loading recipe...</div>';
-
-  try {
-    const info = recipeIndex[id];
-    if (!info) throw new Error('Recipe not found');
-    if (info.letter === ((window.KuschiUserRecipes && KuschiUserRecipes.USER_LETTER) || '_USER')) {
-      throw new Error('User recipe missing from storage');
-    }
-    const detail = await fetchDetail(info.letter);
-    const recipe = detail.find(r => r.id === id);
-    if (!recipe) throw new Error('Recipe not in detail file');
-    currentRecipe = recipe;
-    modal.innerHTML = renderRecipeDetail(recipe);
-    modal.scrollTop = 0;
-    if (window.KuschiScreenWake) KuschiScreenWake.sync();
-  } catch(e) {
-    modal.innerHTML = `<button class="modal-close" onclick="closeModal()">✕</button>
-      <div class="modal-loading" style="color:var(--accent)">Could not load recipe: ${esc(e.message)}</div>`;
-  }
 }
 
 function closeModal() {
   document.getElementById('modalOverlay').classList.remove('open');
   currentRecipe = null;
   if (!document.getElementById('pageQrOverlay').classList.contains('open') &&
-      !(document.getElementById('addKitchenBookOverlay') && document.getElementById('addKitchenBookOverlay').classList.contains('open'))) {
+      !document.getElementById('addRecipeOverlay').classList.contains('open')) {
     document.body.style.overflow = '';
   }
 }
 
-function renderRecipeDetail(r) {
+function renderBookRecipeDetail(r) {
   let html = `<button class="modal-close" onclick="closeModal()">✕</button>`;
   html += `<div class="modal-title">${esc(r.name)}</div>`;
-
-  if (r.cuisine) {
-    html += `<div class="modal-cuisine">${esc(r.cuisine)}</div>`;
-  }
-
+  if (r.cuisine) html += `<div class="modal-cuisine">${esc(r.cuisine)}</div>`;
   const badges = [];
   toArr(r.protein).forEach(p => badges.push(`<span class="badge badge-protein">${esc(p)}</span>`));
   toArr(r.tags).forEach(t => {
@@ -844,20 +632,16 @@ function renderRecipeDetail(r) {
   });
   if (r.category) badges.push(`<span class="badge badge-cat">${esc(r.category)}</span>`);
   if (badges.length) html += `<div class="modal-badges">${badges.join('')}</div>`;
-
   const meta = [];
   if (r.source) meta.push(`Source: <span>${esc(r.source.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase()))}</span>`);
   if (r.yield) meta.push(`Yield: <span>${esc(r.yield)}</span>`);
   if (meta.length) html += `<div class="modal-meta">${meta.join(' · ')}</div>`;
-
-  // ── Pax Scaler ──
   const baseYield = parseModalYield(r.yield);
   html += `<div class="modal-scale">
     <label>Scale to pax:</label>
     <input type="number" id="modalScaleInput" min="1" value="${baseYield}" oninput="rescaleModal(this.value)" />
     <span class="modal-scale-factor" id="modalScaleFactor"></span>
   </div>`;
-
   const ings = toArr(r.ingredients).filter(i => i && i.item);
   if (ings.length) {
     html += `<div class="modal-section">Ingredients</div>`;
@@ -870,79 +654,57 @@ function renderRecipeDetail(r) {
     }
     html += `</div>`;
   }
-
   const steps = toArr(r.instructions);
   if (steps.length) {
     html += `<div class="modal-section">Method</div>`;
     html += `<ol class="modal-steps">`;
-    for (const step of steps) {
-      html += `<li>${esc(step)}</li>`;
-    }
+    for (const step of steps) html += `<li>${esc(step)}</li>`;
     html += `</ol>`;
   }
-
+  html += `<div style="margin:16px 0"><button type="button" class="btn-secondary" onclick="removeCurrentBookRecipe()">Remove from this book</button></div>`;
   html += `<div class="modal-copy-bar">`;
-  html += `<button class="modal-copy-btn" onclick="copyRecipeText('${esc(r.id)}')">Copy as text</button>`;
-  html += `<button class="modal-copy-btn" onclick="copyRecipeName(this, '${esc(r.name).replace(/'/g,"\\'")}')">Copy name</button>`;
+  html += `<button class="modal-copy-btn" onclick="copyBookRecipeText('${esc(r.id)}')">Copy as text</button>`;
+  html += `<button class="modal-copy-btn" onclick="copyRecipeNameBtn(this, '${esc(r.name).replace(/'/g,"\\'")}')">Copy name</button>`;
   html += `<button type="button" class="modal-copy-btn" data-kuschi-wake aria-pressed="false">Keep screen on</button>`;
   html += `</div>`;
-
   return html;
 }
 
-function copyRecipeName(btn, name) {
+function removeCurrentBookRecipe() {
+  if (!currentRecipe) return;
+  if (!confirm('Remove this recipe from this kitchen book?')) return;
+  KuschiUserRecipes.removeBookRecipe(CURRENT_BOOK_ID, currentRecipe.id);
+  closeModal();
+  loadRecipes();
+}
+
+function copyRecipeNameBtn(btn, name) {
   navigator.clipboard.writeText(name).then(() => {
     btn.textContent = 'Copied!';
     setTimeout(() => btn.textContent = 'Copy name', 1500);
   });
 }
 
-async function copyRecipeText(id) {
-  if (window.KuschiUserRecipes && id && String(id).startsWith('user-')) {
-    const r = KuschiUserRecipes.getKitchenById(id);
-    if (!r) return;
-    const d = KuschiUserRecipes.kitchenToDetail(r);
-    let text = d.name + '\n';
-    if (d.cuisine) text += d.cuisine + '\n';
-    text += '\nIngredients:\n';
-    for (const i of toArr(d.ingredients)) {
-      if (!i.item) continue;
-      const qty = [i.qty||'', i.unit||''].filter(Boolean).join(' ');
-      text += '- ' + (qty ? qty + ' ' : '') + i.item + (i.prep ? ', ' + i.prep : '') + '\n';
-    }
-    text += '\nMethod:\n';
-    toArr(d.instructions).forEach((s, i) => { text += (i+1) + '. ' + s + '\n'; });
-    navigator.clipboard.writeText(text).then(() => {
-      const btn = document.querySelector('.modal-copy-btn');
-      if (btn) { btn.textContent = 'Copied!'; setTimeout(() => btn.textContent = 'Copy as text', 1500); }
-    });
-    return;
-  }
-  const info = recipeIndex[id];
-  if (!info) return;
-  const detail = detailCache[info.letter];
-  if (!detail) return;
-  const r = detail.find(x => x.id === id);
+function copyBookRecipeText(id) {
+  const r = KuschiUserRecipes.getBookRecipeById(CURRENT_BOOK_ID, id);
   if (!r) return;
-
-  let text = r.name + '\n';
-  if (r.cuisine) text += r.cuisine + '\n';
+  const d = KuschiUserRecipes.kitchenToDetail(r);
+  let text = d.name + '\n';
+  if (d.cuisine) text += d.cuisine + '\n';
   text += '\nIngredients:\n';
-  for (const i of toArr(r.ingredients)) {
+  for (const i of toArr(d.ingredients)) {
     if (!i.item) continue;
     const qty = [i.qty||'', i.unit||''].filter(Boolean).join(' ');
-    text += `- ${qty ? qty + ' ' : ''}${i.item}${i.prep ? ', ' + i.prep : ''}\n`;
+    text += '- ' + (qty ? qty + ' ' : '') + i.item + (i.prep ? ', ' + i.prep : '') + '\n';
   }
   text += '\nMethod:\n';
-  toArr(r.instructions).forEach((s, i) => { text += `${i+1}. ${s}\n`; });
-
+  toArr(d.instructions).forEach((s, i) => { text += (i+1) + '. ' + s + '\n'; });
   navigator.clipboard.writeText(text).then(() => {
-    const btn = document.querySelector('.modal-copy-btn');
-    if (btn) { btn.textContent = 'Copied!'; setTimeout(() => btn.textContent = 'Copy as text', 1500); }
+    const bar = document.querySelector('.modal-copy-bar .modal-copy-btn');
+    if (bar) { bar.textContent = 'Copied!'; setTimeout(() => bar.textContent = 'Copy as text', 1500); }
   });
 }
 
-// ── Pax Scaler ────────────────────────────────────────
 function parseModalYield(y) {
   const m = String(y || '').match(/\d+/);
   return m ? parseInt(m[0]) : 4;
@@ -961,10 +723,8 @@ function rescaleModal(val) {
   if (!pax || pax < 1) return;
   const base = parseModalYield(currentRecipe.yield);
   const factor = pax / base;
-
   const factorEl = document.getElementById('modalScaleFactor');
   if (factorEl) factorEl.textContent = factor !== 1 ? `× ${factor.toFixed(2)}` : '';
-
   const grid = document.getElementById('modalIngGrid');
   if (!grid) return;
   grid.innerHTML = '';
@@ -977,12 +737,10 @@ function rescaleModal(val) {
   }
 }
 
-
 function closeAddRecipeModal() {
   document.getElementById('addRecipeOverlay').classList.remove('open');
   if (!document.getElementById('modalOverlay').classList.contains('open') &&
-      !document.getElementById('pageQrOverlay').classList.contains('open') &&
-      !(document.getElementById('addKitchenBookOverlay') && document.getElementById('addKitchenBookOverlay').classList.contains('open'))) {
+      !document.getElementById('pageQrOverlay').classList.contains('open')) {
     document.body.style.overflow = '';
   }
 }
@@ -1038,9 +796,7 @@ function showKitchenGeminiKeyEditor() {
   if (section) section.hidden = false;
   if (strip) strip.hidden = true;
   const input = document.getElementById('arGeminiKey');
-  if (input) {
-    input.focus();
-  }
+  if (input) input.focus();
 }
 
 function removeKitchenGeminiKey() {
@@ -1061,7 +817,7 @@ function saveKitchenGeminiKey() {
   const k = document.getElementById('arGeminiKey').value.trim();
   if (window.KuschiRecipeGemini) KuschiRecipeGemini.saveApiKey(k);
   updateKitchenGeminiKeyUi();
-  alert(k ? 'API key saved in this browser only (shared with Riviera page).' : 'Stored API key cleared.');
+  alert(k ? 'API key saved in this browser only (shared with main library pages).' : 'Stored API key cleared.');
 }
 
 function setKitchenIngredientRows(ingredients) {
@@ -1127,10 +883,8 @@ async function formatKitchenRecipeWithGemini() {
     'Split ingredient amounts into qty and unit when possible. ' +
     'Infer protein tags (lowercase: chicken, beef, fish, pork, lamb, dairy, eggs, etc.) and dietary tags when reasonable. ' +
     'Leave unknown optional fields empty or use empty arrays.';
-
   btn.disabled = true;
   statusEl.textContent = 'Formatting…';
-
   try {
     let parsed;
     const schema = KuschiRecipeGemini.SCHEMA_KITCHEN;
@@ -1143,9 +897,7 @@ async function formatKitchenRecipeWithGemini() {
         parsed = await KuschiRecipeGemini.generateStructured(apiKey, systemText, userText, schema);
       }
     } else if (pageUrl) {
-      if (!/^https?:\/\//i.test(pageUrl)) {
-        throw new Error('URL must start with http:// or https://');
-      }
+      if (!/^https?:\/\//i.test(pageUrl)) throw new Error('URL must start with http:// or https://');
       if (!window.KuschiRecipeImport) throw new Error('recipe-import-helpers.js failed to load.');
       const proxy = KuschiRecipeGemini.loadProxyUrl();
       const plain = await KuschiRecipeImport.fetchUrlThenPlainText(pageUrl, proxy);
@@ -1183,11 +935,9 @@ function openAddRecipeModal() {
   if (rf) rf.value = '';
   if (ru) ru.value = '';
   const st = document.getElementById('arFormatStatus');
-  if (st) {
-    st.textContent = '';
-    st.classList.remove('error');
-  }
+  if (st) { st.textContent = ''; st.classList.remove('error'); }
 }
+
 function addKitchenIngRow() {
   const wrap = document.getElementById('arIngRows');
   const row = document.createElement('div');
@@ -1195,7 +945,8 @@ function addKitchenIngRow() {
   row.innerHTML = '<input type="text" placeholder="Qty" class="ar-qty" /><input type="text" placeholder="Unit" class="ar-unit" /><input type="text" placeholder="Ingredient" class="ar-item" /><input type="text" placeholder="Prep" class="ar-prep" /><button type="button" class="btn-secondary" onclick="this.parentElement.remove()">✕</button>';
   wrap.appendChild(row);
 }
-function submitKitchenRecipe() {
+
+function submitBookRecipe() {
   const name = document.getElementById('arName').value.trim();
   if (!name) { alert('Please enter a recipe name'); return; }
   const ingredients = [];
@@ -1212,7 +963,7 @@ function submitKitchenRecipe() {
   const instructions = document.getElementById('arMethod').value.split('\n').map(s => s.trim()).filter(Boolean);
   const protein = document.getElementById('arProtein').value.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
   const tags = document.getElementById('arTags').value.split(',').map(s => s.trim()).filter(Boolean);
-  KuschiUserRecipes.addKitchenRecipe({
+  KuschiUserRecipes.addBookRecipe(CURRENT_BOOK_ID, {
     name,
     yield: document.getElementById('arYield').value.trim() || null,
     cuisine: document.getElementById('arCuisine').value.trim() || null,
@@ -1223,59 +974,14 @@ function submitKitchenRecipe() {
     instructions
   });
   closeAddRecipeModal();
-  location.reload();
-}
-function exportKitchenBackup() {
-  const t = KuschiUserRecipes.exportKitchen();
-  navigator.clipboard.writeText(t).then(() => alert('Kitchen user recipes JSON copied to clipboard'));
+  loadRecipes();
 }
 
-
-function refreshCustomBookNav() {
-  const wrap = document.getElementById('heroCustomBookLinks');
-  if (!wrap || !window.KuschiUserRecipes || !KuschiUserRecipes.listCustomBooks) return;
-  const books = KuschiUserRecipes.listCustomBooks();
-  const parts = books.map(b =>
-    '<a href="kitchen-book.html?b=' + encodeURIComponent(b.id) + '" class="hero-nav-link">' + esc(b.name) +
-    ' <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></a>'
-  );
-  parts.push('<button type="button" class="hero-nav-link" onclick="openAddKitchenBookModal()">+ Kitchen book</button>');
-  wrap.innerHTML = parts.join('');
+function exportBookBackup() {
+  const t = KuschiUserRecipes.exportBookRecipes(CURRENT_BOOK_ID);
+  navigator.clipboard.writeText(t).then(() => alert('This book’s recipes JSON copied to clipboard'));
 }
 
-function openAddKitchenBookModal() {
-  const o = document.getElementById('addKitchenBookOverlay');
-  const inp = document.getElementById('newKitchenBookName');
-  if (inp) inp.value = '';
-  if (o) {
-    o.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-}
-
-function closeAddKitchenBookModal() {
-  const o = document.getElementById('addKitchenBookOverlay');
-  if (o) o.classList.remove('open');
-  if (!document.getElementById('modalOverlay').classList.contains('open') &&
-      !document.getElementById('pageQrOverlay').classList.contains('open') &&
-      !document.getElementById('addRecipeOverlay').classList.contains('open')) {
-    document.body.style.overflow = '';
-  }
-}
-
-function submitNewKitchenBook() {
-  const inp = document.getElementById('newKitchenBookName');
-  const name = inp && inp.value.trim();
-  if (!name) {
-    alert('Please enter a name');
-    return;
-  }
-  if (!window.KuschiUserRecipes || !KuschiUserRecipes.createCustomBook) return;
-  const b = KuschiUserRecipes.createCustomBook(name);
-  window.location.href = 'kitchen-book.html?b=' + encodeURIComponent(b.id);
-}
-
-// ── Init ──────────────────────────────────────────────
 function openPageQrModal() {
   const overlay = document.getElementById('pageQrOverlay');
   const wrap = document.getElementById('pageQrCanvasWrap');
@@ -1291,17 +997,9 @@ function openPageQrModal() {
     return;
   }
   try {
-    new QRCode(wrap, {
-      text: url,
-      width: 220,
-      height: 220,
-      colorDark: '#c9a96e',
-      colorLight: '#1a1a1f',
-      correctLevel: QRCode.CorrectLevel.M,
-    });
+    new QRCode(wrap, { text: url, width: 220, height: 220, colorDark: '#c9a96e', colorLight: '#1a1a1f', correctLevel: QRCode.CorrectLevel.M });
   } catch (err) {
-    wrap.innerHTML =
-      '<span style="color:#e8a0a0;font-size:13px">' + (err && err.message ? err.message : String(err)) + '</span>';
+    wrap.innerHTML = '<span style="color:#e8a0a0;font-size:13px">' + (err && err.message ? err.message : String(err)) + '</span>';
   }
 }
 
@@ -1309,32 +1007,44 @@ function closePageQrModal() {
   const overlay = document.getElementById('pageQrOverlay');
   if (overlay) overlay.classList.remove('open');
   if (!document.getElementById('modalOverlay').classList.contains('open') &&
-      !(document.getElementById('addKitchenBookOverlay') && document.getElementById('addKitchenBookOverlay').classList.contains('open'))) {
+      !document.getElementById('addRecipeOverlay').classList.contains('open')) {
     document.body.style.overflow = '';
   }
 }
 
-(async () => {
-  try {
-    allRecipes = await loadData();
-    if (window.KuschiUserRecipes) {
-      const userRows = KuschiUserRecipes.loadKitchen().map(KuschiUserRecipes.toIndexRow);
-      allRecipes = [...userRows, ...allRecipes];
-    }
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('footer').style.display = 'block';
-    document.getElementById('totalCount').textContent = allRecipes.length.toLocaleString();
-    buildFilters();
-    buildRecipeIndex();
-    filtered = [...allRecipes];
-    applyFilters();
-  } catch(e) {
-    document.getElementById('loading').innerHTML =
-      `<div class="loading-text" style="color:var(--accent)">Failed to load recipes: ${e.message}</div>`;
-  } finally {
-    refreshCustomBookNav();
+function deleteThisKitchenBook() {
+  if (!confirm('Delete this kitchen book and all its recipes on this device? This cannot be undone except from a JSON backup.')) return;
+  KuschiUserRecipes.deleteCustomBook(CURRENT_BOOK_ID);
+  window.location.href = 'index.html';
+}
+
+const searchWrap = document.getElementById('searchWrap');
+if (searchWrap) {
+  const observer = new IntersectionObserver(
+    ([e]) => searchWrap.classList.toggle('stuck', !e.isIntersecting),
+    { threshold: [1], rootMargin: '-1px 0px 0px 0px' }
+  );
+  observer.observe(searchWrap);
+}
+
+(function bootBook() {
+  const invalid = document.getElementById('stateInvalid');
+  const main = document.getElementById('stateMain');
+  if (!CURRENT_BOOK_ID) {
+    invalid.style.display = 'block';
+    document.getElementById('invalidMsg').textContent = 'No kitchen book selected. Open one from the main library or create a new book.';
+    return;
   }
+  if (!window.KuschiUserRecipes || !KuschiUserRecipes.getCustomBook(CURRENT_BOOK_ID)) {
+    invalid.style.display = 'block';
+    document.getElementById('invalidMsg').textContent = 'Unknown or removed kitchen book. Return to the main library to create one.';
+    return;
+  }
+  main.style.display = 'block';
+  document.getElementById('footer').style.display = 'block';
+  loadRecipes();
 })();
 </script>
+
 </body>
 </html>
