@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Kuschi Kitchen Library</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -210,7 +210,10 @@
   }
   .copy-btn {
     flex-shrink: 0;
-    width: 32px; height: 32px;
+    min-width: 44px;
+    min-height: 44px;
+    width: 44px;
+    height: 44px;
     display: flex; align-items: center; justify-content: center;
     background: var(--surface);
     border: 1px solid var(--border);
@@ -447,6 +450,9 @@
 
 <div class="footer" id="footer" style="display:none">
   <div class="footer-text">Kuschi Kitchen Library v3.0 · <a href="riviera.html">Riviera House</a> · <a href="https://github.com/KuschiKuschbert/recipelibrary" target="_blank">GitHub</a></div>
+  <div class="footer-wake">
+    <button type="button" class="modal-copy-btn" data-kuschi-wake aria-pressed="false">Keep screen on</button>
+  </div>
 </div>
 
 <div class="modal-overlay" id="pageQrOverlay" onclick="if(event.target===this)closePageQrModal()">
@@ -464,6 +470,7 @@
 <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js" crossorigin="anonymous"></script>
 <script src="assets/recipe-import-helpers.js"></script>
 <script src="assets/qrcodejs-1.0.0.min.js"></script>
+<script src="assets/screen-wake.js"></script>
 <script>
 const PAGE_SIZE = 60;
 let allRecipes = [];
@@ -774,6 +781,7 @@ async function openRecipe(id) {
       currentRecipe = KuschiUserRecipes.kitchenToDetail(full);
       modal.innerHTML = renderRecipeDetail(currentRecipe);
       modal.scrollTop = 0;
+      if (window.KuschiScreenWake) KuschiScreenWake.sync();
       return;
     }
   }
@@ -792,6 +800,7 @@ async function openRecipe(id) {
     currentRecipe = recipe;
     modal.innerHTML = renderRecipeDetail(recipe);
     modal.scrollTop = 0;
+    if (window.KuschiScreenWake) KuschiScreenWake.sync();
   } catch(e) {
     modal.innerHTML = `<button class="modal-close" onclick="closeModal()">✕</button>
       <div class="modal-loading" style="color:var(--accent)">Could not load recipe: ${esc(e.message)}</div>`;
@@ -861,6 +870,7 @@ function renderRecipeDetail(r) {
   html += `<div class="modal-copy-bar">`;
   html += `<button class="modal-copy-btn" onclick="copyRecipeText('${esc(r.id)}')">Copy as text</button>`;
   html += `<button class="modal-copy-btn" onclick="copyRecipeName(this, '${esc(r.name).replace(/'/g,"\\'")}')">Copy name</button>`;
+  html += `<button type="button" class="modal-copy-btn" data-kuschi-wake aria-pressed="false">Keep screen on</button>`;
   html += `</div>`;
 
   return html;

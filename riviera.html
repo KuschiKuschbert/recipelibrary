@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Riviera House — Prep Chef Recipes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -606,6 +606,9 @@
 
 <div class="footer">
   <div class="footer-text">Riviera House prep set · <a href="index.html">Kitchen Library</a> · Personal static site (GitHub Pages)</div>
+  <div class="footer-wake">
+    <button type="button" class="modal-copy-btn" data-kuschi-wake aria-pressed="false">Keep screen on</button>
+  </div>
   <div class="footer-riviera-admin" id="rivieraAdminChrome">
     <button type="button" class="btn-text riv-admin-btn" id="rivieraAdminOpenBtn" onclick="openRivieraAdminModal()">Admin</button>
     <span id="rivieraAdminUnlockedStrip" class="riv-admin-unlocked" style="display:none">
@@ -640,6 +643,7 @@
 <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js" crossorigin="anonymous"></script>
 <script src="assets/recipe-import-helpers.js"></script>
 <script src="assets/qrcodejs-1.0.0.min.js"></script>
+<script src="assets/screen-wake.js"></script>
 <script>
 const BUILTIN_RECIPES = [
   {
@@ -2180,9 +2184,13 @@ function openRecipe(id) {
     ${note}
     ${label}
     ${adminActions}
+    <div class="modal-copy-bar">
+      <button type="button" class="modal-copy-btn" data-kuschi-wake aria-pressed="false">Keep screen on</button>
+    </div>
   `;
 
   modal.scrollTop = 0;
+  if (window.KuschiScreenWake) KuschiScreenWake.sync();
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
