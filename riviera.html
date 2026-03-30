@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Riviera House — Prep Chef Recipes</title>
+<title>Riviera — Prep Chef Recipes</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23c9a96e'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -349,9 +349,6 @@
   color: var(--gold-light);
 }
 #addRivieraOverlay .modal { max-width: 600px; }
-#orderListOverlay .modal.order-list-modal {
-  max-width: min(920px, 100vw - 32px);
-}
 .form-row textarea { min-height: 80px; }
 .ing-row-r {
   display: grid;
@@ -361,69 +358,6 @@
   align-items: center;
 }
 .ing-row-r input { padding: 8px; font-size: 13px; }
-.order-zone-block { margin-bottom: 20px; }
-.order-zone-head {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 10px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--border);
-}
-.order-line-row {
-  display: grid;
-  grid-template-columns: 22px minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) 120px 32px;
-  gap: 8px;
-  align-items: center;
-  font-size: 13px;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-.order-line-row.order-line-muted { opacity: 0.45; }
-.order-line-row input[type='text'],
-.order-line-row select {
-  width: 100%;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  color: var(--text);
-  border-radius: 8px;
-  padding: 6px 8px;
-  font-size: 12px;
-  font-family: inherit;
-}
-.order-line-row input[type='text']:focus,
-.order-line-row select:focus {
-  outline: none;
-  border-color: var(--gold);
-}
-.order-line-name { color: var(--text); font-weight: 500; }
-.order-line-hint { color: var(--text3); font-size: 12px; line-height: 1.35; }
-.order-add-hint { font-size: 12px; color: var(--text3); margin-bottom: 12px; line-height: 1.5; }
-.order-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-@media (max-width: 860px) {
-  .order-line-row {
-    grid-template-columns: 22px 1fr 1fr;
-    grid-template-rows: auto auto;
-  }
-  .order-line-row .order-line-name { grid-column: 2 / -1; }
-  .order-line-row .order-line-hint { grid-column: 2 / -1; }
-  .order-line-row .ord-inc { grid-row: 3; grid-column: 1; }
-  .order-line-row .ord-order-qty { grid-row: 3; grid-column: 2; }
-  .order-line-row .ord-zone { grid-row: 3; grid-column: 3; }
-  .order-line-row .ord-remove { grid-row: 1; grid-column: 3; justify-self: end; }
-  .order-line-sub {
-    grid-template-columns: 22px 1fr 1fr;
-    grid-template-rows: auto auto auto;
-    padding-left: 8px;
-  }
-  .order-line-sub .order-sub-label:first-of-type { grid-row: 1; grid-column: 1; }
-  .order-line-sub .order-sub-label:nth-of-type(2) { grid-row: 1; grid-column: 2; }
-  .order-line-sub .order-line-hint { grid-column: 2 / -1; grid-row: 2; }
-  .order-line-sub .ord-extra-qty { grid-row: 3; grid-column: 2; }
-  .order-line-sub .ord-remove-extra { grid-row: 3; grid-column: 3; justify-self: end; }
-}
 @media (max-width: 680px) {
   .ing-row-r { grid-template-columns: 1fr 1fr; }
 }
@@ -446,18 +380,6 @@
 .riv-admin-btn:hover { color: var(--gold); }
 .riv-admin-unlocked .riv-admin-btn { margin: 0 4px; }
 
-.order-line-block { margin-bottom: 0; }
-.order-line-sub {
-  display: grid;
-  grid-template-columns: 22px minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) 120px 32px;
-  gap: 8px;
-  align-items: center;
-  font-size: 12px;
-  padding: 4px 0 8px 28px;
-  color: var(--text3);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-.order-sub-label { color: var(--text3); }
 .modal-admin-actions {
   margin-top: 24px;
   padding-top: 16px;
@@ -479,7 +401,7 @@
 </div>
 
 <div class="hero">
-  <div class="hero-label">Kuschi · Riviera House</div>
+  <div class="hero-label">Kuschi · Riviera</div>
   <h1 class="hero-title">The <em>Riviera</em> Kitchen</h1>
   <p class="hero-sub"><b id="totalCount">12</b> prep-chef recipes — batch production, service notes, plating guides.</p>
   <div class="hero-actions">
@@ -606,7 +528,7 @@
 </div>
 
 <div class="footer">
-  <div class="footer-text">Riviera House prep set · <a href="index.html">Kitchen Library</a> · Personal static site (GitHub Pages)</div>
+  <div class="footer-text">Riviera prep set · <a href="index.html">Kitchen Library</a> · Personal static site (GitHub Pages)</div>
   <div class="footer-riviera-admin" id="rivieraAdminChrome">
     <button type="button" class="btn-text riv-admin-btn" id="rivieraAdminOpenBtn" onclick="openRivieraAdminModal()">Admin</button>
     <span id="rivieraAdminUnlockedStrip" class="riv-admin-unlocked" style="display:none">
@@ -637,6 +559,7 @@
 </div>
 
 <script src="assets/user-recipes.js"></script>
+<script src="assets/order-list.js"></script>
 <script src="assets/recipe-gemini-format.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js" crossorigin="anonymous"></script>
 <script src="assets/recipe-import-helpers.js"></script>
@@ -1340,437 +1263,75 @@ function mergeRivieraRecipes() {
 }
 let RECIPES = mergeRivieraRecipes();
 
-const ZONE_ORDER = ['freezer', 'coldroom', 'drystore', 'other'];
-const ZONE_LABELS = { freezer: 'Freezer', coldroom: 'Cold room', drystore: 'Dry store', other: 'Other' };
-
-function escAttr(s) {
-  return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
-}
-
-const MERGED_LINE_KEYS_SEP = '|||';
-
-function pickDisplayZoneForMerged(zoneTally) {
-  if (!zoneTally || !zoneTally.length) return 'other';
-  const counts = {};
-  ZONE_ORDER.forEach((zz) => {
-    counts[zz] = 0;
+const rivieraOrderList =
+  window.KuschiOrderList &&
+  window.KuschiOrderList.create({
+    overlayId: 'orderListOverlay',
+    bodyId: 'orderListBody',
+    formIds: { name: 'ordNewName', zone: 'ordNewZone', qty: 'ordNewQty' },
+    getRecipes: function () {
+      RECIPES = mergeRivieraRecipes();
+      return RECIPES;
+    },
+    storage: {
+      loadOverrides: function () {
+        return KuschiUserRecipes.loadOrderOverrides();
+      },
+      saveOverrides: function (o) {
+        KuschiUserRecipes.saveOrderOverrides(o);
+      },
+      loadExtras: function () {
+        return KuschiUserRecipes.loadOrderExtras();
+      },
+      addOrderExtra: function (n, z, q) {
+        return KuschiUserRecipes.addOrderExtra(n, z, q);
+      },
+      updateOrderExtra: function (id, p) {
+        KuschiUserRecipes.updateOrderExtra(id, p);
+      },
+      removeOrderExtra: function (id) {
+        KuschiUserRecipes.removeOrderExtra(id);
+      },
+      resolveDefaultZone: function (item) {
+        return KuschiUserRecipes.resolveDefaultZone(item);
+      },
+      upsertMasterIngredient: function (n, z) {
+        return KuschiUserRecipes.upsertMasterIngredient(n, z);
+      },
+      exportBundle: function () {
+        return KuschiUserRecipes.exportOrderBundle();
+      },
+      exportMaster: function () {
+        return KuschiUserRecipes.exportMaster();
+      },
+    },
+    shouldReleaseBodyScroll: function () {
+      return (
+        !document.getElementById('modalOverlay').classList.contains('open') &&
+        !document.getElementById('addRivieraOverlay').classList.contains('open') &&
+        !document.getElementById('rivieraAdminOverlay').classList.contains('open') &&
+        !document.getElementById('pageQrOverlay').classList.contains('open')
+      );
+    },
   });
-  zoneTally.forEach((z) => {
-    const zz = ZONE_ORDER.indexOf(z) >= 0 ? z : 'other';
-    counts[zz]++;
-  });
-  let best = 'other';
-  let bestc = -1;
-  for (const zz of ZONE_ORDER) {
-    if (counts[zz] > bestc) {
-      bestc = counts[zz];
-      best = zz;
-    }
-  }
-  return best;
-}
-
-/** Recipe qty hint: prefix with zone name when merged lines span multiple zones. */
-function rebuildMergedOrderQtyDisplay(ex) {
-  const parts = ex._qtyParts || [];
-  const zones = new Set(parts.map((p) => p.zone));
-  const multi = zones.size > 1;
-  const bits = [];
-  const seen = new Set();
-  for (const p of parts) {
-    if (!p.text) continue;
-    const k = p.zone + '\0' + p.text;
-    if (seen.has(k)) continue;
-    seen.add(k);
-    bits.push(multi ? (ZONE_LABELS[p.zone] || p.zone) + ': ' + p.text : p.text);
-  }
-  ex.recipeQtyDisplay = bits.length ? bits.join(' · ') : '—';
-}
-
-/**
- * One row per canonical ingredient (across zones): same SKU was doubling when
- * recipes put it in different storage. Zone column = majority zone; changing
- * it updates all merged recipe lines. Hint shows per-zone recipe qty when split.
- */
-function mergeOrderListRecipeLines(recipeLines) {
-  const Kr = window.KuschiUserRecipes;
-  if (!Kr || typeof Kr.canonicalOrderMergeKey !== 'function') return recipeLines;
-  const map = new Map();
-  for (const line of recipeLines) {
-    const gkey = Kr.canonicalOrderMergeKey(line.item);
-    const z = ZONE_ORDER.indexOf(line.zone) >= 0 ? line.zone : 'other';
-    const qtyText =
-      line.recipeQtyDisplay && line.recipeQtyDisplay !== '—'
-        ? String(line.recipeQtyDisplay).trim()
-        : '';
-
-    if (!map.has(gkey)) {
-      const entry = {
-        kind: line.kind,
-        lineKey: line.lineKey,
-        item: line.item,
-        orderQty: String(line.orderQty || '').trim(),
-        included: line.included,
-        mergedLineKeys: [line.lineKey],
-        extraIds: [],
-        mergedZones: [z],
-        _zoneTally: [z],
-        _qtyParts: qtyText ? [{ zone: z, text: qtyText }] : [],
-      };
-      rebuildMergedOrderQtyDisplay(entry);
-      entry.zone = pickDisplayZoneForMerged(entry._zoneTally);
-      map.set(gkey, entry);
-    } else {
-      const ex = map.get(gkey);
-      ex.mergedLineKeys.push(line.lineKey);
-      if (ex.mergedZones.indexOf(z) < 0) ex.mergedZones.push(z);
-      ex._zoneTally.push(z);
-      if (String(line.item || '').length > String(ex.item || '').length) ex.item = line.item;
-      if (qtyText) {
-        const dup = ex._qtyParts.some((p) => p.zone === z && p.text === qtyText);
-        if (!dup) ex._qtyParts.push({ zone: z, text: qtyText });
-      }
-      rebuildMergedOrderQtyDisplay(ex);
-      const a = String(ex.orderQty || '').trim();
-      const b = String(line.orderQty || '').trim();
-      if (a && b && a !== b) ex.orderQty = a + '; ' + b;
-      else ex.orderQty = a || b;
-      ex.included = ex.included && line.included;
-      ex.zone = pickDisplayZoneForMerged(ex._zoneTally);
-    }
-  }
-  const out = Array.from(map.values());
-  out.forEach((ex) => {
-    delete ex._zoneTally;
-    delete ex._qtyParts;
-  });
-  return out;
-}
-
-function foldOrderExtrasIntoMergedRecipes(mergedRecipeLines, extras, Kr) {
-  const rows = mergedRecipeLines.map((r) =>
-    Object.assign({}, r, { extraIds: r.extraIds ? r.extraIds.slice() : [] })
-  );
-  const consumed = new Set();
-  (extras || []).forEach((ex) => {
-    if (!ex || !ex.id) return;
-    const canonEx = Kr.canonicalOrderMergeKey(ex.name);
-    const z = Kr.ZONE_IDS.indexOf(ex.zone) >= 0 ? ex.zone : 'other';
-    const hit = rows.find(
-      (row) =>
-        row.kind === 'recipe' &&
-        Kr.canonicalOrderMergeKey(row.item) === canonEx &&
-        row.mergedZones &&
-        row.mergedZones.indexOf(z) >= 0
-    );
-    if (!hit) return;
-    hit.extraIds.push(ex.id);
-    consumed.add(ex.id);
-    const mq = String(ex.orderQty || '').trim();
-    const manualBit = mq ? 'Manual: ' + mq : 'Manual line';
-    const cur = hit.recipeQtyDisplay || '';
-    if (cur && cur !== '—') {
-      if (cur.indexOf(manualBit) < 0) hit.recipeQtyDisplay = cur + ' · ' + manualBit;
-    } else {
-      hit.recipeQtyDisplay = manualBit;
-    }
-  });
-  const leftover = (extras || []).filter((ex) => ex && ex.id && !consumed.has(ex.id));
-  return { rows, leftoverExtras: leftover };
-}
-
-function buildOrderLinesFlat() {
-  const Kr = window.KuschiUserRecipes;
-  if (!Kr) return [];
-  const overrides = Kr.loadOrderOverrides();
-  const recipeOut = [];
-  RECIPES = mergeRivieraRecipes();
-  for (const r of RECIPES) {
-    const ings = r.ingredients || [];
-    ings.forEach((i, idx) => {
-      if (!i || !i.item) return;
-      const lineKey = r.id + '::' + idx;
-      const o = overrides[lineKey] || {};
-      const recipeQty = i.qty != null && String(i.qty).trim() !== '' ? String(i.qty).trim() : '';
-      const prep = i.prep ? ' — ' + i.prep : '';
-      const recipeQtyDisplay = (recipeQty + prep) || '—';
-      const defaultZone = Kr.resolveDefaultZone(i.item);
-      let zone = o.zone;
-      if (!zone || Kr.ZONE_IDS.indexOf(zone) < 0) zone = defaultZone;
-      let orderQty = o.orderQty;
-      if (orderQty == null || orderQty === '') orderQty = recipeQty;
-      const included = o.included !== false;
-      recipeOut.push({
-        kind: 'recipe',
-        lineKey,
-        item: i.item,
-        recipeQtyDisplay,
-        orderQty: String(orderQty),
-        zone,
-        included,
-      });
-    });
-  }
-  const mergedRecipes = mergeOrderListRecipeLines(recipeOut);
-  const fold = foldOrderExtrasIntoMergedRecipes(mergedRecipes, Kr.loadOrderExtras(), Kr);
-  const out = fold.rows;
-  fold.leftoverExtras.forEach((ex) => {
-    out.push({
-      kind: 'extra',
-      lineKey: 'extra::' + ex.id,
-      extraId: ex.id,
-      item: ex.name,
-      recipeQtyDisplay: '—',
-      orderQty: ex.orderQty || '',
-      zone: Kr.ZONE_IDS.indexOf(ex.zone) >= 0 ? ex.zone : 'other',
-      included: true,
-    });
-  });
-  return out;
-}
-
-function linesGroupedByZone(lines) {
-  const by = { freezer: [], coldroom: [], drystore: [], other: [] };
-  for (const line of lines) {
-    const z = ZONE_ORDER.indexOf(line.zone) >= 0 ? line.zone : 'other';
-    by[z].push(line);
-  }
-  for (const z of ZONE_ORDER) {
-    by[z].sort((a, b) => a.item.localeCompare(b.item, undefined, { sensitivity: 'base' }));
-  }
-  return by;
-}
-
-function setRecipeOverridesBatch(lineKeys, patch) {
-  const Kr = KuschiUserRecipes;
-  const all = Kr.loadOrderOverrides();
-  lineKeys.forEach(function (k) {
-    if (!k) return;
-    all[k] = Object.assign({}, all[k] || {}, patch);
-  });
-  Kr.saveOrderOverrides(all);
-}
-
-function setRecipeOverride(lineKey, patch) {
-  setRecipeOverridesBatch([lineKey], patch);
-}
-
-function zoneSelectHtml(selected, className, dataKind, mergedKeysAttr, extraId) {
-  const attrs =
-    'class="' + className + '" data-kind="' + dataKind + '"' +
-    (dataKind === 'recipe'
-      ? ' data-merged-keys="' + mergedKeysAttr + '"'
-      : ' data-extra-id="' + escAttr(extraId) + '"');
-  let h = '<select ' + attrs + '>';
-  for (const z of ZONE_ORDER) {
-    h += '<option value="' + z + '"' + (z === selected ? ' selected' : '') + '>' + esc(ZONE_LABELS[z]) + '</option>';
-  }
-  h += '</select>';
-  return h;
-}
-
-function renderOrderListBody() {
-  const body = document.getElementById('orderListBody');
-  if (!body || !window.KuschiUserRecipes) return;
-  const Kr = KuschiUserRecipes;
-  const extrasById = {};
-  Kr.loadOrderExtras().forEach((ex) => {
-    if (ex && ex.id) extrasById[ex.id] = ex;
-  });
-  const lines = buildOrderLinesFlat();
-  const grouped = linesGroupedByZone(lines);
-  let html = '';
-  for (const z of ZONE_ORDER) {
-    const rows = grouped[z];
-    if (!rows.length) continue;
-    html += '<div class="order-zone-block">';
-    html += '<div class="order-zone-head">' + esc(ZONE_LABELS[z]) + '</div>';
-    for (const line of rows) {
-      const muted = !line.included ? ' order-line-muted' : '';
-      const chk = line.included ? ' checked' : '';
-      if (line.kind === 'recipe') {
-        const keysEsc = (line.mergedLineKeys || [line.lineKey])
-          .map(escAttr)
-          .join(MERGED_LINE_KEYS_SEP);
-        const extraIds = line.extraIds || [];
-        const foldedAttr =
-          extraIds.length > 0
-            ? ' data-folded-extras="' + extraIds.map(escAttr).join(MERGED_LINE_KEYS_SEP) + '"'
-            : '';
-        html += '<div class="order-line-block"' + foldedAttr + '>';
-        html +=
-          '<div class="order-line-row' + muted + '" data-kind="recipe">' +
-          '<input type="checkbox" class="ord-inc"' + chk + ' data-merged-keys="' + keysEsc + '" title="Include in copy" />' +
-          '<div class="order-line-name">' + esc(line.item) + '</div>' +
-          '<div class="order-line-hint">Recipe: ' + esc(line.recipeQtyDisplay) + '</div>' +
-          '<input type="text" class="ord-order-qty" data-merged-keys="' + keysEsc + '" value="' + escAttr(line.orderQty) + '" placeholder="Order qty" />' +
-          zoneSelectHtml(line.zone, 'ord-zone', 'recipe', keysEsc, null) +
-          '<span class="ord-remove"></span>' +
-          '</div>';
-        extraIds.forEach((xid) => {
-          const ex = extrasById[xid];
-          if (!ex) return;
-          html +=
-            '<div class="order-line-sub">' +
-            '<span class="order-sub-label">↳</span>' +
-            '<span class="order-sub-label">Manual</span>' +
-            '<div class="order-line-hint">' + esc(ex.name) + '</div>' +
-            '<input type="text" class="ord-extra-qty" data-extra-id="' +
-            escAttr(xid) +
-            '" value="' +
-            escAttr(ex.orderQty || '') +
-            '" placeholder="Order qty" />' +
-            '<span></span>' +
-            '<button type="button" class="btn-secondary ord-remove-extra" data-extra-id="' +
-            escAttr(xid) +
-            '">✕</button>' +
-            '</div>';
-        });
-        html += '</div>';
-      } else {
-        html +=
-          '<div class="order-line-row" data-kind="extra">' +
-          '<span class="ord-inc"></span>' +
-          '<div class="order-line-name">' + esc(line.item) + '</div>' +
-          '<div class="order-line-hint">Manual line</div>' +
-          '<input type="text" class="ord-order-qty-extra" data-extra-id="' + escAttr(line.extraId) + '" value="' + escAttr(line.orderQty) + '" placeholder="Order qty" />' +
-          zoneSelectHtml(line.zone, 'ord-zone-extra', 'extra', '', line.extraId) +
-          '<button type="button" class="btn-secondary ord-remove" data-extra-id="' + escAttr(line.extraId) + '">✕</button>' +
-          '</div>';
-      }
-    }
-    html += '</div>';
-  }
-  if (!html) {
-    html = '<p style="font-size:14px;color:var(--text3)">No lines yet. Add recipes or use Add ingredient below.</p>';
-  }
-  body.innerHTML = html;
-
-  body.querySelectorAll('.ord-inc[data-merged-keys]').forEach((el) => {
-    el.addEventListener('change', () => {
-      const keys = el.getAttribute('data-merged-keys').split(MERGED_LINE_KEYS_SEP);
-      setRecipeOverridesBatch(keys, { included: el.checked });
-      renderOrderListBody();
-    });
-  });
-  body.querySelectorAll('.ord-order-qty[data-merged-keys]').forEach((el) => {
-    el.addEventListener('change', () => {
-      const keys = el.getAttribute('data-merged-keys').split(MERGED_LINE_KEYS_SEP);
-      setRecipeOverridesBatch(keys, { orderQty: el.value });
-    });
-  });
-  body.querySelectorAll('select.ord-zone[data-merged-keys]').forEach((el) => {
-    el.addEventListener('change', () => {
-      const keys = el.getAttribute('data-merged-keys').split(MERGED_LINE_KEYS_SEP);
-      setRecipeOverridesBatch(keys, { zone: el.value });
-      const block = el.closest('.order-line-block');
-      const folded = block && block.getAttribute('data-folded-extras');
-      if (folded && Kr) {
-        folded.split(MERGED_LINE_KEYS_SEP).forEach((xid) => {
-          if (xid) Kr.updateOrderExtra(xid, { zone: el.value });
-        });
-      }
-      renderOrderListBody();
-    });
-  });
-  body.querySelectorAll('.ord-extra-qty').forEach((el) => {
-    el.addEventListener('change', () => {
-      Kr.updateOrderExtra(el.getAttribute('data-extra-id'), { orderQty: el.value });
-    });
-  });
-  body.querySelectorAll('button.ord-remove-extra').forEach((el) => {
-    el.addEventListener('click', () => {
-      Kr.removeOrderExtra(el.getAttribute('data-extra-id'));
-      renderOrderListBody();
-    });
-  });
-  body.querySelectorAll('.ord-order-qty-extra').forEach((el) => {
-    el.addEventListener('change', () => {
-      KuschiUserRecipes.updateOrderExtra(el.getAttribute('data-extra-id'), { orderQty: el.value });
-    });
-  });
-  body.querySelectorAll('select.ord-zone-extra').forEach((el) => {
-    el.addEventListener('change', () => {
-      KuschiUserRecipes.updateOrderExtra(el.getAttribute('data-extra-id'), { zone: el.value });
-      renderOrderListBody();
-    });
-  });
-  body.querySelectorAll('button.ord-remove[data-extra-id]').forEach((el) => {
-    el.addEventListener('click', () => {
-      KuschiUserRecipes.removeOrderExtra(el.getAttribute('data-extra-id'));
-      renderOrderListBody();
-    });
-  });
-}
-
-function closeOrderListModal() {
-  document.getElementById('orderListOverlay').classList.remove('open');
-  if (!document.getElementById('modalOverlay').classList.contains('open') &&
-      !document.getElementById('addRivieraOverlay').classList.contains('open') &&
-      !document.getElementById('rivieraAdminOverlay').classList.contains('open') &&
-      !document.getElementById('pageQrOverlay').classList.contains('open')) {
-    document.body.style.overflow = '';
-  }
-}
 
 function openOrderListModal() {
-  RECIPES = mergeRivieraRecipes();
-  renderOrderListBody();
-  document.getElementById('orderListOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  if (rivieraOrderList) rivieraOrderList.open();
 }
-
+function closeOrderListModal() {
+  if (rivieraOrderList) rivieraOrderList.close();
+}
 function copyOrderListText() {
-  const lines = buildOrderLinesFlat().filter((l) => l.included);
-  const byZone = { freezer: [], coldroom: [], drystore: [], other: [] };
-  lines.forEach((l) => {
-    const z = ZONE_ORDER.indexOf(l.zone) >= 0 ? l.zone : 'other';
-    byZone[z].push(l);
-  });
-  let text = '';
-  for (const z of ZONE_ORDER) {
-    const arr = byZone[z];
-    if (!arr.length) continue;
-    arr.sort((a, b) => a.item.localeCompare(b.item, undefined, { sensitivity: 'base' }));
-    text += ZONE_LABELS[z].toUpperCase() + '\n';
-    arr.forEach((l) => {
-      const q = String(l.orderQty || '').trim() || '(set order qty)';
-      text += '- ' + l.item + ': ' + q;
-      if (l.kind === 'recipe' && l.recipeQtyDisplay && l.recipeQtyDisplay !== '—') {
-        text += ' (recipe: ' + l.recipeQtyDisplay + ')';
-      }
-      text += '\n';
-    });
-    text += '\n';
-  }
-  const out = text.trim() || '(nothing included — tick checkboxes or add lines)';
-  navigator.clipboard.writeText(out).then(() => alert('Order list copied'));
+  if (rivieraOrderList) rivieraOrderList.copyOrderListText();
 }
-
 function copyOrderBundleJson() {
-  if (!window.KuschiUserRecipes) return;
-  navigator.clipboard.writeText(KuschiUserRecipes.exportOrderBundle()).then(() => alert('Order bundle JSON copied'));
+  if (rivieraOrderList) rivieraOrderList.copyOrderBundleJson();
 }
-
 function copyMasterIngredientsJson() {
-  if (!window.KuschiUserRecipes) return;
-  navigator.clipboard.writeText(KuschiUserRecipes.exportMaster()).then(() => alert('Master ingredients JSON copied'));
+  if (rivieraOrderList) rivieraOrderList.copyMasterIngredientsJson();
 }
-
 function submitOrderListAdd() {
-  if (!window.KuschiUserRecipes) return;
-  const name = document.getElementById('ordNewName').value.trim();
-  if (!name) {
-    alert('Enter a name');
-    return;
-  }
-  const zone = document.getElementById('ordNewZone').value;
-  const qty = document.getElementById('ordNewQty').value.trim();
-  KuschiUserRecipes.upsertMasterIngredient(name, zone);
-  KuschiUserRecipes.addOrderExtra(name, zone, qty);
-  document.getElementById('ordNewName').value = '';
-  document.getElementById('ordNewQty').value = '';
-  renderOrderListBody();
+  if (rivieraOrderList) rivieraOrderList.submitOrderListAdd();
 }
 function closeAddRivieraModal() {
   document.getElementById('addRivieraOverlay').classList.remove('open');

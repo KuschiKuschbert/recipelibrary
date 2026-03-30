@@ -18,6 +18,18 @@
     return 'kuschi_book_' + String(bookId || '').trim() + '_recipes_v1';
   }
 
+  function bookOrderOverridesStorageKey(bookId) {
+    return 'kuschi_book_' + String(bookId || '').trim() + '_order_overrides_v1';
+  }
+
+  function bookOrderExtrasStorageKey(bookId) {
+    return 'kuschi_book_' + String(bookId || '').trim() + '_order_extras_v1';
+  }
+
+  function bookMasterStorageKey(bookId) {
+    return 'kuschi_book_' + String(bookId || '').trim() + '_master_v1';
+  }
+
   function slugifyBookId(name) {
     var s = String(name || '')
       .trim()
@@ -515,6 +527,9 @@
     if (next.length === books.length) return false;
     saveCustomBooksRegistry(next);
     localStorage.removeItem(bookRecipesStorageKey(id));
+    localStorage.removeItem(bookOrderOverridesStorageKey(id));
+    localStorage.removeItem(bookOrderExtrasStorageKey(id));
+    localStorage.removeItem(bookMasterStorageKey(id));
     return true;
   }
 
@@ -554,6 +569,120 @@
 
   function exportBookRecipes(bookId) {
     return JSON.stringify(loadBookRecipes(bookId), null, 2);
+  }
+
+  function loadBookMaster(bookId) {
+    var id = String(bookId || '').trim();
+    if (!id) return [];
+    return safeParse(localStorage.getItem(bookMasterStorageKey(id)) || '[]', []);
+  }
+
+  function saveBookMaster(bookId, arr) {
+    var id = String(bookId || '').trim();
+    if (!id) return;
+    localStorage.setItem(bookMasterStorageKey(id), JSON.stringify(arr || []));
+  }
+
+  function upsertBookMasterIngredient(bookId, name, defaultZone) {
+    var raw = String(name || '').trim();
+    if (!raw) return null;
+    var z = ZONE_IDS.indexOf(defaultZone) >= 0 ? defaultZone : 'other';
+    var display = titleCaseWords(raw);
+    var list = loadBookMaster(bookId);
+    var key = normalizeIngName(raw);
+    var idx = list.findIndex(function (x) {
+      return normalizeIngName(x.name) === key;
+    });
+    if (idx >= 0) {
+      list[idx].name = display;
+      list[idx].defaultZone = z;
+    } else {
+      list.push({ id: 'ing-' + Date.now().toString(36), name: display, defaultZone: z });
+      idx = list.length - 1;
+    }
+    saveBookMaster(bookId, list);
+    return list[idx];
+  }
+
+  function resolveBookDefaultZone(bookId, itemName) {
+    var key = normalizeIngName(itemName);
+    var found = loadBookMaster(bookId).find(function (x) {
+      return normalizeIngName(x.name) === key;
+    });
+    return found && found.defaultZone ? found.defaultZone : 'other';
+  }
+
+  function loadBookOrderOverrides(bookId) {
+    var id = String(bookId || '').trim();
+    if (!id) return {};
+    return safeParseObject(localStorage.getItem(bookOrderOverridesStorageKey(id)) || '{}', {});
+  }
+
+  function saveBookOrderOverrides(bookId, obj) {
+    var id = String(bookId || '').trim();
+    if (!id) return;
+    localStorage.setItem(bookOrderOverridesStorageKey(id), JSON.stringify(obj && typeof obj === 'object' ? obj : {}));
+  }
+
+  function loadBookOrderExtras(bookId) {
+    var id = String(bookId || '').trim();
+    if (!id) return [];
+    return safeParseExtraList(localStorage.getItem(bookOrderExtrasStorageKey(id)) || '[]');
+  }
+
+  function saveBookOrderExtras(bookId, arr) {
+    var id = String(bookId || '').trim();
+    if (!id) return;
+    localStorage.setItem(bookOrderExtrasStorageKey(id), JSON.stringify(Array.isArray(arr) ? arr : []));
+  }
+
+  function addBookOrderExtra(bookId, name, zone, orderQty) {
+    var list = loadBookOrderExtras(bookId);
+    var z = ZONE_IDS.indexOf(zone) >= 0 ? zone : 'other';
+    var row = {
+      id: 'extra-' + Date.now().toString(36),
+      name: titleCaseWords(String(name).trim()),
+      zone: z,
+      orderQty: String(orderQty || '').trim(),
+    };
+    list.push(row);
+    saveBookOrderExtras(bookId, list);
+    return row;
+  }
+
+  function updateBookOrderExtra(bookId, id, patch) {
+    var list = loadBookOrderExtras(bookId);
+    var idx = list.findIndex(function (x) {
+      return x.id === id;
+    });
+    if (idx < 0) return;
+    Object.assign(list[idx], patch);
+    saveBookOrderExtras(bookId, list);
+  }
+
+  function removeBookOrderExtra(bookId, extraId) {
+    saveBookOrderExtras(
+      bookId,
+      loadBookOrderExtras(bookId).filter(function (x) {
+        return x.id !== extraId;
+      })
+    );
+  }
+
+  function exportBookMaster(bookId) {
+    return JSON.stringify(loadBookMaster(bookId), null, 2);
+  }
+
+  function exportBookOrderBundle(bookId) {
+    return JSON.stringify(
+      {
+        masterIngredients: loadBookMaster(bookId),
+        orderOverrides: loadBookOrderOverrides(bookId),
+        orderExtras: loadBookOrderExtras(bookId),
+      },
+      null,
+      2
+    );
   }
 
   function getKitchenById(id) {
@@ -748,6 +877,22 @@
     removeBookRecipe: removeBookRecipe,
     exportBookRecipes: exportBookRecipes,
     bookRecipesStorageKey: bookRecipesStorageKey,
+    bookOrderOverridesStorageKey: bookOrderOverridesStorageKey,
+    bookOrderExtrasStorageKey: bookOrderExtrasStorageKey,
+    bookMasterStorageKey: bookMasterStorageKey,
+    loadBookMaster: loadBookMaster,
+    saveBookMaster: saveBookMaster,
+    upsertBookMasterIngredient: upsertBookMasterIngredient,
+    resolveBookDefaultZone: resolveBookDefaultZone,
+    loadBookOrderOverrides: loadBookOrderOverrides,
+    saveBookOrderOverrides: saveBookOrderOverrides,
+    loadBookOrderExtras: loadBookOrderExtras,
+    saveBookOrderExtras: saveBookOrderExtras,
+    addBookOrderExtra: addBookOrderExtra,
+    updateBookOrderExtra: updateBookOrderExtra,
+    removeBookOrderExtra: removeBookOrderExtra,
+    exportBookMaster: exportBookMaster,
+    exportBookOrderBundle: exportBookOrderBundle,
     addRivieraRecipe: addRivieraRecipe,
     exportKitchen: exportKitchen,
     exportRiviera: exportRiviera,

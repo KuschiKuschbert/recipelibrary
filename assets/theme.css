@@ -675,6 +675,145 @@ body {
   }
 }
 
+/* ── Order list modal (Riviera + kitchen books) ───────────────── */
+#orderListOverlay .modal.order-list-modal,
+#kbOrderListOverlay .modal.order-list-modal {
+  max-width: min(920px, 100vw - 32px);
+}
+.order-zone-block {
+  margin-bottom: 20px;
+}
+.order-zone-head {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.order-line-row {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) 120px 32px;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.order-line-row.order-line-muted {
+  opacity: 0.45;
+}
+.order-line-row input[type='text'],
+.order-line-row select {
+  width: 100%;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 12px;
+  font-family: inherit;
+}
+.order-line-row input[type='text']:focus,
+.order-line-row select:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.order-line-name {
+  color: var(--text);
+  font-weight: 500;
+}
+.order-line-hint {
+  color: var(--text3);
+  font-size: 12px;
+  line-height: 1.35;
+}
+.order-add-hint {
+  font-size: 12px;
+  color: var(--text3);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.order-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+@media (max-width: 860px) {
+  .order-line-row {
+    grid-template-columns: 22px 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+  .order-line-row .order-line-name {
+    grid-column: 2 / -1;
+  }
+  .order-line-row .order-line-hint {
+    grid-column: 2 / -1;
+  }
+  .order-line-row .ord-inc {
+    grid-row: 3;
+    grid-column: 1;
+  }
+  .order-line-row .ord-order-qty {
+    grid-row: 3;
+    grid-column: 2;
+  }
+  .order-line-row .ord-zone {
+    grid-row: 3;
+    grid-column: 3;
+  }
+  .order-line-row .ord-remove {
+    grid-row: 1;
+    grid-column: 3;
+    justify-self: end;
+  }
+  .order-line-sub {
+    grid-template-columns: 22px 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    padding-left: 8px;
+  }
+  .order-line-sub .order-sub-label:first-of-type {
+    grid-row: 1;
+    grid-column: 1;
+  }
+  .order-line-sub .order-sub-label:nth-of-type(2) {
+    grid-row: 1;
+    grid-column: 2;
+  }
+  .order-line-sub .order-line-hint {
+    grid-column: 2 / -1;
+    grid-row: 2;
+  }
+  .order-line-sub .ord-extra-qty {
+    grid-row: 3;
+    grid-column: 2;
+  }
+  .order-line-sub .ord-remove-extra {
+    grid-row: 3;
+    grid-column: 3;
+    justify-self: end;
+  }
+}
+.order-line-block {
+  margin-bottom: 0;
+}
+.order-line-sub {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) 120px 32px;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  padding: 4px 0 8px 28px;
+  color: var(--text3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.order-sub-label {
+  color: var(--text3);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .modal-overlay,
   .modal {

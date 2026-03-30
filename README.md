@@ -1,6 +1,6 @@
 # Kuschi Kitchen Library
 
-Personal recipe library hosted on **GitHub Pages**: searchable catalog, metric-oriented data, and a **Riviera House** prep-chef subset for batch and service workflows. Tuned for quick use on a kitchen tablet.
+Personal recipe library hosted on **GitHub Pages**: searchable catalog, metric-oriented data, and a **Riviera** prep-chef subset for batch and service workflows. Tuned for quick use on a kitchen tablet.
 
 ## What’s in the repo
 

@@ -348,6 +348,23 @@
   .hero-nav { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; align-items: center; }
   button.hero-nav-link { cursor: pointer; font: inherit; border: none; }
   .hero-nav-cluster button.hero-nav-link { min-width: 0; }
+  .footer-kb-admin {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 12px;
+  }
+  .riv-admin-btn {
+    background: none;
+    border: none;
+    color: var(--text3);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    text-decoration: underline;
+    padding: 4px 8px;
+  }
+  .riv-admin-btn:hover { color: var(--gold); }
+  .riv-admin-unlocked .riv-admin-btn { margin: 0 4px; }
   #addRecipeOverlay .modal { max-width: 560px; }
   .ing-row { display: grid; grid-template-columns: 72px 56px 1fr 1fr 36px; gap: 8px; margin-bottom: 8px; align-items: center; }
   .ing-row input { padding: 8px; font-size: 13px; }
@@ -376,6 +393,7 @@
       <button type="button" class="hero-nav-link" onclick="openAddRecipeModal()">+ Add recipe</button>
       <button type="button" class="hero-nav-link" onclick="openPageQrModal()" title="QR code to open this book on your phone">QR</button>
     </div>
+    <button type="button" class="hero-nav-link" onclick="openKitchenBookOrderListModal()">Order list (all ingredients)</button>
   </div>
 </div>
 
@@ -448,7 +466,32 @@
   </div>
 </div>
 
-
+<div class="modal-overlay" id="kbOrderListOverlay" onclick="if(event.target===this)closeKitchenBookOrderListModal()">
+  <div class="modal order-list-modal">
+    <button type="button" class="modal-close" onclick="closeKitchenBookOrderListModal()">✕</button>
+    <div class="modal-title" style="margin-bottom:12px">Order list by storage</div>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Grouped as Freezer, Cold room, Dry store, then Other. Same ingredient names merge into one row. Storage and order data for <strong>this book only</strong> — separate from Riviera and other kitchen books.</p>
+    <div id="kbOrderListBody"></div>
+    <div class="modal-section" style="margin-top:20px">Add ingredient</div>
+    <p class="order-add-hint">Saves to this book’s master ingredient list (default zone for matching names) and adds a line to this book’s order.</p>
+    <div class="form-row"><label for="kbOrdNewName">Name</label><input id="kbOrdNewName" type="text" placeholder="e.g. Sumac" autocomplete="off" /></div>
+    <div class="form-row"><label for="kbOrdNewZone">Storage</label>
+      <select id="kbOrdNewZone">
+        <option value="freezer">Freezer</option>
+        <option value="coldroom">Cold room</option>
+        <option value="drystore">Dry store</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <div class="form-row"><label for="kbOrdNewQty">Order quantity</label><input id="kbOrdNewQty" type="text" placeholder="e.g. 2 kg" autocomplete="off" /></div>
+    <button type="button" class="btn-secondary" onclick="submitKitchenBookOrderListAdd()">Add to master &amp; list</button>
+    <div class="order-actions">
+      <button type="button" class="btn-secondary" onclick="copyKitchenBookOrderListText()">Copy as text</button>
+      <button type="button" class="btn-secondary" onclick="copyKitchenBookOrderBundleJson()">Copy order data JSON</button>
+      <button type="button" class="btn-secondary" onclick="copyKitchenBookMasterIngredientsJson()">Copy master ingredients JSON</button>
+    </div>
+  </div>
+</div>
 
 <div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
   <div class="modal" id="modal"></div>
@@ -456,8 +499,24 @@
 
 <div class="footer" id="footer" style="display:none">
   <div class="footer-text">
-    <button type="button" class="btn-secondary" onclick="deleteThisKitchenBook()" style="margin-right:12px;font-size:12px">Delete this kitchen book…</button>
-    · <a href="riviera.html">Riviera House</a> · <a href="https://github.com/KuschiKuschbert/recipelibrary" target="_blank">GitHub</a>
+    <div class="footer-kb-admin" id="kbAdminChrome">
+      <button type="button" class="btn-text riv-admin-btn" id="kbAdminOpenBtn" onclick="openKitchenBookAdminModal()">Admin</button>
+      <span id="kbAdminUnlockedStrip" class="riv-admin-unlocked" style="display:none">
+        <button type="button" class="btn-text riv-admin-btn" onclick="kitchenBookAdminLock()">Lock</button>
+      </span>
+    </div>
+    <button type="button" class="btn-secondary" id="kbDeleteBookBtn" onclick="deleteThisKitchenBook()" style="display:none;margin-top:10px;font-size:12px">Delete this kitchen book…</button>
+    <div style="margin-top:10px">· <a href="riviera.html">Riviera</a> · <a href="https://github.com/KuschiKuschbert/recipelibrary" target="_blank">GitHub</a></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="kbAdminOverlay" onclick="if(event.target===this)closeKitchenBookAdminModal()">
+  <div class="modal" style="max-width:400px">
+    <button type="button" class="modal-close" onclick="closeKitchenBookAdminModal()">✕</button>
+    <div class="modal-title" style="margin-bottom:12px">Kitchen book admin</div>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:12px">Enter PIN to unlock delete and remove actions on this tab. Session clears when you close the tab.</p>
+    <div class="form-row"><label for="kbAdminPinInput">PIN</label><input id="kbAdminPinInput" type="password" inputmode="numeric" autocomplete="off" maxlength="12" /></div>
+    <button type="button" class="form-primary-btn" onclick="submitKitchenBookAdminPin()">Unlock</button>
   </div>
 </div>
 
@@ -473,6 +532,7 @@
 
 
 <script src="assets/user-recipes.js"></script>
+<script src="assets/order-list.js"></script>
 <script src="assets/recipe-gemini-format.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js" crossorigin="anonymous"></script>
 <script src="assets/recipe-import-helpers.js"></script>
@@ -481,6 +541,12 @@
 <script>
 const params = new URLSearchParams(window.location.search);
 const CURRENT_BOOK_ID = (params.get('b') || params.get('id') || '').trim();
+
+/** Same casual PIN as Riviera prep page (visible in source). */
+const KITCHEN_BOOK_ADMIN_PIN = '052610';
+const KITCHEN_BOOK_ADMIN_SESSION = 'kuschi_kitchen_book_admin_session';
+
+let kitchenBookOrderList = null;
 
 let allRecipes = [];
 let filtered = [];
@@ -497,6 +563,150 @@ function bookMeta() {
   return window.KuschiUserRecipes && KuschiUserRecipes.getCustomBook
     ? KuschiUserRecipes.getCustomBook(CURRENT_BOOK_ID)
     : null;
+}
+
+function isKitchenBookAdminUnlocked() {
+  try {
+    return sessionStorage.getItem(KITCHEN_BOOK_ADMIN_SESSION) === '1';
+  } catch (e) {
+    return false;
+  }
+}
+
+function setKitchenBookAdminSession(on) {
+  try {
+    if (on) sessionStorage.setItem(KITCHEN_BOOK_ADMIN_SESSION, '1');
+    else sessionStorage.removeItem(KITCHEN_BOOK_ADMIN_SESSION);
+  } catch (e) { /* ignore */ }
+  updateKitchenBookAdminChrome();
+}
+
+function updateKitchenBookAdminChrome() {
+  const strip = document.getElementById('kbAdminUnlockedStrip');
+  const openBtn = document.getElementById('kbAdminOpenBtn');
+  const delBtn = document.getElementById('kbDeleteBookBtn');
+  const unlocked = isKitchenBookAdminUnlocked();
+  if (strip) strip.style.display = unlocked ? 'inline' : 'none';
+  if (openBtn) openBtn.style.display = unlocked ? 'none' : 'inline';
+  if (delBtn) delBtn.style.display = unlocked ? 'inline-block' : 'none';
+}
+
+function openKitchenBookAdminModal() {
+  const o = document.getElementById('kbAdminOverlay');
+  const inp = document.getElementById('kbAdminPinInput');
+  if (inp) inp.value = '';
+  if (o) {
+    o.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if (inp) setTimeout(() => inp.focus(), 50);
+  }
+}
+
+function closeKitchenBookAdminModal() {
+  const o = document.getElementById('kbAdminOverlay');
+  if (o) o.classList.remove('open');
+  if (!document.getElementById('modalOverlay').classList.contains('open') &&
+      !document.getElementById('addRecipeOverlay').classList.contains('open') &&
+      !document.getElementById('pageQrOverlay').classList.contains('open') &&
+      !document.getElementById('kbOrderListOverlay').classList.contains('open')) {
+    document.body.style.overflow = '';
+  }
+}
+
+function submitKitchenBookAdminPin() {
+  const v = (document.getElementById('kbAdminPinInput') || {}).value;
+  if (String(v || '').trim() === KITCHEN_BOOK_ADMIN_PIN) {
+    setKitchenBookAdminSession(true);
+    closeKitchenBookAdminModal();
+  } else {
+    alert('Incorrect PIN.');
+  }
+}
+
+function kitchenBookAdminLock() {
+  setKitchenBookAdminSession(false);
+}
+
+function initKitchenBookOrderList() {
+  if (!window.KuschiOrderList || !window.KuschiUserRecipes || !CURRENT_BOOK_ID) return;
+  const bid = CURRENT_BOOK_ID;
+  kitchenBookOrderList = KuschiOrderList.create({
+    overlayId: 'kbOrderListOverlay',
+    bodyId: 'kbOrderListBody',
+    formIds: { name: 'kbOrdNewName', zone: 'kbOrdNewZone', qty: 'kbOrdNewQty' },
+    getRecipes: function () {
+      return KuschiUserRecipes.loadBookRecipes(bid).map(function (r) {
+        const copy = Object.assign({}, r);
+        copy.ingredients = (r.ingredients || []).map(function (i) {
+          if (!i) return i;
+          const q = i.qty != null ? String(i.qty).trim() : '';
+          const u = i.unit != null ? String(i.unit).trim() : '';
+          const combined = u ? (q ? q + ' ' + u : u) : q;
+          return Object.assign({}, i, { qty: combined });
+        });
+        return copy;
+      });
+    },
+    storage: {
+      loadOverrides: function () {
+        return KuschiUserRecipes.loadBookOrderOverrides(bid);
+      },
+      saveOverrides: function (o) {
+        KuschiUserRecipes.saveBookOrderOverrides(bid, o);
+      },
+      loadExtras: function () {
+        return KuschiUserRecipes.loadBookOrderExtras(bid);
+      },
+      addOrderExtra: function (n, z, q) {
+        return KuschiUserRecipes.addBookOrderExtra(bid, n, z, q);
+      },
+      updateOrderExtra: function (id, p) {
+        KuschiUserRecipes.updateBookOrderExtra(bid, id, p);
+      },
+      removeOrderExtra: function (id) {
+        KuschiUserRecipes.removeBookOrderExtra(bid, id);
+      },
+      resolveDefaultZone: function (item) {
+        return KuschiUserRecipes.resolveBookDefaultZone(bid, item);
+      },
+      upsertMasterIngredient: function (n, z) {
+        return KuschiUserRecipes.upsertBookMasterIngredient(bid, n, z);
+      },
+      exportBundle: function () {
+        return KuschiUserRecipes.exportBookOrderBundle(bid);
+      },
+      exportMaster: function () {
+        return KuschiUserRecipes.exportBookMaster(bid);
+      },
+    },
+    shouldReleaseBodyScroll: function () {
+      return (
+        !document.getElementById('modalOverlay').classList.contains('open') &&
+        !document.getElementById('addRecipeOverlay').classList.contains('open') &&
+        !document.getElementById('pageQrOverlay').classList.contains('open') &&
+        !document.getElementById('kbAdminOverlay').classList.contains('open')
+      );
+    },
+  });
+}
+
+function openKitchenBookOrderListModal() {
+  if (kitchenBookOrderList) kitchenBookOrderList.open();
+}
+function closeKitchenBookOrderListModal() {
+  if (kitchenBookOrderList) kitchenBookOrderList.close();
+}
+function copyKitchenBookOrderListText() {
+  if (kitchenBookOrderList) kitchenBookOrderList.copyOrderListText();
+}
+function copyKitchenBookOrderBundleJson() {
+  if (kitchenBookOrderList) kitchenBookOrderList.copyOrderBundleJson();
+}
+function copyKitchenBookMasterIngredientsJson() {
+  if (kitchenBookOrderList) kitchenBookOrderList.copyMasterIngredientsJson();
+}
+function submitKitchenBookOrderListAdd() {
+  if (kitchenBookOrderList) kitchenBookOrderList.submitOrderListAdd();
 }
 
 function loadRecipes() {
@@ -589,7 +799,11 @@ document.addEventListener('keydown', e => {
     document.getElementById('search').focus();
   }
   if (e.key === 'Escape') {
-    if (document.getElementById('addRecipeOverlay').classList.contains('open')) {
+    if (document.getElementById('kbAdminOverlay').classList.contains('open')) {
+      closeKitchenBookAdminModal();
+    } else if (document.getElementById('kbOrderListOverlay').classList.contains('open')) {
+      closeKitchenBookOrderListModal();
+    } else if (document.getElementById('addRecipeOverlay').classList.contains('open')) {
       closeAddRecipeModal();
     } else if (document.getElementById('pageQrOverlay').classList.contains('open')) {
       closePageQrModal();
@@ -617,7 +831,9 @@ function closeModal() {
   document.getElementById('modalOverlay').classList.remove('open');
   currentRecipe = null;
   if (!document.getElementById('pageQrOverlay').classList.contains('open') &&
-      !document.getElementById('addRecipeOverlay').classList.contains('open')) {
+      !document.getElementById('addRecipeOverlay').classList.contains('open') &&
+      !document.getElementById('kbOrderListOverlay').classList.contains('open') &&
+      !document.getElementById('kbAdminOverlay').classList.contains('open')) {
     document.body.style.overflow = '';
   }
 }
@@ -662,7 +878,9 @@ function renderBookRecipeDetail(r) {
     for (const step of steps) html += `<li>${esc(step)}</li>`;
     html += `</ol>`;
   }
-  html += `<div style="margin:16px 0"><button type="button" class="btn-secondary" onclick="removeCurrentBookRecipe()">Remove from this book</button></div>`;
+  if (isKitchenBookAdminUnlocked()) {
+    html += `<div style="margin:16px 0"><button type="button" class="btn-secondary" onclick="removeCurrentBookRecipe()">Remove from this book</button></div>`;
+  }
   html += `<div class="modal-copy-bar">`;
   html += `<button class="modal-copy-btn" onclick="copyBookRecipeText('${esc(r.id)}')">Copy as text</button>`;
   html += `<button class="modal-copy-btn" onclick="copyRecipeNameBtn(this, '${esc(r.name).replace(/'/g,"\\'")}')">Copy name</button>`;
@@ -673,6 +891,10 @@ function renderBookRecipeDetail(r) {
 
 function removeCurrentBookRecipe() {
   if (!currentRecipe) return;
+  if (!isKitchenBookAdminUnlocked()) {
+    alert('Unlock Admin in the footer first.');
+    return;
+  }
   if (!confirm('Remove this recipe from this kitchen book?')) return;
   KuschiUserRecipes.removeBookRecipe(CURRENT_BOOK_ID, currentRecipe.id);
   closeModal();
@@ -741,7 +963,9 @@ function rescaleModal(val) {
 function closeAddRecipeModal() {
   document.getElementById('addRecipeOverlay').classList.remove('open');
   if (!document.getElementById('modalOverlay').classList.contains('open') &&
-      !document.getElementById('pageQrOverlay').classList.contains('open')) {
+      !document.getElementById('pageQrOverlay').classList.contains('open') &&
+      !document.getElementById('kbOrderListOverlay').classList.contains('open') &&
+      !document.getElementById('kbAdminOverlay').classList.contains('open')) {
     document.body.style.overflow = '';
   }
 }
@@ -1008,12 +1232,18 @@ function closePageQrModal() {
   const overlay = document.getElementById('pageQrOverlay');
   if (overlay) overlay.classList.remove('open');
   if (!document.getElementById('modalOverlay').classList.contains('open') &&
-      !document.getElementById('addRecipeOverlay').classList.contains('open')) {
+      !document.getElementById('addRecipeOverlay').classList.contains('open') &&
+      !document.getElementById('kbOrderListOverlay').classList.contains('open') &&
+      !document.getElementById('kbAdminOverlay').classList.contains('open')) {
     document.body.style.overflow = '';
   }
 }
 
 function deleteThisKitchenBook() {
+  if (!isKitchenBookAdminUnlocked()) {
+    alert('Unlock Admin in the footer first.');
+    return;
+  }
   if (!confirm('Delete this kitchen book and all its recipes on this device? This cannot be undone except from a JSON backup.')) return;
   KuschiUserRecipes.deleteCustomBook(CURRENT_BOOK_ID);
   window.location.href = 'index.html';
@@ -1043,7 +1273,15 @@ if (searchWrap) {
   }
   main.style.display = 'block';
   document.getElementById('footer').style.display = 'block';
+  initKitchenBookOrderList();
+  updateKitchenBookAdminChrome();
   loadRecipes();
+  const pinEl = document.getElementById('kbAdminPinInput');
+  if (pinEl) {
+    pinEl.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') submitKitchenBookAdminPin();
+    });
+  }
 })();
 </script>
 
