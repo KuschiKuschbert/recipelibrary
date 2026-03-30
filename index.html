@@ -75,6 +75,65 @@
     box-shadow: 0 6px 20px rgba(201,169,110,0.15);
   }
 
+  /* Add recipe modal: manual vs paste-to-format tabs */
+  .ar-modal-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .ar-modal-tabs button {
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: inherit;
+    letter-spacing: 0.4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text3);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .ar-modal-tabs button:hover {
+    border-color: rgba(201, 169, 110, 0.45);
+    color: var(--text2);
+  }
+  .ar-modal-tabs button.active {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: var(--gold-dim);
+  }
+  .ar-format-help {
+    font-size: 12px;
+    color: var(--text3);
+    line-height: 1.55;
+    margin: 0 0 14px;
+  }
+  .ar-format-help a {
+    color: var(--gold);
+  }
+  .ar-format-status {
+    font-size: 12px;
+    margin: 12px 0 0;
+    min-height: 1.2em;
+    color: var(--text2);
+  }
+  .ar-format-status.error {
+    color: #e8a0a0;
+  }
+  .ar-format-key-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: flex-end;
+  }
+  .ar-format-key-row .form-row {
+    flex: 1;
+    min-width: 180px;
+    margin-bottom: 0;
+  }
+
   /* ── Recipe card (index) ─────────────────────────── */
   .card {
     background: var(--surface);
@@ -297,6 +356,11 @@
     <button type="button" class="modal-close" onclick="closeAddRecipeModal()">✕</button>
     <div class="modal-title" style="margin-bottom:16px">Add recipe</div>
     <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Saved on this device (browser). Export JSON from the button below to back up or commit.</p>
+    <div class="ar-modal-tabs" role="tablist" aria-label="Add recipe mode">
+      <button type="button" role="tab" class="active" id="arTabManual" aria-selected="true" onclick="setAddRecipeTab('manual')">Manual</button>
+      <button type="button" role="tab" id="arTabFormat" aria-selected="false" onclick="setAddRecipeTab('format')">Paste &amp; format</button>
+    </div>
+    <div id="arPanelManual" role="tabpanel" aria-labelledby="arTabManual">
     <div class="form-row"><label for="arName">Name</label><input id="arName" type="text" placeholder="Recipe name" required /></div>
     <div class="form-row"><label for="arYield">Yield</label><input id="arYield" type="text" placeholder="e.g. 4 servings" /></div>
     <div class="form-row"><label for="arCuisine">Cuisine</label><input id="arCuisine" type="text" placeholder="Optional" /></div>
@@ -310,6 +374,17 @@
     <div class="add-form-actions">
       <button type="button" class="primary" onclick="submitKitchenRecipe()">Save recipe</button>
       <button type="button" class="btn-secondary" onclick="exportKitchenBackup()">Copy JSON backup</button>
+    </div>
+    </div>
+    <div id="arPanelFormat" role="tabpanel" aria-labelledby="arTabFormat" hidden>
+      <p class="ar-format-help">Paste messy text (blog, screenshot OCR, notes). Uses <strong>Google Gemini</strong> free tier — create an API key in <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio</a>, restrict it to this site’s URL under “HTTP referrers”, then store it below (browser only; never committed). Sending text to Google applies their terms.</p>
+      <div class="ar-format-key-row" style="margin-bottom:14px">
+        <div class="form-row" style="flex:2;min-width:220px"><label for="arGeminiKey">Gemini API key</label><input id="arGeminiKey" type="password" autocomplete="off" placeholder="AIza…" /></div>
+        <button type="button" class="btn-secondary" onclick="saveKitchenGeminiKey()" style="margin-bottom:2px">Remember on device</button>
+      </div>
+      <div class="form-row"><label for="arPasteRaw">Recipe text</label><textarea id="arPasteRaw" placeholder="Paste ingredients and method here…" style="min-height:160px"></textarea></div>
+      <button type="button" class="btn-secondary" id="arFormatBtn" onclick="formatKitchenRecipeWithGemini()">Format into manual form</button>
+      <p class="ar-format-status" id="arFormatStatus"></p>
     </div>
   </div>
 </div>
@@ -812,10 +887,173 @@ function rescaleModal(val) {
 function closeAddRecipeModal() {
   document.getElementById('addRecipeOverlay').classList.remove('open');
 }
+
+const KITCHEN_GEMINI_KEY_STORAGE = 'kuschi_kitchen_gemini_key_v1';
+/** Free-tier model; change if Google renames it. */
+const KITCHEN_GEMINI_MODEL = 'gemini-2.0-flash';
+
+const KITCHEN_RECIPE_GEMINI_SCHEMA = {
+  type: 'OBJECT',
+  properties: {
+    name: { type: 'STRING', description: 'Recipe title' },
+    yield: { type: 'STRING', description: 'Servings or yield, e.g. 4 servings' },
+    cuisine: { type: 'STRING' },
+    category: { type: 'STRING' },
+    protein: { type: 'ARRAY', items: { type: 'STRING' }, description: 'Lowercase tags e.g. chicken, dairy' },
+    tags: { type: 'ARRAY', items: { type: 'STRING' }, description: 'Dietary tags' },
+    ingredients: {
+      type: 'ARRAY',
+      items: {
+        type: 'OBJECT',
+        properties: {
+          qty: { type: 'STRING' },
+          unit: { type: 'STRING', description: 'g, ml, L, etc.' },
+          item: { type: 'STRING' },
+          prep: { type: 'STRING', description: 'Prep note if any' },
+        },
+        required: ['item'],
+      },
+    },
+    instructions: { type: 'ARRAY', items: { type: 'STRING' }, description: 'One string per step, no leading numbers required' },
+  },
+  required: ['name', 'ingredients', 'instructions'],
+};
+
+function setAddRecipeTab(which) {
+  const manual = document.getElementById('arPanelManual');
+  const format = document.getElementById('arPanelFormat');
+  const tabM = document.getElementById('arTabManual');
+  const tabF = document.getElementById('arTabFormat');
+  const isManual = which === 'manual';
+  manual.hidden = !isManual;
+  format.hidden = isManual;
+  tabM.classList.toggle('active', isManual);
+  tabM.setAttribute('aria-selected', isManual);
+  tabF.classList.toggle('active', !isManual);
+  tabF.setAttribute('aria-selected', !isManual);
+}
+
+function saveKitchenGeminiKey() {
+  const k = document.getElementById('arGeminiKey').value.trim();
+  if (k) localStorage.setItem(KITCHEN_GEMINI_KEY_STORAGE, k);
+  else localStorage.removeItem(KITCHEN_GEMINI_KEY_STORAGE);
+  alert(k ? 'API key saved in this browser only.' : 'Stored API key cleared.');
+}
+
+function setKitchenIngredientRows(ingredients) {
+  const wrap = document.getElementById('arIngRows');
+  wrap.innerHTML = '';
+  const list = Array.isArray(ingredients) && ingredients.length ? ingredients : [{}];
+  list.forEach(ing => {
+    addKitchenIngRow();
+    const rows = wrap.querySelectorAll('.ing-row');
+    const row = rows[rows.length - 1];
+    const o = ing && typeof ing === 'object' ? ing : {};
+    row.querySelector('.ar-qty').value = o.qty != null ? String(o.qty).trim() : '';
+    row.querySelector('.ar-unit').value = o.unit != null ? String(o.unit).trim() : '';
+    row.querySelector('.ar-item').value = o.item != null ? String(o.item).trim() : '';
+    row.querySelector('.ar-prep').value = o.prep != null ? String(o.prep).trim() : '';
+  });
+}
+
+function applyKitchenRecipeJsonToForm(obj) {
+  if (!obj || typeof obj !== 'object') throw new Error('Invalid response');
+  document.getElementById('arName').value = obj.name != null ? String(obj.name).trim() : '';
+  document.getElementById('arYield').value = obj.yield != null ? String(obj.yield).trim() : '';
+  document.getElementById('arCuisine').value = obj.cuisine != null ? String(obj.cuisine).trim() : '';
+  document.getElementById('arCategory').value = obj.category != null ? String(obj.category).trim() : '';
+  const protein = Array.isArray(obj.protein) ? obj.protein.map(s => String(s).trim()).filter(Boolean) : [];
+  const tags = Array.isArray(obj.tags) ? obj.tags.map(s => String(s).trim()).filter(Boolean) : [];
+  document.getElementById('arProtein').value = protein.join(', ');
+  document.getElementById('arTags').value = tags.join(', ');
+  setKitchenIngredientRows(obj.ingredients);
+  const steps = Array.isArray(obj.instructions) ? obj.instructions.map(s => String(s).trim()).filter(Boolean) : [];
+  document.getElementById('arMethod').value = steps.join('\n');
+}
+
+async function formatKitchenRecipeWithGemini() {
+  const statusEl = document.getElementById('arFormatStatus');
+  const btn = document.getElementById('arFormatBtn');
+  const apiKey = document.getElementById('arGeminiKey').value.trim();
+  const raw = document.getElementById('arPasteRaw').value.trim();
+  statusEl.textContent = '';
+  statusEl.classList.remove('error');
+  if (!apiKey) {
+    statusEl.textContent = 'Add your Gemini API key (free from Google AI Studio).';
+    statusEl.classList.add('error');
+    return;
+  }
+  if (!raw) {
+    statusEl.textContent = 'Paste some recipe text first.';
+    statusEl.classList.add('error');
+    return;
+  }
+  const systemText =
+    'You convert arbitrary recipe text into structured data for a personal recipe library. ' +
+    'Use metric units (g, kg, ml, L, °C) when amounts are known. Split ingredient amounts into qty and unit when possible. ' +
+    'Infer protein tags (lowercase: chicken, beef, fish, pork, lamb, dairy, eggs, etc.) and dietary tags when reasonable. ' +
+    'Leave unknown optional fields empty or use empty arrays.';
+
+  const userText = 'Convert this recipe into the required JSON shape.\n\n---\n' + raw;
+
+  btn.disabled = true;
+  statusEl.textContent = 'Formatting…';
+
+  try {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${KITCHEN_GEMINI_MODEL}:generateContent`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': apiKey,
+      },
+      body: JSON.stringify({
+        systemInstruction: { parts: [{ text: systemText }] },
+        contents: [{ parts: [{ text: userText }] }],
+        generationConfig: {
+          temperature: 0.2,
+          responseMimeType: 'application/json',
+          responseSchema: KITCHEN_RECIPE_GEMINI_SCHEMA,
+        },
+      }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      const msg = data.error?.message || res.statusText || 'Request failed';
+      throw new Error(msg);
+    }
+    const part = data.candidates?.[0]?.content?.parts?.[0];
+    const text = part?.text;
+    if (!text) {
+      const block = data.promptFeedback?.blockReason || data.candidates?.[0]?.finishReason;
+      throw new Error(block ? `Blocked: ${block}` : 'No response from model');
+    }
+    const parsed = JSON.parse(text);
+    applyKitchenRecipeJsonToForm(parsed);
+    document.getElementById('arPasteRaw').value = '';
+    statusEl.textContent = 'Done — review the manual tab and save when ready.';
+    setAddRecipeTab('manual');
+  } catch (e) {
+    statusEl.classList.add('error');
+    statusEl.textContent = e.message || String(e);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
 function openAddRecipeModal() {
   document.getElementById('addRecipeOverlay').classList.add('open');
   document.getElementById('arIngRows').innerHTML = '';
   addKitchenIngRow();
+  setAddRecipeTab('manual');
+  const sk = localStorage.getItem(KITCHEN_GEMINI_KEY_STORAGE);
+  const keyInput = document.getElementById('arGeminiKey');
+  if (keyInput) keyInput.value = sk || '';
+  const st = document.getElementById('arFormatStatus');
+  if (st) {
+    st.textContent = '';
+    st.classList.remove('error');
+  }
 }
 function addKitchenIngRow() {
   const wrap = document.getElementById('arIngRows');
