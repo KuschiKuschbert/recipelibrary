@@ -496,7 +496,7 @@
     </div>
     </div>
     <div id="rvPanelFormat" role="tabpanel" aria-labelledby="rvTabFormat" hidden>
-      <p class="ar-format-help">Paste messy text (blog, OCR, notes). Uses <strong>Google Gemini</strong> — key from <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio</a>; restrict in <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Cloud → Credentials</a> (API + HTTP referrers). Same saved key as the Kitchen Library page. <strong>Free quota:</strong> do not enable billing on that Cloud project. Rotate any key that was ever exposed. Output maps to Riviera prep fields. Sending text to Google applies their terms.</p>
+      <p class="ar-format-help">Same Gemini key as Kitchen (this device). <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">AI Studio</a> · <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Cloud restrictions</a>. Text sent to Google.</p>
       <div id="rvGeminiKeySavedStrip" class="ar-gemini-saved-strip" hidden>
         <span>API key saved on this device.</span>
         <button type="button" class="btn-secondary" onclick="showRivieraGeminiKeyEditor()">Change</button>
@@ -510,7 +510,7 @@
       <div class="form-row"><label for="rvRecipeFile">Upload PDF, DOCX, or image (optional)</label><input type="file" id="rvRecipeFile" accept=".pdf,.docx,application/pdf,image/*,application/vnd.openxmlformats-officedocument.wordprocessingml.document" /></div>
       <details class="ar-proxy-details" style="margin-bottom:14px">
         <summary>Optional fetch proxy (for recipe URLs when the site blocks the browser)</summary>
-        <p class="ar-format-help" style="margin-top:10px">Deploy <code>workers/recipe-fetch-proxy.js</code> on Cloudflare Workers, then paste your worker base URL (same as Kitchen Library; shared storage).</p>
+        <p class="ar-format-help" style="margin-top:10px">Optional proxy for recipe URL fetch, shared with Kitchen (<code>workers/recipe-fetch-proxy.js</code>).</p>
         <div class="ar-format-key-row">
           <div class="form-row" style="flex:2;min-width:200px"><label for="rvProxyUrl">Proxy base URL</label><input type="url" id="rvProxyUrl" placeholder="https://your-worker.workers.dev" autocomplete="off" /></div>
           <button type="button" class="btn-secondary" onclick="saveRivieraFetchProxy()" style="margin-bottom:2px">Save proxy</button>
@@ -1469,7 +1469,7 @@ async function formatRivieraRecipeWithGemini() {
     return;
   }
   if (!apiKey) {
-    statusEl.textContent = 'Add your Gemini API key (free from Google AI Studio).';
+    statusEl.textContent = 'Add a Gemini API key.';
     statusEl.classList.add('error');
     return;
   }
