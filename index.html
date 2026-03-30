@@ -326,6 +326,7 @@
 
   .hero-nav { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; align-items: center; }
   button.hero-nav-link { cursor: pointer; font: inherit; border: none; }
+  .hero-nav-cluster button.hero-nav-link { min-width: 0; }
   #addRecipeOverlay .modal { max-width: 560px; }
   .ing-row { display: grid; grid-template-columns: 72px 56px 1fr 1fr 36px; gap: 8px; margin-bottom: 8px; align-items: center; }
   .ing-row input { padding: 8px; font-size: 13px; }
@@ -343,7 +344,10 @@
   <h1 class="hero-title">The <em>Kitchen</em> Library</h1>
   <p class="hero-sub"><b id="totalCount">38,363</b> recipes — professionally formatted, metric, density-converted, searchable.</p>
   <div class="hero-nav">
-    <button type="button" class="hero-nav-link" onclick="openAddRecipeModal()">+ Add recipe</button>
+    <div class="hero-nav-cluster">
+      <button type="button" class="hero-nav-link" onclick="openAddRecipeModal()">+ Add recipe</button>
+      <button type="button" class="hero-nav-link" onclick="openPageQrModal()" title="QR code to open this page on your phone">QR</button>
+    </div>
     <a href="riviera.html" class="hero-nav-link">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       Riviera House Kitchen
@@ -442,7 +446,7 @@
 </div>
 
 <div class="footer" id="footer" style="display:none">
-  <div class="footer-text">Kuschi Kitchen Library v3.0 · <a href="riviera.html">Riviera House</a> · <button type="button" class="footer-qr-btn" onclick="openPageQrModal()">Phone QR</button> · <a href="https://github.com/KuschiKuschbert/recipelibrary" target="_blank">GitHub</a></div>
+  <div class="footer-text">Kuschi Kitchen Library v3.0 · <a href="riviera.html">Riviera House</a> · <a href="https://github.com/KuschiKuschbert/recipelibrary" target="_blank">GitHub</a></div>
 </div>
 
 <div class="modal-overlay" id="pageQrOverlay" onclick="if(event.target===this)closePageQrModal()">

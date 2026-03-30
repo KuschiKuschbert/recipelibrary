@@ -482,7 +482,10 @@
   <h1 class="hero-title">The <em>Riviera</em> Kitchen</h1>
   <p class="hero-sub"><b id="totalCount">12</b> prep-chef recipes — batch production, service notes, plating guides.</p>
   <div class="hero-actions">
-    <button type="button" onclick="openAddRivieraModal()">+ Add recipe</button>
+    <div class="hero-nav-cluster">
+      <button type="button" onclick="openAddRivieraModal()">+ Add recipe</button>
+      <button type="button" onclick="openPageQrModal()" title="QR code to open this page on your phone">QR</button>
+    </div>
     <button type="button" onclick="openOrderListModal()">Order list (all ingredients)</button>
   </div>
 </div>
@@ -602,7 +605,7 @@
 </div>
 
 <div class="footer">
-  <div class="footer-text">Riviera House prep set · <a href="index.html">Kitchen Library</a> · <button type="button" class="footer-qr-btn" onclick="openPageQrModal()">Phone QR</button> · Personal static site (GitHub Pages)</div>
+  <div class="footer-text">Riviera House prep set · <a href="index.html">Kitchen Library</a> · Personal static site (GitHub Pages)</div>
   <div class="footer-riviera-admin" id="rivieraAdminChrome">
     <button type="button" class="btn-text riv-admin-btn" id="rivieraAdminOpenBtn" onclick="openRivieraAdminModal()">Admin</button>
     <span id="rivieraAdminUnlockedStrip" class="riv-admin-unlocked" style="display:none">
