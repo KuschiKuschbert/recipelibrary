@@ -1,0 +1,20 @@
+{
+  "phase": "complete",
+  "previous": 23386,
+  "added": 14977,
+  "total": 38363,
+  "timestamp": 1774848660.607052,
+  "by_cuisine": {
+    "Turkish": 4737,
+    "Greek": 2755,
+    "Portuguese": 2313,
+    "Spanish": 5172
+  },
+  "by_source": {
+    "lezzet": 4737,
+    "argiro": 2755,
+    "teleculinaria": 2313,
+    "comedera": 4256,
+    "pequerecetas": 916
+  }
+}

@@ -691,7 +691,6 @@ const INDEX_FILES = [
   'claude_index_14_S-T.json',
   'claude_index_15_T-Z.json',
 ];
-];
 
 async function loadData() {
   const base = window.location.href.replace(/\/[^/]*$/, '');
@@ -771,7 +770,7 @@ function applyFilters() {
 
   filtered = allRecipes.filter(r => {
     if (terms.length) {
-      const hay = [r.name||'', r.cui||'', ...toArr(r.protein), ...toArr(r.tags), r.cat||''].join(' ').toLowerCase();
+      const hay = [r.name||'', r.cui||'', ...toArr(r.protein), ...toArr(r.tags), ...toArr(r.ing), r.cat||''].join(' ').toLowerCase();
       if (!terms.every(t => hay.includes(t))) return false;
     }
     if (cuisine && r.cui !== cuisine) return false;
