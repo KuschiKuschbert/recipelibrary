@@ -473,21 +473,51 @@ body {
 .grid .card:nth-child(3) { animation-delay: 0.08s; }
 .grid .card:nth-child(4) { animation-delay: 0.12s; }
 .grid .card:nth-child(n+5) { animation-delay: 0.16s; }
+
+.hero-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
+.hero-actions button, .form-primary-btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; font-size: 13px; font-weight: 500;
+  letter-spacing: 0.5px; color: var(--gold); background: var(--gold-dim); border: 1px solid rgba(201,169,110,0.3);
+  border-radius: 100px; font-family: inherit; cursor: pointer; transition: all 0.25s;
+}
+.hero-actions button:hover { background: rgba(201,169,110,0.25); border-color: var(--gold); color: var(--gold-light); }
+#addRivieraOverlay .modal, #orderListOverlay .modal { max-width: 600px; }
+.form-row { margin-bottom: 14px; }
+.form-row label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
+.form-row input, .form-row textarea {
+  width: 100%; background: var(--bg2); border: 1px solid var(--border); color: var(--text);
+  border-radius: 10px; padding: 10px 12px; font-size: 14px; font-family: inherit;
+}
+.form-row textarea { min-height: 80px; resize: vertical; }
+.ing-row-r { display: grid; grid-template-columns: 1fr 2fr 1fr 36px; gap: 8px; margin-bottom: 8px; align-items: center; }
+.ing-row-r input { padding: 8px; font-size: 13px; }
+.btn-secondary { padding: 8px 14px; font-size: 12px; font-weight: 500; font-family: inherit;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px; color: var(--text2); cursor: pointer; }
+.order-list-section { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.order-list-section h4 { font-size: 14px; color: var(--gold); margin-bottom: 10px; }
+.order-list-section ul { list-style: none; padding: 0; margin: 0; font-size: 14px; color: var(--text2); line-height: 1.6; }
+.order-list-section li { padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+@media (max-width: 680px) { .ing-row-r { grid-template-columns: 1fr 1fr; } }
+
 </style>
 </head>
 <body>
 
 <div class="nav-back">
-  <a href="../index.html">
+  <a href="index.html">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
     Kitchen Library
   </a>
 </div>
 
 <div class="hero">
-  <div class="hero-label">PrepFlow · Riviera House</div>
+  <div class="hero-label">Kuschi · Riviera House</div>
   <h1 class="hero-title">The <em>Riviera</em> Kitchen</h1>
   <p class="hero-sub"><b id="totalCount">12</b> prep-chef recipes — batch production, service notes, plating guides.</p>
+  <div class="hero-actions">
+    <button type="button" onclick="openAddRivieraModal()">+ Add recipe</button>
+    <button type="button" onclick="openOrderListModal()">Order list (all ingredients)</button>
+  </div>
 </div>
 
 <div class="search-wrap" id="searchWrap">
@@ -513,16 +543,56 @@ body {
 
 <div id="content"></div>
 
+
+<div class="modal-overlay" id="orderListOverlay" onclick="if(event.target===this)closeOrderListModal()">
+  <div class="modal">
+    <button type="button" class="modal-close" onclick="closeOrderListModal()">✕</button>
+    <div class="modal-title" style="margin-bottom:12px">Combined order list</div>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Every ingredient line from all Riviera recipes (including your saved recipes on this device).</p>
+    <div id="orderListBody"></div>
+    <div style="margin-top:16px"><button type="button" class="btn-secondary" onclick="copyOrderListText()">Copy as text</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="addRivieraOverlay" onclick="if(event.target===this)closeAddRivieraModal()">
+  <div class="modal">
+    <button type="button" class="modal-close" onclick="closeAddRivieraModal()">✕</button>
+    <div class="modal-title" style="margin-bottom:12px">Add Riviera recipe</div>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Saved on this device. Use the same ingredient style as other cards (qty as text, e.g. 500 g).</p>
+    <div class="form-row"><label>Name</label><input id="rvName" type="text" /></div>
+    <div class="form-row"><label>Subtitle</label><input id="rvSub" type="text" placeholder="Optional" /></div>
+    <div class="form-row"><label>Type</label><input id="rvType" type="text" placeholder="e.g. Tapas" /></div>
+    <div class="form-row"><label>Course</label><input id="rvCourse" type="text" placeholder="e.g. Canape" /></div>
+    <div class="form-row"><label>Protein (comma)</label><input id="rvProtein" placeholder="chicken, dairy" /></div>
+    <div class="form-row"><label>Dietary (comma)</label><input id="rvDiet" placeholder="Gluten-Free" /></div>
+    <div class="form-row"><label>Method</label><input id="rvMethod" placeholder="e.g. Oven" /></div>
+    <div class="form-row"><label>Yield</label><input id="rvYield" /></div>
+    <div class="form-row"><label>Label (prep label)</label><input id="rvLabel" /></div>
+    <div class="form-row"><label>Elements (comma)</label><input id="rvElements" placeholder="Optional" /></div>
+    <div class="modal-section" style="margin-top:8px">Ingredients</div>
+    <div id="rvIngRows"></div>
+    <button type="button" class="btn-secondary" onclick="addRivIngRow()">+ Row</button>
+    <div class="form-row"><label>Prep method (one line per step)</label><textarea id="rvSteps"></textarea></div>
+    <div class="form-row"><label>Service (one line per step)</label><textarea id="rvService" placeholder="Optional"></textarea></div>
+    <div class="form-row"><label>Note</label><input id="rvNote" placeholder="Optional" /></div>
+    <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+      <button type="button" class="form-primary-btn" onclick="submitRivieraRecipe()">Save recipe</button>
+      <button type="button" class="btn-secondary" onclick="navigator.clipboard.writeText(KuschiUserRecipes.exportRiviera()).then(()=>alert('Copied Riviera JSON'))">Copy JSON backup</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
   <div class="modal" id="modal"></div>
 </div>
 
 <div class="footer">
-  <div class="footer-text">Riviera House Prep Chef Recipes · <a href="../index.html">Kitchen Library</a> · Built with PrepFlow</div>
+  <div class="footer-text">Riviera House Prep Chef Recipes · <a href="index.html">Kitchen Library</a> · Built with PrepFlow</div>
 </div>
 
+<script src="assets/user-recipes.js"></script>
 <script>
-const RECIPES = [
+const BUILTIN_RECIPES = [
   {
     id: "arancini",
     name: "Chorizo & Mozzarella Arancini",
@@ -987,6 +1057,102 @@ const RECIPES = [
   },
 ];
 
+function mergeRivieraRecipes() {
+  const u = (window.KuschiUserRecipes && KuschiUserRecipes.loadRiviera()) || [];
+  return u.concat(BUILTIN_RECIPES);
+}
+let RECIPES = mergeRivieraRecipes();
+
+
+function closeOrderListModal() {
+  document.getElementById('orderListOverlay').classList.remove('open');
+}
+let orderListPlain = '';
+function openOrderListModal() {
+  const body = document.getElementById('orderListBody');
+  body.innerHTML = '';
+  orderListPlain = '';
+  for (const r of RECIPES) {
+    const sec = document.createElement('div');
+    sec.className = 'order-list-section';
+    const h = document.createElement('h4');
+    h.textContent = r.name;
+    sec.appendChild(h);
+    const ul = document.createElement('ul');
+    orderListPlain += r.name + '\n';
+    for (const i of r.ingredients) {
+      const li = document.createElement('li');
+      const q = (i.qty != null && i.qty !== '') ? String(i.qty) + ' ' : '';
+      const prep = i.prep ? ' — ' + i.prep : '';
+      li.textContent = q + i.item + prep;
+      ul.appendChild(li);
+      orderListPlain += '  - ' + q + i.item + prep + '\n';
+    }
+    orderListPlain += '\n';
+    sec.appendChild(ul);
+    body.appendChild(sec);
+  }
+  document.getElementById('orderListOverlay').classList.add('open');
+}
+function copyOrderListText() {
+  navigator.clipboard.writeText(orderListPlain).then(() => alert('Order list copied'));
+}
+function closeAddRivieraModal() {
+  document.getElementById('addRivieraOverlay').classList.remove('open');
+}
+function openAddRivieraModal() {
+  document.getElementById('rvIngRows').innerHTML = '';
+  addRivIngRow();
+  document.getElementById('addRivieraOverlay').classList.add('open');
+}
+function addRivIngRow() {
+  const wrap = document.getElementById('rvIngRows');
+  const row = document.createElement('div');
+  row.className = 'ing-row-r';
+  row.innerHTML = '<input type="text" class="rv-qty" placeholder="500 g or 2 L" /><input type="text" class="rv-item" placeholder="Ingredient name" /><input type="text" class="rv-prep" placeholder="Prep note" /><button type="button" class="btn-secondary" onclick="this.parentElement.remove()">✕</button>';
+  wrap.appendChild(row);
+}
+function submitRivieraRecipe() {
+  const name = document.getElementById('rvName').value.trim();
+  if (!name) { alert('Enter a name'); return; }
+  const ingredients = [];
+  document.querySelectorAll('#rvIngRows .ing-row-r').forEach(row => {
+    const qty = row.querySelector('.rv-qty').value.trim();
+    const item = row.querySelector('.rv-item').value.trim();
+    if (!item) return;
+    const o = { qty: qty, item: item };
+    const prep = row.querySelector('.rv-prep').value.trim();
+    if (prep) o.prep = prep;
+    ingredients.push(o);
+  });
+  const method_steps = document.getElementById('rvSteps').value.split('\n').map(s => s.trim()).filter(Boolean);
+  const service = document.getElementById('rvService').value.split('\n').map(s => s.trim()).filter(Boolean);
+  const protein = document.getElementById('rvProtein').value.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+  const diet = document.getElementById('rvDiet').value.split(',').map(s => s.trim()).filter(Boolean);
+  const elements = document.getElementById('rvElements').value.split(',').map(s => s.trim()).filter(Boolean);
+  KuschiUserRecipes.addRivieraRecipe({
+    name,
+    subtitle: document.getElementById('rvSub').value.trim(),
+    type: document.getElementById('rvType').value.trim() || 'Custom',
+    course: document.getElementById('rvCourse').value.trim() || 'Other',
+    protein,
+    diet,
+    method: document.getElementById('rvMethod').value.trim(),
+    yield: document.getElementById('rvYield').value.trim(),
+    label: document.getElementById('rvLabel').value.trim() || name,
+    elements,
+    ingredients,
+    method_steps,
+    service,
+    note: document.getElementById('rvNote').value.trim() || null
+  });
+  RECIPES = mergeRivieraRecipes();
+  closeAddRivieraModal();
+  populateFilters();
+  applyFilters();
+}
+
+
 // ── Filter population ─────────────────────────
 function populateFilters() {
   const courses = new Set(), proteins = new Set(), diets = new Set();
@@ -1192,7 +1358,12 @@ document.getElementById('clearBtn').addEventListener('click', () => {
   applyFilters();
 });
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && document.getElementById('modalOverlay').classList.contains('open')) {
+  if (e.key !== 'Escape') return;
+  if (document.getElementById('orderListOverlay').classList.contains('open')) {
+    closeOrderListModal();
+  } else if (document.getElementById('addRivieraOverlay').classList.contains('open')) {
+    closeAddRivieraModal();
+  } else if (document.getElementById('modalOverlay').classList.contains('open')) {
     closeModal();
   }
 });
