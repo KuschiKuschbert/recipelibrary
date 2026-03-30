@@ -25,6 +25,8 @@ Static **GitHub Pages** site: main catalog ([index.html](index.html)), Riviera p
 
 - **Kitchen** recipes: `localStorage` key `kuschi_user_recipes_kitchen_v1` — merged into the main list; detail view does **not** use `recipe_detail/` fetch for `user-*` ids.
 - **Riviera** recipes: `kuschi_user_recipes_riviera_v1` — prepended to `BUILTIN_RECIPES` in [riviera.html](riviera.html).
+
+- **Riviera order list:** Button on [riviera.html](riviera.html) aggregates every ingredient line from all Riviera recipes (built-in + user), grouped by recipe; copy as plain text for shopping.
 - **Backup:** Use “Copy JSON backup” in the add-recipe UIs to paste into a file and commit from a dev machine if desired.
 
 ## Theme and units
