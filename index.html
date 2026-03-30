@@ -377,7 +377,7 @@
     </div>
     </div>
     <div id="arPanelFormat" role="tabpanel" aria-labelledby="arTabFormat" hidden>
-      <p class="ar-format-help">Paste messy text (blog, screenshot OCR, notes). Uses <strong>Google Gemini</strong> free tier — create an API key in <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio</a>, restrict it to this site’s URL under “HTTP referrers”, then store it below (browser only; never committed). Sending text to Google applies their terms.</p>
+      <p class="ar-format-help">Paste messy text (blog, screenshot OCR, notes). Uses <strong>Google Gemini</strong> free tier — create an API key in <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio</a>, restrict it to this site’s URL under “HTTP referrers”, then store it below (browser only; never committed). The same saved key is used on the Riviera page. Sending text to Google applies their terms.</p>
       <div class="ar-format-key-row" style="margin-bottom:14px">
         <div class="form-row" style="flex:2;min-width:220px"><label for="arGeminiKey">Gemini API key</label><input id="arGeminiKey" type="password" autocomplete="off" placeholder="AIza…" /></div>
         <button type="button" class="btn-secondary" onclick="saveKitchenGeminiKey()" style="margin-bottom:2px">Remember on device</button>
@@ -398,6 +398,7 @@
 </div>
 
 <script src="assets/user-recipes.js"></script>
+<script src="assets/recipe-gemini-format.js"></script>
 <script>
 const PAGE_SIZE = 60;
 let allRecipes = [];
@@ -888,37 +889,6 @@ function closeAddRecipeModal() {
   document.getElementById('addRecipeOverlay').classList.remove('open');
 }
 
-const KITCHEN_GEMINI_KEY_STORAGE = 'kuschi_kitchen_gemini_key_v1';
-/** Free-tier model; change if Google renames it. */
-const KITCHEN_GEMINI_MODEL = 'gemini-2.0-flash';
-
-const KITCHEN_RECIPE_GEMINI_SCHEMA = {
-  type: 'OBJECT',
-  properties: {
-    name: { type: 'STRING', description: 'Recipe title' },
-    yield: { type: 'STRING', description: 'Servings or yield, e.g. 4 servings' },
-    cuisine: { type: 'STRING' },
-    category: { type: 'STRING' },
-    protein: { type: 'ARRAY', items: { type: 'STRING' }, description: 'Lowercase tags e.g. chicken, dairy' },
-    tags: { type: 'ARRAY', items: { type: 'STRING' }, description: 'Dietary tags' },
-    ingredients: {
-      type: 'ARRAY',
-      items: {
-        type: 'OBJECT',
-        properties: {
-          qty: { type: 'STRING' },
-          unit: { type: 'STRING', description: 'g, ml, L, etc.' },
-          item: { type: 'STRING' },
-          prep: { type: 'STRING', description: 'Prep note if any' },
-        },
-        required: ['item'],
-      },
-    },
-    instructions: { type: 'ARRAY', items: { type: 'STRING' }, description: 'One string per step, no leading numbers required' },
-  },
-  required: ['name', 'ingredients', 'instructions'],
-};
-
 function setAddRecipeTab(which) {
   const manual = document.getElementById('arPanelManual');
   const format = document.getElementById('arPanelFormat');
@@ -935,9 +905,8 @@ function setAddRecipeTab(which) {
 
 function saveKitchenGeminiKey() {
   const k = document.getElementById('arGeminiKey').value.trim();
-  if (k) localStorage.setItem(KITCHEN_GEMINI_KEY_STORAGE, k);
-  else localStorage.removeItem(KITCHEN_GEMINI_KEY_STORAGE);
-  alert(k ? 'API key saved in this browser only.' : 'Stored API key cleared.');
+  if (window.KuschiRecipeGemini) KuschiRecipeGemini.saveApiKey(k);
+  alert(k ? 'API key saved in this browser only (shared with Riviera page).' : 'Stored API key cleared.');
 }
 
 function setKitchenIngredientRows(ingredients) {
@@ -978,6 +947,11 @@ async function formatKitchenRecipeWithGemini() {
   const raw = document.getElementById('arPasteRaw').value.trim();
   statusEl.textContent = '';
   statusEl.classList.remove('error');
+  if (!window.KuschiRecipeGemini) {
+    statusEl.textContent = 'recipe-gemini-format.js failed to load.';
+    statusEl.classList.add('error');
+    return;
+  }
   if (!apiKey) {
     statusEl.textContent = 'Add your Gemini API key (free from Google AI Studio).';
     statusEl.classList.add('error');
@@ -989,7 +963,7 @@ async function formatKitchenRecipeWithGemini() {
     return;
   }
   const systemText =
-    'You convert arbitrary recipe text into structured data for a personal recipe library. ' +
+    'You convert arbitrary recipe text into structured data for a personal home recipe library (not restaurant prep cards). ' +
     'Use metric units (g, kg, ml, L, °C) when amounts are known. Split ingredient amounts into qty and unit when possible. ' +
     'Infer protein tags (lowercase: chicken, beef, fish, pork, lamb, dairy, eggs, etc.) and dietary tags when reasonable. ' +
     'Leave unknown optional fields empty or use empty arrays.';
@@ -1000,35 +974,12 @@ async function formatKitchenRecipeWithGemini() {
   statusEl.textContent = 'Formatting…';
 
   try {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${KITCHEN_GEMINI_MODEL}:generateContent`;
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-goog-api-key': apiKey,
-      },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: systemText }] },
-        contents: [{ parts: [{ text: userText }] }],
-        generationConfig: {
-          temperature: 0.2,
-          responseMimeType: 'application/json',
-          responseSchema: KITCHEN_RECIPE_GEMINI_SCHEMA,
-        },
-      }),
-    });
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok) {
-      const msg = data.error?.message || res.statusText || 'Request failed';
-      throw new Error(msg);
-    }
-    const part = data.candidates?.[0]?.content?.parts?.[0];
-    const text = part?.text;
-    if (!text) {
-      const block = data.promptFeedback?.blockReason || data.candidates?.[0]?.finishReason;
-      throw new Error(block ? `Blocked: ${block}` : 'No response from model');
-    }
-    const parsed = JSON.parse(text);
+    const parsed = await KuschiRecipeGemini.generateStructured(
+      apiKey,
+      systemText,
+      userText,
+      KuschiRecipeGemini.SCHEMA_KITCHEN
+    );
     applyKitchenRecipeJsonToForm(parsed);
     document.getElementById('arPasteRaw').value = '';
     statusEl.textContent = 'Done — review the manual tab and save when ready.';
@@ -1046,7 +997,7 @@ function openAddRecipeModal() {
   document.getElementById('arIngRows').innerHTML = '';
   addKitchenIngRow();
   setAddRecipeTab('manual');
-  const sk = localStorage.getItem(KITCHEN_GEMINI_KEY_STORAGE);
+  const sk = window.KuschiRecipeGemini ? KuschiRecipeGemini.loadApiKey() : '';
   const keyInput = document.getElementById('arGeminiKey');
   if (keyInput) keyInput.value = sk || '';
   const st = document.getElementById('arFormatStatus');
