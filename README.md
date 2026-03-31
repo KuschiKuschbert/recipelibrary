@@ -75,7 +75,7 @@ Scripts in `scripts/` update **`recipe_detail/`** (source of truth for full text
    Otherwise the site may load the wrong `detail_{letter}.json` for that id.
 6. **Verify:** `python3 scripts/check-recipe-shards.py` (must exit 0).
 
-Shared helpers: [`scripts/recipe_pipeline_lib.py`](scripts/recipe_pipeline_lib.py).
+Shared helpers: [`scripts/recipe_pipeline_lib.py`](scripts/recipe_pipeline_lib.py). One-shot full run (detect → Argos models → translate → repartition → sync → verify): [`scripts/run_full_translation.sh`](scripts/run_full_translation.sh).
 
 ## Claude / search
 
