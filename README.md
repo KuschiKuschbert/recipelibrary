@@ -11,6 +11,7 @@ Personal recipe library hosted on **GitHub Pages**: searchable catalog, metric-o
 | [riviera.html](riviera.html) | Riviera prep set (built-in cards + user-added Riviera recipes), **order list by storage** (freezer → cold room → dry store → other) with local master ingredients |
 | [flavor.html](flavor.html) | **Flavor explorer** — merged Flavor Bible + Vegetarian Bible + Aroma + Flavor Thesaurus wheel (`combined_data/ingredients_unified.json`); `?q=` opens the first matching row |
 | [pairing-atlas.html](pairing-atlas.html) | **Pairing atlas** — D3 force graph: protein presets + custom anchors from Flavor tiers + Aroma seasonings |
+| [notebooklm-gallery.html](notebooklm-gallery.html) | **Visual guides** — static NotebookLM (or other) infographics listed in [notebooklm/manifest.json](notebooklm/manifest.json); see [notebooklm/README.md](notebooklm/README.md) |
 | [pantry.html](pantry.html) | **Pantry search** — match typed ingredients against `claude_index` `ing` fields; opens hits via `index.html?open=` |
 | [assets/theme.css](assets/theme.css) | Shared dark theme tokens, search shell, filters, modal shell, footer |
 | [assets/user-recipes.js](assets/user-recipes.js) | `localStorage` helpers: kitchen recipes, Riviera recipes, master ingredients, Riviera order overrides / extras, JSON export |
