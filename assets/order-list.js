@@ -8,6 +8,97 @@
   var ZONE_LABELS = { freezer: 'Freezer', coldroom: 'Cold room', drystore: 'Dry store', other: 'Other' };
   var MERGED_LINE_KEYS_SEP = '|||';
 
+  /** Explicit unit field, else trailing token after leading number/fraction in qty (e.g. 500 g, 2 1/2 cups). */
+  function inferRecipeUnit(i) {
+    if (!i) return '';
+    var u = i.unit != null && String(i.unit).trim() !== '' ? String(i.unit).trim() : '';
+    if (u) return u;
+    var q = i.qty != null ? String(i.qty).trim() : '';
+    if (!q) return '';
+    var m = q.match(/^([\d\s.,\/]+)\s+([a-zA-Z%°].*)$/);
+    if (m && m[2]) return m[2].trim();
+    return '';
+  }
+
+  /** Default text for order qty input when no override: strip inferred unit from qty string when unit is parse-only. */
+  function recipeQtyDefaultForOrder(i) {
+    var q = i.qty != null ? String(i.qty).trim() : '';
+    if (!q) return '';
+    var u = inferRecipeUnit(i);
+    if (!u) return q;
+    if (i.unit != null && String(i.unit).trim() !== '') return q;
+    var m = q.match(/^([\d\s.,\/]+)\s+[a-zA-Z%°].*$/);
+    if (m) return m[1].trim();
+    return q;
+  }
+
+  function pickDisplayUnitForMerged(tally) {
+    var filtered = (tally || [])
+      .map(function (s) {
+        return String(s || '').trim();
+      })
+      .filter(Boolean);
+    if (!filtered.length) return '';
+    var counts = {};
+    filtered.forEach(function (u) {
+      var k = u.toLowerCase();
+      counts[k] = (counts[k] || 0) + 1;
+    });
+    var maxc = 0;
+    Object.keys(counts).forEach(function (k) {
+      if (counts[k] > maxc) maxc = counts[k];
+    });
+    var winners = Object.keys(counts).filter(function (k) {
+      return counts[k] === maxc;
+    });
+    if (winners.length === 1) {
+      var wk = winners[0];
+      for (var fi = 0; fi < filtered.length; fi++) {
+        if (filtered[fi].toLowerCase() === wk) return filtered[fi];
+      }
+    }
+    var seen = {};
+    var order = [];
+    filtered.forEach(function (u) {
+      var k = u.toLowerCase();
+      if (!seen[k]) {
+        seen[k] = true;
+        order.push(u);
+      }
+    });
+    order.sort(function (a, b) {
+      return a.toLowerCase().localeCompare(b.toLowerCase(), undefined, { sensitivity: 'base' });
+    });
+    return order.join(' · ');
+  }
+
+  function qtyEndsWithUnit(q, u) {
+    var ql = q.trim().toLowerCase();
+    var ul = u.trim().toLowerCase();
+    if (!ul) return true;
+    if (ql === ul) return true;
+    if (ql.length < ul.length) return false;
+    if (ql.slice(ql.length - ul.length) !== ul) return false;
+    if (ql.length === ul.length) return true;
+    var c = ql.charAt(ql.length - ul.length - 1);
+    return c === ' ' || c === '.' || c === ',';
+  }
+
+  function formatQtyForCopy(orderQty, orderUnit) {
+    var q = String(orderQty || '').trim();
+    if (!q) return '(set order qty)';
+    var u = String(orderUnit || '').trim();
+    if (!u) return q;
+    if (u.indexOf('·') >= 0) {
+      var full = u.toLowerCase().replace(/\s+/g, ' ');
+      var ql = q.toLowerCase().replace(/\s+/g, ' ');
+      if (ql.indexOf(full) >= 0) return q;
+      return q + ' ' + u;
+    }
+    if (qtyEndsWithUnit(q, u)) return q;
+    return q + ' ' + u;
+  }
+
   function esc(s) {
     return String(s || '')
       .replace(/&/g, '&amp;')
@@ -84,6 +175,7 @@
           mergedZones: [z],
           _zoneTally: [z],
           _qtyParts: qtyText ? [{ zone: z, text: qtyText }] : [],
+          _unitTally: line.recipeUnit ? [line.recipeUnit] : [],
         };
         rebuildMergedOrderQtyDisplay(entry);
         entry.zone = pickDisplayZoneForMerged(entry._zoneTally);
@@ -107,12 +199,15 @@
         else ex.orderQty = a || b;
         ex.included = ex.included && line.included;
         ex.zone = pickDisplayZoneForMerged(ex._zoneTally);
+        if (line.recipeUnit) ex._unitTally.push(line.recipeUnit);
       }
     }
     var out = Array.from(map.values());
     out.forEach(function (ex) {
+      ex.orderUnit = pickDisplayUnitForMerged(ex._unitTally);
       delete ex._zoneTally;
       delete ex._qtyParts;
+      delete ex._unitTally;
     });
     return out;
   }
@@ -169,6 +264,21 @@
   function zoneDisplayHtml(zone) {
     var z = ZONE_ORDER.indexOf(zone) >= 0 ? zone : 'other';
     return '<span class="ord-zone-display">' + esc(ZONE_LABELS[z]) + '</span>';
+  }
+
+  function orderQtyWithUnitHtml(value, keysEsc, orderUnit) {
+    var u = String(orderUnit || '').trim();
+    var suffix = u ? '<span class="ord-unit-suffix">' + esc(u) + '</span>' : '';
+    return (
+      '<div class="ord-qty-with-unit">' +
+      '<input type="text" class="ord-order-qty" data-merged-keys="' +
+      keysEsc +
+      '" value="' +
+      escAttr(value) +
+      '" placeholder="Order qty" />' +
+      suffix +
+      '</div>'
+    );
   }
 
   /**
@@ -247,8 +357,9 @@
           var zone = o.zone;
           if (!zone || k.ZONE_IDS.indexOf(zone) < 0) zone = defaultZone;
           var orderQty = o.orderQty;
-          if (orderQty == null || orderQty === '') orderQty = recipeQty;
+          if (orderQty == null || orderQty === '') orderQty = recipeQtyDefaultForOrder(i);
           var included = o.included !== false;
+          var recipeUnit = inferRecipeUnit(i);
           recipeOut.push({
             kind: 'recipe',
             lineKey: lineKey,
@@ -257,6 +368,7 @@
             orderQty: String(orderQty),
             zone: zone,
             included: included,
+            recipeUnit: recipeUnit,
           });
         }
       }
@@ -273,6 +385,7 @@
           orderQty: ex.orderQty || '',
           zone: k.ZONE_IDS.indexOf(ex.zone) >= 0 ? ex.zone : 'other',
           included: true,
+          orderUnit: '',
         });
       });
       return out;
@@ -330,17 +443,14 @@
               extraIds.length > 0
                 ? ' data-folded-extras="' + extraIds.map(escAttr).join(MERGED_LINE_KEYS_SEP) + '"'
                 : '';
+            var ou = line.orderUnit != null ? line.orderUnit : '';
             html += '<div class="order-line-block"' + foldedAttr + '>';
             html +=
               '<div class="order-line-row" data-kind="recipe">' +
               '<div class="order-line-name">' +
               esc(line.item) +
               '</div>' +
-              '<input type="text" class="ord-order-qty" data-merged-keys="' +
-              keysEsc +
-              '" value="' +
-              escAttr(line.orderQty) +
-              '" placeholder="Order qty" />' +
+              orderQtyWithUnitHtml(line.orderQty, keysEsc, ou) +
               recipeZoneControlHtml(line, keysEsc) +
               '<span class="ord-remove"></span>' +
               '</div>';
@@ -353,11 +463,13 @@
                 '<div class="order-line-name order-sub-name">' +
                 esc(ex.name) +
                 '</div>' +
+                '<div class="ord-qty-with-unit ord-qty-with-unit--sub">' +
                 '<input type="text" class="ord-extra-qty" data-extra-id="' +
                 escAttr(xid) +
                 '" value="' +
                 escAttr(ex.orderQty || '') +
                 '" placeholder="Order qty" />' +
+                '</div>' +
                 '<button type="button" class="btn-secondary ord-remove-extra" data-extra-id="' +
                 escAttr(xid) +
                 '">✕</button>' +
@@ -370,11 +482,13 @@
               '<div class="order-line-name">' +
               esc(line.item) +
               '</div>' +
+              '<div class="ord-qty-with-unit">' +
               '<input type="text" class="ord-order-qty-extra" data-extra-id="' +
               escAttr(line.extraId) +
               '" value="' +
               escAttr(line.orderQty) +
               '" placeholder="Order qty" />' +
+              '</div>' +
               extraZoneControlHtml(line) +
               '<button type="button" class="btn-secondary ord-remove" data-extra-id="' +
               escAttr(line.extraId) +
@@ -483,7 +597,8 @@
         });
         text += ZONE_LABELS[z].toUpperCase() + '\n';
         arr.forEach(function (l) {
-          var q = String(l.orderQty || '').trim() || '(set order qty)';
+          var u = l.kind === 'recipe' ? (l.orderUnit != null ? l.orderUnit : '') : '';
+          var q = formatQtyForCopy(l.orderQty, u);
           text += '- ' + l.item + ': ' + q + '\n';
         });
         text += '\n';
