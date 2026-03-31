@@ -1090,7 +1090,7 @@ function renderRecipeDetail(r) {
   }
 
   if (window.KuschiAromaHints) {
-    html += KuschiAromaHints.seasoningSectionHtml(null, { idSuffix: 'Idx' });
+    html += KuschiAromaHints.seasoningSectionHtml(null, { idSuffix: 'Idx', openByDefault: true });
   }
 
   html += `<div class="modal-copy-bar">`;

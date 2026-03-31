@@ -1957,7 +1957,7 @@ function openRecipe(id) {
 
   const aromaHintHtml =
     typeof KuschiAromaHints !== 'undefined' && KuschiAromaHints
-      ? KuschiAromaHints.seasoningSectionHtml(null, { idSuffix: 'Rv' })
+      ? KuschiAromaHints.seasoningSectionHtml(null, { idSuffix: 'Rv', openByDefault: true })
       : '';
 
   modal.innerHTML = `

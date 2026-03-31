@@ -1183,6 +1183,38 @@ body {
   padding: 8px 0;
 }
 
+.aroma-hint-enhance {
+  padding: 0 14px 10px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+.aroma-hint-profiles,
+.aroma-hint-timing {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.5;
+  margin: 0 0 10px;
+}
+.aroma-hint-profiles:last-child,
+.aroma-hint-timing:last-child {
+  margin-bottom: 0;
+}
+.aroma-hint-profiles-sub {
+  color: var(--text3);
+  font-weight: 400;
+}
+.aroma-hint-inline-spice {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 500;
+}
+.aroma-hint-inline-spice:hover {
+  text-decoration: underline;
+}
+.aroma-hint-timing span {
+  color: var(--text2);
+}
+
 .aroma-add-panel {
   margin: 14px 0 8px;
   padding: 12px;

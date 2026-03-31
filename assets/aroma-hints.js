@@ -82,9 +82,29 @@
     return ref.name || ref.id || '';
   }
 
+  function pushMetaItem(out, s) {
+    s = String(s || '').trim();
+    if (s.length > 120) s = s.slice(0, 117) + '…';
+    if (s) out.push({ item: s });
+  }
+
+  /**
+   * Title, cuisine, category — improves matching when e.g. "lamb" is only in the recipe name.
+   */
+  function recipeMetaLines(recipe) {
+    var meta = [];
+    if (!recipe) return meta;
+    pushMetaItem(meta, recipe.name);
+    pushMetaItem(meta, recipe.cuisine);
+    pushMetaItem(meta, recipe.cui);
+    pushMetaItem(meta, recipe.category);
+    pushMetaItem(meta, recipe.cat);
+    return meta;
+  }
+
   /** Collect { item } rows from kitchen/detail recipe + optional protein strings for food lookup. */
   function recipeLinesForHints(recipe, extraItems) {
-    var out = [];
+    var out = recipeMetaLines(recipe);
     var ings = recipe && recipe.ingredients;
     if (Array.isArray(ings)) {
       for (var i = 0; i < ings.length; i++) {
@@ -241,14 +261,15 @@
 
   /**
    * @param {Array<{item:string}>} lines
-   * @returns {{ suggestions: Array<{id:string,name:string,score:number,groups:number[]}>, matchedSpiceIds: string[] }}
+   * @returns {{ suggestions: Array<{id:string,name:string,score:number,groups:number[]}>, matchedSpiceIds: string[], apparentProfiles: Array<{id:string,name:string}> }}
    */
   function buildSuggestions(lines) {
     if (!ingredients || !foodPairings) {
-      return { suggestions: [], matchedSpiceIds: [] };
+      return { suggestions: [], matchedSpiceIds: [], apparentProfiles: [] };
     }
     var scores = Object.create(null);
     var matchedSpiceIds = [];
+    var apparentSet = Object.create(null);
 
     function add(id, delta) {
       if (!id || !byId[id]) return;
@@ -271,6 +292,9 @@
           for (var h = 0; h < refs.length; h++) {
             var hid = seasonId(refs[h]);
             add(hid, w);
+          }
+          if (m >= 2) {
+            apparentSet[ing.id] = true;
           }
         }
       }
@@ -299,6 +323,17 @@
       }
     }
 
+    for (var ap in apparentSet) {
+      if (!Object.prototype.hasOwnProperty.call(apparentSet, ap)) continue;
+      var apIng = byId[ap];
+      if (!apIng) continue;
+      var apRefs = harmonyRefs(apIng);
+      for (var ah = 0; ah < apRefs.length; ah++) {
+        var brid = seasonId(apRefs[ah]);
+        add(brid, 1.45);
+      }
+    }
+
     var recipeLines = lines;
     var list = [];
     for (var id in scores) {
@@ -316,12 +351,75 @@
     list.sort(function (a, b) {
       return b.score - a.score || a.name.localeCompare(b.name);
     });
+
+    var apparentProfiles = [];
+    for (var aid in apparentSet) {
+      if (!Object.prototype.hasOwnProperty.call(apparentSet, aid)) continue;
+      var ob = byId[aid];
+      if (ob) apparentProfiles.push({ id: aid, name: ob.name || aid });
+    }
+    apparentProfiles.sort(function (a, b) {
+      return a.name.localeCompare(b.name);
+    });
+
     return {
       suggestions: list.slice(0, 24),
       matchedSpiceIds: matchedSpiceIds.filter(function (v, idx, a) {
         return a.indexOf(v) === idx;
       }),
+      apparentProfiles: apparentProfiles,
     };
+  }
+
+  function heatTimingLineForSpice(id) {
+    var ing = byId[id];
+    if (!ing || !ing.heat_behavior) return '';
+    var a = ing.heat_behavior.a;
+    if (!a || typeof a !== 'string') return '';
+    a = a.replace(/\s+/g, ' ').trim();
+    if (a.length > 140) a = a.slice(0, 137) + '…';
+    return a;
+  }
+
+  function enhancementBlockHtml(data) {
+    var parts = [];
+    var apps = data.apparentProfiles || [];
+    if (apps.length) {
+      var names = apps
+        .slice(0, 5)
+        .map(function (p) {
+          return (
+            '<a class="aroma-hint-inline-spice" href="' +
+            aromaPageHrefForSpice(p.id) +
+            '">' +
+            escHtml(p.name) +
+            '</a>'
+          );
+        })
+        .join(', ');
+      parts.push(
+        '<p class="aroma-hint-profiles"><strong>Indexed as spices/herbs:</strong> ' +
+          names +
+          (apps.length > 5 ? ' …' : '') +
+          '. <span class="aroma-hint-profiles-sub">Partners below include harmony picks that go with these.</span></p>'
+      );
+    }
+    var top = data.suggestions && data.suggestions[0];
+    if (top) {
+      var heat = heatTimingLineForSpice(top.id);
+      if (heat) {
+        parts.push(
+          '<p class="aroma-hint-timing"><strong>Heat note</strong> (' +
+            escHtml(top.name) +
+            '): <span>' +
+            escHtml(heat) +
+            '</span> — <a href="' +
+            aromaPageHrefForSpice(top.id) +
+            '">full profile</a></p>'
+        );
+      }
+    }
+    return parts.length ? '<div class="aroma-hint-enhance">' + parts.join('') + '</div>' : '';
   }
 
   function groupBadgesHtml(groups) {
@@ -342,10 +440,13 @@
     opts = opts || {};
     var idSuffix = opts.idSuffix || '';
     var wrapId = 'aromaHintsWrap' + idSuffix;
+    var openAttr = opts.openByDefault ? ' data-aroma-details-open="1"' : '';
     return (
       '<div class="aroma-hint-block" id="' +
       wrapId +
-      '" data-aroma-hint-wrap="1">' +
+      '" data-aroma-hint-wrap="1"' +
+      openAttr +
+      '>' +
       '<div class="aroma-hint-loading">Loading seasoning ideas…</div>' +
       '</div>'
     );
@@ -358,10 +459,13 @@
         var data = buildSuggestions(lines);
         var limit = compactTopN(wrapEl);
         var top = data.suggestions.slice(0, limit);
+        var openTag = wrapEl.getAttribute('data-aroma-details-open') === '1' ? ' open' : '';
         if (!top.length) {
           wrapEl.innerHTML =
-            '<details class="aroma-hint-details">' +
-            '<summary class="aroma-hint-summary">Seasoning ideas</summary>' +
+            '<details class="aroma-hint-details"' +
+            openTag +
+            '>' +
+            '<summary class="aroma-hint-summary">Seasoning &amp; aroma enhancement</summary>' +
             '<p class="aroma-hint-empty">No matches in the Aroma Bible index for these ingredients. Try <a href="aroma.html">Aroma lookup</a>.</p>' +
             '</details>';
           return;
@@ -385,12 +489,16 @@
             );
           })
           .join('');
+        var enhance = enhancementBlockHtml(data);
         wrapEl.innerHTML =
-          '<details class="aroma-hint-details">' +
-          '<summary class="aroma-hint-summary">Seasoning ideas <span class="aroma-hint-teaser">— ' +
+          '<details class="aroma-hint-details"' +
+          openTag +
+          '>' +
+          '<summary class="aroma-hint-summary">Seasoning &amp; aroma enhancement <span class="aroma-hint-teaser">— ' +
           escHtml(names) +
           '</span></summary>' +
-          '<p class="aroma-hint-intro">From the Aroma Bible index (harmony + food pairings). Tap a spice for the full profile.</p>' +
+          enhance +
+          '<p class="aroma-hint-intro">Suggestions combine food appendix rows, ingredient↔spice matches, and harmony partners of spices already in your list. Tap a spice for heat behavior and pairings.</p>' +
           '<div class="aroma-hint-chips">' +
           chips +
           '</div>' +
@@ -500,13 +608,22 @@
     };
   }
 
+  function getRecipeEnhancement(recipe) {
+    return ensureLoaded().then(function () {
+      var lines = recipeLinesForHints(recipe);
+      return Object.assign({ hintLines: lines }, buildSuggestions(lines));
+    });
+  }
+
   global.KuschiAromaHints = {
     ING_URL: ING_URL,
     FOOD_URL: FOOD_URL,
     ensureLoaded: ensureLoaded,
     normKey: normKey,
+    recipeMetaLines: recipeMetaLines,
     recipeLinesForHints: recipeLinesForHints,
     buildSuggestions: buildSuggestions,
+    getRecipeEnhancement: getRecipeEnhancement,
     foodPairingMatchesQuery: foodPairingMatchesQuery,
     ingredientFoodPhraseMatchesQuery: ingredientFoodPhraseMatchesQuery,
     seasoningSectionHtml: seasoningSectionHtml,
