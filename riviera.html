@@ -118,6 +118,7 @@
 
 /* ── Hero ── */
 .hero {
+  container-type: inline-size;
   text-align: center;
   padding: 50px 24px 20px;
   position: relative;
@@ -250,15 +251,21 @@
 
 /* Recipe detail modal (Riviera) — base shell in theme.css */
 #modalOverlay .modal {
-  max-height: 88vh;
+  max-height: min(88vh, 88dvh);
   padding: 36px;
 }
 #modalOverlay .modal-badges { margin-bottom: 16px; }
 #modalOverlay .modal-scale input { width: 72px; }
-#modalOverlay .modal-ing { line-height: 1.8; }
+#modalOverlay .modal-ing {
+  line-height: 1.8;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
 #modalOverlay .modal-steps li {
   line-height: 1.8;
   padding: 10px 0 10px 44px;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .modal-elements {
   display: flex;
@@ -273,6 +280,9 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 4px 12px;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .modal-subsection {
   font-size: 13px;
@@ -291,6 +301,8 @@
   padding: 10px 14px;
   margin-top: 16px;
   line-height: 1.6;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .label-box {
   display: inline-flex;
@@ -323,11 +335,16 @@
   gap: 10px;
   justify-content: center;
   margin-top: 20px;
+  max-width: 100%;
 }
 .hero-actions button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
   padding: 10px 20px;
   font-size: 13px;
   font-weight: 500;
@@ -339,6 +356,18 @@
   font-family: inherit;
   cursor: pointer;
   transition: all 0.25s;
+  text-align: center;
+  line-height: 1.25;
+}
+.hero-actions .hero-nav-cluster {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  max-width: 100%;
+}
+.hero-actions .hero-nav-cluster button {
+  min-width: 0;
 }
 .hero-actions button:hover {
   background: rgba(201, 169, 110, 0.25);
@@ -360,6 +389,9 @@
   .nav-back { padding: 16px 20px 0; }
   .card { padding: 16px; }
   .ing-row-r { grid-template-columns: 1fr 1fr; }
+  #modalOverlay .modal {
+    padding: 24px 20px;
+  }
 }
 
 @media (max-width: 420px) {
@@ -367,6 +399,7 @@
     padding: 9px 14px;
     font-size: 12px;
     letter-spacing: 0.35px;
+    white-space: normal;
   }
 }
 
