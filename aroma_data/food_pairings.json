@@ -15,8 +15,8 @@
         "_de": "Borretsch"
       },
       {
-        "id": "bockshornkleekraut",
-        "name": "Bockshornkleekraut",
+        "id": "fenugreek-leaves",
+        "name": "Fenugreek Leaves",
         "_de": "Bockshornkleekraut"
       },
       {
@@ -45,8 +45,8 @@
         "_de": "Essig"
       },
       {
-        "id": "fenchelkraut",
-        "name": "Fenchelkraut",
+        "id": "fennel-fronds",
+        "name": "Fennel Fronds",
         "_de": "Fenchelkraut"
       },
       {
@@ -439,8 +439,8 @@
         "_de": "Nigella"
       },
       {
-        "id": "pekannuss",
-        "name": "Pekannuss",
+        "id": "pecan",
+        "name": "Pecan",
         "_de": "Pekannuss"
       },
       {
@@ -758,8 +758,8 @@
         "_de": "Paradieskörner"
       },
       {
-        "id": "paranuss",
-        "name": "Paranuss",
+        "id": "brazil-nut",
+        "name": "Brazil Nut",
         "_de": "Paranuss"
       },
       {
@@ -4000,8 +4000,8 @@
         "_de": "Paprika"
       },
       {
-        "id": "paranuss",
-        "name": "Paranuss",
+        "id": "brazil-nut",
+        "name": "Brazil Nut",
         "_de": "Paranuss"
       },
       {

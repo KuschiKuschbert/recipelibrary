@@ -39,6 +39,9 @@ def main() -> int:
     for ing in ingredients:
         iid = ing.get("id", "?")
         _flag(iid, "ingredient.name", ing.get("name", ""), issues)
+        for h in ing.get("harmonizes_with") or []:
+            if isinstance(h, dict):
+                _flag(iid, "harmonizes_with.name", h.get("name", "") or "", issues)
         for p in ing.get("pairs_with_foods") or []:
             _flag(iid, "pairs_with_foods", p, issues)
         if all_fields:

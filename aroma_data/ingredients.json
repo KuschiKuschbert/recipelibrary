@@ -19,10 +19,6 @@
       {
         "id": "thyme",
         "name": "Thyme"
-      },
-      {
-        "id": "das-schluesselaroma-des-gewuerzes-ist-durch-das-aromatisch-kraeuterig-duf",
-        "name": "Das Schlüsselaroma Des Gewürzes Ist Durch Das Aromatisch-Kräuterig Duf-"
       }
     ],
     "pairs_with_foods": [
@@ -31,9 +27,9 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Fresher kräuteriger Duft",
+      "a": "Fresh Herbaler Duft",
       "b": "Optimale Aromenentfaltung beim Kochen",
-      "c": "Thy -"
+      "c": "Thy"
     },
     "spice_blends": [
       "Chat Masala",
@@ -53,10 +49,6 @@
       {
         "id": "chili",
         "name": "Chili"
-      },
-      {
-        "id": "cloves",
-        "name": "Cloves"
       },
       {
         "id": "ginger",
@@ -80,7 +72,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Balsamisch, sandelwoody, warm, kampf -"
+      "a": "balsamic, sandelwoody, warm, kampf"
     },
     "spice_blends": [
       "Indisches Chat Masala",
@@ -103,10 +95,6 @@
       {
         "id": "lavender",
         "name": "Lavender"
-      },
-      {
-        "id": "nutmeg",
-        "name": "Nutmeg"
       },
       {
         "id": "perilla",
@@ -141,16 +129,8 @@
         "name": "Tarragon"
       },
       {
-        "id": "fennel-seeds",
-        "name": "Fennel Seeds"
-      },
-      {
         "id": "chervil",
         "name": "Chervil"
-      },
-      {
-        "id": "nutmeg",
-        "name": "Nutmeg"
       },
       {
         "id": "allspice",
@@ -163,10 +143,6 @@
       {
         "id": "star-anise",
         "name": "Star Anise"
-      },
-      {
-        "id": "lemongrass",
-        "name": "Lemongrass"
       }
     ],
     "pairs_with_foods": [
@@ -178,14 +154,14 @@
       "Almonds",
       "Chocolate",
       "Honey",
-      "salzig",
+      "savory",
       "light meat",
       "liver"
     ],
     "cuisines": [],
     "heat_behavior": {
       "a": "Floral, aromatic, anise-like",
-      "b": "Optimale aromatice anise note",
+      "b": "Optimale aromatic anise note",
       "c": "Lightly bitter mit dark roast notes"
     },
     "aroma_groups": [
@@ -224,14 +200,14 @@
     ],
     "pairs_with_foods": [
       "squash",
-      "Okra",
+      "okra",
       "fish"
     ],
     "cuisines": [
       "Karibik:"
     ],
     "heat_behavior": {
-      "a": "Earthy, woody-aromatice Noten",
+      "a": "Earthy, woody-aromatic Noten",
       "b": "Intense color"
     },
     "aroma_groups": [
@@ -271,10 +247,6 @@
       {
         "id": "vanilla",
         "name": "Vanilla"
-      },
-      {
-        "id": "aprikosen-wurden-schon-vor-rund-4000-jahren-in-china-kultiviert-von",
-        "name": "Aprikosen Wurden Schon Vor Rund 4000 Jahren In China Kultiviert. Von"
       }
     ],
     "pairs_with_foods": [
@@ -374,10 +346,6 @@
       {
         "id": "vanilla",
         "name": "Vanilla"
-      },
-      {
-        "id": "citrus-zest",
-        "name": "Citrus Zest"
       }
     ],
     "pairs_with_foods": [],
@@ -413,14 +381,6 @@
       {
         "id": "wormwood",
         "name": "Wormwood"
-      },
-      {
-        "id": "aromatisiertes-gaenseschmalz",
-        "name": "Aromatisiertes Gänseschmalz"
-      },
-      {
-        "id": "den-flomen-im-ofen-bei-nicht-mehr-als-70-c-aus",
-        "name": "Den Flomen Im Ofen Bei Nicht Mehr Als 70 °C Aus -"
       }
     ],
     "pairs_with_foods": [
@@ -435,8 +395,8 @@
       "Japan:"
     ],
     "heat_behavior": {
-      "a": "Floral-kräuterig",
-      "b": "Kräuterig warme"
+      "a": "Floral-Herbal",
+      "b": "Warm herbal"
     },
     "aroma_groups": [
       2,
@@ -457,20 +417,8 @@
         "name": "Long Pepper"
       },
       {
-        "id": "orange-peel",
-        "name": "Orange Peel"
-      },
-      {
         "id": "allspice",
         "name": "Allspice"
-      },
-      {
-        "id": "pistachios",
-        "name": "Pistachios"
-      },
-      {
-        "id": "rose-water",
-        "name": "Rose Water"
       },
       {
         "id": "saffron",
@@ -479,18 +427,6 @@
       {
         "id": "cinnamon",
         "name": "Cinnamon"
-      },
-      {
-        "id": "berberitzensauce",
-        "name": "Berberitzensauce"
-      },
-      {
-        "id": "berberitzen-15-minuten-waessern-abtrocknen",
-        "name": "Berberitzen 15 Minuten Wässern, Abtrocknen."
-      },
-      {
-        "id": "dann-in-reichlich-butter-kurz-schwenken",
-        "name": "Dann In Reichlich Butter Kurz Schwenken –"
       }
     ],
     "pairs_with_foods": [
@@ -500,7 +436,7 @@
     ],
     "heat_behavior": {
       "a": "Dominant sauer",
-      "b": "118 K R Ä U T E R , G E W Ü R Z E & M E H R Das ätherische Öl der Bergamotte hat einen charakteristischen, Fresh-süß-"
+      "b": "Fresh-sweet"
     },
     "aroma_groups": [
       2,
@@ -515,10 +451,6 @@
       {
         "id": "chili",
         "name": "Chili"
-      },
-      {
-        "id": "kaffir-lime-leaves",
-        "name": "Kaffir Lime Leaves"
       },
       {
         "id": "cardamom",
@@ -543,10 +475,6 @@
       {
         "id": "cinnamon",
         "name": "Cinnamon"
-      },
-      {
-        "id": "linalylacetat-frisch-suesslich-bergamotte-ar",
-        "name": "Linalylacetat Frisch-Süßlich, Bergamotte Ar -"
       }
     ],
     "pairs_with_foods": [
@@ -562,7 +490,7 @@
     ],
     "heat_behavior": {
       "a": "Freshes Bergamotte-Aroma",
-      "b": "Fruchtig"
+      "b": "Fruity"
     },
     "aroma_groups": [
       2
@@ -592,8 +520,8 @@
       "Milch -"
     ],
     "heat_behavior": {
-      "a": "Freshe, süßlich-minzige Aromen",
-      "b": "Beifügen von Röstnöten"
+      "a": "Fresh, sweet-minty aromas",
+      "b": "Addition of roast notes"
     },
     "aroma_groups": [
       4,
@@ -622,10 +550,6 @@
         "name": "Bay Leaf"
       },
       {
-        "id": "rose",
-        "name": "Rose"
-      },
-      {
         "id": "tamarind",
         "name": "Tamarind"
       },
@@ -636,14 +560,6 @@
       {
         "id": "cinnamon",
         "name": "Cinnamon"
-      },
-      {
-        "id": "aprikosenchutney",
-        "name": "Aprikosenchutney"
-      },
-      {
-        "id": "aprikosensteine-knacken-die-bittermandeln-he",
-        "name": "Aprikosensteine Knacken, Die „Bittermandeln“ He-"
       }
     ],
     "pairs_with_foods": [
@@ -654,9 +570,9 @@
       "Deutschland: Stollen, Marzipan"
     ],
     "heat_behavior": {
-      "a": "Mandelig, pungent, trigeminal-reizend",
-      "b": "aromatic-mandelig, süßlich-bitter",
-      "c": "Abgeschwächt bitter, marzipanartig bittermandelig l Wasser BENZALDEHYD"
+      "a": "almond-like, pungent, trigeminal-reizend",
+      "b": "aromatic-almond-like, sweet-bitter",
+      "c": "Muted bitter, marzipan-like bitteralmond-like in water benzaldehydeee"
     },
     "aroma_groups": [
       5
@@ -698,27 +614,11 @@
       {
         "id": "mustard",
         "name": "Mustard"
-      },
-      {
-        "id": "zitrusschalen",
-        "name": "Zitrusschalen"
-      },
-      {
-        "id": "obatzda-mit-bockshornkleesamen",
-        "name": "Obatzda Mit Bockshornkleesamen"
-      },
-      {
-        "id": "die-geruchschemie-der-samen-beziehungsweise-botanisch-korrekt-der",
-        "name": "Die Geruchschemie Der Samen Beziehungsweise Botanisch Korrekt: Der"
-      },
-      {
-        "id": "fruechte-des-bockshornklees-wird-durch-das-molekuel-sotolon-bestimmt-das",
-        "name": "Früchte Des Bockshornklees Wird Durch Das Molekül Sotolon Bestimmt, Das"
       }
     ],
     "pairs_with_foods": [
       "spinach",
-      "Yams"
+      "yams"
     ],
     "cuisines": [
       "Indien: Methi Naan (Brot), Shuktas (benga-"
@@ -785,9 +685,9 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Fresh, kräuterig, leicht Floral",
-      "b": "Kräuterig, warm, kampferig",
-      "c": "Eher woody, beginnende bitternoten"
+      "a": "Fresh, Herbal, leicht Floral",
+      "b": "Herbal, warm, camphorous",
+      "c": "Rather woody, beginnende bitternoten"
     },
     "spice_blends": [
       "Fines Herbes",
@@ -842,8 +742,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Freshe Gurkennote",
-      "b": "Eher wachsig-"
+      "a": "Fresh Gurkennote",
+      "b": "Rather waxy"
     },
     "aroma_groups": [
       2,
@@ -855,10 +755,6 @@
     "name": "Nettle",
     "_de": "Brennnessel",
     "harmonizes_with": [
-      {
-        "id": "kombu-algen",
-        "name": "Kombu-Algen"
-      },
       {
         "id": "bitter-almond",
         "name": "Bitter Almond"
@@ -890,7 +786,7 @@
       "Niederlande:"
     ],
     "heat_behavior": {
-      "a": "Fresh, leicht aromatic, leicht säuerlich",
+      "a": "Fresh, leicht aromatic, leicht tangy",
       "b": "Herb, adstringierend"
     },
     "aroma_groups": [
@@ -935,8 +831,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Freshes, Florales Aroma",
-      "b": "Flat,"
+      "a": "Freshes, Florals Aroma",
+      "b": "Flat"
     },
     "aroma_groups": [
       1
@@ -982,9 +878,9 @@
       "Brasilien: Cajuína (Kaschusaft"
     ],
     "heat_behavior": {
-      "a": "Wachsig, fruchtig",
+      "a": "waxy, Fruity",
       "b": "Whiskyartig, woody",
-      "c": "Warme Röstnoten"
+      "c": "Warm roast notes"
     },
     "aroma_groups": [
       2,
@@ -1037,8 +933,8 @@
       "Deutschland: Champignoncremesuppe,"
     ],
     "heat_behavior": {
-      "a": "Eher rohes Pilzaroma",
-      "c": "Erdig, leicht muf- fig",
+      "a": "Rather rohes Pilzaroma",
+      "c": "earthy, leicht muf- fig",
       "b": "Typischer Champignonduft, herzhaft"
     },
     "aroma_groups": [
@@ -1093,8 +989,8 @@
       "Soups"
     ],
     "heat_behavior": {
-      "a": "Earthy Aromen, Schärfe",
-      "b": "Schärfe wird"
+      "a": "Earthy aromas, heat",
+      "b": "Heat"
     },
     "spice_blends": [
       "Indische Masalas",
@@ -1131,16 +1027,8 @@
         "name": "Garlic"
       },
       {
-        "id": "cilantro",
-        "name": "Cilantro"
-      },
-      {
         "id": "lime",
         "name": "Lime"
-      },
-      {
-        "id": "nuts",
-        "name": "nuts"
       },
       {
         "id": "star-anise",
@@ -1163,9 +1051,9 @@
       "Kanada: Thanksgiving-Truthahn,"
     ],
     "heat_behavior": {
-      "a": "Fruchtig-süß-säuerlich",
+      "a": "Fruity-sweet-tangy",
       "b": "Zitrusartig aromatic",
-      "c": "Kampferartig bis bitter,"
+      "c": "Kampferartig bis bitter"
     },
     "aroma_groups": [
       2,
@@ -1216,26 +1104,6 @@
       {
         "id": "onion",
         "name": "Onion"
-      },
-      {
-        "id": "bergera-koenigii",
-        "name": "Bergera Koenigii"
-      },
-      {
-        "id": "geraniol-blumig-floral-l-alkohol-fett",
-        "name": "Geraniol Blumig, Floral L Alkohol, Fett"
-      },
-      {
-        "id": "nerol-frisch-rosenartig-zitrus-l-alkohol",
-        "name": "Nerol Frisch, Rosenartig, Zitrus L Alkohol,"
-      },
-      {
-        "id": "fett-wasser",
-        "name": "Fett, Wasser"
-      },
-      {
-        "id": "ocimen-zitrus-kiefernartig",
-        "name": "Ocimen Zitrus-Kiefernartig,"
       }
     ],
     "pairs_with_foods": [
@@ -1244,8 +1112,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Fresher, pinienartiger Duft",
-      "b": "Würzig-"
+      "a": "Fresh, pinienartiger Duft",
+      "b": "Spicy"
     },
     "spice_blends": [
       "Indisches Madras-Curry"
@@ -1271,10 +1139,6 @@
       {
         "id": "thyme",
         "name": "Thyme"
-      },
-      {
-        "id": "tomatoes",
-        "name": "tomatoes"
       }
     ],
     "pairs_with_foods": [
@@ -1284,8 +1148,8 @@
       "Soups"
     ],
     "heat_behavior": {
-      "a": "Florale Aromen",
-      "b": "Pinienartig, tannen -"
+      "a": "Floral aromas",
+      "b": "Pinienartig, tannen"
     },
     "aroma_groups": [
       2,
@@ -1310,14 +1174,6 @@
         "name": "Mint"
       },
       {
-        "id": "nuts",
-        "name": "nuts"
-      },
-      {
-        "id": "orange-blossom-water",
-        "name": "Orange Blossom Water"
-      },
-      {
         "id": "saffron",
         "name": "Saffron"
       },
@@ -1328,10 +1184,6 @@
       {
         "id": "cinnamon",
         "name": "Cinnamon"
-      },
-      {
-        "id": "die-vielschichtige-aromachemie-der-datteln-ist-durch-das-fruchtig-blumig",
-        "name": "Die Vielschichtige Aromachemie Der Datteln Ist Durch Das Fruchtig-Blumig-"
       }
     ],
     "pairs_with_foods": [
@@ -1345,8 +1197,8 @@
       "Iran: Marmelade, Obstsa-"
     ],
     "heat_behavior": {
-      "a": "Floral, fruchtig",
-      "b": "aromatic-süß bis"
+      "a": "Floral, Fruity",
+      "b": "aromatic-sweet to"
     },
     "aroma_groups": [
       2,
@@ -1385,10 +1237,6 @@
       {
         "id": "onion",
         "name": "Onion"
-      },
-      {
-        "id": "die-gruenen-dillspitzen-zeichnen-sich-durch-einen-unverwechselbaren-fri",
-        "name": "Die Grünen Dillspitzen Zeichnen Sich Durch Einen Unverwechselbaren Fri-"
       }
     ],
     "pairs_with_foods": [
@@ -1401,9 +1249,9 @@
       "Deutschland: Gurkensalat, milchsauer ein-"
     ],
     "heat_behavior": {
-      "a": "Charakteristischer Fresher Duft",
-      "b": "Warmen Aromen betont, weniger Fresh",
-      "c": "Eher Flat, aber aromatic 151 Das Hauptaroma der Eberraute definiert sich über den eukalyptus- und"
+      "a": "Characteristic Fresh Duft",
+      "b": "Warmn aromas betont, weniger Fresh",
+      "c": "Rather flat, aber aromatic 151 Das Main southernwood aroma: eucalyptus- und"
     },
     "spice_blends": [],
     "aroma_groups": [
@@ -1420,20 +1268,12 @@
         "name": "Sea lettuce"
       },
       {
-        "id": "olives-and-oil",
-        "name": "olives and oil"
-      },
-      {
         "id": "thyme",
         "name": "Thyme"
       },
       {
         "id": "onion",
         "name": "Onion"
-      },
-      {
-        "id": "die-pilze-falls-erforderlich-putzen-und-in-blaetter-also",
-        "name": "Die Pilze Falls Erforderlich Putzen Und In Blätter, Also"
       }
     ],
     "pairs_with_foods": [
@@ -1449,8 +1289,8 @@
       "Island: Snack"
     ],
     "heat_behavior": {
-      "a": "Fresher, grüner, pilzartig-chloriger Duft",
-      "b": "aromatice, ölig-nussige Note"
+      "a": "Fresh, green, mushroom-chlorine-like aroma",
+      "b": "aromatic, oily-nutty note"
     },
     "aroma_groups": [
       2,
@@ -1497,18 +1337,6 @@
       {
         "id": "lemon-balm",
         "name": "Lemon Balm"
-      },
-      {
-        "id": "eistee-mit-cola-geschmack",
-        "name": "Eistee Mit Cola-Geschmack"
-      },
-      {
-        "id": "frische-blaetter-mit-heissem-wasser-aufgiessen-und",
-        "name": "Frische Blätter Mit Heißem Wasser Aufgießen Und"
-      },
-      {
-        "id": "10-minuten-ziehen-lassen-mit-zucker-oder-honig",
-        "name": "10 Minuten Ziehen Lassen. Mit Zucker Oder Honig"
       }
     ],
     "pairs_with_foods": [
@@ -1519,9 +1347,9 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Fresher, typischer Duft",
-      "b": "Kräuterig- bitter",
-      "c": "Stärkeres wermutartiges Aroma"
+      "a": "Fresh, typischer Duft",
+      "b": "Herbal- bitter",
+      "c": "Stronger wormwood-like Aroma"
     },
     "aroma_groups": [
       2,
@@ -1550,10 +1378,6 @@
         "name": "Sesame"
       },
       {
-        "id": "zucker",
-        "name": "Zucker"
-      },
-      {
         "id": "onion",
         "name": "Onion"
       }
@@ -1566,8 +1390,8 @@
       "Westafrika: Erdnusspaste, Erdnussbutter,"
     ],
     "heat_behavior": {
-      "a": "(Fresh, ungeröstet) wachsig, fettig",
-      "b": "Deutlich nussige Röststoffe"
+      "a": "(Fresh, unroasted) waxy, fatty",
+      "b": "Clearly nutty roast compounds"
     },
     "aroma_groups": [
       2,
@@ -1604,10 +1428,6 @@
         "name": "Bay Leaf"
       },
       {
-        "id": "nutmeg",
-        "name": "Nutmeg"
-      },
-      {
         "id": "parsley",
         "name": "Parsley"
       },
@@ -1618,10 +1438,6 @@
       {
         "id": "mustard",
         "name": "Mustard"
-      },
-      {
-        "id": "artemisia-dracunculus",
-        "name": "Artemisia Dracunculus"
       }
     ],
     "pairs_with_foods": [
@@ -1636,8 +1452,8 @@
     ],
     "heat_behavior": {
       "a": "Fresh, Floral, zitrusartig",
-      "b": "Kräuterig-harzig",
-      "c": "(Gekocht) weiche,"
+      "b": "Herbal-resinous",
+      "c": "(Gekocht) weiche"
     },
     "spice_blends": [
       "Fines Herbes",
@@ -1674,10 +1490,6 @@
         "name": "Lavender"
       },
       {
-        "id": "nutmeg",
-        "name": "Nutmeg"
-      },
-      {
         "id": "oregano",
         "name": "Oregano"
       },
@@ -1688,10 +1500,6 @@
       {
         "id": "thyme",
         "name": "Thyme"
-      },
-      {
-        "id": "lemon-zest",
-        "name": "Lemon zest"
       }
     ],
     "pairs_with_foods": [
@@ -1703,8 +1511,8 @@
       "Italien: Finocchiona (Fenchelsalami),"
     ],
     "heat_behavior": {
-      "a": "Freshe kräuterige Note",
-      "b": "Fruchtige Fen-"
+      "a": "Fresh Herbale Note",
+      "b": "Fruitye Fen"
     },
     "spice_blends": [
       "Indisches Garam Masala",
@@ -1728,10 +1536,6 @@
         "name": "Ginger"
       },
       {
-        "id": "kaffir-lime-leaves",
-        "name": "Kaffir Lime Leaves"
-      },
-      {
         "id": "garlic",
         "name": "Garlic"
       },
@@ -1746,10 +1550,6 @@
       {
         "id": "grains-of-paradise",
         "name": "Grains of Paradise"
-      },
-      {
-        "id": "lemongrass",
-        "name": "Lemongrass"
       }
     ],
     "pairs_with_foods": [
@@ -1762,9 +1562,9 @@
       "Thailand: Tom Yam, Tom Kha Gai (Suppen),"
     ],
     "heat_behavior": {
-      "a": "(Fresh:) mitunter zitronige Freshe",
-      "b": "Balsamische, würzige Noten",
-      "c": "Aromati-"
+      "a": "(Fresh:) mitunter zitronige Fresh",
+      "b": "Balsamic, spicy Noten",
+      "c": "Aromati"
     },
     "spice_blends": [
       "marokkani-"
@@ -1784,20 +1584,12 @@
         "name": "Basil"
       },
       {
-        "id": "pomegranate-seeds",
-        "name": "pomegranate seeds"
-      },
-      {
         "id": "long-pepper",
         "name": "Long Pepper"
       },
       {
         "id": "bay-leaf",
         "name": "Bay Leaf"
-      },
-      {
-        "id": "nutmeg",
-        "name": "Nutmeg"
       },
       {
         "id": "oregano",
@@ -1827,7 +1619,7 @@
       "Deutschland: Lebkuchen, Bratapfel, Apfel-"
     ],
     "heat_behavior": {
-      "a": "Wachsige, dezent betäubende Würzig-"
+      "a": "waxy, dezent numbinge Spicy"
     },
     "spice_blends": [
       "indisches Garam Masala"
@@ -1882,8 +1674,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Fresh, säuerlich-fruchtig",
-      "b": "Rosennoten,"
+      "a": "Fresh, tangy-fruity",
+      "b": "Rosennoten"
     },
     "aroma_groups": [
       2,
@@ -1906,14 +1698,6 @@
       {
         "id": "paprika",
         "name": "Paprika"
-      },
-      {
-        "id": "zucker",
-        "name": "Zucker"
-      },
-      {
-        "id": "corylus-maxima",
-        "name": "Corylus Maxima"
       }
     ],
     "pairs_with_foods": [
@@ -1923,7 +1707,7 @@
     "cuisines": [],
     "heat_behavior": {
       "a": "Freshes Haselnussaroma",
-      "b": "Leicht woody,"
+      "b": "Leicht woody"
     },
     "aroma_groups": [
       5
@@ -1969,18 +1753,6 @@
       {
         "id": "cinnamon",
         "name": "Cinnamon"
-      },
-      {
-        "id": "zitrusschalen",
-        "name": "Zitrusschalen"
-      },
-      {
-        "id": "ingwerkarotten-mit-orangenglasur",
-        "name": "Ingwerkarotten Mit Orangenglasur"
-      },
-      {
-        "id": "butter-in-einer-nichthaftenden-pfanne-schmelzen",
-        "name": "Butter In Einer Nichthaftenden Pfanne Schmelzen,"
       }
     ],
     "pairs_with_foods": [
@@ -1989,7 +1761,7 @@
     "cuisines": [],
     "heat_behavior": {
       "a": "Fresh, zitrusartig, Floral",
-      "b": "Eher woody-"
+      "b": "Rather woody"
     },
     "spice_blends": [
       "Getrocknet: Fisch-",
@@ -2023,9 +1795,9 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Leichte, mitunter Florale Röstnoten",
+      "a": "Light, sometimes Floral roast notes",
       "b": "Rauchig, wenig bitter, schokoladig",
-      "c": "Betonung der typischen Kaffeeröst -"
+      "c": "Emphasis on typical coffee roast"
     },
     "aroma_groups": [
       5
@@ -2061,14 +1833,6 @@
         "name": "Mint"
       },
       {
-        "id": "nutmeg",
-        "name": "Nutmeg"
-      },
-      {
-        "id": "orange",
-        "name": "Orange"
-      },
-      {
         "id": "pepper",
         "name": "Pepper"
       },
@@ -2083,10 +1847,6 @@
       {
         "id": "cinnamon",
         "name": "Cinnamon"
-      },
-      {
-        "id": "2-methylbutanal-kakaoartig-nussig-l-al",
-        "name": "2-Methylbutanal Kakaoartig, Nussig L Al-"
       }
     ],
     "pairs_with_foods": [
@@ -2095,9 +1855,9 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Tiefe Schokoladennote, floral-säuerlich",
-      "b": "Würzig-rauchige Kakaonoten",
-      "c": "Beto-"
+      "a": "Tiefe chocolate note, floral-tangy",
+      "b": "Spicy-smoky cocoa notes",
+      "c": "Beto"
     },
     "spice_blends": [
       "Mexikanische Mole poblano",
@@ -2149,8 +1909,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Schwefelig",
-      "b": "Feine aromatice Unter -"
+      "a": "Sulfurous",
+      "b": "Feine aromatic Unter"
     },
     "aroma_groups": [
       2,
@@ -2221,8 +1981,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Freshe, Floral-würzige Note",
-      "b": "Würzig-"
+      "a": "Fresh, Floral-spicy Note",
+      "b": "Spicy"
     },
     "spice_blends": [
       "in-"
@@ -2265,7 +2025,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Süßlich-warme, optimale Kerbelnote",
+      "a": "sweet-Warm, optimal chervil note",
       "b": "Signifikanter Aromenverlust"
     },
     "spice_blends": [
@@ -2312,10 +2072,6 @@
       {
         "id": "thyme",
         "name": "Thyme"
-      },
-      {
-        "id": "lemongrass",
-        "name": "Lemongrass"
       }
     ],
     "pairs_with_foods": [
@@ -2328,8 +2084,8 @@
     "cuisines": [],
     "heat_behavior": {
       "a": "pungent-scharfer Knoblauchduft",
-      "b": "Abschwächung der pungenten Note",
-      "c": "Zunahme der bitterkeit, Röstnoten"
+      "b": "Softening of pungent Note",
+      "c": "Increase in bitterness, roast notes"
     },
     "spice_blends": [
       "Chili-con-carne-Mischung",
@@ -2373,10 +2129,6 @@
         "name": "Cinnamon"
       },
       {
-        "id": "lemongrass",
-        "name": "Lemongrass"
-      },
-      {
         "id": "onion",
         "name": "Onion"
       }
@@ -2393,7 +2145,7 @@
     "cuisines": [],
     "heat_behavior": {
       "a": "Volles Kokosaroma",
-      "b": "abgeschwächter"
+      "b": "Muteder"
     },
     "spice_blends": [],
     "aroma_groups": [
@@ -2413,14 +2165,6 @@
       {
         "id": "lovage",
         "name": "Lovage"
-      },
-      {
-        "id": "zitrusfruechte",
-        "name": "Zitrusfrüchte"
-      },
-      {
-        "id": "ein-eindeutiges-schluesselaroma-gibt-es-trotz-des-charakteristischen-geruchs",
-        "name": "Ein Eindeutiges Schlüsselaroma Gibt Es Trotz Des Charakteristischen Geruchs"
       }
     ],
     "pairs_with_foods": [
@@ -2432,8 +2176,8 @@
       "Vietnam: Currys, Suppen, Salate"
     ],
     "heat_behavior": {
-      "a": "Typisches Koriandergrün",
-      "b": "Deutlicher"
+      "a": "Typical cilantro",
+      "b": "Clearlyer"
     },
     "spice_blends": [],
     "aroma_groups": [
@@ -2466,10 +2210,6 @@
         "name": "Marjoram"
       },
       {
-        "id": "nutmeg",
-        "name": "Nutmeg"
-      },
-      {
         "id": "oregano",
         "name": "Oregano"
       },
@@ -2499,7 +2239,7 @@
     ],
     "heat_behavior": {
       "a": "Fresh, Floral",
-      "b": "Zusätzlich aromatice"
+      "b": "Additionally aromatic"
     },
     "aroma_groups": [
       2
@@ -2579,14 +2319,6 @@
       {
         "id": "cinnamon",
         "name": "Cinnamon"
-      },
-      {
-        "id": "kreuzkuemmel-mit-weisskohl",
-        "name": "Kreuzkümmel Mit Weisskohl"
-      },
-      {
-        "id": "kreuzkuemmel-in-einer-schweren-pfanne-leicht-anroes",
-        "name": "Kreuzkümmel In Einer Schweren Pfanne Leicht Anrös-"
       }
     ],
     "pairs_with_foods": [
@@ -2616,10 +2348,6 @@
         "name": "Curry Leaves"
       },
       {
-        "id": "cloves",
-        "name": "Cloves"
-      },
-      {
         "id": "ginger",
         "name": "Ginger"
       },
@@ -2638,10 +2366,6 @@
       {
         "id": "juniper",
         "name": "Juniper"
-      },
-      {
-        "id": "lemongrass",
-        "name": "Lemongrass"
       }
     ],
     "pairs_with_foods": [
@@ -2659,8 +2383,8 @@
       "Nordafrika: Lamm- oder Hammel -"
     ],
     "heat_behavior": {
-      "a": "Freshe Schärfe, betäubend",
-      "b": "Volles Aroma, wärmend balsamisch",
+      "a": "Fresh heat, numbing",
+      "b": "Full aroma, warming balsamic",
       "c": "Leichte"
     },
     "spice_blends": [
@@ -2701,10 +2425,6 @@
         "name": "Clove"
       },
       {
-        "id": "kaffir-lime-leaves",
-        "name": "Kaffir Lime Leaves"
-      },
-      {
         "id": "cardamom",
         "name": "Cardamom"
       },
@@ -2715,14 +2435,6 @@
       {
         "id": "cumin",
         "name": "Cumin"
-      },
-      {
-        "id": "lemongrass",
-        "name": "Lemongrass"
-      },
-      {
-        "id": "den-ingwer-schaelen-und-grob-hacken-die-chilischote-entkernen-die-sahne-in-einem",
-        "name": "Den Ingwer Schälen Und Grob Hacken, Die Chilischote Entkernen. Die Sahne In Einem"
       }
     ],
     "pairs_with_foods": [
@@ -2775,20 +2487,8 @@
         "name": "Juniper"
       },
       {
-        "id": "citrus-zest",
-        "name": "Citrus Zest"
-      },
-      {
         "id": "onion",
         "name": "Onion"
-      },
-      {
-        "id": "kuemmel-kartoffeln-vom-blech",
-        "name": "Kümmel-Kartoffeln Vom Blech"
-      },
-      {
-        "id": "das-aetherische-oel-des-kuemmels-besteht-bis-zu-80-prozent-aus-dem-fettloes",
-        "name": "Das Ätherische Öl Des Kümmels Besteht Bis Zu 80 Prozent Aus Dem Fettlös-"
       }
     ],
     "pairs_with_foods": [
@@ -2799,7 +2499,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Feiner, mitunter zitrusartiger Kümmel-"
+      "a": "Finer, sometimes citrus-like caraway"
     },
     "spice_blends": [
       "Nordafrikanische Harissa-Sauce",
@@ -2826,10 +2526,6 @@
       {
         "id": "cinnamon",
         "name": "Cinnamon"
-      },
-      {
-        "id": "das-aromenspektrum-der-kuerbiskerne-ist-sehr-komplex-pentanal-steuert",
-        "name": "Das Aromenspektrum Der Kürbiskerne Ist Sehr Komplex: Pentanal Steuert"
       }
     ],
     "pairs_with_foods": [
@@ -2840,9 +2536,9 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Feine wachsige, fettige Noten",
-      "b": "Röstno- ten stärker im Vordergrund",
-      "c": "Zusätzliche"
+      "a": "Feine waxy, fattye Noten",
+      "b": "roast notes more prominent",
+      "c": "Additional"
     },
     "aroma_groups": [
       2,
@@ -2885,14 +2581,6 @@
       {
         "id": "licorice",
         "name": "licorice"
-      },
-      {
-        "id": "lemons",
-        "name": "Lemons"
-      },
-      {
-        "id": "piper-longum",
-        "name": "Piper Longum"
       }
     ],
     "pairs_with_foods": [
@@ -2903,7 +2591,7 @@
       "Deutschland: Wildhasenpfeffer, Wildra-"
     ],
     "heat_behavior": {
-      "a": "Harzig-woody, leicht scharf",
+      "a": "resinous-woody, leicht scharf",
       "b": "Betonte"
     },
     "aroma_groups": [
@@ -2958,8 +2646,8 @@
       "Frankreich: Ratatouille, Schmorgerichte,"
     ],
     "heat_behavior": {
-      "a": "Fresher Duft",
-      "b": "Hervorheben kräuteriger"
+      "a": "Fresh Duft",
+      "b": "Highlighting Herbaler"
     },
     "spice_blends": [
       "marokka-"
@@ -3028,8 +2716,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Fresher, kräuterig-Earthyr Duft",
-      "b": "„Sup-"
+      "a": "Fresh, Herbal-Earthy Duft",
+      "b": "„Sup"
     },
     "aroma_groups": [
       2,
@@ -3080,8 +2768,8 @@
       "Frankreich: Béchamelsauce, Rinderschmor-"
     ],
     "heat_behavior": {
-      "a": "Fresh, Floral, wachsig",
-      "b": "Eher harzige"
+      "a": "Fresh, Floral, waxy",
+      "b": "Rather resinous"
     },
     "spice_blends": [],
     "aroma_groups": [
@@ -3096,10 +2784,6 @@
       {
         "id": "basil",
         "name": "Basil"
-      },
-      {
-        "id": "cloves",
-        "name": "Cloves"
       },
       {
         "id": "marjoram",
@@ -3136,9 +2820,9 @@
     ],
     "pairs_with_foods": [],
     "heat_behavior": {
-      "a": "Eher Florale Noten (etwa beim Einlegen)",
-      "b": "Kampferartige Freshe",
-      "c": "Eher harziger,"
+      "a": "Rather Floral Noten (etwa beim Einlegen)",
+      "b": "Kampferartige Fresh",
+      "c": "Rather resinousr"
     },
     "aroma_groups": [
       3
@@ -3184,8 +2868,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Leicht fettig, aromatic",
-      "b": "aromatic-"
+      "a": "Leicht fatty, aromatic",
+      "b": "aromatic"
     },
     "aroma_groups": [
       2,
@@ -3232,7 +2916,7 @@
     "cuisines": [],
     "heat_behavior": {
       "a": "Fresh, herbal",
-      "b": "Erdig-herbale Aromen"
+      "b": "earthy-herbale aromas"
     },
     "spice_blends": [
       "Wurstmischungen",
@@ -3261,10 +2945,6 @@
         "name": "Cumin"
       },
       {
-        "id": "nutmeg",
-        "name": "Nutmeg"
-      },
-      {
         "id": "rosemary",
         "name": "Rosemary"
       },
@@ -3287,8 +2967,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "b": "aromatic, bitter- süß",
-      "c": "Röstnoten, karamellig bis schoko -"
+      "b": "aromatic, bitter-sweet",
+      "c": "roast notes, karamellig bis schoko"
     },
     "aroma_groups": [
       5
@@ -3299,18 +2979,6 @@
     "name": "chestnuts",
     "_de": "Maronen",
     "harmonizes_with": [
-      {
-        "id": "almonds",
-        "name": "Almonds"
-      },
-      {
-        "id": "nutmeg",
-        "name": "Nutmeg"
-      },
-      {
-        "id": "nuts",
-        "name": "nuts"
-      },
       {
         "id": "vanilla",
         "name": "Vanilla"
@@ -3327,7 +2995,7 @@
       "Griechenland: Tsoureki (griechisches"
     ],
     "heat_behavior": {
-      "a": "Mild harzige Töne",
+      "a": "Mild resinous tones",
       "b": "Anhaltende, leicht"
     },
     "aroma_groups": [
@@ -3367,10 +3035,6 @@
       {
         "id": "horseradish",
         "name": "Horseradish"
-      },
-      {
-        "id": "eutrema-japonica-wasabi-paste",
-        "name": "Eutrema Japonica (Wasabi, Paste)"
       }
     ],
     "pairs_with_foods": [],
@@ -3387,14 +3051,6 @@
       {
         "id": "cubeb-pepper",
         "name": "Cubeb Pepper"
-      },
-      {
-        "id": "bromhuhn-auf-spinat",
-        "name": "Bromhuhn Auf Spinat"
-      },
-      {
-        "id": "meeressalat-in-20-g-butter-und-wasser-weich-duens",
-        "name": "Meeressalat In 20 G Butter Und Wasser Weich Düns-"
       }
     ],
     "pairs_with_foods": [
@@ -3413,10 +3069,6 @@
     "name": "Horseradish",
     "_de": "Meerrettich",
     "harmonizes_with": [
-      {
-        "id": "aprikosen-getrocknet",
-        "name": "Aprikosen (Getrocknet)"
-      },
       {
         "id": "dill",
         "name": "Dill"
@@ -3500,7 +3152,7 @@
       "Frankreich: Sauce paloise, Menthe à l’eau (Erfrischungsge-"
     ],
     "heat_behavior": {
-      "a": "Typisch florale grüne Minznoten",
+      "a": "Typical floral green Minznoten",
       "b": "Leich- te bitternoten, mehr „pfeffrig“"
     },
     "aroma_groups": [
@@ -3528,8 +3180,8 @@
       "Schweiz: Mohn-"
     ],
     "heat_behavior": {
-      "a": "Eher wachsig, leicht fettig",
-      "b": "röstiger"
+      "a": "Rather waxy, leicht fatty",
+      "b": "more roasted"
     },
     "spice_blends": [],
     "aroma_groups": [
@@ -3553,10 +3205,6 @@
       {
         "id": "long-pepper",
         "name": "Long Pepper"
-      },
-      {
-        "id": "muskatnuss-macis",
-        "name": "Muskatnuss, Macis"
       },
       {
         "id": "parsley",
@@ -3602,10 +3250,6 @@
         "name": "Cardamom"
       },
       {
-        "id": "cilantro",
-        "name": "Cilantro"
-      },
-      {
         "id": "coriander-seeds",
         "name": "Coriander Seeds"
       },
@@ -3636,10 +3280,6 @@
       {
         "id": "juniper",
         "name": "Juniper"
-      },
-      {
-        "id": "zitrusschalen",
-        "name": "Zitrusschalen"
       }
     ],
     "pairs_with_foods": [
@@ -3655,7 +3295,7 @@
     ],
     "heat_behavior": {
       "a": "Fresh, leicht zitrusartig",
-      "b": "Sehr aroma-"
+      "b": "Sehr aroma"
     },
     "spice_blends": [
       "Indisches Tandoori",
@@ -3707,7 +3347,7 @@
     "cuisines": [],
     "heat_behavior": {
       "a": "Floral-zitrusartig",
-      "b": "Harzige Noten be-"
+      "b": "resinous Noten be"
     },
     "aroma_groups": [
       2,
@@ -3761,8 +3401,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Holzartig, anise-like-würzig",
-      "b": "Sehr aro-"
+      "a": "Woody, anise-like spicy",
+      "b": "Sehr aro"
     },
     "spice_blends": [
       "Bengalisches Panch Phoron"
@@ -3848,7 +3488,7 @@
       "Frankreich: Tapenade (Olivenpaste), Olivenbrot"
     ],
     "heat_behavior": {
-      "a": "Säuerliches Olivenaroma, leichte bitter-"
+      "a": "tangyes Olivenaroma, leichte bitter"
     },
     "aroma_groups": [
       2,
@@ -3903,8 +3543,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Floral-wachsig-zitrusartig",
-      "b": "Plastikartig-"
+      "a": "Floral-waxy-zitrusartig",
+      "b": "Plastikartig"
     },
     "spice_blends": [
       "Japanisches Shichimi togarashi",
@@ -3962,14 +3602,6 @@
       {
         "id": "vanilla",
         "name": "Vanilla"
-      },
-      {
-        "id": "zitronen-schale",
-        "name": "Zitronen, -Schale"
-      },
-      {
-        "id": "oregano-pizzabrot",
-        "name": "Oregano-Pizzabrot"
       }
     ],
     "pairs_with_foods": [
@@ -3983,9 +3615,9 @@
       "Griechenland: Mous-"
     ],
     "heat_behavior": {
-      "a": "Florale Noten",
+      "a": "Floral Noten",
       "b": "Floral-woody",
-      "c": "Herb-"
+      "c": "Herb"
     },
     "spice_blends": [],
     "aroma_groups": [
@@ -4047,8 +3679,8 @@
       "Balkan: Brathuhn, Cevap-"
     ],
     "heat_behavior": {
-      "a": "Erdig-wachsig",
-      "b": "Erdig-süßlich",
+      "a": "earthy-waxy",
+      "b": "earthy-sweet",
       "c": "Earthy"
     },
     "spice_blends": [
@@ -4105,9 +3737,9 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Floraler Duft, ingwerartige Schärfe",
-      "b": "woodye Noten, dezente Schärfe",
-      "c": "Nach-"
+      "a": "Floralr Duft, ingwerartige heat",
+      "b": "woodye Noten, dezente heat",
+      "c": "Nach"
     },
     "spice_blends": [
       "Marokkanisches Ras el-Hanout",
@@ -4134,14 +3766,6 @@
       {
         "id": "pepper",
         "name": "Pepper"
-      },
-      {
-        "id": "einkauf-lagerung",
-        "name": "Einkauf, Lagerung"
-      },
-      {
-        "id": "paradieskoerner-gibt-es-als-ganze-koerner",
-        "name": "Paradieskörner Gibt Es Als Ganze Körner"
       }
     ],
     "pairs_with_foods": [
@@ -4155,7 +3779,7 @@
       "Brasilien: Tacacá (Fischsuppe), Pato no Tucupí (Entenbraten"
     ],
     "heat_behavior": {
-      "a": "Sehr würzig, kräuterig, prickelnd"
+      "a": "Very spicy, Herbal, prickelnd"
     },
     "aroma_groups": [
       2,
@@ -4170,10 +3794,6 @@
       {
         "id": "garlic",
         "name": "Garlic"
-      },
-      {
-        "id": "cilantro",
-        "name": "Cilantro"
       },
       {
         "id": "coriander-seeds",
@@ -4201,8 +3821,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Wachsig, nussig-aromatic",
-      "b": "Dominan- te Röstnoten zwischen Karamell und Kaffee"
+      "a": "waxy, nussig-aromatic",
+      "b": "Dominan- te roast notes zwischen Karamell und Kaffee"
     },
     "aroma_groups": [
       2,
@@ -4224,7 +3844,7 @@
       },
       {
         "id": "arugula",
-        "name": "Arugula"
+        "name": "arugula"
       },
       {
         "id": "truffle",
@@ -4242,7 +3862,7 @@
     "cuisines": [],
     "heat_behavior": {
       "a": "Typisches Parmesanaroma",
-      "b": "Fast voll-"
+      "b": "Fast voll"
     },
     "aroma_groups": [
       2,
@@ -4273,8 +3893,8 @@
       "USA: Pecan Pie, Sandies (Kekse), Brownies"
     ],
     "heat_behavior": {
-      "a": "Leicht floral, nussig-wachsig",
-      "b": "Samtig-"
+      "a": "Leicht floral, nussig-waxy",
+      "b": "Samtig"
     },
     "aroma_groups": [
       2,
@@ -4305,18 +3925,6 @@
       {
         "id": "parsley",
         "name": "Parsley"
-      },
-      {
-        "id": "lemongrass",
-        "name": "Lemongrass"
-      },
-      {
-        "id": "spargel-mit-perilla",
-        "name": "Spargel Mit Perilla"
-      },
-      {
-        "id": "spargel-schaelen-und-in-etwa-3-cm-lange-stuecke",
-        "name": "Spargel Schälen Und In Etwa 3 Cm Lange Stücke"
       }
     ],
     "pairs_with_foods": [
@@ -4331,7 +3939,7 @@
     ],
     "heat_behavior": {
       "a": "Fresh, fast zitral-herbal",
-      "b": "aromatic-"
+      "b": "aromatic"
     },
     "aroma_groups": [
       2,
@@ -4352,10 +3960,6 @@
         "name": "Garlic"
       },
       {
-        "id": "cilantro",
-        "name": "Cilantro"
-      },
-      {
         "id": "cress",
         "name": "Cress"
       },
@@ -4370,14 +3974,6 @@
       {
         "id": "mint",
         "name": "Mint"
-      },
-      {
-        "id": "nutmeg",
-        "name": "Nutmeg"
-      },
-      {
-        "id": "zitrusschalen",
-        "name": "Zitrusschalen"
       }
     ],
     "pairs_with_foods": [
@@ -4392,8 +3988,8 @@
     "cuisines": [],
     "heat_behavior": {
       "a": "Fresh, herbal",
-      "b": "Würzig, muskatartig",
-      "c": "Würzig, erdig"
+      "b": "Spicy, nutmeg-like",
+      "c": "Spicy, earthy"
     },
     "spice_blends": [],
     "aroma_groups": [
@@ -4427,10 +4023,6 @@
         "name": "Caraway"
       },
       {
-        "id": "nutmeg",
-        "name": "Nutmeg"
-      },
-      {
         "id": "oregano",
         "name": "Oregano"
       },
@@ -4445,22 +4037,18 @@
       {
         "id": "cinnamon",
         "name": "Cinnamon"
-      },
-      {
-        "id": "lemon-zest",
-        "name": "Lemon zest"
       }
     ],
     "pairs_with_foods": [
       "roasted dishes",
       "braised dishes",
       "grilled meat",
-      "Fisch",
+      "fish",
       "hellen Saucen"
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Freshe zitrus-pinienartige Pfeffernoten,"
+      "a": "Fresh zitrus-pinienartige Pfeffernoten"
     },
     "spice_blends": [
       "Steak-"
@@ -4492,10 +4080,6 @@
         "name": "Coriander Seeds"
       },
       {
-        "id": "olives-and-oil",
-        "name": "olives and oil"
-      },
-      {
         "id": "parsley",
         "name": "Parsley"
       },
@@ -4522,7 +4106,7 @@
     "cuisines": [],
     "heat_behavior": {
       "a": "Pfeffriges Aroma",
-      "b": "Herbal-würzige Noten"
+      "b": "Herbal-spicy Noten"
     },
     "aroma_groups": [
       2,
@@ -4559,14 +4143,6 @@
         "name": "Mint"
       },
       {
-        "id": "nutmeg",
-        "name": "Nutmeg"
-      },
-      {
-        "id": "orange",
-        "name": "Orange"
-      },
-      {
         "id": "sage",
         "name": "Sage"
       },
@@ -4576,7 +4152,8 @@
       }
     ],
     "pairs_with_foods": [
-      "braised dishes (beef, game)",
+      "braised dishes (beef",
+      "game",
       "liver"
     ],
     "cuisines": [
@@ -4585,7 +4162,7 @@
     ],
     "heat_behavior": {
       "a": "Allspice-Charakter",
-      "b": "Warme balsamische"
+      "b": "Warm balsamice"
     },
     "spice_blends": [
       "Jamaikanische Jerk-Pasten",
@@ -4610,10 +4187,6 @@
         "name": "Garlic"
       },
       {
-        "id": "olives-and-oil",
-        "name": "olives and oil"
-      },
-      {
         "id": "parmesan",
         "name": "Parmesan"
       },
@@ -4634,7 +4207,7 @@
     ],
     "heat_behavior": {
       "a": "Pinienartig-nussig",
-      "b": "Neue Röstnoten"
+      "b": "Neue roast notes"
     },
     "aroma_groups": [
       2,
@@ -4677,8 +4250,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Fresh, Floral-nussig, fettig (ungeröstet)",
-      "b": "Leicht balsamisch-harzig",
+      "a": "Fresh, Floral-nussig, fatty (unroasted)",
+      "b": "Leicht balsamic-resinous",
       "c": "Bildung von"
     },
     "aroma_groups": [
@@ -4709,7 +4282,7 @@
       },
       {
         "id": "arugula",
-        "name": "Arugula"
+        "name": "arugula"
       },
       {
         "id": "sorrel",
@@ -4729,8 +4302,8 @@
       "Libanon: Fattousch-Salat (Tomaten-Brot- Salat"
     ],
     "heat_behavior": {
-      "a": "Floral-bittere, würzige Noten",
-      "b": "Herb,"
+      "a": "Floral-bittere, spicy Noten",
+      "b": "Herb"
     },
     "aroma_groups": [
       2,
@@ -4795,8 +4368,8 @@
       "Italien: Bresaola (luftgetrocknetes beef-"
     ],
     "heat_behavior": {
-      "a": "Schwefelig-pungent, würzig",
-      "b": "wenig pungent, feine bitter-würzige Aromen RAceto Balsamico, da dessen hoher Anteil am karamellig-süßlichen Aroma-"
+      "a": "Sulfurous-pungent, spicy",
+      "b": "wenig pungent, feine bitter-spicy aromas RAceto Balsamico, da dessen hoher Anteil am karamellig-sweeten Aroma"
     },
     "aroma_groups": [
       2,
@@ -4817,10 +4390,6 @@
         "name": "Galangal"
       },
       {
-        "id": "kaffir-lime-leaves",
-        "name": "Kaffir Lime Leaves"
-      },
-      {
         "id": "chervil",
         "name": "Chervil"
       },
@@ -4835,10 +4404,6 @@
       {
         "id": "juniper",
         "name": "Juniper"
-      },
-      {
-        "id": "lemongrass",
-        "name": "Lemongrass"
       }
     ],
     "pairs_with_foods": [
@@ -4846,13 +4411,13 @@
       "Yogurt",
       "meat",
       "Aprikosen",
-      "Erdbeeren"
+      "strawberries"
     ],
     "cuisines": [
       "Bulgarien: Marme-"
     ],
     "heat_behavior": {
-      "a": "Volles florales, vielschichtiges Rosen -"
+      "a": "Volles Florals, vielschichtiges Rosen"
     },
     "spice_blends": [
       "Iranisches Advieh",
@@ -4883,20 +4448,12 @@
         "name": "Lime"
       },
       {
-        "id": "almonds",
-        "name": "Almonds"
-      },
-      {
         "id": "cinnamon",
         "name": "Cinnamon"
       },
       {
         "id": "lemon",
         "name": "Lemon"
-      },
-      {
-        "id": "getrocknet",
-        "name": "Getrocknet"
       }
     ],
     "pairs_with_foods": [],
@@ -4940,10 +4497,6 @@
       {
         "id": "parsley",
         "name": "Parsley"
-      },
-      {
-        "id": "man-kann-die-blaetter-oder-ganze-frische-zweige-mitkochen-oder-mit",
-        "name": "Man Kann Die Blätter Oder Ganze Frische Zweige Mitkochen Oder Mit-"
       }
     ],
     "pairs_with_foods": [
@@ -4957,7 +4510,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Dominant floral-herbal, „grüner“ Ein-"
+      "a": "Dominant floral-herbal green note"
     },
     "spice_blends": [
       "LAGERUNG",
@@ -4984,10 +4537,6 @@
       {
         "id": "cinnamon",
         "name": "Cinnamon"
-      },
-      {
-        "id": "zitrusschalen",
-        "name": "Zitrusschalen"
       }
     ],
     "pairs_with_foods": [
@@ -5000,8 +4549,8 @@
       "Katalonien: Paella, Zarzuela cata-"
     ],
     "heat_behavior": {
-      "a": "Typisch erdig-roher Safrangeruch",
-      "b": "Ent-"
+      "a": "Typisch earthy-roher Safrangeruch",
+      "b": "Ent"
     },
     "aroma_groups": [
       2,
@@ -5116,8 +4665,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Freshe grüne Säure",
-      "b": "Deutlich Mildr in"
+      "a": "Fresh green acidity",
+      "b": "Clearly Mildr in"
     },
     "aroma_groups": [
       2,
@@ -5164,7 +4713,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Fresher schwefelig-lauchiger Duft",
+      "a": "Fresh sulfur-garlic-like Duft",
       "b": "Rascher Aromenverlust"
     },
     "spice_blends": [],
@@ -5192,14 +4741,6 @@
       {
         "id": "coriander-seeds",
         "name": "Coriander Seeds"
-      },
-      {
-        "id": "cilantro",
-        "name": "Cilantro"
-      },
-      {
-        "id": "apium-graveolens-fruechte",
-        "name": "Apium Graveolens (Früchte)"
       }
     ],
     "pairs_with_foods": [
@@ -5210,8 +4751,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Erdig-zitroniges Aroma",
-      "b": "Betonung der"
+      "a": "earthy-zitroniges Aroma",
+      "b": "Emphasis on der"
     },
     "spice_blends": [
       "bengalisches"
@@ -5309,8 +4850,7 @@
       "Indien: Til"
     ],
     "heat_behavior": {
-      "a": "Feine nussig-rauchige Sesamnoten",
-      "b": "Zu-"
+      "a": "Feine nussig-rauchige Sesamnoten"
     },
     "spice_blends": [
       "Jordanisches Zatar",
@@ -5327,10 +4867,6 @@
     "_de": "Shiitake",
     "harmonizes_with": [
       {
-        "id": "seaweed",
-        "name": "Seaweed"
-      },
-      {
         "id": "ginger",
         "name": "Ginger"
       },
@@ -5343,16 +4879,8 @@
         "name": "Sesame"
       },
       {
-        "id": "zitrusfruechte",
-        "name": "Zitrusfrüchte"
-      },
-      {
         "id": "onion",
         "name": "Onion"
-      },
-      {
-        "id": "shiitake-unterscheiden-sich-von-anderen-pilzen-dadurch-dass-ihre-haupt",
-        "name": "Shiitake Unterscheiden Sich Von Anderen Pilzen Dadurch, Dass Ihre Haupt -"
       }
     ],
     "pairs_with_foods": [
@@ -5362,8 +4890,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Erdig-schwefliger Rohpilzduft",
-      "b": "Champi-"
+      "a": "earthy-schwefliger Rohpilzduft",
+      "b": "Champi"
     },
     "aroma_groups": [
       2,
@@ -5394,8 +4922,8 @@
     ],
     "pairs_with_foods": [],
     "heat_behavior": {
-      "a": "Wachsiges, grünes, leicht harziges Aro- ma",
-      "b": "Bildung von Röstnoten Die Kerne müssen geschält werden und sind dann sowohl geröstet als"
+      "a": "waxy, green, leicht resinouss aroma",
+      "b": "Roast notes form; kernels must be shelled and can be toasted or"
     },
     "aroma_groups": [
       2,
@@ -5412,10 +4940,6 @@
         "name": "Garlic"
       },
       {
-        "id": "olives-and-oil",
-        "name": "olives and oil"
-      },
-      {
         "id": "parsley",
         "name": "Parsley"
       },
@@ -5426,22 +4950,6 @@
       {
         "id": "onion",
         "name": "Onion"
-      },
-      {
-        "id": "auberginencreme-mit-steinpilzgewuerz",
-        "name": "Auberginencreme Mit Steinpilzgewürz"
-      },
-      {
-        "id": "ganze-auberginen-und-knoblauch-in-der-schale-in",
-        "name": "Ganze Auberginen Und Knoblauch In Der Schale In"
-      },
-      {
-        "id": "salzwasser-weichkochen-beide-schaelen-und-mit-dem",
-        "name": "Salzwasser Weichkochen. Beide Schälen Und Mit Dem"
-      },
-      {
-        "id": "stabmixer-zu-einer-glatten-creme-puerieren-pfeffern",
-        "name": "Stabmixer Zu Einer Glatten Creme Pürieren. Pfeffern,"
       }
     ],
     "pairs_with_foods": [
@@ -5452,7 +4960,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Butterig-Earthys, leicht säuerlich-bitteres"
+      "a": "Butterig-Earthys, leicht tangy-bitteres"
     },
     "aroma_groups": [
       2,
@@ -5504,7 +5012,7 @@
     ],
     "heat_behavior": {
       "a": "Fast zitrusartiges Anisaroma",
-      "b": "Aroma-"
+      "b": "Aroma"
     },
     "spice_blends": [],
     "aroma_groups": [
@@ -5564,9 +5072,9 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Zitrusartig, floral, prickelnde Schärfe",
-      "b": "Warm-balsamisch, weniger scharf",
-      "c": "Leicht balsamisch, Mild Noten"
+      "a": "Zitrusartig, floral, prickelnde heat",
+      "b": "Warm-balsamic, weniger scharf",
+      "c": "Leicht balsamic, Mild Noten"
     },
     "spice_blends": [
       "Arabisches Zatar",
@@ -5595,10 +5103,6 @@
         "name": "Ginger"
       },
       {
-        "id": "kaffir-lime-leaves",
-        "name": "Kaffir Lime Leaves"
-      },
-      {
         "id": "garlic",
         "name": "Garlic"
       },
@@ -5613,10 +5117,6 @@
       {
         "id": "mint",
         "name": "Mint"
-      },
-      {
-        "id": "nutmeg",
-        "name": "Nutmeg"
       },
       {
         "id": "sage",
@@ -5637,14 +5137,6 @@
       {
         "id": "juniper",
         "name": "Juniper"
-      },
-      {
-        "id": "lemongrass",
-        "name": "Lemongrass"
-      },
-      {
-        "id": "zitrusfruechte",
-        "name": "Zitrusfrüchte"
       }
     ],
     "pairs_with_foods": [
@@ -5657,8 +5149,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Säuerlich-würzige Fruchtnote",
-      "b": "aromatic, leicht Earthy Säure"
+      "a": "tangy-spicy Fruchtnote",
+      "b": "aromatic, light earthy acidity"
     },
     "spice_blends": [
       "Worcestersauce",
@@ -5703,8 +5195,8 @@
       "Libanon: Fattoush (Brotsalat"
     ],
     "heat_behavior": {
-      "a": "Wachsig-Fresh, leicht säuerlich",
-      "b": "woody-"
+      "a": "waxy-Fresh, leicht tangy",
+      "b": "woody"
     },
     "spice_blends": [
       "marokkanisches Ras el-Hanout"
@@ -5739,32 +5231,8 @@
         "name": "Garlic"
       },
       {
-        "id": "cilantro",
-        "name": "Cilantro"
-      },
-      {
         "id": "turmeric",
         "name": "Turmeric"
-      },
-      {
-        "id": "nutmeg",
-        "name": "Nutmeg"
-      },
-      {
-        "id": "tamarinde-schmeckt-sauer-aber-auch-suess",
-        "name": "Tamarinde Schmeckt Sauer, Aber Auch Süß."
-      },
-      {
-        "id": "ihr-duft-ist-fruchtig-insgesamt-erinnert-ihr",
-        "name": "Ihr Duft Ist Fruchtig, Insgesamt Erinnert Ihr"
-      },
-      {
-        "id": "aroma-ein-bisschen-an-sojasauce-und",
-        "name": "Aroma Ein Bisschen An Sojasauce Und"
-      },
-      {
-        "id": "pflaumen",
-        "name": "Pflaumen."
       }
     ],
     "pairs_with_foods": [],
@@ -5799,10 +5267,6 @@
         "name": "Marjoram"
       },
       {
-        "id": "nutmeg",
-        "name": "Nutmeg"
-      },
-      {
         "id": "oregano",
         "name": "Oregano"
       },
@@ -5829,8 +5293,8 @@
       "Italien: rote Tapanade, Antipasti, Tomaten-"
     ],
     "heat_behavior": {
-      "a": "Fresh-fruchtig-grünlich",
-      "b": "Floral-aroma-"
+      "a": "Fresh-fruity-greenish",
+      "b": "Floral-aroma"
     },
     "spice_blends": [
       "Italienisches Pesto"
@@ -5851,10 +5315,6 @@
       {
         "id": "chili",
         "name": "Chili"
-      },
-      {
-        "id": "cloves",
-        "name": "Cloves"
       },
       {
         "id": "capers",
@@ -5883,10 +5343,6 @@
       {
         "id": "thyme",
         "name": "Thyme"
-      },
-      {
-        "id": "lemons",
-        "name": "Lemons"
       }
     ],
     "pairs_with_foods": [],
@@ -5907,10 +5363,6 @@
       {
         "id": "cocoa",
         "name": "Cocoa"
-      },
-      {
-        "id": "kokos",
-        "name": "Kokos"
       },
       {
         "id": "poppy-seed",
@@ -5934,8 +5386,8 @@
       "Deutschland: Vanilleeis, Vanillepudding"
     ],
     "heat_behavior": {
-      "a": "Fresh, heuartig-süßlich",
-      "b": "Schwerere, süßliche, schokoladig-tabakähnliche Noten"
+      "a": "Fresh, heuartig-sweet",
+      "b": "Heavier, sweet, chocolate-tobacco-like notes"
     },
     "aroma_groups": [
       5
@@ -5972,8 +5424,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Erdig-schwefelige Noten",
-      "b": "Betonung der"
+      "a": "earthy-Sulfurouse Noten",
+      "b": "Emphasis on der"
     },
     "aroma_groups": [
       2,
@@ -6027,8 +5479,8 @@
       "Frankreich: Crème brûlée"
     ],
     "heat_behavior": {
-      "a": "aromatice typische Vanille",
-      "b": "Cremige, süßlich-florale, aromatice Noten"
+      "a": "aromatic typische Vanille",
+      "b": "Cremige, sweet-Floral, aromatic Noten"
     },
     "aroma_groups": [
       5
@@ -6093,8 +5545,8 @@
       "Raum: Wildbeizen,"
     ],
     "heat_behavior": {
-      "a": "Leicht Florale, deutlich harzige Aro- men",
-      "b": "Betonung der woodyen Duftanteile"
+      "a": "Leicht Floral, Clearly resinous Aro- men",
+      "b": "Emphasis on der woodyen Duftanteile"
     },
     "spice_blends": [
       "LAGERUNG"
@@ -6110,10 +5562,6 @@
     "_de": "Wakame",
     "harmonizes_with": [
       {
-        "id": "pilze-getrocknete",
-        "name": "Pilze, Getrocknete"
-      },
-      {
         "id": "sesame",
         "name": "Sesame"
       }
@@ -6126,7 +5574,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Fruchtig, butterig",
+      "a": "Fruity, butterig",
       "b": "Dominant sauer"
     },
     "aroma_groups": [
@@ -6182,8 +5630,8 @@
       "Deutschland: Maibowle, Wackelpudding,"
     ],
     "heat_behavior": {
-      "a": "Leicht fruchtig, wachsig",
-      "b": "Typisch aro-"
+      "a": "Leicht Fruity, waxy",
+      "b": "Typisch aro"
     },
     "aroma_groups": [
       2,
@@ -6226,9 +5674,9 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Feine nussige Töne",
-      "b": "aromatice Noten im Nussaroma",
-      "c": "zusätzliche Röstaromen"
+      "a": "Fine nutty tones",
+      "b": "aromatic Noten im Nussaroma",
+      "c": "Additional roast aromas"
     },
     "aroma_groups": [
       5
@@ -6274,10 +5722,6 @@
       {
         "id": "vanilla",
         "name": "Vanilla"
-      },
-      {
-        "id": "vitis-vinifera-getrocknete-frucht",
-        "name": "Vitis Vinifera (Getrocknete Frucht)"
       }
     ],
     "pairs_with_foods": [
@@ -6288,8 +5732,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Feiner, floral-säuerlicher Duft und Geschmack",
-      "b": "Intensivierung der aromati-"
+      "a": "Finer, floral-tangyer Duft und Geschmack",
+      "b": "Intensivierung der aromati"
     },
     "aroma_groups": [
       2,
@@ -6340,7 +5784,7 @@
     ],
     "heat_behavior": {
       "a": "Sehr intensiver Duft, herber Geschmack",
-      "b": "Feine süß-bittere, heuartige Noten 349"
+      "b": "Fine sweet-bitter, hay-like notes"
     },
     "aroma_groups": [
       2,
@@ -6373,10 +5817,6 @@
         "name": "Clove"
       },
       {
-        "id": "orange-peel",
-        "name": "Orange Peel"
-      },
-      {
         "id": "rosemary",
         "name": "Rosemary"
       }
@@ -6390,7 +5830,7 @@
       "Deutschland: Absinth"
     ],
     "heat_behavior": {
-      "a": "Feine bittere, anise-likee Aromen",
+      "a": "Feine bittere, anise-likee aromas",
       "b": "Starke"
     },
     "aroma_groups": [
@@ -6443,8 +5883,8 @@
       "Mitteleuropa: deftige Kartoffelgerichte,"
     ],
     "heat_behavior": {
-      "a": "Feines harzig-herbales Aroma",
-      "b": "Begin-"
+      "a": "Feines resinous-herbales Aroma",
+      "b": "Begin"
     },
     "aroma_groups": [
       3
@@ -6480,8 +5920,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Freshe Säure, wachsige Anklänge",
-      "b": "Feine, cremig-süßliche Zitrusaromen"
+      "a": "Fresh acidity, waxy hints",
+      "b": "Feine, cremig-sweet Zitrusaromen"
     },
     "spice_blends": [
       "Japanisches Yuzukosho (Chilipaste",
@@ -6511,22 +5951,6 @@
       {
         "id": "bay-leaf",
         "name": "Bay Leaf"
-      },
-      {
-        "id": "nutmeg",
-        "name": "Nutmeg"
-      },
-      {
-        "id": "zimtaldehyd-intensiv-zimtig-l-alkohol",
-        "name": "Zimtaldehyd Intensiv Zimtig L Alkohol,"
-      },
-      {
-        "id": "fett-eugenol-nelkenartig-l-alkohol-fett",
-        "name": "Fett  Eugenol Nelkenartig L Alkohol, Fett"
-      },
-      {
-        "id": "zimtalkohol-suess-wuerzig-hyazinthig-zimtig",
-        "name": "Zimtalkohol Süß-Würzig, Hyazinthig, Zimtig"
       }
     ],
     "pairs_with_foods": [
@@ -6539,8 +5963,8 @@
       "Deutschland: Milchreis, Zimtsterne, Speku-"
     ],
     "heat_behavior": {
-      "a": "Feine würzig-florale Zimttöne",
-      "b": "Aroma-"
+      "a": "Fine spicy-floral cinnamon notes",
+      "b": "Aroma"
     },
     "spice_blends": [
       "Indische Masalas",
@@ -6577,10 +6001,6 @@
         "name": "Cumin"
       },
       {
-        "id": "nutmeg",
-        "name": "Nutmeg"
-      },
-      {
         "id": "parsley",
         "name": "Parsley"
       },
@@ -6609,9 +6029,9 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Feine florale, wachsig-zitrale Aromen",
-      "b": "Harzig-floral, Lightly bitter",
-      "c": "Hervorheben der bitternoten"
+      "a": "Feine Floral, waxy-zitrale aromas",
+      "b": "resinous-floral, Lightly bitter",
+      "c": "Highlighting der bitternoten"
     },
     "aroma_groups": [
       2
@@ -6625,10 +6045,6 @@
       {
         "id": "basil",
         "name": "Basil"
-      },
-      {
-        "id": "watercress",
-        "name": "Watercress"
       },
       {
         "id": "dill",
@@ -6669,10 +6085,6 @@
       {
         "id": "thyme",
         "name": "Thyme"
-      },
-      {
-        "id": "die-blaetter-der-zitronenmelisse-werden-immer-frisch-verwendet-und",
-        "name": "Die Blätter Der Zitronenmelisse Werden Immer Frisch Verwendet Und"
       }
     ],
     "pairs_with_foods": [
@@ -6681,9 +6093,9 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Fresh, grünlich, zitronig-herbal",
-      "b": "Florales Zitrusaroma",
-      "c": "Leichte bitterkeit"
+      "a": "Fresh, greenish, lemon-herbal",
+      "b": "Florals Zitrusaroma",
+      "c": "Leichte bitterness"
     },
     "aroma_groups": [
       2
@@ -6731,7 +6143,7 @@
       "Deutschland: Fruchtsaft, Obstsalat, Dessert,"
     ],
     "heat_behavior": {
-      "a": "Rein süß",
+      "a": "Purely sweet",
       "b": "Bildung karamelliger Noten"
     },
     "spice_blends": [
@@ -6786,9 +6198,9 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Freshe, stark pungente Schwefelnoten",
-      "b": "Mild Zwiebelaromen, kaum pungent",
-      "c": "Bildung vieler Röstnoten aus Zwiebel -"
+      "a": "Fresh, stark pungente Schwefelnoten",
+      "b": "Mild Zwiebelaromas, kaum pungent",
+      "c": "Bildung vieler roast notes aus Zwiebel"
     },
     "spice_blends": [],
     "aroma_groups": [
