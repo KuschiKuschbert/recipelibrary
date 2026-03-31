@@ -34,6 +34,14 @@
   var height = 560;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  function isNarrowViewport() {
+    return typeof window.matchMedia !== 'undefined' && window.matchMedia('(max-width: 680px)').matches;
+  }
+
+  function isCoarsePointer() {
+    return typeof window.matchMedia !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+  }
+
   function norm(s) {
     return String(s || '')
       .toLowerCase()
@@ -201,6 +209,12 @@
         return 0.5 + (d.weight || 1) * 0.35;
       });
 
+    var coarse = isCoarsePointer();
+    var narrow = isNarrowViewport();
+    var rAnchor = coarse ? 17 : 14;
+    var rHg = coarse ? 12 : 9;
+    var rDef = coarse ? 10 : 7;
+
     nodeSel = gRoot
       .selectAll('circle.pa-node')
       .data(nodes, function (d) {
@@ -209,7 +223,7 @@
       .join('circle')
       .attr('class', 'pa-node')
       .attr('r', function (d) {
-        return d.kind === 'anchor' ? 14 : d.tier === 'holy_grail' ? 9 : 7;
+        return d.kind === 'anchor' ? rAnchor : d.tier === 'holy_grail' ? rHg : rDef;
       })
       .attr('fill', function (d) {
         if (d.kind === 'anchor') return 'var(--gold)';
@@ -223,6 +237,7 @@
       .selectAll('text.pa-label')
       .data(
         nodes.filter(function (d) {
+          if (narrow) return d.kind === 'anchor';
           return d.kind === 'anchor' || d.tier === 'holy_grail' || d.kind === 'aroma';
         }),
         function (d) {
@@ -233,9 +248,10 @@
       .attr('class', 'pa-label')
       .text(function (d) {
         var t = d.name || '';
-        return t.length > 22 ? t.slice(0, 20) + '…' : t;
+        var maxLen = narrow ? 18 : 22;
+        return t.length > maxLen ? t.slice(0, maxLen - 2) + '…' : t;
       })
-      .attr('font-size', 11)
+      .attr('font-size', narrow ? 12 : 11)
       .attr('fill', 'var(--text2)')
       .attr('dx', 12)
       .attr('dy', 4)
@@ -250,10 +266,11 @@
           return d.id;
         })
         .distance(function (d) {
-          return 48 + (6 - (d.weight || 2)) * 8;
+          return (narrow ? 42 : 48) + (6 - (d.weight || 2)) * 8;
         })
         .strength(0.55)
     );
+    simulation.force('collide', d3.forceCollide().radius(coarse ? 15 : 10));
     nodeSel.call(drag(simulation));
     simulation.alpha(reduceMotion ? 0 : 0.85).restart();
     if (reduceMotion) {
@@ -374,8 +391,14 @@
     var wrap = document.getElementById('paGraph');
     if (!wrap || !svg) return;
     var r = wrap.getBoundingClientRect();
-    width = Math.max(320, r.width);
-    height = Math.max(400, Math.min(720, window.innerHeight * 0.62));
+    width = Math.max(280, r.width);
+    var vv = window.visualViewport;
+    var vh = vv && vv.height ? vv.height : window.innerHeight;
+    if (isNarrowViewport()) {
+      height = Math.max(220, Math.min(440, r.height || vh * 0.48));
+    } else {
+      height = Math.max(400, Math.min(720, window.innerHeight * 0.62));
+    }
     svg.attr('viewBox', [0, 0, width, height]);
     if (simulation) {
       simulation.force('center', d3.forceCenter(width / 2, height / 2));
@@ -414,19 +437,31 @@
     zoom = d3
       .zoom()
       .scaleExtent([0.35, 3])
+      .filter(function (event) {
+        if (event.type === 'dblclick') return false;
+        return (!event.ctrlKey || event.type === 'wheel') && !event.button;
+      })
       .on('zoom', function (ev) {
         gRoot.attr('transform', ev.transform);
       });
     svg.call(zoom);
+    svg.on('dblclick.zoom', null);
 
     simulation = d3
       .forceSimulation()
-      .force('charge', d3.forceManyBody().strength(-120))
+      .force('charge', d3.forceManyBody().strength(isNarrowViewport() ? -95 : -120))
       .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collide', d3.forceCollide().radius(10))
+      .force('collide', d3.forceCollide().radius(isCoarsePointer() ? 15 : 10))
       .on('tick', ticked);
 
     window.addEventListener('resize', resizeSvg);
+    var vvResizeTimer;
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', function () {
+        clearTimeout(vvResizeTimer);
+        vvResizeTimer = setTimeout(resizeSvg, 100);
+      });
+    }
 
     Promise.all([
       fetch(UNIFIED).then(function (r) {
