@@ -10,6 +10,8 @@
   const STORAGE_ORDER_OVERRIDES = 'kuschi_riviera_order_overrides_v1';
   const STORAGE_ORDER_EXTRAS = 'kuschi_riviera_order_extras_v1';
   const STORAGE_RIVIERA_HIDDEN_BUILTINS = 'kuschi_riviera_hidden_builtin_ids_v1';
+  /** Set to '1' after one-time ingredient qty metric normalisation (Riviera page). */
+  const STORAGE_RIVIERA_METRIC_MIGRATED = 'kuschi_riviera_metric_normalized_v1';
   const STORAGE_CUSTOM_BOOKS = 'kuschi_custom_kitchen_books_v1';
 
   const ZONE_IDS = ['freezer', 'coldroom', 'drystore', 'other'];
@@ -375,6 +377,42 @@
 
   function saveRiviera(list) {
     localStorage.setItem(STORAGE_RIVIERA, JSON.stringify(list));
+  }
+
+  /**
+   * One-time: normalise saved Riviera recipe ingredient qty strings to metric + pc.
+   * Safe to call repeatedly; no-ops after flag is set. Requires KuschiRecipeMetric (riviera.html order).
+   */
+  function migrateRivieraMetricIfNeeded() {
+    if (typeof window === 'undefined' || !window.KuschiRecipeMetric) return;
+    try {
+      if (localStorage.getItem(STORAGE_RIVIERA_METRIC_MIGRATED) === '1') return;
+    } catch (e) {
+      return;
+    }
+    var list = safeParse(localStorage.getItem(STORAGE_RIVIERA) || '[]', []);
+    if (!Array.isArray(list) || list.length === 0) {
+      try {
+        localStorage.setItem(STORAGE_RIVIERA_METRIC_MIGRATED, '1');
+      } catch (e2) {
+        /* ignore */
+      }
+      return;
+    }
+    var norm = window.KuschiRecipeMetric.normalizeRivieraIngredients;
+    if (typeof norm !== 'function') return;
+    var out = list.map(function (r) {
+      if (!r || typeof r !== 'object') return r;
+      var copy = Object.assign({}, r);
+      copy.ingredients = norm(JSON.parse(JSON.stringify(r.ingredients || [])));
+      return copy;
+    });
+    saveRiviera(out);
+    try {
+      localStorage.setItem(STORAGE_RIVIERA_METRIC_MIGRATED, '1');
+    } catch (e3) {
+      /* ignore */
+    }
   }
 
   function loadRivieraHiddenBuiltinIds() {
@@ -860,6 +898,7 @@
     hideRivieraBuiltin: hideRivieraBuiltin,
     restoreAllHiddenRivieraBuiltins: restoreAllHiddenRivieraBuiltins,
     removeRivieraRecipe: removeRivieraRecipe,
+    migrateRivieraMetricIfNeeded: migrateRivieraMetricIfNeeded,
     canonicalOrderMergeKey: canonicalOrderMergeKey,
     toIndexRow: toIndexRow,
     kitchenToDetail: kitchenToDetail,

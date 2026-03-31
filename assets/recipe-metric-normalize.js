@@ -501,13 +501,29 @@
     return { qty: c.qty, unit: c.unit };
   }
 
+  /**
+   * Count-style units → pc (full-string match on unit token only; skips "loaf pan" etc.).
+   */
+  function normalizeRivieraCountUnits(qtyStr) {
+    var raw = String(qtyStr || '').trim();
+    if (!raw) return raw;
+    var s = replaceUnicodeFractions(raw);
+    var pn = parseLeadingNumber(s);
+    if (pn.value == null || !isFinite(pn.value)) return raw;
+    var rest = pn.rest.trim();
+    if (!rest) return raw;
+    if (!/^(loaf|loaves|piece|pieces|pc|pcs|each)$/i.test(rest)) return raw;
+    return qtyString(pn.value) + ' pc';
+  }
+
   /** Single Riviera qty field → one metric string */
   function normalizeRivieraQtyString(qtyStr, item) {
     var s = String(qtyStr || '').trim();
     if (!s) return s;
-    var c = convertAmountPhrase(s, item);
-    if (!c) return s;
-    return c.qty + ' ' + c.unit;
+    var afterCount = normalizeRivieraCountUnits(s);
+    var c = convertAmountPhrase(afterCount, item);
+    if (c) return c.qty + ' ' + c.unit;
+    return afterCount;
   }
 
   function normalizeKitchenIngredients(arr) {
@@ -572,5 +588,7 @@
     kitchenRowToPhrase: kitchenRowToPhrase,
     chefRoundMassG: chefRoundMassG,
     chefRoundVolumeMl: chefRoundVolumeMl,
+    normalizeRivieraCountUnits: normalizeRivieraCountUnits,
+    normalizeRivieraQtyString: normalizeRivieraQtyString,
   };
 })(typeof window !== 'undefined' ? window : this);

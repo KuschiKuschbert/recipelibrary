@@ -1185,6 +1185,18 @@ const BUILTIN_RECIPES = [
   },
 ];
 
+/** Same recipes as BUILTIN_RECIPES; ingredient qty strings normalised to metric + pc at load. */
+const BUILTIN_RECIPES_METRIC = (function () {
+  if (!window.KuschiRecipeMetric) return BUILTIN_RECIPES;
+  return BUILTIN_RECIPES.map(function (r) {
+    var o = Object.assign({}, r);
+    o.ingredients = KuschiRecipeMetric.normalizeRivieraIngredients(
+      JSON.parse(JSON.stringify(r.ingredients || []))
+    );
+    return o;
+  });
+})();
+
 const RIVIERA_ADMIN_PIN = '052610';
 const SS_RIVIERA_ADMIN = 'kuschi_riviera_admin_session';
 
@@ -1297,11 +1309,14 @@ function isBuiltinRecipeId(id) {
 }
 
 function mergeRivieraRecipes() {
+  if (window.KuschiUserRecipes && window.KuschiUserRecipes.migrateRivieraMetricIfNeeded) {
+    KuschiUserRecipes.migrateRivieraMetricIfNeeded();
+  }
   const Kr = window.KuschiUserRecipes;
   const u = (Kr && Kr.loadRiviera()) || [];
   const hiddenRaw = Kr && Kr.loadRivieraHiddenBuiltinIds ? Kr.loadRivieraHiddenBuiltinIds() : [];
   const hidden = new Set(Array.isArray(hiddenRaw) ? hiddenRaw : []);
-  const builtins = BUILTIN_RECIPES.filter((r) => !hidden.has(r.id));
+  const builtins = BUILTIN_RECIPES_METRIC.filter((r) => !hidden.has(r.id));
   return u.concat(builtins);
 }
 let RECIPES = mergeRivieraRecipes();
