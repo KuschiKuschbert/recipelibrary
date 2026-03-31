@@ -1,0 +1,44 @@
+{
+  "notes": "G1–G8 match aroma_data/ingredients.json aroma_groups and theme.css .aroma-g1…8. Column wording follows the Kuschi Vierich/Vilgis-style reference sheet (not a pixel-perfect copy of the PDF grid).",
+  "group_labels": [
+    "Grassy",
+    "Green",
+    "Floral",
+    "Rose",
+    "Citrus",
+    "Camphor",
+    "Woody",
+    "Spicy / phenolic"
+  ],
+  "priority_row_ids": [
+    "basil",
+    "bay-leaf",
+    "pepper",
+    "caraway",
+    "cardamom",
+    "chili",
+    "cinnamon",
+    "clove",
+    "coriander",
+    "cumin",
+    "fennel",
+    "garlic",
+    "ginger",
+    "mint",
+    "oregano",
+    "paprika",
+    "rosemary",
+    "saffron",
+    "sage",
+    "star-anise",
+    "sumac",
+    "tarragon",
+    "thyme",
+    "turmeric",
+    "vanilla"
+  ],
+  "display_names": {
+    "pepper": "Black pepper",
+    "coriander": "Coriander (seed & leaf)"
+  }
+}

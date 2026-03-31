@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="theme-color" content="#0c0c0c">
-<meta name="description" content="Interactive pairing map: proteins and anchors linked to Flavor Bible tiers and Aroma Bible seasonings.">
-<title>Pairing atlas · Kuschi Kitchen</title>
+<meta name="description" content="Aroma matrix: priority spices × eight aroma groups (G1–G8), aligned with the kitchen reference sheet.">
+<title>Aroma matrix · Kuschi Kitchen</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23c9a96e'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -23,12 +23,13 @@
     border-radius: 8px;
     text-decoration: none;
   }
-  .pa-skip:focus {
-    left: 12px;
-  }
+  .pa-skip:focus { left: 12px; }
+
   body.pa-page {
     position: relative;
     background: var(--bg);
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
   }
   body.pa-page::before {
     content: "";
@@ -37,41 +38,30 @@
     pointer-events: none;
     z-index: 0;
     background:
-      radial-gradient(ellipse 80% 50% at 20% -10%, rgba(201, 169, 110, 0.12), transparent 55%),
-      radial-gradient(ellipse 60% 40% at 100% 30%, rgba(110, 154, 190, 0.08), transparent 50%),
-      radial-gradient(ellipse 50% 35% at 50% 100%, rgba(212, 99, 75, 0.06), transparent 45%);
+      radial-gradient(ellipse 80% 50% at 20% -10%, rgba(201, 169, 110, 0.1), transparent 55%),
+      radial-gradient(ellipse 60% 40% at 100% 30%, rgba(110, 154, 190, 0.06), transparent 50%);
   }
   .pa-shell {
     position: relative;
     z-index: 1;
     max-width: 1280px;
     margin: 0 auto;
-    padding: 0 24px 72px;
-    padding-left: max(16px, env(safe-area-inset-left, 0px));
-    padding-right: max(16px, env(safe-area-inset-right, 0px));
-    padding-bottom: max(72px, calc(48px + env(safe-area-inset-bottom, 0px)));
+    padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px))
+      max(48px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
   }
   .pa-nav {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 8px 14px;
-    padding: 20px 0 8px;
+    padding: 8px 0 16px;
     font-size: 13px;
     font-weight: 500;
     color: var(--text3);
   }
-  .pa-nav a {
-    color: var(--text3);
-    text-decoration: none;
-  }
-  .pa-nav a:hover {
-    color: var(--gold);
-  }
-  .pa-hero {
-    text-align: center;
-    padding: 28px 0 20px;
-  }
+  .pa-nav a { color: var(--text3); text-decoration: none; }
+  .pa-nav a:hover { color: var(--gold); }
+
   .pa-hero-label {
     font-size: 11px;
     font-weight: 600;
@@ -82,54 +72,38 @@
   }
   .pa-hero-title {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(30px, 4.5vw, 44px);
+    font-size: clamp(28px, 4vw, 42px);
     font-weight: 700;
-    color: var(--text);
     margin: 0 0 10px;
     line-height: 1.15;
   }
   .pa-hero-sub {
     font-size: 15px;
     color: var(--text2);
-    max-width: 560px;
-    margin: 0 auto;
+    max-width: 720px;
     line-height: 1.55;
+    margin: 0 0 20px;
   }
+
   .pa-toolbar {
-    position: sticky;
-    top: max(0px, env(safe-area-inset-top, 0px));
-    z-index: 50;
-    margin: 24px 0 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
     padding: 14px 16px;
     border-radius: var(--radius);
     border: 1px solid var(--border);
     background: var(--glass);
     backdrop-filter: blur(40px) saturate(180%);
     -webkit-backdrop-filter: blur(40px) saturate(180%);
-    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.25);
   }
-  .pa-toolbar:focus-within {
-    border-color: var(--border-hover);
-  }
-  .pa-profiles-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 4px;
-    margin-bottom: 12px;
-    scroll-snap-type: x proximity;
-    mask-image: linear-gradient(90deg, transparent, #000 12px, #000 calc(100% - 12px), transparent);
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12px, #000 calc(100% - 12px), transparent);
-  }
-  .pa-profiles {
+  .pa-mode {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     gap: 8px;
-    width: max-content;
-    min-width: 100%;
   }
-  .pa-profile {
-    scroll-snap-align: start;
-    flex-shrink: 0;
+  .pa-mode button {
     padding: 10px 16px;
     border-radius: 100px;
     border: 1px solid var(--border);
@@ -139,27 +113,16 @@
     font-size: 13px;
     font-weight: 500;
     cursor: pointer;
-    transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    min-height: 44px;
   }
-  .pa-profile:hover {
-    border-color: var(--border-hover);
-    color: var(--text);
-  }
-  .pa-profile[aria-pressed="true"] {
+  .pa-mode button[aria-pressed="true"] {
     border-color: var(--gold);
     color: var(--gold);
     background: var(--gold-dim);
-    box-shadow: 0 0 0 1px rgba(201, 169, 110, 0.15);
   }
-  .pa-profile:focus-visible {
+  .pa-mode button:focus-visible {
     outline: 2px solid var(--gold);
     outline-offset: 2px;
-  }
-  .pa-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
   }
   .pa-search {
     flex: 1 1 200px;
@@ -170,281 +133,144 @@
     background: var(--bg2);
     color: var(--text);
     font: inherit;
-    font-size: 15px;
+    font-size: 16px;
   }
   .pa-search:focus {
     outline: none;
     border-color: var(--border-hover);
     box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.12);
   }
-  .pa-btn {
-    padding: 12px 18px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    background: var(--surface-hover);
-    color: var(--text);
-    font: inherit;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
-  }
-  .pa-btn:hover {
-    border-color: var(--gold);
-    color: var(--gold-light);
-  }
-  .pa-btn:focus-visible {
-    outline: 2px solid var(--gold);
-    outline-offset: 2px;
-  }
-  .pa-btn-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: stretch;
-  }
-  .pa-btn-row .pa-btn {
-    flex: 1 1 auto;
-    min-height: 44px;
-    min-width: 0;
-  }
-  .pa-layout {
-    display: grid;
-    grid-template-columns: 1fr min(360px, 34%);
-    gap: 20px;
-    align-items: stretch;
-  }
-  @media (max-width: 900px) {
-    .pa-layout {
-      grid-template-columns: 1fr;
-    }
-  }
-  .pa-graph-card {
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    background: rgba(20, 20, 20, 0.5);
-    min-height: min(68vh, 640px);
-    position: relative;
-    overflow: hidden;
-    touch-action: none;
-  }
-  .pa-graph-hint {
-    position: absolute;
-    bottom: 12px;
-    left: 14px;
-    right: 14px;
-    font-size: 12px;
-    color: var(--text3);
-    pointer-events: none;
-    z-index: 2;
-    line-height: 1.35;
-  }
-  #paGraph {
-    width: 100%;
-    height: min(68vh, 640px);
-    min-height: 400px;
-    touch-action: none;
-  }
-  .pa-svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-    touch-action: none;
-  }
-  .pa-node--selected {
-    stroke: var(--gold-light) !important;
-    stroke-width: 2.5px !important;
-    filter: drop-shadow(0 0 8px rgba(201, 169, 110, 0.45));
-  }
-  .pa-panel {
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    background: var(--surface);
-    padding: 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    min-height: 200px;
-  }
-  @media (min-width: 901px) {
-    .pa-panel {
-      position: sticky;
-      top: 100px;
-      align-self: start;
-      max-height: min(68vh, 640px);
-      overflow-y: auto;
-    }
-  }
-  .pa-detail-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    margin: 0;
-    color: var(--text);
-    line-height: 1.2;
-  }
-  .pa-detail-meta {
-    font-size: 13px;
-    color: var(--text3);
-    margin: 0;
-  }
-  .pa-detail-line {
-    font-size: 14px;
-    color: var(--text2);
-    margin: 0;
-    line-height: 1.45;
-  }
-  .pa-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .pa-chip {
-    font-size: 12px;
-    padding: 5px 10px;
-    border-radius: 100px;
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    color: var(--text2);
-  }
-  .pa-detail-actions {
-    margin-top: auto;
-    padding-top: 8px;
-  }
-  .pa-link-out {
-    color: var(--gold);
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-  }
-  .pa-link-out:hover {
-    text-decoration: underline;
-  }
+
   .pa-status {
     font-size: 12px;
     color: var(--text3);
-    margin-top: 4px;
+    margin-bottom: 12px;
+    line-height: 1.45;
   }
-  .pa-error {
-    padding: 24px;
-    color: var(--accent);
-    font-size: 14px;
+
+  .pa-matrix-wrap {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: rgba(20, 20, 20, 0.45);
+    max-height: min(72vh, 720px);
   }
+
+  .pa-matrix {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 13px;
+  }
+  .pa-matrix thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 6px;
+    font-weight: 600;
+    text-align: center;
+    vertical-align: bottom;
+    line-height: 1.2;
+  }
+  .pa-matrix th.pa-mx-spice,
+  .pa-matrix td.pa-mx-spice {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    text-align: left;
+    padding: 10px 12px;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    font-weight: 500;
+    white-space: nowrap;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .pa-matrix thead th.pa-mx-spice {
+    z-index: 3;
+    vertical-align: middle;
+  }
+  .pa-mx-link {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .pa-mx-link:hover { color: var(--gold); }
+
+  .pa-mx-gh-long { display: none; }
+  @media (min-width: 880px) {
+    .pa-mx-gh-short { display: none; }
+    .pa-mx-gh-long { display: inline; font-size: 11px; font-weight: 600; }
+  }
+
+  .pa-matrix tbody td {
+    text-align: center;
+    padding: 8px 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+  .pa-matrix tbody tr:hover th,
+  .pa-matrix tbody tr:hover td {
+    background: rgba(255, 255, 255, 0.03);
+  }
+  .pa-matrix tbody tr:hover th.pa-mx-spice {
+    background: var(--bg2);
+  }
+
+  .pa-mx-on .pa-mx-l { color: var(--gold); font-size: 15px; }
+  .pa-mx-off .pa-mx-n { color: var(--text3); opacity: 0.25; font-size: 20px; line-height: 0.6; }
+
+  /* Column tints (match theme aroma-g1…8) */
+  .pa-matrix thead th.pa-mx-g1 { background: rgba(180, 200, 140, 0.2); color: #c8d4a8; }
+  .pa-matrix thead th.pa-mx-g2 { background: rgba(240, 200, 120, 0.18); color: #e8c88a; }
+  .pa-matrix thead th.pa-mx-g3 { background: rgba(120, 190, 170, 0.18); color: #9dd4c4; }
+  .pa-matrix thead th.pa-mx-g4 { background: rgba(190, 140, 200, 0.18); color: #d4b0dc; }
+  .pa-matrix thead th.pa-mx-g5 { background: rgba(200, 170, 130, 0.2); color: #dcc4a0; }
+  .pa-matrix thead th.pa-mx-g6 { background: rgba(220, 150, 120, 0.18); color: #e8b898; }
+  .pa-matrix thead th.pa-mx-g7 { background: rgba(160, 120, 100, 0.22); color: #d4b8a8; }
+  .pa-matrix thead th.pa-mx-g8 { background: rgba(220, 80, 80, 0.15); color: #f0a0a0; }
+
+  .pa-matrix tbody td.pa-mx-g1 { background: rgba(180, 200, 140, 0.06); }
+  .pa-matrix tbody td.pa-mx-g2 { background: rgba(240, 200, 120, 0.05); }
+  .pa-matrix tbody td.pa-mx-g3 { background: rgba(120, 190, 170, 0.06); }
+  .pa-matrix tbody td.pa-mx-g4 { background: rgba(190, 140, 200, 0.05); }
+  .pa-matrix tbody td.pa-mx-g5 { background: rgba(200, 170, 130, 0.06); }
+  .pa-matrix tbody td.pa-mx-g6 { background: rgba(220, 150, 120, 0.05); }
+  .pa-matrix tbody td.pa-mx-g7 { background: rgba(160, 120, 100, 0.07); }
+  .pa-matrix tbody td.pa-mx-g8 { background: rgba(220, 80, 80, 0.05); }
+
+  .pa-legend {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--text3);
+    line-height: 1.5;
+    max-width: 720px;
+  }
+  .pa-legend code { font-size: 11px; color: var(--text2); }
+
   .pa-footer {
-    margin-top: 40px;
+    margin-top: 36px;
     padding-top: 20px;
     border-top: 1px solid var(--border);
     text-align: center;
     font-size: 13px;
     color: var(--text3);
   }
-  .pa-footer a {
-    color: var(--gold);
-  }
+  .pa-footer a { color: var(--gold); }
+
+  .pa-error { color: var(--accent); padding: 20px; }
+
   @media (prefers-reduced-motion: reduce) {
-    .pa-profile {
-      transition: none;
-    }
-    body.pa-page::before {
-      display: none;
-    }
-  }
-
-  /* ── Mobile / coarse pointer ───────────────────────── */
-  @media (max-width: 680px) {
-    .pa-shell {
-      padding-left: max(14px, env(safe-area-inset-left, 0px));
-      padding-right: max(14px, env(safe-area-inset-right, 0px));
-    }
-    .pa-nav {
-      padding-top: max(12px, env(safe-area-inset-top, 0px));
-      font-size: 12px;
-    }
-    .pa-hero {
-      padding: 16px 0 12px;
-    }
-    .pa-hero-sub {
-      font-size: 14px;
-      padding: 0 4px;
-    }
-    .pa-toolbar {
-      margin: 12px 0 12px;
-      padding: 12px 12px;
-    }
-    .pa-profile {
-      padding: 12px 18px;
-      font-size: 14px;
-      min-height: 44px;
-    }
-    .pa-row {
-      flex-direction: column;
-      align-items: stretch;
-    }
-    .pa-search {
-      font-size: 16px;
-      width: 100%;
-      min-height: 48px;
-    }
-    .pa-btn-row {
-      flex-direction: row;
-    }
-    .pa-btn-row .pa-btn {
-      flex: 1 1 calc(50% - 5px);
-      min-height: 48px;
-      font-size: 15px;
-    }
-    .pa-graph-card {
-      min-height: min(52dvh, 420px);
-      border-radius: var(--radius-sm);
-    }
-    #paGraph {
-      height: min(52dvh, 420px);
-      min-height: 260px;
-    }
-    .pa-graph-hint {
-      font-size: 10px;
-      bottom: 8px;
-      left: 10px;
-      right: 10px;
-    }
-    .pa-panel {
-      padding: 16px;
-      padding-bottom: max(16px, env(safe-area-inset-bottom, 0px));
-      min-height: auto;
-      max-height: none;
-      border-radius: var(--radius-sm);
-    }
-    .pa-detail-title {
-      font-size: 20px;
-    }
-    .pa-link-out {
-      display: inline-block;
-      padding: 10px 0;
-      min-height: 44px;
-      line-height: 1.4;
-      box-sizing: border-box;
-    }
-  }
-
-  @media (max-width: 680px) and (max-height: 700px) {
-    .pa-graph-card {
-      min-height: min(46dvh, 360px);
-    }
-    #paGraph {
-      height: min(46dvh, 360px);
-      min-height: 220px;
-    }
-  }
-
-  @media (pointer: coarse) {
-    .pa-profile {
-      padding: 12px 18px;
-      min-height: 44px;
-    }
+    body.pa-page::before { display: none; }
   }
 </style>
 </head>
 <body class="pa-page">
-<a class="pa-skip" href="#paMain">Skip to atlas</a>
+<a class="pa-skip" href="#paMain">Skip to matrix</a>
 <div class="pa-shell">
   <nav class="pa-nav" aria-label="Site">
     <a href="index.html">← Kitchen Library</a>
@@ -458,60 +284,40 @@
     <a href="pantry.html">Pantry</a>
   </nav>
 
-  <header class="pa-hero">
-    <p class="pa-hero-label">Kuschi · Visual pairing</p>
-    <h1 class="pa-hero-title">Pairing atlas</h1>
-    <p class="pa-hero-sub">Pick a protein or type an ingredient. Book-backed nodes — drag to arrange; pinch to zoom; tap a dot for details.</p>
+  <header>
+    <p class="pa-hero-label">Kuschi · Reference sheet</p>
+    <h1 class="pa-hero-title">Aroma matrix</h1>
+    <p class="pa-hero-sub">
+      Same idea as the printable aroma matrix: <strong>each row</strong> is a priority spice or herb,
+      <strong>each column</strong> is aroma group G1–G8 from the extract. ● = listed in that group; · = not.
+      Tap a name for the full Aroma Bible profile. Switch to <strong>All</strong> for the full index.
+    </p>
   </header>
 
-  <div class="pa-toolbar" role="region" aria-label="Atlas controls">
-    <div class="pa-profiles-wrap">
-      <div class="pa-profiles" role="tablist" aria-label="Protein presets">
-        <button type="button" class="pa-profile" data-profile="lamb" aria-pressed="false">Lamb</button>
-        <button type="button" class="pa-profile" data-profile="beef" aria-pressed="false">Beef</button>
-        <button type="button" class="pa-profile" data-profile="chicken" aria-pressed="false">Chicken</button>
-        <button type="button" class="pa-profile" data-profile="pork" aria-pressed="false">Pork</button>
-        <button type="button" class="pa-profile" data-profile="fish" aria-pressed="false">Fish</button>
-        <button type="button" class="pa-profile" data-profile="duck" aria-pressed="false">Duck</button>
-        <button type="button" class="pa-profile" data-profile="eggs" aria-pressed="false">Eggs</button>
-        <button type="button" class="pa-profile" data-profile="tofu" aria-pressed="false">Tofu</button>
-        <button type="button" class="pa-profile" data-profile="legumes" aria-pressed="false">Legumes</button>
-        <button type="button" class="pa-profile" data-profile="mushroom" aria-pressed="false">Mushrooms</button>
-      </div>
+  <div class="pa-toolbar" role="region" aria-label="Matrix controls">
+    <div class="pa-mode" role="group" aria-label="Row set">
+      <button type="button" id="paModePriority" aria-pressed="true">Priority 25</button>
+      <button type="button" id="paModeAll" aria-pressed="false">All spices</button>
     </div>
-    <div class="pa-row">
-      <label class="visually-hidden" for="paSearch">Focus ingredient</label>
-      <input type="search" id="paSearch" class="pa-search" placeholder="Ingredient (e.g. salmon)…" autocomplete="off" spellcheck="false" enterkeyhint="search" inputmode="search">
-      <div class="pa-btn-row" role="group" aria-label="Graph actions">
-        <button type="button" class="pa-btn" id="paSearchBtn">Build graph</button>
-        <button type="button" class="pa-btn" id="paResetZoom" title="Reset pan and zoom">Reset view</button>
-      </div>
-    </div>
-    <p class="pa-status" id="paStatus" aria-live="polite">Loading data…</p>
+    <label class="visually-hidden" for="paMatrixSearch">Filter rows</label>
+    <input type="search" id="paMatrixSearch" class="pa-search" placeholder="Filter by name…" autocomplete="off" spellcheck="false" enterkeyhint="search" />
   </div>
 
   <main id="paMain">
-    <div class="pa-layout">
-      <div class="pa-graph-card">
-        <div id="paGraph" role="img" aria-label="Force-directed pairing graph"></div>
-        <p class="pa-graph-hint">Gold = anchor &amp; strong Flavor links · Blue = Aroma seasonings · Pinch zoom</p>
-      </div>
-      <aside class="pa-panel" aria-labelledby="paDetailHeading">
-        <h2 id="paDetailHeading" class="visually-hidden">Selection detail</h2>
-        <div id="paDetail" class="pa-detail-body">
-          <p class="pa-detail-meta">Select a node on the graph for notes and a shortcut to the Flavor explorer.</p>
-        </div>
-        <p class="visually-hidden" id="paLive" aria-live="polite"></p>
-      </aside>
-    </div>
+    <p class="pa-status" id="paStatus" aria-live="polite">Loading…</p>
+    <div class="pa-matrix-wrap" id="paMatrixHost"></div>
+    <p class="pa-legend">
+      Group labels in <code>aroma_data/aroma_matrix_meta.json</code> follow a Vierich/Vilgis-style sheet (e.g. your
+      <code>aroma_matrix_sheet_1.pdf</code>); numbering matches <code>ingredients.json</code> <code>aroma_groups</code> and
+      <a href="aroma.html">Aroma lookup</a> badges G1–G8. Not a pixel-perfect reproduction of the PDF.
+    </p>
   </main>
 
   <footer class="pa-footer">
-    Book-backed reference only — <a href="index.html">back to recipes</a>
+    <a href="flavor.html">Flavor explorer</a> · <a href="index.html">Recipes</a>
   </footer>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js" crossorigin="anonymous"></script>
 <script src="assets/pairing-atlas.js"></script>
 <style>
   .visually-hidden {
