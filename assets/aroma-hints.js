@@ -1,0 +1,410 @@
+/**
+ * Aroma Bible data: recipe seasoning suggestions, modal hints, add-recipe panel.
+ * Depends on aroma_data/ingredients.json + food_pairings.json (static fetch).
+ */
+(function (global) {
+  var ING_URL = 'aroma_data/ingredients.json';
+  var FOOD_URL = 'aroma_data/food_pairings.json';
+
+  var ingredients = null;
+  var foodPairings = null;
+  var byId = Object.create(null);
+  var loadPromise = null;
+
+  function normKey(s) {
+    if (window.KuschiUserRecipes && typeof KuschiUserRecipes.canonicalOrderMergeKey === 'function') {
+      return KuschiUserRecipes.canonicalOrderMergeKey(s);
+    }
+    var t = String(s || '')
+      .toLowerCase()
+      .replace(/[—–\-−]/g, ' ')
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    return t;
+  }
+
+  function tokens(s) {
+    return normKey(s)
+      .split(' ')
+      .filter(function (w) {
+        return w.length > 1;
+      });
+  }
+
+  function ensureLoaded() {
+    if (ingredients && foodPairings) return Promise.resolve();
+    if (loadPromise) return loadPromise;
+    loadPromise = Promise.all([
+      fetch(ING_URL).then(function (r) {
+        if (!r.ok) throw new Error('Failed to load ' + ING_URL);
+        return r.json();
+      }),
+      fetch(FOOD_URL).then(function (r) {
+        if (!r.ok) throw new Error('Failed to load ' + FOOD_URL);
+        return r.json();
+      }),
+    ])
+      .then(function (pair) {
+        ingredients = pair[0];
+        foodPairings = pair[1];
+        byId = Object.create(null);
+        for (var i = 0; i < ingredients.length; i++) {
+          var ing = ingredients[i];
+          if (ing && ing.id) byId[ing.id] = ing;
+        }
+      })
+      .catch(function (e) {
+        loadPromise = null;
+        throw e;
+      });
+    return loadPromise;
+  }
+
+  function harmonyRefs(ing) {
+    var h = ing && ing.harmonizes_with;
+    if (!Array.isArray(h)) return [];
+    return h;
+  }
+
+  function seasonId(ref) {
+    if (!ref) return '';
+    if (typeof ref === 'string') return ref;
+    return ref.id || '';
+  }
+
+  function seasonName(ref) {
+    if (!ref) return '';
+    if (typeof ref === 'string') return ref;
+    return ref.name || ref.id || '';
+  }
+
+  /** Collect { item } rows from kitchen/detail recipe + optional protein strings for food lookup. */
+  function recipeLinesForHints(recipe, extraItems) {
+    var out = [];
+    var ings = recipe && recipe.ingredients;
+    if (Array.isArray(ings)) {
+      for (var i = 0; i < ings.length; i++) {
+        var it = ings[i];
+        if (it && it.item) out.push({ item: String(it.item) });
+      }
+    }
+    var extras = extraItems || recipe.protein || recipe.tags;
+    if (Array.isArray(extras)) {
+      for (var j = 0; j < extras.length; j++) {
+        var x = extras[j];
+        if (typeof x === 'string' && x.trim()) out.push({ item: x.trim() });
+      }
+    }
+    return out;
+  }
+
+  function recipeAlreadyHasSpice(recipeLines, spiceId) {
+    var sid = normKey(spiceId.replace(/-/g, ' '));
+    for (var i = 0; i < recipeLines.length; i++) {
+      var k = normKey(recipeLines[i].item);
+      if (k === sid || k.indexOf(sid) >= 0 || sid.indexOf(k) >= 0) return true;
+      var ing = byId[spiceId];
+      if (ing && ing.name) {
+        var nk = normKey(ing.name);
+        if (k === nk || k.indexOf(nk) >= 0) return true;
+      }
+    }
+    return false;
+  }
+
+  function matchAromaIngredient(lineKey, lineToks, ing) {
+    var nk = normKey(ing.name);
+    var idk = normKey(String(ing.id || '').replace(/-/g, ' '));
+    if (!nk && !idk) return 0;
+    if (lineKey === nk || lineKey === idk) return 3;
+    if (nk && (lineKey.indexOf(nk) >= 0 || nk.indexOf(lineKey) >= 0)) return 2;
+    var nameToks = tokens(ing.name);
+    var hit = 0;
+    for (var a = 0; a < nameToks.length; a++) {
+      for (var b = 0; b < lineToks.length; b++) {
+        if (nameToks[a] === lineToks[b]) hit++;
+        else if (nameToks[a].length > 3 && lineToks[b].indexOf(nameToks[a]) >= 0) hit++;
+        else if (lineToks[b].length > 3 && nameToks[a].indexOf(lineToks[b]) >= 0) hit++;
+      }
+    }
+    return hit >= 2 ? 2 : hit === 1 ? 1 : 0;
+  }
+
+  function matchFoodPairing(lineKey, lineToks, fp) {
+    var fk = normKey(fp.name || '');
+    if (!fk) return false;
+    if (lineKey === fk || lineKey.indexOf(fk) >= 0 || fk.indexOf(lineKey) >= 0) return true;
+    var ft = tokens(fp.name);
+    for (var i = 0; i < ft.length; i++) {
+      for (var j = 0; j < lineToks.length; j++) {
+        if (ft[i] === lineToks[j]) return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * @param {Array<{item:string}>} lines
+   * @returns {{ suggestions: Array<{id:string,name:string,score:number,groups:number[]}>, matchedSpiceIds: string[] }}
+   */
+  function buildSuggestions(lines) {
+    if (!ingredients || !foodPairings) {
+      return { suggestions: [], matchedSpiceIds: [] };
+    }
+    var scores = Object.create(null);
+    var matchedSpiceIds = [];
+
+    function add(id, delta) {
+      if (!id || !byId[id]) return;
+      scores[id] = (scores[id] || 0) + delta;
+    }
+
+    for (var L = 0; L < lines.length; L++) {
+      var raw = lines[L].item;
+      var lineKey = normKey(raw);
+      var lineToks = tokens(raw);
+      if (!lineKey) continue;
+
+      for (var i = 0; i < ingredients.length; i++) {
+        var ing = ingredients[i];
+        var m = matchAromaIngredient(lineKey, lineToks, ing);
+        if (m > 0) {
+          matchedSpiceIds.push(ing.id);
+          var w = m >= 3 ? 4 : m >= 2 ? 3 : 2;
+          var refs = harmonyRefs(ing);
+          for (var h = 0; h < refs.length; h++) {
+            var hid = seasonId(refs[h]);
+            add(hid, w);
+          }
+        }
+      }
+
+      for (var f = 0; f < foodPairings.length; f++) {
+        var fp = foodPairings[f];
+        if (matchFoodPairing(lineKey, lineToks, fp)) {
+          var seas = fp.seasonings || [];
+          for (var s = 0; s < seas.length; s++) {
+            add(seasonId(seas[s]), 2.5);
+          }
+        }
+      }
+    }
+
+    var recipeLines = lines;
+    var list = [];
+    for (var id in scores) {
+      if (!Object.prototype.hasOwnProperty.call(scores, id)) continue;
+      if (recipeAlreadyHasSpice(recipeLines, id)) continue;
+      var ob = byId[id];
+      if (!ob) continue;
+      list.push({
+        id: id,
+        name: ob.name || id,
+        score: scores[id],
+        groups: Array.isArray(ob.aroma_groups) ? ob.aroma_groups.slice() : [],
+      });
+    }
+    list.sort(function (a, b) {
+      return b.score - a.score || a.name.localeCompare(b.name);
+    });
+    return {
+      suggestions: list.slice(0, 24),
+      matchedSpiceIds: matchedSpiceIds.filter(function (v, idx, a) {
+        return a.indexOf(v) === idx;
+      }),
+    };
+  }
+
+  function groupBadgesHtml(groups) {
+    if (!groups || !groups.length) return '';
+    var parts = [];
+    for (var g = 0; g < Math.min(groups.length, 3); g++) {
+      var n = groups[g];
+      parts.push('<span class="aroma-group-badge aroma-g' + String(n) + '">G' + String(n) + '</span>');
+    }
+    return parts.join('');
+  }
+
+  function aromaPageHrefForSpice(id) {
+    return 'aroma.html?spice=' + encodeURIComponent(id);
+  }
+
+  function seasoningSectionHtml(lines, opts) {
+    opts = opts || {};
+    var idSuffix = opts.idSuffix || '';
+    var wrapId = 'aromaHintsWrap' + idSuffix;
+    return (
+      '<div class="aroma-hint-block" id="' +
+      wrapId +
+      '" data-aroma-hint-wrap="1">' +
+      '<div class="aroma-hint-loading">Loading seasoning ideas…</div>' +
+      '</div>'
+    );
+  }
+
+  function fillHintWrap(wrapEl, lines) {
+    if (!wrapEl) return;
+    ensureLoaded()
+      .then(function () {
+        var data = buildSuggestions(lines);
+        var limit = compactTopN(wrapEl);
+        var top = data.suggestions.slice(0, limit);
+        if (!top.length) {
+          wrapEl.innerHTML =
+            '<details class="aroma-hint-details">' +
+            '<summary class="aroma-hint-summary">Seasoning ideas</summary>' +
+            '<p class="aroma-hint-empty">No matches in the Aroma Bible index for these ingredients. Try <a href="aroma.html">Aroma lookup</a>.</p>' +
+            '</details>';
+          return;
+        }
+        var names = top
+          .slice(0, 8)
+          .map(function (s) {
+            return s.name;
+          })
+          .join(', ');
+        var chips = top
+          .slice(0, 12)
+          .map(function (s) {
+            return (
+              '<a class="aroma-hint-chip" href="' +
+              aromaPageHrefForSpice(s.id) +
+              '">' +
+              escHtml(s.name) +
+              groupBadgesHtml(s.groups) +
+              '</a>'
+            );
+          })
+          .join('');
+        wrapEl.innerHTML =
+          '<details class="aroma-hint-details">' +
+          '<summary class="aroma-hint-summary">Seasoning ideas <span class="aroma-hint-teaser">— ' +
+          escHtml(names) +
+          '</span></summary>' +
+          '<p class="aroma-hint-intro">From the Aroma Bible index (harmony + food pairings). Tap a spice for the full profile.</p>' +
+          '<div class="aroma-hint-chips">' +
+          chips +
+          '</div>' +
+          '<p class="aroma-hint-more"><a href="aroma.html">Open Aroma lookup →</a></p>' +
+          '</details>';
+      })
+      .catch(function () {
+        wrapEl.innerHTML =
+          '<details class="aroma-hint-details"><summary class="aroma-hint-summary">Seasoning ideas</summary>' +
+          '<p class="aroma-hint-empty">Could not load aroma data.</p></details>';
+      });
+  }
+
+  function compactTopN(el) {
+    var c = el && el.getAttribute('data-aroma-compact');
+    return c === '1' ? 6 : 12;
+  }
+
+  function escHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  /**
+   * After injecting HTML that includes [data-aroma-hint-wrap], call with modal root and recipe.
+   */
+  function hydrateModal(root, recipe) {
+    if (!root || !recipe) return;
+    var lines = recipeLinesForHints(recipe);
+    var wrap = root.querySelector('[data-aroma-hint-wrap]');
+    if (!wrap) return;
+    fillHintWrap(wrap, lines);
+  }
+
+  function addRecipePanelHtml() {
+    return (
+      '<div class="aroma-add-panel" data-aroma-add-panel="1">' +
+      '<div class="aroma-add-panel-inner"><span class="aroma-hint-loading">Seasoning suggestions…</span></div>' +
+      '</div>'
+    );
+  }
+
+  function fillAddRecipePanel(panelEl, getLines, onAdd) {
+    if (!panelEl) return;
+    var inner = panelEl.querySelector('.aroma-add-panel-inner');
+    if (!inner) return;
+    var lines = typeof getLines === 'function' ? getLines() : getLines || [];
+    ensureLoaded()
+      .then(function () {
+        var data = buildSuggestions(lines);
+        var top = data.suggestions.slice(0, 10);
+        if (!top.length) {
+          inner.innerHTML =
+            '<details class="aroma-add-details"><summary>Seasoning suggestions</summary>' +
+            '<p class="aroma-hint-empty">No suggestions yet — add a few ingredients.</p></details>';
+          return;
+        }
+        var btns = top
+          .map(function (s) {
+            return (
+              '<button type="button" class="aroma-suggest-btn" data-aroma-add-id="' +
+              escHtml(s.id) +
+              '" data-aroma-add-name="' +
+              escHtml(s.name) +
+              '">' +
+              '<span class="aroma-suggest-name">' +
+              escHtml(s.name) +
+              '</span>' +
+              groupBadgesHtml(s.groups) +
+              '</button>'
+            );
+          })
+          .join('');
+        inner.innerHTML =
+          '<details class="aroma-add-details">' +
+          '<summary>Seasoning suggestions</summary>' +
+          '<p class="aroma-hint-intro">Based on your ingredient list. Tap to add (pinch / to taste).</p>' +
+          '<div class="aroma-suggest-btns">' +
+          btns +
+          '</div>' +
+          '</details>';
+        inner.querySelectorAll('[data-aroma-add-id]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var id = btn.getAttribute('data-aroma-add-id');
+            var name = btn.getAttribute('data-aroma-add-name');
+            if (onAdd) onAdd(id, name, btn);
+          });
+        });
+      })
+      .catch(function () {
+        inner.innerHTML = '';
+      });
+  }
+
+  function debounce(fn, ms) {
+    var t;
+    return function () {
+      var a = arguments;
+      var th = this;
+      clearTimeout(t);
+      t = setTimeout(function () {
+        fn.apply(th, a);
+      }, ms);
+    };
+  }
+
+  global.KuschiAromaHints = {
+    ING_URL: ING_URL,
+    FOOD_URL: FOOD_URL,
+    ensureLoaded: ensureLoaded,
+    normKey: normKey,
+    recipeLinesForHints: recipeLinesForHints,
+    buildSuggestions: buildSuggestions,
+    seasoningSectionHtml: seasoningSectionHtml,
+    hydrateModal: hydrateModal,
+    addRecipePanelHtml: addRecipePanelHtml,
+    fillAddRecipePanel: fillAddRecipePanel,
+    debounce: debounce,
+    aromaPageHrefForSpice: aromaPageHrefForSpice,
+    escHtml: escHtml,
+  };
+})(typeof window !== 'undefined' ? window : this);

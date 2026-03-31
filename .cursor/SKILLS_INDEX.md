@@ -3,6 +3,7 @@
 | Skill | Path | When |
 |-------|------|------|
 | Hub | [.cursor/skills/kitchen-library/SKILL.md](.cursor/skills/kitchen-library/SKILL.md) | Any cross-cutting or HTML/data work |
+| Aroma Bible | [.cursor/skills/aroma-bible/SKILL.md](.cursor/skills/aroma-bible/SKILL.md) | Seasoning, spice pairing, `aroma_data/`, [aroma.html](aroma.html) |
 
 ## Rules (always or globbed)
 

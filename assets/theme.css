@@ -1064,6 +1064,170 @@ body {
   }
 }
 
+/* ── Aroma Bible (lookup page + recipe hints) ───────────────── */
+.aroma-group-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 1px 5px;
+  border-radius: 4px;
+  margin-left: 4px;
+  vertical-align: middle;
+  border: 1px solid var(--border);
+}
+.aroma-g1 {
+  background: rgba(180, 200, 140, 0.25);
+  color: #c8d4a8;
+}
+.aroma-g2 {
+  background: rgba(240, 200, 120, 0.2);
+  color: #e8c88a;
+}
+.aroma-g3 {
+  background: rgba(120, 190, 170, 0.22);
+  color: #9dd4c4;
+}
+.aroma-g4 {
+  background: rgba(190, 140, 200, 0.2);
+  color: #d4b0dc;
+}
+.aroma-g5 {
+  background: rgba(200, 170, 130, 0.25);
+  color: #dcc4a0;
+}
+.aroma-g6 {
+  background: rgba(220, 150, 120, 0.22);
+  color: #e8b898;
+}
+.aroma-g7 {
+  background: rgba(160, 120, 100, 0.28);
+  color: #d4b8a8;
+}
+.aroma-g8 {
+  background: rgba(220, 80, 80, 0.2);
+  color: #f0a0a0;
+}
+
+.aroma-hint-block {
+  margin: 20px 0 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.aroma-hint-details {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  overflow: hidden;
+}
+.aroma-hint-summary {
+  cursor: pointer;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gold);
+  list-style: none;
+}
+.aroma-hint-summary::-webkit-details-marker {
+  display: none;
+}
+.aroma-hint-teaser {
+  font-weight: 400;
+  color: var(--text2);
+  font-size: 13px;
+}
+.aroma-hint-intro,
+.aroma-hint-empty {
+  font-size: 13px;
+  color: var(--text3);
+  padding: 0 14px 8px;
+  line-height: 1.5;
+}
+.aroma-hint-empty a {
+  color: var(--gold);
+}
+.aroma-hint-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 14px 12px;
+}
+.aroma-hint-chip {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 6px 10px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--text);
+  font-size: 13px;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.aroma-hint-chip:hover {
+  border-color: var(--border-hover);
+  background: var(--surface-hover);
+}
+.aroma-hint-more {
+  font-size: 12px;
+  padding: 0 14px 12px;
+}
+.aroma-hint-more a {
+  color: var(--gold);
+}
+.aroma-hint-loading {
+  font-size: 13px;
+  color: var(--text3);
+  padding: 8px 0;
+}
+
+.aroma-add-panel {
+  margin: 14px 0 8px;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  border: 1px dashed var(--border);
+  background: rgba(255, 255, 255, 0.02);
+}
+.aroma-add-details summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+  list-style: none;
+}
+.aroma-add-details summary::-webkit-details-marker {
+  display: none;
+}
+.aroma-suggest-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.aroma-suggest-btn {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 6px 10px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.aroma-suggest-btn:hover {
+  border-color: var(--gold);
+  background: var(--surface-hover);
+}
+.aroma-suggest-name {
+  font-weight: 500;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .modal-overlay,
   .modal {
