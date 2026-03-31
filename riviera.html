@@ -1726,7 +1726,10 @@ function openRecipe(id) {
     : '';
 
   modal.innerHTML = `
-    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-top-bar">
+      <button type="button" class="modal-wake-pill" data-kuschi-wake aria-pressed="false"><span data-kuschi-wake-label>Stay awake</span></button>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
     <div class="modal-title">${esc(r.name)}</div>
     <div class="modal-type">${esc(r.type)} · Yield: ${esc(r.yield)}</div>
     <div class="modal-badges">${badges}</div>
@@ -1746,9 +1749,6 @@ function openRecipe(id) {
     ${note}
     ${label}
     ${adminActions}
-    <div class="modal-copy-bar">
-      <button type="button" class="modal-copy-btn" data-kuschi-wake aria-pressed="false">Keep screen on</button>
-    </div>
   `;
 
   modal.scrollTop = 0;

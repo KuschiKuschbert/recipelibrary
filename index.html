@@ -1033,7 +1033,9 @@ function closeModal() {
 }
 
 function renderRecipeDetail(r) {
-  let html = `<button class="modal-close" onclick="closeModal()">✕</button>`;
+  let html = `<div class="modal-top-bar">`;
+  html += `<button type="button" class="modal-wake-pill" data-kuschi-wake aria-pressed="false"><span data-kuschi-wake-label>Stay awake</span></button>`;
+  html += `<button class="modal-close" onclick="closeModal()">✕</button></div>`;
   html += `<div class="modal-title">${esc(r.name)}</div>`;
 
   if (r.cuisine) {
@@ -1087,7 +1089,6 @@ function renderRecipeDetail(r) {
   html += `<div class="modal-copy-bar">`;
   html += `<button class="modal-copy-btn" onclick="copyRecipeText('${esc(r.id)}')">Copy as text</button>`;
   html += `<button class="modal-copy-btn" onclick="copyRecipeName(this, '${esc(r.name).replace(/'/g,"\\'")}')">Copy name</button>`;
-  html += `<button type="button" class="modal-copy-btn" data-kuschi-wake aria-pressed="false">Keep screen on</button>`;
   html += `</div>`;
 
   return html;

@@ -314,6 +314,55 @@ body {
   color: var(--gold);
 }
 
+.modal-top-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 0 0 14px 0;
+  margin: 0 0 4px 0;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-top-bar .modal-close {
+  float: none;
+  position: static;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.modal-wake-pill {
+  flex-shrink: 1;
+  min-width: 0;
+  max-width: 100%;
+  padding: 8px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-family: inherit;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.modal-wake-pill:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.modal-wake-pill[aria-pressed='true'] {
+  border-color: var(--gold);
+  background: rgba(201, 169, 110, 0.15);
+  color: var(--gold);
+}
+
 .modal-title {
   font-family: 'Playfair Display', serif;
   font-size: 26px;
@@ -322,6 +371,10 @@ body {
   line-height: 1.25;
   margin-bottom: 6px;
   padding-right: 52px;
+}
+
+.modal-top-bar ~ .modal-title {
+  padding-right: 0;
 }
 
 .modal-cuisine,

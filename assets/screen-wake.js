@@ -6,12 +6,21 @@
   const SEL = '[data-kuschi-wake]';
   const LABEL_ON = 'Screen on';
   const LABEL_OFF = 'Keep screen on';
+  const PILL_LABEL_ON = 'On';
+  const PILL_LABEL_OFF = 'Stay awake';
 
   let sentinel = null;
   let desired = false;
 
   function supported() {
     return typeof navigator !== 'undefined' && navigator.wakeLock && typeof navigator.wakeLock.request === 'function';
+  }
+
+  function labelFor(el, on) {
+    if (el.classList && el.classList.contains('modal-wake-pill')) {
+      return on ? PILL_LABEL_ON : PILL_LABEL_OFF;
+    }
+    return on ? LABEL_ON : LABEL_OFF;
   }
 
   function sync() {
@@ -26,8 +35,11 @@
     nodes.forEach((el) => {
       el.hidden = false;
       el.setAttribute('aria-pressed', on ? 'true' : 'false');
-      const text = on ? LABEL_ON : LABEL_OFF;
-      if (el.tagName === 'BUTTON' || el.getAttribute('role') === 'button') {
+      const text = labelFor(el, on);
+      const labelEl = el.querySelector('[data-kuschi-wake-label]');
+      if (labelEl) {
+        labelEl.textContent = text;
+      } else if (el.tagName === 'BUTTON' || el.getAttribute('role') === 'button') {
         el.textContent = text;
       }
     });
