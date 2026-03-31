@@ -96,6 +96,8 @@
     [/\bevo?o\b/g, 'olive oil'],
     [/\bap\s+flour\b/g, 'plain flour'],
     [/\ball[\s-]?purpose\s+flour\b/g, 'plain flour'],
+    [/\bmint\s*[—–-]\s*fresh\b/gi, 'mint'],
+    [/\bfresh\s+mint\b/gi, 'mint'],
   ];
 
   /** Do not strip trailing “s” for these whole-token matches (false plurals / mass nouns). */
@@ -227,7 +229,48 @@
     return found && found.defaultZone ? found.defaultZone : 'other';
   }
 
+  const STORAGE_ORDER_ARANCINI_COATING_SPLIT = 'kuschi_order_arancini_coating_split_v1';
+
+  /**
+   * One-time: arancini coating was one row (index 14) + eggs (15); split to flour (14), breadcrumbs (15), eggs (16).
+   */
+  function migrateOrderOverridesAranciniCoatingSplitIfNeeded() {
+    try {
+      if (localStorage.getItem(STORAGE_ORDER_ARANCINI_COATING_SPLIT) === '1') return;
+    } catch (e) {
+      return;
+    }
+    var all = safeParseObject(localStorage.getItem(STORAGE_ORDER_OVERRIDES) || '{}', {});
+    if (!all['arancini::14'] && !all['arancini::15']) {
+      try {
+        localStorage.setItem(STORAGE_ORDER_ARANCINI_COATING_SPLIT, '1');
+      } catch (e2) {
+        /* ignore */
+      }
+      return;
+    }
+    var next = Object.assign({}, all);
+    var eggs = next['arancini::15'];
+    var coat = next['arancini::14'];
+    delete next['arancini::14'];
+    delete next['arancini::15'];
+    if (coat != null) {
+      next['arancini::14'] = Object.assign({}, coat);
+      next['arancini::15'] = Object.assign({}, coat);
+    }
+    if (eggs != null) {
+      next['arancini::16'] = Object.assign({}, eggs);
+    }
+    saveOrderOverrides(next);
+    try {
+      localStorage.setItem(STORAGE_ORDER_ARANCINI_COATING_SPLIT, '1');
+    } catch (e3) {
+      /* ignore */
+    }
+  }
+
   function loadOrderOverrides() {
+    migrateOrderOverridesAranciniCoatingSplitIfNeeded();
     return safeParseObject(localStorage.getItem(STORAGE_ORDER_OVERRIDES) || '{}', {});
   }
 

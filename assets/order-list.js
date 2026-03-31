@@ -8,28 +8,43 @@
   var ZONE_LABELS = { freezer: 'Freezer', coldroom: 'Cold room', drystore: 'Dry store', other: 'Other' };
   var MERGED_LINE_KEYS_SEP = '|||';
 
-  /** Explicit unit field, else trailing token after leading number/fraction in qty (e.g. 500 g, 2 1/2 cups). */
-  function inferRecipeUnit(i) {
-    if (!i) return '';
-    var u = i.unit != null && String(i.unit).trim() !== '' ? String(i.unit).trim() : '';
-    if (u) return u;
-    var q = i.qty != null ? String(i.qty).trim() : '';
-    if (!q) return '';
-    var m = q.match(/^([\d\s.,\/]+)\s+([a-zA-Z%°].*)$/);
-    if (m && m[2]) return m[2].trim();
-    return '';
-  }
+  /**
+   * Supplier-facing order unit from canonical merge key (kg / L / pc / piece / box).
+   * Matches run on KuschiUserRecipes.canonicalOrderMergeKey(item) when available.
+   */
+  var SUPPLIER_UNIT_RULES = [
+    { test: /\boyster\b/, unit: 'box' },
+    { test: /\bcinnamon stick\b/, unit: 'pc' },
+    { test: /\blamb cutlet\b/, unit: 'kg' },
+    { test: /\b(mayonnaise|mayo|kewpie|aioli)\b/, unit: 'kg' },
+    { test: /\bcucumber\b/, unit: 'piece' },
+    { test: /\begg\b/, unit: 'pc' },
+    { test: /\btomato\b/, unit: 'kg' },
+    { test: /\b(rocket|arugula)\b/, unit: 'kg' },
+    { test: /\b(flour|breadcrumb)\b/, unit: 'kg' },
+    { test: /\bmint\b/, unit: 'kg' },
+    { test: /\bhoney\b/, unit: 'kg' },
+  ];
 
-  /** Default text for order qty input when no override: strip inferred unit from qty string when unit is parse-only. */
-  function recipeQtyDefaultForOrder(i) {
-    var q = i.qty != null ? String(i.qty).trim() : '';
-    if (!q) return '';
-    var u = inferRecipeUnit(i);
-    if (!u) return q;
-    if (i.unit != null && String(i.unit).trim() !== '') return q;
-    var m = q.match(/^([\d\s.,\/]+)\s+[a-zA-Z%°].*$/);
-    if (m) return m[1].trim();
-    return q;
+  var SUPPLIER_LIQUID_RE =
+    /\b(water|stock|broth|oil|milk|cream|juice|wine|vinegar|sauce|liqueur|beer|spirit|rum|gin|vodka|brandy|whisky|whiskey|mirin|vermouth|bitters|passata|coulis|syrup|cola|cider|essence|extract|demi|glaze)\b/;
+
+  function supplierOrderUnit(itemName, Kr) {
+    var key = '';
+    if (Kr && typeof Kr.canonicalOrderMergeKey === 'function') {
+      key = Kr.canonicalOrderMergeKey(itemName);
+    } else {
+      key = String(itemName || '')
+        .toLowerCase()
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+    if (!key) return 'kg';
+    for (var ri = 0; ri < SUPPLIER_UNIT_RULES.length; ri++) {
+      if (SUPPLIER_UNIT_RULES[ri].test.test(key)) return SUPPLIER_UNIT_RULES[ri].unit;
+    }
+    if (SUPPLIER_LIQUID_RE.test(key)) return 'L';
+    return 'kg';
   }
 
   function pickDisplayUnitForMerged(tally) {
@@ -266,18 +281,30 @@
     return '<span class="ord-zone-display">' + esc(ZONE_LABELS[z]) + '</span>';
   }
 
-  function orderQtyWithUnitHtml(value, keysEsc, orderUnit) {
+  function orderQtyInputBlock(inputAttrs, value, orderUnit, wrapperExtraClass) {
     var u = String(orderUnit || '').trim();
     var suffix = u ? '<span class="ord-unit-suffix">' + esc(u) + '</span>' : '';
+    var wclass = 'ord-qty-with-unit' + (wrapperExtraClass ? ' ' + wrapperExtraClass : '');
     return (
-      '<div class="ord-qty-with-unit">' +
-      '<input type="text" class="ord-order-qty" data-merged-keys="' +
-      keysEsc +
-      '" value="' +
+      '<div class="' +
+      wclass +
+      '">' +
+      '<input type="text" ' +
+      inputAttrs +
+      ' value="' +
       escAttr(value) +
       '" placeholder="Order qty" />' +
       suffix +
       '</div>'
+    );
+  }
+
+  function orderQtyWithUnitHtml(value, keysEsc, orderUnit) {
+    return orderQtyInputBlock(
+      'class="ord-order-qty" data-merged-keys="' + keysEsc + '"',
+      value,
+      orderUnit,
+      ''
     );
   }
 
@@ -356,10 +383,9 @@
           var defaultZone = storage.resolveDefaultZone(i.item);
           var zone = o.zone;
           if (!zone || k.ZONE_IDS.indexOf(zone) < 0) zone = defaultZone;
-          var orderQty = o.orderQty;
-          if (orderQty == null || orderQty === '') orderQty = recipeQtyDefaultForOrder(i);
+          var orderQty = o.orderQty != null ? String(o.orderQty) : '';
           var included = o.included !== false;
-          var recipeUnit = inferRecipeUnit(i);
+          var recipeUnit = supplierOrderUnit(i.item, k);
           recipeOut.push({
             kind: 'recipe',
             lineKey: lineKey,
@@ -385,7 +411,7 @@
           orderQty: ex.orderQty || '',
           zone: k.ZONE_IDS.indexOf(ex.zone) >= 0 ? ex.zone : 'other',
           included: true,
-          orderUnit: '',
+          orderUnit: supplierOrderUnit(ex.name, k),
         });
       });
       return out;
@@ -457,19 +483,19 @@
             extraIds.forEach(function (xid) {
               var ex = extrasById[xid];
               if (!ex) return;
+              var exUnit = supplierOrderUnit(ex.name, k);
               html +=
                 '<div class="order-line-sub">' +
                 '<span class="order-sub-merged" aria-hidden="true">↳</span>' +
                 '<div class="order-line-name order-sub-name">' +
                 esc(ex.name) +
                 '</div>' +
-                '<div class="ord-qty-with-unit ord-qty-with-unit--sub">' +
-                '<input type="text" class="ord-extra-qty" data-extra-id="' +
-                escAttr(xid) +
-                '" value="' +
-                escAttr(ex.orderQty || '') +
-                '" placeholder="Order qty" />' +
-                '</div>' +
+                orderQtyInputBlock(
+                  'class="ord-extra-qty" data-extra-id="' + escAttr(xid) + '"',
+                  ex.orderQty || '',
+                  exUnit,
+                  'ord-qty-with-unit--sub'
+                ) +
                 '<button type="button" class="btn-secondary ord-remove-extra" data-extra-id="' +
                 escAttr(xid) +
                 '">✕</button>' +
@@ -477,18 +503,18 @@
             });
             html += '</div>';
           } else {
+            var extraOu = line.orderUnit != null ? line.orderUnit : supplierOrderUnit(line.item, k);
             html +=
               '<div class="order-line-row" data-kind="extra">' +
               '<div class="order-line-name">' +
               esc(line.item) +
               '</div>' +
-              '<div class="ord-qty-with-unit">' +
-              '<input type="text" class="ord-order-qty-extra" data-extra-id="' +
-              escAttr(line.extraId) +
-              '" value="' +
-              escAttr(line.orderQty) +
-              '" placeholder="Order qty" />' +
-              '</div>' +
+              orderQtyInputBlock(
+                'class="ord-order-qty-extra" data-extra-id="' + escAttr(line.extraId) + '"',
+                line.orderQty,
+                extraOu,
+                ''
+              ) +
               extraZoneControlHtml(line) +
               '<button type="button" class="btn-secondary ord-remove" data-extra-id="' +
               escAttr(line.extraId) +
@@ -597,7 +623,7 @@
         });
         text += ZONE_LABELS[z].toUpperCase() + '\n';
         arr.forEach(function (l) {
-          var u = l.kind === 'recipe' ? (l.orderUnit != null ? l.orderUnit : '') : '';
+          var u = l.orderUnit != null ? l.orderUnit : '';
           var q = formatQtyForCopy(l.orderQty, u);
           text += '- ' + l.item + ': ' + q + '\n';
         });
