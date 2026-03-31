@@ -184,11 +184,11 @@
     background: var(--glass);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
-    padding: 10px 6px;
+    padding: 8px 5px 10px;
     font-weight: 600;
     text-align: center;
     vertical-align: bottom;
-    line-height: 1.2;
+    line-height: 1.15;
   }
   .pa-matrix th.pa-mx-spice,
   .pa-matrix td.pa-mx-spice {
@@ -215,11 +215,61 @@
   }
   .pa-mx-link:hover { color: var(--gold); }
 
-  .pa-mx-gh-long { display: none; }
-  @media (min-width: 880px) {
-    .pa-mx-gh-short { display: none; }
-    .pa-mx-gh-long { display: inline; font-size: 11px; font-weight: 600; }
+  .pa-mx-g-main {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
   }
+  .pa-mx-g-sub {
+    display: block;
+    margin-top: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--text3);
+    max-width: 4.8rem;
+    margin-left: auto;
+    margin-right: auto;
+    hyphens: auto;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .pa-th-main {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text2);
+  }
+  .pa-th-sub {
+    display: block;
+    margin-top: 3px;
+    font-size: 9px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--text3);
+    letter-spacing: 0.02em;
+  }
+
+  .pa-matrix-legend {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.55;
+    margin: 0 0 12px;
+    padding: 12px 14px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.03);
+    max-width: 920px;
+  }
+  .pa-matrix-legend strong { color: var(--text); }
+  .pa-matrix-legend ul {
+    margin: 8px 0 0;
+    padding-left: 1.2em;
+  }
+  .pa-matrix-legend li { margin: 4px 0; }
 
   .pa-matrix tbody td {
     text-align: center;
@@ -252,14 +302,15 @@
     font-size: 12px;
     font-weight: 600;
     color: var(--text2);
-    min-width: 36px;
-    max-width: 44px;
+    min-width: 44px;
+    max-width: 56px;
   }
   .pa-matrix thead th.pa-mx-ind {
     z-index: 2;
-    font-size: 11px;
+    padding-left: 4px;
+    padding-right: 4px;
   }
-  .pa-mx-src-h { min-width: 52px; max-width: 64px; }
+  .pa-mx-src-h { min-width: 52px; max-width: 68px; }
   .pa-mx-src-cell {
     font-family: ui-monospace, monospace;
     letter-spacing: 0.02em;
@@ -429,18 +480,37 @@
   }
   .pa-food-matrix thead th.pa-fx-food {
     z-index: 3;
+    vertical-align: bottom;
+    padding-bottom: 10px;
   }
   .pa-food-matrix thead th.pa-fx-spice {
-    padding: 8px 4px;
-    font-size: 10px;
+    padding: 8px 4px 10px;
     font-weight: 600;
     text-align: center;
     vertical-align: bottom;
     line-height: 1.15;
-    max-width: 56px;
+    max-width: 4.75rem;
+    min-width: 2.5rem;
+  }
+  .pa-fx-spice-main {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.2;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+  .pa-fx-spice-sub {
+    display: block;
+    margin-top: 2px;
+    font-size: 8px;
+    font-weight: 500;
+    color: var(--text3);
+    line-height: 1.15;
+    max-height: 2.4em;
+    overflow: hidden;
+    word-break: break-word;
   }
   .pa-fx-data {
     cursor: pointer;
@@ -539,10 +609,10 @@
     <p class="pa-hero-label">Kuschi · Reference sheet</p>
     <h1 class="pa-hero-title">Aroma matrix</h1>
     <p class="pa-hero-sub">
-      <strong>Spice matrix:</strong> G1–G8 aroma groups from the Aroma extract, plus optional <strong>H</strong> (harmony partner count)
-      and <strong>Src</strong> (Aroma / Flavor Bible / Flavor Thesaurus). Tap a row for cross-book details.
-      <strong>Harmony</strong> layer counts how many spice–spice partners fall in each group.
-      <strong>Food matrix:</strong> rows from the Aroma food-pairing extract × spice columns.
+      <strong>Spice matrix:</strong> each column is an <strong>aroma group</strong> (G1–G8 + name in the header). After data loads:
+      <strong>Harmony</strong> is how many other spices harmonize with this one; <strong>Books</strong> shows A·F·T (Aroma / Flavor Bible / Thesaurus).
+      Tap a row for details. <strong>Harmony heatmap</strong> mode shows partner counts per group instead of dots.
+      <strong>Food matrix:</strong> foods from the Aroma extract × spice columns — see the legend under each table.
     </p>
   </header>
 
@@ -564,6 +634,28 @@
   <main id="paMain">
     <p class="pa-status" id="paStatus" aria-live="polite">Loading…</p>
     <p class="pa-status pa-enrich-status" id="paEnrichStatus" aria-live="polite"></p>
+    <div class="pa-matrix-legend" id="paSpiceLegend" aria-label="How to read the spice matrix">
+      <strong>How to read this table</strong>
+      <ul>
+        <li>
+          <strong>G1–G8</strong> — eight aroma groups from the Aroma Bible extract (names match
+          <code>aroma_data/aroma_matrix_meta.json</code>). <strong>●</strong> means this spice is listed in that group;
+          <strong>·</strong> means not primary there.
+        </li>
+        <li>
+          <strong>Harmony</strong> (after enrichment loads) — total count of other spices that <em>harmonize</em> with this one
+          (<code>aroma_data/pairing_matrix.json</code>).
+        </li>
+        <li>
+          <strong>Books A·F·T</strong> — <strong>A</strong> = in the Aroma extract; <strong>F</strong> = Flavor Bible row in the unified index;
+          <strong>T</strong> = Flavor Thesaurus wheel. Dots mean that book does not list this id.
+        </li>
+        <li>
+          <strong>Harmony heatmap</strong> (toggle above) — each G column shows <em>how many</em> harmony partners fall in that aroma group
+          (numbers / tint), not ●/·.
+        </li>
+      </ul>
+    </div>
     <div class="pa-matrix-wrap" id="paMatrixHost"></div>
     <p class="pa-legend">
       Group labels in <code>aroma_data/aroma_matrix_meta.json</code> follow a Vierich/Vilgis-style sheet (e.g. your
@@ -586,6 +678,11 @@
         </div>
         <label class="visually-hidden" for="paFoodSearch">Filter foods</label>
         <input type="search" id="paFoodSearch" class="pa-search" placeholder="Filter foods…" autocomplete="off" spellcheck="false" enterkeyhint="search" />
+      </div>
+      <div class="pa-matrix-legend" id="paFoodLegend" aria-label="How to read the food matrix">
+        <strong>Food × spice grid</strong> — Each row is a food from <code>aroma_data/food_pairings.json</code>.
+        Each column is a spice or herb. <strong>●</strong> = that spice is listed as a seasoning for that food; <strong>·</strong> = not listed.
+        Column headers show a short label and, when truncated, the full name on the second line. Tap a food row for the full seasoning list.
       </div>
       <div class="pa-food-matrix-wrap" id="paFoodMatrixHost"></div>
     </section>

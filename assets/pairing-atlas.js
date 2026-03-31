@@ -124,8 +124,12 @@
     var headExtra = '';
     if (enriched) {
       headExtra =
-        '<th scope="col" class="pa-mx-ind pa-mx-harm" title="Harmony partners (spice–spice)">H</th>' +
-        '<th scope="col" class="pa-mx-ind pa-mx-src-h" title="Sources: Aroma, Flavor Bible, Thesaurus">Src</th>';
+        '<th scope="col" class="pa-mx-ind pa-mx-harm" title="Number of other spices this one harmonizes with (Aroma pairing matrix)">' +
+        '<span class="pa-th-main">Harmony</span>' +
+        '<span class="pa-th-sub"># partners</span></th>' +
+        '<th scope="col" class="pa-mx-ind pa-mx-src-h" title="A = Aroma Bible extract; F = Flavor Bible (unified); T = Flavor Thesaurus wheel">' +
+        '<span class="pa-th-main">Books</span>' +
+        '<span class="pa-th-sub">A·F·T</span></th>';
     }
 
     var thead =
@@ -138,14 +142,20 @@
             layer === 'harmony'
               ? 'Group ' + g + ': ' + esc(lab) + ' — count of harmony partners in this group'
               : 'Group ' + g + ': ' + esc(lab);
+          var aria = 'Group ' + g + ', ' + esc(lab);
+          if (layer === 'harmony') {
+            aria += ' — harmony partner count in this group';
+          }
           return (
             '<th scope="col" class="pa-mx-g pa-mx-g' +
             g +
             '" title="' +
             title +
-            '"><span class="pa-mx-gh-short">G' +
+            '" aria-label="' +
+            aria +
+            '"><span class="pa-mx-g-main">G' +
             g +
-            '</span><span class="pa-mx-gh-long">' +
+            '</span><span class="pa-mx-g-sub">' +
             esc(lab) +
             '</span></th>'
           );
@@ -201,7 +211,7 @@
       if (enriched) {
         var hc = harmonyPartnerCount(ing.id);
         indCells +=
-          '<td class="pa-mx-ind pa-mx-harm-val" title="Harmony partners">' +
+          '<td class="pa-mx-ind pa-mx-harm-val" title="Total spice–spice harmony partners (pairing matrix)">' +
           (hc != null ? String(hc) : '—') +
           '</td>';
         indCells += '<td class="pa-mx-ind pa-mx-src-cell">' + sourceBadges(unifiedRow) + '</td>';
@@ -478,17 +488,26 @@
   function buildFoodTable(meta, foods, spiceCols) {
     var displayNames = meta.display_names && typeof meta.display_names === 'object' ? meta.display_names : {};
     var thead =
-      '<thead><tr><th scope="col" class="pa-fx-food">Food</th>' +
+      '<thead><tr><th scope="col" class="pa-fx-food" title="Food or dish from the Aroma food-pairing extract">' +
+      '<span class="pa-th-main">Food</span>' +
+      '<span class="pa-th-sub">extract rows</span></th>' +
       spiceCols
         .map(function (sid) {
           var ing = state.byId[sid];
           var lab = displayNames[sid] || (ing && ing.name) || sid;
+          var short =
+            lab.length > 11 ? lab.slice(0, 9).replace(/\s+$/, '') + '…' : lab;
           return (
             '<th scope="col" class="pa-fx-spice" title="' +
             esc(lab) +
-            '"><span class="pa-fx-spice-short">' +
-            esc(lab.length > 10 ? lab.slice(0, 8) + '…' : lab) +
-            '</span></th>'
+            '" aria-label="' +
+            esc(lab) +
+            ' — spice or herb column; dot if listed for food">' +
+            '<span class="pa-fx-spice-main">' +
+            esc(short) +
+            '</span>' +
+            (short !== lab ? '<span class="pa-fx-spice-sub">' + esc(lab) + '</span>' : '') +
+            '</th>'
           );
         })
         .join('') +
@@ -521,11 +540,12 @@
       for (var ci = 0; ci < spiceCols.length; ci++) {
         var spid = spiceCols[ci];
         var on = !!sidSet[spid];
+        var spLab = displayNames[spid] || (state.byId[spid] && state.byId[spid].name) || spid;
         body +=
           '<td class="pa-fx-cell' +
           (on ? ' pa-fx-on' : '') +
           '" aria-label="' +
-          esc((food.name || food.id) + ' — ' + (on ? 'yes' : 'no') + ' — ' + spid) +
+          esc((food.name || food.id) + ' — ' + spLab + ' — ' + (on ? 'seasoning listed' : 'not listed')) +
           '">' +
           (on ? '<span class="pa-mx-l" aria-hidden="true">●</span>' : '<span class="pa-mx-n" aria-hidden="true">·</span>') +
           '</td>';
@@ -824,7 +844,7 @@
       base += ' · G1–G8 from Aroma extract · ● = active group';
     }
     if (state.enriched) {
-      base += ' · H = harmony partner count · Src = A/F/T books';
+      base += ' · Harmony column = partner count · Books = A·F·T coverage';
     } else {
       base += ' · Loading cross-book data…';
     }
