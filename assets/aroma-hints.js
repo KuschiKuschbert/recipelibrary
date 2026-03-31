@@ -1,6 +1,9 @@
 /**
  * Aroma Bible data: recipe seasoning suggestions, modal hints, add-recipe panel.
  * Depends on aroma_data/ingredients.json + food_pairings.json (static fetch).
+ *
+ * German (and other) strings in SEARCH_SYNONYMS / hint maps are for recall only —
+ * they are not shown as primary UI labels; displayed names come from JSON `name`.
  */
 (function (global) {
   var ING_URL = 'aroma_data/ingredients.json';

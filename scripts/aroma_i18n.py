@@ -261,6 +261,19 @@ gebäck|pastry
 süß|sweet
 salzig|savory
 Deutschland|Germany
+Mitteleuropa|Central Europe
+arabisches|Arabic
+Arabisches|Arabic
+Indisches|Indian
+Indische|Indian
+Indische Masalas|Indian spice mixes
+Kartoffelgerichte|potato dishes
+deftige Kartoffelgerichte|hearty potato dishes
+deftige|hearty
+Kartoffelsalat|potato salad
+neuen Kartoffeln|new potatoes
+zitrusartig|citrus-like
+leicht|lightly
 Skandinavien|Scandinavia
 Frankreich|France
 Italien|Italy
@@ -911,6 +924,36 @@ _HEAT_PHRASES = [
     (r"Feiner,", "Finer,"),
     (r"mitunter zitrusartiger", "sometimes citrus-like"),
     (r"zitrusartiger", "citrus-like"),
+    (r"Fresh,\s*leicht zitrusartig", "Fresh, lightly citrus-like"),
+    (r"Fresh,\s*leicht zitrusartiger", "Fresh, lightly citrus-like"),
+    (r"leicht zitrusartig", "lightly citrus-like"),
+    (r",\s*leicht zitrusartig", ", lightly citrus-like"),
+    (r"Roher Pilzduft", "Raw mushroom aroma"),
+    (r"Rohpilzduft", "raw mushroom aroma"),
+    (r"schwefliger Rohpilzduft", "sulfurous raw mushroom aroma"),
+    (r"schwefliger", "sulfurous"),
+    (r"Fresh,\s*leicht aromatic", "Fresh, lightly aromatic"),
+    (r"Fresh,\s*leicht tangy", "Fresh, lightly tangy"),
+    (r"leicht muf-\s*fig", "lightly mushroom-like"),
+    (r"Fresh,\s*leicht scharf", "Fresh, lightly hot"),
+    (r"leicht scharf", "lightly hot"),
+    (r"leicht fatty", "lightly fatty"),
+    (r"Rather waxy,\s*leicht fatty", "Rather waxy, lightly fatty"),
+    (r"Fresh,\s*zitrusartig\b", "Fresh, citrus-like"),
+    (r"Floral,\s*zitrusartig", "Floral, citrus-like"),
+    (r"Fresh,\s*zitrusartig,\s*Floral", "Fresh, citrus-like, Floral"),
+    (r"Floral-zitrusartig", "Floral-citrus-like"),
+    (r"Floral-waxy-zitrusartig", "Floral-waxy-citrus-like"),
+    (r"Fast zitrusartiges Anisaroma", "Almost citrus-like anise aroma"),
+    (r"zitrusartiges Anisaroma", "citrus-like anise aroma"),
+    (r"Fresh zitrus-pinienartige Pfeffernoten", "Fresh citrus-pine-like pepper notes"),
+    (r"Pfeffernoten", "pepper notes"),
+    (r"pinienartige\b", "pine-like"),
+    (r"resinouss aroma", "resinous aroma"),
+    (r"Butterig-Earthys,\s*leicht tangy-bitteres", "Buttery-earthy, lightly tangy-bitter"),
+    (r"Butterig-Earthys", "Buttery-earthy"),
+    (r"tangy-bitteres", "tangy-bitter"),
+    (r"Earthys\b", "Earthy"),
     (r"Kümmel-", "caraway "),
     (r"Zusätzlich aromatice", "Additionally aromatic"),
     (r"Zusätzlich", "Additionally"),
@@ -1099,6 +1142,18 @@ def _heat_token_scrub(t: str) -> str:
     t = re.sub(r"\baus\b", "from", t, flags=re.I)
     t = re.sub(r"\bherzhaft\b", "savory", t, flags=re.I)
     t = re.sub(r"\bleichte\b", "light", t, flags=re.I)
+    t = re.sub(r"\bleicht\b", "lightly", t, flags=re.I)
+    t = re.sub(r"\bzitrusartiges\b", "citrus-like", t, flags=re.I)
+    t = re.sub(r"\bzitrusartig\b", "citrus-like", t, flags=re.I)
+    t = re.sub(r"\bPfeffernoten\b", "pepper notes", t, flags=re.I)
+    t = re.sub(r"\bpinienartige\b", "pine-like", t, flags=re.I)
+    t = re.sub(r"\bpinienartiger\b", "pine-like", t, flags=re.I)
+    t = re.sub(r"\bRoher\b", "Raw", t, flags=re.I)
+    t = re.sub(r"\bPilzduft\b", "mushroom aroma", t, flags=re.I)
+    t = re.sub(r"\bRohpilzduft\b", "raw mushroom aroma", t, flags=re.I)
+    t = re.sub(r"\bschwefliger\b", "sulfurous", t, flags=re.I)
+    t = re.sub(r"muf-\s*fig", "mushroom-like", t, flags=re.I)
+    t = re.sub(r"resinouss\b", "resinous", t, flags=re.I)
     t = re.sub(r"\bwenig\b", "little", t, flags=re.I)
     t = re.sub(r"\bZwiebel\b", "onion", t, flags=re.I)
     t = re.sub(r"\bSaat\b", "seed", t, flags=re.I)
@@ -1149,7 +1204,9 @@ _GERMAN_HINT = re.compile(
     r"Anteil|Ingwer|schokoladig|Rauchig|Kampfer|pinienartiger|Aromenentfaltung|"
     r"Kochen|Herbaler|Einlegen|ingwerartige|dezente|karamelliger|vieler|zwischen|"
     r"Karamell|Kaffee|Zwiebel|Sehr|intensiver|woodyen|Duftanteile|aromati|"
-    r"ANBAU|etwa|hoher|zur|bens|dafür|dazu|daran|darin)\b"
+    r"ANBAU|etwa|hoher|zur|bens|dafür|dazu|daran|darin|"
+    r"leicht|zitrusartig|zitrus|Deutschland|Mitteleuropa|arabisch|indisch|"
+    r"Roher|Pilzduft|Pfeffernoten|Indisches|Indische|arabisches|Kartoffel)\b"
 )
 
 _UCRX = re.compile(r"[äöüÄÖÜß]")
@@ -1173,9 +1230,62 @@ def _dedupe_ci(seq: list[str]) -> list[str]:
     return out
 
 
+def _scrub_hyphen_ocr_fragment(s: str) -> str:
+    """Fix split tokens and drop trailing OCR hyphen stubs on cuisines/blends."""
+    s = re.sub(r"(?i)Baha-\s*rat", "Baharat", s)
+    s = re.sub(r"(?i)muf-\s*fig", "mushroom-like", s)
+    for stub in (
+        "Blumen-",
+        "Apfel-",
+        "ein-",
+        "Wildra-",
+        "Rin-",
+        "Speku-",
+        "Sauer-",
+    ):
+        s = re.sub(rf"(?i),\s*{re.escape(stub)}\s*$", "", s)
+        s = re.sub(rf"(?i),\s*{re.escape(stub)}\s*,", ",", s)
+    s = re.sub(r",\s*[A-Za-zÀ-ÖØ-öø-ÿ]{2,22}-\s*$", "", s)
+    s = re.sub(r",\s*[A-Za-zÀ-ÖØ-öø-ÿ]{2,22}-\s*,", ",", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def _rewrite_cuisine_line(s: str) -> str:
+    """Translate `Country: dish, dish` segments; comma-separated multi-country lines."""
+    s = s.strip()
+    if not s:
+        return ""
+    s = _scrub_hyphen_ocr_fragment(s)
+    parts_out: list[str] = []
+    for seg in re.split(r",\s*", s):
+        seg = seg.strip()
+        if not seg:
+            continue
+        if ":" in seg:
+            pre, _, post = seg.partition(":")
+            pre_t = translate(pre.strip())
+            dishes = [translate(d.strip()) for d in re.split(r",\s*", post) if d.strip()]
+            dishes = [d for d in dishes if d]
+            if dishes:
+                parts_out.append(f"{pre_t}: {', '.join(dishes)}")
+            else:
+                parts_out.append(pre_t)
+        else:
+            parts_out.append(translate(seg))
+    return ", ".join(parts_out)
+
+
+def _translate_word_sequence(s: str) -> str:
+    s = s.strip()
+    if not s:
+        return ""
+    return " ".join(translate(w) for w in s.split())
+
+
 def _clean_display_phrase(raw: str) -> str | None:
     """Keep English-facing lines; drop obvious OCR/German leftovers."""
     s = re.sub(r"\s+", " ", raw.replace("\n", " ")).strip()
+    s = _scrub_hyphen_ocr_fragment(s)
     s = re.sub(r"(?i)Sala-\s*ten", "salads", s)
     s = re.sub(r"(?i)Schmorgerich-\s*ten", "braised dishes", s)
     s = re.sub(r"(?i)Blumenkohl", "cauliflower", s)
@@ -1275,7 +1385,8 @@ def postprocess_ingredients(ingredients: list[dict]) -> None:
         if ing.get("cuisines"):
             cuisines2 = []
             for c in ing["cuisines"]:
-                c2 = translate(c.replace("\n", " "))
+                c0 = c.replace("\n", " ")
+                c2 = _rewrite_cuisine_line(c0)
                 cc = _clean_display_phrase(c2)
                 if cc:
                     cuisines2.append(cc)
@@ -1283,7 +1394,9 @@ def postprocess_ingredients(ingredients: list[dict]) -> None:
         if ing.get("spice_blends"):
             blends = []
             for b in ing["spice_blends"]:
-                b2 = translate(b.replace("\n", " "))
+                b0 = b.replace("\n", " ")
+                b0 = _scrub_hyphen_ocr_fragment(b0)
+                b2 = _translate_word_sequence(b0)
                 bc = _clean_display_phrase(b2)
                 if bc:
                     blends.append(bc)

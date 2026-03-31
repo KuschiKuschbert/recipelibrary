@@ -21,12 +21,35 @@ sys.path.insert(0, SCRIPT_DIR)
 from aroma_i18n import _looks_untranslated_german  # noqa: E402
 
 _UC = re.compile(r"[äöüÄÖÜß]")
+# Trailing or mid-list OCR hyphen stubs (Blumen-, Baha- rat) and common ASCII German slips.
+_EXTRA_ASCII = re.compile(
+    r"(?i)(?:"
+    r"\b(leicht|zitrusartig|zitrusartiges)\b|"
+    r"\b(Deutschland|Mitteleuropa)\s*:|"
+    r"\b(indisches|indische|arabisches)\b|"
+    r"\b(deftige|Kartoffelgerichte|Kartoffelsalat|neuen\s+Kartoffeln)\b|"
+    r"Baha-\s*rat|"
+    r"muf-\s*fig|"
+    r"Pfeffernoten|Pilzduft|\bRoher\b"
+    r")"
+)
+_HYPHEN_STUB = re.compile(r",\s*[A-Za-zÀ-ÖØ-öø-ÿ]{1,22}-\s*(?:,|$)")
+
+
+def _suspicious(s: str) -> bool:
+    if _UC.search(s) or _looks_untranslated_german(s):
+        return True
+    if _EXTRA_ASCII.search(s):
+        return True
+    if _HYPHEN_STUB.search(s):
+        return True
+    return False
 
 
 def _flag(path: str, label: str, s: str, issues: list[tuple[str, str]]) -> None:
     if not s or not isinstance(s, str):
         return
-    if _UC.search(s) or _looks_untranslated_german(s):
+    if _suspicious(s):
         issues.append((path, f"{label}: {s[:140]}"))
 
 

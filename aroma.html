@@ -1205,6 +1205,7 @@
   document.getElementById('matrixDensity').addEventListener('change', renderMatrix);
   document.getElementById('matrixNeighborsOnly').addEventListener('change', renderMatrix);
 
+  /* Profiles use English-facing JSON fields only (_de is provenance; never render it). */
   Promise.all([
     fetch('aroma_data/ingredients.json').then(function (r) { return r.json(); }),
     fetch('aroma_data/food_pairings.json').then(function (r) { return r.json(); }),

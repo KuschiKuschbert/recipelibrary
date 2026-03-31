@@ -74,8 +74,8 @@
       "a": "balsamic, sandelwoody, warm, kampf"
     },
     "spice_blends": [
-      "Indisches Chat Masala",
-      "indisches Tandoori-"
+      "Indian Chat Masala",
+      "Indian Tandoori-"
     ],
     "aroma_groups": [
       2,
@@ -203,7 +203,7 @@
       "fish"
     ],
     "cuisines": [
-      "Karibik:"
+      "Karibik"
     ],
     "heat_behavior": {
       "a": "Earthy, woody-aromatic notes",
@@ -259,7 +259,7 @@
     ],
     "heat_behavior": {
       "a": "Distinct sulfur note",
-      "b": "Leicht Floral",
+      "b": "lightly Floral",
       "c": "Mild, sulfur no longer dominant (typical use) A"
     },
     "aroma_groups": [
@@ -391,7 +391,7 @@
     ],
     "cuisines": [
       "Russland: Karpfen",
-      "Japan:"
+      "Japan"
     ],
     "heat_behavior": {
       "a": "Floral-Herbal",
@@ -485,7 +485,7 @@
     ],
     "cuisines": [
       "England: Earl Grey Tea, Gin",
-      "Frankreich:"
+      "France"
     ],
     "heat_behavior": {
       "a": "Freshes Bergamotte-Aroma",
@@ -566,7 +566,7 @@
       "Coffee"
     ],
     "cuisines": [
-      "Deutschland: Stollen, Marzipan"
+      "Germany: Stollen, marzipan"
     ],
     "heat_behavior": {
       "a": "almond-like, pungent, trigeminal-reizend",
@@ -620,7 +620,7 @@
       "yams"
     ],
     "cuisines": [
-      "Indien: Methi Naan (Brot), Shuktas (benga-"
+      "India: Methi Naan (Brot), Shuktas (benga-"
     ],
     "spice_blends": [
       "Tamilisches Sambar podi",
@@ -684,7 +684,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Fresh, Herbal, leicht Floral",
+      "a": "Fresh, Herbal, lightly Floral",
       "b": "Herbal, warm, camphorous",
       "c": "Rather woody, beginnende bitter notes"
     },
@@ -737,7 +737,7 @@
     "pairs_with_foods": [
       "fettreichem Fisch",
       "Aal",
-      "Kartoffelsalat"
+      "potato salad"
     ],
     "cuisines": [],
     "heat_behavior": {
@@ -780,12 +780,12 @@
       "Cheese"
     ],
     "cuisines": [
-      "Deutschland: Brennnesselsuppe, Salate, Tee",
-      "Italien: Ravioli, Risotto",
-      "Niederlande:"
+      "Germany: Brennnesselsuppe, Salads, tea",
+      "Italy: Ravioli, Risotto",
+      "Niederlande"
     ],
     "heat_behavior": {
-      "a": "Fresh, leicht aromatic, leicht tangy",
+      "a": "Fresh, lightly aromatic, lightly tangy",
       "b": "Herb, adstringierend"
     },
     "aroma_groups": [
@@ -928,11 +928,11 @@
       "Soups"
     ],
     "cuisines": [
-      "Deutschland: Champignoncremesuppe,"
+      "Germany: Champignoncremesuppe"
     ],
     "heat_behavior": {
       "a": "Rather rohes Pilzaroma",
-      "c": "earthy, leicht muf- fig",
+      "c": "earthy, lightly mushroom-like",
       "b": "Typical mushroom aroma, savory"
     },
     "aroma_groups": [
@@ -990,7 +990,7 @@
       "a": "Earthy aromas, heat"
     },
     "spice_blends": [
-      "Indische Masalas",
+      "Indian Masalas",
       "amerikanische BBQ- Mischung",
       "ma-"
     ],
@@ -1045,11 +1045,11 @@
       "baking"
     ],
     "cuisines": [
-      "Kanada: Thanksgiving-Truthahn,"
+      "Kanada: Thanksgiving-Truthahn"
     ],
     "heat_behavior": {
       "a": "Fruity-sweet-tangy",
-      "b": "Zitrusartig aromatic",
+      "b": "citrus-like aromatic",
       "c": "Camphorous to bitter"
     },
     "aroma_groups": [
@@ -1113,7 +1113,7 @@
       "b": "Spicy"
     },
     "spice_blends": [
-      "Indisches Madras-Curry"
+      "Indian Madras-Curry"
     ],
     "aroma_groups": [
       2,
@@ -1191,7 +1191,7 @@
       "Meeres-"
     ],
     "cuisines": [
-      "Iran: Marmelade, Obstsa-"
+      "Iran: Marmelade"
     ],
     "heat_behavior": {
       "a": "Floral, Fruity",
@@ -1239,11 +1239,11 @@
     "pairs_with_foods": [
       "fish",
       "Cream",
-      "neuen Kartoffeln",
+      "new potatoes",
       "gekochtem"
     ],
     "cuisines": [
-      "Deutschland: Gurkensalat, milchsauer ein-"
+      "Germany: Gurkensalat, milchsauer ein-"
     ],
     "heat_behavior": {
       "a": "Characteristic fresh aroma",
@@ -1384,7 +1384,7 @@
       "all meats"
     ],
     "cuisines": [
-      "Westafrika: Erdnusspaste, Erdnussbutter,"
+      "Westafrika: Erdnusspaste, Erdnussbutter"
     ],
     "heat_behavior": {
       "a": "(Fresh, unroasted) waxy, fatty",
@@ -1445,10 +1445,10 @@
       "Herz"
     ],
     "cuisines": [
-      "Frankreich: Estragonhuhn, Sauce bé-"
+      "France: Estragonhuhn, Sauce bé-"
     ],
     "heat_behavior": {
-      "a": "Fresh, Floral, zitrusartig",
+      "a": "Fresh, Floral, citrus-like",
       "b": "Herbal-resinous",
       "c": "(Gekocht) weiche"
     },
@@ -1505,14 +1505,14 @@
       "Ragouts"
     ],
     "cuisines": [
-      "Italien: Finocchiona (Fenchelsalami),"
+      "Italy: Finocchiona (Fenchelsalami"
     ],
     "heat_behavior": {
       "a": "Fresh Herbale Note",
       "b": "Fruitye Fen"
     },
     "spice_blends": [
-      "Indisches Garam Masala",
+      "Indian Garam Masala",
       "chinesisches"
     ],
     "aroma_groups": [
@@ -1556,7 +1556,7 @@
       "Chicken"
     ],
     "cuisines": [
-      "Thailand: Tom Yam, Tom Kha Gai (Suppen),"
+      "Thailand: Tom Yam, Tom Kha Gai (Suppen"
     ],
     "heat_behavior": {
       "a": "(Fresh:) mitunter zitronige Fresh",
@@ -1612,13 +1612,13 @@
       "Wurst"
     ],
     "cuisines": [
-      "Deutschland: Lebkuchen, Bratapfel, Apfel-"
+      "Germany: Lebkuchen, Bratapfel"
     ],
     "heat_behavior": {
       "a": "waxy, dezent numbinge Spicy"
     },
     "spice_blends": [
-      "indisches Garam Masala"
+      "Indian Garam Masala"
     ],
     "aroma_groups": [
       4
@@ -1703,7 +1703,7 @@
     "cuisines": [],
     "heat_behavior": {
       "a": "Freshes Haselnussaroma",
-      "b": "Leicht woody"
+      "b": "lightly woody"
     },
     "aroma_groups": [
       5
@@ -1756,7 +1756,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Fresh, zitrusartig, Floral",
+      "a": "Fresh, citrus-like, Floral",
       "b": "Rather woody"
     },
     "spice_blends": [
@@ -2167,7 +2167,7 @@
       "Currys"
     ],
     "cuisines": [
-      "Vietnam: Currys, Suppen, Salate"
+      "Vietnam: Currys, Soups, Salads"
     ],
     "heat_behavior": {
       "a": "Typical cilantro",
@@ -2229,7 +2229,7 @@
       "Lentils"
     ],
     "cuisines": [
-      "Indien: Currys"
+      "India: Currys"
     ],
     "heat_behavior": {
       "a": "Fresh, Floral",
@@ -2322,9 +2322,9 @@
       "Osten: Falafel"
     ],
     "spice_blends": [
-      "Indische Masalas",
+      "Indian Masalas",
       "bengalisches Panch Pho- ron",
-      "arabisches Baha- rat",
+      "Arabic Baharat",
       "karibisches Colombo Powder"
     ],
     "aroma_groups": [
@@ -2374,7 +2374,7 @@
     "cuisines": [
       "Europa: gepfefferte Leber",
       "Indonesien: Currys",
-      "Nordafrika: Lamm- oder Hammel -"
+      "North Africa: Lamm- oder Hammel -"
     ],
     "heat_behavior": {
       "a": "Fresh heat, numbing",
@@ -2582,10 +2582,10 @@
       "red cabbage"
     ],
     "cuisines": [
-      "Deutschland: Wildhasenpfeffer, Wildra-"
+      "Germany: Wildhasenpfeffer"
     ],
     "heat_behavior": {
-      "a": "resinous-woody, leicht scharf",
+      "a": "resinous-woody, lightly hot",
       "b": "Betonte"
     },
     "aroma_groups": [
@@ -2637,7 +2637,7 @@
       "Kirschen"
     ],
     "cuisines": [
-      "Frankreich: Ratatouille, Schmorgerichte,"
+      "France: Ratatouille, Schmorgerichte"
     ],
     "heat_behavior": {
       "a": "Fresh aroma"
@@ -2757,7 +2757,7 @@
       "stews"
     ],
     "cuisines": [
-      "Frankreich: Béchamelsauce, Rinderschmor-"
+      "France: Béchamelsauce"
     ],
     "heat_behavior": {
       "a": "Fresh, Floral, waxy",
@@ -2860,7 +2860,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Leicht fatty, aromatic",
+      "a": "lightly fatty, aromatic",
       "b": "aromatic"
     },
     "aroma_groups": [
@@ -2983,11 +2983,11 @@
       "Milch -"
     ],
     "cuisines": [
-      "Griechenland: Tsoureki (griechisches"
+      "Greece: Tsoureki (griechisches"
     ],
     "heat_behavior": {
       "a": "Mild resinous tones",
-      "b": "Anhaltende, leicht"
+      "b": "Anhaltende, lightly"
     },
     "aroma_groups": [
       2,
@@ -3077,7 +3077,7 @@
       "Gekochtem"
     ],
     "cuisines": [
-      "Deutschland: Eisbein, Lachs, Karpfen, Rin-"
+      "Germany: Eisbein, Lachs, Karpfen"
     ],
     "heat_behavior": {
       "a": "Fresh, brennend scharf",
@@ -3140,7 +3140,7 @@
     ],
     "cuisines": [
       "England: Minzsauce",
-      "Frankreich: Sauce paloise, Menthe à l’eau (Erfrischungsge-"
+      "France: Sauce paloise, Menthe à l’eau (Erfrischungsge-"
     ],
     "heat_behavior": {
       "a": "Typical floral green Minznoten",
@@ -3171,7 +3171,7 @@
       "Schweiz: Mohn-"
     ],
     "heat_behavior": {
-      "a": "Rather waxy, leicht fatty",
+      "a": "Rather waxy, lightly fatty",
       "b": "more roasted"
     },
     "spice_blends": [],
@@ -3219,7 +3219,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Roher Pilzduft",
+      "a": "Raw mushroom aroma",
       "b": "Typical morel aroma and flavor"
     },
     "aroma_groups": [
@@ -3282,14 +3282,14 @@
       "Cheese"
     ],
     "cuisines": [
-      "Deutschland: Kartoffelgerichte, Blumen-"
+      "Germany: potato dishes"
     ],
     "heat_behavior": {
-      "a": "Fresh, leicht zitrusartig"
+      "a": "Fresh, lightly citrus-like"
     },
     "spice_blends": [
-      "Indisches Tandoori",
-      "arabisches Baharat"
+      "Indian Tandoori",
+      "Arabic Baharat"
     ],
     "aroma_groups": [
       4
@@ -3336,7 +3336,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Floral-zitrusartig",
+      "a": "Floral-citrus-like",
       "b": "resinous note"
     },
     "aroma_groups": [
@@ -3474,7 +3474,7 @@
       "Vegetables"
     ],
     "cuisines": [
-      "Frankreich: Tapenade (Olivenpaste), Olivenbrot"
+      "France: Tapenade (Olivenpaste), Olivenbrot"
     ],
     "heat_behavior": {
       "a": "tangy olive aroma, lightly bitter"
@@ -3532,7 +3532,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Floral-waxy-zitrusartig",
+      "a": "Floral-waxy-citrus-like",
       "b": "Plastikartig"
     },
     "spice_blends": [
@@ -3600,8 +3600,8 @@
       "Zucchini"
     ],
     "cuisines": [
-      "Italien: Tomatensugo, Tomatensuppe, Bohnensuppe, Pizza",
-      "Griechenland: Mous-"
+      "Italy: Tomatensugo, Tomatensuppe, Bohnensuppe, pizza",
+      "Greece: Mous-"
     ],
     "heat_behavior": {
       "a": "Floral notes",
@@ -3664,7 +3664,7 @@
       "Potatoes"
     ],
     "cuisines": [
-      "Balkan: Brathuhn, Cevap-"
+      "Balkan: Brathuhn"
     ],
     "heat_behavior": {
       "a": "earthy-waxy",
@@ -3880,7 +3880,7 @@
       "USA: Pecan Pie, Sandies (Kekse), Brownies"
     ],
     "heat_behavior": {
-      "a": "Leicht floral, nussig-waxy",
+      "a": "lightly floral, nussig-waxy",
       "b": "Samtig"
     },
     "aroma_groups": [
@@ -3922,7 +3922,7 @@
       "salads"
     ],
     "cuisines": [
-      "Japan: Umeboshi (eingelegte Pflaumen),"
+      "Japan: Umeboshi (eingelegte Pflaumen"
     ],
     "heat_behavior": {
       "a": "Fresh, fast zitral-herbal",
@@ -4035,7 +4035,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Fresh zitrus-pinienartige Pfeffernoten"
+      "a": "Fresh citrus-pine-like pepper notes"
     },
     "spice_blends": [
       "Steak-"
@@ -4144,8 +4144,8 @@
       "liver"
     ],
     "cuisines": [
-      "Mexiko: Moles (Saucen",
-      "Frankreich: Bénédictine, Char-"
+      "Mexico: Moles (Saucen",
+      "France: Bénédictine"
     ],
     "heat_behavior": {
       "a": "Allspice-Charakter",
@@ -4189,7 +4189,7 @@
       "Rice"
     ],
     "cuisines": [
-      "Italien: Pesto alla genovese, Torta della non- na (Kuchen) Mittlerer",
+      "Italy: Pesto alla genovese, Torta della non- na (Kuchen) Mittlerer",
       "Osten: Reisgerichte"
     ],
     "heat_behavior": {
@@ -4238,7 +4238,7 @@
     "cuisines": [],
     "heat_behavior": {
       "a": "Fresh, Floral-nussig, fatty (unroasted)",
-      "b": "Leicht balsamic-resinous",
+      "b": "lightly balsamic-resinous",
       "c": "Formation of"
     },
     "aroma_groups": [
@@ -4351,7 +4351,7 @@
       "insbesondere Parmesan"
     ],
     "cuisines": [
-      "Italien: Bresaola (luftgetrocknetes beef-"
+      "Italy: Bresaola (luftgetrocknetes beef-"
     ],
     "heat_behavior": {
       "a": "Sulfurous-pungent, spicy",
@@ -4534,7 +4534,7 @@
       "Katalonien: Paella, Zarzuela cata-"
     ],
     "heat_behavior": {
-      "a": "Typical earthy-roher Safrangeruch"
+      "a": "Typical earthy-Raw Safrangeruch"
     },
     "aroma_groups": [
       2,
@@ -4593,7 +4593,7 @@
     ],
     "pairs_with_foods": [],
     "cuisines": [
-      "Deutschland: Heringe, Salzgurken, Sauer-"
+      "Germany: Heringe, Salzgurken"
     ],
     "spice_blends": [
       "Japanisches Gomashio"
@@ -4780,14 +4780,14 @@
       "Potatoes"
     ],
     "cuisines": [
-      "Deutschland: Sauerbraten, Kohlgerichte,"
+      "Germany: Sauerbraten, Kohlgerichte"
     ],
     "heat_behavior": {
       "a": "pungentes Aroma",
       "b": "Aromas released from the seed when searing"
     },
     "spice_blends": [
-      "Indisches Madras Curry",
+      "Indian Madras Curry",
       "Vindaloo Curry"
     ],
     "aroma_groups": [
@@ -4830,7 +4830,7 @@
     ],
     "pairs_with_foods": [],
     "cuisines": [
-      "Indien: Til"
+      "India: Til"
     ],
     "heat_behavior": {
       "a": "Feine nussig-rauchige Sesamnoten"
@@ -4873,7 +4873,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "earthy-schwefliger Rohpilzduft",
+      "a": "earthy-sulfurous raw mushroom aroma",
       "b": "Champi"
     },
     "aroma_groups": [
@@ -4905,7 +4905,7 @@
     ],
     "pairs_with_foods": [],
     "heat_behavior": {
-      "a": "waxy, green, leicht resinouss aroma",
+      "a": "waxy, green, lightly resinous aroma",
       "b": "Roast notes form; kernels must be shelled and can be toasted or"
     },
     "aroma_groups": [
@@ -4943,7 +4943,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Butterig-Earthys, leicht tangy-bitteres"
+      "a": "Buttery-earthy, lightly tangy-bitter"
     },
     "aroma_groups": [
       2,
@@ -4994,7 +4994,7 @@
       "Vietnam: Pho (Nu-"
     ],
     "heat_behavior": {
-      "a": "Fast zitrusartiges Anisaroma",
+      "a": "Almost citrus-like anise aroma",
       "b": "Aroma"
     },
     "spice_blends": [],
@@ -5055,12 +5055,12 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Zitrusartig, floral, prickelnde heat",
+      "a": "citrus-like, floral, prickelnde heat",
       "b": "Warm-balsamic, weniger scharf",
-      "c": "Leicht Balsamic, mild notes"
+      "c": "lightly Balsamic, mild notes"
     },
     "spice_blends": [
-      "Arabisches Zatar",
+      "Arabic Zatar",
       "iranisches Advieh"
     ],
     "aroma_groups": [
@@ -5174,11 +5174,11 @@
       "Meeres-"
     ],
     "cuisines": [
-      "Syrien: Fisch",
+      "Syrien: fish",
       "Libanon: Fattoush (Brotsalat"
     ],
     "heat_behavior": {
-      "a": "waxy-Fresh, leicht tangy",
+      "a": "waxy-Fresh, lightly tangy",
       "b": "woody"
     },
     "spice_blends": [
@@ -5273,7 +5273,7 @@
       "braised dishes"
     ],
     "cuisines": [
-      "Italien: rote Tapanade, Antipasti, Tomaten-"
+      "Italy: rote Tapanade, Antipasti"
     ],
     "heat_behavior": {
       "a": "Fresh-fruity-greenish",
@@ -5366,7 +5366,7 @@
       "Chocolate"
     ],
     "cuisines": [
-      "Deutschland: Vanilleeis, Vanillepudding"
+      "Germany: Vanilleeis, Vanillepudding"
     ],
     "heat_behavior": {
       "a": "Fresh, heuartig-sweet",
@@ -5458,8 +5458,8 @@
       "Carrots"
     ],
     "cuisines": [
-      "Deutschland: Vanillekipferl, Vanilleeis, Pudding",
-      "Frankreich: Crème brûlée"
+      "Germany: Vanillekipferl, Vanilleeis, Pudding",
+      "France: Crème brûlée"
     ],
     "heat_behavior": {
       "a": "aromatic typische Vanille",
@@ -5525,10 +5525,10 @@
       "beef"
     ],
     "cuisines": [
-      "Raum: Wildbeizen,"
+      "Raum: Wildbeizen"
     ],
     "heat_behavior": {
-      "a": "Leicht Floral, Clearly resinous Aro- men",
+      "a": "lightly Floral, Clearly resinous Aro- men",
       "b": "Emphasis on woody aroma components"
     },
     "spice_blends": [
@@ -5610,10 +5610,10 @@
       "Melone"
     ],
     "cuisines": [
-      "Deutschland: Maibowle, Wackelpudding,"
+      "Germany: Maibowle, Wackelpudding"
     ],
     "heat_behavior": {
-      "a": "Leicht Fruity, waxy",
+      "a": "lightly Fruity, waxy",
       "b": "Typical aro"
     },
     "aroma_groups": [
@@ -5763,7 +5763,7 @@
       "Rice"
     ],
     "cuisines": [
-      "Italien: Grappa con ruta, Moretum (antike"
+      "Italy: Grappa con ruta, Moretum (antike"
     ],
     "heat_behavior": {
       "a": "Very intense aroma, tart flavor",
@@ -5810,7 +5810,7 @@
       "Schweinefleisch"
     ],
     "cuisines": [
-      "Deutschland: Absinth"
+      "Germany: Absinth"
     ],
     "heat_behavior": {
       "a": "Feine bittere, anise-likee aromas",
@@ -5863,7 +5863,7 @@
       "Pilzen"
     ],
     "cuisines": [
-      "Mitteleuropa: deftige Kartoffelgerichte,"
+      "Central Europe: hearty potato dishes"
     ],
     "heat_behavior": {
       "a": "Feines resinous-herbales Aroma",
@@ -5943,15 +5943,15 @@
       "Pasta"
     ],
     "cuisines": [
-      "Deutschland: Milchreis, Zimtsterne, Speku-"
+      "Germany: Milchreis, Zimtsterne"
     ],
     "heat_behavior": {
       "a": "Fine spicy-floral cinnamon notes",
       "b": "Aroma"
     },
     "spice_blends": [
-      "Indische Masalas",
-      "arabisches Baharat",
+      "Indian Masalas",
+      "Arabic Baharat",
       "tune-"
     ],
     "aroma_groups": [
@@ -6123,7 +6123,7 @@
       "in klei- nen Dosen als harmonische Komponente"
     ],
     "cuisines": [
-      "Deutschland: Fruchtsaft, Obstsalat, Dessert,"
+      "Germany: Fruchtsaft, Obstsalat, Dessert"
     ],
     "heat_behavior": {
       "a": "Purely sweet",
