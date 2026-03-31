@@ -10,12 +10,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/theme.css">
 <style>
-  .aroma-page { max-width: 1200px; margin: 0 auto; padding: 0 0 80px; }
+  /* Nav + hero: full-width rhythm (same as riviera.html) */
   .nav-back {
     padding: 20px 32px 0;
     max-width: 1200px;
     margin: 0 auto;
   }
+  .aroma-page { max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; }
   .nav-back a {
     display: inline-flex;
     align-items: center;
@@ -27,68 +28,57 @@
     transition: color 0.2s;
   }
   .nav-back a:hover { color: var(--gold); }
-  .aroma-hero-sync.hero {
+
+  /* Hero — match index.html */
+  .hero {
+    container-type: inline-size;
     text-align: center;
-    padding: 24px 24px 8px;
+    padding: 60px 24px 20px;
     position: relative;
     overflow: hidden;
   }
-  .aroma-hero-sync.hero::before {
+  .hero::before {
     content: '';
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background: radial-gradient(ellipse at 50% 0%, rgba(201,169,110,0.08) 0%, transparent 60%);
     pointer-events: none;
   }
-  .aroma-hero-sync .hero-label {
+  .hero-label {
     font-family: 'Inter', sans-serif;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     opacity: 0.8;
   }
-  .aroma-hero-sync .hero-title {
+  .hero-title {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(32px, 5vw, 48px);
+    font-size: clamp(36px, 6vw, 56px);
     font-weight: 700;
     color: var(--text);
     line-height: 1.1;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
-  .aroma-hero-sync .hero-title em { font-style: italic; color: var(--gold); }
-  .aroma-hero-sync .hero-sub {
+  .hero-title em { font-style: italic; color: var(--gold); }
+  .hero-sub {
     font-size: 16px;
     font-weight: 300;
     color: var(--text2);
-    max-width: 520px;
+    max-width: 500px;
     margin: 0 auto;
-    line-height: 1.55;
+    line-height: 1.6;
   }
-  .aroma-hero-sync .hero-sub b { color: var(--gold-light); font-weight: 500; }
-  .aroma-hero-sync .hero-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  .aroma-hero-sync .hero-nav-cluster {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-  }
-  .aroma-hero-sync .hero-nav-link {
+  .hero-sub b { color: var(--gold-light); font-weight: 500; }
+  .hero-nav-link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 20px;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
+    padding: var(--hero-pill-pad-y, 10px) var(--hero-pill-pad-x, 20px);
+    font-size: var(--hero-pill-fs, 13px);
+    font-weight: var(--hero-pill-fw, 500);
+    letter-spacing: var(--hero-pill-ls, 0.5px);
     color: var(--gold);
     background: var(--gold-dim);
     border: 1px solid rgba(201,169,110,0.3);
@@ -96,22 +86,99 @@
     text-decoration: none;
     transition: all 0.25s;
   }
-  .aroma-hero-sync .hero-nav-link:hover {
+  .hero-nav-link:hover {
     background: rgba(201,169,110,0.25);
     border-color: var(--gold);
     color: var(--gold-light);
     transform: translateY(-1px);
     box-shadow: 0 6px 20px rgba(201,169,110,0.15);
   }
+  .hero-nav {
+    --hero-pill-fs: 13px;
+    --hero-pill-fw: 500;
+    --hero-pill-ls: 0.5px;
+    --hero-pill-pad-y: 10px;
+    --hero-pill-pad-x: 20px;
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+  }
+  button.hero-nav-link {
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+  }
+  .hero-nav .hero-nav-link {
+    line-height: 1.25;
+    box-sizing: border-box;
+  }
+  .hero-nav .hero-nav-link svg {
+    display: block;
+    flex-shrink: 0;
+  }
+  .hero-nav-cluster > button.hero-nav-link {
+    min-height: 42px;
+    align-items: center;
+  }
+  .hero-nav-cluster button.hero-nav-link { min-width: 0; }
+  .hero-nav-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+  }
+
   .aroma-modes {
-    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 24px;
   }
   .aroma-mode-btn {
-    padding: 8px 16px; border-radius: 100px; border: 1px solid var(--border);
-    background: var(--surface); color: var(--gold); font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit;
+    padding: 8px 16px;
+    min-height: 40px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text2);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.25s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .aroma-mode-btn:hover {
+    border-color: var(--border-hover);
+    color: var(--text);
   }
   .aroma-mode-btn[aria-pressed="true"] {
-    background: var(--gold-dim); border-color: var(--border-hover);
+    background: var(--gold-dim);
+    border-color: var(--gold);
+    color: var(--gold-light);
+  }
+  .aroma-panel-lead {
+    max-width: 680px;
+    margin: 0 auto;
+    line-height: 1.55;
+  }
+  .aroma-matrix-legend {
+    margin-top: 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text2);
+  }
+  .aroma-matrix-legend ul {
+    margin: 8px 0 0;
+    padding-left: 1.2em;
   }
   .aroma-panel { display: none; }
   .aroma-panel.active { display: block; }
@@ -242,6 +309,7 @@
     margin-top: 12px;
   }
   @media (max-width: 640px) {
+    .nav-back { padding: 16px 20px 0; }
     .aroma-pair-cols { grid-template-columns: 1fr; }
   }
   .aroma-pair-col {
@@ -260,45 +328,34 @@
   }
   .aroma-pair-col p { font-size: 13px; color: var(--text2); line-height: 1.45; margin: 0; }
   .aroma-pair-actions { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-  .aroma-footer-nav {
-    text-align: center;
-    margin-top: 48px;
-    padding: 24px 20px 0;
-    border-top: 1px solid var(--border);
-    font-size: 13px;
-    color: var(--text3);
-    line-height: 1.6;
-  }
-  .aroma-footer-nav a { color: var(--gold); text-decoration: none; }
-  .aroma-footer-nav a:hover { text-decoration: underline; }
   .aroma-empty { color: var(--text3); font-size: 14px; margin-top: 12px; }
 </style>
 </head>
 <body>
+<div class="nav-back"><a href="index.html">← Kitchen Library</a></div>
+<div class="hero">
+  <div class="hero-label">Kuschi · Aroma Bible</div>
+  <h1 class="hero-title">Aroma <em>lookup</em></h1>
+  <p class="hero-sub">Food-to-spice pairings and harmony matrix from the book extract (English UI). <b>For inspiration only.</b></p>
+  <div class="hero-nav">
+    <div class="hero-nav-cluster">
+      <a href="kitchen-book.html" class="hero-nav-link">Kitchen book</a>
+      <a href="riviera.html" class="hero-nav-link">Riviera</a>
+      <a href="index.html" class="hero-nav-link">Recipe index</a>
+    </div>
+  </div>
+</div>
+
+<div class="search-wrap">
+  <div class="search-glass">
+    <div class="search-inner">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="search" class="search-input" id="aromaSearch" placeholder="Food, spice, or matrix (e.g. lamb, cumin)…" autocomplete="off" spellcheck="false" />
+    </div>
+  </div>
+</div>
+
 <div class="aroma-page">
-  <div class="nav-back"><a href="index.html">← Kitchen Library</a></div>
-  <div class="hero aroma-hero-sync">
-    <div class="hero-label">Kuschi · Aroma Bible</div>
-    <h1 class="hero-title">Aroma <em>lookup</em></h1>
-    <p class="hero-sub">Food-to-spice pairings and harmony matrix from the book extract (English UI). <b>For inspiration only.</b></p>
-    <div class="hero-nav">
-      <div class="hero-nav-cluster">
-        <a href="kitchen-book.html" class="hero-nav-link">Kitchen book</a>
-        <a href="riviera.html" class="hero-nav-link">Riviera</a>
-        <a href="index.html" class="hero-nav-link">Recipe index</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="search-wrap" style="margin-top:8px">
-    <div class="search-glass">
-      <div class="search-inner">
-        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="search" class="search-input" id="aromaSearch" placeholder="Food, spice, or matrix (e.g. lamb, cumin)…" autocomplete="off" spellcheck="false" />
-      </div>
-    </div>
-  </div>
-
   <div class="aroma-modes" role="tablist" aria-label="Lookup mode">
     <button type="button" class="aroma-mode-btn" role="tab" id="tabFood" aria-pressed="true" aria-selected="true" data-mode="food">What goes with this food?</button>
     <button type="button" class="aroma-mode-btn" role="tab" id="tabSpice" aria-pressed="false" data-mode="spice">Spice profile</button>
@@ -307,12 +364,12 @@
   </div>
 
   <section class="aroma-panel active" id="panelFood" role="tabpanel">
-    <p class="aroma-empty" style="margin-top:0">Type a food (e.g. lentils, <strong>lamb</strong>, rice). English and German names are matched (e.g. lamb ↔ Lamm). From the matrix or browse tab, typing here still jumps to food results when there is a match.</p>
+    <p class="aroma-empty aroma-panel-lead">Type a food (e.g. lentils, <strong>lamb</strong>, rice). English and German names are matched (e.g. lamb ↔ Lamm). From the matrix or browse tab, typing here still jumps to food results when there is a match.</p>
     <div class="aroma-results" id="foodResults"></div>
   </section>
 
   <section class="aroma-panel" id="panelSpice" role="tabpanel" hidden>
-    <p class="aroma-empty" style="margin-top:0">Search or tap a spice for harmony partners, foods, heat behavior, and aroma groups.</p>
+    <p class="aroma-empty aroma-panel-lead">Search or tap a spice for harmony partners, foods, heat behavior, and aroma groups.</p>
     <div class="aroma-results" id="spiceResults"></div>
     <div id="spiceProfile"></div>
   </section>
@@ -336,9 +393,9 @@
     <div class="aroma-matrix-scroll aroma-density-comfortable" id="matrixScroll"></div>
     <p class="aroma-matrix-hover-legend is-idle" id="matrixHoverLegend" aria-live="polite">Hover a cell to see row and column names.</p>
     <div class="aroma-matrix-neighbors" id="matrixNeighbors" hidden></div>
-    <div class="aroma-empty" id="matrixLegend" style="margin-top:14px;font-size:13px;line-height:1.5">
+    <div class="aroma-matrix-legend" id="matrixLegend">
       <strong>How to read the matrix</strong>
-      <ul style="margin:8px 0 0;padding-left:1.2em">
+      <ul>
         <li><strong>Filled / tinted cells</strong> — book harmony link between row and column spice.</li>
         <li><strong>Gold tint</strong> — shares at least one aroma group (reinforcing family).</li>
         <li><strong>Blue tint</strong> — harmony without shared group (complementary).</li>
@@ -359,8 +416,10 @@
     </div>
   </div>
 
-  <div class="aroma-footer-nav">
-    <a href="index.html">Kitchen Library</a> · <a href="kitchen-book.html">Kitchen book</a> · <a href="riviera.html">Riviera</a> · <a href="https://github.com/KuschiKuschbert/recipelibrary" target="_blank" rel="noopener">GitHub</a>
+  <div class="footer">
+    <div class="footer-text">
+      <a href="index.html">Kitchen Library</a> · <a href="kitchen-book.html">Kitchen book</a> · <a href="riviera.html">Riviera</a> · <a href="https://github.com/KuschiKuschbert/recipelibrary" target="_blank" rel="noopener">GitHub</a>
+    </div>
   </div>
 </div>
 
