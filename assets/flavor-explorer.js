@@ -320,11 +320,19 @@
   }
 
   function boot() {
+    var params = typeof URLSearchParams !== 'undefined' ? new URLSearchParams(window.location.search) : null;
+    var deepQ = params && params.get('q') ? String(params.get('q')).trim() : '';
     ensureLoaded()
       .then(function () {
         var el = document.getElementById('flavorLoadStatus');
         if (el) el.textContent = unified.length + ' unified rows · Thesaurus ' + wheel.length + ' · Links ' + pairings.length;
+        var inp = document.getElementById('flavorSearch');
+        if (deepQ && inp) inp.value = deepQ;
         runSearch();
+        if (deepQ) {
+          var rows = findRows(deepQ);
+          if (rows.length) renderDetail(rows[0]);
+        }
       })
       .catch(function () {
         var el = document.getElementById('flavorLoadStatus');

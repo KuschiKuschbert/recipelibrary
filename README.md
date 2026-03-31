@@ -9,7 +9,8 @@ Personal recipe library hosted on **GitHub Pages**: searchable catalog, metric-o
 | [index.html](index.html) | Main library UI — loads `claude_index/` shards, recipe detail from `recipe_detail/`, merges **user recipes** from the browser; **+ Kitchen book** and pills for custom books |
 | [kitchen-book.html](kitchen-book.html) | User-created **kitchen books** (`?b=book-id`): local recipes only, same add-recipe flow as the main library (manual + Gemini) |
 | [riviera.html](riviera.html) | Riviera prep set (built-in cards + user-added Riviera recipes), **order list by storage** (freezer → cold room → dry store → other) with local master ingredients |
-| [flavor.html](flavor.html) | **Flavor explorer** — merged Flavor Bible + Vegetarian Bible + Aroma + Flavor Thesaurus wheel (`combined_data/ingredients_unified.json`) |
+| [flavor.html](flavor.html) | **Flavor explorer** — merged Flavor Bible + Vegetarian Bible + Aroma + Flavor Thesaurus wheel (`combined_data/ingredients_unified.json`); `?q=` opens the first matching row |
+| [pairing-atlas.html](pairing-atlas.html) | **Pairing atlas** — D3 force graph: protein presets + custom anchors from Flavor tiers + Aroma seasonings |
 | [pantry.html](pantry.html) | **Pantry search** — match typed ingredients against `claude_index` `ing` fields; opens hits via `index.html?open=` |
 | [assets/theme.css](assets/theme.css) | Shared dark theme tokens, search shell, filters, modal shell, footer |
 | [assets/user-recipes.js](assets/user-recipes.js) | `localStorage` helpers: kitchen recipes, Riviera recipes, master ingredients, Riviera order overrides / extras, JSON export |
