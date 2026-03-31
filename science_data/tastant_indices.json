@@ -1,0 +1,162 @@
+[
+  {
+    "compound": "neutrons",
+    "value": "13",
+    "source": "provost"
+  },
+  {
+    "compound": "pH",
+    "value": "0",
+    "source": "provost"
+  },
+  {
+    "compound": "pH",
+    "value": "14",
+    "source": "provost"
+  },
+  {
+    "compound": "C4",
+    "value": "0",
+    "source": "provost"
+  },
+  {
+    "compound": "C10",
+    "value": "0",
+    "source": "provost"
+  },
+  {
+    "compound": "C12",
+    "value": "0",
+    "source": "provost"
+  },
+  {
+    "compound": "C16",
+    "value": "0",
+    "source": "provost"
+  },
+  {
+    "compound": "C18",
+    "value": "0",
+    "source": "provost"
+  },
+  {
+    "compound": "C20",
+    "value": "0",
+    "source": "provost"
+  },
+  {
+    "compound": "C22",
+    "value": "0",
+    "source": "provost"
+  },
+  {
+    "compound": "C24",
+    "value": "0",
+    "source": "provost"
+  },
+  {
+    "compound": "C16",
+    "value": "1",
+    "source": "provost"
+  },
+  {
+    "compound": "C18",
+    "value": "1",
+    "source": "provost"
+  },
+  {
+    "compound": "C22",
+    "value": "1",
+    "source": "provost"
+  },
+  {
+    "compound": "C18",
+    "value": "2",
+    "source": "provost"
+  },
+  {
+    "compound": "C20",
+    "value": "4",
+    "source": "provost"
+  },
+  {
+    "compound": "C10",
+    "value": "2",
+    "source": "provost"
+  },
+  {
+    "compound": "pH",
+    "value": "7",
+    "source": "provost"
+  },
+  {
+    "compound": "are",
+    "value": "1.",
+    "source": "provost"
+  },
+  {
+    "compound": "are",
+    "value": "1.",
+    "source": "provost"
+  },
+  {
+    "compound": "are",
+    "value": "1.",
+    "source": "provost"
+  },
+  {
+    "compound": "doi",
+    "value": "10.1186",
+    "source": "provost"
+  },
+  {
+    "compound": "rust",
+    "value": "2",
+    "source": "provost"
+  },
+  {
+    "compound": "File",
+    "value": "9",
+    "source": "provost"
+  },
+  {
+    "compound": "rate",
+    "value": "1",
+    "source": "provost"
+  },
+  {
+    "compound": "though",
+    "value": "10",
+    "source": "provost"
+  },
+  {
+    "compound": "concentration",
+    "value": "80",
+    "source": "provost"
+  },
+  {
+    "compound": "concentration",
+    "value": "85",
+    "source": "provost"
+  },
+  {
+    "compound": "concentration",
+    "value": "87",
+    "source": "provost"
+  },
+  {
+    "compound": "concentration",
+    "value": "92",
+    "source": "provost"
+  },
+  {
+    "compound": "concentration",
+    "value": "95",
+    "source": "provost"
+  },
+  {
+    "compound": "concentration",
+    "value": "99",
+    "source": "provost"
+  }
+]

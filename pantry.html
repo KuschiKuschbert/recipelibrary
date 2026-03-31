@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0c0c0c">
+<title>Pantry → recipes · Kuschi Kitchen</title>
+<link rel="stylesheet" href="assets/theme.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body { font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 24px; }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  h1 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 8px; }
+  p.lead { color: var(--text2); font-size: 14px; line-height: 1.5; margin-bottom: 20px; }
+  textarea {
+    width: 100%; min-height: 88px; padding: 14px; border-radius: 12px; border: 1px solid var(--border);
+    background: var(--bg2); color: var(--text); font: inherit; resize: vertical; box-sizing: border-box;
+  }
+  button.primary {
+    margin-top: 12px; padding: 12px 22px; border-radius: 100px; border: 1px solid var(--gold);
+    background: var(--gold-dim); color: var(--gold); font-weight: 600; cursor: pointer; font: inherit;
+  }
+  .nav { margin-bottom: 24px; font-size: 13px; }
+  .nav a { color: var(--gold); text-decoration: none; }
+  #out { margin-top: 24px; }
+  .pantry-card {
+    border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 10px;
+    background: var(--surface); cursor: pointer;
+  }
+  .pantry-card:hover { border-color: var(--gold); }
+  .pantry-name { font-weight: 600; font-size: 16px; }
+  .pantry-meta { font-size: 12px; color: var(--text3); margin-top: 6px; }
+  .status { font-size: 13px; color: var(--text3); margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="nav"><a href="index.html">← Kitchen Library</a> · <a href="flavor.html">Flavor explorer</a></div>
+  <h1>Pantry search</h1>
+  <p class="lead">Enter ingredients you have (comma or newline separated). We match against the library index <code>ing</code> fields — no guarantee of overlap with pantry items.</p>
+  <textarea id="pantryIn" placeholder="e.g. chicken, lemon, garlic, olive oil"></textarea>
+  <button type="button" class="primary" id="pantryGo">Find recipes</button>
+  <p class="status" id="pantryStatus"></p>
+  <div id="out"></div>
+</div>
+<script>
+(function () {
+  var SHARDS = [
+    'claude_index_01_1-B.json','claude_index_02_B-C.json','claude_index_03_C.json','claude_index_04_C.json',
+    'claude_index_05_C-F.json','claude_index_06_F-G.json','claude_index_07_G-H.json','claude_index_08_H-L.json',
+    'claude_index_09_L-N.json','claude_index_10_N-P.json','claude_index_11_P-R.json','claude_index_12_R-S.json',
+    'claude_index_13_S.json','claude_index_14_S-T.json','claude_index_15_T-Z.json'
+  ];
+  var base = '';
+  function norm(s) {
+    return String(s || '').toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+  function tokens(s) {
+    return norm(s).split(' ').filter(function (w) { return w.length > 2; });
+  }
+  function esc(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  var cache = null;
+  function loadAll() {
+    if (cache) return Promise.resolve(cache);
+    var baseUrl = base || (document.body.dataset && document.body.dataset.base) || '';
+    return Promise.all(SHARDS.map(function (f) {
+      return fetch(baseUrl + 'claude_index/' + f).then(function (r) { return r.ok ? r.json() : { recipes: [] }; });
+    })).then(function (parts) {
+      var all = [];
+      parts.forEach(function (p) {
+        if (p && p.recipes) all = all.concat(p.recipes);
+      });
+      cache = all;
+      return all;
+    });
+  }
+  function scoreRecipe(r, needToks) {
+    var ing = (r.ing || []).join(' ').toLowerCase();
+    var name = (r.name || '').toLowerCase();
+    var hay = ing + ' ' + name;
+    var hit = 0;
+    for (var i = 0; i < needToks.length; i++) {
+      if (hay.indexOf(needToks[i]) >= 0) hit++;
+    }
+    return hit;
+  }
+  document.getElementById('pantryGo').addEventListener('click', function () {
+    var raw = document.getElementById('pantryIn').value;
+    var parts = raw.split(/[\n,]+/).map(function (s) { return s.trim(); }).filter(Boolean);
+    var needToks = [];
+    parts.forEach(function (p) {
+      tokens(p).forEach(function (t) {
+        if (needToks.indexOf(t) < 0) needToks.push(t);
+      });
+    });
+    var st = document.getElementById('pantryStatus');
+    var out = document.getElementById('out');
+    out.innerHTML = '';
+    if (!needToks.length) {
+      st.textContent = 'Add at least one ingredient.';
+      return;
+    }
+    st.textContent = 'Loading index…';
+    loadAll()
+      .then(function (all) {
+        var scored = [];
+        for (var i = 0; i < all.length; i++) {
+          var sc = scoreRecipe(all[i], needToks);
+          if (sc > 0) scored.push({ r: all[i], sc: sc });
+        }
+        scored.sort(function (a, b) { return b.sc - a.sc || (a.r.name || '').localeCompare(b.r.name || ''); });
+        st.textContent = scored.length + ' recipes match at least one token (' + needToks.join(', ') + ').';
+        out.innerHTML = scored.slice(0, 40).map(function (x) {
+          return '<div class="pantry-card" data-open-id="' + esc(x.r.id) + '">' +
+            '<div class="pantry-name">' + esc(x.r.name || '') + '</div>' +
+            '<div class="pantry-meta">Match score ' + x.sc + ' · ' + esc(x.r.cui || '') + '</div></div>';
+        }).join('');
+        out.querySelectorAll('.pantry-card').forEach(function (el) {
+          el.addEventListener('click', function () {
+            var id = el.getAttribute('data-open-id');
+            if (id) location.href = 'index.html?open=' + encodeURIComponent(id);
+          });
+        });
+        if (!scored.length) out.innerHTML = '<p class="status">No matches. Try broader names (e.g. “onion” not “yellow onion”).</p>';
+      })
+      .catch(function () {
+        st.textContent = 'Failed to load index.';
+      });
+  });
+})();
+</script>
+</body>
+</html>

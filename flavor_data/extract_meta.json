@@ -1,0 +1,11 @@
+{
+  "flavor_bible_epub": "/Users/danielkuschmierz/Downloads/Karen Page, Andrew Dornenburg - The Flavor Bible_ The Essential Guide to Culinary Creativity, Based on the Wisdom of America's Most Imaginative Chefs (2008, Little, Brown and Company) - libgen.li copy.epub",
+  "vegetarian_pdf": "/Users/danielkuschmierz/Downloads/Page, Karen - The Vegetarian Flavor Bible (2014, Little, Brown and Company) - libgen.li copy.pdf",
+  "counts": {
+    "flavor_bible_raw": 626,
+    "vegetarian_raw": 339,
+    "merged": 920,
+    "affinity_rows": 1433,
+    "avoid_ingredients": 26
+  }
+}

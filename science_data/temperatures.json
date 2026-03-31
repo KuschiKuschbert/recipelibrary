@@ -1,0 +1,956 @@
+[
+  {
+    "value": 100,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 80,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 63,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 90,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 360,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 180,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 350,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 175,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 450,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 230,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 400,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 205,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 410,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 210,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 510,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 265,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 320,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 160,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 185,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 365,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 232,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 6,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 161,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 65,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 4,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 20,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 32,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 0,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 1,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 5,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 40,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 161,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 72,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 190,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 89,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 70,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 104,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 95,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 35,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 77,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 25,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 100,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 38,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 120,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 48,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 130,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 54,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 60,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 10,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 150,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 68,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 180,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 82,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 50,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 149,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 250,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 120,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 140,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 121,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 212,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 284,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 210,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 356,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 145,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 290,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 190,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 380,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 110,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 220,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 425,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 150,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 300,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 58,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 136,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 59,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 15,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 140,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 60,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 30,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 86,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 50,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 122,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 158,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 194,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 185,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 85,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 187,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 86,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 170,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 77,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 115,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 40,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 118,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 6,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 68,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 149,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 133,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 321,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 196,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 160,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 71,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 110,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 200,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 45,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 55,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 75,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 90,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 57,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 135,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 192,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 191,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 179,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 93,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 145,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 99,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 151,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 1,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 95,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 88,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 49,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 39,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 4,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 73,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 23,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 27,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 109,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 43,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 173,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 113,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 172,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 78,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 12,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 55,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 14,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 42,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 81,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 177,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 99,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 37,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 80,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 32,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 82,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 28,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 235,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 113,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 270,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 132,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 234,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 112,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 240,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 248,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 268,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 131,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 143,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 310,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 154,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 116,
+    "unit": "C",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 275,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  },
+  {
+    "value": 245,
+    "unit": "F",
+    "context": "",
+    "source": "provost"
+  }
+]

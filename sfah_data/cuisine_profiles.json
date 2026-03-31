@@ -1,0 +1,151 @@
+{
+  "Mexico": {
+    "fats": [
+      "lard",
+      "vegetable oil"
+    ],
+    "acids": [
+      "lime",
+      "tomatillo",
+      "vinegar"
+    ],
+    "salt": [
+      "sea salt",
+      "kosher salt"
+    ],
+    "heat_notes": [
+      "regional techniques vary"
+    ]
+  },
+  "India": {
+    "fats": [
+      "ghee",
+      "coconut oil",
+      "mustard oil"
+    ],
+    "acids": [
+      "tamarind",
+      "yogurt",
+      "lime"
+    ],
+    "salt": [
+      "sea salt",
+      "kosher salt"
+    ],
+    "heat_notes": [
+      "regional techniques vary"
+    ]
+  },
+  "Thailand": {
+    "fats": [],
+    "acids": [
+      "lime",
+      "fish sauce",
+      "tamarind"
+    ],
+    "salt": [
+      "sea salt",
+      "kosher salt"
+    ],
+    "heat_notes": [
+      "regional techniques vary"
+    ]
+  },
+  "Korea": {
+    "fats": [],
+    "acids": [
+      "fermented chili",
+      "rice vinegar"
+    ],
+    "salt": [
+      "sea salt",
+      "kosher salt"
+    ],
+    "heat_notes": [
+      "regional techniques vary"
+    ]
+  },
+  "West Africa": {
+    "fats": [
+      "palm oil",
+      "coconut oil"
+    ],
+    "acids": [],
+    "salt": [
+      "sea salt",
+      "kosher salt"
+    ],
+    "heat_notes": [
+      "regional techniques vary"
+    ]
+  },
+  "France": {
+    "fats": [
+      "butter",
+      "olive oil",
+      "lard"
+    ],
+    "acids": [
+      "wine vinegar",
+      "lemon",
+      "mustard"
+    ],
+    "salt": [
+      "sea salt",
+      "kosher salt"
+    ],
+    "heat_notes": [
+      "regional techniques vary"
+    ]
+  },
+  "Japan": {
+    "fats": [
+      "sesame oil",
+      "neutral oil"
+    ],
+    "acids": [
+      "rice vinegar",
+      "citrus",
+      "miso tang"
+    ],
+    "salt": [
+      "sea salt",
+      "kosher salt"
+    ],
+    "heat_notes": [
+      "regional techniques vary"
+    ]
+  },
+  "Italy": {
+    "fats": [
+      "olive oil",
+      "butter"
+    ],
+    "acids": [
+      "lemon",
+      "wine vinegar",
+      "tomatoes"
+    ],
+    "salt": [
+      "sea salt",
+      "kosher salt"
+    ],
+    "heat_notes": [
+      "regional techniques vary"
+    ]
+  },
+  "USA South": {
+    "fats": [
+      "butter",
+      "bacon fat"
+    ],
+    "acids": [],
+    "salt": [
+      "sea salt",
+      "kosher salt"
+    ],
+    "heat_notes": [
+      "regional techniques vary"
+    ]
+  }
+}

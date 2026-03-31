@@ -1349,6 +1349,82 @@ body {
   margin-top: 4px;
 }
 
+/* Flavor extras (combined_data + SFAH) in recipe modals via aroma-hints.js */
+.kuschi-flavor-extras {
+  margin-top: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.kuschi-flavor-summary {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text2);
+  cursor: pointer;
+}
+.kuschi-taste-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0;
+}
+.kuschi-taste-badge {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  color: var(--text2);
+}
+.kuschi-flavor-clash {
+  font-size: 12px;
+  color: #e8a0a0;
+  margin: 8px 0;
+  line-height: 1.4;
+}
+.kuschi-flavor-subs,
+.kuschi-flavor-method {
+  font-size: 12px;
+  color: var(--text2);
+  margin: 8px 0;
+  line-height: 1.45;
+}
+.kuschi-pivot {
+  margin-top: 10px;
+}
+.kuschi-pivot label {
+  display: block;
+  font-size: 11px;
+  color: var(--text3);
+  margin-bottom: 4px;
+}
+.kuschi-pivot-sel {
+  width: 100%;
+  max-width: 280px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+}
+.kuschi-pivot-out {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--text3);
+  white-space: pre-wrap;
+  max-height: 120px;
+  overflow: auto;
+}
+.kuschi-flavor-more {
+  margin: 10px 0 0;
+  font-size: 12px;
+}
+.kuschi-flavor-more a {
+  color: var(--gold);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .modal-overlay,
   .modal {

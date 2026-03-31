@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="theme-color" content="#0c0c0c">
+<title>Flavor explorer · Kuschi Kitchen</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23c9a96e'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/theme.css">
+<style>
+  .nav-back { padding: 20px 32px 0; max-width: 1200px; margin: 0 auto; }
+  .nav-back a { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--text3); text-decoration: none; }
+  .nav-back a:hover { color: var(--gold); }
+  .hero { text-align: center; padding: 48px 24px 24px; position: relative; }
+  .hero-label { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .hero-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(32px, 5vw, 48px); font-weight: 700; color: var(--text); margin-bottom: 8px; }
+  .hero-sub { font-size: 15px; color: var(--text2); max-width: 560px; margin: 0 auto; line-height: 1.55; }
+  .flavor-page { max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; }
+  .flavor-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; }
+  .flavor-tabs button {
+    padding: 10px 16px; border-radius: 100px; border: 1px solid var(--border); background: var(--surface);
+    color: var(--text2); font: inherit; font-size: 13px; cursor: pointer;
+  }
+  .flavor-tabs button[aria-selected="true"] { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+  .flavor-search-wrap { margin-bottom: 20px; }
+  .flavor-search-wrap input {
+    width: 100%; max-width: 520px; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--border);
+    background: var(--bg2); color: var(--text); font: inherit; font-size: 15px;
+  }
+  .flavor-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; align-items: start; }
+  @media (max-width: 860px) { .flavor-layout { grid-template-columns: 1fr; } }
+  .flavor-results { display: flex; flex-direction: column; gap: 6px; max-height: min(60vh, 520px); overflow-y: auto; }
+  .flavor-result-row {
+    text-align: left; padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border);
+    background: var(--surface); color: var(--text); font: inherit; cursor: pointer; display: flex; justify-content: space-between; gap: 12px;
+  }
+  .flavor-result-row:hover { border-color: var(--gold); }
+  .flavor-result-name { font-weight: 600; }
+  .flavor-result-hint { font-size: 12px; color: var(--text3); }
+  #flavorDetail {
+    border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; background: var(--surface);
+    min-height: 200px; position: sticky; top: 16px;
+  }
+  .flavor-detail-title { font-family: 'Playfair Display', serif; font-size: 26px; margin: 0 0 12px; color: var(--text); }
+  .flavor-meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .flavor-badge { font-size: 12px; padding: 4px 10px; border-radius: 100px; background: var(--bg2); color: var(--text2); border: 1px solid var(--border); }
+  .flavor-avoid { background: rgba(180, 60, 60, 0.12); border: 1px solid rgba(180, 60, 60, 0.35); padding: 10px 12px; border-radius: var(--radius-sm); margin: 12px 0; font-size: 14px; }
+  .flavor-subst { font-size: 14px; color: var(--text2); margin: 10px 0; }
+  .flavor-section { margin-top: 18px; }
+  .flavor-section h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin: 0 0 8px; }
+  .flavor-section h4 { font-size: 12px; color: var(--text3); margin: 10px 0 6px; }
+  .flavor-pair-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .flavor-pair-chip { font-size: 12px; padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border); }
+  .flavor-tier-hg { border-color: var(--gold); color: var(--gold-light); }
+  .flavor-tier-vh { font-weight: 600; }
+  .flavor-aff-list { margin: 0; padding-left: 18px; color: var(--text2); font-size: 14px; line-height: 1.5; }
+  .flavor-link { color: var(--gold); }
+  .flavor-empty { color: var(--text3); font-size: 14px; }
+  .flavor-wheel-family { margin-bottom: 20px; }
+  .flavor-wheel-family h4 { color: var(--gold); font-size: 13px; margin: 0 0 10px; }
+  .flavor-wheel-items { display: flex; flex-wrap: wrap; gap: 8px; }
+  .flavor-wheel-item {
+    font-size: 13px; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface);
+    color: var(--text); cursor: pointer; font: inherit;
+  }
+  .flavor-wheel-item:hover { border-color: var(--gold); }
+  .flavor-temp-list { columns: 2; font-size: 13px; color: var(--text2); }
+  @media (max-width: 600px) { .flavor-temp-list { columns: 1; } }
+  .footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); text-align: center; font-size: 13px; color: var(--text3); }
+  .footer a { color: var(--gold); }
+  #flavorLoadStatus { font-size: 12px; color: var(--text3); margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="nav-back"><a href="index.html">← Kitchen Library</a> · <a href="aroma.html">Aroma lookup</a></div>
+<div class="hero">
+  <div class="hero-label">Kuschi · Flavor intelligence</div>
+  <h1 class="hero-title">Flavor explorer</h1>
+  <p class="hero-sub">Merged <strong>Flavor Bible</strong>, <strong>Vegetarian Flavor Bible</strong>, <strong>Aroma Bible</strong>, and <strong>Flavor Thesaurus</strong> extracts. For personal use; book content is copyrighted.</p>
+</div>
+
+<div class="flavor-page">
+  <div class="flavor-tabs" role="tablist">
+    <button type="button" role="tab" data-flavor-tab="explore" aria-selected="true">Explore</button>
+    <button type="button" role="tab" data-flavor-tab="wheel" aria-selected="false">Thesaurus wheel</button>
+    <button type="button" role="tab" data-flavor-tab="science" aria-selected="false">Science snippets</button>
+    <a href="pantry.html" class="hero-nav-link" style="margin-left:auto;align-self:center;text-decoration:none;">Pantry → recipes</a>
+  </div>
+
+  <section class="flavor-tab-panel" data-panel="explore">
+    <div class="flavor-search-wrap">
+      <input type="search" id="flavorSearch" placeholder="Ingredient (e.g. tomatoes, cumin, lamb)…" autocomplete="off" />
+      <div id="flavorLoadStatus"></div>
+    </div>
+    <div class="flavor-layout">
+      <div id="flavorResults" class="flavor-results"></div>
+      <div id="flavorDetail"><p class="flavor-empty">Select an ingredient for pairings, avoids, and aroma links.</p></div>
+    </div>
+  </section>
+
+  <section class="flavor-tab-panel" data-panel="wheel" hidden>
+    <p class="flavor-empty" style="margin-bottom:16px">99 Flavor Thesaurus ingredients by family. Tap to jump back to Explore.</p>
+    <div id="flavorWheelHost"></div>
+  </section>
+
+  <section class="flavor-tab-panel" data-panel="science" hidden>
+    <div id="flavorScienceHost"></div>
+  </section>
+
+  <div class="footer">
+    <a href="index.html">Kitchen Library</a> · <a href="aroma.html">Aroma</a> · <a href="riviera.html">Riviera</a> ·
+    <a href="https://github.com/KuschiKuschbert/recipelibrary" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</div>
+<script src="assets/flavor-explorer.js"></script>
+</body>
+</html>

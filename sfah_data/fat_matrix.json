@@ -1,0 +1,32 @@
+{
+  "West Africa": [
+    "palm oil",
+    "coconut oil"
+  ],
+  "France": [
+    "butter",
+    "olive oil",
+    "lard"
+  ],
+  "Italy": [
+    "olive oil",
+    "butter"
+  ],
+  "Mexico": [
+    "lard",
+    "vegetable oil"
+  ],
+  "Japan": [
+    "sesame oil",
+    "neutral oil"
+  ],
+  "India": [
+    "ghee",
+    "coconut oil",
+    "mustard oil"
+  ],
+  "USA South": [
+    "butter",
+    "bacon fat"
+  ]
+}

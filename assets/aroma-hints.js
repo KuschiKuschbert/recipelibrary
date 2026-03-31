@@ -8,11 +8,16 @@
 (function (global) {
   var ING_URL = 'aroma_data/ingredients.json';
   var FOOD_URL = 'aroma_data/food_pairings.json';
+  var UNIFIED_URL = 'combined_data/ingredients_unified.json';
+  var CUISINE_URL = 'sfah_data/cuisine_profiles.json';
 
   var ingredients = null;
   var foodPairings = null;
   var byId = Object.create(null);
   var loadPromise = null;
+  var unifiedFlavors = null;
+  var cuisineMap = null;
+  var unifiedPromise = null;
 
   function normKey(s) {
     if (window.KuschiUserRecipes && typeof KuschiUserRecipes.canonicalOrderMergeKey === 'function') {
@@ -33,6 +38,204 @@
       .filter(function (w) {
         return w.length > 1;
       });
+  }
+
+  function ensureUnifiedLoaded() {
+    if (unifiedFlavors) return Promise.resolve({ unified: unifiedFlavors, cuisine: cuisineMap });
+    if (unifiedPromise) return unifiedPromise;
+    unifiedPromise = Promise.all([
+      fetch(UNIFIED_URL)
+        .then(function (r) {
+          return r.ok ? r.json() : [];
+        })
+        .catch(function () {
+          return [];
+        }),
+      fetch(CUISINE_URL)
+        .then(function (r) {
+          return r.ok ? r.json() : {};
+        })
+        .catch(function () {
+          return {};
+        }),
+    ]).then(function (pair) {
+      unifiedFlavors = Array.isArray(pair[0]) ? pair[0] : [];
+      cuisineMap = pair[1] && typeof pair[1] === 'object' ? pair[1] : {};
+      return { unified: unifiedFlavors, cuisine: cuisineMap };
+    });
+    return unifiedPromise;
+  }
+
+  function matchUnifiedRows(lineKey, lineToks, unified) {
+    if (!unified || !unified.length) return null;
+    var best = null;
+    var bestScore = 0;
+    for (var i = 0; i < unified.length; i++) {
+      var u = unified[i];
+      var n = normKey(u.name || '');
+      if (!n || n.length < 3) continue;
+      var sc = matchAromaIngredient(lineKey, lineToks, { id: u.id, name: u.name });
+      if (sc > bestScore) {
+        bestScore = sc;
+        best = u;
+      }
+    }
+    return bestScore >= 2 ? best : null;
+  }
+
+  function collectUnifiedMatches(lines, unified) {
+    var list = [];
+    var seen = Object.create(null);
+    for (var L = 0; L < lines.length; L++) {
+      var raw = lines[L].item;
+      var lineKey = normKey(raw);
+      var lineToks = tokens(raw);
+      if (!lineKey) continue;
+      var u = matchUnifiedRows(lineKey, lineToks, unified);
+      if (u && !seen[u.id]) {
+        seen[u.id] = true;
+        list.push(u);
+      }
+    }
+    return list;
+  }
+
+  function buildFlavorExtrasHtml(recipe, lines, unified, cuisines) {
+    var matched = collectUnifiedMatches(lines, unified);
+    if (!matched.length) return '';
+
+    var tastes = Object.create(null);
+    var avoids = [];
+    var subs = [];
+    for (var i = 0; i < matched.length; i++) {
+      var f = matched[i].flavor;
+      if (!f) continue;
+      var ta = f.taste;
+      if (Array.isArray(ta)) {
+        for (var t = 0; t < ta.length; t++) tastes[normKey(ta[t])] = ta[t];
+      }
+      var av = f.avoid;
+      if (Array.isArray(av)) {
+        for (var a = 0; a < av.length; a++) avoids.push(String(av[a]));
+      }
+      var su = f.substitutes;
+      if (Array.isArray(su)) {
+        for (var s = 0; s < su.length; s++) subs.push(String(su[s]));
+      }
+    }
+
+    var clash = [];
+    var hayLines = lines
+      .map(function (l) {
+        return normKey(l.item);
+      })
+      .join(' ');
+    for (var i2 = 0; i2 < matched.length; i2++) {
+      var f2 = matched[i2].flavor;
+      if (!f2 || !f2.avoid) continue;
+      for (var j = 0; j < f2.avoid.length; j++) {
+        var term = normKey(f2.avoid[j]);
+        if (term.length > 2 && hayLines.indexOf(term) >= 0) clash.push(matched[i2].name + ' ↔ ' + f2.avoid[j]);
+      }
+    }
+
+    var tasteBadges = Object.keys(tastes)
+      .map(function (k) {
+        return '<span class="kuschi-taste-badge">' + escHtml(tastes[k]) + '</span>';
+      })
+      .join('');
+
+    var instText = '';
+    if (recipe && recipe.instructions) {
+      var ins = recipe.instructions;
+      instText = Array.isArray(ins) ? ins.join(' ') : String(ins);
+    }
+    instText = normKey(instText);
+    var methodTip = '';
+    if (/roast|bake|oven/.test(instText) && ingredients) {
+      methodTip =
+        '<p class="kuschi-flavor-method"><strong>Method</strong>: Long dry heat — add delicate herbs late; toast spices early for depth.</p>';
+    } else if (/grill|char|bbq/.test(instText)) {
+      methodTip =
+        '<p class="kuschi-flavor-method"><strong>Method</strong>: High heat / smoke — bold spices and acids balance char.</p>';
+    } else if (/simmer|brais|stew|slow/.test(instText)) {
+      methodTip =
+        '<p class="kuschi-flavor-method"><strong>Method</strong>: Long wet heat — whole spices in early; fresh herbs at finish.</p>';
+    }
+
+    var pivotOpts = Object.keys(cuisines || {})
+      .sort()
+      .map(function (r) {
+        return '<option value="' + escHtml(r) + '">' + escHtml(r) + '</option>';
+      })
+      .join('');
+
+    var subHtml = subs.length
+      ? '<p class="kuschi-flavor-subs"><strong>Substitutes (Veg Bible)</strong>: ' +
+        escHtml(subs.slice(0, 6).join(', ')) +
+        '</p>'
+      : '';
+
+    return (
+      '<details class="kuschi-flavor-extras">' +
+      '<summary class="kuschi-flavor-summary">Flavor balance &amp; book data</summary>' +
+      (tasteBadges ? '<div class="kuschi-taste-row">' + tasteBadges + '</div>' : '') +
+      (clash.length
+        ? '<div class="kuschi-flavor-clash"><strong>Possible clashes</strong> (AVOID lists): ' +
+          escHtml(clash.slice(0, 5).join(' · ')) +
+          '</div>'
+        : '') +
+      subHtml +
+      methodTip +
+      (pivotOpts
+        ? '<div class="kuschi-pivot"><label for="kuschiPivotSel">Cuisine pivot (SFAH seed)</label> ' +
+          '<select id="kuschiPivotSel" class="kuschi-pivot-sel"><option value="">—</option>' +
+          pivotOpts +
+          '</select>' +
+          '<pre class="kuschi-pivot-out" id="kuschiPivotOut"></pre></div>'
+        : '') +
+      '<p class="kuschi-flavor-more"><a href="flavor.html">Open Flavor explorer →</a></p>' +
+      '</details>'
+    );
+  }
+
+  function wirePivotSelect(root, cuisines) {
+    var sel = root.querySelector('#kuschiPivotSel');
+    var out = root.querySelector('#kuschiPivotOut');
+    if (!sel || !out || !cuisines) return;
+    sel.addEventListener('change', function () {
+      var r = sel.value;
+      if (!r) {
+        out.textContent = '';
+        return;
+      }
+      var p = cuisines[r];
+      if (!p) {
+        out.textContent = '';
+        return;
+      }
+      out.textContent =
+        JSON.stringify(
+          { fats: p.fats || [], acids: p.acids || [], salt: p.salt || [] },
+          null,
+          2
+        );
+    });
+  }
+
+  function appendFlavorExtras(wrapEl, lines, recipe) {
+    if (!wrapEl) return;
+    ensureUnifiedLoaded()
+      .then(function (data) {
+        if (!data.unified || !data.unified.length) return;
+        var html = buildFlavorExtrasHtml(recipe, lines, data.unified, data.cuisine);
+        if (!html) return;
+        var div = document.createElement('div');
+        div.innerHTML = html;
+        wrapEl.appendChild(div.firstElementChild);
+        wirePivotSelect(wrapEl, data.cuisine);
+      })
+      .catch(function () {});
   }
 
   function ensureLoaded() {
@@ -452,7 +655,7 @@
     );
   }
 
-  function fillHintWrap(wrapEl, lines) {
+  function fillHintWrap(wrapEl, lines, recipe) {
     if (!wrapEl) return;
     ensureLoaded()
       .then(function () {
@@ -504,6 +707,7 @@
           '</div>' +
           '<p class="aroma-hint-more"><a href="aroma.html">Open Aroma lookup →</a></p>' +
           '</details>';
+        appendFlavorExtras(wrapEl, lines, recipe);
       })
       .catch(function () {
         wrapEl.innerHTML =
@@ -533,7 +737,7 @@
     var lines = recipeLinesForHints(recipe);
     var wrap = root.querySelector('[data-aroma-hint-wrap]');
     if (!wrap) return;
-    fillHintWrap(wrap, lines);
+    fillHintWrap(wrap, lines, recipe);
   }
 
   function addRecipePanelHtml() {

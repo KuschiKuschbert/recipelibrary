@@ -31,6 +31,8 @@ Skip only if the user explicitly opts out.
 | `kitchen_library_*.json` | Additional library chunks |
 | `assets/user-recipes.js` | **localStorage** helpers (browser-only) — see keys below |
 | `aroma_data/*.json`, [aroma.html](aroma.html), [assets/aroma-hints.js](assets/aroma-hints.js) | **Aroma Bible** extract: food↔spice index, harmony data, recipe hints + [aroma.html](aroma.html) lookup — see [.cursor/skills/aroma-bible/SKILL.md](../aroma-bible/SKILL.md) |
+| [flavor.html](flavor.html), `combined_data/`, `flavor_data/`, `thesaurus_data/`, `scripts/run_all_extractions.sh` | **Flavor explorer** — Flavor Bible + Vegetarian Bible + Aroma + Thesaurus; run `scripts/run_all_extractions.sh` after changing source EPUBs/PDFs |
+| [pantry.html](pantry.html) | Pantry tokens → `claude_index` match; opens `index.html?open=<id>` |
 | `assets/order-list.js` | Shared **order list** modal logic ([riviera.html](riviera.html), [kitchen-book.html](kitchen-book.html)) |
 | [kitchen-book.html](kitchen-book.html) | Per-device **kitchen books** (`?b=id`): search, add recipe (manual + Gemini), QR, **order list** (per-book storage), **Admin** PIN for delete book / remove recipe |
 | `assets/screen-wake.js` | **Keep screen on** toggle (`[data-kuschi-wake]`) — shown in recipe detail modals only |

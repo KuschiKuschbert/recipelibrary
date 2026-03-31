@@ -1,0 +1,12 @@
+{
+  "dials": {
+    "salt": "Enhances and balances other tastes",
+    "sweet": "Rounds harsh edges",
+    "sour": "Brightens and cuts richness",
+    "bitter": "Adds complexity",
+    "umami": "Depth and savoriness",
+    "fat": "Carries aroma and mouthfeel",
+    "heat": "Cooking transformation / capsaicin heat"
+  },
+  "source": "art_of_flavor_curated"
+}

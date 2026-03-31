@@ -1,0 +1,36 @@
+{
+  "Mexico": [
+    "lime",
+    "tomatillo",
+    "vinegar"
+  ],
+  "France": [
+    "wine vinegar",
+    "lemon",
+    "mustard"
+  ],
+  "Italy": [
+    "lemon",
+    "wine vinegar",
+    "tomatoes"
+  ],
+  "Japan": [
+    "rice vinegar",
+    "citrus",
+    "miso tang"
+  ],
+  "India": [
+    "tamarind",
+    "yogurt",
+    "lime"
+  ],
+  "Thailand": [
+    "lime",
+    "fish sauce",
+    "tamarind"
+  ],
+  "Korea": [
+    "fermented chili",
+    "rice vinegar"
+  ]
+}

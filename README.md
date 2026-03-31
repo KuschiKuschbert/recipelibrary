@@ -9,6 +9,8 @@ Personal recipe library hosted on **GitHub Pages**: searchable catalog, metric-o
 | [index.html](index.html) | Main library UI — loads `claude_index/` shards, recipe detail from `recipe_detail/`, merges **user recipes** from the browser; **+ Kitchen book** and pills for custom books |
 | [kitchen-book.html](kitchen-book.html) | User-created **kitchen books** (`?b=book-id`): local recipes only, same add-recipe flow as the main library (manual + Gemini) |
 | [riviera.html](riviera.html) | Riviera prep set (built-in cards + user-added Riviera recipes), **order list by storage** (freezer → cold room → dry store → other) with local master ingredients |
+| [flavor.html](flavor.html) | **Flavor explorer** — merged Flavor Bible + Vegetarian Bible + Aroma + Flavor Thesaurus wheel (`combined_data/ingredients_unified.json`) |
+| [pantry.html](pantry.html) | **Pantry search** — match typed ingredients against `claude_index` `ing` fields; opens hits via `index.html?open=` |
 | [assets/theme.css](assets/theme.css) | Shared dark theme tokens, search shell, filters, modal shell, footer |
 | [assets/user-recipes.js](assets/user-recipes.js) | `localStorage` helpers: kitchen recipes, Riviera recipes, master ingredients, Riviera order overrides / extras, JSON export |
 | [assets/recipe-gemini-format.js](assets/recipe-gemini-format.js) | Gemini JSON extraction for add-recipe (Kitchen + Riviera); optional fetch proxy helpers |
@@ -18,6 +20,8 @@ Personal recipe library hosted on **GitHub Pages**: searchable catalog, metric-o
 | `recipe_detail/detail_*.json` | Full recipe payloads (main library), keyed by first letter of name |
 | `scripts/detect-nonenglish-recipes.py`, `translate_recipes.py`, `sync_claude_index_from_detail.py`, `repartition_detail_shards.py` | Optional pipeline to translate catalog text and keep index/detail aligned (see below) |
 | `scripts/check-recipe-shards.py` | Verify every `claude_index` id resolves in the expected `recipe_detail` shard |
+| `scripts/run_all_extractions.sh` | Regenerate `flavor_data/`, `thesaurus_data/`, `science_data/`, `sfah_data/`, `supplementary_data/`, `combined_data/` from EPUBs/PDFs in `~/Downloads` (see each `extract_*.py` for env overrides) |
+| `combined_data/ingredients_unified.json` | Merged lookup for the Flavor explorer + optional recipe-modal hints (loaded by `assets/aroma-hints.js`) |
 | `pdf/` | Category reference PDFs |
 
 ## Local and device data
@@ -81,7 +85,8 @@ Running `--write` writes `reports/cleanup_affected_ids.jsonl` (gitignored); rege
 2. **Detect:** `python3 scripts/detect-nonenglish-recipes.py` → writes `reports/translation_candidates.jsonl` (add `--no-lingua` if you skip pip).
 3. **Translate:** install Argos language pairs you need, then e.g.  
    `python3 scripts/translate_recipes.py --candidates-file reports/translation_candidates.jsonl --backend argos`  
-   Alternatives: `--backend libretranslate` (set `LIBRETRANSLATE_URL`, optional `LIBRETRANSLATE_API_KEY`) or `--backend deepl` (`DEEPL_AUTH_KEY`, optional `DEEPL_FREE=1` for api-free host). Use `--dry-run` on translate to count non-ASCII strings without writing. Glossary: [`scripts/translation_glossary.json`](scripts/translation_glossary.json).
+   By default only **non-ASCII** strings are sent to the translator. To also translate **ASCII-only** text when Lingua set `suggested_lang` (e.g. Spanish without accents), re-run **detect** for a fresh list, then add **`--translate-ascii-lingua`** (can re-touch already-English lines if Lingua is wrong — spot-check).  
+   Alternatives: `--backend libretranslate` (set `LIBRETRANSLATE_URL`, optional `LIBRETRANSLATE_API_KEY`) or `--backend deepl` (`DEEPL_AUTH_KEY`, optional `DEEPL_FREE=1` for api-free host). Use `--dry-run` on translate to count strings without writing. Glossary: [`scripts/translation_glossary.json`](scripts/translation_glossary.json).
 4. **Sync index:** `python3 scripts/sync_claude_index_from_detail.py --ids-from reports/translation_candidates.jsonl`  
    Or `--all-in-index` to refresh every catalog entry from detail (slow, loads all detail files).
 5. **Repartition detail (only if a recipe `name`’s first ASCII letter changed):**  
