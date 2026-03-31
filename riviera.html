@@ -482,7 +482,7 @@
   <div class="modal order-list-modal">
     <button type="button" class="modal-close" onclick="closeOrderListModal()">✕</button>
     <div class="modal-title" style="margin-bottom:12px">Order list by storage</div>
-    <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Grouped as Freezer, Cold room, Dry store, then Other. The same ingredient name is merged into one row even when recipes use different storage; the row sits under the most common zone and the recipe hint labels splits (e.g. Freezer: … · Cold room: …). Changing zone updates every recipe line in that merge.</p>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Grouped as Freezer, Cold room, Dry store, then Other. The same ingredient name is merged into one row even when recipes use different storage; the row sits under the most common zone. Use <strong>Edit storage zones</strong> when you need to move lines between areas.</p>
     <div id="orderListBody"></div>
     <div class="modal-section" style="margin-top:20px">Add ingredient</div>
     <p class="order-add-hint">Saves to your master ingredient list (default zone for matching names) and adds a line to this order.</p>
@@ -498,6 +498,7 @@
     <div class="form-row"><label for="ordNewQty">Order quantity</label><input id="ordNewQty" type="text" placeholder="e.g. 2 kg" autocomplete="off" /></div>
     <button type="button" class="btn-secondary" onclick="submitOrderListAdd()">Add to master &amp; list</button>
     <div class="order-actions">
+      <button type="button" class="btn-secondary" id="rivieraOrdZoneEditBtn" onclick="toggleRivieraOrderListEditingZones()">Edit storage zones</button>
       <button type="button" class="btn-secondary" onclick="copyOrderListText()">Copy as text</button>
       <button type="button" class="btn-secondary" onclick="copyOrderBundleJson()">Copy order data JSON</button>
       <button type="button" class="btn-secondary" onclick="copyMasterIngredientsJson()">Copy master ingredients JSON</button>
@@ -1357,8 +1358,21 @@ const rivieraOrderList =
     },
   });
 
+function syncRivieraOrderListZoneEditButton() {
+  var btn = document.getElementById('rivieraOrdZoneEditBtn');
+  if (!btn || !rivieraOrderList) return;
+  btn.textContent = rivieraOrderList.isEditingZones() ? 'Done' : 'Edit storage zones';
+}
+function toggleRivieraOrderListEditingZones() {
+  if (!rivieraOrderList) return;
+  rivieraOrderList.toggleEditingZones();
+  syncRivieraOrderListZoneEditButton();
+}
 function openOrderListModal() {
-  if (rivieraOrderList) rivieraOrderList.open();
+  if (rivieraOrderList) {
+    rivieraOrderList.open();
+    syncRivieraOrderListZoneEditButton();
+  }
 }
 function closeOrderListModal() {
   if (rivieraOrderList) rivieraOrderList.close();

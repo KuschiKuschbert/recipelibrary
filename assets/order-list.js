@@ -166,6 +166,11 @@
     return h;
   }
 
+  function zoneDisplayHtml(zone) {
+    var z = ZONE_ORDER.indexOf(zone) >= 0 ? zone : 'other';
+    return '<span class="ord-zone-display">' + esc(ZONE_LABELS[z]) + '</span>';
+  }
+
   /**
    * @param {object} config
    * @param {string} config.overlayId
@@ -184,6 +189,7 @@
     var shouldReleaseBodyScroll = config.shouldReleaseBodyScroll || function () {
       return true;
     };
+    var editingZones = false;
 
     function Kr() {
       return window.KuschiUserRecipes;
@@ -196,6 +202,28 @@
         all[k] = Object.assign({}, all[k] || {}, patch);
       });
       storage.saveOverrides(all);
+    }
+
+    function normalizeIncludedOverrides() {
+      var k = Kr();
+      if (!k) return;
+      var all = storage.loadOverrides();
+      var changed = false;
+      var recipes = getRecipes() || [];
+      for (var ri = 0; ri < recipes.length; ri++) {
+        var r = recipes[ri];
+        var ings = r.ingredients || [];
+        for (var idx = 0; idx < ings.length; idx++) {
+          if (!ings[idx] || !ings[idx].item) continue;
+          var lineKey = r.id + '::' + idx;
+          var cur = all[lineKey] || {};
+          if (cur.included === false) {
+            all[lineKey] = Object.assign({}, cur, { included: true });
+            changed = true;
+          }
+        }
+      }
+      if (changed) storage.saveOverrides(all);
     }
 
     function buildOrderLinesFlat() {
@@ -264,6 +292,20 @@
       return by;
     }
 
+    function recipeZoneControlHtml(line, keysEsc) {
+      if (editingZones) {
+        return zoneSelectHtml(line.zone, 'ord-zone', 'recipe', keysEsc, null);
+      }
+      return zoneDisplayHtml(line.zone);
+    }
+
+    function extraZoneControlHtml(line) {
+      if (editingZones) {
+        return zoneSelectHtml(line.zone, 'ord-zone-extra', 'extra', '', line.extraId);
+      }
+      return zoneDisplayHtml(line.zone);
+    }
+
     function renderOrderListBody() {
       var body = document.getElementById(bodyId);
       if (!body || !Kr()) return;
@@ -281,8 +323,6 @@
         html += '<div class="order-zone-block">';
         html += '<div class="order-zone-head">' + esc(ZONE_LABELS[z]) + '</div>';
         rows.forEach(function (line) {
-          var muted = !line.included ? ' order-line-muted' : '';
-          var chk = line.included ? ' checked' : '';
           if (line.kind === 'recipe') {
             var keysEsc = (line.mergedLineKeys || [line.lineKey]).map(escAttr).join(MERGED_LINE_KEYS_SEP);
             var extraIds = line.extraIds || [];
@@ -292,26 +332,16 @@
                 : '';
             html += '<div class="order-line-block"' + foldedAttr + '>';
             html +=
-              '<div class="order-line-row' +
-              muted +
-              '" data-kind="recipe">' +
-              '<input type="checkbox" class="ord-inc"' +
-              chk +
-              ' data-merged-keys="' +
-              keysEsc +
-              '" title="Include in copy" />' +
+              '<div class="order-line-row" data-kind="recipe">' +
               '<div class="order-line-name">' +
               esc(line.item) +
-              '</div>' +
-              '<div class="order-line-hint">Recipe: ' +
-              esc(line.recipeQtyDisplay) +
               '</div>' +
               '<input type="text" class="ord-order-qty" data-merged-keys="' +
               keysEsc +
               '" value="' +
               escAttr(line.orderQty) +
               '" placeholder="Order qty" />' +
-              zoneSelectHtml(line.zone, 'ord-zone', 'recipe', keysEsc, null) +
+              recipeZoneControlHtml(line, keysEsc) +
               '<span class="ord-remove"></span>' +
               '</div>';
             extraIds.forEach(function (xid) {
@@ -319,9 +349,8 @@
               if (!ex) return;
               html +=
                 '<div class="order-line-sub">' +
-                '<span class="order-sub-label">↳</span>' +
-                '<span class="order-sub-label">Manual</span>' +
-                '<div class="order-line-hint">' +
+                '<span class="order-sub-merged" aria-hidden="true">↳</span>' +
+                '<div class="order-line-name order-sub-name">' +
                 esc(ex.name) +
                 '</div>' +
                 '<input type="text" class="ord-extra-qty" data-extra-id="' +
@@ -329,7 +358,6 @@
                 '" value="' +
                 escAttr(ex.orderQty || '') +
                 '" placeholder="Order qty" />' +
-                '<span></span>' +
                 '<button type="button" class="btn-secondary ord-remove-extra" data-extra-id="' +
                 escAttr(xid) +
                 '">✕</button>' +
@@ -339,17 +367,15 @@
           } else {
             html +=
               '<div class="order-line-row" data-kind="extra">' +
-              '<span class="ord-inc"></span>' +
               '<div class="order-line-name">' +
               esc(line.item) +
               '</div>' +
-              '<div class="order-line-hint">Manual line</div>' +
               '<input type="text" class="ord-order-qty-extra" data-extra-id="' +
               escAttr(line.extraId) +
               '" value="' +
               escAttr(line.orderQty) +
               '" placeholder="Order qty" />' +
-              zoneSelectHtml(line.zone, 'ord-zone-extra', 'extra', '', line.extraId) +
+              extraZoneControlHtml(line) +
               '<button type="button" class="btn-secondary ord-remove" data-extra-id="' +
               escAttr(line.extraId) +
               '">✕</button>' +
@@ -364,13 +390,6 @@
       }
       body.innerHTML = html;
 
-      body.querySelectorAll('.ord-inc[data-merged-keys]').forEach(function (el) {
-        el.addEventListener('change', function () {
-          var keys = el.getAttribute('data-merged-keys').split(MERGED_LINE_KEYS_SEP);
-          setRecipeOverridesBatch(keys, { included: el.checked });
-          renderOrderListBody();
-        });
-      });
       body.querySelectorAll('.ord-order-qty[data-merged-keys]').forEach(function (el) {
         el.addEventListener('change', function () {
           var keys = el.getAttribute('data-merged-keys').split(MERGED_LINE_KEYS_SEP);
@@ -422,6 +441,8 @@
     }
 
     function open() {
+      editingZones = false;
+      normalizeIncludedOverrides();
       renderOrderListBody();
       var el = document.getElementById(overlayId);
       if (el) {
@@ -436,10 +457,18 @@
       if (shouldReleaseBodyScroll()) document.body.style.overflow = '';
     }
 
+    function toggleEditingZones() {
+      editingZones = !editingZones;
+      renderOrderListBody();
+      return editingZones;
+    }
+
+    function isEditingZones() {
+      return editingZones;
+    }
+
     function copyOrderListText() {
-      var lines = buildOrderLinesFlat().filter(function (l) {
-        return l.included;
-      });
+      var lines = buildOrderLinesFlat();
       var byZone = { freezer: [], coldroom: [], drystore: [], other: [] };
       lines.forEach(function (l) {
         var z = ZONE_ORDER.indexOf(l.zone) >= 0 ? l.zone : 'other';
@@ -455,15 +484,11 @@
         text += ZONE_LABELS[z].toUpperCase() + '\n';
         arr.forEach(function (l) {
           var q = String(l.orderQty || '').trim() || '(set order qty)';
-          text += '- ' + l.item + ': ' + q;
-          if (l.kind === 'recipe' && l.recipeQtyDisplay && l.recipeQtyDisplay !== '—') {
-            text += ' (recipe: ' + l.recipeQtyDisplay + ')';
-          }
-          text += '\n';
+          text += '- ' + l.item + ': ' + q + '\n';
         });
         text += '\n';
       });
-      var out = text.trim() || '(nothing included — tick checkboxes or add lines)';
+      var out = text.trim() || '(nothing to copy — add recipes or lines)';
       navigator.clipboard.writeText(out).then(function () {
         alert('Order list copied');
       });
@@ -511,6 +536,8 @@
       copyMasterIngredientsJson: copyMasterIngredientsJson,
       submitOrderListAdd: submitOrderListAdd,
       buildOrderLinesFlat: buildOrderLinesFlat,
+      toggleEditingZones: toggleEditingZones,
+      isEditingZones: isEditingZones,
     };
   }
 
