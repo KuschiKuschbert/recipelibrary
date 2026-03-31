@@ -471,6 +471,11 @@
     max-width: min(720px, calc(100vw - 48px));
     max-width: min(720px, calc(100cqi - 48px));
   }
+  /* Compact strip for Flavor / Aroma / Atlas / Pantry */
+  .hero-lookup-split.expanded .hero-books-panel {
+    max-width: min(440px, calc(100vw - 48px));
+    max-width: min(440px, calc(100cqi - 48px));
+  }
   .hero-books-panel.hero-add-pair .hero-nav-link,
   .hero-books-panel.hero-add-pair .hero-nav-link:first-of-type,
   .hero-books-panel.hero-add-pair .hero-nav-link:last-of-type {
@@ -509,10 +514,17 @@
         </div>
       </div>
       <button type="button" class="hero-nav-link" onclick="openPageQrModal()" title="QR code to open this page on your phone">QR</button>
-      <a href="aroma.html" class="hero-nav-link">Aroma</a>
-      <a href="flavor.html" class="hero-nav-link">Flavor</a>
-      <a href="pairing-atlas.html" class="hero-nav-link">Atlas</a>
-      <a href="pantry.html" class="hero-nav-link">Pantry</a>
+      <div class="hero-add-split hero-books-split hero-lookup-split" id="heroLookupSplit">
+        <div class="hero-add-inner">
+          <button type="button" class="hero-nav-link hero-add-trigger" id="heroLookupTrigger" aria-expanded="false" aria-controls="heroLookupPanel" onclick="event.stopPropagation(); toggleHeroLookupSplit();">Flavor &amp; aroma <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+          <div class="hero-add-pair hero-books-panel" id="heroLookupPanel" role="group" aria-label="Flavor, aroma, atlas, and pantry tools" aria-hidden="true">
+            <a href="flavor.html" class="hero-nav-link" onclick="event.stopPropagation(); closeHeroLookupSplit();">Flavor</a>
+            <a href="aroma.html" class="hero-nav-link" onclick="event.stopPropagation(); closeHeroLookupSplit();">Aroma</a>
+            <a href="pairing-atlas.html" class="hero-nav-link" onclick="event.stopPropagation(); closeHeroLookupSplit();">Atlas</a>
+            <a href="pantry.html" class="hero-nav-link" onclick="event.stopPropagation(); closeHeroLookupSplit();">Pantry</a>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="hero-add-split hero-books-split" id="heroBooksSplit">
       <div class="hero-add-inner">
@@ -948,6 +960,8 @@ document.addEventListener('keydown', e => {
       closeModal();
     } else if (document.getElementById('heroAddSplit') && document.getElementById('heroAddSplit').classList.contains('expanded')) {
       closeHeroAddSplit();
+    } else if (document.getElementById('heroLookupSplit') && document.getElementById('heroLookupSplit').classList.contains('expanded')) {
+      closeHeroLookupSplit();
     } else if (document.getElementById('heroBooksSplit') && !document.getElementById('heroBooksSplit').hidden && document.getElementById('heroBooksSplit').classList.contains('expanded')) {
       closeHeroBooksSplit();
     } else {
@@ -960,6 +974,10 @@ document.addEventListener('click', (e) => {
   const split = document.getElementById('heroAddSplit');
   if (split && split.classList.contains('expanded') && !split.contains(e.target)) {
     closeHeroAddSplit();
+  }
+  const lookupSplit = document.getElementById('heroLookupSplit');
+  if (lookupSplit && lookupSplit.classList.contains('expanded') && !lookupSplit.contains(e.target)) {
+    closeHeroLookupSplit();
   }
   const booksSplit = document.getElementById('heroBooksSplit');
   if (booksSplit && !booksSplit.hidden && booksSplit.classList.contains('expanded') && !booksSplit.contains(e.target)) {
@@ -1446,7 +1464,10 @@ function toggleHeroAddSplit() {
   const t = document.getElementById('heroAddTrigger');
   if (!el || !t) return;
   const open = el.classList.toggle('expanded');
-  if (open) closeHeroBooksSplit();
+  if (open) {
+    closeHeroBooksSplit();
+    closeHeroLookupSplit();
+  }
   t.setAttribute('aria-expanded', open ? 'true' : 'false');
   syncHeroAddPairA11y(open);
 }
@@ -1467,6 +1488,37 @@ function heroPickAddRecipe() {
 function heroPickAddKitchenBook() {
   closeHeroAddSplit();
   openAddKitchenBookModal();
+}
+
+function syncHeroLookupPanelA11y(expanded) {
+  const pair = document.getElementById('heroLookupPanel');
+  const t = document.getElementById('heroLookupTrigger');
+  if (pair) {
+    pair.setAttribute('aria-hidden', expanded ? 'false' : 'true');
+    pair.querySelectorAll('a').forEach((a) => {
+      if (expanded) a.removeAttribute('tabindex');
+      else a.setAttribute('tabindex', '-1');
+    });
+  }
+  if (t) t.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+}
+
+function closeHeroLookupSplit() {
+  const el = document.getElementById('heroLookupSplit');
+  if (el) el.classList.remove('expanded');
+  syncHeroLookupPanelA11y(false);
+}
+
+function toggleHeroLookupSplit() {
+  const el = document.getElementById('heroLookupSplit');
+  const t = document.getElementById('heroLookupTrigger');
+  if (!el || !t) return;
+  const open = el.classList.toggle('expanded');
+  if (open) {
+    closeHeroAddSplit();
+    closeHeroBooksSplit();
+  }
+  syncHeroLookupPanelA11y(open);
 }
 
 function syncHeroBooksPanelA11y(expanded) {
@@ -1493,13 +1545,17 @@ function toggleHeroBooksSplit() {
   const t = document.getElementById('heroBooksTrigger');
   if (!el || !t || el.hidden) return;
   const open = el.classList.toggle('expanded');
-  if (open) closeHeroAddSplit();
+  if (open) {
+    closeHeroAddSplit();
+    closeHeroLookupSplit();
+  }
   syncHeroBooksPanelA11y(open);
 }
 
 function openAddRecipeModal() {
   closeHeroAddSplit();
   closeHeroBooksSplit();
+  closeHeroLookupSplit();
   document.getElementById('addRecipeOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
   document.getElementById('arIngRows').innerHTML = '';
@@ -1640,6 +1696,7 @@ function refreshCustomBookNav() {
 function openAddKitchenBookModal() {
   closeHeroAddSplit();
   closeHeroBooksSplit();
+  closeHeroLookupSplit();
   const o = document.getElementById('addKitchenBookOverlay');
   const inp = document.getElementById('newKitchenBookName');
   if (inp) inp.value = '';
@@ -1675,6 +1732,7 @@ function submitNewKitchenBook() {
 function openPageQrModal() {
   closeHeroAddSplit();
   closeHeroBooksSplit();
+  closeHeroLookupSplit();
   const overlay = document.getElementById('pageQrOverlay');
   const wrap = document.getElementById('pageQrCanvasWrap');
   const urlP = document.getElementById('pageQrUrl');
