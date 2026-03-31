@@ -483,7 +483,7 @@
     <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Grouped as Freezer, Cold room, Dry store, then Other. Same ingredient names merge into one row. Use <strong>Edit storage zones</strong> when you need to move lines. Storage and order data for <strong>this book only</strong> — separate from Riviera and other kitchen books.</p>
     <div id="kbOrderListBody"></div>
     <div class="modal-section" style="margin-top:20px">Add ingredient</div>
-    <p class="order-add-hint">Saves to this book’s master ingredient list (default zone for matching names) and adds a line to this book’s order.</p>
+    <p class="order-add-hint">Remembers this ingredient for next time in this book (same name → same storage) and adds a line to this book’s order.</p>
     <div class="form-row"><label for="kbOrdNewName">Name</label><input id="kbOrdNewName" type="text" placeholder="e.g. Sumac" autocomplete="off" /></div>
     <div class="form-row"><label for="kbOrdNewZone">Storage</label>
       <select id="kbOrdNewZone">
@@ -494,12 +494,12 @@
       </select>
     </div>
     <div class="form-row"><label for="kbOrdNewQty">Order quantity</label><input id="kbOrdNewQty" type="text" placeholder="e.g. 2 kg" autocomplete="off" /></div>
-    <button type="button" class="btn-secondary" onclick="submitKitchenBookOrderListAdd()">Add to master &amp; list</button>
+    <button type="button" class="btn-secondary" onclick="submitKitchenBookOrderListAdd()">Remember for next time &amp; add</button>
     <div class="order-actions">
       <button type="button" class="btn-secondary" id="kbOrdZoneEditBtn" onclick="toggleKitchenBookOrderListEditingZones()">Edit storage zones</button>
       <button type="button" class="btn-secondary" onclick="copyKitchenBookOrderListText()">Copy as text</button>
       <button type="button" class="btn-secondary" onclick="copyKitchenBookOrderBundleJson()">Copy order data JSON</button>
-      <button type="button" class="btn-secondary" onclick="copyKitchenBookMasterIngredientsJson()">Copy master ingredients JSON</button>
+      <button type="button" class="btn-secondary" onclick="copyKitchenBookMasterIngredientsJson()">Copy remembered ingredients (JSON)</button>
     </div>
   </div>
 </div>

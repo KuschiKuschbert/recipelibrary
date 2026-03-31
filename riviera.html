@@ -485,7 +485,7 @@
     <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Grouped as Freezer, Cold room, Dry store, then Other. The same ingredient name is merged into one row even when recipes use different storage; the row sits under the most common zone. Use <strong>Edit storage zones</strong> when you need to move lines between areas.</p>
     <div id="orderListBody"></div>
     <div class="modal-section" style="margin-top:20px">Add ingredient</div>
-    <p class="order-add-hint">Saves to your master ingredient list (default zone for matching names) and adds a line to this order.</p>
+    <p class="order-add-hint">Remembers this ingredient for next time (same name → same storage) and adds a line to this order.</p>
     <div class="form-row"><label for="ordNewName">Name</label><input id="ordNewName" type="text" placeholder="e.g. Sumac" autocomplete="off" /></div>
     <div class="form-row"><label for="ordNewZone">Storage</label>
       <select id="ordNewZone">
@@ -496,12 +496,12 @@
       </select>
     </div>
     <div class="form-row"><label for="ordNewQty">Order quantity</label><input id="ordNewQty" type="text" placeholder="e.g. 2 kg" autocomplete="off" /></div>
-    <button type="button" class="btn-secondary" onclick="submitOrderListAdd()">Add to master &amp; list</button>
+    <button type="button" class="btn-secondary" onclick="submitOrderListAdd()">Remember for next time &amp; add</button>
     <div class="order-actions">
       <button type="button" class="btn-secondary" id="rivieraOrdZoneEditBtn" onclick="toggleRivieraOrderListEditingZones()">Edit storage zones</button>
       <button type="button" class="btn-secondary" onclick="copyOrderListText()">Copy as text</button>
       <button type="button" class="btn-secondary" onclick="copyOrderBundleJson()">Copy order data JSON</button>
-      <button type="button" class="btn-secondary" onclick="copyMasterIngredientsJson()">Copy master ingredients JSON</button>
+      <button type="button" class="btn-secondary" onclick="copyMasterIngredientsJson()">Copy remembered ingredients (JSON)</button>
     </div>
   </div>
 </div>

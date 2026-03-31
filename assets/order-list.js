@@ -645,7 +645,7 @@
     function copyMasterIngredientsJson() {
       if (!storage.exportMaster) return;
       navigator.clipboard.writeText(storage.exportMaster()).then(function () {
-        alert('Master ingredients JSON copied');
+        alert('Remembered ingredients JSON copied');
       });
     }
 
