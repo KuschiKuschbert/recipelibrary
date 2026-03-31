@@ -42,6 +42,19 @@
       });
   }
 
+  function parseUnifiedPayload(raw) {
+    if (Array.isArray(raw)) {
+      return { ingredients: raw, kitchen_context: null };
+    }
+    if (raw && typeof raw === 'object' && Array.isArray(raw.ingredients)) {
+      return {
+        ingredients: raw.ingredients,
+        kitchen_context: raw.kitchen_context && typeof raw.kitchen_context === 'object' ? raw.kitchen_context : null,
+      };
+    }
+    return { ingredients: [], kitchen_context: null };
+  }
+
   function ensureUnifiedLoaded() {
     if (unifiedFlavors) return Promise.resolve({ unified: unifiedFlavors, cuisine: cuisineMap });
     if (unifiedPromise) return unifiedPromise;
@@ -61,8 +74,13 @@
           return {};
         }),
     ]).then(function (pair) {
-      unifiedFlavors = Array.isArray(pair[0]) ? pair[0] : [];
-      cuisineMap = pair[1] && typeof pair[1] === 'object' ? pair[1] : {};
+      var parsed = parseUnifiedPayload(pair[0]);
+      unifiedFlavors = parsed.ingredients;
+      if (parsed.kitchen_context && parsed.kitchen_context.cuisine_map && typeof parsed.kitchen_context.cuisine_map === 'object') {
+        cuisineMap = parsed.kitchen_context.cuisine_map;
+      } else {
+        cuisineMap = pair[1] && typeof pair[1] === 'object' ? pair[1] : {};
+      }
       unifiedByNormName = Object.create(null);
       for (var ui = 0; ui < unifiedFlavors.length; ui++) {
         var row = unifiedFlavors[ui];

@@ -15,6 +15,7 @@
     ingredients: [],
     byId: {},
     unifiedById: null,
+    kitchenContext: null,
     pairingMatrix: null,
     foodPairings: null,
     enriched: false,
@@ -230,6 +231,74 @@
     return '<table class="pa-matrix" id="paSpiceMatrix">' + thead + '<tbody id="paSpiceTbody">' + body + '</tbody></table>';
   }
 
+  function kitchenContextSnippetHtml() {
+    var kc = state.kitchenContext;
+    if (!kc) return '';
+    var chunks = [];
+    var sf = kc.sfah && kc.sfah.four_elements;
+    if (sf && typeof sf === 'object') {
+      var keys = Object.keys(sf);
+      if (keys.length) {
+        chunks.push('<p class="pa-small"><strong>SFAH (four elements)</strong> — ');
+        chunks.push(
+          keys
+            .map(function (k) {
+              return '<em>' + esc(k) + '</em>: ' + esc(String(sf[k]));
+            })
+            .join(' · ')
+        );
+        chunks.push('</p>');
+      }
+    }
+    var sc = kc.science;
+    if (sc) {
+      var lines = [];
+      if (Array.isArray(sc.temperatures)) lines.push(sc.temperatures.length + ' reference temperatures');
+      if (Array.isArray(sc.tastant_indices)) lines.push(sc.tastant_indices.length + ' tastant index rows');
+      if (Array.isArray(sc.storage_timelines)) lines.push(sc.storage_timelines.length + ' storage timeline rows');
+      if (lines.length) {
+        chunks.push('<p class="pa-small"><strong>Science of Cooking extract</strong> — ' + lines.join('; ') + '</p>');
+      }
+    }
+    var supDials = kc.supplementary && kc.supplementary.seven_dials && kc.supplementary.seven_dials.dials;
+    if (supDials && typeof supDials === 'object') {
+      var dkeys = Object.keys(supDials);
+      if (dkeys.length) {
+        chunks.push('<p class="pa-small"><strong>Art of Flavor — seven dials</strong> — ');
+        chunks.push(
+          dkeys
+            .map(function (dk) {
+              return '<em>' + esc(dk) + '</em>';
+            })
+            .join(', ')
+        );
+        chunks.push('</p>');
+      }
+    }
+    var fm = kc.supplementary && kc.supplementary.fermentation_matrix;
+    if (fm && fm.categories && fm.categories.length) {
+      chunks.push(
+        '<p class="pa-small"><strong>Fermentation extract</strong> — categories: ' +
+          esc(fm.categories.join(', ')) +
+          '</p>'
+      );
+    }
+    if (kc.cuisine_map && typeof kc.cuisine_map === 'object') {
+      var ccount = Object.keys(kc.cuisine_map).length;
+      if (ccount) {
+        chunks.push(
+          '<p class="pa-small"><strong>SFAH cuisine profiles</strong> — ' + ccount + ' regions in bundle (fat / acid / salt / heat).</p>'
+        );
+      }
+    }
+    if (!chunks.length) return '';
+    return (
+      '<section class="pa-sec"><h4>Bundled library context</h4>' +
+      chunks.join('') +
+      '<p class="pa-small pa-muted">Included in <code>combined_data/ingredients_unified.json</code> (schema v2).</p></section>'
+    );
+  }
+
   function spiceDrawerHtml(ing) {
     var u = state.unifiedById ? state.unifiedById[ing.id] : null;
     var ar = u && u.aroma ? u.aroma : ing;
@@ -371,6 +440,9 @@
         '<section class="pa-sec"><p class="pa-muted">Not in Flavor Bible extract (unified).</p></section>'
       );
     }
+
+    var kcSnip = kitchenContextSnippetHtml();
+    if (kcSnip) parts.push(kcSnip);
 
     parts.push(
       '<p class="pa-drawer-foot"><a href="aroma.html?spice=' +
@@ -772,7 +844,17 @@
       }),
     ])
       .then(function (triple) {
-        var unified = Array.isArray(triple[0]) ? triple[0] : [];
+        var rawU = triple[0];
+        var unified;
+        var kctx = null;
+        if (Array.isArray(rawU)) {
+          unified = rawU;
+        } else if (rawU && typeof rawU === 'object' && Array.isArray(rawU.ingredients)) {
+          unified = rawU.ingredients;
+          kctx = rawU.kitchen_context && typeof rawU.kitchen_context === 'object' ? rawU.kitchen_context : null;
+        } else {
+          unified = [];
+        }
         var pm = triple[1] && typeof triple[1] === 'object' ? triple[1] : {};
         var fp = Array.isArray(triple[2]) ? triple[2] : [];
 
@@ -782,6 +864,7 @@
           if (row && row.id) ub[row.id] = row;
         }
         state.unifiedById = ub;
+        state.kitchenContext = kctx;
         state.pairingMatrix = pm;
         state.foodPairings = fp;
         state.enriched = true;

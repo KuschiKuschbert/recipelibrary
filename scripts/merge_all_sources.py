@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 """
-Merge aroma_data + flavor_data + thesaurus_data (+ optional sfah) → combined_data/*.json
+Merge aroma_data + flavor_data + thesaurus_data into combined_data/ingredients_unified.json.
+
+Output is a versioned object:
+  schema_version: 2
+  ingredients: [ ... merged rows ... ]
+  kitchen_context: optional bundle of sfah_data, science_data, supplementary_data JSON
+                     (global reference material, not per-ingredient)
+
+Also writes cuisine_map.json (same as kitchen_context.cuisine_map when present).
 """
 from __future__ import annotations
 
@@ -8,10 +16,19 @@ import json
 import os
 import re
 import sys
+from typing import Any, Optional
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.dirname(SCRIPT_DIR)
 OUT_DIR = os.path.join(REPO_ROOT, "combined_data")
+
+
+def _load_json_if_exists(rel_path: str) -> Optional[Any]:
+    path = os.path.join(REPO_ROOT, rel_path)
+    if not os.path.isfile(path):
+        return None
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
 
 
 def _norm(s: str) -> str:
@@ -138,16 +155,66 @@ def main() -> int:
         )
         seen_ids.add(aid)
 
+    # Bundle global notebook extracts (not keyed by ingredient id)
+    kitchen_context: dict[str, Any] = {}
+    if cuisine_map:
+        kitchen_context["cuisine_map"] = cuisine_map
+
+    sfah_bundle: dict[str, Any] = {}
+    for key, rel in (
+        ("acid_matrix", "sfah_data/acid_matrix.json"),
+        ("fat_matrix", "sfah_data/fat_matrix.json"),
+        ("four_elements", "sfah_data/four_elements.json"),
+    ):
+        data = _load_json_if_exists(rel)
+        if data is not None:
+            sfah_bundle[key] = data
+    if sfah_bundle:
+        kitchen_context["sfah"] = sfah_bundle
+
+    science_bundle: dict[str, Any] = {}
+    for key, rel in (
+        ("temperatures", "science_data/temperatures.json"),
+        ("tastant_indices", "science_data/tastant_indices.json"),
+        ("storage_timelines", "science_data/storage_timelines.json"),
+        ("nutrient_retention", "science_data/nutrient_retention.json"),
+    ):
+        data = _load_json_if_exists(rel)
+        if data is not None:
+            science_bundle[key] = data
+    if science_bundle:
+        kitchen_context["science"] = science_bundle
+
+    sup_bundle: dict[str, Any] = {}
+    for key, rel in (
+        ("seven_dials", "supplementary_data/seven_dials.json"),
+        ("fermentation_matrix", "supplementary_data/fermentation_matrix.json"),
+        ("intensity_scale", "supplementary_data/intensity_scale.json"),
+    ):
+        data = _load_json_if_exists(rel)
+        if data is not None:
+            sup_bundle[key] = data
+    if sup_bundle:
+        kitchen_context["supplementary"] = sup_bundle
+
+    payload = {
+        "schema_version": 2,
+        "ingredients": unified,
+        "kitchen_context": kitchen_context,
+    }
+
     os.makedirs(OUT_DIR, exist_ok=True)
     with open(os.path.join(OUT_DIR, "ingredients_unified.json"), "w", encoding="utf-8") as f:
-        json.dump(unified, f, ensure_ascii=False, indent=2)
+        json.dump(payload, f, ensure_ascii=False, indent=2)
     with open(os.path.join(OUT_DIR, "cuisine_map.json"), "w", encoding="utf-8") as f:
         json.dump(cuisine_map, f, ensure_ascii=False, indent=2)
 
     meta = {
+        "schema_version": 2,
         "unified_count": len(unified),
         "flavor_input": len(flavor),
         "aroma_input": len(aroma),
+        "kitchen_context_keys": sorted(kitchen_context.keys()),
     }
     with open(os.path.join(OUT_DIR, "merge_meta.json"), "w", encoding="utf-8") as f:
         json.dump(meta, f, indent=2)

@@ -31,6 +31,20 @@
       .replace(/"/g, '&quot;');
   }
 
+  /** schema v2 object { ingredients, kitchen_context } or legacy flat array */
+  function parseUnifiedPayload(raw) {
+    if (Array.isArray(raw)) {
+      return { ingredients: raw, kitchen_context: null };
+    }
+    if (raw && typeof raw === 'object' && Array.isArray(raw.ingredients)) {
+      return {
+        ingredients: raw.ingredients,
+        kitchen_context: raw.kitchen_context && typeof raw.kitchen_context === 'object' ? raw.kitchen_context : null,
+      };
+    }
+    return { ingredients: [], kitchen_context: null };
+  }
+
   function ensureLoaded() {
     if (unified) return Promise.resolve();
     if (loadP) return loadP;
@@ -53,24 +67,39 @@
         .catch(function () {
           return [];
         }),
-      fetch(SCIENCE_TEMPS)
-        .then(function (r) {
-          return r.ok ? r.json() : [];
-        })
-        .catch(function () {
-          return [];
-        }),
-    ]).then(function (arr) {
-      unified = arr[0];
-      wheel = arr[1];
-      pairings = arr[2];
-      temps = arr[3];
-      byName = Object.create(null);
-      for (var i = 0; i < unified.length; i++) {
-        var u = unified[i];
-        if (u && u.name) byName[norm(u.name)] = u;
-      }
-    });
+    ])
+      .then(function (arr) {
+        var parsed = parseUnifiedPayload(arr[0]);
+        unified = parsed.ingredients;
+        wheel = arr[1];
+        pairings = arr[2];
+        var emb =
+          parsed.kitchen_context &&
+          parsed.kitchen_context.science &&
+          parsed.kitchen_context.science.temperatures;
+        if (Array.isArray(emb) && emb.length) {
+          temps = emb;
+          return;
+        }
+        return fetch(SCIENCE_TEMPS)
+          .then(function (r) {
+            return r.ok ? r.json() : [];
+          })
+          .catch(function () {
+            return [];
+          })
+          .then(function (t) {
+            temps = t;
+          });
+      })
+      .then(function () {
+        if (!temps) temps = [];
+        byName = Object.create(null);
+        for (var i = 0; i < unified.length; i++) {
+          var u = unified[i];
+          if (u && u.name) byName[norm(u.name)] = u;
+        }
+      });
     return loadP;
   }
 
