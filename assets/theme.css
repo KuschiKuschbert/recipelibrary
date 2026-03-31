@@ -1261,15 +1261,39 @@ body {
 }
 
 /* aroma.html — heat timing (A → B → C from book extract) */
-.aroma-heat-legend {
+.aroma-heat-legend-wrap {
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--text2);
-  margin: 0 0 12px;
-  padding: 10px 12px;
+  margin: 0 0 14px;
+  padding: 12px 14px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   background: var(--surface);
+}
+.aroma-heat-legend-wrap p {
+  margin: 0 0 10px;
+}
+.aroma-heat-legend-wrap p:last-child {
+  margin-bottom: 0;
+}
+.aroma-heat-legend-muted {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text3);
+}
+.aroma-heat-legend {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text2);
+  margin: 0 0 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg2);
+}
+.aroma-heat-legend--compact {
+  margin-bottom: 8px;
 }
 .aroma-heat-stages {
   list-style: none;

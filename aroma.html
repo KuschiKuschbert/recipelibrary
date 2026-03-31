@@ -369,7 +369,7 @@
   </section>
 
   <section class="aroma-panel" id="panelSpice" role="tabpanel" hidden>
-    <p class="aroma-empty aroma-panel-lead">Search or tap a spice for harmony partners, foods, heat behavior, and aroma groups.</p>
+    <p class="aroma-empty aroma-panel-lead">Search or tap a spice for harmony partners, foods, and aroma groups. Where the extract includes it, <strong>heat timing (A → B → C)</strong> orders notes from the book for <em>early → middle → later</em> as cooking continues—orientation only, not minutes, degrees, or a rule for every dish.</p>
     <div class="aroma-results" id="spiceResults"></div>
     <div id="spiceProfile"></div>
   </section>
@@ -461,10 +461,16 @@
 
   function heatBehaviorLegendHtml() {
     return (
-      '<p class="aroma-heat-legend">' +
-      '<strong>A → B → C</strong> are progressive stages from the book’s heat and aroma notes (same source as this extract). ' +
-      'They are a rough guide to how the aroma tends to evolve during cooking—not exact temperatures or times.' +
-      '</p>'
+      '<div class="aroma-heat-legend-wrap" role="note">' +
+      '<p><strong>A → B → C</strong> are labels from the same book this extract comes from. They describe how the spice’s aroma or “behavior on the heat” is written as a <strong>sequence</strong>: what tends to show up <strong>earlier</strong> in cooking (<strong>A</strong>), what sits in a <strong>middle</strong> phase (<strong>B</strong>), and what is associated with <strong>later</strong> or more sustained / intense heat (<strong>C</strong>). The phrases below are shortened English from those notes.</p>' +
+      '<p class="aroma-heat-legend-muted">Use this as a mental map while you cook—<em>not</em> as exact minutes, Celsius/Fahrenheit, or a guarantee for every technique. Your pan, fat, grind, and quantity all shift how fast you move through any stage.</p>' +
+      '</div>'
+    );
+  }
+
+  function heatBehaviorLegendCompactHtml() {
+    return (
+      '<p class="aroma-heat-legend aroma-heat-legend--compact">A → B → C = book order for early → middle → later under heat; shortened text below—not clock times.</p>'
     );
   }
 
@@ -501,7 +507,11 @@
 
   function heatBehaviorBlockForPairModal(heat) {
     if (!heatBehaviorHasAny(heat)) return '';
-    return '<h4>Timing under heat</h4>' + heatBehaviorStagesHtml(heat, true);
+    return (
+      '<h4>Timing under heat (A → B → C)</h4>' +
+      heatBehaviorLegendCompactHtml() +
+      heatBehaviorStagesHtml(heat, true)
+    );
   }
 
   function showMode(m) {
