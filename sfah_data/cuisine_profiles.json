@@ -1,4 +1,18 @@
 {
+  "West Africa": {
+    "fats": [
+      "palm oil",
+      "coconut oil"
+    ],
+    "acids": [],
+    "salt": [
+      "sea salt",
+      "kosher salt"
+    ],
+    "heat_notes": [
+      "regional techniques vary"
+    ]
+  },
   "Mexico": {
     "fats": [
       "lard",
@@ -36,6 +50,38 @@
       "regional techniques vary"
     ]
   },
+  "Japan": {
+    "fats": [
+      "sesame oil",
+      "neutral oil"
+    ],
+    "acids": [
+      "rice vinegar",
+      "citrus",
+      "miso tang"
+    ],
+    "salt": [
+      "sea salt",
+      "kosher salt"
+    ],
+    "heat_notes": [
+      "regional techniques vary"
+    ]
+  },
+  "USA South": {
+    "fats": [
+      "butter",
+      "bacon fat"
+    ],
+    "acids": [],
+    "salt": [
+      "sea salt",
+      "kosher salt"
+    ],
+    "heat_notes": [
+      "regional techniques vary"
+    ]
+  },
   "Thailand": {
     "fats": [],
     "acids": [
@@ -65,12 +111,16 @@
       "regional techniques vary"
     ]
   },
-  "West Africa": {
+  "Italy": {
     "fats": [
-      "palm oil",
-      "coconut oil"
+      "olive oil",
+      "butter"
     ],
-    "acids": [],
+    "acids": [
+      "lemon",
+      "wine vinegar",
+      "tomatoes"
+    ],
     "salt": [
       "sea salt",
       "kosher salt"
@@ -90,56 +140,6 @@
       "lemon",
       "mustard"
     ],
-    "salt": [
-      "sea salt",
-      "kosher salt"
-    ],
-    "heat_notes": [
-      "regional techniques vary"
-    ]
-  },
-  "Japan": {
-    "fats": [
-      "sesame oil",
-      "neutral oil"
-    ],
-    "acids": [
-      "rice vinegar",
-      "citrus",
-      "miso tang"
-    ],
-    "salt": [
-      "sea salt",
-      "kosher salt"
-    ],
-    "heat_notes": [
-      "regional techniques vary"
-    ]
-  },
-  "Italy": {
-    "fats": [
-      "olive oil",
-      "butter"
-    ],
-    "acids": [
-      "lemon",
-      "wine vinegar",
-      "tomatoes"
-    ],
-    "salt": [
-      "sea salt",
-      "kosher salt"
-    ],
-    "heat_notes": [
-      "regional techniques vary"
-    ]
-  },
-  "USA South": {
-    "fats": [
-      "butter",
-      "bacon fat"
-    ],
-    "acids": [],
     "salt": [
       "sea salt",
       "kosher salt"
