@@ -131,17 +131,109 @@
     return hit >= 2 ? 2 : hit === 1 ? 1 : 0;
   }
 
+  /** English ↔ German (and common variants) so e.g. recipe "lamb" matches index row "Lamm, Gebraten". */
+  var FOOD_TOKEN_ALIASES = {
+    lamb: ['lamm', 'hammel', 'mutton', 'sheep'],
+    lamm: ['lamb', 'mutton', 'hammel'],
+    beef: ['rind', 'ox', 'veal', 'kalb', 'steer', 'cow'],
+    rind: ['beef', 'ox', 'cattle'],
+    veal: ['kalb', 'beef'],
+    kalb: ['veal'],
+    pork: ['schwein', 'swine', 'ham', 'bacon', 'speck'],
+    schwein: ['pork', 'swine'],
+    chicken: ['huhn', 'poultry', 'poulet', 'hen'],
+    huhn: ['chicken', 'poultry'],
+    turkey: ['pute', 'truthahn'],
+    fish: ['fisch', 'seafood'],
+    fisch: ['fish', 'seafood'],
+    duck: ['ente', 'canard'],
+    ente: ['duck'],
+    rice: ['reis'],
+    reis: ['rice'],
+    lentils: ['linsen'],
+    linsen: ['lentils'],
+    beans: ['bohnen'],
+    bohnen: ['beans'],
+    potato: ['kartoffel', 'potatoes'],
+    kartoffel: ['potato', 'potatoes'],
+    egg: ['ei', 'eggs'],
+    ei: ['egg', 'eggs'],
+    cheese: ['kase', 'kaese', 'fromage'],
+    mushroom: ['champignon', 'pilz', 'mushrooms'],
+    shrimp: ['garnele', 'prawn', 'prawns'],
+    citrus: ['zitrone', 'orange', 'lime', 'lemon'],
+  };
+
+  function aliasExpandedKeys(tok) {
+    var t = normKey(tok);
+    if (!t) return [t];
+    var out = {};
+    out[t] = true;
+    var al = FOOD_TOKEN_ALIASES[t];
+    if (al) {
+      for (var i = 0; i < al.length; i++) {
+        var k = normKey(al[i]);
+        if (k) out[k] = true;
+      }
+    }
+    for (var en in FOOD_TOKEN_ALIASES) {
+      if (!Object.prototype.hasOwnProperty.call(FOOD_TOKEN_ALIASES, en)) continue;
+      var arr = FOOD_TOKEN_ALIASES[en];
+      for (var j = 0; j < arr.length; j++) {
+        if (normKey(arr[j]) === t || en === t) {
+          out[normKey(en)] = true;
+          for (var k2 = 0; k2 < arr.length; k2++) out[normKey(arr[k2])] = true;
+        }
+      }
+    }
+    return Object.keys(out);
+  }
+
+  function anyAliasInString(keys, haystackNorm) {
+    for (var i = 0; i < keys.length; i++) {
+      if (!keys[i]) continue;
+      if (haystackNorm.indexOf(keys[i]) >= 0) return true;
+    }
+    return false;
+  }
+
   function matchFoodPairing(lineKey, lineToks, fp) {
-    var fk = normKey(fp.name || '');
+    var rawName = typeof fp === 'string' ? fp : fp.name || '';
+    var fk = normKey(rawName);
     if (!fk) return false;
     if (lineKey === fk || lineKey.indexOf(fk) >= 0 || fk.indexOf(lineKey) >= 0) return true;
-    var ft = tokens(fp.name);
+    var ft = tokens(rawName);
     for (var i = 0; i < ft.length; i++) {
       for (var j = 0; j < lineToks.length; j++) {
         if (ft[i] === lineToks[j]) return true;
+        var expL = aliasExpandedKeys(lineToks[j]);
+        var expF = aliasExpandedKeys(ft[i]);
+        for (var a = 0; a < expL.length; a++) {
+          for (var b = 0; b < expF.length; b++) {
+            if (expL[a] && expL[a] === expF[b]) return true;
+          }
+        }
       }
     }
+    for (var j2 = 0; j2 < lineToks.length; j2++) {
+      if (anyAliasInString(aliasExpandedKeys(lineToks[j2]), fk)) return true;
+    }
+    for (var i2 = 0; i2 < ft.length; i2++) {
+      if (anyAliasInString(aliasExpandedKeys(ft[i2]), lineKey)) return true;
+    }
     return false;
+  }
+
+  function foodPairingMatchesQuery(queryStr, fp) {
+    var q = String(queryStr || '').trim();
+    if (!q) return false;
+    return matchFoodPairing(normKey(q), tokens(q), fp);
+  }
+
+  function ingredientFoodPhraseMatchesQuery(queryStr, phrase) {
+    var q = String(queryStr || '').trim();
+    if (!q || !phrase) return false;
+    return matchFoodPairing(normKey(q), tokens(q), { name: phrase });
   }
 
   /**
@@ -186,6 +278,19 @@
           var seas = fp.seasonings || [];
           for (var s = 0; s < seas.length; s++) {
             add(seasonId(seas[s]), 2.5);
+          }
+        }
+      }
+
+      for (var ii = 0; ii < ingredients.length; ii++) {
+        var ingP = ingredients[ii];
+        var pfs = ingP && ingP.pairs_with_foods;
+        if (!Array.isArray(pfs)) continue;
+        for (var pi = 0; pi < pfs.length; pi++) {
+          if (matchFoodPairing(lineKey, lineToks, { name: pfs[pi] })) {
+            add(ingP.id, 2);
+            matchedSpiceIds.push(ingP.id);
+            break;
           }
         }
       }
@@ -399,6 +504,8 @@
     normKey: normKey,
     recipeLinesForHints: recipeLinesForHints,
     buildSuggestions: buildSuggestions,
+    foodPairingMatchesQuery: foodPairingMatchesQuery,
+    ingredientFoodPhraseMatchesQuery: ingredientFoodPhraseMatchesQuery,
     seasoningSectionHtml: seasoningSectionHtml,
     hydrateModal: hydrateModal,
     addRecipePanelHtml: addRecipePanelHtml,

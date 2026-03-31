@@ -1,7 +1,7 @@
 [
   {
-    "id": "gartengurken",
-    "name": "Gartengurken",
+    "id": "garden-cucumbers",
+    "name": "Garden Cucumbers",
     "_de": "GARTENGURKEN",
     "seasonings": [
       {
@@ -55,8 +55,8 @@
         "_de": "Gewürzfenchel"
       },
       {
-        "id": "haselnuesse",
-        "name": "Haselnüsse",
+        "id": "hazelnuts",
+        "name": "Hazelnuts",
         "_de": "Haselnüsse"
       },
       {
@@ -253,7 +253,7 @@
       },
       {
         "id": "olives",
-        "name": "olives",
+        "name": "Olives",
         "_de": "Oliven"
       },
       {
@@ -340,7 +340,7 @@
     "seasonings": [
       {
         "id": "wakame",
-        "name": "Wakame)",
+        "name": "Wakame",
         "_de": "Wakame)"
       },
       {
@@ -354,18 +354,18 @@
         "_de": "Annatto"
       },
       {
-        "id": "kaese",
-        "name": "käse)",
+        "id": "cheese",
+        "name": "Cheese",
         "_de": "käse)"
       },
       {
-        "id": "ziegenkaese",
-        "name": "Ziegenkäse)",
+        "id": "goat-cheese",
+        "name": "Goat Cheese",
         "_de": "Ziegenkäse)"
       },
       {
         "id": "mountain-cumin",
-        "name": "Mountain cumin",
+        "name": "Mountain Cumin",
         "_de": "Bergkümmel"
       },
       {
@@ -385,7 +385,7 @@
       },
       {
         "id": "mel",
-        "name": "mel)",
+        "name": "Mel",
         "_de": "mel)"
       },
       {
@@ -459,8 +459,8 @@
         "_de": "Salbei"
       },
       {
-        "id": "frischkaese",
-        "name": "frischkäse)",
+        "id": "cream-cheese",
+        "name": "Cream Cheese",
         "_de": "frischkäse)"
       },
       {
@@ -469,8 +469,8 @@
         "_de": "Senf (Mostarda)"
       },
       {
-        "id": "ueberbacken",
-        "name": "(überbacken)",
+        "id": "baked-topping",
+        "name": "Baked Topping",
         "_de": "(überbacken)"
       },
       {
@@ -490,7 +490,7 @@
       },
       {
         "id": "net",
-        "name": "net)",
+        "name": "Net",
         "_de": "net)"
       },
       {
@@ -754,7 +754,7 @@
       },
       {
         "id": "grains-of-paradise",
-        "name": "Grains of Paradise",
+        "name": "Grains Of Paradise",
         "_de": "Paradieskörner"
       },
       {
@@ -821,7 +821,7 @@
   },
   {
     "id": "kichererbsen",
-    "name": "Kichererbsen",
+    "name": "KICHERERBSEN",
     "_de": "KICHERERBSEN",
     "seasonings": [
       {
@@ -930,20 +930,20 @@
         "_de": "Zimt"
       },
       {
-        "id": "zitronenschale",
-        "name": "Zitronenschale",
+        "id": "lemon-zest",
+        "name": "Lemon Zest",
         "_de": "Zitronenschale"
       }
     ]
   },
   {
     "id": "romanesko",
-    "name": "Romanesko",
+    "name": "ROMANESKO",
     "_de": "ROMANESKO",
     "seasonings": [
       {
-        "id": "arganoel",
-        "name": "Arganöl",
+        "id": "argan-oil",
+        "name": "Argan Oil",
         "_de": "Arganöl"
       },
       {
@@ -1013,7 +1013,7 @@
       },
       {
         "id": "tet",
-        "name": "tet)",
+        "name": "Tet",
         "_de": "tet)"
       },
       {
@@ -1033,14 +1033,14 @@
       },
       {
         "id": "w-a-s-p-a-s-s-t-w-o-z-u",
-        "name": "W A S  P A S S T  W O Z U ?",
+        "name": "W A S P A S S T W O Z U ?",
         "_de": "W A S  P A S S T  W O Z U ?"
       }
     ]
   },
   {
     "id": "red-cabbage",
-    "name": "red cabbage",
+    "name": "Red Cabbage",
     "_de": "ROTKOHL",
     "seasonings": [
       {
@@ -1050,7 +1050,7 @@
       },
       {
         "id": "net",
-        "name": "net)",
+        "name": "Net",
         "_de": "net)"
       },
       {
@@ -1145,7 +1145,7 @@
       },
       {
         "id": "wein-essig",
-        "name": "(Wein)essig",
+        "name": "Wein)essig",
         "_de": "(Wein)essig"
       },
       {
@@ -1167,7 +1167,7 @@
   },
   {
     "id": "weisskohl",
-    "name": "Weisskohl",
+    "name": "WEISSKOHL",
     "_de": "WEISSKOHL",
     "seasonings": [
       {
@@ -1237,7 +1237,7 @@
       },
       {
         "id": "grains-of-paradise",
-        "name": "Grains of Paradise",
+        "name": "Grains Of Paradise",
         "_de": "Paradieskörner"
       },
       {
@@ -1271,8 +1271,8 @@
         "_de": "Vanille"
       },
       {
-        "id": "walnussoel",
-        "name": "Walnussöl",
+        "id": "walnut-oil",
+        "name": "Walnut Oil",
         "_de": "Walnussöl"
       },
       {
@@ -1331,7 +1331,7 @@
   },
   {
     "id": "squash",
-    "name": "squash",
+    "name": "Squash",
     "_de": "KÜRBIS",
     "seasonings": [
       {
@@ -1340,8 +1340,8 @@
         "_de": "Anis"
       },
       {
-        "id": "arganoel",
-        "name": "Arganöl",
+        "id": "argan-oil",
+        "name": "Argan Oil",
         "_de": "Arganöl"
       },
       {
@@ -1391,7 +1391,7 @@
       },
       {
         "id": "chestnuts",
-        "name": "chestnuts",
+        "name": "Chestnuts",
         "_de": "Maronen"
       },
       {
@@ -1410,8 +1410,8 @@
         "_de": "Zitronensaft"
       },
       {
-        "id": "zitronenschale",
-        "name": "Zitronenschale",
+        "id": "lemon-zest",
+        "name": "Lemon Zest",
         "_de": "Zitronenschale"
       },
       {
@@ -1422,13 +1422,13 @@
     ]
   },
   {
-    "id": "lamm-gebraten",
-    "name": "Lamm, Gebraten",
+    "id": "roasted-lamb",
+    "name": "Roasted Lamb",
     "_de": "LAMM, GEBRATEN",
     "seasonings": [
       {
         "id": "net",
-        "name": "net)",
+        "name": "Net",
         "_de": "net)"
       },
       {
@@ -1569,8 +1569,8 @@
     ]
   },
   {
-    "id": "leber-gebraten",
-    "name": "Leber, Gebraten",
+    "id": "roasted-liver",
+    "name": "Roasted Liver",
     "_de": "LEBER, GEBRATEN",
     "seasonings": [
       {
@@ -1624,13 +1624,13 @@
         "_de": "Piment"
       },
       {
-        "id": "pistazienoel",
-        "name": "Pistazienöl",
+        "id": "pistachio-oil",
+        "name": "Pistachio Oil",
         "_de": "Pistazienöl"
       },
       {
         "id": "salbei-kalbsleber-1",
-        "name": "Salbei (Kalbsleber) 1",
+        "name": "Salbei (kalbsleber) 1",
         "_de": "Salbei (Kalbsleber) 1"
       },
       {
@@ -1644,15 +1644,15 @@
         "_de": "Trüffel"
       },
       {
-        "id": "leber",
-        "name": "leber)",
+        "id": "liver",
+        "name": "Liver",
         "_de": "leber)"
       }
     ]
   },
   {
-    "id": "linsen-puylinsen",
-    "name": "Linsen, Puylinsen",
+    "id": "lentils-puylinsen",
+    "name": "Lentils, Puylinsen",
     "_de": "LINSEN, PUYLINSEN",
     "seasonings": [
       {
@@ -1896,7 +1896,7 @@
       },
       {
         "id": "mischungen",
-        "name": "Mischungen)",
+        "name": "Mischungen",
         "_de": "Mischungen)"
       },
       {
@@ -1922,8 +1922,8 @@
     ]
   },
   {
-    "id": "gruetze",
-    "name": "Grütze",
+    "id": "fruit-semolina-pudding",
+    "name": "Fruit Semolina Pudding",
     "_de": "GRÜTZE",
     "seasonings": [
       {
@@ -1993,7 +1993,7 @@
       },
       {
         "id": "olive-oil",
-        "name": "olive oil",
+        "name": "Olive Oil",
         "_de": "Olivenöl"
       },
       {
@@ -2067,15 +2067,15 @@
         "_de": "Zimt"
       },
       {
-        "id": "geroestet",
-        "name": "geröstet)",
+        "id": "toasted",
+        "name": "Toasted",
         "_de": "geröstet)"
       }
     ]
   },
   {
     "id": "seafood",
-    "name": "seafood",
+    "name": "Seafood",
     "_de": "MEERESFRÜCHTE",
     "seasonings": [
       {
@@ -2227,7 +2227,7 @@
   },
   {
     "id": "milk",
-    "name": "milk",
+    "name": "Milk",
     "_de": "MILCH",
     "seasonings": [
       {
@@ -2237,7 +2237,7 @@
       },
       {
         "id": "net",
-        "name": "net)",
+        "name": "Net",
         "_de": "net)"
       },
       {
@@ -2262,7 +2262,7 @@
       },
       {
         "id": "tet",
-        "name": "tet)",
+        "name": "Tet",
         "_de": "tet)"
       },
       {
@@ -2352,7 +2352,7 @@
       },
       {
         "id": "olive-oil",
-        "name": "olive oil",
+        "name": "Olive Oil",
         "_de": "Olivenöl"
       },
       {
@@ -2362,7 +2362,7 @@
       },
       {
         "id": "ben",
-        "name": "ben)",
+        "name": "Ben",
         "_de": "ben)"
       },
       {
@@ -2387,7 +2387,7 @@
       },
       {
         "id": "tomatoes",
-        "name": "tomatoes",
+        "name": "Tomatoes",
         "_de": "Tomaten (getrocknet)"
       },
       {
@@ -2424,7 +2424,7 @@
   },
   {
     "id": "ermilch-dickmilch",
-    "name": "Ermilch, Dickmilch",
+    "name": "ERMILCH, DICKMILCH",
     "_de": "ERMILCH, DICKMILCH",
     "seasonings": [
       {
@@ -2434,7 +2434,7 @@
       },
       {
         "id": "net",
-        "name": "net)",
+        "name": "Net",
         "_de": "net)"
       },
       {
@@ -2454,7 +2454,7 @@
       },
       {
         "id": "tet",
-        "name": "tet)",
+        "name": "Tet",
         "_de": "tet)"
       },
       {
@@ -2463,8 +2463,8 @@
         "_de": "Champignon"
       },
       {
-        "id": "gewuerze-mischung",
-        "name": "Gewürze-Mischung",
+        "id": "spice-blend",
+        "name": "Spice Blend",
         "_de": "Gewürze-Mischung"
       },
       {
@@ -2608,8 +2608,8 @@
         "_de": "Yuzu"
       },
       {
-        "id": "zitronenschale",
-        "name": "Zitronenschale",
+        "id": "lemon-zest",
+        "name": "Lemon Zest",
         "_de": "Zitronenschale"
       },
       {
@@ -2621,7 +2621,7 @@
   },
   {
     "id": "nieren",
-    "name": "Nieren",
+    "name": "NIEREN",
     "_de": "NIEREN",
     "seasonings": [
       {
@@ -2764,8 +2764,8 @@
     ]
   },
   {
-    "id": "salate-mole",
-    "name": "Salate, Mole",
+    "id": "salads-mole",
+    "name": "Salads, Mole",
     "_de": "SALATE, MOLE",
     "seasonings": [
       {
@@ -2810,7 +2810,7 @@
       },
       {
         "id": "net",
-        "name": "net)",
+        "name": "Net",
         "_de": "net)"
       },
       {
@@ -2910,7 +2910,7 @@
       },
       {
         "id": "wasser",
-        "name": "wasser",
+        "name": "Wasser",
         "_de": "wasser"
       },
       {
@@ -2955,7 +2955,7 @@
       },
       {
         "id": "tomatoes",
-        "name": "tomatoes",
+        "name": "Tomatoes",
         "_de": "Tomaten (getrocknet)"
       },
       {
@@ -2965,7 +2965,7 @@
       },
       {
         "id": "gin",
-        "name": "Gin)",
+        "name": "Gin",
         "_de": "Gin)"
       },
       {
@@ -2995,7 +2995,7 @@
       },
       {
         "id": "schale",
-        "name": "schale",
+        "name": "Schale",
         "_de": "schale"
       },
       {
@@ -3129,7 +3129,7 @@
       },
       {
         "id": "net",
-        "name": "net)",
+        "name": "Net",
         "_de": "net)"
       },
       {
@@ -3219,7 +3219,7 @@
       },
       {
         "id": "oranges",
-        "name": "oranges",
+        "name": "Oranges",
         "_de": "Orangen"
       },
       {
@@ -3285,8 +3285,8 @@
     ]
   },
   {
-    "id": "rind-gekocht",
-    "name": "Rind, Gekocht",
+    "id": "beef-gekocht",
+    "name": "Beef, Gekocht",
     "_de": "RIND, GEKOCHT",
     "seasonings": [
       {
@@ -3301,7 +3301,7 @@
       },
       {
         "id": "net",
-        "name": "net)",
+        "name": "Net",
         "_de": "net)"
       },
       {
@@ -3398,7 +3398,7 @@
   },
   {
     "id": "gerichte",
-    "name": "Gerichte",
+    "name": "GERICHTE",
     "_de": "GERICHTE",
     "seasonings": [
       {
@@ -3408,7 +3408,7 @@
       },
       {
         "id": "net",
-        "name": "net)",
+        "name": "Net",
         "_de": "net)"
       },
       {
@@ -3422,8 +3422,8 @@
         "_de": "Bergamotte"
       },
       {
-        "id": "blauschimmelkaese",
-        "name": "Blauschimmelkäse",
+        "id": "blue-cheese",
+        "name": "Blue Cheese",
         "_de": "Blauschimmelkäse"
       },
       {
@@ -3503,7 +3503,7 @@
       },
       {
         "id": "olive-oil",
-        "name": "olive oil",
+        "name": "Olive Oil",
         "_de": "Olivenöl"
       },
       {
@@ -3567,15 +3567,15 @@
         "_de": "Zimt"
       },
       {
-        "id": "zitronenschale",
-        "name": "Zitronenschale",
+        "id": "lemon-zest",
+        "name": "Lemon Zest",
         "_de": "Zitronenschale"
       }
     ]
   },
   {
-    "id": "roasted",
-    "name": "roasted",
+    "id": "roasted-dishes",
+    "name": "Roasted dishes",
     "_de": "GEBRATEN",
     "seasonings": [
       {
@@ -3727,7 +3727,7 @@
       },
       {
         "id": "ter",
-        "name": "ter)",
+        "name": "Ter",
         "_de": "ter)"
       },
       {
@@ -3817,7 +3817,7 @@
       },
       {
         "id": "w-a-s-p-a-s-s-t-w-o-z-u",
-        "name": "W A S  P A S S T  W O Z U ?",
+        "name": "W A S P A S S T W O Z U ?",
         "_de": "W A S  P A S S T  W O Z U ?"
       }
     ]
@@ -3886,7 +3886,7 @@
       },
       {
         "id": "net",
-        "name": "net)",
+        "name": "Net",
         "_de": "net)"
       },
       {
@@ -3991,7 +3991,7 @@
       },
       {
         "id": "olive-oil",
-        "name": "olive oil",
+        "name": "Olive Oil",
         "_de": "Olivenöl"
       },
       {
@@ -4078,7 +4078,7 @@
   },
   {
     "id": "tomatoes",
-    "name": "tomatoes",
+    "name": "Tomatoes",
     "_de": "TOMATEN",
     "seasonings": [
       {
@@ -4088,7 +4088,7 @@
       },
       {
         "id": "mountain-cumin",
-        "name": "Mountain cumin",
+        "name": "Mountain Cumin",
         "_de": "Bergkümmel"
       },
       {
@@ -4103,7 +4103,7 @@
       },
       {
         "id": "net",
-        "name": "net)",
+        "name": "Net",
         "_de": "net)"
       },
       {
@@ -4168,7 +4168,7 @@
       },
       {
         "id": "olives",
-        "name": "olives",
+        "name": "Olives",
         "_de": "Oliven"
       },
       {
@@ -4250,7 +4250,7 @@
   },
   {
     "id": "durumpasta-gekocht",
-    "name": "Durumpasta (Gekocht)",
+    "name": "DURUMPASTA (GEKOCHT)",
     "_de": "DURUMPASTA (GEKOCHT)",
     "seasonings": [
       {
@@ -4265,7 +4265,7 @@
       },
       {
         "id": "net",
-        "name": "net)",
+        "name": "Net",
         "_de": "net)"
       },
       {
@@ -4309,8 +4309,8 @@
         "_de": "Haselnuss"
       },
       {
-        "id": "hartkaese",
-        "name": "Hartkäse",
+        "id": "hard-cheese",
+        "name": "Hard Cheese",
         "_de": "Hartkäse"
       },
       {
@@ -4350,12 +4350,12 @@
       },
       {
         "id": "olives",
-        "name": "olives",
+        "name": "Olives",
         "_de": "Oliven"
       },
       {
         "id": "wasser",
-        "name": "wasser",
+        "name": "Wasser",
         "_de": "wasser"
       },
       {
@@ -4375,7 +4375,7 @@
       },
       {
         "id": "ras-el-hanout",
-        "name": "Ras el-Hanout",
+        "name": "Ras El-hanout",
         "_de": "Ras el-Hanout"
       },
       {
@@ -4429,8 +4429,8 @@
         "_de": "Zitronenmelisse"
       },
       {
-        "id": "zitronenschale",
-        "name": "Zitronenschale",
+        "id": "lemon-zest",
+        "name": "Lemon Zest",
         "_de": "Zitronenschale"
       },
       {
@@ -4451,8 +4451,8 @@
     ]
   },
   {
-    "id": "wild-gebraten",
-    "name": "Wild, Gebraten",
+    "id": "roasted-game",
+    "name": "Roasted Game",
     "_de": "WILD, GEBRATEN",
     "seasonings": [
       {
@@ -4462,7 +4462,7 @@
       },
       {
         "id": "net",
-        "name": "net)",
+        "name": "Net",
         "_de": "net)"
       },
       {
@@ -4512,7 +4512,7 @@
       },
       {
         "id": "chestnuts",
-        "name": "chestnuts",
+        "name": "Chestnuts",
         "_de": "Maronen"
       },
       {
@@ -4522,7 +4522,7 @@
       },
       {
         "id": "grains-of-paradise",
-        "name": "Grains of Paradise",
+        "name": "Grains Of Paradise",
         "_de": "Paradieskörner"
       },
       {
@@ -4569,7 +4569,7 @@
   },
   {
     "id": "wurzel",
-    "name": "Wurzel",
+    "name": "WURZEL",
     "_de": "WURZEL",
     "seasonings": [
       {
@@ -4584,7 +4584,7 @@
       },
       {
         "id": "net",
-        "name": "net)",
+        "name": "Net",
         "_de": "net)"
       },
       {
@@ -4654,7 +4654,7 @@
       },
       {
         "id": "raucharomen",
-        "name": "Raucharomen)",
+        "name": "Raucharomen",
         "_de": "Raucharomen)"
       },
       {
@@ -4686,7 +4686,7 @@
   },
   {
     "id": "zucchini",
-    "name": "Zucchini",
+    "name": "ZUCCHINI",
     "_de": "ZUCCHINI",
     "seasonings": [
       {
@@ -4715,8 +4715,8 @@
         "_de": "Oregano"
       },
       {
-        "id": "pistazienoel",
-        "name": "Pistazienöl",
+        "id": "pistachio-oil",
+        "name": "Pistachio Oil",
         "_de": "Pistazienöl"
       },
       {
@@ -4738,860 +4738,6 @@
         "id": "walnut",
         "name": "Walnut",
         "_de": "Walnuss"
-      }
-    ]
-  },
-  {
-    "id": "rezepte",
-    "name": "Rezepte",
-    "_de": "REZEPTE",
-    "seasonings": [
-      {
-        "id": "ajwain",
-        "name": "Ajwain",
-        "_de": "Ajowan"
-      },
-      {
-        "id": "apfel-thymian-emulsion",
-        "name": "Apfel-Thymian-Emulsion",
-        "_de": "Apfel-Thymian-Emulsion"
-      },
-      {
-        "id": "aprikosenchutney",
-        "name": "Aprikosenchutney",
-        "_de": "Aprikosenchutney"
-      },
-      {
-        "id": "schmalz",
-        "name": "schmalz",
-        "_de": "schmalz"
-      },
-      {
-        "id": "pilzgewuerz",
-        "name": "pilzgewürz",
-        "_de": "pilzgewürz"
-      },
-      {
-        "id": "pralinen",
-        "name": "Pralinen",
-        "_de": "Pralinen"
-      },
-      {
-        "id": "baerlauchmaki",
-        "name": "Bärlauchmaki",
-        "_de": "Bärlauchmaki"
-      },
-      {
-        "id": "berberitzensauce",
-        "name": "Berberitzensauce",
-        "_de": "Berberitzensauce"
-      },
-      {
-        "id": "bergziegamotte",
-        "name": "Bergziegamotte",
-        "_de": "Bergziegamotte"
-      },
-      {
-        "id": "bier-rind-aus-dem-wok",
-        "name": "Bier-Rind aus dem Wok",
-        "_de": "Bier-Rind aus dem Wok"
-      },
-      {
-        "id": "bromhuhn-auf-spinat",
-        "name": "Bromhuhn auf Spinat",
-        "_de": "Bromhuhn auf Spinat"
-      },
-      {
-        "id": "und-orange",
-        "name": "und Orange",
-        "_de": "und Orange"
-      },
-      {
-        "id": "brunnenkresse-aufstrich",
-        "name": "Brunnenkresse-Aufstrich",
-        "_de": "Brunnenkresse-Aufstrich"
-      },
-      {
-        "id": "und-safran",
-        "name": "und Safran",
-        "_de": "und Safran"
-      },
-      {
-        "id": "champignonomelette",
-        "name": "Champignonomelette",
-        "_de": "Champignonomelette"
-      },
-      {
-        "id": "ran",
-        "name": "ran",
-        "_de": "ran"
-      },
-      {
-        "id": "martini",
-        "name": "Martini)",
-        "_de": "Martini)"
-      },
-      {
-        "id": "allspice",
-        "name": "Allspice",
-        "_de": "Piment"
-      },
-      {
-        "id": "cooler-shaker",
-        "name": "Cooler Shaker",
-        "_de": "Cooler Shaker"
-      },
-      {
-        "id": "lingspfeffer",
-        "name": "lingspfeffer",
-        "_de": "lingspfeffer"
-      },
-      {
-        "id": "und-rhabarberconfit",
-        "name": "und Rhabarberconfit",
-        "_de": "und Rhabarberconfit"
-      },
-      {
-        "id": "geschmack",
-        "name": "Geschmack",
-        "_de": "Geschmack"
-      },
-      {
-        "id": "elastische-rosenblaetter",
-        "name": "Elastische Rosenblätter",
-        "_de": "Elastische Rosenblätter"
-      },
-      {
-        "id": "engelwurz-in-reinkultur",
-        "name": "Engelwurz in Reinkultur",
-        "_de": "Engelwurz in Reinkultur"
-      },
-      {
-        "id": "erdbeeren-mit-dill",
-        "name": "Erdbeeren mit Dill",
-        "_de": "Erdbeeren mit Dill"
-      },
-      {
-        "id": "raute",
-        "name": "raute",
-        "_de": "raute"
-      },
-      {
-        "id": "spargel-oseille",
-        "name": "Spargel-Oseille",
-        "_de": "Spargel-Oseille"
-      },
-      {
-        "id": "erdnusszucker",
-        "name": "Erdnusszucker",
-        "_de": "Erdnusszucker"
-      },
-      {
-        "id": "estragonbutter",
-        "name": "Estragonbutter",
-        "_de": "Estragonbutter"
-      },
-      {
-        "id": "fenchellammruecken",
-        "name": "Fenchellammrücken",
-        "_de": "Fenchellammrücken"
-      },
-      {
-        "id": "gebrannten-mandeln",
-        "name": "„gebrannten“ Mandeln",
-        "_de": "„gebrannten“ Mandeln"
-      },
-      {
-        "id": "feves-mit-basilikum",
-        "name": "Feves mit Basilikum",
-        "_de": "Feves mit Basilikum"
-      },
-      {
-        "id": "kartoffelemulsion",
-        "name": "Kartoffelemulsion",
-        "_de": "Kartoffelemulsion"
-      },
-      {
-        "id": "paniert",
-        "name": "paniert",
-        "_de": "paniert"
-      },
-      {
-        "id": "aprikosen-mit-queller",
-        "name": "Aprikosen mit Queller",
-        "_de": "Aprikosen mit Queller"
-      },
-      {
-        "id": "kresseblueten",
-        "name": "kresseblüten",
-        "_de": "kresseblüten"
-      },
-      {
-        "id": "frittiertes-wild",
-        "name": "Frittiertes Wild",
-        "_de": "Frittiertes Wild"
-      },
-      {
-        "id": "pepper",
-        "name": "Pepper",
-        "_de": "Pfeffer"
-      },
-      {
-        "id": "kraut",
-        "name": "kraut",
-        "_de": "kraut"
-      },
-      {
-        "id": "cloves",
-        "name": "Cloves",
-        "_de": "Nelken"
-      },
-      {
-        "id": "asafoetida",
-        "name": "Asafoetida",
-        "_de": "Asant"
-      },
-      {
-        "id": "gefuellte-runde-zucchini",
-        "name": "Gefüllte runde Zucchini",
-        "_de": "Gefüllte runde Zucchini"
-      },
-      {
-        "id": "sueppchen",
-        "name": "süppchen",
-        "_de": "süppchen"
-      },
-      {
-        "id": "geraeucherter-myrtekaese",
-        "name": "Geräucherter Myrtekäse",
-        "_de": "Geräucherter Myrtekäse"
-      },
-      {
-        "id": "nensalat",
-        "name": "nensalat",
-        "_de": "nensalat"
-      },
-      {
-        "id": "hyssop",
-        "name": "Hyssop",
-        "_de": "Ysop"
-      },
-      {
-        "id": "gurkensalat-mit-nigella",
-        "name": "Gurkensalat mit Nigella",
-        "_de": "Gurkensalat mit Nigella"
-      },
-      {
-        "id": "lack",
-        "name": "lack",
-        "_de": "lack"
-      },
-      {
-        "id": "nade",
-        "name": "nade",
-        "_de": "nade"
-      },
-      {
-        "id": "zweierlei-sesam",
-        "name": "zweierlei Sesam",
-        "_de": "zweierlei Sesam"
-      },
-      {
-        "id": "haselnuss-chili-filberton",
-        "name": "Haselnuss-Chili-Filberton",
-        "_de": "Haselnuss-Chili-Filberton"
-      },
-      {
-        "id": "hoisin-sauce",
-        "name": "Hoisin-Sauce",
-        "_de": "Hoisin-Sauce"
-      },
-      {
-        "id": "verschiedenen-puerees",
-        "name": "verschiedenen Pürees",
-        "_de": "verschiedenen Pürees"
-      },
-      {
-        "id": "kruste",
-        "name": "kruste",
-        "_de": "kruste"
-      },
-      {
-        "id": "glasur",
-        "name": "glasur",
-        "_de": "glasur"
-      },
-      {
-        "id": "pikanter-apfelnage",
-        "name": "Pikanter Apfelnage",
-        "_de": "Pikanter Apfelnage"
-      },
-      {
-        "id": "macadamianuessen",
-        "name": "Macadamianüssen",
-        "_de": "Macadamianüssen"
-      },
-      {
-        "id": "kaffeelauch",
-        "name": "Kaffeelauch",
-        "_de": "Kaffeelauch"
-      },
-      {
-        "id": "limettenblaettern",
-        "name": "limettenblättern",
-        "_de": "limettenblättern"
-      },
-      {
-        "id": "kakao-brotaufstrich",
-        "name": "Kakao-Brotaufstrich",
-        "_de": "Kakao-Brotaufstrich"
-      },
-      {
-        "id": "kakaoport-nebst-rehfilet",
-        "name": "Kakaoport nebst Rehfilet",
-        "_de": "Kakaoport nebst Rehfilet"
-      },
-      {
-        "id": "und-paradieskoernern",
-        "name": "und Paradieskörnern",
-        "_de": "und Paradieskörnern"
-      },
-      {
-        "id": "katerfruehstueck",
-        "name": "Katerfrühstück",
-        "_de": "Katerfrühstück"
-      },
-      {
-        "id": "lorbeerblaettern",
-        "name": "Lorbeerblättern",
-        "_de": "Lorbeerblättern"
-      },
-      {
-        "id": "kerbelcreme",
-        "name": "Kerbelcreme",
-        "_de": "Kerbelcreme"
-      },
-      {
-        "id": "kernschmelze",
-        "name": "Kernschmelze",
-        "_de": "Kernschmelze"
-      },
-      {
-        "id": "ketchup",
-        "name": "Ketchup",
-        "_de": "Ketchup"
-      },
-      {
-        "id": "sauce",
-        "name": "sauce",
-        "_de": "sauce"
-      },
-      {
-        "id": "kokosfisch",
-        "name": "Kokosfisch",
-        "_de": "Kokosfisch"
-      },
-      {
-        "id": "kokosspargel",
-        "name": "Kokosspargel",
-        "_de": "Kokosspargel"
-      },
-      {
-        "id": "kombuwuerzpueree",
-        "name": "Kombuwürzpüree",
-        "_de": "Kombuwürzpüree"
-      },
-      {
-        "id": "wok",
-        "name": "Wok",
-        "_de": "Wok"
-      },
-      {
-        "id": "cabbage",
-        "name": "Cabbage",
-        "_de": "kohl"
-      },
-      {
-        "id": "blaetter",
-        "name": "blätter",
-        "_de": "blätter"
-      },
-      {
-        "id": "blutwurst-tarte",
-        "name": "Blutwurst-Tarte",
-        "_de": "Blutwurst-Tarte"
-      },
-      {
-        "id": "kubebentrunk",
-        "name": "Kubebentrunk",
-        "_de": "Kubebentrunk"
-      },
-      {
-        "id": "blech",
-        "name": "Blech",
-        "_de": "Blech"
-      },
-      {
-        "id": "juniper",
-        "name": "Juniper",
-        "_de": "Wacholder"
-      },
-      {
-        "id": "kurkuma-eis",
-        "name": "Kurkuma-Eis",
-        "_de": "Kurkuma-Eis"
-      },
-      {
-        "id": "lachsconfit-mit-anis",
-        "name": "Lachsconfit mit Anis",
-        "_de": "Lachsconfit mit Anis"
-      },
-      {
-        "id": "zucchinimus",
-        "name": "Zucchinimus",
-        "_de": "Zucchinimus"
-      },
-      {
-        "id": "rosinenkern",
-        "name": "Rosinenkern",
-        "_de": "Rosinenkern"
-      },
-      {
-        "id": "nuessen",
-        "name": "nüssen",
-        "_de": "nüssen"
-      },
-      {
-        "id": "lavendellauch",
-        "name": "Lavendellauch",
-        "_de": "Lavendellauch"
-      },
-      {
-        "id": "limettenespuma",
-        "name": "Limettenespuma",
-        "_de": "Limettenespuma"
-      },
-      {
-        "id": "galangal",
-        "name": "Galangal",
-        "_de": "Galgant"
-      },
-      {
-        "id": "tern",
-        "name": "tern",
-        "_de": "tern"
-      },
-      {
-        "id": "maggi-schoko-trunk",
-        "name": "Maggi-Schoko-Trunk",
-        "_de": "Maggi-Schoko-Trunk"
-      },
-      {
-        "id": "meerrettichwurzelschnaps",
-        "name": "Meerrettichwurzelschnaps",
-        "_de": "Meerrettichwurzelschnaps"
-      },
-      {
-        "id": "melissensirup",
-        "name": "Melissensirup",
-        "_de": "Melissensirup"
-      },
-      {
-        "id": "gruen",
-        "name": "grün",
-        "_de": "grün"
-      },
-      {
-        "id": "mexikanische-eier",
-        "name": "Mexikanische Eier",
-        "_de": "Mexikanische Eier"
-      },
-      {
-        "id": "rezept",
-        "name": "Rezept",
-        "_de": "Rezept"
-      },
-      {
-        "id": "mole-negro",
-        "name": "Mole negro",
-        "_de": "Mole negro"
-      },
-      {
-        "id": "nori-matcha-lachsforelle",
-        "name": "Nori-Matcha Lachsforelle",
-        "_de": "Nori-Matcha Lachsforelle"
-      },
-      {
-        "id": "samen",
-        "name": "samen",
-        "_de": "samen"
-      },
-      {
-        "id": "nuss",
-        "name": "nuss",
-        "_de": "nuss"
-      },
-      {
-        "id": "olivenoelwuerfel",
-        "name": "Olivenölwürfel",
-        "_de": "Olivenölwürfel"
-      },
-      {
-        "id": "teufel",
-        "name": "teufel",
-        "_de": "teufel"
-      },
-      {
-        "id": "orangenschokolade",
-        "name": "Orangenschokolade",
-        "_de": "Orangenschokolade"
-      },
-      {
-        "id": "oregano-pizzabrot",
-        "name": "Oregano-Pizzabrot",
-        "_de": "Oregano-Pizzabrot"
-      },
-      {
-        "id": "oranges",
-        "name": "oranges",
-        "_de": "orangen"
-      },
-      {
-        "id": "pan-con-tomates",
-        "name": "Pan con tomates",
-        "_de": "Pan con tomates"
-      },
-      {
-        "id": "papas-arrugadas",
-        "name": "Papas arrugadas",
-        "_de": "Papas arrugadas"
-      },
-      {
-        "id": "paprikapolenta",
-        "name": "Paprikapolenta",
-        "_de": "Paprikapolenta"
-      },
-      {
-        "id": "parmesanschaum",
-        "name": "Parmesanschaum",
-        "_de": "Parmesanschaum"
-      },
-      {
-        "id": "pesto-alla-genovese",
-        "name": "Pesto alla genovese",
-        "_de": "Pesto alla genovese"
-      },
-      {
-        "id": "petersilienoel",
-        "name": "Petersilienöl",
-        "_de": "Petersilienöl"
-      },
-      {
-        "id": "almonds",
-        "name": "Almonds",
-        "_de": "Mandeln"
-      },
-      {
-        "id": "pfefferrouladen",
-        "name": "Pfefferrouladen",
-        "_de": "Pfefferrouladen"
-      },
-      {
-        "id": "beeren",
-        "name": "Beeren",
-        "_de": "Beeren"
-      },
-      {
-        "id": "pizza-rucola",
-        "name": "Pizza Rucola",
-        "_de": "Pizza Rucola"
-      },
-      {
-        "id": "portulak-nockerln",
-        "name": "Portulak–Nockerln",
-        "_de": "Portulak–Nockerln"
-      },
-      {
-        "id": "salat-und-tomatengelee",
-        "name": "salat und Tomatengelee",
-        "_de": "salat und Tomatengelee"
-      },
-      {
-        "id": "rigatoni-mit-zimtbutter",
-        "name": "Rigatoni mit Zimtbutter",
-        "_de": "Rigatoni mit Zimtbutter"
-      },
-      {
-        "id": "risotto-mit-brennnessel",
-        "name": "Risotto mit Brennnessel",
-        "_de": "Risotto mit Brennnessel"
-      },
-      {
-        "id": "roestzwiebel-ohne-hitze",
-        "name": "Röstzwiebel ohne Hitze",
-        "_de": "Röstzwiebel ohne Hitze"
-      },
-      {
-        "id": "sumac",
-        "name": "Sumac",
-        "_de": "Sumach"
-      },
-      {
-        "id": "romesco-sauce",
-        "name": "Romesco-Sauce",
-        "_de": "Romesco-Sauce"
-      },
-      {
-        "id": "roquefortdattel",
-        "name": "Roquefortdattel",
-        "_de": "Roquefortdattel"
-      },
-      {
-        "id": "saison",
-        "name": "Saison",
-        "_de": "Saison"
-      },
-      {
-        "id": "rosmarin-schokoplaetzchen",
-        "name": "Rosmarin-Schokoplätzchen",
-        "_de": "Rosmarin-Schokoplätzchen"
-      },
-      {
-        "id": "marseillaiser-sabayon",
-        "name": "Marseillaiser Sabayon",
-        "_de": "Marseillaiser Sabayon"
-      },
-      {
-        "id": "rote-bete-salat",
-        "name": "Rote Bete Salat",
-        "_de": "Rote Bete Salat"
-      },
-      {
-        "id": "rotes-kartoffelpueree",
-        "name": "Rotes Kartoffelpüree",
-        "_de": "Rotes Kartoffelpüree"
-      },
-      {
-        "id": "rotkraut-mit-macadamia",
-        "name": "Rotkraut mit Macadamia",
-        "_de": "Rotkraut mit Macadamia"
-      },
-      {
-        "id": "sauerampfer-coulis",
-        "name": "Sauerampfer-Coulis",
-        "_de": "Sauerampfer-Coulis"
-      },
-      {
-        "id": "saure-nieren",
-        "name": "Saure Nieren",
-        "_de": "Saure Nieren"
-      },
-      {
-        "id": "schmalzsalzbrote",
-        "name": "Schmalzsalzbrote",
-        "_de": "Schmalzsalzbrote"
-      },
-      {
-        "id": "mountain-cumin",
-        "name": "Mountain cumin",
-        "_de": "Bergkümmel"
-      },
-      {
-        "id": "schnelles-mangochutney",
-        "name": "Schnelles Mangochutney",
-        "_de": "Schnelles Mangochutney"
-      },
-      {
-        "id": "schokolade-kalt-heiss",
-        "name": "Schokolade kalt–heiß",
-        "_de": "Schokolade kalt–heiß"
-      },
-      {
-        "id": "trueffeln",
-        "name": "Trüffeln",
-        "_de": "Trüffeln"
-      },
-      {
-        "id": "beans",
-        "name": "beans",
-        "_de": "bohnen"
-      },
-      {
-        "id": "mustard",
-        "name": "Mustard",
-        "_de": "senf"
-      },
-      {
-        "id": "senfdrops",
-        "name": "Senfdrops",
-        "_de": "Senfdrops"
-      },
-      {
-        "id": "mit-dulse",
-        "name": "mit Dulse",
-        "_de": "mit Dulse"
-      },
-      {
-        "id": "shiitakeschwammerlschaum",
-        "name": "Shiitakeschwammerlschaum",
-        "_de": "Shiitakeschwammerlschaum"
-      },
-      {
-        "id": "speise",
-        "name": "speise)",
-        "_de": "speise)"
-      },
-      {
-        "id": "sauces",
-        "name": "sauces",
-        "_de": "saucen"
-      },
-      {
-        "id": "steckruebenpueree",
-        "name": "Steckrübenpüree",
-        "_de": "Steckrübenpüree"
-      },
-      {
-        "id": "steinpilzcharlotte",
-        "name": "Steinpilzcharlotte",
-        "_de": "Steinpilzcharlotte"
-      },
-      {
-        "id": "suessholzraspel-auf-fettbasis",
-        "name": "Süßholzraspel auf Fettbasis",
-        "_de": "Süßholzraspel auf Fettbasis"
-      },
-      {
-        "id": "statt-petersilie",
-        "name": "(statt Petersilie)",
-        "_de": "(statt Petersilie)"
-      },
-      {
-        "id": "tamarinden-limonade",
-        "name": "Tamarinden-Limonade",
-        "_de": "Tamarinden-Limonade"
-      },
-      {
-        "id": "haube",
-        "name": "haube",
-        "_de": "haube"
-      },
-      {
-        "id": "tomatenpesto",
-        "name": "Tomatenpesto",
-        "_de": "Tomatenpesto"
-      },
-      {
-        "id": "vanillisierter-wirsing",
-        "name": "Vanillisierter Wirsing",
-        "_de": "Vanillisierter Wirsing"
-      },
-      {
-        "id": "wakame-kaesescheiben",
-        "name": "Wakame-Käsescheiben",
-        "_de": "Wakame-Käsescheiben"
-      },
-      {
-        "id": "waldmeisterspruehsahne",
-        "name": "Waldmeistersprühsahne",
-        "_de": "Waldmeistersprühsahne"
-      },
-      {
-        "id": "walnusslikoer",
-        "name": "Walnusslikör",
-        "_de": "Walnusslikör"
-      },
-      {
-        "id": "cheese",
-        "name": "Cheese",
-        "_de": "käse"
-      },
-      {
-        "id": "borage",
-        "name": "Borage",
-        "_de": "Borretsch"
-      },
-      {
-        "id": "weinbeeren-olivenoelcreme",
-        "name": "Weinbeeren-Olivenölcreme",
-        "_de": "Weinbeeren-Olivenölcreme"
-      },
-      {
-        "id": "wermutkraut",
-        "name": "Wermutkraut",
-        "_de": "Wermutkraut"
-      },
-      {
-        "id": "yuzu-eis",
-        "name": "Yuzu-Eis",
-        "_de": "Yuzu-Eis"
-      },
-      {
-        "id": "lauch",
-        "name": "lauch",
-        "_de": "lauch"
-      },
-      {
-        "id": "sichuan-pepper",
-        "name": "Sichuan Pepper",
-        "_de": "Szechuanpfeffer"
-      },
-      {
-        "id": "zitronenuniversalgewuerz",
-        "name": "Zitronenuniversalgewürz",
-        "_de": "Zitronenuniversalgewürz"
-      }
-    ]
-  },
-  {
-    "id": "gewuerzmischungen",
-    "name": "Gewürzmischungen",
-    "_de": "GEWÜRZMISCHUNGEN",
-    "seasonings": [
-      {
-        "id": "advieh",
-        "name": "Advieh",
-        "_de": "Advieh"
-      },
-      {
-        "id": "baharat",
-        "name": "Baharat",
-        "_de": "Baharat"
-      },
-      {
-        "id": "barbecue-mischung",
-        "name": "Barbecue-Mischung",
-        "_de": "Barbecue-Mischung"
-      },
-      {
-        "id": "berbere",
-        "name": "Berbere",
-        "_de": "Berbere"
-      },
-      {
-        "id": "bouquet-garni",
-        "name": "Bouquet garni",
-        "_de": "Bouquet garni"
-      },
-      {
-        "id": "cajun-mischung",
-        "name": "Cajun-Mischung",
-        "_de": "Cajun-Mischung"
-      },
-      {
-        "id": "mischung",
-        "name": "Mischung",
-        "_de": "Mischung"
-      },
-      {
-        "id": "colombo-powder",
-        "name": "Colombo Powder",
-        "_de": "Colombo Powder"
-      },
-      {
-        "id": "dukka-dukkah-duqqa",
-        "name": "Dukka, Dukkah, Duqqa",
-        "_de": "Dukka, Dukkah, Duqqa"
       }
     ]
   }
