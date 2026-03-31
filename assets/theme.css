@@ -1182,6 +1182,9 @@ body {
   color: var(--text3);
   padding: 8px 0;
 }
+.kuschi-flavor-loading {
+  margin: 4px 14px 0;
+}
 
 .aroma-hint-enhance {
   padding: 0 14px 10px;

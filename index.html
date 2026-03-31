@@ -666,6 +666,8 @@ let allRecipes = [];
 let filtered = [];
 let currentPage = 1;
 let currentRecipe = null;
+/** Last applyFilters timing so pagination re-renders can keep showing ms when enabled. */
+let lastFilterMs = '';
 
 // ── Data Loading ──────────────────────────────────────
 /** Origin + directory of the current page (works for /repo, /repo/, /repo/index.html). */
@@ -733,6 +735,23 @@ async function loadData() {
 // ── Filter Setup ──────────────────────────────────────
 function toArr(v) { return Array.isArray(v) ? v : []; }
 
+/** One-time normalised search string per recipe — avoids rebuilding on every filter pass (~38k rows). */
+function buildRecipeSearchIndex(recipes) {
+  for (let i = 0; i < recipes.length; i++) {
+    const r = recipes[i];
+    r._searchHay = [
+      r.name || '',
+      r.cui || '',
+      ...toArr(r.protein),
+      ...toArr(r.tags),
+      ...toArr(r.ing),
+      r.cat || '',
+    ]
+      .join(' ')
+      .toLowerCase();
+  }
+}
+
 function buildFilters() {
   const cuisines = new Set(), proteins = new Set(), tags = new Set(), cats = new Set();
   for (const r of allRecipes) {
@@ -759,6 +778,18 @@ function esc(s) {
 }
 
 // ── Filtering & Search ────────────────────────────────
+// Precomputed _searchHay + filter memo + capped fuzzy path keep ~38k-row filter fast without
+// a full-text bundle (MiniSearch/FlexSearch). Re-profile with localStorage.kuschiDebugPerf=1;
+// add a dedicated index library only if median filter time stays high on target devices.
+/** LRU-ish memo for repeated filter signatures (e.g. backspace). */
+const FILTER_MEMO_MAX = 8;
+const filterMemo = new Map();
+function filterMemoKey(q, cuisine, protein, tag, cat) {
+  return `${q}\0${cuisine}\0${protein}\0${tag}\0${cat}`;
+}
+
+const LEV_MEMO_MAX = 512;
+const levMemo = new Map();
 /** 1-edit fuzzy match for tokens length >= 4 (typos). */
 function levenshtein(a, b) {
   if (a === b) return 0;
@@ -780,12 +811,30 @@ function levenshtein(a, b) {
   return row[n];
 }
 
+function levenshteinMemo(a, b) {
+  const k = a <= b ? `${a}\0${b}` : `${b}\0${a}`;
+  if (levMemo.has(k)) return levMemo.get(k);
+  const v = levenshtein(a, b);
+  if (levMemo.size >= LEV_MEMO_MAX) {
+    const first = levMemo.keys().next().value;
+    levMemo.delete(first);
+  }
+  levMemo.set(k, v);
+  return v;
+}
+
+const MAX_FUZZY_WORDS = 32;
+
 function haystackMatchesTerm(hay, t) {
   if (!t) return true;
   if (hay.includes(t)) return true;
   if (t.length < 4) return false;
   const words = hay.split(/[^a-z0-9]+/).filter(w => w.length >= 4);
-  return words.some(w => levenshtein(w, t) <= 1);
+  const capped = words.length > MAX_FUZZY_WORDS ? words.slice(0, MAX_FUZZY_WORDS) : words;
+  for (let i = 0; i < capped.length; i++) {
+    if (levenshteinMemo(capped[i], t) <= 1) return true;
+  }
+  return false;
 }
 
 function applyFilters() {
@@ -802,19 +851,35 @@ function applyFilters() {
     el.classList.toggle('active', el.value !== '');
   });
 
-  filtered = allRecipes.filter(r => {
-    if (terms.length) {
-      const hay = [r.name||'', r.cui||'', ...toArr(r.protein), ...toArr(r.tags), ...toArr(r.ing), r.cat||''].join(' ').toLowerCase();
-      if (!terms.every(t => haystackMatchesTerm(hay, t))) return false;
+  const mkey = filterMemoKey(q, cuisine, protein, tag, cat);
+  if (filterMemo.has(mkey)) {
+    const cached = filterMemo.get(mkey);
+    filterMemo.delete(mkey);
+    filterMemo.set(mkey, cached);
+    filtered = cached;
+  } else {
+    filtered = allRecipes.filter(r => {
+      if (terms.length) {
+        const hay = r._searchHay;
+        if (!hay || !terms.every(t => haystackMatchesTerm(hay, t))) return false;
+      }
+      if (cuisine && r.cui !== cuisine) return false;
+      if (protein && !toArr(r.protein).includes(protein)) return false;
+      if (tag && !toArr(r.tags).includes(tag)) return false;
+      if (cat && r.cat !== cat) return false;
+      return true;
+    });
+    if (filterMemo.size >= FILTER_MEMO_MAX) {
+      filterMemo.delete(filterMemo.keys().next().value);
     }
-    if (cuisine && r.cui !== cuisine) return false;
-    if (protein && !toArr(r.protein).includes(protein)) return false;
-    if (tag && !toArr(r.tags).includes(tag)) return false;
-    if (cat && r.cat !== cat) return false;
-    return true;
-  });
+    filterMemo.set(mkey, filtered);
+  }
 
   const dt = (performance.now() - t0).toFixed(1);
+  if (typeof localStorage !== 'undefined' && localStorage.getItem('kuschiDebugPerf') === '1') {
+    console.log('[Kuschi] applyFilters ms', dt, 'hits', filtered.length);
+  }
+  lastFilterMs = dt;
   currentPage = 1;
   render(dt);
 }
@@ -825,7 +890,10 @@ function render(dt) {
   bar.classList.add('visible');
   document.getElementById('resultsCount').innerHTML =
     `<span>${filtered.length.toLocaleString()}</span> recipe${filtered.length !== 1 ? 's' : ''}`;
-  document.getElementById('resultsMeta').textContent = dt ? `${dt}ms` : '';
+  const showFilterMs =
+    typeof localStorage !== 'undefined' && localStorage.getItem('kuschiShowFilterMs') === '1';
+  const ms = dt !== undefined && dt !== '' ? dt : lastFilterMs;
+  document.getElementById('resultsMeta').textContent = showFilterMs && ms ? `${ms}ms` : '';
 
   const content = document.getElementById('content');
   if (!filtered.length) {
@@ -1779,6 +1847,9 @@ refreshCustomBookNav();
       const userRows = KuschiUserRecipes.loadKitchen().map(KuschiUserRecipes.toIndexRow);
       allRecipes = [...userRows, ...allRecipes];
     }
+    buildRecipeSearchIndex(allRecipes);
+    filterMemo.clear();
+    levMemo.clear();
     document.getElementById('loading').style.display = 'none';
     document.getElementById('footer').style.display = 'block';
     document.getElementById('totalCount').textContent = allRecipes.length.toLocaleString();

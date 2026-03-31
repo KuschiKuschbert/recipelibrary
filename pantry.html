@@ -31,6 +31,7 @@
   .pantry-name { font-weight: 600; font-size: 16px; }
   .pantry-meta { font-size: 12px; color: var(--text3); margin-top: 6px; }
   .status { font-size: 13px; color: var(--text3); margin-top: 8px; }
+  button.primary:disabled { opacity: 0.5; cursor: not-allowed; }
 </style>
 </head>
 <body>
@@ -39,8 +40,8 @@
   <h1>Pantry search</h1>
   <p class="lead">Enter ingredients you have (comma or newline separated). We match against the library index <code>ing</code> fields — no guarantee of overlap with pantry items.</p>
   <textarea id="pantryIn" placeholder="e.g. chicken, lemon, garlic, olive oil"></textarea>
-  <button type="button" class="primary" id="pantryGo">Find recipes</button>
-  <p class="status" id="pantryStatus"></p>
+  <button type="button" class="primary" id="pantryGo" disabled>Find recipes</button>
+  <p class="status" id="pantryStatus">Loading recipe index…</p>
   <div id="out"></div>
 </div>
 <script>
@@ -129,6 +130,22 @@
         st.textContent = 'Failed to load index.';
       });
   });
+
+  loadAll()
+    .then(function () {
+      var go = document.getElementById('pantryGo');
+      var st = document.getElementById('pantryStatus');
+      if (go) go.disabled = false;
+      if (st && st.textContent.indexOf('Loading recipe index') === 0) {
+        st.textContent = 'Ready — add ingredients and tap Find recipes.';
+      }
+    })
+    .catch(function () {
+      var go = document.getElementById('pantryGo');
+      if (go) go.disabled = false;
+      var st = document.getElementById('pantryStatus');
+      if (st) st.textContent = 'Could not load index. Check connection and try again.';
+    });
 })();
 </script>
 </body>

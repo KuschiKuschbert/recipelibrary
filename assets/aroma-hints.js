@@ -18,6 +18,8 @@
   var unifiedFlavors = null;
   var cuisineMap = null;
   var unifiedPromise = null;
+  /** normKey(unified.name) -> row for O(1) exact match before linear scan */
+  var unifiedByNormName = Object.create(null);
 
   function normKey(s) {
     if (window.KuschiUserRecipes && typeof KuschiUserRecipes.canonicalOrderMergeKey === 'function') {
@@ -61,6 +63,12 @@
     ]).then(function (pair) {
       unifiedFlavors = Array.isArray(pair[0]) ? pair[0] : [];
       cuisineMap = pair[1] && typeof pair[1] === 'object' ? pair[1] : {};
+      unifiedByNormName = Object.create(null);
+      for (var ui = 0; ui < unifiedFlavors.length; ui++) {
+        var row = unifiedFlavors[ui];
+        var unn = normKey(row.name || '');
+        if (unn.length >= 2) unifiedByNormName[unn] = row;
+      }
       return { unified: unifiedFlavors, cuisine: cuisineMap };
     });
     return unifiedPromise;
@@ -68,10 +76,16 @@
 
   function matchUnifiedRows(lineKey, lineToks, unified) {
     if (!unified || !unified.length) return null;
+    var direct = unifiedByNormName[lineKey];
+    if (direct) {
+      var sc0 = matchAromaIngredient(lineKey, lineToks, { id: direct.id, name: direct.name });
+      if (sc0 >= 2) return direct;
+    }
     var best = null;
     var bestScore = 0;
     for (var i = 0; i < unified.length; i++) {
       var u = unified[i];
+      if (direct === u) continue;
       var n = normKey(u.name || '');
       if (!n || n.length < 3) continue;
       var sc = matchAromaIngredient(lineKey, lineToks, { id: u.id, name: u.name });
@@ -225,8 +239,14 @@
 
   function appendFlavorExtras(wrapEl, lines, recipe) {
     if (!wrapEl) return;
+    var pending = document.createElement('p');
+    pending.className = 'aroma-hint-loading kuschi-flavor-loading';
+    pending.setAttribute('aria-live', 'polite');
+    pending.textContent = 'Loading flavour data…';
+    wrapEl.appendChild(pending);
     ensureUnifiedLoaded()
       .then(function (data) {
+        if (pending.parentNode) pending.parentNode.removeChild(pending);
         if (!data.unified || !data.unified.length) return;
         var html = buildFlavorExtrasHtml(recipe, lines, data.unified, data.cuisine);
         if (!html) return;
@@ -235,7 +255,9 @@
         wrapEl.appendChild(div.firstElementChild);
         wirePivotSelect(wrapEl, data.cuisine);
       })
-      .catch(function () {});
+      .catch(function () {
+        if (pending.parentNode) pending.parentNode.removeChild(pending);
+      });
   }
 
   function ensureLoaded() {

@@ -9,7 +9,7 @@ Read before large edits to HTML, JSON recipe data, or `.cursor` rules.
 
 ## Purpose
 
-Static **GitHub Pages** site: main catalog ([index.html](index.html)), user-defined **kitchen books** ([kitchen-book.html?b=…](kitchen-book.html)), Riviera prep-chef set ([riviera.html](riviera.html)). Optimized for a small kitchen tablet.
+Static **GitHub Pages** site: main catalog ([index.html](index.html)), user-defined **kitchen books** ([kitchen-book.html?b=…](kitchen-book.html)), Riviera prep-chef set ([riviera.html](riviera.html)). Optimized for a small kitchen tablet. Main search uses precomputed per-recipe haystacks + memoised filters; see README “Main index performance” for `kuschiShowFilterMs` / `kuschiDebugPerf`.
 
 ## Agent shipping (after you change code)
 

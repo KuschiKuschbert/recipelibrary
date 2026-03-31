@@ -25,6 +25,12 @@ Personal recipe library hosted on **GitHub Pages**: searchable catalog, metric-o
 | `combined_data/ingredients_unified.json` | Merged lookup for the Flavor explorer + optional recipe-modal hints (loaded by `assets/aroma-hints.js`) |
 | `pdf/` | Category reference PDFs |
 
+### Main index performance (optional dev flags)
+
+- Search precomputes a normalised **`_searchHay`** string per recipe, uses a small **filter-result LRU** (8 entries), and caps **fuzzy** Levenshtein to the first 32 eligible words per recipe with a bounded Levenshtein memo. Full-text libraries (MiniSearch, FlexSearch, …) are intentionally not bundled unless profiling shows a need.
+- **`localStorage.kuschiShowFilterMs=1`** — show filter duration next to the results count.
+- **`localStorage.kuschiDebugPerf=1`** — log each filter pass to the browser console.
+
 ## Local and device data
 
 There is **no server**. “Save” actions write to **this browser’s** `localStorage`:
