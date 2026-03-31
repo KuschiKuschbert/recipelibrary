@@ -188,6 +188,7 @@ Gemüse|Vegetables
 Kartoffeln|Potatoes
 Maniok|Cassava
 Maniokwurzel|Cassava
+Maniokwur-|Cassava
 Karotten|Carrots
 Linsen|Lentils
 Hülsenfrüchte|Legumes
@@ -206,6 +207,9 @@ Sahne|Cream
 Kokosmilch|Coconut Milk
 Schokolade|Chocolate
 Honig|Honey
+Zucker|Sugar
+Morchel|Morel
+Karamell|Caramel
 Gebäck|Pastry
 Suppen|Soups
 Salate|Salads
@@ -1007,7 +1011,107 @@ _HEAT_PHRASES = [
     (r"\bsweete\b", "sweet"),
     (r"Holzartig,", "Woody,"),
     (r"Holzartig", "Woody"),
+    (r"Optimale Aromenentfaltung beim Kochen", "Optimal aroma when cooking"),
+    (r"Aromenentfaltung beim Kochen", "aroma development when cooking"),
+    (r"Fresh Herbaler Duft", "Fresh herbal aroma"),
+    (r"Herbaler Duft", "herbal aroma"),
+    (r"Lightly bitter mit dark", "Lightly bitter with dark"),
+    (r"\bmit dark\b", "with dark"),
+    (r"woody-aromatic Noten", "woody-aromatic notes"),
+    (r"bitteralmond-like in water benzaldehydeee", "bitter-almond-like in water (benzaldehyde)"),
+    (r"benzaldehydeee", "benzaldehyde"),
+    (r"Typischer Champignonduft, herzhaft", "Typical mushroom aroma, savory"),
+    (r"Champignonduft", "mushroom aroma"),
+    (r"Kampferartig bis bitter", "Camphorous to bitter"),
+    (r"Fresh, pinienartiger Duft", "Fresh, pine-like aroma"),
+    (r"pinienartiger Duft", "pine-like aroma"),
+    (r"Characteristic Fresh Duft", "Characteristic fresh aroma"),
+    (r"typischer Duft", "typical aroma"),
+    (r"Rather flat, aber aromatic", "Rather flat, but aromatic"),
+    (r"\baber aromatic\b", "but aromatic"),
+    (r"151 Das Main southernwood aroma: eucalyptus- und", "eucalyptus- and"),
+    (r"Main southernwood aroma: eucalyptus- und", "eucalyptus- and"),
+    (r"Fresh, typischer Duft", "Fresh, typical aroma"),
+    (r"Feine waxy, fattye Noten", "Fine waxy, fatty notes"),
+    (r"fattye Noten", "fatty notes"),
+    (r"Fresh Duft", "Fresh aroma"),
+    (r"Floral Noten", "Floral notes"),
+    (r"Rather Floral Noten \(etwa beim Einlegen\)", "Rather floral notes (especially when pickling)"),
+    (r"etwa beim Einlegen", "especially when pickling"),
+    (r"Typischer Morchelduft und -geschmack", "Typical morel aroma and flavor"),
+    (r"Morchelduft und -geschmack", "morel aroma and flavor"),
+    (r"resinous Noten be", "resinous note"),
+    (r"tangyes Olivenaroma, leichte bitter", "tangy olive aroma, lightly bitter"),
+    (r"Olivenaroma", "olive aroma"),
+    (r"Floralr Duft", "Floral aroma"),
+    (r"ingwerartige heat", "ginger-like heat"),
+    (r"woodye Noten", "woody notes"),
+    (r"dezente heat", "subtle heat"),
+    (r"Dominan-\s*te roast notes zwischen Karamell und Kaffee", "Dominant roast notes between caramel and coffee"),
+    (r"zwischen Karamell und Kaffee", "between caramel and coffee"),
+    (r"Herbal-spicy Noten", "Herbal-spicy notes"),
+    (r"Floral-bittere, spicy Noten", "Floral-bitter, spicy notes"),
+    (r"Balsamic, spicy Noten", "Balsamic, spicy notes"),
+    (r"Earthy, woody-aromatic Noten", "Earthy, woody-aromatic notes"),
+    (r"RAceto Balsamico, da dessen hoher Anteil am karamellig-sweeten Aroma", "Balsamic vinegar, caramel-sweet note"),
+    (r"karamellig-sweeten Aroma", "caramel-sweet aroma"),
+    (r"ANBAU Man bekommt mittlerweile in den meisten", ""),
+    (r"Freisetzung der Aro-\s*men aus der Saat beim Anbraten", "Aromas released from the seed when searing"),
+    (r"Emphasis on der woodyen Duftanteile", "Emphasis on woody aroma components"),
+    (r"woodyen Duftanteile", "woody aroma components"),
+    (r"Emphasis on der\b", "Emphasis on the"),
+    (r"Highlighting der bitternoten", "Highlighting bitter notes"),
+    (r"bitternoten", "bitter notes"),
+    (r"Intensivierung der aromati", "Intensification of aromatic notes"),
+    (r"Finer, floral-tangyer Duft und Geschmack", "Finer, floral-tangy aroma and flavor"),
+    (r"Duft und Geschmack", "aroma and flavor"),
+    (r"Sehr intensiver Duft, herber Geschmack", "Very intense aroma, tart flavor"),
+    (r"herber Geschmack", "tart flavor"),
+    (r"Cremige, sweet-Floral, aromatic Noten", "Creamy, sweet-floral, aromatic notes"),
+    (r"aromatic Noten im Nussaroma", "aromatic notes in the nut aroma"),
+    (r"Bildung karamelliger Noten", "Formation of caramel notes"),
+    (r"karamelliger Noten", "caramel notes"),
+    (r"Bildung vieler roast notes aus Zwiebel", "Formation of many roast notes from onion"),
+    (r"Bildung von\b", "Formation of"),
+    (r"Rauchig, wenig bitter", "Smoky, lightly bitter"),
+    (r"schokoladig", "chocolate-like"),
+    (r"Balsamic, Mild Noten", "Balsamic, mild notes"),
+    (r"earthy-Sulfurouse Noten", "earthy sulfurous notes"),
+    (r"Sulfurouse Noten", "sulfurous notes"),
 ]
+
+
+def _heat_token_scrub(t: str) -> str:
+    """Replace common German tokens left in heat strings (ASCII, no umlauts)."""
+    t = re.sub(r"\bNoten\b", "notes", t, flags=re.I)
+    t = re.sub(r"\bDuft\b", "aroma", t, flags=re.I)
+    t = re.sub(r"\bGeschmack\b", "flavor", t, flags=re.I)
+    t = re.sub(r"\bTypischer\b", "Typical", t, flags=re.I)
+    t = re.sub(r"\bTypisch\b", "Typical", t, flags=re.I)
+    t = re.sub(r"\bmit\b", "with", t, flags=re.I)
+    t = re.sub(r"\bund\b", "and", t, flags=re.I)
+    t = re.sub(r"\baber\b", "but", t, flags=re.I)
+    t = re.sub(r"\bzwischen\b", "between", t, flags=re.I)
+    t = re.sub(r"\bbeim\b", "when", t, flags=re.I)
+    t = re.sub(r"\bKochen\b", "cooking", t, flags=re.I)
+    t = re.sub(r"\bvon\b", "from", t, flags=re.I)
+    t = re.sub(r"\bvieler\b", "many", t, flags=re.I)
+    t = re.sub(r"\baus\b", "from", t, flags=re.I)
+    t = re.sub(r"\bherzhaft\b", "savory", t, flags=re.I)
+    t = re.sub(r"\bleichte\b", "light", t, flags=re.I)
+    t = re.sub(r"\bwenig\b", "little", t, flags=re.I)
+    t = re.sub(r"\bZwiebel\b", "onion", t, flags=re.I)
+    t = re.sub(r"\bSaat\b", "seed", t, flags=re.I)
+    t = re.sub(r"\bAnbraten\b", "searing", t, flags=re.I)
+    t = re.sub(r"\bKaramell\b", "caramel", t, flags=re.I)
+    t = re.sub(r"\bKaffee\b", "coffee", t, flags=re.I)
+    t = re.sub(r"\bder\b", "the", t, flags=re.I)
+    t = re.sub(r"\bdie\b", "the", t, flags=re.I)
+    t = re.sub(r"\bdas\b", "the", t, flags=re.I)
+    t = re.sub(r"\bdes\b", "of the", t, flags=re.I)
+    t = re.sub(r"\bden\b", "the", t, flags=re.I)
+    t = re.sub(r"\bdem\b", "the", t, flags=re.I)
+    return t
 
 
 def _english_heat(s: str) -> str:
@@ -1023,9 +1127,13 @@ def _english_heat(s: str) -> str:
     t = re.split(r"\s+l\s+Alkohol", t, flags=re.I)[0]
     t = re.split(r"[αβ][\-−]", t)[0]
     t = re.sub(r"\s+", " ", t).strip()
-    t = re.sub(r"^[,.\s\-–]+", "", t)
-    t = re.sub(r"[,.\s\-–]+$", "", t).strip()
-    if len(t) < 3 or re.match(r"^[\s\-–,]+$", t):
+    t = _heat_token_scrub(t)
+    t = re.sub(r"\s+", " ", t).strip()
+    t = re.sub(r"^[,\.\s\-–]+", "", t)
+    t = re.sub(r"[,\.\s\-–]+$", "", t).strip()
+    if len(t) < 5 or re.match(r"^[\s\-–,]+$", t):
+        return ""
+    if _looks_untranslated_german(t):
         return ""
     if len(t) > 160:
         t = t[:157] + "…"
@@ -1035,8 +1143,15 @@ def _english_heat(s: str) -> str:
 _GERMAN_HINT = re.compile(
     r"(?i)\b(und|der|die|das|mit|von|zu|für|auch|wie|aus|bei|"
     r"eine|einen|wurden|schon|vor|Jahren|kultiviert|bisschen|nicht|noch|"
-    r"nach|über|vom|zum|beim|einem|einer)\b"
+    r"nach|über|vom|zum|beim|einem|einer|allen|helles|Fleisch|Duft|Geschmack|"
+    r"Noten|Typischer|Typisch|Saat|Anbraten|Morchel|Freisetzung|Intensivierung|"
+    r"Bildung|bekommt|mittlerweile|meisten|herber|Champignon|karamellig|dessen|"
+    r"Anteil|Ingwer|schokoladig|Rauchig|Kampfer|pinienartiger|Aromenentfaltung|"
+    r"Kochen|Herbaler|Einlegen|ingwerartige|dezente|karamelliger|vieler|zwischen|"
+    r"Karamell|Kaffee|Zwiebel|Sehr|intensiver|woodyen|Duftanteile|aromati|"
+    r"ANBAU|etwa|hoher|zur|bens|dafür|dazu|daran|darin)\b"
 )
+
 _UCRX = re.compile(r"[äöüÄÖÜß]")
 
 
@@ -1064,6 +1179,9 @@ def _clean_display_phrase(raw: str) -> str | None:
     s = re.sub(r"(?i)Sala-\s*ten", "salads", s)
     s = re.sub(r"(?i)Schmorgerich-\s*ten", "braised dishes", s)
     s = re.sub(r"(?i)Blumenkohl", "cauliflower", s)
+    s = re.sub(r"(?i)allen\s+Fleisch-", "all meats", s)
+    s = re.sub(r"(?i)\bfast allen\b", "almost everything", s)
+    s = re.sub(r"(?i)\bhelles\s+Fleisch\b", "light meat", s)
     s = re.sub(r"(?i)\bherzhaften\b", "hearty", s)
     s = re.sub(r"(?i)Blu-\s*men", "", s).strip()
     s = re.sub(r"(?i)allen\s+Fleischsorten", "all meats", s)

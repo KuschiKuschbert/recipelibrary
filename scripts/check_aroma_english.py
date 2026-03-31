@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Flag umlauts / obvious German leftovers in user-facing aroma strings.
 
-Default: food_pairings names, seasoning names, ingredient names, pairs_with_foods.
-Use --all to include heat_behavior, cuisines, spice_blends (noisy; many mixed OCR lines).
+Default: all user-facing strings in ingredients and food_pairings (incl. heat_behavior, cuisines, spice_blends).
+Use --all is accepted for compatibility (same as default).
 
 Exit 1 if any default-path issue is found.
 """
@@ -16,18 +16,21 @@ import sys
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(REPO, "aroma_data")
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, SCRIPT_DIR)
+from aroma_i18n import _looks_untranslated_german  # noqa: E402
+
 _UC = re.compile(r"[äöüÄÖÜß]")
 
 
 def _flag(path: str, label: str, s: str, issues: list[tuple[str, str]]) -> None:
     if not s or not isinstance(s, str):
         return
-    if _UC.search(s):
+    if _UC.search(s) or _looks_untranslated_german(s):
         issues.append((path, f"{label}: {s[:140]}"))
 
 
 def main() -> int:
-    all_fields = "--all" in sys.argv
     issues: list[tuple[str, str]] = []
     ing_path = os.path.join(DATA, "ingredients.json")
     fp_path = os.path.join(DATA, "food_pairings.json")
@@ -44,14 +47,13 @@ def main() -> int:
                 _flag(iid, "harmonizes_with.name", h.get("name", "") or "", issues)
         for p in ing.get("pairs_with_foods") or []:
             _flag(iid, "pairs_with_foods", p, issues)
-        if all_fields:
-            for c in ing.get("cuisines") or []:
-                _flag(iid, "cuisines", c, issues)
-            for b in ing.get("spice_blends") or []:
-                _flag(iid, "spice_blends", b, issues)
-            hb = ing.get("heat_behavior") or {}
-            for k, v in hb.items():
-                _flag(iid, f"heat.{k}", v, issues)
+        for c in ing.get("cuisines") or []:
+            _flag(iid, "cuisines", c, issues)
+        for b in ing.get("spice_blends") or []:
+            _flag(iid, "spice_blends", b, issues)
+        hb = ing.get("heat_behavior") or {}
+        for k, v in hb.items():
+            _flag(iid, f"heat.{k}", v, issues)
 
     if os.path.isfile(fp_path):
         with open(fp_path, encoding="utf-8") as f:
@@ -63,9 +65,9 @@ def main() -> int:
                 _flag(fid, "seasoning", s.get("name", ""), issues)
 
     if not issues:
-        print("check_aroma_english: no umlauts in checked fields.")
+        print("check_aroma_english: no German/umlaut issues in checked fields.")
         return 0
-    print(f"check_aroma_english: {len(issues)} umlaut issues:\n")
+    print(f"check_aroma_english: {len(issues)} issues:\n")
     for p, msg in issues[:50]:
         print(f"  [{p}] {msg}")
     if len(issues) > 50:

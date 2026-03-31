@@ -23,13 +23,12 @@
     ],
     "pairs_with_foods": [
       "Potatoes",
-      "Maniokwur-"
+      "Cassava"
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Fresh Herbaler Duft",
-      "b": "Optimale Aromenentfaltung beim Kochen",
-      "c": "Thy"
+      "a": "Fresh herbal aroma",
+      "b": "Optimal aroma when cooking"
     },
     "spice_blends": [
       "Chat Masala",
@@ -162,7 +161,7 @@
     "heat_behavior": {
       "a": "Floral, aromatic, anise-like",
       "b": "Optimale aromatic anise note",
-      "c": "Lightly bitter mit dark roast notes"
+      "c": "Lightly bitter with dark roast notes"
     },
     "aroma_groups": [
       2
@@ -207,7 +206,7 @@
       "Karibik:"
     ],
     "heat_behavior": {
-      "a": "Earthy, woody-aromatic Noten",
+      "a": "Earthy, woody-aromatic notes",
       "b": "Intense color"
     },
     "aroma_groups": [
@@ -572,7 +571,7 @@
     "heat_behavior": {
       "a": "almond-like, pungent, trigeminal-reizend",
       "b": "aromatic-almond-like, sweet-bitter",
-      "c": "Muted bitter, marzipan-like bitteralmond-like in water benzaldehydeee"
+      "c": "Muted bitter, marzipan-like bitter-almond-like in water (benzaldehydee)e"
     },
     "aroma_groups": [
       5
@@ -687,7 +686,7 @@
     "heat_behavior": {
       "a": "Fresh, Herbal, leicht Floral",
       "b": "Herbal, warm, camphorous",
-      "c": "Rather woody, beginnende bitternoten"
+      "c": "Rather woody, beginnende bitter notes"
     },
     "spice_blends": [
       "Fines Herbes",
@@ -831,8 +830,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Freshes, Florals Aroma",
-      "b": "Flat"
+      "a": "Freshes, Florals Aroma"
     },
     "aroma_groups": [
       1
@@ -935,7 +933,7 @@
     "heat_behavior": {
       "a": "Rather rohes Pilzaroma",
       "c": "earthy, leicht muf- fig",
-      "b": "Typischer Champignonduft, herzhaft"
+      "b": "Typical mushroom aroma, savory"
     },
     "aroma_groups": [
       2,
@@ -989,8 +987,7 @@
       "Soups"
     ],
     "heat_behavior": {
-      "a": "Earthy aromas, heat",
-      "b": "Heat"
+      "a": "Earthy aromas, heat"
     },
     "spice_blends": [
       "Indische Masalas",
@@ -1053,7 +1050,7 @@
     "heat_behavior": {
       "a": "Fruity-sweet-tangy",
       "b": "Zitrusartig aromatic",
-      "c": "Kampferartig bis bitter"
+      "c": "Camphorous to bitter"
     },
     "aroma_groups": [
       2,
@@ -1112,7 +1109,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Fresh, pinienartiger Duft",
+      "a": "Fresh, pine-like aroma",
       "b": "Spicy"
     },
     "spice_blends": [
@@ -1249,9 +1246,9 @@
       "Deutschland: Gurkensalat, milchsauer ein-"
     ],
     "heat_behavior": {
-      "a": "Characteristic Fresh Duft",
+      "a": "Characteristic fresh aroma",
       "b": "Warmn aromas betont, weniger Fresh",
-      "c": "Rather flat, aber aromatic 151 Das Main southernwood aroma: eucalyptus- und"
+      "c": "Rather flat, but aromatic eucalyptus- and"
     },
     "spice_blends": [],
     "aroma_groups": [
@@ -1347,7 +1344,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Fresh, typischer Duft",
+      "a": "Fresh, typical aroma",
       "b": "Herbal- bitter",
       "c": "Stronger wormwood-like Aroma"
     },
@@ -1384,7 +1381,7 @@
     ],
     "pairs_with_foods": [
       "Marmelade",
-      "allen Fleisch-"
+      "all meats"
     ],
     "cuisines": [
       "Westafrika: Erdnusspaste, Erdnussbutter,"
@@ -1563,8 +1560,7 @@
     ],
     "heat_behavior": {
       "a": "(Fresh:) mitunter zitronige Fresh",
-      "b": "Balsamic, spicy Noten",
-      "c": "Aromati"
+      "b": "Balsamic, spicy notes"
     },
     "spice_blends": [
       "marokkani-"
@@ -1791,12 +1787,12 @@
     ],
     "pairs_with_foods": [
       "Ice Cream",
-      "helles Fleisch"
+      "light meat"
     ],
     "cuisines": [],
     "heat_behavior": {
       "a": "Light, sometimes Floral roast notes",
-      "b": "Rauchig, wenig bitter, schokoladig",
+      "b": "Smoky, lightly bitter, chocolate-like",
       "c": "Emphasis on typical coffee roast"
     },
     "aroma_groups": [
@@ -1856,8 +1852,7 @@
     "cuisines": [],
     "heat_behavior": {
       "a": "Tiefe chocolate note, floral-tangy",
-      "b": "Spicy-smoky cocoa notes",
-      "c": "Beto"
+      "b": "Spicy-smoky cocoa notes"
     },
     "spice_blends": [
       "Mexikanische Mole poblano",
@@ -2139,8 +2134,7 @@
       "Vegetables",
       "Chicken",
       "fish",
-      "Chocolate",
-      "allen"
+      "Chocolate"
     ],
     "cuisines": [],
     "heat_behavior": {
@@ -2385,7 +2379,7 @@
     "heat_behavior": {
       "a": "Fresh heat, numbing",
       "b": "Full aroma, warming balsamic",
-      "c": "Leichte"
+      "c": "light"
     },
     "spice_blends": [
       "Marokkanisches Ras el-Hanout"
@@ -2536,7 +2530,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Feine waxy, fattye Noten",
+      "a": "Fine waxy, fatty notes",
       "b": "roast notes more prominent",
       "c": "Additional"
     },
@@ -2646,8 +2640,7 @@
       "Frankreich: Ratatouille, Schmorgerichte,"
     ],
     "heat_behavior": {
-      "a": "Fresh Duft",
-      "b": "Highlighting Herbaler"
+      "a": "Fresh aroma"
     },
     "spice_blends": [
       "marokka-"
@@ -2716,8 +2709,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Fresh, Herbal-Earthy Duft",
-      "b": "„Sup"
+      "a": "Fresh, Herbal-Earthy aroma"
     },
     "aroma_groups": [
       2,
@@ -2820,7 +2812,7 @@
     ],
     "pairs_with_foods": [],
     "heat_behavior": {
-      "a": "Rather Floral Noten (etwa beim Einlegen)",
+      "a": "Rather Floral notes (especially when pickling)",
       "b": "Kampferartige Fresh",
       "c": "Rather resinousr"
     },
@@ -2967,8 +2959,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "b": "aromatic, bitter-sweet",
-      "c": "roast notes, karamellig bis schoko"
+      "b": "aromatic, bitter-sweet"
     },
     "aroma_groups": [
       5
@@ -3145,7 +3136,7 @@
       "Potatoes",
       "tomatoes",
       "Zucchini",
-      "fast allen"
+      "almost everything"
     ],
     "cuisines": [
       "England: Minzsauce",
@@ -3153,7 +3144,7 @@
     ],
     "heat_behavior": {
       "a": "Typical floral green Minznoten",
-      "b": "Leich- te bitternoten, mehr „pfeffrig“"
+      "b": "Leich- te bitter notes, mehr „pfeffrig“"
     },
     "aroma_groups": [
       2
@@ -3229,7 +3220,7 @@
     "cuisines": [],
     "heat_behavior": {
       "a": "Roher Pilzduft",
-      "b": "Typischer Morchelduft und -geschmack"
+      "b": "Typical morel aroma and flavor"
     },
     "aroma_groups": [
       2,
@@ -3294,8 +3285,7 @@
       "Deutschland: Kartoffelgerichte, Blumen-"
     ],
     "heat_behavior": {
-      "a": "Fresh, leicht zitrusartig",
-      "b": "Sehr aroma"
+      "a": "Fresh, leicht zitrusartig"
     },
     "spice_blends": [
       "Indisches Tandoori",
@@ -3347,7 +3337,7 @@
     "cuisines": [],
     "heat_behavior": {
       "a": "Floral-zitrusartig",
-      "b": "resinous Noten be"
+      "b": "resinous note"
     },
     "aroma_groups": [
       2,
@@ -3401,8 +3391,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Woody, anise-like spicy",
-      "b": "Sehr aro"
+      "a": "Woody, anise-like spicy"
     },
     "spice_blends": [
       "Bengalisches Panch Phoron"
@@ -3488,7 +3477,7 @@
       "Frankreich: Tapenade (Olivenpaste), Olivenbrot"
     ],
     "heat_behavior": {
-      "a": "tangyes Olivenaroma, leichte bitter"
+      "a": "tangy olive aroma, lightly bitter"
     },
     "aroma_groups": [
       2,
@@ -3615,9 +3604,8 @@
       "Griechenland: Mous-"
     ],
     "heat_behavior": {
-      "a": "Floral Noten",
-      "b": "Floral-woody",
-      "c": "Herb"
+      "a": "Floral notes",
+      "b": "Floral-woody"
     },
     "spice_blends": [],
     "aroma_groups": [
@@ -3737,9 +3725,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Floralr Duft, ingwerartige heat",
-      "b": "woodye Noten, dezente heat",
-      "c": "Nach"
+      "a": "Floral aroma, ginger-like heat",
+      "b": "woody notes, subtle heat"
     },
     "spice_blends": [
       "Marokkanisches Ras el-Hanout",
@@ -3822,7 +3809,7 @@
     "cuisines": [],
     "heat_behavior": {
       "a": "waxy, nussig-aromatic",
-      "b": "Dominan- te roast notes zwischen Karamell und Kaffee"
+      "b": "Dominant roast notes between caramel and coffee"
     },
     "aroma_groups": [
       2,
@@ -4106,7 +4093,7 @@
     "cuisines": [],
     "heat_behavior": {
       "a": "Pfeffriges Aroma",
-      "b": "Herbal-spicy Noten"
+      "b": "Herbal-spicy notes"
     },
     "aroma_groups": [
       2,
@@ -4252,7 +4239,7 @@
     "heat_behavior": {
       "a": "Fresh, Floral-nussig, fatty (unroasted)",
       "b": "Leicht balsamic-resinous",
-      "c": "Bildung von"
+      "c": "Formation of"
     },
     "aroma_groups": [
       2,
@@ -4302,8 +4289,7 @@
       "Libanon: Fattousch-Salat (Tomaten-Brot- Salat"
     ],
     "heat_behavior": {
-      "a": "Floral-bittere, spicy Noten",
-      "b": "Herb"
+      "a": "Floral-bitter, spicy notes"
     },
     "aroma_groups": [
       2,
@@ -4369,7 +4355,7 @@
     ],
     "heat_behavior": {
       "a": "Sulfurous-pungent, spicy",
-      "b": "wenig pungent, feine bitter-spicy aromas RAceto Balsamico, da dessen hoher Anteil am karamellig-sweeten Aroma"
+      "b": "little pungent, feine bitter-spicy aromas Balsamic vinegar, caramel-sweet note"
     },
     "aroma_groups": [
       2,
@@ -4513,8 +4499,7 @@
       "a": "Dominant floral-herbal green note"
     },
     "spice_blends": [
-      "LAGERUNG",
-      "ANBAU Man bekommt mittlerweile in den meisten"
+      "LAGERUNG"
     ],
     "aroma_groups": [
       2,
@@ -4549,8 +4534,7 @@
       "Katalonien: Paella, Zarzuela cata-"
     ],
     "heat_behavior": {
-      "a": "Typisch earthy-roher Safrangeruch",
-      "b": "Ent"
+      "a": "Typical earthy-roher Safrangeruch"
     },
     "aroma_groups": [
       2,
@@ -4713,7 +4697,7 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Fresh sulfur-garlic-like Duft",
+      "a": "Fresh sulfur-garlic-like aroma",
       "b": "Rascher Aromenverlust"
     },
     "spice_blends": [],
@@ -4752,7 +4736,7 @@
     "cuisines": [],
     "heat_behavior": {
       "a": "earthy-zitroniges Aroma",
-      "b": "Emphasis on der"
+      "b": "Emphasis on the"
     },
     "spice_blends": [
       "bengalisches"
@@ -4793,15 +4777,14 @@
       }
     ],
     "pairs_with_foods": [
-      "Potatoes",
-      "Fleisch-"
+      "Potatoes"
     ],
     "cuisines": [
       "Deutschland: Sauerbraten, Kohlgerichte,"
     ],
     "heat_behavior": {
       "a": "pungentes Aroma",
-      "b": "Freisetzung der Aro- men aus der Saat beim Anbraten"
+      "b": "Aromas released from the seed when searing"
     },
     "spice_blends": [
       "Indisches Madras Curry",
@@ -5074,7 +5057,7 @@
     "heat_behavior": {
       "a": "Zitrusartig, floral, prickelnde heat",
       "b": "Warm-balsamic, weniger scharf",
-      "c": "Leicht balsamic, Mild Noten"
+      "c": "Leicht Balsamic, mild notes"
     },
     "spice_blends": [
       "Arabisches Zatar",
@@ -5424,8 +5407,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "earthy-Sulfurouse Noten",
-      "b": "Emphasis on der"
+      "a": "earthy sulfurous notes",
+      "b": "Emphasis on the"
     },
     "aroma_groups": [
       2,
@@ -5480,7 +5463,7 @@
     ],
     "heat_behavior": {
       "a": "aromatic typische Vanille",
-      "b": "Cremige, sweet-Floral, aromatic Noten"
+      "b": "Creamy, sweet-floral, aromatic notes"
     },
     "aroma_groups": [
       5
@@ -5546,7 +5529,7 @@
     ],
     "heat_behavior": {
       "a": "Leicht Floral, Clearly resinous Aro- men",
-      "b": "Emphasis on der woodyen Duftanteile"
+      "b": "Emphasis on woody aroma components"
     },
     "spice_blends": [
       "LAGERUNG"
@@ -5631,7 +5614,7 @@
     ],
     "heat_behavior": {
       "a": "Leicht Fruity, waxy",
-      "b": "Typisch aro"
+      "b": "Typical aro"
     },
     "aroma_groups": [
       2,
@@ -5675,7 +5658,7 @@
     "cuisines": [],
     "heat_behavior": {
       "a": "Fine nutty tones",
-      "b": "aromatic Noten im Nussaroma",
+      "b": "aromatic notes in the nut aroma",
       "c": "Additional roast aromas"
     },
     "aroma_groups": [
@@ -5732,8 +5715,8 @@
     ],
     "cuisines": [],
     "heat_behavior": {
-      "a": "Finer, floral-tangyer Duft und Geschmack",
-      "b": "Intensivierung der aromati"
+      "a": "Finer, floral-tangy aroma and flavor",
+      "b": "Intensification of aromatic notes"
     },
     "aroma_groups": [
       2,
@@ -5783,7 +5766,7 @@
       "Italien: Grappa con ruta, Moretum (antike"
     ],
     "heat_behavior": {
-      "a": "Sehr intensiver Duft, herber Geschmack",
+      "a": "Very intense aroma, tart flavor",
       "b": "Fine sweet-bitter, hay-like notes"
     },
     "aroma_groups": [
@@ -6031,7 +6014,7 @@
     "heat_behavior": {
       "a": "Feine Floral, waxy-zitrale aromas",
       "b": "resinous-floral, Lightly bitter",
-      "c": "Highlighting der bitternoten"
+      "c": "Highlighting bitter notes"
     },
     "aroma_groups": [
       2
@@ -6095,7 +6078,7 @@
     "heat_behavior": {
       "a": "Fresh, greenish, lemon-herbal",
       "b": "Florals Zitrusaroma",
-      "c": "Leichte bitterness"
+      "c": "light bitterness"
     },
     "aroma_groups": [
       2
@@ -6144,7 +6127,7 @@
     ],
     "heat_behavior": {
       "a": "Purely sweet",
-      "b": "Bildung karamelliger Noten"
+      "b": "Formation of caramel notes"
     },
     "spice_blends": [
       "Vanillezucker"
@@ -6200,7 +6183,7 @@
     "heat_behavior": {
       "a": "Fresh, stark pungente Schwefelnoten",
       "b": "Mild Zwiebelaromas, kaum pungent",
-      "c": "Bildung vieler roast notes aus Zwiebel"
+      "c": "Formation of many roast notes from onion"
     },
     "spice_blends": [],
     "aroma_groups": [

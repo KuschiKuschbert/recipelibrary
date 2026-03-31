@@ -135,8 +135,8 @@
         "_de": "Weißer Pfeffer"
       },
       {
-        "id": "zucker",
-        "name": "Zucker",
+        "id": "sugar",
+        "name": "Sugar",
         "_de": "Zucker"
       }
     ]
@@ -1154,8 +1154,8 @@
         "_de": "Zimt"
       },
       {
-        "id": "zucker",
-        "name": "Zucker",
+        "id": "sugar",
+        "name": "Sugar",
         "_de": "Zucker"
       },
       {
@@ -1415,8 +1415,8 @@
         "_de": "Zitronenschale"
       },
       {
-        "id": "zucker-karamell",
-        "name": "Zucker(karamell)",
+        "id": "sugar",
+        "name": "Sugar",
         "_de": "Zucker(karamell)"
       }
     ]
@@ -4339,8 +4339,8 @@
         "_de": "Minze"
       },
       {
-        "id": "morchel",
-        "name": "Morchel",
+        "id": "morel",
+        "name": "Morel",
         "_de": "Morchel"
       },
       {
