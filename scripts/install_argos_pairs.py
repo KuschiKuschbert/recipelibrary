@@ -5,7 +5,7 @@ Download Argos Translate language pairs into the local Argos package store.
 Usage:
   python3 scripts/install_argos_pairs.py es pt fr it de
 
-Default (no args): es pt (covers many Spanish/Portuguese catalog strings).
+Default (no args): el es pt fr it de tr ro pl nl ru sl cs (Greek + major EU + Slavic proxy for Croatian via sl).
 Requires: pip install argostranslate
 """
 from __future__ import annotations
@@ -19,7 +19,7 @@ def main() -> int:
     ap.add_argument(
         "langs",
         nargs="*",
-        default=["es", "pt"],
+        default=["el", "es", "pt", "fr", "it", "de", "tr", "ro", "pl", "nl", "ru", "sl", "cs"],
         help="Source language codes (target is always en)",
     )
     args = ap.parse_args()

@@ -39,6 +39,9 @@ GLOSSARY_PATH = Path(__file__).resolve().parent / "translation_glossary.json"
 # DeepL / LibreTranslate language hints from detect script (ISO 639-1)
 DEEPL_LANG = {"el", "es", "pt", "fr", "it", "de", "nl", "pl", "hr", "tr", "ro", "ru", "sv", "da", "fi"}
 
+# Argos has no hr→en; Slovenian is the closest available pair for rough Croatian coverage.
+ARGOS_FROM_ALIASES: dict[str, str] = {"hr": "sl"}
+
 
 def load_glossary() -> list[str]:
     if not GLOSSARY_PATH.is_file():
@@ -108,6 +111,7 @@ def make_translator(
                 print("ERROR: pip install argostranslate", file=sys.stderr)
                 return None
             src = (from_lang or default_from or "es").strip().lower()
+            src = ARGOS_FROM_ALIASES.get(src, src)
             try:
                 return argostranslate.translate.translate(text, src, "en")
             except Exception as e:
@@ -338,6 +342,18 @@ def main() -> int:
         action="store_true",
         help="Run repartition_detail_shards.py after translate if any name changed letter bucket",
     )
+    ap.add_argument(
+        "--checkpoint-every",
+        type=int,
+        default=0,
+        metavar="N",
+        help="After every N recipes, flush modified detail shards to disk (0=only at end)",
+    )
+    ap.add_argument(
+        "--quiet",
+        action="store_true",
+        help="Only print warnings, checkpoints, and final summary",
+    )
     args = ap.parse_args()
 
     ids: list[str] = []
@@ -373,6 +389,16 @@ def main() -> int:
     translator = make_translator(args.backend, args.default_from)
     modified_letters: set[str] = set()
     names_changed_letter: list[tuple[str, str, str]] = []  # id, old_letter, new_letter
+    done = 0
+    changed_recipes = 0
+    total_fields = 0
+
+    def flush_shards() -> None:
+        for L in sorted(modified_letters):
+            if not L:
+                continue
+            path = RECIPE_DETAIL / f"detail_{L}.json"
+            save_detail_file(path, shards[L], compact=True)
 
     for rid in ids:
         hit = id_to_recipe.get(rid)
@@ -380,6 +406,10 @@ def main() -> int:
             print(f"WARN: id not in detail shards: {rid}", file=sys.stderr)
             continue
         letter, recipe = hit
+        if count_non_ascii_strings(recipe) == 0:
+            done += 1
+            continue
+
         from_lang = lang_by_id.get(rid)
         if not from_lang:
             from_lang = args.default_from
@@ -388,22 +418,34 @@ def main() -> int:
         old_l = letter_from_name(old_name)
 
         n = translate_recipe_fields(recipe, translator, from_lang, glossary)
+        done += 1
 
         if n > 0:
             modified_letters.add(letter)
+            changed_recipes += 1
+            total_fields += n
             new_name = recipe.get("name") or ""
             new_l = letter_from_name(new_name)
             if old_l != new_l:
                 names_changed_letter.append((rid, old_l, new_l))
-            print(f"Translated {n} field(s): {rid} ({letter})")
+            if not args.quiet:
+                print(f"Translated {n} field(s): {rid} ({letter})")
 
-    for L in sorted(modified_letters):
-        if not L:
-            continue
-        path = RECIPE_DETAIL / f"detail_{L}.json"
-        save_detail_file(path, shards[L], compact=True)
+        if (
+            args.checkpoint_every > 0
+            and done % args.checkpoint_every == 0
+            and modified_letters
+        ):
+            flush_shards()
+            print(f"checkpoint: {done}/{len(ids)} recipes, flushed {len(modified_letters)} shard(s)", flush=True)
 
-    print(f"Saved detail shards: {', '.join(sorted(modified_letters)) or '(none)'}")
+    flush_shards()
+
+    print(
+        f"Saved detail shards: {', '.join(sorted(modified_letters)) or '(none)'} "
+        f"({changed_recipes} recipes, {total_fields} fields, {done} processed)",
+        flush=True,
+    )
 
     if names_changed_letter and args.repartition_after:
         import subprocess
