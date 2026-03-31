@@ -395,6 +395,56 @@
     }).join('');
   }
 
+  function heatBehaviorHasAny(heat) {
+    heat = heat || {};
+    return !!(heat.a || heat.b || heat.c);
+  }
+
+  function heatBehaviorLegendHtml() {
+    return (
+      '<p class="aroma-heat-legend">' +
+      '<strong>A → B → C</strong> are progressive stages from the book’s heat and aroma notes (same source as this extract). ' +
+      'They are a rough guide to how the aroma tends to evolve during cooking—not exact temperatures or times.' +
+      '</p>'
+    );
+  }
+
+  function heatBehaviorStagesHtml(heat, compact) {
+    heat = heat || {};
+    var keys = ['a', 'b', 'c'];
+    var lis = [];
+    for (var i = 0; i < keys.length; i++) {
+      var k = keys[i];
+      var v = heat[k];
+      if (!v) continue;
+      var label = 'Stage ' + k.toUpperCase();
+      var cls = 'aroma-heat-stage' + (compact ? ' aroma-heat-stage--compact' : '');
+      lis.push(
+        '<li class="' + cls + '">' +
+        '<span class="aroma-heat-stage-label">' + esc(label) + '</span>' +
+        '<span class="aroma-heat-stage-text">' + esc(v) + '</span>' +
+        '</li>'
+      );
+    }
+    if (!lis.length) return '';
+    var wrapCls = 'aroma-heat-stages' + (compact ? ' aroma-heat-stages--compact' : '');
+    return '<ul class="' + wrapCls + '">' + lis.join('') + '</ul>';
+  }
+
+  function heatBehaviorBlockForProfile(heat) {
+    if (!heatBehaviorHasAny(heat)) return '';
+    return (
+      '<h3>Timing under heat (A → B → C)</h3>' +
+      heatBehaviorLegendHtml() +
+      heatBehaviorStagesHtml(heat, false)
+    );
+  }
+
+  function heatBehaviorBlockForPairModal(heat) {
+    if (!heatBehaviorHasAny(heat)) return '';
+    return '<h4>Timing under heat</h4>' + heatBehaviorStagesHtml(heat, true);
+  }
+
   function showMode(m) {
     mode = m;
     document.querySelectorAll('.aroma-mode-btn').forEach(function (b) {
@@ -435,11 +485,7 @@
     var foods = (ing.pairs_with_foods || []).map(function (f) {
       return '<span class="aroma-chip" style="cursor:default">' + esc(f) + '</span>';
     }).join('');
-    var heat = ing.heat_behavior || {};
-    var heatHtml = ['a', 'b', 'c'].map(function (k) {
-      if (!heat[k]) return '';
-      return '<li><strong>' + k.toUpperCase() + '</strong> — ' + esc(heat[k]) + '</li>';
-    }).join('');
+    var heatTimingBlock = heatBehaviorBlockForProfile(ing.heat_behavior);
     var cuisines = (ing.cuisines || []).map(function (c) {
       return '<li>' + esc(c) + '</li>';
     }).join('');
@@ -451,9 +497,9 @@
       '<h2>' + esc(ing.name) + '</h2>' +
       (ing.botanical ? '<div class="bot">' + esc(ing.botanical) + '</div>' : '') +
       '<div>' + groupBadges(ing.aroma_groups) + '</div>' +
+      heatTimingBlock +
       '<h3>Harmonizes with</h3><div class="aroma-chip-row">' + (harm || '<span class="aroma-empty">—</span>') + '</div>' +
       '<h3>Pairs well with foods</h3><div class="aroma-chip-row">' + (foods || '<span class="aroma-empty">—</span>') + '</div>' +
-      (heatHtml ? '<h3>Heat behavior</h3><ul class="modal-steps">' + heatHtml + '</ul>' : '') +
       (cuisines ? '<h3>Regional use</h3><ul class="modal-steps">' + cuisines + '</ul>' : '') +
       (blends ? '<h3>Spice blends</h3><ul class="modal-steps">' + blends + '</ul>' : '') +
       '</div>';
@@ -980,26 +1026,20 @@
       })
       .join(', ');
     var foods = (ing.pairs_with_foods || []).slice(0, 6).join(', ');
-    var heat = ing.heat_behavior || {};
-    var heatBits = ['a', 'b', 'c']
-      .map(function (k) {
-        return heat[k] ? k.toUpperCase() + ': ' + heat[k] : '';
-      })
-      .filter(Boolean)
-      .join(' · ');
+    var heatPairBlock = heatBehaviorBlockForPairModal(ing.heat_behavior);
     return (
       '<div class="aroma-pair-col">' +
       '<h3>' +
       esc(ing.name) +
       '</h3>' +
       groupBadges(ing.aroma_groups) +
+      heatPairBlock +
       '<h4>Harmonizes with</h4><p>' +
       esc(harm || '—') +
       '</p>' +
       '<h4>Pairs with foods</h4><p>' +
       esc(foods || '—') +
       '</p>' +
-      (heatBits ? '<h4>Heat behavior</h4><p>' + esc(heatBits) + '</p>' : '') +
       '</div>'
     );
   }

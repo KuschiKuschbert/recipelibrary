@@ -40,7 +40,7 @@ Principle from the book: ingredients sharing **groups** tend to **reinforce** (s
 1. **“What should I season X with?”** — Find a row in `food_pairings.json` whose `name` matches X (fuzzy: meat, fish, pulses, vegetables). List `seasonings` names; optionally open matching entries in `ingredients.json` for `harmonizes_with` and `heat_behavior`.
 2. **“What goes with spice Y?”** — Look up `ingredients.json` by `id` or `name`; read `harmonizes_with` and `pairs_with_foods`.
 3. **Recipe review** — Map recipe ingredient lines with the same normalization as the site: `KuschiUserRecipes.canonicalOrderMergeKey` when available. Score suggestions: matched spices contribute their harmony partners; food-pairing hits add seasonings from the appendix. Prefer **bridging** spices (suggested by multiple sources). Mention gaps in aroma **groups** only qualitatively unless you’ve loaded the JSON.
-4. **Timing** — Use `heat_behavior.a|b|c` when advising *when* to add (fresh vs cooked-out vs roast notes); wording is abbreviated English from extraction.
+4. **Timing** — `heat_behavior.a` / `b` / `c` map to PDF stages **A → B → C** (progressive heat/aroma notes), not arbitrary keys; use them as a rough evolution guide. Wording is abbreviated English from extraction.
 5. **UI** — Point users to [aroma.html](aroma.html) for full profiles and the matrix (`?spice=id`, `?food=id` query params).
 
 ## Compact reference (~50 ingredients by harmony count)

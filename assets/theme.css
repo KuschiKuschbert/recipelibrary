@@ -1260,6 +1260,71 @@ body {
   font-weight: 500;
 }
 
+/* aroma.html — heat timing (A → B → C from book extract) */
+.aroma-heat-legend {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text2);
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.aroma-heat-stages {
+  list-style: none;
+  margin: 0 0 4px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.aroma-heat-stage {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px 14px;
+  align-items: start;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  background: var(--surface);
+}
+.aroma-heat-stage-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--gold);
+  white-space: nowrap;
+}
+.aroma-heat-stage-text {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--text);
+}
+.aroma-heat-stages--compact {
+  gap: 8px;
+}
+.aroma-heat-stage--compact {
+  padding: 8px 10px;
+  grid-template-columns: 1fr;
+  gap: 4px;
+}
+.aroma-heat-stage--compact .aroma-heat-stage-label {
+  font-size: 10px;
+}
+.aroma-heat-stage--compact .aroma-heat-stage-text {
+  font-size: 12px;
+  color: var(--text2);
+}
+.aroma-pair-col .aroma-heat-stages {
+  margin-bottom: 12px;
+}
+.aroma-pair-col .aroma-heat-stages + h4 {
+  margin-top: 4px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .modal-overlay,
   .modal {
