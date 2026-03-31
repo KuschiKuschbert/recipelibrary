@@ -291,7 +291,9 @@ body {
   border-radius: 20px;
   max-width: var(--modal-max-width);
   width: 100%;
+  min-width: 0;
   max-height: min(85vh, 85dvh);
+  overflow-x: clip;
   overflow-y: auto;
   padding: 32px;
   position: relative;
@@ -761,7 +763,7 @@ body {
 /* ── Order list modal (Riviera + kitchen books) ───────────────── */
 #orderListOverlay .modal.order-list-modal,
 #kbOrderListOverlay .modal.order-list-modal {
-  max-width: min(920px, 100vw - 32px);
+  max-width: min(920px, 100%);
 }
 .order-zone-block {
   margin-bottom: 20px;

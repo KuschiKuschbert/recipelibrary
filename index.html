@@ -12,6 +12,7 @@
 <style>
   /* ── Hero / Header (index) ─────────────────────────── */
   .hero {
+    container-type: inline-size;
     text-align: center;
     padding: 60px 24px 20px;
     position: relative;
@@ -402,7 +403,8 @@
     transition: max-width 0.38s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.28s ease;
   }
   .hero-add-split.expanded .hero-add-pair {
-    max-width: 340px;
+    max-width: min(340px, calc(100vw - 48px));
+    max-width: min(340px, calc(100cqi - 48px));
     opacity: 1;
     pointer-events: auto;
   }
@@ -449,12 +451,6 @@
       --hero-pill-fs: 12px;
       --hero-pill-pad-x-segment: 10px;
     }
-    .hero-add-split.expanded .hero-add-pair {
-      max-width: min(340px, calc(100vw - 48px));
-    }
-    .hero-books-split.expanded .hero-books-panel {
-      max-width: calc(100vw - 40px);
-    }
   }
   @media (prefers-reduced-motion: reduce) {
     .hero-add-pair,
@@ -472,7 +468,8 @@
     box-sizing: border-box;
   }
   .hero-books-split.expanded .hero-books-panel {
-    max-width: min(720px, 92vw);
+    max-width: min(720px, calc(100vw - 48px));
+    max-width: min(720px, calc(100cqi - 48px));
   }
   .hero-books-panel.hero-add-pair .hero-nav-link,
   .hero-books-panel.hero-add-pair .hero-nav-link:first-of-type,
