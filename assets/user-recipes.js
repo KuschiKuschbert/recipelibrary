@@ -646,10 +646,12 @@
     if (patch.brand !== undefined) next.brand = String(patch.brand);
     if (patch.uom !== undefined) next.uom = String(patch.uom);
     if (patch.uomLocked !== undefined) next.uomLocked = !!patch.uomLocked;
+    if (patch.brandLocked !== undefined) next.brandLocked = !!patch.brandLocked;
     if (next.qty === undefined) next.qty = '';
     if (next.brand === undefined) next.brand = '';
     if (next.uom === undefined) next.uom = '';
     if (next.uomLocked === undefined) next.uomLocked = false;
+    if (next.brandLocked === undefined) next.brandLocked = false;
     d.lines[id] = next;
     saveRivieraStocktake(d);
   }
@@ -657,14 +659,17 @@
   function addRivieraStocktakeExtra(name, zone, qty, brand, uom) {
     var d = loadRivieraStocktake();
     var z = ZONE_IDS.indexOf(zone) >= 0 ? zone : 'other';
+    var b = String(brand || '').trim();
+    var u = String(uom || '').trim();
     var row = {
       id: 'stx-' + Date.now().toString(36),
       name: titleCaseWords(String(name).trim()),
       zone: z,
       qty: String(qty || '').trim(),
-      brand: String(brand || '').trim(),
-      uom: String(uom || '').trim(),
-      uomLocked: false,
+      brand: b,
+      uom: u,
+      uomLocked: u !== '',
+      brandLocked: b !== '',
     };
     d.extras.push(row);
     saveRivieraStocktake(d);
@@ -682,6 +687,7 @@
     if (patch.brand !== undefined) ex.brand = String(patch.brand);
     if (patch.uom !== undefined) ex.uom = String(patch.uom);
     if (patch.uomLocked !== undefined) ex.uomLocked = !!patch.uomLocked;
+    if (patch.brandLocked !== undefined) ex.brandLocked = !!patch.brandLocked;
     if (patch.name !== undefined) ex.name = titleCaseWords(String(patch.name).trim());
     if (patch.zone !== undefined) ex.zone = ZONE_IDS.indexOf(patch.zone) >= 0 ? patch.zone : 'other';
     saveRivieraStocktake(d);
@@ -712,12 +718,14 @@
       if (L && typeof L === 'object') {
         L.qty = '';
         L.brand = '';
+        L.brandLocked = false;
       }
     });
     d.extras.forEach(function (ex) {
       if (ex && typeof ex === 'object') {
         ex.qty = '';
         ex.brand = '';
+        ex.brandLocked = false;
       }
     });
     saveRivieraStocktake(d);
@@ -750,10 +758,12 @@
     if (patch.brand !== undefined) next.brand = String(patch.brand);
     if (patch.uom !== undefined) next.uom = String(patch.uom);
     if (patch.uomLocked !== undefined) next.uomLocked = !!patch.uomLocked;
+    if (patch.brandLocked !== undefined) next.brandLocked = !!patch.brandLocked;
     if (next.qty === undefined) next.qty = '';
     if (next.brand === undefined) next.brand = '';
     if (next.uom === undefined) next.uom = '';
     if (next.uomLocked === undefined) next.uomLocked = false;
+    if (next.brandLocked === undefined) next.brandLocked = false;
     d.lines[rid] = next;
     saveBookStocktake(bookId, d);
   }
@@ -761,14 +771,17 @@
   function addBookStocktakeExtra(bookId, name, zone, qty, brand, uom) {
     var d = loadBookStocktake(bookId);
     var z = ZONE_IDS.indexOf(zone) >= 0 ? zone : 'other';
+    var b = String(brand || '').trim();
+    var u = String(uom || '').trim();
     var row = {
       id: 'stx-' + Date.now().toString(36),
       name: titleCaseWords(String(name).trim()),
       zone: z,
       qty: String(qty || '').trim(),
-      brand: String(brand || '').trim(),
-      uom: String(uom || '').trim(),
-      uomLocked: false,
+      brand: b,
+      uom: u,
+      uomLocked: u !== '',
+      brandLocked: b !== '',
     };
     d.extras.push(row);
     saveBookStocktake(bookId, d);
@@ -786,6 +799,7 @@
     if (patch.brand !== undefined) ex.brand = String(patch.brand);
     if (patch.uom !== undefined) ex.uom = String(patch.uom);
     if (patch.uomLocked !== undefined) ex.uomLocked = !!patch.uomLocked;
+    if (patch.brandLocked !== undefined) ex.brandLocked = !!patch.brandLocked;
     if (patch.name !== undefined) ex.name = titleCaseWords(String(patch.name).trim());
     if (patch.zone !== undefined) ex.zone = ZONE_IDS.indexOf(patch.zone) >= 0 ? patch.zone : 'other';
     saveBookStocktake(bookId, d);
@@ -816,12 +830,14 @@
       if (L && typeof L === 'object') {
         L.qty = '';
         L.brand = '';
+        L.brandLocked = false;
       }
     });
     d.extras.forEach(function (ex) {
       if (ex && typeof ex === 'object') {
         ex.qty = '';
         ex.brand = '';
+        ex.brandLocked = false;
       }
     });
     saveBookStocktake(bookId, d);

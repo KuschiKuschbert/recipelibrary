@@ -960,6 +960,10 @@ body {
   opacity: 0.9;
   cursor: default;
 }
+.stkt-field--locked {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(201, 169, 110, 0.2) !important;
+}
 .stkt-line-name {
   color: var(--text);
   font-weight: 500;
@@ -980,19 +984,6 @@ body {
 .stkt-uom-cell .stkt-uom {
   flex: 1 1 52px;
   min-width: 0;
-}
-.stkt-uom-cell .stkt-uom-toggle {
-  flex: 0 0 auto;
-  padding: 6px 10px;
-  font-size: 11px;
-  white-space: nowrap;
-}
-.stkt-uom-locked-badge {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--gold);
-  opacity: 0.85;
 }
 .stkt-line-sub {
   padding-left: 8px;

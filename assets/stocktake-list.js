@@ -44,69 +44,65 @@
     var st = lines[rowId];
     var defU = String(defaultUom || '').trim();
     if (!st || typeof st !== 'object') {
-      return { qty: '', brand: '', uom: defU, uomLocked: false };
+      return { qty: '', brand: '', uom: defU, uomLocked: false, brandLocked: false };
     }
     return {
       qty: st.qty != null ? String(st.qty) : '',
       brand: st.brand != null ? String(st.brand) : '',
       uom: st.uom != null && String(st.uom).trim() !== '' ? String(st.uom) : defU,
       uomLocked: !!st.uomLocked,
+      brandLocked: !!st.brandLocked,
     };
   }
 
   function stxExtraState(ex) {
     if (!ex || typeof ex !== 'object') {
-      return { qty: '', brand: '', uom: '', uomLocked: false };
+      return { qty: '', brand: '', uom: '', uomLocked: false, brandLocked: false };
     }
     return {
       qty: ex.qty != null ? String(ex.qty) : '',
       brand: ex.brand != null ? String(ex.brand) : '',
       uom: ex.uom != null ? String(ex.uom) : '',
       uomLocked: !!ex.uomLocked,
+      brandLocked: !!ex.brandLocked,
     };
   }
 
-  function qtyBrandUomCells(rowId, state, showLockBtn) {
-    var locked = state.uomLocked;
+  function qtyBrandUomCells(rowId, state) {
+    var brandRo = !!state.brandLocked && String(state.brand || '').trim() !== '';
+    var uomRo = !!state.uomLocked;
+    var brandTitle = brandRo ? 'Double-click to edit brand' : '';
+    var uomTitle = uomRo ? 'Double-click to edit UOM' : '';
+
     var uomInput =
-      '<input type="text" class="stkt-field stkt-uom" data-row-id="' +
+      '<input type="text" class="stkt-field stkt-uom' +
+      (uomRo ? ' stkt-field--locked' : '') +
+      '" data-row-id="' +
       escAttr(rowId) +
       '" value="' +
       escAttr(state.uom) +
       '" placeholder="UOM"' +
-      (locked ? ' readonly' : '') +
+      (uomRo ? ' readonly' : '') +
+      (uomTitle ? ' title="' + escAttr(uomTitle) + '"' : '') +
       ' />';
-    if (locked) {
-      uomInput +=
-        '<span class="stkt-uom-locked-badge" title="UOM confirmed">locked</span>';
-    }
-    var lockLabel = locked ? 'Unlock UOM' : 'Confirm UOM';
-    var lockClass = locked ? 'btn-secondary stkt-uom-toggle stkt-uom-unlock' : 'btn-secondary stkt-uom-toggle';
-    var lockBtn = showLockBtn
-      ? '<button type="button" class="' +
-        lockClass +
-        '" data-row-id="' +
-        escAttr(rowId) +
-        '" data-next-locked="' +
-        (locked ? '0' : '1') +
-        '">' +
-        esc(lockLabel) +
-        '</button>'
-      : '';
     return (
       '<input type="text" class="stkt-field stkt-qty" data-row-id="' +
       escAttr(rowId) +
       '" value="' +
       escAttr(state.qty) +
       '" placeholder="Qty on hand" />' +
-      '<input type="text" class="stkt-field stkt-brand" data-row-id="' +
+      '<input type="text" class="stkt-field stkt-brand' +
+      (brandRo ? ' stkt-field--locked' : '') +
+      '" data-row-id="' +
       escAttr(rowId) +
       '" value="' +
       escAttr(state.brand) +
-      '" placeholder="Brand" />' +
+      '" placeholder="Brand"' +
+      (brandRo ? ' readonly' : '') +
+      (brandTitle ? ' title="' + escAttr(brandTitle) + '"' : '') +
+      ' />' +
       '<div class="stkt-uom-cell">' +
       uomInput +
-      lockBtn +
       '</div>'
     );
   }
@@ -197,7 +193,7 @@
               '<div class="stkt-zone-label">' +
               esc(ZL[z]) +
               '</div>' +
-              qtyBrandUomCells(rid, st, true) +
+              qtyBrandUomCells(rid, st) +
               '<span class="stkt-row-spacer"></span>' +
               '</div>';
             extraIds.forEach(function (xid) {
@@ -215,7 +211,7 @@
                 '<div class="stkt-zone-label">' +
                 esc(ZL[z]) +
                 '</div>' +
-                qtyBrandUomCells(eid, stEx, true) +
+                qtyBrandUomCells(eid, stEx) +
                 '<span class="stkt-row-spacer"></span>' +
                 '</div>';
             });
@@ -231,7 +227,7 @@
               '<div class="stkt-zone-label">' +
               esc(ZL[z]) +
               '</div>' +
-              qtyBrandUomCells(eid2, st2, true) +
+              qtyBrandUomCells(eid2, st2) +
               '<span class="stkt-row-spacer"></span>' +
               '</div>';
           }
@@ -248,7 +244,7 @@
             '<div class="stkt-zone-label">' +
             esc(ZL[z]) +
             '</div>' +
-            qtyBrandUomCells(sid, stS, true) +
+            qtyBrandUomCells(sid, stS) +
             '<button type="button" class="btn-secondary stkt-remove-stx" data-stx-id="' +
             escAttr(ex.id) +
             '">✕</button>' +
@@ -279,25 +275,50 @@
       });
       body.querySelectorAll('.stkt-brand').forEach(function (el) {
         el.addEventListener('change', function () {
-          patchFromInput(el, 'brand');
+          if (el.readOnly) return;
+          var rowId = el.getAttribute('data-row-id');
+          if (!rowId) return;
+          var patch = { brand: el.value };
+          if (!String(el.value || '').trim()) patch.brandLocked = false;
+          storage.patchRow(rowId, patch);
+        });
+        el.addEventListener('blur', function () {
+          if (el.readOnly) return;
+          var rowId = el.getAttribute('data-row-id');
+          if (!rowId) return;
+          var v = String(el.value || '').trim();
+          if (v) storage.patchRow(rowId, { brand: el.value, brandLocked: true });
+          else storage.patchRow(rowId, { brand: '', brandLocked: false });
+        });
+        el.addEventListener('dblclick', function () {
+          if (!el.readOnly) return;
+          var rowId = el.getAttribute('data-row-id');
+          if (!rowId) return;
+          storage.patchRow(rowId, { brandLocked: false });
+          renderBody();
         });
       });
       body.querySelectorAll('.stkt-uom').forEach(function (el) {
         el.addEventListener('change', function () {
           if (el.readOnly) return;
-          patchFromInput(el, 'uom');
-        });
-      });
-      body.querySelectorAll('.stkt-uom-toggle').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var rowId = btn.getAttribute('data-row-id');
+          var rowId = el.getAttribute('data-row-id');
           if (!rowId) return;
-          var nextLocked = btn.getAttribute('data-next-locked') === '1';
-          var wrap = btn.closest('.stkt-line-row');
-          var uomEl = wrap && wrap.querySelector('.stkt-uom');
-          var patch = { uomLocked: nextLocked };
-          if (nextLocked && uomEl) patch.uom = uomEl.value;
+          var patch = { uom: el.value };
+          if (!String(el.value || '').trim()) patch.uomLocked = false;
           storage.patchRow(rowId, patch);
+        });
+        el.addEventListener('blur', function () {
+          if (el.readOnly) return;
+          var rowId = el.getAttribute('data-row-id');
+          if (!rowId) return;
+          var v = String(el.value || '').trim();
+          storage.patchRow(rowId, { uom: el.value, uomLocked: v !== '' });
+        });
+        el.addEventListener('dblclick', function () {
+          if (!el.readOnly) return;
+          var rowId = el.getAttribute('data-row-id');
+          if (!rowId) return;
+          storage.patchRow(rowId, { uomLocked: false });
           renderBody();
         });
       });
