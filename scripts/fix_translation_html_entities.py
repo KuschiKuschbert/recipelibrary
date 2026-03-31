@@ -11,6 +11,7 @@ Usage:
   python3 scripts/fix_translation_html_entities.py --dry-run
   python3 scripts/fix_translation_html_entities.py --write
   python3 scripts/fix_translation_html_entities.py --write --retranslate-tr
+  python3 scripts/fix_translation_html_entities.py --write --retranslate-tr --skip-entities
 """
 from __future__ import annotations
 
@@ -193,6 +194,11 @@ def main() -> int:
         help="After entity fix, Argos tr→en on strings with Turkish letters (lezzet / original_language tr)",
     )
     ap.add_argument(
+        "--skip-entities",
+        action="store_true",
+        help="Skip html.unescape pass (entities already fixed); use with --retranslate-tr to only run Argos",
+    )
+    ap.add_argument(
         "--affected-out",
         type=Path,
         default=None,
@@ -202,6 +208,10 @@ def main() -> int:
 
     if not args.dry_run and not args.write:
         print("ERROR: pass --dry-run or --write", file=sys.stderr)
+        return 1
+
+    if args.skip_entities and not args.retranslate_tr:
+        print("ERROR: --skip-entities only makes sense with --retranslate-tr", file=sys.stderr)
         return 1
 
     if args.retranslate_tr:
@@ -229,17 +239,20 @@ def main() -> int:
     for letter, data in sorted(shards.items()):
         for recipe in iter_recipes_in_shard(data):
             n_seen += 1
-            if args.retranslate_tr and n_seen % 400 == 0:
+            if (args.retranslate_tr or not args.skip_entities) and n_seen % 400 == 0:
                 print(f"  … processed {n_seen} recipes", flush=True)
             rid = str(recipe["id"])
             old_name = recipe.get("name") or ""
             old_letter = letter_from_name(old_name)
 
-            ce, _ = mutate_recipe_strings(
-                recipe,
-                do_entities=True,
-                do_tr=False,
-            )
+            if args.skip_entities:
+                ce = 0
+            else:
+                ce, _ = mutate_recipe_strings(
+                    recipe,
+                    do_entities=True,
+                    do_tr=False,
+                )
             ct = 0
             if args.retranslate_tr and is_tr_scope_recipe(recipe):
                 ct, _ = mutate_recipe_strings(
