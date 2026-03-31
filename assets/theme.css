@@ -762,7 +762,9 @@ body {
 
 /* ── Order list modal (Riviera + kitchen books) ───────────────── */
 #orderListOverlay .modal.order-list-modal,
-#kbOrderListOverlay .modal.order-list-modal {
+#kbOrderListOverlay .modal.order-list-modal,
+#stocktakeOverlay .modal.order-list-modal,
+#kbStocktakeOverlay .modal.order-list-modal {
   max-width: min(920px, 100%);
 }
 .order-zone-block {
@@ -926,6 +928,149 @@ body {
 }
 .order-sub-label {
   color: var(--text3);
+}
+
+/* Stocktake checklist (Riviera + kitchen books) */
+.stkt-line-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) 88px minmax(0, 0.75fr) minmax(0, 0.85fr) minmax(0, 1fr) 36px;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.stkt-line-row .stkt-field {
+  width: 100%;
+  min-width: 0;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 12px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+.stkt-line-row .stkt-field:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.stkt-line-row .stkt-field[readonly] {
+  opacity: 0.9;
+  cursor: default;
+}
+.stkt-line-name {
+  color: var(--text);
+  font-weight: 500;
+  min-width: 0;
+}
+.stkt-zone-label {
+  font-size: 11px;
+  color: var(--text3);
+  line-height: 1.3;
+}
+.stkt-uom-cell {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.stkt-uom-cell .stkt-uom {
+  flex: 1 1 52px;
+  min-width: 0;
+}
+.stkt-uom-cell .stkt-uom-toggle {
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.stkt-uom-locked-badge {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  opacity: 0.85;
+}
+.stkt-line-sub {
+  padding-left: 8px;
+}
+.stkt-line-sub .stkt-line-name {
+  font-weight: 400;
+  color: var(--text2);
+}
+.stkt-badge {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 6px;
+  vertical-align: middle;
+}
+.stkt-line-block {
+  margin-bottom: 0;
+}
+.stkt-row-spacer {
+  display: block;
+}
+/* Sub-row (folded order extra): arrow + same fields as main row */
+.stkt-line-row.stkt-line-sub {
+  grid-template-columns: 22px minmax(0, 1.28fr) 80px minmax(0, 0.68fr) minmax(0, 0.78fr) minmax(0, 1fr) 32px;
+}
+.stkt-line-sub .order-sub-merged {
+  align-self: start;
+  padding-top: 6px;
+  color: var(--text3);
+}
+@media (max-width: 900px) {
+  .stkt-line-row {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+  }
+  .stkt-line-row.stkt-line-sub {
+    grid-template-columns: 1fr 1fr;
+  }
+  .stkt-line-row .stkt-line-name {
+    grid-column: 1 / -1;
+  }
+  .stkt-line-sub .order-sub-merged {
+    grid-column: 1;
+    grid-row: 1;
+    padding-top: 4px;
+  }
+  .stkt-line-row .stkt-zone-label {
+    grid-column: 1 / -1;
+  }
+  .stkt-line-row .stkt-qty {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  .stkt-line-row .stkt-brand {
+    grid-column: 2;
+    grid-row: 3;
+  }
+  .stkt-line-row .stkt-uom-cell {
+    grid-column: 1 / -1;
+    grid-row: 4;
+  }
+  .stkt-line-row .stkt-remove-stx,
+  .stkt-line-row .stkt-row-spacer {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    align-self: start;
+  }
+  .stkt-line-sub .stkt-line-name {
+    grid-column: 2;
+    grid-row: 1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

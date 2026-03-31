@@ -13,6 +13,7 @@
   /** Set to '1' after one-time ingredient qty metric normalisation (Riviera page). */
   const STORAGE_RIVIERA_METRIC_MIGRATED = 'kuschi_riviera_metric_normalized_v1';
   const STORAGE_CUSTOM_BOOKS = 'kuschi_custom_kitchen_books_v1';
+  const STORAGE_RIVIERA_STOCKTAKE = 'kuschi_riviera_stocktake_v1';
 
   const ZONE_IDS = ['freezer', 'coldroom', 'drystore', 'other'];
 
@@ -30,6 +31,10 @@
 
   function bookMasterStorageKey(bookId) {
     return 'kuschi_book_' + String(bookId || '').trim() + '_master_v1';
+  }
+
+  function bookStocktakeStorageKey(bookId) {
+    return 'kuschi_book_' + String(bookId || '').trim() + '_stocktake_v1';
   }
 
   function slugifyBookId(name) {
@@ -611,7 +616,219 @@
     localStorage.removeItem(bookOrderOverridesStorageKey(id));
     localStorage.removeItem(bookOrderExtrasStorageKey(id));
     localStorage.removeItem(bookMasterStorageKey(id));
+    localStorage.removeItem(bookStocktakeStorageKey(id));
     return true;
+  }
+
+  function normalizeStocktakeDoc(raw) {
+    var d = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {};
+    var lines = d.lines && typeof d.lines === 'object' && !Array.isArray(d.lines) ? d.lines : {};
+    var extras = Array.isArray(d.extras) ? d.extras : [];
+    return { lines: lines, extras: extras };
+  }
+
+  function loadRivieraStocktake() {
+    return normalizeStocktakeDoc(safeParseObject(localStorage.getItem(STORAGE_RIVIERA_STOCKTAKE) || '{}', {}));
+  }
+
+  function saveRivieraStocktake(doc) {
+    var n = normalizeStocktakeDoc(doc);
+    localStorage.setItem(STORAGE_RIVIERA_STOCKTAKE, JSON.stringify(n));
+  }
+
+  function patchRivieraStocktakeLine(rowId, patch) {
+    var d = loadRivieraStocktake();
+    var id = String(rowId || '').trim();
+    if (!id) return;
+    var cur = d.lines[id] && typeof d.lines[id] === 'object' ? d.lines[id] : {};
+    var next = Object.assign({}, cur);
+    if (patch.qty !== undefined) next.qty = String(patch.qty);
+    if (patch.brand !== undefined) next.brand = String(patch.brand);
+    if (patch.uom !== undefined) next.uom = String(patch.uom);
+    if (patch.uomLocked !== undefined) next.uomLocked = !!patch.uomLocked;
+    if (next.qty === undefined) next.qty = '';
+    if (next.brand === undefined) next.brand = '';
+    if (next.uom === undefined) next.uom = '';
+    if (next.uomLocked === undefined) next.uomLocked = false;
+    d.lines[id] = next;
+    saveRivieraStocktake(d);
+  }
+
+  function addRivieraStocktakeExtra(name, zone, qty, brand, uom) {
+    var d = loadRivieraStocktake();
+    var z = ZONE_IDS.indexOf(zone) >= 0 ? zone : 'other';
+    var row = {
+      id: 'stx-' + Date.now().toString(36),
+      name: titleCaseWords(String(name).trim()),
+      zone: z,
+      qty: String(qty || '').trim(),
+      brand: String(brand || '').trim(),
+      uom: String(uom || '').trim(),
+      uomLocked: false,
+    };
+    d.extras.push(row);
+    saveRivieraStocktake(d);
+    return row;
+  }
+
+  function updateRivieraStocktakeExtra(extraId, patch) {
+    var d = loadRivieraStocktake();
+    var idx = d.extras.findIndex(function (x) {
+      return x && x.id === extraId;
+    });
+    if (idx < 0) return;
+    var ex = d.extras[idx];
+    if (patch.qty !== undefined) ex.qty = String(patch.qty);
+    if (patch.brand !== undefined) ex.brand = String(patch.brand);
+    if (patch.uom !== undefined) ex.uom = String(patch.uom);
+    if (patch.uomLocked !== undefined) ex.uomLocked = !!patch.uomLocked;
+    if (patch.name !== undefined) ex.name = titleCaseWords(String(patch.name).trim());
+    if (patch.zone !== undefined) ex.zone = ZONE_IDS.indexOf(patch.zone) >= 0 ? patch.zone : 'other';
+    saveRivieraStocktake(d);
+  }
+
+  function removeRivieraStocktakeExtra(extraId) {
+    var d = loadRivieraStocktake();
+    d.extras = d.extras.filter(function (x) {
+      return x && x.id !== extraId;
+    });
+    saveRivieraStocktake(d);
+  }
+
+  function patchRivieraStocktakeRow(rowId, patch) {
+    var id = String(rowId || '').trim();
+    if (!id) return;
+    if (id.indexOf('stx:') === 0) {
+      updateRivieraStocktakeExtra(id.slice(4), patch);
+    } else {
+      patchRivieraStocktakeLine(id, patch);
+    }
+  }
+
+  function clearRivieraStocktakeQuantities() {
+    var d = loadRivieraStocktake();
+    Object.keys(d.lines).forEach(function (k) {
+      var L = d.lines[k];
+      if (L && typeof L === 'object') {
+        L.qty = '';
+        L.brand = '';
+      }
+    });
+    d.extras.forEach(function (ex) {
+      if (ex && typeof ex === 'object') {
+        ex.qty = '';
+        ex.brand = '';
+      }
+    });
+    saveRivieraStocktake(d);
+  }
+
+  function exportRivieraStocktakeJson() {
+    return JSON.stringify(loadRivieraStocktake(), null, 2);
+  }
+
+  function loadBookStocktake(bookId) {
+    var id = String(bookId || '').trim();
+    if (!id) return normalizeStocktakeDoc({});
+    return normalizeStocktakeDoc(safeParseObject(localStorage.getItem(bookStocktakeStorageKey(id)) || '{}', {}));
+  }
+
+  function saveBookStocktake(bookId, doc) {
+    var id = String(bookId || '').trim();
+    if (!id) return;
+    var n = normalizeStocktakeDoc(doc);
+    localStorage.setItem(bookStocktakeStorageKey(id), JSON.stringify(n));
+  }
+
+  function patchBookStocktakeLine(bookId, rowId, patch) {
+    var d = loadBookStocktake(bookId);
+    var rid = String(rowId || '').trim();
+    if (!rid) return;
+    var cur = d.lines[rid] && typeof d.lines[rid] === 'object' ? d.lines[rid] : {};
+    var next = Object.assign({}, cur);
+    if (patch.qty !== undefined) next.qty = String(patch.qty);
+    if (patch.brand !== undefined) next.brand = String(patch.brand);
+    if (patch.uom !== undefined) next.uom = String(patch.uom);
+    if (patch.uomLocked !== undefined) next.uomLocked = !!patch.uomLocked;
+    if (next.qty === undefined) next.qty = '';
+    if (next.brand === undefined) next.brand = '';
+    if (next.uom === undefined) next.uom = '';
+    if (next.uomLocked === undefined) next.uomLocked = false;
+    d.lines[rid] = next;
+    saveBookStocktake(bookId, d);
+  }
+
+  function addBookStocktakeExtra(bookId, name, zone, qty, brand, uom) {
+    var d = loadBookStocktake(bookId);
+    var z = ZONE_IDS.indexOf(zone) >= 0 ? zone : 'other';
+    var row = {
+      id: 'stx-' + Date.now().toString(36),
+      name: titleCaseWords(String(name).trim()),
+      zone: z,
+      qty: String(qty || '').trim(),
+      brand: String(brand || '').trim(),
+      uom: String(uom || '').trim(),
+      uomLocked: false,
+    };
+    d.extras.push(row);
+    saveBookStocktake(bookId, d);
+    return row;
+  }
+
+  function updateBookStocktakeExtra(bookId, extraId, patch) {
+    var d = loadBookStocktake(bookId);
+    var idx = d.extras.findIndex(function (x) {
+      return x && x.id === extraId;
+    });
+    if (idx < 0) return;
+    var ex = d.extras[idx];
+    if (patch.qty !== undefined) ex.qty = String(patch.qty);
+    if (patch.brand !== undefined) ex.brand = String(patch.brand);
+    if (patch.uom !== undefined) ex.uom = String(patch.uom);
+    if (patch.uomLocked !== undefined) ex.uomLocked = !!patch.uomLocked;
+    if (patch.name !== undefined) ex.name = titleCaseWords(String(patch.name).trim());
+    if (patch.zone !== undefined) ex.zone = ZONE_IDS.indexOf(patch.zone) >= 0 ? patch.zone : 'other';
+    saveBookStocktake(bookId, d);
+  }
+
+  function removeBookStocktakeExtra(bookId, extraId) {
+    var d = loadBookStocktake(bookId);
+    d.extras = d.extras.filter(function (x) {
+      return x && x.id !== extraId;
+    });
+    saveBookStocktake(bookId, d);
+  }
+
+  function patchBookStocktakeRow(bookId, rowId, patch) {
+    var id = String(rowId || '').trim();
+    if (!id) return;
+    if (id.indexOf('stx:') === 0) {
+      updateBookStocktakeExtra(bookId, id.slice(4), patch);
+    } else {
+      patchBookStocktakeLine(bookId, id, patch);
+    }
+  }
+
+  function clearBookStocktakeQuantities(bookId) {
+    var d = loadBookStocktake(bookId);
+    Object.keys(d.lines).forEach(function (k) {
+      var L = d.lines[k];
+      if (L && typeof L === 'object') {
+        L.qty = '';
+        L.brand = '';
+      }
+    });
+    d.extras.forEach(function (ex) {
+      if (ex && typeof ex === 'object') {
+        ex.qty = '';
+        ex.brand = '';
+      }
+    });
+    saveBookStocktake(bookId, d);
+  }
+
+  function exportBookStocktakeJson(bookId) {
+    return JSON.stringify(loadBookStocktake(bookId), null, 2);
   }
 
   function loadBookRecipes(bookId) {
@@ -975,6 +1192,21 @@
     removeBookOrderExtra: removeBookOrderExtra,
     exportBookMaster: exportBookMaster,
     exportBookOrderBundle: exportBookOrderBundle,
+    bookStocktakeStorageKey: bookStocktakeStorageKey,
+    loadRivieraStocktake: loadRivieraStocktake,
+    saveRivieraStocktake: saveRivieraStocktake,
+    patchRivieraStocktakeRow: patchRivieraStocktakeRow,
+    addRivieraStocktakeExtra: addRivieraStocktakeExtra,
+    removeRivieraStocktakeExtra: removeRivieraStocktakeExtra,
+    clearRivieraStocktakeQuantities: clearRivieraStocktakeQuantities,
+    exportRivieraStocktakeJson: exportRivieraStocktakeJson,
+    loadBookStocktake: loadBookStocktake,
+    saveBookStocktake: saveBookStocktake,
+    patchBookStocktakeRow: patchBookStocktakeRow,
+    addBookStocktakeExtra: addBookStocktakeExtra,
+    removeBookStocktakeExtra: removeBookStocktakeExtra,
+    clearBookStocktakeQuantities: clearBookStocktakeQuantities,
+    exportBookStocktakeJson: exportBookStocktakeJson,
     addRivieraRecipe: addRivieraRecipe,
     exportKitchen: exportKitchen,
     exportRiviera: exportRiviera,

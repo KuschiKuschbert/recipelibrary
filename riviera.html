@@ -451,6 +451,7 @@
       <button type="button" onclick="openPageQrModal()" title="QR code to open this page on your phone">QR</button>
     </div>
     <button type="button" onclick="openOrderListModal()">Order list (all ingredients)</button>
+    <button type="button" onclick="openStocktakeModal()">Stocktake checklist</button>
   </div>
 </div>
 
@@ -502,6 +503,35 @@
       <button type="button" class="btn-secondary" onclick="copyOrderListText()">Copy as text</button>
       <button type="button" class="btn-secondary" onclick="copyOrderBundleJson()">Copy order data JSON</button>
       <button type="button" class="btn-secondary" onclick="copyMasterIngredientsJson()">Copy remembered ingredients (JSON)</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="stocktakeOverlay" onclick="if(event.target===this)closeStocktakeModal()">
+  <div class="modal order-list-modal stocktake-modal">
+    <button type="button" class="modal-close" onclick="closeStocktakeModal()">✕</button>
+    <div class="modal-title" style="margin-bottom:12px">Stocktake checklist</div>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Same ingredients as your order list (merged by name and zone). Enter counted quantity, brand, and UOM. Use <strong>Confirm UOM</strong> to lock the unit for that line. Lines you add here are <strong>only</strong> on this stocktake sheet.</p>
+    <div id="stocktakeBody"></div>
+    <div class="modal-section" style="margin-top:20px">Add line (stocktake only)</div>
+    <p class="order-add-hint">Does not add to the order list — only to this checklist.</p>
+    <div class="form-row"><label for="stNewName">Name</label><input id="stNewName" type="text" placeholder="e.g. Gloves" autocomplete="off" /></div>
+    <div class="form-row"><label for="stNewZone">Storage</label>
+      <select id="stNewZone">
+        <option value="freezer">Freezer</option>
+        <option value="coldroom">Cold room</option>
+        <option value="drystore">Dry store</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <div class="form-row"><label for="stNewQty">Quantity (optional)</label><input id="stNewQty" type="text" placeholder="e.g. 3" autocomplete="off" /></div>
+    <div class="form-row"><label for="stNewBrand">Brand (optional)</label><input id="stNewBrand" type="text" placeholder="e.g. Supplier" autocomplete="off" /></div>
+    <div class="form-row"><label for="stNewUom">UOM (optional)</label><input id="stNewUom" type="text" placeholder="e.g. kg, box" autocomplete="off" /></div>
+    <button type="button" class="btn-secondary" onclick="submitStocktakeAdd()">Add to stocktake</button>
+    <div class="order-actions">
+      <button type="button" class="btn-secondary" onclick="clearStocktakeCounts()">Clear counted qty &amp; brand</button>
+      <button type="button" class="btn-secondary" onclick="copyStocktakeText()">Copy as text</button>
+      <button type="button" class="btn-secondary" onclick="copyStocktakeJson()">Copy stocktake JSON</button>
     </div>
   </div>
 </div>
@@ -602,6 +632,7 @@
 
 <script src="assets/user-recipes.js"></script>
 <script src="assets/order-list.js"></script>
+<script src="assets/stocktake-list.js"></script>
 <script src="assets/recipe-gemini-format.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js" crossorigin="anonymous"></script>
 <script src="assets/recipe-import-helpers.js"></script>
@@ -1266,6 +1297,7 @@ function closePageQrModal() {
   if (overlay) overlay.classList.remove('open');
   if (!document.getElementById('modalOverlay').classList.contains('open') &&
       !document.getElementById('orderListOverlay').classList.contains('open') &&
+      !document.getElementById('stocktakeOverlay').classList.contains('open') &&
       !document.getElementById('addRivieraOverlay').classList.contains('open') &&
       !document.getElementById('rivieraAdminOverlay').classList.contains('open')) {
     document.body.style.overflow = '';
@@ -1276,6 +1308,7 @@ function closeRivieraAdminModal() {
   document.getElementById('rivieraAdminOverlay').classList.remove('open');
   if (!document.getElementById('modalOverlay').classList.contains('open') &&
       !document.getElementById('orderListOverlay').classList.contains('open') &&
+      !document.getElementById('stocktakeOverlay').classList.contains('open') &&
       !document.getElementById('addRivieraOverlay').classList.contains('open') &&
       !document.getElementById('pageQrOverlay').classList.contains('open')) {
     document.body.style.overflow = '';
@@ -1369,10 +1402,72 @@ const rivieraOrderList =
         !document.getElementById('modalOverlay').classList.contains('open') &&
         !document.getElementById('addRivieraOverlay').classList.contains('open') &&
         !document.getElementById('rivieraAdminOverlay').classList.contains('open') &&
-        !document.getElementById('pageQrOverlay').classList.contains('open')
+        !document.getElementById('pageQrOverlay').classList.contains('open') &&
+        !document.getElementById('stocktakeOverlay').classList.contains('open')
       );
     },
   });
+
+const rivieraStocktakeList =
+  window.KuschiStocktakeList &&
+  rivieraOrderList &&
+  KuschiStocktakeList.create({
+    overlayId: 'stocktakeOverlay',
+    bodyId: 'stocktakeBody',
+    formIds: { name: 'stNewName', zone: 'stNewZone', qty: 'stNewQty', brand: 'stNewBrand', uom: 'stNewUom' },
+    orderList: rivieraOrderList,
+    getOrderExtras: function () {
+      return KuschiUserRecipes.loadOrderExtras();
+    },
+    storage: {
+      load: function () {
+        return KuschiUserRecipes.loadRivieraStocktake();
+      },
+      patchRow: function (rowId, patch) {
+        KuschiUserRecipes.patchRivieraStocktakeRow(rowId, patch);
+      },
+      addExtra: function (n, z, q, b, u) {
+        KuschiUserRecipes.addRivieraStocktakeExtra(n, z, q, b, u);
+      },
+      removeExtra: function (id) {
+        KuschiUserRecipes.removeRivieraStocktakeExtra(id);
+      },
+      clearQuantities: function () {
+        KuschiUserRecipes.clearRivieraStocktakeQuantities();
+      },
+      exportJson: function () {
+        return KuschiUserRecipes.exportRivieraStocktakeJson();
+      },
+    },
+    shouldReleaseBodyScroll: function () {
+      return (
+        !document.getElementById('modalOverlay').classList.contains('open') &&
+        !document.getElementById('addRivieraOverlay').classList.contains('open') &&
+        !document.getElementById('rivieraAdminOverlay').classList.contains('open') &&
+        !document.getElementById('pageQrOverlay').classList.contains('open') &&
+        !document.getElementById('orderListOverlay').classList.contains('open')
+      );
+    },
+  });
+
+function openStocktakeModal() {
+  if (rivieraStocktakeList) rivieraStocktakeList.open();
+}
+function closeStocktakeModal() {
+  if (rivieraStocktakeList) rivieraStocktakeList.close();
+}
+function submitStocktakeAdd() {
+  if (rivieraStocktakeList) rivieraStocktakeList.submitAdd();
+}
+function clearStocktakeCounts() {
+  if (rivieraStocktakeList) rivieraStocktakeList.clearCounted();
+}
+function copyStocktakeText() {
+  if (rivieraStocktakeList) rivieraStocktakeList.copyText();
+}
+function copyStocktakeJson() {
+  if (rivieraStocktakeList) rivieraStocktakeList.copyJson();
+}
 
 function syncRivieraOrderListZoneEditButton() {
   var btn = document.getElementById('rivieraOrdZoneEditBtn');
@@ -1904,6 +1999,7 @@ function rescale(val) {
 function closeModal() {
   document.getElementById('modalOverlay').classList.remove('open');
   if (!document.getElementById('orderListOverlay').classList.contains('open') &&
+      !document.getElementById('stocktakeOverlay').classList.contains('open') &&
       !document.getElementById('addRivieraOverlay').classList.contains('open') &&
       !document.getElementById('rivieraAdminOverlay').classList.contains('open') &&
       !document.getElementById('pageQrOverlay').classList.contains('open')) {
@@ -1933,6 +2029,8 @@ document.addEventListener('keydown', e => {
     closeRivieraAdminModal();
   } else if (document.getElementById('pageQrOverlay').classList.contains('open')) {
     closePageQrModal();
+  } else if (document.getElementById('stocktakeOverlay').classList.contains('open')) {
+    closeStocktakeModal();
   } else if (document.getElementById('orderListOverlay').classList.contains('open')) {
     closeOrderListModal();
   } else if (document.getElementById('addRivieraOverlay').classList.contains('open')) {
