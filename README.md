@@ -63,6 +63,20 @@ Counts in the HTML hero update from loaded data; README stats are illustrative �
 
 Scripts in `scripts/` update **`recipe_detail/`** (source of truth for full text) and **`claude_index/`** (compact list/search). The main site does not call translation APIs.
 
+### Translation cleanup (HTML entities + optional Turkish re-pass)
+
+Some imported strings still contain literal HTML entities (`&ccedil;`, `&nbsp;`, …) or leftover Turkish in lezzet-style recipes. Suggested order:
+
+1. **Decode entities:** `python3 scripts/fix_translation_html_entities.py --dry-run`, then `python3 scripts/fix_translation_html_entities.py --write`.
+2. **Optional Turkish re-translate:** `python3 scripts/fix_translation_html_entities.py --write --retranslate-tr` — Argos **tr→en** only for recipes with `source: lezzet` or `original_language: tr`, and only on fields that still contain Turkish letters (`çğıöşü` etc.). Install the Argos **tr** pair first (`python3 scripts/install_argos_pairs.py tr`). This can take a long time on a full library.
+3. **Sync index:** `python3 scripts/sync_claude_index_from_detail.py --ids-from reports/cleanup_affected_ids.jsonl` (or `--all-in-index` for a full refresh).
+4. **Repartition** (only if the cleanup script warned about **name** first-letter bucket drift): `python3 scripts/repartition_detail_shards.py`.
+5. **Verify:** `python3 scripts/check-recipe-shards.py` (must exit 0).
+
+Running `--write` writes `reports/cleanup_affected_ids.jsonl` (gitignored); regenerate it whenever you run a cleanup write.
+
+**Initial translation run (detect → translate → sync):**
+
 1. **Optional:** `pip install argostranslate` (or `pip install -r scripts/requirements-translation.txt` — note `lingua` may need a newer Python than 3.9 on some systems). After Argos is installed, fetch models: `python3 scripts/install_argos_pairs.py es pt` (add `fr it de` etc. as needed).
 2. **Detect:** `python3 scripts/detect-nonenglish-recipes.py` → writes `reports/translation_candidates.jsonl` (add `--no-lingua` if you skip pip).
 3. **Translate:** install Argos language pairs you need, then e.g.  
