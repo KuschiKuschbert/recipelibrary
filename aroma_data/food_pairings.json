@@ -1,0 +1,5598 @@
+[
+  {
+    "id": "gartengurken",
+    "name": "Gartengurken",
+    "_de": "GARTENGURKEN",
+    "seasonings": [
+      {
+        "id": "seaweed",
+        "name": "Seaweed",
+        "_de": "Algen (Nori)"
+      },
+      {
+        "id": "borage",
+        "name": "Borage",
+        "_de": "Borretsch"
+      },
+      {
+        "id": "bockshornkleekraut",
+        "name": "Bockshornkleekraut",
+        "_de": "Bockshornkleekraut"
+      },
+      {
+        "id": "watercress",
+        "name": "Watercress",
+        "_de": "Brunnenkresse"
+      },
+      {
+        "id": "mushrooms",
+        "name": "Mushrooms",
+        "_de": "Champignons"
+      },
+      {
+        "id": "dill",
+        "name": "Dill",
+        "_de": "Dill"
+      },
+      {
+        "id": "tarragon",
+        "name": "Tarragon",
+        "_de": "Estragon"
+      },
+      {
+        "id": "vinegar",
+        "name": "Vinegar",
+        "_de": "Essig"
+      },
+      {
+        "id": "fenchelkraut",
+        "name": "Fenchelkraut",
+        "_de": "Fenchelkraut"
+      },
+      {
+        "id": "fennel-seeds",
+        "name": "Fennel Seeds",
+        "_de": "Gewürzfenchel"
+      },
+      {
+        "id": "haselnuesse",
+        "name": "Haselnüsse",
+        "_de": "Haselnüsse"
+      },
+      {
+        "id": "honey",
+        "name": "Honey",
+        "_de": "Honig"
+      },
+      {
+        "id": "capers",
+        "name": "Capers",
+        "_de": "Kapern"
+      },
+      {
+        "id": "cress",
+        "name": "Cress",
+        "_de": "Kresse"
+      },
+      {
+        "id": "cubeb-pepper",
+        "name": "Cubeb Pepper",
+        "_de": "Kubebenpfeffer"
+      },
+      {
+        "id": "mint",
+        "name": "Mint",
+        "_de": "Minze"
+      },
+      {
+        "id": "mace",
+        "name": "Mace",
+        "_de": "Macis"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg",
+        "_de": "Muskatnuss"
+      },
+      {
+        "id": "nigella",
+        "name": "Nigella",
+        "_de": "Nigella"
+      },
+      {
+        "id": "pistachios",
+        "name": "Pistachios",
+        "_de": "Pistazien"
+      },
+      {
+        "id": "mustard",
+        "name": "Mustard",
+        "_de": "Senf"
+      },
+      {
+        "id": "sesame",
+        "name": "Sesame",
+        "_de": "Sesam"
+      },
+      {
+        "id": "tonka-bean",
+        "name": "Tonka Bean",
+        "_de": "Tonkabohne"
+      },
+      {
+        "id": "walnuts",
+        "name": "Walnuts",
+        "_de": "Walnüsse"
+      },
+      {
+        "id": "sweet-woodruff",
+        "name": "Sweet Woodruff",
+        "_de": "Waldmeister"
+      },
+      {
+        "id": "white-pepper",
+        "name": "White Pepper",
+        "_de": "Weißer Pfeffer"
+      },
+      {
+        "id": "zucker",
+        "name": "Zucker",
+        "_de": "Zucker"
+      }
+    ]
+  },
+  {
+    "id": "chicken",
+    "name": "Chicken",
+    "_de": "HUHN",
+    "seasonings": [
+      {
+        "id": "seaweed",
+        "name": "Seaweed",
+        "_de": "Algen (Dulse)"
+      },
+      {
+        "id": "annatto",
+        "name": "Annatto",
+        "_de": "Annatto"
+      },
+      {
+        "id": "basil",
+        "name": "Basil",
+        "_de": "Basilikum"
+      },
+      {
+        "id": "barberries",
+        "name": "Barberries",
+        "_de": "Berberitzen"
+      },
+      {
+        "id": "cashew",
+        "name": "Cashew",
+        "_de": "Cashew"
+      },
+      {
+        "id": "chili",
+        "name": "Chili",
+        "_de": "Chili"
+      },
+      {
+        "id": "peanut",
+        "name": "Peanut",
+        "_de": "Erdnuss"
+      },
+      {
+        "id": "tarragon",
+        "name": "Tarragon",
+        "_de": "Estragon"
+      },
+      {
+        "id": "galangal",
+        "name": "Galangal",
+        "_de": "Galgant"
+      },
+      {
+        "id": "pomegranate",
+        "name": "Pomegranate",
+        "_de": "Granatapfel"
+      },
+      {
+        "id": "kaffir-lime-leaves",
+        "name": "Kaffir Lime Leaves",
+        "_de": "Kaffirlimettenblätter"
+      },
+      {
+        "id": "capers",
+        "name": "Capers",
+        "_de": "Kapern"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom",
+        "_de": "Kardamom"
+      },
+      {
+        "id": "coconut",
+        "name": "Coconut",
+        "_de": "Kokosnuss"
+      },
+      {
+        "id": "cress",
+        "name": "Cress",
+        "_de": "Kresse"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin",
+        "_de": "Kreuzkümmel"
+      },
+      {
+        "id": "pumpkin-seed-oil",
+        "name": "Pumpkin Seed Oil",
+        "_de": "Kürbiskernöl"
+      },
+      {
+        "id": "turmeric",
+        "name": "Turmeric",
+        "_de": "Kurkuma"
+      },
+      {
+        "id": "lime",
+        "name": "Lime",
+        "_de": "Limette"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf",
+        "_de": "Lorbeer"
+      },
+      {
+        "id": "poppy-seed",
+        "name": "Poppy Seed",
+        "_de": "Mohn"
+      },
+      {
+        "id": "olives",
+        "name": "olives",
+        "_de": "Oliven"
+      },
+      {
+        "id": "paprika",
+        "name": "Paprika",
+        "_de": "Paprika"
+      },
+      {
+        "id": "perilla",
+        "name": "Perilla",
+        "_de": "Perilla"
+      },
+      {
+        "id": "allspice",
+        "name": "Allspice",
+        "_de": "Piment"
+      },
+      {
+        "id": "pistachio",
+        "name": "Pistachio",
+        "_de": "Pistazie"
+      },
+      {
+        "id": "rose",
+        "name": "Rose",
+        "_de": "Rosen"
+      },
+      {
+        "id": "sage",
+        "name": "Sage",
+        "_de": "Salbei"
+      },
+      {
+        "id": "sesame",
+        "name": "Sesame",
+        "_de": "Sesam"
+      },
+      {
+        "id": "shiitake",
+        "name": "Shiitake",
+        "_de": "Shiitake"
+      },
+      {
+        "id": "star-anise",
+        "name": "Star Anise",
+        "_de": "Sternanis"
+      },
+      {
+        "id": "sumac",
+        "name": "Sumac",
+        "_de": "Sumach"
+      },
+      {
+        "id": "sichuan-pepper",
+        "name": "Sichuan Pepper",
+        "_de": "Szechuanpfeffer"
+      },
+      {
+        "id": "sweet-woodruff",
+        "name": "Sweet Woodruff",
+        "_de": "Waldmeister"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon",
+        "_de": "Zimt"
+      },
+      {
+        "id": "lemon",
+        "name": "Lemon",
+        "_de": "Zitrone"
+      },
+      {
+        "id": "lemon-verbena",
+        "name": "Lemon Verbena",
+        "_de": "Zitronenverbene"
+      }
+    ]
+  },
+  {
+    "id": "cheese",
+    "name": "Cheese",
+    "_de": "KÄSE",
+    "seasonings": [
+      {
+        "id": "wakame",
+        "name": "Wakame)",
+        "_de": "Wakame)"
+      },
+      {
+        "id": "angelica",
+        "name": "Angelica",
+        "_de": "Angelika"
+      },
+      {
+        "id": "annatto",
+        "name": "Annatto",
+        "_de": "Annatto"
+      },
+      {
+        "id": "kaese",
+        "name": "käse)",
+        "_de": "käse)"
+      },
+      {
+        "id": "ziegenkaese",
+        "name": "Ziegenkäse)",
+        "_de": "Ziegenkäse)"
+      },
+      {
+        "id": "mountain-cumin",
+        "name": "Mountain cumin",
+        "_de": "Bergkümmel"
+      },
+      {
+        "id": "fenugreek",
+        "name": "Fenugreek",
+        "_de": "Bockshornklee"
+      },
+      {
+        "id": "savory",
+        "name": "Savory",
+        "_de": "Bohnenkraut"
+      },
+      {
+        "id": "nettle",
+        "name": "Nettle",
+        "_de": "Brennnessel"
+      },
+      {
+        "id": "mel",
+        "name": "mel)",
+        "_de": "mel)"
+      },
+      {
+        "id": "chili",
+        "name": "Chili",
+        "_de": "Chili (Chilaca)"
+      },
+      {
+        "id": "curry-leaves",
+        "name": "Curry Leaves",
+        "_de": "Curryblätter"
+      },
+      {
+        "id": "dates",
+        "name": "Dates",
+        "_de": "Datteln"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil",
+        "_de": "Kerbel (Frischkäse)"
+      },
+      {
+        "id": "cress",
+        "name": "Cress",
+        "_de": "Kresse (Frischkäse)"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin",
+        "_de": "Kreuzkümmel"
+      },
+      {
+        "id": "caraway",
+        "name": "Caraway",
+        "_de": "Kümmel"
+      },
+      {
+        "id": "mastic",
+        "name": "Mastic",
+        "_de": "Mastix (Frischkäse)"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg",
+        "_de": "Muskat"
+      },
+      {
+        "id": "nigella",
+        "name": "Nigella",
+        "_de": "Nigella"
+      },
+      {
+        "id": "pekannuss",
+        "name": "Pekannuss",
+        "_de": "Pekannuss"
+      },
+      {
+        "id": "arugula",
+        "name": "Arugula",
+        "_de": "Rauke"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary",
+        "_de": "Rosmarin"
+      },
+      {
+        "id": "sage",
+        "name": "Sage",
+        "_de": "Salbei"
+      },
+      {
+        "id": "frischkaese",
+        "name": "frischkäse)",
+        "_de": "frischkäse)"
+      },
+      {
+        "id": "mustard",
+        "name": "Mustard",
+        "_de": "Senf (Mostarda)"
+      },
+      {
+        "id": "ueberbacken",
+        "name": "(überbacken)",
+        "_de": "(überbacken)"
+      },
+      {
+        "id": "sesame",
+        "name": "Sesame",
+        "_de": "Sesam (Frischkäse))"
+      },
+      {
+        "id": "sichuan-pepper",
+        "name": "Sichuan Pepper",
+        "_de": "Szechuanpfeffer"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme",
+        "_de": "Thymian (Frischkäse)"
+      },
+      {
+        "id": "net",
+        "name": "net)",
+        "_de": "net)"
+      },
+      {
+        "id": "truffle",
+        "name": "Truffle",
+        "_de": "Trüffel"
+      },
+      {
+        "id": "walnut",
+        "name": "Walnut",
+        "_de": "Walnuss"
+      },
+      {
+        "id": "rue",
+        "name": "Rue",
+        "_de": "Weinraute"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon",
+        "_de": "Zimt"
+      },
+      {
+        "id": "onion",
+        "name": "Onion",
+        "_de": "Zwiebel"
+      }
+    ]
+  },
+  {
+    "id": "carrots",
+    "name": "Carrots",
+    "_de": "KAROTTEN",
+    "seasonings": [
+      {
+        "id": "nettle",
+        "name": "Nettle",
+        "_de": "Brennnessel"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger",
+        "_de": "Ingwer"
+      },
+      {
+        "id": "capers",
+        "name": "Capers",
+        "_de": "Kapern"
+      },
+      {
+        "id": "coriander-seeds",
+        "name": "Coriander Seeds",
+        "_de": "Koriandersamen"
+      },
+      {
+        "id": "lovage",
+        "name": "Lovage",
+        "_de": "Liebstöckel"
+      },
+      {
+        "id": "horseradish",
+        "name": "Horseradish",
+        "_de": "Meerrettich"
+      },
+      {
+        "id": "mint",
+        "name": "Mint",
+        "_de": "Minze"
+      },
+      {
+        "id": "saffron",
+        "name": "Saffron",
+        "_de": "Safran"
+      },
+      {
+        "id": "celery",
+        "name": "Celery",
+        "_de": "Sellerie"
+      },
+      {
+        "id": "mustard",
+        "name": "Mustard",
+        "_de": "Senf"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla",
+        "_de": "Vanille"
+      },
+      {
+        "id": "hyssop",
+        "name": "Hyssop",
+        "_de": "Ysop"
+      }
+    ]
+  },
+  {
+    "id": "potatoes",
+    "name": "Potatoes",
+    "_de": "KARTOFFELN",
+    "seasonings": [
+      {
+        "id": "ajwain",
+        "name": "Ajwain",
+        "_de": "Ajowan"
+      },
+      {
+        "id": "seaweed",
+        "name": "Seaweed",
+        "_de": "Algen (Kombu)"
+      },
+      {
+        "id": "amchoor",
+        "name": "Amchoor",
+        "_de": "Amchoor"
+      },
+      {
+        "id": "annatto",
+        "name": "Annatto",
+        "_de": "Annatto"
+      },
+      {
+        "id": "asafoetida",
+        "name": "Asafoetida",
+        "_de": "Asant"
+      },
+      {
+        "id": "wild-garlic",
+        "name": "Wild Garlic",
+        "_de": "Bärlauch"
+      },
+      {
+        "id": "fenugreek",
+        "name": "Fenugreek",
+        "_de": "Bockshornklee"
+      },
+      {
+        "id": "savory",
+        "name": "Savory",
+        "_de": "Bohnenkraut"
+      },
+      {
+        "id": "borage",
+        "name": "Borage",
+        "_de": "Borretsch"
+      },
+      {
+        "id": "curry-leaves",
+        "name": "Curry Leaves",
+        "_de": "Curryblätter"
+      },
+      {
+        "id": "dates",
+        "name": "Dates",
+        "_de": "Datteln"
+      },
+      {
+        "id": "dill",
+        "name": "Dill",
+        "_de": "Dill"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger",
+        "_de": "Ingwer"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom",
+        "_de": "Kardamom"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil",
+        "_de": "Kerbel"
+      },
+      {
+        "id": "cilantro",
+        "name": "Cilantro",
+        "_de": "Korianderkraut"
+      },
+      {
+        "id": "cress",
+        "name": "Cress",
+        "_de": "Kresse"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin",
+        "_de": "Kreuzkümmel"
+      },
+      {
+        "id": "caraway",
+        "name": "Caraway",
+        "_de": "Kümmel"
+      },
+      {
+        "id": "pumpkin-seed-oil",
+        "name": "Pumpkin Seed Oil",
+        "_de": "Kürbiskernöl"
+      },
+      {
+        "id": "turmeric",
+        "name": "Turmeric",
+        "_de": "Kurkuma"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender",
+        "_de": "Lavendel"
+      },
+      {
+        "id": "lovage",
+        "name": "Lovage",
+        "_de": "Liebstöckel"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf",
+        "_de": "Lorbeer"
+      },
+      {
+        "id": "marjoram",
+        "name": "Marjoram",
+        "_de": "Majoran"
+      },
+      {
+        "id": "horseradish",
+        "name": "Horseradish",
+        "_de": "Meerrettich"
+      },
+      {
+        "id": "mint",
+        "name": "Mint",
+        "_de": "Minze"
+      },
+      {
+        "id": "poppy-seed",
+        "name": "Poppy Seed",
+        "_de": "Mohn"
+      },
+      {
+        "id": "mojo",
+        "name": "Mojo",
+        "_de": "Mojo"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg",
+        "_de": "Muskat"
+      },
+      {
+        "id": "nigella",
+        "name": "Nigella",
+        "_de": "Nigella"
+      },
+      {
+        "id": "paprika",
+        "name": "Paprika",
+        "_de": "Paprika"
+      },
+      {
+        "id": "grains-of-paradise",
+        "name": "Grains of Paradise",
+        "_de": "Paradieskörner"
+      },
+      {
+        "id": "paranuss",
+        "name": "Paranuss",
+        "_de": "Paranuss"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley",
+        "_de": "Petersilie"
+      },
+      {
+        "id": "arugula",
+        "name": "Arugula",
+        "_de": "Rauke"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary",
+        "_de": "Rosmarin"
+      },
+      {
+        "id": "sorrel",
+        "name": "Sorrel",
+        "_de": "Sauerampfer"
+      },
+      {
+        "id": "chives",
+        "name": "Chives",
+        "_de": "Schnittlauch"
+      },
+      {
+        "id": "mustard",
+        "name": "Mustard",
+        "_de": "Senf"
+      },
+      {
+        "id": "porcini",
+        "name": "Porcini",
+        "_de": "Steinpilze"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme",
+        "_de": "Thymian"
+      },
+      {
+        "id": "walnut",
+        "name": "Walnut",
+        "_de": "Walnuss"
+      },
+      {
+        "id": "hyssop",
+        "name": "Hyssop",
+        "_de": "Ysop"
+      },
+      {
+        "id": "onion",
+        "name": "Onion",
+        "_de": "Zwiebel"
+      }
+    ]
+  },
+  {
+    "id": "kichererbsen",
+    "name": "Kichererbsen",
+    "_de": "KICHERERBSEN",
+    "seasonings": [
+      {
+        "id": "seaweed",
+        "name": "Seaweed",
+        "_de": "Algen"
+      },
+      {
+        "id": "anise",
+        "name": "Anise",
+        "_de": "Anis"
+      },
+      {
+        "id": "asafoetida",
+        "name": "Asafoetida",
+        "_de": "Asant"
+      },
+      {
+        "id": "bergamot",
+        "name": "Bergamot",
+        "_de": "Bergamotte"
+      },
+      {
+        "id": "peanut",
+        "name": "Peanut",
+        "_de": "Erdnuss"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic",
+        "_de": "Knoblauch"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander",
+        "_de": "Koriander"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin",
+        "_de": "Kreuzkümmel"
+      },
+      {
+        "id": "cubeb-pepper",
+        "name": "Cubeb Pepper",
+        "_de": "Kubebenpfeffer"
+      },
+      {
+        "id": "long-pepper",
+        "name": "Long Pepper",
+        "_de": "Langer Pfeffer"
+      },
+      {
+        "id": "parmesan",
+        "name": "Parmesan",
+        "_de": "Parmesan"
+      },
+      {
+        "id": "perilla",
+        "name": "Perilla",
+        "_de": "Perilla"
+      },
+      {
+        "id": "rosinen",
+        "name": "Rosinen",
+        "_de": "Rosinen"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary",
+        "_de": "Rosmarin"
+      },
+      {
+        "id": "celery",
+        "name": "Celery",
+        "_de": "Sellerie"
+      },
+      {
+        "id": "shiitake",
+        "name": "Shiitake",
+        "_de": "Shiitake"
+      },
+      {
+        "id": "porcini",
+        "name": "Porcini",
+        "_de": "Steinpilz"
+      },
+      {
+        "id": "star-anise",
+        "name": "Star Anise",
+        "_de": "Sternanis"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme",
+        "_de": "Thymian"
+      },
+      {
+        "id": "walnut",
+        "name": "Walnut",
+        "_de": "Walnuss"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon",
+        "_de": "Zimt"
+      },
+      {
+        "id": "zitronenschale",
+        "name": "Zitronenschale",
+        "_de": "Zitronenschale"
+      }
+    ]
+  },
+  {
+    "id": "romanesko",
+    "name": "Romanesko",
+    "_de": "ROMANESKO",
+    "seasonings": [
+      {
+        "id": "arganoel",
+        "name": "Arganöl",
+        "_de": "Arganöl"
+      },
+      {
+        "id": "seaweed",
+        "name": "Seaweed",
+        "_de": "Algen"
+      },
+      {
+        "id": "curry-leaves",
+        "name": "Curry Leaves",
+        "_de": "Curryblätter"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger",
+        "_de": "Ingwer"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin",
+        "_de": "Kreuzkümmel"
+      },
+      {
+        "id": "cubeb-pepper",
+        "name": "Cubeb Pepper",
+        "_de": "Kubebenpfeffer"
+      },
+      {
+        "id": "turmeric",
+        "name": "Turmeric",
+        "_de": "Kurkuma"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender",
+        "_de": "Lavendel"
+      },
+      {
+        "id": "long-pepper",
+        "name": "Long Pepper",
+        "_de": "Langer Pfeffer"
+      },
+      {
+        "id": "mace",
+        "name": "Mace",
+        "_de": "Macis"
+      },
+      {
+        "id": "marjoram",
+        "name": "Marjoram",
+        "_de": "Majoran"
+      },
+      {
+        "id": "mint",
+        "name": "Mint",
+        "_de": "Minze"
+      },
+      {
+        "id": "tamarind",
+        "name": "Tamarind",
+        "_de": "Tamarinde"
+      },
+      {
+        "id": "panch-phoron",
+        "name": "Panch Phoron",
+        "_de": "Panch Phoron"
+      },
+      {
+        "id": "tet",
+        "name": "tet)",
+        "_de": "tet)"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla",
+        "_de": "Vanille"
+      },
+      {
+        "id": "juniper",
+        "name": "Juniper",
+        "_de": "Wacholder"
+      },
+      {
+        "id": "rue",
+        "name": "Rue",
+        "_de": "Weinraute"
+      },
+      {
+        "id": "w-a-s-p-a-s-s-t-w-o-z-u",
+        "name": "W A S  P A S S T  W O Z U ?",
+        "_de": "W A S  P A S S T  W O Z U ?"
+      }
+    ]
+  },
+  {
+    "id": "red-cabbage",
+    "name": "red cabbage",
+    "_de": "ROTKOHL",
+    "seasonings": [
+      {
+        "id": "anise",
+        "name": "Anise",
+        "_de": "Anis"
+      },
+      {
+        "id": "net",
+        "name": "net)",
+        "_de": "net)"
+      },
+      {
+        "id": "balsamico",
+        "name": "Balsamico",
+        "_de": "Balsamico"
+      },
+      {
+        "id": "mugwort",
+        "name": "Mugwort",
+        "_de": "Beifuß"
+      },
+      {
+        "id": "bergamot",
+        "name": "Bergamot",
+        "_de": "Bergamotte"
+      },
+      {
+        "id": "tarragon",
+        "name": "Tarragon",
+        "_de": "Estragon"
+      },
+      {
+        "id": "galangal",
+        "name": "Galangal",
+        "_de": "Galgant"
+      },
+      {
+        "id": "clove",
+        "name": "Clove",
+        "_de": "Gewürznelke"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger",
+        "_de": "Ingwer"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom",
+        "_de": "Kardamom"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender",
+        "_de": "Lavendel"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf",
+        "_de": "Lorbeer"
+      },
+      {
+        "id": "orangenschalen",
+        "name": "Orangenschalen",
+        "_de": "Orangenschalen"
+      },
+      {
+        "id": "rose-water",
+        "name": "Rose Water",
+        "_de": "Rosenwasser"
+      },
+      {
+        "id": "rosinen",
+        "name": "Rosinen",
+        "_de": "Rosinen"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary",
+        "_de": "Rosmarin"
+      },
+      {
+        "id": "porcini",
+        "name": "Porcini",
+        "_de": "Steinpilze"
+      },
+      {
+        "id": "juniper",
+        "name": "Juniper",
+        "_de": "Wacholder"
+      },
+      {
+        "id": "walnut",
+        "name": "Walnut",
+        "_de": "Walnuss"
+      },
+      {
+        "id": "wein",
+        "name": "Wein",
+        "_de": "Wein"
+      },
+      {
+        "id": "wein-essig",
+        "name": "(Wein)essig",
+        "_de": "(Wein)essig"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon",
+        "_de": "Zimt"
+      },
+      {
+        "id": "zucker",
+        "name": "Zucker",
+        "_de": "Zucker"
+      },
+      {
+        "id": "zuckerkaramell",
+        "name": "Zuckerkaramell",
+        "_de": "Zuckerkaramell"
+      }
+    ]
+  },
+  {
+    "id": "weisskohl",
+    "name": "Weisskohl",
+    "_de": "WEISSKOHL",
+    "seasonings": [
+      {
+        "id": "asafoetida",
+        "name": "Asafoetida",
+        "_de": "Asant"
+      },
+      {
+        "id": "chili",
+        "name": "Chili",
+        "_de": "Chili"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom",
+        "_de": "Kardamom"
+      },
+      {
+        "id": "korianderblatt",
+        "name": "Korianderblatt",
+        "_de": "Korianderblatt"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander",
+        "_de": "Koriander"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin",
+        "_de": "Kreuzkümmel"
+      },
+      {
+        "id": "caraway",
+        "name": "Caraway",
+        "_de": "Kümmel"
+      },
+      {
+        "id": "turmeric",
+        "name": "Turmeric",
+        "_de": "Kurkuma"
+      },
+      {
+        "id": "long-pepper",
+        "name": "Long Pepper",
+        "_de": "Langer Pfeffer"
+      },
+      {
+        "id": "marjoram",
+        "name": "Marjoram",
+        "_de": "Majoran"
+      },
+      {
+        "id": "poppy-seed",
+        "name": "Poppy Seed",
+        "_de": "Mohn"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg",
+        "_de": "Muskat"
+      },
+      {
+        "id": "panch-phoron",
+        "name": "Panch Phoron",
+        "_de": "Panch Phoron"
+      },
+      {
+        "id": "grains-of-paradise",
+        "name": "Grains of Paradise",
+        "_de": "Paradieskörner"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary",
+        "_de": "Rosmarin"
+      },
+      {
+        "id": "celery",
+        "name": "Celery",
+        "_de": "Sellerie (Früchte)"
+      },
+      {
+        "id": "tamarind",
+        "name": "Tamarind",
+        "_de": "Tamarinde"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme",
+        "_de": "Thymian"
+      },
+      {
+        "id": "tonka-bean",
+        "name": "Tonka Bean",
+        "_de": "Tonkabohne"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla",
+        "_de": "Vanille"
+      },
+      {
+        "id": "walnussoel",
+        "name": "Walnussöl",
+        "_de": "Walnussöl"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon",
+        "_de": "Zimt"
+      }
+    ]
+  },
+  {
+    "id": "coconut-milk",
+    "name": "Coconut Milk",
+    "_de": "KOKOSMILCH",
+    "seasonings": [
+      {
+        "id": "ajwain",
+        "name": "Ajwain",
+        "_de": "Ajowan"
+      },
+      {
+        "id": "basil",
+        "name": "Basil",
+        "_de": "Basilikum"
+      },
+      {
+        "id": "curry-leaves",
+        "name": "Curry Leaves",
+        "_de": "Curryblätter"
+      },
+      {
+        "id": "galangal",
+        "name": "Galangal",
+        "_de": "Galgant"
+      },
+      {
+        "id": "green-pepper",
+        "name": "Green Pepper",
+        "_de": "Grüner Pfeffer"
+      },
+      {
+        "id": "kaffir-lime-leaves",
+        "name": "Kaffir Lime Leaves",
+        "_de": "Kaffirlimettenblätter"
+      },
+      {
+        "id": "long-pepper",
+        "name": "Long Pepper",
+        "_de": "Langer Pfeffer"
+      },
+      {
+        "id": "lemongrass",
+        "name": "Lemongrass",
+        "_de": "Zitronengras"
+      }
+    ]
+  },
+  {
+    "id": "squash",
+    "name": "squash",
+    "_de": "KÜRBIS",
+    "seasonings": [
+      {
+        "id": "anise",
+        "name": "Anise",
+        "_de": "Anis"
+      },
+      {
+        "id": "arganoel",
+        "name": "Arganöl",
+        "_de": "Arganöl"
+      },
+      {
+        "id": "fenugreek",
+        "name": "Fenugreek",
+        "_de": "Bockshornklee"
+      },
+      {
+        "id": "curry-leaves",
+        "name": "Curry Leaves",
+        "_de": "Curryblätter"
+      },
+      {
+        "id": "vinegar",
+        "name": "Vinegar",
+        "_de": "Essig"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel",
+        "_de": "Fenchel"
+      },
+      {
+        "id": "galangal",
+        "name": "Galangal",
+        "_de": "Galgant"
+      },
+      {
+        "id": "granatapfelkerne",
+        "name": "Granatapfelkerne",
+        "_de": "Granatapfelkerne"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger",
+        "_de": "Ingwer"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin",
+        "_de": "Kreuzkümmel"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf",
+        "_de": "Lorbeer"
+      },
+      {
+        "id": "chestnuts",
+        "name": "chestnuts",
+        "_de": "Maronen"
+      },
+      {
+        "id": "pecans",
+        "name": "Pecans",
+        "_de": "Pekannüsse"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme",
+        "_de": "Thymian"
+      },
+      {
+        "id": "lemon-juice",
+        "name": "Lemon Juice",
+        "_de": "Zitronensaft"
+      },
+      {
+        "id": "zitronenschale",
+        "name": "Zitronenschale",
+        "_de": "Zitronenschale"
+      },
+      {
+        "id": "zucker-karamell",
+        "name": "Zucker(karamell)",
+        "_de": "Zucker(karamell)"
+      }
+    ]
+  },
+  {
+    "id": "lamm-gebraten",
+    "name": "Lamm, Gebraten",
+    "_de": "LAMM, GEBRATEN",
+    "seasonings": [
+      {
+        "id": "net",
+        "name": "net)",
+        "_de": "net)"
+      },
+      {
+        "id": "mugwort",
+        "name": "Mugwort",
+        "_de": "Beifuß"
+      },
+      {
+        "id": "fenugreek",
+        "name": "Fenugreek",
+        "_de": "Bockshornklee"
+      },
+      {
+        "id": "savory",
+        "name": "Savory",
+        "_de": "Bohnenkraut"
+      },
+      {
+        "id": "curry-leaves",
+        "name": "Curry Leaves",
+        "_de": "Curryblätter"
+      },
+      {
+        "id": "tarragon",
+        "name": "Tarragon",
+        "_de": "Estragon"
+      },
+      {
+        "id": "fennel-seeds",
+        "name": "Fennel Seeds",
+        "_de": "Gewürzfenchel"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic",
+        "_de": "Knoblauch"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin",
+        "_de": "Kreuzkümmel"
+      },
+      {
+        "id": "cubeb-pepper",
+        "name": "Cubeb Pepper",
+        "_de": "Kubebenpfeffer"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender",
+        "_de": "Lavendel"
+      },
+      {
+        "id": "lime",
+        "name": "Lime",
+        "_de": "Limette"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf",
+        "_de": "Lorbeer"
+      },
+      {
+        "id": "macadamia",
+        "name": "Macadamia",
+        "_de": "Macadamianuss"
+      },
+      {
+        "id": "almonds",
+        "name": "Almonds",
+        "_de": "Mandeln"
+      },
+      {
+        "id": "mint",
+        "name": "Mint",
+        "_de": "Minze"
+      },
+      {
+        "id": "orangenschalen",
+        "name": "Orangenschalen",
+        "_de": "Orangenschalen"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano",
+        "_de": "Oregano"
+      },
+      {
+        "id": "paprika",
+        "name": "Paprika",
+        "_de": "Paprika"
+      },
+      {
+        "id": "purslane",
+        "name": "Purslane",
+        "_de": "Portulak"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary",
+        "_de": "Rosmarin"
+      },
+      {
+        "id": "sumac",
+        "name": "Sumac",
+        "_de": "Sumach"
+      },
+      {
+        "id": "tamarinden",
+        "name": "Tamarinden",
+        "_de": "Tamarinden"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme",
+        "_de": "Thymian"
+      },
+      {
+        "id": "juniper",
+        "name": "Juniper",
+        "_de": "Wacholder"
+      },
+      {
+        "id": "wormwood",
+        "name": "Wormwood",
+        "_de": "Wermut"
+      },
+      {
+        "id": "hyssop",
+        "name": "Hyssop",
+        "_de": "Ysop"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon",
+        "_de": "Zimt"
+      }
+    ]
+  },
+  {
+    "id": "leber-gebraten",
+    "name": "Leber, Gebraten",
+    "_de": "LEBER, GEBRATEN",
+    "seasonings": [
+      {
+        "id": "anise",
+        "name": "Anise",
+        "_de": "Anis"
+      },
+      {
+        "id": "tarragon",
+        "name": "Tarragon",
+        "_de": "Estragon"
+      },
+      {
+        "id": "fennel-seeds",
+        "name": "Fennel Seeds",
+        "_de": "Gewürzfenchel"
+      },
+      {
+        "id": "hazelnut",
+        "name": "Hazelnut",
+        "_de": "Haselnuss"
+      },
+      {
+        "id": "cocoa",
+        "name": "Cocoa",
+        "_de": "Kakao"
+      },
+      {
+        "id": "cubeb-pepper",
+        "name": "Cubeb Pepper",
+        "_de": "Kubebenpfeffer"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender",
+        "_de": "Lavendel"
+      },
+      {
+        "id": "marjoram",
+        "name": "Marjoram",
+        "_de": "Majoran"
+      },
+      {
+        "id": "almonds",
+        "name": "Almonds",
+        "_de": "Mandeln"
+      },
+      {
+        "id": "allspice",
+        "name": "Allspice",
+        "_de": "Piment"
+      },
+      {
+        "id": "pistazienoel",
+        "name": "Pistazienöl",
+        "_de": "Pistazienöl"
+      },
+      {
+        "id": "salbei-kalbsleber-1",
+        "name": "Salbei (Kalbsleber) 1",
+        "_de": "Salbei (Kalbsleber) 1"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme",
+        "_de": "Thymian"
+      },
+      {
+        "id": "truffle",
+        "name": "Truffle",
+        "_de": "Trüffel"
+      },
+      {
+        "id": "leber",
+        "name": "leber)",
+        "_de": "leber)"
+      }
+    ]
+  },
+  {
+    "id": "linsen-puylinsen",
+    "name": "Linsen, Puylinsen",
+    "_de": "LINSEN, PUYLINSEN",
+    "seasonings": [
+      {
+        "id": "mushroom",
+        "name": "Mushroom",
+        "_de": "Champignon"
+      },
+      {
+        "id": "vinegar",
+        "name": "Vinegar",
+        "_de": "Essig"
+      },
+      {
+        "id": "hazelnut",
+        "name": "Hazelnut",
+        "_de": "Haselnuss"
+      },
+      {
+        "id": "clove",
+        "name": "Clove",
+        "_de": "Gewürznelke"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom",
+        "_de": "Kardamom"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic",
+        "_de": "Knoblauch"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin",
+        "_de": "Kreuzkümmel"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf",
+        "_de": "Lorbeer"
+      },
+      {
+        "id": "celery",
+        "name": "Celery",
+        "_de": "Sellerie"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme",
+        "_de": "Thymian"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary",
+        "_de": "Rosmarin"
+      },
+      {
+        "id": "porcini",
+        "name": "Porcini",
+        "_de": "Steinpilze"
+      },
+      {
+        "id": "orange-peel",
+        "name": "Orange Peel",
+        "_de": "Orangenschale"
+      },
+      {
+        "id": "walnuts",
+        "name": "Walnuts",
+        "_de": "Walnüsse"
+      },
+      {
+        "id": "lemon-juice",
+        "name": "Lemon Juice",
+        "_de": "Zitronensaft"
+      },
+      {
+        "id": "onion",
+        "name": "Onion",
+        "_de": "Zwiebel"
+      }
+    ]
+  },
+  {
+    "id": "red-lentils",
+    "name": "Red Lentils",
+    "_de": "ROTE LINSEN",
+    "seasonings": [
+      {
+        "id": "asafoetida",
+        "name": "Asafoetida",
+        "_de": "Asant"
+      },
+      {
+        "id": "wild-garlic",
+        "name": "Wild Garlic",
+        "_de": "Bärlauch"
+      },
+      {
+        "id": "chili",
+        "name": "Chili",
+        "_de": "Chili"
+      },
+      {
+        "id": "curry-leaves",
+        "name": "Curry Leaves",
+        "_de": "Curryblätter"
+      },
+      {
+        "id": "curry-plant",
+        "name": "Curry Plant",
+        "_de": "Currykraut"
+      },
+      {
+        "id": "galangal",
+        "name": "Galangal",
+        "_de": "Galgant"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger",
+        "_de": "Ingwer"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil",
+        "_de": "Kerbel"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic",
+        "_de": "Knoblauch"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin",
+        "_de": "Kreuzkümmel"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender",
+        "_de": "Lavendel"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf",
+        "_de": "Lorbeer"
+      },
+      {
+        "id": "panch-phoron",
+        "name": "Panch Phoron",
+        "_de": "Panch Phoron"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary",
+        "_de": "Rosmarin"
+      },
+      {
+        "id": "chives",
+        "name": "Chives",
+        "_de": "Schnittlauch"
+      },
+      {
+        "id": "tamarind",
+        "name": "Tamarind",
+        "_de": "Tamarinde"
+      },
+      {
+        "id": "onion",
+        "name": "Onion",
+        "_de": "Zwiebel"
+      }
+    ]
+  },
+  {
+    "id": "yellow-lentils",
+    "name": "Yellow Lentils",
+    "_de": "GELBE LINSEN",
+    "seasonings": [
+      {
+        "id": "asafoetida",
+        "name": "Asafoetida",
+        "_de": "Asant"
+      },
+      {
+        "id": "chili",
+        "name": "Chili",
+        "_de": "Chili"
+      },
+      {
+        "id": "curry-leaves",
+        "name": "Curry Leaves",
+        "_de": "Curryblatt"
+      },
+      {
+        "id": "galangal",
+        "name": "Galangal",
+        "_de": "Galgant"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger",
+        "_de": "Ingwer"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom",
+        "_de": "Kardamom"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic",
+        "_de": "Knoblauch"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander",
+        "_de": "Koriander"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin",
+        "_de": "Kreuzkümmel"
+      },
+      {
+        "id": "long-pepper",
+        "name": "Long Pepper",
+        "_de": "Langer Pfeffer"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender",
+        "_de": "Lavendel"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf",
+        "_de": "Lorbeer"
+      },
+      {
+        "id": "mischungen",
+        "name": "Mischungen)",
+        "_de": "Mischungen)"
+      },
+      {
+        "id": "panch-phoron",
+        "name": "Panch Phoron",
+        "_de": "Panch Phoron"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary",
+        "_de": "Rosmarin"
+      },
+      {
+        "id": "tamarind",
+        "name": "Tamarind",
+        "_de": "Tamarinde"
+      },
+      {
+        "id": "onion",
+        "name": "Onion",
+        "_de": "Zwiebel"
+      }
+    ]
+  },
+  {
+    "id": "gruetze",
+    "name": "Grütze",
+    "_de": "GRÜTZE",
+    "seasonings": [
+      {
+        "id": "seaweed",
+        "name": "Seaweed",
+        "_de": "Algen (Nori)"
+      },
+      {
+        "id": "anise",
+        "name": "Anise",
+        "_de": "Anis"
+      },
+      {
+        "id": "basil",
+        "name": "Basil",
+        "_de": "Basilikum"
+      },
+      {
+        "id": "savory",
+        "name": "Savory",
+        "_de": "Bohnenkraut"
+      },
+      {
+        "id": "mushrooms",
+        "name": "Mushrooms",
+        "_de": "Champignons"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin",
+        "_de": "Kreuzkümmel"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel",
+        "_de": "Fenchel"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger",
+        "_de": "Ingwer"
+      },
+      {
+        "id": "coffee",
+        "name": "Coffee",
+        "_de": "Kaffee (Pulver)"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic",
+        "_de": "Knoblauch"
+      },
+      {
+        "id": "long-pepper",
+        "name": "Long Pepper",
+        "_de": "Langer Pfeffer"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender",
+        "_de": "Lavendel"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf",
+        "_de": "Lorbeer"
+      },
+      {
+        "id": "olive-oil",
+        "name": "olive oil",
+        "_de": "Olivenöl"
+      },
+      {
+        "id": "paprika",
+        "name": "Paprika",
+        "_de": "Paprika"
+      },
+      {
+        "id": "brazil-nuts",
+        "name": "Brazil Nuts",
+        "_de": "Paranüsse"
+      },
+      {
+        "id": "parmesan",
+        "name": "Parmesan",
+        "_de": "Parmesan"
+      },
+      {
+        "id": "pine-nuts",
+        "name": "Pine Nuts",
+        "_de": "Pinienkerne"
+      },
+      {
+        "id": "pecans",
+        "name": "Pecans",
+        "_de": "Pekannüsse"
+      },
+      {
+        "id": "raucharomen",
+        "name": "Raucharomen",
+        "_de": "Raucharomen"
+      },
+      {
+        "id": "rauchsalz",
+        "name": "Rauchsalz",
+        "_de": "Rauchsalz"
+      },
+      {
+        "id": "pink-peppercorn",
+        "name": "Pink Peppercorn",
+        "_de": "Rosa Beeren"
+      },
+      {
+        "id": "porcini",
+        "name": "Porcini",
+        "_de": "Steinpilze"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme",
+        "_de": "Thymian"
+      },
+      {
+        "id": "truffle",
+        "name": "Truffle",
+        "_de": "Trüffel"
+      },
+      {
+        "id": "wormwood",
+        "name": "Wormwood",
+        "_de": "Wermut"
+      },
+      {
+        "id": "lemon-balm",
+        "name": "Lemon Balm",
+        "_de": "Zitronenmelisse"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon",
+        "_de": "Zimt"
+      },
+      {
+        "id": "geroestet",
+        "name": "geröstet)",
+        "_de": "geröstet)"
+      }
+    ]
+  },
+  {
+    "id": "seafood",
+    "name": "seafood",
+    "_de": "MEERESFRÜCHTE",
+    "seasonings": [
+      {
+        "id": "seaweed",
+        "name": "Seaweed",
+        "_de": "Algen"
+      },
+      {
+        "id": "angelica",
+        "name": "Angelica",
+        "_de": "Angelika"
+      },
+      {
+        "id": "anise",
+        "name": "Anise",
+        "_de": "Anis"
+      },
+      {
+        "id": "chili",
+        "name": "Chili",
+        "_de": "Chili"
+      },
+      {
+        "id": "curry-leaves",
+        "name": "Curry Leaves",
+        "_de": "Curryblätter"
+      },
+      {
+        "id": "date",
+        "name": "Date",
+        "_de": "Dattel"
+      },
+      {
+        "id": "dill",
+        "name": "Dill",
+        "_de": "Dill"
+      },
+      {
+        "id": "tarragon",
+        "name": "Tarragon",
+        "_de": "Estragon"
+      },
+      {
+        "id": "fennel-seeds",
+        "name": "Fennel Seeds",
+        "_de": "Gewürzfenchel"
+      },
+      {
+        "id": "galangal",
+        "name": "Galangal",
+        "_de": "Galgant"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger",
+        "_de": "Ingwer"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil",
+        "_de": "Kerbel"
+      },
+      {
+        "id": "coconut",
+        "name": "Coconut",
+        "_de": "Kokosnuss"
+      },
+      {
+        "id": "cress",
+        "name": "Cress",
+        "_de": "Kresse"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano",
+        "_de": "Oregano"
+      },
+      {
+        "id": "buzz-button",
+        "name": "Buzz Button",
+        "_de": "Parakresse"
+      },
+      {
+        "id": "parmesan",
+        "name": "Parmesan",
+        "_de": "Parmesan"
+      },
+      {
+        "id": "chanterelle",
+        "name": "Chanterelle",
+        "_de": "Pfifferling"
+      },
+      {
+        "id": "allspice",
+        "name": "Allspice",
+        "_de": "Piment"
+      },
+      {
+        "id": "arugula",
+        "name": "Arugula",
+        "_de": "Rauke"
+      },
+      {
+        "id": "saffron",
+        "name": "Saffron",
+        "_de": "Safran"
+      },
+      {
+        "id": "celery",
+        "name": "Celery",
+        "_de": "Sellerie"
+      },
+      {
+        "id": "shiitake",
+        "name": "Shiitake",
+        "_de": "Shiitake"
+      },
+      {
+        "id": "licorice",
+        "name": "Licorice",
+        "_de": "Süßholz"
+      },
+      {
+        "id": "star-anise",
+        "name": "Star Anise",
+        "_de": "Sternanis"
+      },
+      {
+        "id": "sumac",
+        "name": "Sumac",
+        "_de": "Sumach"
+      },
+      {
+        "id": "truffle",
+        "name": "Truffle",
+        "_de": "Trüffel"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla",
+        "_de": "Vanille"
+      },
+      {
+        "id": "lemongrass",
+        "name": "Lemongrass",
+        "_de": "Zitronengras"
+      }
+    ]
+  },
+  {
+    "id": "milk",
+    "name": "milk",
+    "_de": "MILCH",
+    "seasonings": [
+      {
+        "id": "seaweed",
+        "name": "Seaweed",
+        "_de": "Algen"
+      },
+      {
+        "id": "net",
+        "name": "net)",
+        "_de": "net)"
+      },
+      {
+        "id": "asafoetida",
+        "name": "Asafoetida",
+        "_de": "Asant"
+      },
+      {
+        "id": "wild-garlic",
+        "name": "Wild Garlic",
+        "_de": "Bärlauch"
+      },
+      {
+        "id": "basil",
+        "name": "Basil",
+        "_de": "Basilikum"
+      },
+      {
+        "id": "borage",
+        "name": "Borage",
+        "_de": "Borretsch"
+      },
+      {
+        "id": "tet",
+        "name": "tet)",
+        "_de": "tet)"
+      },
+      {
+        "id": "mushroom",
+        "name": "Mushroom",
+        "_de": "Champignon"
+      },
+      {
+        "id": "dill",
+        "name": "Dill",
+        "_de": "Dill"
+      },
+      {
+        "id": "southernwood",
+        "name": "Southernwood",
+        "_de": "Eberraute"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel",
+        "_de": "Fenchel"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom",
+        "_de": "Kardamom"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic",
+        "_de": "Knoblauch"
+      },
+      {
+        "id": "cilantro",
+        "name": "Cilantro",
+        "_de": "Korianderkraut"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil",
+        "_de": "Kerbel"
+      },
+      {
+        "id": "coriander-seeds",
+        "name": "Coriander Seeds",
+        "_de": "Koriandersamen"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin",
+        "_de": "Kreuzkümmel"
+      },
+      {
+        "id": "pumpkin-seeds",
+        "name": "Pumpkin Seeds",
+        "_de": "Kürbiskerne"
+      },
+      {
+        "id": "cubeb-pepper",
+        "name": "Cubeb Pepper",
+        "_de": "Kubebenpfeffer"
+      },
+      {
+        "id": "turmeric",
+        "name": "Turmeric",
+        "_de": "Kurkuma"
+      },
+      {
+        "id": "long-pepper",
+        "name": "Long Pepper",
+        "_de": "Langer Pfeffer"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender",
+        "_de": "Lavendel"
+      },
+      {
+        "id": "lovage",
+        "name": "Lovage",
+        "_de": "Liebstöckel"
+      },
+      {
+        "id": "nigella",
+        "name": "Nigella",
+        "_de": "Nigella"
+      },
+      {
+        "id": "olive-oil",
+        "name": "olive oil",
+        "_de": "Olivenöl"
+      },
+      {
+        "id": "paprika",
+        "name": "Paprika",
+        "_de": "Paprika"
+      },
+      {
+        "id": "ben",
+        "name": "ben)",
+        "_de": "ben)"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley",
+        "_de": "Petersilie"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary",
+        "_de": "Rosmarin"
+      },
+      {
+        "id": "sesame",
+        "name": "Sesame",
+        "_de": "Sesam (geröstet)"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme",
+        "_de": "Thymian"
+      },
+      {
+        "id": "tomatoes",
+        "name": "tomatoes",
+        "_de": "Tomaten (getrocknet)"
+      },
+      {
+        "id": "truffle",
+        "name": "Truffle",
+        "_de": "Trüffel"
+      },
+      {
+        "id": "walnut",
+        "name": "Walnut",
+        "_de": "Walnuss"
+      },
+      {
+        "id": "rue",
+        "name": "Rue",
+        "_de": "Weinraute"
+      },
+      {
+        "id": "yuzu",
+        "name": "Yuzu",
+        "_de": "Yuzu"
+      },
+      {
+        "id": "whisky",
+        "name": "Whisky",
+        "_de": "Whisky"
+      },
+      {
+        "id": "onion",
+        "name": "Onion",
+        "_de": "Zwiebel"
+      }
+    ]
+  },
+  {
+    "id": "ermilch-dickmilch",
+    "name": "Ermilch, Dickmilch",
+    "_de": "ERMILCH, DICKMILCH",
+    "seasonings": [
+      {
+        "id": "seaweed",
+        "name": "Seaweed",
+        "_de": "Algen (Nori)"
+      },
+      {
+        "id": "net",
+        "name": "net)",
+        "_de": "net)"
+      },
+      {
+        "id": "basil",
+        "name": "Basil",
+        "_de": "Basilikum"
+      },
+      {
+        "id": "bitter-almond",
+        "name": "Bitter Almond",
+        "_de": "Bittermandel"
+      },
+      {
+        "id": "borage",
+        "name": "Borage",
+        "_de": "Borretsch"
+      },
+      {
+        "id": "tet",
+        "name": "tet)",
+        "_de": "tet)"
+      },
+      {
+        "id": "mushroom",
+        "name": "Mushroom",
+        "_de": "Champignon"
+      },
+      {
+        "id": "gewuerze-mischung",
+        "name": "Gewürze-Mischung",
+        "_de": "Gewürze-Mischung"
+      },
+      {
+        "id": "chili",
+        "name": "Chili",
+        "_de": "Chili"
+      },
+      {
+        "id": "dill",
+        "name": "Dill",
+        "_de": "Dill"
+      },
+      {
+        "id": "southernwood",
+        "name": "Southernwood",
+        "_de": "Eberraute"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel",
+        "_de": "Fenchel"
+      },
+      {
+        "id": "green-pepper",
+        "name": "Green Pepper",
+        "_de": "Grüner Pfeffer"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom",
+        "_de": "Kardamom"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil",
+        "_de": "Kerbel"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic",
+        "_de": "Knoblauch"
+      },
+      {
+        "id": "cilantro",
+        "name": "Cilantro",
+        "_de": "Korianderkraut"
+      },
+      {
+        "id": "coriander-seeds",
+        "name": "Coriander Seeds",
+        "_de": "Koriandersamen"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin",
+        "_de": "Kreuzkümmel"
+      },
+      {
+        "id": "pumpkin-seeds",
+        "name": "Pumpkin Seeds",
+        "_de": "Kürbiskerne"
+      },
+      {
+        "id": "turmeric",
+        "name": "Turmeric",
+        "_de": "Kurkuma"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender",
+        "_de": "Lavendel"
+      },
+      {
+        "id": "almond",
+        "name": "Almond",
+        "_de": "Mandel"
+      },
+      {
+        "id": "mint",
+        "name": "Mint",
+        "_de": "Minze"
+      },
+      {
+        "id": "paprika",
+        "name": "Paprika",
+        "_de": "Paprika"
+      },
+      {
+        "id": "allspice",
+        "name": "Allspice",
+        "_de": "Piment"
+      },
+      {
+        "id": "raucharomen",
+        "name": "Raucharomen",
+        "_de": "Raucharomen"
+      },
+      {
+        "id": "rauchsalz",
+        "name": "Rauchsalz",
+        "_de": "Rauchsalz"
+      },
+      {
+        "id": "rose-water",
+        "name": "Rose Water",
+        "_de": "Rosenwasser"
+      },
+      {
+        "id": "black-pepper",
+        "name": "Black Pepper",
+        "_de": "Schwarzer Pfeffer"
+      },
+      {
+        "id": "sesame",
+        "name": "Sesame",
+        "_de": "Sesam (geröstet)"
+      },
+      {
+        "id": "licorice",
+        "name": "Licorice",
+        "_de": "Süßholz"
+      },
+      {
+        "id": "walnut",
+        "name": "Walnut",
+        "_de": "Walnuss"
+      },
+      {
+        "id": "rue",
+        "name": "Rue",
+        "_de": "Weinraute"
+      },
+      {
+        "id": "whisky",
+        "name": "Whisky",
+        "_de": "Whisky"
+      },
+      {
+        "id": "yuzu",
+        "name": "Yuzu",
+        "_de": "Yuzu"
+      },
+      {
+        "id": "zitronenschale",
+        "name": "Zitronenschale",
+        "_de": "Zitronenschale"
+      },
+      {
+        "id": "onion",
+        "name": "Onion",
+        "_de": "Zwiebel"
+      }
+    ]
+  },
+  {
+    "id": "nieren",
+    "name": "Nieren",
+    "_de": "NIEREN",
+    "seasonings": [
+      {
+        "id": "vinegar",
+        "name": "Vinegar",
+        "_de": "Essig"
+      },
+      {
+        "id": "clove",
+        "name": "Clove",
+        "_de": "Gewürznelke"
+      },
+      {
+        "id": "pomegranate",
+        "name": "Pomegranate",
+        "_de": "Granatapfel"
+      },
+      {
+        "id": "kaffir-lime-leaves",
+        "name": "Kaffir Lime Leaves",
+        "_de": "Kaffirlimettenblätter"
+      },
+      {
+        "id": "long-pepper",
+        "name": "Long Pepper",
+        "_de": "Langer Pfeffer"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender",
+        "_de": "Lavendel"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf",
+        "_de": "Lorbeer"
+      },
+      {
+        "id": "juniper",
+        "name": "Juniper",
+        "_de": "Wacholder"
+      },
+      {
+        "id": "lemon",
+        "name": "Lemon",
+        "_de": "Zitrone"
+      }
+    ]
+  },
+  {
+    "id": "pasta",
+    "name": "Pasta",
+    "_de": "NUDELN",
+    "seasonings": [
+      {
+        "id": "seaweed",
+        "name": "Seaweed",
+        "_de": "Algen"
+      },
+      {
+        "id": "wild-garlic",
+        "name": "Wild Garlic",
+        "_de": "Bärlauch"
+      },
+      {
+        "id": "mugwort",
+        "name": "Mugwort",
+        "_de": "Beifuß"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger",
+        "_de": "Ingwer"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil",
+        "_de": "Kerbel"
+      },
+      {
+        "id": "turmeric",
+        "name": "Turmeric",
+        "_de": "Kurkuma"
+      },
+      {
+        "id": "mint",
+        "name": "Mint",
+        "_de": "Minze"
+      },
+      {
+        "id": "poppy-seed",
+        "name": "Poppy Seed",
+        "_de": "Mohn"
+      },
+      {
+        "id": "parmesan",
+        "name": "Parmesan",
+        "_de": "Parmesan"
+      },
+      {
+        "id": "perilla",
+        "name": "Perilla",
+        "_de": "Perilla"
+      },
+      {
+        "id": "chanterelle",
+        "name": "Chanterelle",
+        "_de": "Pfifferling"
+      },
+      {
+        "id": "sesame",
+        "name": "Sesame",
+        "_de": "Sesam"
+      },
+      {
+        "id": "porcini",
+        "name": "Porcini",
+        "_de": "Steinpilze"
+      },
+      {
+        "id": "star-anise",
+        "name": "Star Anise",
+        "_de": "Sternanis"
+      },
+      {
+        "id": "sichuan-pepper",
+        "name": "Sichuan Pepper",
+        "_de": "Szechuanpfeffer"
+      },
+      {
+        "id": "truffle",
+        "name": "Truffle",
+        "_de": "Trüffel"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon",
+        "_de": "Zimt"
+      }
+    ]
+  },
+  {
+    "id": "salate-mole",
+    "name": "Salate, Mole",
+    "_de": "SALATE, MOLE",
+    "seasonings": [
+      {
+        "id": "seaweed",
+        "name": "Seaweed",
+        "_de": "Algen (frisch)"
+      },
+      {
+        "id": "amchoor",
+        "name": "Amchoor",
+        "_de": "Amchoor"
+      },
+      {
+        "id": "angelica",
+        "name": "Angelica",
+        "_de": "Angelika"
+      },
+      {
+        "id": "anise",
+        "name": "Anise",
+        "_de": "Anis"
+      },
+      {
+        "id": "basil",
+        "name": "Basil",
+        "_de": "Basilikum"
+      },
+      {
+        "id": "bitter-almond",
+        "name": "Bitter Almond",
+        "_de": "Bittermandel"
+      },
+      {
+        "id": "borage",
+        "name": "Borage",
+        "_de": "Borretsch"
+      },
+      {
+        "id": "cognac",
+        "name": "Cognac",
+        "_de": "Cognac"
+      },
+      {
+        "id": "net",
+        "name": "net)",
+        "_de": "net)"
+      },
+      {
+        "id": "dates",
+        "name": "Dates",
+        "_de": "Datteln"
+      },
+      {
+        "id": "dill",
+        "name": "Dill",
+        "_de": "Dill"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel",
+        "_de": "Fenchel"
+      },
+      {
+        "id": "pomegranate",
+        "name": "Pomegranate",
+        "_de": "Granatapfel"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger",
+        "_de": "Ingwer"
+      },
+      {
+        "id": "coffee",
+        "name": "Coffee",
+        "_de": "Kaffee"
+      },
+      {
+        "id": "cocoa",
+        "name": "Cocoa",
+        "_de": "Kakao"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom",
+        "_de": "Kardamom"
+      },
+      {
+        "id": "coconut",
+        "name": "Coconut",
+        "_de": "Kokosnuss"
+      },
+      {
+        "id": "cilantro",
+        "name": "Cilantro",
+        "_de": "Korianderkraut"
+      },
+      {
+        "id": "long-pepper",
+        "name": "Long Pepper",
+        "_de": "Langer Pfeffer"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender",
+        "_de": "Lavendel"
+      },
+      {
+        "id": "lovage",
+        "name": "Lovage",
+        "_de": "Liebstöckel"
+      },
+      {
+        "id": "lime",
+        "name": "Lime",
+        "_de": "Limette"
+      },
+      {
+        "id": "macadamia-oil",
+        "name": "Macadamia Oil",
+        "_de": "Macadamianussöl"
+      },
+      {
+        "id": "almond",
+        "name": "Almond",
+        "_de": "Mandel"
+      },
+      {
+        "id": "mint",
+        "name": "Mint",
+        "_de": "Minze"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg",
+        "_de": "Muskat"
+      },
+      {
+        "id": "nigella",
+        "name": "Nigella",
+        "_de": "Nigella"
+      },
+      {
+        "id": "wasser",
+        "name": "wasser",
+        "_de": "wasser"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano",
+        "_de": "Oregano"
+      },
+      {
+        "id": "pistachio",
+        "name": "Pistachio",
+        "_de": "Pistazie"
+      },
+      {
+        "id": "pink-peppercorn",
+        "name": "Pink Peppercorn",
+        "_de": "Rosa Beeren"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary",
+        "_de": "Rosmarin"
+      },
+      {
+        "id": "rum",
+        "name": "Rum",
+        "_de": "Rum"
+      },
+      {
+        "id": "sunflower-seeds",
+        "name": "Sunflower Seeds",
+        "_de": "Sonnenblumenkerne"
+      },
+      {
+        "id": "star-anise",
+        "name": "Star Anise",
+        "_de": "Sternanis"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme",
+        "_de": "Thymian"
+      },
+      {
+        "id": "tomatoes",
+        "name": "tomatoes",
+        "_de": "Tomaten (getrocknet)"
+      },
+      {
+        "id": "tonka-bean",
+        "name": "Tonka Bean",
+        "_de": "Tonkabohne"
+      },
+      {
+        "id": "gin",
+        "name": "Gin)",
+        "_de": "Gin)"
+      },
+      {
+        "id": "sweet-woodruff",
+        "name": "Sweet Woodruff",
+        "_de": "Waldmeister"
+      },
+      {
+        "id": "walnut",
+        "name": "Walnut",
+        "_de": "Walnuss"
+      },
+      {
+        "id": "rue",
+        "name": "Rue",
+        "_de": "Weinraute"
+      },
+      {
+        "id": "whisky",
+        "name": "Whisky",
+        "_de": "Whisky"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon",
+        "_de": "Zimt"
+      },
+      {
+        "id": "schale",
+        "name": "schale",
+        "_de": "schale"
+      },
+      {
+        "id": "lemon-balm",
+        "name": "Lemon Balm",
+        "_de": "Zitronenmelisse"
+      },
+      {
+        "id": "lemon-verbena",
+        "name": "Lemon Verbena",
+        "_de": "Zitronenverbene"
+      }
+    ]
+  },
+  {
+    "id": "mushrooms",
+    "name": "Mushrooms",
+    "_de": "PILZE",
+    "seasonings": [
+      {
+        "id": "seaweed",
+        "name": "Seaweed",
+        "_de": "Algen"
+      },
+      {
+        "id": "asafoetida",
+        "name": "Asafoetida",
+        "_de": "Asant"
+      },
+      {
+        "id": "basil",
+        "name": "Basil",
+        "_de": "Basilikum"
+      },
+      {
+        "id": "mugwort",
+        "name": "Mugwort",
+        "_de": "Beifuß"
+      },
+      {
+        "id": "tarragon",
+        "name": "Tarragon",
+        "_de": "Estragon"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger",
+        "_de": "Ingwer"
+      },
+      {
+        "id": "coriander-seeds",
+        "name": "Coriander Seeds",
+        "_de": "Koriandersamen"
+      },
+      {
+        "id": "marjoram",
+        "name": "Marjoram",
+        "_de": "Majoran"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg",
+        "_de": "Muskat"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano",
+        "_de": "Oregano"
+      },
+      {
+        "id": "arugula",
+        "name": "Arugula",
+        "_de": "Rauke"
+      },
+      {
+        "id": "sage",
+        "name": "Sage",
+        "_de": "Salbei"
+      },
+      {
+        "id": "sichuan-pepper",
+        "name": "Sichuan Pepper",
+        "_de": "Szechuanpfeffer"
+      },
+      {
+        "id": "tamarind",
+        "name": "Tamarind",
+        "_de": "Tamarinde"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme",
+        "_de": "Thymian"
+      },
+      {
+        "id": "hyssop",
+        "name": "Hyssop",
+        "_de": "Ysop"
+      },
+      {
+        "id": "lemon-balm",
+        "name": "Lemon Balm",
+        "_de": "Zitronenmelisse"
+      },
+      {
+        "id": "lemon-verbena",
+        "name": "Lemon Verbena",
+        "_de": "Zitronenverbene"
+      }
+    ]
+  },
+  {
+    "id": "rice",
+    "name": "Rice",
+    "_de": "REIS",
+    "seasonings": [
+      {
+        "id": "ajwain",
+        "name": "Ajwain",
+        "_de": "Ajowan"
+      },
+      {
+        "id": "seaweed",
+        "name": "Seaweed",
+        "_de": "Algen"
+      },
+      {
+        "id": "annatto",
+        "name": "Annatto",
+        "_de": "Annatto"
+      },
+      {
+        "id": "net",
+        "name": "net)",
+        "_de": "net)"
+      },
+      {
+        "id": "wild-garlic",
+        "name": "Wild Garlic",
+        "_de": "Bärlauch"
+      },
+      {
+        "id": "barberries",
+        "name": "Barberries",
+        "_de": "Berberitzen"
+      },
+      {
+        "id": "bergamot",
+        "name": "Bergamot",
+        "_de": "Bergamotte"
+      },
+      {
+        "id": "fenugreek",
+        "name": "Fenugreek",
+        "_de": "Bockshornklee"
+      },
+      {
+        "id": "nettle",
+        "name": "Nettle",
+        "_de": "Brennnessel"
+      },
+      {
+        "id": "chili",
+        "name": "Chili",
+        "_de": "Chili"
+      },
+      {
+        "id": "date",
+        "name": "Date",
+        "_de": "Dattel"
+      },
+      {
+        "id": "pomegranate",
+        "name": "Pomegranate",
+        "_de": "Granatapfel"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger",
+        "_de": "Ingwer"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom",
+        "_de": "Kardamom"
+      },
+      {
+        "id": "coconut",
+        "name": "Coconut",
+        "_de": "Kokosnuss"
+      },
+      {
+        "id": "coriander-seeds",
+        "name": "Coriander Seeds",
+        "_de": "Koriandersamen"
+      },
+      {
+        "id": "turmeric",
+        "name": "Turmeric",
+        "_de": "Kurkuma"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender",
+        "_de": "Lavendel"
+      },
+      {
+        "id": "lime",
+        "name": "Lime",
+        "_de": "Limette"
+      },
+      {
+        "id": "almonds",
+        "name": "Almonds",
+        "_de": "Mandeln"
+      },
+      {
+        "id": "mint",
+        "name": "Mint",
+        "_de": "Minze"
+      },
+      {
+        "id": "oranges",
+        "name": "oranges",
+        "_de": "Orangen"
+      },
+      {
+        "id": "parmesan",
+        "name": "Parmesan",
+        "_de": "Parmesan"
+      },
+      {
+        "id": "perilla",
+        "name": "Perilla",
+        "_de": "Perilla"
+      },
+      {
+        "id": "pine-nuts",
+        "name": "Pine Nuts",
+        "_de": "Pinienkerne"
+      },
+      {
+        "id": "pistachio",
+        "name": "Pistachio",
+        "_de": "Pistazie"
+      },
+      {
+        "id": "rose",
+        "name": "Rose",
+        "_de": "Rosen"
+      },
+      {
+        "id": "saffron",
+        "name": "Saffron",
+        "_de": "Safran"
+      },
+      {
+        "id": "sumac",
+        "name": "Sumac",
+        "_de": "Sumach"
+      },
+      {
+        "id": "tamarind",
+        "name": "Tamarind",
+        "_de": "Tamarinde"
+      },
+      {
+        "id": "raisin",
+        "name": "Raisin",
+        "_de": "Weinbeere"
+      },
+      {
+        "id": "rue",
+        "name": "Rue",
+        "_de": "Weinraute"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon",
+        "_de": "Zimt"
+      },
+      {
+        "id": "lemon-verbena",
+        "name": "Lemon Verbena",
+        "_de": "Zitronenverbene"
+      }
+    ]
+  },
+  {
+    "id": "rind-gekocht",
+    "name": "Rind, Gekocht",
+    "_de": "RIND, GEKOCHT",
+    "seasonings": [
+      {
+        "id": "seaweed",
+        "name": "Seaweed",
+        "_de": "Algen (Kombu)"
+      },
+      {
+        "id": "annatto",
+        "name": "Annatto",
+        "_de": "Annatto"
+      },
+      {
+        "id": "net",
+        "name": "net)",
+        "_de": "net)"
+      },
+      {
+        "id": "basil",
+        "name": "Basil",
+        "_de": "Basilikum"
+      },
+      {
+        "id": "chili",
+        "name": "Chili",
+        "_de": "Chili"
+      },
+      {
+        "id": "dill",
+        "name": "Dill",
+        "_de": "Dill"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger",
+        "_de": "Ingwer"
+      },
+      {
+        "id": "kaffir-lime-leaves",
+        "name": "Kaffir Lime Leaves",
+        "_de": "Kaffirlimettenblätter"
+      },
+      {
+        "id": "capers",
+        "name": "Capers",
+        "_de": "Kapern"
+      },
+      {
+        "id": "pumpkin-seed-oil",
+        "name": "Pumpkin Seed Oil",
+        "_de": "Kürbiskernöl"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf",
+        "_de": "Lorbeer"
+      },
+      {
+        "id": "marjoram",
+        "name": "Marjoram",
+        "_de": "Majoran"
+      },
+      {
+        "id": "horseradish",
+        "name": "Horseradish",
+        "_de": "Meerrettich"
+      },
+      {
+        "id": "perilla",
+        "name": "Perilla",
+        "_de": "Perilla"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper",
+        "_de": "Pfeffer"
+      },
+      {
+        "id": "allspice",
+        "name": "Allspice",
+        "_de": "Piment"
+      },
+      {
+        "id": "chives",
+        "name": "Chives",
+        "_de": "Schnittlauch"
+      },
+      {
+        "id": "tonka-bean",
+        "name": "Tonka Bean",
+        "_de": "Tonkabohne"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla",
+        "_de": "Vanille"
+      },
+      {
+        "id": "juniper",
+        "name": "Juniper",
+        "_de": "Wacholder"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon",
+        "_de": "Zimt"
+      }
+    ]
+  },
+  {
+    "id": "gerichte",
+    "name": "Gerichte",
+    "_de": "GERICHTE",
+    "seasonings": [
+      {
+        "id": "anise",
+        "name": "Anise",
+        "_de": "Anis"
+      },
+      {
+        "id": "net",
+        "name": "net)",
+        "_de": "net)"
+      },
+      {
+        "id": "asafoetida",
+        "name": "Asafoetida",
+        "_de": "Asant"
+      },
+      {
+        "id": "bergamot",
+        "name": "Bergamot",
+        "_de": "Bergamotte"
+      },
+      {
+        "id": "blauschimmelkaese",
+        "name": "Blauschimmelkäse",
+        "_de": "Blauschimmelkäse"
+      },
+      {
+        "id": "dill",
+        "name": "Dill",
+        "_de": "Dill"
+      },
+      {
+        "id": "peanut",
+        "name": "Peanut",
+        "_de": "Erdnuss (geröstet)"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel",
+        "_de": "Fenchel"
+      },
+      {
+        "id": "clove",
+        "name": "Clove",
+        "_de": "Gewürznelke"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger",
+        "_de": "Ingwer"
+      },
+      {
+        "id": "coffee",
+        "name": "Coffee",
+        "_de": "Kaffee"
+      },
+      {
+        "id": "cress",
+        "name": "Cress",
+        "_de": "Kresse"
+      },
+      {
+        "id": "pumpkin-seeds",
+        "name": "Pumpkin Seeds",
+        "_de": "Kürbiskerne"
+      },
+      {
+        "id": "pumpkin-seed-oil",
+        "name": "Pumpkin Seed Oil",
+        "_de": "Kürbiskernöl"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin",
+        "_de": "Kreuzkümmel"
+      },
+      {
+        "id": "turmeric",
+        "name": "Turmeric",
+        "_de": "Kurkuma"
+      },
+      {
+        "id": "lovage",
+        "name": "Lovage",
+        "_de": "Liebstöckel"
+      },
+      {
+        "id": "mastic",
+        "name": "Mastic",
+        "_de": "Mastix"
+      },
+      {
+        "id": "mint",
+        "name": "Mint",
+        "_de": "Minze (Pfefferminze)"
+      },
+      {
+        "id": "nigella",
+        "name": "Nigella",
+        "_de": "Nigella"
+      },
+      {
+        "id": "olive-oil",
+        "name": "olive oil",
+        "_de": "Olivenöl"
+      },
+      {
+        "id": "parmesan",
+        "name": "Parmesan",
+        "_de": "Parmesan"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper",
+        "_de": "Pfeffer"
+      },
+      {
+        "id": "pink-peppercorn",
+        "name": "Pink Peppercorn",
+        "_de": "Rosa Beeren"
+      },
+      {
+        "id": "rose-petals",
+        "name": "Rose Petals",
+        "_de": "Rosenblätter"
+      },
+      {
+        "id": "raucharomen",
+        "name": "Raucharomen",
+        "_de": "Raucharomen"
+      },
+      {
+        "id": "rauchsalz",
+        "name": "Rauchsalz",
+        "_de": "Rauchsalz"
+      },
+      {
+        "id": "rose-water",
+        "name": "Rose Water",
+        "_de": "Rosenwasser"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary",
+        "_de": "Rosmarin"
+      },
+      {
+        "id": "rum",
+        "name": "Rum",
+        "_de": "Rum"
+      },
+      {
+        "id": "tonka-bean",
+        "name": "Tonka Bean",
+        "_de": "Tonkabohne"
+      },
+      {
+        "id": "whisky",
+        "name": "Whisky",
+        "_de": "Whisky"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon",
+        "_de": "Zimt"
+      },
+      {
+        "id": "zitronenschale",
+        "name": "Zitronenschale",
+        "_de": "Zitronenschale"
+      }
+    ]
+  },
+  {
+    "id": "roasted",
+    "name": "roasted",
+    "_de": "GEBRATEN",
+    "seasonings": [
+      {
+        "id": "seaweed",
+        "name": "Seaweed",
+        "_de": "Algen (Dulse)"
+      },
+      {
+        "id": "anise",
+        "name": "Anise",
+        "_de": "Anis"
+      },
+      {
+        "id": "annatto",
+        "name": "Annatto",
+        "_de": "Annatto"
+      },
+      {
+        "id": "basil",
+        "name": "Basil",
+        "_de": "Basilikum"
+      },
+      {
+        "id": "mugwort",
+        "name": "Mugwort",
+        "_de": "Beifuß"
+      },
+      {
+        "id": "savory",
+        "name": "Savory",
+        "_de": "Bohnenkraut"
+      },
+      {
+        "id": "mushroom",
+        "name": "Mushroom",
+        "_de": "Champignon"
+      },
+      {
+        "id": "southernwood",
+        "name": "Southernwood",
+        "_de": "Eberraute"
+      },
+      {
+        "id": "fennel-seeds",
+        "name": "Fennel Seeds",
+        "_de": "Gewürzfenchel"
+      },
+      {
+        "id": "clove",
+        "name": "Clove",
+        "_de": "Gewürznelke"
+      },
+      {
+        "id": "coriander-seeds",
+        "name": "Coriander Seeds",
+        "_de": "Koriandersamen"
+      },
+      {
+        "id": "long-pepper",
+        "name": "Long Pepper",
+        "_de": "Langer Pfeffer"
+      },
+      {
+        "id": "marjoram",
+        "name": "Marjoram",
+        "_de": "Majoran"
+      },
+      {
+        "id": "myrtle",
+        "name": "Myrtle",
+        "_de": "Myrte"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano",
+        "_de": "Oregano"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper",
+        "_de": "Pfeffer"
+      },
+      {
+        "id": "chanterelle",
+        "name": "Chanterelle",
+        "_de": "Pfifferling"
+      },
+      {
+        "id": "allspice",
+        "name": "Allspice",
+        "_de": "Piment"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary",
+        "_de": "Rosmarin"
+      },
+      {
+        "id": "sage",
+        "name": "Sage",
+        "_de": "Salbei"
+      },
+      {
+        "id": "sorrel",
+        "name": "Sorrel",
+        "_de": "Sauerampfer"
+      },
+      {
+        "id": "porcini",
+        "name": "Porcini",
+        "_de": "Steinpilze"
+      },
+      {
+        "id": "star-anise",
+        "name": "Star Anise",
+        "_de": "Sternanis"
+      },
+      {
+        "id": "tamarind",
+        "name": "Tamarind",
+        "_de": "Tamarinde"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme",
+        "_de": "Thymian"
+      },
+      {
+        "id": "juniper",
+        "name": "Juniper",
+        "_de": "Wacholder"
+      },
+      {
+        "id": "wormwood",
+        "name": "Wormwood",
+        "_de": "Wermut"
+      }
+    ]
+  },
+  {
+    "id": "asparagus",
+    "name": "Asparagus",
+    "_de": "SPARGEL",
+    "seasonings": [
+      {
+        "id": "wild-garlic",
+        "name": "Wild Garlic",
+        "_de": "Bärlauch"
+      },
+      {
+        "id": "ter",
+        "name": "ter)",
+        "_de": "ter)"
+      },
+      {
+        "id": "kaffir-lime-leaves",
+        "name": "Kaffir Lime Leaves",
+        "_de": "Kaffirlimettenblätter"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil",
+        "_de": "Kerbel"
+      },
+      {
+        "id": "coconut",
+        "name": "Coconut",
+        "_de": "Kokosnuss"
+      },
+      {
+        "id": "almond",
+        "name": "Almond",
+        "_de": "Mandel"
+      },
+      {
+        "id": "almond-oil",
+        "name": "Almond Oil",
+        "_de": "Mandelöl"
+      },
+      {
+        "id": "poppy-seed-oil",
+        "name": "Poppy Seed Oil",
+        "_de": "Mohnöl"
+      },
+      {
+        "id": "parmesan",
+        "name": "Parmesan",
+        "_de": "Parmesan"
+      },
+      {
+        "id": "perilla",
+        "name": "Perilla",
+        "_de": "Perilla"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley",
+        "_de": "Petersilie"
+      },
+      {
+        "id": "pink-peppercorn",
+        "name": "Pink Peppercorn",
+        "_de": "Rosa Beeren"
+      },
+      {
+        "id": "sauce-hollandaise",
+        "name": "Sauce Hollandaise",
+        "_de": "Sauce Hollandaise"
+      },
+      {
+        "id": "chives",
+        "name": "Chives",
+        "_de": "Schnittlauch"
+      },
+      {
+        "id": "tonka-bean",
+        "name": "Tonka Bean",
+        "_de": "Tonkabohne"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla",
+        "_de": "Vanille"
+      },
+      {
+        "id": "sweet-woodruff",
+        "name": "Sweet Woodruff",
+        "_de": "Waldmeister"
+      },
+      {
+        "id": "lemon",
+        "name": "Lemon",
+        "_de": "Zitrone"
+      },
+      {
+        "id": "zuckerkaramell",
+        "name": "Zuckerkaramell",
+        "_de": "Zuckerkaramell"
+      },
+      {
+        "id": "w-a-s-p-a-s-s-t-w-o-z-u",
+        "name": "W A S  P A S S T  W O Z U ?",
+        "_de": "W A S  P A S S T  W O Z U ?"
+      }
+    ]
+  },
+  {
+    "id": "spinach",
+    "name": "Spinach",
+    "_de": "SPINAT",
+    "seasonings": [
+      {
+        "id": "seaweed",
+        "name": "Seaweed",
+        "_de": "Algen"
+      },
+      {
+        "id": "fenugreek-leaves",
+        "name": "Fenugreek Leaves",
+        "_de": "Bockshornkleeblätter"
+      },
+      {
+        "id": "pomegranate",
+        "name": "Pomegranate",
+        "_de": "Granatapfel"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg",
+        "_de": "Muskat"
+      },
+      {
+        "id": "pine-nut-oil",
+        "name": "Pine Nut Oil",
+        "_de": "Pinienkernöl"
+      },
+      {
+        "id": "purslane",
+        "name": "Purslane",
+        "_de": "Portulak"
+      },
+      {
+        "id": "sorrel",
+        "name": "Sorrel",
+        "_de": "Sauerampfer"
+      },
+      {
+        "id": "raisins",
+        "name": "Raisins",
+        "_de": "Weinbeeren"
+      }
+    ]
+  },
+  {
+    "id": "tofu-tempeh",
+    "name": "Tofu, Tempeh",
+    "_de": "TOFU, TEMPEH",
+    "seasonings": [
+      {
+        "id": "seaweed",
+        "name": "Seaweed",
+        "_de": "Algen"
+      },
+      {
+        "id": "anise",
+        "name": "Anise",
+        "_de": "Anis"
+      },
+      {
+        "id": "net",
+        "name": "net)",
+        "_de": "net)"
+      },
+      {
+        "id": "basil",
+        "name": "Basil",
+        "_de": "Basilikum"
+      },
+      {
+        "id": "mushroom",
+        "name": "Mushroom",
+        "_de": "Champignon"
+      },
+      {
+        "id": "chili",
+        "name": "Chili",
+        "_de": "Chili"
+      },
+      {
+        "id": "dill",
+        "name": "Dill",
+        "_de": "Dill"
+      },
+      {
+        "id": "peanut",
+        "name": "Peanut",
+        "_de": "Erdnuss"
+      },
+      {
+        "id": "vinegar",
+        "name": "Vinegar",
+        "_de": "Essig"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel",
+        "_de": "Fenchel"
+      },
+      {
+        "id": "galangal",
+        "name": "Galangal",
+        "_de": "Galgant"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger",
+        "_de": "Ingwer"
+      },
+      {
+        "id": "long-pepper",
+        "name": "Long Pepper",
+        "_de": "Langer Pfeffer"
+      },
+      {
+        "id": "lovage",
+        "name": "Lovage",
+        "_de": "Liebstöckel"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf",
+        "_de": "Lorbeer"
+      },
+      {
+        "id": "coffee",
+        "name": "Coffee",
+        "_de": "Kaffee"
+      },
+      {
+        "id": "capers",
+        "name": "Capers",
+        "_de": "Kapern"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin",
+        "_de": "Kreuzkümmel"
+      },
+      {
+        "id": "pumpkin-seed-oil",
+        "name": "Pumpkin Seed Oil",
+        "_de": "Kürbiskernöl"
+      },
+      {
+        "id": "macadamia",
+        "name": "Macadamia",
+        "_de": "Macadamianuss"
+      },
+      {
+        "id": "mint",
+        "name": "Mint",
+        "_de": "Minze"
+      },
+      {
+        "id": "poppy-seed",
+        "name": "Poppy Seed",
+        "_de": "Mohn"
+      },
+      {
+        "id": "nigella",
+        "name": "Nigella",
+        "_de": "Nigella"
+      },
+      {
+        "id": "olive-oil",
+        "name": "olive oil",
+        "_de": "Olivenöl"
+      },
+      {
+        "id": "paprika",
+        "name": "Paprika",
+        "_de": "Paprika"
+      },
+      {
+        "id": "paranuss",
+        "name": "Paranuss",
+        "_de": "Paranuss"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley",
+        "_de": "Petersilie"
+      },
+      {
+        "id": "pine-nut-oil",
+        "name": "Pine Nut Oil",
+        "_de": "Pinienkernöl"
+      },
+      {
+        "id": "raucharomen",
+        "name": "Raucharomen",
+        "_de": "Raucharomen"
+      },
+      {
+        "id": "rauchsalz",
+        "name": "Rauchsalz",
+        "_de": "Rauchsalz"
+      },
+      {
+        "id": "rosinen",
+        "name": "Rosinen",
+        "_de": "Rosinen"
+      },
+      {
+        "id": "celery",
+        "name": "Celery",
+        "_de": "Sellerie"
+      },
+      {
+        "id": "sojasauce",
+        "name": "Sojasauce",
+        "_de": "Sojasauce"
+      },
+      {
+        "id": "porcini",
+        "name": "Porcini",
+        "_de": "Steinpilz"
+      },
+      {
+        "id": "licorice",
+        "name": "Licorice",
+        "_de": "Süßholz"
+      },
+      {
+        "id": "sichuan-pepper",
+        "name": "Sichuan Pepper",
+        "_de": "Szechuanpfeffer"
+      },
+      {
+        "id": "tamarind",
+        "name": "Tamarind",
+        "_de": "Tamarinde"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla",
+        "_de": "Vanille"
+      },
+      {
+        "id": "yuzu",
+        "name": "Yuzu",
+        "_de": "Yuzu"
+      },
+      {
+        "id": "lemon",
+        "name": "Lemon",
+        "_de": "Zitrone"
+      }
+    ]
+  },
+  {
+    "id": "tomatoes",
+    "name": "tomatoes",
+    "_de": "TOMATEN",
+    "seasonings": [
+      {
+        "id": "basil",
+        "name": "Basil",
+        "_de": "Basilikum"
+      },
+      {
+        "id": "mountain-cumin",
+        "name": "Mountain cumin",
+        "_de": "Bergkümmel"
+      },
+      {
+        "id": "fenugreek",
+        "name": "Fenugreek",
+        "_de": "Bockshornklee"
+      },
+      {
+        "id": "chili",
+        "name": "Chili",
+        "_de": "Chili"
+      },
+      {
+        "id": "net",
+        "name": "net)",
+        "_de": "net)"
+      },
+      {
+        "id": "curry-plant",
+        "name": "Curry Plant",
+        "_de": "Currykraut"
+      },
+      {
+        "id": "tarragon",
+        "name": "Tarragon",
+        "_de": "Estragon"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel",
+        "_de": "Fenchel"
+      },
+      {
+        "id": "galangal",
+        "name": "Galangal",
+        "_de": "Galgant"
+      },
+      {
+        "id": "capers",
+        "name": "Capers",
+        "_de": "Kapern"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic",
+        "_de": "Knoblauch"
+      },
+      {
+        "id": "cilantro",
+        "name": "Cilantro",
+        "_de": "Korianderkraut"
+      },
+      {
+        "id": "cress",
+        "name": "Cress",
+        "_de": "Kresse"
+      },
+      {
+        "id": "lime",
+        "name": "Lime",
+        "_de": "Limette"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf",
+        "_de": "Lorbeer"
+      },
+      {
+        "id": "mint",
+        "name": "Mint",
+        "_de": "Minze"
+      },
+      {
+        "id": "poppy-seed-oil",
+        "name": "Poppy Seed Oil",
+        "_de": "Mohnöl"
+      },
+      {
+        "id": "olives",
+        "name": "olives",
+        "_de": "Oliven"
+      },
+      {
+        "id": "orange",
+        "name": "Orange",
+        "_de": "Orange"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano",
+        "_de": "Oregano"
+      },
+      {
+        "id": "paprika",
+        "name": "Paprika",
+        "_de": "Paprika"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper",
+        "_de": "Pfeffer"
+      },
+      {
+        "id": "pine-nuts",
+        "name": "Pine Nuts",
+        "_de": "Pinienkerne"
+      },
+      {
+        "id": "purslane",
+        "name": "Purslane",
+        "_de": "Portulak"
+      },
+      {
+        "id": "arugula",
+        "name": "Arugula",
+        "_de": "Rauke"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary",
+        "_de": "Rosmarin"
+      },
+      {
+        "id": "sage",
+        "name": "Sage",
+        "_de": "Salbei"
+      },
+      {
+        "id": "sorrel",
+        "name": "Sorrel",
+        "_de": "Sauerampfer"
+      },
+      {
+        "id": "celery",
+        "name": "Celery",
+        "_de": "Sellerie"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme",
+        "_de": "Thymian"
+      },
+      {
+        "id": "rue",
+        "name": "Rue",
+        "_de": "Weinraute"
+      },
+      {
+        "id": "hyssop",
+        "name": "Hyssop",
+        "_de": "Ysop"
+      },
+      {
+        "id": "lemon-verbena",
+        "name": "Lemon Verbena",
+        "_de": "Zitronenverbene"
+      }
+    ]
+  },
+  {
+    "id": "durumpasta-gekocht",
+    "name": "Durumpasta (Gekocht)",
+    "_de": "DURUMPASTA (GEKOCHT)",
+    "seasonings": [
+      {
+        "id": "seaweed",
+        "name": "Seaweed",
+        "_de": "Algen"
+      },
+      {
+        "id": "anise",
+        "name": "Anise",
+        "_de": "Anis"
+      },
+      {
+        "id": "net",
+        "name": "net)",
+        "_de": "net)"
+      },
+      {
+        "id": "asafoetida",
+        "name": "Asafoetida",
+        "_de": "Asant"
+      },
+      {
+        "id": "wild-garlic",
+        "name": "Wild Garlic",
+        "_de": "Bärlauch"
+      },
+      {
+        "id": "savory",
+        "name": "Savory",
+        "_de": "Bohnenkraut"
+      },
+      {
+        "id": "nettle",
+        "name": "Nettle",
+        "_de": "Brennnessel"
+      },
+      {
+        "id": "mushroom",
+        "name": "Mushroom",
+        "_de": "Champignon"
+      },
+      {
+        "id": "chili",
+        "name": "Chili",
+        "_de": "Chili"
+      },
+      {
+        "id": "dill",
+        "name": "Dill",
+        "_de": "Dill"
+      },
+      {
+        "id": "hazelnut",
+        "name": "Hazelnut",
+        "_de": "Haselnuss"
+      },
+      {
+        "id": "hartkaese",
+        "name": "Hartkäse",
+        "_de": "Hartkäse"
+      },
+      {
+        "id": "capers",
+        "name": "Capers",
+        "_de": "Kapern"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic",
+        "_de": "Knoblauch"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf",
+        "_de": "Lorbeer"
+      },
+      {
+        "id": "almond",
+        "name": "Almond",
+        "_de": "Mandel"
+      },
+      {
+        "id": "mint",
+        "name": "Mint",
+        "_de": "Minze"
+      },
+      {
+        "id": "morchel",
+        "name": "Morchel",
+        "_de": "Morchel"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg",
+        "_de": "Muskatnuss"
+      },
+      {
+        "id": "olives",
+        "name": "olives",
+        "_de": "Oliven"
+      },
+      {
+        "id": "wasser",
+        "name": "wasser",
+        "_de": "wasser"
+      },
+      {
+        "id": "parmesan",
+        "name": "Parmesan",
+        "_de": "Parmesan"
+      },
+      {
+        "id": "chanterelle",
+        "name": "Chanterelle",
+        "_de": "Pfifferling"
+      },
+      {
+        "id": "pine-nuts",
+        "name": "Pine Nuts",
+        "_de": "Pinienkerne"
+      },
+      {
+        "id": "ras-el-hanout",
+        "name": "Ras el-Hanout",
+        "_de": "Ras el-Hanout"
+      },
+      {
+        "id": "rose-water",
+        "name": "Rose Water",
+        "_de": "Rosenwasser"
+      },
+      {
+        "id": "rosinen",
+        "name": "Rosinen",
+        "_de": "Rosinen"
+      },
+      {
+        "id": "shiitake",
+        "name": "Shiitake",
+        "_de": "Shiitake"
+      },
+      {
+        "id": "sunflower-seeds",
+        "name": "Sunflower Seeds",
+        "_de": "Sonnenblumenkerne"
+      },
+      {
+        "id": "porcini",
+        "name": "Porcini",
+        "_de": "Steinpilz"
+      },
+      {
+        "id": "star-anise",
+        "name": "Star Anise",
+        "_de": "Sternanis"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme",
+        "_de": "Thymian"
+      },
+      {
+        "id": "tonka-bean",
+        "name": "Tonka Bean",
+        "_de": "Tonkabohne"
+      },
+      {
+        "id": "lemongrass",
+        "name": "Lemongrass",
+        "_de": "Zitronengras"
+      },
+      {
+        "id": "lemon-balm",
+        "name": "Lemon Balm",
+        "_de": "Zitronenmelisse"
+      },
+      {
+        "id": "zitronenschale",
+        "name": "Zitronenschale",
+        "_de": "Zitronenschale"
+      },
+      {
+        "id": "lemon-verbena",
+        "name": "Lemon Verbena",
+        "_de": "Zitronenverbene"
+      },
+      {
+        "id": "yuzu",
+        "name": "Yuzu",
+        "_de": "Yuzu"
+      },
+      {
+        "id": "onion",
+        "name": "Onion",
+        "_de": "Zwiebel"
+      }
+    ]
+  },
+  {
+    "id": "wild-gebraten",
+    "name": "Wild, Gebraten",
+    "_de": "WILD, GEBRATEN",
+    "seasonings": [
+      {
+        "id": "barberry",
+        "name": "Barberry",
+        "_de": "Berberitze"
+      },
+      {
+        "id": "net",
+        "name": "net)",
+        "_de": "net)"
+      },
+      {
+        "id": "tarragon",
+        "name": "Tarragon",
+        "_de": "Estragon"
+      },
+      {
+        "id": "galangal",
+        "name": "Galangal",
+        "_de": "Galgant"
+      },
+      {
+        "id": "clove",
+        "name": "Clove",
+        "_de": "Gewürznelke"
+      },
+      {
+        "id": "pomegranate",
+        "name": "Pomegranate",
+        "_de": "Granatapfel"
+      },
+      {
+        "id": "cocoa",
+        "name": "Cocoa",
+        "_de": "Kakao"
+      },
+      {
+        "id": "cubeb-pepper",
+        "name": "Cubeb Pepper",
+        "_de": "Kubebenpfeffer"
+      },
+      {
+        "id": "long-pepper",
+        "name": "Long Pepper",
+        "_de": "Langer Pfeffer"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf",
+        "_de": "Lorbeer"
+      },
+      {
+        "id": "marjoram",
+        "name": "Marjoram",
+        "_de": "Majoran"
+      },
+      {
+        "id": "chestnuts",
+        "name": "chestnuts",
+        "_de": "Maronen"
+      },
+      {
+        "id": "myrtle",
+        "name": "Myrtle",
+        "_de": "Myrte"
+      },
+      {
+        "id": "grains-of-paradise",
+        "name": "Grains of Paradise",
+        "_de": "Paradieskörner"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper",
+        "_de": "Pfeffer"
+      },
+      {
+        "id": "allspice",
+        "name": "Allspice",
+        "_de": "Piment"
+      },
+      {
+        "id": "pink-peppercorn",
+        "name": "Pink Peppercorn",
+        "_de": "Rosa Beeren"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary",
+        "_de": "Rosmarin"
+      },
+      {
+        "id": "sage",
+        "name": "Sage",
+        "_de": "Salbei"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme",
+        "_de": "Thymian"
+      },
+      {
+        "id": "juniper",
+        "name": "Juniper",
+        "_de": "Wacholder"
+      },
+      {
+        "id": "hyssop",
+        "name": "Hyssop",
+        "_de": "Ysop"
+      }
+    ]
+  },
+  {
+    "id": "wurzel",
+    "name": "Wurzel",
+    "_de": "WURZEL",
+    "seasonings": [
+      {
+        "id": "amchoor",
+        "name": "Amchoor",
+        "_de": "Amchoor"
+      },
+      {
+        "id": "anise",
+        "name": "Anise",
+        "_de": "Anis"
+      },
+      {
+        "id": "net",
+        "name": "net)",
+        "_de": "net)"
+      },
+      {
+        "id": "chili",
+        "name": "Chili",
+        "_de": "Chili"
+      },
+      {
+        "id": "curry-leaves",
+        "name": "Curry Leaves",
+        "_de": "Curryblätter"
+      },
+      {
+        "id": "curry-plant",
+        "name": "Curry Plant",
+        "_de": "Currykraut"
+      },
+      {
+        "id": "tarragon",
+        "name": "Tarragon",
+        "_de": "Estragon"
+      },
+      {
+        "id": "green-pepper",
+        "name": "Green Pepper",
+        "_de": "Grüner Pfeffer"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger",
+        "_de": "Ingwer"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic",
+        "_de": "Knoblauch"
+      },
+      {
+        "id": "pumpkin-seeds",
+        "name": "Pumpkin Seeds",
+        "_de": "Kürbiskerne"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender",
+        "_de": "Lavendel"
+      },
+      {
+        "id": "lovage",
+        "name": "Lovage",
+        "_de": "Liebstöckel"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf",
+        "_de": "Lorbeer"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg",
+        "_de": "Muskatnuss"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley",
+        "_de": "Petersilie"
+      },
+      {
+        "id": "raucharomen",
+        "name": "Raucharomen)",
+        "_de": "Raucharomen)"
+      },
+      {
+        "id": "rosinen",
+        "name": "Rosinen",
+        "_de": "Rosinen"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary",
+        "_de": "Rosmarin"
+      },
+      {
+        "id": "sunflower-seeds",
+        "name": "Sunflower Seeds",
+        "_de": "Sonnenblumenkerne"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme",
+        "_de": "Thymian"
+      },
+      {
+        "id": "tonka-bean",
+        "name": "Tonka Bean",
+        "_de": "Tonkabohne"
+      }
+    ]
+  },
+  {
+    "id": "zucchini",
+    "name": "Zucchini",
+    "_de": "ZUCCHINI",
+    "seasonings": [
+      {
+        "id": "basil",
+        "name": "Basil",
+        "_de": "Basilikum"
+      },
+      {
+        "id": "savory",
+        "name": "Savory",
+        "_de": "Bohnenkraut"
+      },
+      {
+        "id": "curry-plant",
+        "name": "Curry Plant",
+        "_de": "Currykraut"
+      },
+      {
+        "id": "poppy-seed",
+        "name": "Poppy Seed",
+        "_de": "Mohn"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano",
+        "_de": "Oregano"
+      },
+      {
+        "id": "pistazienoel",
+        "name": "Pistazienöl",
+        "_de": "Pistazienöl"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary",
+        "_de": "Rosmarin"
+      },
+      {
+        "id": "sesame",
+        "name": "Sesame",
+        "_de": "Sesam"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme",
+        "_de": "Thymian"
+      },
+      {
+        "id": "walnut",
+        "name": "Walnut",
+        "_de": "Walnuss"
+      }
+    ]
+  },
+  {
+    "id": "rezepte",
+    "name": "Rezepte",
+    "_de": "REZEPTE",
+    "seasonings": [
+      {
+        "id": "ajwain",
+        "name": "Ajwain",
+        "_de": "Ajowan"
+      },
+      {
+        "id": "apfel-thymian-emulsion",
+        "name": "Apfel-Thymian-Emulsion",
+        "_de": "Apfel-Thymian-Emulsion"
+      },
+      {
+        "id": "aprikosenchutney",
+        "name": "Aprikosenchutney",
+        "_de": "Aprikosenchutney"
+      },
+      {
+        "id": "schmalz",
+        "name": "schmalz",
+        "_de": "schmalz"
+      },
+      {
+        "id": "pilzgewuerz",
+        "name": "pilzgewürz",
+        "_de": "pilzgewürz"
+      },
+      {
+        "id": "pralinen",
+        "name": "Pralinen",
+        "_de": "Pralinen"
+      },
+      {
+        "id": "baerlauchmaki",
+        "name": "Bärlauchmaki",
+        "_de": "Bärlauchmaki"
+      },
+      {
+        "id": "berberitzensauce",
+        "name": "Berberitzensauce",
+        "_de": "Berberitzensauce"
+      },
+      {
+        "id": "bergziegamotte",
+        "name": "Bergziegamotte",
+        "_de": "Bergziegamotte"
+      },
+      {
+        "id": "bier-rind-aus-dem-wok",
+        "name": "Bier-Rind aus dem Wok",
+        "_de": "Bier-Rind aus dem Wok"
+      },
+      {
+        "id": "bromhuhn-auf-spinat",
+        "name": "Bromhuhn auf Spinat",
+        "_de": "Bromhuhn auf Spinat"
+      },
+      {
+        "id": "und-orange",
+        "name": "und Orange",
+        "_de": "und Orange"
+      },
+      {
+        "id": "brunnenkresse-aufstrich",
+        "name": "Brunnenkresse-Aufstrich",
+        "_de": "Brunnenkresse-Aufstrich"
+      },
+      {
+        "id": "und-safran",
+        "name": "und Safran",
+        "_de": "und Safran"
+      },
+      {
+        "id": "champignonomelette",
+        "name": "Champignonomelette",
+        "_de": "Champignonomelette"
+      },
+      {
+        "id": "ran",
+        "name": "ran",
+        "_de": "ran"
+      },
+      {
+        "id": "martini",
+        "name": "Martini)",
+        "_de": "Martini)"
+      },
+      {
+        "id": "allspice",
+        "name": "Allspice",
+        "_de": "Piment"
+      },
+      {
+        "id": "cooler-shaker",
+        "name": "Cooler Shaker",
+        "_de": "Cooler Shaker"
+      },
+      {
+        "id": "lingspfeffer",
+        "name": "lingspfeffer",
+        "_de": "lingspfeffer"
+      },
+      {
+        "id": "und-rhabarberconfit",
+        "name": "und Rhabarberconfit",
+        "_de": "und Rhabarberconfit"
+      },
+      {
+        "id": "geschmack",
+        "name": "Geschmack",
+        "_de": "Geschmack"
+      },
+      {
+        "id": "elastische-rosenblaetter",
+        "name": "Elastische Rosenblätter",
+        "_de": "Elastische Rosenblätter"
+      },
+      {
+        "id": "engelwurz-in-reinkultur",
+        "name": "Engelwurz in Reinkultur",
+        "_de": "Engelwurz in Reinkultur"
+      },
+      {
+        "id": "erdbeeren-mit-dill",
+        "name": "Erdbeeren mit Dill",
+        "_de": "Erdbeeren mit Dill"
+      },
+      {
+        "id": "raute",
+        "name": "raute",
+        "_de": "raute"
+      },
+      {
+        "id": "spargel-oseille",
+        "name": "Spargel-Oseille",
+        "_de": "Spargel-Oseille"
+      },
+      {
+        "id": "erdnusszucker",
+        "name": "Erdnusszucker",
+        "_de": "Erdnusszucker"
+      },
+      {
+        "id": "estragonbutter",
+        "name": "Estragonbutter",
+        "_de": "Estragonbutter"
+      },
+      {
+        "id": "fenchellammruecken",
+        "name": "Fenchellammrücken",
+        "_de": "Fenchellammrücken"
+      },
+      {
+        "id": "gebrannten-mandeln",
+        "name": "„gebrannten“ Mandeln",
+        "_de": "„gebrannten“ Mandeln"
+      },
+      {
+        "id": "feves-mit-basilikum",
+        "name": "Feves mit Basilikum",
+        "_de": "Feves mit Basilikum"
+      },
+      {
+        "id": "kartoffelemulsion",
+        "name": "Kartoffelemulsion",
+        "_de": "Kartoffelemulsion"
+      },
+      {
+        "id": "paniert",
+        "name": "paniert",
+        "_de": "paniert"
+      },
+      {
+        "id": "aprikosen-mit-queller",
+        "name": "Aprikosen mit Queller",
+        "_de": "Aprikosen mit Queller"
+      },
+      {
+        "id": "kresseblueten",
+        "name": "kresseblüten",
+        "_de": "kresseblüten"
+      },
+      {
+        "id": "frittiertes-wild",
+        "name": "Frittiertes Wild",
+        "_de": "Frittiertes Wild"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper",
+        "_de": "Pfeffer"
+      },
+      {
+        "id": "kraut",
+        "name": "kraut",
+        "_de": "kraut"
+      },
+      {
+        "id": "cloves",
+        "name": "Cloves",
+        "_de": "Nelken"
+      },
+      {
+        "id": "asafoetida",
+        "name": "Asafoetida",
+        "_de": "Asant"
+      },
+      {
+        "id": "gefuellte-runde-zucchini",
+        "name": "Gefüllte runde Zucchini",
+        "_de": "Gefüllte runde Zucchini"
+      },
+      {
+        "id": "sueppchen",
+        "name": "süppchen",
+        "_de": "süppchen"
+      },
+      {
+        "id": "geraeucherter-myrtekaese",
+        "name": "Geräucherter Myrtekäse",
+        "_de": "Geräucherter Myrtekäse"
+      },
+      {
+        "id": "nensalat",
+        "name": "nensalat",
+        "_de": "nensalat"
+      },
+      {
+        "id": "hyssop",
+        "name": "Hyssop",
+        "_de": "Ysop"
+      },
+      {
+        "id": "gurkensalat-mit-nigella",
+        "name": "Gurkensalat mit Nigella",
+        "_de": "Gurkensalat mit Nigella"
+      },
+      {
+        "id": "lack",
+        "name": "lack",
+        "_de": "lack"
+      },
+      {
+        "id": "nade",
+        "name": "nade",
+        "_de": "nade"
+      },
+      {
+        "id": "zweierlei-sesam",
+        "name": "zweierlei Sesam",
+        "_de": "zweierlei Sesam"
+      },
+      {
+        "id": "haselnuss-chili-filberton",
+        "name": "Haselnuss-Chili-Filberton",
+        "_de": "Haselnuss-Chili-Filberton"
+      },
+      {
+        "id": "hoisin-sauce",
+        "name": "Hoisin-Sauce",
+        "_de": "Hoisin-Sauce"
+      },
+      {
+        "id": "verschiedenen-puerees",
+        "name": "verschiedenen Pürees",
+        "_de": "verschiedenen Pürees"
+      },
+      {
+        "id": "kruste",
+        "name": "kruste",
+        "_de": "kruste"
+      },
+      {
+        "id": "glasur",
+        "name": "glasur",
+        "_de": "glasur"
+      },
+      {
+        "id": "pikanter-apfelnage",
+        "name": "Pikanter Apfelnage",
+        "_de": "Pikanter Apfelnage"
+      },
+      {
+        "id": "macadamianuessen",
+        "name": "Macadamianüssen",
+        "_de": "Macadamianüssen"
+      },
+      {
+        "id": "kaffeelauch",
+        "name": "Kaffeelauch",
+        "_de": "Kaffeelauch"
+      },
+      {
+        "id": "limettenblaettern",
+        "name": "limettenblättern",
+        "_de": "limettenblättern"
+      },
+      {
+        "id": "kakao-brotaufstrich",
+        "name": "Kakao-Brotaufstrich",
+        "_de": "Kakao-Brotaufstrich"
+      },
+      {
+        "id": "kakaoport-nebst-rehfilet",
+        "name": "Kakaoport nebst Rehfilet",
+        "_de": "Kakaoport nebst Rehfilet"
+      },
+      {
+        "id": "und-paradieskoernern",
+        "name": "und Paradieskörnern",
+        "_de": "und Paradieskörnern"
+      },
+      {
+        "id": "katerfruehstueck",
+        "name": "Katerfrühstück",
+        "_de": "Katerfrühstück"
+      },
+      {
+        "id": "lorbeerblaettern",
+        "name": "Lorbeerblättern",
+        "_de": "Lorbeerblättern"
+      },
+      {
+        "id": "kerbelcreme",
+        "name": "Kerbelcreme",
+        "_de": "Kerbelcreme"
+      },
+      {
+        "id": "kernschmelze",
+        "name": "Kernschmelze",
+        "_de": "Kernschmelze"
+      },
+      {
+        "id": "ketchup",
+        "name": "Ketchup",
+        "_de": "Ketchup"
+      },
+      {
+        "id": "sauce",
+        "name": "sauce",
+        "_de": "sauce"
+      },
+      {
+        "id": "kokosfisch",
+        "name": "Kokosfisch",
+        "_de": "Kokosfisch"
+      },
+      {
+        "id": "kokosspargel",
+        "name": "Kokosspargel",
+        "_de": "Kokosspargel"
+      },
+      {
+        "id": "kombuwuerzpueree",
+        "name": "Kombuwürzpüree",
+        "_de": "Kombuwürzpüree"
+      },
+      {
+        "id": "wok",
+        "name": "Wok",
+        "_de": "Wok"
+      },
+      {
+        "id": "cabbage",
+        "name": "Cabbage",
+        "_de": "kohl"
+      },
+      {
+        "id": "blaetter",
+        "name": "blätter",
+        "_de": "blätter"
+      },
+      {
+        "id": "blutwurst-tarte",
+        "name": "Blutwurst-Tarte",
+        "_de": "Blutwurst-Tarte"
+      },
+      {
+        "id": "kubebentrunk",
+        "name": "Kubebentrunk",
+        "_de": "Kubebentrunk"
+      },
+      {
+        "id": "blech",
+        "name": "Blech",
+        "_de": "Blech"
+      },
+      {
+        "id": "juniper",
+        "name": "Juniper",
+        "_de": "Wacholder"
+      },
+      {
+        "id": "kurkuma-eis",
+        "name": "Kurkuma-Eis",
+        "_de": "Kurkuma-Eis"
+      },
+      {
+        "id": "lachsconfit-mit-anis",
+        "name": "Lachsconfit mit Anis",
+        "_de": "Lachsconfit mit Anis"
+      },
+      {
+        "id": "zucchinimus",
+        "name": "Zucchinimus",
+        "_de": "Zucchinimus"
+      },
+      {
+        "id": "rosinenkern",
+        "name": "Rosinenkern",
+        "_de": "Rosinenkern"
+      },
+      {
+        "id": "nuessen",
+        "name": "nüssen",
+        "_de": "nüssen"
+      },
+      {
+        "id": "lavendellauch",
+        "name": "Lavendellauch",
+        "_de": "Lavendellauch"
+      },
+      {
+        "id": "limettenespuma",
+        "name": "Limettenespuma",
+        "_de": "Limettenespuma"
+      },
+      {
+        "id": "galangal",
+        "name": "Galangal",
+        "_de": "Galgant"
+      },
+      {
+        "id": "tern",
+        "name": "tern",
+        "_de": "tern"
+      },
+      {
+        "id": "maggi-schoko-trunk",
+        "name": "Maggi-Schoko-Trunk",
+        "_de": "Maggi-Schoko-Trunk"
+      },
+      {
+        "id": "meerrettichwurzelschnaps",
+        "name": "Meerrettichwurzelschnaps",
+        "_de": "Meerrettichwurzelschnaps"
+      },
+      {
+        "id": "melissensirup",
+        "name": "Melissensirup",
+        "_de": "Melissensirup"
+      },
+      {
+        "id": "gruen",
+        "name": "grün",
+        "_de": "grün"
+      },
+      {
+        "id": "mexikanische-eier",
+        "name": "Mexikanische Eier",
+        "_de": "Mexikanische Eier"
+      },
+      {
+        "id": "rezept",
+        "name": "Rezept",
+        "_de": "Rezept"
+      },
+      {
+        "id": "mole-negro",
+        "name": "Mole negro",
+        "_de": "Mole negro"
+      },
+      {
+        "id": "nori-matcha-lachsforelle",
+        "name": "Nori-Matcha Lachsforelle",
+        "_de": "Nori-Matcha Lachsforelle"
+      },
+      {
+        "id": "samen",
+        "name": "samen",
+        "_de": "samen"
+      },
+      {
+        "id": "nuss",
+        "name": "nuss",
+        "_de": "nuss"
+      },
+      {
+        "id": "olivenoelwuerfel",
+        "name": "Olivenölwürfel",
+        "_de": "Olivenölwürfel"
+      },
+      {
+        "id": "teufel",
+        "name": "teufel",
+        "_de": "teufel"
+      },
+      {
+        "id": "orangenschokolade",
+        "name": "Orangenschokolade",
+        "_de": "Orangenschokolade"
+      },
+      {
+        "id": "oregano-pizzabrot",
+        "name": "Oregano-Pizzabrot",
+        "_de": "Oregano-Pizzabrot"
+      },
+      {
+        "id": "oranges",
+        "name": "oranges",
+        "_de": "orangen"
+      },
+      {
+        "id": "pan-con-tomates",
+        "name": "Pan con tomates",
+        "_de": "Pan con tomates"
+      },
+      {
+        "id": "papas-arrugadas",
+        "name": "Papas arrugadas",
+        "_de": "Papas arrugadas"
+      },
+      {
+        "id": "paprikapolenta",
+        "name": "Paprikapolenta",
+        "_de": "Paprikapolenta"
+      },
+      {
+        "id": "parmesanschaum",
+        "name": "Parmesanschaum",
+        "_de": "Parmesanschaum"
+      },
+      {
+        "id": "pesto-alla-genovese",
+        "name": "Pesto alla genovese",
+        "_de": "Pesto alla genovese"
+      },
+      {
+        "id": "petersilienoel",
+        "name": "Petersilienöl",
+        "_de": "Petersilienöl"
+      },
+      {
+        "id": "almonds",
+        "name": "Almonds",
+        "_de": "Mandeln"
+      },
+      {
+        "id": "pfefferrouladen",
+        "name": "Pfefferrouladen",
+        "_de": "Pfefferrouladen"
+      },
+      {
+        "id": "beeren",
+        "name": "Beeren",
+        "_de": "Beeren"
+      },
+      {
+        "id": "pizza-rucola",
+        "name": "Pizza Rucola",
+        "_de": "Pizza Rucola"
+      },
+      {
+        "id": "portulak-nockerln",
+        "name": "Portulak–Nockerln",
+        "_de": "Portulak–Nockerln"
+      },
+      {
+        "id": "salat-und-tomatengelee",
+        "name": "salat und Tomatengelee",
+        "_de": "salat und Tomatengelee"
+      },
+      {
+        "id": "rigatoni-mit-zimtbutter",
+        "name": "Rigatoni mit Zimtbutter",
+        "_de": "Rigatoni mit Zimtbutter"
+      },
+      {
+        "id": "risotto-mit-brennnessel",
+        "name": "Risotto mit Brennnessel",
+        "_de": "Risotto mit Brennnessel"
+      },
+      {
+        "id": "roestzwiebel-ohne-hitze",
+        "name": "Röstzwiebel ohne Hitze",
+        "_de": "Röstzwiebel ohne Hitze"
+      },
+      {
+        "id": "sumac",
+        "name": "Sumac",
+        "_de": "Sumach"
+      },
+      {
+        "id": "romesco-sauce",
+        "name": "Romesco-Sauce",
+        "_de": "Romesco-Sauce"
+      },
+      {
+        "id": "roquefortdattel",
+        "name": "Roquefortdattel",
+        "_de": "Roquefortdattel"
+      },
+      {
+        "id": "saison",
+        "name": "Saison",
+        "_de": "Saison"
+      },
+      {
+        "id": "rosmarin-schokoplaetzchen",
+        "name": "Rosmarin-Schokoplätzchen",
+        "_de": "Rosmarin-Schokoplätzchen"
+      },
+      {
+        "id": "marseillaiser-sabayon",
+        "name": "Marseillaiser Sabayon",
+        "_de": "Marseillaiser Sabayon"
+      },
+      {
+        "id": "rote-bete-salat",
+        "name": "Rote Bete Salat",
+        "_de": "Rote Bete Salat"
+      },
+      {
+        "id": "rotes-kartoffelpueree",
+        "name": "Rotes Kartoffelpüree",
+        "_de": "Rotes Kartoffelpüree"
+      },
+      {
+        "id": "rotkraut-mit-macadamia",
+        "name": "Rotkraut mit Macadamia",
+        "_de": "Rotkraut mit Macadamia"
+      },
+      {
+        "id": "sauerampfer-coulis",
+        "name": "Sauerampfer-Coulis",
+        "_de": "Sauerampfer-Coulis"
+      },
+      {
+        "id": "saure-nieren",
+        "name": "Saure Nieren",
+        "_de": "Saure Nieren"
+      },
+      {
+        "id": "schmalzsalzbrote",
+        "name": "Schmalzsalzbrote",
+        "_de": "Schmalzsalzbrote"
+      },
+      {
+        "id": "mountain-cumin",
+        "name": "Mountain cumin",
+        "_de": "Bergkümmel"
+      },
+      {
+        "id": "schnelles-mangochutney",
+        "name": "Schnelles Mangochutney",
+        "_de": "Schnelles Mangochutney"
+      },
+      {
+        "id": "schokolade-kalt-heiss",
+        "name": "Schokolade kalt–heiß",
+        "_de": "Schokolade kalt–heiß"
+      },
+      {
+        "id": "trueffeln",
+        "name": "Trüffeln",
+        "_de": "Trüffeln"
+      },
+      {
+        "id": "beans",
+        "name": "beans",
+        "_de": "bohnen"
+      },
+      {
+        "id": "mustard",
+        "name": "Mustard",
+        "_de": "senf"
+      },
+      {
+        "id": "senfdrops",
+        "name": "Senfdrops",
+        "_de": "Senfdrops"
+      },
+      {
+        "id": "mit-dulse",
+        "name": "mit Dulse",
+        "_de": "mit Dulse"
+      },
+      {
+        "id": "shiitakeschwammerlschaum",
+        "name": "Shiitakeschwammerlschaum",
+        "_de": "Shiitakeschwammerlschaum"
+      },
+      {
+        "id": "speise",
+        "name": "speise)",
+        "_de": "speise)"
+      },
+      {
+        "id": "sauces",
+        "name": "sauces",
+        "_de": "saucen"
+      },
+      {
+        "id": "steckruebenpueree",
+        "name": "Steckrübenpüree",
+        "_de": "Steckrübenpüree"
+      },
+      {
+        "id": "steinpilzcharlotte",
+        "name": "Steinpilzcharlotte",
+        "_de": "Steinpilzcharlotte"
+      },
+      {
+        "id": "suessholzraspel-auf-fettbasis",
+        "name": "Süßholzraspel auf Fettbasis",
+        "_de": "Süßholzraspel auf Fettbasis"
+      },
+      {
+        "id": "statt-petersilie",
+        "name": "(statt Petersilie)",
+        "_de": "(statt Petersilie)"
+      },
+      {
+        "id": "tamarinden-limonade",
+        "name": "Tamarinden-Limonade",
+        "_de": "Tamarinden-Limonade"
+      },
+      {
+        "id": "haube",
+        "name": "haube",
+        "_de": "haube"
+      },
+      {
+        "id": "tomatenpesto",
+        "name": "Tomatenpesto",
+        "_de": "Tomatenpesto"
+      },
+      {
+        "id": "vanillisierter-wirsing",
+        "name": "Vanillisierter Wirsing",
+        "_de": "Vanillisierter Wirsing"
+      },
+      {
+        "id": "wakame-kaesescheiben",
+        "name": "Wakame-Käsescheiben",
+        "_de": "Wakame-Käsescheiben"
+      },
+      {
+        "id": "waldmeisterspruehsahne",
+        "name": "Waldmeistersprühsahne",
+        "_de": "Waldmeistersprühsahne"
+      },
+      {
+        "id": "walnusslikoer",
+        "name": "Walnusslikör",
+        "_de": "Walnusslikör"
+      },
+      {
+        "id": "cheese",
+        "name": "Cheese",
+        "_de": "käse"
+      },
+      {
+        "id": "borage",
+        "name": "Borage",
+        "_de": "Borretsch"
+      },
+      {
+        "id": "weinbeeren-olivenoelcreme",
+        "name": "Weinbeeren-Olivenölcreme",
+        "_de": "Weinbeeren-Olivenölcreme"
+      },
+      {
+        "id": "wermutkraut",
+        "name": "Wermutkraut",
+        "_de": "Wermutkraut"
+      },
+      {
+        "id": "yuzu-eis",
+        "name": "Yuzu-Eis",
+        "_de": "Yuzu-Eis"
+      },
+      {
+        "id": "lauch",
+        "name": "lauch",
+        "_de": "lauch"
+      },
+      {
+        "id": "sichuan-pepper",
+        "name": "Sichuan Pepper",
+        "_de": "Szechuanpfeffer"
+      },
+      {
+        "id": "zitronenuniversalgewuerz",
+        "name": "Zitronenuniversalgewürz",
+        "_de": "Zitronenuniversalgewürz"
+      }
+    ]
+  },
+  {
+    "id": "gewuerzmischungen",
+    "name": "Gewürzmischungen",
+    "_de": "GEWÜRZMISCHUNGEN",
+    "seasonings": [
+      {
+        "id": "advieh",
+        "name": "Advieh",
+        "_de": "Advieh"
+      },
+      {
+        "id": "baharat",
+        "name": "Baharat",
+        "_de": "Baharat"
+      },
+      {
+        "id": "barbecue-mischung",
+        "name": "Barbecue-Mischung",
+        "_de": "Barbecue-Mischung"
+      },
+      {
+        "id": "berbere",
+        "name": "Berbere",
+        "_de": "Berbere"
+      },
+      {
+        "id": "bouquet-garni",
+        "name": "Bouquet garni",
+        "_de": "Bouquet garni"
+      },
+      {
+        "id": "cajun-mischung",
+        "name": "Cajun-Mischung",
+        "_de": "Cajun-Mischung"
+      },
+      {
+        "id": "mischung",
+        "name": "Mischung",
+        "_de": "Mischung"
+      },
+      {
+        "id": "colombo-powder",
+        "name": "Colombo Powder",
+        "_de": "Colombo Powder"
+      },
+      {
+        "id": "dukka-dukkah-duqqa",
+        "name": "Dukka, Dukkah, Duqqa",
+        "_de": "Dukka, Dukkah, Duqqa"
+      }
+    ]
+  }
+]

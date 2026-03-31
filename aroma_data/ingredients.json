@@ -1,0 +1,6791 @@
+[
+  {
+    "id": "ajwain",
+    "name": "Ajwain",
+    "_de": "Ajowan",
+    "harmonizes_with": [
+      {
+        "id": "savory",
+        "name": "Savory"
+      },
+      {
+        "id": "curry-leaves",
+        "name": "Curry Leaves"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "das-schluesselaroma-des-gewuerzes-ist-durch-das-aromatisch-kraeuterig-duf",
+        "name": "Das Schlüsselaroma Des Gewürzes Ist Durch Das Aromatisch-Kräuterig Duf-"
+      }
+    ],
+    "pairs_with_foods": [
+      "Potatoes",
+      "Maniokwur-"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Fresher kräuteriger Duft",
+      "b": "Optimale Aromenentfaltung beim Kochen",
+      "c": "Thy -"
+    },
+    "spice_blends": [
+      "Chat Masala",
+      "Berbere",
+      "Panch Phoron"
+    ],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "amchoor",
+    "name": "Amchoor",
+    "_de": "Amchoor",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "cloves",
+        "name": "Cloves"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "mint",
+        "name": "Mint"
+      }
+    ],
+    "pairs_with_foods": [],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Balsamisch, sandelwoody, warm, kampf -"
+    },
+    "spice_blends": [
+      "Indisches Chat Masala",
+      "indisches Tandoori-"
+    ],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "angelica",
+    "name": "Angelica",
+    "_de": "Angelika",
+    "harmonizes_with": [
+      {
+        "id": "anise",
+        "name": "Anise"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg"
+      },
+      {
+        "id": "perilla",
+        "name": "Perilla"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "lemon-balm",
+        "name": "Lemon Balm"
+      }
+    ],
+    "pairs_with_foods": [],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "anise",
+    "name": "Anise",
+    "_de": "Anis",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "tarragon",
+        "name": "Tarragon"
+      },
+      {
+        "id": "fennel-seeds",
+        "name": "Fennel Seeds"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg"
+      },
+      {
+        "id": "allspice",
+        "name": "Allspice"
+      },
+      {
+        "id": "pine-nuts",
+        "name": "Pine Nuts"
+      },
+      {
+        "id": "star-anise",
+        "name": "Star Anise"
+      },
+      {
+        "id": "lemongrass",
+        "name": "Lemongrass"
+      }
+    ],
+    "pairs_with_foods": [
+      "Spirits",
+      "Liqueurs",
+      "oranges",
+      "strawberries",
+      "raspberries",
+      "Almonds",
+      "Chocolate",
+      "Honey",
+      "salzig",
+      "light meat",
+      "liver"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Floral, aromatic, anise-like",
+      "b": "Optimale aromatice anise note",
+      "c": "Lightly bitter mit dark roast notes"
+    },
+    "aroma_groups": [
+      2
+    ]
+  },
+  {
+    "id": "annatto",
+    "name": "Annatto",
+    "_de": "Annatto",
+    "harmonizes_with": [
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "paprika",
+        "name": "Paprika"
+      },
+      {
+        "id": "allspice",
+        "name": "Allspice"
+      }
+    ],
+    "pairs_with_foods": [
+      "squash",
+      "Okra",
+      "fish"
+    ],
+    "cuisines": [
+      "Karibik:"
+    ],
+    "heat_behavior": {
+      "a": "Earthy, woody-aromatice Noten",
+      "b": "Intense color"
+    },
+    "aroma_groups": [
+      4,
+      7
+    ]
+  },
+  {
+    "id": "dried-apricots",
+    "name": "Dried Apricots",
+    "_de": "Aprikosen, Getrocknet",
+    "harmonizes_with": [
+      {
+        "id": "cardamom",
+        "name": "Cardamom"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "turmeric",
+        "name": "Turmeric"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "saffron",
+        "name": "Saffron"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla"
+      },
+      {
+        "id": "aprikosen-wurden-schon-vor-rund-4000-jahren-in-china-kultiviert-von",
+        "name": "Aprikosen Wurden Schon Vor Rund 4000 Jahren In China Kultiviert. Von"
+      }
+    ],
+    "pairs_with_foods": [
+      "lamb",
+      "beef",
+      "braised dishes",
+      "Soups"
+    ],
+    "cuisines": [
+      "Persien: Reisgerichte"
+    ],
+    "heat_behavior": {
+      "a": "Distinct sulfur note",
+      "b": "Leicht Floral",
+      "c": "Mild, sulfur no longer dominant (typical use) A"
+    },
+    "aroma_groups": [
+      2
+    ]
+  },
+  {
+    "id": "asafoetida",
+    "name": "Asafoetida",
+    "_de": "Asant",
+    "harmonizes_with": [
+      {
+        "id": "fenugreek",
+        "name": "Fenugreek"
+      },
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "curry-leaves",
+        "name": "Curry Leaves"
+      },
+      {
+        "id": "mustard",
+        "name": "Mustard"
+      },
+      {
+        "id": "lemon",
+        "name": "Lemon"
+      }
+    ],
+    "pairs_with_foods": [
+      "Pasta",
+      "Rice",
+      "Quark",
+      "saure Sahne",
+      "leaf salads",
+      "eggs",
+      "fish",
+      "light meat"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Fresh, pungent",
+      "b": "Milds Aroma",
+      "c": "Flat, bitter"
+    },
+    "spice_blends": [],
+    "aroma_groups": [
+      1
+    ]
+  },
+  {
+    "id": "basil",
+    "name": "Basil",
+    "_de": "Basilikum",
+    "harmonizes_with": [
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "cubeb-pepper",
+        "name": "Cubeb Pepper"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla"
+      },
+      {
+        "id": "citrus-zest",
+        "name": "Citrus Zest"
+      }
+    ],
+    "pairs_with_foods": [],
+    "aroma_groups": [
+      2
+    ]
+  },
+  {
+    "id": "mugwort",
+    "name": "Mugwort",
+    "_de": "Beifuss",
+    "harmonizes_with": [
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "sage",
+        "name": "Sage"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "wormwood",
+        "name": "Wormwood"
+      },
+      {
+        "id": "aromatisiertes-gaenseschmalz",
+        "name": "Aromatisiertes Gänseschmalz"
+      },
+      {
+        "id": "den-flomen-im-ofen-bei-nicht-mehr-als-70-c-aus",
+        "name": "Den Flomen Im Ofen Bei Nicht Mehr Als 70 °C Aus -"
+      }
+    ],
+    "pairs_with_foods": [
+      "Aal",
+      "Karpfen",
+      "Gans",
+      "duck",
+      "roast pork"
+    ],
+    "cuisines": [
+      "Russland: Karpfen",
+      "Japan:"
+    ],
+    "heat_behavior": {
+      "a": "Floral-kräuterig",
+      "b": "Kräuterig warme"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "barberry",
+    "name": "Barberry",
+    "_de": "Berberitze",
+    "harmonizes_with": [
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "long-pepper",
+        "name": "Long Pepper"
+      },
+      {
+        "id": "orange-peel",
+        "name": "Orange Peel"
+      },
+      {
+        "id": "allspice",
+        "name": "Allspice"
+      },
+      {
+        "id": "pistachios",
+        "name": "Pistachios"
+      },
+      {
+        "id": "rose-water",
+        "name": "Rose Water"
+      },
+      {
+        "id": "saffron",
+        "name": "Saffron"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      },
+      {
+        "id": "berberitzensauce",
+        "name": "Berberitzensauce"
+      },
+      {
+        "id": "berberitzen-15-minuten-waessern-abtrocknen",
+        "name": "Berberitzen 15 Minuten Wässern, Abtrocknen."
+      },
+      {
+        "id": "dann-in-reichlich-butter-kurz-schwenken",
+        "name": "Dann In Reichlich Butter Kurz Schwenken –"
+      }
+    ],
+    "pairs_with_foods": [
+      "Rice",
+      "Chicken",
+      "game"
+    ],
+    "heat_behavior": {
+      "a": "Dominant sauer",
+      "b": "118 K R Ä U T E R , G E W Ü R Z E & M E H R Das ätherische Öl der Bergamotte hat einen charakteristischen, Fresh-süß-"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "bergamot",
+    "name": "Bergamot",
+    "_de": "Bergamotte",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "kaffir-lime-leaves",
+        "name": "Kaffir Lime Leaves"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom"
+      },
+      {
+        "id": "turmeric",
+        "name": "Turmeric"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "pink-peppercorn",
+        "name": "Pink Peppercorn"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      },
+      {
+        "id": "linalylacetat-frisch-suesslich-bergamotte-ar",
+        "name": "Linalylacetat Frisch-Süßlich, Bergamotte Ar -"
+      }
+    ],
+    "pairs_with_foods": [
+      "tea",
+      "stews",
+      "Curry",
+      "Chocolate"
+    ],
+    "cuisines": [
+      "England: Earl Grey Tea, Gin",
+      "Frankreich:"
+    ],
+    "heat_behavior": {
+      "a": "Freshes Bergamotte-Aroma",
+      "b": "Fruchtig"
+    },
+    "aroma_groups": [
+      2
+    ]
+  },
+  {
+    "id": "mountain-cumin",
+    "name": "Mountain cumin",
+    "_de": "Bergkümmel",
+    "harmonizes_with": [
+      {
+        "id": "coriander",
+        "name": "Coriander"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      }
+    ],
+    "pairs_with_foods": [
+      "tomatoes",
+      "Cabbage",
+      "Milch -"
+    ],
+    "heat_behavior": {
+      "a": "Freshe, süßlich-minzige Aromen",
+      "b": "Beifügen von Röstnöten"
+    },
+    "aroma_groups": [
+      4,
+      7
+    ]
+  },
+  {
+    "id": "bitter-almond",
+    "name": "Bitter Almond",
+    "_de": "Bittermandel",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "bergamot",
+        "name": "Bergamot"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf"
+      },
+      {
+        "id": "rose",
+        "name": "Rose"
+      },
+      {
+        "id": "tamarind",
+        "name": "Tamarind"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      },
+      {
+        "id": "aprikosenchutney",
+        "name": "Aprikosenchutney"
+      },
+      {
+        "id": "aprikosensteine-knacken-die-bittermandeln-he",
+        "name": "Aprikosensteine Knacken, Die „Bittermandeln“ He-"
+      }
+    ],
+    "pairs_with_foods": [
+      "olive oil",
+      "Coffee"
+    ],
+    "cuisines": [
+      "Deutschland: Stollen, Marzipan"
+    ],
+    "heat_behavior": {
+      "a": "Mandelig, pungent, trigeminal-reizend",
+      "b": "aromatic-mandelig, süßlich-bitter",
+      "c": "Abgeschwächt bitter, marzipanartig bittermandelig l Wasser BENZALDEHYD"
+    },
+    "aroma_groups": [
+      5
+    ]
+  },
+  {
+    "id": "fenugreek",
+    "name": "Fenugreek",
+    "_de": "Bockshornklee",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "curry-leaves",
+        "name": "Curry Leaves"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "lovage",
+        "name": "Lovage"
+      },
+      {
+        "id": "nigella",
+        "name": "Nigella"
+      },
+      {
+        "id": "mustard",
+        "name": "Mustard"
+      },
+      {
+        "id": "zitrusschalen",
+        "name": "Zitrusschalen"
+      },
+      {
+        "id": "obatzda-mit-bockshornkleesamen",
+        "name": "Obatzda Mit Bockshornkleesamen"
+      },
+      {
+        "id": "die-geruchschemie-der-samen-beziehungsweise-botanisch-korrekt-der",
+        "name": "Die Geruchschemie Der Samen Beziehungsweise Botanisch Korrekt: Der"
+      },
+      {
+        "id": "fruechte-des-bockshornklees-wird-durch-das-molekuel-sotolon-bestimmt-das",
+        "name": "Früchte Des Bockshornklees Wird Durch Das Molekül Sotolon Bestimmt, Das"
+      }
+    ],
+    "pairs_with_foods": [
+      "spinach",
+      "Yams"
+    ],
+    "cuisines": [
+      "Indien: Methi Naan (Brot), Shuktas (benga-"
+    ],
+    "spice_blends": [
+      "Tamilisches Sambar podi",
+      "bengalisches"
+    ],
+    "aroma_groups": [
+      4,
+      7
+    ]
+  },
+  {
+    "id": "savory",
+    "name": "Savory",
+    "_de": "Bohnenkraut",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf"
+      },
+      {
+        "id": "marjoram",
+        "name": "Marjoram"
+      },
+      {
+        "id": "mint",
+        "name": "Mint"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      }
+    ],
+    "pairs_with_foods": [
+      "Cabbage",
+      "Potatoes",
+      "Zucchini"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Fresh, kräuterig, leicht Floral",
+      "b": "Kräuterig, warm, kampferig",
+      "c": "Eher woody, beginnende bitternoten"
+    },
+    "spice_blends": [
+      "Fines Herbes",
+      "Herbes de Provence"
+    ],
+    "aroma_groups": [
+      3
+    ]
+  },
+  {
+    "id": "borage",
+    "name": "Borage",
+    "_de": "Borretsch",
+    "harmonizes_with": [
+      {
+        "id": "dill",
+        "name": "Dill"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil"
+      },
+      {
+        "id": "cress",
+        "name": "Cress"
+      },
+      {
+        "id": "turmeric",
+        "name": "Turmeric"
+      },
+      {
+        "id": "lovage",
+        "name": "Lovage"
+      },
+      {
+        "id": "mint",
+        "name": "Mint"
+      },
+      {
+        "id": "mustard",
+        "name": "Mustard"
+      },
+      {
+        "id": "juniper",
+        "name": "Juniper"
+      }
+    ],
+    "pairs_with_foods": [
+      "fettreichem Fisch",
+      "Aal",
+      "Kartoffelsalat"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Freshe Gurkennote",
+      "b": "Eher wachsig-"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "nettle",
+    "name": "Nettle",
+    "_de": "Brennnessel",
+    "harmonizes_with": [
+      {
+        "id": "kombu-algen",
+        "name": "Kombu-Algen"
+      },
+      {
+        "id": "bitter-almond",
+        "name": "Bitter Almond"
+      },
+      {
+        "id": "parmesan",
+        "name": "Parmesan"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      }
+    ],
+    "pairs_with_foods": [
+      "salads",
+      "Soups",
+      "Vegetables",
+      "Risotto",
+      "Ravioli",
+      "Cheese"
+    ],
+    "cuisines": [
+      "Deutschland: Brennnesselsuppe, Salate, Tee",
+      "Italien: Ravioli, Risotto",
+      "Niederlande:"
+    ],
+    "heat_behavior": {
+      "a": "Fresh, leicht aromatic, leicht säuerlich",
+      "b": "Herb, adstringierend"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "wild-garlic",
+    "name": "Wild Garlic",
+    "_de": "Bärlauch",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "chives",
+        "name": "Chives"
+      },
+      {
+        "id": "onion",
+        "name": "Onion"
+      }
+    ],
+    "pairs_with_foods": [
+      "tomatoes",
+      "eggplants",
+      "Zucchini",
+      "Yogurt",
+      "Cream",
+      "Coconut Milk",
+      "Pilzen"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Freshes, Florales Aroma",
+      "b": "Flat,"
+    },
+    "aroma_groups": [
+      1
+    ]
+  },
+  {
+    "id": "cashew",
+    "name": "Cashew",
+    "_de": "Cashew",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom"
+      },
+      {
+        "id": "saffron",
+        "name": "Saffron"
+      },
+      {
+        "id": "tonka-bean",
+        "name": "Tonka Bean"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla"
+      }
+    ],
+    "pairs_with_foods": [
+      "Chicken",
+      "Vegetables",
+      "Hackfleisch",
+      "Desserts"
+    ],
+    "cuisines": [
+      "Brasilien: Cajuína (Kaschusaft"
+    ],
+    "heat_behavior": {
+      "a": "Wachsig, fruchtig",
+      "b": "Whiskyartig, woody",
+      "c": "Warme Röstnoten"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "mushroom",
+    "name": "Mushroom",
+    "_de": "Champignon",
+    "harmonizes_with": [
+      {
+        "id": "tarragon",
+        "name": "Tarragon"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "dried-tomatoes",
+        "name": "dried tomatoes"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "onion",
+        "name": "Onion"
+      }
+    ],
+    "pairs_with_foods": [
+      "meat",
+      "fish",
+      "Cheese",
+      "eggs",
+      "Pasta",
+      "Soups"
+    ],
+    "cuisines": [
+      "Deutschland: Champignoncremesuppe,"
+    ],
+    "heat_behavior": {
+      "a": "Eher rohes Pilzaroma",
+      "c": "Erdig, leicht muf- fig",
+      "b": "Typischer Champignonduft, herzhaft"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "chili",
+    "name": "Chili",
+    "_de": "Chili",
+    "harmonizes_with": [
+      {
+        "id": "amchoor",
+        "name": "Amchoor"
+      },
+      {
+        "id": "asafoetida",
+        "name": "Asafoetida"
+      },
+      {
+        "id": "cranberry",
+        "name": "Cranberry"
+      },
+      {
+        "id": "galangal",
+        "name": "Galangal"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "buzz-button",
+        "name": "Buzz Button"
+      },
+      {
+        "id": "paprika",
+        "name": "Paprika"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla"
+      },
+      {
+        "id": "yuzu",
+        "name": "Yuzu"
+      }
+    ],
+    "pairs_with_foods": [
+      "stews",
+      "Soups"
+    ],
+    "heat_behavior": {
+      "a": "Earthy Aromen, Schärfe",
+      "b": "Schärfe wird"
+    },
+    "spice_blends": [
+      "Indische Masalas",
+      "amerikanische BBQ- Mischung",
+      "ma-"
+    ],
+    "aroma_groups": [
+      8
+    ]
+  },
+  {
+    "id": "cranberry",
+    "name": "Cranberry",
+    "_de": "Cranberry",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "clove",
+        "name": "Clove"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "cilantro",
+        "name": "Cilantro"
+      },
+      {
+        "id": "lime",
+        "name": "Lime"
+      },
+      {
+        "id": "nuts",
+        "name": "nuts"
+      },
+      {
+        "id": "star-anise",
+        "name": "Star Anise"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla"
+      },
+      {
+        "id": "onion",
+        "name": "Onion"
+      }
+    ],
+    "pairs_with_foods": [
+      "fruit salads",
+      "baking"
+    ],
+    "cuisines": [
+      "Kanada: Thanksgiving-Truthahn,"
+    ],
+    "heat_behavior": {
+      "a": "Fruchtig-süß-säuerlich",
+      "b": "Zitrusartig aromatic",
+      "c": "Kampferartig bis bitter,"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "curry-leaves",
+    "name": "Curry Leaves",
+    "_de": "Curryblätter",
+    "harmonizes_with": [
+      {
+        "id": "asafoetida",
+        "name": "Asafoetida"
+      },
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "fenugreek",
+        "name": "Fenugreek"
+      },
+      {
+        "id": "clove",
+        "name": "Clove"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "mustard",
+        "name": "Mustard"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      },
+      {
+        "id": "onion",
+        "name": "Onion"
+      },
+      {
+        "id": "bergera-koenigii",
+        "name": "Bergera Koenigii"
+      },
+      {
+        "id": "geraniol-blumig-floral-l-alkohol-fett",
+        "name": "Geraniol Blumig, Floral L Alkohol, Fett"
+      },
+      {
+        "id": "nerol-frisch-rosenartig-zitrus-l-alkohol",
+        "name": "Nerol Frisch, Rosenartig, Zitrus L Alkohol,"
+      },
+      {
+        "id": "fett-wasser",
+        "name": "Fett, Wasser"
+      },
+      {
+        "id": "ocimen-zitrus-kiefernartig",
+        "name": "Ocimen Zitrus-Kiefernartig,"
+      }
+    ],
+    "pairs_with_foods": [
+      "most vegetables",
+      "fish"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Fresher, pinienartiger Duft",
+      "b": "Würzig-"
+    },
+    "spice_blends": [
+      "Indisches Madras-Curry"
+    ],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "curry-plant",
+    "name": "Curry Plant",
+    "_de": "Currykraut",
+    "harmonizes_with": [
+      {
+        "id": "savory",
+        "name": "Savory"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "tomatoes",
+        "name": "tomatoes"
+      }
+    ],
+    "pairs_with_foods": [
+      "meat",
+      "eggplants",
+      "Zucchini",
+      "Soups"
+    ],
+    "heat_behavior": {
+      "a": "Florale Aromen",
+      "b": "Pinienartig, tannen -"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "dates",
+    "name": "Dates",
+    "_de": "Datteln",
+    "harmonizes_with": [
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "lime",
+        "name": "Lime"
+      },
+      {
+        "id": "mint",
+        "name": "Mint"
+      },
+      {
+        "id": "nuts",
+        "name": "nuts"
+      },
+      {
+        "id": "orange-blossom-water",
+        "name": "Orange Blossom Water"
+      },
+      {
+        "id": "saffron",
+        "name": "Saffron"
+      },
+      {
+        "id": "sumac",
+        "name": "Sumac"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      },
+      {
+        "id": "die-vielschichtige-aromachemie-der-datteln-ist-durch-das-fruchtig-blumig",
+        "name": "Die Vielschichtige Aromachemie Der Datteln Ist Durch Das Fruchtig-Blumig-"
+      }
+    ],
+    "pairs_with_foods": [
+      "marzipan",
+      "Chocolate",
+      "bread",
+      "meat",
+      "Meeres-"
+    ],
+    "cuisines": [
+      "Iran: Marmelade, Obstsa-"
+    ],
+    "heat_behavior": {
+      "a": "Floral, fruchtig",
+      "b": "aromatic-süß bis"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "dill",
+    "name": "Dill",
+    "_de": "Dill",
+    "harmonizes_with": [
+      {
+        "id": "tarragon",
+        "name": "Tarragon"
+      },
+      {
+        "id": "horseradish",
+        "name": "Horseradish"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "allspice",
+        "name": "Allspice"
+      },
+      {
+        "id": "chives",
+        "name": "Chives"
+      },
+      {
+        "id": "mustard",
+        "name": "Mustard"
+      },
+      {
+        "id": "onion",
+        "name": "Onion"
+      },
+      {
+        "id": "die-gruenen-dillspitzen-zeichnen-sich-durch-einen-unverwechselbaren-fri",
+        "name": "Die Grünen Dillspitzen Zeichnen Sich Durch Einen Unverwechselbaren Fri-"
+      }
+    ],
+    "pairs_with_foods": [
+      "fish",
+      "Cream",
+      "neuen Kartoffeln",
+      "gekochtem"
+    ],
+    "cuisines": [
+      "Deutschland: Gurkensalat, milchsauer ein-"
+    ],
+    "heat_behavior": {
+      "a": "Charakteristischer Fresher Duft",
+      "b": "Warmen Aromen betont, weniger Fresh",
+      "c": "Eher Flat, aber aromatic 151 Das Hauptaroma der Eberraute definiert sich über den eukalyptus- und"
+    },
+    "spice_blends": [],
+    "aroma_groups": [
+      2
+    ]
+  },
+  {
+    "id": "dulse",
+    "name": "Dulse",
+    "_de": "Dulse",
+    "harmonizes_with": [
+      {
+        "id": "meeressalat",
+        "name": "Meeressalat"
+      },
+      {
+        "id": "olives-and-oil",
+        "name": "olives and oil"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "onion",
+        "name": "Onion"
+      },
+      {
+        "id": "die-pilze-falls-erforderlich-putzen-und-in-blaetter-also",
+        "name": "Die Pilze Falls Erforderlich Putzen Und In Blätter, Also"
+      }
+    ],
+    "pairs_with_foods": [
+      "Vegetables",
+      "Cheese",
+      "Soups",
+      "meat",
+      "fish",
+      "Pasta",
+      "frischen Pilzen"
+    ],
+    "cuisines": [
+      "Island: Snack"
+    ],
+    "heat_behavior": {
+      "a": "Fresher, grüner, pilzartig-chloriger Duft",
+      "b": "aromatice, ölig-nussige Note"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "southernwood",
+    "name": "Southernwood",
+    "_de": "Eberraute",
+    "harmonizes_with": [
+      {
+        "id": "anise",
+        "name": "Anise"
+      },
+      {
+        "id": "borage",
+        "name": "Borage"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "mint",
+        "name": "Mint"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "sage",
+        "name": "Sage"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "lemon-balm",
+        "name": "Lemon Balm"
+      },
+      {
+        "id": "eistee-mit-cola-geschmack",
+        "name": "Eistee Mit Cola-Geschmack"
+      },
+      {
+        "id": "frische-blaetter-mit-heissem-wasser-aufgiessen-und",
+        "name": "Frische Blätter Mit Heißem Wasser Aufgießen Und"
+      },
+      {
+        "id": "10-minuten-ziehen-lassen-mit-zucker-oder-honig",
+        "name": "10 Minuten Ziehen Lassen. Mit Zucker Oder Honig"
+      }
+    ],
+    "pairs_with_foods": [
+      "roasts",
+      "Quark",
+      "sauces",
+      "Salat"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Fresher, typischer Duft",
+      "b": "Kräuterig- bitter",
+      "c": "Stärkeres wermutartiges Aroma"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "peanut",
+    "name": "Peanut",
+    "_de": "Erdnuss",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "paprika",
+        "name": "Paprika"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "sesame",
+        "name": "Sesame"
+      },
+      {
+        "id": "zucker",
+        "name": "Zucker"
+      },
+      {
+        "id": "onion",
+        "name": "Onion"
+      }
+    ],
+    "pairs_with_foods": [
+      "Marmelade",
+      "allen Fleisch-"
+    ],
+    "cuisines": [
+      "Westafrika: Erdnusspaste, Erdnussbutter,"
+    ],
+    "heat_behavior": {
+      "a": "(Fresh, ungeröstet) wachsig, fettig",
+      "b": "Deutlich nussige Röststoffe"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "tarragon",
+    "name": "Tarragon",
+    "_de": "Estragon",
+    "harmonizes_with": [
+      {
+        "id": "anise",
+        "name": "Anise"
+      },
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "dill",
+        "name": "Dill"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "chives",
+        "name": "Chives"
+      },
+      {
+        "id": "mustard",
+        "name": "Mustard"
+      },
+      {
+        "id": "artemisia-dracunculus",
+        "name": "Artemisia Dracunculus"
+      }
+    ],
+    "pairs_with_foods": [
+      "poultry",
+      "rabbit",
+      "game",
+      "liver",
+      "Herz"
+    ],
+    "cuisines": [
+      "Frankreich: Estragonhuhn, Sauce bé-"
+    ],
+    "heat_behavior": {
+      "a": "Fresh, Floral, zitrusartig",
+      "b": "Kräuterig-harzig",
+      "c": "(Gekocht) weiche,"
+    },
+    "spice_blends": [
+      "Fines Herbes",
+      "Bouquet garni"
+    ],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "fennel",
+    "name": "Fennel",
+    "_de": "Fenchel",
+    "harmonizes_with": [
+      {
+        "id": "anise",
+        "name": "Anise"
+      },
+      {
+        "id": "fenugreek",
+        "name": "Fenugreek"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil"
+      },
+      {
+        "id": "caraway",
+        "name": "Caraway"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "zitronenschale",
+        "name": "Zitronenschale"
+      }
+    ],
+    "pairs_with_foods": [
+      "roast pork",
+      "Vegetables",
+      "Ragouts"
+    ],
+    "cuisines": [
+      "Italien: Finocchiona (Fenchelsalami),"
+    ],
+    "heat_behavior": {
+      "a": "Freshe kräuterige Note",
+      "b": "Fruchtige Fen-"
+    },
+    "spice_blends": [
+      "Indisches Garam Masala",
+      "chinesisches"
+    ],
+    "aroma_groups": [
+      2
+    ]
+  },
+  {
+    "id": "galangal",
+    "name": "Galangal",
+    "_de": "Galgant",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "kaffir-lime-leaves",
+        "name": "Kaffir Lime Leaves"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "lime",
+        "name": "Lime"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "grains-of-paradise",
+        "name": "Grains of Paradise"
+      },
+      {
+        "id": "lemongrass",
+        "name": "Lemongrass"
+      }
+    ],
+    "pairs_with_foods": [
+      "Soups",
+      "duck",
+      "Gans",
+      "Chicken"
+    ],
+    "cuisines": [
+      "Thailand: Tom Yam, Tom Kha Gai (Suppen),"
+    ],
+    "heat_behavior": {
+      "a": "(Fresh:) mitunter zitronige Freshe",
+      "b": "Balsamische, würzige Noten",
+      "c": "Aromati-"
+    },
+    "spice_blends": [
+      "marokkani-"
+    ],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "clove",
+    "name": "Clove",
+    "_de": "Gewürznelke",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "pomegranate-seeds",
+        "name": "pomegranate seeds"
+      },
+      {
+        "id": "long-pepper",
+        "name": "Long Pepper"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "allspice",
+        "name": "Allspice"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      }
+    ],
+    "pairs_with_foods": [
+      "dark sauces",
+      "braised dishes",
+      "game",
+      "Nie- ren",
+      "Wurst"
+    ],
+    "cuisines": [
+      "Deutschland: Lebkuchen, Bratapfel, Apfel-"
+    ],
+    "heat_behavior": {
+      "a": "Wachsige, dezent betäubende Würzig-"
+    },
+    "spice_blends": [
+      "indisches Garam Masala"
+    ],
+    "aroma_groups": [
+      4
+    ]
+  },
+  {
+    "id": "pomegranate",
+    "name": "Pomegranate",
+    "_de": "Granatapfel",
+    "harmonizes_with": [
+      {
+        "id": "sesame",
+        "name": "Sesame"
+      },
+      {
+        "id": "fenugreek",
+        "name": "Fenugreek"
+      },
+      {
+        "id": "clove",
+        "name": "Clove"
+      },
+      {
+        "id": "cocoa",
+        "name": "Cocoa"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom"
+      },
+      {
+        "id": "coriander-seeds",
+        "name": "Coriander Seeds"
+      },
+      {
+        "id": "turmeric",
+        "name": "Turmeric"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      }
+    ],
+    "pairs_with_foods": [
+      "Chicken",
+      "game",
+      "stews",
+      "Salat"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Fresh, säuerlich-fruchtig",
+      "b": "Rosennoten,"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "hazelnut",
+    "name": "Hazelnut",
+    "_de": "Haselnuss",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "cocoa",
+        "name": "Cocoa"
+      },
+      {
+        "id": "paprika",
+        "name": "Paprika"
+      },
+      {
+        "id": "zucker",
+        "name": "Zucker"
+      },
+      {
+        "id": "corylus-maxima",
+        "name": "Corylus Maxima"
+      }
+    ],
+    "pairs_with_foods": [
+      "Chocolate"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Freshes Haselnussaroma",
+      "b": "Leicht woody,"
+    },
+    "aroma_groups": [
+      5
+    ]
+  },
+  {
+    "id": "ginger",
+    "name": "Ginger",
+    "_de": "Ingwer",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "clove",
+        "name": "Clove"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "cubeb-pepper",
+        "name": "Cubeb Pepper"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      },
+      {
+        "id": "zitrusschalen",
+        "name": "Zitrusschalen"
+      },
+      {
+        "id": "ingwerkarotten-mit-orangenglasur",
+        "name": "Ingwerkarotten Mit Orangenglasur"
+      },
+      {
+        "id": "butter-in-einer-nichthaftenden-pfanne-schmelzen",
+        "name": "Butter In Einer Nichthaftenden Pfanne Schmelzen,"
+      }
+    ],
+    "pairs_with_foods": [
+      "many varieties"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Fresh, zitrusartig, Floral",
+      "b": "Eher woody-"
+    },
+    "spice_blends": [
+      "Getrocknet: Fisch-",
+      "Lebkuchen -"
+    ],
+    "aroma_groups": [
+      8
+    ]
+  },
+  {
+    "id": "coffee",
+    "name": "Coffee",
+    "_de": "Kaffee",
+    "harmonizes_with": [
+      {
+        "id": "paprika",
+        "name": "Paprika"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla"
+      }
+    ],
+    "pairs_with_foods": [
+      "Ice Cream",
+      "helles Fleisch"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Leichte, mitunter Florale Röstnoten",
+      "b": "Rauchig, wenig bitter, schokoladig",
+      "c": "Betonung der typischen Kaffeeröst -"
+    },
+    "aroma_groups": [
+      5
+    ]
+  },
+  {
+    "id": "cocoa",
+    "name": "Cocoa",
+    "_de": "Kakao",
+    "harmonizes_with": [
+      {
+        "id": "anise",
+        "name": "Anise"
+      },
+      {
+        "id": "clove",
+        "name": "Clove"
+      },
+      {
+        "id": "hazelnut",
+        "name": "Hazelnut"
+      },
+      {
+        "id": "coffee",
+        "name": "Coffee"
+      },
+      {
+        "id": "almond",
+        "name": "Almond"
+      },
+      {
+        "id": "mint",
+        "name": "Mint"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg"
+      },
+      {
+        "id": "orange",
+        "name": "Orange"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "pistachio",
+        "name": "Pistachio"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      },
+      {
+        "id": "2-methylbutanal-kakaoartig-nussig-l-al",
+        "name": "2-Methylbutanal Kakaoartig, Nussig L Al-"
+      }
+    ],
+    "pairs_with_foods": [
+      "milk",
+      "dark"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Tiefe Schokoladennote, floral-säuerlich",
+      "b": "Würzig-rauchige Kakaonoten",
+      "c": "Beto-"
+    },
+    "spice_blends": [
+      "Mexikanische Mole poblano",
+      "Mole negro"
+    ],
+    "aroma_groups": [
+      5
+    ]
+  },
+  {
+    "id": "capers",
+    "name": "Capers",
+    "_de": "Kapern",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "tarragon",
+        "name": "Tarragon"
+      },
+      {
+        "id": "olives",
+        "name": "olives"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "mustard",
+        "name": "Mustard"
+      },
+      {
+        "id": "onion",
+        "name": "Onion"
+      }
+    ],
+    "pairs_with_foods": [
+      "Rohem Rindfleisch",
+      "Kalbfleisch",
+      "fish",
+      "Chicken"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Schwefelig",
+      "b": "Feine aromatice Unter -"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "cardamom",
+    "name": "Cardamom",
+    "_de": "Kardamom",
+    "harmonizes_with": [
+      {
+        "id": "anise",
+        "name": "Anise"
+      },
+      {
+        "id": "bergamot",
+        "name": "Bergamot"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel"
+      },
+      {
+        "id": "clove",
+        "name": "Clove"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "coffee",
+        "name": "Coffee"
+      },
+      {
+        "id": "coriander-seeds",
+        "name": "Coriander Seeds"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf"
+      },
+      {
+        "id": "marjoram",
+        "name": "Marjoram"
+      },
+      {
+        "id": "mint",
+        "name": "Mint"
+      },
+      {
+        "id": "sage",
+        "name": "Sage"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      }
+    ],
+    "pairs_with_foods": [
+      "pears",
+      "oranges"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Freshe, Floral-würzige Note",
+      "b": "Würzig-"
+    },
+    "spice_blends": [
+      "in-"
+    ],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "chervil",
+    "name": "Chervil",
+    "_de": "Kerbel",
+    "harmonizes_with": [
+      {
+        "id": "dill",
+        "name": "Dill"
+      },
+      {
+        "id": "tarragon",
+        "name": "Tarragon"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "chives",
+        "name": "Chives"
+      },
+      {
+        "id": "onion",
+        "name": "Onion"
+      }
+    ],
+    "pairs_with_foods": [
+      "eggs",
+      "fish",
+      "light meat"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Süßlich-warme, optimale Kerbelnote",
+      "b": "Signifikanter Aromenverlust"
+    },
+    "spice_blends": [
+      "Bouquet garni"
+    ],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "garlic",
+    "name": "Garlic",
+    "_de": "Knoblauch",
+    "harmonizes_with": [
+      {
+        "id": "asafoetida",
+        "name": "Asafoetida"
+      },
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "nigella",
+        "name": "Nigella"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "lemongrass",
+        "name": "Lemongrass"
+      }
+    ],
+    "pairs_with_foods": [
+      "almost everything",
+      "e.g. fish",
+      "meat",
+      "Yogurt",
+      "Soups"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "pungent-scharfer Knoblauchduft",
+      "b": "Abschwächung der pungenten Note",
+      "c": "Zunahme der bitterkeit, Röstnoten"
+    },
+    "spice_blends": [
+      "Chili-con-carne-Mischung",
+      "Knoblauchsalz"
+    ],
+    "aroma_groups": [
+      1
+    ]
+  },
+  {
+    "id": "coconut",
+    "name": "Coconut",
+    "_de": "Kokosnuss",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "fenugreek",
+        "name": "Fenugreek"
+      },
+      {
+        "id": "clove",
+        "name": "Clove"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "turmeric",
+        "name": "Turmeric"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      },
+      {
+        "id": "lemongrass",
+        "name": "Lemongrass"
+      },
+      {
+        "id": "onion",
+        "name": "Onion"
+      }
+    ],
+    "pairs_with_foods": [
+      "baked goods",
+      "Fruit",
+      "Vegetables",
+      "Chicken",
+      "fish",
+      "Chocolate",
+      "allen"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Volles Kokosaroma",
+      "b": "abgeschwächter"
+    },
+    "spice_blends": [],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "coriander",
+    "name": "Coriander",
+    "_de": "Koriander (Kraut)",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "lovage",
+        "name": "Lovage"
+      },
+      {
+        "id": "zitrusfruechte",
+        "name": "Zitrusfrüchte"
+      },
+      {
+        "id": "ein-eindeutiges-schluesselaroma-gibt-es-trotz-des-charakteristischen-geruchs",
+        "name": "Ein Eindeutiges Schlüsselaroma Gibt Es Trotz Des Charakteristischen Geruchs"
+      }
+    ],
+    "pairs_with_foods": [
+      "Potatoes",
+      "Tajines",
+      "Currys"
+    ],
+    "cuisines": [
+      "Vietnam: Currys, Suppen, Salate"
+    ],
+    "heat_behavior": {
+      "a": "Typisches Koriandergrün",
+      "b": "Deutlicher"
+    },
+    "spice_blends": [],
+    "aroma_groups": [
+      2
+    ]
+  },
+  {
+    "id": "coriander-seeds",
+    "name": "Coriander Seeds",
+    "_de": "Koriandersamen",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "savory",
+        "name": "Savory"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf"
+      },
+      {
+        "id": "marjoram",
+        "name": "Marjoram"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "saffron",
+        "name": "Saffron"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      }
+    ],
+    "pairs_with_foods": [
+      "Carrots",
+      "Lentils"
+    ],
+    "cuisines": [
+      "Indien: Currys"
+    ],
+    "heat_behavior": {
+      "a": "Fresh, Floral",
+      "b": "Zusätzlich aromatice"
+    },
+    "aroma_groups": [
+      2
+    ]
+  },
+  {
+    "id": "cress",
+    "name": "Cress",
+    "_de": "Kresse",
+    "harmonizes_with": [
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "sorrel",
+        "name": "Sorrel"
+      }
+    ],
+    "pairs_with_foods": [
+      "Quark",
+      "Lachs",
+      "Potatoes",
+      "Chicken",
+      "Gurke"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Full cress aroma",
+      "b": "Starker Verlust an"
+    },
+    "aroma_groups": [
+      1
+    ]
+  },
+  {
+    "id": "cumin",
+    "name": "Cumin",
+    "_de": "Kreuzkümmel",
+    "harmonizes_with": [
+      {
+        "id": "fenugreek",
+        "name": "Fenugreek"
+      },
+      {
+        "id": "curry-leaves",
+        "name": "Curry Leaves"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel"
+      },
+      {
+        "id": "cocoa",
+        "name": "Cocoa"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander"
+      },
+      {
+        "id": "nigella",
+        "name": "Nigella"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      },
+      {
+        "id": "kreuzkuemmel-mit-weisskohl",
+        "name": "Kreuzkümmel Mit Weisskohl"
+      },
+      {
+        "id": "kreuzkuemmel-in-einer-schweren-pfanne-leicht-anroes",
+        "name": "Kreuzkümmel In Einer Schweren Pfanne Leicht Anrös-"
+      }
+    ],
+    "pairs_with_foods": [
+      "Cabbage"
+    ],
+    "cuisines": [
+      "Osten: Falafel"
+    ],
+    "spice_blends": [
+      "Indische Masalas",
+      "bengalisches Panch Pho- ron",
+      "arabisches Baha- rat",
+      "karibisches Colombo Powder"
+    ],
+    "aroma_groups": [
+      4,
+      7
+    ]
+  },
+  {
+    "id": "cubeb-pepper",
+    "name": "Cubeb Pepper",
+    "_de": "Kubebenpfeffer",
+    "harmonizes_with": [
+      {
+        "id": "curry-leaves",
+        "name": "Curry Leaves"
+      },
+      {
+        "id": "cloves",
+        "name": "Cloves"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "long-pepper",
+        "name": "Long Pepper"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "juniper",
+        "name": "Juniper"
+      },
+      {
+        "id": "lemongrass",
+        "name": "Lemongrass"
+      }
+    ],
+    "pairs_with_foods": [
+      "dark sauces",
+      "braised dishes",
+      "game",
+      "Nieren",
+      "Wurst",
+      "Wirsing",
+      "red cabbage"
+    ],
+    "cuisines": [
+      "Europa: gepfefferte Leber",
+      "Indonesien: Currys",
+      "Nordafrika: Lamm- oder Hammel -"
+    ],
+    "heat_behavior": {
+      "a": "Freshe Schärfe, betäubend",
+      "b": "Volles Aroma, wärmend balsamisch",
+      "c": "Leichte"
+    },
+    "spice_blends": [
+      "Marokkanisches Ras el-Hanout"
+    ],
+    "aroma_groups": [
+      4,
+      8
+    ]
+  },
+  {
+    "id": "turmeric",
+    "name": "Turmeric",
+    "_de": "Kurkuma",
+    "harmonizes_with": [
+      {
+        "id": "fenugreek",
+        "name": "Fenugreek"
+      },
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "curry-leaves",
+        "name": "Curry Leaves"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel"
+      },
+      {
+        "id": "galangal",
+        "name": "Galangal"
+      },
+      {
+        "id": "clove",
+        "name": "Clove"
+      },
+      {
+        "id": "kaffir-lime-leaves",
+        "name": "Kaffir Lime Leaves"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "lemongrass",
+        "name": "Lemongrass"
+      },
+      {
+        "id": "den-ingwer-schaelen-und-grob-hacken-die-chilischote-entkernen-die-sahne-in-einem",
+        "name": "Den Ingwer Schälen Und Grob Hacken, Die Chilischote Entkernen. Die Sahne In Einem"
+      }
+    ],
+    "pairs_with_foods": [
+      "Potatoes",
+      "beans",
+      "cauliflower",
+      "Nudel-"
+    ],
+    "cuisines": [],
+    "spice_blends": [
+      "Karibisches Colombo Powder",
+      "jemenitisches"
+    ],
+    "aroma_groups": [
+      4,
+      7
+    ]
+  },
+  {
+    "id": "caraway",
+    "name": "Caraway",
+    "_de": "Kümmel",
+    "harmonizes_with": [
+      {
+        "id": "savory",
+        "name": "Savory"
+      },
+      {
+        "id": "dill",
+        "name": "Dill"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander"
+      },
+      {
+        "id": "nigella",
+        "name": "Nigella"
+      },
+      {
+        "id": "juniper",
+        "name": "Juniper"
+      },
+      {
+        "id": "citrus-zest",
+        "name": "Citrus Zest"
+      },
+      {
+        "id": "onion",
+        "name": "Onion"
+      },
+      {
+        "id": "kuemmel-kartoffeln-vom-blech",
+        "name": "Kümmel-Kartoffeln Vom Blech"
+      },
+      {
+        "id": "das-aetherische-oel-des-kuemmels-besteht-bis-zu-80-prozent-aus-dem-fettloes",
+        "name": "Das Ätherische Öl Des Kümmels Besteht Bis Zu 80 Prozent Aus Dem Fettlös-"
+      }
+    ],
+    "pairs_with_foods": [
+      "cabbage dishes",
+      "hearty braised dishes",
+      "fried potatoes",
+      "bread"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Feiner, mitunter zitrusartiger Kümmel-"
+    },
+    "spice_blends": [
+      "Nordafrikanische Harissa-Sauce",
+      "tunesi-"
+    ],
+    "aroma_groups": [
+      4,
+      7
+    ]
+  },
+  {
+    "id": "pumpkin-seeds",
+    "name": "Pumpkin Seeds",
+    "_de": "Kürbiskerne",
+    "harmonizes_with": [
+      {
+        "id": "cocoa",
+        "name": "Cocoa"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      },
+      {
+        "id": "das-aromenspektrum-der-kuerbiskerne-ist-sehr-komplex-pentanal-steuert",
+        "name": "Das Aromenspektrum Der Kürbiskerne Ist Sehr Komplex: Pentanal Steuert"
+      }
+    ],
+    "pairs_with_foods": [
+      "Vegetables",
+      "Rohkost",
+      "beef",
+      "saurem Rindfleisch"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Feine wachsige, fettige Noten",
+      "b": "Röstno- ten stärker im Vordergrund",
+      "c": "Zusätzliche"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "long-pepper",
+    "name": "Long Pepper",
+    "_de": "Langer Pfeffer",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "clove",
+        "name": "Clove"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "allspice",
+        "name": "Allspice"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "licorice",
+        "name": "licorice"
+      },
+      {
+        "id": "lemons",
+        "name": "Lemons"
+      },
+      {
+        "id": "piper-longum",
+        "name": "Piper Longum"
+      }
+    ],
+    "pairs_with_foods": [
+      "game",
+      "red cabbage"
+    ],
+    "cuisines": [
+      "Deutschland: Wildhasenpfeffer, Wildra-"
+    ],
+    "heat_behavior": {
+      "a": "Harzig-woody, leicht scharf",
+      "b": "Betonte"
+    },
+    "aroma_groups": [
+      4,
+      8
+    ]
+  },
+  {
+    "id": "lavender",
+    "name": "Lavender",
+    "_de": "Lavendel",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "savory",
+        "name": "Savory"
+      },
+      {
+        "id": "marjoram",
+        "name": "Marjoram"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "perilla",
+        "name": "Perilla"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      }
+    ],
+    "pairs_with_foods": [
+      "Blaubeeren",
+      "strawberries",
+      "Kirschen"
+    ],
+    "cuisines": [
+      "Frankreich: Ratatouille, Schmorgerichte,"
+    ],
+    "heat_behavior": {
+      "a": "Fresher Duft",
+      "b": "Hervorheben kräuteriger"
+    },
+    "spice_blends": [
+      "marokka-"
+    ],
+    "aroma_groups": [
+      2
+    ]
+  },
+  {
+    "id": "lovage",
+    "name": "Lovage",
+    "_de": "Liebstöckel",
+    "harmonizes_with": [
+      {
+        "id": "dill",
+        "name": "Dill"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander"
+      },
+      {
+        "id": "caraway",
+        "name": "Caraway"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "chives",
+        "name": "Chives"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "juniper",
+        "name": "Juniper"
+      },
+      {
+        "id": "onion",
+        "name": "Onion"
+      }
+    ],
+    "pairs_with_foods": [
+      "Soups",
+      "salads"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Fresher, kräuterig-Earthyr Duft",
+      "b": "„Sup-"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "lime",
+    "name": "Lime",
+    "_de": "Limette",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander"
+      },
+      {
+        "id": "mint",
+        "name": "Mint"
+      },
+      {
+        "id": "juniper",
+        "name": "Juniper"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      }
+    ],
+    "pairs_with_foods": [
+      "meat",
+      "Ragouts",
+      "Soups",
+      "stews"
+    ],
+    "cuisines": [
+      "Frankreich: Béchamelsauce, Rinderschmor-"
+    ],
+    "heat_behavior": {
+      "a": "Fresh, Floral, wachsig",
+      "b": "Eher harzige"
+    },
+    "spice_blends": [],
+    "aroma_groups": [
+      2
+    ]
+  },
+  {
+    "id": "bay-leaf",
+    "name": "Bay Leaf",
+    "_de": "Lorbeer",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "cloves",
+        "name": "Cloves"
+      },
+      {
+        "id": "marjoram",
+        "name": "Marjoram"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "sage",
+        "name": "Sage"
+      },
+      {
+        "id": "mustard",
+        "name": "Mustard"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "juniper",
+        "name": "Juniper"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      }
+    ],
+    "pairs_with_foods": [],
+    "heat_behavior": {
+      "a": "Eher Florale Noten (etwa beim Einlegen)",
+      "b": "Kampferartige Freshe",
+      "c": "Eher harziger,"
+    },
+    "aroma_groups": [
+      3
+    ]
+  },
+  {
+    "id": "macadamia",
+    "name": "Macadamia",
+    "_de": "Macadamianuss",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "dill",
+        "name": "Dill"
+      },
+      {
+        "id": "tonka-bean",
+        "name": "Tonka Bean"
+      },
+      {
+        "id": "truffle",
+        "name": "Truffle"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla"
+      }
+    ],
+    "pairs_with_foods": [
+      "salads",
+      "Fisch (Lachs",
+      "Seeteufel",
+      "Loup de Mer",
+      "lamb",
+      "bread",
+      "Desserts",
+      "Chocolate",
+      "Ice Cream"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Leicht fettig, aromatic",
+      "b": "aromatic-"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "marjoram",
+    "name": "Marjoram",
+    "_de": "Majoran",
+    "harmonizes_with": [
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "paprika",
+        "name": "Paprika"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "sage",
+        "name": "Sage"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "juniper",
+        "name": "Juniper"
+      }
+    ],
+    "pairs_with_foods": [
+      "Speck"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Fresh, herbal",
+      "b": "Erdig-herbale Aromen"
+    },
+    "spice_blends": [
+      "Wurstmischungen",
+      "jordanisches Zatar",
+      "ori-"
+    ],
+    "aroma_groups": [
+      3
+    ]
+  },
+  {
+    "id": "almond",
+    "name": "Almond",
+    "_de": "Mandel",
+    "harmonizes_with": [
+      {
+        "id": "bitter-almond",
+        "name": "Bitter Almond"
+      },
+      {
+        "id": "hazelnut",
+        "name": "Hazelnut"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      }
+    ],
+    "pairs_with_foods": [
+      "fish",
+      "Krustentieren",
+      "light meat",
+      "Vegetables",
+      "Soups",
+      "Torten 225 M"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "b": "aromatic, bitter- süß",
+      "c": "Röstnoten, karamellig bis schoko -"
+    },
+    "aroma_groups": [
+      5
+    ]
+  },
+  {
+    "id": "chestnuts",
+    "name": "chestnuts",
+    "_de": "Maronen",
+    "harmonizes_with": [
+      {
+        "id": "almonds",
+        "name": "Almonds"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg"
+      },
+      {
+        "id": "nuts",
+        "name": "nuts"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla"
+      }
+    ],
+    "pairs_with_foods": [
+      "pastry",
+      "Ice Cream",
+      "Pistachios",
+      "Milch -"
+    ],
+    "cuisines": [
+      "Griechenland: Tsoureki (griechisches"
+    ],
+    "heat_behavior": {
+      "a": "Mild harzige Töne",
+      "b": "Anhaltende, leicht"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "mastic",
+    "name": "Mastic",
+    "_de": "Mastix",
+    "harmonizes_with": [
+      {
+        "id": "anise",
+        "name": "Anise"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel"
+      },
+      {
+        "id": "clove",
+        "name": "Clove"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander"
+      },
+      {
+        "id": "grains-of-paradise",
+        "name": "Grains of Paradise"
+      },
+      {
+        "id": "horseradish",
+        "name": "Horseradish"
+      },
+      {
+        "id": "eutrema-japonica-wasabi-paste",
+        "name": "Eutrema Japonica (Wasabi, Paste)"
+      }
+    ],
+    "pairs_with_foods": [],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "meeressalat",
+    "name": "Meeressalat",
+    "_de": "Meeressalat",
+    "harmonizes_with": [
+      {
+        "id": "cubeb-pepper",
+        "name": "Cubeb Pepper"
+      },
+      {
+        "id": "bromhuhn-auf-spinat",
+        "name": "Bromhuhn Auf Spinat"
+      },
+      {
+        "id": "meeressalat-in-20-g-butter-und-wasser-weich-duens",
+        "name": "Meeressalat In 20 G Butter Und Wasser Weich Düns-"
+      }
+    ],
+    "pairs_with_foods": [
+      "Vegetables",
+      "meat",
+      "fish",
+      "Soups"
+    ],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "horseradish",
+    "name": "Horseradish",
+    "_de": "Meerrettich",
+    "harmonizes_with": [
+      {
+        "id": "aprikosen-getrocknet",
+        "name": "Aprikosen (Getrocknet)"
+      },
+      {
+        "id": "dill",
+        "name": "Dill"
+      },
+      {
+        "id": "mustard",
+        "name": "Mustard"
+      },
+      {
+        "id": "celery",
+        "name": "Celery"
+      }
+    ],
+    "pairs_with_foods": [
+      "Gekochtem"
+    ],
+    "cuisines": [
+      "Deutschland: Eisbein, Lachs, Karpfen, Rin-"
+    ],
+    "heat_behavior": {
+      "a": "Fresh, brennend scharf",
+      "b": "Nachlassende"
+    },
+    "aroma_groups": [
+      1
+    ]
+  },
+  {
+    "id": "mint",
+    "name": "Mint",
+    "_de": "Minze",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "fenugreek",
+        "name": "Fenugreek"
+      },
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "dill",
+        "name": "Dill"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "marjoram",
+        "name": "Marjoram"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      }
+    ],
+    "pairs_with_foods": [
+      "Fresh: eggplants",
+      "Carrots",
+      "peas",
+      "Potatoes",
+      "tomatoes",
+      "Zucchini",
+      "fast allen"
+    ],
+    "cuisines": [
+      "England: Minzsauce",
+      "Frankreich: Sauce paloise, Menthe à l’eau (Erfrischungsge-"
+    ],
+    "heat_behavior": {
+      "a": "Typisch florale grüne Minznoten",
+      "b": "Leich- te bitternoten, mehr „pfeffrig“"
+    },
+    "aroma_groups": [
+      2
+    ]
+  },
+  {
+    "id": "poppy-seed",
+    "name": "Poppy Seed",
+    "_de": "Mohn",
+    "harmonizes_with": [
+      {
+        "id": "cardamom",
+        "name": "Cardamom"
+      }
+    ],
+    "pairs_with_foods": [
+      "Currys",
+      "milk",
+      "Cream",
+      "Zucchini",
+      "hellen Kohlsorten (Kohl-"
+    ],
+    "cuisines": [
+      "Schweiz: Mohn-"
+    ],
+    "heat_behavior": {
+      "a": "Eher wachsig, leicht fettig",
+      "b": "röstiger"
+    },
+    "spice_blends": [],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "morels",
+    "name": "morels",
+    "_de": "Morcheln",
+    "harmonizes_with": [
+      {
+        "id": "savory",
+        "name": "Savory"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil"
+      },
+      {
+        "id": "long-pepper",
+        "name": "Long Pepper"
+      },
+      {
+        "id": "muskatnuss-macis",
+        "name": "Muskatnuss, Macis"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      },
+      {
+        "id": "onion",
+        "name": "Onion"
+      }
+    ],
+    "pairs_with_foods": [
+      "poultry"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Roher Pilzduft",
+      "b": "Typischer Morchelduft und -geschmack"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "nutmeg-and-mace",
+    "name": "Nutmeg and mace",
+    "_de": "Muskat, Macis",
+    "harmonizes_with": [
+      {
+        "id": "dill",
+        "name": "Dill"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom"
+      },
+      {
+        "id": "cilantro",
+        "name": "Cilantro"
+      },
+      {
+        "id": "coriander-seeds",
+        "name": "Coriander Seeds"
+      },
+      {
+        "id": "cubeb-pepper",
+        "name": "Cubeb Pepper"
+      },
+      {
+        "id": "caraway",
+        "name": "Caraway"
+      },
+      {
+        "id": "lovage",
+        "name": "Lovage"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "sage",
+        "name": "Sage"
+      },
+      {
+        "id": "juniper",
+        "name": "Juniper"
+      },
+      {
+        "id": "zitrusschalen",
+        "name": "Zitrusschalen"
+      }
+    ],
+    "pairs_with_foods": [
+      "Vegetables",
+      "Soups",
+      "Sauce Béchamel",
+      "spinach",
+      "Cabbage",
+      "Cheese"
+    ],
+    "cuisines": [
+      "Deutschland: Kartoffelgerichte, Blumen-"
+    ],
+    "heat_behavior": {
+      "a": "Fresh, leicht zitrusartig",
+      "b": "Sehr aroma-"
+    },
+    "spice_blends": [
+      "Indisches Tandoori",
+      "arabisches Baharat"
+    ],
+    "aroma_groups": [
+      4
+    ]
+  },
+  {
+    "id": "myrtle",
+    "name": "Myrtle",
+    "_de": "Myrte",
+    "harmonizes_with": [
+      {
+        "id": "savory",
+        "name": "Savory"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "juniper",
+        "name": "Juniper"
+      }
+    ],
+    "pairs_with_foods": [
+      "Fleischragouts",
+      "grilled dishes",
+      "fish"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Floral-zitrusartig",
+      "b": "Harzige Noten be-"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "nigella",
+    "name": "Nigella",
+    "_de": "Nigella",
+    "harmonizes_with": [
+      {
+        "id": "savory",
+        "name": "Savory"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "mint",
+        "name": "Mint"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      }
+    ],
+    "pairs_with_foods": [
+      "bread"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Holzartig, anise-like-würzig",
+      "b": "Sehr aro-"
+    },
+    "spice_blends": [
+      "Bengalisches Panch Phoron"
+    ],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "nori",
+    "name": "Nori",
+    "_de": "Nori",
+    "harmonizes_with": [
+      {
+        "id": "bergamot",
+        "name": "Bergamot"
+      }
+    ],
+    "pairs_with_foods": [
+      "Rice",
+      "Soups",
+      "salads",
+      "Vegetables"
+    ],
+    "cuisines": [
+      "Japan: Sushi, Maki, Onigiri"
+    ],
+    "spice_blends": [
+      "Japanisches Furikake",
+      "Algensalz"
+    ],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "olives",
+    "name": "olives",
+    "_de": "Oliven",
+    "harmonizes_with": [
+      {
+        "id": "fennel",
+        "name": "Fennel"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "coriander-seeds",
+        "name": "Coriander Seeds"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "wormwood",
+        "name": "Wormwood"
+      },
+      {
+        "id": "lemon",
+        "name": "Lemon"
+      }
+    ],
+    "pairs_with_foods": [
+      "Pasta",
+      "pizza",
+      "tomatoes",
+      "Vegetables"
+    ],
+    "cuisines": [
+      "Frankreich: Tapenade (Olivenpaste), Olivenbrot"
+    ],
+    "heat_behavior": {
+      "a": "Säuerliches Olivenaroma, leichte bitter-"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "oranges",
+    "name": "oranges",
+    "_de": "Orangen",
+    "harmonizes_with": [
+      {
+        "id": "coffee",
+        "name": "Coffee"
+      },
+      {
+        "id": "cocoa",
+        "name": "Cocoa"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander"
+      },
+      {
+        "id": "poppy-seed",
+        "name": "Poppy Seed"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "sesame",
+        "name": "Sesame"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "onion",
+        "name": "Onion"
+      }
+    ],
+    "pairs_with_foods": [
+      "duck",
+      "dark meat in braised dishes"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Floral-wachsig-zitrusartig",
+      "b": "Plastikartig-"
+    },
+    "spice_blends": [
+      "Japanisches Shichimi togarashi",
+      "Orangen-"
+    ],
+    "aroma_groups": [
+      2
+    ]
+  },
+  {
+    "id": "oregano",
+    "name": "Oregano",
+    "_de": "Oregano",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf"
+      },
+      {
+        "id": "paprika",
+        "name": "Paprika"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "sage",
+        "name": "Sage"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla"
+      },
+      {
+        "id": "zitronen-schale",
+        "name": "Zitronen, -Schale"
+      },
+      {
+        "id": "oregano-pizzabrot",
+        "name": "Oregano-Pizzabrot"
+      }
+    ],
+    "pairs_with_foods": [
+      "pizza",
+      "tomatoes",
+      "eggplants",
+      "Zucchini"
+    ],
+    "cuisines": [
+      "Italien: Tomatensugo, Tomatensuppe, Bohnensuppe, Pizza",
+      "Griechenland: Mous-"
+    ],
+    "heat_behavior": {
+      "a": "Florale Noten",
+      "b": "Floral-woody",
+      "c": "Herb-"
+    },
+    "spice_blends": [],
+    "aroma_groups": [
+      3
+    ]
+  },
+  {
+    "id": "paprika",
+    "name": "Paprika",
+    "_de": "Paprika",
+    "harmonizes_with": [
+      {
+        "id": "fenugreek",
+        "name": "Fenugreek"
+      },
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "coffee",
+        "name": "Coffee"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "caraway",
+        "name": "Caraway"
+      },
+      {
+        "id": "marjoram",
+        "name": "Marjoram"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      }
+    ],
+    "pairs_with_foods": [
+      "Onion",
+      "all meats",
+      "Potatoes"
+    ],
+    "cuisines": [
+      "Balkan: Brathuhn, Cevap-"
+    ],
+    "heat_behavior": {
+      "a": "Erdig-wachsig",
+      "b": "Erdig-süßlich",
+      "c": "Earthy"
+    },
+    "spice_blends": [
+      "Marokkanisches Chermoula",
+      "lateinameri-"
+    ],
+    "aroma_groups": [
+      4,
+      7
+    ]
+  },
+  {
+    "id": "grains-of-paradise",
+    "name": "Grains of Paradise",
+    "_de": "Paradieskörner",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "clove",
+        "name": "Clove"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "caraway",
+        "name": "Caraway"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      }
+    ],
+    "pairs_with_foods": [
+      "Lebkuchen",
+      "Liqueurs",
+      "Schmorge-"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Floraler Duft, ingwerartige Schärfe",
+      "b": "woodye Noten, dezente Schärfe",
+      "c": "Nach-"
+    },
+    "spice_blends": [
+      "Marokkanisches Ras el-Hanout",
+      "tunesisches Gâlat Daqqa"
+    ],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "buzz-button",
+    "name": "Buzz Button",
+    "_de": "Parakresse",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "einkauf-lagerung",
+        "name": "Einkauf, Lagerung"
+      },
+      {
+        "id": "paradieskoerner-gibt-es-als-ganze-koerner",
+        "name": "Paradieskörner Gibt Es Als Ganze Körner"
+      }
+    ],
+    "pairs_with_foods": [
+      "fish",
+      "stews",
+      "Soups",
+      "salads"
+    ],
+    "cuisines": [
+      "Brasilien: Tacacá (Fischsuppe), Pato no Tucupí (Entenbraten"
+    ],
+    "heat_behavior": {
+      "a": "Sehr würzig, kräuterig, prickelnd"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "paranuss",
+    "name": "Paranuss",
+    "_de": "Paranuss",
+    "harmonizes_with": [
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "cilantro",
+        "name": "Cilantro"
+      },
+      {
+        "id": "coriander-seeds",
+        "name": "Coriander Seeds"
+      },
+      {
+        "id": "allspice",
+        "name": "Allspice"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "lemon",
+        "name": "Lemon"
+      },
+      {
+        "id": "onion",
+        "name": "Onion"
+      }
+    ],
+    "pairs_with_foods": [
+      "Vegetables"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Wachsig, nussig-aromatic",
+      "b": "Dominan- te Röstnoten zwischen Karamell und Kaffee"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "parmesan",
+    "name": "Parmesan",
+    "_de": "Parmesan",
+    "harmonizes_with": [
+      {
+        "id": "olives",
+        "name": "olives"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "arugula",
+        "name": "Arugula"
+      },
+      {
+        "id": "truffle",
+        "name": "Truffle"
+      }
+    ],
+    "pairs_with_foods": [
+      "Pasta",
+      "Rice",
+      "Vegetables",
+      "meat",
+      "fish",
+      "Truffle"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Typisches Parmesanaroma",
+      "b": "Fast voll-"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "pekannuss",
+    "name": "Pekannuss",
+    "_de": "Pekannuss",
+    "harmonizes_with": [
+      {
+        "id": "cocoa",
+        "name": "Cocoa"
+      },
+      {
+        "id": "olives",
+        "name": "olives"
+      }
+    ],
+    "pairs_with_foods": [
+      "Ice Cream",
+      "Salads",
+      "Cheese",
+      "Quark"
+    ],
+    "cuisines": [
+      "USA: Pecan Pie, Sandies (Kekse), Brownies"
+    ],
+    "heat_behavior": {
+      "a": "Leicht floral, nussig-wachsig",
+      "b": "Samtig-"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "perilla",
+    "name": "Perilla",
+    "_de": "Perilla",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "lime",
+        "name": "Lime"
+      },
+      {
+        "id": "mint",
+        "name": "Mint"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "lemongrass",
+        "name": "Lemongrass"
+      },
+      {
+        "id": "spargel-mit-perilla",
+        "name": "Spargel Mit Perilla"
+      },
+      {
+        "id": "spargel-schaelen-und-in-etwa-3-cm-lange-stuecke",
+        "name": "Spargel Schälen Und In Etwa 3 Cm Lange Stücke"
+      }
+    ],
+    "pairs_with_foods": [
+      "Kurzgebratenem",
+      "beef",
+      "Chicken",
+      "fish",
+      "salads"
+    ],
+    "cuisines": [
+      "Japan: Umeboshi (eingelegte Pflaumen),"
+    ],
+    "heat_behavior": {
+      "a": "Fresh, fast zitral-herbal",
+      "b": "aromatic-"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "parsley",
+    "name": "Parsley",
+    "_de": "Petersilie",
+    "harmonizes_with": [
+      {
+        "id": "dill",
+        "name": "Dill"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "cilantro",
+        "name": "Cilantro"
+      },
+      {
+        "id": "cress",
+        "name": "Cress"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "lovage",
+        "name": "Lovage"
+      },
+      {
+        "id": "mint",
+        "name": "Mint"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg"
+      },
+      {
+        "id": "zitrusschalen",
+        "name": "Zitrusschalen"
+      }
+    ],
+    "pairs_with_foods": [
+      "sauces",
+      "salads",
+      "marinades",
+      "Potatoes",
+      "fish",
+      "meat",
+      "Eierspeisen"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Fresh, herbal",
+      "b": "Würzig, muskatartig",
+      "c": "Würzig, erdig"
+    },
+    "spice_blends": [],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "pepper",
+    "name": "Pepper",
+    "_de": "Pfeffer",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "clove",
+        "name": "Clove"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "caraway",
+        "name": "Caraway"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      },
+      {
+        "id": "zitronenschale",
+        "name": "Zitronenschale"
+      }
+    ],
+    "pairs_with_foods": [
+      "roasted dishes",
+      "braised dishes",
+      "grilled meat",
+      "Fisch",
+      "hellen Saucen"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Freshe zitrus-pinienartige Pfeffernoten,"
+    },
+    "spice_blends": [
+      "Steak-"
+    ],
+    "aroma_groups": [
+      4,
+      8
+    ]
+  },
+  {
+    "id": "chanterelles",
+    "name": "chanterelles",
+    "_de": "Pfifferlinge",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "coriander-seeds",
+        "name": "Coriander Seeds"
+      },
+      {
+        "id": "olives-and-oil",
+        "name": "olives and oil"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "sage",
+        "name": "Sage"
+      }
+    ],
+    "pairs_with_foods": [
+      "meat",
+      "fish",
+      "Shrimps",
+      "Garnelen",
+      "Pasta"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Pfeffriges Aroma",
+      "b": "Herbal-würzige Noten"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "allspice",
+    "name": "Allspice",
+    "_de": "Piment",
+    "harmonizes_with": [
+      {
+        "id": "anise",
+        "name": "Anise"
+      },
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel"
+      },
+      {
+        "id": "clove",
+        "name": "Clove"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf"
+      },
+      {
+        "id": "mint",
+        "name": "Mint"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg"
+      },
+      {
+        "id": "orange",
+        "name": "Orange"
+      },
+      {
+        "id": "sage",
+        "name": "Sage"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      }
+    ],
+    "pairs_with_foods": [
+      "braised dishes (beef, game)",
+      "liver"
+    ],
+    "cuisines": [
+      "Mexiko: Moles (Saucen",
+      "Frankreich: Bénédictine, Char-"
+    ],
+    "heat_behavior": {
+      "a": "Allspice-Charakter",
+      "b": "Warme balsamische"
+    },
+    "spice_blends": [
+      "Jamaikanische Jerk-Pasten",
+      "syrisches Baharat",
+      "Ketchup"
+    ],
+    "aroma_groups": [
+      4
+    ]
+  },
+  {
+    "id": "pine-nuts",
+    "name": "Pine Nuts",
+    "_de": "Pinienkerne",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "olives-and-oil",
+        "name": "olives and oil"
+      },
+      {
+        "id": "parmesan",
+        "name": "Parmesan"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      }
+    ],
+    "pairs_with_foods": [
+      "spinach",
+      "Artischocken",
+      "tomatoes",
+      "Rice"
+    ],
+    "cuisines": [
+      "Italien: Pesto alla genovese, Torta della non- na (Kuchen) Mittlerer",
+      "Osten: Reisgerichte"
+    ],
+    "heat_behavior": {
+      "a": "Pinienartig-nussig",
+      "b": "Neue Röstnoten"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "pistachio",
+    "name": "Pistachio",
+    "_de": "Pistazie",
+    "harmonizes_with": [
+      {
+        "id": "tarragon",
+        "name": "Tarragon"
+      },
+      {
+        "id": "coffee",
+        "name": "Coffee"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil"
+      },
+      {
+        "id": "star-anise",
+        "name": "Star Anise"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla"
+      }
+    ],
+    "pairs_with_foods": [
+      "Chocolate",
+      "Wurstwaren"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Fresh, Floral-nussig, fettig (ungeröstet)",
+      "b": "Leicht balsamisch-harzig",
+      "c": "Bildung von"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "purslane",
+    "name": "Purslane",
+    "_de": "Portulak",
+    "harmonizes_with": [
+      {
+        "id": "borage",
+        "name": "Borage"
+      },
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil"
+      },
+      {
+        "id": "cress",
+        "name": "Cress"
+      },
+      {
+        "id": "arugula",
+        "name": "Arugula"
+      },
+      {
+        "id": "sorrel",
+        "name": "Sorrel"
+      }
+    ],
+    "pairs_with_foods": [
+      "Dicken Bohnen",
+      "eggs",
+      "Yogurt",
+      "cucumbers",
+      "tomatoes",
+      "Kopfsalat",
+      "Lemon"
+    ],
+    "cuisines": [
+      "Libanon: Fattousch-Salat (Tomaten-Brot- Salat"
+    ],
+    "heat_behavior": {
+      "a": "Floral-bittere, würzige Noten",
+      "b": "Herb,"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "arugula",
+    "name": "arugula",
+    "_de": "Rauke, Rucola",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "borage",
+        "name": "Borage"
+      },
+      {
+        "id": "dill",
+        "name": "Dill"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "cress",
+        "name": "Cress"
+      },
+      {
+        "id": "lovage",
+        "name": "Lovage"
+      },
+      {
+        "id": "parmesan",
+        "name": "Parmesan"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "chives",
+        "name": "Chives"
+      },
+      {
+        "id": "onion",
+        "name": "Onion"
+      }
+    ],
+    "pairs_with_foods": [
+      "leaf salad",
+      "cured ham",
+      "Potatoes",
+      "tomatoes",
+      "Cheese",
+      "insbesondere Parmesan"
+    ],
+    "cuisines": [
+      "Italien: Bresaola (luftgetrocknetes beef-"
+    ],
+    "heat_behavior": {
+      "a": "Schwefelig-pungent, würzig",
+      "b": "wenig pungent, feine bitter-würzige Aromen RAceto Balsamico, da dessen hoher Anteil am karamellig-süßlichen Aroma-"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "pink-peppercorn",
+    "name": "Pink Peppercorn",
+    "_de": "Rosa Beeren",
+    "harmonizes_with": [
+      {
+        "id": "fennel",
+        "name": "Fennel"
+      },
+      {
+        "id": "galangal",
+        "name": "Galangal"
+      },
+      {
+        "id": "kaffir-lime-leaves",
+        "name": "Kaffir Lime Leaves"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil"
+      },
+      {
+        "id": "cubeb-pepper",
+        "name": "Cubeb Pepper"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "juniper",
+        "name": "Juniper"
+      },
+      {
+        "id": "lemongrass",
+        "name": "Lemongrass"
+      }
+    ],
+    "pairs_with_foods": [
+      "marzipan",
+      "Yogurt",
+      "meat",
+      "Aprikosen",
+      "Erdbeeren"
+    ],
+    "cuisines": [
+      "Bulgarien: Marme-"
+    ],
+    "heat_behavior": {
+      "a": "Volles florales, vielschichtiges Rosen -"
+    },
+    "spice_blends": [
+      "Iranisches Advieh",
+      "marokkanisches Ras el-Hanout",
+      "tunesisches Baharat EINKAUF",
+      "LAGERUNG"
+    ],
+    "aroma_groups": [
+      4,
+      8
+    ]
+  },
+  {
+    "id": "rose-and-rose-water",
+    "name": "rose and rose water",
+    "_de": "Rose, Rosenwasser",
+    "harmonizes_with": [
+      {
+        "id": "cardamom",
+        "name": "Cardamom"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "lime",
+        "name": "Lime"
+      },
+      {
+        "id": "almonds",
+        "name": "Almonds"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      },
+      {
+        "id": "lemon",
+        "name": "Lemon"
+      },
+      {
+        "id": "getrocknet",
+        "name": "Getrocknet"
+      }
+    ],
+    "pairs_with_foods": [],
+    "aroma_groups": [
+      2
+    ]
+  },
+  {
+    "id": "rosemary",
+    "name": "Rosemary",
+    "_de": "Rosmarin",
+    "harmonizes_with": [
+      {
+        "id": "savory",
+        "name": "Savory"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf"
+      },
+      {
+        "id": "marjoram",
+        "name": "Marjoram"
+      },
+      {
+        "id": "mint",
+        "name": "Mint"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "man-kann-die-blaetter-oder-ganze-frische-zweige-mitkochen-oder-mit",
+        "name": "Man Kann Die Blätter Oder Ganze Frische Zweige Mitkochen Oder Mit-"
+      }
+    ],
+    "pairs_with_foods": [
+      "eggplants",
+      "Zucchini",
+      "squash",
+      "Cabbage",
+      "Toma- ten",
+      "beans",
+      "Onion"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Dominant floral-herbal, „grüner“ Ein-"
+    },
+    "spice_blends": [
+      "LAGERUNG",
+      "ANBAU Man bekommt mittlerweile in den meisten"
+    ],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "saffron",
+    "name": "Saffron",
+    "_de": "Safran",
+    "harmonizes_with": [
+      {
+        "id": "long-pepper",
+        "name": "Long Pepper"
+      },
+      {
+        "id": "licorice",
+        "name": "licorice"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      },
+      {
+        "id": "zitrusschalen",
+        "name": "Zitrusschalen"
+      }
+    ],
+    "pairs_with_foods": [
+      "Risotto",
+      "Paella",
+      "Biscotti",
+      "Kuchen 291 S"
+    ],
+    "cuisines": [
+      "Katalonien: Paella, Zarzuela cata-"
+    ],
+    "heat_behavior": {
+      "a": "Typisch erdig-roher Safrangeruch",
+      "b": "Ent-"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "sage",
+    "name": "Sage",
+    "_de": "Salbei",
+    "harmonizes_with": [
+      {
+        "id": "savory",
+        "name": "Savory"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "caraway",
+        "name": "Caraway"
+      },
+      {
+        "id": "lovage",
+        "name": "Lovage"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf"
+      },
+      {
+        "id": "marjoram",
+        "name": "Marjoram"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      }
+    ],
+    "pairs_with_foods": [],
+    "cuisines": [
+      "Deutschland: Heringe, Salzgurken, Sauer-"
+    ],
+    "spice_blends": [
+      "Japanisches Gomashio"
+    ],
+    "aroma_groups": [
+      3
+    ]
+  },
+  {
+    "id": "sorrel",
+    "name": "Sorrel",
+    "_de": "Sauerampfer",
+    "harmonizes_with": [
+      {
+        "id": "borage",
+        "name": "Borage"
+      },
+      {
+        "id": "dill",
+        "name": "Dill"
+      },
+      {
+        "id": "tarragon",
+        "name": "Tarragon"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil"
+      },
+      {
+        "id": "cress",
+        "name": "Cress"
+      },
+      {
+        "id": "lovage",
+        "name": "Lovage"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "chives",
+        "name": "Chives"
+      }
+    ],
+    "pairs_with_foods": [
+      "fish",
+      "tomatoes",
+      "Mangold",
+      "spinach",
+      "Kartof-"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Freshe grüne Säure",
+      "b": "Deutlich Mildr in"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "chives",
+    "name": "Chives",
+    "_de": "Schnittlauch",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "tarragon",
+        "name": "Tarragon"
+      },
+      {
+        "id": "dill",
+        "name": "Dill"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      }
+    ],
+    "pairs_with_foods": [
+      "Soups",
+      "sauces"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Fresher schwefelig-lauchiger Duft",
+      "b": "Rascher Aromenverlust"
+    },
+    "spice_blends": [],
+    "aroma_groups": [
+      1
+    ]
+  },
+  {
+    "id": "celery",
+    "name": "Celery",
+    "_de": "Sellerie",
+    "harmonizes_with": [
+      {
+        "id": "dill",
+        "name": "Dill"
+      },
+      {
+        "id": "clove",
+        "name": "Clove"
+      },
+      {
+        "id": "lovage",
+        "name": "Lovage"
+      },
+      {
+        "id": "coriander-seeds",
+        "name": "Coriander Seeds"
+      },
+      {
+        "id": "cilantro",
+        "name": "Cilantro"
+      },
+      {
+        "id": "apium-graveolens-fruechte",
+        "name": "Apium Graveolens (Früchte)"
+      }
+    ],
+    "pairs_with_foods": [
+      "meat",
+      "fish",
+      "tomatoes",
+      "Soups"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Erdig-zitroniges Aroma",
+      "b": "Betonung der"
+    },
+    "spice_blends": [
+      "bengalisches"
+    ],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "mustard",
+    "name": "Mustard",
+    "_de": "Senf",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "tarragon",
+        "name": "Tarragon"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil"
+      },
+      {
+        "id": "allspice",
+        "name": "Allspice"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      }
+    ],
+    "pairs_with_foods": [
+      "Potatoes",
+      "Fleisch-"
+    ],
+    "cuisines": [
+      "Deutschland: Sauerbraten, Kohlgerichte,"
+    ],
+    "heat_behavior": {
+      "a": "pungentes Aroma",
+      "b": "Freisetzung der Aro- men aus der Saat beim Anbraten"
+    },
+    "spice_blends": [
+      "Indisches Madras Curry",
+      "Vindaloo Curry"
+    ],
+    "aroma_groups": [
+      1
+    ]
+  },
+  {
+    "id": "sesame",
+    "name": "Sesame",
+    "_de": "Sesam",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "cocoa",
+        "name": "Cocoa"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "nigella",
+        "name": "Nigella"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla"
+      }
+    ],
+    "pairs_with_foods": [],
+    "cuisines": [
+      "Indien: Til"
+    ],
+    "heat_behavior": {
+      "a": "Feine nussig-rauchige Sesamnoten",
+      "b": "Zu-"
+    },
+    "spice_blends": [
+      "Jordanisches Zatar",
+      "ja-"
+    ],
+    "aroma_groups": [
+      4,
+      7
+    ]
+  },
+  {
+    "id": "shiitake",
+    "name": "Shiitake",
+    "_de": "Shiitake",
+    "harmonizes_with": [
+      {
+        "id": "seaweed",
+        "name": "Seaweed"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "sesame",
+        "name": "Sesame"
+      },
+      {
+        "id": "zitrusfruechte",
+        "name": "Zitrusfrüchte"
+      },
+      {
+        "id": "onion",
+        "name": "Onion"
+      },
+      {
+        "id": "shiitake-unterscheiden-sich-von-anderen-pilzen-dadurch-dass-ihre-haupt",
+        "name": "Shiitake Unterscheiden Sich Von Anderen Pilzen Dadurch, Dass Ihre Haupt -"
+      }
+    ],
+    "pairs_with_foods": [
+      "Dunkler Schokolade",
+      "salads",
+      "Getreide (Brot"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Erdig-schwefliger Rohpilzduft",
+      "b": "Champi-"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "sunflower-seeds",
+    "name": "Sunflower Seeds",
+    "_de": "Sonnenblumenkerne",
+    "harmonizes_with": [
+      {
+        "id": "coffee",
+        "name": "Coffee"
+      },
+      {
+        "id": "cocoa",
+        "name": "Cocoa"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "lemon-verbena",
+        "name": "Lemon Verbena"
+      }
+    ],
+    "pairs_with_foods": [],
+    "heat_behavior": {
+      "a": "Wachsiges, grünes, leicht harziges Aro- ma",
+      "b": "Bildung von Röstnoten Die Kerne müssen geschält werden und sind dann sowohl geröstet als"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "porcini",
+    "name": "Porcini",
+    "_de": "Steinpilz",
+    "harmonizes_with": [
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "olives-and-oil",
+        "name": "olives and oil"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "star-anise",
+        "name": "Star Anise"
+      },
+      {
+        "id": "onion",
+        "name": "Onion"
+      },
+      {
+        "id": "auberginencreme-mit-steinpilzgewuerz",
+        "name": "Auberginencreme Mit Steinpilzgewürz"
+      },
+      {
+        "id": "ganze-auberginen-und-knoblauch-in-der-schale-in",
+        "name": "Ganze Auberginen Und Knoblauch In Der Schale In"
+      },
+      {
+        "id": "salzwasser-weichkochen-beide-schaelen-und-mit-dem",
+        "name": "Salzwasser Weichkochen. Beide Schälen Und Mit Dem"
+      },
+      {
+        "id": "stabmixer-zu-einer-glatten-creme-puerieren-pfeffern",
+        "name": "Stabmixer Zu Einer Glatten Creme Pürieren. Pfeffern,"
+      }
+    ],
+    "pairs_with_foods": [
+      "Pasta",
+      "meat",
+      "Potatoes",
+      "Risotto"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Butterig-Earthys, leicht säuerlich-bitteres"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "star-anise",
+    "name": "Star Anise",
+    "_de": "Sternanis",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "clove",
+        "name": "Clove"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "sichuan-pepper",
+        "name": "Sichuan Pepper"
+      },
+      {
+        "id": "tamarind",
+        "name": "Tamarind"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      }
+    ],
+    "pairs_with_foods": [
+      "Feigen",
+      "squash",
+      "Lauch"
+    ],
+    "cuisines": [
+      "China: Rotgeschmortes, Pekingente, marmorierte Tee-Eier",
+      "Vietnam: Pho (Nu-"
+    ],
+    "heat_behavior": {
+      "a": "Fast zitrusartiges Anisaroma",
+      "b": "Aroma-"
+    },
+    "spice_blends": [],
+    "aroma_groups": [
+      2,
+      6
+    ]
+  },
+  {
+    "id": "sumac",
+    "name": "Sumac",
+    "_de": "Sumach",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "pomegranate",
+        "name": "Pomegranate"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "marjoram",
+        "name": "Marjoram"
+      },
+      {
+        "id": "mint",
+        "name": "Mint"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "sesame",
+        "name": "Sesame"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      }
+    ],
+    "pairs_with_foods": [
+      "poultry",
+      "meat (roast",
+      "grilled",
+      "beans",
+      "Mushrooms",
+      "eggplants"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Zitrusartig, floral, prickelnde Schärfe",
+      "b": "Warm-balsamisch, weniger scharf",
+      "c": "Leicht balsamisch, Mild Noten"
+    },
+    "spice_blends": [
+      "Arabisches Zatar",
+      "iranisches Advieh"
+    ],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "sichuan-pepper",
+    "name": "Sichuan Pepper",
+    "_de": "Szechuanpfeffer",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "kaffir-lime-leaves",
+        "name": "Kaffir Lime Leaves"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf"
+      },
+      {
+        "id": "mint",
+        "name": "Mint"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg"
+      },
+      {
+        "id": "sage",
+        "name": "Sage"
+      },
+      {
+        "id": "sesame",
+        "name": "Sesame"
+      },
+      {
+        "id": "star-anise",
+        "name": "Star Anise"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "juniper",
+        "name": "Juniper"
+      },
+      {
+        "id": "lemongrass",
+        "name": "Lemongrass"
+      },
+      {
+        "id": "zitrusfruechte",
+        "name": "Zitrusfrüchte"
+      }
+    ],
+    "pairs_with_foods": [
+      "nuts",
+      "fish",
+      "meat",
+      "poultry",
+      "Vegetables",
+      "Pilzen"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Säuerlich-würzige Fruchtnote",
+      "b": "aromatic, leicht Earthy Säure"
+    },
+    "spice_blends": [
+      "Worcestersauce",
+      "Braune Sauce"
+    ],
+    "aroma_groups": [
+      4,
+      8
+    ]
+  },
+  {
+    "id": "licorice",
+    "name": "licorice",
+    "_de": "Süssholz",
+    "harmonizes_with": [
+      {
+        "id": "anise",
+        "name": "Anise"
+      },
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel"
+      },
+      {
+        "id": "coconut",
+        "name": "Coconut"
+      }
+    ],
+    "pairs_with_foods": [
+      "Kebab",
+      "Aubergine",
+      "Yogurt",
+      "fish",
+      "Meeres-"
+    ],
+    "cuisines": [
+      "Syrien: Fisch",
+      "Libanon: Fattoush (Brotsalat"
+    ],
+    "heat_behavior": {
+      "a": "Wachsig-Fresh, leicht säuerlich",
+      "b": "woody-"
+    },
+    "spice_blends": [
+      "marokkanisches Ras el-Hanout"
+    ],
+    "aroma_groups": [
+      6
+    ]
+  },
+  {
+    "id": "tamarind",
+    "name": "Tamarind",
+    "_de": "Tamarinde",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "curry-leaves",
+        "name": "Curry Leaves"
+      },
+      {
+        "id": "galangal",
+        "name": "Galangal"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "cilantro",
+        "name": "Cilantro"
+      },
+      {
+        "id": "turmeric",
+        "name": "Turmeric"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg"
+      },
+      {
+        "id": "tamarinde-schmeckt-sauer-aber-auch-suess",
+        "name": "Tamarinde Schmeckt Sauer, Aber Auch Süß."
+      },
+      {
+        "id": "ihr-duft-ist-fruchtig-insgesamt-erinnert-ihr",
+        "name": "Ihr Duft Ist Fruchtig, Insgesamt Erinnert Ihr"
+      },
+      {
+        "id": "aroma-ein-bisschen-an-sojasauce-und",
+        "name": "Aroma Ein Bisschen An Sojasauce Und"
+      },
+      {
+        "id": "pflaumen",
+        "name": "Pflaumen."
+      }
+    ],
+    "pairs_with_foods": [],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "thyme",
+    "name": "Thyme",
+    "_de": "Thymian",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "capers",
+        "name": "Capers"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf"
+      },
+      {
+        "id": "marjoram",
+        "name": "Marjoram"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "mustard",
+        "name": "Mustard"
+      },
+      {
+        "id": "onion",
+        "name": "Onion"
+      }
+    ],
+    "pairs_with_foods": [
+      "sauces",
+      "stews",
+      "Soups",
+      "braised dishes"
+    ],
+    "cuisines": [
+      "Italien: rote Tapanade, Antipasti, Tomaten-"
+    ],
+    "heat_behavior": {
+      "a": "Fresh-fruchtig-grünlich",
+      "b": "Floral-aroma-"
+    },
+    "spice_blends": [
+      "Italienisches Pesto"
+    ],
+    "aroma_groups": [
+      3
+    ]
+  },
+  {
+    "id": "dried-tomatoes",
+    "name": "dried tomatoes",
+    "_de": "Tomaten, Getrocknet",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "cloves",
+        "name": "Cloves"
+      },
+      {
+        "id": "capers",
+        "name": "Capers"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "cubeb-pepper",
+        "name": "Cubeb Pepper"
+      },
+      {
+        "id": "olives",
+        "name": "olives"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "lemons",
+        "name": "Lemons"
+      }
+    ],
+    "pairs_with_foods": [],
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "tonka-bean",
+    "name": "Tonka Bean",
+    "_de": "Tonkabohne",
+    "harmonizes_with": [
+      {
+        "id": "angelica",
+        "name": "Angelica"
+      },
+      {
+        "id": "cocoa",
+        "name": "Cocoa"
+      },
+      {
+        "id": "kokos",
+        "name": "Kokos"
+      },
+      {
+        "id": "poppy-seed",
+        "name": "Poppy Seed"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla"
+      },
+      {
+        "id": "walnut",
+        "name": "Walnut"
+      }
+    ],
+    "pairs_with_foods": [
+      "sauces",
+      "Dressings",
+      "Chocolate"
+    ],
+    "cuisines": [
+      "Deutschland: Vanilleeis, Vanillepudding"
+    ],
+    "heat_behavior": {
+      "a": "Fresh, heuartig-süßlich",
+      "b": "Schwerere, süßliche, schokoladig-tabakähnliche Noten"
+    },
+    "aroma_groups": [
+      5
+    ]
+  },
+  {
+    "id": "truffle",
+    "name": "Truffle",
+    "_de": "Trüffel",
+    "harmonizes_with": [
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "sage",
+        "name": "Sage"
+      },
+      {
+        "id": "celery",
+        "name": "Celery"
+      },
+      {
+        "id": "onion",
+        "name": "Onion"
+      }
+    ],
+    "pairs_with_foods": [
+      "zartem Fisch"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Erdig-schwefelige Noten",
+      "b": "Betonung der"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "vanilla",
+    "name": "Vanilla",
+    "_de": "Vanille",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "coffee",
+        "name": "Coffee"
+      },
+      {
+        "id": "cocoa",
+        "name": "Cocoa"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "licorice",
+        "name": "licorice"
+      },
+      {
+        "id": "tonka-bean",
+        "name": "Tonka Bean"
+      },
+      {
+        "id": "cinnamon",
+        "name": "Cinnamon"
+      }
+    ],
+    "pairs_with_foods": [
+      "fish",
+      "Carrots"
+    ],
+    "cuisines": [
+      "Deutschland: Vanillekipferl, Vanilleeis, Pudding",
+      "Frankreich: Crème brûlée"
+    ],
+    "heat_behavior": {
+      "a": "aromatice typische Vanille",
+      "b": "Cremige, süßlich-florale, aromatice Noten"
+    },
+    "aroma_groups": [
+      5
+    ]
+  },
+  {
+    "id": "juniper",
+    "name": "Juniper",
+    "_de": "Wacholder",
+    "harmonizes_with": [
+      {
+        "id": "fennel",
+        "name": "Fennel"
+      },
+      {
+        "id": "clove",
+        "name": "Clove"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf"
+      },
+      {
+        "id": "marjoram",
+        "name": "Marjoram"
+      },
+      {
+        "id": "allspice",
+        "name": "Allspice"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "pink-peppercorn",
+        "name": "Pink Peppercorn"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "licorice",
+        "name": "licorice"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      }
+    ],
+    "pairs_with_foods": [
+      "game",
+      "Sauerkraut",
+      "beef"
+    ],
+    "cuisines": [
+      "Raum: Wildbeizen,"
+    ],
+    "heat_behavior": {
+      "a": "Leicht Florale, deutlich harzige Aro- men",
+      "b": "Betonung der woodyen Duftanteile"
+    },
+    "spice_blends": [
+      "LAGERUNG"
+    ],
+    "aroma_groups": [
+      3,
+      4
+    ]
+  },
+  {
+    "id": "wakame",
+    "name": "Wakame",
+    "_de": "Wakame",
+    "harmonizes_with": [
+      {
+        "id": "pilze-getrocknete",
+        "name": "Pilze, Getrocknete"
+      },
+      {
+        "id": "sesame",
+        "name": "Sesame"
+      }
+    ],
+    "pairs_with_foods": [
+      "Potatoes",
+      "okra",
+      "meat",
+      "fish"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Fruchtig, butterig",
+      "b": "Dominant sauer"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "sweet-woodruff",
+    "name": "Sweet Woodruff",
+    "_de": "Waldmeister",
+    "harmonizes_with": [
+      {
+        "id": "anise",
+        "name": "Anise"
+      },
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "tarragon",
+        "name": "Tarragon"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil"
+      },
+      {
+        "id": "long-pepper",
+        "name": "Long Pepper"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "lemon-balm",
+        "name": "Lemon Balm"
+      }
+    ],
+    "pairs_with_foods": [
+      "Wein",
+      "pears",
+      "strawberries",
+      "Melone"
+    ],
+    "cuisines": [
+      "Deutschland: Maibowle, Wackelpudding,"
+    ],
+    "heat_behavior": {
+      "a": "Leicht fruchtig, wachsig",
+      "b": "Typisch aro-"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "walnut",
+    "name": "Walnut",
+    "_de": "Walnuss",
+    "harmonizes_with": [
+      {
+        "id": "wild-garlic",
+        "name": "Wild Garlic"
+      },
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "olives",
+        "name": "olives"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      }
+    ],
+    "pairs_with_foods": [
+      "all meats",
+      "Ice Cream",
+      "Salads",
+      "Cheese",
+      "Quark",
+      "Teig -"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Feine nussige Töne",
+      "b": "aromatice Noten im Nussaroma",
+      "c": "zusätzliche Röstaromen"
+    },
+    "aroma_groups": [
+      5
+    ]
+  },
+  {
+    "id": "raisin",
+    "name": "Raisin",
+    "_de": "Weinbeere",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "dates",
+        "name": "Dates"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander"
+      },
+      {
+        "id": "olives",
+        "name": "olives"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "pine-nuts",
+        "name": "Pine Nuts"
+      },
+      {
+        "id": "saffron",
+        "name": "Saffron"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla"
+      },
+      {
+        "id": "vitis-vinifera-getrocknete-frucht",
+        "name": "Vitis Vinifera (Getrocknete Frucht)"
+      }
+    ],
+    "pairs_with_foods": [
+      "pastries",
+      "bread",
+      "cucumbers",
+      "Yogurt"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Feiner, floral-säuerlicher Duft und Geschmack",
+      "b": "Intensivierung der aromati-"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "rue",
+    "name": "Rue",
+    "_de": "Weinraute",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "capers",
+        "name": "Capers"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander"
+      },
+      {
+        "id": "olives",
+        "name": "olives"
+      },
+      {
+        "id": "celery",
+        "name": "Celery"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      }
+    ],
+    "pairs_with_foods": [
+      "Fruit",
+      "Erdbeerenn",
+      "Rice"
+    ],
+    "cuisines": [
+      "Italien: Grappa con ruta, Moretum (antike"
+    ],
+    "heat_behavior": {
+      "a": "Sehr intensiver Duft, herber Geschmack",
+      "b": "Feine süß-bittere, heuartige Noten 349"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "wormwood",
+    "name": "Wormwood",
+    "_de": "Wermut",
+    "harmonizes_with": [
+      {
+        "id": "anise",
+        "name": "Anise"
+      },
+      {
+        "id": "mugwort",
+        "name": "Mugwort"
+      },
+      {
+        "id": "southernwood",
+        "name": "Southernwood"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel"
+      },
+      {
+        "id": "clove",
+        "name": "Clove"
+      },
+      {
+        "id": "orange-peel",
+        "name": "Orange Peel"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      }
+    ],
+    "pairs_with_foods": [
+      "Fettreichen Speisen",
+      "Lammfleisch",
+      "Schweinefleisch"
+    ],
+    "cuisines": [
+      "Deutschland: Absinth"
+    ],
+    "heat_behavior": {
+      "a": "Feine bittere, anise-likee Aromen",
+      "b": "Starke"
+    },
+    "aroma_groups": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "hyssop",
+    "name": "Hyssop",
+    "_de": "Ysop",
+    "harmonizes_with": [
+      {
+        "id": "dried-apricots",
+        "name": "Dried Apricots"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf"
+      },
+      {
+        "id": "mint",
+        "name": "Mint"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "rosemary",
+        "name": "Rosemary"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      }
+    ],
+    "pairs_with_foods": [
+      "lamb",
+      "rabbit",
+      "Zicklein",
+      "game",
+      "Pilzen"
+    ],
+    "cuisines": [
+      "Mitteleuropa: deftige Kartoffelgerichte,"
+    ],
+    "heat_behavior": {
+      "a": "Feines harzig-herbales Aroma",
+      "b": "Begin-"
+    },
+    "aroma_groups": [
+      3
+    ]
+  },
+  {
+    "id": "yuzu",
+    "name": "Yuzu",
+    "_de": "Yuzu",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "oregano",
+        "name": "Oregano"
+      },
+      {
+        "id": "sesame",
+        "name": "Sesame"
+      }
+    ],
+    "pairs_with_foods": [
+      "fish",
+      "Salat",
+      "meat",
+      "Cocktails"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Freshe Säure, wachsige Anklänge",
+      "b": "Feine, cremig-süßliche Zitrusaromen"
+    },
+    "spice_blends": [
+      "Japanisches Yuzukosho (Chilipaste",
+      "japani-"
+    ],
+    "aroma_groups": [
+      2
+    ]
+  },
+  {
+    "id": "cinnamon",
+    "name": "Cinnamon",
+    "_de": "Zimt",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "clove",
+        "name": "Clove"
+      },
+      {
+        "id": "cardamom",
+        "name": "Cardamom"
+      },
+      {
+        "id": "bay-leaf",
+        "name": "Bay Leaf"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg"
+      },
+      {
+        "id": "zimtaldehyd-intensiv-zimtig-l-alkohol",
+        "name": "Zimtaldehyd Intensiv Zimtig L Alkohol,"
+      },
+      {
+        "id": "fett-eugenol-nelkenartig-l-alkohol-fett",
+        "name": "Fett  Eugenol Nelkenartig L Alkohol, Fett"
+      },
+      {
+        "id": "zimtalkohol-suess-wuerzig-hyazinthig-zimtig",
+        "name": "Zimtalkohol Süß-Würzig, Hyazinthig, Zimtig"
+      }
+    ],
+    "pairs_with_foods": [
+      "Fruit",
+      "meat",
+      "Vegetables",
+      "Pasta"
+    ],
+    "cuisines": [
+      "Deutschland: Milchreis, Zimtsterne, Speku-"
+    ],
+    "heat_behavior": {
+      "a": "Feine würzig-florale Zimttöne",
+      "b": "Aroma-"
+    },
+    "spice_blends": [
+      "Indische Masalas",
+      "arabisches Baharat",
+      "tune-"
+    ],
+    "aroma_groups": [
+      6
+    ]
+  },
+  {
+    "id": "lemon",
+    "name": "Lemon",
+    "_de": "Zitrone",
+    "harmonizes_with": [
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "dill",
+        "name": "Dill"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "cumin",
+        "name": "Cumin"
+      },
+      {
+        "id": "nutmeg",
+        "name": "Nutmeg"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "chives",
+        "name": "Chives"
+      },
+      {
+        "id": "mustard",
+        "name": "Mustard"
+      },
+      {
+        "id": "vanilla",
+        "name": "Vanilla"
+      }
+    ],
+    "pairs_with_foods": [
+      "fish",
+      "poultry",
+      "light meat",
+      "Salads"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Feine florale, wachsig-zitrale Aromen",
+      "b": "Harzig-floral, Lightly bitter",
+      "c": "Hervorheben der bitternoten"
+    },
+    "aroma_groups": [
+      2
+    ]
+  },
+  {
+    "id": "lemon-balm",
+    "name": "Lemon Balm",
+    "_de": "Zitronenmelisse",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "watercress",
+        "name": "Watercress"
+      },
+      {
+        "id": "dill",
+        "name": "Dill"
+      },
+      {
+        "id": "fennel",
+        "name": "Fennel"
+      },
+      {
+        "id": "galangal",
+        "name": "Galangal"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil"
+      },
+      {
+        "id": "lime",
+        "name": "Lime"
+      },
+      {
+        "id": "mint",
+        "name": "Mint"
+      },
+      {
+        "id": "parsley",
+        "name": "Parsley"
+      },
+      {
+        "id": "chives",
+        "name": "Chives"
+      },
+      {
+        "id": "thyme",
+        "name": "Thyme"
+      },
+      {
+        "id": "die-blaetter-der-zitronenmelisse-werden-immer-frisch-verwendet-und",
+        "name": "Die Blätter Der Zitronenmelisse Werden Immer Frisch Verwendet Und"
+      }
+    ],
+    "pairs_with_foods": [
+      "fish",
+      "Chicken"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Fresh, grünlich, zitronig-herbal",
+      "b": "Florales Zitrusaroma",
+      "c": "Leichte bitterkeit"
+    },
+    "aroma_groups": [
+      2
+    ]
+  },
+  {
+    "id": "lemon-verbena",
+    "name": "Lemon Verbena",
+    "_de": "Zitronenverbene",
+    "harmonizes_with": [
+      {
+        "id": "basil",
+        "name": "Basil"
+      },
+      {
+        "id": "chili",
+        "name": "Chili"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "coriander",
+        "name": "Coriander"
+      },
+      {
+        "id": "lavender",
+        "name": "Lavender"
+      },
+      {
+        "id": "mint",
+        "name": "Mint"
+      },
+      {
+        "id": "chives",
+        "name": "Chives"
+      }
+    ],
+    "pairs_with_foods": [
+      "hearty Speisen",
+      "in klei- nen Dosen als harmonische Komponente"
+    ],
+    "cuisines": [
+      "Deutschland: Fruchtsaft, Obstsalat, Dessert,"
+    ],
+    "heat_behavior": {
+      "a": "Rein süß",
+      "b": "Bildung karamelliger Noten"
+    },
+    "spice_blends": [
+      "Vanillezucker"
+    ],
+    "aroma_groups": [
+      2
+    ]
+  },
+  {
+    "id": "onion",
+    "name": "Onion",
+    "_de": "Zwiebel",
+    "harmonizes_with": [
+      {
+        "id": "tarragon",
+        "name": "Tarragon"
+      },
+      {
+        "id": "ginger",
+        "name": "Ginger"
+      },
+      {
+        "id": "chervil",
+        "name": "Chervil"
+      },
+      {
+        "id": "garlic",
+        "name": "Garlic"
+      },
+      {
+        "id": "paprika",
+        "name": "Paprika"
+      },
+      {
+        "id": "pepper",
+        "name": "Pepper"
+      },
+      {
+        "id": "shiitake",
+        "name": "Shiitake"
+      },
+      {
+        "id": "sumac",
+        "name": "Sumac"
+      }
+    ],
+    "pairs_with_foods": [
+      "Saucengrundlagen",
+      "meat",
+      "fish"
+    ],
+    "cuisines": [],
+    "heat_behavior": {
+      "a": "Freshe, stark pungente Schwefelnoten",
+      "b": "Mild Zwiebelaromen, kaum pungent",
+      "c": "Bildung vieler Röstnoten aus Zwiebel -"
+    },
+    "spice_blends": [],
+    "aroma_groups": [
+      1
+    ]
+  }
+]

@@ -8,6 +8,10 @@
   var PROXY_STORAGE_KEY = 'kuschi_recipe_fetch_proxy_v1';
   var MODEL = 'gemini-2.5-flash';
 
+  /** Append to system prompts so structured output can include sensible herbs/spices when the source is sparse. */
+  var SEASONING_SYSTEM_HINT =
+    ' If the source recipe is clearly under-seasoned or omits obvious complementary herbs and spices for the main ingredients, add them as normal ingredient lines with reasonable amounts (or "to taste"). Do not invent quantities for the main dish structure.';
+
   var SCHEMA_KITCHEN = {
     type: 'OBJECT',
     properties: {
@@ -217,6 +221,7 @@
   }
 
   global.KuschiRecipeGemini = {
+    SEASONING_SYSTEM_HINT: SEASONING_SYSTEM_HINT,
     STORAGE_KEY: STORAGE_KEY,
     LEGACY_KITCHEN_KEY: LEGACY_KITCHEN_KEY,
     PROXY_STORAGE_KEY: PROXY_STORAGE_KEY,

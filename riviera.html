@@ -369,6 +369,27 @@
 .hero-actions .hero-nav-cluster button {
   min-width: 0;
 }
+.hero-actions .hero-nav-cluster a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--gold);
+  background: var(--gold-dim);
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  border-radius: 100px;
+  font-family: inherit;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.hero-actions .hero-nav-cluster a:hover {
+  background: rgba(201, 169, 110, 0.25);
+  border-color: var(--gold);
+  color: var(--gold-light);
+}
 .hero-actions button:hover {
   background: rgba(201, 169, 110, 0.25);
   border-color: var(--gold);
@@ -449,6 +470,7 @@
     <div class="hero-nav-cluster">
       <button type="button" onclick="openAddRivieraModal()">+ Add recipe</button>
       <button type="button" onclick="openPageQrModal()" title="QR code to open this page on your phone">QR</button>
+      <a href="aroma.html">Aroma</a>
     </div>
     <button type="button" onclick="openOrderListModal()">Order list (all ingredients)</button>
     <button type="button" onclick="openStocktakeModal()">Stocktake checklist</button>
@@ -558,6 +580,7 @@
     <div class="form-row"><label>Elements (comma)</label><input id="rvElements" placeholder="Optional" /></div>
     <div class="modal-section" style="margin-top:8px">Ingredients</div>
     <div id="rvIngRows"></div>
+    <div id="rvAromaAddPanel"></div>
     <button type="button" class="btn-secondary" onclick="addRivIngRow()">+ Row</button>
     <div class="form-row"><label>Prep method (one line per step)</label><textarea id="rvSteps"></textarea></div>
     <div class="form-row"><label>Service (one line per step)</label><textarea id="rvService" placeholder="Optional"></textarea></div>
@@ -600,7 +623,7 @@
 </div>
 
 <div class="footer">
-  <div class="footer-text">Riviera prep set · <a href="index.html">Kitchen Library</a> · Personal static site (GitHub Pages)</div>
+  <div class="footer-text">Riviera prep set · <a href="index.html">Kitchen Library</a> · <a href="aroma.html">Aroma</a> · Personal static site (GitHub Pages)</div>
   <div class="footer-riviera-admin" id="rivieraAdminChrome">
     <button type="button" class="btn-text riv-admin-btn" id="rivieraAdminOpenBtn" onclick="openRivieraAdminModal()">Admin</button>
     <span id="rivieraAdminUnlockedStrip" class="riv-admin-unlocked" style="display:none">
@@ -631,6 +654,7 @@
 </div>
 
 <script src="assets/user-recipes.js"></script>
+<script src="assets/aroma-hints.js"></script>
 <script src="assets/order-list.js"></script>
 <script src="assets/stocktake-list.js"></script>
 <script src="assets/recipe-gemini-format.js"></script>
@@ -1617,6 +1641,7 @@ function applyRivieraRecipeJsonToForm(obj) {
   document.getElementById('rvSteps').value = prepSteps.join('\n');
   document.getElementById('rvService').value = svc.join('\n');
   document.getElementById('rvNote').value = obj.note != null ? String(obj.note).trim() : '';
+  if (typeof refreshRvAromaAddPanel === 'function') refreshRvAromaAddPanel();
 }
 
 async function formatRivieraRecipeWithGemini() {
@@ -1653,7 +1678,8 @@ async function formatRivieraRecipeWithGemini() {
     'Infer protein tags lowercase (pork, dairy, seafood, chicken, beef, etc.) and diet (e.g. Gluten-Free). ' +
     'type is like "Canape / Tapas" or "Canape"; course like "Canape" or "Other". ' +
     'elements lists named plating components when mentioned. label is a short prep/kitchen label; use the recipe name if unsure. ' +
-    'subtitle is for secondary line (sauces, pairings). Leave unknown optional fields empty or use empty arrays.';
+    'subtitle is for secondary line (sauces, pairings). Leave unknown optional fields empty or use empty arrays.' +
+    (window.KuschiRecipeGemini && KuschiRecipeGemini.SEASONING_SYSTEM_HINT ? KuschiRecipeGemini.SEASONING_SYSTEM_HINT : '');
 
   btn.disabled = true;
   statusEl.textContent = 'Formatting…';
@@ -1714,6 +1740,7 @@ function openAddRivieraModal() {
     st.classList.remove('error');
   }
   document.getElementById('addRivieraOverlay').classList.add('open');
+  if (typeof refreshRvAromaAddPanel === 'function') refreshRvAromaAddPanel();
 }
 function addRivIngRow() {
   const wrap = document.getElementById('rvIngRows');
@@ -1721,7 +1748,44 @@ function addRivIngRow() {
   row.className = 'ing-row-r';
   row.innerHTML = '<input type="text" class="rv-qty" placeholder="500 g or 2 L" /><input type="text" class="rv-item" placeholder="Ingredient name" /><input type="text" class="rv-prep" placeholder="Prep note" /><button type="button" class="btn-secondary" onclick="this.parentElement.remove()">✕</button>';
   wrap.appendChild(row);
+  if (typeof debouncedRefreshRvAroma === 'function') debouncedRefreshRvAroma();
 }
+function collectRvAddRecipeIngredientLines() {
+  const lines = [];
+  document.querySelectorAll('#rvIngRows .rv-item').forEach((inp) => {
+    const v = inp.value.trim();
+    if (v) lines.push({ item: v });
+  });
+  document.getElementById('rvProtein').value.split(',').map((s) => s.trim()).filter(Boolean).forEach((p) => lines.push({ item: p }));
+  return lines;
+}
+function refreshRvAromaAddPanel() {
+  const slot = document.getElementById('rvAromaAddPanel');
+  if (!slot || !window.KuschiAromaHints) return;
+  slot.innerHTML = KuschiAromaHints.addRecipePanelHtml();
+  const panel = slot.querySelector('.aroma-add-panel');
+  KuschiAromaHints.fillAddRecipePanel(panel, collectRvAddRecipeIngredientLines, (id, name) => {
+    addRivIngRow();
+    const rows = document.querySelectorAll('#rvIngRows .ing-row-r');
+    const row = rows[rows.length - 1];
+    row.querySelector('.rv-item').value = name;
+    row.querySelector('.rv-prep').value = 'to taste';
+    refreshRvAromaAddPanel();
+  });
+}
+const debouncedRefreshRvAroma =
+  window.KuschiAromaHints && KuschiAromaHints.debounce
+    ? KuschiAromaHints.debounce(() => refreshRvAromaAddPanel(), 400)
+    : () => {};
+(function initRvAromaAddListeners() {
+  const overlay = document.getElementById('addRivieraOverlay');
+  const prot = document.getElementById('rvProtein');
+  if (!overlay || !prot || !window.KuschiAromaHints) return;
+  overlay.addEventListener('input', (e) => {
+    if (e.target && e.target.classList && e.target.classList.contains('rv-item')) debouncedRefreshRvAroma();
+  });
+  prot.addEventListener('input', debouncedRefreshRvAroma);
+})();
 function submitRivieraRecipe() {
   const name = document.getElementById('rvName').value.trim();
   if (!name) { alert('Enter a name'); return; }
@@ -1891,6 +1955,11 @@ function openRecipe(id) {
       }</div>`
     : '';
 
+  const aromaHintHtml =
+    typeof KuschiAromaHints !== 'undefined' && KuschiAromaHints
+      ? KuschiAromaHints.seasoningSectionHtml(null, { idSuffix: 'Rv' })
+      : '';
+
   modal.innerHTML = `
     <div class="modal-top-bar">
       <button type="button" class="modal-wake-pill" data-kuschi-wake aria-pressed="false"><span data-kuschi-wake-label>Stay awake</span></button>
@@ -1912,6 +1981,7 @@ function openRecipe(id) {
     <ol class="modal-steps">${steps}</ol>
     <div class="modal-section">On the Day — Service</div>
     <ol class="modal-steps">${service}</ol>
+    ${aromaHintHtml}
     ${note}
     ${label}
     ${adminActions}
@@ -1919,6 +1989,7 @@ function openRecipe(id) {
 
   modal.scrollTop = 0;
   if (window.KuschiScreenWake) KuschiScreenWake.sync();
+  if (window.KuschiAromaHints) KuschiAromaHints.hydrateModal(modal, r);
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 }

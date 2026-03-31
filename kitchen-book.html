@@ -402,6 +402,7 @@
     <div class="hero-nav-cluster">
       <button type="button" class="hero-nav-link" onclick="openAddRecipeModal()">+ Add recipe</button>
       <button type="button" class="hero-nav-link" onclick="openPageQrModal()" title="QR code to open this book on your phone">QR</button>
+      <a href="aroma.html" class="hero-nav-link">Aroma</a>
     </div>
     <button type="button" class="hero-nav-link" onclick="openKitchenBookOrderListModal()">Order list (all ingredients)</button>
     <button type="button" class="hero-nav-link" onclick="openKitchenBookStocktakeModal()">Stocktake checklist</button>
@@ -442,6 +443,7 @@
     <div class="form-row"><label for="arTags">Dietary tags</label><input id="arTags" type="text" placeholder="comma-separated: gluten-free" /></div>
     <div class="modal-section" style="margin-top:8px">Ingredients</div>
     <div id="arIngRows"></div>
+    <div id="kbAromaAddPanel"></div>
     <button type="button" class="btn-secondary" onclick="addKitchenIngRow()">+ Ingredient row</button>
     <div class="form-row" style="margin-top:16px"><label for="arMethod">Method (one step per line)</label><textarea id="arMethod" placeholder="1. First step…"></textarea></div>
     <div class="add-form-actions">
@@ -547,7 +549,7 @@
       </span>
     </div>
     <button type="button" class="btn-secondary" id="kbDeleteBookBtn" onclick="deleteThisKitchenBook()" style="display:none;margin-top:10px;font-size:12px">Delete this kitchen book…</button>
-    <div style="margin-top:10px">· <a href="riviera.html">Riviera</a> · <a href="https://github.com/KuschiKuschbert/recipelibrary" target="_blank">GitHub</a></div>
+    <div style="margin-top:10px">· <a href="aroma.html">Aroma</a> · <a href="riviera.html">Riviera</a> · <a href="https://github.com/KuschiKuschbert/recipelibrary" target="_blank">GitHub</a></div>
   </div>
 </div>
 
@@ -573,6 +575,7 @@
 
 
 <script src="assets/user-recipes.js"></script>
+<script src="assets/aroma-hints.js"></script>
 <script src="assets/order-list.js"></script>
 <script src="assets/stocktake-list.js"></script>
 <script src="assets/recipe-gemini-format.js"></script>
@@ -952,6 +955,7 @@ function openRecipe(id) {
   modal.innerHTML = renderBookRecipeDetail(currentRecipe);
   modal.scrollTop = 0;
   if (window.KuschiScreenWake) KuschiScreenWake.sync();
+  if (window.KuschiAromaHints) KuschiAromaHints.hydrateModal(modal, currentRecipe);
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -1012,6 +1016,9 @@ function renderBookRecipeDetail(r) {
   }
   if (isKitchenBookAdminUnlocked()) {
     html += `<div style="margin:16px 0"><button type="button" class="btn-secondary" onclick="removeCurrentBookRecipe()">Remove from this book</button></div>`;
+  }
+  if (window.KuschiAromaHints) {
+    html += KuschiAromaHints.seasoningSectionHtml(null, { idSuffix: 'Kb' });
   }
   html += `<div class="modal-copy-bar">`;
   html += `<button class="modal-copy-btn" onclick="copyBookRecipeText('${esc(r.id)}')">Copy as text</button>`;
@@ -1206,6 +1213,7 @@ function applyKitchenRecipeJsonToForm(obj) {
   setKitchenIngredientRows(obj.ingredients);
   const steps = Array.isArray(obj.instructions) ? obj.instructions.map(s => String(s).trim()).filter(Boolean) : [];
   document.getElementById('arMethod').value = steps.join('\n');
+  if (typeof refreshKbAromaAddPanel === 'function') refreshKbAromaAddPanel();
 }
 
 async function formatKitchenRecipeWithGemini() {
@@ -1239,7 +1247,8 @@ async function formatKitchenRecipeWithGemini() {
     'Ignore ads, navigation, and non-recipe text. Extract amounts and units faithfully from the source (imperial or metric is OK — a script will normalize to metric). ' +
     'Split ingredient amounts into qty and unit when possible. ' +
     'Infer protein tags (lowercase: chicken, beef, fish, pork, lamb, dairy, eggs, etc.) and dietary tags when reasonable. ' +
-    'Leave unknown optional fields empty or use empty arrays.';
+    'Leave unknown optional fields empty or use empty arrays.' +
+    (window.KuschiRecipeGemini && KuschiRecipeGemini.SEASONING_SYSTEM_HINT ? KuschiRecipeGemini.SEASONING_SYSTEM_HINT : '');
   btn.disabled = true;
   statusEl.textContent = 'Formatting…';
   try {
@@ -1294,6 +1303,7 @@ function openAddRecipeModal() {
   if (ru) ru.value = '';
   const st = document.getElementById('arFormatStatus');
   if (st) { st.textContent = ''; st.classList.remove('error'); }
+  if (typeof refreshKbAromaAddPanel === 'function') refreshKbAromaAddPanel();
 }
 
 function addKitchenIngRow() {
@@ -1302,7 +1312,44 @@ function addKitchenIngRow() {
   row.className = 'ing-row';
   row.innerHTML = '<input type="text" placeholder="Qty" class="ar-qty" /><input type="text" placeholder="Unit" class="ar-unit" /><input type="text" placeholder="Ingredient" class="ar-item" /><input type="text" placeholder="Prep" class="ar-prep" /><button type="button" class="btn-secondary" onclick="this.parentElement.remove()">✕</button>';
   wrap.appendChild(row);
+  if (typeof debouncedRefreshKbAroma === 'function') debouncedRefreshKbAroma();
 }
+function collectKbAddRecipeIngredientLines() {
+  const lines = [];
+  document.querySelectorAll('#arIngRows .ar-item').forEach((inp) => {
+    const v = inp.value.trim();
+    if (v) lines.push({ item: v });
+  });
+  document.getElementById('arProtein').value.split(',').map((s) => s.trim()).filter(Boolean).forEach((p) => lines.push({ item: p }));
+  return lines;
+}
+function refreshKbAromaAddPanel() {
+  const slot = document.getElementById('kbAromaAddPanel');
+  if (!slot || !window.KuschiAromaHints) return;
+  slot.innerHTML = KuschiAromaHints.addRecipePanelHtml();
+  const panel = slot.querySelector('.aroma-add-panel');
+  KuschiAromaHints.fillAddRecipePanel(panel, collectKbAddRecipeIngredientLines, (id, name) => {
+    addKitchenIngRow();
+    const rows = document.querySelectorAll('#arIngRows .ing-row');
+    const row = rows[rows.length - 1];
+    row.querySelector('.ar-item').value = name;
+    row.querySelector('.ar-prep').value = 'to taste';
+    refreshKbAromaAddPanel();
+  });
+}
+const debouncedRefreshKbAroma =
+  window.KuschiAromaHints && KuschiAromaHints.debounce
+    ? KuschiAromaHints.debounce(() => refreshKbAromaAddPanel(), 400)
+    : () => {};
+(function initKbAromaAddListeners() {
+  const box = document.getElementById('addRecipeModalBox');
+  const prot = document.getElementById('arProtein');
+  if (!box || !prot || !window.KuschiAromaHints) return;
+  box.addEventListener('input', (e) => {
+    if (e.target && e.target.classList && e.target.classList.contains('ar-item')) debouncedRefreshKbAroma();
+  });
+  prot.addEventListener('input', debouncedRefreshKbAroma);
+})();
 
 function submitBookRecipe() {
   const name = document.getElementById('arName').value.trim();
