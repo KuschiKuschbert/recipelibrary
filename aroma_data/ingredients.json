@@ -75,7 +75,9 @@
         "name": "Mint"
       }
     ],
-    "pairs_with_foods": [],
+    "pairs_with_foods": [
+      "nuts"
+    ],
     "cuisines": [],
     "heat_behavior": {
       "a": "Balsamisch, sandelwoody, warm, kampf -"
@@ -551,7 +553,8 @@
       "tea",
       "stews",
       "Curry",
-      "Chocolate"
+      "Chocolate",
+      "Cream cheese"
     ],
     "cuisines": [
       "England: Earl Grey Tea, Gin",
@@ -1413,8 +1416,8 @@
     "_de": "Dulse",
     "harmonizes_with": [
       {
-        "id": "meeressalat",
-        "name": "Meeressalat"
+        "id": "sea-lettuce",
+        "name": "Sea lettuce"
       },
       {
         "id": "olives-and-oil",
@@ -1687,8 +1690,8 @@
         "name": "Thyme"
       },
       {
-        "id": "zitronenschale",
-        "name": "Zitronenschale"
+        "id": "lemon-zest",
+        "name": "Lemon zest"
       }
     ],
     "pairs_with_foods": [
@@ -1914,7 +1917,8 @@
       }
     ],
     "pairs_with_foods": [
-      "Chocolate"
+      "Chocolate",
+      "Cream cheese"
     ],
     "cuisines": [],
     "heat_behavior": {
@@ -3175,6 +3179,7 @@
       "bread",
       "Desserts",
       "Chocolate",
+      "Cream cheese",
       "Ice Cream"
     ],
     "cuisines": [],
@@ -3314,6 +3319,7 @@
     "pairs_with_foods": [
       "pastry",
       "Ice Cream",
+      "Cream cheese",
       "Pistachios",
       "Milch -"
     ],
@@ -3374,8 +3380,8 @@
     ]
   },
   {
-    "id": "meeressalat",
-    "name": "Meeressalat",
+    "id": "sea-lettuce",
+    "name": "Sea lettuce",
     "_de": "Meeressalat",
     "harmonizes_with": [
       {
@@ -4142,7 +4148,8 @@
       "fish",
       "stews",
       "Soups",
-      "salads"
+      "salads",
+      "Cream cheese"
     ],
     "cuisines": [
       "Brasilien: Tacacá (Fischsuppe), Pato no Tucupí (Entenbraten"
@@ -4440,8 +4447,8 @@
         "name": "Cinnamon"
       },
       {
-        "id": "zitronenschale",
-        "name": "Zitronenschale"
+        "id": "lemon-zest",
+        "name": "Lemon zest"
       }
     ],
     "pairs_with_foods": [

@@ -2,23 +2,107 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="theme-color" content="#0c0c0c">
 <title>Aroma lookup · Kuschi Kitchen</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23c9a96e'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/theme.css">
 <style>
-  .aroma-page { max-width: 1100px; margin: 0 auto; padding: 24px 20px 80px; }
-  .aroma-hero { text-align: center; margin-bottom: 28px; }
-  .aroma-hero h1 {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(28px, 5vw, 40px);
-    color: var(--text);
-    margin-bottom: 8px;
+  .aroma-page { max-width: 1200px; margin: 0 auto; padding: 0 0 80px; }
+  .nav-back {
+    padding: 20px 32px 0;
+    max-width: 1200px;
+    margin: 0 auto;
   }
-  .aroma-hero p { color: var(--text2); font-size: 15px; max-width: 520px; margin: 0 auto; line-height: 1.5; }
+  .nav-back a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-back a:hover { color: var(--gold); }
+  .aroma-hero-sync.hero {
+    text-align: center;
+    padding: 24px 24px 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  .aroma-hero-sync.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(201,169,110,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .aroma-hero-sync .hero-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    opacity: 0.8;
+  }
+  .aroma-hero-sync .hero-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+  .aroma-hero-sync .hero-title em { font-style: italic; color: var(--gold); }
+  .aroma-hero-sync .hero-sub {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text2);
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.55;
+  }
+  .aroma-hero-sync .hero-sub b { color: var(--gold-light); font-weight: 500; }
+  .aroma-hero-sync .hero-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .aroma-hero-sync .hero-nav-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  .aroma-hero-sync .hero-nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: var(--gold);
+    background: var(--gold-dim);
+    border: 1px solid rgba(201,169,110,0.3);
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+  .aroma-hero-sync .hero-nav-link:hover {
+    background: rgba(201,169,110,0.25);
+    border-color: var(--gold);
+    color: var(--gold-light);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(201,169,110,0.15);
+  }
   .aroma-modes {
     display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px;
   }
@@ -58,18 +142,90 @@
   }
   .aroma-browse-card:hover { border-color: var(--gold); }
   .aroma-matrix-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 12px 0; }
-  .aroma-matrix-toolbar label { font-size: 13px; color: var(--text2); }
+  .aroma-matrix-toolbar label { font-size: 13px; color: var(--text2); display: inline-flex; align-items: center; gap: 6px; }
   .aroma-matrix-toolbar select { background: var(--bg2); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; font: inherit; }
+  .aroma-matrix-stats {
+    width: 100%; flex-basis: 100%; font-size: 13px; color: var(--text2); margin: 0;
+  }
+  .aroma-matrix-hover-legend {
+    font-size: 13px; color: var(--text); min-height: 1.35em; margin: 8px 0 0; padding: 8px 10px;
+    border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface);
+  }
+  .aroma-matrix-hover-legend.is-idle { color: var(--text3); font-style: italic; }
+  .aroma-matrix-neighbors { margin-top: 14px; }
+  .aroma-matrix-neighbors h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin: 0 0 10px; }
+  .aroma-neighbor-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px;
+  }
+  .aroma-neighbor-card {
+    text-align: left; font: inherit; cursor: pointer; padding: 10px 12px; border-radius: var(--radius-sm);
+    border: 1px solid var(--border); background: var(--surface); color: var(--text);
+  }
+  .aroma-neighbor-card:hover { border-color: var(--border-hover); }
+  .aroma-neighbor-card.reinforce { border-left: 3px solid var(--gold); }
+  .aroma-neighbor-card.complement { border-left: 3px solid rgba(110, 154, 190, 0.9); }
+  .aroma-neighbor-card .nm { font-weight: 600; font-size: 14px; display: block; }
+  .aroma-neighbor-card .hint { font-size: 12px; color: var(--text3); margin-top: 4px; }
+  #matrixScroll {
+    --mat-cell: 22px;
+    --mat-row-label-w: 72px;
+    --mat-header-h: 52px;
+    --mat-th-font: 8px;
+    --mat-row-th-font: 10px;
+  }
+  #matrixScroll.aroma-density-comfortable {
+    --mat-cell: 32px;
+    --mat-row-label-w: 104px;
+    --mat-header-h: 80px;
+    --mat-th-font: 9px;
+    --mat-row-th-font: 11px;
+  }
+  #matrixScroll.aroma-density-large {
+    --mat-cell: 44px;
+    --mat-row-label-w: 128px;
+    --mat-header-h: 96px;
+    --mat-th-font: 10px;
+    --mat-row-th-font: 12px;
+  }
   .aroma-matrix-scroll {
     overflow: auto; max-height: min(70vh, 640px); border: 1px solid var(--border); border-radius: var(--radius-sm);
     -webkit-overflow-scrolling: touch;
   }
-  .aroma-matrix-table { border-collapse: separate; border-spacing: 0; font-size: 10px; }
-  .aroma-matrix-table th, .aroma-matrix-table td { width: 22px; height: 22px; min-width: 22px; padding: 0; text-align: center; vertical-align: middle; }
-  .aroma-matrix-table th { position: sticky; background: var(--bg2); z-index: 1; font-weight: 500; color: var(--text3); font-size: 9px; max-width: 72px; overflow: hidden; text-overflow: ellipsis; }
-  .aroma-matrix-table th:first-child { left: 0; z-index: 2; width: 72px; max-width: 72px; text-align: left; padding-left: 6px; }
-  .aroma-matrix-table thead th { top: 0; }
-  .aroma-mat-cell { border: 1px solid rgba(255,255,255,0.04); cursor: pointer; }
+  .aroma-matrix-table { border-collapse: separate; border-spacing: 0; font-size: 10px; table-layout: fixed; }
+  .aroma-matrix-table th, .aroma-matrix-table td {
+    width: var(--mat-cell); height: var(--mat-cell); min-width: var(--mat-cell); padding: 0;
+    text-align: center; vertical-align: middle;
+  }
+  .aroma-matrix-table th {
+    position: sticky; background: var(--bg2); z-index: 1; font-weight: 500; color: var(--text3);
+    font-size: var(--mat-th-font); overflow: visible;
+  }
+  .aroma-matrix-table tbody th {
+    font-size: var(--mat-row-th-font); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .aroma-matrix-table th:first-child {
+    left: 0; z-index: 3; width: var(--mat-row-label-w); min-width: var(--mat-row-label-w); max-width: var(--mat-row-label-w);
+    text-align: left; padding-left: 6px; padding-right: 4px;
+  }
+  .aroma-matrix-table thead th { top: 0; z-index: 2; }
+  .aroma-matrix-table thead th:first-child { z-index: 4; }
+  .aroma-matrix-table thead th:not(:first-child) {
+    height: var(--mat-header-h); min-height: var(--mat-header-h); vertical-align: bottom; padding: 0 2px 4px;
+  }
+  .aroma-mat-th-label {
+    display: block; max-width: calc(var(--mat-header-h) * 1.25); margin: 0 auto;
+    line-height: 1.05; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    transform: rotate(-52deg); transform-origin: center bottom; font-size: inherit;
+  }
+  .aroma-matrix-table tbody tr.is-crosshair-row > th,
+  .aroma-matrix-table tbody tr.is-crosshair-row > td {
+    background: rgba(201, 169, 110, 0.14);
+  }
+  .aroma-matrix-table thead th.is-crosshair-col,
+  .aroma-matrix-table tbody td.is-crosshair-col {
+    background: rgba(201, 169, 110, 0.14);
+  }
+  .aroma-mat-cell { border: 1px solid rgba(255,255,255,0.04); cursor: default; }
   .aroma-mat-cell.dim { opacity: 0.12; }
   .aroma-mat-cell.self { background: rgba(255,255,255,0.06); cursor: default; }
   .aroma-mat-cell.linked { cursor: pointer; }
@@ -104,7 +260,15 @@
   }
   .aroma-pair-col p { font-size: 13px; color: var(--text2); line-height: 1.45; margin: 0; }
   .aroma-pair-actions { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-  .aroma-footer-nav { text-align: center; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .aroma-footer-nav {
+    text-align: center;
+    margin-top: 48px;
+    padding: 24px 20px 0;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text3);
+    line-height: 1.6;
+  }
   .aroma-footer-nav a { color: var(--gold); text-decoration: none; }
   .aroma-footer-nav a:hover { text-decoration: underline; }
   .aroma-empty { color: var(--text3); font-size: 14px; margin-top: 12px; }
@@ -112,16 +276,25 @@
 </head>
 <body>
 <div class="aroma-page">
-  <div class="aroma-hero">
-    <h1>Aroma lookup</h1>
-    <p>Food-to-spice pairings and harmony matrix from the <em>Aroma Bible</em> extract (English). For inspiration only.</p>
+  <div class="nav-back"><a href="index.html">← Kitchen Library</a></div>
+  <div class="hero aroma-hero-sync">
+    <div class="hero-label">Kuschi · Aroma Bible</div>
+    <h1 class="hero-title">Aroma <em>lookup</em></h1>
+    <p class="hero-sub">Food-to-spice pairings and harmony matrix from the book extract (English UI). <b>For inspiration only.</b></p>
+    <div class="hero-nav">
+      <div class="hero-nav-cluster">
+        <a href="kitchen-book.html" class="hero-nav-link">Kitchen book</a>
+        <a href="riviera.html" class="hero-nav-link">Riviera</a>
+        <a href="index.html" class="hero-nav-link">Recipe index</a>
+      </div>
+    </div>
   </div>
 
-  <div class="search-wrap" style="margin-top:0">
+  <div class="search-wrap" style="margin-top:8px">
     <div class="search-glass">
       <div class="search-inner">
         <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="search" class="search-input" id="aromaSearch" placeholder="Search food, spice, or browse below…" autocomplete="off" />
+        <input type="search" class="search-input" id="aromaSearch" placeholder="Food, spice, or matrix (e.g. lamb, cumin)…" autocomplete="off" spellcheck="false" />
       </div>
     </div>
   </div>
@@ -134,7 +307,7 @@
   </div>
 
   <section class="aroma-panel active" id="panelFood" role="tabpanel">
-    <p class="aroma-empty" style="margin-top:0">Type a food (e.g. lentils, lamb, rice). Results come from the book’s reverse index.</p>
+    <p class="aroma-empty" style="margin-top:0">Type a food (e.g. lentils, <strong>lamb</strong>, rice). English and German names are matched (e.g. lamb ↔ Lamm). From the matrix or browse tab, typing here still jumps to food results when there is a match.</p>
     <div class="aroma-results" id="foodResults"></div>
   </section>
 
@@ -155,10 +328,27 @@
     <div class="aroma-matrix-toolbar">
       <label>Subset <select id="matrixSubset"><option value="24">Top 24</option><option value="48" selected>Top 48</option><option value="all">Full set</option></select></label>
       <label>Aroma group <select id="matrixAromaGroupFilter"><option value="">All groups</option></select></label>
+      <label>Cell size <select id="matrixDensity" aria-label="Matrix cell size"><option value="compact">Compact</option><option value="comfortable" selected>Comfortable</option><option value="large">Large (touch)</option></select></label>
       <label>Highlight <select id="matrixFocus"><option value="">— none —</option></select></label>
+      <label><input type="checkbox" id="matrixNeighborsOnly" /> Partners list only</label>
     </div>
-    <div class="aroma-matrix-scroll" id="matrixScroll"></div>
-    <p class="aroma-empty" id="matrixLegend">Filled cells: harmony link. Gold tint = shared aroma groups; blue = complement. Tap a filled cell for both profiles side by side.</p>
+    <p class="aroma-matrix-stats" id="matrixStats" aria-live="polite"></p>
+    <div class="aroma-matrix-scroll aroma-density-comfortable" id="matrixScroll"></div>
+    <p class="aroma-matrix-hover-legend is-idle" id="matrixHoverLegend" aria-live="polite">Hover a cell to see row and column names.</p>
+    <div class="aroma-matrix-neighbors" id="matrixNeighbors" hidden></div>
+    <div class="aroma-empty" id="matrixLegend" style="margin-top:14px;font-size:13px;line-height:1.5">
+      <strong>How to read the matrix</strong>
+      <ul style="margin:8px 0 0;padding-left:1.2em">
+        <li><strong>Filled / tinted cells</strong> — book harmony link between row and column spice.</li>
+        <li><strong>Gold tint</strong> — shares at least one aroma group (reinforcing family).</li>
+        <li><strong>Blue tint</strong> — harmony without shared group (complementary).</li>
+        <li><strong>Dim cells</strong> — no harmony link in the extract.</li>
+        <li><strong>Highlight</strong> — dims cells that do not involve the chosen spice.</li>
+        <li><strong>Crosshair</strong> — hover highlights the row and column headers.</li>
+        <li><strong>Stats line</strong> — <em>Harmony pairs</em> counts each unordered pair once (no double-count).</li>
+        <li>Tap a filled cell for side-by-side profiles.</li>
+      </ul>
+    </div>
   </section>
 
   <div class="modal-overlay" id="aromaPairOverlay" aria-hidden="true">
@@ -170,10 +360,11 @@
   </div>
 
   <div class="aroma-footer-nav">
-    <a href="index.html">Kitchen Library</a> · <a href="kitchen-book.html">Kitchen book</a> · <a href="riviera.html">Riviera</a>
+    <a href="index.html">Kitchen Library</a> · <a href="kitchen-book.html">Kitchen book</a> · <a href="riviera.html">Riviera</a> · <a href="https://github.com/KuschiKuschbert/recipelibrary" target="_blank" rel="noopener">GitHub</a>
   </div>
 </div>
 
+<script src="assets/aroma-hints.js"></script>
 <script>
 (function () {
   var ingredients = [];
@@ -222,7 +413,14 @@
 
   document.querySelectorAll('.aroma-mode-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      showMode(btn.getAttribute('data-mode'));
+      var m = btn.getAttribute('data-mode');
+      showMode(m);
+      if (m === 'matrix') {
+        applyMatrixDensity();
+        renderMatrix();
+      } else {
+        pushAromaUrl();
+      }
     });
   });
 
@@ -273,6 +471,150 @@
     searchEl.value = ing ? ing.name : id;
     document.getElementById('spiceResults').innerHTML = '';
     renderSpiceProfile(ing);
+    var p = new URLSearchParams(location.search);
+    p.set('tab', 'spice');
+    p.set('spice', id);
+    p.delete('food');
+    ['msub', 'mgroup', 'mden', 'mfocus', 'mlist'].forEach(function (k) {
+      p.delete(k);
+    });
+    history.replaceState(null, '', location.pathname + '?' + p.toString());
+  }
+
+  function foodAppendixHits(rawQ) {
+    var rq = String(rawQ || '').trim();
+    if (!rq) return [];
+    if (window.KuschiAromaHints && KuschiAromaHints.foodPairingMatchesQuery) {
+      return foodPairings.filter(function (fp) {
+        return KuschiAromaHints.foodPairingMatchesQuery(rq, fp);
+      });
+    }
+    var q = norm(rq);
+    return foodPairings.filter(function (fp) {
+      return norm(fp.name).indexOf(q) >= 0 || q.indexOf(norm(fp.name)) >= 0;
+    });
+  }
+
+  function spicesMentioningFoodQuery(rawQ) {
+    var rq = String(rawQ || '').trim();
+    if (!rq || !ingredients.length) return [];
+    if (!window.KuschiAromaHints || !KuschiAromaHints.ingredientFoodPhraseMatchesQuery) return [];
+    var out = [];
+    var seen = {};
+    for (var i = 0; i < ingredients.length; i++) {
+      var ing = ingredients[i];
+      var pfs = ing.pairs_with_foods || [];
+      for (var j = 0; j < pfs.length; j++) {
+        if (KuschiAromaHints.ingredientFoodPhraseMatchesQuery(rq, pfs[j])) {
+          if (!seen[ing.id]) {
+            seen[ing.id] = true;
+            out.push(ing);
+          }
+          break;
+        }
+      }
+    }
+    return out;
+  }
+
+  function bindFoodPanelClicks(container) {
+    container.querySelectorAll('[data-food-id]').forEach(function (row) {
+      row.addEventListener('click', function () {
+        var id = row.getAttribute('data-food-id');
+        var fp = foodPairings.find(function (f) { return f.id === id; });
+        if (fp) openFood(fp);
+      });
+    });
+    container.querySelectorAll('[data-spice-id]').forEach(function (row) {
+      row.addEventListener('click', function () {
+        openSpice(row.getAttribute('data-spice-id'));
+      });
+    });
+  }
+
+  function runFoodSearchFromQuery(rawQ) {
+    var hits = foodAppendixHits(rawQ);
+    var extras = spicesMentioningFoodQuery(rawQ);
+    var html = '';
+    if (hits.length) {
+      html += hits
+        .map(function (fp) {
+          return '<button type="button" class="aroma-result-row" data-food-id="' + esc(fp.id) + '">' + esc(fp.name) + '</button>';
+        })
+        .join('');
+    }
+    if (extras.length) {
+      html +=
+        '<p class="aroma-empty" style="margin-top:14px"><strong>Spices that mention this in their profile</strong> (helpful when the appendix row uses another language):</p>';
+      html += extras
+        .map(function (ing) {
+          return (
+            '<button type="button" class="aroma-result-row" data-spice-id="' +
+            esc(ing.id) +
+            '">' +
+            esc(ing.name) +
+            ' ' +
+            groupBadges(ing.aroma_groups) +
+            '</button>'
+          );
+        })
+        .join('');
+    }
+    if (!html) {
+      html =
+        '<p class="aroma-empty">No foods match. Try another word (English or German, e.g. <em>lamb</em> / <em>Lamm</em>) or switch to <strong>Spice profile</strong>.</p>';
+    }
+    var el = document.getElementById('foodResults');
+    el.innerHTML = html;
+    bindFoodPanelClicks(el);
+  }
+
+  function trySmartSearchFromMatrixOrBrowse() {
+    var rawQ = String(searchEl.value || '').trim();
+    var q = norm(rawQ);
+    if (q.length < 2) return false;
+    if (mode !== 'browse' && mode !== 'matrix') return false;
+    if (foodAppendixHits(rawQ).length) {
+      showMode('food');
+      runFoodSearchFromQuery(rawQ);
+      pushAromaUrl();
+      return true;
+    }
+    if (spicesMentioningFoodQuery(rawQ).length) {
+      showMode('food');
+      runFoodSearchFromQuery(rawQ);
+      pushAromaUrl();
+      return true;
+    }
+    var shits = ingredients.filter(function (ing) {
+      return norm(ing.name).indexOf(q) >= 0 || norm(ing.id).indexOf(q.replace(/\s/g, '-')) >= 0;
+    });
+    if (shits.length) {
+      showMode('spice');
+      var shel = shits
+        .map(function (ing) {
+          return (
+            '<button type="button" class="aroma-result-row" data-spice-id="' +
+            esc(ing.id) +
+            '">' +
+            esc(ing.name) +
+            ' ' +
+            groupBadges(ing.aroma_groups) +
+            '</button>'
+          );
+        })
+        .join('');
+      document.getElementById('spiceResults').innerHTML = shel;
+      document.getElementById('spiceProfile').innerHTML = '';
+      document.getElementById('spiceResults').querySelectorAll('[data-spice-id]').forEach(function (row) {
+        row.addEventListener('click', function () {
+          openSpice(row.getAttribute('data-spice-id'));
+        });
+      });
+      pushAromaUrl();
+      return true;
+    }
+    return false;
   }
 
   function openFood(fp) {
@@ -290,27 +632,23 @@
         openSpice(row.getAttribute('data-spice-id'));
       });
     });
+    var p = new URLSearchParams(location.search);
+    p.set('tab', 'food');
+    p.set('food', fp.id);
+    p.delete('spice');
+    ['msub', 'mgroup', 'mden', 'mfocus', 'mlist'].forEach(function (k) {
+      p.delete(k);
+    });
+    history.replaceState(null, '', location.pathname + '?' + p.toString());
   }
 
   function runSearch() {
-    var q = norm(searchEl.value);
+    var rawQ = String(searchEl.value || '').trim();
+    var q = norm(rawQ);
     if (!q) return;
     if (mode === 'browse' || mode === 'matrix') return;
     if (mode === 'food') {
-      var hits = foodPairings.filter(function (fp) {
-        return norm(fp.name).indexOf(q) >= 0 || q.indexOf(norm(fp.name)) >= 0;
-      });
-      var html = hits.map(function (fp) {
-        return '<button type="button" class="aroma-result-row" data-food-id="' + esc(fp.id) + '">' + esc(fp.name) + '</button>';
-      }).join('');
-      document.getElementById('foodResults').innerHTML = html || '<p class="aroma-empty">No foods match. Try another word or switch to Spice profile.</p>';
-      document.getElementById('foodResults').querySelectorAll('[data-food-id]').forEach(function (row) {
-        row.addEventListener('click', function () {
-          var id = row.getAttribute('data-food-id');
-          var fp = foodPairings.find(function (f) { return f.id === id; });
-          if (fp) openFood(fp);
-        });
-      });
+      runFoodSearchFromQuery(rawQ);
       return;
     }
     if (mode === 'spice') {
@@ -334,10 +672,17 @@
   var debounce;
   searchEl.addEventListener('input', function () {
     clearTimeout(debounce);
-    debounce = setTimeout(runSearch, 200);
+    debounce = setTimeout(function () {
+      if (trySmartSearchFromMatrixOrBrowse()) return;
+      runSearch();
+    }, 200);
   });
   searchEl.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') { e.preventDefault(); runSearch(); }
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (trySmartSearchFromMatrixOrBrowse()) return;
+      runSearch();
+    }
   });
 
   function sharedGroups(a, b) {
@@ -358,6 +703,241 @@
       return 'rgba(201, 169, 110, ' + alpha + ')';
     }
     return 'rgba(110, 154, 190, 0.22)';
+  }
+
+  function pushAromaUrl() {
+    var p = new URLSearchParams(location.search);
+    p.set('tab', mode);
+    if (mode === 'matrix') {
+      p.delete('spice');
+      p.delete('food');
+      p.set('msub', document.getElementById('matrixSubset').value);
+      var grp = document.getElementById('matrixAromaGroupFilter').value;
+      if (grp) p.set('mgroup', grp);
+      else p.delete('mgroup');
+      var den = document.getElementById('matrixDensity').value;
+      if (den !== 'comfortable') p.set('mden', den);
+      else p.delete('mden');
+      var foc = document.getElementById('matrixFocus').value;
+      if (foc) p.set('mfocus', foc);
+      else p.delete('mfocus');
+      if (document.getElementById('matrixNeighborsOnly').checked) p.set('mlist', '1');
+      else p.delete('mlist');
+    } else {
+      ['msub', 'mgroup', 'mden', 'mfocus', 'mlist'].forEach(function (k) {
+        p.delete(k);
+      });
+    }
+    var qs = p.toString();
+    history.replaceState(null, '', location.pathname + (qs ? '?' + qs : ''));
+  }
+
+  function applyMatrixParamsFromUrl() {
+    var params = new URLSearchParams(location.search);
+    var msub = params.get('msub');
+    if (msub) {
+      var subSel = document.getElementById('matrixSubset');
+      for (var si = 0; si < subSel.options.length; si++) {
+        if (subSel.options[si].value === msub) {
+          subSel.value = msub;
+          break;
+        }
+      }
+    }
+    var mgroup = params.get('mgroup');
+    if (mgroup !== null && mgroup !== undefined) {
+      var grpSel = document.getElementById('matrixAromaGroupFilter');
+      for (var gi = 0; gi < grpSel.options.length; gi++) {
+        if (grpSel.options[gi].value === mgroup) {
+          grpSel.value = mgroup;
+          break;
+        }
+      }
+    }
+    var mden = params.get('mden');
+    if (mden && ['compact', 'comfortable', 'large'].indexOf(mden) >= 0) {
+      document.getElementById('matrixDensity').value = mden;
+    }
+    var mfocus = params.get('mfocus');
+    if (mfocus && byId[mfocus]) {
+      document.getElementById('matrixFocus').value = mfocus;
+    }
+    document.getElementById('matrixNeighborsOnly').checked = params.get('mlist') === '1';
+  }
+
+  function applyMatrixDensity() {
+    var d = document.getElementById('matrixDensity').value;
+    var scroll = document.getElementById('matrixScroll');
+    scroll.classList.remove('aroma-density-compact', 'aroma-density-comfortable', 'aroma-density-large');
+    scroll.classList.add('aroma-density-' + d);
+  }
+
+  function colHeaderShort(name) {
+    var n = String(name || '');
+    if (n.length <= 12) return n;
+    return n.slice(0, 11) + '…';
+  }
+
+  function countUndirectedHarmonyPairs(cols) {
+    var count = 0;
+    for (var i = 0; i < cols.length; i++) {
+      var row = matrix[cols[i]] || [];
+      for (var j = i + 1; j < cols.length; j++) {
+        if (row.indexOf(cols[j]) >= 0) count++;
+      }
+    }
+    return count;
+  }
+
+  function clearMatrixCrosshair(table) {
+    if (!table) return;
+    table.querySelectorAll('.is-crosshair-row').forEach(function (el) {
+      el.classList.remove('is-crosshair-row');
+    });
+    table.querySelectorAll('.is-crosshair-col').forEach(function (el) {
+      el.classList.remove('is-crosshair-col');
+    });
+  }
+
+  function setMatrixCrosshair(table, rowIdx, colIdx) {
+    clearMatrixCrosshair(table);
+    var rows = table.querySelectorAll('tbody tr');
+    if (rows[rowIdx]) rows[rowIdx].classList.add('is-crosshair-row');
+    table.querySelectorAll('[data-matrix-col="' + colIdx + '"]').forEach(function (el) {
+      el.classList.add('is-crosshair-col');
+    });
+  }
+
+  function setHoverLegendIdle() {
+    var el = document.getElementById('matrixHoverLegend');
+    el.textContent = 'Hover a cell to see row and column names.';
+    el.classList.add('is-idle');
+  }
+
+  function updateHoverLegend(rowIng, colIng) {
+    var el = document.getElementById('matrixHoverLegend');
+    el.classList.remove('is-idle');
+    var a = rowIng && rowIng.name ? rowIng.name : '—';
+    var b = colIng && colIng.name ? colIng.name : '—';
+    el.textContent = 'Row: ' + a + ' · Column: ' + b;
+  }
+
+  var matrixCrosshairScrollBound = false;
+
+  function attachMatrixCrosshair(table, cols) {
+    var scroll = document.getElementById('matrixScroll');
+    if (!matrixCrosshairScrollBound) {
+      matrixCrosshairScrollBound = true;
+      scroll.addEventListener(
+        'mouseleave',
+        function () {
+          var t = scroll.querySelector('.aroma-matrix-table');
+          if (t) clearMatrixCrosshair(t);
+          setHoverLegendIdle();
+        },
+        { passive: true }
+      );
+    }
+    table.querySelectorAll('tbody tr').forEach(function (tr) {
+      tr.querySelectorAll('td').forEach(function (td) {
+        var cell = td.querySelector('.aroma-mat-cell');
+        if (!cell) return;
+        var rid = tr.getAttribute('data-matrix-row-id');
+        var cid = cols[parseInt(td.getAttribute('data-matrix-col'), 10)];
+        td.addEventListener(
+          'mouseenter',
+          function () {
+            var rI = parseInt(tr.getAttribute('data-matrix-row'), 10);
+            var cI = parseInt(td.getAttribute('data-matrix-col'), 10);
+            setMatrixCrosshair(table, rI, cI);
+            updateHoverLegend(byId[rid], byId[cid]);
+          },
+          { passive: true }
+        );
+      });
+    });
+  }
+
+  function renderNeighborsPanel(focusId, cols) {
+    var neighEl = document.getElementById('matrixNeighbors');
+    var center = byId[focusId];
+    if (!center) {
+      neighEl.innerHTML = '';
+      return;
+    }
+    var ids = (matrix[focusId] || []).filter(function (pid) {
+      return cols.indexOf(pid) >= 0;
+    });
+    ids.sort(function (a, b) {
+      return (byId[a].name || a).localeCompare(byId[b].name || b);
+    });
+    var inner;
+    if (!ids.length) {
+      inner =
+        '<p class="aroma-empty">No partners for this spice appear in the current subset. Try <strong>Full set</strong> or a larger Top N.</p>';
+    } else {
+      inner =
+        '<h3>Harmony partners of ' +
+        esc(center.name) +
+        ' (in this view)</h3><div class="aroma-neighbor-grid">' +
+        ids
+          .map(function (pid) {
+            var ing = byId[pid];
+            if (!ing) return '';
+            var sg = sharedGroups(center, ing);
+            var cls = sg > 0 ? 'reinforce' : 'complement';
+            var hint = sg > 0 ? 'Shared aroma group(s) — reinforcing' : 'No shared group in extract — complementary';
+            return (
+              '<button type="button" class="aroma-neighbor-card ' +
+              cls +
+              '" data-nb-row="' +
+              esc(focusId) +
+              '" data-nb-col="' +
+              esc(pid) +
+              '"><span class="nm">' +
+              esc(ing.name) +
+              '</span><span class="hint">' +
+              hint +
+              '</span></button>'
+            );
+          })
+          .join('') +
+        '</div>';
+    }
+    neighEl.innerHTML = inner;
+    neighEl.querySelectorAll('[data-nb-row]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        openPairModal(btn.getAttribute('data-nb-row'), btn.getAttribute('data-nb-col'));
+      });
+    });
+  }
+
+  function updateMatrixStats(cols, opts) {
+    var el = document.getElementById('matrixStats');
+    var neighborsOnly = opts && opts.neighborsOnly;
+    var focus = document.getElementById('matrixFocus').value;
+    if (neighborsOnly && focus && byId[focus]) {
+      var allP = matrix[focus] || [];
+      var inView = allP.filter(function (id) {
+        return cols.indexOf(id) >= 0;
+      });
+      el.textContent =
+        'Highlight: ' +
+        byId[focus].name +
+        ' — ' +
+        inView.length +
+        ' partners in this subset · ' +
+        allP.length +
+        ' partners in the full extract.';
+    } else if (neighborsOnly) {
+      el.textContent = 'Turn on Highlight to list partners, or uncheck Partners list only for the matrix.';
+    } else if (!cols.length) {
+      el.textContent = '';
+    } else {
+      var n = cols.length;
+      var m = countUndirectedHarmonyPairs(cols);
+      el.textContent = 'Showing ' + n + ' spices · ' + m + ' harmony pairs in view (each unordered pair counted once).';
+    }
   }
 
   function matrixFilteredPoolIds() {
@@ -471,16 +1051,52 @@
   });
 
   function renderMatrix() {
+    applyMatrixDensity();
     var subVal = document.getElementById('matrixSubset').value;
     var n = subVal === 'all' ? Infinity : parseInt(subVal, 10) || 48;
     var focus = document.getElementById('matrixFocus').value;
+    var neighborsOnly = document.getElementById('matrixNeighborsOnly').checked;
     var pool = matrixFilteredPoolIds();
     var cols = topIdsByDegreeInPool(pool, n);
     var scroll = document.getElementById('matrixScroll');
+    var neighEl = document.getElementById('matrixNeighbors');
+
     if (!cols.length) {
-      scroll.innerHTML = '<p class="aroma-empty" style="padding:16px">No ingredients match this filter. Choose “All groups” or a larger subset.</p>';
+      scroll.hidden = false;
+      scroll.innerHTML =
+        '<p class="aroma-empty" style="padding:16px">No ingredients match this filter. Choose “All groups” or a larger subset.</p>';
+      neighEl.hidden = true;
+      neighEl.innerHTML = '';
+      updateMatrixStats([], { neighborsOnly: neighborsOnly });
+      setHoverLegendIdle();
+      pushAromaUrl();
       return;
     }
+
+    if (neighborsOnly && focus && byId[focus]) {
+      scroll.hidden = true;
+      scroll.innerHTML = '';
+      neighEl.hidden = false;
+      renderNeighborsPanel(focus, cols);
+      updateMatrixStats(cols, { neighborsOnly: true });
+      setHoverLegendIdle();
+      pushAromaUrl();
+      return;
+    }
+
+    scroll.hidden = false;
+    neighEl.hidden = true;
+    neighEl.innerHTML = '';
+
+    if (neighborsOnly && (!focus || !byId[focus])) {
+      scroll.innerHTML =
+        '<p class="aroma-empty" style="padding:16px">Choose a spice in <strong>Highlight</strong> to see its harmony partners as a list, or uncheck <strong>Partners list only</strong>.</p>';
+      updateMatrixStats(cols, { neighborsOnly: true });
+      setHoverLegendIdle();
+      pushAromaUrl();
+      return;
+    }
+
     var table = document.createElement('table');
     table.className = 'aroma-matrix-table';
     var thead = document.createElement('thead');
@@ -488,24 +1104,34 @@
     var corner = document.createElement('th');
     corner.textContent = '';
     hr.appendChild(corner);
-    cols.forEach(function (cid) {
+    cols.forEach(function (cid, colIdx) {
       var th = document.createElement('th');
-      th.title = byId[cid] ? byId[cid].name : cid;
-      th.textContent = (byId[cid] && byId[cid].name) ? byId[cid].name.slice(0, 3) : cid.slice(0, 3);
+      th.setAttribute('data-matrix-col', String(colIdx));
+      var nm = (byId[cid] && byId[cid].name) || cid;
+      th.title = nm;
+      th.setAttribute('aria-label', 'Column: ' + nm);
+      var span = document.createElement('span');
+      span.className = 'aroma-mat-th-label';
+      span.textContent = colHeaderShort(nm);
+      th.appendChild(span);
       hr.appendChild(th);
     });
     thead.appendChild(hr);
     table.appendChild(thead);
     var tbody = document.createElement('tbody');
-    cols.forEach(function (rid) {
+    cols.forEach(function (rid, rowIdx) {
       var tr = document.createElement('tr');
+      tr.setAttribute('data-matrix-row', String(rowIdx));
+      tr.setAttribute('data-matrix-row-id', rid);
       var th = document.createElement('th');
       th.textContent = (byId[rid] && byId[rid].name) ? byId[rid].name : rid;
       th.title = th.textContent;
+      th.setAttribute('aria-label', 'Row: ' + th.textContent);
       tr.appendChild(th);
       var rowN = matrix[rid] || [];
-      cols.forEach(function (cid) {
+      cols.forEach(function (cid, colIdx) {
         var td = document.createElement('td');
+        td.setAttribute('data-matrix-col', String(colIdx));
         var cell = document.createElement('div');
         cell.className = 'aroma-mat-cell';
         if (rid === cid) {
@@ -536,6 +1162,9 @@
     table.appendChild(tbody);
     scroll.innerHTML = '';
     scroll.appendChild(table);
+    attachMatrixCrosshair(table, cols);
+    updateMatrixStats(cols, { neighborsOnly: false });
+    pushAromaUrl();
   }
 
   function fillBrowseFilter() {
@@ -573,6 +1202,8 @@
   document.getElementById('matrixSubset').addEventListener('change', renderMatrix);
   document.getElementById('matrixAromaGroupFilter').addEventListener('change', renderMatrix);
   document.getElementById('matrixFocus').addEventListener('change', renderMatrix);
+  document.getElementById('matrixDensity').addEventListener('change', renderMatrix);
+  document.getElementById('matrixNeighborsOnly').addEventListener('change', renderMatrix);
 
   Promise.all([
     fetch('aroma_data/ingredients.json').then(function (r) { return r.json(); }),
@@ -594,15 +1225,23 @@
       o.textContent = ing.name;
       fsel.appendChild(o);
     });
-    renderMatrix();
+    applyMatrixParamsFromUrl();
 
     var params = new URLSearchParams(location.search);
     var sp = params.get('spice');
     var fd = params.get('food');
-    if (sp && byId[sp]) openSpice(sp);
-    else if (fd) {
+    if (sp && byId[sp]) {
+      openSpice(sp);
+    } else if (fd) {
       var fp = foodPairings.find(function (f) { return f.id === fd; });
       if (fp) openFood(fp);
+    } else {
+      var tab = params.get('tab');
+      if (tab === 'matrix' || tab === 'browse' || tab === 'spice' || tab === 'food') {
+        showMode(tab);
+      }
+      applyMatrixDensity();
+      renderMatrix();
     }
   }).catch(function () {
     document.getElementById('foodResults').innerHTML = '<p class="aroma-empty">Could not load aroma JSON files.</p>';

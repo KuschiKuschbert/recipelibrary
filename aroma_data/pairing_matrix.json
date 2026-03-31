@@ -524,10 +524,10 @@
     "juniper",
     "lavender",
     "long-pepper",
-    "meeressalat",
     "nutmeg-and-mace",
     "oregano",
-    "pink-peppercorn"
+    "pink-peppercorn",
+    "sea-lettuce"
   ],
   "cumin": [
     "almond",
@@ -633,8 +633,8 @@
     "thyme"
   ],
   "dulse": [
-    "meeressalat",
     "onion",
+    "sea-lettuce",
     "thyme"
   ],
   "fennel": [
@@ -974,10 +974,6 @@
     "fennel",
     "grains-of-paradise",
     "horseradish"
-  ],
-  "meeressalat": [
-    "cubeb-pepper",
-    "dulse"
   ],
   "mint": [
     "allspice",
@@ -1488,6 +1484,10 @@
     "rosemary",
     "sage",
     "thyme"
+  ],
+  "sea-lettuce": [
+    "cubeb-pepper",
+    "dulse"
   ],
   "sesame": [
     "cardamom",

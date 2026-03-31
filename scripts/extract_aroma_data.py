@@ -195,6 +195,7 @@ Weinbeeren|Raisins
 Yuzu|Yuzu
 Zitrone|Lemon
 Zitronen|Lemons
+Zitronenschale|Lemon zest
 Zitronensaft|Lemon Juice
 Zitrusschale|Citrus Zest
 Olivenöl|Olive Oil
@@ -356,6 +357,55 @@ Tee|tea
 Marzipan|marzipan
 Frisch|fresh
 Steinpilz|Porcini
+Gartengurken|Garden cucumbers
+Grütze|Fruit semolina pudding
+Meeressalat|Sea lettuce
+Haselnüsse|Hazelnuts
+Arganöl|Argan oil
+Walnussöl|Walnut oil
+Pistazienöl|Pistachio oil
+Petersilienöl|Parsley oil
+Blauschimmelkäse|Blue cheese
+Hartkäse|Hard cheese
+Frischkäse|Cream cheese
+Ziegenkäse|Goat cheese
+Gewürze-Mischung|Spice blend
+pilzgewürz|Mushroom spice blend
+Geräucherter Myrtekäse|Smoked myrtle cheese
+Kombuwürzpüree|Kombu spice puree
+Olivenölwürfel|Olive oil cubes
+Röstzwiebel|Roasted onion
+Fenchellammrücken|Fennel lamb saddle
+Bärlauchmaki|Wild garlic maki
+Elastische Rosenblätter|Candied rose petals
+Gefüllte runde Zucchini|Stuffed round zucchini
+Geräucherter|Smoked
+Katerfrühstück|Hangover breakfast
+Lorbeerblättern|Bay leaves
+limettenblättern|Lime leaves
+Paradieskörnern|Grains of paradise
+Rosmarin-Schokoplätzchen|Rosemary chocolate cookies
+verschiedenen Pürees|Various purées
+Kresseblüten|Cress blossoms
+nüssen|nuts
+blätter|leaves
+grün|green
+Überbacken|Baked topping
+Geröstet|Toasted
+Süppchen|Light soup
+Trüffeln|Truffles
+Macadamianüssen|Macadamia nuts
+Und Paradieskörnern|And grains of paradise
+Röstzwiebel Ohne Hitze|Roasted onion without heat
+Rotes Kartoffelpüree|Red potato purée
+Schokolade Kalt–heiß|Chocolate hot and cold
+Steckrübenpüree|Rutabaga purée
+Süßholzraspel Auf Fettbasis|Licorice shavings in fat
+Wakame-käsescheiben|Wakame cheese slices
+Waldmeistersprühsahne|Sweet woodruff spray cream
+Walnusslikör|Walnut liqueur
+Weinbeeren-olivenölcreme|Raisin olive oil cream
+Zitronenuniversalgewürz|Lemon all-purpose seasoning
 """
 for line in _RAW.strip().splitlines():
     if "|" in line:
@@ -373,6 +423,117 @@ def translate(text: str) -> str:
     if base.lower() in DE_NORM:
         return DE_NORM[base.lower()]
     return t
+
+
+def _cap_words(s: str) -> str:
+    parts = []
+    for w in s.split():
+        if not w:
+            continue
+        parts.append(w[:1].upper() + w[1:].lower() if w[1:] else w.upper())
+    return " ".join(parts)
+
+
+def _english_core_token(core: str) -> str:
+    c = core.strip()
+    if not c:
+        return c
+    low = c.lower()
+    if low in DE_NORM:
+        t = DE_NORM[low]
+    else:
+        t = translate(c)
+        if t == c:
+            t = translate(c.title())
+    return _cap_words(t) if t else c
+
+
+def english_appendix_food_name(raw: str) -> str:
+    """German appendix dish lines → English (e.g. 'Lamm, Gebraten' → 'Roasted Lamb')."""
+    s = raw.strip()
+    if not s:
+        return s
+    ul = s.lower()
+    if ul == "gebraten" or s.strip().upper() == "GEBRATEN":
+        return "Roasted dishes"
+    if ul == "gegrillt" or s.strip().upper() == "GEGRILLT":
+        return "Grilled dishes"
+    if ul.startswith("geschmort") or s.startswith("GESCHMORT"):
+        return "Braised dishes"
+    m = re.match(r"^(.+?),\s*Gebraten\s*$", s, re.I)
+    if m:
+        return "Roasted " + _english_core_token(m.group(1))
+    m = re.match(r"^(.+?),\s*Gegrillt\w*\s*$", s, re.I)
+    if m:
+        return "Grilled " + _english_core_token(m.group(1))
+    m = re.match(r"^(.+?),\s*Geschmort\w*\s*$", s, re.I)
+    if m:
+        return "Braised " + _english_core_token(m.group(1))
+    t = translate(s)
+    if t != s:
+        return _cap_words(t)
+    if "," in s:
+        chunks = [x.strip() for x in s.split(",")]
+        tr = [translate(x) for x in chunks]
+        if tr != chunks:
+            return ", ".join(_cap_words(x) for x in tr)
+    return s
+
+
+def _clean_seasoning_ocr(raw: str) -> str:
+    s = raw.strip()
+    s = re.sub(r"^[(\[\s,;]+", "", s)
+    s = re.sub(r"[)\]\s,;]+$", "", s)
+    s = re.sub(r"\)+$", "", s)
+    s = s.strip()
+    if s.count("(") > s.count(")"):
+        s = s + ")"
+    return s.strip()
+
+
+def english_appendix_seasoning(raw: str) -> str:
+    s = _clean_seasoning_ocr(raw)
+    if not s:
+        return _clean_seasoning_ocr(raw) or raw.strip()
+    en = translate(s)
+    if en == s and s != s.title():
+        en = translate(s.title())
+    en = _clean_seasoning_ocr(en)
+    return _cap_words(en) if en else raw.strip()
+
+
+def _finalize_pairs_food_line(s: str) -> str:
+    if re.search(r",\s*Gebraten|,\s*Gegrillt|,\s*Geschmort", s, re.I):
+        return english_appendix_food_name(s)
+    return s
+
+
+_SKIP_APPENDIX_FOOD_HEADERS = frozenset(
+    {
+        "GEWÜRZMISCHUNGEN",
+        "GEWÜRZMISCHUNG",
+        "REZEPTE",
+        "REGISTER",
+        "WAS PASST WOZU",
+        "EINKAUF",
+    }
+)
+
+
+def postprocess_food_pairings(rows: list[dict]) -> None:
+    rows[:] = [
+        r
+        for r in rows
+        if (r.get("_de") or r.get("name") or "").strip().upper() not in _SKIP_APPENDIX_FOOD_HEADERS
+    ]
+    for row in rows:
+        de_food = row.get("_de") or row.get("name", "")
+        row["name"] = english_appendix_food_name(de_food)
+        row["id"] = to_id(row["name"])
+        for sea in row.get("seasonings", []):
+            de_s = sea.get("_de") or sea.get("name", "")
+            sea["name"] = english_appendix_seasoning(de_s)
+            sea["id"] = to_id(sea["name"])
 
 
 def to_id(name: str) -> str:
@@ -837,7 +998,7 @@ def postprocess_ingredients(ingredients: list[dict]) -> None:
                 merged.append("braised dishes (beef, game)")
                 i += 3
                 continue
-            merged.append(foods[i])
+            merged.append(_finalize_pairs_food_line(foods[i]))
             i += 1
         ing["pairs_with_foods"] = merged
         if ing.get("cuisines"):
@@ -910,6 +1071,7 @@ def main() -> None:
         print("Reading Part4…", PDF_PART4)
         t4 = extract_text(PDF_PART4)
         food_pairings = parse_was_passt_wozu(t4)
+        postprocess_food_pairings(food_pairings)
     else:
         print("WARN: Part4 PDF missing; food_pairings.json will be empty.")
 
