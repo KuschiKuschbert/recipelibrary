@@ -5,6 +5,8 @@ Default: all user-facing strings in ingredients and food_pairings (incl. heat_be
 Use --all is accepted for compatibility (same as default).
 
 Exit 1 if any default-path issue is found.
+
+Also exports scan_aroma_user_strings / apply_string_translations for normalize_aroma_english.py + MT backfill.
 """
 from __future__ import annotations
 
@@ -36,7 +38,8 @@ _EXTRA_ASCII = re.compile(
 _HYPHEN_STUB = re.compile(r",\s*[A-Za-zÀ-ÖØ-öø-ÿ]{1,22}-\s*(?:,|$)")
 
 
-def _suspicious(s: str) -> bool:
+def suspicious(s: str) -> bool:
+    """True if string looks like German / OCR leftovers (user-facing check)."""
     if _UC.search(s) or _looks_untranslated_german(s):
         return True
     if _EXTRA_ASCII.search(s):
@@ -46,15 +49,101 @@ def _suspicious(s: str) -> bool:
     return False
 
 
-def _flag(path: str, label: str, s: str, issues: list[tuple[str, str]]) -> None:
+def _note(path: str, label: str, s: str, issues: list[tuple[str, str]], bad: set[str]) -> None:
     if not s or not isinstance(s, str):
         return
-    if _suspicious(s):
+    if suspicious(s):
         issues.append((path, f"{label}: {s[:140]}"))
+        bad.add(s)
+
+
+def scan_aroma_user_strings(
+    ingredients: list[dict],
+    foods: list[dict] | None,
+) -> tuple[list[tuple[str, str]], set[str]]:
+    """Walk user-visible fields; return (issues for logging, full strings needing fix)."""
+    issues: list[tuple[str, str]] = []
+    bad_strings: set[str] = set()
+    for ing in ingredients:
+        iid = ing.get("id", "?")
+        _note(iid, "ingredient.name", ing.get("name", ""), issues, bad_strings)
+        for h in ing.get("harmonizes_with") or []:
+            if isinstance(h, dict):
+                _note(iid, "harmonizes_with.name", h.get("name", "") or "", issues, bad_strings)
+        for p in ing.get("pairs_with_foods") or []:
+            _note(iid, "pairs_with_foods", p, issues, bad_strings)
+        for c in ing.get("cuisines") or []:
+            _note(iid, "cuisines", c, issues, bad_strings)
+        for b in ing.get("spice_blends") or []:
+            _note(iid, "spice_blends", b, issues, bad_strings)
+        hb = ing.get("heat_behavior") or {}
+        for k, v in hb.items():
+            _note(iid, f"heat.{k}", v, issues, bad_strings)
+
+    if foods:
+        for row in foods:
+            fid = row.get("id", "?")
+            _note(fid, "food.name", row.get("name", ""), issues, bad_strings)
+            for s in row.get("seasonings") or []:
+                _note(fid, "seasoning", s.get("name", ""), issues, bad_strings)
+
+    return issues, bad_strings
+
+
+def collect_issues(
+    ingredients: list[dict],
+    foods: list[dict] | None = None,
+) -> list[tuple[str, str]]:
+    """Compatibility wrapper: issue list only."""
+    issues, _ = scan_aroma_user_strings(ingredients, foods)
+    return issues
+
+
+def apply_string_translations(
+    ingredients: list[dict],
+    foods: list[dict] | None,
+    tmap: dict[str, str],
+) -> int:
+    """Replace exact field values when key in tmap. Whitelist paths only. Returns replacement count."""
+    n = 0
+
+    def rep(s: str) -> str:
+        nonlocal n
+        if s in tmap:
+            n += 1
+            return tmap[s]
+        return s
+
+    for ing in ingredients:
+        if "name" in ing and isinstance(ing["name"], str):
+            ing["name"] = rep(ing["name"])
+        for h in ing.get("harmonizes_with") or []:
+            if isinstance(h, dict) and isinstance(h.get("name"), str):
+                h["name"] = rep(h["name"])
+        if ing.get("pairs_with_foods"):
+            ing["pairs_with_foods"] = [rep(x) if isinstance(x, str) else x for x in ing["pairs_with_foods"]]
+        if ing.get("cuisines"):
+            ing["cuisines"] = [rep(x) if isinstance(x, str) else x for x in ing["cuisines"]]
+        if ing.get("spice_blends"):
+            ing["spice_blends"] = [rep(x) if isinstance(x, str) else x for x in ing["spice_blends"]]
+        hb = ing.get("heat_behavior")
+        if isinstance(hb, dict):
+            for k, v in list(hb.items()):
+                if isinstance(v, str):
+                    hb[k] = rep(v)
+
+    if foods:
+        for row in foods:
+            if isinstance(row.get("name"), str):
+                row["name"] = rep(row["name"])
+            for s in row.get("seasonings") or []:
+                if isinstance(s, dict) and isinstance(s.get("name"), str):
+                    s["name"] = rep(s["name"])
+
+    return n
 
 
 def main() -> int:
-    issues: list[tuple[str, str]] = []
     ing_path = os.path.join(DATA, "ingredients.json")
     fp_path = os.path.join(DATA, "food_pairings.json")
     if not os.path.isfile(ing_path):
@@ -62,30 +151,11 @@ def main() -> int:
         return 0
     with open(ing_path, encoding="utf-8") as f:
         ingredients = json.load(f)
-    for ing in ingredients:
-        iid = ing.get("id", "?")
-        _flag(iid, "ingredient.name", ing.get("name", ""), issues)
-        for h in ing.get("harmonizes_with") or []:
-            if isinstance(h, dict):
-                _flag(iid, "harmonizes_with.name", h.get("name", "") or "", issues)
-        for p in ing.get("pairs_with_foods") or []:
-            _flag(iid, "pairs_with_foods", p, issues)
-        for c in ing.get("cuisines") or []:
-            _flag(iid, "cuisines", c, issues)
-        for b in ing.get("spice_blends") or []:
-            _flag(iid, "spice_blends", b, issues)
-        hb = ing.get("heat_behavior") or {}
-        for k, v in hb.items():
-            _flag(iid, f"heat.{k}", v, issues)
-
+    foods: list[dict] | None = None
     if os.path.isfile(fp_path):
         with open(fp_path, encoding="utf-8") as f:
             foods = json.load(f)
-        for row in foods:
-            fid = row.get("id", "?")
-            _flag(fid, "food.name", row.get("name", ""), issues)
-            for s in row.get("seasonings") or []:
-                _flag(fid, "seasoning", s.get("name", ""), issues)
+    issues, _ = scan_aroma_user_strings(ingredients, foods)
 
     if not issues:
         print("check_aroma_english: no German/umlaut issues in checked fields.")
