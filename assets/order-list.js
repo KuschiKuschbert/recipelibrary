@@ -17,7 +17,7 @@
     { test: /\bcinnamon stick\b/, unit: 'pc' },
     { test: /\blamb cutlet\b/, unit: 'kg' },
     { test: /\b(mayonnaise|mayo|kewpie|aioli)\b/, unit: 'kg' },
-    { test: /\bcucumber\b/, unit: 'piece' },
+    { test: /\bcucumber\b/, unit: 'pc' },
     { test: /\begg\b/, unit: 'pc' },
     { test: /\btomato\b/, unit: 'kg' },
     { test: /\b(rocket|arugula)\b/, unit: 'kg' },
