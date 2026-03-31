@@ -1,0 +1,30 @@
+name: Aroma English check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "aroma_data/**"
+      - "scripts/check_aroma_english.py"
+      - "scripts/aroma_i18n.py"
+      - "scripts/normalize_aroma_english.py"
+      - "scripts/aroma_mt_backfill.py"
+      - ".github/workflows/aroma-english.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "aroma_data/**"
+      - "scripts/check_aroma_english.py"
+      - "scripts/aroma_i18n.py"
+      - "scripts/normalize_aroma_english.py"
+      - "scripts/aroma_mt_backfill.py"
+      - ".github/workflows/aroma-english.yml"
+
+jobs:
+  user-facing-english:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify aroma user-facing strings (no German / umlaut leaks)
+        run: python3 scripts/check_aroma_english.py
