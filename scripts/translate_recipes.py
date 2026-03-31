@@ -203,11 +203,13 @@ def translate_string(
     translator: Callable[[str, str | None], str | None],
     from_lang: str | None,
     glossary_phrases: list[str],
+    *,
+    allow_ascii: bool = False,
 ) -> str | None:
     t = text.strip()
     if len(t) < 2:
         return None
-    if is_ascii_only(t):
+    if is_ascii_only(t) and not allow_ascii:
         return None
     protected, mapping = protect_phrases(t, glossary_phrases)
     out = translator(protected, from_lang)
@@ -221,6 +223,8 @@ def translate_recipe_fields(
     translator: Callable[[str, str | None], str | None],
     from_lang: str | None,
     glossary_phrases: list[str],
+    *,
+    allow_ascii: bool = False,
 ) -> int:
     """Mutate recipe in place. Returns count of fields changed."""
     changed = 0
@@ -230,7 +234,9 @@ def translate_recipe_fields(
         v = recipe.get(key)
         if not isinstance(v, str):
             continue
-        new = translate_string(v, translator, from_lang, glossary_phrases)
+        new = translate_string(
+            v, translator, from_lang, glossary_phrases, allow_ascii=allow_ascii
+        )
         if new and new != v:
             if key == "name" and not recipe.get("original_name"):
                 recipe["original_name"] = v
@@ -247,7 +253,9 @@ def translate_recipe_fields(
                 v = row.get(ik)
                 if not isinstance(v, str):
                     continue
-                new = translate_string(v, translator, from_lang, glossary_phrases)
+                new = translate_string(
+                    v, translator, from_lang, glossary_phrases, allow_ascii=allow_ascii
+                )
                 if new and new != v:
                     row[ik] = new
                     changed += 1
@@ -260,7 +268,9 @@ def translate_recipe_fields(
             if not isinstance(step, str):
                 new_steps.append(step)
                 continue
-            new = translate_string(step, translator, from_lang, glossary_phrases)
+            new = translate_string(
+                step, translator, from_lang, glossary_phrases, allow_ascii=allow_ascii
+            )
             if new and new != step:
                 new_steps.append(new)
                 modified = True
@@ -288,6 +298,32 @@ def count_non_ascii_strings(recipe: dict) -> int:
                 n += 1
     for step in recipe.get("instructions") or []:
         if isinstance(step, str) and step.strip() and not is_ascii_only(step):
+            n += 1
+    return n
+
+
+def count_translatable_strings(recipe: dict, *, ascii_ok: bool) -> int:
+    """Fields translate_recipe_fields may attempt (len >= 2)."""
+    n = 0
+
+    def counts(v: object) -> bool:
+        if not isinstance(v, str):
+            return False
+        if len(v.strip()) < 2:
+            return False
+        return ascii_ok or not is_ascii_only(v)
+
+    for key in ("name", "category", "cuisine", "yield"):
+        if counts(recipe.get(key)):
+            n += 1
+    for row in recipe.get("ingredients") or []:
+        if not isinstance(row, dict):
+            continue
+        for ik in ("item", "prep"):
+            if counts(row.get(ik)):
+                n += 1
+    for step in recipe.get("instructions") or []:
+        if counts(step):
             n += 1
     return n
 
@@ -354,6 +390,15 @@ def main() -> int:
         action="store_true",
         help="Only print warnings, checkpoints, and final summary",
     )
+    ap.add_argument(
+        "--translate-ascii-lingua",
+        action="store_true",
+        help=(
+            "With --candidates-file: also translate ASCII-only text when suggested_lang "
+            "is set and not en (Lingua-detected Latin languages). Re-run detect first "
+            "for a fresh candidate list."
+        ),
+    )
     args = ap.parse_args()
 
     ids: list[str] = []
@@ -373,17 +418,30 @@ def main() -> int:
 
     if args.dry_run:
         total = 0
+        touched = 0
         for rid in ids:
             hit = id_to_recipe.get(rid)
             recipe = hit[1] if hit else None
             if not recipe:
                 print(f"WARN: id not in detail shards: {rid}", file=sys.stderr)
                 continue
-            c = count_non_ascii_strings(recipe)
+            lg = (lang_by_id.get(rid) or "").strip().lower()
+            has_na = count_non_ascii_strings(recipe) > 0
+            allow_ascii = bool(
+                args.translate_ascii_lingua and lg and lg != "en"
+            )
+            if not has_na and not allow_ascii:
+                continue
+            c = count_translatable_strings(recipe, ascii_ok=allow_ascii)
             if c:
-                print(f"{rid}: {c} non-ASCII string(s) would be translated")
+                touched += 1
+                print(f"{rid}: {c} string(s) would be translated (ascii_lingua={allow_ascii})")
                 total += c
-        print(f"Dry-run: {total} string(s) across {len(ids)} id(s); no files written")
+        print(
+            f"Dry-run: {total} string(s) in {touched} recipe(s) of {len(ids)} id(s); "
+            "no files written",
+            flush=True,
+        )
         return 0
 
     translator = make_translator(args.backend, args.default_from)
@@ -406,7 +464,12 @@ def main() -> int:
             print(f"WARN: id not in detail shards: {rid}", file=sys.stderr)
             continue
         letter, recipe = hit
-        if count_non_ascii_strings(recipe) == 0:
+        lg = (lang_by_id.get(rid) or "").strip().lower()
+        has_na = count_non_ascii_strings(recipe) > 0
+        allow_ascii = bool(
+            args.translate_ascii_lingua and lg and lg != "en"
+        )
+        if not has_na and not allow_ascii:
             done += 1
             continue
 
@@ -417,7 +480,13 @@ def main() -> int:
         old_name = recipe.get("name") or ""
         old_l = letter_from_name(old_name)
 
-        n = translate_recipe_fields(recipe, translator, from_lang, glossary)
+        n = translate_recipe_fields(
+            recipe,
+            translator,
+            from_lang,
+            glossary,
+            allow_ascii=allow_ascii,
+        )
         done += 1
 
         if n > 0:
