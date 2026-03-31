@@ -299,7 +299,7 @@
     justify-content: center;
     align-items: center;
     gap: 6px;
-    padding: 16px 24px 60px;
+    padding: 16px 24px max(60px, env(safe-area-inset-bottom, 0px));
   }
   .page-btn {
     min-width: 40px; height: 40px;
@@ -329,6 +329,15 @@
   @media (max-width: 680px) {
     .hero { padding: 40px 20px 16px; }
     .card { padding: 16px; }
+    .nav-back { padding: 16px 20px 0; }
+  }
+
+  @media (max-width: 420px) {
+    .hero-nav-link {
+      padding: 9px 14px;
+      font-size: 12px;
+      letter-spacing: 0.35px;
+    }
   }
 
   /* ── Animations ──────────────────────────────────── */

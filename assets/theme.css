@@ -1,6 +1,12 @@
 /**
  * Shared kitchen library theme: tokens, search shell, filters, modal shell, footer, spin.
  * Page-specific layout (hero, cards, Riviera nav) stays in each HTML file.
+ *
+ * Responsive breakpoints (use these names when adding rules):
+ *   -- 860px — order list rows stack (theme .order-line-row); small tablets portrait.
+ *   -- 680px — phones / narrow: single-column .grid, modal tweaks, search/filters padding.
+ *   -- 600px — optional density step in theme (results bar); pair with 680 for “tall phone”.
+ *   -- 420px — very narrow phones: hero pills / split controls (index.html inline styles).
  */
 :root {
   --bg: #0c0c0c;
@@ -37,7 +43,11 @@ body {
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
+  min-height: 100dvh;
   -webkit-font-smoothing: antialiased;
+  /* Horizontal safe area; pair with viewport-fit=cover. Footer keeps bottom inset only. */
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
 }
 
 /* ── Search ─────────────────────────────────────────── */
@@ -565,8 +575,7 @@ body {
 /* ── Footer ─────────────────────────────────────────── */
 .footer {
   text-align: center;
-  padding: 32px max(24px, env(safe-area-inset-right, 0px))
-    max(32px, env(safe-area-inset-bottom, 0px)) max(24px, env(safe-area-inset-left, 0px));
+  padding: 32px 24px max(32px, env(safe-area-inset-bottom, 0px)) 24px;
   border-top: 1px solid var(--border);
   margin-top: 20px;
 }
@@ -717,6 +726,10 @@ body {
     padding: 0 20px;
   }
 
+  .results-count {
+    font-size: 20px;
+  }
+
   .search-shortcut {
     display: none;
   }
@@ -725,6 +738,16 @@ body {
     padding: 16px;
     gap: 12px;
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .results-count {
+    font-size: 18px;
+  }
+
+  .empty {
+    padding: 48px 16px;
   }
 }
 
