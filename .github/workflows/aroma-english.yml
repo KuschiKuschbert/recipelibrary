@@ -1,24 +1,12 @@
 name: Aroma English check
 
+# Runs on every push/PR to main (fast JSON scan). Manual runs: Actions → Aroma English check → Run workflow.
 on:
   push:
     branches: [main]
-    paths:
-      - "aroma_data/**"
-      - "scripts/check_aroma_english.py"
-      - "scripts/aroma_i18n.py"
-      - "scripts/normalize_aroma_english.py"
-      - "scripts/aroma_mt_backfill.py"
-      - ".github/workflows/aroma-english.yml"
   pull_request:
     branches: [main]
-    paths:
-      - "aroma_data/**"
-      - "scripts/check_aroma_english.py"
-      - "scripts/aroma_i18n.py"
-      - "scripts/normalize_aroma_english.py"
-      - "scripts/aroma_mt_backfill.py"
-      - ".github/workflows/aroma-english.yml"
+  workflow_dispatch:
 
 jobs:
   user-facing-english:
