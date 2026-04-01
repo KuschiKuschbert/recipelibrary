@@ -753,6 +753,9 @@
     var wrapId = 'aromaHintsWrap' + idSuffix;
     var wantOpen = !!opts.openByDefault;
     var detailsOpenAttr = wantOpen ? ' open' : '';
+    var summaryText = wantOpen
+      ? 'Seasoning ideas <span class="aroma-hint-summary-status" aria-live="polite">Loading tips…</span>'
+      : 'Seasoning ideas';
     return (
       '<div class="aroma-hint-block" id="' +
       wrapId +
@@ -762,7 +765,9 @@
       '<details class="aroma-hint-details"' +
       detailsOpenAttr +
       '>' +
-      '<summary class="aroma-hint-summary">Seasoning ideas <span class="aroma-hint-summary-status" aria-live="polite">Loading…</span></summary>' +
+      '<summary class="aroma-hint-summary">' +
+      summaryText +
+      '</summary>' +
       '<div data-aroma-hint-body="1">' +
       '<div class="aroma-hint-body-loading">' +
       '<div class="loader aroma-hint-loader" aria-hidden="true"></div>' +
@@ -979,4 +984,7 @@
     aromaPageHrefForSpice: aromaPageHrefForSpice,
     escHtml: escHtml,
   };
+
+  /* Start aroma index fetches as soon as this script runs so the first recipe modal is less often blocked on network (~200KB). */
+  ensureLoaded().catch(function () {});
 })(typeof window !== 'undefined' ? window : this);
