@@ -55,6 +55,53 @@
   .flavor-pair-chip { font-size: 12px; padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border); }
   .flavor-tier-hg { border-color: var(--gold); color: var(--gold-light); }
   .flavor-tier-vh { font-weight: 600; }
+  .flavor-badge-toolkit { border-color: rgba(0, 188, 212, 0.45); color: #7fd8e8; }
+  .flavor-fk-note { font-size: 13px; color: var(--text3); margin: 0 0 8px; }
+  .flavor-fk-harmony { border-color: rgba(255, 255, 255, 0.35); color: var(--text); }
+  .flavor-fk-contrast { border-color: rgba(0, 188, 212, 0.55); color: #5fd4e6; font-style: italic; }
+  .flavor-fk-aroma-line { font-size: 14px; color: var(--text2); margin: 0; line-height: 1.5; }
+  .flavor-toolkit-intro { margin-bottom: 24px; max-width: 720px; }
+  .flavor-toolkit-intro p { font-size: 14px; color: var(--text2); line-height: 1.55; margin: 0; }
+  .flavor-toolkit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; margin-bottom: 32px; }
+  @media (max-width: 900px) { .flavor-toolkit-grid { grid-template-columns: 1fr; } }
+  .flavor-toolkit-h2 { font-family: 'Playfair Display', serif; font-size: 20px; margin: 0 0 14px; color: var(--text); }
+  .flavor-toolkit-h2-sp { margin-top: 28px; }
+  .flavor-toolkit-card { border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 10px; background: var(--surface); }
+  .flavor-toolkit-summary { padding: 12px 14px; font-weight: 600; cursor: pointer; list-style: none; }
+  .flavor-toolkit-summary::-webkit-details-marker { display: none; }
+  .flavor-toolkit-card[open] .flavor-toolkit-summary { border-bottom: 1px solid var(--border); }
+  .flavor-toolkit-dx { padding: 0 14px; margin: 10px 0; font-size: 14px; color: var(--text2); }
+  .flavor-toolkit-fix { padding: 0 14px 10px; font-size: 14px; color: var(--text2); }
+  .flavor-toolkit-priority { font-size: 12px; color: var(--text3); font-weight: 400; }
+  .flavor-toolkit-options { margin-top: 4px; color: var(--text); }
+  .flavor-toolkit-rule { margin: 12px 14px 14px; padding-top: 10px; border-top: 1px solid var(--border); font-size: 13px; color: #e8c04a; }
+  .flavor-toolkit-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+  .flavor-toolkit-badge { font-size: 12px; padding: 8px 12px; border-radius: 100px; border: 1px solid var(--border); background: var(--bg2); color: var(--text2); }
+  .flavor-af-list { display: flex; flex-direction: column; gap: 12px; }
+  .flavor-af-row { display: flex; gap: 12px; align-items: flex-start; font-size: 13px; }
+  .flavor-af-swatch { width: 14px; height: 14px; border-radius: 4px; flex-shrink: 0; margin-top: 3px; border: 1px solid rgba(255,255,255,0.15); }
+  .flavor-af-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .flavor-af-name { font-weight: 600; color: var(--text); }
+  .flavor-af-desc { font-size: 12px; color: var(--text3); line-height: 1.45; }
+  .flavor-toolkit-wide { margin-bottom: 36px; }
+  .flavor-toolkit-cuisines { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+  .flavor-toolkit-cuisine { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); }
+  .flavor-toolkit-csummary { padding: 12px 14px; font-weight: 600; cursor: pointer; list-style: none; }
+  .flavor-toolkit-csummary::-webkit-details-marker { display: none; }
+  .flavor-toolkit-cbody { padding: 0 14px 14px; font-size: 13px; color: var(--text2); line-height: 1.5; }
+  .flavor-toolkit-cbody p { margin: 8px 0; }
+  .flavor-toolkit-trios { margin: 6px 0 0; padding-left: 18px; }
+  .flavor-toolkit-blends { display: flex; flex-direction: column; gap: 10px; }
+  .flavor-toolkit-blend { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); }
+  .flavor-toolkit-bsummary { padding: 12px 14px; cursor: pointer; list-style: none; }
+  .flavor-toolkit-bsummary::-webkit-details-marker { display: none; }
+  .flavor-toolkit-bcuisine { font-weight: 400; font-size: 13px; color: var(--text3); margin-left: 8px; }
+  .flavor-toolkit-bbody { padding: 0 14px 14px; }
+  .flavor-toolkit-blogic { font-size: 14px; color: var(--text2); margin: 12px 0; line-height: 1.5; }
+  .flavor-blend-row { display: grid; grid-template-columns: minmax(100px, 1fr) 2fr auto; gap: 10px; align-items: center; margin-bottom: 6px; font-size: 12px; }
+  .flavor-blend-track { height: 8px; background: var(--bg2); border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
+  .flavor-blend-fill { display: block; height: 100%; background: linear-gradient(90deg, var(--gold-dim), var(--gold)); border-radius: 3px; min-width: 2px; }
+  .flavor-blend-val { color: var(--text3); font-variant-numeric: tabular-nums; min-width: 2ch; text-align: right; }
   .flavor-aff-list { margin: 0; padding-left: 18px; color: var(--text2); font-size: 14px; line-height: 1.5; }
   .flavor-link { color: var(--gold); }
   .flavor-empty { color: var(--text3); font-size: 14px; }
@@ -78,7 +125,7 @@
 <div class="hero">
   <div class="hero-label">Kuschi · Flavor intelligence</div>
   <h1 class="hero-title">Flavor explorer</h1>
-  <p class="hero-sub">Merged <strong>Flavor Bible</strong>, <strong>Vegetarian Flavor Bible</strong>, <strong>Aroma Bible</strong>, and <strong>Flavor Thesaurus</strong> extracts. For personal use; book content is copyrighted.</p>
+  <p class="hero-sub">Merged <strong>Flavor Bible</strong>, <strong>Vegetarian Flavor Bible</strong>, <strong>Aroma Bible</strong>, and <strong>Flavor Thesaurus</strong> extracts — plus the <strong>Flavour Knowledge toolkit</strong> (fix-the-dish, cuisines, blends, matrix hints). For personal use; book content is copyrighted.</p>
 </div>
 
 <div class="flavor-page">
@@ -86,6 +133,7 @@
     <button type="button" role="tab" data-flavor-tab="explore" aria-selected="true">Explore</button>
     <button type="button" role="tab" data-flavor-tab="wheel" aria-selected="false">Thesaurus wheel</button>
     <button type="button" role="tab" data-flavor-tab="science" aria-selected="false">Science snippets</button>
+    <button type="button" role="tab" data-flavor-tab="toolkit" aria-selected="false">Kitchen toolkit</button>
     <a href="pantry.html" class="hero-nav-link" style="margin-left:auto;align-self:center;text-decoration:none;">Pantry → recipes</a>
   </div>
 
@@ -107,6 +155,10 @@
 
   <section class="flavor-tab-panel" data-panel="science" hidden>
     <div id="flavorScienceHost"></div>
+  </section>
+
+  <section class="flavor-tab-panel" data-panel="toolkit" hidden>
+    <div id="flavorToolkitHost"><p class="flavor-empty">Open this tab to load the toolkit…</p></div>
   </section>
 
   <div class="footer">
