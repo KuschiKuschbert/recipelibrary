@@ -30,8 +30,8 @@
       if (w.KuschiAromaHints) w.KuschiAromaHints.hydrateModal(modalEl, recipe);
     },
     /**
-     * Defer aroma matching until the browser is idle so the user can scroll, close,
-     * and use inputs immediately after the modal paints. Falls back to setTimeout(0).
+     * Run after the next paint (macrotask + 2× rAF). Avoids requestIdleCallback with a long
+     * timeout — under load, idle could defer hydration ~2.5s and feel like a frozen modal.
      * @param {() => boolean} [isStillOpen] Return false if user closed modal or switched recipe.
      */
     scheduleHydrateModalAroma: function (modalEl, recipe, isStillOpen) {
@@ -42,12 +42,12 @@
         w.KuschiAromaHints.hydrateModal(modalEl, recipe);
       };
       w.setTimeout(function () {
-        if (typeof w.requestIdleCallback === 'function') {
-          w.requestIdleCallback(go, { timeout: 2500 });
-        } else {
+        if (typeof w.requestAnimationFrame === 'function') {
           w.requestAnimationFrame(function () {
             w.requestAnimationFrame(go);
           });
+        } else {
+          w.setTimeout(go, 0);
         }
       }, 0);
     },

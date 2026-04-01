@@ -1391,7 +1391,7 @@ function kitchenModalShellTop(r) {
   return html;
 }
 
-function renderKitchenModalHeavy(r) {
+function renderKitchenModalIngredientsBlock(r) {
   let html = '';
   const ings = toArr(r.ingredients).filter(i => i && i.item);
   if (ings.length) {
@@ -1405,24 +1405,35 @@ function renderKitchenModalHeavy(r) {
     }
     html += `</div>`;
   }
+  return html;
+}
 
+function renderKitchenModalMethodBlock(r) {
   const steps = toArr(r.instructions);
-  if (steps.length) {
-    html += `<div class="modal-section">Method</div>`;
-    html += `<ol class="modal-steps">`;
-    for (const step of steps) {
-      html += `<li>${KuschiRecipeUi.esc(step)}</li>`;
-    }
-    html += `</ol>`;
+  if (!steps.length) return '';
+  let html = `<div class="modal-section">Method</div><ol class="modal-steps">`;
+  for (const step of steps) {
+    html += `<li>${KuschiRecipeUi.esc(step)}</li>`;
   }
+  html += `</ol>`;
+  return html;
+}
 
-  html += KuschiRecipeUi.aromaSeasoningSectionHtml({ idSuffix: 'Idx', openByDefault: false });
-
+function renderKitchenModalAromaAndCopyBlock(r) {
+  let html = KuschiRecipeUi.aromaSeasoningSectionHtml({ idSuffix: 'Idx', openByDefault: false });
   html += `<div class="modal-copy-bar">`;
   html += `<button class="modal-copy-btn" onclick="copyRecipeText('${KuschiRecipeUi.esc(r.id)}')">Copy as text</button>`;
   html += `<button class="modal-copy-btn" onclick="copyRecipeName(this, '${KuschiRecipeUi.esc(r.name).replace(/'/g,"\\'")}')">Copy name</button>`;
   html += `</div>`;
   return html;
+}
+
+function renderKitchenModalHeavy(r) {
+  return (
+    renderKitchenModalIngredientsBlock(r) +
+    renderKitchenModalMethodBlock(r) +
+    renderKitchenModalAromaAndCopyBlock(r)
+  );
 }
 
 function renderKitchenModalShell(r) {
@@ -1439,16 +1450,31 @@ function scheduleKitchenModalHeavyFill(modal, r, recipeId) {
     const mo = document.getElementById('modalOverlay');
     return !!(mo && mo.classList.contains('open') && currentRecipe && currentRecipe.id === recipeId);
   }
+  function heavyEl() {
+    return modal.querySelector('#kitchenModalHeavy');
+  }
   requestAnimationFrame(function () {
-    requestAnimationFrame(function () {
-      setTimeout(function () {
+    if (!guard()) return;
+    const heavy = heavyEl();
+    if (!heavy) return;
+    const ingHtml = renderKitchenModalIngredientsBlock(r);
+    heavy.innerHTML = ingHtml || '<p class="kitchen-modal-heavy-loading" style="font-size:13px;color:var(--text3);margin:8px 0 0">No ingredients listed.</p>';
+    heavy.removeAttribute('aria-busy');
+    const scaleInp = document.getElementById('modalScaleInput');
+    if (scaleInp) rescaleModal(scaleInp.value);
+
+    setTimeout(function chunkMethod() {
+      if (!guard()) return;
+      const h2 = heavyEl();
+      if (!h2) return;
+      const methodHtml = renderKitchenModalMethodBlock(r);
+      if (methodHtml) h2.insertAdjacentHTML('beforeend', methodHtml);
+
+      setTimeout(function chunkAromaCopy() {
         if (!guard()) return;
-        const heavy = modal.querySelector('#kitchenModalHeavy');
-        if (!heavy) return;
-        heavy.innerHTML = renderKitchenModalHeavy(r);
-        heavy.removeAttribute('aria-busy');
-        const scaleInp = document.getElementById('modalScaleInput');
-        if (scaleInp) rescaleModal(scaleInp.value);
+        const h3 = heavyEl();
+        if (!h3) return;
+        h3.insertAdjacentHTML('beforeend', renderKitchenModalAromaAndCopyBlock(r));
         setTimeout(function () {
           if (window.KuschiScreenWake) KuschiScreenWake.sync();
         }, 0);
@@ -1456,7 +1482,7 @@ function scheduleKitchenModalHeavyFill(modal, r, recipeId) {
           return !!(currentRecipe && currentRecipe.id === recipeId);
         });
       }, 0);
-    });
+    }, 0);
   });
 }
 

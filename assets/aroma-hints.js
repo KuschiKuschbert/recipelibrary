@@ -20,6 +20,10 @@
       }
     }
     global.setTimeout(function () {
+      if (ingredients && foodPairings) {
+        global.setTimeout(run, 0);
+        return;
+      }
       var sch = global.scheduler;
       if (sch && typeof sch.yield === 'function') {
         sch.yield().then(run).catch(run);
