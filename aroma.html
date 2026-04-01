@@ -331,6 +331,106 @@
   .aroma-pair-col p { font-size: 13px; color: var(--text2); line-height: 1.45; margin: 0; }
   .aroma-pair-actions { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
   .aroma-empty { color: var(--text3); font-size: 14px; margin-top: 12px; }
+  .aroma-quick-pass {
+    max-width: 720px;
+    margin: 0 auto 20px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    overflow: hidden;
+  }
+  .aroma-quick-pass-summary {
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text2);
+    cursor: pointer;
+    list-style: none;
+  }
+  .aroma-quick-pass-summary::-webkit-details-marker { display: none; }
+  .aroma-quick-pass[open] .aroma-quick-pass-summary {
+    border-bottom: 1px solid var(--border);
+    color: var(--gold-light);
+  }
+  .aroma-quick-pass-body { padding: 12px 16px 16px; }
+  .aroma-quick-pass-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .aroma-quick-pass-badge {
+    font-size: 11px;
+    padding: 6px 10px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    line-height: 1.35;
+  }
+  .aroma-quick-pass-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
+    background: var(--bg2);
+  }
+  .aroma-quick-pass-csum {
+    padding: 10px 12px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    list-style: none;
+  }
+  .aroma-quick-pass-csum::-webkit-details-marker { display: none; }
+  .aroma-quick-pass-rule {
+    margin: 0 12px 10px;
+    font-size: 12px;
+    color: #e8c04a;
+    line-height: 1.4;
+  }
+  .aroma-quick-pass-more {
+    margin-top: 12px;
+    font-size: 13px;
+  }
+  .aroma-quick-pass-more a { color: var(--gold); }
+  .aroma-mode-btn { max-width: 100%; text-align: center; }
+  .aroma-ftk-block {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .aroma-ftk-block h3 { margin-top: 0; }
+  .aroma-ftk-lead {
+    font-size: 13px;
+    color: var(--text3);
+    margin: 0 0 10px;
+    line-height: 1.45;
+  }
+  .aroma-ftk-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .aroma-ftk-chip {
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    color: var(--text2);
+  }
+  .aroma-ftk-chip--harm { border-color: rgba(255,255,255,0.28); color: var(--text); }
+  .aroma-ftk-chip--contrast {
+    border-color: rgba(0, 188, 212, 0.45);
+    color: #7fd8e8;
+    font-style: italic;
+  }
+  .aroma-ftk-links { font-size: 13px; margin-top: 8px; }
+  .aroma-ftk-links a { color: var(--gold); margin-right: 12px; }
+  .hero-sub-tools {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--text3);
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+  }
+  .hero-sub-tools a { color: var(--gold); }
 </style>
 </head>
 <body>
@@ -339,6 +439,7 @@
   <div class="hero-label">Kuschi · Aroma Bible</div>
   <h1 class="hero-title">Aroma <em>lookup</em></h1>
   <p class="hero-sub">Food-to-spice pairings and harmony matrix from the book extract (English UI). <b>For inspiration only.</b></p>
+  <p class="hero-sub-tools">Also: <a href="flavor.html">Flavor explorer</a> (pairing tiers) · <a href="flavor.html?toolkit=1">Flavor toolkit</a> (fix flat dishes, cuisine DNA, blends) · <a href="pairing-atlas.html">Matrix</a> (full grid).</p>
   <div class="hero-nav">
     <div class="hero-nav-cluster">
       <a href="kitchen-book.html" class="hero-nav-link">Kitchen book</a>
@@ -352,31 +453,39 @@
   <div class="search-glass">
     <div class="search-inner">
       <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="search" class="search-input" id="aromaSearch" placeholder="Food, spice, or matrix (e.g. lamb, cumin)…" autocomplete="off" spellcheck="false" />
+      <input type="search" class="search-input" id="aromaSearch" placeholder="Try a food or spice — lamb, cumin, lemongrass…" autocomplete="off" spellcheck="false" aria-label="Search foods and spices" />
     </div>
   </div>
 </div>
 
 <div class="aroma-page">
+  <details class="aroma-quick-pass" id="aromaQuickPass">
+    <summary class="aroma-quick-pass-summary">Quick fixes at the pass · balance reminders</summary>
+    <div class="aroma-quick-pass-body" id="aromaQuickPassBody">
+      <p class="aroma-empty" style="margin:0">Open once to load a short cheat sheet (small download).</p>
+    </div>
+  </details>
+
   <div class="aroma-modes" role="tablist" aria-label="Lookup mode">
-    <button type="button" class="aroma-mode-btn" role="tab" id="tabFood" aria-pressed="true" aria-selected="true" data-mode="food">What goes with this food?</button>
-    <button type="button" class="aroma-mode-btn" role="tab" id="tabSpice" aria-pressed="false" data-mode="spice">Spice profile</button>
-    <button type="button" class="aroma-mode-btn" role="tab" id="tabBrowse" aria-pressed="false" data-mode="browse">Browse all</button>
-    <button type="button" class="aroma-mode-btn" role="tab" id="tabMatrix" aria-pressed="false" data-mode="matrix">Pairing matrix</button>
+    <button type="button" class="aroma-mode-btn" role="tab" id="tabFood" aria-pressed="true" aria-selected="true" data-mode="food" title="Find herbs and spices that pair with an ingredient or dish name" aria-label="Food lookup: what goes with this food?">Food → seasonings</button>
+    <button type="button" class="aroma-mode-btn" role="tab" id="tabSpice" aria-pressed="false" data-mode="spice" title="Harmony partners, foods, aroma groups, and Flavour toolkit layering when available" aria-label="Spice profile">Spice profile</button>
+    <button type="button" class="aroma-mode-btn" role="tab" id="tabBrowse" aria-pressed="false" data-mode="browse" title="All spices in the extract, filter by aroma group G1–G8" aria-label="Browse all spices">Browse all</button>
+    <button type="button" class="aroma-mode-btn" role="tab" id="tabMatrix" aria-pressed="false" data-mode="matrix" title="Spice–spice harmony grid from the book extract" aria-label="Pairing matrix">Pairing matrix</button>
   </div>
 
   <section class="aroma-panel active" id="panelFood" role="tabpanel">
-    <p class="aroma-empty aroma-panel-lead">Type a food (e.g. lentils, <strong>lamb</strong>, rice). English and German names are matched (e.g. lamb ↔ Lamm). From the matrix or browse tab, typing here still jumps to food results when there is a match.</p>
+    <p class="aroma-empty aroma-panel-lead"><strong>Start here:</strong> type a food (lentils, <strong>lamb</strong>, rice…). English and German names both match (e.g. lamb ↔ Lamm). On <strong>Browse</strong> or <strong>Matrix</strong>, the same search still jumps you back to food hits when it finds a match. No hit? Try <a href="flavor.html">Flavor explorer</a> or the <a href="flavor.html?toolkit=1">toolkit</a>.</p>
     <div class="aroma-results" id="foodResults"></div>
   </section>
 
   <section class="aroma-panel" id="panelSpice" role="tabpanel" hidden>
-    <p class="aroma-empty aroma-panel-lead">Search or tap a spice for harmony partners, foods, and aroma groups. Where the extract includes it, <strong>heat timing (A → B → C)</strong> orders notes from the book for <em>early → middle → later</em> as cooking continues—orientation only, not minutes, degrees, or a rule for every dish.</p>
+    <p class="aroma-empty aroma-panel-lead">Pick a spice from search results or <strong>Browse</strong>. You get harmony partners, foods, G1–G8 badges, and—when the id lines up—extra <strong>harmony / contrast</strong> hints from the Flavour toolkit. <strong>A → B → C</strong> heat timing is book order (early → middle → later), not minutes or temperatures.</p>
     <div class="aroma-results" id="spiceResults"></div>
     <div id="spiceProfile"></div>
   </section>
 
   <section class="aroma-panel" id="panelBrowse" role="tabpanel" hidden>
+    <p class="aroma-empty aroma-panel-lead">Tap a spice for the full profile. Same data as <strong>Spice profile</strong> search—handy when you want to skim by G1–G8.</p>
     <div class="aroma-matrix-toolbar">
       <label>Filter by aroma group <select id="browseGroupFilter"><option value="">All groups</option></select></label>
     </div>
@@ -384,6 +493,7 @@
   </section>
 
   <section class="aroma-panel" id="panelMatrix" role="tabpanel" hidden>
+    <p class="aroma-empty aroma-panel-lead">Interactive spice–spice harmony grid. For per-spice <strong>Flavor Bible</strong> tiers and toolkit layering, open a row in <a href="pairing-atlas.html">Pairing matrix</a> (drawer) or <a href="flavor.html">Flavor explorer</a>.</p>
     <div class="aroma-matrix-toolbar">
       <label>Subset <select id="matrixSubset"><option value="24">Top 24</option><option value="48" selected>Top 48</option><option value="all">Full set</option></select></label>
       <label>Aroma group <select id="matrixAromaGroupFilter"><option value="">All groups</option></select></label>
@@ -433,6 +543,9 @@
   var foodPairings = [];
   var matrix = {};
   var byId = {};
+  /** Slim Flavour Knowledge hints (lazy); enriches spice profile when loaded */
+  var flavourHintsMap = null;
+  var lastSpiceProfileId = null;
   var searchEl = document.getElementById('aromaSearch');
   var panels = {
     food: document.getElementById('panelFood'),
@@ -448,6 +561,96 @@
 
   function esc(s) {
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function buildQuickPassHtml(data) {
+    if (!data || typeof data !== 'object') return '<p class="aroma-empty">Nothing to show.</p>';
+    var br = data.balance_rules;
+    var fix = data.fix_the_dish;
+    var parts = [];
+    if (br && typeof br === 'object') {
+      parts.push('<div class="aroma-quick-pass-badges">');
+      Object.keys(br).sort().forEach(function (k) {
+        parts.push('<span class="aroma-quick-pass-badge">' + esc(k) + ': ' + esc(br[k]) + '</span>');
+      });
+      parts.push('</div>');
+    }
+    if (fix && fix.length) {
+      for (var qi = 0; qi < fix.length; qi++) {
+        var card = fix[qi];
+        if (!card) continue;
+        parts.push(
+          '<details class="aroma-quick-pass-card"><summary class="aroma-quick-pass-csum">' +
+            esc(card.problem || '') +
+            '</summary><p class="aroma-quick-pass-rule">' +
+            esc(card.rule || '') +
+            '</p></details>'
+        );
+      }
+    }
+    parts.push(
+      '<p class="aroma-quick-pass-more"><a href="flavor.html?toolkit=1">Open full Flavour toolkit →</a></p>'
+    );
+    return parts.join('');
+  }
+
+  function flavourToolkitSectionHtml(ing) {
+    if (!ing || !flavourHintsMap) return '';
+    var L = window.KuschiFlavourToolkitLookup;
+    var hint =
+      L && typeof L.lookupHint === 'function' ? L.lookupHint(flavourHintsMap, ing.id) : null;
+    if (!hint) {
+      var kk = String(ing.id || '')
+        .replace(/-/g, '_')
+        .replace(/_+/g, '_');
+      hint = flavourHintsMap[kk] || flavourHintsMap[ing.id] || null;
+    }
+    if (!hint) return '';
+    var bits = [];
+    bits.push('<div class="aroma-ftk-block">');
+    bits.push('<h3>Flavour toolkit layering</h3>');
+    bits.push(
+      '<p class="aroma-ftk-lead">Harmony and contrast from the same dataset as the site toolkit—use alongside the sections above.</p>'
+    );
+    if (hint.primary_family) {
+      bits.push(
+        '<p class="aroma-ftk-lead"><strong>Primary aroma family:</strong> ' +
+          esc(String(hint.primary_family).replace(/_/g, ' ')) +
+          '</p>'
+      );
+    }
+    function chipRow(arr, cls) {
+      if (!arr || !arr.length) return '';
+      var cap = 10;
+      return (
+        '<div class="aroma-ftk-chips">' +
+        arr
+          .slice(0, cap)
+          .map(function (x) {
+            return '<span class="aroma-ftk-chip' + (cls ? ' ' + cls : '') + '">' + esc(String(x)) + '</span>';
+          })
+          .join('') +
+        '</div>'
+      );
+    }
+    if (hint.harmony && hint.harmony.length) {
+      bits.push('<p class="aroma-ftk-lead" style="margin-bottom:6px"><strong>Harmony</strong></p>');
+      bits.push(chipRow(hint.harmony, 'aroma-ftk-chip--harm'));
+    }
+    if (hint.contrast && hint.contrast.length) {
+      bits.push('<p class="aroma-ftk-lead" style="margin-bottom:6px"><strong>Contrast</strong></p>');
+      bits.push(chipRow(hint.contrast, 'aroma-ftk-chip--contrast'));
+    }
+    if (hint.spice_harmony_partners && hint.spice_harmony_partners.length) {
+      bits.push('<p class="aroma-ftk-lead" style="margin-bottom:6px"><strong>Spice harmony partners</strong></p>');
+      bits.push(chipRow(hint.spice_harmony_partners, ''));
+    }
+    var q = encodeURIComponent(ing.name || ing.id);
+    bits.push(
+      '<div class="aroma-ftk-links"><a href="flavor.html?q=' + q + '">Flavor explorer</a><a href="pairing-atlas.html">Pairing matrix</a></div>'
+    );
+    bits.push('</div>');
+    return bits.join('');
   }
 
   function groupBadges(groups) {
@@ -548,7 +751,12 @@
 
   function renderSpiceProfile(ing) {
     var el = document.getElementById('spiceProfile');
-    if (!ing) { el.innerHTML = ''; return; }
+    if (!ing) {
+      el.innerHTML = '';
+      lastSpiceProfileId = null;
+      return;
+    }
+    lastSpiceProfileId = ing.id;
     var harm = (ing.harmonizes_with || []).map(function (h) {
       var id = typeof h === 'string' ? h : h.id;
       var nm = typeof h === 'string' ? h : (h.name || id);
@@ -574,6 +782,7 @@
       '<h3>Pairs well with foods</h3><div class="aroma-chip-row">' + (foods || '<span class="aroma-empty">—</span>') + '</div>' +
       (cuisines ? '<h3>Regional use</h3><ul class="modal-steps">' + cuisines + '</ul>' : '') +
       (blends ? '<h3>Spice blends</h3><ul class="modal-steps">' + blends + '</ul>' : '') +
+      flavourToolkitSectionHtml(ing) +
       '</div>';
     el.querySelectorAll('[data-spice-id]').forEach(function (chip) {
       chip.addEventListener('click', function () {
@@ -680,7 +889,7 @@
     }
     if (!html) {
       html =
-        '<p class="aroma-empty">No foods match. Try another word (e.g. <em>lamb</em>, <em>cumin</em>) or switch to <strong>Spice profile</strong>.</p>';
+        '<p class="aroma-empty">No foods match. Try <em>lamb</em>, <em>cumin</em>, or switch to <strong>Spice profile</strong>. For book-style pairing tiers, open <a href="flavor.html">Flavor explorer</a> or <a href="flavor.html?toolkit=1">Flavor toolkit</a>.</p>';
     }
     var el = document.getElementById('foodResults');
     el.innerHTML = html;
@@ -1317,6 +1526,37 @@
   document.getElementById('matrixDensity').addEventListener('change', renderMatrix);
   document.getElementById('matrixNeighborsOnly').addEventListener('change', renderMatrix);
 
+  (function wireAromaQuickPass() {
+    var det = document.getElementById('aromaQuickPass');
+    var body = document.getElementById('aromaQuickPassBody');
+    if (!det || !body) return;
+    det.addEventListener('toggle', function () {
+      if (!det.open) return;
+      var st = det.getAttribute('data-aroma-pass');
+      if (st === '1' || st === 'loading') return;
+      det.setAttribute('data-aroma-pass', 'loading');
+      body.innerHTML = '<p class="aroma-empty" style="margin:0">Loading…</p>';
+      fetch('flavour_data/toolkit_pass_static.json')
+        .then(function (r) {
+          return r.ok ? r.json() : null;
+        })
+        .then(function (data) {
+          det.setAttribute('data-aroma-pass', '1');
+          if (!data) {
+            body.innerHTML =
+              '<p class="aroma-empty">Could not load. Try <a href="flavor.html?toolkit=1">Flavor toolkit</a>.</p>';
+            return;
+          }
+          body.innerHTML = buildQuickPassHtml(data);
+        })
+        .catch(function () {
+          det.setAttribute('data-aroma-pass', 'err');
+          body.innerHTML =
+            '<p class="aroma-empty">Network error. <a href="flavor.html?toolkit=1">Open toolkit</a>.</p>';
+        });
+    });
+  })();
+
   /* Profiles use English-facing JSON fields only (_de is provenance; never render it). */
   Promise.all([
     fetch('aroma_data/ingredients.json').then(function (r) { return r.json(); }),
@@ -1327,6 +1567,21 @@
     foodPairings = all[1];
     matrix = all[2];
     ingredients.forEach(function (ing) { byId[ing.id] = ing; });
+
+    fetch('flavour_data/flavour_hints_by_id.json')
+      .then(function (r) {
+        return r.ok ? r.json() : {};
+      })
+      .then(function (obj) {
+        flavourHintsMap = obj && typeof obj === 'object' && !Array.isArray(obj) ? obj : null;
+        if (lastSpiceProfileId && byId[lastSpiceProfileId]) {
+          renderSpiceProfile(byId[lastSpiceProfileId]);
+        }
+      })
+      .catch(function () {
+        flavourHintsMap = null;
+      });
+
     fillBrowseFilter();
     renderBrowse();
     var allOpt = document.querySelector('#matrixSubset option[value="all"]');
