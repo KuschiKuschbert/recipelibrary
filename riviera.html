@@ -1522,7 +1522,7 @@ function openRecipe(id) {
                   : '<button type="button" class="btn-secondary" onclick="rivieraRemoveCurrentUserRecipe()">Remove recipe</button>'
               }</div>`
             : '';
-          const aromaHintHtml = KuschiRecipeUi.aromaSeasoningSectionHtml({ idSuffix: 'Rv', modalPopover: true });
+          const aromaHintHtml = KuschiRecipeUi.aromaSeasoningSectionHtml({ idSuffix: 'Rv', modalInline: true });
 
           function guard() {
             return (
@@ -1552,27 +1552,23 @@ function openRecipe(id) {
 
           setTimeout(function chunk2() {
             if (!guard()) return;
+            heavy.insertAdjacentHTML(
+              'beforeend',
+              `<div class="modal-section">Prep Method</div><ol class="modal-steps">${steps}</ol><div class="modal-section">On the Day — Service</div><ol class="modal-steps">${service}</ol>`
+            );
             heavy.insertAdjacentHTML('beforeend', aromaHintHtml);
 
             setTimeout(function chunk3() {
               if (!guard()) return;
-              heavy.insertAdjacentHTML(
-                'beforeend',
-                `<div class="modal-section">Prep Method</div><ol class="modal-steps">${steps}</ol><div class="modal-section">On the Day — Service</div><ol class="modal-steps">${service}</ol>`
-              );
-
-              setTimeout(function chunk4() {
-                if (!guard()) return;
-                heavy.insertAdjacentHTML('beforeend', `${note}${label}${adminActions}`);
-                scaleInp = document.getElementById('scaleInput');
-                if (scaleInp) rescale(scaleInp.value, { skipIfIdentity: true });
-                setTimeout(function () {
-                  if (window.KuschiScreenWake) KuschiScreenWake.sync();
-                }, 0);
-                KuschiRecipeUi.scheduleHydrateModalAroma(modal, r, function () {
-                  return currentRecipe && currentRecipe.id === r.id;
-                });
+              heavy.insertAdjacentHTML('beforeend', `${note}${label}${adminActions}`);
+              scaleInp = document.getElementById('scaleInput');
+              if (scaleInp) rescale(scaleInp.value, { skipIfIdentity: true });
+              setTimeout(function () {
+                if (window.KuschiScreenWake) KuschiScreenWake.sync();
               }, 0);
+              KuschiRecipeUi.scheduleHydrateModalAroma(modal, r, function () {
+                return currentRecipe && currentRecipe.id === r.id;
+              });
             }, 0);
           }, 0);
         }, 0);

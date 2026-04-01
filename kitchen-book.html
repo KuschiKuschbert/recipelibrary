@@ -1020,7 +1020,7 @@ function renderBookRecipeDetail(r) {
   if (isKitchenBookAdminUnlocked()) {
     html += `<div style="margin:16px 0"><button type="button" class="btn-secondary" onclick="removeCurrentBookRecipe()">Remove from this book</button></div>`;
   }
-  html += KuschiRecipeUi.aromaSeasoningSectionHtml({ idSuffix: 'Kb', modalPopover: true });
+  html += KuschiRecipeUi.aromaSeasoningSectionHtml({ idSuffix: 'Kb', modalInline: true });
   html += `<div class="modal-copy-bar">`;
   html += `<button class="modal-copy-btn" onclick="copyBookRecipeText('${KuschiRecipeUi.esc(r.id)}')">Copy as text</button>`;
   html += `<button class="modal-copy-btn" onclick="copyRecipeNameBtn(this, '${KuschiRecipeUi.esc(r.name).replace(/'/g,"\\'")}')">Copy name</button>`;

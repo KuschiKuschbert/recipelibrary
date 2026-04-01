@@ -604,6 +604,11 @@ body {
   border-top: 1px solid var(--border);
 }
 
+.kuschi-modal-seasoning + .modal-copy-bar {
+  margin-top: 14px;
+  padding-top: 14px;
+}
+
 .modal-copy-btn {
   flex: 1;
   padding: 10px;
@@ -1161,80 +1166,133 @@ body {
   padding-top: 12px;
   border-top: 1px solid var(--border);
 }
-.aroma-hint-block--popover {
-  position: relative;
-  margin: 14px 0 10px;
-  padding-top: 10px;
+/* In-flow seasoning block inside recipe modals (no overlay). */
+.kuschi-modal-seasoning {
+  margin: 18px 0 14px;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--border);
+  contain: layout style;
 }
-.aroma-hint-popover-row {
-  margin: 0;
-  font-size: 13px;
-  color: var(--text3);
-  line-height: 1.5;
+.kuschi-modal-seasoning-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
 }
-.aroma-hint-popover-btn {
-  display: inline;
-  margin: 0;
-  padding: 0;
-  border: none;
-  background: none;
-  font: inherit;
-  font-size: 13px;
+.kuschi-modal-seasoning-title {
+  font-size: 14px;
   font-weight: 600;
   color: var(--gold);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
-  text-align: left;
+  letter-spacing: 0.01em;
 }
-.aroma-hint-popover-btn:hover {
-  color: var(--text);
-}
-.aroma-hint-popover-hint {
-  font-weight: 400;
+.kuschi-modal-seasoning-status {
+  font-size: 12px;
+  font-weight: 500;
   color: var(--text3);
+  transition: color 0.35s ease, opacity 0.35s ease;
 }
-.aroma-hint-popover-placeholder {
-  margin: 0;
-  padding: 12px 14px;
+.kuschi-modal-seasoning--ready .kuschi-modal-seasoning-status {
+  color: var(--text2);
 }
-/* Position (fixed) and size are set in JS so the panel is not clipped by .modal overflow. */
-.aroma-hint-popover-panel {
-  overflow-y: auto;
-  overflow-x: hidden;
+.kuschi-modal-seasoning-body {
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   background: var(--surface);
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.38);
+  overflow: hidden;
 }
-.aroma-hint-popover-head {
+[data-aroma-hint-body]:has(.kuschi-seasoning-loading) {
+  min-height: 128px;
+}
+.kuschi-seasoning-loading {
+  padding: 14px 14px 16px;
+}
+.kuschi-seasoning-loading-row {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 10px 6px 8px 14px;
-  border-bottom: 1px solid var(--border);
+  align-items: flex-start;
+  gap: 14px;
+}
+.kuschi-seasoning-loading-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  padding-top: 2px;
+}
+.kuschi-seasoning-loading-title {
+  display: block;
   font-size: 13px;
   font-weight: 600;
-  color: var(--gold);
-}
-.aroma-hint-popover-close {
-  flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  margin: 0;
-  padding: 0;
-  border: none;
-  border-radius: var(--radius-sm);
-  background: transparent;
-  color: var(--text2);
-  font-size: 22px;
-  line-height: 1;
-  cursor: pointer;
-}
-.aroma-hint-popover-close:hover {
-  background: var(--surface-hover);
   color: var(--text);
+  line-height: 1.35;
+}
+.kuschi-seasoning-loading-hint {
+  display: block;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.45;
+}
+.kuschi-seasoning-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 4px;
+}
+.kuschi-seasoning-skel {
+  display: block;
+  height: 10px;
+  border-radius: 5px;
+  background: linear-gradient(
+    90deg,
+    var(--bg2) 0%,
+    var(--surface-hover) 42%,
+    var(--bg2) 84%
+  );
+  background-size: 220% 100%;
+  animation: kuschiSeasoningShimmer 1.15s ease-in-out infinite;
+}
+.kuschi-seasoning-skel--a {
+  width: 72%;
+}
+.kuschi-seasoning-skel--b {
+  width: 48%;
+}
+.kuschi-seasoning-skel--c {
+  width: 56%;
+}
+@keyframes kuschiSeasoningShimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+.kuschi-modal-seasoning-content--entering {
+  animation: kuschiModalSeasoningIn 0.48s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes kuschiModalSeasoningIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kuschi-seasoning-skel {
+    animation: none;
+    background: var(--bg2);
+  }
+  .kuschi-modal-seasoning-content--entering {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 .aroma-hint-details {
   border-radius: var(--radius-sm);
