@@ -818,57 +818,6 @@
     return finalizeSuggestionResult(lines, scores, matchedSpiceIds, apparentSet);
   }
 
-  function heatTimingLineForSpice(id) {
-    var ing = byId[id];
-    if (!ing || !ing.heat_behavior) return '';
-    var a = ing.heat_behavior.a;
-    if (!a || typeof a !== 'string') return '';
-    a = a.replace(/\s+/g, ' ').trim();
-    if (a.length > 140) a = a.slice(0, 137) + '…';
-    return a;
-  }
-
-  function enhancementBlockHtml(data) {
-    var parts = [];
-    var apps = data.apparentProfiles || [];
-    if (apps.length) {
-      var names = apps
-        .slice(0, 5)
-        .map(function (p) {
-          return (
-            '<a class="aroma-hint-inline-spice" href="' +
-            aromaPageHrefForSpice(p.id) +
-            '">' +
-            escHtml(p.name) +
-            '</a>'
-          );
-        })
-        .join(', ');
-      parts.push(
-        '<p class="aroma-hint-profiles"><strong>In your list already:</strong> ' +
-          names +
-          (apps.length > 5 ? ' …' : '') +
-          '. <span class="aroma-hint-profiles-sub">Ideas below pair with these.</span></p>'
-      );
-    }
-    var top = data.suggestions && data.suggestions[0];
-    if (top) {
-      var heat = heatTimingLineForSpice(top.id);
-      if (heat) {
-        parts.push(
-          '<p class="aroma-hint-timing"><strong>When cooking</strong> (' +
-            escHtml(top.name) +
-            '): <span>' +
-            escHtml(heat) +
-            '</span> — <a href="' +
-            aromaPageHrefForSpice(top.id) +
-            '">full profile</a></p>'
-        );
-      }
-    }
-    return parts.length ? '<div class="aroma-hint-enhance">' + parts.join('') + '</div>' : '';
-  }
-
   function groupBadgesHtml(groups) {
     if (!groups || !groups.length) return '';
     var parts = [];
@@ -952,7 +901,8 @@
             var bodyEl2 = wrapEl.querySelector('[data-aroma-hint-body]');
             var summaryEl2 = detailsEl2 ? detailsEl2.querySelector('.aroma-hint-summary') : null;
             var limit = compactTopN(wrapEl);
-            var top = data.suggestions.slice(0, limit);
+            var displayN = Math.min(limit, 6);
+            var top = data.suggestions.slice(0, displayN);
             if (!bodyEl2 || !detailsEl2) {
               return;
             }
@@ -969,14 +919,7 @@
                 syncAromaDetailsOpen(wrapEl, detailsEl2);
                 return;
               }
-              var names = top
-                .slice(0, 8)
-                .map(function (s) {
-                  return s.name;
-                })
-                .join(', ');
               var chips = top
-                .slice(0, limit)
                 .map(function (s) {
                   return (
                     '<a class="aroma-hint-chip" href="' +
@@ -987,14 +930,8 @@
                   );
                 })
                 .join('');
-              var enhance = enhancementBlockHtml(data);
-              if (summaryEl2) {
-                summaryEl2.innerHTML =
-                  'Seasoning ideas <span class="aroma-hint-teaser">— Try: ' + escHtml(names) + '</span>';
-              }
+              if (summaryEl2) summaryEl2.textContent = 'Seasoning ideas';
               bodyEl2.innerHTML =
-                enhance +
-                '<p class="aroma-hint-intro">Based on your ingredients. Tap a spice for heat timing and pairings.</p>' +
                 '<div class="aroma-hint-chips">' +
                 chips +
                 '</div>' +
