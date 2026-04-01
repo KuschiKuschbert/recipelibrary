@@ -23,6 +23,7 @@ Personal recipe library hosted on **GitHub Pages**: searchable catalog, metric-o
 | `scripts/detect-nonenglish-recipes.py`, `translate_recipes.py`, `sync_claude_index_from_detail.py`, `repartition_detail_shards.py`, `repartition_detail_subshards.py` | Optional pipeline to translate catalog text and keep index/detail aligned; sub-shard repartition after index/name changes (see below) |
 | `scripts/check-recipe-shards.py` | Verify every `claude_index` id resolves in the expected `recipe_detail` shard |
 | `scripts/run_all_extractions.sh` | Regenerate `flavor_data/`, `thesaurus_data/`, `science_data/`, `sfah_data/`, `supplementary_data/`, `combined_data/` from EPUBs/PDFs in `~/Downloads` (see each `extract_*.py` for env overrides) |
+| `scripts/build_flavour_hints_modal.mjs` | After updating `flavour_data/flavour_knowledge_db_v1.1.json`, run `node scripts/build_flavour_hints_modal.mjs` to refresh `flavour_data/flavour_hints_by_id.json` (slim matrix hints for modals + pairing atlas). `toolkit_pass_static.json` is extractable the same way from the full DB if you add fields to `fix_the_dish` / `balance_rules`. |
 | `combined_data/ingredients_unified.json` | **Schema v2** object: `ingredients` (merged Flavor + Aroma + Thesaurus rows) + `kitchen_context` (bundled `cuisine_map`, SFAH acid/fat/four-elements, science temps/tastants/storage/nutrients, supplementary seven-dials / fermentation / intensity). Regenerate with `python3 scripts/merge_all_sources.py`. Legacy **array-only** files are still accepted by the site JS. |
 | `pdf/` | Category reference PDFs |
 

@@ -1,5 +1,5 @@
-const CACHE_NAME = 'kuschi-kitchen-v4';
-const CACHEABLE = /\/(recipe_detail\/detail_[A-Z](_\d+)?\.json|claude_index\/claude_index_\d+.*\.json|aroma_data\/[a-z_]+\.json|combined_data\/ingredients_unified_modal\.json|riviera_data\/[a-z_]+\.json|flavour_data\/flavour_knowledge_db_v1\.1\.json)$/;
+const CACHE_NAME = 'kuschi-kitchen-v5';
+const CACHEABLE = /\/(recipe_detail\/detail_[A-Z](_\d+)?\.json|claude_index\/claude_index_\d+.*\.json|aroma_data\/[a-z_]+\.json|combined_data\/ingredients_unified_modal\.json|riviera_data\/[a-z_]+\.json|flavour_data\/(flavour_knowledge_db_v1\.1\.json|toolkit_pass_static\.json|flavour_hints_by_id\.json))$/;
 
 self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', (e) => {

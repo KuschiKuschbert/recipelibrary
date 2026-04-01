@@ -1795,3 +1795,101 @@ button.kuschi-flavor-retry:hover {
 .kuschi-flavor-more a {
   color: var(--gold);
 }
+
+/* Flavour toolkit pass hacks + matrix hints (aroma-hints.js) */
+.kuschi-pass-toolkit {
+  margin-top: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.kuschi-pass-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.kuschi-pass-rule {
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  color: var(--text2);
+  line-height: 1.35;
+}
+.kuschi-pass-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+  background: var(--surface);
+}
+.kuschi-pass-summary {
+  padding: 10px 12px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  list-style: none;
+}
+.kuschi-pass-summary::-webkit-details-marker {
+  display: none;
+}
+.kuschi-pass-dx {
+  margin: 0 12px 8px;
+  font-size: 12px;
+  color: var(--text2);
+}
+.kuschi-pass-fix {
+  padding: 0 12px 8px;
+  font-size: 12px;
+  color: var(--text2);
+}
+.kuschi-pass-priority {
+  font-weight: 400;
+  color: var(--text3);
+  font-size: 11px;
+}
+.kuschi-pass-opts {
+  margin-top: 4px;
+  color: var(--text);
+}
+.kuschi-pass-ruleline {
+  margin: 8px 12px 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: #e8c04a;
+  line-height: 1.4;
+}
+.kuschi-matrix-hints {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.kuschi-matrix-label {
+  font-size: 11px;
+  color: var(--text3);
+  margin: 8px 0 4px;
+}
+.kuschi-matrix-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.kuschi-matrix-chip {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  color: var(--text2);
+}
+.kuschi-matrix-harm {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--text);
+}
+.kuschi-matrix-contrast {
+  border-color: rgba(0, 188, 212, 0.45);
+  color: #7fd8e8;
+  font-style: italic;
+}

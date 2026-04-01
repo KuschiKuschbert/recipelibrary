@@ -9,12 +9,14 @@
   var UNIFIED = 'combined_data/ingredients_unified.json';
   var PAIRING_MATRIX = 'aroma_data/pairing_matrix.json';
   var FOOD_PAIRINGS = 'aroma_data/food_pairings.json';
+  var FLAVOUR_HINTS = 'flavour_data/flavour_hints_by_id.json';
 
   var state = {
     meta: {},
     ingredients: [],
     byId: {},
     unifiedById: null,
+    flavourHints: null,
     kitchenContext: null,
     pairingMatrix: null,
     foodPairings: null,
@@ -314,6 +316,68 @@
     );
   }
 
+  function atlasLookupToolkitHint(ingId) {
+    var m = state.flavourHints;
+    if (!m || !ingId) return null;
+    var L = typeof window !== 'undefined' ? window.KuschiFlavourToolkitLookup : null;
+    if (L && typeof L.lookupHint === 'function') return L.lookupHint(m, ingId);
+    var k = String(ingId || '')
+      .replace(/-/g, '_')
+      .replace(/_+/g, '_');
+    return m[k] || m[ingId] || null;
+  }
+
+  function spiceDrawerToolkitSection(ing) {
+    var h = atlasLookupToolkitHint(ing.id);
+    if (!h) return '';
+    var bits = [];
+    if (h.primary_family) {
+      bits.push(
+        '<p class="pa-small">Primary family: <strong>' +
+          esc(String(h.primary_family).replace(/_/g, ' ')) +
+          '</strong></p>'
+      );
+    }
+    if (h.harmony && h.harmony.length) {
+      bits.push(
+        '<p class="pa-chips">' +
+          h.harmony
+            .slice(0, 8)
+            .map(function (x) {
+              return '<span class="pa-chip">' + esc(String(x)) + '</span>';
+            })
+            .join(' ') +
+          '</p>'
+      );
+    }
+    if (h.contrast && h.contrast.length) {
+      bits.push(
+        '<p class="pa-chips">' +
+          h.contrast
+            .slice(0, 8)
+            .map(function (x) {
+              return '<span class="pa-chip pa-chip-contrast">' + esc(String(x)) + '</span>';
+            })
+            .join(' ') +
+          '</p>'
+      );
+    }
+    if (h.spice_harmony_partners && h.spice_harmony_partners.length) {
+      bits.push(
+        '<p class="pa-small pa-muted">Spice harmony</p><p class="pa-chips">' +
+          h.spice_harmony_partners
+            .slice(0, 8)
+            .map(function (x) {
+              return '<span class="pa-chip">' + esc(String(x)) + '</span>';
+            })
+            .join(' ') +
+          '</p>'
+      );
+    }
+    if (!bits.length) return '';
+    return '<section class="pa-sec"><h4>Toolkit matrix</h4>' + bits.join('') + '</section>';
+  }
+
   function spiceDrawerHtml(ing) {
     var u = state.unifiedById ? state.unifiedById[ing.id] : null;
     var ar = u && u.aroma ? u.aroma : ing;
@@ -459,12 +523,15 @@
     var kcSnip = kitchenContextSnippetHtml();
     if (kcSnip) parts.push(kcSnip);
 
+    var tkSec = spiceDrawerToolkitSection(ing);
+    if (tkSec) parts.push(tkSec);
+
     parts.push(
       '<p class="pa-drawer-foot"><a href="aroma.html?spice=' +
         encodeURIComponent(ing.id) +
         '">Open full Aroma profile →</a> · <a href="flavor.html?q=' +
         encodeURIComponent(ing.name || ing.id) +
-        '">Flavor explorer →</a></p>'
+        '">Flavor explorer →</a> · <a href="flavor.html?toolkit=1">Flavor toolkit →</a></p>'
     );
     parts.push('</div>');
     return parts.join('');
@@ -869,9 +936,14 @@
       fetch(FOOD_PAIRINGS).then(function (r) {
         return r.ok ? r.json() : [];
       }),
+      fetch(FLAVOUR_HINTS).then(function (r) {
+        return r.ok ? r.json() : {};
+      }).catch(function () {
+        return {};
+      }),
     ])
-      .then(function (triple) {
-        var rawU = triple[0];
+      .then(function (quad) {
+        var rawU = quad[0];
         var unified;
         var kctx = null;
         if (Array.isArray(rawU)) {
@@ -882,8 +954,9 @@
         } else {
           unified = [];
         }
-        var pm = triple[1] && typeof triple[1] === 'object' ? triple[1] : {};
-        var fp = Array.isArray(triple[2]) ? triple[2] : [];
+        var pm = quad[1] && typeof quad[1] === 'object' ? quad[1] : {};
+        var fp = Array.isArray(quad[2]) ? quad[2] : [];
+        var fh = quad[3] && typeof quad[3] === 'object' && !Array.isArray(quad[3]) ? quad[3] : null;
 
         var ub = Object.create(null);
         for (var i = 0; i < unified.length; i++) {
@@ -894,6 +967,7 @@
         state.kitchenContext = kctx;
         state.pairingMatrix = pm;
         state.foodPairings = fp;
+        state.flavourHints = fh;
         state.enriched = true;
 
         var lh = document.getElementById('paLayerHarmony');

@@ -44,9 +44,13 @@
   /** Slim ~120KB vs full unified ~1.9MB; modal “More flavour” only. */
   var UNIFIED_URL = 'combined_data/ingredients_unified_modal.json';
   var CUISINE_URL = 'sfah_data/cuisine_profiles.json';
+  var TOOLKIT_PASS_URL = 'flavour_data/toolkit_pass_static.json';
+  var FLAVOUR_HINTS_URL = 'flavour_data/flavour_hints_by_id.json';
   /** Fetch timeouts so slow networks never leave spinners stuck indefinitely */
   var FETCH_TIMEOUT_AROMA_MS = 15000;
   var FETCH_TIMEOUT_UNIFIED_MS = 20000;
+  var FETCH_TIMEOUT_PASS_MS = 8000;
+  var FETCH_TIMEOUT_HINTS_MS = 12000;
 
   var ingredients = null;
   var foodPairings = null;
@@ -209,7 +213,160 @@
     return list;
   }
 
-  function buildFlavorExtrasHtml(recipe, lines, unified, cuisines) {
+  function lookupFlavourHintMap(hintsMap, rowId) {
+    var L = global.KuschiFlavourToolkitLookup;
+    if (L && typeof L.lookupHint === 'function') return L.lookupHint(hintsMap, rowId);
+    var k = String(rowId || '')
+      .replace(/-/g, '_')
+      .replace(/_+/g, '_');
+    if (hintsMap[k]) return hintsMap[k];
+    if (hintsMap[rowId]) return hintsMap[rowId];
+    return null;
+  }
+
+  function buildPassToolkitHtml(pass) {
+    if (!pass || typeof pass !== 'object') return '';
+    var br = pass.balance_rules;
+    var fix = pass.fix_the_dish;
+    if ((!br || typeof br !== 'object') && (!fix || !fix.length)) return '';
+    var parts = [];
+    parts.push('<div class="kuschi-pass-toolkit">');
+    parts.push('<p class="kuschi-flavor-heading">Pass fixes &amp; balance</p>');
+    if (br && typeof br === 'object') {
+      var keys = Object.keys(br).sort();
+      var badges = keys
+        .map(function (k) {
+          return '<span class="kuschi-pass-rule">' + escHtml(k) + ': ' + escHtml(br[k]) + '</span>';
+        })
+        .join('');
+      if (badges) parts.push('<div class="kuschi-pass-badges">' + badges + '</div>');
+    }
+    if (fix && fix.length) {
+      for (var fi = 0; fi < fix.length; fi++) {
+        var card = fix[fi];
+        if (!card) continue;
+        var fixes = (card.fixes || [])
+          .map(function (fx) {
+            var opts = (fx.options || []).map(escHtml).join(', ');
+            return (
+              '<div class="kuschi-pass-fix"><strong>' +
+              escHtml(fx.action || '') +
+              '</strong> <span class="kuschi-pass-priority">(' +
+              escHtml(fx.priority || '') +
+              ')</span><div class="kuschi-pass-opts">' +
+              opts +
+              '</div></div>'
+            );
+          })
+          .join('');
+        parts.push(
+          '<details class="kuschi-pass-card"><summary class="kuschi-pass-summary">' +
+            escHtml(card.problem || '') +
+            '</summary><p class="kuschi-pass-dx"><em>' +
+            escHtml(card.diagnosis || '') +
+            '</em></p>' +
+            fixes +
+            '<p class="kuschi-pass-ruleline">' +
+            escHtml(card.rule || '') +
+            '</p></details>'
+        );
+      }
+    }
+    parts.push(
+      '<p class="kuschi-flavor-more"><a href="flavor.html?toolkit=1">Full Flavour toolkit →</a></p></div>'
+    );
+    return parts.join('');
+  }
+
+  function buildMatrixHintsHtml(matched, hintsMap) {
+    if (!hintsMap || !matched || !matched.length) return '';
+    var cap = 8;
+    var harm = [];
+    var con = [];
+    var sp = [];
+    var seenH = Object.create(null);
+    var seenC = Object.create(null);
+    var seenS = Object.create(null);
+    for (var i = 0; i < matched.length; i++) {
+      var h = lookupFlavourHintMap(hintsMap, matched[i].id);
+      if (!h) continue;
+      var j;
+      if (h.harmony && h.harmony.length) {
+        for (j = 0; j < h.harmony.length; j++) {
+          var t1 = String(h.harmony[j]);
+          var nk1 = normKey(t1);
+          if (nk1 && !seenH[nk1]) {
+            seenH[nk1] = true;
+            harm.push(t1);
+          }
+        }
+      }
+      if (h.contrast && h.contrast.length) {
+        for (j = 0; j < h.contrast.length; j++) {
+          var t2 = String(h.contrast[j]);
+          var nk2 = normKey(t2);
+          if (nk2 && !seenC[nk2]) {
+            seenC[nk2] = true;
+            con.push(t2);
+          }
+        }
+      }
+      if (h.spice_harmony_partners && h.spice_harmony_partners.length) {
+        for (j = 0; j < h.spice_harmony_partners.length; j++) {
+          var t3 = String(h.spice_harmony_partners[j]);
+          var nk3 = normKey(t3);
+          if (nk3 && !seenS[nk3]) {
+            seenS[nk3] = true;
+            sp.push(t3);
+          }
+        }
+      }
+    }
+    if (!harm.length && !con.length && !sp.length) return '';
+    var bits = [];
+    bits.push('<div class="kuschi-matrix-hints">');
+    bits.push('<p class="kuschi-flavor-heading">Matrix hints</p>');
+    if (harm.length) {
+      bits.push('<p class="kuschi-matrix-label">Harmony</p><div class="kuschi-matrix-chips">');
+      bits.push(
+        harm
+          .slice(0, cap)
+          .map(function (x) {
+            return '<span class="kuschi-matrix-chip kuschi-matrix-harm">' + escHtml(x) + '</span>';
+          })
+          .join('')
+      );
+      bits.push('</div>');
+    }
+    if (con.length) {
+      bits.push('<p class="kuschi-matrix-label">Contrast</p><div class="kuschi-matrix-chips">');
+      bits.push(
+        con
+          .slice(0, cap)
+          .map(function (x) {
+            return '<span class="kuschi-matrix-chip kuschi-matrix-contrast">' + escHtml(x) + '</span>';
+          })
+          .join('')
+      );
+      bits.push('</div>');
+    }
+    if (sp.length) {
+      bits.push('<p class="kuschi-matrix-label">Spice partners</p><div class="kuschi-matrix-chips">');
+      bits.push(
+        sp
+          .slice(0, cap)
+          .map(function (x) {
+            return '<span class="kuschi-matrix-chip">' + escHtml(x) + '</span>';
+          })
+          .join('')
+      );
+      bits.push('</div>');
+    }
+    bits.push('</div>');
+    return bits.join('');
+  }
+
+  function buildFlavorExtrasHtml(recipe, lines, unified, cuisines, hintsMap) {
     var matched = collectUnifiedMatches(lines, unified);
     if (!matched.length) return '';
 
@@ -305,7 +462,8 @@
           '</select>' +
           '<div class="kuschi-pivot-out" id="kuschiPivotOut"></div></div>'
         : '') +
-      '<p class="kuschi-flavor-more"><a href="flavor.html">Open Flavor explorer →</a></p>' +
+      buildMatrixHintsHtml(matched, hintsMap || null) +
+      '<p class="kuschi-flavor-more"><a href="flavor.html">Open Flavor explorer →</a> · <a href="flavor.html?toolkit=1">Flavor toolkit →</a></p>' +
       '</div>'
     );
   }
@@ -349,30 +507,60 @@
       loadingP.setAttribute('aria-live', 'polite');
       loadingP.textContent = 'Loading flavour book data…';
       det.appendChild(loadingP);
-      ensureUnifiedLoaded()
-        .then(function (data) {
+      Promise.all([
+        ensureUnifiedLoaded().catch(function () {
+          return { unified: [], cuisine: {} };
+        }),
+        fetchJsonWithTimeout(TOOLKIT_PASS_URL, FETCH_TIMEOUT_PASS_MS).catch(function () {
+          return null;
+        }),
+        fetchJsonWithTimeout(FLAVOUR_HINTS_URL, FETCH_TIMEOUT_HINTS_MS).catch(function () {
+          return null;
+        }),
+      ])
+        .then(function (triple) {
           if (loadingP.parentNode) loadingP.parentNode.removeChild(loadingP);
-          if (!data.unified || !data.unified.length) {
+          var data = triple[0];
+          var pass = triple[1];
+          var hintsRaw = triple[2];
+          var hintsMap =
+            hintsRaw && typeof hintsRaw === 'object' && !Array.isArray(hintsRaw) ? hintsRaw : null;
+
+          var hasUnified = data.unified && data.unified.length;
+          var mainHtml = '';
+          if (hasUnified) {
+            mainHtml = buildFlavorExtrasHtml(recipe, lines, data.unified, data.cuisine, hintsMap);
+          }
+          var passHtml = buildPassToolkitHtml(pass);
+
+          if (!mainHtml && !passHtml) {
             det.setAttribute('data-kuschi-flavor-state', 'done');
             var empty = document.createElement('p');
             empty.className = 'aroma-hint-empty';
-            empty.innerHTML = 'No flavour book data available. <a href="flavor.html">Open Flavor explorer</a>';
+            empty.innerHTML =
+              'No flavour book data available. <a href="flavor.html">Open Flavor explorer</a> · <a href="flavor.html?toolkit=1">Flavor toolkit</a>';
             det.appendChild(empty);
             return;
           }
-          var html = buildFlavorExtrasHtml(recipe, lines, data.unified, data.cuisine);
-          if (!html) {
-            det.setAttribute('data-kuschi-flavor-state', 'done');
+
+          if (mainHtml) {
+            var div = document.createElement('div');
+            div.innerHTML = mainHtml;
+            while (div.firstChild) det.appendChild(div.firstChild);
+            wirePivotSelect(det, data.cuisine);
+          } else if (hasUnified) {
             var em = document.createElement('p');
             em.className = 'aroma-hint-empty';
             em.textContent = 'No extra matches for these ingredients in the book.';
             det.appendChild(em);
-            return;
           }
-          var div = document.createElement('div');
-          div.innerHTML = html;
-          while (div.firstChild) det.appendChild(div.firstChild);
-          wirePivotSelect(det, data.cuisine);
+
+          if (passHtml) {
+            var div2 = document.createElement('div');
+            div2.innerHTML = passHtml;
+            while (div2.firstChild) det.appendChild(div2.firstChild);
+          }
+
           det.setAttribute('data-kuschi-flavor-state', 'done');
         })
         .catch(function () {
@@ -381,7 +569,7 @@
           var errP = document.createElement('p');
           errP.className = 'aroma-hint-empty kuschi-flavor-load-err';
           errP.innerHTML =
-            'Couldn’t load flavour data (timeout or network). <a href="flavor.html">Open Flavor explorer</a> · <button type="button" class="kuschi-flavor-retry">Try again</button>';
+            'Couldn’t load flavour data (timeout or network). <a href="flavor.html">Open Flavor explorer</a> · <a href="flavor.html?toolkit=1">Flavor toolkit</a> · <button type="button" class="kuschi-flavor-retry">Try again</button>';
           det.appendChild(errP);
           var btn = errP.querySelector('.kuschi-flavor-retry');
           if (btn) {

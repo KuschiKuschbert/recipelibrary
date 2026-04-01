@@ -123,7 +123,11 @@
         flavourByCollapsedKey = Object.create(null);
         if (flavourIngredients) {
           Object.keys(flavourIngredients).forEach(function (k) {
-            var collapsed = k.replace(/_+/g, '_');
+            var collapsed =
+              global.KuschiFlavourToolkitLookup &&
+              typeof global.KuschiFlavourToolkitLookup.flavourHintLookupKey === 'function'
+                ? global.KuschiFlavourToolkitLookup.flavourHintLookupKey(k)
+                : k.replace(/_+/g, '_');
             if (!flavourByCollapsedKey[collapsed]) flavourByCollapsedKey[collapsed] = flavourIngredients[k];
           });
         }
@@ -381,6 +385,33 @@
     });
   }
 
+  function toolkitFilterNorm(s) {
+    return String(s || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function wireToolkitFilter(host) {
+    var inp = host.querySelector('#flavorToolkitFilter');
+    if (!inp || inp._flavorTkWired) return;
+    inp._flavorTkWired = true;
+    function applyFilter() {
+      var q = toolkitFilterNorm(inp.value);
+      ['.flavor-toolkit-card', '.flavor-toolkit-cuisine', '.flavor-toolkit-blend'].forEach(function (sel) {
+        host.querySelectorAll(sel).forEach(function (el) {
+          var t = toolkitFilterNorm(el.textContent || '');
+          el.style.display = !q || t.indexOf(q) >= 0 ? '' : 'none';
+        });
+      });
+    }
+    inp.addEventListener('input', function () {
+      clearTimeout(inp._tkFt);
+      inp._tkFt = setTimeout(applyFilter, 120);
+    });
+  }
+
   function renderToolkit() {
     var host = document.getElementById('flavorToolkitHost');
     if (!host) return;
@@ -544,6 +575,9 @@
 
     host.innerHTML =
       '<div class="flavor-toolkit-intro"><p>Flavour Knowledge toolkit (v1.1): pass fixes, cuisine DNA, classic blends, balance rules, and aroma family legend. In <strong>Explore</strong>, matching ingredients also show harmony / contrast and spice notes from the same database.</p></div>' +
+      '<div class="flavor-toolkit-filter-wrap">' +
+      '<input type="search" id="flavorToolkitFilter" class="flavor-toolkit-filter" placeholder="Filter fixes, cuisines, blends…" autocomplete="off" aria-label="Filter toolkit content" />' +
+      '</div>' +
       '<div class="flavor-toolkit-grid">' +
       '<section class="flavor-toolkit-col"><h2 class="flavor-toolkit-h2">Fix the dish</h2>' +
       fixHtml +
@@ -561,6 +595,7 @@
       '<section class="flavor-toolkit-wide"><h2 class="flavor-toolkit-h2">Spice blends</h2><div class="flavor-toolkit-blends">' +
       blendHtml +
       '</div></section>';
+    wireToolkitFilter(host);
   }
 
   function renderWheel() {
