@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/theme.css">
 <link rel="preload" href="riviera_data/builtins.json" as="fetch" type="application/json" crossorigin="anonymous">
-<link rel="preload" href="aroma_data/ingredients.json" as="fetch" type="application/json" crossorigin="anonymous">
+<link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
 /* ── Nav back ─────────────────────────────────────── */
@@ -253,14 +253,17 @@
   grid-column: 1 / -1;
 }
 
-/* Recipe detail modal (Riviera) — base shell in theme.css */
-#modalOverlay {
-  transition: opacity 0.08s ease-out;
+/* Recipe detail modal (Riviera) — no motion so hit-testing is immediate */
+#modalOverlay,
+#modalOverlay.open,
+#modalOverlay .modal,
+#modalOverlay.open .modal {
+  transition: none !important;
 }
 #modalOverlay .modal {
   max-height: min(88vh, 88dvh);
   padding: 36px;
-  transition: transform 0.08s ease-out;
+  transform: none;
 }
 #modalOverlay .modal-badges { margin-bottom: 16px; }
 #modalOverlay .modal-scale input { width: 72px; }
@@ -1414,14 +1417,16 @@ function openRecipe(id) {
   requestAnimationFrame(function () {
     modal.scrollTop = 0;
     overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    setTimeout(function () {
+      document.body.style.overflow = 'hidden';
+    }, 0);
     setTimeout(function () {
       if (window.KuschiScreenWake) KuschiScreenWake.sync();
     }, 0);
 
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
-        setTimeout(function () {
+        setTimeout(function rivieraModalHeavyChunk1() {
           if (!document.getElementById('modalOverlay').classList.contains('open')) return;
           if (!currentRecipe || currentRecipe.id !== recipeId) return;
           const heavy = document.getElementById('rivieraModalHeavy');
@@ -1442,30 +1447,48 @@ function openRecipe(id) {
             : '';
           const aromaHintHtml = KuschiRecipeUi.aromaSeasoningSectionHtml({ idSuffix: 'Rv', openByDefault: false });
 
+          function guard() {
+            return (
+              document.getElementById('modalOverlay').classList.contains('open') &&
+              currentRecipe &&
+              currentRecipe.id === recipeId
+            );
+          }
+
           heavy.innerHTML = `
     <div class="modal-section">Elements</div>
     <div class="modal-elements">${elements}</div>
     <div class="modal-section">Ingredients</div>
-    <div class="modal-ing" id="ingGrid">${ingsHTML}</div>
-    ${aromaHintHtml}
-    <div class="modal-section">Prep Method</div>
-    <ol class="modal-steps">${steps}</ol>
-    <div class="modal-section">On the Day — Service</div>
-    <ol class="modal-steps">${service}</ol>
-    ${note}
-    ${label}
-    ${adminActions}
-  `;
+    <div class="modal-ing" id="ingGrid">${ingsHTML}</div>`;
           heavy.removeAttribute('aria-busy');
-          const scaleInp = document.getElementById('scaleInput');
+          let scaleInp = document.getElementById('scaleInput');
           if (scaleInp) rescale(scaleInp.value);
 
-          setTimeout(function () {
-            if (window.KuschiScreenWake) KuschiScreenWake.sync();
+          setTimeout(function chunk2() {
+            if (!guard()) return;
+            heavy.insertAdjacentHTML('beforeend', aromaHintHtml);
+
+            setTimeout(function chunk3() {
+              if (!guard()) return;
+              heavy.insertAdjacentHTML(
+                'beforeend',
+                `<div class="modal-section">Prep Method</div><ol class="modal-steps">${steps}</ol><div class="modal-section">On the Day — Service</div><ol class="modal-steps">${service}</ol>`
+              );
+
+              setTimeout(function chunk4() {
+                if (!guard()) return;
+                heavy.insertAdjacentHTML('beforeend', `${note}${label}${adminActions}`);
+                scaleInp = document.getElementById('scaleInput');
+                if (scaleInp) rescale(scaleInp.value);
+                setTimeout(function () {
+                  if (window.KuschiScreenWake) KuschiScreenWake.sync();
+                }, 0);
+                KuschiRecipeUi.scheduleHydrateModalAroma(modal, r, function () {
+                  return currentRecipe && currentRecipe.id === r.id;
+                });
+              }, 0);
+            }, 0);
           }, 0);
-          KuschiRecipeUi.scheduleHydrateModalAroma(modal, r, function () {
-            return currentRecipe && currentRecipe.id === r.id;
-          });
         }, 0);
       });
     });

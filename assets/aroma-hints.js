@@ -1,6 +1,7 @@
 /**
  * Aroma Bible data: recipe seasoning suggestions, modal hints, add-recipe panel.
- * Depends on aroma_data/ingredients.json + food_pairings.json (static fetch).
+ * Depends on aroma_data/ingredients_modal_core.json + food_pairings.json (static fetch).
+ * Regenerate core from ingredients.json: node scripts/build_aroma_modal_data.mjs
  *
  * German (and other) strings in SEARCH_SYNONYMS / hint maps are for recall only —
  * they are not shown as primary UI labels; displayed names come from JSON `name`.
@@ -34,9 +35,10 @@
     }, 0);
   }
 
-  var ING_URL = 'aroma_data/ingredients.json';
+  var ING_URL = 'aroma_data/ingredients_modal_core.json';
   var FOOD_URL = 'aroma_data/food_pairings.json';
-  var UNIFIED_URL = 'combined_data/ingredients_unified.json';
+  /** Slim ~120KB vs full unified ~1.9MB; modal “More flavour” only. */
+  var UNIFIED_URL = 'combined_data/ingredients_unified_modal.json';
   var CUISINE_URL = 'sfah_data/cuisine_profiles.json';
   /** Fetch timeouts so slow networks never leave spinners stuck indefinitely */
   var FETCH_TIMEOUT_AROMA_MS = 15000;
