@@ -911,6 +911,11 @@
       if (summaryEl) summaryEl.textContent = 'Seasoning ideas';
       if (bodyEl) bodyEl.innerHTML = '<p class="aroma-hint-empty">' + msgHtml + '</p>';
       if (detailsEl) syncAromaDetailsOpen(wrapEl, detailsEl);
+      if (popoverMode) {
+        try {
+          wrapEl.dispatchEvent(new CustomEvent('kuschi-aroma-popover-did-fill', { bubbles: false }));
+        } catch (e) {}
+      }
     }
 
     ensureLoaded()
@@ -941,6 +946,11 @@
                 bodyEl2.innerHTML =
                   '<p class="aroma-hint-empty">No matches in the Aroma Bible for these ingredients. Try <a href="aroma.html">Aroma lookup</a>.</p>';
                 if (detailsEl2) syncAromaDetailsOpen(wrapEl, detailsEl2);
+                if (pop) {
+                  try {
+                    wrapEl.dispatchEvent(new CustomEvent('kuschi-aroma-popover-did-fill', { bubbles: false }));
+                  } catch (e) {}
+                }
                 return;
               }
               var chips = top
@@ -966,6 +976,11 @@
                 '</details>';
               wireLazyFlavorExtras(wrapEl, lines, recipe);
               if (detailsEl2) syncAromaDetailsOpen(wrapEl, detailsEl2);
+              if (pop) {
+                try {
+                  wrapEl.dispatchEvent(new CustomEvent('kuschi-aroma-popover-did-fill', { bubbles: false }));
+                } catch (e) {}
+              }
             });
           });
         });
@@ -989,12 +1004,66 @@
     var closeBtn = wrap.querySelector('[data-aroma-hint-popover-close]');
     if (!trigger || !panel) return;
     var filled = false;
+    var modalScrollEl = null;
+
+    function clearPanelPosition() {
+      panel.style.position = '';
+      panel.style.left = '';
+      panel.style.top = '';
+      panel.style.right = '';
+      panel.style.bottom = '';
+      panel.style.width = '';
+      panel.style.maxHeight = '';
+      panel.style.zIndex = '';
+    }
+
+    function syncPanelPosition() {
+      if (panel.hidden) return;
+      var r = trigger.getBoundingClientRect();
+      var pad = 12;
+      var vw = global.innerWidth;
+      var vh = global.innerHeight;
+      var w = Math.min(Math.max(220, r.width), vw - 2 * pad);
+      var left = r.left + (r.width - w) / 2;
+      if (left < pad) left = pad;
+      if (left + w > vw - pad) left = vw - pad - w;
+      var gap = 8;
+      var topBelow = r.bottom + gap;
+      var spaceBelow = vh - topBelow - pad;
+      var maxH = Math.min(420, Math.max(140, spaceBelow));
+      var top;
+      if (spaceBelow >= 160 || r.bottom < vh * 0.45) {
+        top = topBelow;
+        panel.style.maxHeight = maxH + 'px';
+      } else {
+        maxH = Math.min(420, Math.max(140, r.top - pad - gap));
+        top = Math.max(pad, r.top - gap - maxH);
+        panel.style.maxHeight = maxH + 'px';
+      }
+      panel.style.position = 'fixed';
+      panel.style.left = left + 'px';
+      panel.style.top = top + 'px';
+      panel.style.width = w + 'px';
+      panel.style.right = 'auto';
+      panel.style.bottom = 'auto';
+      panel.style.zIndex = '10050';
+    }
+
+    function onResizeOrScroll() {
+      syncPanelPosition();
+    }
 
     function closePopover() {
       panel.hidden = true;
       trigger.setAttribute('aria-expanded', 'false');
       document.removeEventListener('keydown', onKeyDown);
       document.removeEventListener('click', onDocClick, true);
+      global.removeEventListener('resize', onResizeOrScroll);
+      if (modalScrollEl) {
+        modalScrollEl.removeEventListener('scroll', onResizeOrScroll);
+        modalScrollEl = null;
+      }
+      clearPanelPosition();
     }
 
     function onKeyDown(e) {
@@ -1010,6 +1079,11 @@
       trigger.setAttribute('aria-expanded', 'true');
       document.addEventListener('keydown', onKeyDown);
       document.addEventListener('click', onDocClick, true);
+      modalScrollEl = wrap.closest('.modal');
+      global.addEventListener('resize', onResizeOrScroll);
+      if (modalScrollEl) modalScrollEl.addEventListener('scroll', onResizeOrScroll, { passive: true });
+      syncPanelPosition();
+      global.requestAnimationFrame(syncPanelPosition);
       if (!filled) {
         filled = true;
         var bodyEl = wrap.querySelector('[data-aroma-hint-body]');
@@ -1023,6 +1097,8 @@
         fillHintWrap(wrap, lines, recipe);
       }
     }
+
+    wrap.addEventListener('kuschi-aroma-popover-did-fill', syncPanelPosition);
 
     trigger.addEventListener('click', function (e) {
       e.preventDefault();
