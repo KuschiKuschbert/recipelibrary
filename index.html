@@ -950,7 +950,7 @@ function cardHTML(r) {
   const ings = (r.ing || []).slice(0, 8).map(i => `<strong>${esc(i)}</strong>`).join(' · ');
   const rid = esc(r.id || '');
 
-  return `<div class="card" onclick="openRecipe('${rid}')" style="cursor:pointer">
+  return `<div class="card" data-recipe-id="${rid}" onclick="openRecipe('${rid}')" style="cursor:pointer">
     <div class="card-header">
       <div class="card-name">${name}</div>
       <button class="copy-btn" onclick="event.stopPropagation();copyName(this,'${nameAttr}')" title="Copy recipe name">
@@ -1111,6 +1111,42 @@ async function fetchDetail(letter) {
   return data;
 }
 
+/** Warm detail JSON for a catalog recipe (same letter shard). Safe no-op for user recipes or unknown ids. */
+function prefetchDetailShardForRecipeId(id) {
+  if (!id || !recipeIndex[id]) return;
+  const info = recipeIndex[id];
+  const userLet = (window.KuschiUserRecipes && KuschiUserRecipes.USER_LETTER) || '_USER';
+  if (info.letter === userLet) return;
+  if (detailCache[info.letter]) return;
+  fetchDetail(info.letter).catch(() => {});
+}
+
+/** True when ?kuschiPerfModal=1 or localStorage kuschiPerfModal=1 — logs recipe modal timing to the console. */
+function kuschiModalPerfEnabled() {
+  try {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('kuschiPerfModal') === '1') return true;
+    return /(?:^|[?&])kuschiPerfModal=1(?:&|$)/.test(String(window.location && window.location.search));
+  } catch (_) {
+    return false;
+  }
+}
+
+let kuschiContentPrefetchAttached = false;
+function attachContentRecipePrefetch() {
+  const content = document.getElementById('content');
+  if (!content || kuschiContentPrefetchAttached) return;
+  kuschiContentPrefetchAttached = true;
+  const warm = (e) => {
+    const t = e.target;
+    if (!t || !t.closest) return;
+    const card = t.closest('.card[data-recipe-id]');
+    if (!card) return;
+    prefetchDetailShardForRecipeId(card.getAttribute('data-recipe-id'));
+  };
+  content.addEventListener('pointerdown', warm, { passive: true });
+  content.addEventListener('pointerover', warm, { passive: true });
+}
+
 /** Detail shards may be a JSON array (legacy) or an object map keyed by recipe id. */
 function findRecipeInDetailPayload(payload, id) {
   if (payload == null) return undefined;
@@ -1147,13 +1183,20 @@ async function openRecipe(id) {
   modal.innerHTML = '<div class="modal-loading"><div class="loader"></div>Loading recipe...</div>';
   overlay.classList.add('open');
 
+  const modalPerf = kuschiModalPerfEnabled();
+  const tModal0 = modalPerf ? performance.now() : 0;
+
   try {
     const info = recipeIndex[id];
     if (!info) throw new Error('Recipe not found');
     if (info.letter === ((window.KuschiUserRecipes && KuschiUserRecipes.USER_LETTER) || '_USER')) {
       throw new Error('User recipe missing from storage');
     }
+    const tFetch0 = modalPerf ? performance.now() : 0;
     const detail = await fetchDetail(info.letter);
+    if (modalPerf) {
+      console.log('[Kuschi modal] detail shard fetch+parse ms', (performance.now() - tFetch0).toFixed(1), 'letter', info.letter);
+    }
     const recipe = findRecipeInDetailPayload(detail, id);
     if (!recipe) throw new Error('Recipe not in detail file');
     currentRecipe = recipe;
@@ -1161,6 +1204,9 @@ async function openRecipe(id) {
     modal.scrollTop = 0;
     if (window.KuschiScreenWake) KuschiScreenWake.sync();
     if (window.KuschiAromaHints) KuschiAromaHints.hydrateModal(modal, currentRecipe);
+    if (modalPerf) {
+      console.log('[Kuschi modal] openRecipe total ms', (performance.now() - tModal0).toFixed(1));
+    }
   } catch(e) {
     modal.innerHTML = `<button class="modal-close" onclick="closeModal()">✕</button>
       <div class="modal-loading" style="color:var(--accent)">Could not load recipe: ${esc(e.message)}</div>`;
@@ -1862,6 +1908,7 @@ function closePageQrModal() {
 }
 
 refreshCustomBookNav();
+attachContentRecipePrefetch();
 
 (async () => {
   try {
