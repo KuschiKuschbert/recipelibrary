@@ -1,10 +1,26 @@
 /**
  * Browser helpers: recipe file → Gemini payload, HTML → plain text.
- * Depends on window.mammoth for .docx (loaded from CDN in HTML).
+ * Mammoth (.docx) is loaded dynamically on first DOCX use — not in HTML.
  */
 (function (global) {
   var MAX_TEXT_CHARS = 200000;
   var MAX_FILE_BYTES = 4 * 1024 * 1024;
+  var MAMMOTH_CDN = 'https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js';
+  var mammothLoadPromise = null;
+
+  function loadMammoth() {
+    if (global.mammoth && global.mammoth.extractRawText) return Promise.resolve();
+    if (mammothLoadPromise) return mammothLoadPromise;
+    mammothLoadPromise = new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = MAMMOTH_CDN;
+      s.crossOrigin = 'anonymous';
+      s.onload = resolve;
+      s.onerror = function () { reject(new Error('Failed to load DOCX library.')); };
+      document.head.appendChild(s);
+    });
+    return mammothLoadPromise;
+  }
 
   function readFileAsDataUrl(file) {
     return new Promise(function (resolve, reject) {
@@ -41,31 +57,29 @@
     }
 
     if (name.endsWith('.docx') || mime.indexOf('wordprocessingml') >= 0) {
-      return new Promise(function (resolve, reject) {
-        if (!global.mammoth || !global.mammoth.extractRawText) {
-          reject(new Error('DOCX support: mammoth library not loaded.'));
-          return;
-        }
-        var fr = new FileReader();
-        fr.onload = function () {
-          global.mammoth
-            .extractRawText({ arrayBuffer: fr.result })
-            .then(function (result) {
-              var t = (result && result.value) || '';
-              t = t.trim();
-              if (!t) reject(new Error('No text could be read from the DOCX.'));
-              else
-                resolve({
-                  kind: 'text',
-                  text: t.slice(0, MAX_TEXT_CHARS),
-                });
-            })
-            .catch(reject);
-        };
-        fr.onerror = function () {
-          reject(new Error('Could not read DOCX.'));
-        };
-        fr.readAsArrayBuffer(file);
+      return loadMammoth().then(function () {
+        return new Promise(function (resolve, reject) {
+          var fr = new FileReader();
+          fr.onload = function () {
+            global.mammoth
+              .extractRawText({ arrayBuffer: fr.result })
+              .then(function (result) {
+                var t = (result && result.value) || '';
+                t = t.trim();
+                if (!t) reject(new Error('No text could be read from the DOCX.'));
+                else
+                  resolve({
+                    kind: 'text',
+                    text: t.slice(0, MAX_TEXT_CHARS),
+                  });
+              })
+              .catch(reject);
+          };
+          fr.onerror = function () {
+            reject(new Error('Could not read DOCX.'));
+          };
+          fr.readAsArrayBuffer(file);
+        });
       });
     }
 
