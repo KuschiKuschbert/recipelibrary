@@ -16,7 +16,7 @@
   w.KuschiRecipeUi = {
     esc: esc,
     /**
-     * @param {{ idSuffix?: string, openByDefault?: boolean }} [opts]
+     * @param {{ idSuffix?: string, openByDefault?: boolean, modalPopover?: boolean }} [opts]
      */
     aromaSeasoningSectionHtml: function (opts) {
       if (!w.KuschiAromaHints) return '';
@@ -24,6 +24,7 @@
       return w.KuschiAromaHints.seasoningSectionHtml(null, {
         idSuffix: o.idSuffix != null ? o.idSuffix : 'Ui',
         openByDefault: !!o.openByDefault,
+        modalPopover: !!o.modalPopover,
       });
     },
     hydrateModalAroma: function (modalEl, recipe) {

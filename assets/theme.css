@@ -1161,6 +1161,87 @@ body {
   padding-top: 12px;
   border-top: 1px solid var(--border);
 }
+.aroma-hint-block--popover {
+  position: relative;
+  margin: 14px 0 10px;
+  padding-top: 10px;
+}
+.aroma-hint-popover-row {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text3);
+  line-height: 1.5;
+}
+.aroma-hint-popover-btn {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  text-align: left;
+}
+.aroma-hint-popover-btn:hover {
+  color: var(--text);
+}
+.aroma-hint-popover-hint {
+  font-weight: 400;
+  color: var(--text3);
+}
+.aroma-hint-popover-placeholder {
+  margin: 0;
+  padding: 12px 14px;
+}
+.aroma-hint-popover-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  z-index: 80;
+  max-height: min(55vh, 420px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.38);
+  contain: layout style;
+}
+.aroma-hint-popover-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 6px 8px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+}
+.aroma-hint-popover-close {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text2);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+.aroma-hint-popover-close:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
 .aroma-hint-details {
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);

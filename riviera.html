@@ -1522,7 +1522,7 @@ function openRecipe(id) {
                   : '<button type="button" class="btn-secondary" onclick="rivieraRemoveCurrentUserRecipe()">Remove recipe</button>'
               }</div>`
             : '';
-          const aromaHintHtml = KuschiRecipeUi.aromaSeasoningSectionHtml({ idSuffix: 'Rv', openByDefault: true });
+          const aromaHintHtml = KuschiRecipeUi.aromaSeasoningSectionHtml({ idSuffix: 'Rv', modalPopover: true });
 
           function guard() {
             return (

@@ -836,6 +836,27 @@
     opts = opts || {};
     var idSuffix = opts.idSuffix || '';
     var wrapId = 'aromaHintsWrap' + idSuffix;
+    if (opts.modalPopover) {
+      return (
+        '<div class="aroma-hint-block aroma-hint-block--popover" id="' +
+        wrapId +
+        '" data-aroma-hint-wrap="1" data-aroma-hint-popover-mode="1">' +
+        '<p class="aroma-hint-popover-row">' +
+        '<button type="button" class="aroma-hint-popover-btn" data-aroma-hint-popover-trigger="1" aria-expanded="false" aria-haspopup="dialog">' +
+        'More seasoning tips' +
+        '</button>' +
+        '<span class="aroma-hint-popover-hint"> — Aroma index suggestions</span>' +
+        '</p>' +
+        '<div class="aroma-hint-popover-panel" data-aroma-hint-popover-panel="1" hidden role="dialog" aria-label="Seasoning tips">' +
+        '<div class="aroma-hint-popover-head">' +
+        '<span>Seasoning tips</span>' +
+        '<button type="button" class="aroma-hint-popover-close" data-aroma-hint-popover-close="1" aria-label="Close">×</button>' +
+        '</div>' +
+        '<div data-aroma-hint-body="1">' +
+        '<p class="aroma-hint-empty aroma-hint-popover-placeholder">Tap the button above to load suggestions.</p>' +
+        '</div></div></div>'
+      );
+    }
     var wantOpen = !!opts.openByDefault;
     var detailsOpenAttr = wantOpen ? ' open' : '';
     var summaryText = wantOpen
@@ -881,6 +902,7 @@
 
   function fillHintWrap(wrapEl, lines, recipe) {
     if (!wrapEl) return;
+    var popoverMode = wrapEl.getAttribute('data-aroma-hint-popover-mode') === '1';
     var detailsEl = wrapEl.querySelector('.aroma-hint-details');
     var bodyEl = wrapEl.querySelector('[data-aroma-hint-body]');
     var summaryEl = detailsEl ? detailsEl.querySelector('.aroma-hint-summary') : null;
@@ -888,7 +910,7 @@
     function applyErrorBody(msgHtml) {
       if (summaryEl) summaryEl.textContent = 'Seasoning ideas';
       if (bodyEl) bodyEl.innerHTML = '<p class="aroma-hint-empty">' + msgHtml + '</p>';
-      syncAromaDetailsOpen(wrapEl, detailsEl);
+      if (detailsEl) syncAromaDetailsOpen(wrapEl, detailsEl);
     }
 
     ensureLoaded()
@@ -900,10 +922,11 @@
             var detailsEl2 = wrapEl.querySelector('.aroma-hint-details');
             var bodyEl2 = wrapEl.querySelector('[data-aroma-hint-body]');
             var summaryEl2 = detailsEl2 ? detailsEl2.querySelector('.aroma-hint-summary') : null;
+            var pop = wrapEl.getAttribute('data-aroma-hint-popover-mode') === '1';
             var limit = compactTopN(wrapEl);
             var displayN = Math.min(limit, 6);
             var top = data.suggestions.slice(0, displayN);
-            if (!bodyEl2 || !detailsEl2) {
+            if (!bodyEl2 || (!pop && !detailsEl2)) {
               return;
             }
             scheduleAromaFillPaint(function () {
@@ -911,12 +934,13 @@
               detailsEl2 = wrapEl.querySelector('.aroma-hint-details');
               bodyEl2 = wrapEl.querySelector('[data-aroma-hint-body]');
               summaryEl2 = detailsEl2 ? detailsEl2.querySelector('.aroma-hint-summary') : null;
-              if (!bodyEl2 || !detailsEl2) return;
+              pop = wrapEl.getAttribute('data-aroma-hint-popover-mode') === '1';
+              if (!bodyEl2 || (!pop && !detailsEl2)) return;
               if (!top.length) {
                 if (summaryEl2) summaryEl2.textContent = 'Seasoning ideas';
                 bodyEl2.innerHTML =
                   '<p class="aroma-hint-empty">No matches in the Aroma Bible for these ingredients. Try <a href="aroma.html">Aroma lookup</a>.</p>';
-                syncAromaDetailsOpen(wrapEl, detailsEl2);
+                if (detailsEl2) syncAromaDetailsOpen(wrapEl, detailsEl2);
                 return;
               }
               var chips = top
@@ -941,13 +965,13 @@
                 '<p class="kuschi-flavor-lazy-intro">Substitutes, taste balance, and cuisine ideas from the flavour book. Opens on demand (~2&nbsp;MB the first time).</p>' +
                 '</details>';
               wireLazyFlavorExtras(wrapEl, lines, recipe);
-              syncAromaDetailsOpen(wrapEl, detailsEl2);
+              if (detailsEl2) syncAromaDetailsOpen(wrapEl, detailsEl2);
             });
           });
         });
       })
       .catch(function () {
-        if (!detailsEl || !bodyEl) {
+        if (!bodyEl) {
           wrapEl.innerHTML =
             '<details class="aroma-hint-details"><summary class="aroma-hint-summary">Seasoning ideas</summary>' +
             '<div data-aroma-hint-body="1"><p class="aroma-hint-empty">Couldn’t load aroma data (timeout or network). <a href="aroma.html">Aroma lookup</a></p></div></details>';
@@ -957,6 +981,66 @@
           'Couldn’t load aroma data (timeout or network). <a href="aroma.html">Aroma lookup</a>'
         );
       });
+  }
+
+  function installAromaPopoverHandlers(wrap, lines, recipe) {
+    var trigger = wrap.querySelector('[data-aroma-hint-popover-trigger]');
+    var panel = wrap.querySelector('[data-aroma-hint-popover-panel]');
+    var closeBtn = wrap.querySelector('[data-aroma-hint-popover-close]');
+    if (!trigger || !panel) return;
+    var filled = false;
+
+    function closePopover() {
+      panel.hidden = true;
+      trigger.setAttribute('aria-expanded', 'false');
+      document.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener('click', onDocClick, true);
+    }
+
+    function onKeyDown(e) {
+      if (e.key === 'Escape') closePopover();
+    }
+
+    function onDocClick(e) {
+      if (!wrap.contains(e.target)) closePopover();
+    }
+
+    function openPopover() {
+      panel.hidden = false;
+      trigger.setAttribute('aria-expanded', 'true');
+      document.addEventListener('keydown', onKeyDown);
+      document.addEventListener('click', onDocClick, true);
+      if (!filled) {
+        filled = true;
+        var bodyEl = wrap.querySelector('[data-aroma-hint-body]');
+        if (bodyEl) {
+          bodyEl.innerHTML =
+            '<div class="aroma-hint-body-loading">' +
+            '<div class="loader aroma-hint-loader" aria-hidden="true"></div>' +
+            '<span>Matching your ingredients to the Aroma index…</span>' +
+            '</div>';
+        }
+        fillHintWrap(wrap, lines, recipe);
+      }
+    }
+
+    trigger.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (panel.hidden) {
+        openPopover();
+      } else {
+        closePopover();
+      }
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        closePopover();
+      });
+    }
   }
 
   function compactTopN(el) {
@@ -974,6 +1058,7 @@
 
   /**
    * After injecting HTML that includes [data-aroma-hint-wrap], call with modal root and recipe.
+   * Popover mode: load suggestions on first open of the tips panel.
    * When data-aroma-hint-lazy="1" and details starts closed, defer fillHintWrap until first open.
    */
   function hydrateModal(root, recipe) {
@@ -981,6 +1066,10 @@
     var lines = recipeLinesForHints(recipe);
     var wrap = root.querySelector('[data-aroma-hint-wrap]');
     if (!wrap) return;
+    if (wrap.getAttribute('data-aroma-hint-popover-mode') === '1') {
+      installAromaPopoverHandlers(wrap, lines, recipe);
+      return;
+    }
     var details = wrap.querySelector('.aroma-hint-details');
     if (wrap.getAttribute('data-aroma-hint-lazy') === '1' && details && !details.open) {
       function onLazyToggle() {
