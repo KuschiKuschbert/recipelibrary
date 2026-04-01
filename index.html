@@ -1245,7 +1245,7 @@ function renderRecipeDetail(r) {
   }
 
   if (window.KuschiAromaHints) {
-    html += KuschiAromaHints.seasoningSectionHtml(null, { idSuffix: 'Idx', openByDefault: true });
+    html += KuschiAromaHints.seasoningSectionHtml(null, { idSuffix: 'Idx', openByDefault: false });
   }
 
   html += `<div class="modal-copy-bar">`;
@@ -1880,6 +1880,16 @@ refreshCustomBookNav();
     filtered = [...allRecipes];
     applyFilters();
     tryOpenFromQuery();
+    if (window.KuschiAromaHints && typeof KuschiAromaHints.ensureLoaded === 'function') {
+      var warmAroma = function () {
+        KuschiAromaHints.ensureLoaded().catch(function () {});
+      };
+      if (typeof requestIdleCallback === 'function') {
+        requestIdleCallback(warmAroma, { timeout: 8000 });
+      } else {
+        setTimeout(warmAroma, 1);
+      }
+    }
   } catch(e) {
     document.getElementById('loading').innerHTML =
       `<div class="loading-text" style="color:var(--accent)">Failed to load recipes: ${e.message}</div>`;

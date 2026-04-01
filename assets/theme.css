@@ -1385,6 +1385,43 @@ body {
   color: var(--text2);
   cursor: pointer;
 }
+.kuschi-flavor-heading {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text2);
+  margin: 0 0 8px;
+}
+.kuschi-more-flavor-details {
+  margin-top: 14px;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+}
+.kuschi-more-flavor-summary {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text2);
+  cursor: pointer;
+}
+.kuschi-flavor-lazy-intro {
+  font-size: 12px;
+  color: var(--text3);
+  margin: 8px 0 0;
+  line-height: 1.45;
+}
+button.kuschi-flavor-retry {
+  margin-left: 4px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--gold);
+  font: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+}
+button.kuschi-flavor-retry:hover {
+  color: var(--text);
+}
 .kuschi-taste-row {
   display: flex;
   flex-wrap: wrap;

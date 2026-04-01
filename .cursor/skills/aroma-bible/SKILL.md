@@ -43,6 +43,10 @@ Principle from the book: ingredients sharing **groups** tend to **reinforce** (s
 4. **Timing** — `heat_behavior.a` / `b` / `c` are the book’s **ordered** stages **A → B → C**: earlier vs middle vs later in how the author describes the spice under heat (aroma/behavior on the heat), not three independent tags. They are **not** clock times or temperatures; abbreviated English from extraction. The site explains this in the spice profile and pair modal on [aroma.html](aroma.html).
 5. **UI** — Point users to [aroma.html](aroma.html) for full profiles and the matrix (`?spice=id`, `?food=id` query params).
 
+## Recipe modal on [index.html](../../index.html)
+
+Seasoning chips hydrate from `ingredients.json` + `food_pairings.json` only. **`combined_data/ingredients_unified.json`** (large) loads **only** when the user expands **More flavour & pairing notes** inside the seasoning block. Aroma fetches use **timeouts** (`AbortController`) so loading states do not hang indefinitely; the index may **idle-prefetch** `ensureLoaded()` after the catalog loads.
+
 ## Compact reference (~50 ingredients by harmony count)
 
 Auto-derived from the latest `ingredients.json` (top 5 harmonizing partners, up to 3 food pairings). **Prefer the JSON** for authoritative data.

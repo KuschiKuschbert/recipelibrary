@@ -10,6 +10,9 @@
   var FOOD_URL = 'aroma_data/food_pairings.json';
   var UNIFIED_URL = 'combined_data/ingredients_unified.json';
   var CUISINE_URL = 'sfah_data/cuisine_profiles.json';
+  /** Fetch timeouts so slow networks never leave spinners stuck indefinitely */
+  var FETCH_TIMEOUT_AROMA_MS = 15000;
+  var FETCH_TIMEOUT_UNIFIED_MS = 20000;
 
   var ingredients = null;
   var foodPairings = null;
@@ -42,6 +45,21 @@
       });
   }
 
+  function fetchJsonWithTimeout(url, timeoutMs) {
+    var ctrl = new AbortController();
+    var tid = setTimeout(function () {
+      ctrl.abort();
+    }, timeoutMs);
+    return fetch(url, { signal: ctrl.signal })
+      .finally(function () {
+        clearTimeout(tid);
+      })
+      .then(function (r) {
+        if (!r.ok) throw new Error('Failed to load ' + url);
+        return r.json();
+      });
+  }
+
   function parseUnifiedPayload(raw) {
     if (Array.isArray(raw)) {
       return { ingredients: raw, kitchen_context: null };
@@ -59,36 +77,31 @@
     if (unifiedFlavors) return Promise.resolve({ unified: unifiedFlavors, cuisine: cuisineMap });
     if (unifiedPromise) return unifiedPromise;
     unifiedPromise = Promise.all([
-      fetch(UNIFIED_URL)
-        .then(function (r) {
-          return r.ok ? r.json() : [];
-        })
-        .catch(function () {
-          return [];
-        }),
-      fetch(CUISINE_URL)
-        .then(function (r) {
-          return r.ok ? r.json() : {};
-        })
-        .catch(function () {
-          return {};
-        }),
-    ]).then(function (pair) {
-      var parsed = parseUnifiedPayload(pair[0]);
-      unifiedFlavors = parsed.ingredients;
-      if (parsed.kitchen_context && parsed.kitchen_context.cuisine_map && typeof parsed.kitchen_context.cuisine_map === 'object') {
-        cuisineMap = parsed.kitchen_context.cuisine_map;
-      } else {
-        cuisineMap = pair[1] && typeof pair[1] === 'object' ? pair[1] : {};
-      }
-      unifiedByNormName = Object.create(null);
-      for (var ui = 0; ui < unifiedFlavors.length; ui++) {
-        var row = unifiedFlavors[ui];
-        var unn = normKey(row.name || '');
-        if (unn.length >= 2) unifiedByNormName[unn] = row;
-      }
-      return { unified: unifiedFlavors, cuisine: cuisineMap };
-    });
+      fetchJsonWithTimeout(UNIFIED_URL, FETCH_TIMEOUT_UNIFIED_MS),
+      fetchJsonWithTimeout(CUISINE_URL, FETCH_TIMEOUT_UNIFIED_MS).catch(function () {
+        return {};
+      }),
+    ])
+      .then(function (pair) {
+        var parsed = parseUnifiedPayload(pair[0]);
+        unifiedFlavors = parsed.ingredients;
+        if (parsed.kitchen_context && parsed.kitchen_context.cuisine_map && typeof parsed.kitchen_context.cuisine_map === 'object') {
+          cuisineMap = parsed.kitchen_context.cuisine_map;
+        } else {
+          cuisineMap = pair[1] && typeof pair[1] === 'object' ? pair[1] : {};
+        }
+        unifiedByNormName = Object.create(null);
+        for (var ui = 0; ui < unifiedFlavors.length; ui++) {
+          var row = unifiedFlavors[ui];
+          var unn = normKey(row.name || '');
+          if (unn.length >= 2) unifiedByNormName[unn] = row;
+        }
+        return { unified: unifiedFlavors, cuisine: cuisineMap };
+      })
+      .catch(function (e) {
+        unifiedPromise = null;
+        throw e;
+      });
     return unifiedPromise;
   }
 
@@ -203,31 +216,31 @@
       .join('');
 
     var subHtml = subs.length
-      ? '<p class="kuschi-flavor-subs"><strong>Substitutes (Veg Bible)</strong>: ' +
+      ? '<p class="kuschi-flavor-subs"><strong>Substitutes</strong>: ' +
         escHtml(subs.slice(0, 6).join(', ')) +
         '</p>'
       : '';
 
     return (
-      '<details class="kuschi-flavor-extras">' +
-      '<summary class="kuschi-flavor-summary">Flavor balance &amp; book data</summary>' +
+      '<div class="kuschi-flavor-extras">' +
+      '<p class="kuschi-flavor-heading">Substitutes, tastes &amp; cuisine ideas</p>' +
       (tasteBadges ? '<div class="kuschi-taste-row">' + tasteBadges + '</div>' : '') +
       (clash.length
-        ? '<div class="kuschi-flavor-clash"><strong>Possible clashes</strong> (AVOID lists): ' +
+        ? '<div class="kuschi-flavor-clash"><strong>Watch out</strong>: ' +
           escHtml(clash.slice(0, 5).join(' · ')) +
           '</div>'
         : '') +
       subHtml +
       methodTip +
       (pivotOpts
-        ? '<div class="kuschi-pivot"><label for="kuschiPivotSel">Cuisine pivot (SFAH seed)</label> ' +
+        ? '<div class="kuschi-pivot"><label for="kuschiPivotSel">Cuisine pivot</label> ' +
           '<select id="kuschiPivotSel" class="kuschi-pivot-sel"><option value="">—</option>' +
           pivotOpts +
           '</select>' +
-          '<pre class="kuschi-pivot-out" id="kuschiPivotOut"></pre></div>'
+          '<div class="kuschi-pivot-out" id="kuschiPivotOut"></div></div>'
         : '') +
       '<p class="kuschi-flavor-more"><a href="flavor.html">Open Flavor explorer →</a></p>' +
-      '</details>'
+      '</div>'
     );
   }
 
@@ -246,50 +259,96 @@
         out.textContent = '';
         return;
       }
-      out.textContent =
-        JSON.stringify(
-          { fats: p.fats || [], acids: p.acids || [], salt: p.salt || [] },
-          null,
-          2
-        );
+      var fats = Array.isArray(p.fats) ? p.fats.join(', ') : '';
+      var acids = Array.isArray(p.acids) ? p.acids.join(', ') : '';
+      var salt = Array.isArray(p.salt) ? p.salt.join(', ') : '';
+      var lines = [];
+      if (fats) lines.push('Fats: ' + fats);
+      if (acids) lines.push('Acids: ' + acids);
+      if (salt) lines.push('Salt: ' + salt);
+      out.textContent = lines.join('\n');
     });
   }
 
-  function appendFlavorExtras(wrapEl, lines, recipe) {
-    if (!wrapEl) return;
-    var pending = document.createElement('p');
-    pending.className = 'aroma-hint-loading kuschi-flavor-loading';
-    pending.setAttribute('aria-live', 'polite');
-    pending.textContent = 'Loading flavour data…';
-    wrapEl.appendChild(pending);
-    ensureUnifiedLoaded()
-      .then(function (data) {
-        if (pending.parentNode) pending.parentNode.removeChild(pending);
-        if (!data.unified || !data.unified.length) return;
-        var html = buildFlavorExtrasHtml(recipe, lines, data.unified, data.cuisine);
-        if (!html) return;
-        var div = document.createElement('div');
-        div.innerHTML = html;
-        wrapEl.appendChild(div.firstElementChild);
-        wirePivotSelect(wrapEl, data.cuisine);
-      })
-      .catch(function () {
-        if (pending.parentNode) pending.parentNode.removeChild(pending);
-      });
+  function wireLazyFlavorExtras(wrapEl, lines, recipe) {
+    var det = wrapEl.querySelector('[data-kuschi-more-flavor]');
+    if (!det) return;
+
+    function attemptLoad() {
+      var st = det.getAttribute('data-kuschi-flavor-state') || 'idle';
+      if (st === 'loading' || st === 'done') return;
+      det.setAttribute('data-kuschi-flavor-state', 'loading');
+      var loadingP = document.createElement('p');
+      loadingP.className = 'aroma-hint-loading kuschi-flavor-loading';
+      loadingP.setAttribute('aria-live', 'polite');
+      loadingP.textContent = 'Loading flavour book data…';
+      det.appendChild(loadingP);
+      ensureUnifiedLoaded()
+        .then(function (data) {
+          if (loadingP.parentNode) loadingP.parentNode.removeChild(loadingP);
+          if (!data.unified || !data.unified.length) {
+            det.setAttribute('data-kuschi-flavor-state', 'done');
+            var empty = document.createElement('p');
+            empty.className = 'aroma-hint-empty';
+            empty.innerHTML = 'No flavour book data available. <a href="flavor.html">Open Flavor explorer</a>';
+            det.appendChild(empty);
+            return;
+          }
+          var html = buildFlavorExtrasHtml(recipe, lines, data.unified, data.cuisine);
+          if (!html) {
+            det.setAttribute('data-kuschi-flavor-state', 'done');
+            var em = document.createElement('p');
+            em.className = 'aroma-hint-empty';
+            em.textContent = 'No extra matches for these ingredients in the book.';
+            det.appendChild(em);
+            return;
+          }
+          var div = document.createElement('div');
+          div.innerHTML = html;
+          while (div.firstChild) det.appendChild(div.firstChild);
+          wirePivotSelect(det, data.cuisine);
+          det.setAttribute('data-kuschi-flavor-state', 'done');
+        })
+        .catch(function () {
+          if (loadingP.parentNode) loadingP.parentNode.removeChild(loadingP);
+          det.setAttribute('data-kuschi-flavor-state', 'error');
+          var errP = document.createElement('p');
+          errP.className = 'aroma-hint-empty kuschi-flavor-load-err';
+          errP.innerHTML =
+            'Couldn’t load flavour data (timeout or network). <a href="flavor.html">Open Flavor explorer</a> · <button type="button" class="kuschi-flavor-retry">Try again</button>';
+          det.appendChild(errP);
+          var btn = errP.querySelector('.kuschi-flavor-retry');
+          if (btn) {
+            btn.addEventListener('click', function (e) {
+              e.preventDefault();
+              errP.remove();
+              det.setAttribute('data-kuschi-flavor-state', 'idle');
+              attemptLoad();
+            });
+          }
+        });
+    }
+
+    det.addEventListener('toggle', function () {
+      if (!det.open) return;
+      var st = det.getAttribute('data-kuschi-flavor-state') || 'idle';
+      if (st === 'done' || st === 'loading') return;
+      if (st === 'error') {
+        det.querySelectorAll('.kuschi-flavor-load-err').forEach(function (n) {
+          n.remove();
+        });
+        det.setAttribute('data-kuschi-flavor-state', 'idle');
+      }
+      attemptLoad();
+    });
   }
 
   function ensureLoaded() {
     if (ingredients && foodPairings) return Promise.resolve();
     if (loadPromise) return loadPromise;
     loadPromise = Promise.all([
-      fetch(ING_URL).then(function (r) {
-        if (!r.ok) throw new Error('Failed to load ' + ING_URL);
-        return r.json();
-      }),
-      fetch(FOOD_URL).then(function (r) {
-        if (!r.ok) throw new Error('Failed to load ' + FOOD_URL);
-        return r.json();
-      }),
+      fetchJsonWithTimeout(ING_URL, FETCH_TIMEOUT_AROMA_MS),
+      fetchJsonWithTimeout(FOOD_URL, FETCH_TIMEOUT_AROMA_MS),
     ])
       .then(function (pair) {
         ingredients = pair[0];
@@ -641,10 +700,10 @@
         })
         .join(', ');
       parts.push(
-        '<p class="aroma-hint-profiles"><strong>Indexed as spices/herbs:</strong> ' +
+        '<p class="aroma-hint-profiles"><strong>In your list already:</strong> ' +
           names +
           (apps.length > 5 ? ' …' : '') +
-          '. <span class="aroma-hint-profiles-sub">Partners below include harmony picks that go with these.</span></p>'
+          '. <span class="aroma-hint-profiles-sub">Ideas below pair with these.</span></p>'
       );
     }
     var top = data.suggestions && data.suggestions[0];
@@ -652,7 +711,7 @@
       var heat = heatTimingLineForSpice(top.id);
       if (heat) {
         parts.push(
-          '<p class="aroma-hint-timing"><strong>Heat note</strong> (' +
+          '<p class="aroma-hint-timing"><strong>When cooking</strong> (' +
             escHtml(top.name) +
             '): <span>' +
             escHtml(heat) +
@@ -690,7 +749,7 @@
       '" data-aroma-hint-wrap="1"' +
       openAttr +
       '>' +
-      '<div class="aroma-hint-loading">Loading seasoning ideas…</div>' +
+      '<div class="aroma-hint-loading">Loading quick seasoning suggestions…</div>' +
       '</div>'
     );
   }
@@ -708,8 +767,8 @@
             '<details class="aroma-hint-details"' +
             openTag +
             '>' +
-            '<summary class="aroma-hint-summary">Seasoning &amp; aroma enhancement</summary>' +
-            '<p class="aroma-hint-empty">No matches in the Aroma Bible index for these ingredients. Try <a href="aroma.html">Aroma lookup</a>.</p>' +
+            '<summary class="aroma-hint-summary">Seasoning ideas</summary>' +
+            '<p class="aroma-hint-empty">No matches in the Aroma Bible for these ingredients. Try <a href="aroma.html">Aroma lookup</a>.</p>' +
             '</details>';
           return;
         }
@@ -727,7 +786,6 @@
               aromaPageHrefForSpice(s.id) +
               '">' +
               escHtml(s.name) +
-              groupBadgesHtml(s.groups) +
               '</a>'
             );
           })
@@ -737,22 +795,26 @@
           '<details class="aroma-hint-details"' +
           openTag +
           '>' +
-          '<summary class="aroma-hint-summary">Seasoning &amp; aroma enhancement <span class="aroma-hint-teaser">— ' +
+          '<summary class="aroma-hint-summary">Seasoning ideas <span class="aroma-hint-teaser">— Try: ' +
           escHtml(names) +
           '</span></summary>' +
           enhance +
-          '<p class="aroma-hint-intro">Suggestions combine food appendix rows, ingredient↔spice matches, and harmony partners of spices already in your list. Tap a spice for heat behavior and pairings.</p>' +
+          '<p class="aroma-hint-intro">Based on your ingredients. Tap a spice for heat timing and pairings.</p>' +
           '<div class="aroma-hint-chips">' +
           chips +
           '</div>' +
           '<p class="aroma-hint-more"><a href="aroma.html">Open Aroma lookup →</a></p>' +
+          '<details class="kuschi-more-flavor-details" data-kuschi-more-flavor="1" data-kuschi-flavor-state="idle">' +
+          '<summary class="kuschi-more-flavor-summary">More flavour &amp; pairing notes</summary>' +
+          '<p class="kuschi-flavor-lazy-intro">Substitutes, taste balance, and cuisine ideas from the flavour book. Opens on demand (~2&nbsp;MB the first time).</p>' +
+          '</details>' +
           '</details>';
-        appendFlavorExtras(wrapEl, lines, recipe);
+        wireLazyFlavorExtras(wrapEl, lines, recipe);
       })
       .catch(function () {
         wrapEl.innerHTML =
           '<details class="aroma-hint-details"><summary class="aroma-hint-summary">Seasoning ideas</summary>' +
-          '<p class="aroma-hint-empty">Could not load aroma data.</p></details>';
+          '<p class="aroma-hint-empty">Couldn’t load aroma data (timeout or network). <a href="aroma.html">Aroma lookup</a></p></details>';
       });
   }
 
