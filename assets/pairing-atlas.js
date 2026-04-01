@@ -124,24 +124,29 @@
     var headExtra = '';
     if (enriched) {
       headExtra =
-        '<th scope="col" class="pa-mx-ind pa-mx-harm" title="Number of other spices this one harmonizes with (Aroma pairing matrix)">' +
+        '<th scope="col" class="pa-mx-ind pa-mx-harm" title="Total count of other spices listed as harmonizing with this one in aroma_data/pairing_matrix.json (spice–spice links, not food pairings).">' +
         '<span class="pa-th-main">Harmony</span>' +
         '<span class="pa-th-sub"># partners</span></th>' +
-        '<th scope="col" class="pa-mx-ind pa-mx-src-h" title="A = Aroma Bible extract; F = Flavor Bible (unified); T = Flavor Thesaurus wheel">' +
+        '<th scope="col" class="pa-mx-ind pa-mx-src-h" title="Which other book extracts include this ingredient: A = Aroma ingredients list; F = Flavor Bible row in ingredients_unified.json; T = Flavor Thesaurus wheel. Dim letter = no row in that source.">' +
         '<span class="pa-th-main">Books</span>' +
         '<span class="pa-th-sub">A·F·T</span></th>';
     }
 
     var thead =
-      '<thead><tr><th scope="col" class="pa-mx-spice">Spice / herb</th>' +
+      '<thead><tr><th scope="col" class="pa-mx-spice" title="Ingredient name. Link opens the full Aroma Bible page for this spice. Tap the row (outside the link) to open the cross-book detail drawer." aria-label="Spice or herb (first column)">' +
+      '<span class="pa-mx-g-main">Spice</span><span class="pa-mx-g-sub">or herb</span></th>' +
       labels
         .slice(0, 8)
         .map(function (lab, idx) {
           var g = idx + 1;
           var title =
             layer === 'harmony'
-              ? 'Group ' + g + ': ' + esc(lab) + ' — count of harmony partners in this group'
-              : 'Group ' + g + ': ' + esc(lab);
+              ? 'Aroma group ' +
+                g +
+                ' (' +
+                esc(lab) +
+                '): in heatmap mode, this cell is how many of this spice’s harmony partners are tagged with this aroma group (see pairing_matrix + ingredients aroma_groups).'
+              : 'Aroma group ' + g + ' — ' + esc(lab) + '. In aroma mode, ● means this spice is assigned to this group in the extract; · means not.';
           var aria = 'Group ' + g + ', ' + esc(lab);
           if (layer === 'harmony') {
             aria += ' — harmony partner count in this group';
@@ -200,7 +205,7 @@
             c +
             (on ? ' pa-mx-on' : ' pa-mx-off') +
             '" aria-label="' +
-            esc(label + ': ' + lab + (on ? ' — active' : ' — not primary')) +
+            esc(label + ': ' + lab + (on ? ' — tagged in this aroma group' : ' — not tagged in this aroma group')) +
             '">' +
             (on ? '<span class="pa-mx-mark pa-mx-l" aria-hidden="true">●</span>' : '<span class="pa-mx-mark pa-mx-n" aria-hidden="true">·</span>') +
             '</td>';
@@ -211,7 +216,7 @@
       if (enriched) {
         var hc = harmonyPartnerCount(ing.id);
         indCells +=
-          '<td class="pa-mx-ind pa-mx-harm-val" title="Total spice–spice harmony partners (pairing matrix)">' +
+          '<td class="pa-mx-ind pa-mx-harm-val" title="Number of other spices this one harmonizes with (aroma_data/pairing_matrix.json).">' +
           (hc != null ? String(hc) : '—') +
           '</td>';
         indCells += '<td class="pa-mx-ind pa-mx-src-cell">' + sourceBadges(unifiedRow) + '</td>';
@@ -839,14 +844,16 @@
       n +
       ' spices';
     if (state.layer === 'harmony') {
-      base += ' · Harmony heatmap: partner counts per G1–G8';
+      base +=
+        ' · Heatmap: each cell = how many harmony partners fall in that aroma column (numbers; not the same as ●/· in aroma mode)';
     } else {
-      base += ' · G1–G8 from Aroma extract · ● = active group';
+      base += ' · Aroma mode: ● = spice tagged in that G column; · = not tagged there';
     }
     if (state.enriched) {
-      base += ' · Harmony column = partner count · Books = A·F·T coverage';
+      base +=
+        ' · Harmony column = total spice–spice partners · Books = whether Aroma / Flavor unified / Thesaurus has this id';
     } else {
-      base += ' · Loading cross-book data…';
+      base += ' · Loading unified index + pairing + food data for Harmony, Books, food grid…';
     }
     el.textContent = base;
   }

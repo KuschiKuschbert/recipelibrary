@@ -269,7 +269,42 @@
     margin: 8px 0 0;
     padding-left: 1.2em;
   }
-  .pa-matrix-legend li { margin: 4px 0; }
+  .pa-matrix-legend li { margin: 6px 0; }
+  .pa-legend-lead {
+    margin: 0 0 10px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+  .pa-matrix-legend details {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+  }
+  .pa-matrix-legend summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--gold);
+    font-size: 13px;
+    list-style-position: outside;
+  }
+  .pa-matrix-legend summary:hover { color: var(--text); }
+  .pa-matrix-legend .pa-legend-more {
+    margin: 10px 0 0;
+    padding-left: 0;
+    list-style: none;
+  }
+  .pa-matrix-legend .pa-legend-more li {
+    margin: 8px 0;
+    padding-left: 0;
+  }
+
+  .pa-toolbar-hint {
+    width: 100%;
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--text3);
+  }
 
   .pa-matrix tbody td {
     text-align: center;
@@ -609,80 +644,125 @@
     <p class="pa-hero-label">Kuschi · Reference sheet</p>
     <h1 class="pa-hero-title">Aroma matrix</h1>
     <p class="pa-hero-sub">
-      <strong>Spice matrix:</strong> each column is an <strong>aroma group</strong> (G1–G8 + name in the header). After data loads:
-      <strong>Harmony</strong> is how many other spices harmonize with this one; <strong>Books</strong> shows A·F·T (Aroma / Flavor Bible / Thesaurus).
-      Tap a row for details. <strong>Harmony heatmap</strong> mode shows partner counts per group instead of dots.
-      <strong>Food matrix:</strong> foods from the Aroma extract × spice columns — see the legend under each table.
+      This page is two reference grids built from your extracted kitchen books (not live NotebookLM). The <strong>spice matrix</strong> lists herbs and spices in rows;
+      each <strong>column</strong> is one of eight <strong>aroma families</strong> (G1–G8). A gold <strong>●</strong> means the Aroma extract assigns that spice to that family; a faint <strong>·</strong> means it is not counted there.
+      That is different from “this spice goes with chicken”: it is about <em>how the spice smells</em>, grouped for the sheet.
+    </p>
+    <p class="pa-hero-sub">
+      After cross-book data loads, you also get a <strong>Harmony</strong> number (how many <em>other spices</em> are said to harmonize with this one in the pairing matrix) and <strong>Books A·F·T</strong>
+      (whether the same ingredient appears in the Aroma file, the Flavor Bible merge, or the Flavor Thesaurus wheel). <strong>Tap any spice row</strong> (not only the name link) to open a drawer with pairings, harmonizes-with, and more.
+      Switch to <strong>Harmony heatmap</strong> to see, per aroma column, <em>how many</em> of those partners sit in each group (numbers and tint), instead of ●/·.
+    </p>
+    <p class="pa-hero-sub">
+      The <strong>food matrix</strong> below is separate: rows are foods (chicken, rice, tomatoes…), columns are spices. A <strong>●</strong> means that extract lists the spice as a seasoning for that food.
+      Use <strong>Priority 25</strong> for a compact sheet; <strong>All spices</strong> for the full index. See the boxed legends under each toolbar for the full picture.
     </p>
   </header>
 
   <div class="pa-toolbar" role="region" aria-label="Spice matrix controls">
     <span class="pa-toolbar-label">Spice rows</span>
     <div class="pa-mode" role="group" aria-label="Row set">
-      <button type="button" id="paModePriority" aria-pressed="true">Priority 25</button>
-      <button type="button" id="paModeAll" aria-pressed="false">All spices</button>
+      <button type="button" id="paModePriority" aria-pressed="true" title="Show only the curated priority spices from aroma_matrix_meta.json (printable-style short list).">Priority 25</button>
+      <button type="button" id="paModeAll" aria-pressed="false" title="Show every spice in aroma_data/ingredients.json, sorted by name.">All spices</button>
     </div>
     <span class="pa-toolbar-label">Column layer</span>
     <div class="pa-mode" role="group" aria-label="Column layer">
-      <button type="button" id="paLayerAroma" aria-pressed="true">Aroma groups</button>
-      <button type="button" id="paLayerHarmony" aria-pressed="false" disabled aria-disabled="true" title="Loads after cross-book data">Harmony heatmap</button>
+      <button type="button" id="paLayerAroma" aria-pressed="true" title="Eight aroma-family columns: ● if this spice is tagged in that group, · if not.">Aroma groups</button>
+      <button type="button" id="paLayerHarmony" aria-pressed="false" disabled aria-disabled="true" title="Same eight columns, but each cell shows how many harmony partners sit in that aroma group. Enabled after data loads.">Harmony heatmap</button>
     </div>
     <label class="visually-hidden" for="paMatrixSearch">Filter spice rows</label>
     <input type="search" id="paMatrixSearch" class="pa-search" placeholder="Filter spices…" autocomplete="off" spellcheck="false" enterkeyhint="search" />
+    <p class="pa-toolbar-hint">
+      <strong>Priority 25</strong> = the curated “sheet” list from meta. <strong>All spices</strong> = every row in <code>aroma_data/ingredients.json</code>.
+      <strong>Aroma groups</strong> = classic ●/· grid. <strong>Harmony heatmap</strong> = same eight columns, but cells show counts (needs loaded data).
+    </p>
   </div>
 
   <main id="paMain">
     <p class="pa-status" id="paStatus" aria-live="polite">Loading…</p>
     <p class="pa-status pa-enrich-status" id="paEnrichStatus" aria-live="polite"></p>
     <div class="pa-matrix-legend" id="paSpiceLegend" aria-label="How to read the spice matrix">
-      <strong>How to read this table</strong>
+      <strong>How to read the spice matrix</strong>
+      <p class="pa-legend-lead">
+        Read across a row for one spice. The first column is its name (the link goes to the full Aroma profile). The next eight columns are <em>not</em> foods and <em>not</em> “how strong” the spice is — they are
+        <strong>aroma families</strong> from the reference classification. Think of them as columns on a printed aroma chart.
+      </p>
       <ul>
         <li>
-          <strong>G1–G8</strong> — eight aroma groups from the Aroma Bible extract (names match
-          <code>aroma_data/aroma_matrix_meta.json</code>). <strong>●</strong> means this spice is listed in that group;
-          <strong>·</strong> means not primary there.
+          <strong>G1–G8 (● and ·)</strong> — Labels under each header (Grassy, Citrus, …) come from the extract and
+          <code>aroma_data/aroma_matrix_meta.json</code>. <strong>●</strong> = this spice is tagged with that aroma group in <code>ingredients.json</code>.
+          <strong>·</strong> = not tagged for that group (empty does not mean “bad”, only “not in that bucket” for this sheet).
         </li>
         <li>
-          <strong>Harmony</strong> (after enrichment loads) — total count of other spices that <em>harmonize</em> with this one
-          (<code>aroma_data/pairing_matrix.json</code>).
+          <strong>Harmony (# partners)</strong> — Appears after data loads. One number for the whole row: how many <em>other spices</em> appear as harmony partners in
+          <code>aroma_data/pairing_matrix.json</code>. It answers “how connected is this spice in the spice–spice network?”, not “how many foods”.
         </li>
         <li>
-          <strong>Books A·F·T</strong> — <strong>A</strong> = in the Aroma extract; <strong>F</strong> = Flavor Bible row in the unified index;
-          <strong>T</strong> = Flavor Thesaurus wheel. Dots mean that book does not list this id.
+          <strong>Books (A·F·T)</strong> — Three letters show <em>coverage in other extracts</em>, not quality. <strong>A</strong> lit = row exists in the Aroma ingredient list.
+          <strong>F</strong> lit = same id has a Flavor Bible (or merged) entry in <code>combined_data/ingredients_unified.json</code>. <strong>T</strong> lit = name appears on the Flavor Thesaurus wheel.
+          A dim letter means that source has no row for this id (common for obscure spices).
         </li>
         <li>
-          <strong>Harmony heatmap</strong> (toggle above) — each G column shows <em>how many</em> harmony partners fall in that aroma group
-          (numbers / tint), not ●/·.
+          <strong>Harmony heatmap mode</strong> — Same eight columns, different meaning: each cell is <em>how many</em> of this spice’s harmony partners belong to that aroma group. Darker / larger numbers = more partners in that family.
+          Switch back to <strong>Aroma groups</strong> for the original ●/· view.
+        </li>
+        <li>
+          <strong>Row tap</strong> — Opens an inline panel with harmonizes-with links, Flavor Bible tiers (if any), Thesaurus family, and a short “bundled library context” blurb when present in the unified file.
         </li>
       </ul>
+      <details>
+        <summary>More detail: files and limits</summary>
+        <ul class="pa-legend-more">
+          <li>
+            Data is <strong>offline JSON</strong> in this repo (GitHub Pages). It reflects whatever last ran through the extract + merge scripts, not your live NotebookLM session.
+          </li>
+          <li>
+            The <strong>Flavor Thesaurus pairing graph</strong> (thousands of links) is not drawn as a matrix here; only wheel family + unified row show up in the drawer and <strong>T</strong>.
+          </li>
+          <li>
+            <strong>Science of Cooking</strong>, <strong>SFAH</strong>, and <strong>Art of Flavor / Fermentation</strong> snippets live inside <code>ingredients_unified.json</code> as <code>kitchen_context</code> and in the drawer’s “Bundled library context” section, not as extra matrix columns.
+          </li>
+        </ul>
+      </details>
     </div>
     <div class="pa-matrix-wrap" id="paMatrixHost"></div>
     <p class="pa-legend">
-      Group labels in <code>aroma_data/aroma_matrix_meta.json</code> follow a Vierich/Vilgis-style sheet (e.g. your
-      <code>aroma_matrix_sheet_1.pdf</code>); numbering matches <code>ingredients.json</code> <code>aroma_groups</code> and
-      <a href="aroma.html">Aroma lookup</a> badges G1–G8. Detail drawer merges <code>combined_data/ingredients_unified.json</code>
-      (Flavor Bible + Thesaurus where present). Not a pixel-perfect reproduction of the PDF.
+      Column wording is aligned with a Vierich/Vilgis-style aroma sheet (e.g. <code>aroma_matrix_sheet_1.pdf</code>); G numbers match
+      <code>ingredients.json</code> <code>aroma_groups</code> and <a href="aroma.html">Aroma lookup</a> badges. The drawer pulls from
+      <code>combined_data/ingredients_unified.json</code> (schema v2: <code>ingredients</code> rows + optional <code>kitchen_context</code> bundle). This UI is a working grid, not a pixel-perfect PDF copy.
     </p>
 
     <section class="pa-food-section" aria-labelledby="paFoodHeading">
       <h2 class="pa-food-title" id="paFoodHeading">Food × spice pairings</h2>
       <p class="pa-food-sub">
-        From <code>aroma_data/food_pairings.json</code> (Aroma extract). ● = seasoning listed for that food.
-        Tap a row for the full seasoning list.
+        This grid answers a different question than the spice matrix above: <strong>“For this food, which spices does the Aroma extract list as seasonings?”</strong>
+        Each row is one food (or dish category); each column is one spice or herb. Data comes from <code>aroma_data/food_pairings.json</code>.
+        <strong>Priority 25</strong> limits columns to the same curated spice set as the sheet; <strong>All spices</strong> uses every indexed spice (very wide on small screens — scroll horizontally).
       </p>
       <div class="pa-toolbar" role="region" aria-label="Food matrix controls">
         <span class="pa-toolbar-label">Spice columns</span>
         <div class="pa-mode" role="group" aria-label="Food matrix spice columns">
-          <button type="button" id="paFoodModePriority" aria-pressed="true">Priority 25</button>
-          <button type="button" id="paFoodModeAll" aria-pressed="false">All spices</button>
+          <button type="button" id="paFoodModePriority" aria-pressed="true" title="Spice columns = same priority list as the spice matrix sheet.">Priority 25</button>
+          <button type="button" id="paFoodModeAll" aria-pressed="false" title="Spice columns = all indexed spices (wide table).">All spices</button>
         </div>
         <label class="visually-hidden" for="paFoodSearch">Filter foods</label>
         <input type="search" id="paFoodSearch" class="pa-search" placeholder="Filter foods…" autocomplete="off" spellcheck="false" enterkeyhint="search" />
+        <p class="pa-toolbar-hint">
+          <strong>Priority 25</strong> = spice columns match the sheet’s priority list. <strong>All spices</strong> = one column per spice in <code>ingredients.json</code> (can be 100+ columns).
+        </p>
       </div>
       <div class="pa-matrix-legend" id="paFoodLegend" aria-label="How to read the food matrix">
-        <strong>Food × spice grid</strong> — Each row is a food from <code>aroma_data/food_pairings.json</code>.
-        Each column is a spice or herb. <strong>●</strong> = that spice is listed as a seasoning for that food; <strong>·</strong> = not listed.
-        Column headers show a short label and, when truncated, the full name on the second line. Tap a food row for the full seasoning list.
+        <strong>How to read the food × spice grid</strong>
+        <p class="pa-legend-lead">
+          Scan along a <strong>row</strong> to see which spices the extract associates with that food. Scan down a <strong>column</strong> to see which foods use that spice as a listed seasoning.
+          This is still extract data, not a universal truth about cooking.
+        </p>
+        <ul>
+          <li><strong>●</strong> = that spice appears in the food’s <code>seasonings</code> list in the JSON.</li>
+          <li><strong>·</strong> = not listed for that food in this extract (other books may still recommend it).</li>
+          <li><strong>Headers</strong> — First line is shortened if the name is long; second line shows the full spice name when needed. Hover (or screen reader) gives the full title.</li>
+          <li><strong>Tap a food row</strong> — Opens a list of all seasonings as chips with links to Aroma profiles.</li>
+        </ul>
       </div>
       <div class="pa-food-matrix-wrap" id="paFoodMatrixHost"></div>
     </section>
