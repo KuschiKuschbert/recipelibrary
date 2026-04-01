@@ -1,34 +1,11 @@
 /**
  * Stocktake checklist modal (Riviera + kitchen books). Uses order list merge via orderList.buildOrderLinesFlat().
- * Optional config.builtinCatalog: built-in snapshot rows (Riviera) with zone/category and default qty/brand/UOM.
+ * Optional config.builtinCatalog: built-in snapshot rows (Riviera) with zone, default qty/brand/UOM (category in data is ignored in UI).
  */
 (function () {
   'use strict';
 
   var ZONE_ORDER = ['freezer', 'coldroom', 'drystore', 'other'];
-
-  /** Sub-category order within each zone (matches generate_riviera_stocktake_data.py). */
-  var BUILTIN_CATEGORY_ORDER = {
-    freezer: [
-      'Pastry, bread, desserts',
-      'Prepared/freezer portions',
-      'Frozen savouries / convenience',
-      'Frozen seafood and meats',
-      'Frozen bread / gluten-free bakery',
-    ],
-    coldroom: [
-      'Dairy, cheese, deli',
-      'Fruit, veg, herbs',
-      'Dips, sauces, condiments, oils',
-    ],
-    drystore: [
-      'Pantry, dry goods, rice, pasta, flour',
-      'Spices, powders (volume estimates)',
-      'Other spices / packets / pantry',
-      'Crackers and snacks',
-      'Chocolate / sweets',
-    ],
-  };
 
   function esc(s) {
     return String(s || '')
@@ -131,37 +108,19 @@
     return set;
   }
 
-  function builtinsForZone(zone, catalog, recipeKeys, k) {
-    var order = BUILTIN_CATEGORY_ORDER[zone] || [];
-    var catMap = {};
-    order.forEach(function (c) {
-      catMap[c] = [];
-    });
+  /** Built-in catalog items for one zone, deduped vs recipe merge keys, sorted A–Z by name. */
+  function builtinsFlatForZone(zone, catalog, recipeKeys, k) {
+    var list = [];
     (catalog || []).forEach(function (item) {
       if (!item || item.zone !== zone) return;
       var mk = k.canonicalOrderMergeKey(item.name);
       if (recipeKeys[mk]) return;
-      var cat = item.category || 'Other';
-      if (!catMap[cat]) catMap[cat] = [];
-      catMap[cat].push(item);
+      list.push(item);
     });
-    var out = [];
-    order.forEach(function (c) {
-      if (catMap[c] && catMap[c].length) {
-        out.push({ category: c, items: catMap[c] });
-      }
+    list.sort(function (a, b) {
+      return (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' });
     });
-    Object.keys(catMap).forEach(function (c) {
-      if (order.indexOf(c) >= 0) return;
-      if (catMap[c].length) {
-        out.push({ category: c, items: catMap[c] });
-      }
-    });
-    return out;
-  }
-
-  function zoneHasBuiltinRows(zone, catalog, recipeKeys, k) {
-    return builtinsForZone(zone, catalog, recipeKeys, k).length > 0;
+    return list;
   }
 
   function buildExportDocWithBuiltins(doc, catalog, orderList, k) {
@@ -296,8 +255,8 @@
       ZONE_ORDER.forEach(function (z) {
         var rows = byZone[z];
         var stxRows = stxByZone[z];
-        var builtinGroups = builtinsForZone(z, builtinCatalog, recipeKeys, k);
-        if (!rows.length && !stxRows.length && !builtinGroups.length) return;
+        var builtinFlat = builtinsFlatForZone(z, builtinCatalog, recipeKeys, k);
+        if (!rows.length && !stxRows.length && !builtinFlat.length) return;
         html += '<div class="order-zone-block stkt-zone-block">';
         html += '<div class="order-zone-head">' + esc(ZL[z]) + '</div>';
 
@@ -374,23 +333,20 @@
             '</div>';
         });
 
-        builtinGroups.forEach(function (grp) {
-          html += '<div class="stkt-category-head">' + esc(grp.category) + '</div>';
-          grp.items.forEach(function (item) {
-            var bid = rowIdBuiltin(item.id);
-            var stB = builtinLineState(doc, item);
-            html +=
-              '<div class="stkt-line-row stkt-line-row--builtin" data-kind="builtin">' +
-              '<div class="stkt-line-name">' +
-              esc(item.name) +
-              ' <span class="stkt-badge stkt-badge--catalog">catalog</span></div>' +
-              '<div class="stkt-zone-label">' +
-              esc(ZL[z]) +
-              '</div>' +
-              qtyBrandUomCells(bid, stB) +
-              '<span class="stkt-row-spacer"></span>' +
-              '</div>';
-          });
+        builtinFlat.forEach(function (item) {
+          var bid = rowIdBuiltin(item.id);
+          var stB = builtinLineState(doc, item);
+          html +=
+            '<div class="stkt-line-row stkt-line-row--builtin" data-kind="builtin">' +
+            '<div class="stkt-line-name">' +
+            esc(item.name) +
+            ' <span class="stkt-badge stkt-badge--catalog">catalog</span></div>' +
+            '<div class="stkt-zone-label">' +
+            esc(ZL[z]) +
+            '</div>' +
+            qtyBrandUomCells(bid, stB) +
+            '<span class="stkt-row-spacer"></span>' +
+            '</div>';
         });
 
         html += '</div>';
@@ -566,15 +522,11 @@
       if (builtinCatalog && builtinCatalog.length) {
         ZONE_ORDER.forEach(function (zid) {
           var zu = ZL[zid] || zid;
-          var groups = builtinsForZone(zid, builtinCatalog, recipeKeys, k);
-          groups.forEach(function (grp) {
-            lines.push({ zone: zu, isCategory: true, title: grp.category });
-            grp.items.forEach(function (item) {
-              lines.push({
-                zone: zu,
-                name: item.name,
-                st: builtinLineState(doc, item),
-              });
+          builtinsFlatForZone(zid, builtinCatalog, recipeKeys, k).forEach(function (item) {
+            lines.push({
+              zone: zu,
+              name: item.name,
+              st: builtinLineState(doc, item),
             });
           });
         });
@@ -592,10 +544,6 @@
         if (!arr || !arr.length) return;
         text += label.toUpperCase() + '\n';
         arr.forEach(function (L) {
-          if (L.isCategory) {
-            text += '  [' + L.title + ']\n';
-            return;
-          }
           var p = L.st;
           var u = p.uom ? ' ' + p.uom : '';
           var b = p.brand ? ' · ' + p.brand : '';
