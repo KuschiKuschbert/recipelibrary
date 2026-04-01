@@ -1201,38 +1201,32 @@ body {
   display: none;
 }
 .kuschi-modal-seasoning-idle {
-  padding: 6px 4px 8px;
+  padding: 8px 6px 10px;
 }
 .kuschi-modal-seasoning-idle-text {
-  margin: 0 0 16px;
-  padding: 0 14px;
+  margin: 0 0 14px;
+  padding: 0 12px;
   font-size: 13px;
   line-height: 1.6;
   color: var(--text3);
   max-width: 42em;
 }
-.kuschi-modal-seasoning-load-btn {
-  display: block;
-  width: 100%;
-  max-width: 320px;
-  margin: 0 auto;
-  padding: 12px 18px;
-  font-size: 14px;
+.kuschi-modal-seasoning-idle-text strong {
   font-weight: 600;
-  font-family: inherit;
-  color: var(--text);
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  color: var(--text2);
 }
-.kuschi-modal-seasoning-load-btn:hover {
-  background: var(--surface-hover);
-  border-color: var(--border-hover);
-  color: var(--gold);
+/* Same row rhythm as .modal-copy-bar; single button grows like a full-width copy action. */
+.kuschi-modal-seasoning-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 4px;
 }
-.kuschi-modal-seasoning-load-btn:focus-visible {
+.kuschi-modal-seasoning-actions .modal-copy-btn {
+  flex: 1;
+  min-width: min(100%, 200px);
+}
+.kuschi-modal-seasoning-actions .modal-copy-btn:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 2px;
 }

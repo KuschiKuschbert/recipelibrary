@@ -1006,9 +1006,10 @@
         '</div>' +
         '<div class="kuschi-modal-seasoning-body" data-aroma-hint-body="1">' +
         '<div class="kuschi-modal-seasoning-idle">' +
-        '<p class="kuschi-modal-seasoning-idle-text">Optional: herbs and spices from the Aroma index that often harmonize with this ingredient list. Loads only when you ask — opening the recipe stays fast.</p>' +
-        '<button type="button" class="kuschi-modal-seasoning-load-btn" data-aroma-inline-load="1">Show seasoning suggestions</button>' +
-        '</div></div></div>'
+        '<p class="kuschi-modal-seasoning-idle-text"><strong>See Aroma matches</strong> for this ingredient list. Tap below to load — spice pages open in a <strong>new tab</strong> so you keep this recipe open.</p>' +
+        '<div class="kuschi-modal-seasoning-actions">' +
+        '<button type="button" class="modal-copy-btn kuschi-modal-seasoning-load-btn" data-aroma-inline-load="1">Load seasoning suggestions</button>' +
+        '</div></div></div></div>'
       );
     }
     var wantOpen = !!opts.openByDefault;
