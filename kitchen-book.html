@@ -949,11 +949,16 @@ function openRecipe(id) {
   const full = KuschiUserRecipes.getBookRecipeById(CURRENT_BOOK_ID, id);
   if (!full) return;
   currentRecipe = KuschiUserRecipes.kitchenToDetail(full);
+  const recKb = currentRecipe;
   const modal = document.getElementById('modal');
   modal.innerHTML = renderBookRecipeDetail(currentRecipe);
   modal.scrollTop = 0;
-  if (window.KuschiScreenWake) KuschiScreenWake.sync();
-  KuschiRecipeUi.hydrateModalAroma(modal, currentRecipe);
+  setTimeout(function () {
+    if (window.KuschiScreenWake) KuschiScreenWake.sync();
+  }, 0);
+  KuschiRecipeUi.scheduleHydrateModalAroma(modal, recKb, function () {
+    return currentRecipe && currentRecipe.id === recKb.id;
+  });
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }

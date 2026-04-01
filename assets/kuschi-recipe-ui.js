@@ -29,5 +29,23 @@
     hydrateModalAroma: function (modalEl, recipe) {
       if (w.KuschiAromaHints) w.KuschiAromaHints.hydrateModal(modalEl, recipe);
     },
+    /**
+     * Defer aroma matching until the browser is idle so the user can scroll, close,
+     * and use inputs immediately after the modal paints. Falls back to setTimeout(0).
+     * @param {() => boolean} [isStillOpen] Return false if user closed modal or switched recipe.
+     */
+    scheduleHydrateModalAroma: function (modalEl, recipe, isStillOpen) {
+      if (!modalEl || !recipe) return;
+      var go = function () {
+        if (!modalEl.isConnected || !w.KuschiAromaHints) return;
+        if (typeof isStillOpen === 'function' && !isStillOpen()) return;
+        w.KuschiAromaHints.hydrateModal(modalEl, recipe);
+      };
+      if (typeof w.requestIdleCallback === 'function') {
+        w.requestIdleCallback(go, { timeout: 500 });
+      } else {
+        w.setTimeout(go, 0);
+      }
+    },
   };
 })(typeof window !== 'undefined' ? window : globalThis);

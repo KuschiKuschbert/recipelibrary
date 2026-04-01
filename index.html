@@ -1268,13 +1268,14 @@ async function openRecipe(id) {
     const full = KuschiUserRecipes.getKitchenById(id);
     if (full) {
       currentRecipe = KuschiUserRecipes.kitchenToDetail(full);
+      const recUser = currentRecipe;
       modal.innerHTML = renderRecipeDetail(currentRecipe);
       modal.scrollTop = 0;
       overlay.classList.add('open');
       setTimeout(() => {
         if (window.KuschiScreenWake) KuschiScreenWake.sync();
-        KuschiRecipeUi.hydrateModalAroma(modal, currentRecipe);
       }, 0);
+      KuschiRecipeUi.scheduleHydrateModalAroma(modal, recUser, () => currentRecipe && currentRecipe.id === recUser.id);
       return;
     }
   }
@@ -1302,12 +1303,13 @@ async function openRecipe(id) {
     const recipe = findRecipeInDetailPayload(detail, id);
     if (!recipe) throw new Error('Recipe not in detail file');
     currentRecipe = recipe;
+    const recCat = recipe;
     modal.innerHTML = renderRecipeDetail(recipe);
     modal.scrollTop = 0;
     setTimeout(() => {
       if (window.KuschiScreenWake) KuschiScreenWake.sync();
-      KuschiRecipeUi.hydrateModalAroma(modal, currentRecipe);
     }, 0);
+    KuschiRecipeUi.scheduleHydrateModalAroma(modal, recCat, () => currentRecipe && currentRecipe.id === recCat.id);
     if (modalPerf) {
       console.log('[Kuschi modal] openRecipe total ms', (performance.now() - tModal0).toFixed(1));
     }
