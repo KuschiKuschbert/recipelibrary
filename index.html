@@ -358,8 +358,21 @@
     flex-shrink: 0;
   }
   .hero-nav-cluster > button.hero-nav-link {
-    min-height: 42px;
+    min-height: 44px;
     align-items: center;
+  }
+  /* Compact row: + Add, QR, Kitchen books — same footprint */
+  .hero-nav-cluster .hero-add-split:not(.hero-lookup-split) .hero-add-trigger.hero-nav-link,
+  .hero-books-split .hero-add-trigger.hero-nav-link {
+    min-height: 44px;
+    padding-top: var(--hero-pill-pad-y);
+    padding-bottom: var(--hero-pill-pad-y);
+  }
+  /* Prominent control: Flavor & aroma only (stays larger than the compact pills) */
+  .hero-lookup-split .hero-add-trigger.hero-nav-link {
+    min-height: 52px;
+    padding: 14px 22px;
+    font-size: 14px;
   }
   .hero-nav-cluster button.hero-nav-link { min-width: 0; }
 
@@ -381,7 +394,20 @@
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    min-height: 42px;
+    min-height: 44px;
+  }
+  /* Collapsed flyouts: inner links still layout-wrap at width 0 and were stretching the row tall */
+  .hero-add-split:not(.expanded) .hero-add-inner {
+    align-items: center;
+  }
+  .hero-add-split.expanded .hero-add-inner {
+    align-items: stretch;
+  }
+  .hero-add-split:not(.expanded) .hero-add-pair {
+    max-height: 0;
+    min-height: 0;
+    overflow: hidden;
+    align-self: center;
   }
   .hero-add-split .hero-nav-link {
     border: none;
@@ -405,6 +431,7 @@
   .hero-add-split.expanded .hero-add-pair {
     max-width: min(340px, calc(100vw - 48px));
     max-width: min(340px, calc(100cqi - 48px));
+    max-height: none;
     opacity: 1;
     pointer-events: auto;
   }
