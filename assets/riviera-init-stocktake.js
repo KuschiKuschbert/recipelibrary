@@ -4,7 +4,9 @@
  */
 (function () {
   'use strict';
-  var ol = window.rivieraOrderList;
+  var ol = typeof ensureRivieraOrderList === 'function'
+    ? ensureRivieraOrderList()
+    : window.rivieraOrderList;
   if (!window.KuschiStocktakeList || !ol) return;
   window.rivieraStocktakeList = window.KuschiStocktakeList.create({
     overlayId: 'stocktakeOverlay',
