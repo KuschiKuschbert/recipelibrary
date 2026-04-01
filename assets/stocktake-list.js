@@ -1,6 +1,7 @@
 /**
  * Stocktake checklist modal (Riviera + kitchen books). Uses order list merge via orderList.buildOrderLinesFlat().
- * Optional config.builtinCatalog: built-in snapshot rows (Riviera) with zone, default qty/brand/UOM (category in data is ignored in UI).
+ * Optional config.builtinCatalog: static built-in snapshot rows (kitchen books / tests).
+ * Optional config.builtinCatalogUrl: fetch JSON array on first open (Riviera); same-origin URL.
  */
 (function () {
   'use strict';
@@ -195,6 +196,7 @@
    * @param {object} config.storage - load, patchRow, addExtra, removeExtra, clearQuantities, exportJson
    * @param {() => boolean} [config.shouldReleaseBodyScroll]
    * @param {object[]} [config.builtinCatalog] - optional { id, name, zone, category, brand, defaultQty, defaultUom }
+   * @param {string} [config.builtinCatalogUrl] - optional same-origin URL to JSON array (lazy on first open)
    */
   function create(config) {
     var overlayId = config.overlayId;
@@ -208,7 +210,38 @@
     var shouldReleaseBodyScroll = config.shouldReleaseBodyScroll || function () {
       return true;
     };
-    var builtinCatalog = config.builtinCatalog || [];
+    var staticBuiltinCatalog =
+      Array.isArray(config.builtinCatalog) && config.builtinCatalog.length > 0 ? config.builtinCatalog : null;
+    var builtinCatalogUrl = String(config.builtinCatalogUrl || '').trim();
+    var lazyCatalogNotLoaded = {};
+    var lazyBuiltinCatalog = lazyCatalogNotLoaded;
+    var lazyBuiltinLoading = null;
+
+    function getBuiltinCatalogArray() {
+      if (staticBuiltinCatalog) return staticBuiltinCatalog;
+      if (lazyBuiltinCatalog !== lazyCatalogNotLoaded) return lazyBuiltinCatalog;
+      return [];
+    }
+
+    function loadLazyBuiltinCatalog() {
+      if (!builtinCatalogUrl) return Promise.resolve();
+      if (lazyBuiltinCatalog !== lazyCatalogNotLoaded) return Promise.resolve();
+      if (lazyBuiltinLoading) return lazyBuiltinLoading;
+      lazyBuiltinLoading = fetch(builtinCatalogUrl, { credentials: 'same-origin' })
+        .then(function (res) {
+          if (!res.ok) throw new Error('Stocktake catalog HTTP ' + res.status);
+          return res.json();
+        })
+        .then(function (data) {
+          lazyBuiltinCatalog = Array.isArray(data) ? data : [];
+          lazyBuiltinLoading = null;
+        })
+        .catch(function (e) {
+          lazyBuiltinLoading = null;
+          throw e;
+        });
+      return lazyBuiltinLoading;
+    }
 
     function Kr() {
       return window.KuschiUserRecipes;
@@ -255,7 +288,7 @@
       ZONE_ORDER.forEach(function (z) {
         var rows = byZone[z];
         var stxRows = stxByZone[z];
-        var builtinFlat = builtinsFlatForZone(z, builtinCatalog, recipeKeys, k);
+        var builtinFlat = builtinsFlatForZone(z, getBuiltinCatalogArray(), recipeKeys, k);
         if (!rows.length && !stxRows.length && !builtinFlat.length) return;
         html += '<div class="order-zone-block stkt-zone-block">';
         html += '<div class="order-zone-head">' + esc(ZL[z]) + '</div>';
@@ -429,6 +462,31 @@
     }
 
     function open() {
+      var needsFetch =
+        builtinCatalogUrl && !staticBuiltinCatalog && lazyBuiltinCatalog === lazyCatalogNotLoaded;
+      if (needsFetch) {
+        var bodyPre = document.getElementById(bodyId);
+        if (bodyPre) {
+          bodyPre.innerHTML =
+            '<p style="font-size:14px;color:var(--text3)">Loading catalog…</p>';
+        }
+        var elPre = document.getElementById(overlayId);
+        if (elPre) {
+          elPre.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        }
+        loadLazyBuiltinCatalog()
+          .then(function () {
+            renderBody();
+          })
+          .catch(function () {
+            if (bodyPre) {
+              bodyPre.innerHTML =
+                '<p style="font-size:14px;color:#e8a0a0">Could not load stocktake catalog. Check your connection and try again.</p>';
+            }
+          });
+        return;
+      }
       renderBody();
       var el = document.getElementById(overlayId);
       if (el) {
@@ -468,8 +526,9 @@
     }
 
     function clearCounted() {
+      var cat = getBuiltinCatalogArray();
       var msg =
-        builtinCatalog && builtinCatalog.length
+        cat && cat.length
           ? 'Clear all counted quantities and brands for recipe/order lines (UOM locks stay)? Built-in catalog rows reset to snapshot defaults.'
           : 'Clear all counted quantities and brands? UOM locks stay as they are.';
       if (!confirm(msg)) return;
@@ -519,10 +578,11 @@
         lines.push({ zone: ZL[z] || z, name: ex.name + ' (stocktake)', st: stxExtraState(ex) });
       });
 
-      if (builtinCatalog && builtinCatalog.length) {
+      var catCopy = getBuiltinCatalogArray();
+      if (catCopy && catCopy.length) {
         ZONE_ORDER.forEach(function (zid) {
           var zu = ZL[zid] || zid;
-          builtinsFlatForZone(zid, builtinCatalog, recipeKeys, k).forEach(function (item) {
+          builtinsFlatForZone(zid, catCopy, recipeKeys, k).forEach(function (item) {
             lines.push({
               zone: zu,
               name: item.name,
@@ -560,9 +620,10 @@
     function copyJson() {
       var k = Kr();
       var jsonStr;
-      if (builtinCatalog && builtinCatalog.length && k && orderList) {
+      var catJ = getBuiltinCatalogArray();
+      if (catJ && catJ.length && k && orderList) {
         var doc = storage.load();
-        jsonStr = JSON.stringify(buildExportDocWithBuiltins(doc, builtinCatalog, orderList, k), null, 2);
+        jsonStr = JSON.stringify(buildExportDocWithBuiltins(doc, catJ, orderList, k), null, 2);
       } else {
         jsonStr = storage.exportJson();
       }

@@ -6,6 +6,7 @@
 <meta name="theme-color" content="#0c0c0c">
 <title>Riviera — Prep Chef Recipes</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23c9a96e'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/theme.css">
@@ -659,13 +660,7 @@
 <script src="assets/aroma-hints.js"></script>
 <script src="assets/kuschi-recipe-ui.js"></script>
 <script src="assets/order-list.js"></script>
-<script src="assets/stocktake-data.js"></script>
-<script src="assets/stocktake-list.js"></script>
-<script src="assets/recipe-gemini-format.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js" crossorigin="anonymous"></script>
-<script src="assets/recipe-import-helpers.js"></script>
 <script src="assets/recipe-metric-normalize.js"></script>
-<script src="assets/qrcodejs-1.0.0.min.js"></script>
 <script src="assets/screen-wake.js"></script>
 <script>
 /** Static JSON (same-origin) — keeps initial HTML/JS parse small; merged after fetch. */
@@ -915,66 +910,26 @@ const rivieraOrderList =
     },
   });
 
-const rivieraStocktakeList =
-  window.KuschiStocktakeList &&
-  rivieraOrderList &&
-  KuschiStocktakeList.create({
-    overlayId: 'stocktakeOverlay',
-    bodyId: 'stocktakeBody',
-    formIds: { name: 'stNewName', zone: 'stNewZone', qty: 'stNewQty', brand: 'stNewBrand', uom: 'stNewUom' },
-    orderList: rivieraOrderList,
-    getOrderExtras: function () {
-      return KuschiUserRecipes.loadOrderExtras();
-    },
-    storage: {
-      load: function () {
-        return KuschiUserRecipes.loadRivieraStocktake();
-      },
-      patchRow: function (rowId, patch) {
-        KuschiUserRecipes.patchRivieraStocktakeRow(rowId, patch);
-      },
-      addExtra: function (n, z, q, b, u) {
-        KuschiUserRecipes.addRivieraStocktakeExtra(n, z, q, b, u);
-      },
-      removeExtra: function (id) {
-        KuschiUserRecipes.removeRivieraStocktakeExtra(id);
-      },
-      clearQuantities: function () {
-        KuschiUserRecipes.clearRivieraStocktakeQuantities();
-      },
-      exportJson: function () {
-        return KuschiUserRecipes.exportRivieraStocktakeJson();
-      },
-    },
-    shouldReleaseBodyScroll: function () {
-      return (
-        !document.getElementById('modalOverlay').classList.contains('open') &&
-        !document.getElementById('addRivieraOverlay').classList.contains('open') &&
-        !document.getElementById('rivieraAdminOverlay').classList.contains('open') &&
-        !document.getElementById('pageQrOverlay').classList.contains('open') &&
-        !document.getElementById('orderListOverlay').classList.contains('open')
-      );
-    },
-    builtinCatalog: window.RIVIERA_STOCKTAKE_CATALOG || [],
-  });
+window.rivieraOrderList = rivieraOrderList;
+window.__RIVIERA_STOCKTAKE_CATALOG_URL = siteBaseUrl() + '/riviera_data/stocktake_catalog.json';
 
 function openStocktakeModal() {
-  if (rivieraStocktakeList) rivieraStocktakeList.open();
+  if (window.rivieraStocktakeList) window.rivieraStocktakeList.open();
 }
 function closeStocktakeModal() {
-  if (rivieraStocktakeList) rivieraStocktakeList.close();
+  if (window.rivieraStocktakeList) window.rivieraStocktakeList.close();
 }
 function submitStocktakeAdd() {
-  if (rivieraStocktakeList) rivieraStocktakeList.submitAdd();
+  if (window.rivieraStocktakeList) window.rivieraStocktakeList.submitAdd();
 }
 function clearStocktakeCounts() {
-  if (rivieraStocktakeList) rivieraStocktakeList.clearCounted();
+  if (window.rivieraStocktakeList) window.rivieraStocktakeList.clearCounted();
 }
 function copyStocktakeText() {
-  if (rivieraStocktakeList) rivieraStocktakeList.copyText();
+  if (window.rivieraStocktakeList) window.rivieraStocktakeList.copyText();
 }
 function copyStocktakeJson() {
-  if (rivieraStocktakeList) rivieraStocktakeList.copyJson();
+  if (window.rivieraStocktakeList) window.rivieraStocktakeList.copyJson();
 }
 
 function syncRivieraOrderListZoneEditButton() {
@@ -1610,5 +1565,11 @@ if (window.KuschiAromaHints && typeof KuschiAromaHints.ensureLoaded === 'functio
   }
 }
 </script>
+<script src="assets/stocktake-list.js" defer></script>
+<script src="assets/recipe-gemini-format.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js" crossorigin="anonymous" defer></script>
+<script src="assets/recipe-import-helpers.js" defer></script>
+<script src="assets/qrcodejs-1.0.0.min.js" defer></script>
+<script src="assets/riviera-init-stocktake.js" defer></script>
 </body>
 </html>
