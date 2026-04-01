@@ -1166,6 +1166,12 @@ body {
   border: 1px solid var(--border);
   background: var(--surface);
   overflow: hidden;
+  /* Limit reflow from chip list to the seasoning block (modal feels less “jittery”). */
+  contain: layout style;
+}
+/* Reserve vertical space while matching runs so the modal doesn’t lurch when chips appear. */
+[data-aroma-hint-body]:has(.aroma-hint-body-loading) {
+  min-height: 132px;
 }
 .aroma-hint-summary {
   cursor: pointer;

@@ -746,6 +746,16 @@
 
   /** Hint lines processed per animation frame so the main thread can handle input between chunks. */
   var MODAL_HINT_LINES_PER_FRAME = 3;
+  /** At or below this count, run matching in one task (avoids many rAF turns on typical recipes). */
+  var MODAL_HINT_SYNC_LINE_THRESHOLD = 20;
+
+  function scheduleAromaFillPaint(fn) {
+    if (typeof global.requestAnimationFrame === 'function') {
+      global.requestAnimationFrame(fn);
+    } else {
+      global.setTimeout(fn, 0);
+    }
+  }
 
   /**
    * @param {Array<{item:string}>} lines
@@ -756,6 +766,11 @@
       done({ suggestions: [], matchedSpiceIds: [], apparentProfiles: [] });
       return;
     }
+    var n = lines.length;
+    if (n <= MODAL_HINT_SYNC_LINE_THRESHOLD) {
+      done(buildSuggestions(lines));
+      return;
+    }
     var scores = Object.create(null);
     var matchedSpiceIds = [];
     var apparentSet = Object.create(null);
@@ -764,7 +779,6 @@
       scores[id] = (scores[id] || 0) + delta;
     }
     var L = 0;
-    var n = lines.length;
     function step() {
       var end = Math.min(L + MODAL_HINT_LINES_PER_FRAME, n);
       for (; L < end; L++) {
@@ -933,7 +947,7 @@
             if (!bodyEl2 || !detailsEl2) {
               return;
             }
-            global.setTimeout(function () {
+            scheduleAromaFillPaint(function () {
               if (!wrapEl.isConnected) return;
               detailsEl2 = wrapEl.querySelector('.aroma-hint-details');
               bodyEl2 = wrapEl.querySelector('[data-aroma-hint-body]');
@@ -982,7 +996,7 @@
                 '</details>';
               wireLazyFlavorExtras(wrapEl, lines, recipe);
               syncAromaDetailsOpen(wrapEl, detailsEl2);
-            }, 0);
+            });
           });
         });
       })
