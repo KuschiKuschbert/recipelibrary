@@ -1420,7 +1420,7 @@ function renderKitchenModalMethodBlock(r) {
 }
 
 function renderKitchenModalAromaAndCopyBlock(r) {
-  let html = KuschiRecipeUi.aromaSeasoningSectionHtml({ idSuffix: 'Idx', openByDefault: false });
+  let html = KuschiRecipeUi.aromaSeasoningSectionHtml({ idSuffix: 'Idx', openByDefault: true });
   html += `<div class="modal-copy-bar">`;
   html += `<button class="modal-copy-btn" onclick="copyRecipeText('${KuschiRecipeUi.esc(r.id)}')">Copy as text</button>`;
   html += `<button class="modal-copy-btn" onclick="copyRecipeName(this, '${KuschiRecipeUi.esc(r.name).replace(/'/g,"\\'")}')">Copy name</button>`;
