@@ -1486,14 +1486,15 @@ function rescaleModal(val) {
 
   const grid = document.getElementById('modalIngGrid');
   if (!grid) return;
-  grid.innerHTML = '';
+  const parts = [];
   for (const i of toArr(currentRecipe.ingredients).filter(i => i && i.item)) {
     const scaled = scaleModalQty(i.qty, factor);
     const qty = [scaled, i.unit || ''].filter(Boolean).join(' ');
     const prep = i.prep ? ` <span class="ing-prep">— ${KuschiRecipeUi.esc(i.prep)}</span>` : '';
-    grid.innerHTML += `<div class="ing-qty">${KuschiRecipeUi.esc(qty) || '·'}</div>`;
-    grid.innerHTML += `<div class="ing-item">${KuschiRecipeUi.esc(i.item)}${prep}</div>`;
+    parts.push(`<div class="ing-qty">${KuschiRecipeUi.esc(qty) || '·'}</div>`);
+    parts.push(`<div class="ing-item">${KuschiRecipeUi.esc(i.item)}${prep}</div>`);
   }
+  grid.innerHTML = parts.join('');
 }
 
 

@@ -6,6 +6,34 @@
  * they are not shown as primary UI labels; displayed names come from JSON `name`.
  */
 (function (global) {
+  /**
+   * Run fn after the current task and at least one paint opportunity so taps/scroll/input
+   * are not stuck behind ensureLoaded().then → buildSuggestions → innerHTML.
+   */
+  function deferAromaDomWork(fn) {
+    function run() {
+      try {
+        fn();
+      } catch (e) {
+        if (typeof console !== 'undefined' && console.warn) console.warn('[aroma-hints]', e);
+      }
+    }
+    global.setTimeout(function () {
+      var sch = global.scheduler;
+      if (sch && typeof sch.yield === 'function') {
+        sch.yield().then(run).catch(run);
+        return;
+      }
+      if (typeof global.requestAnimationFrame === 'function') {
+        global.requestAnimationFrame(function () {
+          global.requestAnimationFrame(run);
+        });
+        return;
+      }
+      global.setTimeout(run, 0);
+    }, 0);
+  }
+
   var ING_URL = 'aroma_data/ingredients.json';
   var FOOD_URL = 'aroma_data/food_pairings.json';
   var UNIFIED_URL = 'combined_data/ingredients_unified.json';
@@ -799,55 +827,61 @@
 
     ensureLoaded()
       .then(function () {
-        var data = buildSuggestions(lines);
-        var limit = compactTopN(wrapEl);
-        var top = data.suggestions.slice(0, limit);
-        if (!bodyEl || !detailsEl) {
-          return;
-        }
-        if (!top.length) {
-          if (summaryEl) summaryEl.textContent = 'Seasoning ideas';
-          bodyEl.innerHTML =
-            '<p class="aroma-hint-empty">No matches in the Aroma Bible for these ingredients. Try <a href="aroma.html">Aroma lookup</a>.</p>';
-          syncAromaDetailsOpen(wrapEl, detailsEl);
-          return;
-        }
-        var names = top
-          .slice(0, 8)
-          .map(function (s) {
-            return s.name;
-          })
-          .join(', ');
-        var chips = top
-          .slice(0, limit)
-          .map(function (s) {
-            return (
-              '<a class="aroma-hint-chip" href="' +
-              aromaPageHrefForSpice(s.id) +
-              '">' +
-              escHtml(s.name) +
-              '</a>'
-            );
-          })
-          .join('');
-        var enhance = enhancementBlockHtml(data);
-        if (summaryEl) {
-          summaryEl.innerHTML =
-            'Seasoning ideas <span class="aroma-hint-teaser">— Try: ' + escHtml(names) + '</span>';
-        }
-        bodyEl.innerHTML =
-          enhance +
-          '<p class="aroma-hint-intro">Based on your ingredients. Tap a spice for heat timing and pairings.</p>' +
-          '<div class="aroma-hint-chips">' +
-          chips +
-          '</div>' +
-          '<p class="aroma-hint-more"><a href="aroma.html">Open Aroma lookup →</a></p>' +
-          '<details class="kuschi-more-flavor-details" data-kuschi-more-flavor="1" data-kuschi-flavor-state="idle">' +
-          '<summary class="kuschi-more-flavor-summary">More flavour &amp; pairing notes</summary>' +
-          '<p class="kuschi-flavor-lazy-intro">Substitutes, taste balance, and cuisine ideas from the flavour book. Opens on demand (~2&nbsp;MB the first time).</p>' +
-          '</details>';
-        wireLazyFlavorExtras(wrapEl, lines, recipe);
-        syncAromaDetailsOpen(wrapEl, detailsEl);
+        deferAromaDomWork(function () {
+          if (!wrapEl.isConnected) return;
+          var detailsEl2 = wrapEl.querySelector('.aroma-hint-details');
+          var bodyEl2 = wrapEl.querySelector('[data-aroma-hint-body]');
+          var summaryEl2 = detailsEl2 ? detailsEl2.querySelector('.aroma-hint-summary') : null;
+          var data = buildSuggestions(lines);
+          var limit = compactTopN(wrapEl);
+          var top = data.suggestions.slice(0, limit);
+          if (!bodyEl2 || !detailsEl2) {
+            return;
+          }
+          if (!top.length) {
+            if (summaryEl2) summaryEl2.textContent = 'Seasoning ideas';
+            bodyEl2.innerHTML =
+              '<p class="aroma-hint-empty">No matches in the Aroma Bible for these ingredients. Try <a href="aroma.html">Aroma lookup</a>.</p>';
+            syncAromaDetailsOpen(wrapEl, detailsEl2);
+            return;
+          }
+          var names = top
+            .slice(0, 8)
+            .map(function (s) {
+              return s.name;
+            })
+            .join(', ');
+          var chips = top
+            .slice(0, limit)
+            .map(function (s) {
+              return (
+                '<a class="aroma-hint-chip" href="' +
+                aromaPageHrefForSpice(s.id) +
+                '">' +
+                escHtml(s.name) +
+                '</a>'
+              );
+            })
+            .join('');
+          var enhance = enhancementBlockHtml(data);
+          if (summaryEl2) {
+            summaryEl2.innerHTML =
+              'Seasoning ideas <span class="aroma-hint-teaser">— Try: ' + escHtml(names) + '</span>';
+          }
+          bodyEl2.innerHTML =
+            enhance +
+            '<p class="aroma-hint-intro">Based on your ingredients. Tap a spice for heat timing and pairings.</p>' +
+            '<div class="aroma-hint-chips">' +
+            chips +
+            '</div>' +
+            '<p class="aroma-hint-more"><a href="aroma.html">Open Aroma lookup →</a></p>' +
+            '<details class="kuschi-more-flavor-details" data-kuschi-more-flavor="1" data-kuschi-flavor-state="idle">' +
+            '<summary class="kuschi-more-flavor-summary">More flavour &amp; pairing notes</summary>' +
+            '<p class="kuschi-flavor-lazy-intro">Substitutes, taste balance, and cuisine ideas from the flavour book. Opens on demand (~2&nbsp;MB the first time).</p>' +
+            '</details>';
+          wireLazyFlavorExtras(wrapEl, lines, recipe);
+          syncAromaDetailsOpen(wrapEl, detailsEl2);
+        });
       })
       .catch(function () {
         if (!detailsEl || !bodyEl) {
@@ -901,43 +935,48 @@
     var lines = typeof getLines === 'function' ? getLines() : getLines || [];
     ensureLoaded()
       .then(function () {
-        var data = buildSuggestions(lines);
-        var top = data.suggestions.slice(0, 10);
-        if (!top.length) {
-          inner.innerHTML =
-            '<details class="aroma-add-details"><summary>Seasoning suggestions</summary>' +
-            '<p class="aroma-hint-empty">No suggestions yet — add a few ingredients.</p></details>';
-          return;
-        }
-        var btns = top
-          .map(function (s) {
-            return (
-              '<button type="button" class="aroma-suggest-btn" data-aroma-add-id="' +
-              escHtml(s.id) +
-              '" data-aroma-add-name="' +
-              escHtml(s.name) +
-              '">' +
-              '<span class="aroma-suggest-name">' +
-              escHtml(s.name) +
-              '</span>' +
-              groupBadgesHtml(s.groups) +
-              '</button>'
-            );
-          })
-          .join('');
-        inner.innerHTML =
-          '<details class="aroma-add-details">' +
-          '<summary>Seasoning suggestions</summary>' +
-          '<p class="aroma-hint-intro">Based on your ingredient list. Tap to add (pinch / to taste).</p>' +
-          '<div class="aroma-suggest-btns">' +
-          btns +
-          '</div>' +
-          '</details>';
-        inner.querySelectorAll('[data-aroma-add-id]').forEach(function (btn) {
-          btn.addEventListener('click', function () {
-            var id = btn.getAttribute('data-aroma-add-id');
-            var name = btn.getAttribute('data-aroma-add-name');
-            if (onAdd) onAdd(id, name, btn);
+        deferAromaDomWork(function () {
+          if (!panelEl.isConnected) return;
+          var inner2 = panelEl.querySelector('.aroma-add-panel-inner');
+          if (!inner2) return;
+          var data = buildSuggestions(lines);
+          var top = data.suggestions.slice(0, 10);
+          if (!top.length) {
+            inner2.innerHTML =
+              '<details class="aroma-add-details"><summary>Seasoning suggestions</summary>' +
+              '<p class="aroma-hint-empty">No suggestions yet — add a few ingredients.</p></details>';
+            return;
+          }
+          var btns = top
+            .map(function (s) {
+              return (
+                '<button type="button" class="aroma-suggest-btn" data-aroma-add-id="' +
+                escHtml(s.id) +
+                '" data-aroma-add-name="' +
+                escHtml(s.name) +
+                '">' +
+                '<span class="aroma-suggest-name">' +
+                escHtml(s.name) +
+                '</span>' +
+                groupBadgesHtml(s.groups) +
+                '</button>'
+              );
+            })
+            .join('');
+          inner2.innerHTML =
+            '<details class="aroma-add-details">' +
+            '<summary>Seasoning suggestions</summary>' +
+            '<p class="aroma-hint-intro">Based on your ingredient list. Tap to add (pinch / to taste).</p>' +
+            '<div class="aroma-suggest-btns">' +
+            btns +
+            '</div>' +
+            '</details>';
+          inner2.querySelectorAll('[data-aroma-add-id]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              var id = btn.getAttribute('data-aroma-add-id');
+              var name = btn.getAttribute('data-aroma-add-name');
+              if (onAdd) onAdd(id, name, btn);
+            });
           });
         });
       })
