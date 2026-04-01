@@ -6,6 +6,7 @@
 <meta name="theme-color" content="#0c0c0c">
 <title>Pantry → recipes · Kuschi Kitchen</title>
 <link rel="stylesheet" href="assets/theme.css">
+<link rel="preload" href="pantry_data/shard_hay_index.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
   body { font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 24px; }
@@ -41,7 +42,7 @@
   <p class="lead">Enter ingredients you have (comma or newline separated). We match against the library index <code>ing</code> fields — no guarantee of overlap with pantry items.</p>
   <textarea id="pantryIn" placeholder="e.g. chicken, lemon, garlic, olive oil"></textarea>
   <button type="button" class="primary" id="pantryGo" disabled>Find recipes</button>
-  <p class="status" id="pantryStatus">Loading recipe index…</p>
+  <p class="status" id="pantryStatus">Loading pantry index…</p>
   <div id="out"></div>
 </div>
 <script>
@@ -52,7 +53,19 @@
     'claude_index_09_L-N.json','claude_index_10_N-P.json','claude_index_11_P-R.json','claude_index_12_R-S.json',
     'claude_index_13_S.json','claude_index_14_S-T.json','claude_index_15_T-Z.json'
   ];
-  var base = '';
+  var HAY_INDEX_URL = 'pantry_data/shard_hay_index.json';
+
+  function siteBaseUrl() {
+    var origin = window.location.origin;
+    var p = window.location.pathname;
+    if (/\.html?$/i.test(p)) {
+      var dir = p.slice(0, p.lastIndexOf('/'));
+      return dir ? origin + dir : origin;
+    }
+    var stripped = p.replace(/\/$/, '') || '';
+    return stripped ? origin + stripped : origin;
+  }
+
   function norm(s) {
     return String(s || '').toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
   }
@@ -62,21 +75,89 @@
   function esc(s) {
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
-  var cache = null;
-  function loadAll() {
-    if (cache) return Promise.resolve(cache);
-    var baseUrl = base || (document.body.dataset && document.body.dataset.base) || '';
-    return Promise.all(SHARDS.map(function (f) {
-      return fetch(baseUrl + 'claude_index/' + f).then(function (r) { return r.ok ? r.json() : { recipes: [] }; });
-    })).then(function (parts) {
-      var all = [];
-      parts.forEach(function (p) {
-        if (p && p.recipes) all = all.concat(p.recipes);
+
+  var hayIndex = null;
+  var hayIndexFailed = false;
+  var shardRecipeCache = Object.create(null);
+
+  function loadHayIndex() {
+    if (hayIndexFailed) return Promise.resolve(null);
+    if (hayIndex) return Promise.resolve(hayIndex);
+    var url = siteBaseUrl() + '/' + HAY_INDEX_URL.replace(/^\/+/, '');
+    return fetch(url)
+      .then(function (r) {
+        if (!r.ok) throw new Error('hay index');
+        return r.json();
+      })
+      .then(function (data) {
+        if (data && data.shards && typeof data.shards === 'object') {
+          hayIndex = data.shards;
+        } else {
+          hayIndex = null;
+        }
+        return hayIndex;
+      })
+      .catch(function () {
+        hayIndexFailed = true;
+        hayIndex = null;
+        return null;
       });
-      cache = all;
+  }
+
+  /** Shards that might contain any user token (substring), else all shards. */
+  function pickShards(needToks) {
+    if (!hayIndex || !needToks.length) return SHARDS.slice();
+    var picked = [];
+    for (var s = 0; s < SHARDS.length; s++) {
+      var fn = SHARDS[s];
+      var hay = hayIndex[fn];
+      if (!hay) continue;
+      var hit = false;
+      for (var t = 0; t < needToks.length; t++) {
+        var tok = needToks[t];
+        if (tok && hay.indexOf(tok) >= 0) {
+          hit = true;
+          break;
+        }
+      }
+      if (hit) picked.push(fn);
+    }
+    return picked.length ? picked : SHARDS.slice();
+  }
+
+  function fetchShardRecipes(files) {
+    var base = siteBaseUrl();
+    return Promise.all(
+      files.map(function (f) {
+        if (shardRecipeCache[f]) return Promise.resolve(shardRecipeCache[f]);
+        return fetch(base + '/claude_index/' + f)
+          .then(function (r) {
+            return r.ok ? r.json() : { recipes: [] };
+          })
+          .then(function (p) {
+            var rec = (p && p.recipes) || [];
+            shardRecipeCache[f] = rec;
+            return rec;
+          });
+      })
+    ).then(function (parts) {
+      var all = [];
+      for (var i = 0; i < parts.length; i++) {
+        all = all.concat(parts[i]);
+      }
       return all;
     });
   }
+
+  function loadRecipesForPantrySearch(needToks) {
+    return loadHayIndex().then(function () {
+      var files = pickShards(needToks);
+      return fetchShardRecipes(files).then(function (all) {
+        return { all: all, shardCount: files.length };
+      });
+    });
+  }
+
   function scoreRecipe(r, needToks) {
     var ing = (r.ing || []).join(' ').toLowerCase();
     var name = (r.name || '').toLowerCase();
@@ -87,6 +168,7 @@
     }
     return hit;
   }
+
   document.getElementById('pantryGo').addEventListener('click', function () {
     var raw = document.getElementById('pantryIn').value;
     var parts = raw.split(/[\n,]+/).map(function (s) { return s.trim(); }).filter(Boolean);
@@ -103,16 +185,18 @@
       st.textContent = 'Add at least one ingredient.';
       return;
     }
-    st.textContent = 'Loading index…';
-    loadAll()
-      .then(function (all) {
+    st.textContent = 'Searching library…';
+    loadRecipesForPantrySearch(needToks)
+      .then(function (pack) {
+        var all = pack.all;
         var scored = [];
         for (var i = 0; i < all.length; i++) {
           var sc = scoreRecipe(all[i], needToks);
           if (sc > 0) scored.push({ r: all[i], sc: sc });
         }
         scored.sort(function (a, b) { return b.sc - a.sc || (a.r.name || '').localeCompare(b.r.name || ''); });
-        st.textContent = scored.length + ' recipes match at least one token (' + needToks.join(', ') + ').';
+        var seg = pack.shardCount < SHARDS.length ? ' (scanned ' + pack.shardCount + ' of ' + SHARDS.length + ' index parts)' : '';
+        st.textContent = scored.length + ' recipes match at least one token (' + needToks.join(', ') + ').' + seg;
         out.innerHTML = scored.slice(0, 40).map(function (x) {
           return '<div class="pantry-card" data-open-id="' + esc(x.r.id) + '">' +
             '<div class="pantry-name">' + esc(x.r.name || '') + '</div>' +
@@ -131,21 +215,16 @@
       });
   });
 
-  loadAll()
-    .then(function () {
-      var go = document.getElementById('pantryGo');
-      var st = document.getElementById('pantryStatus');
-      if (go) go.disabled = false;
-      if (st && st.textContent.indexOf('Loading recipe index') === 0) {
-        st.textContent = 'Ready — add ingredients and tap Find recipes.';
-      }
-    })
-    .catch(function () {
-      var go = document.getElementById('pantryGo');
-      if (go) go.disabled = false;
-      var st = document.getElementById('pantryStatus');
-      if (st) st.textContent = 'Could not load index. Check connection and try again.';
-    });
+  loadHayIndex().then(function () {
+    var go = document.getElementById('pantryGo');
+    var st = document.getElementById('pantryStatus');
+    if (go) go.disabled = false;
+    if (st && st.textContent.indexOf('Loading pantry index') === 0) {
+      st.textContent = hayIndex
+        ? 'Ready — add ingredients and tap Find recipes. (Only matching index parts load per search.)'
+        : 'Ready — add ingredients and tap Find recipes. (Full index load per search — routing file missing.)';
+    }
+  });
 })();
 </script>
 </body>
