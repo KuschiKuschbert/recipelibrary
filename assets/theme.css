@@ -593,6 +593,23 @@ body {
   animation: spin 1s linear infinite;
 }
 
+.modal-shell-loading {
+  padding: 8px 0;
+}
+
+.modal-shell-bar {
+  height: 14px;
+  margin: 10px 0;
+  border-radius: 6px;
+  background: var(--surface);
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.7; }
+}
+
 .modal-copy-bar {
   display: flex;
   flex-wrap: wrap;

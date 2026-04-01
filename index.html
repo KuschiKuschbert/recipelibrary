@@ -1240,6 +1240,26 @@ function findRecipeInDetailPayload(payload, id) {
   return undefined;
 }
 
+function renderModalShell(title) {
+  return `<div class="modal-top-bar">
+    <button type="button" class="modal-wake-pill" data-kuschi-wake aria-pressed="false"><span data-kuschi-wake-label>Stay awake</span></button>
+    <button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-title">${KuschiRecipeUi.esc(title)}</div>
+    <div class="modal-shell-loading">
+      <div class="modal-shell-bar" style="width:35%"></div>
+      <div class="modal-section">Ingredients</div>
+      <div class="modal-shell-bar" style="width:60%"></div>
+      <div class="modal-shell-bar" style="width:50%"></div>
+      <div class="modal-shell-bar" style="width:70%"></div>
+      <div class="modal-shell-bar" style="width:45%"></div>
+      <div class="modal-shell-bar" style="width:55%"></div>
+      <div class="modal-section" style="margin-top:20px">Method</div>
+      <div class="modal-shell-bar" style="width:90%"></div>
+      <div class="modal-shell-bar" style="width:85%"></div>
+      <div class="modal-shell-bar" style="width:75%"></div>
+    </div>`;
+}
+
 async function openRecipe(id) {
   const overlay = document.getElementById('modalOverlay');
   const modal = document.getElementById('modal');
@@ -1258,14 +1278,16 @@ async function openRecipe(id) {
     }
   }
 
-  modal.innerHTML = '<div class="modal-loading"><div class="loader"></div>Loading recipe...</div>';
+  const info = recipeIndex[id];
+  const shellTitle = (info && info.name) || 'Loading recipe…';
+  modal.innerHTML = renderModalShell(shellTitle);
+  modal.scrollTop = 0;
   overlay.classList.add('open');
 
   const modalPerf = kuschiModalPerfEnabled();
   const tModal0 = modalPerf ? performance.now() : 0;
 
   try {
-    const info = recipeIndex[id];
     if (!info) throw new Error('Recipe not found');
     if (info.letter === ((window.KuschiUserRecipes && KuschiUserRecipes.USER_LETTER) || '_USER')) {
       throw new Error('User recipe missing from storage');
@@ -1287,7 +1309,9 @@ async function openRecipe(id) {
       console.log('[Kuschi modal] openRecipe total ms', (performance.now() - tModal0).toFixed(1));
     }
   } catch(e) {
-    modal.innerHTML = `<button class="modal-close" onclick="closeModal()">✕</button>
+    modal.innerHTML = `<div class="modal-top-bar">
+      <button class="modal-close" onclick="closeModal()">✕</button></div>
+      <div class="modal-title">${KuschiRecipeUi.esc(shellTitle)}</div>
       <div class="modal-loading" style="color:var(--accent)">Could not load recipe: ${KuschiRecipeUi.esc(e.message)}</div>`;
   }
 }
@@ -2013,6 +2037,9 @@ attachContentRecipePrefetch();
       if (typeof requestIdleCallback === 'function') {
         requestIdleCallback(warmAroma, { timeout: 8000 });
       }
+    }
+    if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+      navigator.serviceWorker.register(siteBaseUrl() + '/sw.js').catch(() => {});
     }
   } catch(e) {
     document.getElementById('loading').innerHTML =
