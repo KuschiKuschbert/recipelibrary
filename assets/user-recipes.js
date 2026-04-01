@@ -714,6 +714,10 @@
   function clearRivieraStocktakeQuantities() {
     var d = loadRivieraStocktake();
     Object.keys(d.lines).forEach(function (k) {
+      if (k.indexOf('builtin:') === 0) {
+        delete d.lines[k];
+        return;
+      }
       var L = d.lines[k];
       if (L && typeof L === 'object') {
         L.qty = '';
@@ -826,6 +830,10 @@
   function clearBookStocktakeQuantities(bookId) {
     var d = loadBookStocktake(bookId);
     Object.keys(d.lines).forEach(function (k) {
+      if (k.indexOf('builtin:') === 0) {
+        delete d.lines[k];
+        return;
+      }
       var L = d.lines[k];
       if (L && typeof L === 'object') {
         L.qty = '';

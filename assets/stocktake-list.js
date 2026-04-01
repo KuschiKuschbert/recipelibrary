@@ -1,10 +1,34 @@
 /**
  * Stocktake checklist modal (Riviera + kitchen books). Uses order list merge via orderList.buildOrderLinesFlat().
+ * Optional config.builtinCatalog: built-in snapshot rows (Riviera) with zone/category and default qty/brand/UOM.
  */
 (function () {
   'use strict';
 
   var ZONE_ORDER = ['freezer', 'coldroom', 'drystore', 'other'];
+
+  /** Sub-category order within each zone (matches generate_riviera_stocktake_data.py). */
+  var BUILTIN_CATEGORY_ORDER = {
+    freezer: [
+      'Pastry, bread, desserts',
+      'Prepared/freezer portions',
+      'Frozen savouries / convenience',
+      'Frozen seafood and meats',
+      'Frozen bread / gluten-free bakery',
+    ],
+    coldroom: [
+      'Dairy, cheese, deli',
+      'Fruit, veg, herbs',
+      'Dips, sauces, condiments, oils',
+    ],
+    drystore: [
+      'Pantry, dry goods, rice, pasta, flour',
+      'Spices, powders (volume estimates)',
+      'Other spices / packets / pantry',
+      'Crackers and snacks',
+      'Chocolate / sweets',
+    ],
+  };
 
   function esc(s) {
     return String(s || '')
@@ -39,6 +63,10 @@
     return 'stx:' + String(stxId || '');
   }
 
+  function rowIdBuiltin(catalogId) {
+    return 'builtin:' + String(catalogId || '');
+  }
+
   function lineStateFromDoc(doc, rowId, defaultUom) {
     var lines = doc.lines || {};
     var st = lines[rowId];
@@ -49,6 +77,31 @@
     return {
       qty: st.qty != null ? String(st.qty) : '',
       brand: st.brand != null ? String(st.brand) : '',
+      uom: st.uom != null && String(st.uom).trim() !== '' ? String(st.uom) : defU,
+      uomLocked: !!st.uomLocked,
+      brandLocked: !!st.brandLocked,
+    };
+  }
+
+  function builtinLineState(doc, item) {
+    var rowId = rowIdBuiltin(item.id);
+    var lines = doc.lines || {};
+    var st = lines[rowId];
+    var defU = String(item.defaultUom || '').trim();
+    var defQ = String(item.defaultQty != null ? item.defaultQty : '').trim();
+    var defB = String(item.brand || '').trim();
+    if (!st || typeof st !== 'object') {
+      return {
+        qty: defQ,
+        brand: defB,
+        uom: defU,
+        uomLocked: defU !== '',
+        brandLocked: defB !== '',
+      };
+    }
+    return {
+      qty: st.qty != null ? String(st.qty) : defQ,
+      brand: st.brand != null ? String(st.brand) : defB,
       uom: st.uom != null && String(st.uom).trim() !== '' ? String(st.uom) : defU,
       uomLocked: !!st.uomLocked,
       brandLocked: !!st.brandLocked,
@@ -66,6 +119,72 @@
       uomLocked: !!ex.uomLocked,
       brandLocked: !!ex.brandLocked,
     };
+  }
+
+  function collectRecipeMergeKeys(flat, k) {
+    var set = {};
+    (flat || []).forEach(function (line) {
+      if (line && line.kind === 'recipe' && line.item) {
+        set[k.canonicalOrderMergeKey(line.item)] = true;
+      }
+    });
+    return set;
+  }
+
+  function builtinsForZone(zone, catalog, recipeKeys, k) {
+    var order = BUILTIN_CATEGORY_ORDER[zone] || [];
+    var catMap = {};
+    order.forEach(function (c) {
+      catMap[c] = [];
+    });
+    (catalog || []).forEach(function (item) {
+      if (!item || item.zone !== zone) return;
+      var mk = k.canonicalOrderMergeKey(item.name);
+      if (recipeKeys[mk]) return;
+      var cat = item.category || 'Other';
+      if (!catMap[cat]) catMap[cat] = [];
+      catMap[cat].push(item);
+    });
+    var out = [];
+    order.forEach(function (c) {
+      if (catMap[c] && catMap[c].length) {
+        out.push({ category: c, items: catMap[c] });
+      }
+    });
+    Object.keys(catMap).forEach(function (c) {
+      if (order.indexOf(c) >= 0) return;
+      if (catMap[c].length) {
+        out.push({ category: c, items: catMap[c] });
+      }
+    });
+    return out;
+  }
+
+  function zoneHasBuiltinRows(zone, catalog, recipeKeys, k) {
+    return builtinsForZone(zone, catalog, recipeKeys, k).length > 0;
+  }
+
+  function buildExportDocWithBuiltins(doc, catalog, orderList, k) {
+    var flat = orderList.buildOrderLinesFlat() || [];
+    var recipeKeys = collectRecipeMergeKeys(flat, k);
+    var lines = Object.assign({}, doc.lines || {});
+    (catalog || []).forEach(function (item) {
+      if (!item) return;
+      if (recipeKeys[k.canonicalOrderMergeKey(item.name)]) return;
+      var rid = rowIdBuiltin(item.id);
+      var st = builtinLineState(doc, item);
+      lines[rid] = {
+        qty: st.qty,
+        brand: st.brand,
+        uom: st.uom,
+        uomLocked: st.uomLocked,
+        brandLocked: st.brandLocked,
+        catalogName: item.name,
+        catalogCategory: item.category,
+        catalogZone: item.zone,
+      };
+    });
+    return { lines: lines, extras: doc.extras || [] };
   }
 
   function qtyBrandUomCells(rowId, state) {
@@ -116,6 +235,7 @@
    * @param {() => object[]} config.getOrderExtras
    * @param {object} config.storage - load, patchRow, addExtra, removeExtra, clearQuantities, exportJson
    * @param {() => boolean} [config.shouldReleaseBodyScroll]
+   * @param {object[]} [config.builtinCatalog] - optional { id, name, zone, category, brand, defaultQty, defaultUom }
    */
   function create(config) {
     var overlayId = config.overlayId;
@@ -129,6 +249,7 @@
     var shouldReleaseBodyScroll = config.shouldReleaseBodyScroll || function () {
       return true;
     };
+    var builtinCatalog = config.builtinCatalog || [];
 
     function Kr() {
       return window.KuschiUserRecipes;
@@ -142,6 +263,7 @@
       var ZL = zoneLabels();
       var doc = storage.load();
       var flat = orderList.buildOrderLinesFlat() || [];
+      var recipeKeys = collectRecipeMergeKeys(flat, k);
       var extrasById = {};
       getOrderExtras().forEach(function (ex) {
         if (ex && ex.id) extrasById[ex.id] = ex;
@@ -174,7 +296,8 @@
       ZONE_ORDER.forEach(function (z) {
         var rows = byZone[z];
         var stxRows = stxByZone[z];
-        if (!rows.length && !stxRows.length) return;
+        var builtinGroups = builtinsForZone(z, builtinCatalog, recipeKeys, k);
+        if (!rows.length && !stxRows.length && !builtinGroups.length) return;
         html += '<div class="order-zone-block stkt-zone-block">';
         html += '<div class="order-zone-head">' + esc(ZL[z]) + '</div>';
 
@@ -249,6 +372,25 @@
             escAttr(ex.id) +
             '">✕</button>' +
             '</div>';
+        });
+
+        builtinGroups.forEach(function (grp) {
+          html += '<div class="stkt-category-head">' + esc(grp.category) + '</div>';
+          grp.items.forEach(function (item) {
+            var bid = rowIdBuiltin(item.id);
+            var stB = builtinLineState(doc, item);
+            html +=
+              '<div class="stkt-line-row stkt-line-row--builtin" data-kind="builtin">' +
+              '<div class="stkt-line-name">' +
+              esc(item.name) +
+              ' <span class="stkt-badge stkt-badge--catalog">catalog</span></div>' +
+              '<div class="stkt-zone-label">' +
+              esc(ZL[z]) +
+              '</div>' +
+              qtyBrandUomCells(bid, stB) +
+              '<span class="stkt-row-spacer"></span>' +
+              '</div>';
+          });
         });
 
         html += '</div>';
@@ -370,7 +512,11 @@
     }
 
     function clearCounted() {
-      if (!confirm('Clear all counted quantities and brands? UOM locks stay as they are.')) return;
+      var msg =
+        builtinCatalog && builtinCatalog.length
+          ? 'Clear all counted quantities and brands for recipe/order lines (UOM locks stay)? Built-in catalog rows reset to snapshot defaults.'
+          : 'Clear all counted quantities and brands? UOM locks stay as they are.';
+      if (!confirm(msg)) return;
       storage.clearQuantities();
       renderBody();
     }
@@ -380,6 +526,7 @@
       if (!k) return;
       var doc = storage.load();
       var flat = orderList.buildOrderLinesFlat() || [];
+      var recipeKeys = collectRecipeMergeKeys(flat, k);
       var ZL = zoneLabels();
       var extrasById = {};
       getOrderExtras().forEach(function (ex) {
@@ -415,6 +562,24 @@
         var z = ZONE_ORDER.indexOf(ex.zone) >= 0 ? ex.zone : 'other';
         lines.push({ zone: ZL[z] || z, name: ex.name + ' (stocktake)', st: stxExtraState(ex) });
       });
+
+      if (builtinCatalog && builtinCatalog.length) {
+        ZONE_ORDER.forEach(function (zid) {
+          var zu = ZL[zid] || zid;
+          var groups = builtinsForZone(zid, builtinCatalog, recipeKeys, k);
+          groups.forEach(function (grp) {
+            lines.push({ zone: zu, isCategory: true, title: grp.category });
+            grp.items.forEach(function (item) {
+              lines.push({
+                zone: zu,
+                name: item.name,
+                st: builtinLineState(doc, item),
+              });
+            });
+          });
+        });
+      }
+
       var byZ = {};
       lines.forEach(function (L) {
         if (!byZ[L.zone]) byZ[L.zone] = [];
@@ -427,6 +592,10 @@
         if (!arr || !arr.length) return;
         text += label.toUpperCase() + '\n';
         arr.forEach(function (L) {
+          if (L.isCategory) {
+            text += '  [' + L.title + ']\n';
+            return;
+          }
           var p = L.st;
           var u = p.uom ? ' ' + p.uom : '';
           var b = p.brand ? ' · ' + p.brand : '';
@@ -441,7 +610,15 @@
     }
 
     function copyJson() {
-      navigator.clipboard.writeText(storage.exportJson()).then(function () {
+      var k = Kr();
+      var jsonStr;
+      if (builtinCatalog && builtinCatalog.length && k && orderList) {
+        var doc = storage.load();
+        jsonStr = JSON.stringify(buildExportDocWithBuiltins(doc, builtinCatalog, orderList, k), null, 2);
+      } else {
+        jsonStr = storage.exportJson();
+      }
+      navigator.clipboard.writeText(jsonStr).then(function () {
         alert('Stocktake JSON copied');
       });
     }
