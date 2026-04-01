@@ -1205,7 +1205,7 @@ function schedulePrefetchVisibleDetailShards() {
   }
 }
 
-/** True when ?kuschiPerfModal=1 or localStorage kuschiPerfModal=1 — logs recipe modal timing to the console. For jank, also use DevTools Performance (long tasks / “long animation frames”). */
+/** True when ?kuschiPerfModal=1 or localStorage kuschiPerfModal=1 — logs recipe modal timing to the console (index + riviera.html). For jank, also use DevTools Performance (long tasks / “long animation frames”). */
 function kuschiModalPerfEnabled() {
   try {
     if (typeof localStorage !== 'undefined' && localStorage.getItem('kuschiPerfModal') === '1') return true;
@@ -1446,6 +1446,7 @@ function renderKitchenModalShell(r) {
 }
 
 function scheduleKitchenModalHeavyFill(modal, r, recipeId) {
+  const modalPerf = kuschiModalPerfEnabled();
   function guard() {
     const mo = document.getElementById('modalOverlay');
     return !!(mo && mo.classList.contains('open') && currentRecipe && currentRecipe.id === recipeId);
@@ -1455,26 +1456,44 @@ function scheduleKitchenModalHeavyFill(modal, r, recipeId) {
   }
   requestAnimationFrame(function () {
     if (!guard()) return;
+    const t0 = modalPerf ? performance.now() : 0;
     const heavy = heavyEl();
     if (!heavy) return;
     const ingHtml = renderKitchenModalIngredientsBlock(r);
     heavy.innerHTML = ingHtml || '<p class="kitchen-modal-heavy-loading" style="font-size:13px;color:var(--text3);margin:8px 0 0">No ingredients listed.</p>';
     heavy.removeAttribute('aria-busy');
+    if (modalPerf) {
+      console.log('[Kuschi modal] heavy ingredients innerHTML ms', (performance.now() - t0).toFixed(1));
+    }
     const scaleInp = document.getElementById('modalScaleInput');
-    if (scaleInp) rescaleModal(scaleInp.value);
+    if (scaleInp) {
+      const t1 = modalPerf ? performance.now() : 0;
+      rescaleModal(scaleInp.value, { skipIfIdentity: true });
+      if (modalPerf) {
+        console.log('[Kuschi modal] rescaleModal ms', (performance.now() - t1).toFixed(1));
+      }
+    }
 
     setTimeout(function chunkMethod() {
       if (!guard()) return;
+      const tM = modalPerf ? performance.now() : 0;
       const h2 = heavyEl();
       if (!h2) return;
       const methodHtml = renderKitchenModalMethodBlock(r);
       if (methodHtml) h2.insertAdjacentHTML('beforeend', methodHtml);
+      if (modalPerf && methodHtml) {
+        console.log('[Kuschi modal] method insertAdjacentHTML ms', (performance.now() - tM).toFixed(1));
+      }
 
       setTimeout(function chunkAromaCopy() {
         if (!guard()) return;
+        const t2 = modalPerf ? performance.now() : 0;
         const h3 = heavyEl();
         if (!h3) return;
         h3.insertAdjacentHTML('beforeend', renderKitchenModalAromaAndCopyBlock(r));
+        if (modalPerf) {
+          console.log('[Kuschi modal] aroma+copy insertAdjacentHTML ms', (performance.now() - t2).toFixed(1));
+        }
         setTimeout(function () {
           if (window.KuschiScreenWake) KuschiScreenWake.sync();
         }, 0);
@@ -1555,7 +1574,7 @@ function scaleModalQty(qty, factor) {
   return s % 1 === 0 ? String(s) : s.toFixed(1);
 }
 
-function rescaleModal(val) {
+function rescaleModal(val, options) {
   if (!currentRecipe) return;
   const pax = parseInt(val);
   if (!pax || pax < 1) return;
@@ -1567,6 +1586,9 @@ function rescaleModal(val) {
 
   const grid = document.getElementById('modalIngGrid');
   if (!grid) return;
+  /* After initial ingredients innerHTML, grid is already 1×; skip duplicate rebuild only on that path. */
+  if (factor === 1 && options && options.skipIfIdentity) return;
+
   const parts = [];
   for (const i of toArr(currentRecipe.ingredients).filter(i => i && i.item)) {
     const scaled = scaleModalQty(i.qty, factor);

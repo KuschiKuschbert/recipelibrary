@@ -643,68 +643,57 @@
     return matchFoodPairing(normKey(q), tokens(q), { name: phrase });
   }
 
-  /**
-   * @param {Array<{item:string}>} lines
-   * @returns {{ suggestions: Array<{id:string,name:string,score:number,groups:number[]}>, matchedSpiceIds: string[], apparentProfiles: Array<{id:string,name:string}> }}
-   */
-  function buildSuggestions(lines) {
-    if (!ingredients || !foodPairings) {
-      return { suggestions: [], matchedSpiceIds: [], apparentProfiles: [] };
-    }
-    var scores = Object.create(null);
-    var matchedSpiceIds = [];
-    var apparentSet = Object.create(null);
+  function accumulateSuggestionLine(L, lines, add, matchedSpiceIds, apparentSet) {
+    var raw = lines[L].item;
+    var lineKey = normKey(raw);
+    var lineToks = tokens(raw);
+    if (!lineKey) return;
 
+    for (var i = 0; i < ingredients.length; i++) {
+      var ing = ingredients[i];
+      var m = matchAromaIngredient(lineKey, lineToks, ing);
+      if (m > 0) {
+        matchedSpiceIds.push(ing.id);
+        var w = m >= 3 ? 4 : m >= 2 ? 3 : 2;
+        var refs = harmonyRefs(ing);
+        for (var h = 0; h < refs.length; h++) {
+          var hid = seasonId(refs[h]);
+          add(hid, w);
+        }
+        if (m >= 2) {
+          apparentSet[ing.id] = true;
+        }
+      }
+    }
+
+    for (var f = 0; f < foodPairings.length; f++) {
+      var fp = foodPairings[f];
+      if (matchFoodPairing(lineKey, lineToks, fp)) {
+        var seas = fp.seasonings || [];
+        for (var s = 0; s < seas.length; s++) {
+          add(seasonId(seas[s]), 2.5);
+        }
+      }
+    }
+
+    for (var ii = 0; ii < ingredients.length; ii++) {
+      var ingP = ingredients[ii];
+      var pfs = ingP && ingP.pairs_with_foods;
+      if (!Array.isArray(pfs)) continue;
+      for (var pi = 0; pi < pfs.length; pi++) {
+        if (matchFoodPairing(lineKey, lineToks, { name: pfs[pi] })) {
+          add(ingP.id, 2);
+          matchedSpiceIds.push(ingP.id);
+          break;
+        }
+      }
+    }
+  }
+
+  function finalizeSuggestionResult(lines, scores, matchedSpiceIds, apparentSet) {
     function add(id, delta) {
       if (!id || !byId[id]) return;
       scores[id] = (scores[id] || 0) + delta;
-    }
-
-    for (var L = 0; L < lines.length; L++) {
-      var raw = lines[L].item;
-      var lineKey = normKey(raw);
-      var lineToks = tokens(raw);
-      if (!lineKey) continue;
-
-      for (var i = 0; i < ingredients.length; i++) {
-        var ing = ingredients[i];
-        var m = matchAromaIngredient(lineKey, lineToks, ing);
-        if (m > 0) {
-          matchedSpiceIds.push(ing.id);
-          var w = m >= 3 ? 4 : m >= 2 ? 3 : 2;
-          var refs = harmonyRefs(ing);
-          for (var h = 0; h < refs.length; h++) {
-            var hid = seasonId(refs[h]);
-            add(hid, w);
-          }
-          if (m >= 2) {
-            apparentSet[ing.id] = true;
-          }
-        }
-      }
-
-      for (var f = 0; f < foodPairings.length; f++) {
-        var fp = foodPairings[f];
-        if (matchFoodPairing(lineKey, lineToks, fp)) {
-          var seas = fp.seasonings || [];
-          for (var s = 0; s < seas.length; s++) {
-            add(seasonId(seas[s]), 2.5);
-          }
-        }
-      }
-
-      for (var ii = 0; ii < ingredients.length; ii++) {
-        var ingP = ingredients[ii];
-        var pfs = ingP && ingP.pairs_with_foods;
-        if (!Array.isArray(pfs)) continue;
-        for (var pi = 0; pi < pfs.length; pi++) {
-          if (matchFoodPairing(lineKey, lineToks, { name: pfs[pi] })) {
-            add(ingP.id, 2);
-            matchedSpiceIds.push(ingP.id);
-            break;
-          }
-        }
-      }
     }
 
     for (var ap in apparentSet) {
@@ -739,8 +728,8 @@
     var apparentProfiles = [];
     for (var aid in apparentSet) {
       if (!Object.prototype.hasOwnProperty.call(apparentSet, aid)) continue;
-      var ob = byId[aid];
-      if (ob) apparentProfiles.push({ id: aid, name: ob.name || aid });
+      var ob2 = byId[aid];
+      if (ob2) apparentProfiles.push({ id: aid, name: ob2.name || aid });
     }
     apparentProfiles.sort(function (a, b) {
       return a.name.localeCompare(b.name);
@@ -753,6 +742,66 @@
       }),
       apparentProfiles: apparentProfiles,
     };
+  }
+
+  /** Hint lines processed per animation frame so the main thread can handle input between chunks. */
+  var MODAL_HINT_LINES_PER_FRAME = 3;
+
+  /**
+   * @param {Array<{item:string}>} lines
+   * @param {function({ suggestions: Array, matchedSpiceIds: Array, apparentProfiles: Array })} done
+   */
+  function buildSuggestionsChunked(lines, done) {
+    if (!ingredients || !foodPairings) {
+      done({ suggestions: [], matchedSpiceIds: [], apparentProfiles: [] });
+      return;
+    }
+    var scores = Object.create(null);
+    var matchedSpiceIds = [];
+    var apparentSet = Object.create(null);
+    function add(id, delta) {
+      if (!id || !byId[id]) return;
+      scores[id] = (scores[id] || 0) + delta;
+    }
+    var L = 0;
+    var n = lines.length;
+    function step() {
+      var end = Math.min(L + MODAL_HINT_LINES_PER_FRAME, n);
+      for (; L < end; L++) {
+        accumulateSuggestionLine(L, lines, add, matchedSpiceIds, apparentSet);
+      }
+      if (L < n) {
+        if (typeof global.requestAnimationFrame === 'function') {
+          global.requestAnimationFrame(step);
+        } else {
+          global.setTimeout(step, 0);
+        }
+      } else {
+        done(finalizeSuggestionResult(lines, scores, matchedSpiceIds, apparentSet));
+      }
+    }
+    step();
+  }
+
+  /**
+   * @param {Array<{item:string}>} lines
+   * @returns {{ suggestions: Array<{id:string,name:string,score:number,groups:number[]}>, matchedSpiceIds: string[], apparentProfiles: Array<{id:string,name:string}> }}
+   */
+  function buildSuggestions(lines) {
+    if (!ingredients || !foodPairings) {
+      return { suggestions: [], matchedSpiceIds: [], apparentProfiles: [] };
+    }
+    var scores = Object.create(null);
+    var matchedSpiceIds = [];
+    var apparentSet = Object.create(null);
+    function add(id, delta) {
+      if (!id || !byId[id]) return;
+      scores[id] = (scores[id] || 0) + delta;
+    }
+    for (var L = 0; L < lines.length; L++) {
+      accumulateSuggestionLine(L, lines, add, matchedSpiceIds, apparentSet);
+    }
+    return finalizeSuggestionResult(lines, scores, matchedSpiceIds, apparentSet);
   }
 
   function heatTimingLineForSpice(id) {
@@ -874,65 +923,67 @@
       .then(function () {
         deferAromaDomWork(function () {
           if (!wrapEl.isConnected) return;
-          var detailsEl2 = wrapEl.querySelector('.aroma-hint-details');
-          var bodyEl2 = wrapEl.querySelector('[data-aroma-hint-body]');
-          var summaryEl2 = detailsEl2 ? detailsEl2.querySelector('.aroma-hint-summary') : null;
-          var data = buildSuggestions(lines);
-          var limit = compactTopN(wrapEl);
-          var top = data.suggestions.slice(0, limit);
-          if (!bodyEl2 || !detailsEl2) {
-            return;
-          }
-          global.setTimeout(function () {
+          buildSuggestionsChunked(lines, function (data) {
             if (!wrapEl.isConnected) return;
-            detailsEl2 = wrapEl.querySelector('.aroma-hint-details');
-            bodyEl2 = wrapEl.querySelector('[data-aroma-hint-body]');
-            summaryEl2 = detailsEl2 ? detailsEl2.querySelector('.aroma-hint-summary') : null;
-            if (!bodyEl2 || !detailsEl2) return;
-            if (!top.length) {
-              if (summaryEl2) summaryEl2.textContent = 'Seasoning ideas';
-              bodyEl2.innerHTML =
-                '<p class="aroma-hint-empty">No matches in the Aroma Bible for these ingredients. Try <a href="aroma.html">Aroma lookup</a>.</p>';
-              syncAromaDetailsOpen(wrapEl, detailsEl2);
+            var detailsEl2 = wrapEl.querySelector('.aroma-hint-details');
+            var bodyEl2 = wrapEl.querySelector('[data-aroma-hint-body]');
+            var summaryEl2 = detailsEl2 ? detailsEl2.querySelector('.aroma-hint-summary') : null;
+            var limit = compactTopN(wrapEl);
+            var top = data.suggestions.slice(0, limit);
+            if (!bodyEl2 || !detailsEl2) {
               return;
             }
-            var names = top
-              .slice(0, 8)
-              .map(function (s) {
-                return s.name;
-              })
-              .join(', ');
-            var chips = top
-              .slice(0, limit)
-              .map(function (s) {
-                return (
-                  '<a class="aroma-hint-chip" href="' +
-                  aromaPageHrefForSpice(s.id) +
-                  '">' +
-                  escHtml(s.name) +
-                  '</a>'
-                );
-              })
-              .join('');
-            var enhance = enhancementBlockHtml(data);
-            if (summaryEl2) {
-              summaryEl2.innerHTML =
-                'Seasoning ideas <span class="aroma-hint-teaser">— Try: ' + escHtml(names) + '</span>';
-            }
-            bodyEl2.innerHTML =
-              enhance +
-              '<p class="aroma-hint-intro">Based on your ingredients. Tap a spice for heat timing and pairings.</p>' +
-              '<div class="aroma-hint-chips">' +
-              chips +
-              '</div>' +
-              '<p class="aroma-hint-more"><a href="aroma.html">Open Aroma lookup →</a></p>' +
-              '<details class="kuschi-more-flavor-details" data-kuschi-more-flavor="1" data-kuschi-flavor-state="idle">' +
-              '<summary class="kuschi-more-flavor-summary">More flavour &amp; pairing notes</summary>' +
-              '<p class="kuschi-flavor-lazy-intro">Substitutes, taste balance, and cuisine ideas from the flavour book. Opens on demand (~2&nbsp;MB the first time).</p>' +
-              '</details>';
-            wireLazyFlavorExtras(wrapEl, lines, recipe);
-            syncAromaDetailsOpen(wrapEl, detailsEl2);
-          }, 0);
+            global.setTimeout(function () {
+              if (!wrapEl.isConnected) return;
+              detailsEl2 = wrapEl.querySelector('.aroma-hint-details');
+              bodyEl2 = wrapEl.querySelector('[data-aroma-hint-body]');
+              summaryEl2 = detailsEl2 ? detailsEl2.querySelector('.aroma-hint-summary') : null;
+              if (!bodyEl2 || !detailsEl2) return;
+              if (!top.length) {
+                if (summaryEl2) summaryEl2.textContent = 'Seasoning ideas';
+                bodyEl2.innerHTML =
+                  '<p class="aroma-hint-empty">No matches in the Aroma Bible for these ingredients. Try <a href="aroma.html">Aroma lookup</a>.</p>';
+                syncAromaDetailsOpen(wrapEl, detailsEl2);
+                return;
+              }
+              var names = top
+                .slice(0, 8)
+                .map(function (s) {
+                  return s.name;
+                })
+                .join(', ');
+              var chips = top
+                .slice(0, limit)
+                .map(function (s) {
+                  return (
+                    '<a class="aroma-hint-chip" href="' +
+                    aromaPageHrefForSpice(s.id) +
+                    '">' +
+                    escHtml(s.name) +
+                    '</a>'
+                  );
+                })
+                .join('');
+              var enhance = enhancementBlockHtml(data);
+              if (summaryEl2) {
+                summaryEl2.innerHTML =
+                  'Seasoning ideas <span class="aroma-hint-teaser">— Try: ' + escHtml(names) + '</span>';
+              }
+              bodyEl2.innerHTML =
+                enhance +
+                '<p class="aroma-hint-intro">Based on your ingredients. Tap a spice for heat timing and pairings.</p>' +
+                '<div class="aroma-hint-chips">' +
+                chips +
+                '</div>' +
+                '<p class="aroma-hint-more"><a href="aroma.html">Open Aroma lookup →</a></p>' +
+                '<details class="kuschi-more-flavor-details" data-kuschi-more-flavor="1" data-kuschi-flavor-state="idle">' +
+                '<summary class="kuschi-more-flavor-summary">More flavour &amp; pairing notes</summary>' +
+                '<p class="kuschi-flavor-lazy-intro">Substitutes, taste balance, and cuisine ideas from the flavour book. Opens on demand (~2&nbsp;MB the first time).</p>' +
+                '</details>';
+              wireLazyFlavorExtras(wrapEl, lines, recipe);
+              syncAromaDetailsOpen(wrapEl, detailsEl2);
+            }, 0);
+          });
         });
       })
       .catch(function () {
@@ -991,43 +1042,47 @@
           if (!panelEl.isConnected) return;
           var inner2 = panelEl.querySelector('.aroma-add-panel-inner');
           if (!inner2) return;
-          var data = buildSuggestions(lines);
-          var top = data.suggestions.slice(0, 10);
-          if (!top.length) {
-            inner2.innerHTML =
-              '<details class="aroma-add-details"><summary>Seasoning suggestions</summary>' +
-              '<p class="aroma-hint-empty">No suggestions yet — add a few ingredients.</p></details>';
-            return;
-          }
-          var btns = top
-            .map(function (s) {
-              return (
-                '<button type="button" class="aroma-suggest-btn" data-aroma-add-id="' +
-                escHtml(s.id) +
-                '" data-aroma-add-name="' +
-                escHtml(s.name) +
-                '">' +
-                '<span class="aroma-suggest-name">' +
-                escHtml(s.name) +
-                '</span>' +
-                groupBadgesHtml(s.groups) +
-                '</button>'
-              );
-            })
-            .join('');
-          inner2.innerHTML =
-            '<details class="aroma-add-details">' +
-            '<summary>Seasoning suggestions</summary>' +
-            '<p class="aroma-hint-intro">Based on your ingredient list. Tap to add (pinch / to taste).</p>' +
-            '<div class="aroma-suggest-btns">' +
-            btns +
-            '</div>' +
-            '</details>';
-          inner2.querySelectorAll('[data-aroma-add-id]').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-              var id = btn.getAttribute('data-aroma-add-id');
-              var name = btn.getAttribute('data-aroma-add-name');
-              if (onAdd) onAdd(id, name, btn);
+          buildSuggestionsChunked(lines, function (data) {
+            if (!panelEl.isConnected) return;
+            var inner3 = panelEl.querySelector('.aroma-add-panel-inner');
+            if (!inner3) return;
+            var top = data.suggestions.slice(0, 10);
+            if (!top.length) {
+              inner3.innerHTML =
+                '<details class="aroma-add-details"><summary>Seasoning suggestions</summary>' +
+                '<p class="aroma-hint-empty">No suggestions yet — add a few ingredients.</p></details>';
+              return;
+            }
+            var btns = top
+              .map(function (s) {
+                return (
+                  '<button type="button" class="aroma-suggest-btn" data-aroma-add-id="' +
+                  escHtml(s.id) +
+                  '" data-aroma-add-name="' +
+                  escHtml(s.name) +
+                  '">' +
+                  '<span class="aroma-suggest-name">' +
+                  escHtml(s.name) +
+                  '</span>' +
+                  groupBadgesHtml(s.groups) +
+                  '</button>'
+                );
+              })
+              .join('');
+            inner3.innerHTML =
+              '<details class="aroma-add-details">' +
+              '<summary>Seasoning suggestions</summary>' +
+              '<p class="aroma-hint-intro">Based on your ingredient list. Tap to add (pinch / to taste).</p>' +
+              '<div class="aroma-suggest-btns">' +
+              btns +
+              '</div>' +
+              '</details>';
+            inner3.querySelectorAll('[data-aroma-add-id]').forEach(function (btn) {
+              btn.addEventListener('click', function () {
+                var id = btn.getAttribute('data-aroma-add-id');
+                var name = btn.getAttribute('data-aroma-add-name');
+                if (onAdd) onAdd(id, name, btn);
+              });
             });
           });
         });
@@ -1052,7 +1107,11 @@
   function getRecipeEnhancement(recipe) {
     return ensureLoaded().then(function () {
       var lines = recipeLinesForHints(recipe);
-      return Object.assign({ hintLines: lines }, buildSuggestions(lines));
+      return new Promise(function (resolve) {
+        buildSuggestionsChunked(lines, function (data) {
+          resolve(Object.assign({ hintLines: lines }, data));
+        });
+      });
     });
   }
 

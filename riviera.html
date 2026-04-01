@@ -1386,6 +1386,15 @@ function cardHTML(r) {
 // ── Modal ─────────────────────────────────────
 let currentRecipe = null;
 
+function rivieraModalPerfEnabled() {
+  try {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('kuschiPerfModal') === '1') return true;
+    return /(?:^|[?&])kuschiPerfModal=1(?:&|$)/.test(String(window.location && window.location.search));
+  } catch (_) {
+    return false;
+  }
+}
+
 function openRecipe(id) {
   const r = RECIPES.find(x => x.id === id);
   if (!r) return;
@@ -1438,6 +1447,8 @@ function openRecipe(id) {
           if (!currentRecipe || currentRecipe.id !== recipeId) return;
           const heavy = document.getElementById('rivieraModalHeavy');
           if (!heavy) return;
+          const rvPerf = rivieraModalPerfEnabled();
+          const tRv0 = rvPerf ? performance.now() : 0;
 
           const elements = r.elements.map(e => `<span class="element-chip">${KuschiRecipeUi.esc(e)}</span>`).join('');
           const ingsHTML = buildIngsHTML(r.ingredients, 1);
@@ -1468,8 +1479,17 @@ function openRecipe(id) {
     <div class="modal-section">Ingredients</div>
     <div class="modal-ing" id="ingGrid">${ingsHTML}</div>`;
           heavy.removeAttribute('aria-busy');
+          if (rvPerf) {
+            console.log('[Riviera modal] heavy chunk1 innerHTML ms', (performance.now() - tRv0).toFixed(1));
+          }
           let scaleInp = document.getElementById('scaleInput');
-          if (scaleInp) rescale(scaleInp.value);
+          if (scaleInp) {
+            const tRv1 = rvPerf ? performance.now() : 0;
+            rescale(scaleInp.value, { skipIfIdentity: true });
+            if (rvPerf) {
+              console.log('[Riviera modal] rescale ms', (performance.now() - tRv1).toFixed(1));
+            }
+          }
 
           setTimeout(function chunk2() {
             if (!guard()) return;
@@ -1486,7 +1506,7 @@ function openRecipe(id) {
                 if (!guard()) return;
                 heavy.insertAdjacentHTML('beforeend', `${note}${label}${adminActions}`);
                 scaleInp = document.getElementById('scaleInput');
-                if (scaleInp) rescale(scaleInp.value);
+                if (scaleInp) rescale(scaleInp.value, { skipIfIdentity: true });
                 setTimeout(function () {
                   if (window.KuschiScreenWake) KuschiScreenWake.sync();
                 }, 0);
@@ -1562,7 +1582,7 @@ function buildIngsHTML(ingredients, factor) {
   }).join('');
 }
 
-function rescale(val) {
+function rescale(val, options) {
   if (!currentRecipe) return;
   const pax = parseFloat(val);
   if (!pax || pax <= 0) return;
@@ -1571,7 +1591,9 @@ function rescale(val) {
   const factorEl = document.getElementById('scaleFactor');
   if (factorEl) factorEl.textContent = factor !== 1 ? `× ${factor.toFixed(2)}` : '';
   const grid = document.getElementById('ingGrid');
-  if (grid) grid.innerHTML = buildIngsHTML(currentRecipe.ingredients, factor);
+  if (!grid) return;
+  if (factor === 1 && options && options.skipIfIdentity) return;
+  grid.innerHTML = buildIngsHTML(currentRecipe.ingredients, factor);
 }
 
 function closeModal() {
