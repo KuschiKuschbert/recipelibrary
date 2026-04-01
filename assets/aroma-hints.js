@@ -999,24 +999,16 @@
       return (
         '<div class="aroma-hint-block kuschi-modal-seasoning" id="' +
         wrapId +
-        '" data-aroma-hint-wrap="1" data-aroma-hint-inline-modal="1" aria-busy="true" aria-live="polite">' +
+        '" data-aroma-hint-wrap="1" data-aroma-hint-inline-modal="1" data-aroma-inline-lazy="1" aria-busy="false" aria-live="polite">' +
         '<div class="kuschi-modal-seasoning-head">' +
         '<span class="kuschi-modal-seasoning-title">Seasoning tips</span>' +
         '<span class="kuschi-modal-seasoning-status" data-aroma-inline-status="1">Matching to the Aroma index…</span>' +
         '</div>' +
         '<div class="kuschi-modal-seasoning-body" data-aroma-hint-body="1">' +
-        '<div class="kuschi-seasoning-loading" aria-hidden="true">' +
-        '<div class="kuschi-seasoning-loading-row">' +
-        '<div class="loader aroma-hint-loader" aria-hidden="true"></div>' +
-        '<div class="kuschi-seasoning-loading-copy">' +
-        '<span class="kuschi-seasoning-loading-title">Building suggestions</span>' +
-        '<span class="kuschi-seasoning-loading-hint">From your ingredient list — usually a moment</span>' +
-        '</div></div>' +
-        '<div class="kuschi-seasoning-skeleton">' +
-        '<span class="kuschi-seasoning-skel kuschi-seasoning-skel--a"></span>' +
-        '<span class="kuschi-seasoning-skel kuschi-seasoning-skel--b"></span>' +
-        '<span class="kuschi-seasoning-skel kuschi-seasoning-skel--c"></span>' +
-        '</div></div></div></div>'
+        '<div class="kuschi-modal-seasoning-idle">' +
+        '<p class="kuschi-modal-seasoning-idle-text">Optional: herbs and spices from the Aroma index that often harmonize with this ingredient list. Loads only when you ask — opening the recipe stays fast.</p>' +
+        '<button type="button" class="kuschi-modal-seasoning-load-btn" data-aroma-inline-load="1">Show seasoning suggestions</button>' +
+        '</div></div></div>'
       );
     }
     var wantOpen = !!opts.openByDefault;
@@ -1062,8 +1054,44 @@
     }
   }
 
+  function installInlineModalLazyLoad(wrapEl, lines, recipe) {
+    if (!wrapEl || wrapEl.getAttribute('data-aroma-inline-lazy') !== '1') return;
+    if (wrapEl.getAttribute('data-aroma-inline-lazy-wired') === '1') return;
+    wrapEl.setAttribute('data-aroma-inline-lazy-wired', '1');
+    var btn = wrapEl.querySelector('[data-aroma-inline-load]');
+    if (!btn) return;
+    function beginLoad() {
+      wrapEl.removeAttribute('data-aroma-inline-lazy');
+      wrapEl.setAttribute('aria-busy', 'true');
+      var st = wrapEl.querySelector('[data-aroma-inline-status]');
+      if (st) st.textContent = 'Matching to the Aroma index…';
+      var bodyEl = wrapEl.querySelector('[data-aroma-hint-body]');
+      if (bodyEl) {
+        bodyEl.innerHTML =
+          '<div class="kuschi-seasoning-loading" aria-hidden="true">' +
+          '<div class="kuschi-seasoning-loading-row">' +
+          '<div class="loader aroma-hint-loader" aria-hidden="true"></div>' +
+          '<div class="kuschi-seasoning-loading-copy">' +
+          '<span class="kuschi-seasoning-loading-title">Building suggestions</span>' +
+          '<span class="kuschi-seasoning-loading-hint">From your ingredient list — usually a moment</span>' +
+          '</div></div>' +
+          '<div class="kuschi-seasoning-skeleton">' +
+          '<span class="kuschi-seasoning-skel kuschi-seasoning-skel--a"></span>' +
+          '<span class="kuschi-seasoning-skel kuschi-seasoning-skel--b"></span>' +
+          '<span class="kuschi-seasoning-skel kuschi-seasoning-skel--c"></span>' +
+          '</div></div>';
+      }
+      fillHintWrap(wrapEl, lines, recipe);
+    }
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      beginLoad();
+    });
+  }
+
   function fillHintWrap(wrapEl, lines, recipe) {
     if (!wrapEl) return;
+    if (wrapEl.getAttribute('data-aroma-inline-lazy') === '1') return;
     var inlineModal = wrapEl.getAttribute('data-aroma-hint-inline-modal') === '1';
     var detailsEl = wrapEl.querySelector('.aroma-hint-details');
     var bodyEl = wrapEl.querySelector('[data-aroma-hint-body]');
@@ -1204,7 +1232,7 @@
 
   /**
    * After injecting HTML that includes [data-aroma-hint-wrap], call with modal root and recipe.
-   * Inline modal: fills in-flow with loading UI until suggestions are ready.
+   * Inline modal: optional load via button (no fetch until user taps); then loading UI + fill.
    * When data-aroma-hint-lazy="1" and details starts closed, defer fillHintWrap until first open.
    */
   function hydrateModal(root, recipe) {
@@ -1213,6 +1241,10 @@
     var wrap = root.querySelector('[data-aroma-hint-wrap]');
     if (!wrap) return;
     if (wrap.getAttribute('data-aroma-hint-inline-modal') === '1') {
+      if (wrap.getAttribute('data-aroma-inline-lazy') === '1') {
+        installInlineModalLazyLoad(wrap, lines, recipe);
+        return;
+      }
       fillHintWrap(wrap, lines, recipe);
       return;
     }

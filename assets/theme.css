@@ -1169,17 +1169,20 @@ body {
 /* In-flow seasoning block inside recipe modals (no overlay). */
 .kuschi-modal-seasoning {
   position: relative;
-  margin: 18px 0 14px;
-  padding: 14px 0 0;
+  margin: 24px 0 20px;
+  padding: 20px 0 0;
   border-top: 1px solid var(--border);
   contain: layout style;
+}
+.kuschi-modal-seasoning[data-aroma-inline-lazy="1"] .kuschi-modal-seasoning-status {
+  display: none;
 }
 .kuschi-modal-seasoning-head {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   flex-wrap: wrap;
 }
 .kuschi-modal-seasoning-title {
@@ -1197,11 +1200,47 @@ body {
 .kuschi-modal-seasoning--ready .kuschi-modal-seasoning-status {
   display: none;
 }
-.kuschi-modal-seasoning-intro {
-  margin: 0 0 10px;
+.kuschi-modal-seasoning-idle {
+  padding: 6px 4px 8px;
+}
+.kuschi-modal-seasoning-idle-text {
+  margin: 0 0 16px;
   padding: 0 14px;
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 1.6;
+  color: var(--text3);
+  max-width: 42em;
+}
+.kuschi-modal-seasoning-load-btn {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.kuschi-modal-seasoning-load-btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-hover);
+  color: var(--gold);
+}
+.kuschi-modal-seasoning-load-btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+.kuschi-modal-seasoning-intro {
+  margin: 0 0 14px;
+  padding: 0 18px;
+  font-size: 13px;
+  line-height: 1.6;
   color: var(--text3);
 }
 .kuschi-modal-seasoning-intro strong {
@@ -1266,16 +1305,27 @@ body {
   margin-right: 4px;
 }
 .kuschi-modal-seasoning-body {
-  border-radius: var(--radius-sm);
+  border-radius: 12px;
   border: 1px solid var(--border);
   background: var(--surface);
   overflow: hidden;
+}
+.kuschi-modal-seasoning-content .aroma-hint-chips {
+  gap: 10px;
+  padding: 4px 18px 14px;
+}
+.kuschi-modal-seasoning-content .aroma-hint-more {
+  padding: 0 18px 14px;
+}
+.kuschi-modal-seasoning-content .kuschi-more-flavor-details {
+  margin: 10px 18px 18px;
+  padding-top: 14px;
 }
 [data-aroma-hint-body]:has(.kuschi-seasoning-loading) {
   min-height: 128px;
 }
 .kuschi-seasoning-loading {
-  padding: 14px 14px 16px;
+  padding: 18px 18px 20px;
 }
 .kuschi-seasoning-loading-row {
   display: flex;
