@@ -254,9 +254,13 @@
 }
 
 /* Recipe detail modal (Riviera) — base shell in theme.css */
+#modalOverlay {
+  transition: opacity 0.08s ease-out;
+}
 #modalOverlay .modal {
   max-height: min(88vh, 88dvh);
   padding: 36px;
+  transition: transform 0.08s ease-out;
 }
 #modalOverlay .modal-badges { margin-bottom: 16px; }
 #modalOverlay .modal-scale input { width: 72px; }
@@ -1407,36 +1411,38 @@ function openRecipe(id) {
     </div>
   `;
 
-  modal.scrollTop = 0;
-  overlay.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  setTimeout(function () {
-    if (window.KuschiScreenWake) KuschiScreenWake.sync();
-  }, 0);
-
   requestAnimationFrame(function () {
+    modal.scrollTop = 0;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function () {
+      if (window.KuschiScreenWake) KuschiScreenWake.sync();
+    }, 0);
+
     requestAnimationFrame(function () {
-      if (!document.getElementById('modalOverlay').classList.contains('open')) return;
-      if (!currentRecipe || currentRecipe.id !== recipeId) return;
-      const heavy = document.getElementById('rivieraModalHeavy');
-      if (!heavy) return;
+      requestAnimationFrame(function () {
+        setTimeout(function () {
+          if (!document.getElementById('modalOverlay').classList.contains('open')) return;
+          if (!currentRecipe || currentRecipe.id !== recipeId) return;
+          const heavy = document.getElementById('rivieraModalHeavy');
+          if (!heavy) return;
 
-      const elements = r.elements.map(e => `<span class="element-chip">${KuschiRecipeUi.esc(e)}</span>`).join('');
-      const ingsHTML = buildIngsHTML(r.ingredients, 1);
-      const steps = r.method_steps.map(s => `<li>${KuschiRecipeUi.esc(s)}</li>`).join('');
-      const service = r.service.map(s => `<li>${KuschiRecipeUi.esc(s)}</li>`).join('');
-      const note = r.note ? `<div class="modal-note">⚠ ${KuschiRecipeUi.esc(r.note)}</div>` : '';
-      const label = `<div class="label-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> Label: DATE MADE · ${KuschiRecipeUi.esc(r.label)}</div>`;
-      const adminActions = isRivieraAdminUnlocked()
-        ? `<div class="modal-admin-actions">${
-            isBuiltinRecipeId(r.id)
-              ? '<button type="button" class="btn-secondary" onclick="rivieraHideCurrentBuiltin()">Hide from my list</button>'
-              : '<button type="button" class="btn-secondary" onclick="rivieraRemoveCurrentUserRecipe()">Remove recipe</button>'
-          }</div>`
-        : '';
-      const aromaHintHtml = KuschiRecipeUi.aromaSeasoningSectionHtml({ idSuffix: 'Rv', openByDefault: false });
+          const elements = r.elements.map(e => `<span class="element-chip">${KuschiRecipeUi.esc(e)}</span>`).join('');
+          const ingsHTML = buildIngsHTML(r.ingredients, 1);
+          const steps = r.method_steps.map(s => `<li>${KuschiRecipeUi.esc(s)}</li>`).join('');
+          const service = r.service.map(s => `<li>${KuschiRecipeUi.esc(s)}</li>`).join('');
+          const note = r.note ? `<div class="modal-note">⚠ ${KuschiRecipeUi.esc(r.note)}</div>` : '';
+          const label = `<div class="label-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> Label: DATE MADE · ${KuschiRecipeUi.esc(r.label)}</div>`;
+          const adminActions = isRivieraAdminUnlocked()
+            ? `<div class="modal-admin-actions">${
+                isBuiltinRecipeId(r.id)
+                  ? '<button type="button" class="btn-secondary" onclick="rivieraHideCurrentBuiltin()">Hide from my list</button>'
+                  : '<button type="button" class="btn-secondary" onclick="rivieraRemoveCurrentUserRecipe()">Remove recipe</button>'
+              }</div>`
+            : '';
+          const aromaHintHtml = KuschiRecipeUi.aromaSeasoningSectionHtml({ idSuffix: 'Rv', openByDefault: false });
 
-      heavy.innerHTML = `
+          heavy.innerHTML = `
     <div class="modal-section">Elements</div>
     <div class="modal-elements">${elements}</div>
     <div class="modal-section">Ingredients</div>
@@ -1450,15 +1456,17 @@ function openRecipe(id) {
     ${label}
     ${adminActions}
   `;
-      heavy.removeAttribute('aria-busy');
-      const scaleInp = document.getElementById('scaleInput');
-      if (scaleInp) rescale(scaleInp.value);
+          heavy.removeAttribute('aria-busy');
+          const scaleInp = document.getElementById('scaleInput');
+          if (scaleInp) rescale(scaleInp.value);
 
-      setTimeout(function () {
-        if (window.KuschiScreenWake) KuschiScreenWake.sync();
-      }, 0);
-      KuschiRecipeUi.scheduleHydrateModalAroma(modal, r, function () {
-        return currentRecipe && currentRecipe.id === r.id;
+          setTimeout(function () {
+            if (window.KuschiScreenWake) KuschiScreenWake.sync();
+          }, 0);
+          KuschiRecipeUi.scheduleHydrateModalAroma(modal, r, function () {
+            return currentRecipe && currentRecipe.id === r.id;
+          });
+        }, 0);
       });
     });
   });

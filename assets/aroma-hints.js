@@ -88,6 +88,36 @@
       });
   }
 
+  /**
+   * Fetch JSON but parse on a later macrotask so response handling does not block input/paint
+   * in the same turn as the network completion microtask.
+   */
+  function fetchJsonTextParseDeferred(url, timeoutMs) {
+    var ctrl = new AbortController();
+    var tid = setTimeout(function () {
+      ctrl.abort();
+    }, timeoutMs);
+    return fetch(url, { signal: ctrl.signal })
+      .finally(function () {
+        clearTimeout(tid);
+      })
+      .then(function (r) {
+        if (!r.ok) throw new Error('Failed to load ' + url);
+        return r.text();
+      })
+      .then(function (text) {
+        return new Promise(function (resolve, reject) {
+          global.setTimeout(function () {
+            try {
+              resolve(JSON.parse(text));
+            } catch (err) {
+              reject(err);
+            }
+          }, 0);
+        });
+      });
+  }
+
   function parseUnifiedPayload(raw) {
     if (Array.isArray(raw)) {
       return { ingredients: raw, kitchen_context: null };
@@ -377,17 +407,26 @@
     if (ingredients && foodPairings) return Promise.resolve();
     if (loadPromise) return loadPromise;
     loadPromise = Promise.all([
-      fetchJsonWithTimeout(ING_URL, FETCH_TIMEOUT_AROMA_MS),
-      fetchJsonWithTimeout(FOOD_URL, FETCH_TIMEOUT_AROMA_MS),
+      fetchJsonTextParseDeferred(ING_URL, FETCH_TIMEOUT_AROMA_MS),
+      fetchJsonTextParseDeferred(FOOD_URL, FETCH_TIMEOUT_AROMA_MS),
     ])
       .then(function (pair) {
         ingredients = pair[0];
         foodPairings = pair[1];
-        byId = Object.create(null);
-        for (var i = 0; i < ingredients.length; i++) {
-          var ing = ingredients[i];
-          if (ing && ing.id) byId[ing.id] = ing;
-        }
+        return new Promise(function (resolve, reject) {
+          global.setTimeout(function () {
+            try {
+              byId = Object.create(null);
+              for (var i = 0; i < ingredients.length; i++) {
+                var ing = ingredients[i];
+                if (ing && ing.id) byId[ing.id] = ing;
+              }
+              resolve();
+            } catch (err) {
+              reject(err);
+            }
+          }, 0);
+        });
       })
       .catch(function (e) {
         loadPromise = null;
@@ -838,49 +877,56 @@
           if (!bodyEl2 || !detailsEl2) {
             return;
           }
-          if (!top.length) {
-            if (summaryEl2) summaryEl2.textContent = 'Seasoning ideas';
+          global.setTimeout(function () {
+            if (!wrapEl.isConnected) return;
+            detailsEl2 = wrapEl.querySelector('.aroma-hint-details');
+            bodyEl2 = wrapEl.querySelector('[data-aroma-hint-body]');
+            summaryEl2 = detailsEl2 ? detailsEl2.querySelector('.aroma-hint-summary') : null;
+            if (!bodyEl2 || !detailsEl2) return;
+            if (!top.length) {
+              if (summaryEl2) summaryEl2.textContent = 'Seasoning ideas';
+              bodyEl2.innerHTML =
+                '<p class="aroma-hint-empty">No matches in the Aroma Bible for these ingredients. Try <a href="aroma.html">Aroma lookup</a>.</p>';
+              syncAromaDetailsOpen(wrapEl, detailsEl2);
+              return;
+            }
+            var names = top
+              .slice(0, 8)
+              .map(function (s) {
+                return s.name;
+              })
+              .join(', ');
+            var chips = top
+              .slice(0, limit)
+              .map(function (s) {
+                return (
+                  '<a class="aroma-hint-chip" href="' +
+                  aromaPageHrefForSpice(s.id) +
+                  '">' +
+                  escHtml(s.name) +
+                  '</a>'
+                );
+              })
+              .join('');
+            var enhance = enhancementBlockHtml(data);
+            if (summaryEl2) {
+              summaryEl2.innerHTML =
+                'Seasoning ideas <span class="aroma-hint-teaser">— Try: ' + escHtml(names) + '</span>';
+            }
             bodyEl2.innerHTML =
-              '<p class="aroma-hint-empty">No matches in the Aroma Bible for these ingredients. Try <a href="aroma.html">Aroma lookup</a>.</p>';
+              enhance +
+              '<p class="aroma-hint-intro">Based on your ingredients. Tap a spice for heat timing and pairings.</p>' +
+              '<div class="aroma-hint-chips">' +
+              chips +
+              '</div>' +
+              '<p class="aroma-hint-more"><a href="aroma.html">Open Aroma lookup →</a></p>' +
+              '<details class="kuschi-more-flavor-details" data-kuschi-more-flavor="1" data-kuschi-flavor-state="idle">' +
+              '<summary class="kuschi-more-flavor-summary">More flavour &amp; pairing notes</summary>' +
+              '<p class="kuschi-flavor-lazy-intro">Substitutes, taste balance, and cuisine ideas from the flavour book. Opens on demand (~2&nbsp;MB the first time).</p>' +
+              '</details>';
+            wireLazyFlavorExtras(wrapEl, lines, recipe);
             syncAromaDetailsOpen(wrapEl, detailsEl2);
-            return;
-          }
-          var names = top
-            .slice(0, 8)
-            .map(function (s) {
-              return s.name;
-            })
-            .join(', ');
-          var chips = top
-            .slice(0, limit)
-            .map(function (s) {
-              return (
-                '<a class="aroma-hint-chip" href="' +
-                aromaPageHrefForSpice(s.id) +
-                '">' +
-                escHtml(s.name) +
-                '</a>'
-              );
-            })
-            .join('');
-          var enhance = enhancementBlockHtml(data);
-          if (summaryEl2) {
-            summaryEl2.innerHTML =
-              'Seasoning ideas <span class="aroma-hint-teaser">— Try: ' + escHtml(names) + '</span>';
-          }
-          bodyEl2.innerHTML =
-            enhance +
-            '<p class="aroma-hint-intro">Based on your ingredients. Tap a spice for heat timing and pairings.</p>' +
-            '<div class="aroma-hint-chips">' +
-            chips +
-            '</div>' +
-            '<p class="aroma-hint-more"><a href="aroma.html">Open Aroma lookup →</a></p>' +
-            '<details class="kuschi-more-flavor-details" data-kuschi-more-flavor="1" data-kuschi-flavor-state="idle">' +
-            '<summary class="kuschi-more-flavor-summary">More flavour &amp; pairing notes</summary>' +
-            '<p class="kuschi-flavor-lazy-intro">Substitutes, taste balance, and cuisine ideas from the flavour book. Opens on demand (~2&nbsp;MB the first time).</p>' +
-            '</details>';
-          wireLazyFlavorExtras(wrapEl, lines, recipe);
-          syncAromaDetailsOpen(wrapEl, detailsEl2);
+          }, 0);
         });
       })
       .catch(function () {

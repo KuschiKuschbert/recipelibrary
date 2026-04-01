@@ -41,11 +41,15 @@
         if (typeof isStillOpen === 'function' && !isStillOpen()) return;
         w.KuschiAromaHints.hydrateModal(modalEl, recipe);
       };
-      if (typeof w.requestIdleCallback === 'function') {
-        w.requestIdleCallback(go, { timeout: 500 });
-      } else {
-        w.setTimeout(go, 0);
-      }
+      w.setTimeout(function () {
+        if (typeof w.requestIdleCallback === 'function') {
+          w.requestIdleCallback(go, { timeout: 2500 });
+        } else {
+          w.requestAnimationFrame(function () {
+            w.requestAnimationFrame(go);
+          });
+        }
+      }, 0);
     },
   };
 })(typeof window !== 'undefined' ? window : globalThis);
