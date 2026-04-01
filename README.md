@@ -19,8 +19,8 @@ Personal recipe library hosted on **GitHub Pages**: searchable catalog, metric-o
 | [assets/recipe-import-helpers.js](assets/recipe-import-helpers.js) | File upload (PDF / DOCX / image) and HTML→text for URL import |
 | [workers/recipe-fetch-proxy.js](workers/recipe-fetch-proxy.js) | Optional Cloudflare Worker to fetch recipe URLs (bypass browser CORS) |
 | `claude_index/` | Compact index JSON shards for search |
-| `recipe_detail/detail_*.json` | Full recipe payloads (main library), keyed by first letter of name |
-| `scripts/detect-nonenglish-recipes.py`, `translate_recipes.py`, `sync_claude_index_from_detail.py`, `repartition_detail_shards.py` | Optional pipeline to translate catalog text and keep index/detail aligned (see below) |
+| `recipe_detail/detail_*.json` | Full recipe payloads (main library): `detail_{L}_{bucket}.json` sub-shards (`hash(id) % 64`, FNV-1a — see `index.html` + `scripts/recipe_pipeline_lib.py`); letter **L** from compact index `name` (same as the Kitchen list). Optional legacy `detail_{L}.json` fallback on 404. |
+| `scripts/detect-nonenglish-recipes.py`, `translate_recipes.py`, `sync_claude_index_from_detail.py`, `repartition_detail_shards.py`, `repartition_detail_subshards.py` | Optional pipeline to translate catalog text and keep index/detail aligned; sub-shard repartition after index/name changes (see below) |
 | `scripts/check-recipe-shards.py` | Verify every `claude_index` id resolves in the expected `recipe_detail` shard |
 | `scripts/run_all_extractions.sh` | Regenerate `flavor_data/`, `thesaurus_data/`, `science_data/`, `sfah_data/`, `supplementary_data/`, `combined_data/` from EPUBs/PDFs in `~/Downloads` (see each `extract_*.py` for env overrides) |
 | `combined_data/ingredients_unified.json` | **Schema v2** object: `ingredients` (merged Flavor + Aroma + Thesaurus rows) + `kitchen_context` (bundled `cuisine_map`, SFAH acid/fat/four-elements, science temps/tastants/storage/nutrients, supplementary seven-dials / fermentation / intensity). Regenerate with `python3 scripts/merge_all_sources.py`. Legacy **array-only** files are still accepted by the site JS. |
@@ -82,7 +82,7 @@ Some imported strings still contain literal HTML entities (`&ccedil;`, `&nbsp;`,
 1. **Decode entities:** `python3 scripts/fix_translation_html_entities.py --dry-run`, then `python3 scripts/fix_translation_html_entities.py --write`.
 2. **Optional Turkish re-translate:** `python3 scripts/fix_translation_html_entities.py --write --retranslate-tr` — Argos **tr→en** only for recipes with `source: lezzet` or `original_language: tr`, and only on fields that still contain Turkish letters (`çğıöşü` etc.). Install the Argos **tr** pair first (`python3 scripts/install_argos_pairs.py tr`). After you have already run step 1, use `--skip-entities` with `--retranslate-tr` so the script does not rescan every recipe for HTML entities (much faster): `python3 scripts/fix_translation_html_entities.py --write --retranslate-tr --skip-entities`. Expect a long run on a full library either way.
 3. **Sync index:** `python3 scripts/sync_claude_index_from_detail.py --ids-from reports/cleanup_affected_ids.jsonl` (or `--all-in-index` for a full refresh).
-4. **Repartition** (only if the cleanup script warned about **name** first-letter bucket drift): `python3 scripts/repartition_detail_shards.py`.
+4. **Repartition** (only if the cleanup script warned about **name** first-letter bucket drift): `python3 scripts/repartition_detail_shards.py`, then `python3 scripts/repartition_detail_subshards.py` to refresh `detail_{L}_{bucket}.json` files.
 5. **Verify:** `python3 scripts/check-recipe-shards.py` (must exit 0).
 
 Running `--write` writes `reports/cleanup_affected_ids.jsonl` (gitignored); regenerate it whenever you run a cleanup write.
@@ -97,9 +97,10 @@ Running `--write` writes `reports/cleanup_affected_ids.jsonl` (gitignored); rege
    Alternatives: `--backend libretranslate` (set `LIBRETRANSLATE_URL`, optional `LIBRETRANSLATE_API_KEY`) or `--backend deepl` (`DEEPL_AUTH_KEY`, optional `DEEPL_FREE=1` for api-free host). Use `--dry-run` on translate to count strings without writing. Glossary: [`scripts/translation_glossary.json`](scripts/translation_glossary.json).
 4. **Sync index:** `python3 scripts/sync_claude_index_from_detail.py --ids-from reports/translation_candidates.jsonl`  
    Or `--all-in-index` to refresh every catalog entry from detail (slow, loads all detail files).
-5. **Repartition detail (only if a recipe `name`’s first ASCII letter changed):**  
+5. **Repartition detail (only if a compact index `name`’s first ASCII letter changed):**  
    `python3 scripts/repartition_detail_shards.py`  
-   Otherwise the site may load the wrong `detail_{letter}.json` for that id.
+   then `python3 scripts/repartition_detail_subshards.py`  
+   Otherwise the site may fetch the wrong `recipe_detail/detail_{letter}_{bucket}.json` slice for that id.
 6. **Verify:** `python3 scripts/check-recipe-shards.py` (must exit 0).
 
 Shared helpers: [`scripts/recipe_pipeline_lib.py`](scripts/recipe_pipeline_lib.py). One-shot full run (detect → Argos models → translate → repartition → sync → verify): [`scripts/run_full_translation.sh`](scripts/run_full_translation.sh).

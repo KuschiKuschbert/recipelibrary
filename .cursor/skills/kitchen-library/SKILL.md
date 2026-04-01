@@ -27,7 +27,7 @@ Skip only if the user explicitly opts out.
 |------|------|
 | `assets/theme.css` | **Shared** theme: `:root` tokens, search, filters, modal shell, footer, spin, form helpers, base `.grid` |
 | `claude_index/` | Search index JSON shards for the main library |
-| `recipe_detail/detail_*.json` | Full recipe payloads keyed by first letter of name |
+| `recipe_detail/detail_*.json` | Full payloads: `detail_{Letter}_{bucket}.json` (64 buckets, FNV-1a on id); letter from compact index `name` (matches Kitchen UI). Regenerate with `scripts/repartition_detail_subshards.py`. |
 | `kitchen_library_*.json` | Additional library chunks |
 | `assets/user-recipes.js` | **localStorage** helpers (browser-only) — see keys below |
 | `aroma_data/*.json`, [aroma.html](aroma.html), [assets/aroma-hints.js](assets/aroma-hints.js) | **Aroma Bible** extract: food↔spice index, harmony data, recipe hints + [aroma.html](aroma.html) lookup — see [.cursor/skills/aroma-bible/SKILL.md](../aroma-bible/SKILL.md). **Index recipe modal:** chips load from the small aroma pair only; `ingredients_unified.json` is **lazy** (second `<details>`); fetches are **timed** so spinners do not stick. |
@@ -37,7 +37,7 @@ Skip only if the user explicitly opts out.
 | [kitchen-book.html](kitchen-book.html) | Per-device **kitchen books** (`?b=id`): search, add recipe (manual + Gemini), QR, **order list** (per-book storage), **Admin** PIN for delete book / remove recipe |
 | `assets/screen-wake.js` | **Keep screen on** toggle (`[data-kuschi-wake]`) — shown in recipe detail modals only |
 | `scraped_raw/`, `pdf/` | Source / export artifacts |
-| `scripts/detect-nonenglish-recipes.py`, `translate_recipes.py`, `sync_claude_index_from_detail.py`, `repartition_detail_shards.py` | Optional: translate catalog text to English, sync `claude_index` from `recipe_detail`, repartition detail shards after name changes — see [README.md](../../../README.md) |
+| `scripts/detect-nonenglish-recipes.py`, `translate_recipes.py`, `sync_claude_index_from_detail.py`, `repartition_detail_shards.py`, `repartition_detail_subshards.py` | Optional: translate catalog text to English, sync `claude_index` from `recipe_detail`, repartition detail shards / letter+bucket sub-shards after name changes — see [README.md](../../../README.md) |
 
 ## User data (client-side)
 

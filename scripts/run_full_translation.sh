@@ -19,11 +19,14 @@ echo "== translate (long) =="
   --checkpoint-every 100 \
   --quiet
 
-echo "== repartition detail shards by name letter =="
-"$PY" scripts/repartition_detail_shards.py
-
 echo "== sync claude_index from detail =="
 "$PY" scripts/sync_claude_index_from_detail.py --ids-from reports/translation_candidates.jsonl
+
+echo "== repartition detail shards by index name letter =="
+"$PY" scripts/repartition_detail_shards.py
+
+echo "== repartition detail sub-shards (hash buckets) =="
+"$PY" scripts/repartition_detail_subshards.py
 
 echo "== verify =="
 "$PY" scripts/check-recipe-shards.py

@@ -12,6 +12,17 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+SCRIPTS = REPO_ROOT / "scripts"
+sys.path.insert(0, str(SCRIPTS))
+
+from recipe_pipeline_lib import (  # noqa: E402
+    DETAIL_BUCKET_COUNT,
+    DETAIL_LEGACY_RE,
+    DETAIL_SUBSHARD_RE,
+    detail_bucket_from_id,
+    detail_subshard_filename,
+)
+
 CLAUDE_INDEX = REPO_ROOT / "claude_index"
 RECIPE_DETAIL = REPO_ROOT / "recipe_detail"
 
@@ -33,9 +44,6 @@ INDEX_FILES = [
     "claude_index_14_S-T.json",
     "claude_index_15_T-Z.json",
 ]
-
-ASCII_AZ = set(chr(c) for c in range(ord("A"), ord("Z") + 1))
-
 
 def letter_from_name(name: str | None) -> str:
     """Match buildRecipeIndex in index.html (first ASCII a–zA–Z, else Z)."""
@@ -65,6 +73,14 @@ def find_in_payload(payload, rid: str):
             if isinstance(v, dict) and str(v.get("id")) == sid:
                 return v
     return None
+
+
+def is_valid_detail_filename(name: str) -> bool:
+    m = DETAIL_SUBSHARD_RE.match(name)
+    if m:
+        b = int(m.group(2), 10)
+        return 0 <= b < DETAIL_BUCKET_COUNT
+    return bool(DETAIL_LEGACY_RE.match(name))
 
 
 def load_index_recipes() -> list[dict]:
@@ -116,28 +132,35 @@ def main() -> int:
         if bad and p.name in listed:
             pass  # already could warn above
 
-    # 2) Detail orphans: detail_*.json whose suffix is not exactly one ASCII A–Z
+    # 2) Detail orphans: detail_*.json not matching sub-shard or legacy monolith pattern
     detail_orphans: list[str] = []
     for p in RECIPE_DETAIL.glob("detail_*.json"):
-        suf = p.name[len("detail_") : -len(".json")]
-        if not (len(suf) == 1 and suf in ASCII_AZ):
+        if not is_valid_detail_filename(p.name):
             detail_orphans.append(p.name)
             bad = suspicious_filename(p)
             if bad:
                 warnings.append(f"{p.name}: {'; '.join(bad)}")
 
-    # 3) Load detail shards lazily by letter
+    # 3) Load detail sub-shards (or legacy monolith) lazily
     detail_cache: dict[str, object] = {}
 
-    def get_detail(letter: str):
-        if letter not in detail_cache:
-            path = RECIPE_DETAIL / f"detail_{letter}.json"
-            if not path.is_file():
-                detail_cache[letter] = None
+    def get_detail_payload(letter: str, bucket: int):
+        sub = RECIPE_DETAIL / detail_subshard_filename(letter, bucket)
+        if sub.is_file():
+            sk = f"sub:{letter}_{bucket}"
+            if sk not in detail_cache:
+                with open(sub, encoding="utf-8") as f:
+                    detail_cache[sk] = json.load(f)
+            return detail_cache[sk]
+        lk = f"leg:{letter}"
+        if lk not in detail_cache:
+            leg = RECIPE_DETAIL / f"detail_{letter}.json"
+            if leg.is_file():
+                with open(leg, encoding="utf-8") as f:
+                    detail_cache[lk] = json.load(f)
             else:
-                with open(path, encoding="utf-8") as f:
-                    detail_cache[letter] = json.load(f)
-        return detail_cache[letter]
+                detail_cache[lk] = None
+        return detail_cache[lk]
 
     recipes = load_index_recipes()
     missing: list[tuple[str, str, str]] = []  # id, letter, name
@@ -145,7 +168,8 @@ def main() -> int:
     for r in recipes:
         rid = r["id"]
         letter = letter_from_name(r.get("name"))
-        payload = get_detail(letter)
+        bucket = detail_bucket_from_id(rid)
+        payload = get_detail_payload(letter, bucket)
         if payload is None:
             missing.append((str(rid), letter, r.get("name") or ""))
             continue
@@ -156,7 +180,7 @@ def main() -> int:
         print(f"WARN: {w}", file=sys.stderr)
 
     if detail_orphans:
-        print(f"ERROR: orphan detail shards (not A–Z ASCII): {len(detail_orphans)}", file=sys.stderr)
+        print(f"ERROR: orphan detail shards (unexpected filename): {len(detail_orphans)}", file=sys.stderr)
         for o in sorted(detail_orphans)[:40]:
             print(f"  {o}", file=sys.stderr)
         if len(detail_orphans) > 40:
@@ -175,7 +199,7 @@ def main() -> int:
         print(
             f"OK: {len(INDEX_FILES)} index shards present; "
             f"{len(recipes)} index recipes checked; "
-            f"detail A–Z only (no orphan shards)."
+            f"detail letter+bucket (or legacy monolith); no orphan shards."
         )
 
     return 1 if errors or missing else 0

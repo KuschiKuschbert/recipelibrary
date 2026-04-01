@@ -6,6 +6,7 @@ Must stay aligned with index.html INDEX_FILES and letter bucketing.
 from __future__ import annotations
 
 import json
+import re
 from functools import lru_cache
 from pathlib import Path
 from typing import Any, Iterator
@@ -35,6 +36,42 @@ INDEX_FILES = [
 ]
 
 ASCII_AZ = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+# Sub-shards: hash(id) % N → recipe_detail/detail_{L}_{bucket}.json (matches index.html)
+DETAIL_BUCKET_COUNT = 64
+DETAIL_SUBSHARD_RE = re.compile(r"^detail_([A-Z])_(\d+)\.json$")
+DETAIL_LEGACY_RE = re.compile(r"^detail_([A-Z])\.json$")
+_FNV_OFFSET = 2166136261
+_FNV_PRIME = 16777619
+
+
+def detail_bucket_pad_width() -> int:
+    return max(2, len(str(DETAIL_BUCKET_COUNT - 1)))
+
+
+def detail_subshard_filename(letter: str, bucket: int) -> str:
+    w = detail_bucket_pad_width()
+    return f"detail_{letter}_{str(bucket).zfill(w)}.json"
+
+
+def detail_bucket_from_id(rid: str | int, n: int | None = None) -> int:
+    """FNV-1a 32-bit, same algorithm as detailBucketFromId in index.html."""
+    if n is None:
+        n = DETAIL_BUCKET_COUNT
+    h = _FNV_OFFSET
+    for c in str(rid):
+        h ^= ord(c)
+        h = (h * _FNV_PRIME) & 0xFFFFFFFF
+    return h % n
+
+
+def detail_repo_uses_subshards() -> bool:
+    if not RECIPE_DETAIL.is_dir():
+        return False
+    for p in RECIPE_DETAIL.glob("detail_*.json"):
+        if DETAIL_SUBSHARD_RE.match(p.name):
+            return True
+    return False
 
 
 def letter_from_name(name: str | None) -> str:
@@ -68,15 +105,40 @@ def find_in_detail_payload(payload: Any, rid: str) -> dict | None:
 
 
 def iter_detail_shard_paths() -> Iterator[Path]:
-    for letter in ASCII_AZ:
-        p = RECIPE_DETAIL / f"detail_{letter}.json"
-        if p.is_file():
-            yield p
+    if not RECIPE_DETAIL.is_dir():
+        return
+    paths = list(RECIPE_DETAIL.glob("detail_*.json"))
+    subs = sorted(p for p in paths if DETAIL_SUBSHARD_RE.match(p.name))
+    if subs:
+        yield from subs
+        return
+    legs = sorted(p for p in paths if DETAIL_LEGACY_RE.match(p.name))
+    yield from legs
 
 
 def load_all_detail_shards() -> dict[str, dict | list]:
-    """Letter -> parsed JSON (object map or legacy list)."""
+    """Letter -> parsed JSON (object map or legacy list), merging all buckets per letter."""
     out: dict[str, dict | list] = {}
+    if not RECIPE_DETAIL.is_dir():
+        return out
+    if detail_repo_uses_subshards():
+        for letter in ASCII_AZ:
+            merged: dict[str, dict] = {}
+            for p in sorted(RECIPE_DETAIL.glob(f"detail_{letter}_*.json")):
+                if not DETAIL_SUBSHARD_RE.match(p.name):
+                    continue
+                data = load_detail_file(p)
+                if isinstance(data, list):
+                    for r in data:
+                        if isinstance(r, dict) and r.get("id") is not None:
+                            merged[str(r["id"])] = r
+                elif isinstance(data, dict):
+                    for v in data.values():
+                        if isinstance(v, dict) and v.get("id") is not None:
+                            merged[str(v["id"])] = v
+            if merged:
+                out[letter] = merged
+        return out
     for letter in ASCII_AZ:
         p = RECIPE_DETAIL / f"detail_{letter}.json"
         if p.is_file():
@@ -116,38 +178,84 @@ def load_all_detail_recipes() -> dict[str, dict]:
     return out
 
 
+def _merge_detail_payload_into_out(
+    data: dict | list, remaining: set[str], out: dict[str, dict]
+) -> None:
+    if isinstance(data, list):
+        for r in data:
+            if not isinstance(r, dict) or r.get("id") is None:
+                continue
+            sid = str(r["id"])
+            if sid in remaining:
+                out[sid] = r
+                remaining.discard(sid)
+    elif isinstance(data, dict):
+        for v in data.values():
+            if not isinstance(v, dict) or v.get("id") is None:
+                continue
+            sid = str(v["id"])
+            if sid in remaining:
+                out[sid] = v
+                remaining.discard(sid)
+
+
 def load_detail_recipes_subset(wanted_ids: set[str]) -> dict[str, dict]:
     """Load only recipes whose id is in wanted_ids (faster than full merge)."""
     out: dict[str, dict] = {}
     if not wanted_ids:
         return out
     remaining = set(wanted_ids)
+    if detail_repo_uses_subshards():
+        loc_map = build_index_id_locations()
+        idx_cache: dict[Path, dict] = {}
+        by_path: dict[Path, set[str]] = {}
+        for rid in remaining:
+            loc = loc_map.get(rid)
+            if not loc:
+                continue
+            ipath, iidx = loc
+            if ipath not in idx_cache:
+                idx_cache[ipath] = load_index_shard(ipath)
+            recs = idx_cache[ipath].get("recipes") or []
+            if iidx >= len(recs):
+                continue
+            name = recs[iidx].get("name")
+            L = letter_from_name(name)
+            b = detail_bucket_from_id(rid)
+            p = RECIPE_DETAIL / detail_subshard_filename(L, b)
+            by_path.setdefault(p, set()).add(rid)
+        for p, want in by_path.items():
+            if not p.is_file():
+                continue
+            data = load_detail_file(p)
+            sub_rem = set(want)
+            _merge_detail_payload_into_out(data, sub_rem, out)
+        return out
     for path in iter_detail_shard_paths():
         if not remaining:
             break
         data = load_detail_file(path)
-        if isinstance(data, list):
-            for r in data:
-                if not isinstance(r, dict) or r.get("id") is None:
-                    continue
-                sid = str(r["id"])
-                if sid in remaining:
-                    out[sid] = r
-                    remaining.discard(sid)
-        elif isinstance(data, dict):
-            for v in data.values():
-                if not isinstance(v, dict) or v.get("id") is None:
-                    continue
-                sid = str(v["id"])
-                if sid in remaining:
-                    out[sid] = v
-                    remaining.discard(sid)
+        _merge_detail_payload_into_out(data, remaining, out)
     return out
 
 
 def load_index_shard(path: Path) -> dict:
     with open(path, encoding="utf-8") as f:
         return json.load(f)
+
+
+def load_index_id_to_display_name() -> dict[str, str]:
+    """id -> compact index `name` (matches Kitchen list / buildRecipeIndex letter rule)."""
+    m: dict[str, str] = {}
+    for name in INDEX_FILES:
+        path = CLAUDE_INDEX / name
+        if not path.is_file():
+            continue
+        data = load_index_shard(path)
+        for r in data.get("recipes") or []:
+            if r and r.get("id") is not None:
+                m[str(r["id"])] = str(r.get("name") or "")
+    return m
 
 
 def save_index_shard(path: Path, data: dict, *, compact: bool = True) -> None:

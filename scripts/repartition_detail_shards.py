@@ -20,6 +20,7 @@ from recipe_pipeline_lib import (  # noqa: E402
     RECIPE_DETAIL,
     letter_from_name,
     load_all_detail_recipes,
+    load_index_id_to_display_name,
     save_detail_file,
 )
 
@@ -39,10 +40,12 @@ def main() -> int:
     args = ap.parse_args()
 
     all_recipes = load_all_detail_recipes()
+    idx_name = load_index_id_to_display_name()
     buckets: dict[str, dict] = {L: {} for L in ASCII_AZ}
 
     for rid, recipe in all_recipes.items():
-        L = letter_from_name(recipe.get("name"))
+        nm = idx_name.get(rid) or recipe.get("name") or ""
+        L = letter_from_name(nm)
         buckets[L][rid] = recipe
 
     if args.dry_run:

@@ -1083,44 +1083,91 @@ const observer = new IntersectionObserver(
 observer.observe(searchWrap);
 
 // ── Recipe Detail Modal ───────────────────────────────
+// Sub-shards: hash(id) % N → recipe_detail/detail_{L}_{bucket}.json (see scripts/recipe_pipeline_lib.py DETAIL_BUCKET_COUNT)
+const DETAIL_BUCKET_COUNT = 64;
 const detailCache = {};
 const recipeIndex = {};
+
+function detailBucketFromId(id) {
+  const s = String(id);
+  let h = 2166136261 >>> 0;
+  const prime = 16777619;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, prime) >>> 0;
+  }
+  return h % DETAIL_BUCKET_COUNT;
+}
+
+function detailSliceCacheKey(letter, bucket) {
+  return `${letter}_${bucket}`;
+}
+
+function detailSubshardZeroPad() {
+  return Math.max(2, String(DETAIL_BUCKET_COUNT - 1).length);
+}
 
 function buildRecipeIndex() {
   for (const r of allRecipes) {
     let letter = 'Z';
     if (r.id && String(r.id).startsWith('user-')) {
       letter = (window.KuschiUserRecipes && KuschiUserRecipes.USER_LETTER) || '_USER';
+      recipeIndex[r.id] = { letter, name: r.name };
     } else {
       for (const c of (r.name || '')) {
         if (/[a-zA-Z]/.test(c)) { letter = c.toUpperCase(); break; }
       }
+      recipeIndex[r.id] = { letter, bucket: detailBucketFromId(r.id), name: r.name };
     }
-    recipeIndex[r.id] = { letter, name: r.name };
   }
 }
 
-async function fetchDetail(letter) {
-  if (detailCache[letter]) return detailCache[letter];
+async function fetchDetailLegacy(letter) {
+  const legacyKey = `__legacy_${letter}`;
+  if (detailCache[legacyKey]) return detailCache[legacyKey];
   const base = siteBaseUrl();
   const resp = await fetch(`${base}/recipe_detail/detail_${letter}.json`);
   if (!resp.ok) throw new Error(`Detail file not found for "${letter}"`);
   const data = await resp.json();
-  detailCache[letter] = data;
+  detailCache[legacyKey] = data;
   return data;
 }
 
-/** Warm detail JSON for a catalog recipe (same letter shard). Safe no-op for user recipes or unknown ids. */
+async function fetchDetailSlice(letter, bucket) {
+  const key = detailSliceCacheKey(letter, bucket);
+  if (detailCache[key]) return detailCache[key];
+  const base = siteBaseUrl();
+  const pad = detailSubshardZeroPad();
+  const nb = String(bucket).padStart(pad, '0');
+  const url = `${base}/recipe_detail/detail_${letter}_${nb}.json`;
+  const resp = await fetch(url);
+  if (resp.status === 404) {
+    return fetchDetailLegacy(letter);
+  }
+  if (!resp.ok) throw new Error(`Detail slice not found for "${letter}" bucket ${bucket}`);
+  const data = await resp.json();
+  detailCache[key] = data;
+  return data;
+}
+
+function catalogDetailBucketForId(id, info) {
+  if (info && info.bucket != null) return info.bucket;
+  return detailBucketFromId(id);
+}
+
+/** Warm detail JSON for a catalog recipe (same letter+bucket sub-shard). Safe no-op for user recipes or unknown ids. */
 function prefetchDetailShardForRecipeId(id) {
   if (!id || !recipeIndex[id]) return;
   const info = recipeIndex[id];
   const userLet = (window.KuschiUserRecipes && KuschiUserRecipes.USER_LETTER) || '_USER';
   if (info.letter === userLet) return;
-  if (detailCache[info.letter]) return;
-  fetchDetail(info.letter).catch(() => {});
+  const bucket = catalogDetailBucketForId(id, info);
+  const key = detailSliceCacheKey(info.letter, bucket);
+  if (detailCache[key]) return;
+  fetchDetailSlice(info.letter, bucket).catch(() => {});
 }
 
-/** After grid render: prefetch detail shards for letters on the first ~50 visible cards (idle). Helps touch devices where pointer prefetch has no lead time. */
+/** After grid render: prefetch detail sub-shards for letter+bucket on the first ~50 visible cards (idle). Helps touch devices where pointer prefetch has no lead time. */
 let kuschiVisibleShardPrefetchGen = 0;
 function schedulePrefetchVisibleDetailShards() {
   const gen = ++kuschiVisibleShardPrefetchGen;
@@ -1137,10 +1184,12 @@ function schedulePrefetchVisibleDetailShards() {
       if (!id || !recipeIndex[id]) continue;
       const letter = recipeIndex[id].letter;
       if (letter === userLet) continue;
-      if (detailCache[letter]) continue;
-      if (seen[letter]) continue;
-      seen[letter] = true;
-      fetchDetail(letter).catch(() => {});
+      const bucket = catalogDetailBucketForId(id, recipeIndex[id]);
+      const sk = detailSliceCacheKey(letter, bucket);
+      if (detailCache[sk]) continue;
+      if (seen[sk]) continue;
+      seen[sk] = true;
+      fetchDetailSlice(letter, bucket).catch(() => {});
     }
   };
   if (typeof requestIdleCallback === 'function') {
@@ -1222,9 +1271,10 @@ async function openRecipe(id) {
       throw new Error('User recipe missing from storage');
     }
     const tFetch0 = modalPerf ? performance.now() : 0;
-    const detail = await fetchDetail(info.letter);
+    const bucket = catalogDetailBucketForId(id, info);
+    const detail = await fetchDetailSlice(info.letter, bucket);
     if (modalPerf) {
-      console.log('[Kuschi modal] detail shard fetch+parse ms', (performance.now() - tFetch0).toFixed(1), 'letter', info.letter);
+      console.log('[Kuschi modal] detail slice fetch+parse ms', (performance.now() - tFetch0).toFixed(1), 'letter', info.letter, 'bucket', bucket);
     }
     const recipe = findRecipeInDetailPayload(detail, id);
     if (!recipe) throw new Error('Recipe not in detail file');
@@ -1360,8 +1410,8 @@ async function copyRecipeText(id) {
   }
   const info = recipeIndex[id];
   if (!info) return;
-  const detail = detailCache[info.letter];
-  if (!detail) return;
+  const bucket = catalogDetailBucketForId(id, info);
+  const detail = await fetchDetailSlice(info.letter, bucket);
   const r = findRecipeInDetailPayload(detail, id);
   if (!r) return;
 
