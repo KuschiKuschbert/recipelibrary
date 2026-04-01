@@ -39,6 +39,17 @@ Skip only if the user explicitly opts out.
 | `scraped_raw/`, `pdf/` | Source / export artifacts |
 | `scripts/detect-nonenglish-recipes.py`, `translate_recipes.py`, `sync_claude_index_from_detail.py`, `repartition_detail_shards.py`, `repartition_detail_subshards.py` | Optional: translate catalog text to English, sync `claude_index` from `recipe_detail`, repartition detail shards / letter+bucket sub-shards after name changes — see [README.md](../../../README.md) |
 
+### Aroma modal data — when to shard further (agent checklist)
+
+Slim artifacts (`ingredients_modal_core.json`, `ingredients_unified_modal.json` via `node scripts/build_aroma_modal_data.mjs`) are enough while files stay small and modals stay responsive.
+
+**Escalate** (implement without asking the user first if you hit these while editing aroma/unified or profiling modals):
+
+1. **`ingredients_unified_modal.json`** grows past **~400–500KB** *or* “More flavour” still causes long main-thread tasks after existing deferrals — add **sharded** slim files (e.g. by normalized name prefix or hash bucket), a tiny **routing index** (recipe-line tokens → candidate shard keys; **fallback fetch all shards** if index misses to avoid false negatives), and teach `ensureUnifiedLoaded` in [assets/aroma-hints.js](assets/aroma-hints.js) to fetch only candidates + merge. Mirror patterns in [.cursor/skills/big-static-data-frontend/SKILL.md](../big-static-data-frontend/SKILL.md) (Pantry routing index, `siteBaseUrl()`).
+2. **`ingredients_modal_core.json`** passes **~150KB** *or* row count **≫200** — consider splitting the core file by bucket; keep **one merge** in memory after `Promise.all` (or batched concurrency), update [sw.js](../../../sw.js) `CACHEABLE`, and extend `scripts/build_aroma_modal_data.mjs`.
+
+Regenerate slim outputs after any source change; bump `CACHE_NAME` in [sw.js](../../../sw.js) when adding new static URLs clients must fetch.
+
 ## User data (client-side)
 
 - **Kitchen** recipes: `kuschi_user_recipes_kitchen_v1` — merged into the main list; detail view does **not** use `recipe_detail/` fetch for `user-*` ids.
