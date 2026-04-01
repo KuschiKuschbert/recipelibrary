@@ -452,7 +452,7 @@
     var out = list.map(function (r) {
       if (!r || typeof r !== 'object') return r;
       var copy = Object.assign({}, r);
-      copy.ingredients = norm(JSON.parse(JSON.stringify(r.ingredients || [])));
+      copy.ingredients = norm(r.ingredients || []);
       return copy;
     });
     saveRiviera(out);

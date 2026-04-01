@@ -691,19 +691,27 @@ function computeBuiltinRecipesMetric(builtins) {
   if (!window.KuschiRecipeMetric) return builtins.slice();
   return builtins.map(function (r) {
     var o = Object.assign({}, r);
-    o.ingredients = KuschiRecipeMetric.normalizeRivieraIngredients(
-      JSON.parse(JSON.stringify(r.ingredients || []))
-    );
+    o.ingredients = KuschiRecipeMetric.normalizeRivieraIngredients(r.ingredients || []);
     return o;
   });
 }
 
 function finishRivieraBuiltinHydrate() {
-  BUILTIN_RECIPES_METRIC = computeBuiltinRecipesMetric(BUILTIN_RECIPES);
-  RECIPES = mergeRivieraRecipes();
-  filtered = [...RECIPES];
-  populateFilters();
-  applyFilters();
+  /* Yield one frame so "Loading…" can paint before filter DOM + full grid innerHTML. */
+  function run() {
+    BUILTIN_RECIPES_METRIC = computeBuiltinRecipesMetric(BUILTIN_RECIPES);
+    RECIPES = mergeRivieraRecipes();
+    filtered = [...RECIPES];
+    populateFilters();
+    applyFilters();
+  }
+  if (typeof requestAnimationFrame === 'function') {
+    requestAnimationFrame(function () {
+      setTimeout(run, 0);
+    });
+  } else {
+    setTimeout(run, 0);
+  }
 }
 
 async function loadRivieraBuiltinsFromNetwork() {
