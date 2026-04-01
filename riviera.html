@@ -1414,19 +1414,18 @@ function openRecipe(id) {
     </div>
   `;
 
-  requestAnimationFrame(function () {
-    modal.scrollTop = 0;
-    overlay.classList.add('open');
-    setTimeout(function () {
-      document.body.style.overflow = 'hidden';
-    }, 0);
-    setTimeout(function () {
-      if (window.KuschiScreenWake) KuschiScreenWake.sync();
-    }, 0);
+  modal.scrollTop = 0;
+  overlay.classList.add('open');
+  setTimeout(function () {
+    document.body.style.overflow = 'hidden';
+  }, 0);
+  setTimeout(function () {
+    if (window.KuschiScreenWake) KuschiScreenWake.sync();
+  }, 0);
 
+  requestAnimationFrame(function () {
     requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        setTimeout(function rivieraModalHeavyChunk1() {
+      setTimeout(function rivieraModalHeavyChunk1() {
           if (!document.getElementById('modalOverlay').classList.contains('open')) return;
           if (!currentRecipe || currentRecipe.id !== recipeId) return;
           const heavy = document.getElementById('rivieraModalHeavy');
@@ -1492,7 +1491,6 @@ function openRecipe(id) {
         }, 0);
       });
     });
-  });
 }
 
 function rivieraHideCurrentBuiltin() {

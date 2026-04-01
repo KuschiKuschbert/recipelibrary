@@ -509,6 +509,13 @@
     padding: var(--hero-pill-pad-y) var(--hero-pill-pad-x);
   }
   #addRecipeOverlay .modal { max-width: 560px; }
+  /* Recipe detail modal (index) — no motion so hit-testing matches Riviera */
+  #modalOverlay,
+  #modalOverlay.open,
+  #modalOverlay .modal,
+  #modalOverlay.open .modal {
+    transition: none !important;
+  }
   .ing-row { display: grid; grid-template-columns: 72px 56px 1fr 1fr 36px; gap: 8px; margin-bottom: 8px; align-items: center; }
   .ing-row input { padding: 8px; font-size: 13px; }
   @media (max-width: 680px) {
@@ -1198,7 +1205,7 @@ function schedulePrefetchVisibleDetailShards() {
   }
 }
 
-/** True when ?kuschiPerfModal=1 or localStorage kuschiPerfModal=1 — logs recipe modal timing to the console. */
+/** True when ?kuschiPerfModal=1 or localStorage kuschiPerfModal=1 — logs recipe modal timing to the console. For jank, also use DevTools Performance (long tasks / “long animation frames”). */
 function kuschiModalPerfEnabled() {
   try {
     if (typeof localStorage !== 'undefined' && localStorage.getItem('kuschiPerfModal') === '1') return true;
@@ -1262,20 +1269,23 @@ function renderModalShell(title) {
 async function openRecipe(id) {
   const overlay = document.getElementById('modalOverlay');
   const modal = document.getElementById('modal');
-  document.body.style.overflow = 'hidden';
 
   if (window.KuschiUserRecipes && id && String(id).startsWith('user-')) {
     const full = KuschiUserRecipes.getKitchenById(id);
     if (full) {
       currentRecipe = KuschiUserRecipes.kitchenToDetail(full);
       const recUser = currentRecipe;
-      modal.innerHTML = renderRecipeDetail(currentRecipe);
+      const rid = recUser.id;
+      modal.innerHTML = renderKitchenModalShell(recUser);
       modal.scrollTop = 0;
       overlay.classList.add('open');
       setTimeout(() => {
+        document.body.style.overflow = 'hidden';
+      }, 0);
+      setTimeout(() => {
         if (window.KuschiScreenWake) KuschiScreenWake.sync();
       }, 0);
-      KuschiRecipeUi.scheduleHydrateModalAroma(modal, recUser, () => currentRecipe && currentRecipe.id === recUser.id);
+      scheduleKitchenModalHeavyFill(modal, recUser, rid);
       return;
     }
   }
@@ -1285,6 +1295,9 @@ async function openRecipe(id) {
   modal.innerHTML = renderModalShell(shellTitle);
   modal.scrollTop = 0;
   overlay.classList.add('open');
+  setTimeout(() => {
+    document.body.style.overflow = 'hidden';
+  }, 0);
 
   const modalPerf = kuschiModalPerfEnabled();
   const tModal0 = modalPerf ? performance.now() : 0;
@@ -1304,12 +1317,13 @@ async function openRecipe(id) {
     if (!recipe) throw new Error('Recipe not in detail file');
     currentRecipe = recipe;
     const recCat = recipe;
-    modal.innerHTML = renderRecipeDetail(recipe);
+    const rid = recCat.id;
+    modal.innerHTML = renderKitchenModalShell(recipe);
     modal.scrollTop = 0;
     setTimeout(() => {
       if (window.KuschiScreenWake) KuschiScreenWake.sync();
     }, 0);
-    KuschiRecipeUi.scheduleHydrateModalAroma(modal, recCat, () => currentRecipe && currentRecipe.id === recCat.id);
+    scheduleKitchenModalHeavyFill(modal, recCat, rid);
     if (modalPerf) {
       console.log('[Kuschi modal] openRecipe total ms', (performance.now() - tModal0).toFixed(1));
     }
@@ -1345,7 +1359,7 @@ document.addEventListener('keydown', (e) => {
   if (mo && mo.classList.contains('open')) closeModal();
 });
 
-function renderRecipeDetail(r) {
+function kitchenModalShellTop(r) {
   let html = `<div class="modal-top-bar">`;
   html += `<button type="button" class="modal-wake-pill" data-kuschi-wake aria-pressed="false"><span data-kuschi-wake-label>Stay awake</span></button>`;
   html += `<button class="modal-close" onclick="closeModal()">✕</button></div>`;
@@ -1368,14 +1382,17 @@ function renderRecipeDetail(r) {
   if (r.yield) meta.push(`Yield: <span>${KuschiRecipeUi.esc(r.yield)}</span>`);
   if (meta.length) html += `<div class="modal-meta">${meta.join(' · ')}</div>`;
 
-  // ── Pax Scaler ──
   const baseYield = parseModalYield(r.yield);
   html += `<div class="modal-scale">
     <label>Scale to pax:</label>
     <input type="number" id="modalScaleInput" min="1" value="${baseYield}" oninput="rescaleModal(this.value)" />
     <span class="modal-scale-factor" id="modalScaleFactor"></span>
   </div>`;
+  return html;
+}
 
+function renderKitchenModalHeavy(r) {
+  let html = '';
   const ings = toArr(r.ingredients).filter(i => i && i.item);
   if (ings.length) {
     html += `<div class="modal-section">Ingredients</div>`;
@@ -1405,8 +1422,46 @@ function renderRecipeDetail(r) {
   html += `<button class="modal-copy-btn" onclick="copyRecipeText('${KuschiRecipeUi.esc(r.id)}')">Copy as text</button>`;
   html += `<button class="modal-copy-btn" onclick="copyRecipeName(this, '${KuschiRecipeUi.esc(r.name).replace(/'/g,"\\'")}')">Copy name</button>`;
   html += `</div>`;
-
   return html;
+}
+
+function renderKitchenModalShell(r) {
+  return (
+    kitchenModalShellTop(r) +
+    `<div id="kitchenModalHeavy" class="kitchen-modal-heavy" aria-busy="true">` +
+    `<p class="kitchen-modal-heavy-loading" style="font-size:13px;color:var(--text3);margin:12px 0 0">Loading details…</p>` +
+    `</div>`
+  );
+}
+
+function scheduleKitchenModalHeavyFill(modal, r, recipeId) {
+  function guard() {
+    const mo = document.getElementById('modalOverlay');
+    return !!(mo && mo.classList.contains('open') && currentRecipe && currentRecipe.id === recipeId);
+  }
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      setTimeout(function () {
+        if (!guard()) return;
+        const heavy = modal.querySelector('#kitchenModalHeavy');
+        if (!heavy) return;
+        heavy.innerHTML = renderKitchenModalHeavy(r);
+        heavy.removeAttribute('aria-busy');
+        const scaleInp = document.getElementById('modalScaleInput');
+        if (scaleInp) rescaleModal(scaleInp.value);
+        setTimeout(function () {
+          if (window.KuschiScreenWake) KuschiScreenWake.sync();
+        }, 0);
+        KuschiRecipeUi.scheduleHydrateModalAroma(modal, r, function () {
+          return !!(currentRecipe && currentRecipe.id === recipeId);
+        });
+      }, 0);
+    });
+  });
+}
+
+function renderRecipeDetail(r) {
+  return kitchenModalShellTop(r) + `<div id="kitchenModalHeavy" class="kitchen-modal-heavy">${renderKitchenModalHeavy(r)}</div>`;
 }
 
 function copyRecipeName(btn, name) {
