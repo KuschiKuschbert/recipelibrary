@@ -676,6 +676,7 @@
 
 <script src="assets/user-recipes.js"></script>
 <script src="assets/aroma-hints.js"></script>
+<script src="assets/kuschi-recipe-ui.js"></script>
 <script src="assets/recipe-gemini-format.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js" crossorigin="anonymous"></script>
 <script src="assets/recipe-import-helpers.js"></script>
@@ -791,12 +792,7 @@ function buildFilters() {
 function fillSelect(id, items, label) {
   const sel = document.getElementById(id);
   sel.innerHTML = `<option value="">${label}</option>` +
-    items.map(i => `<option value="${esc(i)}">${esc(i)}</option>`).join('');
-}
-
-function esc(s) {
-  if (!s) return '';
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    items.map(i => `<option value="${KuschiRecipeUi.esc(i)}">${KuschiRecipeUi.esc(i)}</option>`).join('');
 }
 
 // ── Filtering & Search ────────────────────────────────
@@ -931,24 +927,24 @@ function render(dt) {
 }
 
 function cardHTML(r) {
-  const name = esc(r.name || 'Untitled');
+  const name = KuschiRecipeUi.esc(r.name || 'Untitled');
   const nameAttr = name.replace(/'/g, "\\'");
-  const cui = r.cui ? `<div class="card-cuisine">${esc(r.cui)}</div>` : '';
+  const cui = r.cui ? `<div class="card-cuisine">${KuschiRecipeUi.esc(r.cui)}</div>` : '';
 
   let badges = '';
   const rProteins = toArr(r.protein);
   const rTags = toArr(r.tags);
   if (rProteins.length) {
-    badges += rProteins.map(p => `<span class="badge badge-protein">${esc(p)}</span>`).join('');
+    badges += rProteins.map(p => `<span class="badge badge-protein">${KuschiRecipeUi.esc(p)}</span>`).join('');
   }
   if (rTags.length) {
     badges += rTags.filter(t => typeof t === 'string').slice(0, 3)
-      .map(t => `<span class="badge badge-tag">${esc(t)}</span>`).join('');
+      .map(t => `<span class="badge badge-tag">${KuschiRecipeUi.esc(t)}</span>`).join('');
   }
-  if (r.cat) badges += `<span class="badge badge-cat">${esc(r.cat)}</span>`;
+  if (r.cat) badges += `<span class="badge badge-cat">${KuschiRecipeUi.esc(r.cat)}</span>`;
 
-  const ings = (r.ing || []).slice(0, 8).map(i => `<strong>${esc(i)}</strong>`).join(' · ');
-  const rid = esc(r.id || '');
+  const ings = (r.ing || []).slice(0, 8).map(i => `<strong>${KuschiRecipeUi.esc(i)}</strong>`).join(' · ');
+  const rid = KuschiRecipeUi.esc(r.id || '');
 
   return `<div class="card" data-recipe-id="${rid}" onclick="openRecipe('${rid}')" style="cursor:pointer">
     <div class="card-header">
@@ -1175,7 +1171,7 @@ async function openRecipe(id) {
       modal.scrollTop = 0;
       overlay.classList.add('open');
       if (window.KuschiScreenWake) KuschiScreenWake.sync();
-      if (window.KuschiAromaHints) KuschiAromaHints.hydrateModal(modal, currentRecipe);
+      KuschiRecipeUi.hydrateModalAroma(modal, currentRecipe);
       return;
     }
   }
@@ -1203,13 +1199,13 @@ async function openRecipe(id) {
     modal.innerHTML = renderRecipeDetail(recipe);
     modal.scrollTop = 0;
     if (window.KuschiScreenWake) KuschiScreenWake.sync();
-    if (window.KuschiAromaHints) KuschiAromaHints.hydrateModal(modal, currentRecipe);
+    KuschiRecipeUi.hydrateModalAroma(modal, currentRecipe);
     if (modalPerf) {
       console.log('[Kuschi modal] openRecipe total ms', (performance.now() - tModal0).toFixed(1));
     }
   } catch(e) {
     modal.innerHTML = `<button class="modal-close" onclick="closeModal()">✕</button>
-      <div class="modal-loading" style="color:var(--accent)">Could not load recipe: ${esc(e.message)}</div>`;
+      <div class="modal-loading" style="color:var(--accent)">Could not load recipe: ${KuschiRecipeUi.esc(e.message)}</div>`;
   }
 }
 
@@ -1241,23 +1237,23 @@ function renderRecipeDetail(r) {
   let html = `<div class="modal-top-bar">`;
   html += `<button type="button" class="modal-wake-pill" data-kuschi-wake aria-pressed="false"><span data-kuschi-wake-label>Stay awake</span></button>`;
   html += `<button class="modal-close" onclick="closeModal()">✕</button></div>`;
-  html += `<div class="modal-title">${esc(r.name)}</div>`;
+  html += `<div class="modal-title">${KuschiRecipeUi.esc(r.name)}</div>`;
 
   if (r.cuisine) {
-    html += `<div class="modal-cuisine">${esc(r.cuisine)}</div>`;
+    html += `<div class="modal-cuisine">${KuschiRecipeUi.esc(r.cuisine)}</div>`;
   }
 
   const badges = [];
-  toArr(r.protein).forEach(p => badges.push(`<span class="badge badge-protein">${esc(p)}</span>`));
+  toArr(r.protein).forEach(p => badges.push(`<span class="badge badge-protein">${KuschiRecipeUi.esc(p)}</span>`));
   toArr(r.tags).forEach(t => {
-    if (typeof t === 'string') badges.push(`<span class="badge badge-tag">${esc(t)}</span>`);
+    if (typeof t === 'string') badges.push(`<span class="badge badge-tag">${KuschiRecipeUi.esc(t)}</span>`);
   });
-  if (r.category) badges.push(`<span class="badge badge-cat">${esc(r.category)}</span>`);
+  if (r.category) badges.push(`<span class="badge badge-cat">${KuschiRecipeUi.esc(r.category)}</span>`);
   if (badges.length) html += `<div class="modal-badges">${badges.join('')}</div>`;
 
   const meta = [];
-  if (r.source) meta.push(`Source: <span>${esc(r.source.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase()))}</span>`);
-  if (r.yield) meta.push(`Yield: <span>${esc(r.yield)}</span>`);
+  if (r.source) meta.push(`Source: <span>${KuschiRecipeUi.esc(r.source.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase()))}</span>`);
+  if (r.yield) meta.push(`Yield: <span>${KuschiRecipeUi.esc(r.yield)}</span>`);
   if (meta.length) html += `<div class="modal-meta">${meta.join(' · ')}</div>`;
 
   // ── Pax Scaler ──
@@ -1274,9 +1270,9 @@ function renderRecipeDetail(r) {
     html += `<div class="modal-ing" id="modalIngGrid">`;
     for (const i of ings) {
       const qty = [i.qty || '', i.unit || ''].filter(Boolean).join(' ');
-      const prep = i.prep ? ` <span class="ing-prep">— ${esc(i.prep)}</span>` : '';
-      html += `<div class="ing-qty">${esc(qty) || '·'}</div>`;
-      html += `<div class="ing-item">${esc(i.item)}${prep}</div>`;
+      const prep = i.prep ? ` <span class="ing-prep">— ${KuschiRecipeUi.esc(i.prep)}</span>` : '';
+      html += `<div class="ing-qty">${KuschiRecipeUi.esc(qty) || '·'}</div>`;
+      html += `<div class="ing-item">${KuschiRecipeUi.esc(i.item)}${prep}</div>`;
     }
     html += `</div>`;
   }
@@ -1286,18 +1282,16 @@ function renderRecipeDetail(r) {
     html += `<div class="modal-section">Method</div>`;
     html += `<ol class="modal-steps">`;
     for (const step of steps) {
-      html += `<li>${esc(step)}</li>`;
+      html += `<li>${KuschiRecipeUi.esc(step)}</li>`;
     }
     html += `</ol>`;
   }
 
-  if (window.KuschiAromaHints) {
-    html += KuschiAromaHints.seasoningSectionHtml(null, { idSuffix: 'Idx', openByDefault: false });
-  }
+  html += KuschiRecipeUi.aromaSeasoningSectionHtml({ idSuffix: 'Idx', openByDefault: false });
 
   html += `<div class="modal-copy-bar">`;
-  html += `<button class="modal-copy-btn" onclick="copyRecipeText('${esc(r.id)}')">Copy as text</button>`;
-  html += `<button class="modal-copy-btn" onclick="copyRecipeName(this, '${esc(r.name).replace(/'/g,"\\'")}')">Copy name</button>`;
+  html += `<button class="modal-copy-btn" onclick="copyRecipeText('${KuschiRecipeUi.esc(r.id)}')">Copy as text</button>`;
+  html += `<button class="modal-copy-btn" onclick="copyRecipeName(this, '${KuschiRecipeUi.esc(r.name).replace(/'/g,"\\'")}')">Copy name</button>`;
   html += `</div>`;
 
   return html;
@@ -1384,9 +1378,9 @@ function rescaleModal(val) {
   for (const i of toArr(currentRecipe.ingredients).filter(i => i && i.item)) {
     const scaled = scaleModalQty(i.qty, factor);
     const qty = [scaled, i.unit || ''].filter(Boolean).join(' ');
-    const prep = i.prep ? ` <span class="ing-prep">— ${esc(i.prep)}</span>` : '';
-    grid.innerHTML += `<div class="ing-qty">${esc(qty) || '·'}</div>`;
-    grid.innerHTML += `<div class="ing-item">${esc(i.item)}${prep}</div>`;
+    const prep = i.prep ? ` <span class="ing-prep">— ${KuschiRecipeUi.esc(i.prep)}</span>` : '';
+    grid.innerHTML += `<div class="ing-qty">${KuschiRecipeUi.esc(qty) || '·'}</div>`;
+    grid.innerHTML += `<div class="ing-item">${KuschiRecipeUi.esc(i.item)}${prep}</div>`;
   }
 }
 
@@ -1820,7 +1814,7 @@ function refreshCustomBookNav() {
           encodeURIComponent(b.id) +
           '" class="hero-nav-link" onclick="event.stopPropagation(); closeHeroBooksSplit();">' +
           HERO_ICON_BOOK +
-          esc(b.name) +
+          KuschiRecipeUi.esc(b.name) +
           HERO_BOOKS_CHEVRON +
           '</a>'
       )
