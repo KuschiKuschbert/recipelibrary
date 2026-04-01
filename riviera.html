@@ -1959,7 +1959,7 @@ function openRecipe(id) {
 
   const aromaHintHtml =
     typeof KuschiAromaHints !== 'undefined' && KuschiAromaHints
-      ? KuschiAromaHints.seasoningSectionHtml(null, { idSuffix: 'Rv', openByDefault: true })
+      ? KuschiAromaHints.seasoningSectionHtml(null, { idSuffix: 'Rv', openByDefault: false })
       : '';
 
   modal.innerHTML = `
@@ -1979,11 +1979,11 @@ function openRecipe(id) {
     <div class="modal-elements">${elements}</div>
     <div class="modal-section">Ingredients</div>
     <div class="modal-ing" id="ingGrid">${ingsHTML}</div>
+    ${aromaHintHtml}
     <div class="modal-section">Prep Method</div>
     <ol class="modal-steps">${steps}</ol>
     <div class="modal-section">On the Day — Service</div>
     <ol class="modal-steps">${service}</ol>
-    ${aromaHintHtml}
     ${note}
     ${label}
     ${adminActions}
@@ -2125,6 +2125,16 @@ document.addEventListener('keydown', e => {
 updateRivieraAdminChrome();
 populateFilters();
 render();
+if (window.KuschiAromaHints && typeof KuschiAromaHints.ensureLoaded === 'function') {
+  const warmAroma = () => {
+    KuschiAromaHints.ensureLoaded().catch(() => {});
+  };
+  if (typeof requestIdleCallback === 'function') {
+    requestIdleCallback(warmAroma, { timeout: 8000 });
+  } else {
+    setTimeout(warmAroma, 1);
+  }
+}
 </script>
 </body>
 </html>

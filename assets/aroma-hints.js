@@ -191,9 +191,11 @@
       .join('');
 
     var instText = '';
-    if (recipe && recipe.instructions) {
+    if (recipe) {
       var ins = recipe.instructions;
-      instText = Array.isArray(ins) ? ins.join(' ') : String(ins);
+      if (ins == null && Array.isArray(recipe.method_steps)) ins = recipe.method_steps;
+      if (ins == null && Array.isArray(recipe.service)) ins = recipe.service;
+      if (ins != null) instText = Array.isArray(ins) ? ins.join(' ') : String(ins);
     }
     instText = normKey(instText);
     var methodTip = '';
@@ -412,6 +414,13 @@
       for (var i = 0; i < ings.length; i++) {
         var it = ings[i];
         if (it && it.item) out.push({ item: String(it.item) });
+      }
+    }
+    var elms = recipe && recipe.elements;
+    if (Array.isArray(elms)) {
+      for (var ei = 0; ei < elms.length; ei++) {
+        var ev = elms[ei];
+        if (typeof ev === 'string' && ev.trim()) out.push({ item: ev.trim() });
       }
     }
     var extras = extraItems || recipe.protein || recipe.tags;
