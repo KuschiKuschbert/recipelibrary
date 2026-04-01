@@ -30,7 +30,7 @@
       if (w.KuschiAromaHints) w.KuschiAromaHints.hydrateModal(modalEl, recipe);
     },
     /**
-     * Run after the next paint (macrotask + 2× rAF). Avoids requestIdleCallback with a long
+     * Run after the next paint (macrotask + rAF). Avoids requestIdleCallback with a long
      * timeout — under load, idle could defer hydration ~2.5s and feel like a frozen modal.
      * @param {() => boolean} [isStillOpen] Return false if user closed modal or switched recipe.
      */
@@ -43,9 +43,7 @@
       };
       w.setTimeout(function () {
         if (typeof w.requestAnimationFrame === 'function') {
-          w.requestAnimationFrame(function () {
-            w.requestAnimationFrame(go);
-          });
+          w.requestAnimationFrame(go);
         } else {
           w.setTimeout(go, 0);
         }

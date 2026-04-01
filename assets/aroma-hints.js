@@ -19,11 +19,11 @@
         if (typeof console !== 'undefined' && console.warn) console.warn('[aroma-hints]', e);
       }
     }
+    if (ingredients && foodPairings) {
+      global.setTimeout(run, 0);
+      return;
+    }
     global.setTimeout(function () {
-      if (ingredients && foodPairings) {
-        global.setTimeout(run, 0);
-        return;
-      }
       var sch = global.scheduler;
       if (sch && typeof sch.yield === 'function') {
         sch.yield().then(run).catch(run);
@@ -892,12 +892,23 @@
     var summaryText = wantOpen
       ? 'Seasoning ideas <span class="aroma-hint-summary-status" aria-live="polite">Loading tips…</span>'
       : 'Seasoning ideas';
+    var lazyAttr = wantOpen ? '' : ' data-aroma-hint-lazy="1"';
+    var bodyWhenClosed =
+      '<p class="aroma-hint-empty aroma-hint-lazy-intro">Open for seasoning ideas from the Aroma index.</p>';
+    var bodyWhenOpen =
+      '<div class="aroma-hint-body-loading">' +
+      '<div class="loader aroma-hint-loader" aria-hidden="true"></div>' +
+      '<span>Matching your ingredients to the Aroma index…</span>' +
+      '</div>';
+    var bodyInner = wantOpen ? bodyWhenOpen : bodyWhenClosed;
     return (
       '<div class="aroma-hint-block" id="' +
       wrapId +
       '" data-aroma-hint-wrap="1" data-aroma-details-open="' +
       (wantOpen ? '1' : '0') +
-      '">' +
+      '"' +
+      lazyAttr +
+      '>' +
       '<details class="aroma-hint-details"' +
       detailsOpenAttr +
       '>' +
@@ -905,10 +916,8 @@
       summaryText +
       '</summary>' +
       '<div data-aroma-hint-body="1">' +
-      '<div class="aroma-hint-body-loading">' +
-      '<div class="loader aroma-hint-loader" aria-hidden="true"></div>' +
-      '<span>Matching your ingredients to the Aroma index…</span>' +
-      '</div></div></details></div>'
+      bodyInner +
+      '</div></details></div>'
     );
   }
 
@@ -1028,12 +1037,32 @@
 
   /**
    * After injecting HTML that includes [data-aroma-hint-wrap], call with modal root and recipe.
+   * When data-aroma-hint-lazy="1" and details starts closed, defer fillHintWrap until first open.
    */
   function hydrateModal(root, recipe) {
     if (!root || !recipe) return;
     var lines = recipeLinesForHints(recipe);
     var wrap = root.querySelector('[data-aroma-hint-wrap]');
     if (!wrap) return;
+    var details = wrap.querySelector('.aroma-hint-details');
+    if (wrap.getAttribute('data-aroma-hint-lazy') === '1' && details && !details.open) {
+      function onLazyToggle() {
+        if (!details.open) return;
+        details.removeEventListener('toggle', onLazyToggle);
+        wrap.removeAttribute('data-aroma-hint-lazy');
+        var bodyEl = wrap.querySelector('[data-aroma-hint-body]');
+        if (bodyEl) {
+          bodyEl.innerHTML =
+            '<div class="aroma-hint-body-loading">' +
+            '<div class="loader aroma-hint-loader" aria-hidden="true"></div>' +
+            '<span>Matching your ingredients to the Aroma index…</span>' +
+            '</div>';
+        }
+        fillHintWrap(wrap, lines, recipe);
+      }
+      details.addEventListener('toggle', onLazyToggle);
+      return;
+    }
     fillHintWrap(wrap, lines, recipe);
   }
 

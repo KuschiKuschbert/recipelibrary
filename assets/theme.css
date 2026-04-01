@@ -1199,6 +1199,10 @@ body {
 .aroma-hint-empty a {
   color: var(--gold);
 }
+.aroma-hint-lazy-intro {
+  margin-top: 0;
+  margin-bottom: 0;
+}
 .aroma-hint-chips {
   display: flex;
   flex-wrap: wrap;

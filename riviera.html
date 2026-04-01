@@ -668,7 +668,6 @@
 <script src="assets/kuschi-recipe-ui.js"></script>
 <script src="assets/recipe-metric-normalize.js"></script>
 <script src="assets/aroma-hints.js" defer></script>
-<script src="assets/order-list.js" defer></script>
 <script src="assets/screen-wake.js" defer></script>
 <script>
 /** Static JSON (same-origin) — keeps initial HTML/JS parse small; merged after fetch. */
@@ -874,6 +873,25 @@ function mergeRivieraRecipes() {
 let RECIPES = mergeRivieraRecipes();
 
 let rivieraOrderList = null;
+/** Lazy-load order-list.js on first use so recipe modal / grid are not contending with its parse at startup. */
+let rivieraOrderListScriptPromise = null;
+function loadRivieraOrderListScript() {
+  if (window.KuschiOrderList) return Promise.resolve();
+  if (rivieraOrderListScriptPromise) return rivieraOrderListScriptPromise;
+  rivieraOrderListScriptPromise = new Promise(function (resolve, reject) {
+    var s = document.createElement('script');
+    s.src = 'assets/order-list.js';
+    s.onload = function () {
+      resolve();
+    };
+    s.onerror = function () {
+      rivieraOrderListScriptPromise = null;
+      reject(new Error('Failed to load order-list.js'));
+    };
+    document.head.appendChild(s);
+  });
+  return rivieraOrderListScriptPromise;
+}
 const _rivieraOrderListConfig = {
   overlayId: 'orderListOverlay',
   bodyId: 'orderListBody',
@@ -953,42 +971,83 @@ function copyStocktakeJson() {
 }
 
 function syncRivieraOrderListZoneEditButton() {
-  var ol = ensureRivieraOrderList();
   var btn = document.getElementById('rivieraOrdZoneEditBtn');
-  if (!btn || !ol) return;
+  if (!btn) return;
+  if (!window.KuschiOrderList) {
+    btn.textContent = 'Edit storage zones';
+    return;
+  }
+  var ol = ensureRivieraOrderList();
+  if (!ol) return;
   btn.textContent = ol.isEditingZones() ? 'Done' : 'Edit storage zones';
 }
 function toggleRivieraOrderListEditingZones() {
-  var ol = ensureRivieraOrderList();
-  if (!ol) return;
-  ol.toggleEditingZones();
-  syncRivieraOrderListZoneEditButton();
+  loadRivieraOrderListScript()
+    .then(function () {
+      var ol = ensureRivieraOrderList();
+      if (!ol) return;
+      ol.toggleEditingZones();
+      syncRivieraOrderListZoneEditButton();
+    })
+    .catch(function (e) {
+      console.warn(e);
+    });
 }
 function openOrderListModal() {
-  var ol = ensureRivieraOrderList();
-  if (ol) {
-    ol.open();
-    syncRivieraOrderListZoneEditButton();
-  }
+  loadRivieraOrderListScript()
+    .then(function () {
+      var ol = ensureRivieraOrderList();
+      if (ol) {
+        ol.open();
+        syncRivieraOrderListZoneEditButton();
+      }
+    })
+    .catch(function (e) {
+      console.warn(e);
+    });
 }
 function closeOrderListModal() {
   if (rivieraOrderList) rivieraOrderList.close();
 }
 function copyOrderListText() {
-  var ol = ensureRivieraOrderList();
-  if (ol) ol.copyOrderListText();
+  loadRivieraOrderListScript()
+    .then(function () {
+      var ol = ensureRivieraOrderList();
+      if (ol) ol.copyOrderListText();
+    })
+    .catch(function (e) {
+      console.warn(e);
+    });
 }
 function copyOrderBundleJson() {
-  var ol = ensureRivieraOrderList();
-  if (ol) ol.copyOrderBundleJson();
+  loadRivieraOrderListScript()
+    .then(function () {
+      var ol = ensureRivieraOrderList();
+      if (ol) ol.copyOrderBundleJson();
+    })
+    .catch(function (e) {
+      console.warn(e);
+    });
 }
 function copyMasterIngredientsJson() {
-  var ol = ensureRivieraOrderList();
-  if (ol) ol.copyMasterIngredientsJson();
+  loadRivieraOrderListScript()
+    .then(function () {
+      var ol = ensureRivieraOrderList();
+      if (ol) ol.copyMasterIngredientsJson();
+    })
+    .catch(function (e) {
+      console.warn(e);
+    });
 }
 function submitOrderListAdd() {
-  var ol = ensureRivieraOrderList();
-  if (ol) ol.submitOrderListAdd();
+  loadRivieraOrderListScript()
+    .then(function () {
+      var ol = ensureRivieraOrderList();
+      if (ol) ol.submitOrderListAdd();
+    })
+    .catch(function (e) {
+      console.warn(e);
+    });
 }
 function closeAddRivieraModal() {
   document.getElementById('addRivieraOverlay').classList.remove('open');
