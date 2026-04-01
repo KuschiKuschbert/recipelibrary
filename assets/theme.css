@@ -1168,6 +1168,7 @@ body {
 }
 /* In-flow seasoning block inside recipe modals (no overlay). */
 .kuschi-modal-seasoning {
+  position: relative;
   margin: 18px 0 14px;
   padding: 14px 0 0;
   border-top: 1px solid var(--border);
@@ -1194,7 +1195,75 @@ body {
   transition: color 0.35s ease, opacity 0.35s ease;
 }
 .kuschi-modal-seasoning--ready .kuschi-modal-seasoning-status {
+  display: none;
+}
+.kuschi-modal-seasoning-intro {
+  margin: 0 0 10px;
+  padding: 0 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text3);
+}
+.kuschi-modal-seasoning-intro strong {
+  font-weight: 600;
   color: var(--text2);
+}
+.kuschi-aroma-chip-preview-root {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  pointer-events: none;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+}
+.kuschi-aroma-chip-preview {
+  pointer-events: auto;
+  box-sizing: border-box;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  padding: 0;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.kuschi-aroma-chip-preview--open {
+  opacity: 1;
+  transform: translateY(0);
+}
+.kuschi-aroma-chip-preview-inner {
+  padding: 12px 14px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+.kuschi-aroma-chip-preview-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+.kuschi-aroma-chip-preview-line {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.45;
+  margin: 0 0 8px;
+}
+.kuschi-aroma-chip-preview-meta {
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.45;
+  margin: 0 0 6px;
+}
+.kuschi-aroma-chip-preview-badges {
+  margin: 0;
+}
+.kuschi-aroma-chip-preview-badges .aroma-group-badge {
+  margin-left: 0;
+  margin-right: 4px;
 }
 .kuschi-modal-seasoning-body {
   border-radius: var(--radius-sm);
@@ -1291,6 +1360,12 @@ body {
   .kuschi-modal-seasoning-content--entering {
     animation: none;
     opacity: 1;
+    transform: none;
+  }
+  .kuschi-aroma-chip-preview {
+    transition: none;
+  }
+  .kuschi-aroma-chip-preview--open {
     transform: none;
   }
 }

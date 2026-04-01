@@ -828,6 +828,165 @@
     return parts.join('');
   }
 
+  function aromaChipPreviewSnippetHtml(id, fallbackName) {
+    var row = byId[id];
+    var title = escHtml((row && row.name) || fallbackName || '');
+    var parts = [];
+    if (row && row.heat_behavior && typeof row.heat_behavior === 'object') {
+      var raw = String(row.heat_behavior.a || '').trim();
+      if (raw.length > 120) raw = raw.slice(0, 119).trim() + '…';
+      if (raw) parts.push('<p class="kuschi-aroma-chip-preview-line">' + escHtml(raw) + '</p>');
+    }
+    var hw = row && row.harmonizes_with;
+    if (Array.isArray(hw) && hw.length) {
+      var names = [];
+      for (var hi = 0; hi < Math.min(4, hw.length); hi++) {
+        if (hw[hi].name) names.push(escHtml(hw[hi].name));
+      }
+      if (names.length) {
+        parts.push('<p class="kuschi-aroma-chip-preview-meta">Often works with: ' + names.join(', ') + '</p>');
+      }
+    }
+    var gb = row && groupBadgesHtml(row.aroma_groups);
+    if (gb) parts.push('<p class="kuschi-aroma-chip-preview-badges">' + gb + '</p>');
+    if (!parts.length) {
+      parts.push('<p class="kuschi-aroma-chip-preview-meta">Open full Aroma entry for pairings and heat notes.</p>');
+    }
+    return '<div class="kuschi-aroma-chip-preview-title">' + title + '</div>' + parts.join('');
+  }
+
+  function aromaPreviewFinePointerHover() {
+    return global.matchMedia && global.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  }
+
+  function wireInlineSeasoningChipPreviews(wrapEl) {
+    if (!wrapEl || !wrapEl.isConnected) return;
+    if (wrapEl.getAttribute('data-aroma-hint-inline-modal') !== '1') return;
+    if (!aromaPreviewFinePointerHover()) return;
+
+    wrapEl.querySelectorAll('[data-kuschi-aroma-chip-preview-root]').forEach(function (n) {
+      n.remove();
+    });
+
+    var chipNodes = wrapEl.querySelectorAll('a.aroma-hint-chip[data-aroma-chip-preview]');
+    if (!chipNodes.length) return;
+
+    var root = document.createElement('div');
+    root.setAttribute('data-kuschi-aroma-chip-preview-root', '1');
+    root.className = 'kuschi-aroma-chip-preview-root';
+    var panel = document.createElement('div');
+    panel.className = 'kuschi-aroma-chip-preview';
+    panel.setAttribute('role', 'tooltip');
+    panel.hidden = true;
+    panel.setAttribute('aria-hidden', 'true');
+    var inner = document.createElement('div');
+    inner.className = 'kuschi-aroma-chip-preview-inner';
+    panel.appendChild(inner);
+    root.appendChild(panel);
+    wrapEl.appendChild(root);
+
+    var showT = null;
+    var hideT = null;
+    var reduceMotion = global.matchMedia && global.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var showDelay = reduceMotion ? 0 : 180;
+    var hideDelay = reduceMotion ? 0 : 120;
+
+    function clearTimers() {
+      if (showT) {
+        clearTimeout(showT);
+        showT = null;
+      }
+      if (hideT) {
+        clearTimeout(hideT);
+        hideT = null;
+      }
+    }
+
+    function hidePreview() {
+      clearTimers();
+      panel.hidden = true;
+      panel.setAttribute('aria-hidden', 'true');
+      panel.classList.remove('kuschi-aroma-chip-preview--open');
+      global.removeEventListener('keydown', onKeyDown);
+    }
+
+    function onKeyDown(e) {
+      if (e.key === 'Escape') hidePreview();
+    }
+
+    function positionPreview(anchor) {
+      global.removeEventListener('keydown', onKeyDown);
+      var sid = anchor.getAttribute('data-aroma-chip-id') || '';
+      inner.innerHTML = aromaChipPreviewSnippetHtml(sid, anchor.textContent || '');
+      var pad = 10;
+      var vw = global.innerWidth;
+      var vh = global.innerHeight;
+      var maxW = Math.min(292, vw - 2 * pad);
+      panel.style.visibility = 'hidden';
+      panel.hidden = false;
+      panel.style.position = 'fixed';
+      panel.style.width = maxW + 'px';
+      panel.style.left = '0';
+      panel.style.top = '0';
+      panel.style.zIndex = '10050';
+      var r = anchor.getBoundingClientRect();
+      var pw = panel.offsetWidth;
+      var ph = panel.offsetHeight;
+      var left = r.left + (r.width - pw) / 2;
+      if (left < pad) left = pad;
+      if (left + pw > vw - pad) left = vw - pad - pw;
+      var gap = 8;
+      var top = r.bottom + gap;
+      if (top + ph > vh - pad) top = Math.max(pad, r.top - gap - ph);
+      panel.style.left = left + 'px';
+      panel.style.top = top + 'px';
+      panel.style.visibility = '';
+      panel.setAttribute('aria-hidden', 'false');
+      panel.classList.add('kuschi-aroma-chip-preview--open');
+      global.addEventListener('keydown', onKeyDown);
+    }
+
+    function scheduleShow(anchor) {
+      clearTimers();
+      showT = setTimeout(function () {
+        showT = null;
+        if (!wrapEl.isConnected || !anchor.isConnected) return;
+        positionPreview(anchor);
+      }, showDelay);
+    }
+
+    function scheduleHide() {
+      clearTimers();
+      hideT = setTimeout(function () {
+        hideT = null;
+        hidePreview();
+      }, hideDelay);
+    }
+
+    chipNodes.forEach(function (chip) {
+      chip.addEventListener('mouseenter', function () {
+        scheduleShow(chip);
+      });
+      chip.addEventListener('mouseleave', function () {
+        scheduleHide();
+      });
+      chip.addEventListener('focusin', function () {
+        clearTimers();
+        if (chip.isConnected && wrapEl.isConnected) positionPreview(chip);
+      });
+      chip.addEventListener('focusout', function () {
+        scheduleHide();
+      });
+    });
+
+    panel.addEventListener('mouseenter', function () {
+      clearTimers();
+    });
+    panel.addEventListener('mouseleave', function () {
+      scheduleHide();
+    });
+  }
+
   function aromaPageHrefForSpice(id) {
     return 'aroma.html?spice=' + encodeURIComponent(id);
   }
@@ -950,6 +1109,8 @@
                 var emptyP =
                   '<p class="aroma-hint-empty">No matches in the Aroma Bible for these ingredients. Try <a href="aroma.html">Aroma lookup</a>.</p>';
                 if (isInline) {
+                  emptyP =
+                    '<p class="aroma-hint-empty">No matches in the Aroma Bible for these ingredients. Try <a href="aroma.html" target="_blank" rel="noopener noreferrer">Aroma lookup</a>.</p>';
                   wrapEl.setAttribute('aria-busy', 'false');
                   wrapEl.classList.add('kuschi-modal-seasoning--ready');
                   var stEmpty = wrapEl.querySelector('[data-aroma-inline-status]');
@@ -964,21 +1125,36 @@
               }
               var chips = top
                 .map(function (s) {
+                  var href = aromaPageHrefForSpice(s.id);
+                  if (isInline) {
+                    return (
+                      '<a class="aroma-hint-chip" data-aroma-chip-preview="1" data-aroma-chip-id="' +
+                      escHtml(s.id) +
+                      '" href="' +
+                      href +
+                      '" target="_blank" rel="noopener noreferrer">' +
+                      escHtml(s.name) +
+                      '</a>'
+                    );
+                  }
                   return (
-                    '<a class="aroma-hint-chip" href="' +
-                    aromaPageHrefForSpice(s.id) +
-                    '">' +
-                    escHtml(s.name) +
-                    '</a>'
+                    '<a class="aroma-hint-chip" href="' + href + '">' + escHtml(s.name) + '</a>'
                   );
                 })
                 .join('');
               if (summaryEl2) summaryEl2.textContent = 'Seasoning ideas';
+              var introPart = isInline
+                ? '<p class="kuschi-modal-seasoning-intro aroma-hint-empty">Suggested harmonizers from the Aroma index, matched to this recipe’s ingredients. Full detail opens in a <strong>new tab</strong> when you use a chip.</p>'
+                : '';
+              var moreLink = isInline
+                ? '<p class="aroma-hint-more"><a href="aroma.html" target="_blank" rel="noopener noreferrer">Browse all spices in Aroma lookup →</a></p>'
+                : '<p class="aroma-hint-more"><a href="aroma.html">Open Aroma lookup →</a></p>';
               var chipsBlock =
+                introPart +
                 '<div class="aroma-hint-chips">' +
                 chips +
                 '</div>' +
-                '<p class="aroma-hint-more"><a href="aroma.html">Open Aroma lookup →</a></p>' +
+                moreLink +
                 '<details class="kuschi-more-flavor-details" data-kuschi-more-flavor="1" data-kuschi-flavor-state="idle">' +
                 '<summary class="kuschi-more-flavor-summary">More flavour &amp; pairing notes</summary>' +
                 '<p class="kuschi-flavor-lazy-intro">Substitutes, taste balance, and cuisine ideas from the flavour book. Opens on demand (~2&nbsp;MB the first time).</p>' +
@@ -986,14 +1162,13 @@
               if (isInline) {
                 wrapEl.setAttribute('aria-busy', 'false');
                 wrapEl.classList.add('kuschi-modal-seasoning--ready');
-                var stOk = wrapEl.querySelector('[data-aroma-inline-status]');
-                if (stOk) stOk.textContent = 'From the Aroma index';
                 bodyEl2.innerHTML =
                   '<div class="kuschi-modal-seasoning-content kuschi-modal-seasoning-content--entering">' + chipsBlock + '</div>';
               } else {
                 bodyEl2.innerHTML = chipsBlock;
               }
               wireLazyFlavorExtras(wrapEl, lines, recipe);
+              if (isInline && top.length) wireInlineSeasoningChipPreviews(wrapEl);
               if (detailsEl2) syncAromaDetailsOpen(wrapEl, detailsEl2);
             });
           });
@@ -1007,7 +1182,9 @@
           return;
         }
         applyErrorBody(
-          'Couldn’t load aroma data (timeout or network). <a href="aroma.html">Aroma lookup</a>'
+          inlineModal
+            ? 'Couldn’t load aroma data (timeout or network). <a href="aroma.html" target="_blank" rel="noopener noreferrer">Aroma lookup</a>'
+            : 'Couldn’t load aroma data (timeout or network). <a href="aroma.html">Aroma lookup</a>'
         );
       });
   }
