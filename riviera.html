@@ -2129,10 +2129,9 @@ if (window.KuschiAromaHints && typeof KuschiAromaHints.ensureLoaded === 'functio
   const warmAroma = () => {
     KuschiAromaHints.ensureLoaded().catch(() => {});
   };
+  setTimeout(warmAroma, 0);
   if (typeof requestIdleCallback === 'function') {
     requestIdleCallback(warmAroma, { timeout: 8000 });
-  } else {
-    setTimeout(warmAroma, 1);
   }
 }
 </script>

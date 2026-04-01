@@ -321,6 +321,32 @@ body {
   transform: translateY(0) scale(1);
 }
 
+@media (max-width: 600px) {
+  .modal-overlay {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transition: opacity 0.15s;
+  }
+  .modal {
+    transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-overlay {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transition: none;
+  }
+  .modal {
+    transition: none;
+    transform: none;
+  }
+  .modal-overlay.open .modal {
+    transform: none;
+  }
+}
+
 .modal-close {
   position: sticky;
   top: 0;
@@ -1201,6 +1227,28 @@ body {
   color: var(--text3);
   padding: 8px 0;
 }
+.aroma-hint-summary-status {
+  font-weight: 400;
+  color: var(--text3);
+  font-size: 13px;
+}
+.aroma-hint-body-loading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px 14px;
+  font-size: 13px;
+  color: var(--text3);
+  line-height: 1.45;
+}
+.aroma-hint-loader {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  margin: 0;
+  border-width: 2px;
+  flex-shrink: 0;
+}
 .kuschi-flavor-loading {
   margin: 4px 14px 0;
 }
@@ -1482,11 +1530,4 @@ button.kuschi-flavor-retry:hover {
 }
 .kuschi-flavor-more a {
   color: var(--gold);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .modal-overlay,
-  .modal {
-    transition: none;
-  }
 }

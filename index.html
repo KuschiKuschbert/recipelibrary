@@ -1129,7 +1129,6 @@ function findRecipeInDetailPayload(payload, id) {
 async function openRecipe(id) {
   const overlay = document.getElementById('modalOverlay');
   const modal = document.getElementById('modal');
-  overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 
   if (window.KuschiUserRecipes && id && String(id).startsWith('user-')) {
@@ -1138,6 +1137,7 @@ async function openRecipe(id) {
       currentRecipe = KuschiUserRecipes.kitchenToDetail(full);
       modal.innerHTML = renderRecipeDetail(currentRecipe);
       modal.scrollTop = 0;
+      overlay.classList.add('open');
       if (window.KuschiScreenWake) KuschiScreenWake.sync();
       if (window.KuschiAromaHints) KuschiAromaHints.hydrateModal(modal, currentRecipe);
       return;
@@ -1145,6 +1145,7 @@ async function openRecipe(id) {
   }
 
   modal.innerHTML = '<div class="modal-loading"><div class="loader"></div>Loading recipe...</div>';
+  overlay.classList.add('open');
 
   try {
     const info = recipeIndex[id];
@@ -1884,10 +1885,9 @@ refreshCustomBookNav();
       var warmAroma = function () {
         KuschiAromaHints.ensureLoaded().catch(function () {});
       };
+      setTimeout(warmAroma, 0);
       if (typeof requestIdleCallback === 'function') {
         requestIdleCallback(warmAroma, { timeout: 8000 });
-      } else {
-        setTimeout(warmAroma, 1);
       }
     }
   } catch(e) {
