@@ -926,6 +926,7 @@ function render(dt) {
   const page = filtered.slice(start, start + PAGE_SIZE);
   content.innerHTML = '<div class="grid">' + page.map(cardHTML).join('') + '</div>';
   renderPagination();
+  schedulePrefetchVisibleDetailShards();
 }
 
 function cardHTML(r) {
@@ -1117,6 +1118,36 @@ function prefetchDetailShardForRecipeId(id) {
   if (info.letter === userLet) return;
   if (detailCache[info.letter]) return;
   fetchDetail(info.letter).catch(() => {});
+}
+
+/** After grid render: prefetch detail shards for letters on the first ~50 visible cards (idle). Helps touch devices where pointer prefetch has no lead time. */
+let kuschiVisibleShardPrefetchGen = 0;
+function schedulePrefetchVisibleDetailShards() {
+  const gen = ++kuschiVisibleShardPrefetchGen;
+  const run = () => {
+    if (gen !== kuschiVisibleShardPrefetchGen) return;
+    const content = document.getElementById('content');
+    if (!content) return;
+    const cards = content.querySelectorAll('.card[data-recipe-id]');
+    const maxCards = 50;
+    const userLet = (window.KuschiUserRecipes && KuschiUserRecipes.USER_LETTER) || '_USER';
+    const seen = Object.create(null);
+    for (let i = 0; i < cards.length && i < maxCards; i++) {
+      const id = cards[i].getAttribute('data-recipe-id');
+      if (!id || !recipeIndex[id]) continue;
+      const letter = recipeIndex[id].letter;
+      if (letter === userLet) continue;
+      if (detailCache[letter]) continue;
+      if (seen[letter]) continue;
+      seen[letter] = true;
+      fetchDetail(letter).catch(() => {});
+    }
+  };
+  if (typeof requestIdleCallback === 'function') {
+    requestIdleCallback(run, { timeout: 4000 });
+  } else {
+    setTimeout(run, 500);
+  }
 }
 
 /** True when ?kuschiPerfModal=1 or localStorage kuschiPerfModal=1 — logs recipe modal timing to the console. */
