@@ -1433,10 +1433,12 @@ function openRecipe(id) {
   `;
 
   modal.scrollTop = 0;
-  if (window.KuschiScreenWake) KuschiScreenWake.sync();
-  KuschiRecipeUi.hydrateModalAroma(modal, r);
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+  requestAnimationFrame(function () {
+    if (window.KuschiScreenWake) KuschiScreenWake.sync();
+    KuschiRecipeUi.hydrateModalAroma(modal, r);
+  });
 }
 
 function rivieraHideCurrentBuiltin() {

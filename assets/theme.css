@@ -279,9 +279,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.85);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -291,7 +289,7 @@ body {
     max(24px, env(safe-area-inset-left, 0px));
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s;
+  transition: opacity 0.15s;
 }
 
 .modal-overlay.open {
@@ -311,8 +309,8 @@ body {
   overflow-y: auto;
   padding: 32px;
   position: relative;
-  transform: translateY(20px) scale(0.97);
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(12px) scale(0.98);
+  transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
 }
@@ -321,21 +319,8 @@ body {
   transform: translateY(0) scale(1);
 }
 
-@media (max-width: 600px) {
-  .modal-overlay {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    transition: opacity 0.15s;
-  }
-  .modal {
-    transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .modal-overlay {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
     transition: none;
   }
   .modal {
