@@ -169,7 +169,8 @@
   border-radius: var(--radius);
   padding: 20px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  touch-action: manipulation;
+  transition: border-color 0.2s, background 0.2s, opacity 0.2s;
   position: relative;
   overflow: hidden;
   animation: fadeUp 0.4s ease both;
@@ -180,15 +181,14 @@
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.2s;
 }
 .card:hover {
   border-color: var(--border-hover);
   background: var(--surface-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
 }
 .card:hover::before { opacity: 1; }
+.card:active { opacity: 0.75; }
 .card-name {
   font-family: 'Playfair Display', serif;
   font-size: 17px;
