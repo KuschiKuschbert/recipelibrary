@@ -361,18 +361,12 @@
     min-height: 44px;
     align-items: center;
   }
-  /* Compact row: + Add, QR, Kitchen books — same footprint */
-  .hero-nav-cluster .hero-add-split:not(.hero-lookup-split) .hero-add-trigger.hero-nav-link,
-  .hero-books-split .hero-add-trigger.hero-nav-link {
+  /* All hero split triggers (+ Add, Flavor & aroma, Kitchen books): same height/padding as QR */
+  .hero-nav .hero-add-trigger.hero-nav-link {
     min-height: 44px;
     padding-top: var(--hero-pill-pad-y);
     padding-bottom: var(--hero-pill-pad-y);
-  }
-  /* Prominent control: Flavor & aroma only (stays larger than the compact pills) */
-  .hero-lookup-split .hero-add-trigger.hero-nav-link {
-    min-height: 52px;
-    padding: 14px 22px;
-    font-size: 14px;
+    font-size: var(--hero-pill-fs);
   }
   .hero-nav-cluster button.hero-nav-link { min-width: 0; }
 
