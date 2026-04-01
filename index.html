@@ -1271,10 +1271,10 @@ async function openRecipe(id) {
       modal.innerHTML = renderRecipeDetail(currentRecipe);
       modal.scrollTop = 0;
       overlay.classList.add('open');
-      requestAnimationFrame(() => {
+      setTimeout(() => {
         if (window.KuschiScreenWake) KuschiScreenWake.sync();
         KuschiRecipeUi.hydrateModalAroma(modal, currentRecipe);
-      });
+      }, 0);
       return;
     }
   }
@@ -1304,10 +1304,10 @@ async function openRecipe(id) {
     currentRecipe = recipe;
     modal.innerHTML = renderRecipeDetail(recipe);
     modal.scrollTop = 0;
-    requestAnimationFrame(() => {
+    setTimeout(() => {
       if (window.KuschiScreenWake) KuschiScreenWake.sync();
       KuschiRecipeUi.hydrateModalAroma(modal, currentRecipe);
-    });
+    }, 0);
     if (modalPerf) {
       console.log('[Kuschi modal] openRecipe total ms', (performance.now() - tModal0).toFixed(1));
     }
