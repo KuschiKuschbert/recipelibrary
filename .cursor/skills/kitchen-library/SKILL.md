@@ -26,13 +26,14 @@ Skip only if the user explicitly opts out.
 | Path | Role |
 |------|------|
 | `assets/theme.css` | **Shared** theme: `:root` tokens, search, filters, modal shell, footer, spin, form helpers, base `.grid` |
-| `claude_index/` | Search index JSON shards for the main library |
+| `alpha_catalog/` | **Browser** search index (compact rows + `manifest.json`; built from `alpha/` + `claude_index`) |
+| `claude_index/` | Compact shards maintained by scripts; feeds `alpha_catalog` build |
 | `recipe_detail/detail_*.json` | Full payloads: `detail_{Letter}_{bucket}.json` (64 buckets, FNV-1a on id); letter from compact index `name` (matches Kitchen UI). Regenerate with `scripts/repartition_detail_subshards.py`. |
 | `kitchen_library_*.json` | Additional library chunks |
 | `assets/user-recipes.js` | **localStorage** helpers (browser-only) — see keys below |
 | `aroma_data/*.json`, [aroma.html](aroma.html), [assets/aroma-hints.js](assets/aroma-hints.js) | **Aroma Bible** extract: food↔spice index, harmony data, recipe hints + [aroma.html](aroma.html) lookup — see [.cursor/skills/aroma-bible/SKILL.md](../aroma-bible/SKILL.md). [aroma.html](aroma.html) uses full `ingredients.json`. **Recipe modals** (kitchen / Riviera / books) use [assets/aroma-hints.js](assets/aroma-hints.js) with **`ingredients_modal_core.json`** (~half size) and **`combined_data/ingredients_unified_modal.json`** (slim flavor rows for “More flavour”); regenerate both with `node scripts/build_aroma_modal_data.mjs` after editing `ingredients.json` or `ingredients_unified.json`. |
 | [flavor.html](flavor.html), [pairing-atlas.html](pairing-atlas.html), [notebooklm-gallery.html](notebooklm-gallery.html), `notebooklm/manifest.json`, `aroma_data/aroma_matrix_meta.json`, `combined_data/`, `flavour_data/flavour_knowledge_db_v1.1.json`, `flavor_data/`, `thesaurus_data/`, `scripts/run_all_extractions.sh`, `scripts/merge_all_sources.py` | **Flavor** + **Aroma matrix** (`pairing-atlas.html`: G1–G8 grid, unified-data drawer, harmony heatmap, food×spice table) + **Visual guides**; `ingredients_unified.json` is **schema v2** (`ingredients` + `kitchen_context` bundle); regenerate merge with `python3 scripts/merge_all_sources.py` after extractions; `flavor.html?q=` deep-links; **Kitchen toolkit** tab + Explore overlays use `flavour_data/flavour_knowledge_db_v1.1.json` (replace file when the DB is updated) |
-| [pantry.html](pantry.html) | Pantry tokens → `claude_index` match; opens `index.html?open=<id>` |
+| [pantry.html](pantry.html) | Pantry tokens → `alpha_catalog` match; opens `index.html?open=<id>` |
 | `assets/order-list.js` | Shared **order list** modal logic ([riviera.html](riviera.html), [kitchen-book.html](kitchen-book.html)) |
 | [kitchen-book.html](kitchen-book.html) | Per-device **kitchen books** (`?b=id`): search, add recipe (manual + Gemini), QR, **order list** (per-book storage), **Admin** PIN for delete book / remove recipe |
 | `assets/screen-wake.js` | **Keep screen on** toggle (`[data-kuschi-wake]`) — shown in recipe detail modals only |

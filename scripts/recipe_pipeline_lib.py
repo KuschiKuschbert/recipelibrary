@@ -16,7 +16,7 @@ RECIPE_DETAIL = REPO_ROOT / "recipe_detail"
 CLAUDE_INDEX = REPO_ROOT / "claude_index"
 REPORTS_DIR = REPO_ROOT / "reports"
 
-# Must match index.html INDEX_FILES and scripts/check-recipe-shards.py
+# Must match scripts/build_alpha_catalog_index.py CLAUDE_SHARDS and offline checks
 INDEX_FILES = [
     "claude_index_01_1-B.json",
     "claude_index_02_B-C.json",

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Verify claude_index shard filenames vs INDEX_FILES and that every index recipe
+Verify alpha_catalog shard list vs manifest and that every catalog recipe
 resolves in the detail file the Kitchen page would fetch (ASCII A–Z letter rule).
 
-Exit 1 if index files are missing or any recipe id is missing from its detail shard.
+Exit 1 if catalog files are missing or any recipe id is missing from its detail shard.
 """
 from __future__ import annotations
 
@@ -23,27 +23,18 @@ from recipe_pipeline_lib import (  # noqa: E402
     detail_subshard_filename,
 )
 
-CLAUDE_INDEX = REPO_ROOT / "claude_index"
+CATALOG_DIR = REPO_ROOT / "alpha_catalog"
+MANIFEST_PATH = CATALOG_DIR / "manifest.json"
 RECIPE_DETAIL = REPO_ROOT / "recipe_detail"
 
-# Must match index.html INDEX_FILES order and names.
-INDEX_FILES = [
-    "claude_index_01_1-B.json",
-    "claude_index_02_B-C.json",
-    "claude_index_03_C.json",
-    "claude_index_04_C.json",
-    "claude_index_05_C-F.json",
-    "claude_index_06_F-G.json",
-    "claude_index_07_G-H.json",
-    "claude_index_08_H-L.json",
-    "claude_index_09_L-N.json",
-    "claude_index_10_N-P.json",
-    "claude_index_11_P-R.json",
-    "claude_index_12_R-S.json",
-    "claude_index_13_S.json",
-    "claude_index_14_S-T.json",
-    "claude_index_15_T-Z.json",
-]
+
+def load_manifest_files() -> list[str]:
+    if not MANIFEST_PATH.is_file():
+        return []
+    data = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+    files = data.get("files")
+    return list(files) if isinstance(files, list) else []
+
 
 def letter_from_name(name: str | None) -> str:
     """Match buildRecipeIndex in index.html (first ASCII a–zA–Z, else Z)."""
@@ -83,10 +74,10 @@ def is_valid_detail_filename(name: str) -> bool:
     return bool(DETAIL_LEGACY_RE.match(name))
 
 
-def load_index_recipes() -> list[dict]:
+def load_index_recipes(files: list[str]) -> list[dict]:
     recipes: list[dict] = []
-    for name in INDEX_FILES:
-        path = CLAUDE_INDEX / name
+    for name in files:
+        path = CATALOG_DIR / name
         if not path.is_file():
             continue
         with open(path, encoding="utf-8") as f:
@@ -112,27 +103,29 @@ def main() -> int:
     errors = 0
     warnings: list[str] = []
 
-    # 1) INDEX_FILES exist on disk
-    for name in INDEX_FILES:
-        p = CLAUDE_INDEX / name
+    index_files = load_manifest_files()
+    if not index_files:
+        print("ERROR: missing or empty alpha_catalog/manifest.json", file=sys.stderr)
+        return 1
+
+    listed = set(index_files)
+
+    for name in index_files:
+        p = CATALOG_DIR / name
         if not p.is_file():
-            print(f"ERROR: missing index shard: {name}", file=sys.stderr)
+            print(f"ERROR: missing catalog shard: {name}", file=sys.stderr)
             errors += 1
         else:
             bad = suspicious_filename(p)
             if bad:
                 warnings.append(f"{name}: {'; '.join(bad)}")
 
-    # Extra JSON in claude_index not listed
-    listed = set(INDEX_FILES)
-    for p in CLAUDE_INDEX.glob("*.json"):
+    for p in CATALOG_DIR.glob("*.json"):
+        if p.name == "manifest.json":
+            continue
         if p.name not in listed:
-            warnings.append(f"extra index file (not in INDEX_FILES): {p.name}")
-        bad = suspicious_filename(p)
-        if bad and p.name in listed:
-            pass  # already could warn above
+            warnings.append(f"extra catalog file (not in manifest): {p.name}")
 
-    # 2) Detail orphans: detail_*.json not matching sub-shard or legacy monolith pattern
     detail_orphans: list[str] = []
     for p in RECIPE_DETAIL.glob("detail_*.json"):
         if not is_valid_detail_filename(p.name):
@@ -141,7 +134,6 @@ def main() -> int:
             if bad:
                 warnings.append(f"{p.name}: {'; '.join(bad)}")
 
-    # 3) Load detail sub-shards (or legacy monolith) lazily
     detail_cache: dict[str, object] = {}
 
     def get_detail_payload(letter: str, bucket: int):
@@ -162,8 +154,8 @@ def main() -> int:
                 detail_cache[lk] = None
         return detail_cache[lk]
 
-    recipes = load_index_recipes()
-    missing: list[tuple[str, str, str]] = []  # id, letter, name
+    recipes = load_index_recipes(index_files)
+    missing: list[tuple[str, str, str]] = []
 
     for r in recipes:
         rid = r["id"]
@@ -188,7 +180,7 @@ def main() -> int:
         errors += 1
 
     if missing:
-        print(f"ERROR: {len(missing)} index recipes missing from expected detail shard", file=sys.stderr)
+        print(f"ERROR: {len(missing)} catalog recipes missing from expected detail shard", file=sys.stderr)
         for rid, letter, name in missing[:30]:
             print(f"  letter={letter} id={rid!r} name={name[:60]!r}", file=sys.stderr)
         if len(missing) > 30:
@@ -197,8 +189,8 @@ def main() -> int:
 
     if not errors and not missing:
         print(
-            f"OK: {len(INDEX_FILES)} index shards present; "
-            f"{len(recipes)} index recipes checked; "
+            f"OK: {len(index_files)} catalog shards present; "
+            f"{len(recipes)} catalog recipes checked; "
             f"detail letter+bucket (or legacy monolith); no orphan shards."
         )
 

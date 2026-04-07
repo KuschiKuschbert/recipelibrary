@@ -5,7 +5,7 @@ Build pantry_data/shard_hay_index.json — per-shard lowercase word haystacks fo
 Pantry search can fetch only shards whose hay contains at least one user token (substring),
 matching the browser's scoreRecipe() haystack behavior for whole tokens from the textarea.
 
-Regenerate when claude_index shards change:
+Regenerate when alpha_catalog shards change (after build_alpha_catalog_index.py):
   python3 scripts/build_pantry_shard_hay_index.py
 """
 from __future__ import annotations
@@ -16,10 +16,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SHARDS_DIR = ROOT / "claude_index"
+SHARDS_DIR = ROOT / "alpha_catalog"
 OUT_PATH = ROOT / "pantry_data" / "shard_hay_index.json"
-
-SHARD_GLOB = "claude_index_*.json"
 
 
 def norm_words(s: str) -> list[str]:
@@ -32,7 +30,11 @@ def main() -> int:
         print("Missing", SHARDS_DIR, file=sys.stderr)
         return 1
 
-    files = sorted(p.name for p in SHARDS_DIR.glob(SHARD_GLOB) if p.suffix == ".json")
+    files = sorted(
+        p.name
+        for p in SHARDS_DIR.glob("*.json")
+        if p.suffix == ".json" and p.name != "manifest.json"
+    )
     if not files:
         print("No shards in", SHARDS_DIR, file=sys.stderr)
         return 1

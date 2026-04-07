@@ -1,6 +1,7 @@
 ---
 description: Metric-first recipe quantities in JSON and copy
 globs:
+  - "alpha_catalog/**/*.json"
   - "claude_index/**/*.json"
   - "kitchen_library*.json"
   - "recipe_detail/**/*.json"

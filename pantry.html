@@ -47,12 +47,7 @@
 </div>
 <script>
 (function () {
-  var SHARDS = [
-    'claude_index_01_1-B.json','claude_index_02_B-C.json','claude_index_03_C.json','claude_index_04_C.json',
-    'claude_index_05_C-F.json','claude_index_06_F-G.json','claude_index_07_G-H.json','claude_index_08_H-L.json',
-    'claude_index_09_L-N.json','claude_index_10_N-P.json','claude_index_11_P-R.json','claude_index_12_R-S.json',
-    'claude_index_13_S.json','claude_index_14_S-T.json','claude_index_15_T-Z.json'
-  ];
+  var SHARDS = [];
   var HAY_INDEX_URL = 'pantry_data/shard_hay_index.json';
 
   function siteBaseUrl() {
@@ -79,6 +74,20 @@
   var hayIndex = null;
   var hayIndexFailed = false;
   var shardRecipeCache = Object.create(null);
+
+  function loadCatalogManifest() {
+    if (SHARDS.length) return Promise.resolve(SHARDS);
+    var base = siteBaseUrl();
+    return fetch(base + '/alpha_catalog/manifest.json')
+      .then(function (r) {
+        if (!r.ok) throw new Error('manifest');
+        return r.json();
+      })
+      .then(function (data) {
+        SHARDS = (data && data.files) || [];
+        return SHARDS;
+      });
+  }
 
   function loadHayIndex() {
     if (hayIndexFailed) return Promise.resolve(null);
@@ -130,7 +139,7 @@
     return Promise.all(
       files.map(function (f) {
         if (shardRecipeCache[f]) return Promise.resolve(shardRecipeCache[f]);
-        return fetch(base + '/claude_index/' + f)
+        return fetch(base + '/alpha_catalog/' + encodeURIComponent(f))
           .then(function (r) {
             return r.ok ? r.json() : { recipes: [] };
           })
@@ -215,16 +224,27 @@
       });
   });
 
-  loadHayIndex().then(function () {
-    var go = document.getElementById('pantryGo');
-    var st = document.getElementById('pantryStatus');
-    if (go) go.disabled = false;
-    if (st && st.textContent.indexOf('Loading pantry index') === 0) {
-      st.textContent = hayIndex
-        ? 'Ready — add ingredients and tap Find recipes. (Only matching index parts load per search.)'
-        : 'Ready — add ingredients and tap Find recipes. (Full index load per search — routing file missing.)';
-    }
-  });
+  Promise.all([loadCatalogManifest(), loadHayIndex()])
+    .then(function () {
+      var go = document.getElementById('pantryGo');
+      var st = document.getElementById('pantryStatus');
+      if (go) go.disabled = false;
+      if (st && st.textContent.indexOf('Loading pantry index') === 0) {
+        if (!SHARDS.length) {
+          st.textContent = 'Could not load alpha_catalog/manifest.json.';
+        } else {
+          st.textContent = hayIndex
+            ? 'Ready — add ingredients and tap Find recipes. (Only matching index parts load per search.)'
+            : 'Ready — add ingredients and tap Find recipes. (Full index load per search — routing file missing.)';
+        }
+      }
+    })
+    .catch(function () {
+      var st = document.getElementById('pantryStatus');
+      var go = document.getElementById('pantryGo');
+      if (st) st.textContent = 'Failed to load catalog manifest.';
+      if (go) go.disabled = true;
+    });
 })();
 </script>
 </body>

@@ -10,7 +10,7 @@ alwaysApply: true
 ## Discovery before read
 
 - Prefer targeted search (`grep`/rg-style) with **path + pattern** to locate symbols; use **read with line ranges** (offset/limit) unless the file is known small.
-- Treat **generated or bulk data** (e.g. `combined_data/*.json`, `claude_index*`, large `recipe_detail` shards, multi‑MB flavour DB JSON) as **do not read wholesale** unless the task requires it. Use `head`, counts, small scripts, or a single key/section—not full file dumps.
+- Treat **generated or bulk data** (e.g. `combined_data/*.json`, `alpha_catalog/`, `claude_index/`, large `recipe_detail` shards, multi‑MB flavour DB JSON) as **do not read wholesale** unless the task requires it. Use `head`, counts, small scripts, or a single key/section—not full file dumps.
 
 ## Edits on large files
 

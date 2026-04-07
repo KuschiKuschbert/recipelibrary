@@ -4,18 +4,28 @@ on:
   push:
     branches: [main]
     paths:
+      - "alpha/**"
+      - "alpha_catalog/**"
       - "claude_index/**"
       - "recipe_detail/**"
+      - "pantry_data/shard_hay_index.json"
       - "scripts/**"
       - "index.html"
+      - "pantry.html"
+      - "sw.js"
       - ".github/workflows/recipe-shards.yml"
   pull_request:
     branches: [main]
     paths:
+      - "alpha/**"
+      - "alpha_catalog/**"
       - "claude_index/**"
       - "recipe_detail/**"
+      - "pantry_data/shard_hay_index.json"
       - "scripts/**"
       - "index.html"
+      - "pantry.html"
+      - "sw.js"
       - ".github/workflows/recipe-shards.yml"
 
 jobs:

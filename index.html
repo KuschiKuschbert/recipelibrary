@@ -714,37 +714,25 @@ function siteBaseUrl() {
   return stripped ? origin + stripped : origin;
 }
 
-const INDEX_FILES = [
-  'claude_index_01_1-B.json',
-  'claude_index_02_B-C.json',
-  'claude_index_03_C.json',
-  'claude_index_04_C.json',
-  'claude_index_05_C-F.json',
-  'claude_index_06_F-G.json',
-  'claude_index_07_G-H.json',
-  'claude_index_08_H-L.json',
-  'claude_index_09_L-N.json',
-  'claude_index_10_N-P.json',
-  'claude_index_11_P-R.json',
-  'claude_index_12_R-S.json',
-  'claude_index_13_S.json',
-  'claude_index_14_S-T.json',
-  'claude_index_15_T-Z.json',
-];
-
+/** Letter shards: compact rows from claude_index, split per alpha/ (see scripts/build_alpha_catalog_index.py). */
 async function loadData() {
   const base = siteBaseUrl();
   const all = [];
   let loaded = 0;
   const loadingText = document.querySelector('.loading-text');
 
+  const manResp = await fetch(`${base}/alpha_catalog/manifest.json`);
+  if (!manResp.ok) throw new Error('Could not load recipe catalog manifest');
+  const manifest = await manResp.json();
+  const files = Array.isArray(manifest.files) ? manifest.files : [];
+
   const fetches = await Promise.allSettled(
-    INDEX_FILES.map(f =>
-      fetch(`${base}/claude_index/${f}`)
+    files.map(f =>
+      fetch(`${base}/alpha_catalog/${encodeURIComponent(f)}`)
         .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
         .then(data => {
           loaded++;
-          if (loadingText) loadingText.textContent = `Loading recipes... (${loaded}/${INDEX_FILES.length} files)`;
+          if (loadingText) loadingText.textContent = `Loading recipes... (${loaded}/${files.length} files)`;
           return data;
         })
     )
