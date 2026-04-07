@@ -5,7 +5,7 @@ Build pantry_data/shard_hay_index.json — per-shard lowercase word haystacks fo
 Pantry search can fetch only shards whose hay contains at least one user token (substring),
 matching the browser's scoreRecipe() haystack behavior for whole tokens from the textarea.
 
-Regenerate when alpha_catalog shards change (after build_alpha_catalog_index.py):
+Regenerate when alpha_catalog shards change (after rebuild_catalog_from_detail.py or build_alpha_catalog_index.py):
   python3 scripts/build_pantry_shard_hay_index.py
 """
 from __future__ import annotations

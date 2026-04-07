@@ -2,7 +2,7 @@
 
 Personal **Kuschi Kitchen Library** (GitHub Pages, public repo).
 
-1. Read [.cursor/skills/kitchen-library/SKILL.md](.cursor/skills/kitchen-library/SKILL.md) for data layout, user-recipe storage, workflow, **ship-after-change** checklist, and **“Aroma modal data — when to shard further”** (apply that escalation yourself when thresholds are hit).
+1. Read [.cursor/skills/kitchen-library/SKILL.md](.cursor/skills/kitchen-library/SKILL.md) for data layout, user-recipe storage, workflow, **ship-after-change** checklist, and **“Aroma modal data — when to shard further”** (apply that escalation yourself when thresholds are hit). **Recipe catalog SSOT:** `recipe_detail/`; after bulk edits run `python3 scripts/rebuild_catalog_from_detail.py` so `claude_index/`, `alpha_catalog/`, and pantry hay stay aligned.
 2. Read [.cursor/skills/big-static-data-frontend/SKILL.md](.cursor/skills/big-static-data-frontend/SKILL.md) when changing **large static JSON**, **sharding**, **Pantry-style routing**, or **client-side catalog performance** on GitHub Pages.
 3. Follow `.cursor/rules/ship-after-change.mdc` (test → commit → push) and `.cursor/rules/git-workflow.mdc` (branches, Conventional Commits).
 4. Follow `.cursor/rules/token-efficiency.mdc` to limit **LLM context** usage (discovery, large JSON/HTML, tool output).

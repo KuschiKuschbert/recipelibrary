@@ -714,7 +714,7 @@ function siteBaseUrl() {
   return stripped ? origin + stripped : origin;
 }
 
-/** Letter shards: compact rows from claude_index, split per alpha/ (see scripts/build_alpha_catalog_index.py). */
+/** Letter shards: compact rows in alpha_catalog/ (built by scripts/rebuild_catalog_from_detail.py). */
 async function loadData() {
   const base = siteBaseUrl();
   const all = [];
@@ -1109,6 +1109,9 @@ function buildRecipeIndex() {
     if (r.id && String(r.id).startsWith('user-')) {
       letter = (window.KuschiUserRecipes && KuschiUserRecipes.USER_LETTER) || '_USER';
       recipeIndex[r.id] = { letter, name: r.name };
+    } else if (r._detailLetter && /^[A-Z]$/.test(r._detailLetter)) {
+      letter = r._detailLetter;
+      recipeIndex[r.id] = { letter, bucket: detailBucketFromId(r.id), name: r.name };
     } else {
       for (const c of (r.name || '')) {
         if (/[a-zA-Z]/.test(c)) { letter = c.toUpperCase(); break; }

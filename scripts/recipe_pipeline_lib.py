@@ -116,6 +116,36 @@ def iter_detail_shard_paths() -> Iterator[Path]:
     yield from legs
 
 
+def letter_from_detail_path(path: Path) -> str | None:
+    """Shard letter from filename detail_{L}_{bucket}.json or detail_{L}.json."""
+    m = DETAIL_SUBSHARD_RE.match(path.name)
+    if m:
+        return m.group(1)
+    m2 = DETAIL_LEGACY_RE.match(path.name)
+    if m2:
+        return m2.group(1)
+    return None
+
+
+def build_id_to_detail_letter() -> dict[str, str]:
+    """Map recipe id → shard letter from recipe_detail path (modal router truth)."""
+    m: dict[str, str] = {}
+    for path in iter_detail_shard_paths():
+        letter = letter_from_detail_path(path)
+        if not letter:
+            continue
+        data = load_detail_file(path)
+        if isinstance(data, list):
+            for r in data:
+                if isinstance(r, dict) and r.get("id") is not None:
+                    m[str(r["id"])] = letter
+        elif isinstance(data, dict):
+            for v in data.values():
+                if isinstance(v, dict) and v.get("id") is not None:
+                    m[str(v["id"])] = letter
+    return m
+
+
 def load_all_detail_shards() -> dict[str, dict | list]:
     """Letter -> parsed JSON (object map or legacy list), merging all buckets per letter."""
     out: dict[str, dict | list] = {}
@@ -289,8 +319,12 @@ def build_index_id_locations() -> dict[str, tuple[Path, int]]:
     return m
 
 
-def detail_to_index_entry(recipe: dict) -> dict:
-    """Build compact index record from a detail recipe (matches README schema)."""
+def detail_to_index_entry(recipe: dict, *, router_letter: str | None = None) -> dict:
+    """Build compact index record from a detail recipe (matches README schema).
+
+    router_letter: optional A–Z from recipe_detail filename; stored as _detailLetter
+    so the browser opens the correct detail sub-shard when display name first letter differs.
+    """
     rid = recipe.get("id")
     name = recipe.get("name")
     cat = recipe.get("category")
@@ -326,7 +360,7 @@ def detail_to_index_entry(recipe: dict) -> dict:
         if item:
             ing.append(str(item))
 
-    return {
+    out: dict[str, Any] = {
         "id": rid,
         "name": name,
         "cat": cat,
@@ -335,6 +369,9 @@ def detail_to_index_entry(recipe: dict) -> dict:
         "tags": tags,
         "ing": ing,
     }
+    if router_letter and len(str(router_letter)) == 1:
+        out["_detailLetter"] = str(router_letter).upper()
+    return out
 
 
 def collect_translatable_text(recipe: dict) -> str:

@@ -18,6 +18,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from recipe_pipeline_lib import (  # noqa: E402
     INDEX_FILES,
     CLAUDE_INDEX,
+    build_id_to_detail_letter,
     build_index_id_locations,
     detail_to_index_entry,
     load_all_detail_recipes,
@@ -91,6 +92,7 @@ def main() -> int:
         detail = load_all_detail_recipes()
     else:
         detail = load_detail_recipes_subset(set(target))
+    id_to_letter = build_id_to_detail_letter()
     loc_map = build_index_id_locations()
     shard_cache: dict[Path, dict] = {}
     touched_paths: set[Path] = set()
@@ -110,7 +112,9 @@ def main() -> int:
         if path not in shard_cache:
             shard_cache[path] = load_index_shard(path)
         shard = shard_cache[path]
-        new_entry = detail_to_index_entry(drec)
+        new_entry = detail_to_index_entry(
+            drec, router_letter=id_to_letter.get(rid)
+        )
         old = shard["recipes"][idx]
         new_entry["id"] = old.get("id") or new_entry.get("id")
         shard["recipes"][idx] = new_entry

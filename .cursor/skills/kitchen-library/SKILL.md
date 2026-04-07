@@ -26,9 +26,9 @@ Skip only if the user explicitly opts out.
 | Path | Role |
 |------|------|
 | `assets/theme.css` | **Shared** theme: `:root` tokens, search, filters, modal shell, footer, spin, form helpers, base `.grid` |
-| `alpha_catalog/` | **Browser** search index (compact rows + `manifest.json`; built from `alpha/` + `claude_index`) |
-| `claude_index/` | Compact shards maintained by scripts; feeds `alpha_catalog` build |
-| `recipe_detail/detail_*.json` | Full payloads: `detail_{Letter}_{bucket}.json` (64 buckets, FNV-1a on id); letter from compact index `name` (matches Kitchen UI). Regenerate with `scripts/repartition_detail_subshards.py`. |
+| `alpha_catalog/` | **Browser** search index — run `python3 scripts/rebuild_catalog_from_detail.py` after `recipe_detail/` changes |
+| `claude_index/` | Compact shards — same rebuild script (from `recipe_detail/`) |
+| `recipe_detail/detail_*.json` | **SSOT** full payloads: `detail_{Letter}_{bucket}.json` (64 buckets, FNV-1a on id). Letter is usually the first ASCII letter of the English `name`, but can differ after imports — compact rows carry **`_detailLetter`** so modals fetch the correct sub-shard. Regenerate layout with `repartition_detail_shards.py` / `repartition_detail_subshards.py`. |
 | `kitchen_library_*.json` | Additional library chunks |
 | `assets/user-recipes.js` | **localStorage** helpers (browser-only) — see keys below |
 | `aroma_data/*.json`, [aroma.html](aroma.html), [assets/aroma-hints.js](assets/aroma-hints.js) | **Aroma Bible** extract: food↔spice index, harmony data, recipe hints + [aroma.html](aroma.html) lookup — see [.cursor/skills/aroma-bible/SKILL.md](../aroma-bible/SKILL.md). [aroma.html](aroma.html) uses full `ingredients.json`. **Recipe modals** (kitchen / Riviera / books) use [assets/aroma-hints.js](assets/aroma-hints.js) with **`ingredients_modal_core.json`** (~half size) and **`combined_data/ingredients_unified_modal.json`** (slim flavor rows for “More flavour”); regenerate both with `node scripts/build_aroma_modal_data.mjs` after editing `ingredients.json` or `ingredients_unified.json`. |
@@ -38,7 +38,8 @@ Skip only if the user explicitly opts out.
 | [kitchen-book.html](kitchen-book.html) | Per-device **kitchen books** (`?b=id`): search, add recipe (manual + Gemini), QR, **order list** (per-book storage), **Admin** PIN for delete book / remove recipe |
 | `assets/screen-wake.js` | **Keep screen on** toggle (`[data-kuschi-wake]`) — shown in recipe detail modals only |
 | `scraped_raw/`, `pdf/` | Source / export artifacts |
-| `scripts/detect-nonenglish-recipes.py`, `translate_recipes.py`, `sync_claude_index_from_detail.py`, `repartition_detail_shards.py`, `repartition_detail_subshards.py` | Optional: translate catalog text to English, sync `claude_index` from `recipe_detail`, repartition detail shards / letter+bucket sub-shards after name changes — see [README.md](../../../README.md) |
+| `scripts/rebuild_catalog_from_detail.py` | After `recipe_detail/` edits (or merges): regenerates `claude_index/`, `alpha_catalog/`, pantry hay — **run this before commit** for the live site. |
+| `scripts/detect-nonenglish-recipes.py`, `translate_recipes.py`, `sync_claude_index_from_detail.py`, `repartition_detail_shards.py`, `repartition_detail_subshards.py` | Optional: translate to English, targeted `claude_index` sync, repartition detail after name-first-letter changes — see [README.md](../../../README.md); full pipeline still ends with **rebuild** + `check-recipe-shards.py`. |
 
 ### Aroma modal data — when to shard further (agent checklist)
 

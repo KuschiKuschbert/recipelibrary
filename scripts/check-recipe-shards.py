@@ -46,6 +46,13 @@ def letter_from_name(name: str | None) -> str:
     return "Z"
 
 
+def letter_for_catalog_row(r: dict) -> str:
+    dl = r.get("_detailLetter")
+    if isinstance(dl, str) and len(dl) == 1 and dl.isalpha():
+        return dl.upper()
+    return letter_from_name(r.get("name"))
+
+
 def find_in_payload(payload, rid: str):
     """Match findRecipeInDetailPayload in index.html."""
     if payload is None:
@@ -159,7 +166,7 @@ def main() -> int:
 
     for r in recipes:
         rid = r["id"]
-        letter = letter_from_name(r.get("name"))
+        letter = letter_for_catalog_row(r)
         bucket = detail_bucket_from_id(rid)
         payload = get_detail_payload(letter, bucket)
         if payload is None:

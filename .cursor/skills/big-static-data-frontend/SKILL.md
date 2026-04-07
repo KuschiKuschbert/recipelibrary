@@ -74,4 +74,4 @@ description: >-
 
 ## Reference implementation (example)
 
-The Kuschi kitchen library repo uses: `alpha_catalog/*.json` + `manifest.json` (browser), `claude_index/` (script-maintained), `recipe_detail/detail_{L}_{bucket}.json` (lazy per-recipe modal fetch; 64 FNV-1a buckets), index `_searchHay` + filter memo, `pantry_data/shard_hay_index.json` + `scripts/build_pantry_shard_hay_index.py`, external Riviera builtins + aroma preload/prime.
+The Kuschi kitchen library repo uses: **`recipe_detail/` as SSOT** for full recipes; **`python3 scripts/rebuild_catalog_from_detail.py`** regenerates `claude_index/`, `alpha_catalog/*.json` + `manifest.json`, and `pantry_data/shard_hay_index.json`. The browser loads `alpha_catalog/` only; modals use `recipe_detail/detail_{L}_{bucket}.json` (lazy fetch; 64 FNV-1a buckets) with **`_detailLetter`** on index rows when the display `name`’s first letter differs from the detail filename letter. Index `_searchHay` + filter memo; external Riviera builtins + aroma preload/prime.

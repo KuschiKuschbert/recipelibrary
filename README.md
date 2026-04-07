@@ -18,13 +18,14 @@ Personal recipe library hosted on **GitHub Pages**: searchable catalog, metric-o
 | [assets/recipe-gemini-format.js](assets/recipe-gemini-format.js) | Gemini JSON extraction for add-recipe (Kitchen + Riviera); optional fetch proxy helpers |
 | [assets/recipe-import-helpers.js](assets/recipe-import-helpers.js) | File upload (PDF / DOCX / image) and HTML→text for URL import |
 | [workers/recipe-fetch-proxy.js](workers/recipe-fetch-proxy.js) | Optional Cloudflare Worker to fetch recipe URLs (bypass browser CORS) |
-| `alpha_catalog/` | **Browser catalog** — compact shards + `manifest.json`; built from `alpha/` layout + **`claude_index` row data** (keeps names aligned with `recipe_detail/` letter routing) |
-| `claude_index/` | Compact shards maintained by offline scripts; source of truth for catalog **fields** until you regenerate `alpha_catalog/` |
-| `alpha/` | Full-recipe letter shards + `index.json` (layout for `alpha_catalog/`) |
+| `alpha_catalog/` | **Browser catalog** — compact shards + `manifest.json`; **generated** from `recipe_detail/` via `scripts/rebuild_catalog_from_detail.py` |
+| `claude_index/` | Compact shards — **generated** from `recipe_detail/` (same script); kept for pipelines / Claude / backups |
+| `alpha/` | Only **`index.json`** is required (defines letter filenames); full `alpha/*.json` bodies are optional archives |
 | `recipe_detail/detail_*.json` | Full recipe payloads (main library): `detail_{L}_{bucket}.json` sub-shards (`hash(id) % 64`, FNV-1a — see `index.html` + `scripts/recipe_pipeline_lib.py`); letter **L** from compact index `name` (same as the Kitchen list). Optional legacy `detail_{L}.json` fallback on 404. |
 | `scripts/detect-nonenglish-recipes.py`, `translate_recipes.py`, `sync_claude_index_from_detail.py`, `repartition_detail_shards.py`, `repartition_detail_subshards.py` | Optional pipeline to translate catalog text and keep index/detail aligned; sub-shard repartition after index/name changes (see below) |
-| `scripts/build_alpha_catalog_index.py` | Build `alpha_catalog/` from `alpha/` + `claude_index` (run after either changes) |
-| `scripts/build_pantry_shard_hay_index.py` | Regenerate `pantry_data/shard_hay_index.json` for `alpha_catalog/` filenames |
+| `scripts/rebuild_catalog_from_detail.py` | **Regenerate `claude_index/` + `alpha_catalog/` + pantry hay** from `recipe_detail/` (single source of truth) |
+| `scripts/build_alpha_catalog_index.py` | Wrapper → calls `rebuild_catalog_from_detail.py` |
+| `scripts/build_pantry_shard_hay_index.py` | Regenerate `pantry_data/shard_hay_index.json` (also run by rebuild script) |
 | `scripts/check-recipe-shards.py` | Verify every `alpha_catalog` recipe resolves in the expected `recipe_detail` shard |
 | `scripts/run_all_extractions.sh` | Regenerate `flavor_data/`, `thesaurus_data/`, `science_data/`, `sfah_data/`, `supplementary_data/`, `combined_data/` from EPUBs/PDFs in `~/Downloads` (see each `extract_*.py` for env overrides) |
 | `scripts/build_flavour_hints_modal.mjs` | After updating `flavour_data/flavour_knowledge_db_v1.1.json`, run `node scripts/build_flavour_hints_modal.mjs` to refresh `flavour_data/flavour_hints_by_id.json` (slim matrix hints for modals + pairing atlas). `toolkit_pass_static.json` is extractable the same way from the full DB if you add fields to `fix_the_dish` / `balance_rules`. |
@@ -70,23 +71,24 @@ Each index entry is shaped like:
   "cui": "Greek",
   "protein": ["chicken"],
   "tags": ["gluten-free", "high-protein"],
-  "ing": ["Chicken thigh", "Lemon", "Garlic"]
+  "ing": ["Chicken thigh", "Lemon", "Garlic"],
+  "_detailLetter": "F"
 }
 ```
 
+`_detailLetter` (A–Z) is the **`recipe_detail/` filename letter** for that id. It is set by `rebuild_catalog_from_detail.py` so the modal loads the correct sub-shard when the display `name` starts with a different letter than the file the recipe lives in.
+
 Counts in the HTML hero update from loaded data; README stats are illustrative — regenerate from your shards if you need exact numbers.
 
-## Alpha letter layout (`alpha/` → `alpha_catalog/`)
+## Alpha letter layout (`alpha/index.json`)
 
-- **`alpha/`** — full recipes grouped by letter (`alpha/index.json` lists shard files). Display titles here can differ from `claude_index` (e.g. original-language titles).
-- **`alpha_catalog/`** — what the **browser loads**: same **compact row** as `claude_index` for each id (so **first-letter → `recipe_detail/`** routing matches modals). Regenerate with:
-  - `python3 scripts/build_alpha_catalog_index.py`
-  - `python3 scripts/build_pantry_shard_hay_index.py`
-- After **`sync_claude_index_from_detail.py`** (or any `claude_index/` edit), run both commands above so **Pages** stays consistent.
+`alpha/index.json` lists which **filenames** exist under `alpha_catalog/` (e.g. `#.json`, `A.json`, `À.json`). The rebuild script assigns each recipe to a bucket from the **first letter of `name`**, falling back to `#.json` when needed. You do **not** need the large `alpha/*.json` full-recipe copies for the site to work.
 
 ## Translating non-English recipes (offline pipeline)
 
-Scripts in `scripts/` update **`recipe_detail/`** (source of truth for full text) and **`claude_index/`** (compact list/search). The **live UI** reads **`alpha_catalog/`**, rebuilt from `claude_index` + `alpha/` layout. The main site does not call translation APIs.
+**Single source of truth:** **`recipe_detail/`** holds every full recipe. After any batch of detail edits, run **`python3 scripts/rebuild_catalog_from_detail.py`** to refresh **`claude_index/`**, **`alpha_catalog/`**, and **`pantry_data/shard_hay_index.json`**, then commit. The live site reads **`alpha_catalog/`** only. The main site does not call translation APIs.
+
+For **targeted** text fixes, you can still run **`sync_claude_index_from_detail.py`** for specific ids; a full rebuild is safer after large merges.
 
 ### Translation cleanup (HTML entities + optional Turkish re-pass)
 
@@ -96,7 +98,8 @@ Some imported strings still contain literal HTML entities (`&ccedil;`, `&nbsp;`,
 2. **Optional Turkish re-translate:** `python3 scripts/fix_translation_html_entities.py --write --retranslate-tr` — Argos **tr→en** only for recipes with `source: lezzet` or `original_language: tr`, and only on fields that still contain Turkish letters (`çğıöşü` etc.). Install the Argos **tr** pair first (`python3 scripts/install_argos_pairs.py tr`). After you have already run step 1, use `--skip-entities` with `--retranslate-tr` so the script does not rescan every recipe for HTML entities (much faster): `python3 scripts/fix_translation_html_entities.py --write --retranslate-tr --skip-entities`. Expect a long run on a full library either way.
 3. **Sync index:** `python3 scripts/sync_claude_index_from_detail.py --ids-from reports/cleanup_affected_ids.jsonl` (or `--all-in-index` for a full refresh).
 4. **Repartition** (only if the cleanup script warned about **name** first-letter bucket drift): `python3 scripts/repartition_detail_shards.py`, then `python3 scripts/repartition_detail_subshards.py` to refresh `detail_{L}_{bucket}.json` files.
-5. **Verify:** `python3 scripts/check-recipe-shards.py` (must exit 0).
+5. **Rebuild catalog:** `python3 scripts/rebuild_catalog_from_detail.py` (refreshes `claude_index/`, `alpha_catalog/`, pantry hay).
+6. **Verify:** `python3 scripts/check-recipe-shards.py` (must exit 0).
 
 Running `--write` writes `reports/cleanup_affected_ids.jsonl` (gitignored); regenerate it whenever you run a cleanup write.
 
@@ -108,15 +111,16 @@ Running `--write` writes `reports/cleanup_affected_ids.jsonl` (gitignored); rege
    `python3 scripts/translate_recipes.py --candidates-file reports/translation_candidates.jsonl --backend argos`  
    By default only **non-ASCII** strings are sent to the translator. To also translate **ASCII-only** text when Lingua set `suggested_lang` (e.g. Spanish without accents), re-run **detect** for a fresh list, then add **`--translate-ascii-lingua`** (can re-touch already-English lines if Lingua is wrong — spot-check).  
    Alternatives: `--backend libretranslate` (set `LIBRETRANSLATE_URL`, optional `LIBRETRANSLATE_API_KEY`) or `--backend deepl` (`DEEPL_AUTH_KEY`, optional `DEEPL_FREE=1` for api-free host). Use `--dry-run` on translate to count strings without writing. Glossary: [`scripts/translation_glossary.json`](scripts/translation_glossary.json).
-4. **Sync index:** `python3 scripts/sync_claude_index_from_detail.py --ids-from reports/translation_candidates.jsonl`  
-   Or `--all-in-index` to refresh every catalog entry from detail (slow, loads all detail files).
+4. **Sync index (optional):** `python3 scripts/sync_claude_index_from_detail.py --ids-from reports/translation_candidates.jsonl`  
+   Or `--all-in-index` to refresh every catalog entry from detail (slow, loads all detail files). **Skip this** if you will run step 6 — the rebuild overwrites `claude_index/` from `recipe_detail/` anyway.
 5. **Repartition detail (only if a compact index `name`’s first ASCII letter changed):**  
    `python3 scripts/repartition_detail_shards.py`  
    then `python3 scripts/repartition_detail_subshards.py`  
    Otherwise the site may fetch the wrong `recipe_detail/detail_{letter}_{bucket}.json` slice for that id.
-6. **Verify:** `python3 scripts/check-recipe-shards.py` (must exit 0).
+6. **Rebuild catalog:** `python3 scripts/rebuild_catalog_from_detail.py` (refreshes `claude_index/`, `alpha_catalog/`, pantry hay).
+7. **Verify:** `python3 scripts/check-recipe-shards.py` (must exit 0).
 
-Shared helpers: [`scripts/recipe_pipeline_lib.py`](scripts/recipe_pipeline_lib.py). One-shot full run (detect → Argos models → translate → repartition → sync → verify): [`scripts/run_full_translation.sh`](scripts/run_full_translation.sh).
+Shared helpers: [`scripts/recipe_pipeline_lib.py`](scripts/recipe_pipeline_lib.py). One-shot full run (detect → Argos models → translate → repartition → **rebuild catalog** → verify): [`scripts/run_full_translation.sh`](scripts/run_full_translation.sh).
 
 ## Claude / search
 
