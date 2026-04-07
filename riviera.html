@@ -954,29 +954,58 @@ function ensureRivieraOrderList() {
 }
 window.__RIVIERA_STOCKTAKE_CATALOG_URL = siteBaseUrl() + '/riviera_data/stocktake_catalog.json';
 
+function withRivieraStocktakeList(callback) {
+  if (!window.ensureRivieraStocktakeListReady) {
+    alert('Stocktake is still loading. Refresh and try again.');
+    return;
+  }
+  window
+    .ensureRivieraStocktakeListReady()
+    .then(function (list) {
+      callback(list);
+    })
+    .catch(function (e) {
+      console.warn(e);
+      alert('Could not use stocktake. Check your connection and try again.');
+    });
+}
 function openStocktakeModal() {
-  if (window.rivieraStocktakeList) window.rivieraStocktakeList.open();
+  withRivieraStocktakeList(function (list) {
+    list.open();
+  });
 }
 function closeStocktakeModal() {
   if (window.rivieraStocktakeList) window.rivieraStocktakeList.close();
 }
 function submitStocktakeAdd() {
-  if (window.rivieraStocktakeList) window.rivieraStocktakeList.submitAdd();
+  withRivieraStocktakeList(function (list) {
+    list.submitAdd();
+  });
 }
 function clearStocktakeCounts() {
-  if (window.rivieraStocktakeList) window.rivieraStocktakeList.clearCounted();
+  withRivieraStocktakeList(function (list) {
+    list.clearCounted();
+  });
 }
 function copyStocktakeText() {
-  if (window.rivieraStocktakeList) window.rivieraStocktakeList.copyText();
+  withRivieraStocktakeList(function (list) {
+    list.copyText();
+  });
 }
 function copyStocktakeJson() {
-  if (window.rivieraStocktakeList) window.rivieraStocktakeList.copyJson();
+  withRivieraStocktakeList(function (list) {
+    list.copyJson();
+  });
 }
 function printStocktakeSheet() {
-  if (window.rivieraStocktakeList) window.rivieraStocktakeList.printSheet();
+  withRivieraStocktakeList(function (list) {
+    list.printSheet();
+  });
 }
 function importStocktakeJsonFile() {
-  if (window.rivieraStocktakeList) window.rivieraStocktakeList.importJsonFile();
+  withRivieraStocktakeList(function (list) {
+    list.importJsonFile();
+  });
 }
 
 function syncRivieraOrderListZoneEditButton() {
