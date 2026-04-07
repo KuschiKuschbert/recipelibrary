@@ -20,7 +20,7 @@ Personal recipe library hosted on **GitHub Pages**: searchable catalog, metric-o
 | [workers/recipe-fetch-proxy.js](workers/recipe-fetch-proxy.js) | Optional Cloudflare Worker to fetch recipe URLs (bypass browser CORS) |
 | `alpha_catalog/` | **Browser catalog** — **8** merged JSON parts (`catalog_01.json` … `catalog_08.json`) + `manifest.json`; **generated** from `recipe_detail/` via `scripts/rebuild_catalog_from_detail.py` |
 | `claude_index/` | Compact shards — **generated** from `recipe_detail/` (same script); kept for pipelines / Claude / backups |
-| `alpha/` | Only **`index.json`** is required (defines letter filenames); full `alpha/*.json` bodies are optional archives |
+| `alpha/` | **`index.json`** defines **letter bucket layout** (legacy `alpha/*.json` paths in entries); full letter JSON bodies are optional local archives — the site uses **`alpha_catalog/`** + **`recipe_detail/`** |
 | `recipe_detail/detail_*.json` | Full recipe payloads (main library): `detail_{L}_{bucket}.json` sub-shards (`hash(id) % 64`, FNV-1a — see `index.html` + `scripts/recipe_pipeline_lib.py`); letter **L** from compact index `name` (same as the Kitchen list). Optional legacy `detail_{L}.json` fallback on 404. |
 | `scripts/detect-nonenglish-recipes.py`, `translate_recipes.py`, `sync_claude_index_from_detail.py`, `repartition_detail_shards.py`, `repartition_detail_subshards.py` | Optional pipeline to translate catalog text and keep index/detail aligned; sub-shard repartition after index/name changes (see below) |
 | `scripts/rebuild_catalog_from_detail.py` | **Regenerate `claude_index/` + `alpha_catalog/` + pantry hay** from `recipe_detail/` (single source of truth) |

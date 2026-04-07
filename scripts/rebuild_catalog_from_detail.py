@@ -44,7 +44,11 @@ ALPHA_CATALOG_PHYSICAL_PARTS = 8
 
 
 def load_alpha_bucket_map() -> tuple[list[str], dict[str, str]]:
-    """Ordered shard basenames + stem ('A', '#', 'İ') → 'A.json'."""
+    """Letter-bucket layout from alpha/index.json: ordered legacy basenames (e.g. A.json) and stem → basename.
+
+    These names match historical alpha/*.json paths; they are **logical bucket keys** only.
+    Output files under alpha_catalog/ are always catalog_01.json … (see ALPHA_CATALOG_PHYSICAL_PARTS).
+    """
     meta = json.loads(ALPHA_INDEX.read_text(encoding="utf-8"))
     ordered: list[str] = []
     stem_to_bn: dict[str, str] = {}

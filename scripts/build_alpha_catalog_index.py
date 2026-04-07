@@ -3,9 +3,9 @@
 Backward-compatible entry point — delegates to rebuild_catalog_from_detail.py.
 
 The browser catalog is built from **recipe_detail/** (SSOT) together with
-**claude_index/** and pantry hay. The old implementation read id lists from
-**alpha/*.json**; that is no longer required — only **alpha/index.json** defines
-output filenames.
+**claude_index/** and pantry hay. **alpha/index.json** defines **letter bucket
+layout** (logical grouping); the rebuild writes **catalog_01.json** … **catalog_NN.json**
+under **alpha_catalog/**. Full **alpha/*.json** recipe archives are optional.
 
   python3 scripts/build_alpha_catalog_index.py
 """

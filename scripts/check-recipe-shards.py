@@ -28,12 +28,21 @@ MANIFEST_PATH = CATALOG_DIR / "manifest.json"
 RECIPE_DETAIL = REPO_ROOT / "recipe_detail"
 
 
-def load_manifest_files() -> list[str]:
+def load_manifest() -> tuple[list[str], dict]:
+    """Return (files list, raw manifest object) for v2 consistency checks."""
     if not MANIFEST_PATH.is_file():
-        return []
-    data = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
-    files = data.get("files")
-    return list(files) if isinstance(files, list) else []
+        return [], {}
+    raw = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+    if not isinstance(raw, dict):
+        return [], {}
+    files = raw.get("files")
+    fl = [x for x in files if isinstance(x, str) and x.strip()] if isinstance(files, list) else []
+    return fl, raw
+
+
+def load_manifest_files() -> list[str]:
+    files, _ = load_manifest()
+    return files
 
 
 def letter_from_name(name: str | None) -> str:
@@ -110,10 +119,19 @@ def main() -> int:
     errors = 0
     warnings: list[str] = []
 
-    index_files = load_manifest_files()
+    index_files, manifest_raw = load_manifest()
     if not index_files:
         print("ERROR: missing or empty alpha_catalog/manifest.json", file=sys.stderr)
         return 1
+
+    if manifest_raw.get("v") == 2:
+        parts = manifest_raw.get("parts")
+        if isinstance(parts, int) and len(index_files) != parts:
+            print(
+                f"ERROR: manifest v2 parts={parts} but len(files)={len(index_files)}",
+                file=sys.stderr,
+            )
+            errors += 1
 
     listed = set(index_files)
 
