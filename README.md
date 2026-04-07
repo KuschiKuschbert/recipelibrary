@@ -18,9 +18,11 @@ Personal recipe library hosted on **GitHub Pages**: searchable catalog, metric-o
 | [assets/recipe-gemini-format.js](assets/recipe-gemini-format.js) | Gemini JSON extraction for add-recipe (Kitchen + Riviera); optional fetch proxy helpers |
 | [assets/recipe-import-helpers.js](assets/recipe-import-helpers.js) | File upload (PDF / DOCX / image) and HTML→text for URL import |
 | [workers/recipe-fetch-proxy.js](workers/recipe-fetch-proxy.js) | Optional Cloudflare Worker to fetch recipe URLs (bypass browser CORS) |
-| `claude_index/` | Compact index JSON shards for search |
+| `claude_index/` | Compact index JSON shards for search (what **index.html** / **pantry.html** load) |
+| `alpha/` | Optional full-recipe letter shards + `index.json` (see **Alpha letter shards** below) |
 | `recipe_detail/detail_*.json` | Full recipe payloads (main library): `detail_{L}_{bucket}.json` sub-shards (`hash(id) % 64`, FNV-1a — see `index.html` + `scripts/recipe_pipeline_lib.py`); letter **L** from compact index `name` (same as the Kitchen list). Optional legacy `detail_{L}.json` fallback on 404. |
 | `scripts/detect-nonenglish-recipes.py`, `translate_recipes.py`, `sync_claude_index_from_detail.py`, `repartition_detail_shards.py`, `repartition_detail_subshards.py` | Optional pipeline to translate catalog text and keep index/detail aligned; sub-shard repartition after index/name changes (see below) |
+| `scripts/build_alpha_catalog_index.py` | Build gitignored `alpha_catalog/` compact shards from `alpha/` (experimental; see README) |
 | `scripts/check-recipe-shards.py` | Verify every `claude_index` id resolves in the expected `recipe_detail` shard |
 | `scripts/run_all_extractions.sh` | Regenerate `flavor_data/`, `thesaurus_data/`, `science_data/`, `sfah_data/`, `supplementary_data/`, `combined_data/` from EPUBs/PDFs in `~/Downloads` (see each `extract_*.py` for env overrides) |
 | `scripts/build_flavour_hints_modal.mjs` | After updating `flavour_data/flavour_knowledge_db_v1.1.json`, run `node scripts/build_flavour_hints_modal.mjs` to refresh `flavour_data/flavour_hints_by_id.json` (slim matrix hints for modals + pairing atlas). `toolkit_pass_static.json` is extractable the same way from the full DB if you add fields to `fix_the_dish` / `balance_rules`. |
@@ -71,6 +73,14 @@ Each index entry is shaped like:
 ```
 
 Counts in the HTML hero update from loaded data; README stats are illustrative — regenerate from your shards if you need exact numbers.
+
+## Alpha letter shards (`alpha/`)
+
+Optional **full-recipe** JSON split by first letter (`alpha/index.json` lists the files). This tree can **diverge** from `recipe_detail/` (e.g. recipes present in `alpha/` but missing from detail shards). The **live site** loads **`claude_index/`** so every list row still opens a modal from `recipe_detail/`.
+
+To build a compact index-shaped mirror (same entry shape as `claude_index`) for experiments or a future cutover:
+
+`python3 scripts/build_alpha_catalog_index.py` → writes **`alpha_catalog/`** (gitignored). Switching `index.html` / `pantry.html` to that folder is only safe after **every** catalog id resolves in `recipe_detail/` (extend `check-recipe-shards.py` accordingly and run it until it exits 0).
 
 ## Translating non-English recipes (offline pipeline)
 
