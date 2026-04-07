@@ -544,7 +544,7 @@
   <div class="modal order-list-modal stocktake-modal">
     <button type="button" class="modal-close" onclick="closeStocktakeModal()">✕</button>
     <div class="modal-title" style="margin-bottom:12px">Stocktake checklist</div>
-    <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Same ingredients as your order list (merged by name and zone), plus a <strong>built-in venue catalog</strong> (snapshot with default qty/brand/UOM). When you leave the <strong>brand</strong> or <strong>UOM</strong> field (tab or tap away), it locks for a cleaner list — <strong>double-click</strong> a locked field to edit again. Lines you add below are <strong>only</strong> on this stocktake sheet.</p>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Same ingredients as your order list (merged by name and zone), plus a <strong>built-in venue catalog</strong> (snapshot with default qty/brand/UOM). When you leave the <strong>brand</strong> or <strong>UOM</strong> field (tab or tap away), it locks for a cleaner list — <strong>double-click</strong> a locked field to edit again. Lines you add below are <strong>only</strong> on this stocktake sheet. Use <strong>Copy stocktake JSON</strong> and <strong>Import JSON…</strong> to move this checklist to another device (save or share the JSON as a file where needed).</p>
     <div id="stocktakeBody"></div>
     <div class="modal-section" style="margin-top:20px">Add line (stocktake only)</div>
     <p class="order-add-hint">Does not add to the order list — only to this checklist.</p>
@@ -566,6 +566,7 @@
       <button type="button" class="btn-secondary" onclick="copyStocktakeText()">Copy as text</button>
       <button type="button" class="btn-secondary" onclick="printStocktakeSheet()">Print checklist</button>
       <button type="button" class="btn-secondary" onclick="copyStocktakeJson()">Copy stocktake JSON</button>
+      <button type="button" class="btn-secondary" onclick="importStocktakeJsonFile()">Import JSON…</button>
     </div>
   </div>
 </div>
@@ -973,6 +974,9 @@ function copyStocktakeJson() {
 }
 function printStocktakeSheet() {
   if (window.rivieraStocktakeList) window.rivieraStocktakeList.printSheet();
+}
+function importStocktakeJsonFile() {
+  if (window.rivieraStocktakeList) window.rivieraStocktakeList.importJsonFile();
 }
 
 function syncRivieraOrderListZoneEditButton() {

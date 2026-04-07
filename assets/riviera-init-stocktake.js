@@ -41,6 +41,9 @@
       exportJson: function () {
         return window.KuschiUserRecipes.exportRivieraStocktakeJson();
       },
+      importFromJsonText: function (text) {
+        return window.KuschiUserRecipes.importRivieraStocktakeJson(text);
+      },
     },
     shouldReleaseBodyScroll: function () {
       return (

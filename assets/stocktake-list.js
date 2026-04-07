@@ -198,6 +198,7 @@
    * @param {object} config.orderList - KuschiOrderList instance with buildOrderLinesFlat
    * @param {() => object[]} config.getOrderExtras
    * @param {object} config.storage - load, patchRow, addExtra, removeExtra, clearQuantities, exportJson
+   * @param {function(string):{ok:boolean,message?:string}} [config.storage.importFromJsonText] - optional replace-from-JSON (e.g. cross-device)
    * @param {() => boolean} [config.shouldReleaseBodyScroll]
    * @param {object[]} [config.builtinCatalog] - optional { id, name, zone, category, brand, defaultQty, defaultUom }
    * @param {string} [config.builtinCatalogUrl] - optional same-origin URL to JSON array (lazy on first open)
@@ -771,6 +772,34 @@
       w.print();
     }
 
+    function importJsonFile() {
+      if (!storage || typeof storage.importFromJsonText !== 'function') {
+        alert('Import is not available.');
+        return;
+      }
+      var inp = document.createElement('input');
+      inp.type = 'file';
+      inp.accept = '.json,application/json';
+      inp.onchange = function () {
+        var f = inp.files && inp.files[0];
+        if (!f) return;
+        var reader = new FileReader();
+        reader.onload = function () {
+          var res = storage.importFromJsonText(String(reader.result || ''));
+          if (res && res.ok) {
+            renderBody();
+            alert('Stocktake imported.');
+          } else if (res && res.message === 'Cancelled.') {
+            return;
+          } else {
+            alert((res && res.message) || 'Import failed.');
+          }
+        };
+        reader.readAsText(f);
+      };
+      inp.click();
+    }
+
     function copyJson() {
       var k = Kr();
       var jsonStr;
@@ -795,6 +824,7 @@
       copyText: copyText,
       copyJson: copyJson,
       printSheet: printSheet,
+      importJsonFile: importJsonFile,
     };
   }
 

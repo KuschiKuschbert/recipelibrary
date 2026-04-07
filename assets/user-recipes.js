@@ -806,6 +806,41 @@
     return JSON.stringify(loadRivieraStocktake(), null, 2);
   }
 
+  /** @returns {{ ok: boolean, message?: string }} */
+  function importRivieraStocktakeJson(jsonStr) {
+    var parsed;
+    try {
+      parsed = JSON.parse(String(jsonStr || '').trim());
+    } catch (e) {
+      return { ok: false, message: 'Invalid JSON.' };
+    }
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+      return { ok: false, message: 'Stocktake data must be a JSON object.' };
+    }
+    if (typeof parsed.lines !== 'object' || parsed.lines === null || Array.isArray(parsed.lines)) {
+      return { ok: false, message: 'Missing or invalid "lines" object.' };
+    }
+    if (parsed.extras != null && !Array.isArray(parsed.extras)) {
+      return { ok: false, message: 'Invalid "extras" (must be an array).' };
+    }
+    var cur = loadRivieraStocktake();
+    var hasExisting =
+      Object.keys(cur.lines || {}).length > 0 ||
+      (cur.extras && cur.extras.length > 0) ||
+      !!(cur.lastCountSnapshot && typeof cur.lastCountSnapshot === 'object');
+    if (hasExisting) {
+      if (
+        !confirm(
+          'Replace stocktake on this device with imported data? This overwrites counts, extras, and last snapshot.'
+        )
+      ) {
+        return { ok: false, message: 'Cancelled.' };
+      }
+    }
+    saveRivieraStocktake(parsed);
+    return { ok: true };
+  }
+
   function loadBookStocktake(bookId) {
     var id = String(bookId || '').trim();
     if (!id) return normalizeStocktakeDoc({});
@@ -921,6 +956,43 @@
 
   function exportBookStocktakeJson(bookId) {
     return JSON.stringify(loadBookStocktake(bookId), null, 2);
+  }
+
+  /** @returns {{ ok: boolean, message?: string }} */
+  function importBookStocktakeJson(bookId, jsonStr) {
+    var id = String(bookId || '').trim();
+    if (!id) return { ok: false, message: 'No book id.' };
+    var parsed;
+    try {
+      parsed = JSON.parse(String(jsonStr || '').trim());
+    } catch (e) {
+      return { ok: false, message: 'Invalid JSON.' };
+    }
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+      return { ok: false, message: 'Stocktake data must be a JSON object.' };
+    }
+    if (typeof parsed.lines !== 'object' || parsed.lines === null || Array.isArray(parsed.lines)) {
+      return { ok: false, message: 'Missing or invalid "lines" object.' };
+    }
+    if (parsed.extras != null && !Array.isArray(parsed.extras)) {
+      return { ok: false, message: 'Invalid "extras" (must be an array).' };
+    }
+    var cur = loadBookStocktake(id);
+    var hasExisting =
+      Object.keys(cur.lines || {}).length > 0 ||
+      (cur.extras && cur.extras.length > 0) ||
+      !!(cur.lastCountSnapshot && typeof cur.lastCountSnapshot === 'object');
+    if (hasExisting) {
+      if (
+        !confirm(
+          'Replace stocktake on this device with imported data? This overwrites counts, extras, and last snapshot.'
+        )
+      ) {
+        return { ok: false, message: 'Cancelled.' };
+      }
+    }
+    saveBookStocktake(id, parsed);
+    return { ok: true };
   }
 
   function loadBookRecipes(bookId) {
@@ -1292,6 +1364,7 @@
     removeRivieraStocktakeExtra: removeRivieraStocktakeExtra,
     clearRivieraStocktakeQuantities: clearRivieraStocktakeQuantities,
     exportRivieraStocktakeJson: exportRivieraStocktakeJson,
+    importRivieraStocktakeJson: importRivieraStocktakeJson,
     loadBookStocktake: loadBookStocktake,
     saveBookStocktake: saveBookStocktake,
     patchBookStocktakeRow: patchBookStocktakeRow,
@@ -1299,6 +1372,7 @@
     removeBookStocktakeExtra: removeBookStocktakeExtra,
     clearBookStocktakeQuantities: clearBookStocktakeQuantities,
     exportBookStocktakeJson: exportBookStocktakeJson,
+    importBookStocktakeJson: importBookStocktakeJson,
     addRivieraRecipe: addRivieraRecipe,
     exportKitchen: exportKitchen,
     exportRiviera: exportRiviera,
