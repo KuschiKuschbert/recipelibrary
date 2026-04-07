@@ -1,0 +1,192 @@
+{
+  "#": {
+    "file": "alpha/#.json",
+    "count": 143,
+    "size_kb": 240
+  },
+  "A": {
+    "file": "alpha/A.json",
+    "count": 1509,
+    "size_kb": 3220
+  },
+  "B": {
+    "file": "alpha/B.json",
+    "count": 3393,
+    "size_kb": 8558
+  },
+  "C": {
+    "file": "alpha/C.json",
+    "count": 6085,
+    "size_kb": 15797
+  },
+  "D": {
+    "file": "alpha/D.json",
+    "count": 828,
+    "size_kb": 1946
+  },
+  "E": {
+    "file": "alpha/E.json",
+    "count": 634,
+    "size_kb": 1644
+  },
+  "F": {
+    "file": "alpha/F.json",
+    "count": 1414,
+    "size_kb": 3855
+  },
+  "G": {
+    "file": "alpha/G.json",
+    "count": 1938,
+    "size_kb": 4469
+  },
+  "H": {
+    "file": "alpha/H.json",
+    "count": 2349,
+    "size_kb": 4938
+  },
+  "I": {
+    "file": "alpha/I.json",
+    "count": 562,
+    "size_kb": 1302
+  },
+  "J": {
+    "file": "alpha/J.json",
+    "count": 293,
+    "size_kb": 696
+  },
+  "K": {
+    "file": "alpha/K.json",
+    "count": 490,
+    "size_kb": 1276
+  },
+  "L": {
+    "file": "alpha/L.json",
+    "count": 1188,
+    "size_kb": 3247
+  },
+  "M": {
+    "file": "alpha/M.json",
+    "count": 2120,
+    "size_kb": 5357
+  },
+  "N": {
+    "file": "alpha/N.json",
+    "count": 370,
+    "size_kb": 859
+  },
+  "O": {
+    "file": "alpha/O.json",
+    "count": 882,
+    "size_kb": 2283
+  },
+  "P": {
+    "file": "alpha/P.json",
+    "count": 3357,
+    "size_kb": 8693
+  },
+  "Q": {
+    "file": "alpha/Q.json",
+    "count": 106,
+    "size_kb": 269
+  },
+  "R": {
+    "file": "alpha/R.json",
+    "count": 2050,
+    "size_kb": 4813
+  },
+  "S": {
+    "file": "alpha/S.json",
+    "count": 4942,
+    "size_kb": 12575
+  },
+  "T": {
+    "file": "alpha/T.json",
+    "count": 1840,
+    "size_kb": 4606
+  },
+  "U": {
+    "file": "alpha/U.json",
+    "count": 64,
+    "size_kb": 159
+  },
+  "V": {
+    "file": "alpha/V.json",
+    "count": 721,
+    "size_kb": 2088
+  },
+  "W": {
+    "file": "alpha/W.json",
+    "count": 665,
+    "size_kb": 1546
+  },
+  "X": {
+    "file": "alpha/X.json",
+    "count": 6,
+    "size_kb": 39
+  },
+  "Y": {
+    "file": "alpha/Y.json",
+    "count": 186,
+    "size_kb": 537
+  },
+  "Z": {
+    "file": "alpha/Z.json",
+    "count": 203,
+    "size_kb": 487
+  },
+  "À": {
+    "file": "alpha/À.json",
+    "count": 1,
+    "size_kb": 0
+  },
+  "Á": {
+    "file": "alpha/Á.json",
+    "count": 1,
+    "size_kb": 1
+  },
+  "Ç": {
+    "file": "alpha/Ç.json",
+    "count": 7,
+    "size_kb": 16
+  },
+  "Î": {
+    "file": "alpha/Î.json",
+    "count": 1,
+    "size_kb": 1
+  },
+  "Ð": {
+    "file": "alpha/Ð.json",
+    "count": 1,
+    "size_kb": 1
+  },
+  "Ö": {
+    "file": "alpha/Ö.json",
+    "count": 1,
+    "size_kb": 1
+  },
+  "Đ": {
+    "file": "alpha/Đ.json",
+    "count": 1,
+    "size_kb": 3
+  },
+  "İ": {
+    "file": "alpha/İ.json",
+    "count": 2,
+    "size_kb": 7
+  },
+  "Ş": {
+    "file": "alpha/Ş.json",
+    "count": 8,
+    "size_kb": 25
+  },
+  "Ž": {
+    "file": "alpha/Ž.json",
+    "count": 1,
+    "size_kb": 2
+  },
+  "Ȟ": {
+    "file": "alpha/Ȟ.json",
+    "count": 1,
+    "size_kb": 2
+  }
+}
