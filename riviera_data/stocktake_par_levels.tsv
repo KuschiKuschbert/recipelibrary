@@ -1,0 +1,365 @@
+Freezer	f001	Puff pastry roll	Unknown	roll	1
+Freezer	f002	Puff pastry sheets	Woolworths	sheets	30
+Freezer	f003	Feta pastry	Antonio	box	1
+Freezer	f004	Filo pastry, wrapped	—	tray	0.75
+Freezer	f005	Mini croissants	Sara Lee	box	0.5
+Freezer	f006	Mini brioche slider buns	Laurent	box	0.5
+Freezer	f007	Brioche slider buns	KitKop	box	0.25
+Freezer	f008	Cannoli shells	—	pcs	45
+Freezer	f009	Brownie	—	serves	3
+Freezer	f010	Rum balls	—	serves	5
+Freezer	f011	Madeleine	—	serves	12
+Freezer	f012	GF marble cake shaped pastry	—	pcs	12
+Freezer	f013	Raspberry Choc Gâteau (VG/GF)	Gourmet Delight	pcs	7
+Freezer	f014	Vanilla bean ice cream	EV	tub	1
+Freezer	f015	Birthday cake ice cream	Golden Gaytime	serves	3
+Freezer	f016	Original Twin Pole	Peters	box	1
+Freezer	f017	Mini ice cream cones	—	mL	750
+Freezer	f018	Choc Top ice cream	Bulla	tubs (half)	2
+Freezer	f019	Simply vanilla ice cream	Cold Rock	× 4L tubs	1.8
+Freezer	f020	Vanilla ice cream 2L	Woolworths	tub	1
+Freezer	f021	Pistachio gelati	Artisan Italian	tub	1
+Freezer	f022	Lemon lime cheesecake	—	whole	1
+Freezer	f023	Vanilla cake w/ Biscoff	Woolworths Bakery	cakes	1.25
+Freezer	f024	Apple pie GF	Woolworths	whole	1
+Freezer	f025	GF churros	Wize	pkt	0.5
+Freezer	f026	Lamb stock	—	L	3
+Freezer	f027	Apple filling	—	L	2
+Freezer	f028	Lamb	—	serves	4
+Freezer	f029	Chicken skewers	—	serves	33
+Freezer	f030	Chorizo, cut up	—	× 1L PCs	15
+Freezer	f031	Feta cheese (frozen)	—	× 1L PCs	16
+Freezer	f032	Baba ganoush	—	× 1L PCs	3
+Freezer	f033	Pulled beef	—	× 1L PCs	4
+Freezer	f034	Diced egg	—	× 500mL PCs	5
+Freezer	f035	Olive stuffing	—	× 1L PCs	2
+Freezer	f036	Potato	—	serves	29
+Freezer	f037	Arancini	—	serves	5
+Freezer	f038	Fish	—	serve	1
+Freezer	f039	Popcorn cauliflower	—	serves	3
+Freezer	f040	Olives	—	serves	21
+Freezer	f041	Calamari	—	portions	26
+Freezer	f042	Halloumi	—	portions	6
+Freezer	f043	Meatballs (polpette)	—	portions	59
+Freezer	f044	Two-bone lamb chops	—	serves	8
+Freezer	f045	Tzatziki (frozen)	—	× 1L PCs	3
+Freezer	f046	Pulled lamb in red wine	—	serves	4
+Freezer	f047	Bolognese	—	serves	9
+Freezer	f048	Angus beef sliders, par-cooked	Angel Bay	box	1
+Freezer	f049	Homestyle bacon lasagna	Helen's	box	0.75
+Freezer	f050	Beef party pies	Herbert Adams	pcs	12
+Freezer	f051	King Island beef sausage rolls	Herbert Adams	box	1
+Freezer	f052	Quiche Lorraine	VILI's	pcs	124
+Freezer	f053	Sausage rolls	VILI's	pcs	24
+Freezer	f054	Vegan GF gourmet roll	ReadyBake	kg	4.2
+Freezer	f055	Fish bites GF crumb	Sea Lord	box (350g)	1
+Freezer	f056	Hoki fish bites	Sealord	box	1
+Freezer	f057	Spinach & ricotta patties	—	pcs (530g)	24
+Freezer	f058	Southern Style Tenders	Melco Foods	ctn (5kg)	1
+Freezer	f059	Beef dim sim	Su Hin	box	0.75
+Freezer	f060	Chicken breast GF	Ingham	box	1
+Freezer	f061	Sausage rolls GF/DF	—	pcs	4
+Freezer	f062	Pies	—	pcs	9
+Freezer	f063	Frozen strawberries	Caterer's Choice	kg	1
+Freezer	f064	Carvery beef, cooked	Naturalaz	packs	2
+Freezer	f065	Lamb leg roast, boneless	Woolworths	pcs (~1.37kg ea)	8
+Freezer	f066	Cooked Aussie tiger prawns	Tassal	box	1
+Freezer	f067	Baby octopus, cleaned	—	kg	19
+Freezer	f068	Wild caught reef fish	Seacrest	kg	2.5
+Freezer	f069	Squid strips, pineapple cut	Seafrost	kg	6.5
+Freezer	f070	Greek-style lamb meat	Specialty Foods	kg	2
+Freezer	f071	Pork belly	SunPork/Barker Creek	serves	3
+Freezer	f072	Pork belly (frozen)	Naturalaz	pcs	2
+Freezer	f073	Beef cheeks (frozen)	Jeffries	packs	2
+Freezer	f074	White bread toast	—	baker's trays	2
+Freezer	f075	Pizza bread	Alfina's	portions	10
+Freezer	f076	GF soft white half loaf	Tip Top	loaf	1
+Freezer	f077	Turkish bread GF	Woolworths	loaves	4
+Freezer	f078	GF brioche burger buns	Woolworths	pcs	2
+Freezer	f079	GF white burger buns	Woolworths	packs of 4	2
+Freezer	f080	GF garlic herb focaccia	Senza	pack	1
+Freezer	f081	GF focaccia	Community Co	pack (3pc)	1
+Freezer	f082	GF high-fibre white rolls	Lifestyle Bakery	pack	1
+Freezer	f083	GF soft white bread	Woolworths	loaf	0.5
+Freezer	f084	GF English muffins	Coles	pcs	2
+Freezer	f085	GF ham & cheese toasties	—	pcs	5
+Freezer	f086	GF white bread (wheat/dairy free)	Coles	loaf	1
+Freezer	f087	GF pizza bases 12″	Letizza	box	1
+Freezer	f088	Greek pitta bread	Golden Top	packs	4
+Freezer	f089	GF pita breads	BFree	packs	1.5
+Freezer	f090	GF all-butter croissants	Woolworths	pack of 2	1
+Freezer	f091	Flour tortillas 6″	—	packs (12ea)	3
+Freezer	f092	Bread rolls	—	bag	1
+Freezer	f093	Roasted sweet potatoes	Charworks	boxes	1.5
+Freezer	f094	Chopped onion	Edgell	box (~5kg)	1
+Freezer	f095	Frozen egg yolks	Sunny Queen	box	1
+Cold Room	c001	Coffee chocolate cream	—	L	1
+Cold Room	c002	Natural Greek yogurt	Woolworths	kg	2
+Cold Room	c003	Greek style yogurt	Kalos	kg	1.8
+Cold Room	c004	Feta cheese block	Yarde Farm	× 2kg	2
+Cold Room	c005	Thickened cream 600mL	Woolworths	bottles	3
+Cold Room	c006	Thickened cream 600mL	Black & Gold	bottle	1
+Cold Room	c007	Halloumi	—	pcs	3
+Cold Room	c008	Tasty cheese slices	Woolworths	g	500
+Cold Room	c009	Extra tasty aged cheddar	Mainland	g	250
+Cold Room	c010	Nuttelex Original	Nuttelex	g	500
+Cold Room	c011	Mozzarella shredded	Hillsview	g	700
+Cold Room	c012	Natural sliced cheddar	Dairyworks	pack	0.5
+Cold Room	c013	Mozzarella cheese	Woolworths	g	350
+Cold Room	c014	Parmesan cheese	Woolworths	g	250
+Cold Room	c015	Double cream brie	Castello	serves	4
+Cold Room	c016	Mascarpone 250g	Woolworths	tub	1
+Cold Room	c017	Mascarpone 250g	La Casa del Formaggio	× 250g	4
+Cold Room	c018	Mascarpone 1kg	Valesco Fresh	tub (half)	1
+Cold Room	c019	Mascarpone 250g	Tatua	tub	1
+Cold Room	c020	Serrano ham	Redondo Iglesias	pkg	0.5
+Cold Room	c021	Prosciutto sliced	Don	g	500
+Cold Room	c022	Australian prosciutto	Mondelli	× 80g	2
+Cold Room	c023	Prosciutto extra	—	packets	2
+Cold Room	c024	Spanish chorizo	Montecatini	packets	4
+Cold Room	c025	Sun-dried tomato ham	Woolworths	g	500
+Cold Room	c026	Australian leg ham	Mondelli	× 100g	2
+Cold Room	c027	Eggs	Woolworths	pcs	70
+Cold Room	c028	Cucumber	—	pcs	2
+Cold Room	c029	Sourdough bread	—	loaf	1
+Cold Room	c030	Black grapes	—	bag (~500g)	1
+Cold Room	c031	Red grapes	—	bags	4
+Cold Room	c032	Lemons	—	kg	1.5
+Cold Room	c033	Oranges	—	kg	1.5
+Cold Room	c034	Lime	—	kg	1.2
+Cold Room	c035	Tomatoes	—	kg	1.5
+Cold Room	c036	Red onions	—	g	500
+Cold Room	c037	Brown onions	—	kg	1.5
+Cold Room	c038	Garlic	—	kg	1.5
+Cold Room	c039	Confit garlic	—	kg	1
+Cold Room	c040	Lemon zest, marinated	—	mL	100
+Cold Room	c041	Lemon zest extra	—	g	50
+Cold Room	c042	Thyme (loose)	—	mL	250
+Cold Room	c043	Pumpkin seeds	—	mL	600
+Cold Room	c044	Mint	Doblo	bunches	5
+Cold Room	c045	Spring onion	Doblo	bunches	2
+Cold Room	c046	Thyme	Doblo	bags	5
+Cold Room	c047	Fresh dill	Doblo	bags	2
+Cold Room	c048	Flat leaf parsley	Doblo	bags	2
+Cold Room	c049	Curly parsley	Doblo	bags	2
+Cold Room	c050	Fresh oregano	Doblo	bags	2
+Cold Room	c051	Bean sprouts	—	bunches/pkts	3
+Cold Room	c052	Lime leaves	—	g	20
+Cold Room	c053	Rocket, baby leaf	Woolworths	× 120g packs	5
+Cold Room	c054	Spicy capsicum & feta dip	Casa di Mare	kg	1
+Cold Room	c055	Jalapeños	Riviana	large tin	1
+Cold Room	c056	Tomato paste	—	L	2
+Cold Room	c057	Crushed garlic	—	mL	500
+Cold Room	c058	Romesco	House	L	1
+Cold Room	c059	Hot honey	—	L	1.5
+Cold Room	c060	Aioli	—	L	1
+Cold Room	c061	Tzatziki	—	L	2.5
+Cold Room	c062	House emulsion	House	L	6
+Cold Room	c063	Orange cinnamon honey	—	L	2
+Cold Room	c064	Couscous	—	L	1
+Cold Room	c065	Sliced shallots	—	L (~150g)	0.5
+Cold Room	c066	Whole egg mayonnaise	S&W	g	440
+Cold Room	c067	Traditional mayo GF	Woolworths	g	470
+Cold Room	c068	Premium mayonnaise	Bega	kg	2
+Cold Room	c069	Marinated olives bucket	Sandhurst	bucket (~5kg)	1
+Cold Room	c070	Pitted green olives	Sandhurst	× 350g jars	2
+Cold Room	c071	Marinated olives	—	× 1L PCs	2
+Cold Room	c072	Peppercorns	Sandhurst	g	120
+Cold Room	c073	Chargrilled eggplant	Casa di Mare	kg	1.9
+Cold Room	c074	Baby capers	Casa di Mare	× 700g	2
+Cold Room	c075	Caramelized onions	Beerenberg	kg	1
+Cold Room	c076	Chicken stock concentrate	Knorr Pro	kg	1.25
+Cold Room	c077	Caramel syrup	Cottee's	L	3
+Cold Room	c078	Strawberry syrup	Cottee's	L	3
+Cold Room	c079	Chocolate syrup	Cottee's	L	1.5
+Cold Room	c080	Chocolate topping	Woolworths Essentials	mL	600
+Cold Room	c081	Lime juice	Woolworths	L	2
+Cold Room	c082	Lemon juice	Lovely Lemon	mL	500
+Cold Room	c083	Orange juice	Daily Juice	L	2
+Cold Room	c084	Basil purée	New Fresh Farmers	g	160
+Cold Room	c085	Worcestershire sauce	Woolworths	mL	250
+Cold Room	c086	Worcestershire sauce	Sunshine	L	6
+Cold Room	c087	Crispy chili oil	—	g	210
+Cold Room	c088	Balsamic glaze	Coles	g	100
+Cold Room	c089	Balsamic glaze	Woolworths	mL	100
+Cold Room	c090	Sweet mustard pickles	333	g	250
+Cold Room	c091	Dijon mustard vinaigrette	Praise	mL	250
+Cold Room	c092	Honey mustard dressing	Virgin Wade	mL	100
+Cold Room	c093	Seafood sauce	Praise	g	100
+Cold Room	c094	Chipotle aioli	Praise	mL	125
+Cold Room	c095	Fish sauce	Squid Brand	mL (3/4 bottle)	375
+Cold Room	c096	Tabasco	—	mL (3/4 bottle)	112
+Cold Room	c097	Soy milk	So Good	mL	750
+Cold Room	c098	Soy milk	Vitasoy	mL	750
+Cold Room	c099	Light white milk	Dairy Farmers	L	1
+Cold Room	c100	Lemon juice	Caterer's Choice	L (half)	1
+Cold Room	c101	Honey mustard sauce	French Maid	× 2L bottles	2.5
+Cold Room	c102	Hickory smoked BBQ sauce	Sunshine	mL	500
+Cold Room	c103	Chipotle BBQ sauce	Praise	kg	2
+Cold Room	c104	Peri-peri sauce	Praise	× 1.95kg	2.5
+Cold Room	c105	Burger sauce	Wombat Valley	g	500
+Cold Room	c106	Aioli	Jeffries	× 1L bottles	2
+Cold Room	c107	Mango habanero sauce	French Maid	mL	750
+Cold Room	c108	Roasted truffle mayo	Virgin Wade	bottle	1
+Cold Room	c109	Mild chunky salsa	Edlyn	kg	1
+Cold Room	c110	Mild chunky tomato salsa	Woolworths	g	300
+Cold Room	c111	Balsamic dressing	Bega	kg	2.6
+Cold Room	c112	Seeded mustard	MasterFoods	kg	2.5
+Cold Room	c113	Dijon mustard	MasterFoods	kg	1.5
+Cold Room	c114	Tomato sauce	Caterer's Choice	L	3
+Cold Room	c115	BBQ sauce	Caterer's Choice	L	3
+Cold Room	c116	Kewpie mayo	Kewpie	× ~1kg bottles	7
+Cold Room	c117	Portion honey	—	box	1
+Cold Room	c118	Strawberry & rhubarb jam	St. Dalfour	jar	1
+Cold Room	c119	Fig royale jam	St. Dalfour	jar	1
+Cold Room	c120	Cherry jam	Baraka's	g	455
+Cold Room	c121	Raspberry conserve	Bonne Maman	g (half)	185
+Cold Room	c122	Jellied cranberry sauce	Ocean Spray	g	275
+Cold Room	c123	Cranberry sauce	Woolworths	× 275g	2
+Cold Room	c124	Maple syrup	Sunshine	L	2
+Cold Room	c125	Maple syrup	Queen	mL	750
+Cold Room	c126	Maple flavoured syrup	Woolworths	mL	300
+Cold Room	c127	Maple flavoured syrup	Edlyn	L	2
+Cold Room	c128	White wine cooking wine	Caterer's Choice	L	10
+Cold Room	c129	Red wine cooking wine	Caterer's Choice	L	8
+Cold Room	c130	Old Tawny port	De Bortoli	L	4
+Cold Room	c131	EVOO	Sandhurst	L	8
+Cold Room	c132	White wine vinegar	Sandhurst	L	2
+Cold Room	c133	Red wine vinegar	Sandhurst	L	6
+Cold Room	c134	White wine vinegar	Woolworths	mL	250
+Cold Room	c135	White vinegar	Woolworths Essentials	L	1
+Cold Room	c136	Apple cider vinegar	Cornwell's	mL	500
+Cold Room	c137	Lemon infused EVOO	Cobram	× 250mL	3
+Cold Room	c138	Truffle infused oil	Cobram	mL	200
+Cold Room	c139	Cooking sake	—	mL	150
+Cold Room	c140	Pure sesame oil	Mr Chen's	mL	250
+Cold Room	c141	Zesty lemon & herb sauce	MasterFoods	mL	250
+Cold Room	c142	Balsamic roasted garlic	Praise	mL	250
+Cold Room	c143	Moro Italian glaze	Moro	mL	100
+Cold Room	c144	Italian glaze	Knorr	g	400
+Dry Store	d001	Semolina	Caterer's Choice	kg	1
+Dry Store	d002	Fettuccine	La Molisana	g	500
+Dry Store	d003	Basmati rice	SunRice	kg	1
+Dry Store	d004	Arborio rice	Riviana	kg	5
+Dry Store	d005	Italian passata	Coles	kg	1.4
+Dry Store	d006	Sugo per pasta	Buitoni	kg	3
+Dry Store	d007	Roasted peppers	Casa di Mare	kg	4.1
+Dry Store	d008	Chickpea flour	McKenzie's	g	660
+Dry Store	d009	Rice flour, coarse	Caterer's Choice	kg	4
+Dry Store	d010	Self-raising flour	Caterer's Choice	kg	4
+Dry Store	d011	Plain flour	Caterer's Choice	kg	10
+Dry Store	d012	Crème Pâtissière	Nestlé	bucket (<half)	1
+Dry Store	d013	Vanilla mousse mix	Dolcello Nestlé	g (half)	450
+Dry Store	d014	Frying shortening	Red Band	kg	12.5
+Dry Store	d015	Moroccan seasoning	MasterFoods	kg	1.5
+Dry Store	d016	Corn flour	—	kg	3.9
+Dry Store	d017	Rice flour (fine)	—	kg	2.7
+Dry Store	d018	Breadcrumbs	—	g	600
+Dry Store	d019	Calamari flour mix	House	g	275
+Dry Store	d020	Tapioca starch	—	kg	1.65
+Dry Store	d021	Spelt flour	—	g	800
+Dry Store	d022	GF pizza flour	—	g	250
+Dry Store	d023	GF normal flour	—	kg	1
+Dry Store	d024	Dried potatoes (professional)	—	kg	2
+Dry Store	d025	Freeze-dried raspberries	—	g	25
+Dry Store	d026	White chocolate powder	—	g	275
+Dry Store	d027	Coconut milk powder	—	kg	1
+Dry Store	d028	Lemon pepper	—	kg	1
+Dry Store	d029	Oregano (dried)	—	g	600
+Dry Store	d030	Mixed herbs	—	g	375
+Dry Store	d031	Parsley (dried)	—	g	300
+Dry Store	d032	Fine cracked pepper	MasterFoods?	g	120
+Dry Store	d033	Turmeric	Krio	g	400
+Dry Store	d034	Ground coriander	Krio	g	70
+Dry Store	d035	Thyme (dried)	Krio	g	35
+Dry Store	d036	Dill (dried)	—	g	25
+Dry Store	d037	Black sesame seeds	Krio	g	325
+Dry Store	d038	Dukkah mix	Krio	g	250
+Dry Store	d039	Mild curry powder	Clive's	g	400
+Dry Store	d040	Cracked black pepper	—	g	500
+Dry Store	d041	Ground black pepper	—	kg	1
+Dry Store	d042	MSG	—	g	350
+Dry Store	d043	Garlic powder	Trump	g	550
+Dry Store	d044	Chicken salt	—	kg	2.1
+Dry Store	d045	Table salt	—	kg	6
+Dry Store	d046	Sugar pearls	—	g	425
+Dry Store	d047	Pitted dates	—	kg	1.3
+Dry Store	d048	Desiccated coconut	—	kg	1.7
+Dry Store	d049	Custard powder	—	g	275
+Dry Store	d050	Gelatine powder	—	g	325
+Dry Store	d051	Baking powder	—	g	450
+Dry Store	d052	Vanilla sugar	—	g	400
+Dry Store	d053	Walnuts	—	g	50
+Dry Store	d054	Pistachios	—	g	240
+Dry Store	d055	Toasted pepitas	—	g	65
+Dry Store	d056	Dehydrated oranges	—	g	240
+Dry Store	d057	Pistachios, shell on	—	g	280
+Dry Store	d058	Dehydrated lemons	—	g	18
+Dry Store	d059	Shredded coconut	—	g	450
+Dry Store	d060	Ground cinnamon	—	g	560
+Dry Store	d061	Raw sugar	—	kg	1.06
+Dry Store	d062	Almond sticks	—	g	450
+Dry Store	d063	White sesame seeds	—	g	780
+Dry Store	d064	Icing sugar	—	g	280
+Dry Store	d065	Dry yeast	—	g	250
+Dry Store	d066	Coffee sugar	—	g	170
+Dry Store	d067	Brown sugar	—	g	140
+Dry Store	d068	Caster sugar	—	kg	3.1
+Dry Store	d069	Persian fairy floss, pistachio	Pariya	g	200
+Dry Store	d070	Rose petals	Herbie Spices	g	5
+Dry Store	d071	Crystallized ginger	Buderim	g	200
+Dry Store	d072	Finest cranberry	Angas Park	g	40
+Dry Store	d073	French onion soup	Woolworths	× 40g	3
+Dry Store	d074	Maggi jus beef sauce mix	Maggi	kg	1.8
+Dry Store	d075	Maggi vegetable sauce powder	Maggi	kg	1.5
+Dry Store	d076	Maggi rich gravy mix	Maggi	kg	2
+Dry Store	d077	Maggi rich gravy mix GF	Maggi	kg	3.5
+Dry Store	d078	Rosemary leaves	Hoyts	g	100
+Dry Store	d079	Bay leaves	Hoyts	g	15
+Dry Store	d080	Smoky paprika	Trump	g	500
+Dry Store	d081	Ground cumin	—	kg	2
+Dry Store	d082	Sweet paprika	—	kg	1
+Dry Store	d083	Traditional curry powder	Keen's	g	360
+Dry Store	d084	Coriander leaves (dried)	MasterFoods	g	5
+Dry Store	d085	Nutmeg, ground	MasterFoods	g	30
+Dry Store	d086	Ginger, ground	Woolworths	g	25
+Dry Store	d087	Nutmeg, ground	Woolworths	g	30
+Dry Store	d088	Queen Unicorn Confetti	Queen	g	110
+Dry Store	d089	Garlic herb salt blend	MasterFoods	g	31
+Dry Store	d090	Keen's mustard powder	Keen's	× 50g	3
+Dry Store	d091	Cumin, ground	Woolworths	g	30
+Dry Store	d092	Cloves, ground	Woolworths	g	30
+Dry Store	d093	French onion soup	Woolworths Essentials	g	40
+Dry Store	d094	Onion powder	—	g	38
+Dry Store	d095	Ground coriander	MasterFoods	g	30
+Dry Store	d096	Vanilla bean pods	Queen	pods	5
+Dry Store	d097	Gourmet veggie stock powder	Vegeta	g	100
+Dry Store	d098	Whole black peppercorns	McKenzie's	g	200
+Dry Store	d099	Natural sea salt	Saxa	g	15
+Dry Store	d100	Black peppercorn grinder	Woolworths	g	50
+Dry Store	d101	Agar agar	Lotus	g	75
+Dry Store	d102	Cocoa powder	Nestlé	g	95
+Dry Store	d103	Plaistowe cocoa powder	Nestlé	g	180
+Dry Store	d104	Freeze dried coffee	Woolworths	g	50
+Dry Store	d105	Freeze dried coffee (combined)	Woolworths	g	100
+Dry Store	d106	Pistachio spread 500g	Pisti	× 500g jars	1.5
+Dry Store	d107	Hazelnut cream spread	Pisti	g	300
+Dry Store	d108	Pistachio spread 180g	Pisti	× 180g	2
+Dry Store	d109	Pistachio spread 600g	—	× 600g	2
+Dry Store	d110	Nutella	Nutella	kg	1
+Dry Store	d111	Pure honey	Super Bee	kg	10
+Dry Store	d112	Apricot & macadamia crackers	OB Finest	packs	2
+Dry Store	d113	GF date & almond crackers	OB Finest	packs	2
+Dry Store	d114	Fig & cranberry crackers	OB Finest	packs	2
+Dry Store	d115	Fig & almond crackers	OB Finest	packs	2
+Dry Store	d116	GF fig & pistachio crackers	OB Finest	pack	1
+Dry Store	d117	Original wafer crackers	OB Finest	packs	1.5
+Dry Store	d118	Dried apricots	—	g	500
+Dry Store	d119	Chilli lime soy crisps	BlueWorks	× 400g	2
+Dry Store	d120	Original crisps	Smith's	g	170
+Dry Store	d121	Sea salt & sesame crackers	Valley Produce Co	g	130
+Dry Store	d122	Cracked pepper water crackers	Captain's Table	g	125
+Dry Store	d123	Lindt Easter hen choc eggs	Lindt	pc	1
+Dry Store	d124	Cadbury Dairy Milk	Cadbury	× 100g bars	8
+Dry Store	d125	Vegemite	Vegemite	g	100
+Dry Store	d126	Pomegranate juice	Bickford's	× 1L	2
