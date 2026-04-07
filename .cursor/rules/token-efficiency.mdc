@@ -1,0 +1,33 @@
+---
+description: Reduce LLM/API context usage — discovery, large files, tools, replies
+alwaysApply: true
+---
+
+# Token efficiency (LLM context)
+
+**"Token" here means LLM/API context usage**, not CSS design tokens (`--bg`, etc.) or search/index tokens in static data.
+
+## Discovery before read
+
+- Prefer targeted search (`grep`/rg-style) with **path + pattern** to locate symbols; use **read with line ranges** (offset/limit) unless the file is known small.
+- Treat **generated or bulk data** (e.g. `combined_data/*.json`, `claude_index*`, large `recipe_detail` shards, multi‑MB flavour DB JSON) as **do not read wholesale** unless the task requires it. Use `head`, counts, small scripts, or a single key/section—not full file dumps.
+
+## Edits on large files
+
+- Prefer **small anchored patches** over re-reading or pasting entire megabyte sources.
+- For large structural edits, use **terminal/sed/Python with explicit line ranges** instead of loading the whole file into the conversation twice.
+
+## Chat and attachments
+
+- Do not paste multi‑thousand-line dumps or full JSON into messages; reference **paths and line ranges** (code citations over prose for code).
+- Avoid attaching **entire plans plus entire data files** in one prompt; point to repo paths instead.
+
+## Tool discipline
+
+- Batch independent reads; avoid **duplicate** reads of the same large file in one turn.
+- Summarize directory listings and search results; do not quote exhaustive huge outputs (e.g. dependency trees at scale).
+- Use **narrow** semantic search queries and **directory scopes** instead of vague repo-wide questions when possible.
+
+## Responses
+
+- Keep final answers **proportional** to task complexity; do not repeat the full prior plan or full code when a short summary plus citations suffices.

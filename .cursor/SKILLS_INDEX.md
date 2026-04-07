@@ -14,3 +14,4 @@
 | Git workflow | `.cursor/rules/git-workflow.mdc` |
 | Theme + tablet | `.cursor/rules/theme.mdc` |
 | Metric units | `.cursor/rules/metric-units.mdc` |
+| Token efficiency (LLM context) | `.cursor/rules/token-efficiency.mdc` |
