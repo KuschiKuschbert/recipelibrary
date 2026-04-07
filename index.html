@@ -714,6 +714,33 @@ function siteBaseUrl() {
   return stripped ? origin + stripped : origin;
 }
 
+/** Max parallel alpha_catalog fetches — caps connection/memory churn on slow devices (HTTP/2 still multiplexes). */
+const CATALOG_FETCH_CONCURRENCY = 10;
+
+/**
+ * Run async mapper over items with at most `limit` in flight; results match input order.
+ * Failed items become undefined (same spirit as allSettled + skip).
+ */
+async function mapWithConcurrency(items, limit, mapper) {
+  if (!items.length) return [];
+  const ret = new Array(items.length);
+  let next = 0;
+  async function worker() {
+    while (true) {
+      const i = next++;
+      if (i >= items.length) break;
+      try {
+        ret[i] = await mapper(items[i], i);
+      } catch (_) {
+        ret[i] = undefined;
+      }
+    }
+  }
+  const n = Math.min(Math.max(1, limit), items.length);
+  await Promise.all(Array.from({ length: n }, () => worker()));
+  return ret;
+}
+
 /** Letter shards: compact rows in alpha_catalog/ (built by scripts/rebuild_catalog_from_detail.py). */
 async function loadData() {
   const base = siteBaseUrl();
@@ -726,22 +753,17 @@ async function loadData() {
   const manifest = await manResp.json();
   const files = Array.isArray(manifest.files) ? manifest.files : [];
 
-  const fetches = await Promise.allSettled(
-    files.map(f =>
-      fetch(`${base}/alpha_catalog/${encodeURIComponent(f)}`)
-        .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-        .then(data => {
-          loaded++;
-          if (loadingText) loadingText.textContent = `Loading recipes... (${loaded}/${files.length} files)`;
-          return data;
-        })
-    )
-  );
+  const parts = await mapWithConcurrency(files, CATALOG_FETCH_CONCURRENCY, async f => {
+    const r = await fetch(`${base}/alpha_catalog/${encodeURIComponent(f)}`);
+    if (!r.ok) throw new Error(String(r.status));
+    const data = await r.json();
+    loaded++;
+    if (loadingText) loadingText.textContent = `Loading recipes... (${loaded}/${files.length} files)`;
+    return data;
+  });
 
-  for (const f of fetches) {
-    if (f.status === 'fulfilled' && f.value && f.value.recipes) {
-      all.push(...f.value.recipes);
-    }
+  for (const data of parts) {
+    if (data && data.recipes) all.push(...data.recipes);
   }
 
   // Deduplicate by id
@@ -757,19 +779,27 @@ async function loadData() {
 function toArr(v) { return Array.isArray(v) ? v : []; }
 
 /** One-time normalised search string per recipe — avoids rebuilding on every filter pass (~38k rows). */
-function buildRecipeSearchIndex(recipes) {
-  for (let i = 0; i < recipes.length; i++) {
-    const r = recipes[i];
-    r._searchHay = [
-      r.name || '',
-      r.cui || '',
-      ...toArr(r.protein),
-      ...toArr(r.tags),
-      ...toArr(r.ing),
-      r.cat || '',
-    ]
-      .join(' ')
-      .toLowerCase();
+const SEARCH_HAY_CHUNK = 4000;
+
+async function buildRecipeSearchIndexAsync(recipes) {
+  for (let start = 0; start < recipes.length; start += SEARCH_HAY_CHUNK) {
+    const end = Math.min(start + SEARCH_HAY_CHUNK, recipes.length);
+    for (let i = start; i < end; i++) {
+      const r = recipes[i];
+      r._searchHay = [
+        r.name || '',
+        r.cui || '',
+        ...toArr(r.protein),
+        ...toArr(r.tags),
+        ...toArr(r.ing),
+        r.cat || '',
+      ]
+        .join(' ')
+        .toLowerCase();
+    }
+    if (end < recipes.length) {
+      await new Promise(resolve => requestAnimationFrame(resolve));
+    }
   }
 }
 
@@ -1103,20 +1133,30 @@ function detailSubshardZeroPad() {
   return Math.max(2, String(DETAIL_BUCKET_COUNT - 1).length);
 }
 
-function buildRecipeIndex() {
-  for (const r of allRecipes) {
-    let letter = 'Z';
-    if (r.id && String(r.id).startsWith('user-')) {
-      letter = (window.KuschiUserRecipes && KuschiUserRecipes.USER_LETTER) || '_USER';
-      recipeIndex[r.id] = { letter, name: r.name };
-    } else if (r._detailLetter && /^[A-Z]$/.test(r._detailLetter)) {
-      letter = r._detailLetter;
-      recipeIndex[r.id] = { letter, bucket: detailBucketFromId(r.id), name: r.name };
-    } else {
-      for (const c of (r.name || '')) {
-        if (/[a-zA-Z]/.test(c)) { letter = c.toUpperCase(); break; }
+const RECIPE_INDEX_CHUNK = 5000;
+
+async function buildRecipeIndexAsync() {
+  for (const k of Object.keys(recipeIndex)) delete recipeIndex[k];
+  for (let start = 0; start < allRecipes.length; start += RECIPE_INDEX_CHUNK) {
+    const end = Math.min(start + RECIPE_INDEX_CHUNK, allRecipes.length);
+    for (let i = start; i < end; i++) {
+      const r = allRecipes[i];
+      let letter = 'Z';
+      if (r.id && String(r.id).startsWith('user-')) {
+        letter = (window.KuschiUserRecipes && KuschiUserRecipes.USER_LETTER) || '_USER';
+        recipeIndex[r.id] = { letter, name: r.name };
+      } else if (r._detailLetter && /^[A-Z]$/.test(r._detailLetter)) {
+        letter = r._detailLetter;
+        recipeIndex[r.id] = { letter, bucket: detailBucketFromId(r.id), name: r.name };
+      } else {
+        for (const c of (r.name || '')) {
+          if (/[a-zA-Z]/.test(c)) { letter = c.toUpperCase(); break; }
+        }
+        recipeIndex[r.id] = { letter, bucket: detailBucketFromId(r.id), name: r.name };
       }
-      recipeIndex[r.id] = { letter, bucket: detailBucketFromId(r.id), name: r.name };
+    }
+    if (end < allRecipes.length) {
+      await new Promise(resolve => requestAnimationFrame(resolve));
     }
   }
 }
@@ -2120,14 +2160,14 @@ attachContentRecipePrefetch();
       const userRows = KuschiUserRecipes.loadKitchen().map(KuschiUserRecipes.toIndexRow);
       allRecipes = [...userRows, ...allRecipes];
     }
-    buildRecipeSearchIndex(allRecipes);
+    await buildRecipeSearchIndexAsync(allRecipes);
     filterMemo.clear();
     levMemo.clear();
     document.getElementById('loading').style.display = 'none';
     document.getElementById('footer').style.display = 'block';
     document.getElementById('totalCount').textContent = allRecipes.length.toLocaleString();
     buildFilters();
-    buildRecipeIndex();
+    await buildRecipeIndexAsync();
     filtered = [...allRecipes];
     applyFilters();
     tryOpenFromQuery();

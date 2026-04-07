@@ -134,22 +134,54 @@
     return picked.length ? picked : SHARDS.slice();
   }
 
+  var PANTRY_FETCH_CONCURRENCY = 10;
+
+  /** Same pattern as index.html — bounded parallelism for alpha_catalog fetches. */
+  function mapWithConcurrency(items, limit, mapper) {
+    var ret = new Array(items.length);
+    var next = 0;
+    function worker() {
+      return new Promise(function (resolve) {
+        function step() {
+          var i = next++;
+          if (i >= items.length) {
+            resolve();
+            return;
+          }
+          Promise.resolve(mapper(items[i], i))
+            .then(function (v) {
+              ret[i] = v;
+              step();
+            })
+            .catch(function () {
+              ret[i] = [];
+              step();
+            });
+        }
+        step();
+      });
+    }
+    var n = items.length ? Math.min(limit, items.length) : 0;
+    if (!n) return Promise.resolve(ret);
+    var workers = [];
+    for (var w = 0; w < n; w++) workers.push(worker());
+    return Promise.all(workers).then(function () { return ret; });
+  }
+
   function fetchShardRecipes(files) {
     var base = siteBaseUrl();
-    return Promise.all(
-      files.map(function (f) {
-        if (shardRecipeCache[f]) return Promise.resolve(shardRecipeCache[f]);
-        return fetch(base + '/alpha_catalog/' + encodeURIComponent(f))
-          .then(function (r) {
-            return r.ok ? r.json() : { recipes: [] };
-          })
-          .then(function (p) {
-            var rec = (p && p.recipes) || [];
-            shardRecipeCache[f] = rec;
-            return rec;
-          });
-      })
-    ).then(function (parts) {
+    return mapWithConcurrency(files, PANTRY_FETCH_CONCURRENCY, function (f) {
+      if (shardRecipeCache[f]) return Promise.resolve(shardRecipeCache[f]);
+      return fetch(base + '/alpha_catalog/' + encodeURIComponent(f))
+        .then(function (r) {
+          return r.ok ? r.json() : { recipes: [] };
+        })
+        .then(function (p) {
+          var rec = (p && p.recipes) || [];
+          shardRecipeCache[f] = rec;
+          return rec;
+        });
+    }).then(function (parts) {
       var all = [];
       for (var i = 0; i < parts.length; i++) {
         all = all.concat(parts[i]);

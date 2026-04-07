@@ -34,6 +34,7 @@ Personal recipe library hosted on **GitHub Pages**: searchable catalog, metric-o
 
 ### Main index performance (optional dev flags)
 
+- **`alpha_catalog`** shards load with **bounded concurrency** (10 parallel fetches on [index.html](index.html) and [pantry.html](pantry.html)) so weak devices are not hit with dozens of simultaneous responses. Building **`_searchHay`** and the **`recipeIndex`** map is **chunked** with `requestAnimationFrame` yields so the main thread can still paint during load.
 - Search precomputes a normalised **`_searchHay`** string per recipe, uses a small **filter-result LRU** (8 entries), and caps **fuzzy** Levenshtein to the first 32 eligible words per recipe with a bounded Levenshtein memo. Full-text libraries (MiniSearch, FlexSearch, …) are intentionally not bundled unless profiling shows a need.
 - **`localStorage.kuschiShowFilterMs=1`** — show filter duration next to the results count.
 - **`localStorage.kuschiDebugPerf=1`** — log each filter pass to the browser console.
