@@ -719,33 +719,47 @@
     var params = typeof URLSearchParams !== 'undefined' ? new URLSearchParams(window.location.search) : null;
     var deepQ = params && params.get('q') ? String(params.get('q')).trim() : '';
     var openToolkit = params && params.get('toolkit') === '1';
-    ensureLoaded()
-      .then(function () {
-        var el = document.getElementById('flavorLoadStatus');
-        if (el) el.textContent = unified.length + ' unified rows · Thesaurus ' + wheel.length + ' · Links ' + pairings.length;
-        ensureFlavourKb().then(function (kb) {
-          var st = document.getElementById('flavorLoadStatus');
-          if (st && kb && kb.stats) {
-            st.textContent +=
-              ' · Toolkit v' + (kb.stats.version || '1.1') + ' (' + (kb.stats.total_ingredients || '') + ' ingredients)';
+    var urgent = !!(deepQ || openToolkit);
+    function startLoad() {
+      ensureLoaded()
+        .then(function () {
+          var el = document.getElementById('flavorLoadStatus');
+          if (el) el.textContent = unified.length + ' unified rows · Thesaurus ' + wheel.length + ' · Links ' + pairings.length;
+          ensureFlavourKb().then(function (kb) {
+            var st = document.getElementById('flavorLoadStatus');
+            if (st && kb && kb.stats) {
+              st.textContent +=
+                ' · Toolkit v' + (kb.stats.version || '1.1') + ' (' + (kb.stats.total_ingredients || '') + ' ingredients)';
+            }
+          });
+          var inp = document.getElementById('flavorSearch');
+          if (deepQ && inp) inp.value = deepQ;
+          runSearch();
+          if (deepQ) {
+            var rows = findRows(deepQ);
+            if (rows.length) renderDetail(rows[0]);
           }
+          if (openToolkit) {
+            var tt = document.querySelector('[data-flavor-tab="toolkit"]');
+            if (tt) tt.click();
+          }
+        })
+        .catch(function () {
+          var el = document.getElementById('flavorLoadStatus');
+          if (el) el.textContent = 'Could not load combined_data (run scripts/run_all_extractions.sh).';
         });
-        var inp = document.getElementById('flavorSearch');
-        if (deepQ && inp) inp.value = deepQ;
-        runSearch();
-        if (deepQ) {
-          var rows = findRows(deepQ);
-          if (rows.length) renderDetail(rows[0]);
-        }
-        if (openToolkit) {
-          var tt = document.querySelector('[data-flavor-tab="toolkit"]');
-          if (tt) tt.click();
-        }
-      })
-      .catch(function () {
-        var el = document.getElementById('flavorLoadStatus');
-        if (el) el.textContent = 'Could not load combined_data (run scripts/run_all_extractions.sh).';
-      });
+    }
+    if (!urgent) {
+      var st0 = document.getElementById('flavorLoadStatus');
+      if (st0) st0.textContent = 'Loading…';
+      if (typeof requestIdleCallback === 'function') {
+        requestIdleCallback(startLoad, { timeout: 2200 });
+      } else {
+        setTimeout(startLoad, 60);
+      }
+    } else {
+      startLoad();
+    }
     initTabs();
     var inp = document.getElementById('flavorSearch');
     if (inp) {

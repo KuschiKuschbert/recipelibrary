@@ -10,3 +10,9 @@ Thumbs.db
 reports/translation_candidates.jsonl
 reports/cleanup_affected_ids.jsonl
 reports/translate_full.log
+
+# Optional pipeline / legacy dumps — not needed for GitHub Pages (see README “Repo size”)
+scraped_raw/
+kitchen_library_*.json
+alpha/*.json
+!alpha/index.json

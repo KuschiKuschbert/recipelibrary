@@ -4,8 +4,8 @@ Single rebuild path: recipe_detail/ → claude_index/ + alpha_catalog/ + pantry 
 
 - **Source of truth:** full recipes in recipe_detail/*.json only.
 - **claude_index:** compact rows (15 legacy shards, deduped by id, sorted by id).
-- **alpha_catalog:** same compact rows split into letter buckets; bucket list comes from
-  alpha/index.json only (no recipe bodies required under alpha/).
+- **alpha_catalog:** same compact rows; **logical** letter buckets from alpha/index.json are merged
+  into **8 physical JSON files** (`catalog_01.json` … `catalog_08.json`) for fewer HTTP requests.
 - Then runs build_pantry_shard_hay_index.py.
 
 Run after editing recipe_detail:
@@ -38,6 +38,9 @@ from recipe_pipeline_lib import (  # noqa: E402
 ALPHA_INDEX = ROOT / "alpha" / "index.json"
 OUT_CATALOG = ROOT / "alpha_catalog"
 PANTRY_SCRIPT = ROOT / "scripts" / "build_pantry_shard_hay_index.py"
+
+# Physical catalog parts (HTTP fetches on index + pantry). Letter logic unchanged; files are merged groups.
+ALPHA_CATALOG_PHYSICAL_PARTS = 8
 
 
 def load_alpha_bucket_map() -> tuple[list[str], dict[str, str]]:
@@ -87,6 +90,14 @@ def shard_sizes_15(total: int, n: int = 15) -> list[int]:
     return [base + (1 if i < rem else 0) for i in range(n)]
 
 
+def shard_sizes_equal(total: int, n: int) -> list[int]:
+    """Split `total` items into `n` buckets as evenly as possible (same as claude sharding)."""
+    if n <= 0:
+        return []
+    base, rem = divmod(total, n)
+    return [base + (1 if i < rem else 0) for i in range(n)]
+
+
 def main() -> int:
     if not ALPHA_INDEX.is_file():
         print("Missing", ALPHA_INDEX, file=sys.stderr)
@@ -127,19 +138,47 @@ def main() -> int:
         buckets[bn].sort(key=lambda r: str(r.get("id") or ""))
 
     OUT_CATALOG.mkdir(parents=True, exist_ok=True)
-    for bn in ordered_bn:
-        recs = buckets.get(bn, [])
-        (OUT_CATALOG / bn).write_text(
-            json.dumps({"recipes": recs}, separators=(",", ":")),
+    for p in OUT_CATALOG.glob("*.json"):
+        if p.name == "manifest.json":
+            continue
+        p.unlink()
+
+    n_letters = len(ordered_bn)
+    n_parts = min(ALPHA_CATALOG_PHYSICAL_PARTS, max(1, n_letters))
+    group_sizes = shard_sizes_equal(n_letters, n_parts)
+    manifest_files: list[str] = []
+    offset = 0
+    for part_i, gsz in enumerate(group_sizes):
+        fname = f"catalog_{part_i + 1:02d}.json"
+        manifest_files.append(fname)
+        merged: list[dict] = []
+        for j in range(gsz):
+            bn = ordered_bn[offset + j]
+            merged.extend(buckets.get(bn, []))
+        offset += gsz
+        merged.sort(key=lambda r: str(r.get("id") or ""))
+        (OUT_CATALOG / fname).write_text(
+            json.dumps({"recipes": merged}, separators=(",", ":")),
             encoding="utf-8",
         )
 
-    manifest = {"v": 1, "files": ordered_bn}
+    manifest = {
+        "v": 2,
+        "parts": n_parts,
+        "letterBuckets": n_letters,
+        "files": manifest_files,
+    }
     (OUT_CATALOG / "manifest.json").write_text(
         json.dumps(manifest, separators=(",", ":")),
         encoding="utf-8",
     )
-    print("Wrote", len(ordered_bn), "alpha_catalog shards + manifest.json")
+    print(
+        "Wrote",
+        n_parts,
+        "alpha_catalog physical shards (from",
+        n_letters,
+        "letter buckets) + manifest.json",
+    )
 
     build_index_id_locations.cache_clear()
 

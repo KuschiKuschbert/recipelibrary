@@ -26,7 +26,7 @@ Skip only if the user explicitly opts out.
 | Path | Role |
 |------|------|
 | `assets/theme.css` | **Shared** theme: `:root` tokens, search, filters, modal shell, footer, spin, form helpers, base `.grid` |
-| `alpha_catalog/` | **Browser** search index — run `python3 scripts/rebuild_catalog_from_detail.py` after `recipe_detail/` changes |
+| `alpha_catalog/` | **Browser** catalog — **8** merged `catalog_XX.json` + `manifest.json` (from `rebuild_catalog_from_detail.py`) |
 | `claude_index/` | Compact shards — same rebuild script (from `recipe_detail/`) |
 | `recipe_detail/detail_*.json` | **SSOT** full payloads: `detail_{Letter}_{bucket}.json` (64 buckets, FNV-1a on id). Letter is usually the first ASCII letter of the English `name`, but can differ after imports — compact rows carry **`_detailLetter`** so modals fetch the correct sub-shard. Regenerate layout with `repartition_detail_shards.py` / `repartition_detail_subshards.py`. |
 | `kitchen_library_*.json` | Additional library chunks |

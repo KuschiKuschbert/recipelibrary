@@ -1143,6 +1143,23 @@
       });
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
+  function scheduleInit() {
+    var urgent =
+      (window.location.search && window.location.search.length > 1) ||
+      (window.location.hash && window.location.hash.length > 1);
+    function run() {
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+      else init();
+    }
+    if (urgent) {
+      run();
+      return;
+    }
+    if (typeof requestIdleCallback === 'function') {
+      requestIdleCallback(run, { timeout: 2600 });
+    } else {
+      setTimeout(run, 80);
+    }
+  }
+  scheduleInit();
 })();

@@ -134,7 +134,7 @@
     return picked.length ? picked : SHARDS.slice();
   }
 
-  var PANTRY_FETCH_CONCURRENCY = 10;
+  var PANTRY_FETCH_CONCURRENCY = 8;
 
   /** Same pattern as index.html — bounded parallelism for alpha_catalog fetches. */
   function mapWithConcurrency(items, limit, mapper) {

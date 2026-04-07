@@ -714,8 +714,8 @@ function siteBaseUrl() {
   return stripped ? origin + stripped : origin;
 }
 
-/** Max parallel alpha_catalog fetches — caps connection/memory churn on slow devices (HTTP/2 still multiplexes). */
-const CATALOG_FETCH_CONCURRENCY = 10;
+/** Max parallel alpha_catalog fetches (8 physical shards from rebuild; pool avoids connection spikes). */
+const CATALOG_FETCH_CONCURRENCY = 8;
 
 /**
  * Run async mapper over items with at most `limit` in flight; results match input order.
@@ -741,7 +741,7 @@ async function mapWithConcurrency(items, limit, mapper) {
   return ret;
 }
 
-/** Letter shards: compact rows in alpha_catalog/ (built by scripts/rebuild_catalog_from_detail.py). */
+/** Compact catalog: few merged JSON parts in alpha_catalog/ (see rebuild_catalog_from_detail.py). */
 async function loadData() {
   const base = siteBaseUrl();
   const all = [];
@@ -803,13 +803,25 @@ async function buildRecipeSearchIndexAsync(recipes) {
   }
 }
 
-function buildFilters() {
-  const cuisines = new Set(), proteins = new Set(), tags = new Set(), cats = new Set();
-  for (const r of allRecipes) {
-    if (r.cui && typeof r.cui === 'string') cuisines.add(r.cui);
-    toArr(r.protein).forEach(p => { if (p) proteins.add(p); });
-    toArr(r.tags).forEach(t => { if (typeof t === 'string') tags.add(t); });
-    if (r.cat && typeof r.cat === 'string') cats.add(r.cat);
+const FILTER_BUILD_CHUNK = 4000;
+
+async function buildFiltersAsync() {
+  const cuisines = new Set();
+  const proteins = new Set();
+  const tags = new Set();
+  const cats = new Set();
+  for (let start = 0; start < allRecipes.length; start += FILTER_BUILD_CHUNK) {
+    const end = Math.min(start + FILTER_BUILD_CHUNK, allRecipes.length);
+    for (let i = start; i < end; i++) {
+      const r = allRecipes[i];
+      if (r.cui && typeof r.cui === 'string') cuisines.add(r.cui);
+      toArr(r.protein).forEach(p => { if (p) proteins.add(p); });
+      toArr(r.tags).forEach(t => { if (typeof t === 'string') tags.add(t); });
+      if (r.cat && typeof r.cat === 'string') cats.add(r.cat);
+    }
+    if (end < allRecipes.length) {
+      await new Promise(resolve => requestAnimationFrame(resolve));
+    }
   }
   fillSelect('filterCuisine', [...cuisines].sort(), 'Cuisine');
   fillSelect('filterProtein', [...proteins].sort(), 'Protein');
@@ -2166,7 +2178,7 @@ attachContentRecipePrefetch();
     document.getElementById('loading').style.display = 'none';
     document.getElementById('footer').style.display = 'block';
     document.getElementById('totalCount').textContent = allRecipes.length.toLocaleString();
-    buildFilters();
+    await buildFiltersAsync();
     await buildRecipeIndexAsync();
     filtered = [...allRecipes];
     applyFilters();
