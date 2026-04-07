@@ -533,6 +533,7 @@
     <div class="order-actions">
       <button type="button" class="btn-secondary" onclick="clearKitchenBookStocktakeCounts()">Clear counted qty &amp; brand</button>
       <button type="button" class="btn-secondary" onclick="copyKitchenBookStocktakeText()">Copy as text</button>
+      <button type="button" class="btn-secondary" onclick="printKitchenBookStocktakeSheet()">Print checklist</button>
       <button type="button" class="btn-secondary" onclick="copyKitchenBookStocktakeJson()">Copy stocktake JSON</button>
     </div>
   </div>
@@ -804,6 +805,9 @@ function copyKitchenBookStocktakeText() {
 }
 function copyKitchenBookStocktakeJson() {
   if (kitchenBookStocktakeList) kitchenBookStocktakeList.copyJson();
+}
+function printKitchenBookStocktakeSheet() {
+  if (kitchenBookStocktakeList) kitchenBookStocktakeList.printSheet();
 }
 
 function syncKitchenBookOrderListZoneEditButton() {

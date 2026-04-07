@@ -144,7 +144,11 @@
         catalogZone: item.zone,
       };
     });
-    return { lines: lines, extras: doc.extras || [] };
+    var out = { lines: lines, extras: doc.extras || [] };
+    if (doc.lastCountSnapshot && typeof doc.lastCountSnapshot === 'object') {
+      out.lastCountSnapshot = doc.lastCountSnapshot;
+    }
+    return out;
   }
 
   function qtyBrandUomCells(rowId, state) {
@@ -536,10 +540,9 @@
       renderBody();
     }
 
-    function copyText() {
+    function collectFlatStocktakeRows(doc) {
       var k = Kr();
-      if (!k) return;
-      var doc = storage.load();
+      if (!k || !orderList) return [];
       var flat = orderList.buildOrderLinesFlat() || [];
       var recipeKeys = collectRecipeMergeKeys(flat, k);
       var ZL = zoneLabels();
@@ -554,13 +557,13 @@
         if (line.kind === 'recipe') {
           var rid = rowIdRecipe(line.item, k);
           var st = lineStateFromDoc(doc, rid, line.orderUnit != null ? String(line.orderUnit) : '');
-          lines.push({ zone: zu, name: line.item, st: st });
+          lines.push({ zone: zu, name: line.item, rowId: rid, st: st });
           (line.extraIds || []).forEach(function (xid) {
             var ex = extrasById[xid];
             if (!ex) return;
             var eid = rowIdExtra(xid);
             var stEx = lineStateFromDoc(doc, eid, line.orderUnit != null ? String(line.orderUnit) : '');
-            lines.push({ zone: zu, name: '↳ ' + ex.name, st: stEx });
+            lines.push({ zone: zu, name: '↳ ' + ex.name, rowId: eid, st: stEx });
           });
         } else {
           var eid2 = rowIdExtra(line.extraId);
@@ -569,13 +572,18 @@
             eid2,
             line.orderUnit != null ? String(line.orderUnit) : ''
           );
-          lines.push({ zone: zu, name: line.item, st: st2 });
+          lines.push({ zone: zu, name: line.item, rowId: eid2, st: st2 });
         }
       });
       (doc.extras || []).forEach(function (ex) {
         if (!ex) return;
         var z = ZONE_ORDER.indexOf(ex.zone) >= 0 ? ex.zone : 'other';
-        lines.push({ zone: ZL[z] || z, name: ex.name + ' (stocktake)', st: stxExtraState(ex) });
+        lines.push({
+          zone: ZL[z] || z,
+          name: ex.name + ' (stocktake)',
+          rowId: rowIdStx(ex.id),
+          st: stxExtraState(ex),
+        });
       });
 
       var catCopy = getBuiltinCatalogArray();
@@ -583,20 +591,62 @@
         ZONE_ORDER.forEach(function (zid) {
           var zu = ZL[zid] || zid;
           builtinsFlatForZone(zid, catCopy, recipeKeys, k).forEach(function (item) {
+            var bid = rowIdBuiltin(item.id);
             lines.push({
               zone: zu,
               name: item.name,
+              rowId: bid,
               st: builtinLineState(doc, item),
             });
           });
         });
       }
+      return lines;
+    }
 
+    function lastStocktakeCell(rowId, snapshot, currentSt) {
+      function pack(q, b) {
+        var tq = String(q != null ? q : '').trim();
+        var tb = String(b != null ? b : '').trim();
+        if (!tq && !tb) return '—';
+        if (tb) return esc(tq + ' · ' + tb);
+        return esc(tq);
+      }
+      if (!snapshot || typeof snapshot !== 'object') {
+        return pack(currentSt.qty, currentSt.brand);
+      }
+      var q = '';
+      var b = '';
+      var found = false;
+      if (snapshot.lines && Object.prototype.hasOwnProperty.call(snapshot.lines, rowId)) {
+        found = true;
+        var L = snapshot.lines[rowId];
+        q = L && L.qty != null ? String(L.qty) : '';
+        b = L && L.brand != null ? String(L.brand) : '';
+      } else if (rowId.indexOf('stx:') === 0 && snapshot.extrasById) {
+        var eid = rowId.slice(4);
+        if (Object.prototype.hasOwnProperty.call(snapshot.extrasById, eid)) {
+          found = true;
+          var ex = snapshot.extrasById[eid];
+          q = ex && ex.qty != null ? String(ex.qty) : '';
+          b = ex && ex.brand != null ? String(ex.brand) : '';
+        }
+      }
+      if (!found) return '—';
+      return pack(q, b);
+    }
+
+    function copyText() {
+      var k = Kr();
+      if (!k) return;
+      var doc = storage.load();
+      var lines = collectFlatStocktakeRows(doc);
       var byZ = {};
       lines.forEach(function (L) {
         if (!byZ[L.zone]) byZ[L.zone] = [];
         byZ[L.zone].push(L);
       });
+      var ZL = zoneLabels();
       var text = '';
       ZONE_ORDER.forEach(function (zid) {
         var label = ZL[zid];
@@ -615,6 +665,110 @@
       navigator.clipboard.writeText(out).then(function () {
         alert('Stocktake copied');
       });
+    }
+
+    function printSheet() {
+      var k = Kr();
+      if (!k || !orderList) return;
+      var doc = storage.load();
+      var snap = doc.lastCountSnapshot;
+      var lines = collectFlatStocktakeRows(doc);
+      if (!lines.length) {
+        alert('Nothing to print yet.');
+        return;
+      }
+      var byZ = {};
+      lines.forEach(function (L) {
+        if (!byZ[L.zone]) byZ[L.zone] = [];
+        byZ[L.zone].push(L);
+      });
+      var ZL = zoneLabels();
+      var subtitle = '';
+      if (!snap || typeof snap !== 'object') {
+        subtitle =
+          '<p class="stkt-print-note">Reference: counts currently in app (no snapshot from a previous clear yet).</p>';
+      }
+      var rowsHtml = '';
+      ZONE_ORDER.forEach(function (zid) {
+        var label = ZL[zid];
+        var arr = byZ[label];
+        if (!arr || !arr.length) return;
+        rowsHtml +=
+          '<tr class="stkt-print-zone"><td colspan="6">' + esc(label.toUpperCase()) + '</td></tr>';
+        arr.forEach(function (L) {
+          var st = L.st;
+          var uomRaw = String(st.uom || '').trim();
+          var brandRaw = String(st.brand || '').trim();
+          var uom = uomRaw ? esc(uomRaw) : '—';
+          var brand = brandRaw ? esc(brandRaw) : '—';
+          var last = lastStocktakeCell(L.rowId, snap, st);
+          rowsHtml +=
+            '<tr>' +
+            '<td class="stkt-print-z">' +
+            esc(L.zone) +
+            '</td>' +
+            '<td class="stkt-print-name">' +
+            esc(L.name) +
+            '</td>' +
+            '<td class="stkt-print-uom">' +
+            uom +
+            '</td>' +
+            '<td class="stkt-print-brand">' +
+            brand +
+            '</td>' +
+            '<td class="stkt-print-last">' +
+            last +
+            '</td>' +
+            '<td class="stkt-print-write"></td>' +
+            '</tr>';
+        });
+      });
+      if (!rowsHtml.trim()) {
+        alert('Nothing to print yet.');
+        return;
+      }
+      var html =
+        '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Stocktake checklist</title>' +
+        '<style>' +
+        '*{box-sizing:border-box}' +
+        'body{font:13px/1.35 system-ui,Segoe UI,sans-serif;margin:12mm;color:#111}' +
+        'h1{font-size:1.15rem;margin:0 0 8px}' +
+        '.stkt-print-note{font-size:11px;color:#444;margin:0 0 12px}' +
+        'table{width:100%;border-collapse:collapse;table-layout:fixed}' +
+        'th,td{border:1px solid #333;padding:6px 8px;vertical-align:top}' +
+        'th{background:#eee;font-weight:600;text-align:left}' +
+        'tr.stkt-print-zone td{font-weight:700;background:#f3f3f3;border-color:#333}' +
+        '.stkt-print-z{width:12%}' +
+        '.stkt-print-name{width:26%}' +
+        '.stkt-print-uom{width:10%}' +
+        '.stkt-print-brand{width:18%}' +
+        '.stkt-print-last{width:18%}' +
+        '.stkt-print-write{min-height:1.6em;background:#fafafa}' +
+        '@page{margin:12mm}' +
+        '@media print{body{margin:0}.stkt-print-write{min-height:24px}}' +
+        '</style></head><body>' +
+        '<h1>Stocktake checklist</h1>' +
+        subtitle +
+        '<table><thead><tr>' +
+        '<th scope="col">Zone</th>' +
+        '<th scope="col">Item</th>' +
+        '<th scope="col">UOM</th>' +
+        '<th scope="col">Brand</th>' +
+        '<th scope="col">Last stocktake</th>' +
+        '<th scope="col">This week</th>' +
+        '</tr></thead><tbody>' +
+        rowsHtml +
+        '</tbody></table>' +
+        '</body></html>';
+      var w = window.open('', '_blank');
+      if (!w) {
+        alert('Pop-up blocked — allow pop-ups to print.');
+        return;
+      }
+      w.document.write(html);
+      w.document.close();
+      w.focus();
+      w.print();
     }
 
     function copyJson() {
@@ -640,6 +794,7 @@
       clearCounted: clearCounted,
       copyText: copyText,
       copyJson: copyJson,
+      printSheet: printSheet,
     };
   }
 

@@ -620,11 +620,77 @@
     return true;
   }
 
+  function normalizeLastCountSnapshot(raw) {
+    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
+    var srcLines =
+      raw.lines && typeof raw.lines === 'object' && !Array.isArray(raw.lines) ? raw.lines : {};
+    var srcExtras =
+      raw.extrasById && typeof raw.extrasById === 'object' && !Array.isArray(raw.extrasById)
+        ? raw.extrasById
+        : {};
+    var lines = {};
+    Object.keys(srcLines).forEach(function (k) {
+      var L = srcLines[k];
+      if (!L || typeof L !== 'object') return;
+      lines[k] = {
+        qty: L.qty != null ? String(L.qty) : '',
+        brand: L.brand != null ? String(L.brand) : '',
+      };
+    });
+    var extrasById = {};
+    Object.keys(srcExtras).forEach(function (id) {
+      var L = srcExtras[id];
+      if (!L || typeof L !== 'object') return;
+      extrasById[id] = {
+        qty: L.qty != null ? String(L.qty) : '',
+        brand: L.brand != null ? String(L.brand) : '',
+      };
+    });
+    if (!Object.keys(lines).length && !Object.keys(extrasById).length && raw.at == null) {
+      return null;
+    }
+    return {
+      at: raw.at != null ? String(raw.at) : '',
+      lines: lines,
+      extrasById: extrasById,
+    };
+  }
+
+  function buildLastCountSnapshot(doc) {
+    var d = doc && typeof doc === 'object' ? doc : {};
+    var lines = {};
+    var docLines = d.lines && typeof d.lines === 'object' && !Array.isArray(d.lines) ? d.lines : {};
+    Object.keys(docLines).forEach(function (k) {
+      var L = docLines[k];
+      if (!L || typeof L !== 'object') return;
+      lines[k] = {
+        qty: L.qty != null ? String(L.qty) : '',
+        brand: L.brand != null ? String(L.brand) : '',
+      };
+    });
+    var extrasById = {};
+    (d.extras || []).forEach(function (ex) {
+      if (!ex || !ex.id) return;
+      extrasById[ex.id] = {
+        qty: ex.qty != null ? String(ex.qty) : '',
+        brand: ex.brand != null ? String(ex.brand) : '',
+      };
+    });
+    return {
+      at: new Date().toISOString(),
+      lines: lines,
+      extrasById: extrasById,
+    };
+  }
+
   function normalizeStocktakeDoc(raw) {
     var d = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {};
     var lines = d.lines && typeof d.lines === 'object' && !Array.isArray(d.lines) ? d.lines : {};
     var extras = Array.isArray(d.extras) ? d.extras : [];
-    return { lines: lines, extras: extras };
+    var out = { lines: lines, extras: extras };
+    var snap = normalizeLastCountSnapshot(d.lastCountSnapshot);
+    if (snap) out.lastCountSnapshot = snap;
+    return out;
   }
 
   function loadRivieraStocktake() {
@@ -713,6 +779,7 @@
 
   function clearRivieraStocktakeQuantities() {
     var d = loadRivieraStocktake();
+    d.lastCountSnapshot = buildLastCountSnapshot(d);
     Object.keys(d.lines).forEach(function (k) {
       if (k.indexOf('builtin:') === 0) {
         delete d.lines[k];
@@ -829,6 +896,7 @@
 
   function clearBookStocktakeQuantities(bookId) {
     var d = loadBookStocktake(bookId);
+    d.lastCountSnapshot = buildLastCountSnapshot(d);
     Object.keys(d.lines).forEach(function (k) {
       if (k.indexOf('builtin:') === 0) {
         delete d.lines[k];

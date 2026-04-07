@@ -564,6 +564,7 @@
     <div class="order-actions">
       <button type="button" class="btn-secondary" onclick="clearStocktakeCounts()">Clear counted qty &amp; brand</button>
       <button type="button" class="btn-secondary" onclick="copyStocktakeText()">Copy as text</button>
+      <button type="button" class="btn-secondary" onclick="printStocktakeSheet()">Print checklist</button>
       <button type="button" class="btn-secondary" onclick="copyStocktakeJson()">Copy stocktake JSON</button>
     </div>
   </div>
@@ -969,6 +970,9 @@ function copyStocktakeText() {
 }
 function copyStocktakeJson() {
   if (window.rivieraStocktakeList) window.rivieraStocktakeList.copyJson();
+}
+function printStocktakeSheet() {
+  if (window.rivieraStocktakeList) window.rivieraStocktakeList.printSheet();
 }
 
 function syncRivieraOrderListZoneEditButton() {
