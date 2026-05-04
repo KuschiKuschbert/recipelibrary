@@ -1,52 +1,760 @@
 {
-  "version": 1,
+  "version": 2,
   "baseline_sha": "a53587ae8e67a77be1ef81116f1fd25f8a2db3a1",
   "sources": [
-    {"id": "dec2025", "label": "The Riviera Table Menu December 2025 PDF", "url": "https://www.rivierayeppoon.com.au/s/The-Riviera-Table-Menu-December-2025-4.pdf"},
-    {"id": "funeral", "label": "Funeral / wake catering PDF", "url": "https://www.rivierayeppoon.com.au/s/Funeral-Catering-Brochure-4.pdf"},
-    {"id": "offsite", "label": "Offsite platter PDF", "url": "https://www.rivierayeppoon.com.au/s/Offsite-Platter-Brochure-3.pdf"},
-    {"id": "corporate", "label": "Corporate catering PDF", "url": "https://www.rivierayeppoon.com.au/s/Corporate-Catering-Brochure-7.pdf"}
+    {
+      "id": "dec2025",
+      "label": "The Riviera Table Menu December 2025 PDF",
+      "url": "https://www.rivierayeppoon.com.au/s/The-Riviera-Table-Menu-December-2025-4.pdf"
+    },
+    {
+      "id": "funeral",
+      "label": "Funeral / wake catering PDF",
+      "url": "https://www.rivierayeppoon.com.au/s/Funeral-Catering-Brochure-4.pdf"
+    },
+    {
+      "id": "offsite",
+      "label": "Offsite platter PDF",
+      "url": "https://www.rivierayeppoon.com.au/s/Offsite-Platter-Brochure-3.pdf"
+    },
+    {
+      "id": "corporate",
+      "label": "Corporate catering PDF",
+      "url": "https://www.rivierayeppoon.com.au/s/Corporate-Catering-Brochure-7.pdf"
+    }
   ],
   "skus": [
-    {"wave": "A", "source": "dec2025", "menu_name": "Bruschetta of Rare Roast Beef", "components": ["Charred sourdough", "Rare roast beef", "Relish or horseradish cream", "Garnish"], "builtin_id": "bruschetta-rare-roast-beef", "reuse": []},
-    {"wave": "A", "source": "dec2025", "menu_name": "Spanner Crab Cannoli", "components": ["Cannoli shell or tuile", "Spanner crab filling", "Citrus herbs"], "builtin_id": "spanner-crab-cannoli", "reuse": []},
-    {"wave": "A", "source": "dec2025", "menu_name": "Prawn Brioche Slider", "components": ["Prawn patty or whole prawn", "Brioche bun", "Sauce", "Lettuce"], "builtin_id": "prawn-brioche-slider", "reuse": ["reef-fish-batter"]},
-    {"wave": "A", "source": "dec2025", "menu_name": "Smoked Chicken & Bacon Brioche Slider", "components": ["Chicken bacon mix", "Brioche", "Aioli", "Rocket"], "builtin_id": "chicken-bacon-brioche-slider", "reuse": []},
-    {"wave": "A", "source": "dec2025", "menu_name": "Vintage Beef Brioche Slider", "components": ["Beef patty", "Aged cheddar", "Brioche", "Relish"], "builtin_id": "vintage-beef-brioche-slider", "reuse": []},
-    {"wave": "A", "source": "dec2025", "menu_name": "Mini Beefburger Canapé", "components": ["Beef patty", "Cheddar", "Herbed aioli", "Tomato relish", "Rocket"], "builtin_id": "mini-beefburger-canape", "reuse": []},
-    {"wave": "A", "source": "dec2025", "menu_name": "Beef Polpette", "components": ["Polpette", "Sugo or glaze"], "builtin_id": "beef-polpette-canape", "merge_notes": "Distinct from veal meatballs card; smaller canapé format"},
-    {"wave": "A", "source": "dec2025", "menu_name": "Slow Cooked Lamb Shoulder Provençale + couscous + yoghurt", "components": ["Lamb shoulder Provençale", "Moroccan couscous", "Harissa yoghurt"], "builtin_id": "lamb-shoulder-provencale-composed", "reuse": []},
-    {"wave": "A", "source": "dec2025", "menu_name": "Beef Bourguignon", "components": ["Braised beef", "Red wine sauce", "Garnish veg"], "builtin_id": "beef-bourguignon", "reuse": []},
-    {"wave": "A", "source": "dec2025", "menu_name": "Creamy Lemon Caper Chicken", "components": ["Chicken", "Lemon caper cream", "Sides TBC"], "builtin_id": "creamy-lemon-caper-chicken", "reuse": ["lemon-dill-aioli"]},
-    {"wave": "A", "source": "dec2025", "menu_name": "Natural Oysters Champagne Mignonette", "components": ["Oysters", "Champagne mignonette"], "builtin_id": "natural-oysters-champagne-mignonette", "reuse": ["oysters-kilpatrick"]},
-    {"wave": "A", "source": "dec2025", "menu_name": "Greek Spiced Roast Lamb", "components": ["Lamb leg", "Greek spice rub", "Pan juices"], "builtin_id": "greek-spiced-roast-lamb", "reuse": ["lamb-citrus-herb-brine"]},
-    {"wave": "A", "source": "dec2025", "menu_name": "Creamy Potato Gratin", "components": ["Potato layers", "Cream", "Cheese crust"], "builtin_id": "creamy-potato-gratin", "reuse": []},
-    {"wave": "A", "source": "dec2025", "menu_name": "Garlic & Herb Chat Potatoes with Feta Cream", "components": ["Chat potatoes", "Garlic herb butter", "Whipped feta cream"], "builtin_id": "garlic-herb-chat-potatoes-feta", "reuse": []},
-    {"wave": "A", "source": "dec2025", "menu_name": "Broccoli & Cauliflower Gratin", "components": ["Florets", "Béchamel", "Cheese crust"], "builtin_id": "broccoli-cauliflower-gratin", "reuse": []},
-    {"wave": "A", "source": "dec2025", "menu_name": "Prosciutto Wrapped Chicken Breast", "components": ["Chicken", "Prosciutto", "Lemon caper cream", "Potato", "Greens"], "builtin_id": "prosciutto-chicken-lemon-caper", "reuse": []},
-    {"wave": "A", "source": "dec2025", "menu_name": "Fillet of Beef Tempranillo", "components": ["Beef fillet", "Tempranillo reduction", "Potato", "Greens"], "builtin_id": "fillet-beef-tempranillo", "reuse": []},
-    {"wave": "A", "source": "dec2025", "menu_name": "Stuffed Mushroom Romesco Lemon Aioli", "components": ["Mushroom", "Romesco", "Lemon aioli", "Greens"], "builtin_id": "stuffed-mushroom-romesco", "reuse": ["romesco", "lemon-thyme-aioli"]},
-    {"wave": "A", "source": "dec2025", "menu_name": "Roving dessert cannoli / tiramisu", "components": ["Shells or vessels", "Fillings rotation"], "builtin_id": "roving-cannoli-tiramisu", "reuse": []},
-    {"wave": "B", "source": "funeral", "menu_name": "House Baked Scones Platter", "components": ["Scones", "Chantilly", "Jam"], "builtin_id": "platter-scones-chantilly-jam", "reuse": []},
-    {"wave": "B", "source": "funeral", "menu_name": "Sweet Slice & Cake Platter", "components": ["Slices", "Cakes", "Presentation"], "builtin_id": "platter-sweet-slices-cakes", "reuse": []},
-    {"wave": "B", "source": "funeral", "menu_name": "Grazing Box", "components": ["Cheeses", "Deli meats", "Fruit", "Nuts", "Crackers", "Dips", "Olives"], "builtin_id": "grazing-box-standard", "reuse": ["charcuterie-board-classic"]},
-    {"wave": "B", "source": "funeral", "menu_name": "Ham & Cheese Croissants Platter", "components": ["Croissants", "Ham", "Cheese", "Bake"], "builtin_id": "platter-ham-cheese-croissants", "reuse": []},
-    {"wave": "B", "source": "funeral", "menu_name": "Sandwich Platter", "components": ["Bread selection", "Fillings", "Condiments"], "builtin_id": "platter-sandwiches-standard", "reuse": []},
-    {"wave": "B", "source": "funeral", "menu_name": "Premium Filled Wraps Platter", "components": ["Wraps", "Gourmet fills"], "builtin_id": "platter-wraps-premium", "reuse": []},
-    {"wave": "B", "source": "funeral", "menu_name": "Filled Brioche Rolls", "components": ["Brioche", "Protein fills"], "builtin_id": "platter-filled-brioche-rolls", "reuse": []},
-    {"wave": "B", "source": "funeral", "menu_name": "Roast Beef Beetroot Balsamic Platter", "components": ["Sliced beef", "Beetroot balsamic relish"], "builtin_id": "platter-roast-beef-beetroot-relish", "reuse": []},
-    {"wave": "B", "source": "funeral", "menu_name": "Dietary Grazing Platter", "components": ["GF/DF/Vegan variant build"], "builtin_id": "platter-dietary-grazing", "reuse": []},
-    {"wave": "C", "source": "corporate", "menu_name": "Savoury Filled Croissants", "components": ["Croissant", "Savoury fills"], "builtin_id": "corporate-savoury-croissants", "reuse": []},
-    {"wave": "C", "source": "corporate", "menu_name": "Sweet Filled Croissants", "components": ["Croissant", "Sweet fills"], "builtin_id": "corporate-sweet-croissants", "reuse": []},
-    {"wave": "C", "source": "corporate", "menu_name": "Mixed Bircher Muesli Bowls", "components": ["Bircher base", "Fruit", "Yoghurt"], "builtin_id": "corporate-bircher-muesli-bowls", "reuse": []},
-    {"wave": "C", "source": "corporate", "menu_name": "Chicken Caesar Salad Bowl", "components": ["Chicken", "Cos", "Dressing", "Parmesan"], "builtin_id": "corporate-chicken-caesar-bowl", "reuse": []},
-    {"wave": "C", "source": "corporate", "menu_name": "Lamb Fattoush Salad Bowl", "components": ["Lamb", "Pita chips", "Herb dressing"], "builtin_id": "corporate-lamb-fattoush-bowl", "reuse": []},
-    {"wave": "C", "source": "corporate", "menu_name": "Mediterranean Chicken Bowl", "components": ["Chicken", "Pita", "Tzatziki", "Salad"], "builtin_id": "corporate-mediterranean-chicken-bowl", "reuse": ["labneh-tzatziki"]},
-    {"wave": "C", "source": "corporate", "menu_name": "Beef Lasagne + Side Salad", "components": ["Lasagne", "Garden salad"], "builtin_id": "corporate-beef-lasagne-side-salad", "reuse": []},
-    {"wave": "C", "source": "corporate", "menu_name": "Breakfast Wraps", "components": ["Wrap", "Egg bacon cheese hash", "Relish"], "builtin_id": "corporate-breakfast-wraps", "reuse": []},
-    {"wave": "C", "source": "corporate", "menu_name": "Gourmet Filled Cookies", "components": ["Cookie", "Fillings"], "builtin_id": "corporate-gourmet-filled-cookies", "reuse": []},
-    {"wave": "C", "source": "corporate", "menu_name": "Mixed Filled Sandwiches", "components": ["Bread", "Chef selection fills"], "builtin_id": "corporate-mixed-sandwiches", "reuse": []},
-    {"wave": "C", "source": "corporate", "menu_name": "Roasted Vegetable Salad Bowl", "components": ["Roast veg", "Leaves", "Dressing"], "builtin_id": "corporate-roast-veg-salad-bowl", "reuse": []}
+    {
+      "wave": "A",
+      "source": "dec2025",
+      "menu_name": "Bruschetta of Rare Roast Beef",
+      "components": [
+        "Charred sourdough",
+        "Rare roast beef",
+        "Relish or horseradish cream",
+        "Garnish"
+      ],
+      "builtin_id": "bruschetta-rare-roast-beef",
+      "reuse": []
+    },
+    {
+      "wave": "A",
+      "source": "dec2025",
+      "menu_name": "Spanner Crab Cannoli",
+      "components": [
+        "Cannoli shell or tuile",
+        "Spanner crab filling",
+        "Citrus herbs"
+      ],
+      "builtin_id": "spanner-crab-cannoli",
+      "reuse": []
+    },
+    {
+      "wave": "A",
+      "source": "dec2025",
+      "menu_name": "Prawn Brioche Slider",
+      "components": [
+        "Prawn patty or whole prawn",
+        "Brioche bun",
+        "Sauce",
+        "Lettuce"
+      ],
+      "builtin_id": "prawn-brioche-slider",
+      "reuse": [
+        "reef-fish-batter"
+      ]
+    },
+    {
+      "wave": "A",
+      "source": "dec2025",
+      "menu_name": "Smoked Chicken & Bacon Brioche Slider",
+      "components": [
+        "Chicken bacon mix",
+        "Brioche",
+        "Aioli",
+        "Rocket"
+      ],
+      "builtin_id": "chicken-bacon-brioche-slider",
+      "reuse": []
+    },
+    {
+      "wave": "A",
+      "source": "dec2025",
+      "menu_name": "Vintage Beef Brioche Slider",
+      "components": [
+        "Beef patty",
+        "Aged cheddar",
+        "Brioche",
+        "Relish"
+      ],
+      "builtin_id": "vintage-beef-brioche-slider",
+      "reuse": []
+    },
+    {
+      "wave": "A",
+      "source": "dec2025",
+      "menu_name": "Mini Beefburger Canapé",
+      "components": [
+        "Beef patty",
+        "Cheddar",
+        "Herbed aioli",
+        "Tomato relish",
+        "Rocket"
+      ],
+      "builtin_id": "mini-beefburger-canape",
+      "reuse": []
+    },
+    {
+      "wave": "A",
+      "source": "dec2025",
+      "menu_name": "Beef Polpette",
+      "components": [
+        "Polpette",
+        "Sugo or glaze"
+      ],
+      "builtin_id": "beef-polpette-canape",
+      "merge_notes": "Distinct from veal meatballs card; smaller canapé format"
+    },
+    {
+      "wave": "A",
+      "source": "dec2025",
+      "menu_name": "Slow Cooked Lamb Shoulder Provençale + couscous + yoghurt",
+      "components": [
+        "Lamb shoulder Provençale",
+        "Moroccan couscous",
+        "Harissa yoghurt"
+      ],
+      "builtin_id": "lamb-shoulder-provencale-composed",
+      "reuse": []
+    },
+    {
+      "wave": "A",
+      "source": "dec2025",
+      "menu_name": "Beef Bourguignon",
+      "components": [
+        "Braised beef",
+        "Red wine sauce",
+        "Garnish veg"
+      ],
+      "builtin_id": "beef-bourguignon",
+      "reuse": []
+    },
+    {
+      "wave": "A",
+      "source": "dec2025",
+      "menu_name": "Creamy Lemon Caper Chicken",
+      "components": [
+        "Chicken",
+        "Lemon caper cream",
+        "Sides TBC"
+      ],
+      "builtin_id": "creamy-lemon-caper-chicken",
+      "reuse": [
+        "lemon-dill-aioli"
+      ]
+    },
+    {
+      "wave": "A",
+      "source": "dec2025",
+      "menu_name": "Natural Oysters Champagne Mignonette",
+      "components": [
+        "Oysters",
+        "Champagne mignonette"
+      ],
+      "builtin_id": "natural-oysters-champagne-mignonette",
+      "reuse": [
+        "oysters-kilpatrick"
+      ]
+    },
+    {
+      "wave": "A",
+      "source": "dec2025",
+      "menu_name": "Greek Spiced Roast Lamb",
+      "components": [
+        "Lamb leg",
+        "Greek spice rub",
+        "Pan juices"
+      ],
+      "builtin_id": "greek-spiced-roast-lamb",
+      "reuse": [
+        "lamb-citrus-herb-brine"
+      ]
+    },
+    {
+      "wave": "A",
+      "source": "dec2025",
+      "menu_name": "Creamy Potato Gratin",
+      "components": [
+        "Potato layers",
+        "Cream",
+        "Cheese crust"
+      ],
+      "builtin_id": "creamy-potato-gratin",
+      "reuse": []
+    },
+    {
+      "wave": "A",
+      "source": "dec2025",
+      "menu_name": "Garlic & Herb Chat Potatoes with Feta Cream",
+      "components": [
+        "Chat potatoes",
+        "Garlic herb butter",
+        "Whipped feta cream"
+      ],
+      "builtin_id": "garlic-herb-chat-potatoes-feta",
+      "reuse": []
+    },
+    {
+      "wave": "A",
+      "source": "dec2025",
+      "menu_name": "Broccoli & Cauliflower Gratin",
+      "components": [
+        "Florets",
+        "Béchamel",
+        "Cheese crust"
+      ],
+      "builtin_id": "broccoli-cauliflower-gratin",
+      "reuse": []
+    },
+    {
+      "wave": "A",
+      "source": "dec2025",
+      "menu_name": "Prosciutto Wrapped Chicken Breast",
+      "components": [
+        "Chicken",
+        "Prosciutto",
+        "Lemon caper cream",
+        "Potato",
+        "Greens"
+      ],
+      "builtin_id": "prosciutto-chicken-lemon-caper",
+      "reuse": []
+    },
+    {
+      "wave": "A",
+      "source": "dec2025",
+      "menu_name": "Fillet of Beef Tempranillo",
+      "components": [
+        "Beef fillet",
+        "Tempranillo reduction",
+        "Potato",
+        "Greens"
+      ],
+      "builtin_id": "fillet-beef-tempranillo",
+      "reuse": []
+    },
+    {
+      "wave": "A",
+      "source": "dec2025",
+      "menu_name": "Stuffed Mushroom Romesco Lemon Aioli",
+      "components": [
+        "Mushroom",
+        "Romesco",
+        "Lemon aioli",
+        "Greens"
+      ],
+      "builtin_id": "stuffed-mushroom-romesco",
+      "reuse": [
+        "romesco",
+        "lemon-thyme-aioli"
+      ]
+    },
+    {
+      "wave": "A",
+      "source": "dec2025",
+      "menu_name": "Roving dessert cannoli / tiramisu",
+      "components": [
+        "Shells or vessels",
+        "Fillings rotation"
+      ],
+      "builtin_id": "roving-cannoli-tiramisu",
+      "reuse": []
+    },
+    {
+      "wave": "B",
+      "source": "funeral",
+      "menu_name": "House Baked Scones Platter",
+      "components": [
+        "Scones",
+        "Chantilly",
+        "Jam"
+      ],
+      "builtin_id": "platter-scones-chantilly-jam",
+      "reuse": []
+    },
+    {
+      "wave": "B",
+      "source": "funeral",
+      "menu_name": "Sweet Slice & Cake Platter",
+      "components": [
+        "Slices",
+        "Cakes",
+        "Presentation"
+      ],
+      "builtin_id": "platter-sweet-slices-cakes",
+      "reuse": []
+    },
+    {
+      "wave": "B",
+      "source": "funeral",
+      "menu_name": "Grazing Box",
+      "components": [
+        "Cheeses",
+        "Deli meats",
+        "Fruit",
+        "Nuts",
+        "Crackers",
+        "Dips",
+        "Olives"
+      ],
+      "builtin_id": "grazing-box-standard",
+      "reuse": [
+        "charcuterie-board-classic"
+      ]
+    },
+    {
+      "wave": "B",
+      "source": "funeral",
+      "menu_name": "Ham & Cheese Croissants Platter",
+      "components": [
+        "Croissants",
+        "Ham",
+        "Cheese",
+        "Bake"
+      ],
+      "builtin_id": "platter-ham-cheese-croissants",
+      "reuse": []
+    },
+    {
+      "wave": "B",
+      "source": "funeral",
+      "menu_name": "Sandwich Platter",
+      "components": [
+        "Bread selection",
+        "Fillings",
+        "Condiments"
+      ],
+      "builtin_id": "platter-sandwiches-standard",
+      "reuse": []
+    },
+    {
+      "wave": "B",
+      "source": "funeral",
+      "menu_name": "Premium Filled Wraps Platter",
+      "components": [
+        "Wraps",
+        "Gourmet fills"
+      ],
+      "builtin_id": "platter-wraps-premium",
+      "reuse": []
+    },
+    {
+      "wave": "B",
+      "source": "funeral",
+      "menu_name": "Filled Brioche Rolls",
+      "components": [
+        "Brioche",
+        "Protein fills"
+      ],
+      "builtin_id": "platter-filled-brioche-rolls",
+      "reuse": []
+    },
+    {
+      "wave": "B",
+      "source": "funeral",
+      "menu_name": "Roast Beef Beetroot Balsamic Platter",
+      "components": [
+        "Sliced beef",
+        "Beetroot balsamic relish"
+      ],
+      "builtin_id": "platter-roast-beef-beetroot-relish",
+      "reuse": []
+    },
+    {
+      "wave": "B",
+      "source": "funeral",
+      "menu_name": "Dietary Grazing Platter",
+      "components": [
+        "GF/DF/Vegan variant build"
+      ],
+      "builtin_id": "platter-dietary-grazing",
+      "reuse": []
+    },
+    {
+      "wave": "C",
+      "source": "corporate",
+      "menu_name": "Savoury Filled Croissants",
+      "components": [
+        "Croissant",
+        "Savoury fills"
+      ],
+      "builtin_id": "corporate-savoury-croissants",
+      "reuse": []
+    },
+    {
+      "wave": "C",
+      "source": "corporate",
+      "menu_name": "Sweet Filled Croissants",
+      "components": [
+        "Croissant",
+        "Sweet fills"
+      ],
+      "builtin_id": "corporate-sweet-croissants",
+      "reuse": []
+    },
+    {
+      "wave": "C",
+      "source": "corporate",
+      "menu_name": "Mixed Bircher Muesli Bowls",
+      "components": [
+        "Bircher base",
+        "Fruit",
+        "Yoghurt"
+      ],
+      "builtin_id": "corporate-bircher-muesli-bowls",
+      "reuse": []
+    },
+    {
+      "wave": "C",
+      "source": "corporate",
+      "menu_name": "Chicken Caesar Salad Bowl",
+      "components": [
+        "Chicken",
+        "Cos",
+        "Dressing",
+        "Parmesan"
+      ],
+      "builtin_id": "corporate-chicken-caesar-bowl",
+      "reuse": []
+    },
+    {
+      "wave": "C",
+      "source": "corporate",
+      "menu_name": "Lamb Fattoush Salad Bowl",
+      "components": [
+        "Lamb",
+        "Pita chips",
+        "Herb dressing"
+      ],
+      "builtin_id": "corporate-lamb-fattoush-bowl",
+      "reuse": []
+    },
+    {
+      "wave": "C",
+      "source": "corporate",
+      "menu_name": "Mediterranean Chicken Bowl",
+      "components": [
+        "Chicken",
+        "Pita",
+        "Tzatziki",
+        "Salad"
+      ],
+      "builtin_id": "corporate-mediterranean-chicken-bowl",
+      "reuse": [
+        "labneh-tzatziki"
+      ]
+    },
+    {
+      "wave": "C",
+      "source": "corporate",
+      "menu_name": "Beef Lasagne + Side Salad",
+      "components": [
+        "Lasagne",
+        "Garden salad"
+      ],
+      "builtin_id": "corporate-beef-lasagne-side-salad",
+      "reuse": []
+    },
+    {
+      "wave": "C",
+      "source": "corporate",
+      "menu_name": "Breakfast Wraps",
+      "components": [
+        "Wrap",
+        "Egg bacon cheese hash",
+        "Relish"
+      ],
+      "builtin_id": "corporate-breakfast-wraps",
+      "reuse": []
+    },
+    {
+      "wave": "C",
+      "source": "corporate",
+      "menu_name": "Gourmet Filled Cookies",
+      "components": [
+        "Cookie",
+        "Fillings"
+      ],
+      "builtin_id": "corporate-gourmet-filled-cookies",
+      "reuse": []
+    },
+    {
+      "wave": "C",
+      "source": "corporate",
+      "menu_name": "Mixed Filled Sandwiches",
+      "components": [
+        "Bread",
+        "Chef selection fills"
+      ],
+      "builtin_id": "corporate-mixed-sandwiches",
+      "reuse": []
+    },
+    {
+      "wave": "C",
+      "source": "corporate",
+      "menu_name": "Roasted Vegetable Salad Bowl",
+      "components": [
+        "Roast veg",
+        "Leaves",
+        "Dressing"
+      ],
+      "builtin_id": "corporate-roast-veg-salad-bowl",
+      "reuse": []
+    },
+    {
+      "wave": "D",
+      "source": "dec2025",
+      "menu_name": "Chilli Garlic Prawns & Chorizo",
+      "components": [
+        "Tiger Prawns",
+        "Chorizo",
+        "Chilli Garlic",
+        "Rocket"
+      ],
+      "builtin_id": "chilli-garlic-prawns-chorizo-rocket",
+      "reuse": []
+    },
+    {
+      "wave": "D",
+      "source": "dec2025",
+      "menu_name": "Slow Cooked Beef Albondigas",
+      "components": [
+        "Beef Albondigas",
+        "Romesco Sugo",
+        "Turkish Bread"
+      ],
+      "builtin_id": "slow-cooked-beef-albondigas-buffet",
+      "reuse": []
+    },
+    {
+      "wave": "D",
+      "source": "dec2025",
+      "menu_name": "Heirloom Tomato Bruschetta",
+      "components": [
+        "Sourdough",
+        "Tomato",
+        "Goats Cheese",
+        "Basil Oil"
+      ],
+      "builtin_id": "heirloom-tomato-bruschetta-goats-cheese",
+      "reuse": []
+    },
+    {
+      "wave": "D",
+      "source": "dec2025",
+      "menu_name": "Greek Style Pulled Beef",
+      "components": [
+        "Beef Chuck",
+        "Greek Marinade",
+        "Pan Juices"
+      ],
+      "builtin_id": "greek-style-pulled-beef-buffet",
+      "reuse": []
+    },
+    {
+      "wave": "D",
+      "source": "dec2025",
+      "menu_name": "Chargrilled Lemon & Thyme Chicken",
+      "components": [
+        "Chicken",
+        "Marinade",
+        "Char"
+      ],
+      "builtin_id": "chargrilled-lemon-thyme-chicken-buffet",
+      "reuse": []
+    },
+    {
+      "wave": "D",
+      "source": "dec2025",
+      "menu_name": "Duo of Cannoli",
+      "components": [
+        "Shell",
+        "Pistachio Fill",
+        "Strawberry Fill"
+      ],
+      "builtin_id": "duo-cannoli-pistachio-white-chocolate",
+      "reuse": []
+    },
+    {
+      "wave": "D",
+      "source": "dec2025",
+      "menu_name": "Strawberry Ricotta Cheesecake",
+      "components": [
+        "Base",
+        "Cheesecake",
+        "Strawberry"
+      ],
+      "builtin_id": "strawberry-ricotta-cheesecake-plated",
+      "reuse": []
+    },
+    {
+      "wave": "D",
+      "source": "dec2025",
+      "menu_name": "Riviera Tiramisu",
+      "components": [
+        "Coffee Soak",
+        "Mascarpone Layer",
+        "Biscotti Soil",
+        "Hazelnut Mousse"
+      ],
+      "builtin_id": "riviera-tiramisu-biscotti-hazelnut",
+      "reuse": []
+    },
+    {
+      "wave": "D",
+      "source": "dec2025",
+      "menu_name": "Kids Snack Pack",
+      "components": [
+        "Snack Items"
+      ],
+      "builtin_id": "kids-snack-pack",
+      "reuse": []
+    },
+    {
+      "wave": "D",
+      "source": "dec2025",
+      "menu_name": "Kids Spaghetti Bolognese",
+      "components": [
+        "Spaghetti",
+        "Mild Bolognese",
+        "Parmesan"
+      ],
+      "builtin_id": "kids-spaghetti-bolognese",
+      "reuse": []
+    },
+    {
+      "wave": "D",
+      "source": "corporate",
+      "menu_name": "Bacon & Egg Muffins",
+      "components": [
+        "Muffin",
+        "Bacon",
+        "Egg",
+        "Cheese"
+      ],
+      "builtin_id": "corporate-bacon-egg-muffins",
+      "reuse": []
+    },
+    {
+      "wave": "D",
+      "source": "corporate",
+      "menu_name": "Bacon & Egg Paninis",
+      "components": [
+        "Bread",
+        "Fill",
+        "Jam"
+      ],
+      "builtin_id": "corporate-bacon-egg-paninis",
+      "reuse": []
+    },
+    {
+      "wave": "D",
+      "source": "corporate",
+      "menu_name": "Waffles",
+      "components": [
+        "Batter",
+        "Butter",
+        "Maple"
+      ],
+      "builtin_id": "corporate-waffles-breakfast",
+      "reuse": []
+    },
+    {
+      "wave": "D",
+      "source": "corporate",
+      "menu_name": "Creamy Basil Pesto Pasta Salad",
+      "components": [
+        "Pasta",
+        "Pesto Cream",
+        "Vegetables"
+      ],
+      "builtin_id": "corporate-pesto-pasta-salad",
+      "reuse": []
+    },
+    {
+      "wave": "D",
+      "source": "corporate",
+      "menu_name": "Moroccan Couscous Salad",
+      "components": [
+        "Couscous",
+        "Roast Veg",
+        "Dressing"
+      ],
+      "builtin_id": "corporate-moroccan-couscous-salad",
+      "reuse": []
+    },
+    {
+      "wave": "D",
+      "source": "corporate",
+      "menu_name": "Pumpkin, Feta & Pepita Salad",
+      "components": [
+        "Roast Pumpkin",
+        "Feta",
+        "Pepitas",
+        "Leaves"
+      ],
+      "builtin_id": "corporate-pumpkin-feta-pepita-salad",
+      "reuse": []
+    },
+    {
+      "wave": "D",
+      "source": "corporate",
+      "menu_name": "Traditional Garden Salad",
+      "components": [
+        "Leaves",
+        "Garden Veg",
+        "Dressing"
+      ],
+      "builtin_id": "corporate-traditional-garden-salad",
+      "reuse": []
+    },
+    {
+      "wave": "D",
+      "source": "corporate",
+      "menu_name": "Creamy Potato, Bacon & Herb Salad",
+      "components": [
+        "Potato",
+        "Bacon",
+        "Herb Dressing"
+      ],
+      "builtin_id": "corporate-creamy-potato-bacon-herb-salad",
+      "reuse": []
+    },
+    {
+      "wave": "D",
+      "source": "funeral",
+      "menu_name": "Spinach & Ricotta Pastizzi Platter",
+      "components": [
+        "Pastizzi",
+        "Sauce"
+      ],
+      "builtin_id": "funeral-spinach-ricotta-pastizzi-platter",
+      "reuse": []
+    },
+    {
+      "wave": "D",
+      "source": "funeral",
+      "menu_name": "Mixed Box Hot Nibbles",
+      "components": [
+        "Sausage Roll",
+        "Pie",
+        "Quiche",
+        "Pastizzi",
+        "Sauces"
+      ],
+      "builtin_id": "funeral-mixed-hot-nibbles-box",
+      "reuse": []
+    }
   ],
-  "notes": "Manifest is the checklist; not every PDF line is listed yet—extend skus[] as more cards ship. Composite policy: one builtin per composed menu line with sectioned method_steps for each component."
+  "notes": "Manifest is the checklist; not every PDF line is listed yet—extend skus[] as more cards ship. Composite policy: one builtin per composed menu line with sectioned method_steps for each component. Wave D (second batch) adds buffet, plated desserts, kids, corporate breakfast/salads, funeral hot nibbles."
 }

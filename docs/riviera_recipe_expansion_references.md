@@ -8,7 +8,7 @@ House recipes in `riviera_data/builtins.json` are **original prep-chef specs**. 
 - [USDA — Safe minimum internal temperatures](https://www.fsis.usda.gov/food-safety/safe-temperature-chart) — protein temps (cross-check with house policy)  
 - [Food Standards Australia New Zealand — food safety](https://www.foodstandards.gov.au/consumer/generalissues/foodsafety) — cold chain / events context  
 
-## By dish class (waves A–C)
+## By dish class (waves A–D)
 
 | Class | Example built-in ids | Suggested reading |
 |-------|----------------------|-------------------|
@@ -22,6 +22,7 @@ House recipes in `riviera_data/builtins.json` are **original prep-chef specs**. 
 | Couscous / harissa yoghurt | `lamb-shoulder-provencale-composed` | Couscous hydration; harissa heat by brand |
 | Platters / boxes | `grazing-box-standard`, `platter-*` | Assembly order (wet vs dry); allergen labelling |
 | Corporate bowls | `corporate-*-bowl` | Dress-to-order to avoid wilt; cold chain |
+| Wave D buffet / salads / kids | `chilli-garlic-prawns-chorizo-rocket`, `greek-style-pulled-beef-buffet`, `corporate-pesto-pasta-salad`, `kids-spaghetti-bolognese`, `funeral-mixed-hot-nibbles-box` | Buffet hold times; pasta salad dressing split; mild kids ragu |
 
 ## Updating this file
 

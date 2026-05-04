@@ -17,13 +17,13 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "wave",
-        choices=("a", "b", "c", "all"),
-        help="Which wave to append (all = a then b then c)",
+        choices=("a", "b", "c", "d", "all"),
+        help="Which wave to append (all = a then b then c then d)",
     )
     args = parser.parse_args()
 
     sys.path.insert(0, str(ROOT / "scripts"))
-    from riviera_expansion_recipes_data import WAVE_A, WAVE_B, WAVE_C
+    from riviera_expansion_recipes_data import WAVE_A, WAVE_B, WAVE_C, WAVE_D
 
     waves: list[tuple[str, list]]
     if args.wave == "a":
@@ -32,8 +32,10 @@ def main() -> None:
         waves = [("B", WAVE_B)]
     elif args.wave == "c":
         waves = [("C", WAVE_C)]
+    elif args.wave == "d":
+        waves = [("D", WAVE_D)]
     else:
-        waves = [("A", WAVE_A), ("B", WAVE_B), ("C", WAVE_C)]
+        waves = [("A", WAVE_A), ("B", WAVE_B), ("C", WAVE_C), ("D", WAVE_D)]
 
     data = json.loads(BUILTINS.read_text(encoding="utf-8"))
     existing = {r["id"] for r in data}
