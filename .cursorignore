@@ -1,0 +1,21 @@
+# Cursor index / broad-context hygiene (kitchen library). SSOT paths like
+# recipe_detail/ stay searchable; generated bulk and indexes are excluded.
+
+node_modules/
+.git/
+
+# Generated catalog / search indexes (rebuild via scripts)
+alpha_catalog/
+claude_index/
+claude_index_txt/
+combined_data/
+
+# Large bundled library JSON shards (catalog lives in recipe_detail/)
+kitchen_library_*.json
+
+# Raw scrapes and heavy static blobs (use targeted reads when needed)
+scraped_raw/
+notebooklm/
+
+# Optional: uncomment if flavour DB pulls too much into index
+# flavour_data/

@@ -21,6 +21,10 @@ Matches [.cursor/rules/ship-after-change.mdc](../../rules/ship-after-change.mdc)
 
 Skip only if the user explicitly opts out.
 
+## LLM context (tokens)
+
+Follow **`~/.cursor/rules/token-efficiency.mdc`** (global). This repo’s **[`.cursorignore`](../../../.cursorignore)** keeps bulk indexes (`claude_index/`, `alpha_catalog/`, etc.) out of broad Cursor index context; still use **targeted reads** for `recipe_detail/` (SSOT). Optional **local code-search MCP** options and a pilot checklist live in **[PrepFlow `AGENTS.md`](../../../../Prepflow-Ecosystem/prepflow-web/AGENTS.md)** under “Cursor: token-efficient discovery” — use there first if you add MCP; this static site rarely needs it.
+
 ## Directories
 
 | Path | Role |
