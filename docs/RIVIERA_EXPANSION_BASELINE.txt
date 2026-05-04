@@ -1,0 +1,11 @@
+# Riviera recipe expansion — rollback baseline
+
+Recorded before wave branches (see plan: riviera_web-sourced_recipes).
+
+- **Baseline commit (main):** a53587ae8e67a77be1ef81116f1fd25f8a2db3a1
+- **Local tag:** pre-riviera-recipe-expansion
+
+## Rollback
+
+- Nothing merged: delete feature branch.
+- After bad merge to main: `git revert -m 1 <merge_commit_sha>` or reset main to baseline SHA (single-maintainer only).
