@@ -1036,7 +1036,8 @@
       },
       {
         "qty": "800 g",
-        "item": "Passata"
+        "item": "Tomato Sugo",
+        "prep": "in-house or quality tinned"
       },
       {
         "qty": "500 g",
@@ -1084,7 +1085,7 @@
     "service": [
       "Reheat from frozen in a saucepan over medium heat, stirring, until reaching 75°C minimum. Alternatively reheat in microwave in 60-second bursts, stirring between. Use as sauce base or accompaniment as required."
     ],
-    "note": "TOMATO FLAG: This recipe contains passata (cooked tomato). The Kuschi exclusion applies to raw and fresh tomato as a key ingredient. Cooked sauce form (passata, reduced) may be acceptable — confirm with head chef before serving to Kuschi-restricted covers. The romesco is also a base for Vodka Sauce — apply the same flag to that recipe."
+    "note": "Made in-house using house tomato sugo. Freezes well — portion into PCs, label and freeze. Defrost overnight in coldroom. Also the base for Vodka Sauce."
   },
   {
     "id": "lemon-dill-aioli",
@@ -1262,7 +1263,7 @@
     "service": [
       "Reheat from cold in a saucepan over medium heat to 75°C minimum, stirring regularly. Thin with a small amount of pasta water or cream if needed. Use as a pasta sauce base or accompaniment."
     ],
-    "note": "TOMATO FLAG: This sauce uses Romesco as its base, which contains passata (cooked tomato). The Kuschi exclusion targets raw and fresh tomato — cooked and reduced sauce form may be acceptable, but confirm with head chef before serving to Kuschi-restricted covers. Tomato paste is also a cooked, concentrated form — apply the same flag. Sugar quantity updated from 'quarter cup' to 50 g (approx. equivalent) for metric consistency — taste and adjust as the romesco batch may vary in acidity."
+    "note": "Built on house romesco which uses in-house sugo. Sugar quantity approx. 50 g — taste and adjust as romesco batch acidity varies."
   },
   {
     "id": "whipped-butter",
@@ -1424,7 +1425,7 @@
   {
     "id": "labneh-tzatziki",
     "name": "Labneh Tzatziki",
-    "subtitle": "Grated Cucumber · Pickled Cucumber · Lemon",
+    "subtitle": "Pickled Cucumber · Pickled Cucumber Brine · Lemon",
     "type": "Sauce / Base",
     "course": "Sauce",
     "protein": [
@@ -1439,7 +1440,6 @@
     "label": "Labneh Tzatziki",
     "elements": [
       "Labneh",
-      "Grated Cucumber",
       "Pickled Cucumber",
       "Red & Brown Onion",
       "Garlic",
@@ -1451,17 +1451,12 @@
         "item": "Labneh"
       },
       {
-        "qty": "250 g",
-        "item": "Cucumber",
-        "prep": "grated, lightly salted, rested 10 minutes, moisture squeezed out — RAW CUCUMBER: see note"
-      },
-      {
-        "qty": "80 g",
+        "qty": "150 g",
         "item": "Pickled Cucumber",
         "prep": "finely diced"
       },
       {
-        "qty": "30 ml",
+        "qty": "50 ml",
         "item": "Pickled Cucumber Brine",
         "prep": "from house brine batch"
       },
@@ -1495,6 +1490,11 @@
         "prep": "finely microplaned"
       },
       {
+        "qty": "15 g",
+        "item": "Fresh Dill",
+        "prep": "finely chopped"
+      },
+      {
         "qty": "8 g",
         "item": "Salt Flakes",
         "prep": "to taste"
@@ -1503,27 +1503,20 @@
         "qty": "3 g",
         "item": "White Pepper",
         "prep": "to taste"
-      },
-      {
-        "qty": "10 g",
-        "item": "Fresh Dill",
-        "prep": "finely chopped — optional but recommended for flavour balance if cucumber is reduced"
       }
     ],
     "method_steps": [
-      "Grate cucumber on a box grater. Toss with a pinch of salt and rest in a colander for 10 minutes. Squeeze firmly in a clean cloth or with both hands to remove as much liquid as possible.",
       "Finely dice pickled cucumber. Very finely dice red and brown onion. Microplane garlic.",
-      "In a large bowl, combine labneh, grated cucumber, diced pickled cucumber, pickled cucumber brine, red onion, brown onion and grated garlic.",
-      "Add olive oil, lemon juice and lemon zest. If using dill, fold through now.",
-      "Season with salt and white pepper. Mix until completely uniform.",
-      "Taste and adjust — add more brine for tang, lemon for brightness, or salt as needed.",
+      "In a large bowl, combine labneh, diced pickled cucumber, pickled cucumber brine, red onion, brown onion, grated garlic and chopped dill.",
+      "Add olive oil, lemon juice and lemon zest. Season with salt and white pepper.",
+      "Mix until completely uniform. Taste and adjust — add more brine for tang, lemon for brightness, or salt as needed.",
       "Transfer to a labelled PC, press cling film to surface and refrigerate. Hold at 2–4°C. Use within 3 days."
     ],
     "service": [
       "Serve chilled. Use for chicken skewers, lamb dishes, mezze platters or canapé garnish.",
       "Stir well before each service. Portion into ramekins or pipe onto plates as required."
     ],
-    "note": "RAW CUCUMBER FLAG — KUSCHI EXCLUSION: This recipe currently contains 250 g grated raw cucumber, which is a Kuschi-excluded ingredient. For Kuschi-restricted covers or if raw cucumber is to be removed from the recipe entirely, substitute as follows: omit the 250 g grated raw cucumber; increase pickled cucumber to 120 g and pickled cucumber brine to 50 ml to maintain moisture balance and flavour; increase chopped dill to 20 g to reinforce the herbal character. The substituted version is cucumber-free from a raw ingredient standpoint and is fully compliant. Confirm with head chef which version is the house standard going forward. Scaled from the 3 kg house batch."
+    "note": "House version uses pickled cucumber (not raw) — diced pickled cucumber + brine gives brightness and crunch without raw cucumber. Scale: 1 kg labneh batch. Scaled from the 3 kg house batch."
   },
   {
     "id": "pickled-cucumber-brine",
@@ -2223,7 +2216,7 @@
   {
     "id": "charcuterie-board-classic",
     "name": "Charcuterie Board",
-    "subtitle": "Salami · Prosciutto · Blue · Brie · Crackers",
+    "subtitle": "Brie · Blue · Cheddar · Prosciutto · Salami · Crackers",
     "type": "Platter",
     "course": "Platter",
     "protein": [
@@ -2237,39 +2230,41 @@
     "elements": [
       "Cured Meats",
       "Cheese Selection",
-      "Fruit & Condiments",
-      "Crackers"
+      "Crackers",
+      "Grapes",
+      "Chef's Dip",
+      "Dried Citrus & Fruit Garnish"
     ],
     "ingredients": [
       {
         "qty": "120 g",
-        "item": "Fancy Salami",
-        "prep": "sliced thin, folded into quarters or roses"
+        "item": "Salami",
+        "prep": "thin sliced, folded into quarters or roses"
       },
       {
         "qty": "100 g",
         "item": "Prosciutto",
-        "prep": "hand-torn into loose ribbons — do not slice to order on a board, pre-torn portions present better"
-      },
-      {
-        "qty": "150 g",
-        "item": "Blue Cheese",
-        "prep": "temperate to 16–18°C before service — broken into irregular pieces, not pre-sliced"
-      },
-      {
-        "qty": "150 g",
-        "item": "Mersey Valley Cheese",
-        "prep": "temperate to 16–18°C — portioned into wedges or scooped rustic"
+        "prep": "hand-torn into loose ribbons"
       },
       {
         "qty": "150 g",
         "item": "Brie",
-        "prep": "temperate to 16–18°C — cut into wedges with rind intact, fanned from the point"
+        "prep": "tempered to 16–18°C, cut into wedges with rind intact"
       },
       {
-        "qty": "80 g",
-        "item": "Dried Fruit",
-        "prep": "mixed — dried apricots, figs, or sultanas as available"
+        "qty": "150 g",
+        "item": "Blue Cheese",
+        "prep": "tempered to 16–18°C, broken into irregular pieces"
+      },
+      {
+        "qty": "150 g",
+        "item": "Cheddar",
+        "prep": "tempered to 16–18°C, sliced or portioned into wedges"
+      },
+      {
+        "qty": "120 g",
+        "item": "Crackers — 2 varieties",
+        "prep": "60 g each e.g. water crackers + seeded crispbread"
       },
       {
         "qty": "150 g",
@@ -2277,46 +2272,42 @@
         "prep": "washed, cut into small clusters of 4–6 berries"
       },
       {
-        "qty": "60 g",
-        "item": "Crackers — Variety 1",
-        "prep": "water crackers or lavosh"
+        "qty": "100 g",
+        "item": "Chef's Dip of Choice",
+        "prep": "e.g. quince paste, romesco, caramelised onion, or hot honey — served in a small ramekin"
       },
       {
-        "qty": "60 g",
-        "item": "Crackers — Variety 2",
-        "prep": "seeded or wholegrain crispbread"
+        "qty": "4–6 slices",
+        "item": "Dried Orange Slices",
+        "prep": "whole, arranged upright or flat for height and colour"
       },
       {
-        "qty": "40 g",
-        "item": "Whole Grain Mustard",
-        "prep": "served in a small ramekin on the board"
+        "qty": "4–6 slices",
+        "item": "Dried Lemon Slices",
+        "prep": "whole, colour contrast to orange"
       },
       {
-        "qty": "30 g",
-        "item": "Honey",
-        "prep": "mild variety in a small ramekin — pairs with blue cheese"
-      },
-      {
-        "qty": "30 g",
-        "item": "Cornichons",
-        "prep": "drained — acid cut for the fat-heavy board"
+        "qty": "80 g",
+        "item": "Dried Fruit",
+        "prep": "dates and/or dried apricots, halved or whole"
       }
     ],
     "method_steps": [
-      "TEMPER CHEESES: Remove all cheeses from coldroom 30–40 minutes before assembly. Cheese served below 14°C loses aroma and paste texture — this is non-negotiable for flavour quality. Do not temper in a warm kitchen for more than 45 minutes.",
-      "BOARD PREP: Select a board appropriate to the yield — minimum 45 cm × 35 cm for this volume. Wipe board with a clean damp cloth. Place two small ramekins (for mustard and honey) on the board first — these anchor the layout.",
-      "CHEESE FIRST: Position three cheese pieces at different zones of the board — blue at one end, brie in the centre, Mersey Valley at the other end. Space them so guests can access each without disturbing others.",
-      "MEATS: Fan salami roses adjacent to the blue cheese. Arrange torn prosciutto ribbons loosely near the brie — the fat of the prosciutto pairs with the creamy paste. Avoid stacking meats flat — layered folds create height and make the board visually approachable.",
-      "FILL: Scatter grape clusters and dried fruit into the gaps between cheese and meat zones. Distribute crackers in two or three fanned stacks along the board edge — keep crackers away from wet elements (grapes, cornichons) to prevent sogging.",
-      "CONDIMENTS: Fill ramekins with 40 g whole grain mustard and 30 g honey. Place cornichons in or beside the mustard ramekin. These three condiments provide the acid, sweet and sharp notes that balance the fat-forward board.",
+      "TEMPER CHEESES: Remove all three cheeses from coldroom 30–40 minutes before assembly. Cheese served below 14°C loses aroma and texture — this is non-negotiable.",
+      "BOARD PREP: Select a board minimum 45 cm × 35 cm. Place a small ramekin for the chef's dip first — this anchors the layout.",
+      "CHEESE FIRST: Position the three cheeses at different zones across the board — brie centre, blue at one end, cheddar at the other. Space them so guests can access each without disturbing the others.",
+      "MEATS: Fan salami roses adjacent to the blue cheese. Arrange torn prosciutto ribbons loosely near the brie. Fold and layer — do not lay flat.",
+      "CRACKERS: Fan two varieties along opposite board edges, away from wet elements (grapes, dip) to prevent sogging.",
+      "FRUIT & GARNISH: Scatter grape clusters, dates and apricots into the gaps between cheese and meat zones. Stand dried orange and lemon slices upright against cheese pieces for height and colour contrast.",
+      "DIP: Fill ramekin with chef's dip of choice. Position centrally or near the cheddar.",
       "HOLD: If assembling more than 20 minutes before service, cover loosely with cling film and return to coldroom. Remove 10 minutes before service."
     ],
     "service": [
-      "Place board on table or pass at room temperature — cheeses must be at 16–18°C at service time for correct flavour and texture.",
-      "For passed canape service: replenish crackers every 10 minutes as they are the first item depleted. Have a pre-portioned refill tray in coldroom.",
-      "Replace any picked-at or broken cheese pieces if the board is on display for longer than 30 minutes — presentation integrity matters for a platter product."
+      "Place board at room temperature — cheeses must be at 16–18°C at service for correct flavour and texture.",
+      "Replenish crackers every 10 minutes during passed or display service — they go first.",
+      "Replace picked-at cheese pieces if board is on display longer than 30 minutes."
     ],
-    "note": "All 'as needed' quantities have been converted to specific gram weights appropriate for a 10–12 person board. Cornichons and whole grain mustard added — without an acid element this board has no structural balance; fat and salt dominate without a counterpoint. Honey added for the blue cheese pairing — a standard professional expectation. Temper timing made explicit with temperature range."
+    "note": "Chef's dip rotates by season or event — quince paste pairs with blue, hot honey with brie, romesco with cheddar and meats. Dried citrus slices are a house garnish — source pre-dried or dehydrate in-house at 80°C for 3–4 hours. Crackers must be kept away from grapes and dip ramekin to stay crisp."
   },
   {
     "id": "nibble-platter-40",
