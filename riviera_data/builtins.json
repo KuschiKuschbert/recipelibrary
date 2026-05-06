@@ -361,6 +361,11 @@
         "qty": "6",
         "item": "Eggs",
         "prep": "whisked with a splash of cold water, for egg wash — crumbing station"
+      },
+      {
+        "qty": "as needed",
+        "item": "Romesco Sugo",
+        "prep": "house-made — needed for baking; have ready before cook stage"
       }
     ],
     "method_steps": [
@@ -370,7 +375,7 @@
       "TASTE TEST: Roll a 20 g test ball, flatten into a patty and pan-fry until cooked through. Taste for salt, pepper and herb balance. Adjust the full batch before rolling.",
       "ROLL: Wet hands to prevent sticking. Weigh and roll into 60 g balls. Press firmly so there are no surface cracks or air pockets. Place on lined trays as you go — do not stack. Rest in fridge for 15 minutes before crumbing.",
       "CRUMB: Set up a crumbing station with a tray of 500 g GF breadcrumbs and 6 whisked eggs for egg wash. Working in batches, dip each 60 g ball in egg wash — eggs whisked with cold water, no milk (let excess drip off), then roll in GF breadcrumbs to coat evenly. Press lightly to ensure the crumb adheres with no bare patches. Return crumbed balls to lined trays in a single layer. Keep cold between batches.",
-      "BAKE / FREEZE OPTIONS: Crumbed polpette can be baked or held frozen. TO BAKE: Arrange in a single layer on oiled trays. Bake at 180°C (fan) for 18–22 minutes until deep golden and internal temperature reaches 72°C. Alternatively, deep-fry at 175°C for 4–5 minutes until golden, then finish in oven if needed. TO FREEZE RAW: Lay crumbed balls on lined trays and blast-chill or freeze uncovered until solid (minimum 2 hours), then transfer to labelled vacuum bags or sealed containers. Cook from frozen at 180°C for 25–28 minutes.",
+      "BAKE: Ladle enough romesco sugo into deep gastronorm bains to cover the base generously. Arrange crumbed polpette in a single layer — do not stack. Ladle more romesco over the top so each ball is at least half submerged. Cover bains tightly with foil. Steam-bake at 160°C (steam setting) for 30 minutes total — remove foil at 15 minutes, carefully flip each ball, re-cover and return for the remaining 15 minutes. Internal temperature must reach 72°C at the centre. The crumb will absorb romesco and become tender — this is correct.",
       "COOL & STORE: Allow to cool in the sauce. Once below 20°C, portion into PCs in serves of 3 with sauce distributed evenly. Label with name and date. Freeze in crate labelled POLPETTE."
     ],
     "service": [
