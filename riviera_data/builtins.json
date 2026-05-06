@@ -277,19 +277,21 @@
   },
   {
     "id": "veal-meatballs",
-    "name": "Slow Cooked Veal Meatballs",
-    "subtitle": "Romesco Sugo · Toasted Focaccia · Gremolata",
+    "name": "Polpette",
+    "subtitle": "Beef & Pork · Romesco Sugo · Focaccia · Gremolata",
     "type": "Tapas",
     "course": "Tapas",
     "protein": [
-      "veal"
+      "beef",
+      "pork",
+      "dairy"
     ],
     "diet": [
       "Gluten-Free"
     ],
     "method": "Slow Bake",
-    "yield": "90 balls @ 80g",
-    "label": "Meatballs",
+    "yield": "Approx. 190–210 balls @ 60g (pre-crumb weight)",
+    "label": "Polpette",
     "elements": [
       "Meatballs",
       "Romesco Sugo",
@@ -299,88 +301,85 @@
     ],
     "ingredients": [
       {
-        "qty": "5 kg",
-        "item": "Veal Mince"
+        "qty": "4.5 kg",
+        "item": "Beef Mince",
+        "prep": "minimum 20% fat"
       },
       {
-        "qty": "600 g",
-        "item": "GF Breadcrumbs"
+        "qty": "3.5 kg",
+        "item": "Pork Mince",
+        "prep": "minimum 20% fat"
       },
       {
-        "qty": "¾ loaf",
-        "item": "GF Bread Loaf",
-        "prep": "blitzed into coarse crumbs"
+        "qty": "800 g",
+        "item": "GF Breadcrumbs",
+        "prep": "for panade"
       },
       {
-        "qty": "500 ml",
-        "item": "Thickened Cream",
-        "prep": "for soaking panade"
+        "qty": "2.5 kg",
+        "item": "Full-Cream Milk",
+        "prep": "for soaking breadcrumbs"
       },
       {
-        "qty": "4",
-        "item": "Brown Onions",
-        "prep": "blitzed"
-      },
-      {
-        "qty": "20",
-        "item": "Garlic Cloves",
-        "prep": "blitzed"
-      },
-      {
-        "qty": "400 g",
-        "item": "Parmesan Cheese",
-        "prep": "finely grated"
-      },
-      {
-        "qty": "30 g",
-        "item": "Flat Leaf Italian Parsley",
-        "prep": "finely chopped"
-      },
-      {
-        "qty": "20 g",
-        "item": "Basil",
-        "prep": "finely chopped"
-      },
-      {
-        "qty": "20 g",
-        "item": "Oregano",
-        "prep": "finely chopped"
-      },
-      {
-        "qty": "10 g",
-        "item": "Mixed Italian Herbs — Dried"
-      },
-      {
-        "qty": "25 g",
-        "item": "Salt"
-      },
-      {
-        "qty": "15 g",
-        "item": "Cracked Pepper"
-      },
-      {
-        "qty": "5",
+        "qty": "18",
         "item": "Eggs"
+      },
+      {
+        "qty": "500 g",
+        "item": "Brown Onion",
+        "prep": "finely diced or blitzed"
+      },
+      {
+        "qty": "200 g",
+        "item": "Garlic",
+        "prep": "crushed or blitzed"
+      },
+      {
+        "qty": "1 bunch",
+        "item": "Fresh Thyme",
+        "prep": "leaves stripped from stems"
+      },
+      {
+        "qty": "1 kg",
+        "item": "Parmesan — Grana Padano",
+        "prep": "blitzed"
+      },
+      {
+        "qty": "250 g",
+        "item": "Salt Flakes"
+      },
+      {
+        "qty": "125 g",
+        "item": "Cracked Black Pepper"
+      },
+      {
+        "qty": "500 g",
+        "item": "GF Breadcrumbs",
+        "prep": "for crumbing coat — keep separate from panade crumbs"
+      },
+      {
+        "qty": "6",
+        "item": "Eggs",
+        "prep": "whisked, for egg wash — crumbing station"
       }
     ],
     "method_steps": [
-      "PANADE — CRITICAL STEP: Combine the GF breadcrumbs and blitzed GF bread loaf in a large bowl. Pour all 500ml thickened cream over the breadcrumb and bread mixture. Stir to coat, then press down and leave to soak for 10–15 minutes until the cream is fully absorbed and the mixture resembles a thick, soft paste. This is the panade — it provides moisture, a tender texture, and helps bind the meatballs without toughening the veal.",
-      "While the panade soaks, blitz onion and garlic together in the food processor until finely processed. Do not drain — the onion juices add flavour and moisture.",
-      "Add the blitzed onion and garlic mixture to the soaked panade and fold through.",
-      "In a large mixing bowl, combine veal mince, panade mixture, finely grated parmesan, all fresh herbs, dried herbs, salt, pepper and eggs. Mix by hand until just combined — do not overwork the mince or the meatballs will tighten and become dense. The mixture should feel moist and hold its shape when pressed.",
-      "Fry a small test ball (15g) in a hot pan and taste. Adjust seasoning before rolling the full batch.",
-      "Wet your hands to prevent sticking. Weigh and roll mixture into 80g balls — keep them firm and round with no surface cracks. Place on lined trays as you go.",
-      "Arrange meatballs in a single layer in deep gastronorm bains. Cover generously with romesco sugo — ensure all meatballs are at least two-thirds submerged in sauce to prevent drying during the slow bake.",
-      "Cover bains tightly with foil. Bake in conventional oven at 150°C for 60–70 minutes. Meatballs are cooked when they reach an internal temperature of 72°C and feel firm but give slightly when pressed. Allow to cool in the sauce — this keeps them moist and allows the flavours to develop.",
-      "Once cooled to below 20°C, portion into round or rectangle PCs in serves of 3 meatballs. Distribute romesco sauce evenly across all portions. Label with item name and date. Freeze in crate labelled MEATBALLS."
+      "PANADE: Place 800 g GF breadcrumbs in a large deep container. Pour all 2.5 kg full-cream milk over the breadcrumbs. Press down to submerge and rest for 15–20 minutes until the breadcrumbs have fully absorbed the milk and become a thick, wet paste. Do not squeeze out the milk — the full soak is intentional and gives the polpette their moisture and tenderness.",
+      "ONION & GARLIC: Sweat 500 g finely diced onion and 200 g crushed garlic in a splash of oil over medium heat on the 6-burner for 8–10 minutes until fully soft and translucent. Do not colour. Cool completely before adding to the mix.",
+      "COMBINE: In a large mixing bin, combine 4.5 kg beef mince, 3.5 kg pork mince, the full soaked panade, cooled onion and garlic, stripped thyme leaves, 1 kg blitzed parmesan, 18 eggs, 250 g salt and 125 g cracked pepper. Mix by hand until just combined — do not overwork. The mix should feel moist, cohesive and slightly tacky. Overworking develops the proteins and produces a tight, rubbery texture.",
+      "TASTE TEST: Roll a 20 g test ball, flatten into a patty and pan-fry until cooked through. Taste for salt, pepper and herb balance. Adjust the full batch before rolling.",
+      "ROLL: Wet hands to prevent sticking. Weigh and roll into 60 g balls. Press firmly so there are no surface cracks or air pockets. Place on lined trays as you go — do not stack. Rest in fridge for 15 minutes before crumbing.",
+      "CRUMB: Set up a crumbing station with a tray of 500 g GF breadcrumbs and 6 whisked eggs for egg wash. Working in batches, dip each 60 g ball in egg wash (let excess drip off), then roll in GF breadcrumbs to coat evenly. Press lightly to ensure the crumb adheres with no bare patches. Return crumbed balls to lined trays in a single layer. Keep cold between batches.",
+      "BAKE / FREEZE OPTIONS: Crumbed polpette can be baked or held frozen. TO BAKE: Arrange in a single layer on oiled trays. Bake at 180°C (fan) for 18–22 minutes until deep golden and internal temperature reaches 72°C. Alternatively, deep-fry at 175°C for 4–5 minutes until golden, then finish in oven if needed. TO FREEZE RAW: Lay crumbed balls on lined trays and blast-chill or freeze uncovered until solid (minimum 2 hours), then transfer to labelled vacuum bags or sealed containers. Cook from frozen at 180°C for 25–28 minutes.",
+      "COOL & STORE: Allow to cool in the sauce. Once below 20°C, portion into PCs in serves of 3 with sauce distributed evenly. Label with name and date. Freeze in crate labelled POLPETTE."
     ],
     "service": [
-      "Reheat portioned meatballs and sauce in the microwave on medium-high in 60-second bursts until steaming throughout. Check internal temperature — minimum 75°C before service.",
-      "Transfer reheated meatballs and sauce to a medium serving bowl. Ensure there is adequate sauce — add extra warmed romesco if portions look dry.",
-      "Toast 3 slices of focaccia, cut 2cm thick, on the kick oven or in a hot pan with a little oil until golden on both sides.",
-      "Top meatballs with a generous pinch of freshly made gremolata and a fine grating of Manchego. Arrange focaccia alongside. Serve immediately."
+      "Reheat portioned polpette and sauce in the microwave in 60-second bursts until steaming throughout. Check internal temperature — minimum 75°C before service.",
+      "Transfer to a medium serving bowl. Add extra warmed romesco if portions look dry.",
+      "Toast 3 slices of focaccia (2 cm thick) on the kick oven or flat grill until golden on both sides.",
+      "Top polpette with a generous pinch of freshly made gremolata and fine-grated Manchego. Arrange focaccia alongside. Serve immediately."
     ],
-    "note": "The panade (soaked breadcrumb) is essential — do not skip or rush the 10–15 minute soak time. Cream must be fully absorbed before adding to the mince. Overworking the mince after combining will result in tough, rubbery meatballs. Mix only until just combined. Prep time approximately 45 minutes per batch of 90 balls."
+    "note": "Beef and pork mince replaces the original veal — the 56/44 split gives depth from the beef and fat/sweetness from the pork. Panade is the full 2.5 kg milk — do not reduce or squeeze out. The wet panade is what gives these polpette their moisture and tenderness. Do not overwork the mix after combining. Balls are rolled at 60 g (pre-crumb weight) then crumbed in GF breadcrumbs for a crisp exterior. Keep mix cold throughout. Prep time approximately 75–90 minutes per full batch."
   },
   {
     "id": "chicken-skewer",
