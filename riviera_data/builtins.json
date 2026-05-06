@@ -7980,11 +7980,6 @@
         "prep": "plus extra for bain"
       },
       {
-        "qty": "TBC",
-        "item": "Salt Flakes",
-        "prep": "quantity to be confirmed by head chef"
-      },
-      {
         "qty": "as needed",
         "item": "Fresh Thyme",
         "prep": "tapas topping"
@@ -7998,6 +7993,11 @@
         "qty": "as needed",
         "item": "Seedless Grapes",
         "prep": "tapas topping — halved or left whole"
+      },
+      {
+        "qty": "as needed",
+        "item": "Salt Flakes",
+        "prep": "scattered on top before baking"
       }
     ],
     "method_steps": [
@@ -8009,7 +8009,7 @@
       "STRETCH & FOLD #2: Repeat the stretch and fold process as above — 3–4 rounds. The dough should feel smoother and more elastic than after the first round.",
       "COLD PROOF: Cover the dough tightly and refrigerate overnight (minimum 10 hours, maximum 18 hours). The dough will continue to develop flavour and structure in the cold.",
       "NEXT MORNING — PAN: Generously coat shallow gastronorm bains with olive oil — do not be shy, the oil is structural and creates the crust. Remove dough from the fridge. Portion and fold the dough into the oiled bains. Do not stretch or force it flat — it will relax and fill the bain on its own. Allow to rest and rise at room temperature for 30 minutes.",
-      "DIMPLE & TOP: With oiled fingers, dimple the dough firmly and evenly across the entire surface. For the tapas version, press in fresh thyme sprigs, rosemary and whole or halved grapes into the dimples. Drizzle with olive oil.",
+      "DIMPLE & TOP: With oiled fingers, dimple the dough firmly and evenly across the entire surface. For the tapas version, press in fresh thyme sprigs, rosemary and whole or halved grapes into the dimples. Drizzle with olive oil. Scatter salt flakes generously over the top.",
       "BAKE — STAGE 1: Cover bains tightly with foil or lids. Bake at 220°C (conventional) for 30 minutes. The steam trapped inside creates an open, airy crumb.",
       "BAKE — STAGE 2: Remove covering. Reduce oven to 180°C. Bake uncovered for a further 30 minutes until the top is deep golden and the edges are crisp and pulling away from the bain.",
       "COOL: Remove from bains immediately and place on a cooling rack. Do not rest in the bain — the bottom will sweat and the crust will soften. Allow to cool for at least 20 minutes before slicing."
@@ -8019,6 +8019,6 @@
       "Serve warm or at room temperature. Can be lightly toasted on the flat grill or kick oven to order.",
       "For polpette service: slice 2 cm thick and grill both sides until golden."
     ],
-    "note": "Salt quantity not included in the provided recipe — confirm with head chef before production. Standard for this flour weight would be approximately 45–50 g salt flakes added with the flour. Two-stage bake (covered then uncovered) is essential — covered stage builds the crumb, uncovered stage builds the crust. Do not skip the cooling rack step."
+    "note": "Two-stage bake (covered then uncovered) is essential — covered stage builds the crumb, uncovered stage builds the crust. Do not skip the cooling rack step."
   }
 ]
