@@ -1995,6 +1995,50 @@ button.kuschi-flavor-retry:hover {
   background: var(--bg2);
   color: var(--text);
 }
+.prep-subtabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 12px;
+}
+.prep-subtab {
+  min-height: 44px;
+  padding: 0 18px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  letter-spacing: 0.3px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s;
+}
+.prep-subtab:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-hover);
+  color: var(--text);
+}
+.prep-subtab--active {
+  background: var(--gold-dim);
+  border-color: rgba(201, 169, 110, 0.45);
+  color: var(--gold-light);
+}
+.prep-add-panel {
+  margin-top: 4px;
+}
+.prep-add-hint {
+  font-size: 13px;
+  color: var(--text3);
+  line-height: 1.55;
+}
+.prep-add-hint--tab {
+  margin: 8px 0 0;
+}
 .prep-hide-done {
   display: flex;
   align-items: center;
@@ -2017,15 +2061,49 @@ button.kuschi-flavor-retry:hover {
   font-size: 14px;
   color: var(--text3);
   margin: 12px 0;
+  line-height: 1.55;
 }
-.prep-task-row {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1.6fr) minmax(0, 7.5rem) minmax(0, 6.5rem) minmax(0, 1fr) auto;
-  gap: 8px;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  font-size: 13px;
+.prep-task-card-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 10px 12px;
+  margin-bottom: 12px;
+}
+.prep-task-card {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+.prep-task-card--prio-high {
+  border-color: rgba(201, 169, 110, 0.35);
+  background: rgba(201, 169, 110, 0.08);
+}
+.prep-task-card--prio-low {
+  border-color: rgba(255, 255, 255, 0.06);
+  opacity: 0.95;
+}
+.prep-task-card--done {
+  opacity: 0.62;
+}
+.prep-task-card-title {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.35;
+  margin-bottom: 6px;
+}
+.prep-task-card-meta {
+  display: block;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.45;
 }
 .prep-task-done {
   display: flex;
@@ -2040,64 +2118,18 @@ button.kuschi-flavor-retry:hover {
   height: 18px;
   accent-color: var(--green);
 }
-.prep-task-title,
-.prep-task-notes {
-  min-width: 0;
-  width: 100%;
-  min-height: 40px;
-  padding: 8px 10px;
-  font-size: 13px;
-  font-family: inherit;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--bg2);
-  color: var(--text);
+.prep-task-done--card {
+  align-self: center;
+  flex-shrink: 0;
+  min-height: 44px;
+  padding: 0 4px;
 }
-.prep-task-assign,
-.prep-task-priority {
-  min-width: 0;
-  width: 100%;
-  min-height: 40px;
-  padding: 6px 8px;
-  font-size: 12px;
-  font-family: inherit;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--bg2);
-  color: var(--text);
-}
-.prep-task-del {
-  font-size: 12px;
-  padding: 8px 10px;
-  white-space: nowrap;
-}
-@media (max-width: 860px) {
-  .prep-task-row {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      'done done'
-      'title title'
-      'assign priority'
-      'notes notes'
-      'del del';
+@media (max-width: 520px) {
+  .prep-task-card-row {
+    flex-direction: column;
+    align-items: stretch;
   }
-  .prep-task-row .prep-task-done {
-    grid-area: done;
-  }
-  .prep-task-row .prep-task-title {
-    grid-area: title;
-  }
-  .prep-task-row .prep-task-assign {
-    grid-area: assign;
-  }
-  .prep-task-row .prep-task-priority {
-    grid-area: priority;
-  }
-  .prep-task-row .prep-task-notes {
-    grid-area: notes;
-  }
-  .prep-task-row .prep-task-del {
-    grid-area: del;
-    justify-self: start;
+  .prep-task-done--card {
+    align-self: flex-end;
   }
 }

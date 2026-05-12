@@ -1,5 +1,6 @@
 /**
  * Prep board: actor chips (Kuschi, Ash, custom teammates) + task list per Riviera or kitchen book.
+ * Tasks are immutable after save (read-only card); only Done may change. All tasks / Add task subtabs.
  */
 (function () {
   'use strict';
@@ -24,9 +25,11 @@
 
   function sortTasksForDisplay(tasks, hideDone) {
     var list = (tasks || []).slice();
-    if (hideDone) list = list.filter(function (x) {
-      return !x.done;
-    });
+    if (hideDone) {
+      list = list.filter(function (x) {
+        return !x.done;
+      });
+    }
     list.sort(function (a, b) {
       if (!!a.done !== !!b.done) return a.done ? 1 : -1;
       var pa = weightPriority(a.priority);
@@ -48,6 +51,20 @@
     return out;
   }
 
+  function assigneeLabelForId(doc, id) {
+    var actors = allActors(doc);
+    for (var i = 0; i < actors.length; i++) {
+      if (actors[i].id === id) return actors[i].label;
+    }
+    return id || '—';
+  }
+
+  function priorityLabel(p) {
+    if (p === 'high') return 'High';
+    if (p === 'low') return 'Low';
+    return 'Medium';
+  }
+
   function fillAssigneeSelect(sel, doc) {
     if (!sel) return;
     var cur = sel.value;
@@ -63,9 +80,16 @@
     sel.value = ok ? cur : doc.selectedId || 'kuschi';
   }
 
+  function syncAddPanelVisibility(addPanelId, subTab) {
+    if (!addPanelId) return;
+    var p = document.getElementById(addPanelId);
+    if (p) p.hidden = subTab !== 'add';
+  }
+
   function create(config) {
     var overlayId = config.overlayId;
     var bodyId = config.bodyId;
+    var addPanelId = config.addPanelId || '';
     var formIds = config.formIds || {};
     var bookId =
       config.bookId != null && String(config.bookId).trim() !== ''
@@ -79,7 +103,9 @@
           };
 
     function loadDoc() {
-      if (!window.KuschiUserRecipes) return { selectedId: 'kuschi', employees: [], tasks: [], hideDone: false };
+      if (!window.KuschiUserRecipes) {
+        return { selectedId: 'kuschi', employees: [], tasks: [], hideDone: false, prepSubTab: 'list' };
+      }
       if (bookId) return KuschiUserRecipes.loadBookPrepBoard(bookId);
       return KuschiUserRecipes.loadRivieraPrepBoard();
     }
@@ -97,7 +123,10 @@
 
       var selected = doc.selectedId || 'kuschi';
       var hideDone = !!doc.hideDone;
+      var subTab = doc.prepSubTab === 'add' ? 'add' : 'list';
       var sorted = sortTasksForDisplay(doc.tasks, hideDone);
+
+      syncAddPanelVisibility(addPanelId, subTab);
 
       var chipHtml = function (id, label, kind) {
         var pressed = selected === id ? 'true' : 'false';
@@ -129,66 +158,59 @@
       var teammateInputId = formIds.teammate || '';
       var teammatePh = teammateInputId ? ' id="' + escAttr(teammateInputId) + '"' : '';
 
-      var rows = sorted
-        .map(function (t) {
-          var tid = escAttr(t.id);
-          var actors = allActors(doc);
-          var assignOpts = actors
-            .map(function (a) {
-              var sel = t.assigneeId === a.id ? ' selected' : '';
-              return '<option value="' + escAttr(a.id) + '"' + sel + '>' + esc(a.label) + '</option>';
-            })
-            .join('');
-          var ph = t.priority || 'medium';
-          var hSel = ph === 'high' ? ' selected' : '';
-          var mSel = ph === 'medium' ? ' selected' : '';
-          var lSel = ph === 'low' ? ' selected' : '';
-          var doneCh = t.done ? ' checked' : '';
-          var notesVal = t.notes != null ? escAttr(t.notes) : '';
-          return (
-            '<div class="prep-task-row" data-task-id="' +
-            tid +
-            '">' +
-            '<label class="prep-task-done"><input type="checkbox" data-prep-act="toggle-done" data-task-id="' +
-            tid +
-            '"' +
-            doneCh +
-            ' /><span>Done</span></label>' +
-            '<input type="text" class="prep-task-title" data-prep-act="task-title" data-task-id="' +
-            tid +
-            '" value="' +
-            escAttr(t.title) +
-            '" />' +
-            '<select class="prep-task-assign" data-prep-act="task-assign" data-task-id="' +
-            tid +
-            '">' +
-            assignOpts +
-            '</select>' +
-            '<select class="prep-task-priority" data-prep-act="task-priority" data-task-id="' +
-            tid +
-            '">' +
-            '<option value="high"' +
-            hSel +
-            '>High</option>' +
-            '<option value="medium"' +
-            mSel +
-            '>Medium</option>' +
-            '<option value="low"' +
-            lSel +
-            '>Low</option>' +
-            '</select>' +
-            '<input type="text" class="prep-task-notes" data-prep-act="task-notes" data-task-id="' +
-            tid +
-            '" placeholder="Notes" value="' +
-            notesVal +
-            '" />' +
-            '<button type="button" class="btn-secondary prep-task-del" data-prep-act="del-task" data-task-id="' +
-            tid +
-            '">Remove</button>' +
-            '</div>'
-          );
-        })
-        .join('');
+      var subListSel = subTab === 'list' ? 'true' : 'false';
+      var subAddSel = subTab === 'add' ? 'true' : 'false';
+
+      var listBlock = '';
+      if (subTab === 'list') {
+        var rows = sorted
+          .map(function (t) {
+            var tid = escAttr(t.id);
+            var ph = t.priority || 'medium';
+            var doneCh = t.done ? ' checked' : '';
+            var assignLabel = assigneeLabelForId(doc, t.assigneeId);
+            var prLab = priorityLabel(ph);
+            var notesStr = t.notes != null ? String(t.notes).trim() : '';
+            var metaParts = [assignLabel, prLab];
+            if (notesStr) metaParts.push(notesStr);
+            var meta = metaParts.map(function (x) {
+              return esc(x);
+            }).join(' · ');
+            var cardMod =
+              (t.done ? ' prep-task-card--done' : '') +
+              (ph === 'high' ? ' prep-task-card--prio-high' : ph === 'low' ? ' prep-task-card--prio-low' : '');
+            return (
+              '<div class="prep-task-card-row">' +
+              '<div class="prep-task-card' +
+              cardMod +
+              '" role="listitem">' +
+              '<span class="prep-task-card-title">' +
+              esc(t.title) +
+              '</span>' +
+              '<span class="prep-task-card-meta">' +
+              meta +
+              '</span>' +
+              '</div>' +
+              '<label class="prep-task-done prep-task-done--card"><input type="checkbox" data-prep-act="toggle-done" data-task-id="' +
+              tid +
+              '"' +
+              doneCh +
+              ' /><span>Done</span></label>' +
+              '</div>'
+            );
+          })
+          .join('');
+        listBlock =
+          '<label class="prep-hide-done"><input type="checkbox" data-prep-act="toggle-hide-done"' +
+          (hideDone ? ' checked' : '') +
+          ' /> Hide completed</label>' +
+          '<div class="prep-task-list" role="list">' +
+          (rows || '<p class="prep-empty">No tasks yet. Switch to <strong>Add task</strong> to create one.</p>') +
+          '</div>';
+      } else {
+        listBlock =
+          '<p class="prep-add-hint prep-add-hint--tab">Tasks are <strong>fixed</strong> after you save them — only <strong>Done</strong> can be changed on the All tasks tab.</p>';
+      }
 
       body.innerHTML =
         '<div class="prep-actor-block">' +
@@ -203,12 +225,19 @@
         '<button type="button" class="btn-secondary" data-prep-act="add-teammate">Add teammate</button>' +
         '</div>' +
         '</div>' +
-        '<label class="prep-hide-done"><input type="checkbox" data-prep-act="toggle-hide-done"' +
-        (hideDone ? ' checked' : '') +
-        ' /> Hide completed</label>' +
-        '<div class="prep-task-list">' +
-        (rows || '<p class="prep-empty">No tasks yet. Add one below.</p>') +
-        '</div>';
+        '<div class="prep-subtabs" role="tablist" aria-label="Prep sections">' +
+        '<button type="button" class="prep-subtab' +
+        (subTab === 'list' ? ' prep-subtab--active' : '') +
+        '" role="tab" aria-selected="' +
+        subListSel +
+        '" data-prep-act="subtab" data-subtab="list">All tasks</button>' +
+        '<button type="button" class="prep-subtab' +
+        (subTab === 'add' ? ' prep-subtab--active' : '') +
+        '" role="tab" aria-selected="' +
+        subAddSel +
+        '" data-prep-act="subtab" data-subtab="add">Add task</button>' +
+        '</div>' +
+        listBlock;
 
       var assigneeFormEl = formIds.assignee ? document.getElementById(formIds.assignee) : null;
       fillAssigneeSelect(assigneeFormEl, loadDoc());
@@ -219,6 +248,15 @@
       if (!btn) return;
       var act = btn.getAttribute('data-prep-act');
       var doc = loadDoc();
+
+      if (act === 'subtab') {
+        var st = btn.getAttribute('data-subtab');
+        if (st !== 'list' && st !== 'add') return;
+        doc.prepSubTab = st;
+        saveDoc(doc);
+        renderBody();
+        return;
+      }
 
       if (act === 'select-actor') {
         var aid = btn.getAttribute('data-actor-id');
@@ -261,17 +299,6 @@
         renderBody();
         return;
       }
-
-      if (act === 'del-task') {
-        var tid2 = btn.getAttribute('data-task-id');
-        doc.tasks = (doc.tasks || []).filter(function (x) {
-          return x && x.id !== tid2;
-        });
-        saveDoc(doc);
-        renderBody();
-        return;
-      }
-
     }
 
     function onOverlayChange(e) {
@@ -304,46 +331,6 @@
         renderBody();
         return;
       }
-      if (act !== 'task-assign' && act !== 'task-priority') return;
-      var tid = el.getAttribute('data-task-id');
-      if (!tid) return;
-      var doc = loadDoc();
-      var t = (doc.tasks || []).find(function (x) {
-        return x && x.id === tid;
-      });
-      if (!t) return;
-      if (act === 'task-assign') t.assigneeId = el.value;
-      if (act === 'task-priority') t.priority = el.value;
-      saveDoc(doc);
-    }
-
-    function onOverlayBlur(e) {
-      var el = e.target;
-      if (!el || !el.getAttribute) return;
-      var act = el.getAttribute('data-prep-act');
-      if (act !== 'task-title' && act !== 'task-notes') return;
-      var tid = el.getAttribute('data-task-id');
-      if (!tid) return;
-      var doc = loadDoc();
-      var t = (doc.tasks || []).find(function (x) {
-        return x && x.id === tid;
-      });
-      if (!t) return;
-      if (act === 'task-title') {
-        var nt = String(el.value || '').trim();
-        if (!nt) {
-          alert('Task title cannot be empty.');
-          renderBody();
-          return;
-        }
-        t.title = nt.slice(0, 500);
-      }
-      if (act === 'task-notes') {
-        var n = String(el.value || '').trim();
-        if (n) t.notes = n.slice(0, 500);
-        else delete t.notes;
-      }
-      saveDoc(doc);
     }
 
     function bindOverlay() {
@@ -352,7 +339,6 @@
       overlay._kuschiPrepListBound = true;
       overlay.addEventListener('click', onOverlayClick);
       overlay.addEventListener('change', onOverlayChange);
-      overlay.addEventListener('blur', onOverlayBlur, true);
     }
 
     function open() {
@@ -402,6 +388,7 @@
       if (notes) row.notes = notes.slice(0, 500);
       doc.tasks = doc.tasks || [];
       doc.tasks.push(row);
+      doc.prepSubTab = 'list';
       saveDoc(doc);
       if (titleEl) titleEl.value = '';
       if (notesEl) notesEl.value = '';

@@ -695,7 +695,8 @@
     var selectedId = String(d.selectedId || 'kuschi').trim();
     if (!assigneeIds.has(selectedId)) selectedId = 'kuschi';
     var hideDone = !!d.hideDone;
-    return { selectedId: selectedId, employees: employees, tasks: tasks, hideDone: hideDone };
+    var prepSubTab = d.prepSubTab === 'add' ? 'add' : 'list';
+    return { selectedId: selectedId, employees: employees, tasks: tasks, hideDone: hideDone, prepSubTab: prepSubTab };
   }
 
   function loadRivieraPrepBoard() {
