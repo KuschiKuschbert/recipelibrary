@@ -545,7 +545,7 @@
   <div class="modal order-list-modal prep-board-modal">
     <button type="button" class="modal-close" onclick="closeKitchenBookPrepModal()">✕</button>
     <div class="modal-title" style="margin-bottom:12px">Prep board</div>
-    <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Choose <strong>who is working</strong> on this device, add teammates if needed, then track prep tasks for <strong>this book</strong>. Stored on this browser only — use <strong>Copy prep JSON</strong> / <strong>Import JSON…</strong> to move or back up.</p>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Choose <strong>who is working</strong> on this device, add teammates if needed, then track prep tasks for <strong>this book</strong>. Stored on this browser only.</p>
     <div id="kbPrepBody"></div>
     <div id="kbPrepAddPanel" class="prep-add-panel" hidden>
       <div class="modal-section" style="margin-top:20px">Add task</div>
@@ -561,10 +561,6 @@
       </div>
       <div class="form-row"><label for="kbPrepNewNotes">Notes (optional)</label><input id="kbPrepNewNotes" type="text" placeholder="Short note" autocomplete="off" maxlength="500" /></div>
       <button type="button" class="btn-secondary" onclick="submitKitchenBookPrepAdd()">Save task</button>
-    </div>
-    <div class="order-actions" style="margin-top:16px">
-      <button type="button" class="btn-secondary" onclick="copyKitchenBookPrepJson()">Copy prep JSON</button>
-      <button type="button" class="btn-secondary" onclick="importKitchenBookPrepJsonFile()">Import JSON…</button>
     </div>
   </div>
 </div>
@@ -887,12 +883,6 @@ function closeKitchenBookPrepModal() {
 function submitKitchenBookPrepAdd() {
   if (kitchenBookPrepList) kitchenBookPrepList.submitAdd();
 }
-function copyKitchenBookPrepJson() {
-  if (kitchenBookPrepList) kitchenBookPrepList.copyJson();
-}
-function importKitchenBookPrepJsonFile() {
-  if (kitchenBookPrepList) kitchenBookPrepList.importJsonFile();
-}
 
 function syncKitchenBookOrderListZoneEditButton() {
   var btn = document.getElementById('kbOrdZoneEditBtn');
@@ -1021,6 +1011,9 @@ document.addEventListener('keydown', e => {
     } else if (document.getElementById('kbStocktakeOverlay').classList.contains('open')) {
       closeKitchenBookStocktakeModal();
     } else if (document.getElementById('kbPrepOverlay').classList.contains('open')) {
+      if (kitchenBookPrepList && typeof kitchenBookPrepList.tryCloseTaskDetail === 'function' && kitchenBookPrepList.tryCloseTaskDetail()) {
+        return;
+      }
       closeKitchenBookPrepModal();
     } else if (document.getElementById('kbOrderListOverlay').classList.contains('open')) {
       closeKitchenBookOrderListModal();

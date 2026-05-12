@@ -576,7 +576,7 @@
   <div class="modal order-list-modal prep-board-modal">
     <button type="button" class="modal-close" onclick="closePrepModal()">✕</button>
     <div class="modal-title" style="margin-bottom:12px">Prep board</div>
-    <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Choose <strong>who is working</strong> on this device, add teammates if needed, then track prep tasks with assignees and priorities. Stored on this browser only — use <strong>Copy prep JSON</strong> / <strong>Import JSON…</strong> to move or back up.</p>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Choose <strong>who is working</strong> on this device, add teammates if needed, then track prep tasks with assignees and priorities. Stored on this browser only.</p>
     <div id="prepBody"></div>
     <div id="prepAddPanel" class="prep-add-panel" hidden>
       <div class="modal-section" style="margin-top:20px">Add task</div>
@@ -592,10 +592,6 @@
       </div>
       <div class="form-row"><label for="prepNewNotes">Notes (optional)</label><input id="prepNewNotes" type="text" placeholder="Short note" autocomplete="off" maxlength="500" /></div>
       <button type="button" class="btn-secondary" onclick="submitPrepAdd()">Save task</button>
-    </div>
-    <div class="order-actions" style="margin-top:16px">
-      <button type="button" class="btn-secondary" onclick="copyPrepBoardJson()">Copy prep JSON</button>
-      <button type="button" class="btn-secondary" onclick="importPrepBoardJsonFile()">Import JSON…</button>
     </div>
   </div>
 </div>
@@ -1077,12 +1073,6 @@ function closePrepModal() {
 }
 function submitPrepAdd() {
   if (rivieraPrepList) rivieraPrepList.submitAdd();
-}
-function copyPrepBoardJson() {
-  if (rivieraPrepList) rivieraPrepList.copyJson();
-}
-function importPrepBoardJsonFile() {
-  if (rivieraPrepList) rivieraPrepList.importJsonFile();
 }
 initRivieraPrepList();
 
@@ -1804,6 +1794,9 @@ document.addEventListener('keydown', e => {
   } else if (document.getElementById('stocktakeOverlay').classList.contains('open')) {
     closeStocktakeModal();
   } else if (document.getElementById('prepOverlay').classList.contains('open')) {
+    if (window.rivieraPrepList && typeof rivieraPrepList.tryCloseTaskDetail === 'function' && rivieraPrepList.tryCloseTaskDetail()) {
+      return;
+    }
     closePrepModal();
   } else if (document.getElementById('orderListOverlay').classList.contains('open')) {
     closeOrderListModal();

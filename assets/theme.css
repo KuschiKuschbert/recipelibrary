@@ -1897,6 +1897,9 @@ button.kuschi-flavor-retry:hover {
 }
 
 /* ── Prep board (Riviera + kitchen books) ───────────────── */
+.prep-board-modal {
+  position: relative;
+}
 .prep-board-modal .prep-actor-block {
   margin-bottom: 18px;
 }
@@ -2065,10 +2068,31 @@ button.kuschi-flavor-retry:hover {
 }
 .prep-task-card-row {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: stretch;
-  gap: 10px 12px;
+  gap: 10px;
   margin-bottom: 12px;
+}
+.prep-task-done--row {
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 52px;
+  padding: 8px 4px;
+  margin: 0;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  cursor: pointer;
+  font-size: 11px;
+  color: var(--text3);
+}
+.prep-task-done--row input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--green);
 }
 .prep-task-card {
   flex: 1;
@@ -2079,20 +2103,40 @@ button.kuschi-flavor-retry:hover {
   border: 1px solid var(--border);
   background: var(--surface);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04);
+  font: inherit;
+}
+button.prep-task-card {
+  cursor: pointer;
+}
+button.prep-task-card:hover {
+  filter: brightness(1.06);
+}
+.prep-task-card--by-kuschi {
+  background: var(--gold-dim);
+  border-color: rgba(201, 169, 110, 0.4);
+}
+.prep-task-card--by-ash {
+  background: var(--blue-bg);
+  border-color: rgba(110, 154, 190, 0.45);
+}
+.prep-task-card--by-custom {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 .prep-task-card--prio-high {
-  border-color: rgba(201, 169, 110, 0.35);
-  background: rgba(201, 169, 110, 0.08);
+  box-shadow: inset 3px 0 0 var(--gold), 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 .prep-task-card--prio-low {
-  border-color: rgba(255, 255, 255, 0.06);
-  opacity: 0.95;
+  box-shadow: inset 3px 0 0 rgba(255, 255, 255, 0.12), 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 .prep-task-card--done {
   opacity: 0.62;
 }
 .prep-task-card-title {
-  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   font-weight: 600;
   font-size: 14px;
   color: var(--text);
@@ -2104,6 +2148,14 @@ button.kuschi-flavor-retry:hover {
   font-size: 12px;
   color: var(--text3);
   line-height: 1.45;
+}
+.prep-task-card-hint {
+  display: block;
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 8px;
+  font-style: italic;
+  opacity: 0.9;
 }
 .prep-task-done {
   display: flex;
@@ -2118,18 +2170,94 @@ button.kuschi-flavor-retry:hover {
   height: 18px;
   accent-color: var(--green);
 }
-.prep-task-done--card {
-  align-self: center;
-  flex-shrink: 0;
-  min-height: 44px;
-  padding: 0 4px;
+.prep-task-detail-sheet {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 12px;
+  box-sizing: border-box;
+}
+.prep-task-detail-sheet[hidden] {
+  display: none !important;
+}
+.prep-task-detail-sheet__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+}
+.prep-task-detail-sheet__panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  max-height: min(70vh, 420px);
+  overflow: auto;
+  padding: 44px 18px 20px;
+  border-radius: 14px 14px 10px 10px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.35);
+  margin-bottom: 0;
+}
+.prep-task-detail-sheet__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-family: inherit;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  cursor: pointer;
+}
+.prep-task-detail-sheet__close:hover {
+  color: var(--text);
+  border-color: var(--border-hover);
+}
+.prep-task-detail-sheet__heading {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+  margin: 0 0 10px;
+  padding-right: 72px;
+}
+.prep-task-detail-sheet__meta {
+  font-size: 12px;
+  color: var(--text3);
+  margin: 0 0 14px;
+  line-height: 1.45;
+}
+.prep-task-detail-sheet__notes-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin: 0 0 6px;
+}
+.prep-task-detail-sheet__body {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.55;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 @media (max-width: 520px) {
   .prep-task-card-row {
-    flex-direction: column;
-    align-items: stretch;
+    flex-wrap: wrap;
   }
-  .prep-task-done--card {
-    align-self: flex-end;
+  .prep-task-done--row {
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+    min-width: 0;
   }
 }

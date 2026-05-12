@@ -1,9 +1,12 @@
 /**
  * Prep board: actor chips (Kuschi, Ash, custom teammates) + task list per Riviera or kitchen book.
- * Tasks are immutable after save (read-only card); only Done may change. All tasks / Add task subtabs.
+ * Tasks are immutable after save; only Done may change. Assignee colours on task cards; optional detail sheet for long text.
  */
 (function () {
   'use strict';
+
+  var PREVIEW_TITLE_LEN = 68;
+  var PREVIEW_NOTES_LEN = 40;
 
   function esc(s) {
     return String(s || '')
@@ -15,6 +18,12 @@
 
   function escAttr(s) {
     return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+  }
+
+  function truncate(s, n) {
+    var t = String(s || '');
+    if (t.length <= n) return t;
+    return t.slice(0, Math.max(0, n - 1)) + '…';
   }
 
   function weightPriority(p) {
@@ -57,6 +66,13 @@
       if (actors[i].id === id) return actors[i].label;
     }
     return id || '—';
+  }
+
+  function assigneeCardClass(assigneeId) {
+    var id = String(assigneeId || 'kuschi');
+    if (id === 'kuschi') return ' prep-task-card--by-kuschi';
+    if (id === 'ash') return ' prep-task-card--by-ash';
+    return ' prep-task-card--by-custom';
   }
 
   function priorityLabel(p) {
@@ -102,6 +118,9 @@
             return true;
           };
 
+    var detailSheet = null;
+    var detailKeydownBound = false;
+
     function loadDoc() {
       if (!window.KuschiUserRecipes) {
         return { selectedId: 'kuschi', employees: [], tasks: [], hideDone: false, prepSubTab: 'list' };
@@ -116,10 +135,97 @@
       else KuschiUserRecipes.saveRivieraPrepBoard(doc);
     }
 
+    function ensureDetailSheet() {
+      if (detailSheet) return detailSheet;
+      var overlay = document.getElementById(overlayId);
+      if (!overlay) return null;
+      var modal = overlay.querySelector('.prep-board-modal') || overlay.querySelector('.modal');
+      if (!modal) return null;
+      var sheet = document.createElement('div');
+      sheet.className = 'prep-task-detail-sheet';
+      sheet.setAttribute('hidden', '');
+      sheet.innerHTML =
+        '<div class="prep-task-detail-sheet__backdrop" data-prep-act="close-detail"></div>' +
+        '<div class="prep-task-detail-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="prep-task-detail-heading">' +
+        '<button type="button" class="prep-task-detail-sheet__close" data-prep-act="close-detail">Close</button>' +
+        '<h3 class="prep-task-detail-sheet__heading" id="prep-task-detail-heading"></h3>' +
+        '<p class="prep-task-detail-sheet__meta"></p>' +
+        '<p class="prep-task-detail-sheet__notes-label">Notes</p>' +
+        '<p class="prep-task-detail-sheet__body"></p>' +
+        '</div>';
+      modal.appendChild(sheet);
+      detailSheet = sheet;
+      return sheet;
+    }
+
+    function closeTaskDetail() {
+      if (!detailSheet) return;
+      detailSheet.setAttribute('hidden', '');
+      detailSheet.setAttribute('aria-hidden', 'true');
+      if (detailKeydownBound) {
+        var ov = document.getElementById(overlayId);
+        if (ov) ov.removeEventListener('keydown', onOverlayKeydownCapture, true);
+        detailKeydownBound = false;
+      }
+    }
+
+    function onOverlayKeydownCapture(ev) {
+      if (ev.key !== 'Escape') return;
+      if (!detailSheet || detailSheet.hasAttribute('hidden')) return;
+      ev.preventDefault();
+      ev.stopPropagation();
+      closeTaskDetail();
+    }
+
+    function openTaskDetail(taskId) {
+      var doc = loadDoc();
+      var t = (doc.tasks || []).find(function (x) {
+        return x && x.id === taskId;
+      });
+      if (!t) return;
+      var sheet = ensureDetailSheet();
+      if (!sheet) return;
+      var h = sheet.querySelector('.prep-task-detail-sheet__heading');
+      var meta = sheet.querySelector('.prep-task-detail-sheet__meta');
+      var body = sheet.querySelector('.prep-task-detail-sheet__body');
+      if (h) h.textContent = String(t.title || '').trim() || 'Task';
+      if (meta) {
+        meta.textContent =
+          assigneeLabelForId(doc, t.assigneeId) +
+          ' · ' +
+          priorityLabel(t.priority || 'medium') +
+          (t.done ? ' · Done' : '');
+      }
+      if (body) {
+        var notes = t.notes != null ? String(t.notes).trim() : '';
+        var nl = sheet.querySelector('.prep-task-detail-sheet__notes-label');
+        if (notes) {
+          body.textContent = notes;
+          body.style.display = 'block';
+          if (nl) nl.style.display = 'block';
+        } else {
+          body.textContent = '';
+          body.style.display = 'none';
+          if (nl) nl.style.display = 'none';
+        }
+      }
+      sheet.removeAttribute('hidden');
+      sheet.setAttribute('aria-hidden', 'false');
+      if (!detailKeydownBound) {
+        var ov = document.getElementById(overlayId);
+        if (ov) {
+          ov.addEventListener('keydown', onOverlayKeydownCapture, true);
+          detailKeydownBound = true;
+        }
+      }
+    }
+
     function renderBody() {
       var doc = loadDoc();
       var body = document.getElementById(bodyId);
       if (!body) return;
+
+      closeTaskDetail();
 
       var selected = doc.selectedId || 'kuschi';
       var hideDone = !!doc.hideDone;
@@ -166,36 +272,68 @@
         var rows = sorted
           .map(function (t) {
             var tid = escAttr(t.id);
+            var rawId = String(t.id || '');
             var ph = t.priority || 'medium';
             var doneCh = t.done ? ' checked' : '';
             var assignLabel = assigneeLabelForId(doc, t.assigneeId);
             var prLab = priorityLabel(ph);
+            var titleFull = String(t.title || '').trim();
             var notesStr = t.notes != null ? String(t.notes).trim() : '';
-            var metaParts = [assignLabel, prLab];
-            if (notesStr) metaParts.push(notesStr);
-            var meta = metaParts.map(function (x) {
-              return esc(x);
-            }).join(' · ');
+            var titleLong = titleFull.length > PREVIEW_TITLE_LEN;
+            var notesLong = notesStr.length > PREVIEW_NOTES_LEN;
+            var openable = titleLong || notesLong;
+            var titleShow = titleLong ? truncate(titleFull, PREVIEW_TITLE_LEN) : titleFull;
+            var metaCore = assignLabel + ' · ' + prLab;
+            var metaExtra = '';
+            if (notesStr && !notesLong) {
+              metaExtra = ' · ' + notesStr;
+            } else if (notesStr && notesLong) {
+              metaExtra = ' · ' + truncate(notesStr, PREVIEW_NOTES_LEN);
+            }
+            var prioMod =
+              ph === 'high' ? ' prep-task-card--prio-high' : ph === 'low' ? ' prep-task-card--prio-low' : '';
             var cardMod =
               (t.done ? ' prep-task-card--done' : '') +
-              (ph === 'high' ? ' prep-task-card--prio-high' : ph === 'low' ? ' prep-task-card--prio-low' : '');
-            return (
-              '<div class="prep-task-card-row">' +
-              '<div class="prep-task-card' +
-              cardMod +
-              '" role="listitem">' +
+              prioMod +
+              assigneeCardClass(t.assigneeId);
+            var hint = openable
+              ? '<span class="prep-task-card-hint">Tap for full text</span>'
+              : '';
+
+            var cardInner =
               '<span class="prep-task-card-title">' +
-              esc(t.title) +
+              esc(titleShow) +
               '</span>' +
               '<span class="prep-task-card-meta">' +
-              meta +
+              esc(metaCore + metaExtra) +
               '</span>' +
-              '</div>' +
-              '<label class="prep-task-done prep-task-done--card"><input type="checkbox" data-prep-act="toggle-done" data-task-id="' +
+              hint;
+
+            var cardOpen;
+            if (openable) {
+              cardOpen =
+                '<button type="button" class="prep-task-card' +
+                cardMod +
+                '" data-prep-act="open-task" data-task-id="' +
+                tid +
+                '">' +
+                cardInner +
+                '</button>';
+            } else {
+              cardOpen = '<div class="prep-task-card' + cardMod + '">' + cardInner + '</div>';
+            }
+
+            return (
+              '<div class="prep-task-card-row">' +
+              '<label class="prep-task-done prep-task-done--row">' +
+              '<input type="checkbox" data-prep-act="toggle-done" data-task-id="' +
               tid +
               '"' +
               doneCh +
-              ' /><span>Done</span></label>' +
+              ' />' +
+              '<span>Done</span>' +
+              '</label>' +
+              cardOpen +
               '</div>'
             );
           })
@@ -248,6 +386,17 @@
       if (!btn) return;
       var act = btn.getAttribute('data-prep-act');
       var doc = loadDoc();
+
+      if (act === 'close-detail') {
+        closeTaskDetail();
+        return;
+      }
+
+      if (act === 'open-task') {
+        var oid = btn.getAttribute('data-task-id');
+        if (oid) openTaskDetail(oid);
+        return;
+      }
 
       if (act === 'subtab') {
         var st = btn.getAttribute('data-subtab');
@@ -352,9 +501,16 @@
     }
 
     function close() {
+      closeTaskDetail();
       var el = document.getElementById(overlayId);
       if (el) el.classList.remove('open');
       if (shouldReleaseBodyScroll()) document.body.style.overflow = '';
+    }
+
+    function tryCloseTaskDetail() {
+      if (!detailSheet || detailSheet.hasAttribute('hidden')) return false;
+      closeTaskDetail();
+      return true;
     }
 
     function submitAdd() {
@@ -395,38 +551,6 @@
       renderBody();
     }
 
-    function copyJson() {
-      var jsonStr;
-      if (bookId) jsonStr = KuschiUserRecipes.exportBookPrepBoardJson(bookId);
-      else jsonStr = KuschiUserRecipes.exportRivieraPrepBoardJson();
-      navigator.clipboard.writeText(jsonStr).then(function () {
-        alert('Prep board JSON copied.');
-      });
-    }
-
-    function importJsonFile() {
-      var inp = document.createElement('input');
-      inp.type = 'file';
-      inp.accept = '.json,application/json';
-      inp.onchange = function () {
-        var f = inp.files && inp.files[0];
-        if (!f) return;
-        var reader = new FileReader();
-        reader.onload = function () {
-          try {
-            if (bookId) KuschiUserRecipes.importBookPrepBoardJson(bookId, String(reader.result || ''));
-            else KuschiUserRecipes.importRivieraPrepBoardJson(String(reader.result || ''));
-            renderBody();
-            alert('Prep board imported.');
-          } catch (err) {
-            alert((err && err.message) || 'Import failed.');
-          }
-        };
-        reader.readAsText(f);
-      };
-      inp.click();
-    }
-
     bindOverlay();
 
     return {
@@ -434,8 +558,7 @@
       close: close,
       refresh: renderBody,
       submitAdd: submitAdd,
-      copyJson: copyJson,
-      importJsonFile: importJsonFile,
+      tryCloseTaskDetail: tryCloseTaskDetail,
       getSelectedActorId: function () {
         return loadDoc().selectedId || 'kuschi';
       },
