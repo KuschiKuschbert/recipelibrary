@@ -55,7 +55,8 @@
           !document.getElementById('addRivieraOverlay').classList.contains('open') &&
           !document.getElementById('rivieraAdminOverlay').classList.contains('open') &&
           !document.getElementById('pageQrOverlay').classList.contains('open') &&
-          !document.getElementById('orderListOverlay').classList.contains('open')
+          !document.getElementById('orderListOverlay').classList.contains('open') &&
+          !document.getElementById('prepOverlay').classList.contains('open')
         );
       },
       builtinCatalogUrl: window.__RIVIERA_STOCKTAKE_CATALOG_URL || '',

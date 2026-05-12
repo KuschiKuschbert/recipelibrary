@@ -50,6 +50,8 @@ There is **no server**. “Save” actions write to **this browser’s** `localS
 - Master ingredients (default storage zone per name): `kuschi_master_ingredients_v1`
 - Riviera order line overrides: `kuschi_riviera_order_overrides_v1`
 - Manual order lines: `kuschi_riviera_order_extras_v1`
+- Riviera prep board (actors + tasks): `kuschi_riviera_prep_board_v1`
+- Per-book prep board: `kuschi_book_<id>_prep_board_v1`
 
 Use **Copy JSON backup** / **Copy order data JSON** / **Copy master ingredients JSON** in the UIs to paste into files and commit from a dev machine if you want git-backed backups.
 

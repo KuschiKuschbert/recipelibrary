@@ -484,6 +484,7 @@
       <a href="aroma.html">Aroma</a>
     </div>
     <button type="button" onclick="openOrderListModal()">Order list (all ingredients)</button>
+    <button type="button" onclick="openPrepModal()">Prep board</button>
     <button type="button" onclick="openStocktakeModal()">Stocktake checklist</button>
   </div>
 </div>
@@ -567,6 +568,31 @@
       <button type="button" class="btn-secondary" onclick="printStocktakeSheet()">Print checklist</button>
       <button type="button" class="btn-secondary" onclick="copyStocktakeJson()">Copy stocktake JSON</button>
       <button type="button" class="btn-secondary" onclick="importStocktakeJsonFile()">Import JSON…</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="prepOverlay" onclick="if(event.target===this)closePrepModal()">
+  <div class="modal order-list-modal prep-board-modal">
+    <button type="button" class="modal-close" onclick="closePrepModal()">✕</button>
+    <div class="modal-title" style="margin-bottom:12px">Prep board</div>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Choose <strong>who is working</strong> on this device, add teammates if needed, then track prep tasks with assignees and priorities. Stored on this browser only — use <strong>Copy prep JSON</strong> / <strong>Import JSON…</strong> to move or back up.</p>
+    <div id="prepBody"></div>
+    <div class="modal-section" style="margin-top:20px">Add task</div>
+    <div class="form-row"><label for="prepNewTitle">Title</label><input id="prepNewTitle" type="text" placeholder="e.g. Pick herbs" autocomplete="off" maxlength="500" /></div>
+    <div class="form-row"><label for="prepNewAssignee">Assignee</label><select id="prepNewAssignee"></select></div>
+    <div class="form-row"><label for="prepNewPriority">Priority</label>
+      <select id="prepNewPriority">
+        <option value="high">High</option>
+        <option value="medium" selected>Medium</option>
+        <option value="low">Low</option>
+      </select>
+    </div>
+    <div class="form-row"><label for="prepNewNotes">Notes (optional)</label><input id="prepNewNotes" type="text" placeholder="Short note" autocomplete="off" maxlength="500" /></div>
+    <button type="button" class="btn-secondary" onclick="submitPrepAdd()">Add task</button>
+    <div class="order-actions" style="margin-top:16px">
+      <button type="button" class="btn-secondary" onclick="copyPrepBoardJson()">Copy prep JSON</button>
+      <button type="button" class="btn-secondary" onclick="importPrepBoardJsonFile()">Import JSON…</button>
     </div>
   </div>
 </div>
@@ -667,6 +693,7 @@
 </div>
 
 <script src="assets/user-recipes.js"></script>
+<script src="assets/prep-list.js"></script>
 <script src="assets/kuschi-recipe-ui.js"></script>
 <script src="assets/recipe-metric-normalize.js"></script>
 <script src="assets/flavour-toolkit-lookup.js" defer></script>
@@ -818,6 +845,7 @@ function closePageQrModal() {
   if (!document.getElementById('modalOverlay').classList.contains('open') &&
       !document.getElementById('orderListOverlay').classList.contains('open') &&
       !document.getElementById('stocktakeOverlay').classList.contains('open') &&
+      !document.getElementById('prepOverlay').classList.contains('open') &&
       !document.getElementById('addRivieraOverlay').classList.contains('open') &&
       !document.getElementById('rivieraAdminOverlay').classList.contains('open')) {
     document.body.style.overflow = '';
@@ -829,6 +857,7 @@ function closeRivieraAdminModal() {
   if (!document.getElementById('modalOverlay').classList.contains('open') &&
       !document.getElementById('orderListOverlay').classList.contains('open') &&
       !document.getElementById('stocktakeOverlay').classList.contains('open') &&
+      !document.getElementById('prepOverlay').classList.contains('open') &&
       !document.getElementById('addRivieraOverlay').classList.contains('open') &&
       !document.getElementById('pageQrOverlay').classList.contains('open')) {
     document.body.style.overflow = '';
@@ -876,6 +905,7 @@ function mergeRivieraRecipes() {
 let RECIPES = mergeRivieraRecipes();
 
 let rivieraOrderList = null;
+let rivieraPrepList = null;
 /** Lazy-load order-list.js on first use so recipe modal / grid are not contending with its parse at startup. */
 let rivieraOrderListScriptPromise = null;
 function loadRivieraOrderListScript() {
@@ -941,7 +971,8 @@ const _rivieraOrderListConfig = {
       !document.getElementById('addRivieraOverlay').classList.contains('open') &&
       !document.getElementById('rivieraAdminOverlay').classList.contains('open') &&
       !document.getElementById('pageQrOverlay').classList.contains('open') &&
-      !document.getElementById('stocktakeOverlay').classList.contains('open')
+      !document.getElementById('stocktakeOverlay').classList.contains('open') &&
+      !document.getElementById('prepOverlay').classList.contains('open')
     );
   },
 };
@@ -1007,6 +1038,49 @@ function importStocktakeJsonFile() {
     list.importJsonFile();
   });
 }
+
+function initRivieraPrepList() {
+  if (!window.KuschiPrepList || !window.KuschiUserRecipes) return;
+  rivieraPrepList = KuschiPrepList.create({
+    overlayId: 'prepOverlay',
+    bodyId: 'prepBody',
+    bookId: null,
+    formIds: {
+      title: 'prepNewTitle',
+      assignee: 'prepNewAssignee',
+      priority: 'prepNewPriority',
+      notes: 'prepNewNotes',
+      teammate: 'prepNewTeammate',
+    },
+    shouldReleaseBodyScroll: function () {
+      return (
+        !document.getElementById('modalOverlay').classList.contains('open') &&
+        !document.getElementById('addRivieraOverlay').classList.contains('open') &&
+        !document.getElementById('rivieraAdminOverlay').classList.contains('open') &&
+        !document.getElementById('pageQrOverlay').classList.contains('open') &&
+        !document.getElementById('orderListOverlay').classList.contains('open') &&
+        !document.getElementById('stocktakeOverlay').classList.contains('open')
+      );
+    },
+  });
+  window.rivieraPrepList = rivieraPrepList;
+}
+function openPrepModal() {
+  if (rivieraPrepList) rivieraPrepList.open();
+}
+function closePrepModal() {
+  if (rivieraPrepList) rivieraPrepList.close();
+}
+function submitPrepAdd() {
+  if (rivieraPrepList) rivieraPrepList.submitAdd();
+}
+function copyPrepBoardJson() {
+  if (rivieraPrepList) rivieraPrepList.copyJson();
+}
+function importPrepBoardJsonFile() {
+  if (rivieraPrepList) rivieraPrepList.importJsonFile();
+}
+initRivieraPrepList();
 
 function syncRivieraOrderListZoneEditButton() {
   var btn = document.getElementById('rivieraOrdZoneEditBtn');
@@ -1693,6 +1767,7 @@ function closeModal() {
   document.getElementById('modalOverlay').classList.remove('open');
   if (!document.getElementById('orderListOverlay').classList.contains('open') &&
       !document.getElementById('stocktakeOverlay').classList.contains('open') &&
+      !document.getElementById('prepOverlay').classList.contains('open') &&
       !document.getElementById('addRivieraOverlay').classList.contains('open') &&
       !document.getElementById('rivieraAdminOverlay').classList.contains('open') &&
       !document.getElementById('pageQrOverlay').classList.contains('open')) {
@@ -1724,6 +1799,8 @@ document.addEventListener('keydown', e => {
     closePageQrModal();
   } else if (document.getElementById('stocktakeOverlay').classList.contains('open')) {
     closeStocktakeModal();
+  } else if (document.getElementById('prepOverlay').classList.contains('open')) {
+    closePrepModal();
   } else if (document.getElementById('orderListOverlay').classList.contains('open')) {
     closeOrderListModal();
   } else if (document.getElementById('addRivieraOverlay').classList.contains('open')) {

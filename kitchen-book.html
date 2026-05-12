@@ -407,6 +407,7 @@
       <a href="aroma.html" class="hero-nav-link">Aroma</a>
     </div>
     <button type="button" class="hero-nav-link" onclick="openKitchenBookOrderListModal()">Order list (all ingredients)</button>
+    <button type="button" class="hero-nav-link" onclick="openKitchenBookPrepModal()">Prep board</button>
     <button type="button" class="hero-nav-link" onclick="openKitchenBookStocktakeModal()">Stocktake checklist</button>
   </div>
 </div>
@@ -540,6 +541,31 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="kbPrepOverlay" onclick="if(event.target===this)closeKitchenBookPrepModal()">
+  <div class="modal order-list-modal prep-board-modal">
+    <button type="button" class="modal-close" onclick="closeKitchenBookPrepModal()">✕</button>
+    <div class="modal-title" style="margin-bottom:12px">Prep board</div>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Choose <strong>who is working</strong> on this device, add teammates if needed, then track prep tasks for <strong>this book</strong>. Stored on this browser only — use <strong>Copy prep JSON</strong> / <strong>Import JSON…</strong> to move or back up.</p>
+    <div id="kbPrepBody"></div>
+    <div class="modal-section" style="margin-top:20px">Add task</div>
+    <div class="form-row"><label for="kbPrepNewTitle">Title</label><input id="kbPrepNewTitle" type="text" placeholder="e.g. Pick herbs" autocomplete="off" maxlength="500" /></div>
+    <div class="form-row"><label for="kbPrepNewAssignee">Assignee</label><select id="kbPrepNewAssignee"></select></div>
+    <div class="form-row"><label for="kbPrepNewPriority">Priority</label>
+      <select id="kbPrepNewPriority">
+        <option value="high">High</option>
+        <option value="medium" selected>Medium</option>
+        <option value="low">Low</option>
+      </select>
+    </div>
+    <div class="form-row"><label for="kbPrepNewNotes">Notes (optional)</label><input id="kbPrepNewNotes" type="text" placeholder="Short note" autocomplete="off" maxlength="500" /></div>
+    <button type="button" class="btn-secondary" onclick="submitKitchenBookPrepAdd()">Add task</button>
+    <div class="order-actions" style="margin-top:16px">
+      <button type="button" class="btn-secondary" onclick="copyKitchenBookPrepJson()">Copy prep JSON</button>
+      <button type="button" class="btn-secondary" onclick="importKitchenBookPrepJsonFile()">Import JSON…</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
   <div class="modal" id="modal"></div>
 </div>
@@ -579,6 +605,7 @@
 
 
 <script src="assets/user-recipes.js"></script>
+<script src="assets/prep-list.js"></script>
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/aroma-hints.js"></script>
 <script src="assets/kuschi-recipe-ui.js"></script>
@@ -600,6 +627,7 @@ const KITCHEN_BOOK_ADMIN_SESSION = 'kuschi_kitchen_book_admin_session';
 
 let kitchenBookOrderList = null;
 let kitchenBookStocktakeList = null;
+let kitchenBookPrepList = null;
 
 let allRecipes = [];
 let filtered = [];
@@ -657,7 +685,8 @@ function closeKitchenBookAdminModal() {
       !document.getElementById('addRecipeOverlay').classList.contains('open') &&
       !document.getElementById('pageQrOverlay').classList.contains('open') &&
       !document.getElementById('kbOrderListOverlay').classList.contains('open') &&
-      !document.getElementById('kbStocktakeOverlay').classList.contains('open')) {
+      !document.getElementById('kbStocktakeOverlay').classList.contains('open') &&
+      !document.getElementById('kbPrepOverlay').classList.contains('open')) {
     document.body.style.overflow = '';
   }
 }
@@ -734,7 +763,8 @@ function initKitchenBookOrderList() {
         !document.getElementById('addRecipeOverlay').classList.contains('open') &&
         !document.getElementById('pageQrOverlay').classList.contains('open') &&
         !document.getElementById('kbAdminOverlay').classList.contains('open') &&
-        !document.getElementById('kbStocktakeOverlay').classList.contains('open')
+        !document.getElementById('kbStocktakeOverlay').classList.contains('open') &&
+        !document.getElementById('kbPrepOverlay').classList.contains('open')
       );
     },
   });
@@ -786,7 +816,8 @@ function initKitchenBookStocktakeList() {
         !document.getElementById('addRecipeOverlay').classList.contains('open') &&
         !document.getElementById('pageQrOverlay').classList.contains('open') &&
         !document.getElementById('kbAdminOverlay').classList.contains('open') &&
-        !document.getElementById('kbOrderListOverlay').classList.contains('open')
+        !document.getElementById('kbOrderListOverlay').classList.contains('open') &&
+        !document.getElementById('kbPrepOverlay').classList.contains('open')
       );
     },
   });
@@ -815,6 +846,48 @@ function printKitchenBookStocktakeSheet() {
 }
 function importKitchenBookStocktakeJsonFile() {
   if (kitchenBookStocktakeList) kitchenBookStocktakeList.importJsonFile();
+}
+
+function initKitchenBookPrepList() {
+  if (!window.KuschiPrepList || !window.KuschiUserRecipes || !CURRENT_BOOK_ID) return;
+  const bid = CURRENT_BOOK_ID;
+  kitchenBookPrepList = KuschiPrepList.create({
+    overlayId: 'kbPrepOverlay',
+    bodyId: 'kbPrepBody',
+    bookId: bid,
+    formIds: {
+      title: 'kbPrepNewTitle',
+      assignee: 'kbPrepNewAssignee',
+      priority: 'kbPrepNewPriority',
+      notes: 'kbPrepNewNotes',
+      teammate: 'kbPrepNewTeammate',
+    },
+    shouldReleaseBodyScroll: function () {
+      return (
+        !document.getElementById('modalOverlay').classList.contains('open') &&
+        !document.getElementById('addRecipeOverlay').classList.contains('open') &&
+        !document.getElementById('pageQrOverlay').classList.contains('open') &&
+        !document.getElementById('kbAdminOverlay').classList.contains('open') &&
+        !document.getElementById('kbOrderListOverlay').classList.contains('open') &&
+        !document.getElementById('kbStocktakeOverlay').classList.contains('open')
+      );
+    },
+  });
+}
+function openKitchenBookPrepModal() {
+  if (kitchenBookPrepList) kitchenBookPrepList.open();
+}
+function closeKitchenBookPrepModal() {
+  if (kitchenBookPrepList) kitchenBookPrepList.close();
+}
+function submitKitchenBookPrepAdd() {
+  if (kitchenBookPrepList) kitchenBookPrepList.submitAdd();
+}
+function copyKitchenBookPrepJson() {
+  if (kitchenBookPrepList) kitchenBookPrepList.copyJson();
+}
+function importKitchenBookPrepJsonFile() {
+  if (kitchenBookPrepList) kitchenBookPrepList.importJsonFile();
 }
 
 function syncKitchenBookOrderListZoneEditButton() {
@@ -943,6 +1016,8 @@ document.addEventListener('keydown', e => {
       closeKitchenBookAdminModal();
     } else if (document.getElementById('kbStocktakeOverlay').classList.contains('open')) {
       closeKitchenBookStocktakeModal();
+    } else if (document.getElementById('kbPrepOverlay').classList.contains('open')) {
+      closeKitchenBookPrepModal();
     } else if (document.getElementById('kbOrderListOverlay').classList.contains('open')) {
       closeKitchenBookOrderListModal();
     } else if (document.getElementById('addRecipeOverlay').classList.contains('open')) {
@@ -982,6 +1057,7 @@ function closeModal() {
       !document.getElementById('addRecipeOverlay').classList.contains('open') &&
       !document.getElementById('kbOrderListOverlay').classList.contains('open') &&
       !document.getElementById('kbStocktakeOverlay').classList.contains('open') &&
+      !document.getElementById('kbPrepOverlay').classList.contains('open') &&
       !document.getElementById('kbAdminOverlay').classList.contains('open')) {
     document.body.style.overflow = '';
   }
@@ -1117,6 +1193,7 @@ function closeAddRecipeModal() {
       !document.getElementById('pageQrOverlay').classList.contains('open') &&
       !document.getElementById('kbOrderListOverlay').classList.contains('open') &&
       !document.getElementById('kbStocktakeOverlay').classList.contains('open') &&
+      !document.getElementById('kbPrepOverlay').classList.contains('open') &&
       !document.getElementById('kbAdminOverlay').classList.contains('open')) {
     document.body.style.overflow = '';
   }
@@ -1429,6 +1506,7 @@ function closePageQrModal() {
       !document.getElementById('addRecipeOverlay').classList.contains('open') &&
       !document.getElementById('kbOrderListOverlay').classList.contains('open') &&
       !document.getElementById('kbStocktakeOverlay').classList.contains('open') &&
+      !document.getElementById('kbPrepOverlay').classList.contains('open') &&
       !document.getElementById('kbAdminOverlay').classList.contains('open')) {
     document.body.style.overflow = '';
   }
@@ -1470,6 +1548,7 @@ if (searchWrap) {
   document.getElementById('footer').style.display = 'block';
   initKitchenBookOrderList();
   initKitchenBookStocktakeList();
+  initKitchenBookPrepList();
   updateKitchenBookAdminChrome();
   loadRecipes();
   const pinEl = document.getElementById('kbAdminPinInput');

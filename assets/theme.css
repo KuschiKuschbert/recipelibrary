@@ -811,7 +811,9 @@ body {
 #orderListOverlay .modal.order-list-modal,
 #kbOrderListOverlay .modal.order-list-modal,
 #stocktakeOverlay .modal.order-list-modal,
-#kbStocktakeOverlay .modal.order-list-modal {
+#kbStocktakeOverlay .modal.order-list-modal,
+#prepOverlay .modal.order-list-modal,
+#kbPrepOverlay .modal.order-list-modal {
   max-width: min(920px, 100%);
 }
 .order-zone-block {
@@ -1892,4 +1894,210 @@ button.kuschi-flavor-retry:hover {
   border-color: rgba(0, 188, 212, 0.45);
   color: #7fd8e8;
   font-style: italic;
+}
+
+/* ── Prep board (Riviera + kitchen books) ───────────────── */
+.prep-board-modal .prep-actor-block {
+  margin-bottom: 18px;
+}
+.prep-actor-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 10px;
+}
+.prep-actor-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.prep-actor-chip-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.prep-actor-chip {
+  min-height: 44px;
+  padding: 0 18px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  letter-spacing: 0.3px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s;
+}
+.prep-actor-chip:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-hover);
+}
+.prep-actor-chip--kuschi {
+  background: var(--gold-dim);
+  border-color: rgba(201, 169, 110, 0.35);
+  color: var(--gold-light);
+}
+.prep-actor-chip--ash {
+  background: var(--blue-bg);
+  border-color: rgba(110, 154, 190, 0.4);
+  color: var(--blue);
+}
+.prep-actor-chip--custom {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text2);
+}
+.prep-actor-chip[aria-pressed='true'] {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  border-color: var(--gold);
+}
+.prep-actor-remove {
+  min-width: 36px;
+  min-height: 36px;
+  padding: 0;
+  font-size: 18px;
+  line-height: 1;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text3);
+  cursor: pointer;
+  font-family: inherit;
+}
+.prep-actor-remove:hover {
+  color: var(--accent);
+  border-color: rgba(212, 99, 75, 0.45);
+}
+.prep-add-teammate {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-top: 14px;
+}
+.prep-teammate-input {
+  flex: 1;
+  min-width: 160px;
+  min-height: 44px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-family: inherit;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--text);
+}
+.prep-hide-done {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text2);
+  margin: 14px 0 8px;
+  cursor: pointer;
+  user-select: none;
+}
+.prep-hide-done input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--gold);
+}
+.prep-task-list {
+  margin-top: 8px;
+}
+.prep-empty {
+  font-size: 14px;
+  color: var(--text3);
+  margin: 12px 0;
+}
+.prep-task-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1.6fr) minmax(0, 7.5rem) minmax(0, 6.5rem) minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 13px;
+}
+.prep-task-done {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  color: var(--text3);
+  font-size: 12px;
+}
+.prep-task-done input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--green);
+}
+.prep-task-title,
+.prep-task-notes {
+  min-width: 0;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-family: inherit;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--text);
+}
+.prep-task-assign,
+.prep-task-priority {
+  min-width: 0;
+  width: 100%;
+  min-height: 40px;
+  padding: 6px 8px;
+  font-size: 12px;
+  font-family: inherit;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--text);
+}
+.prep-task-del {
+  font-size: 12px;
+  padding: 8px 10px;
+  white-space: nowrap;
+}
+@media (max-width: 860px) {
+  .prep-task-row {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      'done done'
+      'title title'
+      'assign priority'
+      'notes notes'
+      'del del';
+  }
+  .prep-task-row .prep-task-done {
+    grid-area: done;
+  }
+  .prep-task-row .prep-task-title {
+    grid-area: title;
+  }
+  .prep-task-row .prep-task-assign {
+    grid-area: assign;
+  }
+  .prep-task-row .prep-task-priority {
+    grid-area: priority;
+  }
+  .prep-task-row .prep-task-notes {
+    grid-area: notes;
+  }
+  .prep-task-row .prep-task-del {
+    grid-area: del;
+    justify-self: start;
+  }
 }

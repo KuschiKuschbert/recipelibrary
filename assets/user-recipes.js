@@ -14,8 +14,11 @@
   const STORAGE_RIVIERA_METRIC_MIGRATED = 'kuschi_riviera_metric_normalized_v1';
   const STORAGE_CUSTOM_BOOKS = 'kuschi_custom_kitchen_books_v1';
   const STORAGE_RIVIERA_STOCKTAKE = 'kuschi_riviera_stocktake_v1';
+  const STORAGE_RIVIERA_PREP_BOARD = 'kuschi_riviera_prep_board_v1';
 
   const ZONE_IDS = ['freezer', 'coldroom', 'drystore', 'other'];
+  const PREP_BUILTIN_IDS = new Set(['kuschi', 'ash']);
+  const PREP_PRIORITY_IDS = new Set(['high', 'medium', 'low']);
 
   function bookRecipesStorageKey(bookId) {
     return 'kuschi_book_' + String(bookId || '').trim() + '_recipes_v1';
@@ -35,6 +38,10 @@
 
   function bookStocktakeStorageKey(bookId) {
     return 'kuschi_book_' + String(bookId || '').trim() + '_stocktake_v1';
+  }
+
+  function bookPrepBoardStorageKey(bookId) {
+    return 'kuschi_book_' + String(bookId || '').trim() + '_prep_board_v1';
   }
 
   function slugifyBookId(name) {
@@ -617,7 +624,124 @@
     localStorage.removeItem(bookOrderExtrasStorageKey(id));
     localStorage.removeItem(bookMasterStorageKey(id));
     localStorage.removeItem(bookStocktakeStorageKey(id));
+    localStorage.removeItem(bookPrepBoardStorageKey(id));
     return true;
+  }
+
+  function normalizePrepEmployees(arr) {
+    var out = [];
+    var seen = new Set();
+    (Array.isArray(arr) ? arr : []).forEach(function (e) {
+      if (!e || typeof e !== 'object') return;
+      var id = String(e.id || '').trim();
+      var label = String(e.label || '').trim();
+      if (!id || !label) return;
+      if (PREP_BUILTIN_IDS.has(id)) return;
+      if (id.indexOf('emp-') !== 0) return;
+      if (seen.has(id)) return;
+      seen.add(id);
+      out.push({ id: id, label: titleCaseWords(label) });
+    });
+    if (out.length > 32) out = out.slice(-32);
+    return out;
+  }
+
+  function normalizePrepTasks(arr, validAssigneeIds) {
+    var valid = validAssigneeIds || new Set(['kuschi', 'ash']);
+    var out = [];
+    (Array.isArray(arr) ? arr : []).forEach(function (t) {
+      if (!t || typeof t !== 'object') return;
+      var id = String(t.id || '').trim();
+      var title = String(t.title || '').trim();
+      if (!id || !title) return;
+      var assigneeId = String(t.assigneeId || 'kuschi').trim();
+      if (!valid.has(assigneeId)) assigneeId = 'kuschi';
+      var pr = String(t.priority || 'medium').trim().toLowerCase();
+      if (!PREP_PRIORITY_IDS.has(pr)) pr = 'medium';
+      var row = {
+        id: id,
+        title: title.slice(0, 500),
+        assigneeId: assigneeId,
+        priority: pr,
+        done: !!t.done,
+      };
+      var notes = t.notes != null ? String(t.notes).trim() : '';
+      if (notes) row.notes = notes.slice(0, 500);
+      if (t.completedBy != null && String(t.completedBy).trim()) {
+        row.completedBy = String(t.completedBy).trim().slice(0, 64);
+      }
+      if (t.completedAt != null && String(t.completedAt).trim()) {
+        row.completedAt = String(t.completedAt).trim();
+      }
+      out.push(row);
+    });
+    if (out.length > 400) out = out.slice(-400);
+    return out;
+  }
+
+  function assigneeIdSetForPrepDoc(employees) {
+    var s = new Set(['kuschi', 'ash']);
+    (employees || []).forEach(function (e) {
+      if (e && e.id) s.add(e.id);
+    });
+    return s;
+  }
+
+  function normalizePrepBoardDoc(raw) {
+    var d = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {};
+    var employees = normalizePrepEmployees(d.employees);
+    var assigneeIds = assigneeIdSetForPrepDoc(employees);
+    var tasks = normalizePrepTasks(d.tasks, assigneeIds);
+    var selectedId = String(d.selectedId || 'kuschi').trim();
+    if (!assigneeIds.has(selectedId)) selectedId = 'kuschi';
+    var hideDone = !!d.hideDone;
+    return { selectedId: selectedId, employees: employees, tasks: tasks, hideDone: hideDone };
+  }
+
+  function loadRivieraPrepBoard() {
+    return normalizePrepBoardDoc(safeParseObject(localStorage.getItem(STORAGE_RIVIERA_PREP_BOARD) || '{}', {}));
+  }
+
+  function saveRivieraPrepBoard(doc) {
+    var n = normalizePrepBoardDoc(doc);
+    localStorage.setItem(STORAGE_RIVIERA_PREP_BOARD, JSON.stringify(n));
+  }
+
+  function loadBookPrepBoard(bookId) {
+    var bid = String(bookId || '').trim();
+    if (!bid) return normalizePrepBoardDoc({});
+    return normalizePrepBoardDoc(
+      safeParseObject(localStorage.getItem(bookPrepBoardStorageKey(bid)) || '{}', {})
+    );
+  }
+
+  function saveBookPrepBoard(bookId, doc) {
+    var bid = String(bookId || '').trim();
+    if (!bid) return;
+    var n = normalizePrepBoardDoc(doc);
+    localStorage.setItem(bookPrepBoardStorageKey(bid), JSON.stringify(n));
+  }
+
+  function exportRivieraPrepBoardJson() {
+    return JSON.stringify(loadRivieraPrepBoard(), null, 2);
+  }
+
+  function importRivieraPrepBoardJson(text) {
+    var obj = safeParseObject(String(text || ''), {});
+    saveRivieraPrepBoard(obj);
+    return loadRivieraPrepBoard();
+  }
+
+  function exportBookPrepBoardJson(bookId) {
+    return JSON.stringify(loadBookPrepBoard(bookId), null, 2);
+  }
+
+  function importBookPrepBoardJson(bookId, text) {
+    var bid = String(bookId || '').trim();
+    if (!bid) return normalizePrepBoardDoc({});
+    var obj = safeParseObject(String(text || ''), {});
+    saveBookPrepBoard(bid, obj);
+    return loadBookPrepBoard(bid);
   }
 
   function normalizeLastCountSnapshot(raw) {
@@ -1373,6 +1497,15 @@
     clearBookStocktakeQuantities: clearBookStocktakeQuantities,
     exportBookStocktakeJson: exportBookStocktakeJson,
     importBookStocktakeJson: importBookStocktakeJson,
+    bookPrepBoardStorageKey: bookPrepBoardStorageKey,
+    loadRivieraPrepBoard: loadRivieraPrepBoard,
+    saveRivieraPrepBoard: saveRivieraPrepBoard,
+    loadBookPrepBoard: loadBookPrepBoard,
+    saveBookPrepBoard: saveBookPrepBoard,
+    exportRivieraPrepBoardJson: exportRivieraPrepBoardJson,
+    importRivieraPrepBoardJson: importRivieraPrepBoardJson,
+    exportBookPrepBoardJson: exportBookPrepBoardJson,
+    importBookPrepBoardJson: importBookPrepBoardJson,
     addRivieraRecipe: addRivieraRecipe,
     exportKitchen: exportKitchen,
     exportRiviera: exportRiviera,
