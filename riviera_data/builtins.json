@@ -311,9 +311,9 @@
         "prep": "minimum 20% fat"
       },
       {
-        "qty": "800 g",
+        "qty": "1.25 kg",
         "item": "GF Breadcrumbs",
-        "prep": "for panade"
+        "prep": "for panade; for crumbing coat — keep separate from panade crumbs"
       },
       {
         "qty": "2.5 kg",
@@ -351,11 +351,6 @@
       {
         "qty": "125 g",
         "item": "Cracked Black Pepper"
-      },
-      {
-        "qty": "500 g",
-        "item": "GF Breadcrumbs",
-        "prep": "for crumbing coat — keep separate from panade crumbs"
       },
       {
         "qty": "6",
@@ -694,13 +689,14 @@
         "item": "Onion Powder"
       },
       {
-        "qty": "15 g",
+        "qty": "70 g",
         "item": "Salt Flakes",
-        "prep": "for batter seasoning"
+        "prep": "for batter seasoning; for aioli seasoning; for fish seasoning and finishing"
       },
       {
-        "qty": "10 g",
-        "item": "Cracked White Pepper"
+        "qty": "15 g",
+        "item": "Cracked White Pepper",
+        "prep": "for aioli seasoning"
       },
       {
         "qty": "900 ml",
@@ -732,16 +728,6 @@
         "prep": "finely chopped"
       },
       {
-        "qty": "5 g",
-        "item": "Salt Flakes",
-        "prep": "for aioli seasoning"
-      },
-      {
-        "qty": "5 g",
-        "item": "Cracked White Pepper",
-        "prep": "for aioli seasoning"
-      },
-      {
         "qty": "150 g",
         "item": "Rocket",
         "prep": "picked, washed, dried — 3 g per slider"
@@ -750,11 +736,6 @@
         "qty": "50",
         "item": "Brioche Slider Buns",
         "prep": "halved, stored wrapped in fridge"
-      },
-      {
-        "qty": "50 g",
-        "item": "Salt Flakes",
-        "prep": "for fish seasoning and finishing"
       },
       {
         "qty": "canola or rice bran oil",
@@ -1301,8 +1282,7 @@
       },
       {
         "qty": "",
-        "item": "Optional flavour additions — choose one per batch:",
-        "prep": ""
+        "item": "Optional flavour additions — choose one per batch:"
       },
       {
         "qty": "10 g",
@@ -1480,7 +1460,7 @@
         "prep": "finely grated on microplane"
       },
       {
-        "qty": "17 ml",
+        "qty": "15 ml",
         "item": "Extra Virgin Olive Oil"
       },
       {
@@ -1719,14 +1699,9 @@
         "prep": "whole"
       },
       {
-        "qty": "1 L",
+        "qty": "5 L",
         "item": "Water",
-        "prep": "hot (just off the boil)"
-      },
-      {
-        "qty": "4 L",
-        "item": "Water",
-        "prep": "cold or iced"
+        "prep": "hot (just off the boil); cold or iced"
       },
       {
         "qty": "3",
@@ -1777,7 +1752,7 @@
         "prep": "approx. 3.5 tsp — reacts with boiling water to soften dates and aerate batter"
       },
       {
-        "qty": "895 ml",
+        "qty": "900 ml",
         "item": "Boiling Water",
         "prep": "measured by weight — 895 g — for precision"
       },
@@ -1787,7 +1762,7 @@
         "prep": "lightly packed"
       },
       {
-        "qty": "285 g",
+        "qty": "290 g",
         "item": "Unsalted Butter",
         "prep": "softened to 18–20°C — not melted"
       },
@@ -2400,7 +2375,7 @@
     ],
     "ingredients": [
       {
-        "qty": "1 loaf",
+        "qty": "1 pc",
         "item": "Sourdough Batard",
         "prep": "slice 1.5cm thick, brush both sides with olive oil, char on grill or cast iron pan until deep grill marks both sides — not pale"
       },
@@ -2524,7 +2499,7 @@
         "prep": "fronds only, fine chop — stalks discarded"
       },
       {
-        "qty": "2 tsp",
+        "qty": "10 ml",
         "item": "Tabasco",
         "prep": "or to heat preference; add last, taste before committing"
       },
@@ -2582,7 +2557,7 @@
         "prep": "split, toasted cut-side on flat grill or pan — butter the cut face lightly before toasting for flavour and moisture barrier"
       },
       {
-        "qty": "1.2 kg",
+        "qty": "1.25 kg",
         "item": "Cooked Prawns",
         "prep": "peeled, tails off, halved lengthways — pat dry before folding into sauce; wet prawns dilute and break the emulsion"
       },
@@ -2607,7 +2582,7 @@
         "prep": "adds umami depth missing in original — classic Marie Rose component"
       },
       {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "Tabasco"
       },
       {
@@ -2752,7 +2727,7 @@
         "prep": "split, toasted cut-side on buttered flat grill until golden — butter barrier critical for structural integrity"
       },
       {
-        "qty": "1.6 kg",
+        "qty": "1.5 kg",
         "item": "Beef Mince",
         "prep": "80/20 fat ratio (chuck or brisket blend preferred); loosely portion 40g balls — do not compress or pack tightly before smashing"
       },
@@ -2834,7 +2809,7 @@
         "prep": "split, toasted cut-side on buttered flat grill"
       },
       {
-        "qty": "1.6 kg",
+        "qty": "1.5 kg",
         "item": "Wagyu Beef Mince",
         "prep": "MS4+ minimum; loosely portioned into 40g balls — do NOT compress. Hold chilled. Season only immediately before cooking."
       },
@@ -2908,7 +2883,7 @@
     ],
     "ingredients": [
       {
-        "qty": "1.2 kg",
+        "qty": "1.25 kg",
         "item": "Beef Mince",
         "prep": "20% fat content minimum — lean mince will produce dry, bouncy polpette"
       },
@@ -3065,9 +3040,9 @@
         "item": "Bay Leaves"
       },
       {
-        "qty": "30 ml",
-        "item": "Olive Oil",
-        "prep": "for searing"
+        "qty": "50 ml",
+        "item": "Extra Virgin Olive Oil",
+        "prep": "for searing; to bind gremolata"
       },
       {
         "qty": "to taste",
@@ -3087,11 +3062,6 @@
         "qty": "3 cloves",
         "item": "Garlic",
         "prep": "microplane to paste — gremolata"
-      },
-      {
-        "qty": "20 ml",
-        "item": "Extra Virgin Olive Oil",
-        "prep": "to bind gremolata"
       },
       {
         "qty": "300 g",
@@ -3610,7 +3580,7 @@
         "prep": "grated — 150 g in cream mix, 100 g for top"
       },
       {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "Nutmeg",
         "prep": "freshly grated"
       },
@@ -3624,7 +3594,7 @@
         "item": "Fine Salt"
       },
       {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "White Pepper",
         "prep": "ground"
       }
@@ -3672,8 +3642,9 @@
         "prep": "smashed, skin on"
       },
       {
-        "qty": "80 ml",
-        "item": "Olive Oil"
+        "qty": "160 ml",
+        "item": "Extra Virgin Olive Oil",
+        "prep": "for herb oil"
       },
       {
         "qty": "4 sprigs",
@@ -3704,18 +3675,13 @@
         "prep": "freshly squeezed"
       },
       {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "Lemon Zest"
       },
       {
         "qty": "1 bunch",
         "item": "Flat Leaf Parsley",
         "prep": "leaves only, fine chop — for herb oil"
-      },
-      {
-        "qty": "80 ml",
-        "item": "Extra Virgin Olive Oil",
-        "prep": "for herb oil"
       },
       {
         "qty": "1 small clove",
@@ -3788,11 +3754,11 @@
         "prep": "grated — 100 g into sauce, 100 g for top"
       },
       {
-        "qty": "1 tbsp",
+        "qty": "15 ml",
         "item": "Dijon Mustard"
       },
       {
-        "qty": "½ tsp",
+        "qty": "2.5 ml",
         "item": "Nutmeg",
         "prep": "freshly grated"
       },
@@ -3820,7 +3786,7 @@
         "item": "Fine Salt"
       },
       {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "White Pepper",
         "prep": "ground"
       }
@@ -3966,7 +3932,7 @@
     ],
     "ingredients": [
       {
-        "qty": "4.2 kg",
+        "qty": "4 kg",
         "item": "Eye Fillet",
         "prep": "trimmed of all silverskin and chain — do not remove all surface fat but remove sinew. Portion into 180–200g steaks cut from the centre and upper tail. Tie with butcher's twine to maintain cylinder shape if steaks are from the wider section."
       },
@@ -3999,9 +3965,9 @@
         "prep": "lightly cracked"
       },
       {
-        "qty": "50 g",
+        "qty": "70 g",
         "item": "Butter",
-        "prep": "cold, unsalted, cubed — jus mount"
+        "prep": "cold, unsalted, cubed — jus mount; for broccolini finish"
       },
       {
         "qty": "700 g",
@@ -4009,24 +3975,14 @@
         "prep": "1 bunch per 4 portions approximate — trimmed, 2cm of base removed"
       },
       {
-        "qty": "20 g",
-        "item": "Butter",
-        "prep": "for broccolini finish"
-      },
-      {
         "qty": "2 cloves",
         "item": "Garlic",
         "prep": "fine slice — for broccolini"
       },
       {
-        "qty": "30 ml",
+        "qty": "50 ml",
         "item": "Olive Oil",
-        "prep": "for searing beef"
-      },
-      {
-        "qty": "20 ml",
-        "item": "Olive Oil",
-        "prep": "for broccolini"
+        "prep": "for searing beef; for broccolini"
       },
       {
         "qty": "Salt Flakes & Cracked Pepper",
@@ -4087,9 +4043,9 @@
         "prep": "softened to room temperature"
       },
       {
-        "qty": "120 g",
+        "qty": "140 g",
         "item": "Parmesan",
-        "prep": "finely grated on microplane"
+        "prep": "finely grated on microplane; finely grated — extra, for gratinating tops"
       },
       {
         "qty": "5 cloves",
@@ -4128,11 +4084,6 @@
         "qty": "1",
         "item": "Lemon",
         "prep": "zest only — for filling brightness"
-      },
-      {
-        "qty": "20 g",
-        "item": "Parmesan",
-        "prep": "finely grated — extra, for gratinating tops"
       }
     ],
     "method_steps": [
@@ -4307,7 +4258,7 @@
         "prep": "sifted — for Chantilly"
       },
       {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "Vanilla Extract",
         "prep": "for Chantilly"
       },
@@ -4543,11 +4494,11 @@
         "item": "Dijon Mustard"
       },
       {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "Fine Salt"
       },
       {
-        "qty": "½ tsp",
+        "qty": "2.5 ml",
         "item": "White Pepper",
         "prep": "ground"
       }
@@ -4588,12 +4539,12 @@
     ],
     "ingredients": [
       {
-        "qty": "1 loaf",
+        "qty": "1 pc",
         "item": "White Sandwich Bread",
         "prep": "sliced, crusts removed"
       },
       {
-        "qty": "1 loaf",
+        "qty": "1 pc",
         "item": "Wholemeal Sandwich Bread",
         "prep": "sliced, crusts removed"
       },
@@ -4607,7 +4558,7 @@
         "item": "Whole Egg Mayonnaise"
       },
       {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "Lemon Juice",
         "prep": "for chicken mayo"
       },
@@ -4800,9 +4751,9 @@
         "item": "Tomato Sauce"
       },
       {
-        "qty": "10 ml",
+        "qty": "30 ml",
         "item": "Lemon Juice",
-        "prep": "cocktail sauce"
+        "prep": "cocktail sauce; cream cheese mix"
       },
       {
         "qty": "5 ml",
@@ -4821,11 +4772,6 @@
         "qty": "200 g",
         "item": "Cream Cheese",
         "prep": "softened to room temp"
-      },
-      {
-        "qty": "20 ml",
-        "item": "Lemon Juice",
-        "prep": "cream cheese mix"
       },
       {
         "qty": "15 g",
@@ -4895,7 +4841,7 @@
     ],
     "ingredients": [
       {
-        "qty": "1 loaf",
+        "qty": "1 pc",
         "item": "Sourdough or Baguette",
         "prep": "sliced 8–10 mm, brushed with olive oil, toasted"
       },
@@ -5166,9 +5112,9 @@
         "prep": "cold from fridge"
       },
       {
-        "qty": "25 g",
+        "qty": "55 g",
         "item": "Icing Sugar",
-        "prep": "Chantilly"
+        "prep": "Chantilly; dust at service"
       },
       {
         "qty": "5 ml",
@@ -5198,11 +5144,6 @@
         "qty": "50 g",
         "item": "Flaked Almonds",
         "prep": "toasted at 160°C 6–8 min until golden"
-      },
-      {
-        "qty": "30 g",
-        "item": "Icing Sugar",
-        "prep": "dust at service"
       },
       {
         "qty": "10 ml",
@@ -5457,19 +5398,14 @@
         "item": "Salt Flakes"
       },
       {
-        "qty": "30 ml",
-        "item": "Olive Oil",
-        "prep": "for cooking lamb"
+        "qty": "120 ml",
+        "item": "Extra Virgin Olive Oil",
+        "prep": "for cooking lamb; for flatbread"
       },
       {
         "qty": "4",
         "item": "Lebanese Flatbreads",
         "prep": "torn to 3–4 cm rough pieces"
-      },
-      {
-        "qty": "30 ml",
-        "item": "Olive Oil",
-        "prep": "for flatbread"
       },
       {
         "qty": "2 heads",
@@ -5495,10 +5431,6 @@
         "qty": "60 ml",
         "item": "Lemon Juice",
         "prep": "freshly squeezed"
-      },
-      {
-        "qty": "60 ml",
-        "item": "Extra Virgin Olive Oil"
       },
       {
         "qty": "10 g",
@@ -5561,14 +5493,14 @@
         "prep": "trimmed"
       },
       {
-        "qty": "80 ml",
-        "item": "Olive Oil",
-        "prep": "marinade"
+        "qty": "140 ml",
+        "item": "Extra Virgin Olive Oil",
+        "prep": "marinade; tabbouleh dressing; for flatbread"
       },
       {
-        "qty": "10 g",
+        "qty": "15 g",
         "item": "Sumac",
-        "prep": "marinade"
+        "prep": "marinade; garnish dust"
       },
       {
         "qty": "5 g",
@@ -5581,14 +5513,14 @@
         "prep": "microplaned"
       },
       {
-        "qty": "30 ml",
+        "qty": "90 ml",
         "item": "Lemon Juice",
-        "prep": "marinade"
+        "prep": "marinade; tabbouleh dressing"
       },
       {
-        "qty": "5 g",
+        "qty": "10 g",
         "item": "Salt Flakes",
-        "prep": "marinade"
+        "prep": "marinade; tabbouleh"
       },
       {
         "qty": "200 g",
@@ -5611,21 +5543,6 @@
         "prep": "fine sliced"
       },
       {
-        "qty": "60 ml",
-        "item": "Lemon Juice",
-        "prep": "tabbouleh dressing"
-      },
-      {
-        "qty": "40 ml",
-        "item": "Extra Virgin Olive Oil",
-        "prep": "tabbouleh dressing"
-      },
-      {
-        "qty": "5 g",
-        "item": "Salt Flakes",
-        "prep": "tabbouleh"
-      },
-      {
         "qty": "300 ml",
         "item": "Tzatziki — house made"
       },
@@ -5633,16 +5550,6 @@
         "qty": "4",
         "item": "Lebanese Flatbreads",
         "prep": "torn to 4 cm rough pieces"
-      },
-      {
-        "qty": "20 ml",
-        "item": "Olive Oil",
-        "prep": "for flatbread"
-      },
-      {
-        "qty": "5 g",
-        "item": "Sumac",
-        "prep": "garnish dust"
       },
       {
         "qty": "to taste",
@@ -5740,7 +5647,7 @@
         "item": "Plain Flour"
       },
       {
-        "qty": "1.2 L",
+        "qty": "1.25 L",
         "item": "Full-Cream Milk",
         "prep": "warmed to 60°C"
       },
@@ -5959,12 +5866,12 @@
     ],
     "ingredients": [
       {
-        "qty": "1 loaf",
+        "qty": "1 pc",
         "item": "White Sandwich Bread",
         "prep": "pre-sliced, crusts removed"
       },
       {
-        "qty": "1 loaf",
+        "qty": "1 pc",
         "item": "Wholemeal Sandwich Bread",
         "prep": "pre-sliced, crusts removed"
       },
@@ -6061,11 +5968,11 @@
         "item": "Olive Oil"
       },
       {
-        "qty": "2 tsp",
+        "qty": "10 ml",
         "item": "Smoked Paprika"
       },
       {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "Ground Cumin"
       },
       {
@@ -6263,12 +6170,12 @@
         "prep": "microplane — meatball mix"
       },
       {
-        "qty": "3 tsp",
+        "qty": "30 ml",
         "item": "Smoked Paprika",
-        "prep": "meatball mix — divided from sauce quantity"
+        "prep": "meatball mix — divided from sauce quantity; sauce"
       },
       {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "Ground Cumin",
         "prep": "meatball mix"
       },
@@ -6303,12 +6210,7 @@
         "prep": "fine slice — sauce"
       },
       {
-        "qty": "3 tsp",
-        "item": "Smoked Paprika",
-        "prep": "sauce"
-      },
-      {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "Dried Chilli Flakes",
         "prep": "sauce — optional, adjustable"
       },
@@ -6377,7 +6279,7 @@
     ],
     "ingredients": [
       {
-        "qty": "1 loaf",
+        "qty": "1 pc",
         "item": "Sourdough Batard",
         "prep": "sliced 1.5cm thick, charred both sides on grill or grill pan"
       },
@@ -6392,8 +6294,9 @@
         "prep": "microplaned — for tomato mix"
       },
       {
-        "qty": "40 ml",
-        "item": "Extra Virgin Olive Oil"
+        "qty": "60 ml",
+        "item": "Extra Virgin Olive Oil",
+        "prep": "for brushing bread before grilling"
       },
       {
         "qty": "20 ml",
@@ -6408,11 +6311,6 @@
         "qty": "200 g",
         "item": "Soft Goats Cheese",
         "prep": "brought to room temperature 30 min before service"
-      },
-      {
-        "qty": "20 ml",
-        "item": "Olive Oil",
-        "prep": "for brushing bread before grilling"
       },
       {
         "qty": "to taste",
@@ -6451,7 +6349,7 @@
     ],
     "ingredients": [
       {
-        "qty": "3.2 kg",
+        "qty": "3 kg",
         "item": "Beef Chuck",
         "prep": "cut into 300–400 g pieces, sinew trimmed, surface moisture patted dry — brisket acceptable but chuck holds pull texture better"
       },
@@ -6485,16 +6383,16 @@
         "item": "Dry White Wine"
       },
       {
-        "qty": "2 tbsp",
+        "qty": "30 ml",
         "item": "Dried Oregano",
         "prep": "rub half into beef before searing, reserve half for sauce"
       },
       {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "Ground Cinnamon"
       },
       {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "Ground Allspice"
       },
       {
@@ -6592,23 +6490,18 @@
         "prep": "microplane for marinade"
       },
       {
-        "qty": "100 ml",
-        "item": "Olive Oil",
-        "prep": "marinade"
+        "qty": "180 ml",
+        "item": "Extra Virgin Olive Oil",
+        "prep": "marinade; dressing"
       },
       {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "Dried Chilli Flakes"
       },
       {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "Fine Salt",
         "prep": "marinade — salt the marinade, it seasons from outside in"
-      },
-      {
-        "qty": "80 ml",
-        "item": "Extra Virgin Olive Oil",
-        "prep": "dressing"
       },
       {
         "qty": "25 ml",
@@ -6689,14 +6582,9 @@
         "prep": "drained overnight in muslin over a colander in the coldroom; weigh after draining — target 400 g drained yield"
       },
       {
-        "qty": "80 g",
+        "qty": "130 g",
         "item": "Icing Sugar",
-        "prep": "sifted, for white chocolate ricotta filling"
-      },
-      {
-        "qty": "40 g",
-        "item": "Icing Sugar",
-        "prep": "sifted, for pistachio cream"
+        "prep": "sifted, for white chocolate ricotta filling; sifted, for pistachio cream; extra, for dusting at pass"
       },
       {
         "qty": "90 g",
@@ -6732,11 +6620,6 @@
         "qty": "1",
         "item": "Lemon",
         "prep": "zest only — fold into white chocolate ricotta filling to cut richness"
-      },
-      {
-        "qty": "10 g",
-        "item": "Icing Sugar",
-        "prep": "extra, for dusting at pass"
       }
     ],
     "method_steps": [
@@ -6803,8 +6686,9 @@
         "prep": "full fat, at room temperature minimum 1 hour — cold cream cheese causes lumps and over-beating"
       },
       {
-        "qty": "200 g",
-        "item": "Caster Sugar"
+        "qty": "250 g",
+        "item": "Caster Sugar",
+        "prep": "for macerated strawberries"
       },
       {
         "qty": "4",
@@ -6812,7 +6696,7 @@
         "prep": "at room temperature — cold eggs cause batter to seize"
       },
       {
-        "qty": "2 tsp",
+        "qty": "10 ml",
         "item": "Vanilla Extract",
         "prep": "pure, not imitation"
       },
@@ -6830,11 +6714,6 @@
         "qty": "500 g",
         "item": "Fresh Strawberries",
         "prep": "hulled, quartered — extra quantity to account for trim loss and tasting"
-      },
-      {
-        "qty": "50 g",
-        "item": "Caster Sugar",
-        "prep": "for macerated strawberries"
       },
       {
         "qty": "25 ml",
@@ -7315,8 +7194,9 @@
         "prep": "melted, cooled slightly"
       },
       {
-        "qty": "1 tsp",
-        "item": "Vanilla Extract"
+        "qty": "10 ml",
+        "item": "Vanilla Extract",
+        "prep": "Chantilly"
       },
       {
         "qty": "300 ml",
@@ -7327,11 +7207,6 @@
         "qty": "25 g",
         "item": "Icing Sugar",
         "prep": "sifted, Chantilly"
-      },
-      {
-        "qty": "1 tsp",
-        "item": "Vanilla Extract",
-        "prep": "Chantilly"
       },
       {
         "qty": "300 g",
@@ -7473,8 +7348,8 @@
         "prep": "boiling — use vegetable stock to keep vegan"
       },
       {
-        "qty": "30 ml",
-        "item": "Olive Oil",
+        "qty": "70 ml",
+        "item": "Extra Virgin Olive Oil",
         "prep": "stirred through couscous after steaming"
       },
       {
@@ -7512,19 +7387,15 @@
         "prep": "freshly squeezed"
       },
       {
-        "qty": "40 ml",
-        "item": "Extra Virgin Olive Oil"
-      },
-      {
         "qty": "30 g",
         "item": "Harissa Paste"
       },
       {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "Ground Cumin"
       },
       {
-        "qty": "½ tsp",
+        "qty": "2.5 ml",
         "item": "Ground Cinnamon"
       },
       {
@@ -7575,19 +7446,19 @@
         "prep": "skin off, 3 cm dice"
       },
       {
-        "qty": "60 ml",
-        "item": "Olive Oil"
+        "qty": "90 ml",
+        "item": "Extra Virgin Olive Oil"
       },
       {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "Ground Cinnamon"
       },
       {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "Smoked Paprika"
       },
       {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "Fine Salt"
       },
       {
@@ -7615,11 +7486,7 @@
         "prep": "freshly squeezed"
       },
       {
-        "qty": "30 ml",
-        "item": "Extra Virgin Olive Oil"
-      },
-      {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "Dijon Mustard"
       },
       {
@@ -7772,7 +7639,7 @@
         "item": "White Wine Vinegar"
       },
       {
-        "qty": "1 tsp",
+        "qty": "5 ml",
         "item": "Dijon Mustard"
       },
       {

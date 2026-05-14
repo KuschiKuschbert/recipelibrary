@@ -526,6 +526,36 @@
     return afterCount;
   }
 
+  /**
+   * Parse a Riviera ingredient qty string (already count-normalised) into a mergeable base or null.
+   * @returns {{ kind: 'g'|'ml'|'pc', n: number }|null}
+   */
+  function rivieraQtyToMergeBase(qtyStr) {
+    var s = String(qtyStr || '').trim();
+    if (!s) return null;
+    if (/as needed|to taste/i.test(s)) return null;
+    var afterCount = normalizeRivieraCountUnits(s);
+    var pn = parseLeadingNumber(afterCount);
+    if (pn.value == null || !isFinite(pn.value)) return null;
+    var rest = pn.rest.trim();
+    if (!rest) return null;
+    if (/^pc\b/i.test(rest)) return { kind: 'pc', n: pn.value };
+    var mf = metricUnitFactors(rest);
+    if (!mf) return null;
+    if (mf.factorToG) return { kind: 'g', n: pn.value * mf.factorToG };
+    if (mf.factorToMl) return { kind: 'ml', n: pn.value * mf.factorToMl };
+    return null;
+  }
+
+  /** Format merge base back to one Riviera qty string (chef rounding). */
+  function rivieraMergeBaseToQtyString(kind, n, item) {
+    if (!(n > 0) || !isFinite(n)) return '';
+    if (kind === 'pc') return qtyString(n) + ' pc';
+    if (kind === 'g') return normalizeRivieraQtyString(qtyString(n) + ' g', item);
+    if (kind === 'ml') return normalizeRivieraQtyString(qtyString(n) + ' ml', item);
+    return '';
+  }
+
   function normalizeKitchenIngredients(arr) {
     if (!Array.isArray(arr)) return arr;
     return arr.map(function (ing) {
@@ -590,5 +620,15 @@
     chefRoundVolumeMl: chefRoundVolumeMl,
     normalizeRivieraCountUnits: normalizeRivieraCountUnits,
     normalizeRivieraQtyString: normalizeRivieraQtyString,
+    rivieraQtyToMergeBase: rivieraQtyToMergeBase,
+    rivieraMergeBaseToQtyString: rivieraMergeBaseToQtyString,
   };
-})(typeof window !== 'undefined' ? window : this);
+})(
+  typeof globalThis !== 'undefined'
+    ? globalThis
+    : typeof window !== 'undefined'
+      ? window
+      : typeof global !== 'undefined'
+        ? global
+        : this
+);

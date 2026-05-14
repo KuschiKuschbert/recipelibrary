@@ -15,6 +15,8 @@
   const STORAGE_CUSTOM_BOOKS = 'kuschi_custom_kitchen_books_v1';
   const STORAGE_RIVIERA_STOCKTAKE = 'kuschi_riviera_stocktake_v1';
   const STORAGE_RIVIERA_PREP_BOARD = 'kuschi_riviera_prep_board_v1';
+  /** Set to '1' after one-time remap of Riviera order overrides for built-in ingredient merge (v2). */
+  const STORAGE_RIVIERA_BUILTIN_MERGE_V2 = 'kuschi_riviera_builtin_merge_overrides_v2';
 
   const ZONE_IDS = ['freezer', 'coldroom', 'drystore', 'other'];
   const PREP_BUILTIN_IDS = new Set(['kuschi', 'ash']);
@@ -82,121 +84,14 @@
     }
   }
 
-  /**
-   * Regex → replacement (applied after basic normalization). Word-style aliases for order-list merge + master.
-   * Extend as you hit duplicates in prep (e.g. US vs UK names).
-   */
-  const INGREDIENT_CANON_ALIASES = [
-    [/\bkewpie\s+mayonnaise\b/g, 'kewpie mayo'],
-    [/\bdill\s+fresh\b/g, 'dill'],
-    [/\bfresh\s+dill\b/g, 'dill'],
-    [/\bscallions?\b/g, 'spring onion'],
-    [/\bgreen\s+onions?\b/g, 'spring onion'],
-    [/\bspring\s+onions?\b/g, 'spring onion'],
-    [/\bshallots?\b/g, 'eschalot'],
-    [/\beshallots?\b/g, 'eschalot'],
-    [/\bcilantro\b/g, 'coriander'],
-    [/\bcoriander\s+leaves?\b/g, 'coriander'],
-    [/\bground\s+beef\b/g, 'beef mince'],
-    [/\bminced\s+beef\b/g, 'beef mince'],
-    [/\bheavy\s+cream\b/g, 'thickened cream'],
-    [/\bconfectioners\s+sugar\b/g, 'icing sugar'],
-    [/\bpowdered\s+sugar\b/g, 'icing sugar'],
-    [/\bkosher\s+salt\b/g, 'salt'],
-    [/\bsea\s+salt\s+flakes?\b/g, 'salt flakes'],
-    [/\bextra\s+virgin\s+olive\s+oil\b/g, 'olive oil'],
-    [/\bevo?o\b/g, 'olive oil'],
-    [/\bap\s+flour\b/g, 'plain flour'],
-    [/\ball[\s-]?purpose\s+flour\b/g, 'plain flour'],
-    [/\bmint\s*[—–-]\s*fresh\b/gi, 'mint'],
-    [/\bfresh\s+mint\b/gi, 'mint'],
-  ];
-
-  /** Do not strip trailing “s” for these whole-token matches (false plurals / mass nouns). */
-  const INGREDIENT_KEEP_TRAILING_S = new Set([
-    'glass',
-    'grass',
-    'class',
-    'brass',
-    'pass',
-    'cross',
-    'loss',
-    'boss',
-    'chess',
-    'dress',
-    'press',
-    'stress',
-    'mess',
-    'access',
-    'success',
-    'business',
-    'illness',
-    'happiness',
-    'walrus',
-    'virus',
-    'campus',
-    'status',
-    'this',
-    'us',
-    'plus',
-    'minus',
-    'gas',
-    'atlas',
-  ]);
-
-  function singularizeIngredientToken(w) {
-    var x = String(w || '').trim();
-    if (x.length < 3) return x;
-    if (INGREDIENT_KEEP_TRAILING_S.has(x)) return x;
-    if (x.length >= 5 && x.endsWith('ies')) return x.slice(0, -3) + 'y';
-    if (x.length >= 6 && x.endsWith('oes')) return x.slice(0, -2);
-    if (x.length >= 5 && x.endsWith('xes')) return x.slice(0, -2);
-    if (x.length >= 8 && x.endsWith('ches')) return x.slice(0, -2);
-    if (x.length >= 6 && x.endsWith('shes')) return x.slice(0, -2);
-    if (x.length >= 4 && x.endsWith('s') && x.charAt(x.length - 2) !== 's') {
-      if (x.endsWith('us') || x.endsWith('is') || x === 'this' || x === 'gas') return x;
-      return x.slice(0, -1);
-    }
-    return x;
-  }
-
-  function applyIngredientAliases(t) {
-    var s = t;
-    for (var i = 0; i < INGREDIENT_CANON_ALIASES.length; i++) {
-      s = s.replace(INGREDIENT_CANON_ALIASES[i][0], INGREDIENT_CANON_ALIASES[i][1]);
-    }
-    return s;
-  }
-
-  function singularizeIngredientPhrase(t) {
-    return t
-      .split(' ')
-      .filter(Boolean)
-      .map(singularizeIngredientToken)
-      .join(' ')
-      .replace(/\s+/g, ' ')
-      .trim();
-  }
-
-  /**
-   * Canonical key for order-list merging and master ingredient matching.
-   * NFKC, & → and, dash/punct cleanup, curated aliases, conservative English plural collapse per token.
-   */
   function canonicalOrderMergeKey(s) {
-    var t = String(s || '').trim();
-    try {
-      if (t.normalize) t = t.normalize('NFKC');
-    } catch (e) {
-      /* ignore */
+    var C =
+      (typeof globalThis !== 'undefined' && globalThis.KuschiRivieraCanonical) ||
+      (typeof window !== 'undefined' && window.KuschiRivieraCanonical);
+    if (!C || typeof C.canonicalOrderMergeKey !== 'function') {
+      throw new Error('Load assets/riviera-canonical-ingredient.js before user-recipes.js');
     }
-    t = t.toLowerCase();
-    t = t.replace(/&/g, ' and ');
-    t = t.replace(/[—–\-−]/g, ' ');
-    t = t.replace(/[^a-z0-9\s\u00C0-\u024F]/g, ' ');
-    t = t.replace(/\s+/g, ' ').trim();
-    t = applyIngredientAliases(t);
-    t = singularizeIngredientPhrase(t);
-    return t;
+    return C.canonicalOrderMergeKey(s);
   }
 
   function normalizeIngName(s) {
@@ -241,6 +136,112 @@
     return found && found.defaultZone ? found.defaultZone : 'other';
   }
 
+  /**
+   * Merge multiple order-override patches that collapsed to the same recipeId::newIndex.
+   * zone / orderQty: last non-empty wins (stable sort by sourceOldIndex).
+   * included: false if any patch explicitly sets included === false.
+   */
+  function mergeCollapsedOrderOverridePatches(entries) {
+    var zone = '';
+    var orderQty = '';
+    var included = true;
+    for (var i = 0; i < entries.length; i++) {
+      var p = entries[i].patch || {};
+      if (p.zone != null && String(p.zone).trim()) zone = String(p.zone).trim();
+      if (p.orderQty != null && String(p.orderQty).trim()) orderQty = String(p.orderQty).trim();
+      if (p.included === false) included = false;
+    }
+    var out = {};
+    if (zone) out.zone = zone;
+    if (orderQty) out.orderQty = orderQty;
+    if (!included) out.included = false;
+    return out;
+  }
+
+  /**
+   * One-time: remap kuschi_riviera_order_overrides_v1 keys after built-in ingredient row merge.
+   * Reads globalThis.KuschiRivieraOrderOverrideRemapV2 from assets/riviera-order-override-remap-v2.js (Riviera page only).
+   */
+  function migrateRivieraBuiltinMergeOverridesIfNeeded() {
+    try {
+      if (localStorage.getItem(STORAGE_RIVIERA_BUILTIN_MERGE_V2) === '1') return;
+    } catch (e) {
+      return;
+    }
+    var R =
+      (typeof globalThis !== 'undefined' && globalThis.KuschiRivieraOrderOverrideRemapV2) ||
+      (typeof window !== 'undefined' && window.KuschiRivieraOrderOverrideRemapV2);
+    if (!R || R.version !== 2 || !R.maps || typeof R.maps !== 'object') {
+      try {
+        localStorage.setItem(STORAGE_RIVIERA_BUILTIN_MERGE_V2, '1');
+      } catch (e2) {
+        /* ignore */
+      }
+      return;
+    }
+    var maps = R.maps;
+    var rid;
+    var hasAny = false;
+    for (rid in maps) {
+      if (!Object.prototype.hasOwnProperty.call(maps, rid)) continue;
+      var m = maps[rid];
+      if (m && typeof m === 'object' && Object.keys(m).length) {
+        hasAny = true;
+        break;
+      }
+    }
+    if (!hasAny) {
+      try {
+        localStorage.setItem(STORAGE_RIVIERA_BUILTIN_MERGE_V2, '1');
+      } catch (e3) {
+        /* ignore */
+      }
+      return;
+    }
+
+    var all = safeParseObject(localStorage.getItem(STORAGE_ORDER_OVERRIDES) || '{}', {});
+    var keys = Object.keys(all).sort();
+    var buckets = {};
+    var next = {};
+    var ki;
+    for (ki = 0; ki < keys.length; ki++) {
+      var fullKey = keys[ki];
+      var parts = fullKey.split('::');
+      if (parts.length < 2) {
+        next[fullKey] = all[fullKey];
+        continue;
+      }
+      var recipeId = parts[0];
+      var oldIdxStr = parts[1];
+      var oldIdx = parseInt(oldIdxStr, 10);
+      var mapForRecipe = maps[recipeId];
+      if (!mapForRecipe || mapForRecipe[String(oldIdx)] == null) {
+        next[fullKey] = all[fullKey];
+        continue;
+      }
+      var newIdx = mapForRecipe[String(oldIdx)];
+      var newKey = recipeId + '::' + newIdx;
+      if (!buckets[newKey]) buckets[newKey] = [];
+      buckets[newKey].push({ sourceOld: oldIdx, patch: all[fullKey] });
+    }
+
+    var bk = Object.keys(buckets).sort();
+    for (var bi = 0; bi < bk.length; bi++) {
+      var nk = bk[bi];
+      var arr = buckets[nk].slice().sort(function (a, b) {
+        return a.sourceOld - b.sourceOld;
+      });
+      next[nk] = mergeCollapsedOrderOverridePatches(arr);
+    }
+
+    saveOrderOverrides(next);
+    try {
+      localStorage.setItem(STORAGE_RIVIERA_BUILTIN_MERGE_V2, '1');
+    } catch (e4) {
+      /* ignore */
+    }
+  }
+
   const STORAGE_ORDER_ARANCINI_COATING_SPLIT = 'kuschi_order_arancini_coating_split_v1';
 
   /**
@@ -283,6 +284,7 @@
 
   function loadOrderOverrides() {
     migrateOrderOverridesAranciniCoatingSplitIfNeeded();
+    migrateRivieraBuiltinMergeOverridesIfNeeded();
     return safeParseObject(localStorage.getItem(STORAGE_ORDER_OVERRIDES) || '{}', {});
   }
 
@@ -1448,6 +1450,7 @@
     restoreAllHiddenRivieraBuiltins: restoreAllHiddenRivieraBuiltins,
     removeRivieraRecipe: removeRivieraRecipe,
     migrateRivieraMetricIfNeeded: migrateRivieraMetricIfNeeded,
+    migrateRivieraBuiltinMergeOverridesIfNeeded: migrateRivieraBuiltinMergeOverridesIfNeeded,
     canonicalOrderMergeKey: canonicalOrderMergeKey,
     toIndexRow: toIndexRow,
     kitchenToDetail: kitchenToDetail,
