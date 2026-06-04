@@ -1,0 +1,392 @@
+{
+  "version": "2026-06-04-v1",
+  "status": "active_service_standard_addon",
+  "source_of_truth": "Canape, roving and slider service-size standards inferred from Riviera built-in canape recipes and Kuschi-approved service-variant patterns. Base rules remain riviera_data/service_variants.json.",
+  "service_variants": {
+    "bruschetta-rare-roast-beef": {
+      "recipe_id": "bruschetta-rare-roast-beef",
+      "base_prep": {
+        "base_yield_pieces": 40
+      },
+      "cocktail": {
+        "portion": "1 bruschetta per guest",
+        "pieces_per_guest": 1,
+        "production_buffer_multiplier": 1.15,
+        "production_pieces_per_guest": 1.15,
+        "raw_beef_g_per_piece": 20,
+        "horseradish_cream_g_per_piece": 10,
+        "pickled_shallot_rings_per_piece": "3-4",
+        "chives_g_per_40_pieces": 40,
+        "standard_garnish": "pickled shallot and chives",
+        "premium_garnish_option": "Micro herbs, 1 punnet per 80 pieces as optional premium finish.",
+        "service_rule": "Assemble in 20-piece batches no more than 15 minutes before pass. Keep crostini, beef and cream separate for staggered service.",
+        "status": "confirmed"
+      },
+      "platter": {
+        "portion": "count by ordered pieces",
+        "raw_beef_g_per_piece": 20,
+        "horseradish_cream_g_per_piece": 10,
+        "pickled_shallot_rings_per_piece": "3-4",
+        "chives_g_per_40_pieces": 40,
+        "service_rule": "Immediate service only. Assemble close to handover; do not hold fully assembled more than 15 minutes.",
+        "premium_garnish_option": "Micro herbs, 1 punnet per 80 pieces as optional premium finish.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "not recommended as open buffet",
+        "reason": "Crostini softens quickly once topped with cream and beef. Use roving canape or immediate platter service instead.",
+        "status": "not_recommended"
+      },
+      "corporate_boxed": {
+        "portion": "not recommended for corporate boxes",
+        "reason": "Bread loses crunch and beef/cream quality drops in sealed boxed holding. Use sandwich or roll formats for corporate delivery.",
+        "status": "not_recommended"
+      }
+    },
+    "spanner-crab-cannoli": {
+      "recipe_id": "spanner-crab-cannoli",
+      "base_prep": {
+        "base_yield_pieces": 40
+      },
+      "cocktail": {
+        "portion": "1 small crab cannoli per guest",
+        "pieces_per_guest": 1,
+        "production_buffer_multiplier": 1.2,
+        "production_pieces_per_guest": 1.2,
+        "crab_meat_g_per_piece": 15,
+        "finished_filling_g_per_piece": 22,
+        "lemon_juice_ml_per_piece": 1,
+        "microherbs_punnets_per_40_pieces": 1,
+        "standard_garnish": "dill frond or micro herbs",
+        "premium_garnish_option": "Finger lime pearls or extra micro herbs as optional premium finish.",
+        "service_rule": "Fill 5-10 minutes before service. Do not pre-fill more than 30 minutes out and never stack filled shells.",
+        "status": "confirmed"
+      },
+      "platter": {
+        "portion": "count by ordered cannoli",
+        "crab_meat_g_per_piece": 15,
+        "finished_filling_g_per_piece": 22,
+        "service_rule": "Chilled immediate-service platter only. Fill close to pickup/service and send in single layer.",
+        "premium_garnish_option": "Finger lime pearls or micro herbs as optional premium finish.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "not recommended as open buffet",
+        "reason": "Seafood filling softens cannoli shells quickly and creates high chilled seafood holding risk. Use roving or immediate platter service.",
+        "status": "not_recommended"
+      },
+      "corporate_boxed": {
+        "portion": "not recommended",
+        "reason": "Filled shells soften in sealed boxes and chilled seafood quality is too fragile for normal corporate delivery.",
+        "status": "not_recommended"
+      }
+    },
+    "prawn-brioche-slider": {
+      "recipe_id": "prawn-brioche-slider",
+      "base_prep": {
+        "base_yield_sliders": 40
+      },
+      "cocktail": {
+        "portion": "1 prawn brioche slider per guest",
+        "sliders_per_guest": 1,
+        "production_buffer_multiplier": 1.1,
+        "production_sliders_per_guest": 1.1,
+        "cooked_prawn_g_per_slider": 31,
+        "marie_rose_ml_per_slider": 7,
+        "pickled_slaw_g_per_slider": 15,
+        "brioche_buns_per_slider": 1,
+        "standard_garnish": "cocktail pick",
+        "premium_garnish_option": "Potato crisp or micro herbs as optional premium finish.",
+        "service_rule": "Assemble no more than 12 minutes before pass. Keep prawns dry and slaw well drained.",
+        "status": "confirmed"
+      },
+      "platter": {
+        "portion": "count by ordered sliders",
+        "cooked_prawn_g_per_slider": 31,
+        "marie_rose_ml_per_slider": 7,
+        "pickled_slaw_g_per_slider": 15,
+        "service_rule": "Immediate service only. Toast bun cut-side and assemble close to handover.",
+        "premium_garnish_option": "Potato crisp or micro herbs as optional premium finish.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "not recommended as open buffet",
+        "reason": "Wet prawn cocktail mix and slaw soften brioche quickly. Use roving/substantial canape or ordered platter service instead.",
+        "status": "not_recommended"
+      },
+      "corporate_boxed": {
+        "portion": "not recommended for corporate boxes unless specifically ordered",
+        "reason": "Brioche and seafood filling quality drop quickly in sealed boxes. Use only when client specifically orders sliders and timing supports quality.",
+        "status": "not_recommended"
+      }
+    },
+    "chicken-bacon-brioche-slider": {
+      "recipe_id": "chicken-bacon-brioche-slider",
+      "base_prep": {
+        "base_yield_sliders": 40
+      },
+      "cocktail": {
+        "portion": "1 smoked chicken and bacon brioche slider per guest",
+        "sliders_per_guest": 1,
+        "production_buffer_multiplier": 1.1,
+        "production_sliders_per_guest": 1.1,
+        "smoked_chicken_g_per_slider": 20,
+        "bacon_rashers_per_slider": 0.5,
+        "dijonnaise_g_per_slider": 10,
+        "baby_cos_g_per_slider": 2,
+        "standard_garnish": "cocktail pick",
+        "premium_garnish_option": "Micro herbs or crisp bacon crumb as optional premium finish.",
+        "service_rule": "Assemble in batches of 20 no more than 15 minutes before pass. Bacon must be crisp at assembly.",
+        "status": "confirmed"
+      },
+      "platter": {
+        "portion": "count by ordered sliders",
+        "smoked_chicken_g_per_slider": 20,
+        "bacon_rashers_per_slider": 0.5,
+        "dijonnaise_g_per_slider": 10,
+        "baby_cos_g_per_slider": 2,
+        "service_rule": "Immediate service or short delivery only. Keep bacon separate until final assembly where practical.",
+        "premium_garnish_option": "Micro herbs or crisp bacon crumb as optional premium finish.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "not recommended as open buffet",
+        "reason": "Assembled brioche softens and bacon loses crispness during open buffet holding. Use roving canape or platter service instead.",
+        "status": "not_recommended"
+      },
+      "corporate_boxed": {
+        "portion": "not recommended unless specifically ordered",
+        "reason": "Brioche and bacon texture decline in sealed boxed holding. Use filled brioche roll or sandwich formats for standard corporate boxes.",
+        "status": "not_recommended"
+      }
+    },
+    "vintage-beef-brioche-slider": {
+      "recipe_id": "vintage-beef-brioche-slider",
+      "base_prep": {
+        "base_yield_sliders": 40
+      },
+      "cocktail": {
+        "portion": "1 vintage beef brioche slider per guest",
+        "sliders_per_guest": 1,
+        "production_buffer_multiplier": 1.1,
+        "production_sliders_per_guest": 1.1,
+        "beef_patty_g_raw_per_slider": 40,
+        "aged_cheddar_g_per_slider": 5,
+        "cornichon_g_per_slider": 4,
+        "burger_sauce_ml_per_slider": 6,
+        "standard_garnish": "cocktail pick",
+        "premium_garnish_option": "Micro herbs or premium pickle garnish as optional finish.",
+        "service_rule": "Cook in rolling batches and pass immediately. Do not hold assembled sliders.",
+        "status": "confirmed"
+      },
+      "tapas": {
+        "portion": "3 sliders per tapas serve",
+        "sliders_per_serve": 3,
+        "beef_patty_g_raw_per_slider": 40,
+        "burger_sauce_ml_per_slider": 6,
+        "status": "confirmed"
+      },
+      "platter": {
+        "portion": "count by ordered sliders",
+        "beef_patty_g_raw_per_slider": 40,
+        "aged_cheddar_g_per_slider": 5,
+        "cornichon_g_per_slider": 4,
+        "burger_sauce_ml_per_slider": 6,
+        "service_rule": "Immediate service only. Cook and assemble as close to handover as possible.",
+        "premium_garnish_option": "Micro herbs or premium pickle garnish as optional finish.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "not recommended as open buffet",
+        "reason": "Smash patties and brioche lose quality quickly once assembled. Use roving/substantial canape or immediate platter service.",
+        "status": "not_recommended"
+      },
+      "corporate_boxed": {
+        "portion": "not recommended unless specifically ordered",
+        "reason": "Hot beef sliders do not hold well in sealed boxes. Use only with client-specific order and protected delivery timing.",
+        "status": "not_recommended"
+      }
+    },
+    "mini-beefburger-canape": {
+      "recipe_id": "mini-beefburger-canape",
+      "base_prep": {
+        "base_yield_pieces": 40
+      },
+      "cocktail": {
+        "portion": "1 mini beefburger canape per guest",
+        "pieces_per_guest": 1,
+        "production_buffer_multiplier": 1.1,
+        "production_pieces_per_guest": 1.1,
+        "wagyu_patty_g_raw_per_piece": 40,
+        "truffle_aioli_g_per_piece": 5,
+        "microgreens_punnets_per_40_pieces": 1,
+        "standard_garnish": "microgreens and cocktail pick",
+        "premium_garnish_option": "Extra microgreens or truffle aroma refreshed at pass as premium finish.",
+        "service_rule": "Cook in batches of 8-10 and serve immediately. Wagyu fat sets quickly; do not hot-hold assembled.",
+        "status": "confirmed"
+      },
+      "platter": {
+        "portion": "count by ordered pieces",
+        "wagyu_patty_g_raw_per_piece": 40,
+        "truffle_aioli_g_per_piece": 5,
+        "service_rule": "Immediate service only. Not suitable for long delivery or standing hold.",
+        "premium_garnish_option": "Extra microgreens or truffle aroma refreshed at pass as premium finish.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "not recommended as open buffet",
+        "reason": "Mini burgers lose heat and texture too quickly for open buffet holding. Use roving canape or immediate platter service.",
+        "status": "not_recommended"
+      },
+      "corporate_boxed": {
+        "portion": "not recommended",
+        "reason": "Wagyu mini burgers are quality-sensitive and unsuitable for sealed boxed delivery.",
+        "status": "not_recommended"
+      }
+    },
+    "natural-oysters-champagne-mignonette": {
+      "recipe_id": "natural-oysters-champagne-mignonette",
+      "cocktail": {
+        "portion": "1 natural oyster per guest",
+        "oysters_per_guest": 1,
+        "mignonette_ml_per_oyster": 5,
+        "lemons_per_8_oysters": 1,
+        "standard_garnish": "champagne mignonette served beside or spooned to order",
+        "premium_garnish_option": "Finger lime or micro herbs as optional premium finish.",
+        "service_rule": "Serve chilled on ice. Mignonette beside the oyster or spooned at pass, not pre-drowned.",
+        "status": "confirmed"
+      },
+      "tapas": {
+        "portion": "1/2 dozen oysters",
+        "oysters_per_serve": 6,
+        "mignonette_ml_per_oyster": 5,
+        "lemons_per_8_oysters": 1,
+        "premium_garnish_option": "Finger lime or micro herbs as optional premium finish.",
+        "status": "confirmed"
+      },
+      "platter": {
+        "portion": "count by ordered oysters",
+        "mignonette_ml_per_oyster": 5,
+        "lemons_per_8_oysters": 1,
+        "service_rule": "Chilled immediate service on ice. Label raw seafood clearly and keep shellfish separate from other platters.",
+        "premium_garnish_option": "Finger lime or micro herbs as optional premium finish.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "not recommended unless built as a staffed oyster station or seafood fountain item",
+        "reason": "Raw oysters require controlled cold holding, ice, service monitoring and clear allergen management. Use staffed station or platter service only.",
+        "status": "not_recommended"
+      },
+      "corporate_boxed": {
+        "portion": "not recommended",
+        "reason": "Raw oysters are not suitable for standard boxed corporate delivery due cold-chain, shellfish and quality risk.",
+        "status": "not_recommended"
+      }
+    },
+    "stuffed-mushroom-romesco": {
+      "recipe_id": "stuffed-mushroom-romesco",
+      "base_prep": {
+        "base_yield_pieces": 60
+      },
+      "cocktail": {
+        "portion": "1 stuffed mushroom per guest",
+        "pieces_per_guest": 1,
+        "production_buffer_multiplier": 1.2,
+        "production_pieces_per_guest": 1.2,
+        "romesco_g_per_piece": 17,
+        "lemon_aioli_g_per_piece": 5,
+        "rocket_g_per_piece": 1,
+        "standard_garnish": "lemon aioli dot and rocket",
+        "premium_garnish_option": "Micro herbs or beetroot powder as optional premium finish.",
+        "service_rule": "Serve warm. Dot aioli and garnish at pass only.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "1 stuffed mushroom per guest service target with 1.2 mushrooms per guest production allowance",
+        "piece_count": 1,
+        "production_piece_count_per_guest": 1.2,
+        "romesco_g_per_piece": 17,
+        "lemon_aioli_g_per_piece": 5,
+        "rocket_g_per_piece": 1,
+        "service_rule": "Hold warm dry, uncovered where possible. Garnish and aioli at service, not before holding.",
+        "premium_garnish_option": "Micro herbs or beetroot powder as optional premium finish.",
+        "status": "confirmed"
+      },
+      "platter": {
+        "portion": "count by ordered pieces",
+        "romesco_g_per_piece": 17,
+        "lemon_aioli_g_per_piece": 5,
+        "service_rule": "Immediate warm platter. Send aioli separate for hot delivery or dot at handover.",
+        "premium_garnish_option": "Micro herbs or beetroot powder as optional premium finish.",
+        "status": "confirmed"
+      },
+      "corporate_boxed": {
+        "portion": "not recommended unless specifically ordered",
+        "reason": "Warm mushrooms release moisture and soften in sealed boxes. Use only for immediate service or controlled hot platter delivery.",
+        "status": "not_recommended"
+      }
+    },
+    "chilli-garlic-prawns-chorizo-rocket": {
+      "recipe_id": "chilli-garlic-prawns-chorizo-rocket",
+      "base_prep": {
+        "base_yield_pieces": 40
+      },
+      "cocktail": {
+        "portion": "1 prawn with chorizo per guest on spoon",
+        "prawns_per_guest": 1,
+        "production_buffer_multiplier": 1.15,
+        "production_prawns_per_guest": 1.15,
+        "chorizo_g_per_piece": 5.5,
+        "pan_sauce_ml_per_piece": 3,
+        "rocket_leaves_per_piece": 1,
+        "parsley_g_per_40_pieces": 20,
+        "standard_garnish": "single rocket leaf and parsley",
+        "premium_garnish_option": "Micro herbs or restrained green herb powder as optional premium finish.",
+        "service_rule": "Fire-to-pass canape. Cook in batches of 10-12 prawns and pass immediately. No hot holding.",
+        "status": "confirmed"
+      },
+      "platter": {
+        "portion": "count by ordered spoons/pieces for immediate service only",
+        "chorizo_g_per_piece": 5.5,
+        "pan_sauce_ml_per_piece": 3,
+        "rocket_leaves_per_piece": 1,
+        "service_rule": "Immediate staffed service only. Not suitable for pre-built delivery platters.",
+        "premium_garnish_option": "Micro herbs or restrained green herb powder as optional premium finish.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "not recommended as open buffet",
+        "reason": "Prawns become rubbery within minutes and the dish is designed as fire-to-pass spoon service. Use roving canape or staffed action station.",
+        "status": "not_recommended"
+      },
+      "corporate_boxed": {
+        "portion": "not recommended",
+        "reason": "Hot prawns and chorizo are not suitable for boxed delivery; texture and food safety risk are too high.",
+        "status": "not_recommended"
+      }
+    },
+    "heirloom-tomato-bruschetta-goats-cheese": {
+      "recipe_id": "heirloom-tomato-bruschetta-goats-cheese",
+      "cocktail": {
+        "portion": "not recommended until tomato-based spec is deliberately approved or substituted",
+        "reason": "Built-in recipe flags heirloom tomato as a Kuschi exclusion/review item. Use roasted capsicum and caramelised onion, whipped goats cheese with pickled shallot, or another approved vegetarian crostini instead.",
+        "status": "not_recommended"
+      },
+      "platter": {
+        "portion": "not recommended until tomato-based spec is deliberately approved or substituted",
+        "reason": "Built-in recipe flags heirloom tomato as a Kuschi exclusion/review item and crostini softens quickly after topping.",
+        "status": "not_recommended"
+      },
+      "buffet": {
+        "portion": "not recommended as open buffet",
+        "reason": "Tomato mix releases liquid and crostini softens quickly. The recipe also requires review before confirmation due tomato exclusion note.",
+        "status": "not_recommended"
+      },
+      "corporate_boxed": {
+        "portion": "not recommended",
+        "reason": "Wet tomato bruschetta is unsuitable for boxed delivery and the tomato-based spec requires deliberate approval before use.",
+        "status": "not_recommended"
+      }
+    }
+  }
+}
