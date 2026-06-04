@@ -13,8 +13,7 @@ legacy/duplicate slow-cooked-beef-albondigas-buffet — Slow Cooked Beef Albondi
 
 SERVICE VARIANT STATUS REVIEW
 -----------------------------
-needs_confirmation: 2
-- veal-meatballs.buffet
+needs_confirmation: 1
 - fish-slider.corporate_boxed
 missing_status: 0
 not_recommended: 1
