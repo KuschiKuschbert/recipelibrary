@@ -316,8 +316,9 @@
       else if (key === 'total_g_finished_serve') bits.push(value + 'g finished serve');
       else if (key === 'sauce_ml_per_guest') bits.push(value + 'ml sauce per guest');
       else if (key === 'aioli_ml_per_guest') bits.push(value + 'ml aioli per guest');
+      else if (key === 'source_note') bits.push('Source note: ' + value);
       else {
-        const label = ['portion', 'recommendation', 'reason', 'note', 'hold', 'source_note'].includes(key) ? '' : prettyKey(key) + ': ';
+        const label = ['portion', 'recommendation', 'reason', 'note', 'hold'].includes(key) ? '' : prettyKey(key) + ': ';
         const text = normaliseScalar(key, value);
         if (text) bits.push(label + text);
       }
