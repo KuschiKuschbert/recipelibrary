@@ -131,6 +131,7 @@
     'riviera_data/service_variants_canapes.json',
     'riviera_data/service_variants_corporate.json',
     'riviera_data/service_variants_mains_sides.json',
+    'riviera_data/service_variant_source_overrides.json',
   ];
   const ALIASES_URL = 'riviera_data/canonical_recipe_aliases.json';
   let variantsPayload = null;
@@ -168,6 +169,17 @@
     });
   }
 
+  function deepMergeOverride(existing, incoming) {
+    Object.keys(incoming).forEach((key) => {
+      const value = incoming[key];
+      if (value && typeof value === 'object' && !Array.isArray(value) && existing[key] && typeof existing[key] === 'object' && !Array.isArray(existing[key])) {
+        deepMergeOverride(existing[key], value);
+      } else {
+        existing[key] = value;
+      }
+    });
+  }
+
   function mergeVariantPayloads(payloads) {
     const merged = { service_variants: {}, rules: {} };
     payloads.forEach((payload, index) => {
@@ -175,6 +187,7 @@
       if (index === 0 && payload.rules && typeof payload.rules === 'object') {
         merged.rules = payload.rules;
       }
+      const overrideExisting = payload.merge_strategy === 'override_existing_fields';
       const serviceVariants = payload.service_variants || {};
       Object.keys(serviceVariants).forEach((recipeId) => {
         const incoming = serviceVariants[recipeId];
@@ -184,6 +197,10 @@
           return;
         }
         const existing = merged.service_variants[recipeId];
+        if (overrideExisting) {
+          deepMergeOverride(existing, incoming);
+          return;
+        }
         Object.keys(incoming).forEach((key) => {
           if (existing[key] && JSON.stringify(existing[key]) !== JSON.stringify(incoming[key])) {
             console.warn('[Riviera service variants] duplicate/conflicting variant ignored:', recipeId + '.' + key);
@@ -247,8 +264,21 @@
   function variantLine(v) {
     if (!v || typeof v !== 'object') return '';
     const bits = [];
+    const used = new Set();
+
+    if (v.brochure_range_min != null && v.brochure_range_max != null) {
+      bits.push('Brochure range: ' + v.brochure_range_min + '-' + v.brochure_range_max);
+      used.add('brochure_range_min');
+      used.add('brochure_range_max');
+    }
+
     const priority = [
       'portion',
+      'brochure_count',
+      'kitchen_production_count',
+      'total_pieces',
+      'whole_sandwiches',
+      'items_per_type',
       'piece_weight_g_pre_crumb',
       'piece_weight_g_raw',
       'production_buffer_multiplier',
@@ -268,21 +298,26 @@
       'recommendation',
       'reason',
       'note',
+      'source_note',
     ];
-    const used = new Set();
 
     priority.forEach((key) => {
-      if (!(key in v)) return;
+      if (used.has(key) || !(key in v)) return;
       used.add(key);
       const value = v[key];
-      if (key === 'piece_weight_g_pre_crumb') bits.push(value + 'g pre-crumb');
+      if (key === 'brochure_count') bits.push('Brochure count: ' + value);
+      else if (key === 'kitchen_production_count') bits.push('Kitchen production: ' + value);
+      else if (key === 'total_pieces') bits.push('Total pieces: ' + value);
+      else if (key === 'whole_sandwiches') bits.push('Whole sandwiches: ' + value);
+      else if (key === 'items_per_type') bits.push('Items per type: ' + value);
+      else if (key === 'piece_weight_g_pre_crumb') bits.push(value + 'g pre-crumb');
       else if (key === 'piece_weight_g_raw') bits.push(value + 'g raw');
       else if (key === 'production_buffer_multiplier') bits.push(value + 'x production buffer');
       else if (key === 'total_g_finished_serve') bits.push(value + 'g finished serve');
       else if (key === 'sauce_ml_per_guest') bits.push(value + 'ml sauce per guest');
       else if (key === 'aioli_ml_per_guest') bits.push(value + 'ml aioli per guest');
       else {
-        const label = ['portion', 'recommendation', 'reason', 'note', 'hold'].includes(key) ? '' : prettyKey(key) + ': ';
+        const label = ['portion', 'recommendation', 'reason', 'note', 'hold', 'source_note'].includes(key) ? '' : prettyKey(key) + ': ';
         const text = normaliseScalar(key, value);
         if (text) bits.push(label + text);
       }
@@ -297,7 +332,7 @@
 
     Object.keys(v).forEach((key) => {
       if (used.has(key) || key === 'status' || key === 'piece_count' || key === 'piece_count_per_guest') return;
-      if (/^(production_|microherbs_|lemons_|lemon_|chives_|parsley_|rocket_|feta_|pita_|caper_|beetroot_|olive_|bread_|manchego_|finished_|chicken_|beef_|lamb_|potato_|chorizo_|sauce_|aioli_|dressing_|garnish_|standard_|premium_)/.test(key)) return;
+      if (/^(production_|microherbs_|lemons_|lemon_|chives_|parsley_|rocket_|feta_|pita_|caper_|beetroot_|olive_|bread_|manchego_|finished_|chicken_|beef_|lamb_|potato_|chorizo_|sauce_|aioli_|dressing_|garnish_|standard_|premium_|brochure_|kitchen_|source_)/.test(key)) return;
       const text = normaliseScalar(key, v[key]);
       if (text && bits.length < 8) bits.push(prettyKey(key) + ': ' + text);
     });
