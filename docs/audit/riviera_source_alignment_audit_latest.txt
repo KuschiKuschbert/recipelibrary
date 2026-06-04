@@ -1,0 +1,55 @@
+RIVIERA SOURCE ALIGNMENT AUDIT
+===================================
+Alignment file: riviera_data/service_variant_source_alignment.json
+Service variant files: 4
+- riviera_data/service_variants.json
+- riviera_data/service_variants_canapes.json
+- riviera_data/service_variants_corporate.json
+- riviera_data/service_variants_mains_sides.json
+Alignment checks: 10
+Checked records: 10
+
+WARNINGS
+--------
+None
+
+ERRORS
+------
+- platter-scones-chantilly-jam.platter: expected brochure_count=12, found None — Scone platter source count is 12 pieces per platter.
+- platter-scones-chantilly-jam.platter: expected kitchen_production_count=12, found None — Scone platter source count is 12 pieces per platter.
+- platter-scones-chantilly-jam.platter: expected total_pieces=12, found 40 — Scone platter source count is 12 pieces per platter.
+- platter-sweet-slices-cakes.platter: expected brochure_count=12, found None — Sweet slices/cakes platter source count is 12 pieces per platter.
+- platter-sweet-slices-cakes.platter: expected kitchen_production_count=12, found None — Sweet slices/cakes platter source count is 12 pieces per platter.
+- platter-sweet-slices-cakes.platter: expected total_pieces=12, found 40 — Sweet slices/cakes platter source count is 12 pieces per platter.
+- platter-ham-cheese-croissants.platter: expected brochure_count=12, found None — Croissant platter source count is 12 pieces per platter.
+- platter-ham-cheese-croissants.platter: expected kitchen_production_count=12, found None — Croissant platter source count is 12 pieces per platter.
+- platter-ham-cheese-croissants.platter: expected total_pieces=12, found 40 — Croissant platter source count is 12 pieces per platter.
+- platter-sandwiches-standard.platter: expected brochure_count=24, found None — Sandwich platter source count is 24 points from 6 whole sandwiches.
+- platter-sandwiches-standard.platter: expected kitchen_production_count=24, found None — Sandwich platter source count is 24 points from 6 whole sandwiches.
+- platter-sandwiches-standard.platter: expected total_pieces=24, found 40 — Sandwich platter source count is 24 points from 6 whole sandwiches.
+- platter-sandwiches-standard.platter: expected whole_sandwiches=6, found None — Sandwich platter source count is 24 points from 6 whole sandwiches.
+- platter-wraps-premium.platter: expected brochure_count=12, found None — Wrap platter source count is 12 pieces per platter.
+- platter-wraps-premium.platter: expected kitchen_production_count=12, found None — Wrap platter source count is 12 pieces per platter.
+- platter-wraps-premium.platter: expected total_pieces=12, found 40 — Wrap platter source count is 12 pieces per platter.
+- platter-filled-brioche-rolls.platter: expected brochure_count=12, found None — Mini brioche roll platter source count is 12 rolls per platter.
+- platter-filled-brioche-rolls.platter: expected kitchen_production_count=12, found None — Mini brioche roll platter source count is 12 rolls per platter.
+- platter-filled-brioche-rolls.platter: expected total_pieces=12, found 40 — Mini brioche roll platter source count is 12 rolls per platter.
+- platter-roast-beef-beetroot-relish.platter: expected brochure_count=24, found None — Treat as sandwich platter logic unless a newer source splits this as a separate 12-piece roll/brioche item.
+- platter-roast-beef-beetroot-relish.platter: expected kitchen_production_count=24, found None — Treat as sandwich platter logic unless a newer source splits this as a separate 12-piece roll/brioche item.
+- platter-roast-beef-beetroot-relish.platter: expected total_pieces=24, found 40 — Treat as sandwich platter logic unless a newer source splits this as a separate 12-piece roll/brioche item.
+- platter-roast-beef-beetroot-relish.platter: expected whole_sandwiches=6, found None — Treat as sandwich platter logic unless a newer source splits this as a separate 12-piece roll/brioche item.
+- nibble-platter-40.platter: expected brochure_range_min=40, found None — Mixed hot nibble source range is 40-50 pieces; locked kitchen production count is 48 pieces, 12 each of four items.
+- nibble-platter-40.platter: expected brochure_range_max=50, found None — Mixed hot nibble source range is 40-50 pieces; locked kitchen production count is 48 pieces, 12 each of four items.
+- nibble-platter-40.platter: expected kitchen_production_count=48, found None — Mixed hot nibble source range is 40-50 pieces; locked kitchen production count is 48 pieces, 12 each of four items.
+- nibble-platter-40.platter: expected total_pieces=48, found 40 — Mixed hot nibble source range is 40-50 pieces; locked kitchen production count is 48 pieces, 12 each of four items.
+- nibble-platter-40.platter: expected items_per_type=12, found None — Mixed hot nibble source range is 40-50 pieces; locked kitchen production count is 48 pieces, 12 each of four items.
+- funeral-mixed-hot-nibbles-box.platter: expected brochure_range_min=40, found None — Wake/funeral mixed hot nibble source range is 40-50 pieces; locked kitchen production count is 48 pieces.
+- funeral-mixed-hot-nibbles-box.platter: expected brochure_range_max=50, found None — Wake/funeral mixed hot nibble source range is 40-50 pieces; locked kitchen production count is 48 pieces.
+- funeral-mixed-hot-nibbles-box.platter: expected kitchen_production_count=48, found None — Wake/funeral mixed hot nibble source range is 40-50 pieces; locked kitchen production count is 48 pieces.
+- funeral-mixed-hot-nibbles-box.platter: expected total_pieces=48, found 40 — Wake/funeral mixed hot nibble source range is 40-50 pieces; locked kitchen production count is 48 pieces.
+- funeral-mixed-hot-nibbles-box.platter: expected items_per_type=12, found None — Wake/funeral mixed hot nibble source range is 40-50 pieces; locked kitchen production count is 48 pieces.
+- funeral-spinach-ricotta-pastizzi-platter.platter: expected brochure_range_min=20, found None — Single hot nibble platter source range is 20-25 pieces; locked kitchen production count is 24 pieces.
+- funeral-spinach-ricotta-pastizzi-platter.platter: expected brochure_range_max=25, found None — Single hot nibble platter source range is 20-25 pieces; locked kitchen production count is 24 pieces.
+- funeral-spinach-ricotta-pastizzi-platter.platter: expected kitchen_production_count=24, found None — Single hot nibble platter source range is 20-25 pieces; locked kitchen production count is 24 pieces.
+- funeral-spinach-ricotta-pastizzi-platter.platter: expected total_pieces=24, found 40 — Single hot nibble platter source range is 20-25 pieces; locked kitchen production count is 24 pieces.
+
