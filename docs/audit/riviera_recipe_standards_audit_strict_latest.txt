@@ -15,7 +15,7 @@ SERVICE VARIANT STATUS REVIEW
 -----------------------------
 needs_confirmation: 2
 - veal-meatballs.buffet
-- fish-slider.corporate_offsite
+- fish-slider.corporate_boxed
 missing_status: 0
 not_recommended: 1
 - veal-meatballs.legacy_mini_canape
