@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Audit that the Riviera frontend recipe modal loads every service variant file.
+Audit that the Riviera frontend recipe modal loads every service variant file,
+including the source-aligned override layer.
 
 Run from repo root:
     python3 scripts/audit_riviera_frontend_service_variants.py
@@ -8,7 +9,6 @@ Run from repo root:
 from __future__ import annotations
 
 import json
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,6 +16,7 @@ RIVIERA_DATA = ROOT / "riviera_data"
 FRONTEND_PATH = ROOT / "assets" / "screen-wake.js"
 BASE_VARIANTS = RIVIERA_DATA / "service_variants.json"
 ADDON_GLOB = "service_variants_*.json"
+SOURCE_OVERRIDES = RIVIERA_DATA / "service_variant_source_overrides.json"
 
 
 def rel(path: Path) -> str:
@@ -36,6 +37,8 @@ def main() -> int:
     errors: list[str] = []
 
     expected_paths = [BASE_VARIANTS, *sorted(RIVIERA_DATA.glob(ADDON_GLOB))]
+    if SOURCE_OVERRIDES.is_file():
+        expected_paths.append(SOURCE_OVERRIDES)
 
     if not FRONTEND_PATH.is_file():
         errors.append(f"Missing frontend file: {rel(FRONTEND_PATH)}")
@@ -62,8 +65,13 @@ def main() -> int:
     required_frontend_markers = [
         "const VARIANT_URLS = [",
         "mergeVariantPayloads",
+        "deepMergeOverride",
+        "override_existing_fields",
         "Service Sizes",
         "rivieraServiceVariantsBlock",
+        "Brochure count",
+        "Kitchen production",
+        "Source note",
     ]
     for marker in required_frontend_markers:
         if marker not in frontend:
