@@ -23,13 +23,14 @@ jobs:
         run: |
           mkdir -p docs/audit
           python3 scripts/audit_riviera_recipe_standards.py | tee docs/audit/riviera_recipe_standards_audit_latest.txt
-          python3 scripts/audit_riviera_recipe_standards.py --strict > docs/audit/riviera_recipe_standards_audit_strict_latest.txt || true
+          python3 scripts/audit_riviera_recipe_standards.py --strict | tee docs/audit/riviera_recipe_standards_audit_strict_latest.txt
+          python3 scripts/audit_riviera_recipe_standards.py --strict --all-builtins | tee docs/audit/riviera_recipe_standards_audit_strict_all_builtins_latest.txt
 
       - name: Commit audit output
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/audit/riviera_recipe_standards_audit_latest.txt docs/audit/riviera_recipe_standards_audit_strict_latest.txt
+          git add docs/audit/riviera_recipe_standards_audit_latest.txt docs/audit/riviera_recipe_standards_audit_strict_latest.txt docs/audit/riviera_recipe_standards_audit_strict_all_builtins_latest.txt
           if git diff --cached --quiet; then
             echo "No audit output changes to commit."
           else
