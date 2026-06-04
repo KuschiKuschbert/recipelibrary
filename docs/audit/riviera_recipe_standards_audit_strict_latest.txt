@@ -1,10 +1,11 @@
 RIVIERA RECIPE STANDARDS AUDIT
 ====================================
 Built-in recipes: 88
-Service variant files: 2
+Service variant files: 3
 - riviera_data/service_variants.json
+- riviera_data/service_variants_canapes.json
 - riviera_data/service_variants_corporate.json
-Service variant records: 50
+Service variant records: 60
 Canonical recipe groups: 1
 Recipe redirects: 2
 Strict missing variant scope: service variants only
@@ -19,35 +20,46 @@ SERVICE VARIANT STATUS REVIEW
 -----------------------------
 needs_confirmation: 0
 missing_status: 0
-not_recommended: 6
+not_recommended: 27
 - oysters-kilpatrick.buffet
 - oysters-kilpatrick.corporate_boxed
 - veal-meatballs.legacy_mini_canape
 - fish-slider.buffet
 - fish-slider.corporate_boxed
 - camembert-cigars.corporate_boxed
+- bruschetta-rare-roast-beef.buffet
+- bruschetta-rare-roast-beef.corporate_boxed
+- spanner-crab-cannoli.buffet
+- spanner-crab-cannoli.corporate_boxed
+- prawn-brioche-slider.buffet
+- prawn-brioche-slider.corporate_boxed
+- chicken-bacon-brioche-slider.buffet
+- chicken-bacon-brioche-slider.corporate_boxed
+- vintage-beef-brioche-slider.buffet
+- vintage-beef-brioche-slider.corporate_boxed
+- mini-beefburger-canape.buffet
+- mini-beefburger-canape.corporate_boxed
+- natural-oysters-champagne-mignonette.buffet
+- natural-oysters-champagne-mignonette.corporate_boxed
+- stuffed-mushroom-romesco.corporate_boxed
+- chilli-garlic-prawns-chorizo-rocket.buffet
+- chilli-garlic-prawns-chorizo-rocket.corporate_boxed
+- heirloom-tomato-bruschetta-goats-cheese.cocktail
+- heirloom-tomato-bruschetta-goats-cheese.platter
+- heirloom-tomato-bruschetta-goats-cheese.buffet
+- heirloom-tomato-bruschetta-goats-cheese.corporate_boxed
 
 ACTIVE FOOD RECIPES MISSING SERVICE VARIANTS
 -----------------------------------------------
-- bruschetta-rare-roast-beef: Bruschetta of Rare Roast Beef [Canape] — yield: 40 pieces
-- spanner-crab-cannoli: Spanner Crab Cannoli [Canape] — yield: 40 small cannoli
-- prawn-brioche-slider: Prawn Brioche Slider [Canape] — yield: 40 sliders
-- chicken-bacon-brioche-slider: Smoked Chicken & Bacon Brioche Slider [Canape] — yield: 40 sliders
-- vintage-beef-brioche-slider: Vintage Beef Brioche Slider [Canape] — yield: 40 sliders
-- mini-beefburger-canape: Mini Beefburger Canapé [Canape] — yield: 40 pieces
 - lamb-shoulder-provencale-composed: Slow Cooked Lamb Shoulder Provençale [Main] — yield: 20 portions
 - beef-bourguignon: Beef Bourguignon [Main] — yield: 20 portions
 - creamy-lemon-caper-chicken: Creamy Lemon Caper Chicken [Main] — yield: 20 portions
-- natural-oysters-champagne-mignonette: Natural Oysters with Champagne Mignonette [Canape] — yield: 48 oysters
 - greek-spiced-roast-lamb: Greek Spiced Roast Lamb Leg [Main] — yield: 20 portions
 - creamy-potato-gratin: Creamy Potato Gratin [Side] — yield: 20 portions
 - garlic-herb-chat-potatoes-feta: Garlic & Herb Chat Potatoes with Feta Cream [Side] — yield: 20 portions
 - broccoli-cauliflower-gratin: Broccoli & Cauliflower Gratin [Side] — yield: 20 portions
 - prosciutto-chicken-lemon-caper: Prosciutto Wrapped Chicken Breast [Main] — yield: 20 portions
 - fillet-beef-tempranillo: Fillet of Beef with Tempranillo Reduction [Main] — yield: 20 portions
-- stuffed-mushroom-romesco: Stuffed Mushroom with Romesco & Lemon Aioli [Canape] — yield: 40 pieces
-- chilli-garlic-prawns-chorizo-rocket: Chilli Garlic Prawns & Chorizo [Canape] — yield: 40 pieces
-- heirloom-tomato-bruschetta-goats-cheese: Heirloom Tomato Bruschetta [Canape] — yield: 40 pieces
 - greek-style-pulled-beef-buffet: Greek Style Pulled Beef [Buffet] — yield: 20 portions
 - chargrilled-lemon-thyme-chicken-buffet: Chargrilled Lemon & Thyme Chicken [Buffet] — yield: 20 portions
 
