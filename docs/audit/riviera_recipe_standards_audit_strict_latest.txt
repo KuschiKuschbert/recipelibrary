@@ -1,0 +1,85 @@
+RIVIERA RECIPE STANDARDS AUDIT
+====================================
+Built-in recipes: 88
+Service variant records: 8
+Canonical recipe groups: 1
+Recipe redirects: 1
+
+MEATBALL / POLPETTE CONTROL
+-------------------------------
+canonical        veal-meatballs — Polpette — Approx. 190–210 balls @ 60g (pre-crumb weight)
+legacy/duplicate beef-polpette-canape — Beef Polpette — 60 pieces
+legacy/duplicate slow-cooked-beef-albondigas-buffet — Slow Cooked Beef Albondigas — 20 portions
+
+ACTIVE FOOD RECIPES MISSING SERVICE VARIANTS
+-----------------------------------------------
+- oysters-kilpatrick: Kilpatrick Oysters [Canape] — yield: Scalable
+- beef-kofta: Beef Kofta [Canape] — yield: 50 koftas
+- camembert-cigars: Camembert, Pecan & Cranberry Cigars [Canape] — yield: ~50 cigars
+- whipped-butter: Whipped Butter [Component] — yield: Batch
+- date-madeleines: Date Madeleines [Bakery] — yield: 1 kg date batch — approx. 40–45 madeleines depending on tray size
+- charcuterie-board-classic: Charcuterie Board [Platter] — yield: 1 board — serves 10–12 guests as a standalone or 15–20 as part of a wider spread
+- nibble-platter-40: Nibble Platter [Platter] — yield: 40 pieces
+- bruschetta-rare-roast-beef: Bruschetta of Rare Roast Beef [Canape] — yield: 40 pieces
+- spanner-crab-cannoli: Spanner Crab Cannoli [Canape] — yield: 40 small cannoli
+- prawn-brioche-slider: Prawn Brioche Slider [Canape] — yield: 40 sliders
+- chicken-bacon-brioche-slider: Smoked Chicken & Bacon Brioche Slider [Canape] — yield: 40 sliders
+- vintage-beef-brioche-slider: Vintage Beef Brioche Slider [Canape] — yield: 40 sliders
+- mini-beefburger-canape: Mini Beefburger Canapé [Canape] — yield: 40 pieces
+- lamb-shoulder-provencale-composed: Slow Cooked Lamb Shoulder Provençale [Main] — yield: 20 portions
+- beef-bourguignon: Beef Bourguignon [Main] — yield: 20 portions
+- creamy-lemon-caper-chicken: Creamy Lemon Caper Chicken [Main] — yield: 20 portions
+- natural-oysters-champagne-mignonette: Natural Oysters with Champagne Mignonette [Canape] — yield: 48 oysters
+- greek-spiced-roast-lamb: Greek Spiced Roast Lamb Leg [Main] — yield: 20 portions
+- creamy-potato-gratin: Creamy Potato Gratin [Side] — yield: 20 portions
+- garlic-herb-chat-potatoes-feta: Garlic & Herb Chat Potatoes with Feta Cream [Side] — yield: 20 portions
+- broccoli-cauliflower-gratin: Broccoli & Cauliflower Gratin [Side] — yield: 20 portions
+- prosciutto-chicken-lemon-caper: Prosciutto Wrapped Chicken Breast [Main] — yield: 20 portions
+- fillet-beef-tempranillo: Fillet of Beef with Tempranillo Reduction [Main] — yield: 20 portions
+- stuffed-mushroom-romesco: Stuffed Mushroom with Romesco & Lemon Aioli [Canape] — yield: 40 pieces
+- roving-cannoli-tiramisu: Roving Cannoli & Tiramisu Service [Dessert] — yield: Service for 40
+- platter-scones-chantilly-jam: House Baked Scones Platter [Platter] — yield: 40 pieces
+- platter-sweet-slices-cakes: Sweet Slice & Cake Platter [Platter] — yield: 40 pieces
+- grazing-box-standard: Grazing Box [Platter] — yield: 1 box (serves 6–8)
+- platter-ham-cheese-croissants: Ham & Cheese Croissants Platter [Platter] — yield: 40 pieces
+- platter-sandwiches-standard: Sandwich Platter [Platter] — yield: 40 pieces
+- platter-wraps-premium: Premium Filled Wraps Platter [Platter] — yield: 40 pieces
+- platter-filled-brioche-rolls: Filled Brioche Rolls Platter [Platter] — yield: 40 pieces
+- platter-roast-beef-beetroot-relish: Roast Beef & Beetroot Balsamic Platter [Platter] — yield: 40 pieces
+- platter-dietary-grazing: Dietary Grazing Platter [Platter] — yield: Serves 6–8
+- corporate-savoury-croissants: Savoury Filled Croissants [Corporate] — yield: 40 pieces
+- corporate-sweet-croissants: Sweet Filled Croissants [Corporate] — yield: 40 pieces
+- corporate-bircher-muesli-bowls: Mixed Bircher Muesli Bowls [Corporate] — yield: 20 portions
+- corporate-chicken-caesar-bowl: Chicken Caesar Salad Bowl [Corporate] — yield: 20 portions
+- corporate-lamb-fattoush-bowl: Lamb Fattoush Salad Bowl [Corporate] — yield: 20 portions
+- corporate-mediterranean-chicken-bowl: Mediterranean Chicken Bowl [Corporate] — yield: 20 portions
+- corporate-beef-lasagne-side-salad: Beef Lasagne with Side Salad [Corporate] — yield: 20 portions
+- corporate-breakfast-wraps: Breakfast Wraps [Corporate] — yield: 20 portions
+- corporate-gourmet-filled-cookies: Gourmet Filled Cookies [Corporate] — yield: 40 pieces
+- corporate-mixed-sandwiches: Mixed Filled Sandwiches [Corporate] — yield: 40 pieces
+- corporate-roast-veg-salad-bowl: Roasted Vegetable Salad Bowl [Corporate] — yield: 20 portions
+- chilli-garlic-prawns-chorizo-rocket: Chilli Garlic Prawns & Chorizo [Canape] — yield: 40 pieces
+- slow-cooked-beef-albondigas-buffet: Slow Cooked Beef Albondigas [Buffet] — yield: 20 portions
+- heirloom-tomato-bruschetta-goats-cheese: Heirloom Tomato Bruschetta [Canape] — yield: 40 pieces
+- greek-style-pulled-beef-buffet: Greek Style Pulled Beef [Buffet] — yield: 20 portions
+- chargrilled-lemon-thyme-chicken-buffet: Chargrilled Lemon & Thyme Chicken [Buffet] — yield: 20 portions
+- duo-cannoli-pistachio-white-chocolate: Duo of Cannoli [Dessert] — yield: 40 pieces (20 of each)
+- strawberry-ricotta-cheesecake-plated: Strawberry Ricotta Cheesecake [Dessert] — yield: 20 portions
+- riviera-tiramisu-biscotti-hazelnut: Riviera Tiramisu [Dessert] — yield: 20 portions
+- kids-snack-pack: Kids Snack Pack [Corporate] — yield: 10 packs
+- kids-spaghetti-bolognese: Kids Spaghetti Bolognese [Corporate] — yield: 10 portions
+- corporate-bacon-egg-muffins: Bacon & Egg Muffins [Corporate] — yield: 20 portions
+- corporate-bacon-egg-paninis: Bacon & Egg Paninis [Corporate] — yield: 20 portions
+- corporate-waffles-breakfast: Waffles [Corporate] — yield: 20 portions
+- corporate-pesto-pasta-salad: Creamy Basil Pesto Pasta Salad [Corporate] — yield: 20 portions
+- corporate-moroccan-couscous-salad: Moroccan Couscous Salad [Corporate] — yield: 20 portions
+- corporate-pumpkin-feta-pepita-salad: Pumpkin, Feta & Pepita Salad [Corporate] — yield: 20 portions
+- corporate-traditional-garden-salad: Traditional Garden Salad [Corporate] — yield: 20 portions
+- corporate-creamy-potato-bacon-herb-salad: Creamy Potato, Bacon & Herb Salad [Corporate] — yield: 20 portions
+- funeral-spinach-ricotta-pastizzi-platter: Spinach & Ricotta Pastizzi Platter [Platter] — yield: 40 pieces
+- funeral-mixed-hot-nibbles-box: Mixed Box Hot Nibbles [Platter] — yield: 40 pieces
+
+ERRORS
+------
+- Unexpected active meatball-like recipes found: slow-cooked-beef-albondigas-buffet
+
