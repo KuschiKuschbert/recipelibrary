@@ -1,0 +1,83 @@
+{
+  "version": "2026-06-04-v1",
+  "status": "active_source_alignment_standard",
+  "source_of_truth": "Riviera brochure/source count alignment plus locked Kuschi kitchen production standards. Brochure ranges stay visible; kitchen production counts are fixed for prep efficiency.",
+  "rules": {
+    "brochure_vs_kitchen": "Use brochure_count or brochure_range for client/source alignment. Use kitchen_production_count for prep sheets, order builds and production targets.",
+    "hot_nibble_standard": "Single hot nibble platter converts brochure range 20-25 pieces to fixed kitchen production count 24 pieces.",
+    "mixed_hot_nibble_standard": "Mixed hot nibble box/platter converts brochure range 40-50 pieces to fixed kitchen production count 48 pieces, split 12 each across four items.",
+    "platter_standard": "Cold platter counts must not silently use 40-piece batch yields when the published platter service count is 12 or 24 pieces. Built-in recipe yields may remain batch yields, but service variants must show platter service counts."
+  },
+  "checks": [
+    {
+      "recipe_id": "platter-scones-chantilly-jam",
+      "variant_key": "platter",
+      "expected": {"brochure_count": 12, "kitchen_production_count": 12, "total_pieces": 12},
+      "source_note": "Scone platter source count is 12 pieces per platter.",
+      "severity": "error"
+    },
+    {
+      "recipe_id": "platter-sweet-slices-cakes",
+      "variant_key": "platter",
+      "expected": {"brochure_count": 12, "kitchen_production_count": 12, "total_pieces": 12},
+      "source_note": "Sweet slices/cakes platter source count is 12 pieces per platter.",
+      "severity": "error"
+    },
+    {
+      "recipe_id": "platter-ham-cheese-croissants",
+      "variant_key": "platter",
+      "expected": {"brochure_count": 12, "kitchen_production_count": 12, "total_pieces": 12},
+      "source_note": "Croissant platter source count is 12 pieces per platter.",
+      "severity": "error"
+    },
+    {
+      "recipe_id": "platter-sandwiches-standard",
+      "variant_key": "platter",
+      "expected": {"brochure_count": 24, "kitchen_production_count": 24, "total_pieces": 24, "whole_sandwiches": 6},
+      "source_note": "Sandwich platter source count is 24 points from 6 whole sandwiches.",
+      "severity": "error"
+    },
+    {
+      "recipe_id": "platter-wraps-premium",
+      "variant_key": "platter",
+      "expected": {"brochure_count": 12, "kitchen_production_count": 12, "total_pieces": 12},
+      "source_note": "Wrap platter source count is 12 pieces per platter.",
+      "severity": "error"
+    },
+    {
+      "recipe_id": "platter-filled-brioche-rolls",
+      "variant_key": "platter",
+      "expected": {"brochure_count": 12, "kitchen_production_count": 12, "total_pieces": 12},
+      "source_note": "Mini brioche roll platter source count is 12 rolls per platter.",
+      "severity": "error"
+    },
+    {
+      "recipe_id": "platter-roast-beef-beetroot-relish",
+      "variant_key": "platter",
+      "expected": {"brochure_count": 24, "kitchen_production_count": 24, "total_pieces": 24, "whole_sandwiches": 6},
+      "source_note": "Treat as sandwich platter logic unless a newer source splits this as a separate 12-piece roll/brioche item.",
+      "severity": "error"
+    },
+    {
+      "recipe_id": "nibble-platter-40",
+      "variant_key": "platter",
+      "expected": {"brochure_range_min": 40, "brochure_range_max": 50, "kitchen_production_count": 48, "total_pieces": 48, "items_per_type": 12},
+      "source_note": "Mixed hot nibble source range is 40-50 pieces; locked kitchen production count is 48 pieces, 12 each of four items.",
+      "severity": "error"
+    },
+    {
+      "recipe_id": "funeral-mixed-hot-nibbles-box",
+      "variant_key": "platter",
+      "expected": {"brochure_range_min": 40, "brochure_range_max": 50, "kitchen_production_count": 48, "total_pieces": 48, "items_per_type": 12},
+      "source_note": "Wake/funeral mixed hot nibble source range is 40-50 pieces; locked kitchen production count is 48 pieces.",
+      "severity": "error"
+    },
+    {
+      "recipe_id": "funeral-spinach-ricotta-pastizzi-platter",
+      "variant_key": "platter",
+      "expected": {"brochure_range_min": 20, "brochure_range_max": 25, "kitchen_production_count": 24, "total_pieces": 24},
+      "source_note": "Single hot nibble platter source range is 20-25 pieces; locked kitchen production count is 24 pieces.",
+      "severity": "error"
+    }
+  ]
+}
