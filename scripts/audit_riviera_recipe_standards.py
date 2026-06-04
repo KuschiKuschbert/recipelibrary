@@ -70,7 +70,6 @@ MEATBALL_TERMS = (
 )
 
 CANONICAL_POLPETTE_ID = "veal-meatballs"
-OLD_POLPETTE_IDS = {"beef-polpette-canape"}
 
 
 def load_json(path: Path) -> Any:
@@ -127,6 +126,15 @@ def text_blob(r: dict[str, Any]) -> str:
     return " ".join(parts).lower()
 
 
+def allowed_polpette_ids(canonical_recipes: dict[str, Any]) -> set[str]:
+    polpette_cfg = canonical_recipes.get("polpette", {})
+    if not isinstance(polpette_cfg, dict):
+        return {CANONICAL_POLPETTE_ID}
+    canonical_id = str(polpette_cfg.get("canonical_id") or CANONICAL_POLPETTE_ID)
+    duplicate_ids = polpette_cfg.get("duplicate_recipe_ids", []) or []
+    return {canonical_id, *[str(x) for x in duplicate_ids]}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--strict", action="store_true", help="fail if active food recipes are missing service variants")
@@ -177,8 +185,9 @@ def main() -> int:
         if rid not in recipe_ids and rid not in recipe_redirects and rid != "cannoli":
             errors.append(f"service_variants key {rid!r} is not a built-in recipe id or redirect")
 
+    allowed_ids = allowed_polpette_ids(canonical_recipes)
     polpette_like = [r for r in recipes if any(term in text_blob(r) for term in MEATBALL_TERMS)]
-    unexpected_polpette = [r["id"] for r in polpette_like if r.get("id") not in {CANONICAL_POLPETTE_ID, *OLD_POLPETTE_IDS}]
+    unexpected_polpette = [r["id"] for r in polpette_like if r.get("id") not in allowed_ids]
     if unexpected_polpette:
         errors.append(
             "Unexpected active meatball-like recipes found: " + ", ".join(sorted(unexpected_polpette))
