@@ -2,21 +2,23 @@
 """
 Audit Riviera recipe library standards.
 
-This is stricter than validate_riviera_builtins.py. It checks whether the active
-Riviera recipe data is aligned with the working SOP model:
-- built-in recipe shape is valid
-- service variants reference real recipes
+Checks:
+- built-in recipe JSON shape
+- service variant records reference real recipes or approved redirects
 - canonical aliases / redirects point to real recipes
-- meatball / polpette / albondigas duplicates are controlled
-- active recipes missing service variants are listed for Kuschi confirmation
-- service variant statuses are classified for normal vs strict audit behaviour
+- meatball / polpette / albondigas duplicates stay controlled
+- service variant statuses follow normal vs strict audit behaviour
+- special-purpose service keys are explicit and documented
+- missing service variants are reported as backlog; strict only fails them when --all-builtins is used
 
 Run from repo root:
     python3 scripts/audit_riviera_recipe_standards.py
 
-Use --strict to fail when active food recipes are missing service variants or
-service variants are still marked needs_confirmation / missing status:
+Strict scoped audit:
     python3 scripts/audit_riviera_recipe_standards.py --strict
+
+Full builtins backlog audit:
+    python3 scripts/audit_riviera_recipe_standards.py --strict --all-builtins
 """
 from __future__ import annotations
 
@@ -56,6 +58,11 @@ NON_PORTION_RECIPE_TYPES = {
     "Seasoning",
     "Batter",
     "Prep",
+    "Component",
+    "Dry Mix",
+    "Marinade",
+    "Brine",
+    "Pickle / Base",
 }
 
 NON_PORTION_COURSES = {
@@ -93,6 +100,13 @@ NOT_RECOMMENDED_REASON_KEYS = {
     "note",
     "notes",
     "recommendation",
+}
+
+SPECIAL_PURPOSE_REASON_KEYS = {
+    "note",
+    "reason",
+    "service_rule",
+    "size_rule",
 }
 
 
@@ -159,8 +173,8 @@ def allowed_polpette_ids(canonical_recipes: dict[str, Any]) -> set[str]:
     return {canonical_id, *[str(x) for x in duplicate_ids]}
 
 
-def has_not_recommended_reason(record: dict[str, Any]) -> bool:
-    for key in NOT_RECOMMENDED_REASON_KEYS:
+def has_any_text(record: dict[str, Any], keys: set[str]) -> bool:
+    for key in keys:
         value = record.get(key)
         if isinstance(value, str) and value.strip():
             return True
@@ -182,7 +196,14 @@ def iter_service_variant_records(service_variants: dict[str, Any]) -> list[tuple
     return records
 
 
-def service_variant_status_review(
+def get_rule_list(service_raw: dict[str, Any], key: str) -> set[str]:
+    rules = service_raw.get("rules", {}) if isinstance(service_raw, dict) else {}
+    values = rules.get(key, []) if isinstance(rules, dict) else []
+    return {str(v) for v in values} if isinstance(values, list) else set()
+
+
+def service_variant_review(
+    service_raw: dict[str, Any],
     service_variants: dict[str, Any],
     errors: list[str],
 ) -> tuple[list[tuple[str, str]], list[tuple[str, str]], list[tuple[str, str]]]:
@@ -190,7 +211,22 @@ def service_variant_status_review(
     missing_status: list[tuple[str, str]] = []
     not_recommended: list[tuple[str, str]] = []
 
+    master_keys = get_rule_list(service_raw, "master_variant_keys")
+    special_keys = get_rule_list(service_raw, "special_variant_keys")
+    allowed_variant_keys = master_keys | special_keys
+
     for recipe_id, variant_key, variant_record in iter_service_variant_records(service_variants):
+        if allowed_variant_keys and variant_key not in allowed_variant_keys:
+            errors.append(
+                f"service_variants.{recipe_id}.{variant_key}: variant key is not in master_variant_keys or special_variant_keys"
+            )
+
+        if special_keys and variant_key in special_keys:
+            if not has_any_text(variant_record, SPECIAL_PURPOSE_REASON_KEYS):
+                errors.append(
+                    f"service_variants.{recipe_id}.{variant_key}: special-purpose variant requires note/reason/service_rule"
+                )
+
         raw_status = variant_record.get("status")
         status = str(raw_status).strip() if raw_status is not None else ""
 
@@ -209,7 +245,7 @@ def service_variant_status_review(
             needs_confirmation.append((recipe_id, variant_key))
         elif status == "not_recommended":
             not_recommended.append((recipe_id, variant_key))
-            if not has_not_recommended_reason(variant_record):
+            if not has_any_text(variant_record, NOT_RECOMMENDED_REASON_KEYS):
                 errors.append(
                     f"service_variants.{recipe_id}.{variant_key}: not_recommended requires a clear reason/note"
                 )
@@ -219,7 +255,8 @@ def service_variant_status_review(
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--strict", action="store_true", help="fail if active food recipes are missing service variants or unresolved statuses")
+    parser.add_argument("--strict", action="store_true", help="fail if confirmed service standard statuses are unresolved")
+    parser.add_argument("--all-builtins", action="store_true", help="also fail strict mode when any active built-in food recipe lacks a service variant")
     args = parser.parse_args()
 
     recipes_raw = load_json(BUILTINS_PATH)
@@ -259,7 +296,6 @@ def main() -> int:
         if canonical_id not in recipe_ids:
             errors.append(f"canonical_recipes.{key}: canonical_id {canonical_id!r} missing from builtins")
         for dup in rec.get("duplicate_recipe_ids", []) or []:
-            # Duplicate IDs may be legacy expansion drafts outside builtins, but if present in builtins they must redirect.
             if dup in recipe_ids and recipe_redirects.get(dup) != canonical_id:
                 errors.append(f"Duplicate recipe id {dup!r} exists in builtins but does not redirect to {canonical_id!r}")
 
@@ -273,9 +309,7 @@ def main() -> int:
     polpette_like = [r for r in recipes if any(term in text_blob(r) for term in MEATBALL_TERMS)]
     unexpected_polpette = [r["id"] for r in polpette_like if r.get("id") not in allowed_ids]
     if unexpected_polpette:
-        errors.append(
-            "Unexpected active meatball-like recipes found: " + ", ".join(sorted(unexpected_polpette))
-        )
+        errors.append("Unexpected active meatball-like recipes found: " + ", ".join(sorted(unexpected_polpette)))
 
     missing_variants = []
     for r in recipes:
@@ -288,7 +322,7 @@ def main() -> int:
             continue
         missing_variants.append((rid, r.get("name", ""), r.get("type", ""), r.get("yield", "")))
 
-    needs_confirmation, missing_status, not_recommended = service_variant_status_review(service_variants, errors)
+    needs_confirmation, missing_status, not_recommended = service_variant_review(service_raw, service_variants, errors)
 
     print("RIVIERA RECIPE STANDARDS AUDIT")
     print("=" * 36)
@@ -296,6 +330,7 @@ def main() -> int:
     print(f"Service variant records: {len(service_variants)}")
     print(f"Canonical recipe groups: {len(canonical_recipes)}")
     print(f"Recipe redirects: {len(recipe_redirects)}")
+    print(f"Strict missing variant scope: {'all builtins' if args.all_builtins else 'service variants only'}")
     print()
 
     print("MEATBALL / POLPETTE CONTROL")
@@ -337,7 +372,9 @@ def main() -> int:
             print(f"- {e}")
         print()
 
-    strict_blockers = bool(missing_variants or needs_confirmation or missing_status)
+    strict_blockers = bool(needs_confirmation or missing_status)
+    if args.all_builtins:
+        strict_blockers = strict_blockers or bool(missing_variants)
 
     if errors or (args.strict and strict_blockers):
         return 1
