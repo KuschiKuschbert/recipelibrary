@@ -1,0 +1,206 @@
+{
+  "version": "2026-06-04-v1",
+  "status": "active_service_standard_addon",
+  "source_of_truth": "Mains, sides and buffet service standards inferred from Riviera built-ins and approved service-variant patterns.",
+  "service_variants": {
+    "lamb-shoulder-provencale-composed": {
+      "recipe_id": "lamb-shoulder-provencale-composed",
+      "plated_main": {
+        "portion": "170 g cooked lamb, 50 ml jus, 80 g Provençale veg, 5 g gremolata per guest",
+        "production_buffer_multiplier": 1.1,
+        "premium_garnish_option": "Micro herbs or lemon zest.",
+        "service_rule": "Hold lamb in jus at 78-80 C; veg and gremolata separate until pass.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "170 g cooked lamb with jus per guest",
+        "production_buffer_multiplier": 1.15,
+        "jus_ml_per_guest": 50,
+        "provencale_veg_g_per_guest": 80,
+        "gremolata_g_per_guest": 5,
+        "premium_garnish_option": "Micro herbs or lemon zest.",
+        "service_rule": "Serve lamb covered in jus from GN; refresh jus level during service.",
+        "status": "confirmed"
+      }
+    },
+    "beef-bourguignon": {
+      "recipe_id": "beef-bourguignon",
+      "plated_main": {
+        "portion": "180 g bourguignon per guest; optional 100 g mash/purée base",
+        "production_buffer_multiplier": 1.1,
+        "premium_garnish_option": "Micro parsley, picked thyme or crisp lardon crumb.",
+        "service_rule": "Hold gently at 78-80 C; do not boil once beef is in sauce.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "180 g bourguignon per guest",
+        "production_buffer_multiplier": 1.15,
+        "premium_garnish_option": "Micro parsley, picked thyme or crisp lardon crumb.",
+        "service_rule": "Each scoop should include beef, sauce, mushroom, lardon and onion.",
+        "status": "confirmed"
+      },
+      "corporate_boxed": {
+        "portion": "not recommended unless sold as controlled hot boxed meal",
+        "reason": "Wet braise needs proper hot holding and is not a standard mixed-box item.",
+        "status": "not_recommended"
+      }
+    },
+    "creamy-lemon-caper-chicken": {
+      "recipe_id": "creamy-lemon-caper-chicken",
+      "plated_main": {
+        "portion": "1 chicken portion, 45 ml lemon caper cream, 5 g capers per guest",
+        "chicken_g_raw_per_guest": 200,
+        "production_buffer_multiplier": 1.1,
+        "premium_garnish_option": "Micro herbs, fried capers or lemon zest.",
+        "service_rule": "Cook to 74 C internal; sauce separately at pass.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "1 sliced chicken portion per guest",
+        "production_buffer_multiplier": 1.15,
+        "sauce_ml_per_guest": 45,
+        "premium_garnish_option": "Micro herbs, fried capers or lemon zest.",
+        "service_rule": "Slice in shallow batches; hold covered with sauce protected.",
+        "status": "confirmed"
+      }
+    },
+    "greek-spiced-roast-lamb": {
+      "recipe_id": "greek-spiced-roast-lamb",
+      "plated_main": {
+        "portion": "120 g cooked lamb, 35 ml pan jus, oregano finish per guest",
+        "production_buffer_multiplier": 1.1,
+        "premium_garnish_option": "Micro oregano, lemon zest or herb oil.",
+        "service_rule": "Carve against grain and sauce immediately.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "120 g cooked lamb per guest",
+        "production_buffer_multiplier": 1.15,
+        "pan_jus_ml_per_guest": 40,
+        "premium_garnish_option": "Micro oregano, lemon zest or herb oil.",
+        "service_rule": "Carve tableside or hold pulled/carved lamb covered in jus.",
+        "status": "confirmed"
+      }
+    },
+    "prosciutto-chicken-lemon-caper": {
+      "recipe_id": "prosciutto-chicken-lemon-caper",
+      "plated_main": {
+        "portion": "1 prosciutto chicken portion, 50 ml sauce, 100 g chat potatoes, 25 g greens per guest",
+        "chicken_g_raw_per_guest": 200,
+        "prosciutto_g_per_guest": 20,
+        "production_buffer_multiplier": 1.1,
+        "premium_garnish_option": "Micro herbs, fried capers or lemon zest.",
+        "service_rule": "Rest and slice on bias at pass; do not bury prosciutto in sauce.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "not recommended as open buffet",
+        "reason": "Prosciutto-wrapped breast loses texture and moisture during open buffet holding.",
+        "status": "not_recommended"
+      }
+    },
+    "fillet-beef-tempranillo": {
+      "recipe_id": "fillet-beef-tempranillo",
+      "plated_main": {
+        "portion": "130 g raw fillet portion, 40 ml reduction, 100 g potato, 25 g greens per guest",
+        "production_buffer_multiplier": 1.1,
+        "premium_garnish_option": "Micro herbs, herb oil or crisp potato garnish.",
+        "service_rule": "Sear, oven finish, rest and sauce at pass only.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "not recommended as open buffet",
+        "reason": "Fillet is too quality-sensitive for buffet holding and overcooks once sliced.",
+        "status": "not_recommended"
+      },
+      "corporate_boxed": {
+        "portion": "not recommended",
+        "reason": "Not suitable for standard boxed delivery due doneness and holding risk.",
+        "status": "not_recommended"
+      }
+    },
+    "greek-style-pulled-beef-buffet": {
+      "recipe_id": "greek-style-pulled-beef-buffet",
+      "buffet": {
+        "portion": "150 g pulled beef and jus per guest",
+        "production_buffer_multiplier": 1.15,
+        "tzatziki_g_per_guest": 15,
+        "parsley_g_per_guest": 1,
+        "premium_garnish_option": "Micro herbs, lemon zest or oregano finish.",
+        "service_rule": "Hold beef covered in jus at 75 C; tzatziki separate and labelled.",
+        "status": "confirmed"
+      },
+      "plated_main": {
+        "portion": "150 g pulled beef, 45 ml jus, 15 g tzatziki per guest",
+        "premium_garnish_option": "Micro herbs, lemon zest or oregano finish.",
+        "service_rule": "Keep hot beef and cold tzatziki separate on plate.",
+        "status": "confirmed"
+      }
+    },
+    "chargrilled-lemon-thyme-chicken-buffet": {
+      "recipe_id": "chargrilled-lemon-thyme-chicken-buffet",
+      "buffet": {
+        "portion": "1 chargrilled thigh fillet per guest",
+        "production_buffer_multiplier": 1.15,
+        "dressing_ml_per_guest": 20,
+        "premium_garnish_option": "Micro herbs, lemon zest or fried capers.",
+        "service_rule": "Hold thighs whole where possible; slice at service and dress individual portions only.",
+        "status": "confirmed"
+      },
+      "plated_main": {
+        "portion": "1 sliced thigh fillet, 20 ml dressing, caper-parsley finish per guest",
+        "premium_garnish_option": "Micro herbs, lemon zest or fried capers.",
+        "service_rule": "Add parsley to dressing at service only.",
+        "status": "confirmed"
+      }
+    },
+    "creamy-potato-gratin": {
+      "recipe_id": "creamy-potato-gratin",
+      "buffet": {
+        "portion": "150 g gratin per guest",
+        "production_buffer_multiplier": 1.1,
+        "premium_garnish_option": "Micro herbs or crisp cheese crumb.",
+        "service_rule": "Rest before cutting; hold covered hot max 90 min.",
+        "status": "confirmed"
+      },
+      "platter": {
+        "portion": "count by 150 g side portions",
+        "premium_garnish_option": "Micro herbs or crisp cheese crumb.",
+        "service_rule": "Cut clean squares; reheat covered then uncover to refresh crust.",
+        "status": "confirmed"
+      }
+    },
+    "garlic-herb-chat-potatoes-feta": {
+      "recipe_id": "garlic-herb-chat-potatoes-feta",
+      "buffet": {
+        "portion": "125 g roast chats, 20 g whipped feta, 8 ml herb oil per guest",
+        "production_buffer_multiplier": 1.15,
+        "premium_garnish_option": "Micro herbs, parsley leaves or lemon zest.",
+        "service_rule": "Re-crisp potatoes before service; feta and herb oil at service only.",
+        "status": "confirmed"
+      },
+      "platter": {
+        "portion": "portion by guest count, not individual pieces",
+        "premium_garnish_option": "Micro herbs, parsley leaves or lemon zest.",
+        "service_rule": "For delivery, send feta separate if holding time is long.",
+        "status": "confirmed"
+      }
+    },
+    "broccoli-cauliflower-gratin": {
+      "recipe_id": "broccoli-cauliflower-gratin",
+      "buffet": {
+        "portion": "150 g vegetable gratin per guest",
+        "production_buffer_multiplier": 1.1,
+        "premium_garnish_option": "Micro herbs or crisp herb crumb.",
+        "service_rule": "Drain veg hard; rest before scooping; avoid stirring after baking.",
+        "status": "confirmed"
+      },
+      "platter": {
+        "portion": "portion by guest count, not individual pieces",
+        "premium_garnish_option": "Micro herbs or crisp herb crumb.",
+        "service_rule": "Serve hot from baking dish or GN with crust intact.",
+        "status": "confirmed"
+      }
+    }
+  }
+}
