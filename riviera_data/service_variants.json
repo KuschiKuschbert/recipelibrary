@@ -1,5 +1,5 @@
 {
-  "version": "2026-06-04-v4",
+  "version": "2026-06-04-v5",
   "status": "active_service_standard",
   "source_of_truth": "Kuschi service-size corrections. Base recipes remain riviera_data/builtins.json unless explicitly superseded.",
   "rules": {
@@ -7,6 +7,8 @@
     "older_docx_sources": "Reference only unless explicitly restored.",
     "portion_locking": "Do not invent missing service sizes. Ask Kuschi before locking tapas, canape, plated, buffet or corporate portions.",
     "status_locking": "confirmed is locked; needs_confirmation is allowed in normal audit but blocks strict audit; not_recommended is allowed only with a clear reason or note.",
+    "master_variant_keys": ["cocktail", "tapas", "plated_entree", "plated_main", "buffet", "platter", "corporate_boxed", "kids", "dietary_single"],
+    "naming_locking": "Use master_variant_keys for service variants. Older keys such as plated_dinner, plated_dinner_entree, plated and corporate_offsite should not be used in new records.",
     "meatball_naming": {
       "canonical_name": "Polpette",
       "aliases": ["meatballs", "veal meatballs", "beef albondigas", "albondigas", "polpette", "beef polpette", "slow cooked beef albondigas", "slow cooked beef albondigas buffet"],
@@ -20,31 +22,31 @@
       "base_prep": {"piece_weight_g_pre_crumb": 40},
       "cocktail": {"portion": "1 piece", "piece_weight_g_pre_crumb": 40, "status": "confirmed"},
       "tapas": {"portion": "3 pieces", "piece_weight_g_pre_crumb": 40, "status": "confirmed"},
-      "plated_dinner": {"portion": "1 piece", "piece_weight_g_pre_crumb": 50, "note": "Make separate 50 g plated batch before crumbing.", "status": "confirmed"}
+      "plated_entree": {"portion": "1 piece", "piece_weight_g_pre_crumb": 50, "note": "Make separate 50 g plated batch before crumbing.", "status": "confirmed"}
     },
     "calamari": {
       "recipe_id": "calamari",
       "cocktail": {"portion": "4 calamari strips + 1 baby octopus", "status": "confirmed"},
       "tapas": {"portion": "6 calamari strips + 2 baby octopus", "status": "confirmed"},
-      "plated_dinner": {"portion": "6 calamari strips + 2 baby octopus", "status": "confirmed"}
+      "plated_entree": {"portion": "6 calamari strips + 2 baby octopus", "status": "confirmed"}
     },
     "lamb-cutlet": {
       "recipe_id": "lamb-cutlet",
       "tapas": {"portion": "3 cutlets", "status": "confirmed"},
       "cocktail": {"portion": "1 cutlet", "status": "confirmed"},
-      "plated_dinner_entree": {"portion": "2 cutlets", "status": "confirmed"}
+      "plated_entree": {"portion": "2 cutlets", "status": "confirmed"}
     },
     "chicken-skewer": {
       "recipe_id": "chicken-skewer",
       "tapas": {"portion": "3 skewers", "status": "confirmed"},
       "cocktail": {"portion": "1 skewer", "status": "confirmed"},
-      "plated_dinner_entree": {"portion": "2 skewers", "status": "confirmed"}
+      "plated_entree": {"portion": "2 skewers", "status": "confirmed"}
     },
     "chorizo-potatoes": {
       "recipe_id": "chorizo-potatoes",
       "tapas": {"potato_g": 180, "chorizo_g": 60, "total_g": 240, "status": "confirmed"},
       "cocktail": {"potato_g": 144, "chorizo_g": 48, "total_g": 192, "note": "80 percent of tapas serve.", "status": "confirmed"},
-      "plated_dinner_entree": {"total_g": 240, "status": "confirmed"},
+      "plated_entree": {"total_g": 240, "status": "confirmed"},
       "buffet": {"total_g_finished_serve": 160, "status": "confirmed"}
     },
     "veal-meatballs": {
@@ -54,8 +56,8 @@
       "base_prep": {"piece_weight_g_pre_crumb": 60},
       "tapas": {"portion": "3 meatballs with sauce", "piece_weight_g_pre_crumb": 60, "status": "confirmed"},
       "cocktail": {"portion": "1 meatball with sauce", "piece_weight_g_pre_crumb": 60, "recommendation": "Use 60 g for normal canape service. Use 80 g only as substantial canape.", "status": "confirmed"},
-      "plated": {"portion": "3 meatballs with sauce", "piece_weight_g_pre_crumb": 60, "status": "confirmed"},
-      "plated_dinner_entree": {"portion": "2 meatballs with sauce", "piece_weight_g_pre_crumb": 60, "status": "confirmed"},
+      "plated_main": {"portion": "3 meatballs with sauce", "piece_weight_g_pre_crumb": 60, "status": "confirmed"},
+      "plated_entree": {"portion": "2 meatballs with sauce", "piece_weight_g_pre_crumb": 60, "status": "confirmed"},
       "buffet": {"service_name": "Slow Cooked Beef Albondigas", "portion": "buffet serve - portion count to confirm before locking", "piece_weight_g_pre_crumb": 60, "sauce": "romesco sugo or smoked paprika passata sauce per menu wording", "hold": "Hold covered in sauce in bain marie at 75 C. Exposed meatballs dry quickly.", "note": "Use canonical Polpette base. Albondigas is menu wording and service style, not a separate active recipe.", "status": "needs_confirmation"},
       "legacy_mini_canape": {"portion": "1 mini polpette with glaze or sugo", "piece_weight_g_pre_crumb": 25, "note": "Merged from beef-polpette-canape older draft. Archive/reference only unless Kuschi deliberately reactivates a mini polpette canape format.", "status": "not_recommended"}
     },
@@ -63,7 +65,7 @@
       "recipe_id": "fish-slider",
       "cocktail": {"portion": "1 slider per guest", "status": "confirmed"},
       "tapas": {"portion": "3 sliders per serve", "status": "confirmed"},
-      "corporate_offsite": {"portion": "needs confirmation", "status": "needs_confirmation"}
+      "corporate_boxed": {"portion": "needs confirmation", "status": "needs_confirmation"}
     },
     "cannoli": {
       "recipe_id_candidates": ["cannoli", "housemade-cannoli-trio", "spanner-crab-cannoli"],
