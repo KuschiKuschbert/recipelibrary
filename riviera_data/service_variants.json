@@ -1,5 +1,5 @@
 {
-  "version": "2026-06-04-v10",
+  "version": "2026-06-04-v11",
   "status": "active_service_standard",
   "source_of_truth": "Kuschi service-size corrections. Base recipes remain riviera_data/builtins.json unless explicitly superseded.",
   "rules": {
@@ -60,7 +60,7 @@
       "cocktail": {"portion": "1 meatball with sauce", "piece_weight_g_pre_crumb": 60, "recommendation": "Use 60 g for normal canape service. Use 80 g only as substantial canape.", "status": "confirmed"},
       "plated_main": {"portion": "3 meatballs with sauce", "piece_weight_g_pre_crumb": 60, "status": "confirmed"},
       "plated_entree": {"portion": "2 meatballs with sauce", "piece_weight_g_pre_crumb": 60, "status": "confirmed"},
-      "buffet": {"service_name": "Slow Cooked Beef Albondigas", "portion": "2 meatballs per guest service target with 2.3 meatballs per guest production allowance", "piece_count": 2, "production_piece_count_per_guest": 2.3, "piece_weight_g_pre_crumb": 60, "production_weight_g_pre_crumb_per_guest": 138, "sauce_ml_per_guest": 80, "bread_slices_per_guest": 1.5, "bread_slice_thickness_cm": 1.5, "manchego_g_per_guest": 10, "sauce": "romesco sugo or smoked paprika passata sauce per menu wording", "hold": "Hold covered in sauce in bain marie at 75 C. Exposed meatballs dry quickly.", "note": "Use canonical Polpette base. Albondigas is menu wording and service style, not a separate active recipe. Production allowance includes buffet buffer. Bread allowance is 1.5 slices per serve at 1.5 cm thickness. Manchego allowance is 10 g per serve.", "status": "needs_confirmation"},
+      "buffet": {"service_name": "Slow Cooked Beef Albondigas", "portion": "2 meatballs per guest service target with 2.3 meatballs per guest production allowance", "piece_count": 2, "production_piece_count_per_guest": 2.3, "piece_weight_g_pre_crumb": 60, "production_weight_g_pre_crumb_per_guest": 138, "sauce_ml_per_guest": 80, "bread_slices_per_guest": 1.5, "bread_slice_thickness_cm": 1.5, "manchego_g_per_guest": 10, "parsley_g_per_guest": 2, "parsley_g_per_40_guests": 80, "lemon_zest_lemons_per_40_guests": 1, "olive_oil_ml_per_guest": 3, "olive_oil_ml_per_40_guests": 120, "garnish": "Flat-leaf parsley, shaved Manchego, light lemon zest and good olive oil finish.", "sauce": "romesco sugo or smoked paprika passata sauce per menu wording", "hold": "Hold covered in sauce in bain marie at 75 C. Exposed meatballs dry quickly.", "note": "Use canonical Polpette base. Albondigas is menu wording and service style, not a separate active recipe. Production allowance includes buffet buffer. Bread allowance is 1.5 slices per serve at 1.5 cm thickness. Manchego allowance is 10 g per serve. Garnish allowance is 2 g parsley per serve, 1 lemon zested per 40 serves and 3 ml olive oil per serve.", "status": "confirmed"},
       "legacy_mini_canape": {"portion": "1 mini polpette with glaze or sugo", "piece_weight_g_pre_crumb": 25, "note": "Merged from beef-polpette-canape older draft. Archive/reference only unless Kuschi deliberately reactivates a mini polpette canape format.", "status": "not_recommended"}
     },
     "fish-slider": {
