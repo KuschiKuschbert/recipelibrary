@@ -5,6 +5,7 @@ Audit Riviera recipe library standards.
 Checks:
 - built-in recipe JSON shape
 - service variant records reference real recipes or approved redirects
+- service variant add-on files are merged into the audit
 - canonical aliases / redirects point to real recipes
 - meatball / polpette / albondigas duplicates stay controlled
 - service variant statuses follow normal vs strict audit behaviour
@@ -32,6 +33,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 BUILTINS_PATH = ROOT / "riviera_data" / "builtins.json"
 SERVICE_VARIANTS_PATH = ROOT / "riviera_data" / "service_variants.json"
+SERVICE_VARIANTS_ADDON_GLOB = "service_variants_*.json"
 CANONICAL_ALIASES_PATH = ROOT / "riviera_data" / "canonical_recipe_aliases.json"
 
 ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,62}$")
@@ -103,6 +105,7 @@ NOT_RECOMMENDED_REASON_KEYS = {
 }
 
 SPECIAL_PURPOSE_REASON_KEYS = {
+    "portion",
     "note",
     "reason",
     "service_rule",
@@ -114,6 +117,10 @@ def load_json(path: Path) -> Any:
     if not path.is_file():
         raise FileNotFoundError(f"Missing {path.relative_to(ROOT)}")
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def rel(path: Path) -> str:
+    return str(path.relative_to(ROOT))
 
 
 def validate_builtin_shape(recipes: list[dict[str, Any]]) -> list[str]:
@@ -202,6 +209,65 @@ def get_rule_list(service_raw: dict[str, Any], key: str) -> set[str]:
     return {str(v) for v in values} if isinstance(values, list) else set()
 
 
+def merge_service_variants(
+    merged: dict[str, Any],
+    incoming: dict[str, Any],
+    source_path: Path,
+    errors: list[str],
+) -> None:
+    for recipe_id, variant_group in incoming.items():
+        if not isinstance(variant_group, dict):
+            errors.append(f"{rel(source_path)}: service_variants.{recipe_id}: must be an object")
+            continue
+        if recipe_id not in merged:
+            merged[recipe_id] = variant_group
+            continue
+        existing = merged[recipe_id]
+        if not isinstance(existing, dict):
+            errors.append(f"{rel(source_path)}: service_variants.{recipe_id}: conflicts with non-object existing record")
+            continue
+        for variant_key, variant_record in variant_group.items():
+            if variant_key in existing and existing[variant_key] != variant_record:
+                errors.append(
+                    f"{rel(source_path)}: service_variants.{recipe_id}.{variant_key}: "
+                    "conflicts with an existing service variant definition"
+                )
+                continue
+            existing[variant_key] = variant_record
+
+
+def load_service_variant_bundle() -> tuple[dict[str, Any], dict[str, Any], list[Path], list[str]]:
+    errors: list[str] = []
+    service_raw = load_json(SERVICE_VARIANTS_PATH)
+    source_paths = [SERVICE_VARIANTS_PATH]
+    merged: dict[str, Any] = {}
+
+    if not isinstance(service_raw, dict):
+        errors.append(f"{rel(SERVICE_VARIANTS_PATH)}: root must be an object")
+        return {}, merged, source_paths, errors
+
+    base_variants = service_raw.get("service_variants", {})
+    if not isinstance(base_variants, dict):
+        errors.append(f"{rel(SERVICE_VARIANTS_PATH)}: service_variants must be an object")
+    else:
+        merge_service_variants(merged, base_variants, SERVICE_VARIANTS_PATH, errors)
+
+    addon_paths = sorted(SERVICE_VARIANTS_PATH.parent.glob(SERVICE_VARIANTS_ADDON_GLOB))
+    for addon_path in addon_paths:
+        source_paths.append(addon_path)
+        addon_raw = load_json(addon_path)
+        if not isinstance(addon_raw, dict):
+            errors.append(f"{rel(addon_path)}: root must be an object")
+            continue
+        addon_variants = addon_raw.get("service_variants", {})
+        if not isinstance(addon_variants, dict):
+            errors.append(f"{rel(addon_path)}: service_variants must be an object")
+            continue
+        merge_service_variants(merged, addon_variants, addon_path, errors)
+
+    return service_raw, merged, source_paths, errors
+
+
 def service_variant_review(
     service_raw: dict[str, Any],
     service_variants: dict[str, Any],
@@ -224,7 +290,7 @@ def service_variant_review(
         if special_keys and variant_key in special_keys:
             if not has_any_text(variant_record, SPECIAL_PURPOSE_REASON_KEYS):
                 errors.append(
-                    f"service_variants.{recipe_id}.{variant_key}: special-purpose variant requires note/reason/service_rule"
+                    f"service_variants.{recipe_id}.{variant_key}: special-purpose variant requires portion/note/reason/service_rule"
                 )
 
         raw_status = variant_record.get("status")
@@ -260,7 +326,7 @@ def main() -> int:
     args = parser.parse_args()
 
     recipes_raw = load_json(BUILTINS_PATH)
-    service_raw = load_json(SERVICE_VARIANTS_PATH)
+    service_raw, service_variants, service_variant_paths, service_variant_errors = load_service_variant_bundle()
     aliases_raw = load_json(CANONICAL_ALIASES_PATH)
 
     if not isinstance(recipes_raw, list):
@@ -270,13 +336,10 @@ def main() -> int:
     recipe_ids = {str(r.get("id", "")).strip() for r in recipes}
 
     errors = validate_builtin_shape(recipes)
-    service_variants = service_raw.get("service_variants", {}) if isinstance(service_raw, dict) else {}
+    errors.extend(service_variant_errors)
     recipe_redirects = aliases_raw.get("recipe_id_redirects", {}) if isinstance(aliases_raw, dict) else {}
     canonical_recipes = aliases_raw.get("canonical_recipes", {}) if isinstance(aliases_raw, dict) else {}
 
-    if not isinstance(service_variants, dict):
-        errors.append("service_variants.json: service_variants must be an object")
-        service_variants = {}
     if not isinstance(recipe_redirects, dict):
         errors.append("canonical_recipe_aliases.json: recipe_id_redirects must be an object")
         recipe_redirects = {}
@@ -327,6 +390,9 @@ def main() -> int:
     print("RIVIERA RECIPE STANDARDS AUDIT")
     print("=" * 36)
     print(f"Built-in recipes: {len(recipes)}")
+    print(f"Service variant files: {len(service_variant_paths)}")
+    for path in service_variant_paths:
+        print(f"- {rel(path)}")
     print(f"Service variant records: {len(service_variants)}")
     print(f"Canonical recipe groups: {len(canonical_recipes)}")
     print(f"Recipe redirects: {len(recipe_redirects)}")
