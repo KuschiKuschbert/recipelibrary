@@ -1,5 +1,5 @@
 {
-  "version": "2026-06-04-v2",
+  "version": "2026-06-04-v3",
   "status": "active_service_standard",
   "source_of_truth": "Kuschi service-size corrections. Base recipes remain riviera_data/builtins.json unless explicitly superseded.",
   "rules": {
@@ -8,9 +8,9 @@
     "portion_locking": "Do not invent missing service sizes. Ask Kuschi before locking tapas, canape, plated, buffet or corporate portions.",
     "meatball_naming": {
       "canonical_name": "Polpette",
-      "aliases": ["meatballs", "veal meatballs", "beef albondigas", "albondigas", "polpette", "beef polpette"],
+      "aliases": ["meatballs", "veal meatballs", "beef albondigas", "albondigas", "polpette", "beef polpette", "slow cooked beef albondigas", "slow cooked beef albondigas buffet"],
       "standard_piece_weight_g_pre_crumb": 60,
-      "note": "Use 60 g pre-crumb weight as active standard. 80 g is substantial canape only if explicitly requested. The old beef-polpette-canape 25 g draft is merged here as a legacy mini-canape format, not an active separate recipe."
+      "note": "Use 60 g pre-crumb weight as active standard. 80 g is substantial canape only if explicitly requested. Older mini canape and buffet albondigas drafts are service variants, not separate production recipes."
     }
   },
   "service_variants": {
@@ -49,12 +49,13 @@
     "veal-meatballs": {
       "recipe_id": "veal-meatballs",
       "canonical_name": "Polpette",
-      "aliases": ["meatballs", "veal meatballs", "beef albondigas", "albondigas", "polpette", "beef polpette"],
+      "aliases": ["meatballs", "veal meatballs", "beef albondigas", "albondigas", "polpette", "beef polpette", "slow cooked beef albondigas", "slow cooked beef albondigas buffet"],
       "base_prep": {"piece_weight_g_pre_crumb": 60},
       "tapas": {"portion": "3 meatballs with sauce", "piece_weight_g_pre_crumb": 60},
       "cocktail": {"portion": "1 meatball with sauce", "piece_weight_g_pre_crumb": 60, "recommendation": "Use 60 g for normal canape service. Use 80 g only as substantial canape."},
       "plated": {"portion": "3 meatballs with sauce", "piece_weight_g_pre_crumb": 60},
       "plated_dinner_entree": {"portion": "2 meatballs with sauce", "piece_weight_g_pre_crumb": 60},
+      "buffet": {"service_name": "Slow Cooked Beef Albondigas", "portion": "buffet serve - portion count to confirm before locking", "piece_weight_g_pre_crumb": 60, "sauce": "romesco sugo or smoked paprika passata sauce per menu wording", "hold": "Hold covered in sauce in bain marie at 75 C. Exposed meatballs dry quickly.", "note": "Use canonical Polpette base. Albondigas is menu wording and service style, not a separate active recipe."},
       "legacy_mini_canape": {"portion": "1 mini polpette with glaze or sugo", "piece_weight_g_pre_crumb": 25, "note": "Merged from beef-polpette-canape older draft. Archive/reference only unless Kuschi deliberately reactivates a mini polpette canape format."}
     },
     "fish-slider": {
