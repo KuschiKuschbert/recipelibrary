@@ -1,0 +1,352 @@
+{
+  "version": "2026-06-04-v1",
+  "status": "active_service_standard_addon",
+  "source_of_truth": "Corporate service-size standards inferred from Riviera corporate built-in recipe yields and Kuschi-approved service-variant patterns. Base rules remain riviera_data/service_variants.json.",
+  "service_variants": {
+    "corporate-savoury-croissants": {
+      "recipe_id": "corporate-savoury-croissants",
+      "corporate_boxed": {
+        "portion": "1 savoury croissant per guest or box",
+        "pieces_per_guest": 1,
+        "minimum_order_pieces": 12,
+        "service_rule": "Box by the dozen for corporate morning tea or individually only when requested. Fill split must be set on the event prep sheet.",
+        "premium_garnish_option": "Micro herbs or edible flowers as optional premium finish where packing allows.",
+        "status": "confirmed"
+      },
+      "platter": {
+        "portion": "count by ordered croissants, 12 piece minimum order",
+        "minimum_order_pieces": 12,
+        "service_rule": "Serve fresh or warm only when delivery timing supports pastry quality. Do not seal hot croissants for long delivery.",
+        "premium_garnish_option": "Micro herbs or edible flowers as optional premium finish.",
+        "status": "confirmed"
+      }
+    },
+    "corporate-sweet-croissants": {
+      "recipe_id": "corporate-sweet-croissants",
+      "corporate_boxed": {
+        "portion": "1 sweet croissant per guest or box",
+        "pieces_per_guest": 1,
+        "minimum_order_pieces": 12,
+        "icing_sugar_g_per_12_pieces_optional": 10,
+        "service_rule": "Fill and finish close to delivery. Keep chilled if filling requires it.",
+        "premium_garnish_option": "Edible flowers, berry garnish or flavour-matched crumb as optional premium finish.",
+        "status": "confirmed"
+      },
+      "platter": {
+        "portion": "count by ordered croissants, 12 piece minimum order",
+        "minimum_order_pieces": 12,
+        "service_rule": "Use platter only for same-day service. Do not stack filled croissants.",
+        "premium_garnish_option": "Edible flowers or berries as optional premium finish.",
+        "status": "confirmed"
+      }
+    },
+    "corporate-bircher-muesli-bowls": {
+      "recipe_id": "corporate-bircher-muesli-bowls",
+      "corporate_boxed": {
+        "portion": "1 chilled bircher bowl per guest",
+        "bowls_per_guest": 1,
+        "minimum_order_bowls": 12,
+        "production_buffer_multiplier": 1.05,
+        "fruit_garnish_g_per_bowl": 80,
+        "toasted_nuts_g_per_bowl": 15,
+        "service_rule": "Keep chilled below 5 C. Label nut-containing bowls clearly or keep nuts separate for mixed dietaries.",
+        "premium_garnish_option": "Berries, edible flowers or toasted coconut as optional premium finish.",
+        "status": "confirmed"
+      }
+    },
+    "corporate-chicken-caesar-bowl": {
+      "recipe_id": "corporate-chicken-caesar-bowl",
+      "corporate_boxed": {
+        "portion": "1 Caesar bowl per guest",
+        "bowls_per_guest": 1,
+        "minimum_order_bowls": 12,
+        "chicken_g_per_bowl": 125,
+        "caesar_dressing_ml_per_bowl": 35,
+        "parmesan_g_per_bowl": 17,
+        "bacon_g_per_bowl_optional": 17,
+        "service_rule": "Keep cold. Dress no more than 20 minutes before send or pack dressing separately for longer delivery.",
+        "premium_garnish_option": "Micro herbs or extra shaved parmesan as optional premium finish.",
+        "status": "confirmed"
+      }
+    },
+    "corporate-lamb-fattoush-bowl": {
+      "recipe_id": "corporate-lamb-fattoush-bowl",
+      "corporate_boxed": {
+        "portion": "1 lamb fattoush bowl per guest",
+        "bowls_per_guest": 1,
+        "minimum_order_bowls": 12,
+        "lamb_g_per_bowl": 100,
+        "sumac_dressing_ml_per_bowl": 25,
+        "pita_pieces_per_bowl": 0.5,
+        "service_rule": "Keep pita chips separate or on top at handover so they stay crisp. Confirm GF change before using pita alternative.",
+        "premium_garnish_option": "Micro herbs or pomegranate as optional premium finish.",
+        "status": "confirmed"
+      }
+    },
+    "corporate-mediterranean-chicken-bowl": {
+      "recipe_id": "corporate-mediterranean-chicken-bowl",
+      "corporate_boxed": {
+        "portion": "1 Mediterranean chicken bowl per guest",
+        "bowls_per_guest": 1,
+        "minimum_order_bowls": 12,
+        "chicken_g_per_bowl": 125,
+        "labneh_tzatziki_g_per_bowl": 35,
+        "pita_pieces_per_bowl": 1,
+        "service_rule": "Keep tzatziki in dip well or separate pot. Do not seal warm chicken directly against cold labneh.",
+        "premium_garnish_option": "Micro herbs, lemon zest or edible flowers as optional premium finish.",
+        "status": "confirmed"
+      }
+    },
+    "corporate-beef-lasagne-side-salad": {
+      "recipe_id": "corporate-beef-lasagne-side-salad",
+      "corporate_boxed": {
+        "portion": "1 lasagne portion with side salad per guest",
+        "lasagne_portions_per_guest": 1,
+        "side_salad_g_per_guest": 80,
+        "dressing_ml_per_guest": 15,
+        "minimum_order_portions": 12,
+        "service_rule": "Use two-compartment box for takeaway. Keep salad and dressing separate from hot lasagne.",
+        "premium_garnish_option": "Micro herbs or parmesan finish where packing allows.",
+        "status": "confirmed"
+      }
+    },
+    "corporate-breakfast-wraps": {
+      "recipe_id": "corporate-breakfast-wraps",
+      "corporate_boxed": {
+        "portion": "1 breakfast wrap per guest",
+        "wraps_per_guest": 1,
+        "minimum_order_wraps": 12,
+        "hash_browns_per_wrap": 1,
+        "eggs_per_wrap": 1,
+        "bacon_g_per_wrap": 25,
+        "cheese_g_per_wrap": 17,
+        "tomato_relish_g_per_wrap": 12,
+        "service_rule": "Toast seam down and wrap for delivery. Vent briefly before boxing so wraps do not steam soggy.",
+        "premium_garnish_option": "No garnish needed for boxed wraps; offer premium sauce/relish instead.",
+        "status": "confirmed"
+      }
+    },
+    "corporate-gourmet-filled-cookies": {
+      "recipe_id": "corporate-gourmet-filled-cookies",
+      "corporate_boxed": {
+        "portion": "1 filled cookie per guest or box",
+        "cookies_per_guest": 1,
+        "production_buffer_multiplier": 1.1,
+        "service_rule": "Fill day-of where possible so biscuit keeps texture. Pack flat and do not stack soft filled cookies.",
+        "premium_garnish_option": "Gold dust, chocolate drizzle, edible flowers or flavour-matched crumb as optional premium finish.",
+        "status": "confirmed"
+      },
+      "dessert_platter": {
+        "portion": "count by ordered cookies, base recipe yield 24 cookies",
+        "base_recipe_yield_pieces": 24,
+        "service_rule": "Fill close to service and separate flavours clearly on platter.",
+        "premium_garnish_option": "Edible flowers or flavour-matched garnish as optional premium finish.",
+        "status": "confirmed"
+      }
+    },
+    "corporate-mixed-sandwiches": {
+      "recipe_id": "corporate-mixed-sandwiches",
+      "corporate_boxed": {
+        "portion": "1 serve per guest, 3 finger sandwiches per serve",
+        "finger_sandwiches_per_guest": 3,
+        "minimum_order_serves": 12,
+        "service_rule": "Filling split must be set on the event prep sheet. Do not use vague chef selection for kitchen-facing counts.",
+        "premium_garnish_option": "Micro herbs or premium fruit garnish only where packing allows.",
+        "status": "confirmed"
+      },
+      "platter": {
+        "portion": "12 serves per built-in batch, 3 finger sandwiches per serve",
+        "serves_per_batch": 12,
+        "finger_sandwiches_per_serve": 3,
+        "service_rule": "Cut cleanly, keep wrapped/chilled, and build flavour split from event prep sheet.",
+        "premium_garnish_option": "Micro herbs, edible flowers or premium fruit garnish as optional premium finish.",
+        "status": "confirmed"
+      }
+    },
+    "corporate-roast-veg-salad-bowl": {
+      "recipe_id": "corporate-roast-veg-salad-bowl",
+      "corporate_boxed": {
+        "portion": "1 roasted vegetable salad bowl per guest",
+        "bowls_per_guest": 1,
+        "minimum_order_bowls": 12,
+        "roast_veg_g_per_bowl": 250,
+        "dressing_ml_per_bowl": 25,
+        "service_rule": "Cool roasted vegetables before lidding unless served warm. Keep dressing separate for longer holding.",
+        "premium_garnish_option": "Pepitas, micro herbs or edible flowers as optional premium finish.",
+        "status": "confirmed"
+      }
+    },
+    "kids-snack-pack": {
+      "recipe_id": "kids-snack-pack",
+      "kids": {
+        "portion": "1 snack pack per child",
+        "packs_per_child": 1,
+        "fruit_portion_per_pack": 1,
+        "crackers_portion_per_pack": 1,
+        "cheese_portion_per_pack": 1,
+        "small_treat_portion_per_pack": 1,
+        "service_rule": "Cut fruit into safe pieces for age group. Label allergens and keep nut products out unless specifically approved.",
+        "premium_garnish_option": "Not required; keep child-friendly and safe.",
+        "status": "confirmed"
+      }
+    },
+    "kids-spaghetti-bolognese": {
+      "recipe_id": "kids-spaghetti-bolognese",
+      "kids": {
+        "portion": "1 mild spaghetti bolognese serve per child",
+        "serves_per_child": 1,
+        "beef_mince_g_raw_per_child": 100,
+        "spaghetti_g_dry_per_child": 50,
+        "parmesan_g_per_child": 10,
+        "service_rule": "Keep mild. Sauce pasta lightly and serve extra sauce separately when practical.",
+        "premium_garnish_option": "Not required; parmesan only unless requested.",
+        "status": "confirmed"
+      }
+    },
+    "corporate-bacon-egg-muffins": {
+      "recipe_id": "corporate-bacon-egg-muffins",
+      "corporate_boxed": {
+        "portion": "1 bacon and egg muffin per guest",
+        "muffins_per_guest": 1,
+        "minimum_order_pieces": 12,
+        "bacon_rashers_per_muffin": 1,
+        "eggs_per_muffin": 1,
+        "cheese_slices_per_muffin": 1,
+        "service_rule": "Build hot and wrap for transport. Sauce optional; confirm before adding.",
+        "premium_garnish_option": "Not required for wrapped breakfast item.",
+        "status": "confirmed"
+      }
+    },
+    "corporate-bacon-egg-paninis": {
+      "recipe_id": "corporate-bacon-egg-paninis",
+      "corporate_boxed": {
+        "portion": "1 bacon and egg panini per guest",
+        "paninis_per_guest": 1,
+        "minimum_order_pieces": 12,
+        "bacon_rashers_per_panini": 1,
+        "eggs_per_panini": 1,
+        "caramelised_onion_jam_g_per_panini": 17,
+        "cheese_g_per_panini": 17,
+        "service_rule": "Press until marked, cut only if requested, vent briefly before boxing.",
+        "premium_garnish_option": "Not required for boxed panini; premium relish is the finish.",
+        "status": "confirmed"
+      }
+    },
+    "corporate-waffles-breakfast": {
+      "recipe_id": "corporate-waffles-breakfast",
+      "corporate_boxed": {
+        "portion": "1 waffle per guest",
+        "waffles_per_guest": 1,
+        "minimum_order_pieces": 12,
+        "whipped_honey_butter_g_per_guest": 17,
+        "maple_syrup_ml_per_guest": 25,
+        "service_rule": "Hold waffles on rack, not stacked. Pack butter and maple separately.",
+        "premium_garnish_option": "Berries, edible flowers or toasted coconut as optional premium finish.",
+        "status": "confirmed"
+      }
+    },
+    "corporate-pesto-pasta-salad": {
+      "recipe_id": "corporate-pesto-pasta-salad",
+      "corporate_boxed": {
+        "portion": "1 pasta salad serve per guest",
+        "serves_per_guest": 1,
+        "finished_salad_g_per_guest": 200,
+        "production_buffer_multiplier": 1.1,
+        "premium_garnish_option": "Basil oil, micro basil or edible flowers as optional premium finish.",
+        "service_rule": "Hold chilled below 5 C. Refresh with basil oil at send if needed.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "200 g finished salad per guest with 1.1 production allowance",
+        "finished_salad_g_per_guest": 200,
+        "production_finished_salad_g_per_guest": 220,
+        "premium_garnish_option": "Micro basil or edible flowers as optional premium finish.",
+        "service_rule": "Keep chilled and refresh in small batches.",
+        "status": "confirmed"
+      }
+    },
+    "corporate-moroccan-couscous-salad": {
+      "recipe_id": "corporate-moroccan-couscous-salad",
+      "corporate_boxed": {
+        "portion": "1 couscous salad serve per guest",
+        "serves_per_guest": 1,
+        "finished_salad_g_per_guest": 180,
+        "production_buffer_multiplier": 1.1,
+        "premium_garnish_option": "Toasted almonds, micro herbs or edible flowers as optional premium finish.",
+        "service_rule": "Hold chilled. Keep nuts separate if nut-free dietaries are present.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "180 g finished salad per guest with 1.1 production allowance",
+        "finished_salad_g_per_guest": 180,
+        "production_finished_salad_g_per_guest": 198,
+        "premium_garnish_option": "Micro herbs or edible flowers as optional premium finish.",
+        "service_rule": "Refresh in small batches and label nuts clearly.",
+        "status": "confirmed"
+      }
+    },
+    "corporate-pumpkin-feta-pepita-salad": {
+      "recipe_id": "corporate-pumpkin-feta-pepita-salad",
+      "corporate_boxed": {
+        "portion": "1 pumpkin feta salad serve per guest",
+        "serves_per_guest": 1,
+        "finished_salad_g_per_guest": 200,
+        "pumpkin_g_per_guest": 165,
+        "feta_g_per_guest": 25,
+        "pepitas_g_per_guest": 12,
+        "premium_garnish_option": "Micro herbs, edible flowers or extra toasted pepitas as optional premium finish.",
+        "service_rule": "Cool pumpkin before boxing unless sold warm. Keep leaves from wilting by layering carefully.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "200 g finished salad per guest with 1.1 production allowance",
+        "finished_salad_g_per_guest": 200,
+        "production_finished_salad_g_per_guest": 220,
+        "premium_garnish_option": "Micro herbs or edible flowers as optional premium finish.",
+        "service_rule": "Refresh in small batches and keep feta visible on top.",
+        "status": "confirmed"
+      }
+    },
+    "corporate-traditional-garden-salad": {
+      "recipe_id": "corporate-traditional-garden-salad",
+      "corporate_boxed": {
+        "portion": "1 garden salad serve per guest",
+        "serves_per_guest": 1,
+        "finished_salad_g_per_guest": 120,
+        "vinaigrette_ml_per_guest": 25,
+        "premium_garnish_option": "Edible flowers, radish curls or micro herbs as optional premium finish.",
+        "service_rule": "Keep dressing separate until send. Do not pre-dress for long delivery.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "120 g finished salad per guest with 1.1 production allowance",
+        "finished_salad_g_per_guest": 120,
+        "production_finished_salad_g_per_guest": 132,
+        "vinaigrette_ml_per_guest": 25,
+        "premium_garnish_option": "Micro herbs or edible flowers as optional premium finish.",
+        "service_rule": "Dress at service only and refresh in small batches.",
+        "status": "confirmed"
+      }
+    },
+    "corporate-creamy-potato-bacon-herb-salad": {
+      "recipe_id": "corporate-creamy-potato-bacon-herb-salad",
+      "corporate_boxed": {
+        "portion": "1 potato bacon salad serve per guest",
+        "serves_per_guest": 1,
+        "finished_salad_g_per_guest": 200,
+        "bacon_g_per_guest": 33,
+        "premium_garnish_option": "Chives, micro herbs or crisp bacon crumb as optional premium finish.",
+        "service_rule": "Hold chilled. Keep bacon separate overnight and fold through before service for texture.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "200 g finished salad per guest with 1.1 production allowance",
+        "finished_salad_g_per_guest": 200,
+        "production_finished_salad_g_per_guest": 220,
+        "premium_garnish_option": "Chives, micro herbs or crisp bacon crumb as optional premium finish.",
+        "service_rule": "Refresh chilled in small batches. Label pork and dairy clearly.",
+        "status": "confirmed"
+      }
+    }
+  }
+}
