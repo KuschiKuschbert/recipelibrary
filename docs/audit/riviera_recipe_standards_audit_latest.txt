@@ -78,7 +78,3 @@ ACTIVE FOOD RECIPES MISSING SERVICE VARIANTS
 - funeral-spinach-ricotta-pastizzi-platter: Spinach & Ricotta Pastizzi Platter [Platter] — yield: 40 pieces
 - funeral-mixed-hot-nibbles-box: Mixed Box Hot Nibbles [Platter] — yield: 40 pieces
 
-ERRORS
-------
-- Unexpected active meatball-like recipes found: slow-cooked-beef-albondigas-buffet
-
