@@ -1,0 +1,60 @@
+RIVIERA RECIPE STANDARDS AUDIT
+====================================
+Built-in recipes: 88
+Service variant files: 4
+- riviera_data/service_variants.json
+- riviera_data/service_variants_canapes.json
+- riviera_data/service_variants_corporate.json
+- riviera_data/service_variants_mains_sides.json
+Service variant records: 71
+Canonical recipe groups: 1
+Recipe redirects: 2
+Strict missing variant scope: all builtins
+
+MEATBALL / POLPETTE CONTROL
+-------------------------------
+canonical        veal-meatballs — Polpette — Approx. 190–210 balls @ 60g (pre-crumb weight)
+legacy/duplicate beef-polpette-canape — Beef Polpette — 60 pieces
+legacy/duplicate slow-cooked-beef-albondigas-buffet — Slow Cooked Beef Albondigas — 20 portions
+
+SERVICE VARIANT STATUS REVIEW
+-----------------------------
+needs_confirmation: 0
+missing_status: 0
+not_recommended: 31
+- oysters-kilpatrick.buffet
+- oysters-kilpatrick.corporate_boxed
+- veal-meatballs.legacy_mini_canape
+- fish-slider.buffet
+- fish-slider.corporate_boxed
+- camembert-cigars.corporate_boxed
+- bruschetta-rare-roast-beef.buffet
+- bruschetta-rare-roast-beef.corporate_boxed
+- spanner-crab-cannoli.buffet
+- spanner-crab-cannoli.corporate_boxed
+- prawn-brioche-slider.buffet
+- prawn-brioche-slider.corporate_boxed
+- chicken-bacon-brioche-slider.buffet
+- chicken-bacon-brioche-slider.corporate_boxed
+- vintage-beef-brioche-slider.buffet
+- vintage-beef-brioche-slider.corporate_boxed
+- mini-beefburger-canape.buffet
+- mini-beefburger-canape.corporate_boxed
+- natural-oysters-champagne-mignonette.buffet
+- natural-oysters-champagne-mignonette.corporate_boxed
+- stuffed-mushroom-romesco.corporate_boxed
+- chilli-garlic-prawns-chorizo-rocket.buffet
+- chilli-garlic-prawns-chorizo-rocket.corporate_boxed
+- heirloom-tomato-bruschetta-goats-cheese.cocktail
+- heirloom-tomato-bruschetta-goats-cheese.platter
+- heirloom-tomato-bruschetta-goats-cheese.buffet
+- heirloom-tomato-bruschetta-goats-cheese.corporate_boxed
+- beef-bourguignon.corporate_boxed
+- prosciutto-chicken-lemon-caper.buffet
+- fillet-beef-tempranillo.buffet
+- fillet-beef-tempranillo.corporate_boxed
+
+ACTIVE FOOD RECIPES MISSING SERVICE VARIANTS
+-----------------------------------------------
+None
+
