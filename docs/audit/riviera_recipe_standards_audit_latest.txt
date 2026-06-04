@@ -4,6 +4,7 @@ Built-in recipes: 88
 Service variant records: 11
 Canonical recipe groups: 1
 Recipe redirects: 2
+Strict missing variant scope: service variants only
 
 MEATBALL / POLPETTE CONTROL
 -------------------------------
@@ -25,7 +26,6 @@ not_recommended: 6
 
 ACTIVE FOOD RECIPES MISSING SERVICE VARIANTS
 -----------------------------------------------
-- whipped-butter: Whipped Butter [Component] — yield: Batch
 - date-madeleines: Date Madeleines [Bakery] — yield: 1 kg date batch — approx. 40–45 madeleines depending on tray size
 - charcuterie-board-classic: Charcuterie Board [Platter] — yield: 1 board — serves 10–12 guests as a standalone or 15–20 as part of a wider spread
 - nibble-platter-40: Nibble Platter [Platter] — yield: 40 pieces
