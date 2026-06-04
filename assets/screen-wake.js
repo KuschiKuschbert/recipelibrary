@@ -187,7 +187,7 @@
         })
         .catch((err) => {
           console.warn('[Riviera canonical aliases]', err);
-          aliasesPayload = { canonical_recipes: {}, alias_to_canonical: {} };
+          aliasesPayload = { canonical_recipes: {}, alias_to_canonical: {}, recipe_id_redirects: {} };
           return aliasesPayload;
         });
     }
@@ -217,8 +217,13 @@
     return bits.filter(Boolean).join(' · ');
   }
 
-  function serviceVariantHtml(recipeId, variants) {
-    const v = variants && variants.service_variants && variants.service_variants[recipeId];
+  function resolveRecipeId(recipeId, aliases) {
+    return (aliases && aliases.recipe_id_redirects && aliases.recipe_id_redirects[recipeId]) || recipeId;
+  }
+
+  function serviceVariantHtml(recipeId, variants, aliases) {
+    const canonicalId = resolveRecipeId(recipeId, aliases);
+    const v = variants && variants.service_variants && variants.service_variants[canonicalId];
     if (!v) return '';
     const rows = [];
     Object.keys(v).forEach((key) => {
@@ -233,8 +238,10 @@
     });
     if (!rows.length && v.size_rule) rows.push(['Size Rule', v.size_rule]);
     if (!rows.length) return '';
+    const redirected = canonicalId !== recipeId ? `<div class="modal-note" style="margin-bottom:10px"><strong>Redirected to canonical recipe:</strong> ${esc(canonicalId)}</div>` : '';
     return `
       <div class="modal-section">Service Sizes</div>
+      ${redirected}
       <div class="modal-ing riviera-service-variants" style="margin-bottom:14px">
         ${rows
           .map(
@@ -248,16 +255,19 @@
   function canonicalAliasHtml(recipeId, aliases) {
     const canonical = aliases && aliases.canonical_recipes;
     if (!canonical) return '';
+    const canonicalId = resolveRecipeId(recipeId, aliases);
     const entries = Object.keys(canonical).map((k) => canonical[k]);
-    const match = entries.find((x) => x && x.canonical_id === recipeId);
+    const match = entries.find((x) => x && (x.canonical_id === canonicalId || (Array.isArray(x.duplicate_recipe_ids) && x.duplicate_recipe_ids.indexOf(recipeId) >= 0)));
     if (!match) return '';
     const aliasText = Array.isArray(match.aliases) ? match.aliases.join(' · ') : '';
     const notes = Array.isArray(match.notes) ? match.notes.join(' ') : '';
+    const duplicate = canonicalId !== recipeId || (Array.isArray(match.duplicate_recipe_ids) && match.duplicate_recipe_ids.indexOf(recipeId) >= 0);
     return `
       <div class="modal-section">Canonical Recipe</div>
       <div class="modal-note" style="margin-bottom:14px">
-        <strong>${esc(match.canonical_name || 'Canonical recipe')}</strong><br>
+        <strong>${esc(match.canonical_name || 'Canonical recipe')}</strong>${duplicate ? ' <span style="color:var(--text3)">(canonical source)</span>' : ''}<br>
         ${esc(match.service_rule || '')}<br>
+        ${duplicate && match.duplicate_rule ? '<span style="color:var(--text3)">' + esc(match.duplicate_rule) + '</span><br>' : ''}
         ${aliasText ? '<span style="color:var(--text3)">Aliases: ' + esc(aliasText) + '</span><br>' : ''}
         ${notes ? '<span style="color:var(--text3)">' + esc(notes) + '</span>' : ''}
       </div>`;
@@ -273,7 +283,7 @@
       if (!stillHeavy || document.getElementById('rivieraServiceVariantsBlock')) return;
       const r = window.currentRecipe || recipe;
       if (!r || r.id !== recipe.id) return;
-      const html = serviceVariantHtml(r.id, variants) + canonicalAliasHtml(r.id, aliases);
+      const html = serviceVariantHtml(r.id, variants, aliases) + canonicalAliasHtml(r.id, aliases);
       if (!html) return;
       const block = document.createElement('div');
       block.id = 'rivieraServiceVariantsBlock';
