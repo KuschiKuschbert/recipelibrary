@@ -1,5 +1,5 @@
 {
-  "version": "2026-06-04-v1",
+  "version": "2026-06-04-v2",
   "status": "active_canonical_alias_map",
   "purpose": "Single source of truth for Riviera recipe naming where the same kitchen recipe appears under multiple menu names.",
   "canonical_recipes": {
@@ -9,10 +9,14 @@
       "active_base_recipe_file": "riviera_data/builtins.json",
       "active_service_standard_file": "riviera_data/service_variants.json",
       "standard_piece_weight_g_pre_crumb": 60,
+      "duplicate_recipe_ids": [
+        "beef-polpette-canape"
+      ],
       "aliases": [
         "polpette",
         "meatballs",
         "veal meatballs",
+        "beef meatballs",
         "beef albondigas",
         "albondigas",
         "slow cooked veal meatballs",
@@ -21,16 +25,22 @@
       ],
       "service_rule": "Use the Polpette recipe as the single kitchen base for meatballs, albondigas and polpette unless a future menu deliberately creates a separate recipe.",
       "cocktail_size_rule": "60 g pre-crumb is the normal cocktail standard. 80 g is substantial canape only if explicitly requested.",
+      "duplicate_rule": "Do not use beef-polpette-canape as a separate active recipe. It is an older 25 g canape draft and should redirect to the canonical Polpette recipe.",
       "notes": [
         "Do not create separate active recipes for meatballs, albondigas and polpette without a deliberate menu decision.",
-        "Older DOCX wording may use veal meatballs or albondigas. Treat those as aliases, not separate production recipes."
+        "Older DOCX wording may use veal meatballs or albondigas. Treat those as aliases, not separate production recipes.",
+        "The GitHub expansion draft beef-polpette-canape is not a separate production recipe; use the canonical 60 g Polpette standard instead."
       ]
     }
+  },
+  "recipe_id_redirects": {
+    "beef-polpette-canape": "veal-meatballs"
   },
   "alias_to_canonical": {
     "polpette": "polpette",
     "meatballs": "polpette",
     "veal meatballs": "polpette",
+    "beef meatballs": "polpette",
     "beef albondigas": "polpette",
     "albondigas": "polpette",
     "slow cooked veal meatballs": "polpette",
