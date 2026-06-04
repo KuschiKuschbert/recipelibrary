@@ -3,7 +3,7 @@ RIVIERA RECIPE STANDARDS AUDIT
 Built-in recipes: 88
 Service variant records: 8
 Canonical recipe groups: 1
-Recipe redirects: 1
+Recipe redirects: 2
 
 MEATBALL / POLPETTE CONTROL
 -------------------------------
@@ -59,7 +59,6 @@ ACTIVE FOOD RECIPES MISSING SERVICE VARIANTS
 - corporate-mixed-sandwiches: Mixed Filled Sandwiches [Corporate] — yield: 40 pieces
 - corporate-roast-veg-salad-bowl: Roasted Vegetable Salad Bowl [Corporate] — yield: 20 portions
 - chilli-garlic-prawns-chorizo-rocket: Chilli Garlic Prawns & Chorizo [Canape] — yield: 40 pieces
-- slow-cooked-beef-albondigas-buffet: Slow Cooked Beef Albondigas [Buffet] — yield: 20 portions
 - heirloom-tomato-bruschetta-goats-cheese: Heirloom Tomato Bruschetta [Canape] — yield: 40 pieces
 - greek-style-pulled-beef-buffet: Greek Style Pulled Beef [Buffet] — yield: 20 portions
 - chargrilled-lemon-thyme-chicken-buffet: Chargrilled Lemon & Thyme Chicken [Buffet] — yield: 20 portions
