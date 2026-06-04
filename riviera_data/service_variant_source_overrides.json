@@ -1,0 +1,155 @@
+{
+  "version": "2026-06-04-v1",
+  "status": "active_source_alignment_override",
+  "merge_strategy": "override_existing_fields",
+  "source_of_truth": "Overrides service variant count fields where brochure/source service counts differ from older 40-piece recipe batch yields. Kitchen prep uses kitchen_production_count.",
+  "service_variants": {
+    "platter-scones-chantilly-jam": {
+      "platter": {
+        "portion": "12 scones per platter",
+        "brochure_count": 12,
+        "kitchen_production_count": 12,
+        "total_pieces": 12,
+        "jam_g_per_piece": 10,
+        "chantilly_g_per_piece": 15,
+        "jam_g_per_platter": 120,
+        "chantilly_g_per_platter": 180,
+        "source_note": "Brochure/source count is 12 pieces per scone platter. Older 40-piece recipe yield is batch logic, not platter service count.",
+        "premium_garnish_option": "Edible flowers, strawberry halves or citrus zest as optional premium finish.",
+        "service_rule": "Cream and jam separate for delivery unless platter is for immediate service.",
+        "status": "confirmed"
+      }
+    },
+    "platter-sweet-slices-cakes": {
+      "platter": {
+        "portion": "12 sweet pieces per platter",
+        "brochure_count": 12,
+        "kitchen_production_count": 12,
+        "total_pieces": 12,
+        "piece_count_per_guest_light": 1,
+        "source_note": "Brochure/source count is 12 pieces per sweet slice/cake platter. Older 40-piece recipe yield is batch logic, not platter service count.",
+        "premium_garnish_option": "Edible flowers, dried citrus, berries or gold-dusted crumb where appropriate.",
+        "service_rule": "Keep chilled where required; separate wet garnishes until service.",
+        "status": "confirmed"
+      }
+    },
+    "platter-ham-cheese-croissants": {
+      "platter": {
+        "portion": "12 croissants per platter",
+        "brochure_count": 12,
+        "kitchen_production_count": 12,
+        "total_pieces": 12,
+        "piece_count_per_guest_light": 1,
+        "source_note": "Brochure/source count is 12 croissants per platter. Older 40-piece recipe yield is batch logic, not platter service count.",
+        "premium_garnish_option": "Micro herbs or edible flowers as optional premium finish.",
+        "service_rule": "Best served fresh or lightly warmed only when service timing allows. Do not seal hot croissants for long delivery.",
+        "status": "confirmed"
+      }
+    },
+    "platter-sandwiches-standard": {
+      "platter": {
+        "portion": "24 sandwich points per platter from 6 whole sandwiches",
+        "brochure_count": 24,
+        "kitchen_production_count": 24,
+        "total_pieces": 24,
+        "whole_sandwiches": 6,
+        "piece_count_per_guest_light": 1,
+        "piece_count_per_guest_lunch": 2,
+        "source_note": "Brochure/source count is 24 sandwich points from 6 whole sandwiches. Kitchen-facing prep sheets must still define exact filling split.",
+        "standard_garnish": "neat cut faces, paper lining and restrained herbs",
+        "premium_garnish_option": "Micro herbs, edible flowers or premium fruit garnish when event style supports it.",
+        "service_rule": "Keep fillings defined by event prep sheet. Do not use chef's selection for kitchen-facing counts.",
+        "status": "confirmed"
+      }
+    },
+    "platter-wraps-premium": {
+      "platter": {
+        "portion": "12 wrap pieces per platter",
+        "brochure_count": 12,
+        "kitchen_production_count": 12,
+        "total_pieces": 12,
+        "piece_count_per_guest_light": 1,
+        "piece_count_per_guest_lunch": 2,
+        "source_note": "Brochure/source count is 12 wrap pieces per platter. Older 40-piece recipe yield is batch logic, not platter service count.",
+        "premium_garnish_option": "Micro herbs or edible flowers as optional premium finish.",
+        "service_rule": "Cut cleanly, pack tight, and keep chilled. Avoid wet fillings against wrap edges for long holding.",
+        "status": "confirmed"
+      }
+    },
+    "platter-filled-brioche-rolls": {
+      "platter": {
+        "portion": "12 filled brioche rolls per platter",
+        "brochure_count": 12,
+        "kitchen_production_count": 12,
+        "total_pieces": 12,
+        "pieces_per_guest_light": 1,
+        "source_note": "Brochure/source count is 12 mini brioche rolls per platter. Older 40-piece recipe yield is batch logic, not platter service count.",
+        "premium_garnish_option": "Micro herbs, edible flowers or premium fruit garnish as optional finish.",
+        "service_rule": "Assemble close to delivery. Keep wet sauces controlled to protect brioche.",
+        "status": "confirmed"
+      }
+    },
+    "platter-roast-beef-beetroot-relish": {
+      "platter": {
+        "portion": "24 sandwich points per platter from 6 whole sandwiches",
+        "brochure_count": 24,
+        "kitchen_production_count": 24,
+        "total_pieces": 24,
+        "whole_sandwiches": 6,
+        "piece_count_per_guest_light": 1,
+        "source_note": "Treat as sandwich platter logic unless a newer source splits this as a separate 12-piece roll/brioche item.",
+        "premium_garnish_option": "Micro herbs, beetroot powder or edible flowers as optional premium finish.",
+        "service_rule": "Keep roast beef chilled and protected. Add wet relish cleanly so bread/wrap does not bleed before service.",
+        "status": "confirmed"
+      }
+    },
+    "nibble-platter-40": {
+      "platter": {
+        "portion": "48 mixed hot nibbles per platter, 12 each of 4 items",
+        "brochure_range_min": 40,
+        "brochure_range_max": 50,
+        "kitchen_production_count": 48,
+        "total_pieces": 48,
+        "items_per_type": 12,
+        "split": "12 sausage rolls, 12 spinach pizzinis, 12 beef pies, 12 quiche Lorraine",
+        "tomato_sauce_ml_per_platter": 80,
+        "mustard_ml_per_platter": 60,
+        "source_note": "Brochure/source range is 40-50 pieces. Locked kitchen production count is 48 pieces for efficient 12-each production.",
+        "premium_garnish_option": "Flat parsley, micro herbs or edible flowers only if presentation needs lifting.",
+        "service_rule": "Reheat close to delivery/service and avoid covered long holding that softens pastry.",
+        "status": "confirmed"
+      }
+    },
+    "funeral-mixed-hot-nibbles-box": {
+      "platter": {
+        "portion": "48 mixed hot nibbles per box/platter, 12 each of 4 items",
+        "brochure_range_min": 40,
+        "brochure_range_max": 50,
+        "kitchen_production_count": 48,
+        "total_pieces": 48,
+        "items_per_type": 12,
+        "piece_count_per_guest_light": 1,
+        "tomato_sauce_ml_per_box_optional": 80,
+        "mustard_ml_per_box_optional": 60,
+        "source_note": "Wake/funeral mixed hot nibble source range is 40-50 pieces. Locked kitchen production count is 48 pieces.",
+        "premium_garnish_option": "Flat parsley, micro herbs or edible flowers only if presentation needs lifting.",
+        "service_rule": "Pack hot nibbles by type where possible. Vent briefly before closing to protect pastry texture.",
+        "status": "confirmed"
+      }
+    },
+    "funeral-spinach-ricotta-pastizzi-platter": {
+      "platter": {
+        "portion": "24 spinach and ricotta pastizzis per platter",
+        "brochure_range_min": 20,
+        "brochure_range_max": 25,
+        "kitchen_production_count": 24,
+        "total_pieces": 24,
+        "piece_count_per_guest_light": 1,
+        "source_note": "Single hot nibble source range is 20-25 pieces. Locked kitchen production count is 24 pieces.",
+        "premium_garnish_option": "Flat parsley, micro herbs or edible flowers only if presentation needs lifting.",
+        "service_rule": "Reheat close to delivery/service and avoid covered long holding that softens pastry.",
+        "status": "confirmed"
+      }
+    }
+  }
+}
