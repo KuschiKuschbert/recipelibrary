@@ -1,5 +1,5 @@
 {
-  "version": "2026-06-04-v16",
+  "version": "2026-06-04-v17",
   "status": "active_service_standard",
   "source_of_truth": "Kuschi service-size corrections. Base recipes remain riviera_data/builtins.json unless explicitly superseded.",
   "rules": {
@@ -35,7 +35,7 @@
       "cocktail": {"portion": "4 calamari strips + 1 baby octopus", "status": "confirmed"},
       "tapas": {"portion": "6 calamari strips + 2 baby octopus", "status": "confirmed"},
       "plated_entree": {"portion": "6 calamari strips + 2 baby octopus", "status": "confirmed"},
-      "buffet": {"portion": "4 calamari strips + 1 baby octopus per guest service target with 1.2 production allowance", "calamari_strips_per_guest": 4, "baby_octopus_per_guest": 1, "production_buffer_multiplier": 1.2, "production_calamari_strips_per_guest": 4.8, "production_baby_octopus_per_guest": 1.2, "note": "Piece standard confirmed. Sauce, lemon and garnish finish still need confirmation before marking the full buffet variant confirmed.", "status": "needs_confirmation"}
+      "buffet": {"portion": "4 calamari strips + 1 baby octopus per guest service target with 1.2 production allowance", "calamari_strips_per_guest": 4, "baby_octopus_per_guest": 1, "production_buffer_multiplier": 1.2, "production_calamari_strips_per_guest": 4.8, "production_baby_octopus_per_guest": 1.2, "lemon_wedges_per_guest": 1, "standard_garnish": "deep fried capers and 1 lemon wedge", "green_powder_options": ["dill powder", "chive powder", "spring onion powder"], "green_powder_note": "Use a restrained green powder finish only when it improves the look and does not make the coating look dusty.", "garnish": "Deep fried capers, 1 lemon wedge per guest and optional restrained green herb powder such as dill, chive or spring onion.", "note": "Piece standard and garnish family confirmed. Deep fried caper quantity, aioli/sauce quantity and green powder quantity still need confirmation before marking the full buffet variant confirmed.", "status": "needs_confirmation"}
     },
     "lamb-cutlet": {
       "recipe_id": "lamb-cutlet",
