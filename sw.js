@@ -1,5 +1,6 @@
-const CACHE_NAME = 'kuschi-kitchen-v7';
+const CACHE_NAME = 'kuschi-kitchen-v8';
 const CACHEABLE = /\/(recipe_detail\/detail_[A-Z](_\d+)?\.json|alpha_catalog\/[^/]+\.json|claude_index\/claude_index_\d+.*\.json|aroma_data\/[a-z_]+\.json|combined_data\/ingredients_unified_modal\.json|riviera_data\/[a-z_]+\.json|flavour_data\/(flavour_knowledge_db_v1\.1\.json|toolkit_pass_static\.json|flavour_hints_by_id\.json))$/;
+const NETWORK_FIRST = /\/assets\/screen-wake\.js$/;
 
 self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', (e) => {
@@ -13,6 +14,12 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
   const url = new URL(e.request.url);
+
+  if (NETWORK_FIRST.test(url.pathname)) {
+    e.respondWith(fetch(e.request, { cache: 'reload' }));
+    return;
+  }
+
   if (!CACHEABLE.test(url.pathname)) return;
   e.respondWith(
     caches.open(CACHE_NAME).then((cache) =>
