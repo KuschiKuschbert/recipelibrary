@@ -1,5 +1,5 @@
 {
-  "version": "2026-06-04-v11",
+  "version": "2026-06-04-v12",
   "status": "active_service_standard",
   "source_of_truth": "Kuschi service-size corrections. Base recipes remain riviera_data/builtins.json unless explicitly superseded.",
   "rules": {
@@ -67,7 +67,7 @@
       "recipe_id": "fish-slider",
       "cocktail": {"portion": "1 slider per guest", "status": "confirmed"},
       "tapas": {"portion": "3 sliders per serve", "status": "confirmed"},
-      "corporate_boxed": {"portion": "needs confirmation", "status": "needs_confirmation"}
+      "corporate_boxed": {"portion": "not recommended for corporate boxes unless specifically ordered", "reason": "Fish sliders are better held and served as cocktail or tapas items. Use corporate boxed only when the client specifically orders sliders and service timing supports quality.", "status": "not_recommended"}
     },
     "cannoli": {
       "recipe_id_candidates": ["cannoli", "housemade-cannoli-trio", "spanner-crab-cannoli"],
