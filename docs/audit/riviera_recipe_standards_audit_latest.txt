@@ -1,7 +1,7 @@
 RIVIERA RECIPE STANDARDS AUDIT
 ====================================
 Built-in recipes: 88
-Service variant records: 11
+Service variant records: 29
 Canonical recipe groups: 1
 Recipe redirects: 2
 Strict missing variant scope: service variants only
@@ -26,9 +26,6 @@ not_recommended: 6
 
 ACTIVE FOOD RECIPES MISSING SERVICE VARIANTS
 -----------------------------------------------
-- date-madeleines: Date Madeleines [Bakery] — yield: 1 kg date batch — approx. 40–45 madeleines depending on tray size
-- charcuterie-board-classic: Charcuterie Board [Platter] — yield: 1 board — serves 10–12 guests as a standalone or 15–20 as part of a wider spread
-- nibble-platter-40: Nibble Platter [Platter] — yield: 40 pieces
 - bruschetta-rare-roast-beef: Bruschetta of Rare Roast Beef [Canape] — yield: 40 pieces
 - spanner-crab-cannoli: Spanner Crab Cannoli [Canape] — yield: 40 small cannoli
 - prawn-brioche-slider: Prawn Brioche Slider [Canape] — yield: 40 sliders
@@ -46,16 +43,6 @@ ACTIVE FOOD RECIPES MISSING SERVICE VARIANTS
 - prosciutto-chicken-lemon-caper: Prosciutto Wrapped Chicken Breast [Main] — yield: 20 portions
 - fillet-beef-tempranillo: Fillet of Beef with Tempranillo Reduction [Main] — yield: 20 portions
 - stuffed-mushroom-romesco: Stuffed Mushroom with Romesco & Lemon Aioli [Canape] — yield: 40 pieces
-- roving-cannoli-tiramisu: Roving Cannoli & Tiramisu Service [Dessert] — yield: Service for 40
-- platter-scones-chantilly-jam: House Baked Scones Platter [Platter] — yield: 40 pieces
-- platter-sweet-slices-cakes: Sweet Slice & Cake Platter [Platter] — yield: 40 pieces
-- grazing-box-standard: Grazing Box [Platter] — yield: 1 box (serves 6–8)
-- platter-ham-cheese-croissants: Ham & Cheese Croissants Platter [Platter] — yield: 40 pieces
-- platter-sandwiches-standard: Sandwich Platter [Platter] — yield: 40 pieces
-- platter-wraps-premium: Premium Filled Wraps Platter [Platter] — yield: 40 pieces
-- platter-filled-brioche-rolls: Filled Brioche Rolls Platter [Platter] — yield: 40 pieces
-- platter-roast-beef-beetroot-relish: Roast Beef & Beetroot Balsamic Platter [Platter] — yield: 40 pieces
-- platter-dietary-grazing: Dietary Grazing Platter [Platter] — yield: Serves 6–8
 - corporate-savoury-croissants: Savoury Filled Croissants [Corporate] — yield: 40 pieces
 - corporate-sweet-croissants: Sweet Filled Croissants [Corporate] — yield: 40 pieces
 - corporate-bircher-muesli-bowls: Mixed Bircher Muesli Bowls [Corporate] — yield: 20 portions
@@ -71,9 +58,6 @@ ACTIVE FOOD RECIPES MISSING SERVICE VARIANTS
 - heirloom-tomato-bruschetta-goats-cheese: Heirloom Tomato Bruschetta [Canape] — yield: 40 pieces
 - greek-style-pulled-beef-buffet: Greek Style Pulled Beef [Buffet] — yield: 20 portions
 - chargrilled-lemon-thyme-chicken-buffet: Chargrilled Lemon & Thyme Chicken [Buffet] — yield: 20 portions
-- duo-cannoli-pistachio-white-chocolate: Duo of Cannoli [Dessert] — yield: 40 pieces (20 of each)
-- strawberry-ricotta-cheesecake-plated: Strawberry Ricotta Cheesecake [Dessert] — yield: 20 portions
-- riviera-tiramisu-biscotti-hazelnut: Riviera Tiramisu [Dessert] — yield: 20 portions
 - kids-snack-pack: Kids Snack Pack [Corporate] — yield: 10 packs
 - kids-spaghetti-bolognese: Kids Spaghetti Bolognese [Corporate] — yield: 10 portions
 - corporate-bacon-egg-muffins: Bacon & Egg Muffins [Corporate] — yield: 20 portions
@@ -84,6 +68,11 @@ ACTIVE FOOD RECIPES MISSING SERVICE VARIANTS
 - corporate-pumpkin-feta-pepita-salad: Pumpkin, Feta & Pepita Salad [Corporate] — yield: 20 portions
 - corporate-traditional-garden-salad: Traditional Garden Salad [Corporate] — yield: 20 portions
 - corporate-creamy-potato-bacon-herb-salad: Creamy Potato, Bacon & Herb Salad [Corporate] — yield: 20 portions
-- funeral-spinach-ricotta-pastizzi-platter: Spinach & Ricotta Pastizzi Platter [Platter] — yield: 40 pieces
-- funeral-mixed-hot-nibbles-box: Mixed Box Hot Nibbles [Platter] — yield: 40 pieces
+
+ERRORS
+------
+- service_variants.date-madeleines.dessert_buffet: special-purpose variant requires note/reason/service_rule
+- service_variants.duo-cannoli-pistachio-white-chocolate.dessert_buffet: special-purpose variant requires note/reason/service_rule
+- service_variants.strawberry-ricotta-cheesecake-plated.plated_dessert: special-purpose variant requires note/reason/service_rule
+- service_variants.riviera-tiramisu-biscotti-hazelnut.plated_dessert: special-purpose variant requires note/reason/service_rule
 
