@@ -1,0 +1,73 @@
+{
+  "version": "2026-06-04-v1",
+  "status": "active_service_standard",
+  "source_of_truth": "Kuschi service-size corrections. Base recipes remain riviera_data/builtins.json unless explicitly superseded.",
+  "rules": {
+    "base_recipe_source": "Use GitHub website recipes as current active recipe base.",
+    "older_docx_sources": "Reference only unless explicitly restored.",
+    "portion_locking": "Do not invent missing service sizes. Ask Kuschi before locking tapas, canape, plated, buffet or corporate portions.",
+    "meatball_naming": {
+      "canonical_name": "Polpette",
+      "aliases": ["meatballs", "veal meatballs", "beef albondigas", "albondigas", "polpette"],
+      "standard_piece_weight_g_pre_crumb": 60,
+      "note": "Use 60 g pre-crumb weight as active standard. 80 g is substantial canape only if explicitly requested."
+    }
+  },
+  "service_variants": {
+    "arancini": {
+      "recipe_id": "arancini",
+      "base_prep": {"piece_weight_g_pre_crumb": 40},
+      "cocktail": {"portion": "1 piece", "piece_weight_g_pre_crumb": 40},
+      "tapas": {"portion": "3 pieces", "piece_weight_g_pre_crumb": 40},
+      "plated_dinner": {"portion": "1 piece", "piece_weight_g_pre_crumb": 50, "note": "Make separate 50 g plated batch before crumbing."}
+    },
+    "calamari": {
+      "recipe_id": "calamari",
+      "cocktail": {"portion": "4 calamari strips + 1 baby octopus"},
+      "tapas": {"portion": "6 calamari strips + 2 baby octopus"},
+      "plated_dinner": {"portion": "6 calamari strips + 2 baby octopus"}
+    },
+    "lamb-cutlet": {
+      "recipe_id": "lamb-cutlet",
+      "tapas": {"portion": "3 cutlets"},
+      "cocktail": {"portion": "1 cutlet"},
+      "plated_dinner_entree": {"portion": "2 cutlets"}
+    },
+    "chicken-skewer": {
+      "recipe_id": "chicken-skewer",
+      "tapas": {"portion": "3 skewers"},
+      "cocktail": {"portion": "1 skewer"},
+      "plated_dinner_entree": {"portion": "2 skewers"}
+    },
+    "chorizo-potatoes": {
+      "recipe_id": "chorizo-potatoes",
+      "tapas": {"potato_g": 180, "chorizo_g": 60, "total_g": 240},
+      "cocktail": {"potato_g": 144, "chorizo_g": 48, "total_g": 192, "note": "80 percent of tapas serve."},
+      "plated_dinner_entree": {"total_g": 240},
+      "buffet": {"total_g_finished_serve": 160}
+    },
+    "veal-meatballs": {
+      "recipe_id": "veal-meatballs",
+      "canonical_name": "Polpette",
+      "aliases": ["meatballs", "veal meatballs", "beef albondigas", "albondigas", "polpette"],
+      "base_prep": {"piece_weight_g_pre_crumb": 60},
+      "tapas": {"portion": "3 meatballs with sauce", "piece_weight_g_pre_crumb": 60},
+      "cocktail": {"portion": "1 meatball with sauce", "piece_weight_g_pre_crumb": 60, "recommendation": "Use 60 g for normal canape service. Use 80 g only as substantial canape."},
+      "plated": {"portion": "3 meatballs with sauce", "piece_weight_g_pre_crumb": 60},
+      "plated_dinner_entree": {"portion": "2 meatballs with sauce", "piece_weight_g_pre_crumb": 60}
+    },
+    "fish-slider": {
+      "recipe_id": "fish-slider",
+      "cocktail": {"portion": "1 slider per guest"},
+      "tapas": {"portion": "3 sliders per serve"},
+      "corporate_offsite": {"portion": "needs confirmation"}
+    },
+    "cannoli": {
+      "recipe_id_candidates": ["cannoli", "housemade-cannoli-trio", "spanner-crab-cannoli"],
+      "size_rule": "Cannoli size stays the same across service styles.",
+      "tapas": {"portion": "trio of 3 cannoli"},
+      "roving_dessert": {"portion": "1 cannoli per guest"},
+      "plated_dessert": {"portion": "trio of 3 cannoli"}
+    }
+  }
+}
