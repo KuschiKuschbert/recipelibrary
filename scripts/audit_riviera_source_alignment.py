@@ -21,6 +21,7 @@ RIVIERA_DATA = ROOT / "riviera_data"
 BASE_VARIANTS = RIVIERA_DATA / "service_variants.json"
 ADDON_GLOB = "service_variants_*.json"
 SOURCE_ALIGNMENT = RIVIERA_DATA / "service_variant_source_alignment.json"
+SOURCE_OVERRIDES = RIVIERA_DATA / "service_variant_source_overrides.json"
 
 META_KEYS = {"recipe_id", "recipe_id_candidates", "canonical_name", "aliases", "base_prep", "size_rule"}
 
@@ -34,13 +35,21 @@ def load_json(path: Path) -> Any:
         return json.load(f)
 
 
+def deep_merge_override(existing: dict[str, Any], incoming: dict[str, Any]) -> None:
+    for key, value in incoming.items():
+        if isinstance(value, dict) and isinstance(existing.get(key), dict):
+            deep_merge_override(existing[key], value)
+        else:
+            existing[key] = value
+
+
 def merge_service_variants() -> tuple[dict[str, Any], list[str], list[Path]]:
     errors: list[str] = []
     merged: dict[str, Any] = {}
     paths = [BASE_VARIANTS, *sorted(RIVIERA_DATA.glob(ADDON_GLOB))]
 
     for path in paths:
-        if path == SOURCE_ALIGNMENT:
+        if path in {SOURCE_ALIGNMENT, SOURCE_OVERRIDES}:
             continue
         try:
             data = load_json(path)
@@ -61,6 +70,23 @@ def merge_service_variants() -> tuple[dict[str, Any], list[str], list[Path]]:
                     errors.append(f"{rel(path)}: conflicting definition for {recipe_id}.{key}")
                     continue
                 existing[key] = value
+
+    if SOURCE_OVERRIDES.is_file():
+        paths.append(SOURCE_OVERRIDES)
+        try:
+            override_data = load_json(SOURCE_OVERRIDES)
+            override_variants = override_data.get("service_variants", {}) if isinstance(override_data, dict) else {}
+            if not isinstance(override_variants, dict):
+                errors.append(f"{rel(SOURCE_OVERRIDES)}: service_variants must be an object")
+            else:
+                for recipe_id, group in override_variants.items():
+                    if not isinstance(group, dict):
+                        errors.append(f"{rel(SOURCE_OVERRIDES)}: service_variants.{recipe_id} must be an object")
+                        continue
+                    existing = merged.setdefault(recipe_id, {})
+                    deep_merge_override(existing, group)
+        except Exception as exc:  # noqa: BLE001
+            errors.append(f"{rel(SOURCE_OVERRIDES)}: failed to load JSON: {exc}")
 
     return merged, errors, paths
 
@@ -140,9 +166,10 @@ def main() -> int:
     print("RIVIERA SOURCE ALIGNMENT AUDIT")
     print("=" * 35)
     print(f"Alignment file: {rel(SOURCE_ALIGNMENT)}")
-    print(f"Service variant files: {len([p for p in variant_paths if p != SOURCE_ALIGNMENT])}")
+    print(f"Override file: {rel(SOURCE_OVERRIDES) if SOURCE_OVERRIDES.is_file() else 'None'}")
+    print(f"Service variant files: {len([p for p in variant_paths if p not in {SOURCE_ALIGNMENT, SOURCE_OVERRIDES}])}")
     for path in variant_paths:
-        if path != SOURCE_ALIGNMENT:
+        if path not in {SOURCE_ALIGNMENT, SOURCE_OVERRIDES}:
             print(f"- {rel(path)}")
     print(f"Alignment checks: {len(checks)}")
     print(f"Checked records: {checked_count}")
