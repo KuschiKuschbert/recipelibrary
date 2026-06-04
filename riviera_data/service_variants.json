@@ -1,5 +1,5 @@
 {
-  "version": "2026-06-04-v15",
+  "version": "2026-06-04-v16",
   "status": "active_service_standard",
   "source_of_truth": "Kuschi service-size corrections. Base recipes remain riviera_data/builtins.json unless explicitly superseded.",
   "rules": {
@@ -34,7 +34,8 @@
       "recipe_id": "calamari",
       "cocktail": {"portion": "4 calamari strips + 1 baby octopus", "status": "confirmed"},
       "tapas": {"portion": "6 calamari strips + 2 baby octopus", "status": "confirmed"},
-      "plated_entree": {"portion": "6 calamari strips + 2 baby octopus", "status": "confirmed"}
+      "plated_entree": {"portion": "6 calamari strips + 2 baby octopus", "status": "confirmed"},
+      "buffet": {"portion": "4 calamari strips + 1 baby octopus per guest service target with 1.2 production allowance", "calamari_strips_per_guest": 4, "baby_octopus_per_guest": 1, "production_buffer_multiplier": 1.2, "production_calamari_strips_per_guest": 4.8, "production_baby_octopus_per_guest": 1.2, "note": "Piece standard confirmed. Sauce, lemon and garnish finish still need confirmation before marking the full buffet variant confirmed.", "status": "needs_confirmation"}
     },
     "lamb-cutlet": {
       "recipe_id": "lamb-cutlet",
