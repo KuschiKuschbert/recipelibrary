@@ -1,0 +1,33 @@
+RIVIERA SERVICE VARIANT DISPLAY SAMPLE AUDIT
+================================================
+Service variant files merged: 5
+- riviera_data/service_variants.json
+- riviera_data/service_variants_canapes.json
+- riviera_data/service_variants_corporate.json
+- riviera_data/service_variants_mains_sides.json
+- riviera_data/service_variant_source_overrides.json
+Sample records checked: 6
+
+SAMPLE DISPLAY LINES
+--------------------
+Scone platter override display
+platter-scones-chantilly-jam.platter: 12 scones per platter · Brochure count: 12 · Kitchen production: 12 · Total pieces: 12 · Premium Garnish Option: Edible flowers, strawberry halves or citrus zest as optional premium finish. · Service Rule: Cream and jam separate for delivery unless platter is for immediate service. · Source note: Brochure/source count is 12 pieces per scone platter. Older 40-piece recipe yield is batch logic, not platter service count.
+
+Sandwich platter override display
+platter-sandwiches-standard.platter: 24 sandwich points per platter from 6 whole sandwiches · Brochure count: 24 · Kitchen production: 24 · Total pieces: 24 · Whole sandwiches: 6 · Premium Garnish Option: Micro herbs, edible flowers or premium fruit garnish when event style supports it. · Standard Garnish: neat cut faces, paper lining and restrained herbs · Service Rule: Keep fillings defined by event prep sheet. Do not use chef's selection for kitchen-facing counts. · Source note: Brochure/source count is 24 sandwich points from 6 whole sandwiches. Kitchen-facing prep sheets must still define exact filling split.
+
+Mixed hot nibble override display
+nibble-platter-40.platter: Brochure range: 40-50 · 48 mixed hot nibbles per platter, 12 each of 4 items · Kitchen production: 48 · Total pieces: 48 · Items per type: 12 · Premium Garnish Option: Flat parsley, micro herbs or edible flowers only if presentation needs lifting. · Service Rule: Reheat close to delivery/service and avoid covered long holding that softens pastry. · Source note: Brochure/source range is 40-50 pieces. Locked kitchen production count is 48 pieces for efficient 12-each production.
+
+Corporate croissant display
+corporate-savoury-croissants.corporate_boxed: 1 savoury croissant per guest or box · Minimum order pieces: 12 · Premium Garnish Option: Micro herbs or edible flowers as optional premium finish where packing allows. · Service Rule: Box by the dozen for corporate morning tea or individually only when requested. Fill split must be set on the event prep sheet.
+
+Base calamari buffet display
+calamari.buffet: 4 calamari strips + 1 baby octopus per guest service target with 1.2 production allowance · 1.2x production buffer · 30ml aioli per guest · Premium Garnish Option: Micro herbs, 1 punnet per 80 guests as optional premium finish. · Standard Garnish: deep fried capers and 1 lemon wedge
+
+Main course display
+beef-bourguignon.buffet: 180 g bourguignon per guest · 1.15x production buffer · Premium Garnish Option: Micro parsley, picked thyme or crisp lardon crumb. · Service Rule: Each scoop should include beef, sauce, mushroom, lardon and onion.
+
+ERRORS
+------
+None
