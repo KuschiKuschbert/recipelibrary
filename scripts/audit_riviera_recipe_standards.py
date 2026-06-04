@@ -9,11 +9,13 @@ Riviera recipe data is aligned with the working SOP model:
 - canonical aliases / redirects point to real recipes
 - meatball / polpette / albondigas duplicates are controlled
 - active recipes missing service variants are listed for Kuschi confirmation
+- service variant statuses are classified for normal vs strict audit behaviour
 
 Run from repo root:
     python3 scripts/audit_riviera_recipe_standards.py
 
-Use --strict to fail when active food recipes are missing service variants:
+Use --strict to fail when active food recipes are missing service variants or
+service variants are still marked needs_confirmation / missing status:
     python3 scripts/audit_riviera_recipe_standards.py --strict
 """
 from __future__ import annotations
@@ -70,6 +72,28 @@ MEATBALL_TERMS = (
 )
 
 CANONICAL_POLPETTE_ID = "veal-meatballs"
+
+SERVICE_VARIANT_META_KEYS = {
+    "recipe_id",
+    "recipe_id_candidates",
+    "canonical_name",
+    "aliases",
+    "base_prep",
+    "size_rule",
+}
+
+SERVICE_VARIANT_STATUSES = {
+    "confirmed",
+    "needs_confirmation",
+    "not_recommended",
+}
+
+NOT_RECOMMENDED_REASON_KEYS = {
+    "reason",
+    "note",
+    "notes",
+    "recommendation",
+}
 
 
 def load_json(path: Path) -> Any:
@@ -135,9 +159,67 @@ def allowed_polpette_ids(canonical_recipes: dict[str, Any]) -> set[str]:
     return {canonical_id, *[str(x) for x in duplicate_ids]}
 
 
+def has_not_recommended_reason(record: dict[str, Any]) -> bool:
+    for key in NOT_RECOMMENDED_REASON_KEYS:
+        value = record.get(key)
+        if isinstance(value, str) and value.strip():
+            return True
+        if isinstance(value, list) and any(str(x).strip() for x in value):
+            return True
+    return False
+
+
+def iter_service_variant_records(service_variants: dict[str, Any]) -> list[tuple[str, str, dict[str, Any]]]:
+    records: list[tuple[str, str, dict[str, Any]]] = []
+    for recipe_id, variant_group in service_variants.items():
+        if not isinstance(variant_group, dict):
+            continue
+        for variant_key, variant_record in variant_group.items():
+            if variant_key in SERVICE_VARIANT_META_KEYS:
+                continue
+            if isinstance(variant_record, dict):
+                records.append((str(recipe_id), str(variant_key), variant_record))
+    return records
+
+
+def service_variant_status_review(
+    service_variants: dict[str, Any],
+    errors: list[str],
+) -> tuple[list[tuple[str, str]], list[tuple[str, str]], list[tuple[str, str]]]:
+    needs_confirmation: list[tuple[str, str]] = []
+    missing_status: list[tuple[str, str]] = []
+    not_recommended: list[tuple[str, str]] = []
+
+    for recipe_id, variant_key, variant_record in iter_service_variant_records(service_variants):
+        raw_status = variant_record.get("status")
+        status = str(raw_status).strip() if raw_status is not None else ""
+
+        if not status:
+            missing_status.append((recipe_id, variant_key))
+            continue
+
+        if status not in SERVICE_VARIANT_STATUSES:
+            errors.append(
+                f"service_variants.{recipe_id}.{variant_key}: invalid status {status!r}; "
+                f"expected one of {sorted(SERVICE_VARIANT_STATUSES)}"
+            )
+            continue
+
+        if status == "needs_confirmation":
+            needs_confirmation.append((recipe_id, variant_key))
+        elif status == "not_recommended":
+            not_recommended.append((recipe_id, variant_key))
+            if not has_not_recommended_reason(variant_record):
+                errors.append(
+                    f"service_variants.{recipe_id}.{variant_key}: not_recommended requires a clear reason/note"
+                )
+
+    return needs_confirmation, missing_status, not_recommended
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--strict", action="store_true", help="fail if active food recipes are missing service variants")
+    parser.add_argument("--strict", action="store_true", help="fail if active food recipes are missing service variants or unresolved statuses")
     args = parser.parse_args()
 
     recipes_raw = load_json(BUILTINS_PATH)
@@ -181,9 +263,11 @@ def main() -> int:
             if dup in recipe_ids and recipe_redirects.get(dup) != canonical_id:
                 errors.append(f"Duplicate recipe id {dup!r} exists in builtins but does not redirect to {canonical_id!r}")
 
-    for rid in service_variants.keys():
+    for rid, value in service_variants.items():
         if rid not in recipe_ids and rid not in recipe_redirects and rid != "cannoli":
             errors.append(f"service_variants key {rid!r} is not a built-in recipe id or redirect")
+        if not isinstance(value, dict):
+            errors.append(f"service_variants.{rid}: must be an object")
 
     allowed_ids = allowed_polpette_ids(canonical_recipes)
     polpette_like = [r for r in recipes if any(term in text_blob(r) for term in MEATBALL_TERMS)]
@@ -204,6 +288,8 @@ def main() -> int:
             continue
         missing_variants.append((rid, r.get("name", ""), r.get("type", ""), r.get("yield", "")))
 
+    needs_confirmation, missing_status, not_recommended = service_variant_status_review(service_variants, errors)
+
     print("RIVIERA RECIPE STANDARDS AUDIT")
     print("=" * 36)
     print(f"Built-in recipes: {len(recipes)}")
@@ -222,6 +308,19 @@ def main() -> int:
         print("No meatball-like recipes found in active builtins.")
     print()
 
+    print("SERVICE VARIANT STATUS REVIEW")
+    print("-" * 29)
+    print(f"needs_confirmation: {len(needs_confirmation)}")
+    for rid, variant in needs_confirmation:
+        print(f"- {rid}.{variant}")
+    print(f"missing_status: {len(missing_status)}")
+    for rid, variant in missing_status:
+        print(f"- {rid}.{variant}")
+    print(f"not_recommended: {len(not_recommended)}")
+    for rid, variant in not_recommended:
+        print(f"- {rid}.{variant}")
+    print()
+
     print("ACTIVE FOOD RECIPES MISSING SERVICE VARIANTS")
     print("-" * 47)
     if missing_variants:
@@ -238,7 +337,9 @@ def main() -> int:
             print(f"- {e}")
         print()
 
-    if errors or (args.strict and missing_variants):
+    strict_blockers = bool(missing_variants or needs_confirmation or missing_status)
+
+    if errors or (args.strict and strict_blockers):
         return 1
     return 0
 
