@@ -1,7 +1,7 @@
 RIVIERA RECIPE STANDARDS AUDIT
 ====================================
 Built-in recipes: 88
-Service variant records: 8
+Service variant records: 11
 Canonical recipe groups: 1
 Recipe redirects: 2
 
@@ -15,15 +15,16 @@ SERVICE VARIANT STATUS REVIEW
 -----------------------------
 needs_confirmation: 0
 missing_status: 0
-not_recommended: 2
+not_recommended: 6
+- oysters-kilpatrick.buffet
+- oysters-kilpatrick.corporate_boxed
 - veal-meatballs.legacy_mini_canape
+- fish-slider.buffet
 - fish-slider.corporate_boxed
+- camembert-cigars.corporate_boxed
 
 ACTIVE FOOD RECIPES MISSING SERVICE VARIANTS
 -----------------------------------------------
-- oysters-kilpatrick: Kilpatrick Oysters [Canape] — yield: Scalable
-- beef-kofta: Beef Kofta [Canape] — yield: 50 koftas
-- camembert-cigars: Camembert, Pecan & Cranberry Cigars [Canape] — yield: ~50 cigars
 - whipped-butter: Whipped Butter [Component] — yield: Batch
 - date-madeleines: Date Madeleines [Bakery] — yield: 1 kg date batch — approx. 40–45 madeleines depending on tray size
 - charcuterie-board-classic: Charcuterie Board [Platter] — yield: 1 board — serves 10–12 guests as a standalone or 15–20 as part of a wider spread
