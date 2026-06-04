@@ -1,5 +1,5 @@
 {
-  "version": "2026-06-04-v5",
+  "version": "2026-06-04-v6",
   "status": "active_service_standard",
   "source_of_truth": "Kuschi service-size corrections. Base recipes remain riviera_data/builtins.json unless explicitly superseded.",
   "rules": {
@@ -8,7 +8,8 @@
     "portion_locking": "Do not invent missing service sizes. Ask Kuschi before locking tapas, canape, plated, buffet or corporate portions.",
     "status_locking": "confirmed is locked; needs_confirmation is allowed in normal audit but blocks strict audit; not_recommended is allowed only with a clear reason or note.",
     "master_variant_keys": ["cocktail", "tapas", "plated_entree", "plated_main", "buffet", "platter", "corporate_boxed", "kids", "dietary_single"],
-    "naming_locking": "Use master_variant_keys for service variants. Older keys such as plated_dinner, plated_dinner_entree, plated and corporate_offsite should not be used in new records.",
+    "special_variant_keys": ["legacy_mini_canape", "roving_dessert", "plated_dessert"],
+    "naming_locking": "Use master_variant_keys for normal service variants. Special-purpose keys are allowed only when listed in special_variant_keys and documented with status, note/reason and clear service use.",
     "meatball_naming": {
       "canonical_name": "Polpette",
       "aliases": ["meatballs", "veal meatballs", "beef albondigas", "albondigas", "polpette", "beef polpette", "slow cooked beef albondigas", "slow cooked beef albondigas buffet"],
@@ -71,8 +72,8 @@
       "recipe_id_candidates": ["cannoli", "housemade-cannoli-trio", "spanner-crab-cannoli"],
       "size_rule": "Cannoli size stays the same across service styles.",
       "tapas": {"portion": "trio of 3 cannoli", "status": "confirmed"},
-      "roving_dessert": {"portion": "1 cannoli per guest", "status": "confirmed"},
-      "plated_dessert": {"portion": "trio of 3 cannoli", "status": "confirmed"}
+      "roving_dessert": {"portion": "1 cannoli per guest", "note": "Special roving dessert service; used when cannoli are passed rather than plated or sold as tapas.", "status": "confirmed"},
+      "plated_dessert": {"portion": "trio of 3 cannoli", "note": "Special dessert service key for formal plated dessert use; not part of savoury plated entree/main service.", "status": "confirmed"}
     }
   }
 }
