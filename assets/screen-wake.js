@@ -132,6 +132,7 @@
   let aliasesPayload = null;
   let variantPromise = null;
   let aliasPromise = null;
+  let activeRecipeId = null;
 
   function esc(s) {
     return String(s == null ? '' : s)
@@ -273,17 +274,15 @@
       </div>`;
   }
 
-  function injectForCurrentRecipe() {
+  function injectForRecipeId(recipeId) {
     const heavy = document.getElementById('rivieraModalHeavy');
     if (!heavy || document.getElementById('rivieraServiceVariantsBlock')) return;
-    const recipe = window.currentRecipe || null;
-    if (!recipe || !recipe.id) return;
+    if (!recipeId) return;
     Promise.all([loadVariants(), loadAliases()]).then(([variants, aliases]) => {
       const stillHeavy = document.getElementById('rivieraModalHeavy');
       if (!stillHeavy || document.getElementById('rivieraServiceVariantsBlock')) return;
-      const r = window.currentRecipe || recipe;
-      if (!r || r.id !== recipe.id) return;
-      const html = serviceVariantHtml(r.id, variants, aliases) + canonicalAliasHtml(r.id, aliases);
+      if (activeRecipeId !== recipeId) return;
+      const html = serviceVariantHtml(recipeId, variants, aliases) + canonicalAliasHtml(recipeId, aliases);
       if (!html) return;
       const block = document.createElement('div');
       block.id = 'rivieraServiceVariantsBlock';
@@ -297,14 +296,19 @@
     });
   }
 
+  function scheduleInject(recipeId) {
+    setTimeout(() => injectForRecipeId(recipeId), 80);
+    setTimeout(() => injectForRecipeId(recipeId), 350);
+    setTimeout(() => injectForRecipeId(recipeId), 900);
+  }
+
   function patchOpenRecipe() {
     if (typeof window.openRecipe !== 'function' || window.openRecipe.__rivieraServiceVariantsPatched) return;
     const original = window.openRecipe;
     window.openRecipe = function patchedOpenRecipe(id) {
+      activeRecipeId = id;
       const result = original.apply(this, arguments);
-      setTimeout(injectForCurrentRecipe, 80);
-      setTimeout(injectForCurrentRecipe, 350);
-      setTimeout(injectForCurrentRecipe, 900);
+      scheduleInject(id);
       return result;
     };
     window.openRecipe.__rivieraServiceVariantsPatched = true;
