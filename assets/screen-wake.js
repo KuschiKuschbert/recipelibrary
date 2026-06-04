@@ -126,13 +126,20 @@
  * Keeps serving sizes out of the base recipe and shows the separate service standard in the recipe modal.
  */
 (function () {
-  const VARIANTS_URL = 'riviera_data/service_variants.json';
+  const VARIANT_URLS = [
+    'riviera_data/service_variants.json',
+    'riviera_data/service_variants_canapes.json',
+    'riviera_data/service_variants_corporate.json',
+    'riviera_data/service_variants_mains_sides.json',
+  ];
   const ALIASES_URL = 'riviera_data/canonical_recipe_aliases.json';
   let variantsPayload = null;
   let aliasesPayload = null;
   let variantPromise = null;
   let aliasPromise = null;
   let activeRecipeId = null;
+
+  const META_KEYS = new Set(['recipe_id', 'canonical_name', 'aliases', 'recipe_id_candidates', 'size_rule']);
 
   function esc(s) {
     return String(s == null ? '' : s)
@@ -161,19 +168,48 @@
     });
   }
 
+  function mergeVariantPayloads(payloads) {
+    const merged = { service_variants: {}, rules: {} };
+    payloads.forEach((payload, index) => {
+      if (!payload || typeof payload !== 'object') return;
+      if (index === 0 && payload.rules && typeof payload.rules === 'object') {
+        merged.rules = payload.rules;
+      }
+      const serviceVariants = payload.service_variants || {};
+      Object.keys(serviceVariants).forEach((recipeId) => {
+        const incoming = serviceVariants[recipeId];
+        if (!incoming || typeof incoming !== 'object') return;
+        if (!merged.service_variants[recipeId]) {
+          merged.service_variants[recipeId] = incoming;
+          return;
+        }
+        const existing = merged.service_variants[recipeId];
+        Object.keys(incoming).forEach((key) => {
+          if (existing[key] && JSON.stringify(existing[key]) !== JSON.stringify(incoming[key])) {
+            console.warn('[Riviera service variants] duplicate/conflicting variant ignored:', recipeId + '.' + key);
+            return;
+          }
+          existing[key] = incoming[key];
+        });
+      });
+    });
+    return merged;
+  }
+
   function loadVariants() {
     if (variantsPayload) return Promise.resolve(variantsPayload);
     if (!variantPromise) {
-      variantPromise = fetchJson(VARIANTS_URL)
-        .then((data) => {
-          variantsPayload = data || {};
-          return variantsPayload;
-        })
-        .catch((err) => {
-          console.warn('[Riviera service variants]', err);
-          variantsPayload = { service_variants: {} };
-          return variantsPayload;
-        });
+      variantPromise = Promise.all(
+        VARIANT_URLS.map((path) =>
+          fetchJson(path).catch((err) => {
+            console.warn('[Riviera service variants]', err);
+            return { service_variants: {} };
+          })
+        )
+      ).then((payloads) => {
+        variantsPayload = mergeVariantPayloads(payloads);
+        return variantsPayload;
+      });
     }
     return variantPromise;
   }
@@ -201,20 +237,71 @@
       .replace(/\b\w/g, (m) => m.toUpperCase());
   }
 
+  function normaliseScalar(key, value) {
+    if (value == null || value === '' || value === false) return '';
+    if (Array.isArray(value)) return value.join(', ');
+    if (typeof value === 'boolean') return value ? prettyKey(key) : '';
+    return String(value);
+  }
+
   function variantLine(v) {
     if (!v || typeof v !== 'object') return '';
     const bits = [];
-    if (v.portion) bits.push(v.portion);
-    if (v.piece_weight_g_pre_crumb) bits.push(v.piece_weight_g_pre_crumb + 'g pre-crumb');
+    const priority = [
+      'portion',
+      'piece_weight_g_pre_crumb',
+      'piece_weight_g_raw',
+      'production_buffer_multiplier',
+      'production_piece_count_per_guest',
+      'production_pieces_per_guest',
+      'production_sliders_per_guest',
+      'production_portions_per_guest',
+      'production_finished_salad_g_per_guest',
+      'production_finished_gratin_g_per_guest',
+      'total_g_finished_serve',
+      'sauce_ml_per_guest',
+      'aioli_ml_per_guest',
+      'premium_garnish_option',
+      'standard_garnish',
+      'service_rule',
+      'hold',
+      'recommendation',
+      'reason',
+      'note',
+    ];
+    const used = new Set();
+
+    priority.forEach((key) => {
+      if (!(key in v)) return;
+      used.add(key);
+      const value = v[key];
+      if (key === 'piece_weight_g_pre_crumb') bits.push(value + 'g pre-crumb');
+      else if (key === 'piece_weight_g_raw') bits.push(value + 'g raw');
+      else if (key === 'production_buffer_multiplier') bits.push(value + 'x production buffer');
+      else if (key === 'total_g_finished_serve') bits.push(value + 'g finished serve');
+      else if (key === 'sauce_ml_per_guest') bits.push(value + 'ml sauce per guest');
+      else if (key === 'aioli_ml_per_guest') bits.push(value + 'ml aioli per guest');
+      else {
+        const label = ['portion', 'recommendation', 'reason', 'note', 'hold'].includes(key) ? '' : prettyKey(key) + ': ';
+        const text = normaliseScalar(key, value);
+        if (text) bits.push(label + text);
+      }
+    });
+
     if (v.potato_g != null || v.chorizo_g != null) {
       const p = v.potato_g != null ? v.potato_g + 'g potato' : '';
       const c = v.chorizo_g != null ? v.chorizo_g + 'g chorizo' : '';
       bits.push([p, c].filter(Boolean).join(' + '));
     }
     if (v.total_g != null) bits.push(v.total_g + 'g total');
-    if (v.total_g_finished_serve != null) bits.push(v.total_g_finished_serve + 'g finished serve');
-    if (v.recommendation) bits.push(v.recommendation);
-    if (v.note) bits.push(v.note);
+
+    Object.keys(v).forEach((key) => {
+      if (used.has(key) || key === 'status' || key === 'piece_count' || key === 'piece_count_per_guest') return;
+      if (/^(production_|microherbs_|lemons_|lemon_|chives_|parsley_|rocket_|feta_|pita_|caper_|beetroot_|olive_|bread_|manchego_|finished_|chicken_|beef_|lamb_|potato_|chorizo_|sauce_|aioli_|dressing_|garnish_|standard_|premium_)/.test(key)) return;
+      const text = normaliseScalar(key, v[key]);
+      if (text && bits.length < 8) bits.push(prettyKey(key) + ': ' + text);
+    });
+
     return bits.filter(Boolean).join(' · ');
   }
 
@@ -228,7 +315,7 @@
     if (!v) return '';
     const rows = [];
     Object.keys(v).forEach((key) => {
-      if (key === 'recipe_id' || key === 'canonical_name' || key === 'aliases' || key === 'recipe_id_candidates') return;
+      if (META_KEYS.has(key)) return;
       if (key === 'base_prep') {
         const line = variantLine(v[key]);
         if (line) rows.push(['Base Prep', line]);
