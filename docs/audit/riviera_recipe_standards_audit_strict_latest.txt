@@ -11,6 +11,40 @@ canonical        veal-meatballs — Polpette — Approx. 190–210 balls @ 60g (
 legacy/duplicate beef-polpette-canape — Beef Polpette — 60 pieces
 legacy/duplicate slow-cooked-beef-albondigas-buffet — Slow Cooked Beef Albondigas — 20 portions
 
+SERVICE VARIANT STATUS REVIEW
+-----------------------------
+needs_confirmation: 0
+missing_status: 28
+- arancini.cocktail
+- arancini.tapas
+- arancini.plated_dinner
+- calamari.cocktail
+- calamari.tapas
+- calamari.plated_dinner
+- lamb-cutlet.tapas
+- lamb-cutlet.cocktail
+- lamb-cutlet.plated_dinner_entree
+- chicken-skewer.tapas
+- chicken-skewer.cocktail
+- chicken-skewer.plated_dinner_entree
+- chorizo-potatoes.tapas
+- chorizo-potatoes.cocktail
+- chorizo-potatoes.plated_dinner_entree
+- chorizo-potatoes.buffet
+- veal-meatballs.tapas
+- veal-meatballs.cocktail
+- veal-meatballs.plated
+- veal-meatballs.plated_dinner_entree
+- veal-meatballs.buffet
+- veal-meatballs.legacy_mini_canape
+- fish-slider.cocktail
+- fish-slider.tapas
+- fish-slider.corporate_offsite
+- cannoli.tapas
+- cannoli.roving_dessert
+- cannoli.plated_dessert
+not_recommended: 0
+
 ACTIVE FOOD RECIPES MISSING SERVICE VARIANTS
 -----------------------------------------------
 - oysters-kilpatrick: Kilpatrick Oysters [Canape] — yield: Scalable
