@@ -1,7 +1,10 @@
 RIVIERA RECIPE STANDARDS AUDIT
 ====================================
 Built-in recipes: 88
-Service variant records: 29
+Service variant files: 2
+- riviera_data/service_variants.json
+- riviera_data/service_variants_corporate.json
+Service variant records: 50
 Canonical recipe groups: 1
 Recipe redirects: 2
 Strict missing variant scope: service variants only
@@ -43,36 +46,8 @@ ACTIVE FOOD RECIPES MISSING SERVICE VARIANTS
 - prosciutto-chicken-lemon-caper: Prosciutto Wrapped Chicken Breast [Main] — yield: 20 portions
 - fillet-beef-tempranillo: Fillet of Beef with Tempranillo Reduction [Main] — yield: 20 portions
 - stuffed-mushroom-romesco: Stuffed Mushroom with Romesco & Lemon Aioli [Canape] — yield: 40 pieces
-- corporate-savoury-croissants: Savoury Filled Croissants [Corporate] — yield: 40 pieces
-- corporate-sweet-croissants: Sweet Filled Croissants [Corporate] — yield: 40 pieces
-- corporate-bircher-muesli-bowls: Mixed Bircher Muesli Bowls [Corporate] — yield: 20 portions
-- corporate-chicken-caesar-bowl: Chicken Caesar Salad Bowl [Corporate] — yield: 20 portions
-- corporate-lamb-fattoush-bowl: Lamb Fattoush Salad Bowl [Corporate] — yield: 20 portions
-- corporate-mediterranean-chicken-bowl: Mediterranean Chicken Bowl [Corporate] — yield: 20 portions
-- corporate-beef-lasagne-side-salad: Beef Lasagne with Side Salad [Corporate] — yield: 20 portions
-- corporate-breakfast-wraps: Breakfast Wraps [Corporate] — yield: 20 portions
-- corporate-gourmet-filled-cookies: Gourmet Filled Cookies [Corporate] — yield: 40 pieces
-- corporate-mixed-sandwiches: Mixed Filled Sandwiches [Corporate] — yield: 40 pieces
-- corporate-roast-veg-salad-bowl: Roasted Vegetable Salad Bowl [Corporate] — yield: 20 portions
 - chilli-garlic-prawns-chorizo-rocket: Chilli Garlic Prawns & Chorizo [Canape] — yield: 40 pieces
 - heirloom-tomato-bruschetta-goats-cheese: Heirloom Tomato Bruschetta [Canape] — yield: 40 pieces
 - greek-style-pulled-beef-buffet: Greek Style Pulled Beef [Buffet] — yield: 20 portions
 - chargrilled-lemon-thyme-chicken-buffet: Chargrilled Lemon & Thyme Chicken [Buffet] — yield: 20 portions
-- kids-snack-pack: Kids Snack Pack [Corporate] — yield: 10 packs
-- kids-spaghetti-bolognese: Kids Spaghetti Bolognese [Corporate] — yield: 10 portions
-- corporate-bacon-egg-muffins: Bacon & Egg Muffins [Corporate] — yield: 20 portions
-- corporate-bacon-egg-paninis: Bacon & Egg Paninis [Corporate] — yield: 20 portions
-- corporate-waffles-breakfast: Waffles [Corporate] — yield: 20 portions
-- corporate-pesto-pasta-salad: Creamy Basil Pesto Pasta Salad [Corporate] — yield: 20 portions
-- corporate-moroccan-couscous-salad: Moroccan Couscous Salad [Corporate] — yield: 20 portions
-- corporate-pumpkin-feta-pepita-salad: Pumpkin, Feta & Pepita Salad [Corporate] — yield: 20 portions
-- corporate-traditional-garden-salad: Traditional Garden Salad [Corporate] — yield: 20 portions
-- corporate-creamy-potato-bacon-herb-salad: Creamy Potato, Bacon & Herb Salad [Corporate] — yield: 20 portions
-
-ERRORS
-------
-- service_variants.date-madeleines.dessert_buffet: special-purpose variant requires note/reason/service_rule
-- service_variants.duo-cannoli-pistachio-white-chocolate.dessert_buffet: special-purpose variant requires note/reason/service_rule
-- service_variants.strawberry-ricotta-cheesecake-plated.plated_dessert: special-purpose variant requires note/reason/service_rule
-- service_variants.riviera-tiramisu-biscotti-hazelnut.plated_dessert: special-purpose variant requires note/reason/service_rule
 
