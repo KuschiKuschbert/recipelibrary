@@ -9,6 +9,7 @@ on:
       - 'assets/screen-wake.js'
       - 'scripts/audit_riviera_recipe_standards.py'
       - 'scripts/audit_riviera_frontend_service_variants.py'
+      - 'scripts/audit_riviera_source_alignment.py'
       - '.github/workflows/riviera-standards-audit.yml'
   workflow_dispatch:
 
@@ -29,12 +30,13 @@ jobs:
           python3 scripts/audit_riviera_recipe_standards.py --strict | tee docs/audit/riviera_recipe_standards_audit_strict_latest.txt
           python3 scripts/audit_riviera_recipe_standards.py --strict --all-builtins | tee docs/audit/riviera_recipe_standards_audit_strict_all_builtins_latest.txt
           python3 scripts/audit_riviera_frontend_service_variants.py | tee docs/audit/riviera_frontend_service_variants_audit_latest.txt
+          python3 scripts/audit_riviera_source_alignment.py | tee docs/audit/riviera_source_alignment_audit_latest.txt
 
       - name: Commit audit output
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/audit/riviera_recipe_standards_audit_latest.txt docs/audit/riviera_recipe_standards_audit_strict_latest.txt docs/audit/riviera_recipe_standards_audit_strict_all_builtins_latest.txt docs/audit/riviera_frontend_service_variants_audit_latest.txt
+          git add docs/audit/riviera_recipe_standards_audit_latest.txt docs/audit/riviera_recipe_standards_audit_strict_latest.txt docs/audit/riviera_recipe_standards_audit_strict_all_builtins_latest.txt docs/audit/riviera_frontend_service_variants_audit_latest.txt docs/audit/riviera_source_alignment_audit_latest.txt
           if git diff --cached --quiet; then
             echo "No audit output changes to commit."
           else
