@@ -9,7 +9,4 @@ Expected service variant files: 5
 - riviera_data/service_variant_source_overrides.json
 Service variant records visible to frontend audit: 81
 
-ERRORS
-------
-- Frontend missing service variant marker: Source note
-
+Frontend service variant file coverage: OK
