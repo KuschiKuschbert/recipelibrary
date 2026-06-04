@@ -1,5 +1,5 @@
 {
-  "version": "2026-06-04-v13",
+  "version": "2026-06-04-v14",
   "status": "active_service_standard",
   "source_of_truth": "Kuschi service-size corrections. Base recipes remain riviera_data/builtins.json unless explicitly superseded.",
   "rules": {
@@ -7,6 +7,7 @@
     "older_docx_sources": "Reference only unless explicitly restored.",
     "portion_locking": "Do not invent missing service sizes. Ask Kuschi before locking tapas, canape, plated, buffet or corporate portions.",
     "status_locking": "confirmed is locked; needs_confirmation is allowed in normal audit but blocks strict audit; not_recommended is allowed only with a clear reason or note.",
+    "premium_garnish_rule": "Always call out the optional premium garnish where one exists. Keep the standard garnish practical, and list the premium garnish as an upgrade rather than silently replacing the standard.",
     "master_variant_keys": ["cocktail", "tapas", "plated_entree", "plated_main", "buffet", "platter", "corporate_boxed", "kids", "dietary_single"],
     "special_variant_keys": ["legacy_mini_canape", "roving_dessert", "plated_dessert", "dessert_buffet", "dessert_platter"],
     "dessert_variant_rule": "Use normal keys where they are clear. Use plated_dessert, roving_dessert, dessert_buffet and dessert_platter only when a normal savoury key would be confusing.",
@@ -25,7 +26,8 @@
       "cocktail": {"portion": "1 piece", "piece_weight_g_pre_crumb": 40, "status": "confirmed"},
       "tapas": {"portion": "3 pieces", "piece_weight_g_pre_crumb": 40, "status": "confirmed"},
       "plated_entree": {"portion": "1 piece", "piece_weight_g_pre_crumb": 50, "note": "Make separate 50 g plated batch before crumbing.", "status": "confirmed"},
-      "buffet": {"portion": "1 arancini per guest service target with 1.3 arancini per guest production allowance", "piece_count": 1, "production_piece_count_per_guest": 1.3, "piece_weight_g_pre_crumb": 40, "production_weight_g_pre_crumb_per_guest": 52, "aioli_ml_per_piece": 10, "aioli_ml_per_guest_production": 13, "chives_g_per_guest": 0.5, "chives_g_per_40_guests": 20, "microherbs_punnets_per_80_guests_optional": 1, "garnish": "Aioli topping with chives as standard garnish. Micro herbs are optional premium finish. Raw thyme is not recommended for buffet garnish.", "note": "Use chives as the standard buffet garnish because they hold cleaner than micro herbs and eat better than raw thyme. Thyme can be used in the mix or aioli if wanted, but not as the main raw garnish.", "status": "confirmed"}
+      "buffet": {"portion": "1 arancini per guest service target with 1.3 arancini per guest production allowance", "piece_count": 1, "production_piece_count_per_guest": 1.3, "piece_weight_g_pre_crumb": 40, "production_weight_g_pre_crumb_per_guest": 52, "aioli_ml_per_piece": 10, "aioli_ml_per_guest_production": 13, "chives_g_per_guest": 0.5, "chives_g_per_40_guests": 20, "microherbs_punnets_per_80_guests_optional": 1, "garnish": "Aioli topping with chives as standard garnish. Micro herbs are optional premium finish and must be called out as an upgrade.", "premium_garnish_option": "Micro herbs, 1 punnet per 80 guests as optional premium finish.", "note": "Use chives as the standard buffet garnish because they hold cleaner than micro herbs and eat better than raw thyme. Thyme can be used in the mix or aioli if wanted, but not as the main raw garnish. Always call out the micro herb premium option.", "status": "confirmed"},
+      "platter": {"portion": "count by ordered pieces", "piece_weight_g_pre_crumb": 40, "aioli_service_rule": "Depends on hot delivery versus immediate service.", "hot_delivery_aioli": "Serve aioli separately in ramekin/container to protect texture.", "immediate_service_aioli": "Aioli can be dotted or piped on top before service.", "standard_garnish": "chives", "chives_g_per_40_pieces": 20, "premium_garnish_option": "Micro herbs, 1 punnet per 80 pieces as optional premium finish.", "note": "For platters, decide aioli placement by service condition: separate for hot delivery/holding, dotted on top for immediate service. Always call out the premium micro herb option.", "status": "confirmed"}
     },
     "calamari": {
       "recipe_id": "calamari",
