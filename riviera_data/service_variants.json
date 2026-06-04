@@ -1,5 +1,5 @@
 {
-  "version": "2026-06-04-v18",
+  "version": "2026-06-04-v19",
   "status": "active_service_standard",
   "source_of_truth": "Kuschi service-size corrections. Base recipes remain riviera_data/builtins.json unless explicitly superseded.",
   "rules": {
@@ -41,7 +41,8 @@
       "recipe_id": "lamb-cutlet",
       "tapas": {"portion": "3 cutlets", "status": "confirmed"},
       "cocktail": {"portion": "1 cutlet", "status": "confirmed"},
-      "plated_entree": {"portion": "2 cutlets", "status": "confirmed"}
+      "plated_entree": {"portion": "2 cutlets", "status": "confirmed"},
+      "buffet": {"portion": "1 cutlet per guest service target with 1.2 cutlets per guest production allowance", "cutlets_per_guest": 1, "production_buffer_multiplier": 1.2, "production_cutlets_per_guest": 1.2, "house_emulsion_ml_per_guest_draft": 25, "lemon_wedge": false, "rocket_bed": "confirmed direction - exact quantity needs confirmation", "garnish_options": ["beetroot powder", "microgreens"], "standard_garnish": "rocket bed with beetroot powder or microgreens", "premium_garnish_option": "Microgreens as premium finish when not used as the standard garnish.", "note": "No lemon wedge. Use rocket as the bed for the cutlet. Finish with beetroot powder or microgreens. Exact rocket quantity, final garnish choice and emulsion quantity still need confirmation before marking the full buffet variant confirmed.", "status": "needs_confirmation"}
     },
     "chicken-skewer": {
       "recipe_id": "chicken-skewer",
