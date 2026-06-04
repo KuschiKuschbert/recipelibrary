@@ -1,5 +1,5 @@
 {
-  "version": "2026-06-04-v6",
+  "version": "2026-06-04-v7",
   "status": "active_service_standard",
   "source_of_truth": "Kuschi service-size corrections. Base recipes remain riviera_data/builtins.json unless explicitly superseded.",
   "rules": {
@@ -8,7 +8,8 @@
     "portion_locking": "Do not invent missing service sizes. Ask Kuschi before locking tapas, canape, plated, buffet or corporate portions.",
     "status_locking": "confirmed is locked; needs_confirmation is allowed in normal audit but blocks strict audit; not_recommended is allowed only with a clear reason or note.",
     "master_variant_keys": ["cocktail", "tapas", "plated_entree", "plated_main", "buffet", "platter", "corporate_boxed", "kids", "dietary_single"],
-    "special_variant_keys": ["legacy_mini_canape", "roving_dessert", "plated_dessert"],
+    "special_variant_keys": ["legacy_mini_canape", "roving_dessert", "plated_dessert", "dessert_buffet", "dessert_platter"],
+    "dessert_variant_rule": "Use normal keys where they are clear. Use plated_dessert, roving_dessert, dessert_buffet and dessert_platter only when a normal savoury key would be confusing.",
     "naming_locking": "Use master_variant_keys for normal service variants. Special-purpose keys are allowed only when listed in special_variant_keys and documented with status, note/reason and clear service use.",
     "meatball_naming": {
       "canonical_name": "Polpette",
