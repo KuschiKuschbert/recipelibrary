@@ -1,38 +1,66 @@
 # Riviera Production System
 
-This folder contains the Riviera kitchen production, event prep, ordering, recipe and source-routing system.
+This folder contains the Riviera kitchen production, event prep, ordering, recipe, seasoning and source-routing system.
 
-## Current committed files
+## Active source map
 
 ### Harness / routing
 
 - `harness/Riviera_Kitchen_Production_Harness_Index_v1_2026-06-08.md`
+- `harness/Riviera_Count_Ordering_Harness_v1_2026-06-08.md`
 
-Use this first. It routes event prep, ordering, recipes, seasoning and PDF production to the correct source files.
+Use these first for routing, count logic, buffers, product-format checks and order-count conversion.
+
+### SOPs
+
+- `sops/riviera_sop_master_index_v6_2026-06-08.md`
+
+Controls food-only production sheets, stacked cards, quantity-first layout, owner-first cards, 2-metre readability, dietaries, offsite/cryovac, tapas overlap and final QA.
+
+### Modules
+
+- `modules/Riviera_Component_Module_Library_v1_2026-06-08.md`
+
+Reusable production modules for scones, focaccia, fruit formats, grazing, sandwiches/wraps/croissants/brioche, hot nibbles, GF hot nibbles, labneh, limoncello chicken skewers, arancini, calamari, Tapas pull, Roscoes cryovac and ready-to-send gates.
+
+### Templates
+
+- `templates/Riviera_Production_Sheet_Template_Library_v1_2026-06-08.md`
+
+Use this to prevent layout drift. It locks single-event and multi-event sheet skeletons, visual rules and card grammar.
+
+### Recipes
+
+- `recipes/Riviera_Canonical_Recipe_Bank_v1_2026-06-08.md`
+
+Use this for locked recipes, active working recipes, source recipes and draft recipe gaps.
 
 ### Ordering
 
 - `orders/Riviera_Order_Template_v1_2026-06-09.md`
 - `orders/Riviera_Weekly_Order_Workflow_v1_2026-06-09.md`
+- `orders/Riviera_Supplier_Ordering_Translator_v1_2026-06-08.md`
 
-Use these for event orders, weekly supplier ledgers, Doblo's/Bidfood/Woolworths split, already ordered/still needed lists, and supplier-ready order messages.
+Use these for event orders, weekly supplier ledgers, Doblo's/Bidfood/Woolworths split, already ordered/still needed lists and supplier-ready order messages.
 
-## Active source pack still to commit
+### Seasoning / pairing
 
-The following files are active in the ChatGPT Riviera project sources and should be committed in the next source-pack PR:
+- `seasoning/Riviera_Seasoning_Palette_v2_2026-06-08.md`
+- `seasoning/foodpairing_condensed_riviera_reference.md`
 
-```text
-riviera_sop_master_index_v6_2026-06-08.md
-Riviera_Seasoning_Palette_v2_2026-06-08.md
-Riviera_Component_Module_Library_v1_2026-06-08.md
-Riviera_Count_Ordering_Harness_v1_2026-06-08.md
-Riviera_Production_Sheet_Template_Library_v1_2026-06-08.md
-Riviera_Canonical_Recipe_Bank_v1_2026-06-08.md
-Riviera_Supplier_Ordering_Translator_v1_2026-06-08.md
-Riviera_Real_Event_Test_Pack_v1_2026-06-08.md
-Riviera_Package_Source_Digest_v1_2026-06-09.md
-foodpairing_condensed_riviera_reference.md
-```
+Use these for seasoning, garnish, pairings, Foodpairing support and practical chef-language production-card wording.
+
+### Source digests
+
+- `sources/Riviera_Package_Source_Digest_v1_2026-06-09.md`
+
+Use this as the compact day-to-day package/menu digest after the original brochure PDFs are archived outside the active source list.
+
+### Tests / QA
+
+- `tests/Riviera_Real_Event_Test_Pack_v1_2026-06-08.md`
+
+Use this for real-event intake, missing-info detection, product-format pass, count pass, module pass, sheet-build pass and final QA.
 
 ## Source priority
 
@@ -48,7 +76,7 @@ Use this priority when sources conflict:
 7. Riviera Canonical Recipe Bank v1
 8. Riviera Supplier Ordering Translator v1
 9. Riviera Seasoning Palette v2
-10. Riviera package/menu/source digest
+10. Riviera Package Source Digest v1
 11. Bidfood / Doblo's supplier references
 12. GitHub recipe/aroma data
 13. Foodpairing reference layer
