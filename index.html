@@ -727,44 +727,49 @@ async function mapWithConcurrency(items, limit, mapper) {
   return ret;
 }
 
-/** Compact catalog: few merged JSON parts in alpha_catalog/ (see rebuild_catalog_from_detail.py). */
+// ── Per-recipe search hay builder ──────────────────────
+/** Build the lowercase search haystack for a single recipe row. */
+function buildHayForRecipe(r) {
+  const parts = [r.name || '', r.cui || ''];
+  const p = r.protein; if (Array.isArray(p)) for (const x of p) { if (x) parts.push(x); }
+  const t = r.tags;    if (Array.isArray(t)) for (const x of t) { if (x) parts.push(x); }
+  const g = r.ing;     if (Array.isArray(g)) for (const x of g) { if (x) parts.push(x); }
+  if (r.cat) parts.push(r.cat);
+  return parts.join(' ').toLowerCase();
+}
+
+/** Extend the recipeIndex with a slice of allRecipes (synchronous, fast per shard). */
+function indexRecipeSlice(recipes) {
+  for (const r of recipes) {
+    if (!r.id) continue;
+    if (String(r.id).startsWith('user-')) {
+      const letter = (window.KuschiUserRecipes && KuschiUserRecipes.USER_LETTER) || '_USER';
+      recipeIndex[r.id] = { letter, name: r.name };
+    } else if (r._detailLetter && /^[A-Z]$/.test(r._detailLetter)) {
+      recipeIndex[r.id] = { letter: r._detailLetter, bucket: detailBucketFromId(r.id), name: r.name };
+    } else {
+      let letter = 'Z';
+      for (const c of (r.name || '')) {
+        if (/[a-zA-Z]/.test(c)) { letter = c.toUpperCase(); break; }
+      }
+      recipeIndex[r.id] = { letter, bucket: detailBucketFromId(r.id), name: r.name };
+    }
+  }
+}
+
+/** Compact catalog: fetch manifest, return it. Streaming load is handled in the bootstrap below. */
 async function loadData() {
   const base = siteBaseUrl();
-  const all = [];
-  let loaded = 0;
-  const loadingText = document.querySelector('.loading-text');
-
   const manResp = await fetch(`${base}/alpha_catalog/manifest.json`);
   if (!manResp.ok) throw new Error('Could not load recipe catalog manifest');
-  const manifest = await manResp.json();
-  const files = Array.isArray(manifest.files) ? manifest.files : [];
-
-  const parts = await mapWithConcurrency(files, CATALOG_FETCH_CONCURRENCY, async f => {
-    const r = await fetch(`${base}/alpha_catalog/${encodeURIComponent(f)}`);
-    if (!r.ok) throw new Error(String(r.status));
-    const data = await r.json();
-    loaded++;
-    if (loadingText) loadingText.textContent = `Loading recipes... (${loaded}/${files.length} files)`;
-    return data;
-  });
-
-  for (const data of parts) {
-    if (data && data.recipes) all.push(...data.recipes);
-  }
-
-  // Deduplicate by id
-  const seen = new Set();
-  return all.filter(r => {
-    if (!r.id || seen.has(r.id)) return false;
-    seen.add(r.id);
-    return true;
-  });
+  return manResp.json();
 }
 
 // ── Filter Setup ──────────────────────────────────────
 function toArr(v) { return Array.isArray(v) ? v : []; }
 
-/** One-time normalised search string per recipe — avoids rebuilding on every filter pass (~38k rows). */
+/** One-time normalised search string per recipe — avoids rebuilding on every filter pass (~38k rows).
+ *  Skips rows that already have _searchHay (set during streaming shard load). */
 const SEARCH_HAY_CHUNK = 4000;
 
 async function buildRecipeSearchIndexAsync(recipes) {
@@ -772,16 +777,7 @@ async function buildRecipeSearchIndexAsync(recipes) {
     const end = Math.min(start + SEARCH_HAY_CHUNK, recipes.length);
     for (let i = start; i < end; i++) {
       const r = recipes[i];
-      r._searchHay = [
-        r.name || '',
-        r.cui || '',
-        ...toArr(r.protein),
-        ...toArr(r.tags),
-        ...toArr(r.ing),
-        r.cat || '',
-      ]
-        .join(' ')
-        .toLowerCase();
+      if (!r._searchHay) r._searchHay = buildHayForRecipe(r);
     }
     if (end < recipes.length) {
       await new Promise(resolve => requestAnimationFrame(resolve));
@@ -791,7 +787,20 @@ async function buildRecipeSearchIndexAsync(recipes) {
 
 const FILTER_BUILD_CHUNK = 4000;
 
-async function buildFiltersAsync() {
+/**
+ * Fill filter dropdowns. When the catalog manifest includes pre-baked facets
+ * (from scripts/bake_manifest_facets.py), this is synchronous and instant.
+ * Falls back to scanning allRecipes if facets are absent.
+ */
+async function buildFiltersAsync(manifestFacets) {
+  if (manifestFacets) {
+    fillSelect('filterCuisine', manifestFacets.cuisines || [], 'Cuisine');
+    fillSelect('filterProtein', manifestFacets.proteins || [], 'Protein');
+    fillSelect('filterTag',     manifestFacets.tags     || [], 'Dietary');
+    fillSelect('filterCat',     manifestFacets.cats     || [], 'Category');
+    return;
+  }
+  // Fallback: scan allRecipes (no facets in manifest)
   const cuisines = new Set();
   const proteins = new Set();
   const tags = new Set();
@@ -811,8 +820,8 @@ async function buildFiltersAsync() {
   }
   fillSelect('filterCuisine', [...cuisines].sort(), 'Cuisine');
   fillSelect('filterProtein', [...proteins].sort(), 'Protein');
-  fillSelect('filterTag', [...tags].sort(), 'Dietary');
-  fillSelect('filterCat', [...cats].sort(), 'Category');
+  fillSelect('filterTag',     [...tags].sort(),     'Dietary');
+  fillSelect('filterCat',     [...cats].sort(),     'Category');
 }
 
 function fillSelect(id, items, label) {
@@ -1074,7 +1083,6 @@ document.addEventListener('keydown', e => {
     } else if (document.getElementById('heroAddSplit') && document.getElementById('heroAddSplit').classList.contains('expanded')) {
       closeHeroAddSplit();
     } else {
-    } else {
       document.getElementById('search').blur();
     }
   }
@@ -1122,26 +1130,13 @@ function detailSubshardZeroPad() {
 
 const RECIPE_INDEX_CHUNK = 5000;
 
+/** Build (or complete) the id→detail lookup index from allRecipes.
+ *  Each shard already calls indexRecipeSlice() during streaming, so this
+ *  is a fast top-up pass that handles anything missed (user recipes, etc.). */
 async function buildRecipeIndexAsync() {
-  for (const k of Object.keys(recipeIndex)) delete recipeIndex[k];
   for (let start = 0; start < allRecipes.length; start += RECIPE_INDEX_CHUNK) {
     const end = Math.min(start + RECIPE_INDEX_CHUNK, allRecipes.length);
-    for (let i = start; i < end; i++) {
-      const r = allRecipes[i];
-      let letter = 'Z';
-      if (r.id && String(r.id).startsWith('user-')) {
-        letter = (window.KuschiUserRecipes && KuschiUserRecipes.USER_LETTER) || '_USER';
-        recipeIndex[r.id] = { letter, name: r.name };
-      } else if (r._detailLetter && /^[A-Z]$/.test(r._detailLetter)) {
-        letter = r._detailLetter;
-        recipeIndex[r.id] = { letter, bucket: detailBucketFromId(r.id), name: r.name };
-      } else {
-        for (const c of (r.name || '')) {
-          if (/[a-zA-Z]/.test(c)) { letter = c.toUpperCase(); break; }
-        }
-        recipeIndex[r.id] = { letter, bucket: detailBucketFromId(r.id), name: r.name };
-      }
-    }
+    indexRecipeSlice(allRecipes.slice(start, end));
     if (end < allRecipes.length) {
       await new Promise(resolve => requestAnimationFrame(resolve));
     }
@@ -2112,35 +2107,125 @@ function closePageQrModal() {
 refreshCustomBookNav();
 attachContentRecipePrefetch();
 
-(async () => {
+// ── Kick manifest + shard fetches IMMEDIATELY so they're in-flight while
+//    deferred scripts finish loading. Render happens after DOMContentLoaded
+//    (guarantees KuschiRecipeUi and other defer-loaded helpers are ready).
+const _eagerManifest = loadData();
+const _eagerShardCache = new Map();
+
+(function _prefetchShards() {
+  const base = siteBaseUrl();
+  _eagerManifest.then(manifest => {
+    (manifest.files || []).forEach(f => {
+      if (_eagerShardCache.has(f)) return;
+      const p = fetch(`${base}/alpha_catalog/${encodeURIComponent(f)}`)
+        .then(r => r.ok ? r.json() : null)
+        .catch(() => null);
+      _eagerShardCache.set(f, p);
+    });
+  }).catch(() => {});
+})();
+
+async function _bootstrapRecipes() {
   try {
-    allRecipes = await loadData();
+    // ── Step 1: manifest is already in-flight; await it ──
+    const manifest = await _eagerManifest;
+    const files = Array.isArray(manifest.files) ? manifest.files : [];
+    const facets = manifest.facets || null;
+    const base = siteBaseUrl();
+    const loadingText = document.querySelector('.loading-text');
+
+    // ── Step 2: fill filter dropdowns instantly from pre-baked manifest facets ──
+    await buildFiltersAsync(facets);
+
+    // ── Step 3: prepend user recipes and index them ──
     if (window.KuschiUserRecipes) {
       const userRows = KuschiUserRecipes.loadKitchen().map(KuschiUserRecipes.toIndexRow);
-      allRecipes = [...userRows, ...allRecipes];
+      for (const r of userRows) { if (!r._searchHay) r._searchHay = buildHayForRecipe(r); }
+      allRecipes.push(...userRows);
+      indexRecipeSlice(userRows);
     }
-    await buildRecipeSearchIndexAsync(allRecipes);
+
+    // ── Step 4: stream shards — first arrival shows recipes, rest add silently ──
+    const seen = new Set(allRecipes.map(r => r.id));
+    let loadedShards = 0;
+    let firstShardRendered = false;
+
+    let pendingRerender = false;
+    function scheduleRerender() {
+      if (pendingRerender) return;
+      pendingRerender = true;
+      requestAnimationFrame(() => {
+        pendingRerender = false;
+        filterMemo.clear();
+        document.getElementById('totalCount').textContent =
+          allRecipes.length.toLocaleString() + (loadedShards < files.length ? '+' : '');
+        applyFilters();
+      });
+    }
+
+    const shardPromises = files.map(f => {
+      // Use the eagerly-prefetched promise when available, else fetch now
+      const dataP = _eagerShardCache.has(f)
+        ? _eagerShardCache.get(f)
+        : fetch(`${base}/alpha_catalog/${encodeURIComponent(f)}`)
+            .then(r => r.ok ? r.json() : null)
+            .catch(() => null);
+
+      return dataP.then(data => {
+        if (!data) return;
+        const incoming = (data && data.recipes) ? data.recipes : [];
+        const fresh = [];
+        for (const r of incoming) {
+          if (r.id && !seen.has(r.id)) {
+            seen.add(r.id);
+            r._searchHay = buildHayForRecipe(r);
+            fresh.push(r);
+          }
+        }
+        allRecipes.push(...fresh);
+        indexRecipeSlice(fresh);
+        loadedShards++;
+        if (loadingText) loadingText.textContent = `Loading recipes… (${loadedShards}/${files.length})`;
+
+        if (!firstShardRendered) {
+          firstShardRendered = true;
+          filterMemo.clear();
+          levMemo.clear();
+          document.getElementById('loading').style.display = 'none';
+          document.getElementById('footer').style.display = 'block';
+          document.getElementById('totalCount').textContent =
+            allRecipes.length.toLocaleString() + (loadedShards < files.length ? '+' : '');
+          filtered = [...allRecipes];
+          applyFilters();
+          tryOpenFromQuery();
+        } else {
+          scheduleRerender();
+        }
+      }).catch(err => console.warn('[catalog] shard error:', f, err));
+    });
+
+    // ── Step 5: await all shards then finalise ──
+    await Promise.allSettled(shardPromises);
+
     filterMemo.clear();
     levMemo.clear();
     document.getElementById('loading').style.display = 'none';
     document.getElementById('footer').style.display = 'block';
     document.getElementById('totalCount').textContent = allRecipes.length.toLocaleString();
-    await buildFiltersAsync();
+
+    await buildRecipeSearchIndexAsync(allRecipes);
     await buildRecipeIndexAsync();
+
     filtered = [...allRecipes];
     applyFilters();
-    tryOpenFromQuery();
+
     if (window.KuschiAromaHints && typeof KuschiAromaHints.ensureLoaded === 'function') {
-      var warmAroma = function () {
-        KuschiAromaHints.ensureLoaded().catch(function () {});
-      };
+      const warmAroma = () => KuschiAromaHints.ensureLoaded().catch(() => {});
       setTimeout(warmAroma, 0);
       if (typeof requestIdleCallback === 'function') {
         requestIdleCallback(warmAroma, { timeout: 8000 });
       }
-    }
-    if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
-      // SW now registered by assets/app-nav.js
     }
   } catch(e) {
     document.getElementById('loading').innerHTML =
@@ -2148,7 +2233,13 @@ attachContentRecipePrefetch();
   } finally {
     refreshCustomBookNav();
   }
-})();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', _bootstrapRecipes);
+} else {
+  _bootstrapRecipes();
+}
 </script>
 <script src="assets/app-nav.js"></script>
 </body>
