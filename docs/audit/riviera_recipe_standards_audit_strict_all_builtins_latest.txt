@@ -1,6 +1,6 @@
 RIVIERA RECIPE STANDARDS AUDIT
 ====================================
-Built-in recipes: 88
+Built-in recipes: 89
 Service variant files: 4
 - riviera_data/service_variants.json
 - riviera_data/service_variants_canapes.json
@@ -56,5 +56,5 @@ not_recommended: 31
 
 ACTIVE FOOD RECIPES MISSING SERVICE VARIANTS
 -----------------------------------------------
-None
+- house-scones: House Scones [Bakery] — yield: 12 regular · 40 small (high tea) per batch · scones box = 12 regular + jam + cream
 
