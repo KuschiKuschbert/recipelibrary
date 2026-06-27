@@ -17,6 +17,9 @@
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
+  :root { --app-header-h: 65px; }
+  .search-wrap { margin-top: 12px; top: var(--app-header-h); }
+  .app-header__mark { font-size: 14px; letter-spacing: -0.5px; }
   .nav-back {
     padding: 20px 32px 0;
     max-width: 1200px;
@@ -394,25 +397,49 @@
 </head>
 <body class="has-app-nav">
 
-<div id="stateInvalid" class="hero" style="display:none;padding-top:48px">
-  <p class="hero-sub" id="invalidMsg" style="max-width:520px;margin:24px auto 0"></p>
+<div id="stateInvalid" style="display:none;padding:60px 24px 24px;text-align:center">
+  <p style="font-size:15px;color:var(--text3);max-width:520px;margin:0 auto" id="invalidMsg"></p>
 </div>
 
 <div id="stateMain" style="display:none">
-<div class="hero">
-  <div class="hero-label">Kuschi · Kitchen book</div>
-  <h1 class="hero-title" id="bookHeroTitle">…</h1>
-  <p class="hero-sub"><b id="bookCount">0</b> recipes · saved on this device only.</p>
-  <div class="hero-nav">
-    <div class="hero-nav-cluster">
-      <button type="button" class="hero-nav-link" onclick="openAddRecipeModal()">+ Add recipe</button>
-      <button type="button" class="hero-nav-link" onclick="openPageQrModal()" title="QR code to open this book on your phone">QR</button>
-      <a href="aroma.html" class="hero-nav-link">Aroma</a>
+
+<header class="app-header">
+  <div class="app-header__brand">
+    <span class="app-header__mark" style="font-size:14px;letter-spacing:-0.5px">KB</span>
+    <div class="app-header__info">
+      <div class="app-header__title" id="bookHeroTitle">Kitchen Book</div>
+      <div class="app-header__count"><b id="bookCount">0</b> recipes · device only</div>
     </div>
-    <button type="button" class="hero-nav-link" onclick="openKitchenBookOrderListModal()">Order list (all ingredients)</button>
-    <button type="button" class="hero-nav-link" onclick="openKitchenBookPrepModal()">Prep board</button>
-    <button type="button" class="hero-nav-link" onclick="openKitchenBookStocktakeModal()">Stocktake checklist</button>
   </div>
+  <div class="app-header__actions">
+    <button type="button" class="app-header__btn" data-kitchen-mode-toggle onclick="toggleKitchenMode()" title="Kitchen Mode — larger text for bench reading">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <span class="app-header__btn-label">Kitchen</span>
+    </button>
+    <button type="button" class="app-header__btn app-header__btn--add" onclick="openAddRecipeModal()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Add
+    </button>
+  </div>
+</header>
+
+<div class="page-actions">
+  <button type="button" class="page-action-btn" onclick="openKitchenBookOrderListModal()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+    Order list
+  </button>
+  <button type="button" class="page-action-btn" onclick="openKitchenBookPrepModal()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="18"/><path d="M3 9h18M3 15h18"/></svg>
+    Prep board
+  </button>
+  <button type="button" class="page-action-btn" onclick="openKitchenBookStocktakeModal()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+    Stocktake
+  </button>
+  <button type="button" class="page-action-btn" onclick="openPageQrModal()" title="QR code">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="5" height="5"/><rect x="16" y="3" width="5" height="5"/><rect x="3" y="16" width="5" height="5"/><rect x="5" y="5" width="1" height="1" fill="currentColor"/><rect x="18" y="5" width="1" height="1" fill="currentColor"/><rect x="5" y="18" width="1" height="1" fill="currentColor"/><path d="M16 16h5v5M16 16v5M21 16v5"/></svg>
+    QR
+  </button>
 </div>
 
 <div class="search-wrap" id="searchWrap">
@@ -620,6 +647,8 @@
 <script src="assets/recipe-metric-normalize.js"></script>
 <script src="assets/qrcodejs-1.0.0.min.js"></script>
 <script src="assets/screen-wake.js"></script>
+<script src="assets/kuschi-kitchen-mode.js"></script>
+<script src="assets/kuschi-cook-mode.js"></script>
 <script>
 const params = new URLSearchParams(window.location.search);
 const CURRENT_BOOK_ID = (params.get('b') || params.get('id') || '').trim();
@@ -1036,6 +1065,7 @@ document.addEventListener('keydown', e => {
 function openRecipe(id) {
   const full = KuschiUserRecipes.getBookRecipeById(CURRENT_BOOK_ID, id);
   if (!full) return;
+  if (window.KuschiCookMode) KuschiCookMode.pushOpen(id);
   currentRecipe = KuschiUserRecipes.kitchenToDetail(full);
   const recKb = currentRecipe;
   const modal = document.getElementById('modal');
@@ -1052,8 +1082,9 @@ function openRecipe(id) {
 }
 
 function closeModal() {
-  document.getElementById('modalOverlay').classList.remove('open');
+  document.getElementById('modalOverlay').classList.remove('open', 'cook-mode');
   currentRecipe = null;
+  if (window.KuschiCookMode) { KuschiCookMode.popOpen(); KuschiCookMode.cleanup(); }
   if (!document.getElementById('pageQrOverlay').classList.contains('open') &&
       !document.getElementById('addRecipeOverlay').classList.contains('open') &&
       !document.getElementById('kbOrderListOverlay').classList.contains('open') &&
@@ -1067,6 +1098,7 @@ function closeModal() {
 function renderBookRecipeDetail(r) {
   let html = `<div class="modal-top-bar">`;
   html += `<button type="button" class="modal-wake-pill" data-kuschi-wake aria-pressed="false"><span data-kuschi-wake-label>Stay awake</span></button>`;
+  html += `<button type="button" class="cook-mode-btn" id="cookModeBtn" onclick="toggleCookMode()" title="Cook Mode — full screen, large text"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg> Cook</button>`;
   html += `<button class="modal-close" onclick="closeModal()">✕</button></div>`;
   html += `<div class="modal-title">${KuschiRecipeUi.esc(r.name)}</div>`;
   if (r.cuisine) html += `<div class="modal-cuisine">${KuschiRecipeUi.esc(r.cuisine)}</div>`;
@@ -1558,6 +1590,7 @@ if (searchWrap) {
       if (e.key === 'Enter') submitKitchenBookAdminPin();
     });
   }
+  KuschiCookMode.bindRouting(openRecipe, closeModal);
 })();
 </script>
 <script src="assets/app-nav.js"></script>

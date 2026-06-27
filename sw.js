@@ -1,5 +1,5 @@
 'use strict';
-const CACHE_NAME = 'kuschi-kitchen-v9';
+const CACHE_NAME = 'kuschi-kitchen-v10';
 
 // App shell: HTML pages + core assets (precache on install)
 const SHELL_URLS = [
@@ -15,6 +15,9 @@ const SHELL_URLS = [
   './manifest.webmanifest',
   './assets/theme.css',
   './assets/app-nav.js',
+  './assets/kuschi-kitchen-mode.js',
+  './assets/kuschi-filter-chips.js',
+  './assets/kuschi-cook-mode.js',
   './assets/user-recipes.js',
   './assets/order-list.js',
   './assets/aroma-hints.js',

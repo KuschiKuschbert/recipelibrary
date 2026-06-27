@@ -19,6 +19,9 @@
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
+:root { --app-header-h: 65px; }
+.search-wrap { margin-top: 12px; top: var(--app-header-h); }
+
 /* ── Nav back ─────────────────────────────────────── */
 .nav-back {
   padding: 20px 32px 0;
@@ -471,20 +474,43 @@
 </head>
 <body class="has-app-nav">
 
-<div class="hero">
-  <div class="hero-label">Kuschi · Riviera</div>
-  <h1 class="hero-title">The <em>Riviera</em> Kitchen</h1>
-  <p class="hero-sub"><b id="totalCount">…</b> prep-chef recipes — batch production, service notes, plating guides.</p>
-  <div class="hero-actions">
-    <div class="hero-nav-cluster">
-      <button type="button" onclick="openAddRivieraModal()">+ Add recipe</button>
-      <button type="button" onclick="openPageQrModal()" title="QR code to open this page on your phone">QR</button>
-      <a href="aroma.html">Aroma</a>
+<header class="app-header">
+  <div class="app-header__brand">
+    <span class="app-header__mark">R</span>
+    <div class="app-header__info">
+      <div class="app-header__title">Riviera Kitchen</div>
+      <div class="app-header__count"><b id="totalCount">…</b> recipes</div>
     </div>
-    <button type="button" onclick="openOrderListModal()">Order list (all ingredients)</button>
-    <button type="button" onclick="openPrepModal()">Prep board</button>
-    <button type="button" onclick="openStocktakeModal()">Stocktake checklist</button>
   </div>
+  <div class="app-header__actions">
+    <button type="button" class="app-header__btn" data-kitchen-mode-toggle onclick="toggleKitchenMode()" title="Kitchen Mode — larger text for bench reading">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <span class="app-header__btn-label">Kitchen</span>
+    </button>
+    <button type="button" class="app-header__btn app-header__btn--add" onclick="openAddRivieraModal()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Add
+    </button>
+  </div>
+</header>
+
+<div class="page-actions">
+  <button type="button" class="page-action-btn" onclick="openOrderListModal()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+    Order list
+  </button>
+  <button type="button" class="page-action-btn" onclick="openPrepModal()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="18"/><path d="M3 9h18M3 15h18"/></svg>
+    Prep board
+  </button>
+  <button type="button" class="page-action-btn" onclick="openStocktakeModal()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+    Stocktake
+  </button>
+  <button type="button" class="page-action-btn" onclick="openPageQrModal()" title="QR code">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="5" height="5"/><rect x="16" y="3" width="5" height="5"/><rect x="3" y="16" width="5" height="5"/><rect x="5" y="5" width="1" height="1" fill="currentColor"/><rect x="18" y="5" width="1" height="1" fill="currentColor"/><rect x="5" y="18" width="1" height="1" fill="currentColor"/><path d="M16 16h5v5M16 16v5M21 16v5"/></svg>
+    QR
+  </button>
 </div>
 
 <div class="search-wrap" id="searchWrap">
@@ -496,10 +522,15 @@
   </div>
 </div>
 
-<div class="filters-wrap">
-  <select class="filter-pill" id="filterCourse"><option value="">Course</option></select>
-  <select class="filter-pill" id="filterProtein"><option value="">Protein</option></select>
-  <select class="filter-pill" id="filterDiet"><option value="">Dietary</option></select>
+<div class="filters-wrap" id="filtersWrap">
+  <!-- Hidden native selects (read by applyFilters) -->
+  <select class="filter-pill filter-pill--hidden" id="filterCourse"><option value="">Course</option></select>
+  <select class="filter-pill filter-pill--hidden" id="filterProtein"><option value="">Protein</option></select>
+  <select class="filter-pill filter-pill--hidden" id="filterDiet"><option value="">Dietary</option></select>
+  <!-- Custom chips -->
+  <button type="button" class="filter-chip" id="chipCourse" onclick="openFilterSheet('Course','filterCourse')">Course</button>
+  <button type="button" class="filter-chip" id="chipRivProtein" onclick="openFilterSheet('Protein','filterProtein')">Protein</button>
+  <button type="button" class="filter-chip" id="chipDiet" onclick="openFilterSheet('Dietary','filterDiet')">Dietary</button>
   <button class="clear-btn" id="clearBtn">Clear all</button>
 </div>
 
@@ -698,6 +729,9 @@
 <script src="assets/flavour-toolkit-lookup.js" defer></script>
 <script src="assets/aroma-hints.js" defer></script>
 <script src="assets/screen-wake.js" defer></script>
+<script src="assets/kuschi-kitchen-mode.js"></script>
+<script src="assets/kuschi-filter-chips.js"></script>
+<script src="assets/kuschi-cook-mode.js"></script>
 <script>
 /** Static JSON (same-origin) — keeps initial HTML/JS parse small; merged after fetch. */
 const RIVIERA_BUILTINS_URL = 'riviera_data/builtins.json';
@@ -1497,9 +1531,7 @@ function applyFilters() {
   const diet = document.getElementById('filterDiet').value;
   const terms = q ? q.split(/\s+/) : [];
 
-  document.querySelectorAll('.filter-pill').forEach(el => {
-    el.classList.toggle('active', el.value !== '');
-  });
+  if (typeof updateFilterChips === 'function') updateFilterChips();
 
   filtered = RECIPES.filter(r => {
     if (terms.length) {
@@ -1581,6 +1613,7 @@ function openRecipe(id) {
   modal.innerHTML = `
     <div class="modal-top-bar">
       <button type="button" class="modal-wake-pill" data-kuschi-wake aria-pressed="false"><span data-kuschi-wake-label>Stay awake</span></button>
+      <button type="button" class="cook-mode-btn" id="cookModeBtn" onclick="toggleCookMode()" title="Cook Mode — full screen, large text"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg> Cook</button>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
     <div class="modal-title">${KuschiRecipeUi.esc(r.name)}</div>
@@ -1758,7 +1791,8 @@ function rescale(val, options) {
 }
 
 function closeModal() {
-  document.getElementById('modalOverlay').classList.remove('open');
+  document.getElementById('modalOverlay').classList.remove('open', 'cook-mode');
+  if (window.KuschiCookMode) { KuschiCookMode.popOpen(); KuschiCookMode.cleanup(); }
   if (!document.getElementById('orderListOverlay').classList.contains('open') &&
       !document.getElementById('stocktakeOverlay').classList.contains('open') &&
       !document.getElementById('prepOverlay').classList.contains('open') &&
@@ -1818,9 +1852,15 @@ document.addEventListener('keydown', e => {
 })();
 updateRivieraAdminChrome();
 void bootstrapRivieraRecipeData();
-if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
-  // SW now registered by assets/app-nav.js
-}
+
+// ── Init shared modules ───────────────────────────────
+KuschiFilterChips.init([
+  { chipId: 'chipCourse',     selectId: 'filterCourse',  label: 'Course' },
+  { chipId: 'chipRivProtein', selectId: 'filterProtein', label: 'Protein' },
+  { chipId: 'chipDiet',       selectId: 'filterDiet',    label: 'Dietary' },
+], applyFilters);
+
+KuschiCookMode.bindRouting(openRecipe, closeModal);
 </script>
 <script src="assets/stocktake-list.js" defer></script>
 <script src="assets/recipe-gemini-format.js" defer></script>
