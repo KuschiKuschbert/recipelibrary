@@ -3161,3 +3161,86 @@ button, a, select, input, [role="button"] {
   outline: 2px solid var(--gold);
   outline-offset: 2px;
 }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   PAGE-LEVEL SHARED COMPONENTS
+   ──────────────────────────────────────────────────────────────────────────── */
+
+/* ── Page action strip (Order list, Prep board, Stocktake, QR…) ─────────── */
+.page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 20px 4px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  min-height: 44px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text2);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+}
+.page-action-btn:hover  { border-color: var(--border-hover); color: var(--text); }
+.page-action-btn:active { background: var(--surface-hover); }
+
+/* Tablet: larger action buttons */
+@media (min-width: 768px) {
+  .page-action-btn { min-height: 48px; font-size: 14px; }
+}
+
+/* ── Page-about collapsible (replaces wall-of-text headers) ──────────────── */
+.page-about {
+  max-width: 860px;
+  margin: 8px auto 0;
+  padding: 0 20px;
+}
+
+.page-about summary {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text3);
+  cursor: pointer;
+  user-select: none;
+  padding: 8px 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  -webkit-tap-highlight-color: transparent;
+}
+.page-about summary::-webkit-details-marker { display: none; }
+.page-about summary::before {
+  content: '▸';
+  font-size: 10px;
+  transition: transform 0.18s;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.page-about[open] summary::before { transform: rotate(90deg); }
+
+.page-about__body {
+  padding: 8px 0 16px;
+  font-size: 13px;
+  color: var(--text3);
+  line-height: 1.65;
+}
+.page-about__body p { margin: 0 0 10px; }
+.page-about__body p:last-child { margin: 0; }
+.page-about__body strong { color: var(--text2); font-weight: 600; }
+.page-about__body em { color: var(--text2); }

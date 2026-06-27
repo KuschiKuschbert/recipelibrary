@@ -36,7 +36,10 @@
   }
   .nav-back a:hover { color: var(--gold); }
 
-  /* Hero — match index.html */
+  :root { --app-header-h: 65px; }
+  .search-wrap { margin-top: 12px; top: var(--app-header-h); }
+
+  /* Hero — legacy; no longer rendered but kept for reference */
   .hero {
     container-type: inline-size;
     text-align: center;
@@ -439,19 +442,21 @@
 </style>
 </head>
 <body class="has-app-nav">
-<div class="hero">
-  <div class="hero-label">Kuschi · Aroma Bible</div>
-  <h1 class="hero-title">Aroma <em>lookup</em></h1>
-  <p class="hero-sub">Food-to-spice pairings and harmony matrix from the book extract (English UI). <b>For inspiration only.</b></p>
-  <p class="hero-sub-tools">Also: <a href="flavor.html">Flavor explorer</a> (pairing tiers) · <a href="flavor.html?toolkit=1">Flavor toolkit</a> (fix flat dishes, cuisine DNA, blends) · <a href="pairing-atlas.html">Matrix</a> (full grid).</p>
-  <div class="hero-nav">
-    <div class="hero-nav-cluster">
-      <a href="kitchen-book.html" class="hero-nav-link">Kitchen book</a>
-      <a href="riviera.html" class="hero-nav-link">Riviera</a>
-      <a href="index.html" class="hero-nav-link">Recipe index</a>
+<header class="app-header">
+  <div class="app-header__brand">
+    <span class="app-header__mark">A</span>
+    <div class="app-header__info">
+      <div class="app-header__title">Aroma Bible</div>
+      <div class="app-header__count" style="color:var(--text3);font-size:11px">Food-to-spice pairings · for inspiration</div>
     </div>
   </div>
-</div>
+  <div class="app-header__actions">
+    <button type="button" class="app-header__btn" data-kitchen-mode-toggle onclick="toggleKitchenMode()" title="Kitchen Mode — larger text">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <span class="app-header__btn-label">Kitchen</span>
+    </button>
+  </div>
+</header>
 
 <div class="search-wrap">
   <div class="search-glass">
@@ -539,6 +544,7 @@
 
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/aroma-hints.js"></script>
+<script src="assets/kuschi-kitchen-mode.js"></script>
 <script>
 (function () {
   var ingredients = [];

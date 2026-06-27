@@ -594,17 +594,6 @@
   <button class="clear-btn" id="clearBtn">Clear all</button>
 </div>
 
-<!-- Filter bottom sheet (reuses .nav-sheet CSS from theme.css) -->
-<div class="nav-sheet" id="filterSheet" hidden role="dialog" aria-modal="true">
-  <div class="nav-sheet__backdrop" onclick="closeFilterSheet()"></div>
-  <div class="nav-sheet__panel filter-sheet__panel">
-    <div class="nav-sheet__header">
-      <span class="nav-sheet__title" id="filterSheetTitle">Filter</span>
-      <button class="nav-sheet__close" type="button" onclick="closeFilterSheet()">✕</button>
-    </div>
-    <div class="nav-sheet__books filter-sheet__list" id="filterSheetList"></div>
-  </div>
-</div>
 
 <div class="results-bar" id="resultsBar">
   <div class="results-count" id="resultsCount"></div>
@@ -715,6 +704,9 @@
 <script src="assets/recipe-metric-normalize.js"></script>
 <script src="assets/qrcodejs-1.0.0.min.js" defer></script>
 <script src="assets/screen-wake.js" defer></script>
+<script src="assets/kuschi-kitchen-mode.js"></script>
+<script src="assets/kuschi-filter-chips.js"></script>
+<script src="assets/kuschi-cook-mode.js"></script>
 <script>
 const PAGE_SIZE = 48;
 let allRecipes = [];
@@ -1100,77 +1092,7 @@ document.getElementById('clearBtn').addEventListener('click', () => {
   applyFilters();
 });
 
-// ── Filter chips ──────────────────────────────────────
-const FILTER_CHIP_DEFS = [
-  { chipId: 'chipCuisine', selectId: 'filterCuisine', label: 'Cuisine' },
-  { chipId: 'chipProtein', selectId: 'filterProtein', label: 'Protein' },
-  { chipId: 'chipTag',     selectId: 'filterTag',     label: 'Dietary' },
-  { chipId: 'chipCat',     selectId: 'filterCat',     label: 'Category' },
-];
-
-const _CHECK_ICON = '<svg class="filter-sheet__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
-
-let _filterSheetActiveSelect = null;
-
-function updateFilterChips() {
-  for (const { chipId, selectId, label } of FILTER_CHIP_DEFS) {
-    const chip = document.getElementById(chipId);
-    const sel  = document.getElementById(selectId);
-    if (!chip || !sel) continue;
-    const val = sel.value;
-    if (val) {
-      chip.classList.add('filter-chip--active');
-      chip.innerHTML = KuschiRecipeUi.esc(val) +
-        `<span class="filter-chip__x" role="button" aria-label="Clear ${label} filter"
-          onclick="event.stopPropagation();clearFilterChip('${selectId}')">×</span>`;
-    } else {
-      chip.classList.remove('filter-chip--active');
-      chip.textContent = label;
-    }
-  }
-}
-
-function openFilterSheet(label, selectId) {
-  const sel = document.getElementById(selectId);
-  if (!sel) return;
-  _filterSheetActiveSelect = selectId;
-
-  let html = '';
-  for (const opt of sel.options) {
-    const active = opt.value === sel.value;
-    const cls = 'filter-sheet__option' + (active ? ' filter-sheet__option--active' : '');
-    html += `<button class="${cls}" type="button"
-        onclick="setFilterValue('${selectId}','${KuschiRecipeUi.esc(opt.value).replace(/'/g,"\\'")}')">
-      ${KuschiRecipeUi.esc(opt.textContent)}
-      ${active ? _CHECK_ICON : '<svg class="filter-sheet__check" viewBox="0 0 24 24"></svg>'}
-    </button>`;
-  }
-  document.getElementById('filterSheetTitle').textContent = label;
-  document.getElementById('filterSheetList').innerHTML = html;
-
-  const sheet = document.getElementById('filterSheet');
-  if (sheet) { sheet.removeAttribute('hidden'); document.body.style.overflow = 'hidden'; }
-}
-
-function setFilterValue(selectId, value) {
-  const sel = document.getElementById(selectId);
-  if (sel) {
-    sel.value = value;
-    sel.dispatchEvent(new Event('change', { bubbles: true }));
-  }
-  closeFilterSheet();
-}
-
-function clearFilterChip(selectId) {
-  setFilterValue(selectId, '');
-}
-
-function closeFilterSheet() {
-  const sheet = document.getElementById('filterSheet');
-  if (sheet) sheet.setAttribute('hidden', '');
-  const anyOpen = document.querySelector('.modal-overlay.open, .nav-sheet:not([hidden])');
-  if (!anyOpen) document.body.style.overflow = '';
-}
+// Filter chips provided by assets/kuschi-filter-chips.js
 
 
 // Keyboard shortcuts
@@ -1395,6 +1317,9 @@ async function openRecipe(id) {
   const overlay = document.getElementById('modalOverlay');
   const modal = document.getElementById('modal');
 
+  // Routing: push ?open=<id> so the back button closes the modal.
+  if (window.KuschiCookMode) KuschiCookMode.pushOpen(id);
+
   if (window.KuschiUserRecipes && id && String(id).startsWith('user-')) {
     const full = KuschiUserRecipes.getKitchenById(id);
     if (full) {
@@ -1464,77 +1389,17 @@ function closeModal() {
   const overlay = document.getElementById('modalOverlay');
   overlay.classList.remove('open', 'cook-mode');
   currentRecipe = null;
+  // Routing: remove ?open= from history.
+  if (window.KuschiCookMode) KuschiCookMode.popOpen();
+  // Clean up Cook Mode step nav so it rebuilds fresh next open.
+  if (window.KuschiCookMode) KuschiCookMode.cleanup();
   if (!document.getElementById('pageQrOverlay').classList.contains('open') &&
       !(document.getElementById('addKitchenBookOverlay') && document.getElementById('addKitchenBookOverlay').classList.contains('open'))) {
     document.body.style.overflow = '';
   }
 }
 
-function toggleCookMode() {
-  const overlay = document.getElementById('modalOverlay');
-  const btn = document.getElementById('cookModeBtn');
-  const entering = !overlay.classList.contains('cook-mode');
-  overlay.classList.toggle('cook-mode', entering);
-  if (btn) btn.classList.toggle('cook-mode-btn--active', entering);
-  // Auto-enable wake lock in Cook Mode
-  if (entering && window.KuschiScreenWake) {
-    KuschiScreenWake.request().catch(() => {});
-  }
-  // Build step nav on first entry
-  if (entering) buildCookModeStepNav();
-}
-
-function buildCookModeStepNav() {
-  if (document.getElementById('cookStepNav')) return;
-  const steps = document.querySelectorAll('#modalOverlay .modal-steps li, #modalOverlay .modal-step');
-  if (!steps.length) return;
-
-  let currentStep = 0;
-  const total = steps.length;
-
-  function goToStep(idx) {
-    currentStep = Math.max(0, Math.min(total - 1, idx));
-    steps.forEach((el, i) => {
-      el.classList.toggle('cook-step-active', i === currentStep);
-      el.classList.toggle('cook-step-past', i < currentStep);
-    });
-    const counter = document.getElementById('cookStepCounter');
-    if (counter) counter.textContent = `${currentStep + 1} / ${total}`;
-    // Scroll the active step into view
-    steps[currentStep].scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-
-  const nav = document.createElement('div');
-  nav.id = 'cookStepNav';
-  nav.className = 'cook-step-nav';
-  nav.innerHTML = `
-    <button class="cook-step-prev" type="button" onclick="cookStepNav.prev()" aria-label="Previous step">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-    <span class="cook-step-counter" id="cookStepCounter">1 / ${total}</span>
-    <button class="cook-step-next" type="button" onclick="cookStepNav.next()" aria-label="Next step">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>`;
-
-  const modal = document.getElementById('modal');
-  modal.appendChild(nav);
-
-  window.cookStepNav = {
-    prev: function () { goToStep(currentStep - 1); },
-    next: function () { goToStep(currentStep + 1); },
-  };
-
-  goToStep(0);
-}
-
-function tryOpenFromQuery() {
-  try {
-    const p = new URLSearchParams(window.location.search);
-    const id = p.get('open');
-    if (!id || !recipeIndex[id]) return;
-    setTimeout(() => openRecipe(id), 120);
-  } catch (_) {}
-}
+// Cook Mode + routing provided by assets/kuschi-cook-mode.js
 
 document.addEventListener('keydown', (e) => {
   if (e.key !== 'Escape') return;
@@ -2279,23 +2144,7 @@ function closePageQrModal() {
 refreshCustomBookNav();
 attachContentRecipePrefetch();
 
-// ── Kitchen Mode (persisted large-type toggle) ────────
-(function initKitchenMode() {
-  try {
-    if (localStorage.getItem('kuschiKitchenMode') === '1') {
-      document.documentElement.classList.add('kitchen-mode');
-      const btn = document.getElementById('kmToggleBtn');
-      if (btn) btn.setAttribute('data-km-active', 'true');
-    }
-  } catch (_) {}
-})();
-
-function toggleKitchenMode() {
-  const active = document.documentElement.classList.toggle('kitchen-mode');
-  const btn = document.getElementById('kmToggleBtn');
-  if (btn) btn.setAttribute('data-km-active', active ? 'true' : 'false');
-  try { localStorage.setItem('kuschiKitchenMode', active ? '1' : '0'); } catch (_) {}
-}
+// Kitchen Mode provided by assets/kuschi-kitchen-mode.js
 
 // ── Kick manifest + shard fetches IMMEDIATELY so they're in-flight while
 //    deferred scripts finish loading. Render happens after DOMContentLoaded
@@ -2388,7 +2237,6 @@ async function _bootstrapRecipes() {
             allRecipes.length.toLocaleString() + (loadedShards < files.length ? '+' : '');
           filtered = [...allRecipes];
           applyFilters();
-          tryOpenFromQuery();
         } else {
           scheduleRerender();
         }
@@ -2430,6 +2278,18 @@ if (document.readyState === 'loading') {
 } else {
   _bootstrapRecipes();
 }
+
+// ── Init shared modules ───────────────────────────────
+// Filter chips — wire the 4 chip buttons to the hidden selects.
+KuschiFilterChips.init([
+  { chipId: 'chipCuisine', selectId: 'filterCuisine', label: 'Cuisine' },
+  { chipId: 'chipProtein', selectId: 'filterProtein', label: 'Protein' },
+  { chipId: 'chipTag',     selectId: 'filterTag',     label: 'Dietary' },
+  { chipId: 'chipCat',     selectId: 'filterCat',     label: 'Category' },
+], applyFilters);
+
+// Routing — back button closes modal, ?open= deep-links to a recipe.
+KuschiCookMode.bindRouting(openRecipe, closeModal);
 </script>
 <script src="assets/app-nav.js"></script>
 </body>

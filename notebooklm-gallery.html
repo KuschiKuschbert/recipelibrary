@@ -16,6 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/theme.css">
 <style>
+  :root { --app-header-h: 65px; }
   body.nb-page {
     font-family: Inter, -apple-system, sans-serif;
     background: var(--bg);
@@ -199,13 +200,20 @@
 <div class="nb-shell">
   <nav class="nb-nav" aria-label="Site" style="display:none" aria-hidden="true"></nav>
 
-  <header>
-    <p class="nb-hero-label">Kuschi · NotebookLM &amp; visuals</p>
-    <h1 class="nb-hero-title">Visual guides</h1>
-    <p class="nb-hero-sub">
-      Infographics and slide-style exports from your notebooks, listed in <code>notebooklm/manifest.json</code>.
-      Tap a card to view full size — handy on a pass with an apprentice or on the line.
-    </p>
+  <header class="app-header">
+    <div class="app-header__brand">
+      <span class="app-header__mark">G</span>
+      <div class="app-header__info">
+        <div class="app-header__title">Visual Guides</div>
+        <div class="app-header__count" style="color:var(--text3);font-size:11px">NotebookLM infographics &amp; exports</div>
+      </div>
+    </div>
+    <div class="app-header__actions">
+      <button type="button" class="app-header__btn" data-kitchen-mode-toggle onclick="toggleKitchenMode()" title="Kitchen Mode — larger text">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <span class="app-header__btn-label">Kitchen</span>
+      </button>
+    </div>
   </header>
 
   <p class="nb-status" id="nbStatus" aria-live="polite">Loading manifest…</p>
@@ -231,6 +239,7 @@
 </div>
 
 <script src="assets/notebooklm-gallery.js"></script>
+<script src="assets/kuschi-kitchen-mode.js"></script>
 <script src="assets/app-nav.js"></script>
 </body>
 </html>
