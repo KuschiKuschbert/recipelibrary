@@ -17,72 +17,90 @@
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
-  /* ── Hero / Header (index) ─────────────────────────── */
-  .hero {
-    container-type: inline-size;
-    text-align: center;
-    padding: 60px 24px 20px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 50% 0%, rgba(201,169,110,0.08) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .hero-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 16px;
-    opacity: 0.8;
-  }
-  .hero-title {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(36px, 6vw, 56px);
-    font-weight: 700;
-    color: var(--text);
-    line-height: 1.1;
-    margin-bottom: 12px;
-  }
-  .hero-title em {
-    font-style: italic;
-    color: var(--gold);
-  }
-  .hero-sub {
-    font-size: 16px;
-    font-weight: 300;
-    color: var(--text2);
-    max-width: 500px;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
-  .hero-sub b { color: var(--gold-light); font-weight: 500; }
-  .hero-nav-link {
-    display: inline-flex;
+  /* Page-level layout tokens */
+  :root { --app-header-h: 65px; }
+  /* Search sticks just below the app-header */
+  .search-wrap { margin-top: 12px; top: var(--app-header-h); }
+
+  /* ── App header (compact brand strip) ───────────────── */
+  .app-header {
+    display: flex;
     align-items: center;
-    gap: 8px;
-    padding: var(--hero-pill-pad-y, 10px) var(--hero-pill-pad-x, 20px);
-    font-size: var(--hero-pill-fs, 13px);
-    font-weight: var(--hero-pill-fw, 500);
-    letter-spacing: var(--hero-pill-ls, 0.5px);
-    color: var(--gold);
+    justify-content: space-between;
+    gap: 12px;
+    padding: max(16px, env(safe-area-inset-top, 0px)) 20px 12px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 110;
+  }
+  .app-header__brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+  .app-header__mark {
+    flex-shrink: 0;
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
     background: var(--gold-dim);
     border: 1px solid rgba(201,169,110,0.3);
-    border-radius: 100px;
-    text-decoration: none;
-    transition: all 0.25s;
+    border-radius: 10px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
   }
-  .hero-nav-link:hover {
-    background: rgba(201,169,110,0.25);
-    border-color: var(--gold);
-    color: var(--gold-light);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(201,169,110,0.15);
+  .app-header__info { min-width: 0; }
+  .app-header__title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px; font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .app-header__count {
+    font-size: 11px; color: var(--text3);
+    white-space: nowrap;
+  }
+  .app-header__count b { color: var(--gold); font-weight: 500; }
+  .app-header__actions {
+    display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+  }
+  .app-header__btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 8px 12px;
+    min-height: 38px;
+    font-size: 12px; font-weight: 500; font-family: inherit;
+    color: var(--text2);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .app-header__btn:hover { border-color: var(--border-hover); color: var(--text); }
+  .app-header__btn:active { background: var(--surface-hover); }
+  .app-header__btn--add {
+    background: var(--gold-dim);
+    border-color: rgba(201,169,110,0.3);
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .app-header__btn--add:hover { background: rgba(201,169,110,0.25); border-color: var(--gold); color: var(--gold-light); }
+  .app-header__btn[data-km-active="true"] {
+    border-color: var(--gold); color: var(--gold); background: var(--gold-dim);
+  }
+  .app-header__btn-label { font-size: 11px; }
+  @media (max-width: 480px) {
+    .app-header__btn-label { display: none; }
+    .app-header__btn { padding: 8px 10px; }
+    .app-header__mark { width: 32px; height: 32px; font-size: 18px; }
   }
 
   /* Add recipe modal: manual vs paste-to-format tabs */
@@ -532,25 +550,25 @@
 </head>
 <body class="has-app-nav">
 
-<div class="hero">
-  <div class="hero-label">Kuschi · Recipe Library</div>
-  <h1 class="hero-title">The <em>Kitchen</em> Library</h1>
-  <p class="hero-sub"><b id="totalCount">38,363</b> recipes — professionally formatted, metric, density-converted, searchable.</p>
-  <div class="hero-nav">
-    <div class="hero-nav-cluster">
-      <div class="hero-add-split" id="heroAddSplit">
-        <div class="hero-add-inner">
-          <button type="button" class="hero-nav-link hero-add-trigger" id="heroAddTrigger" aria-expanded="false" aria-controls="heroAddPair" onclick="event.stopPropagation(); toggleHeroAddSplit();">+ Add</button>
-          <div class="hero-add-pair" id="heroAddPair" role="group" aria-label="Choose what to add" aria-hidden="true">
-            <button type="button" class="hero-nav-link" tabindex="-1" onclick="event.stopPropagation(); heroPickAddRecipe();">+ Add recipe</button>
-            <span class="hero-add-divider" aria-hidden="true"></span>
-            <button type="button" class="hero-nav-link" tabindex="-1" onclick="event.stopPropagation(); heroPickAddKitchenBook();">+ Kitchen book</button>
-          </div>
-        </div>
-      </div>
+<header class="app-header">
+  <div class="app-header__brand">
+    <span class="app-header__mark">K</span>
+    <div class="app-header__info">
+      <div class="app-header__title">Kitchen Library</div>
+      <div class="app-header__count"><b id="totalCount">38,363</b> recipes</div>
     </div>
   </div>
-</div>
+  <div class="app-header__actions">
+    <button type="button" class="app-header__btn" id="kmToggleBtn" onclick="toggleKitchenMode()" title="Kitchen Mode — larger text for bench reading">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <span class="app-header__btn-label">Kitchen</span>
+    </button>
+    <button type="button" class="app-header__btn app-header__btn--add" onclick="openAddRecipeModal()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Add
+    </button>
+  </div>
+</header>
 
 <div class="search-wrap" id="searchWrap">
   <div class="search-glass">
@@ -562,12 +580,30 @@
   </div>
 </div>
 
-<div class="filters-wrap">
-  <select class="filter-pill" id="filterCuisine"><option value="">Cuisine</option></select>
-  <select class="filter-pill" id="filterProtein"><option value="">Protein</option></select>
-  <select class="filter-pill" id="filterTag"><option value="">Dietary</option></select>
-  <select class="filter-pill" id="filterCat"><option value="">Category</option></select>
+<div class="filters-wrap" id="filtersWrap">
+  <!-- Hidden native selects (still read by applyFilters(); populated by buildFiltersAsync()) -->
+  <select class="filter-pill filter-pill--hidden" id="filterCuisine"><option value="">Cuisine</option></select>
+  <select class="filter-pill filter-pill--hidden" id="filterProtein"><option value="">Protein</option></select>
+  <select class="filter-pill filter-pill--hidden" id="filterTag"><option value="">Dietary</option></select>
+  <select class="filter-pill filter-pill--hidden" id="filterCat"><option value="">Category</option></select>
+  <!-- Custom chip bar (synced to hidden selects) -->
+  <button type="button" class="filter-chip" id="chipCuisine" onclick="openFilterSheet('Cuisine','filterCuisine')">Cuisine</button>
+  <button type="button" class="filter-chip" id="chipProtein" onclick="openFilterSheet('Protein','filterProtein')">Protein</button>
+  <button type="button" class="filter-chip" id="chipTag" onclick="openFilterSheet('Dietary','filterTag')">Dietary</button>
+  <button type="button" class="filter-chip" id="chipCat" onclick="openFilterSheet('Category','filterCat')">Category</button>
   <button class="clear-btn" id="clearBtn">Clear all</button>
+</div>
+
+<!-- Filter bottom sheet (reuses .nav-sheet CSS from theme.css) -->
+<div class="nav-sheet" id="filterSheet" hidden role="dialog" aria-modal="true">
+  <div class="nav-sheet__backdrop" onclick="closeFilterSheet()"></div>
+  <div class="nav-sheet__panel filter-sheet__panel">
+    <div class="nav-sheet__header">
+      <span class="nav-sheet__title" id="filterSheetTitle">Filter</span>
+      <button class="nav-sheet__close" type="button" onclick="closeFilterSheet()">✕</button>
+    </div>
+    <div class="nav-sheet__books filter-sheet__list" id="filterSheetList"></div>
+  </div>
 </div>
 
 <div class="results-bar" id="resultsBar">
@@ -680,10 +716,12 @@
 <script src="assets/qrcodejs-1.0.0.min.js" defer></script>
 <script src="assets/screen-wake.js" defer></script>
 <script>
-const PAGE_SIZE = 60;
+const PAGE_SIZE = 48;
 let allRecipes = [];
 let filtered = [];
 let currentPage = 1;
+/** How many recipes are currently displayed (load-more accumulator). */
+let kuschiDisplayCount = PAGE_SIZE;
 let currentRecipe = null;
 /** Last applyFilters timing so pagination re-renders can keep showing ms when enabled. */
 let lastFilterMs = '';
@@ -934,7 +972,9 @@ function applyFilters() {
   }
   lastFilterMs = dt;
   currentPage = 1;
+  kuschiDisplayCount = PAGE_SIZE;
   render(dt);
+  if (typeof updateFilterChips === 'function') updateFilterChips();
 }
 
 // ── Rendering ─────────────────────────────────────────
@@ -955,11 +995,45 @@ function render(dt) {
     return;
   }
 
-  const start = (currentPage - 1) * PAGE_SIZE;
-  const page = filtered.slice(start, start + PAGE_SIZE);
+  const page = filtered.slice(0, kuschiDisplayCount);
   content.innerHTML = '<div class="grid">' + page.map(cardHTML).join('') + '</div>';
-  renderPagination();
+  renderLoadMore();
   schedulePrefetchVisibleDetailShards();
+}
+
+/** Append next PAGE_SIZE cards to the existing grid without a full re-render. */
+function loadMore() {
+  const prev = kuschiDisplayCount;
+  kuschiDisplayCount = Math.min(prev + PAGE_SIZE, filtered.length);
+  const newCards = filtered.slice(prev, kuschiDisplayCount);
+  const grid = document.querySelector('#content .grid');
+  if (grid) {
+    grid.insertAdjacentHTML('beforeend', newCards.map(cardHTML).join(''));
+    schedulePrefetchVisibleDetailShards();
+  }
+  renderLoadMore();
+}
+
+function renderLoadMore() {
+  const pag = document.getElementById('pagination');
+  const remaining = filtered.length - kuschiDisplayCount;
+
+  let html = '<div class="load-more-wrap">';
+  if (remaining > 0) {
+    const next = Math.min(PAGE_SIZE, remaining);
+    html += `<button class="load-more-btn" onclick="loadMore()">
+      Load ${next.toLocaleString()} more
+      <span class="load-more-count">(${remaining.toLocaleString()} remaining)</span>
+    </button>`;
+  }
+  if (kuschiDisplayCount > PAGE_SIZE) {
+    html += `<button class="back-to-top-btn" onclick="document.getElementById('searchWrap').scrollIntoView({behavior:'smooth'})">
+      ↑ Back to top
+    </button>`;
+  }
+  html += '</div>';
+
+  pag.innerHTML = html;
 }
 
 function cardHTML(r) {
@@ -1006,45 +1080,6 @@ function copyName(btn, name) {
   });
 }
 
-// ── Pagination ────────────────────────────────────────
-function renderPagination() {
-  const total = Math.ceil(filtered.length / PAGE_SIZE);
-  const pag = document.getElementById('pagination');
-  if (total <= 1) { pag.innerHTML = ''; return; }
-
-  let html = `<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage<=1?'disabled':''}>
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-  </button>`;
-
-  for (const p of pageRange(currentPage, total)) {
-    if (p === '...') html += '<span class="page-dots">…</span>';
-    else html += `<button class="page-btn ${p===currentPage?'active':''}" onclick="goPage(${p})">${p}</button>`;
-  }
-
-  html += `<button class="page-btn" onclick="goPage(${currentPage+1})" ${currentPage>=total?'disabled':''}>
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-  </button>`;
-
-  pag.innerHTML = html;
-}
-
-function pageRange(cur, total) {
-  if (total <= 7) return Array.from({length:total},(_,i)=>i+1);
-  const p = [1];
-  if (cur > 3) p.push('...');
-  for (let i = Math.max(2,cur-1); i <= Math.min(total-1,cur+1); i++) p.push(i);
-  if (cur < total-2) p.push('...');
-  p.push(total);
-  return p;
-}
-
-function goPage(p) {
-  const total = Math.ceil(filtered.length / PAGE_SIZE);
-  if (p < 1 || p > total) return;
-  currentPage = p;
-  render();
-  document.getElementById('searchWrap').scrollIntoView({ behavior: 'smooth' });
-}
 
 // ── Event Listeners ───────────────────────────────────
 let debounce;
@@ -1065,6 +1100,79 @@ document.getElementById('clearBtn').addEventListener('click', () => {
   applyFilters();
 });
 
+// ── Filter chips ──────────────────────────────────────
+const FILTER_CHIP_DEFS = [
+  { chipId: 'chipCuisine', selectId: 'filterCuisine', label: 'Cuisine' },
+  { chipId: 'chipProtein', selectId: 'filterProtein', label: 'Protein' },
+  { chipId: 'chipTag',     selectId: 'filterTag',     label: 'Dietary' },
+  { chipId: 'chipCat',     selectId: 'filterCat',     label: 'Category' },
+];
+
+const _CHECK_ICON = '<svg class="filter-sheet__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+
+let _filterSheetActiveSelect = null;
+
+function updateFilterChips() {
+  for (const { chipId, selectId, label } of FILTER_CHIP_DEFS) {
+    const chip = document.getElementById(chipId);
+    const sel  = document.getElementById(selectId);
+    if (!chip || !sel) continue;
+    const val = sel.value;
+    if (val) {
+      chip.classList.add('filter-chip--active');
+      chip.innerHTML = KuschiRecipeUi.esc(val) +
+        `<span class="filter-chip__x" role="button" aria-label="Clear ${label} filter"
+          onclick="event.stopPropagation();clearFilterChip('${selectId}')">×</span>`;
+    } else {
+      chip.classList.remove('filter-chip--active');
+      chip.textContent = label;
+    }
+  }
+}
+
+function openFilterSheet(label, selectId) {
+  const sel = document.getElementById(selectId);
+  if (!sel) return;
+  _filterSheetActiveSelect = selectId;
+
+  let html = '';
+  for (const opt of sel.options) {
+    const active = opt.value === sel.value;
+    const cls = 'filter-sheet__option' + (active ? ' filter-sheet__option--active' : '');
+    html += `<button class="${cls}" type="button"
+        onclick="setFilterValue('${selectId}','${KuschiRecipeUi.esc(opt.value).replace(/'/g,"\\'")}')">
+      ${KuschiRecipeUi.esc(opt.textContent)}
+      ${active ? _CHECK_ICON : '<svg class="filter-sheet__check" viewBox="0 0 24 24"></svg>'}
+    </button>`;
+  }
+  document.getElementById('filterSheetTitle').textContent = label;
+  document.getElementById('filterSheetList').innerHTML = html;
+
+  const sheet = document.getElementById('filterSheet');
+  if (sheet) { sheet.removeAttribute('hidden'); document.body.style.overflow = 'hidden'; }
+}
+
+function setFilterValue(selectId, value) {
+  const sel = document.getElementById(selectId);
+  if (sel) {
+    sel.value = value;
+    sel.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+  closeFilterSheet();
+}
+
+function clearFilterChip(selectId) {
+  setFilterValue(selectId, '');
+}
+
+function closeFilterSheet() {
+  const sheet = document.getElementById('filterSheet');
+  if (sheet) sheet.setAttribute('hidden', '');
+  const anyOpen = document.querySelector('.modal-overlay.open, .nav-sheet:not([hidden])');
+  if (!anyOpen) document.body.style.overflow = '';
+}
+
+
 // Keyboard shortcuts
 document.addEventListener('keydown', e => {
   if (e.key === '/' && !['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) {
@@ -1072,6 +1180,8 @@ document.addEventListener('keydown', e => {
     document.getElementById('search').focus();
   }
   if (e.key === 'Escape') {
+    const fSheet = document.getElementById('filterSheet');
+    if (fSheet && !fSheet.hidden) { closeFilterSheet(); return; }
     if (document.getElementById('addRecipeOverlay').classList.contains('open')) {
       closeAddRecipeModal();
     } else if (document.getElementById('addKitchenBookOverlay') && document.getElementById('addKitchenBookOverlay').classList.contains('open')) {
@@ -1351,12 +1461,70 @@ async function openRecipe(id) {
 }
 
 function closeModal() {
-  document.getElementById('modalOverlay').classList.remove('open');
+  const overlay = document.getElementById('modalOverlay');
+  overlay.classList.remove('open', 'cook-mode');
   currentRecipe = null;
   if (!document.getElementById('pageQrOverlay').classList.contains('open') &&
       !(document.getElementById('addKitchenBookOverlay') && document.getElementById('addKitchenBookOverlay').classList.contains('open'))) {
     document.body.style.overflow = '';
   }
+}
+
+function toggleCookMode() {
+  const overlay = document.getElementById('modalOverlay');
+  const btn = document.getElementById('cookModeBtn');
+  const entering = !overlay.classList.contains('cook-mode');
+  overlay.classList.toggle('cook-mode', entering);
+  if (btn) btn.classList.toggle('cook-mode-btn--active', entering);
+  // Auto-enable wake lock in Cook Mode
+  if (entering && window.KuschiScreenWake) {
+    KuschiScreenWake.request().catch(() => {});
+  }
+  // Build step nav on first entry
+  if (entering) buildCookModeStepNav();
+}
+
+function buildCookModeStepNav() {
+  if (document.getElementById('cookStepNav')) return;
+  const steps = document.querySelectorAll('#modalOverlay .modal-steps li, #modalOverlay .modal-step');
+  if (!steps.length) return;
+
+  let currentStep = 0;
+  const total = steps.length;
+
+  function goToStep(idx) {
+    currentStep = Math.max(0, Math.min(total - 1, idx));
+    steps.forEach((el, i) => {
+      el.classList.toggle('cook-step-active', i === currentStep);
+      el.classList.toggle('cook-step-past', i < currentStep);
+    });
+    const counter = document.getElementById('cookStepCounter');
+    if (counter) counter.textContent = `${currentStep + 1} / ${total}`;
+    // Scroll the active step into view
+    steps[currentStep].scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  const nav = document.createElement('div');
+  nav.id = 'cookStepNav';
+  nav.className = 'cook-step-nav';
+  nav.innerHTML = `
+    <button class="cook-step-prev" type="button" onclick="cookStepNav.prev()" aria-label="Previous step">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <span class="cook-step-counter" id="cookStepCounter">1 / ${total}</span>
+    <button class="cook-step-next" type="button" onclick="cookStepNav.next()" aria-label="Next step">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>`;
+
+  const modal = document.getElementById('modal');
+  modal.appendChild(nav);
+
+  window.cookStepNav = {
+    prev: function () { goToStep(currentStep - 1); },
+    next: function () { goToStep(currentStep + 1); },
+  };
+
+  goToStep(0);
 }
 
 function tryOpenFromQuery() {
@@ -1377,6 +1545,10 @@ document.addEventListener('keydown', (e) => {
 function kitchenModalShellTop(r) {
   let html = `<div class="modal-top-bar">`;
   html += `<button type="button" class="modal-wake-pill" data-kuschi-wake aria-pressed="false"><span data-kuschi-wake-label>Stay awake</span></button>`;
+  html += `<button type="button" class="cook-mode-btn" id="cookModeBtn" onclick="toggleCookMode()" title="Cook Mode — full screen, large text">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+    Cook
+  </button>`;
   html += `<button class="modal-close" onclick="closeModal()">✕</button></div>`;
   html += `<div class="modal-title">${KuschiRecipeUi.esc(r.name)}</div>`;
 
@@ -2106,6 +2278,24 @@ function closePageQrModal() {
 
 refreshCustomBookNav();
 attachContentRecipePrefetch();
+
+// ── Kitchen Mode (persisted large-type toggle) ────────
+(function initKitchenMode() {
+  try {
+    if (localStorage.getItem('kuschiKitchenMode') === '1') {
+      document.documentElement.classList.add('kitchen-mode');
+      const btn = document.getElementById('kmToggleBtn');
+      if (btn) btn.setAttribute('data-km-active', 'true');
+    }
+  } catch (_) {}
+})();
+
+function toggleKitchenMode() {
+  const active = document.documentElement.classList.toggle('kitchen-mode');
+  const btn = document.getElementById('kmToggleBtn');
+  if (btn) btn.setAttribute('data-km-active', active ? 'true' : 'false');
+  try { localStorage.setItem('kuschiKitchenMode', active ? '1' : '0'); } catch (_) {}
+}
 
 // ── Kick manifest + shard fetches IMMEDIATELY so they're in-flight while
 //    deferred scripts finish loading. Render happens after DOMContentLoaded
