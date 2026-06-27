@@ -280,7 +280,9 @@
         "Jam"
       ],
       "builtin_id": "platter-scones-chantilly-jam",
-      "reuse": []
+      "reuse": [
+        "house-scones"
+      ]
     },
     {
       "wave": "B",

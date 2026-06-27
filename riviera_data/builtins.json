@@ -4206,6 +4206,71 @@
     "note": "Ricotta must be well drained or cannoli filling will be too loose to pipe cleanly. Zabaglione must be fully cooled before folding into mascarpone or the cream will split. Cannoli shells absorb moisture quickly — keep unfilled until the final moment. Tiramisu cups can be made day prior for best set."
   },
   {
+    "id": "house-scones",
+    "name": "House Scones",
+    "subtitle": "Scone Mix · 180°C · 20 Minutes",
+    "type": "Bakery",
+    "course": "Dessert",
+    "protein": [],
+    "diet": [
+      "vegetarian"
+    ],
+    "method": "Bake",
+    "yield": "12 regular · 40 small (high tea) per batch · scones box = 12 regular + jam + cream",
+    "label": "House Scones",
+    "elements": [
+      "Scone Dough",
+      "Baked Scones",
+      "Scones Box"
+    ],
+    "ingredients": [
+      {
+        "qty": "1080 g",
+        "item": "Scone Mix"
+      },
+      {
+        "qty": "600 ml",
+        "item": "Water"
+      },
+      {
+        "qty": "120 g",
+        "item": "Strawberry Jam",
+        "prep": "scones box — per 12 regular"
+      },
+      {
+        "qty": "200 ml",
+        "item": "Thickened Cream",
+        "prep": "cold — whip with icing sugar and vanilla for chantilly; scones box — per 12 regular"
+      },
+      {
+        "qty": "15 g",
+        "item": "Icing Sugar",
+        "prep": "sifted — for chantilly"
+      },
+      {
+        "qty": "5 ml",
+        "item": "Vanilla Extract",
+        "prep": "for chantilly"
+      }
+    ],
+    "method_steps": [
+      "MIX: Combine 1080 g scone mix and 600 ml water in a stand mixer. Mix for 3 minutes until just combined — do not overmix.",
+      "REST: Rest dough 5 minutes covered.",
+      "SHAPE: Turn onto a lightly floured bench. Form to scone thickness — handle as little as possible. Cut with a floured round cutter; press straight down and lift cleanly — do not twist. Regular cutter = 12 scones; small cutter = 40 scones (high tea) from this batch. Re-pat scraps once only.",
+      "BAKE: Place on a lined tray with scones touching (encourages rise). Bake at 180°C conventional for 20 minutes until risen and golden. Cool on a wire rack briefly before packing.",
+      "CHANTILLY: Whip cold cream, icing sugar and vanilla in a chilled bowl to soft-firm peaks. Yield approx. 180 g chantilly per 12 regular scones.",
+      "SCONES BOX: Pack 12 regular scones with 120 g jam and chantilly. Cream and jam separate for delivery unless immediate service.",
+      "PLATTER: Same as scones box — halve scones on platter, jam and chantilly in bowls alongside."
+    ],
+    "service": [
+      "Scones box = 12 regular scones with jam and cream.",
+      "Best served warm on the day of baking.",
+      "If made ahead, reheat at 160°C for 5–6 min — do not overheat or they dry out.",
+      "Pack cream and jam separately for delivery unless immediate service."
+    ],
+    "note": "Locked batch — 1080 g mix + 600 ml water. Regular cutter: 12 scones. Small cutter (high tea): 40 scones. Bake 180°C for 20 minutes. Scale in batch multiples: 24 regular = 2160 g + 1200 ml; 36 regular = 3240 g + 1800 ml. Do not overmix after water is added."
+  },
+  {
     "id": "platter-scones-chantilly-jam",
     "name": "House Baked Scones Platter",
     "subtitle": "Warm Scones · Chantilly · House Jam",
@@ -4215,72 +4280,29 @@
     "diet": [
       "vegetarian"
     ],
-    "method": "Bake",
-    "yield": "40 pieces",
+    "method": "Assemble",
+    "yield": "12 serves platter",
     "label": "Scones Platter",
     "elements": [
-      "Scones",
-      "Chantilly Cream",
-      "Jam"
+      "Scones Box",
+      "Platter Presentation"
     ],
     "ingredients": [
       {
-        "qty": "600 g",
-        "item": "Self-Raising Flour",
-        "prep": "plus extra for dusting"
-      },
-      {
-        "qty": "80 g",
-        "item": "Butter",
-        "prep": "cold, cubed"
-      },
-      {
-        "qty": "310 ml",
-        "item": "Buttermilk",
-        "prep": "cold — plus a splash for brushing tops"
-      },
-      {
-        "qty": "30 g",
-        "item": "Caster Sugar"
-      },
-      {
-        "qty": "8 g",
-        "item": "Fine Salt"
-      },
-      {
-        "qty": "350 ml",
-        "item": "Thickened Cream",
-        "prep": "cold — for Chantilly"
-      },
-      {
-        "qty": "25 g",
-        "item": "Icing Sugar",
-        "prep": "sifted — for Chantilly"
-      },
-      {
-        "qty": "5 ml",
-        "item": "Vanilla Extract",
-        "prep": "for Chantilly"
-      },
-      {
-        "qty": "300 g",
-        "item": "Strawberry Jam — house-made or quality commercial"
+        "qty": "1",
+        "item": "Scones Box",
+        "prep": "12 regular scones with jam and cream — per house scone recipe card"
       }
     ],
     "method_steps": [
-      "SCONES: Combine flour, caster sugar and salt in a large bowl. Add cold cubed butter and rub into flour using fingertips until mixture resembles coarse breadcrumbs with some pea-sized pieces remaining — do not over-rub.",
-      "MIX: Make a well in the centre. Add cold buttermilk all at once. Use a butter knife or pastry scraper to bring dough together with a cutting action — mix until just combined. Dough will look shaggy. Do not knead.",
-      "SHAPE: Turn onto a lightly floured bench. Pat gently to 3 cm thick — handle as little as possible. Use a sharp 5 cm round cutter dipped in flour. Press straight down and lift cleanly — do not twist. Re-pat scraps once only.",
-      "BAKE: Place on a lined tray with scones touching (encourages rise). Brush tops with buttermilk. Bake at 220°C conventional for 12–14 min until risen, golden on top, and cooked through. Cool on a wire rack for 5 min before serving.",
-      "CHANTILLY: Whip cold cream, icing sugar and vanilla in a chilled bowl to soft-firm peaks. Peaks should hold shape but not be stiff. Refrigerate in a covered container until service.",
-      "PLATTER ASSEMBLY: Halve scones and arrange cut-side up on platter. Place Chantilly in a small bowl and jam in a ramekin alongside."
+      "Prep scones box on the house scone recipe card — 12 regular scones with jam and chantilly.",
+      "PLATTER: Halve scones and arrange cut-side up on platter. Jam and chantilly in bowls alongside."
     ],
     "service": [
-      "Serve warm. If made ahead, reheat scones at 160°C for 5–6 min — do not overheat or they dry out.",
-      "Chantilly in a small bowl or piping bag on platter. Jam in a ramekin with a small spoon.",
+      "Serve warm. Same pack and delivery rules as scones box on the house scone card.",
       "Do not pre-split scones more than 15 min before service — cut surfaces dry quickly."
     ],
-    "note": "Overworking the dough is the primary failure point — the less handling after liquid is added, the better the rise. Cold butter and cold buttermilk are essential. Scones touching on the tray help them rise straighter. Yield is approximately 40 x 40 g scones from this batch."
+    "note": "Service format only — bake, box pack, jam and cream quantities are on the house scone recipe card."
   },
   {
     "id": "platter-sweet-slices-cakes",
