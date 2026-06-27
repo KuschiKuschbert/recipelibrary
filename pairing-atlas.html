@@ -7,6 +7,11 @@
 <meta name="description" content="Aroma matrix: G1–G8 groups, cross-book details, harmony heatmap, and food × spice pairings from the kitchen extracts.">
 <title>Aroma matrix · Kuschi Kitchen</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23c9a96e'/%3E%3C/svg%3E" />
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/theme.css">
@@ -630,20 +635,10 @@
   }
 </style>
 </head>
-<body class="pa-page">
+<body class="pa-page has-app-nav">
 <a class="pa-skip" href="#paMain">Skip to matrix</a>
 <div class="pa-shell">
-  <nav class="pa-nav" aria-label="Site">
-    <a href="index.html">← Kitchen Library</a>
-    <span aria-hidden="true">·</span>
-    <a href="flavor.html">Flavor</a>
-    <span aria-hidden="true">·</span>
-    <a href="aroma.html">Aroma</a>
-    <span aria-hidden="true">·</span>
-    <a href="notebooklm-gallery.html">Guides</a>
-    <span aria-hidden="true">·</span>
-    <a href="pantry.html">Pantry</a>
-  </nav>
+  <nav class="pa-nav" aria-label="Site" style="display:none" aria-hidden="true"></nav>
 
   <header>
     <p class="pa-hero-label">Kuschi · Reference sheet</p>
@@ -774,12 +769,13 @@
   </main>
 
   <footer class="pa-footer">
-    <a href="flavor.html">Flavor explorer</a> · <a href="index.html">Recipes</a>
+    Aroma matrix · Kuschi Kitchen
   </footer>
 </div>
 
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/pairing-atlas.js"></script>
+<script src="assets/app-nav.js"></script>
 <style>
   .visually-hidden {
     position: absolute;

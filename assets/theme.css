@@ -534,10 +534,10 @@ body {
   font-size: 14px;
   line-height: 1.7;
   color: var(--text);
-  padding: 10px 0;
-  padding-left: 40px;
+  padding: 10px 8px 10px 48px;
   position: relative;
   border-bottom: 1px solid var(--border);
+  border-radius: 8px;
 }
 
 .modal-steps li:last-child {
@@ -2261,3 +2261,577 @@ button.prep-task-card:hover {
     min-width: 0;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   APP NAV — Sidebar rail (landscape ≥900px) ↔ Bottom tab bar (portrait/narrow)
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* Nav root variables */
+:root {
+  --nav-rail-width: 72px;        /* collapsed sidebar icon rail */
+  --nav-tabbar-height: 60px;     /* bottom tab bar height */
+  --nav-safe-bottom: max(var(--nav-tabbar-height), calc(var(--nav-tabbar-height) + env(safe-area-inset-bottom, 0px)));
+}
+
+/* Body offset — page content avoids the nav chrome */
+body.has-app-nav {
+  /* Bottom tab bar offset applied by default (narrow); sidebar overrides below */
+  padding-bottom: var(--nav-safe-bottom);
+}
+
+/* ── Shared nav container ─────────────────────────────────────────────────── */
+#appNavWrap {
+  position: fixed;
+  z-index: 200;
+}
+
+.app-nav {
+  display: flex;
+  align-items: center;
+  background: var(--glass);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border-color: var(--border);
+  border-style: solid;
+  /* Transition for smooth rotate switch */
+  transition: width 0.2s ease, height 0.2s ease;
+}
+
+/* ── Bottom tab bar (default / narrow / portrait) ─────────────────────────── */
+#appNavWrap {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: auto;
+}
+
+.app-nav {
+  flex-direction: row;
+  width: 100%;
+  height: var(--nav-tabbar-height);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  border-top-width: 1px;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  border-left-width: 0;
+}
+
+.nav-brand-wrap { display: none; }
+
+.nav-items {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  flex: 1;
+  height: 100%;
+}
+
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: var(--text3);
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 6px 4px;
+  cursor: pointer;
+  font-family: inherit;
+  min-height: 48px;
+  position: relative;
+  transition: color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-item:active {
+  background: rgba(201, 169, 110, 0.1);
+}
+
+.nav-item__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.nav-item__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.nav-item__label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.nav-item--active {
+  color: var(--gold);
+}
+
+.nav-item--active .nav-item__icon::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 28px;
+  background: var(--gold-dim);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.nav-item__badge {
+  position: absolute;
+  top: 6px;
+  right: calc(50% - 14px);
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+/* ── Sidebar rail (landscape / wide ≥900px) ───────────────────────────────── */
+@media (min-width: 900px) and (orientation: landscape),
+       (min-width: 1100px) {
+  :root {
+    --nav-rail-width: 72px;
+  }
+
+  body.has-app-nav {
+    padding-bottom: 0;
+    padding-left: calc(var(--nav-rail-width) + env(safe-area-inset-left, 0px));
+  }
+
+  #appNavWrap {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: auto;
+  }
+
+  .app-nav {
+    flex-direction: column;
+    width: var(--nav-rail-width);
+    height: 100dvh;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding-left: env(safe-area-inset-left, 0px);
+    border-top-width: 0;
+    border-right-width: 1px;
+    border-bottom-width: 0;
+    border-left-width: 0;
+  }
+
+  .nav-brand-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 0 14px;
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  .nav-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+  }
+
+  .nav-brand__mark {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gold-dim);
+    border: 1px solid rgba(201,169,110,0.3);
+    border-radius: 10px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .nav-brand__name {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text3);
+  }
+
+  .nav-items {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+    height: auto;
+    width: 100%;
+    padding: 8px 0;
+    gap: 2px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+  }
+  .nav-items::-webkit-scrollbar { display: none; }
+
+  .nav-item {
+    flex: none;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 4px;
+    border-radius: 0;
+    min-height: 56px;
+    gap: 4px;
+  }
+
+  .nav-item--active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 28px;
+    background: var(--gold);
+    border-radius: 0 3px 3px 0;
+  }
+
+  .nav-item--active .nav-item__icon::after { display: none; }
+
+  .nav-item__label {
+    font-size: 9px;
+    letter-spacing: 0.3px;
+  }
+}
+
+/* ── Nav sheet (More, Books) ─────────────────────────────────────────────── */
+.nav-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.nav-sheet[hidden] { display: none; }
+
+.nav-sheet__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.nav-sheet__panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 500px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 20px 20px 0 0;
+  padding-bottom: max(24px, env(safe-area-inset-bottom, 0px));
+  animation: sheetSlideUp 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes sheetSlideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+.nav-sheet__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-sheet__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.nav-sheet__close {
+  background: none;
+  border: none;
+  color: var(--text3);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 8px;
+  min-height: 36px;
+  min-width: 36px;
+  font-family: inherit;
+  border-radius: 8px;
+  transition: color 0.15s;
+}
+.nav-sheet__close:hover { color: var(--text); }
+
+/* More sheet: 3-column icon grid */
+.nav-sheet__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 16px 12px;
+}
+
+.sheet-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 14px 8px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--text2);
+  text-decoration: none;
+  cursor: pointer;
+  font-family: inherit;
+  min-height: 76px;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.sheet-item:hover, .sheet-item:active {
+  background: var(--surface-hover);
+  border-color: var(--border-hover);
+  color: var(--gold);
+}
+.sheet-item__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+}
+.sheet-item__icon svg { width: 24px; height: 24px; }
+.sheet-item__label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Books sheet: vertical list */
+.nav-sheet__books {
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 60dvh;
+  overflow-y: auto;
+}
+
+.sheet-book-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  text-decoration: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: background 0.15s, border-color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 56px;
+}
+.sheet-book-item:hover, .sheet-book-item:active {
+  background: var(--surface-hover);
+  border-color: var(--border-hover);
+}
+.sheet-book-item__icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 16px; font-weight: 700; }
+.sheet-book-item__icon svg { width: 20px; height: 20px; }
+.sheet-book-item__name { flex: 1; font-size: 14px; font-weight: 500; }
+.sheet-book-item__sub { font-size: 11px; color: var(--text3); }
+.sheet-book-item--new { color: var(--gold); border-style: dashed; }
+.sheet-book-item--new .sheet-book-item__name { color: var(--gold); }
+
+/* ── iOS install tip ─────────────────────────────────────────────────────── */
+#kuschi-ios-tip {
+  position: fixed;
+  bottom: calc(var(--nav-tabbar-height) + env(safe-area-inset-bottom, 0px) + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 400;
+  max-width: 320px;
+  width: calc(100vw - 32px);
+}
+
+.ios-tip-inner {
+  background: var(--bg2);
+  border: 1px solid var(--border-hover);
+  border-radius: 16px;
+  padding: 16px 20px;
+  position: relative;
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.5;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+.ios-tip-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: var(--text3);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px;
+  font-family: inherit;
+}
+
+/* ── Sidebar-aware sheet positioning ────────────────────────────────────── */
+@media (min-width: 900px) and (orientation: landscape),
+       (min-width: 1100px) {
+  .nav-sheet {
+    align-items: center;
+    padding-left: var(--nav-rail-width);
+  }
+
+  .nav-sheet__panel {
+    border-radius: 20px;
+    max-width: 440px;
+    padding-bottom: 8px;
+  }
+
+  #kuschi-ios-tip {
+    bottom: 24px;
+    left: calc(var(--nav-rail-width) + 24px);
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-sheet__panel { animation: none; }
+  .app-nav { transition: none; }
+  .nav-item { transition: none; }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   TABLET ERGONOMICS — Larger tap targets, density, sticky filters
+   ──────────────────────────────────────────────────────────────────────────── */
+
+/* Sticky filter row offset for the app nav (tab bar adds bottom padding;
+   sticky top offset is just search-wrap for now, which is already handled) */
+.filters-wrap {
+  position: sticky;
+  top: 60px; /* height of sticky search-wrap */
+  z-index: 90;
+  background: var(--bg);
+}
+
+/* Tablet: larger filter pills */
+@media (min-width: 768px) {
+  .filter-pill,
+  .clear-btn {
+    min-height: 48px;
+    font-size: 14px;
+  }
+}
+
+/* Stronger touch active state for cards */
+.card:active {
+  transform: scale(0.985);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+/* ── Recipe modal tablet optimisations ───────────────────────────────────── */
+
+/* Larger ingredients + method text for bench reading */
+@media (min-width: 700px) {
+  .modal-ingredient {
+    font-size: 16px;
+    line-height: 1.7;
+    padding: 7px 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .modal-step,
+  .modal-steps li {
+    font-size: 16px;
+    line-height: 1.75;
+    padding: 10px 0;
+    min-height: 48px;
+  }
+
+  .modal-section {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+  }
+}
+
+/* ── Step tap-to-check ───────────────────────────────────────────────────── */
+.modal-step,
+.modal-steps li {
+  cursor: pointer;
+  border-radius: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  transition: background 0.15s, opacity 0.15s, text-decoration-color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+.modal-step:hover,
+.modal-steps li:hover {
+  background: rgba(255,255,255,0.04);
+}
+.modal-step.step-done,
+.modal-steps li.step-done {
+  opacity: 0.42;
+  text-decoration: line-through;
+  text-decoration-color: var(--text3);
+}
+.modal-step:active,
+.modal-steps li:active {
+  background: rgba(201,169,110,0.1);
+}
+
+/* ── Wake lock button in modal (prominent on tablet) ─────────────────────── */
+.wake-btn-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+.wake-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--text3);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  min-height: 36px;
+}
+.wake-btn:hover { color: var(--gold); border-color: var(--border-hover); }
+.wake-btn[data-wake-active="true"] { color: var(--gold); border-color: var(--gold); background: var(--gold-dim); }

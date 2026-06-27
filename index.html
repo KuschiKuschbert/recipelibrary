@@ -6,6 +6,11 @@
 <meta name="theme-color" content="#0c0c0c">
 <title>Kuschi Kitchen Library</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23c9a96e'/%3E%3C/svg%3E" />
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/theme.css">
@@ -525,7 +530,7 @@
 
 </style>
 </head>
-<body>
+<body class="has-app-nav">
 
 <div class="hero">
   <div class="hero-label">Kuschi · Recipe Library</div>
@@ -542,26 +547,6 @@
             <button type="button" class="hero-nav-link" tabindex="-1" onclick="event.stopPropagation(); heroPickAddKitchenBook();">+ Kitchen book</button>
           </div>
         </div>
-      </div>
-      <button type="button" class="hero-nav-link" onclick="openPageQrModal()" title="QR code to open this page on your phone">QR</button>
-      <div class="hero-add-split hero-books-split hero-lookup-split" id="heroLookupSplit">
-        <div class="hero-add-inner">
-          <button type="button" class="hero-nav-link hero-add-trigger" id="heroLookupTrigger" aria-expanded="false" aria-controls="heroLookupPanel" onclick="event.stopPropagation(); toggleHeroLookupSplit();">Flavor &amp; aroma <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
-          <div class="hero-add-pair hero-books-panel" id="heroLookupPanel" role="group" aria-label="Flavor, aroma, atlas, pantry, and visual guides" aria-hidden="true">
-            <a href="flavor.html" class="hero-nav-link" onclick="event.stopPropagation(); closeHeroLookupSplit();">Flavor</a>
-            <a href="flavor.html?toolkit=1" class="hero-nav-link" onclick="event.stopPropagation(); closeHeroLookupSplit();">Toolkit</a>
-            <a href="aroma.html" class="hero-nav-link" onclick="event.stopPropagation(); closeHeroLookupSplit();">Aroma</a>
-            <a href="pairing-atlas.html" class="hero-nav-link" onclick="event.stopPropagation(); closeHeroLookupSplit();">Matrix</a>
-            <a href="pantry.html" class="hero-nav-link" onclick="event.stopPropagation(); closeHeroLookupSplit();">Pantry</a>
-            <a href="notebooklm-gallery.html" class="hero-nav-link" onclick="event.stopPropagation(); closeHeroLookupSplit();">Guides</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="hero-add-split hero-books-split" id="heroBooksSplit">
-      <div class="hero-add-inner">
-        <button type="button" class="hero-nav-link hero-add-trigger" id="heroBooksTrigger" aria-expanded="false" aria-controls="heroBooksPanel" onclick="event.stopPropagation(); toggleHeroBooksSplit();">Kitchen books <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
-        <div class="hero-add-pair hero-books-panel" id="heroBooksPanel" role="group" aria-label="Open a kitchen book" aria-hidden="true"></div>
       </div>
     </div>
   </div>
@@ -1088,10 +1073,7 @@ document.addEventListener('keydown', e => {
       closeModal();
     } else if (document.getElementById('heroAddSplit') && document.getElementById('heroAddSplit').classList.contains('expanded')) {
       closeHeroAddSplit();
-    } else if (document.getElementById('heroLookupSplit') && document.getElementById('heroLookupSplit').classList.contains('expanded')) {
-      closeHeroLookupSplit();
-    } else if (document.getElementById('heroBooksSplit') && !document.getElementById('heroBooksSplit').hidden && document.getElementById('heroBooksSplit').classList.contains('expanded')) {
-      closeHeroBooksSplit();
+    } else {
     } else {
       document.getElementById('search').blur();
     }
@@ -1102,14 +1084,6 @@ document.addEventListener('click', (e) => {
   const split = document.getElementById('heroAddSplit');
   if (split && split.classList.contains('expanded') && !split.contains(e.target)) {
     closeHeroAddSplit();
-  }
-  const lookupSplit = document.getElementById('heroLookupSplit');
-  if (lookupSplit && lookupSplit.classList.contains('expanded') && !lookupSplit.contains(e.target)) {
-    closeHeroLookupSplit();
-  }
-  const booksSplit = document.getElementById('heroBooksSplit');
-  if (booksSplit && !booksSplit.hidden && booksSplit.classList.contains('expanded') && !booksSplit.contains(e.target)) {
-    closeHeroBooksSplit();
   }
 });
 
@@ -2056,40 +2030,12 @@ const HERO_BOOKS_CHEVRON =
   '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>';
 
 function refreshCustomBookNav() {
-  const root = document.getElementById('heroBooksSplit');
-  const panel = document.getElementById('heroBooksPanel');
-  if (!root || !panel) return;
-  root.hidden = false;
-  const rivieraRow =
-    '<a href="riviera.html" class="hero-nav-link" onclick="event.stopPropagation(); closeHeroBooksSplit();">' +
-    HERO_ICON_RIVIERA +
-    'Riviera' +
-    HERO_BOOKS_CHEVRON +
-    '</a>';
-  let customRows = '';
-  if (window.KuschiUserRecipes && KuschiUserRecipes.listCustomBooks) {
-    const books = KuschiUserRecipes.listCustomBooks();
-    customRows = books
-      .map(
-        (b) =>
-          '<a href="kitchen-book.html?b=' +
-          encodeURIComponent(b.id) +
-          '" class="hero-nav-link" onclick="event.stopPropagation(); closeHeroBooksSplit();">' +
-          HERO_ICON_BOOK +
-          KuschiRecipeUi.esc(b.name) +
-          HERO_BOOKS_CHEVRON +
-          '</a>'
-      )
-      .join('');
-  }
-  panel.innerHTML = rivieraRow + customRows;
-  syncHeroBooksPanelA11y(root.classList.contains('expanded'));
+  // Books nav is now handled by app-nav.js (sheet refreshes on open from localStorage).
+  // This function is kept as a no-op to avoid breaking callers.
 }
 
 function openAddKitchenBookModal() {
   closeHeroAddSplit();
-  closeHeroBooksSplit();
-  closeHeroLookupSplit();
   const o = document.getElementById('addKitchenBookOverlay');
   const inp = document.getElementById('newKitchenBookName');
   if (inp) inp.value = '';
@@ -2194,7 +2140,7 @@ attachContentRecipePrefetch();
       }
     }
     if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
-      navigator.serviceWorker.register(siteBaseUrl() + '/sw.js').catch(() => {});
+      // SW now registered by assets/app-nav.js
     }
   } catch(e) {
     document.getElementById('loading').innerHTML =
@@ -2204,5 +2150,6 @@ attachContentRecipePrefetch();
   }
 })();
 </script>
+<script src="assets/app-nav.js"></script>
 </body>
 </html>

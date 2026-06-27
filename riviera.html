@@ -6,6 +6,11 @@
 <meta name="theme-color" content="#0c0c0c">
 <title>Riviera — Prep Chef Recipes</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23c9a96e'/%3E%3C/svg%3E" />
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -464,14 +469,7 @@
 
 </style>
 </head>
-<body>
-
-<div class="nav-back">
-  <a href="index.html">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
-    Kitchen Library
-  </a>
-</div>
+<body class="has-app-nav">
 
 <div class="hero">
   <div class="hero-label">Kuschi · Riviera</div>
@@ -661,7 +659,7 @@
 </div>
 
 <div class="footer">
-  <div class="footer-text">Riviera prep set · <a href="index.html">Kitchen Library</a> · <a href="aroma.html">Aroma</a> · <a href="flavor.html?toolkit=1">Flavor toolkit</a> · Personal static site (GitHub Pages)</div>
+  <div class="footer-text">Riviera prep set · Personal static site (GitHub Pages)</div>
   <div class="footer-riviera-admin" id="rivieraAdminChrome">
     <button type="button" class="btn-text riv-admin-btn" id="rivieraAdminOpenBtn" onclick="openRivieraAdminModal()">Admin</button>
     <span id="rivieraAdminUnlockedStrip" class="riv-admin-unlocked" style="display:none">
@@ -1821,7 +1819,7 @@ document.addEventListener('keydown', e => {
 updateRivieraAdminChrome();
 void bootstrapRivieraRecipeData();
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
-  navigator.serviceWorker.register(siteBaseUrl() + '/sw.js').catch(() => {});
+  // SW now registered by assets/app-nav.js
 }
 </script>
 <script src="assets/stocktake-list.js" defer></script>
@@ -1829,5 +1827,6 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 <script src="assets/recipe-import-helpers.js" defer></script>
 <script src="assets/qrcodejs-1.0.0.min.js" defer></script>
 <script src="assets/riviera-init-stocktake.js" defer></script>
+<script src="assets/app-nav.js"></script>
 </body>
 </html>
