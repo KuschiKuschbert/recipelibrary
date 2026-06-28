@@ -553,12 +553,42 @@
 
     bindOverlay();
 
+    function importTasks(tasks, opts) {
+      opts = opts || {};
+      if (!tasks || !tasks.length) return 0;
+      var doc = loadDoc();
+      doc.tasks = doc.tasks || [];
+      var added = 0;
+      tasks.forEach(function (t) {
+        if (!t || !t.title) return;
+        var pr = t.priority || 'medium';
+        if (pr !== 'high' && pr !== 'low') pr = 'medium';
+        var row = {
+          id: 'task-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 6),
+          title: String(t.title).slice(0, 500),
+          assigneeId: doc.selectedId || 'kuschi',
+          priority: pr,
+          done: false,
+        };
+        if (t.notes) row.notes = String(t.notes).slice(0, 500);
+        doc.tasks.push(row);
+        added++;
+      });
+      if (added) {
+        doc.prepSubTab = 'list';
+        saveDoc(doc);
+        renderBody();
+      }
+      return added;
+    }
+
     return {
       open: open,
       close: close,
       refresh: renderBody,
       submitAdd: submitAdd,
       tryCloseTaskDetail: tryCloseTaskDetail,
+      importTasks: importTasks,
       getSelectedActorId: function () {
         return loadDoc().selectedId || 'kuschi';
       },

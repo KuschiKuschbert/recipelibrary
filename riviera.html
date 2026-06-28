@@ -735,6 +735,52 @@
   </div>
 </div>
 
+<!-- ── Function Package Planner (full-screen) ─────────────────────────────── -->
+<div class="fn-planner-overlay" id="functionPlannerOverlay" aria-label="Function package planner">
+  <div class="fn-planner">
+    <header class="fn-planner__header">
+      <h2 class="fn-planner__title">Function Planner</h2>
+      <button type="button" class="fn-planner__close" id="fnPlannerClose" aria-label="Close">✕</button>
+    </header>
+    <div class="fn-planner__tabs" id="fnPlannerEventTabs" role="tablist" aria-label="Event type"></div>
+    <div class="fn-planner__tabs fn-planner__tabs--section" id="fnPlannerSectionTabs" role="tablist" aria-label="Package type"></div>
+    <div class="fn-planner__bar">
+      <label class="fn-planner__pax-label">Covers
+        <input type="number" class="fn-planner__pax-input" id="fnPlannerPax" min="1" step="1" value="100" inputmode="numeric">
+      </label>
+      <button type="button" class="btn-primary fn-planner__generate" id="fnPlannerGenerate" disabled>Generate Full Planner List</button>
+    </div>
+    <div class="fn-planner__body" id="fnPlannerBody"></div>
+  </div>
+</div>
+
+<!-- ── Full Planner List ─────────────────────────────────────────────────── -->
+<div class="planner-list-overlay" id="plannerListOverlay" aria-label="Full planner list">
+  <div class="planner-list">
+    <header class="planner-list__header">
+      <div>
+        <h2 class="planner-list__title" id="plannerListTitle">Planner list</h2>
+        <p class="planner-list__subtitle">Menu · timeline · shopping · recipes</p>
+      </div>
+      <button type="button" class="planner-list__close" id="plannerListClose" aria-label="Close">✕</button>
+    </header>
+    <div class="planner-list__tabs" role="tablist">
+      <button type="button" class="planner-list-tab" data-tab="menu">Menu</button>
+      <button type="button" class="planner-list-tab planner-list-tab--active" data-tab="timeline">Timeline</button>
+      <button type="button" class="planner-list-tab" data-tab="shopping">Shopping</button>
+      <button type="button" class="planner-list-tab" data-tab="recipes">Recipes</button>
+    </div>
+    <div class="planner-list__actions">
+      <button type="button" class="btn-secondary" id="plannerCopyAll">Copy all</button>
+      <button type="button" class="btn-secondary" id="plannerCopyTimeline">Copy timeline</button>
+      <button type="button" class="btn-secondary" id="plannerPrint">Print</button>
+      <button type="button" class="btn-secondary" id="plannerOrderList">Order list</button>
+      <button type="button" class="btn-secondary" id="plannerPrepBoard">Prep board</button>
+    </div>
+    <div class="planner-list__body" id="plannerListBody"></div>
+  </div>
+</div>
+
 <div class="search-wrap" id="searchWrap">
   <div class="search-glass">
     <div class="search-inner">
@@ -946,6 +992,8 @@
 <script src="assets/riviera-order-override-remap-v2.js"></script>
 <script src="assets/user-recipes.js"></script>
 <script src="assets/prep-list.js"></script>
+<script src="assets/package-planner.js"></script>
+<script src="assets/package-prep-sheet.js"></script>
 <script src="assets/kuschi-recipe-ui.js"></script>
 <script src="assets/recipe-metric-normalize.js"></script>
 <script src="assets/flavour-toolkit-lookup.js" defer></script>
@@ -1002,9 +1050,6 @@ function finishRivieraBuiltinHydrate() {
     filtered = [...RECIPES];
     populateFilters();
     applyFilters();
-    if (window._pkgBrowser && window._pkgBrowser.tryDeepLink) {
-      window._pkgBrowser.tryDeepLink();
-    }
   }
   if (typeof requestAnimationFrame === 'function') {
     requestAnimationFrame(function () {
@@ -1244,7 +1289,9 @@ const _rivieraOrderListConfig = {
       !document.getElementById('rivieraAdminOverlay').classList.contains('open') &&
       !document.getElementById('pageQrOverlay').classList.contains('open') &&
       !document.getElementById('stocktakeOverlay').classList.contains('open') &&
-      !document.getElementById('prepOverlay').classList.contains('open')
+      !document.getElementById('prepOverlay').classList.contains('open') &&
+      !document.getElementById('functionPlannerOverlay').classList.contains('open') &&
+      !document.getElementById('plannerListOverlay').classList.contains('open')
     );
   },
 };
@@ -1331,7 +1378,9 @@ function initRivieraPrepList() {
         !document.getElementById('rivieraAdminOverlay').classList.contains('open') &&
         !document.getElementById('pageQrOverlay').classList.contains('open') &&
         !document.getElementById('orderListOverlay').classList.contains('open') &&
-        !document.getElementById('stocktakeOverlay').classList.contains('open')
+        !document.getElementById('stocktakeOverlay').classList.contains('open') &&
+        !document.getElementById('functionPlannerOverlay').classList.contains('open') &&
+        !document.getElementById('plannerListOverlay').classList.contains('open')
       );
     },
     addPanelId: 'prepAddPanel',
@@ -2098,264 +2147,22 @@ document.addEventListener('keydown', e => {
   }
 })();
 updateRivieraAdminChrome();
-void bootstrapRivieraRecipeData();
-
-// ── Function Package Browser ───────────────────────────────────────────────
-(function () {
-  var _pkgData = null;
-  var _activeEvent = null;
-  var _activeSection = null;
-  var _activeItem = null;
-
-  function _esc(s) {
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
-  function _loadPackages(cb) {
-    if (_pkgData) { cb(_pkgData); return; }
-    var base = siteBaseUrl();
-    fetch(base + '/riviera_data/function_packages.json')
-      .then(function (r) { return r.json(); })
-      .then(function (d) { _pkgData = d; cb(d); })
-      .catch(function () {
-        document.getElementById('pkgsContent').innerHTML =
-          '<p style="color:var(--text3);font-size:13px;padding:12px 0">Could not load package data.</p>';
-      });
-  }
-
-  function _ensureBrowserOpen(cb) {
-    var el = document.getElementById('packageBrowser');
-    var btn = document.getElementById('pkgsToggle');
-    el.removeAttribute('hidden');
-    btn.classList.add('pkgs-toggle--active');
-    btn.setAttribute('aria-expanded', 'true');
-    _loadPackages(cb);
-  }
-
-  function _syncPkgUrl(opts) {
-    opts = opts || {};
-    rivieraSyncUrl(function (p) {
-      if (_activeEvent) p.set('pkg', _activeEvent);
-      else p.delete('pkg');
-      if (_activeSection) p.set('section', _activeSection);
-      else p.delete('section');
-      if (opts.open) p.set('open', opts.open);
-      else if (opts.clearOpen) p.delete('open');
-    }, opts.push ? 'push' : 'replace');
-  }
-
-  function _highlightByRecipeId(recipeId) {
-    if (!recipeId) return;
-    document.querySelectorAll('.pkgs-item').forEach(function (el) {
-      var linked = el.getAttribute('data-recipe-id') === recipeId;
-      el.classList.toggle('pkgs-item--active', linked);
+void bootstrapRivieraRecipeData().then(function () {
+  if (window.KuschiPackagePlanner) {
+    KuschiPackagePlanner.init({
+      getRecipes: function () {
+        return RECIPES;
+      },
+      openRecipe: openRecipe,
+      siteBaseUrl: siteBaseUrl,
+      syncUrl: rivieraSyncUrl,
+      onGenerate: function (payload) {
+        if (window.KuschiPackagePrepSheet) KuschiPackagePrepSheet.open(payload);
+      },
     });
+    KuschiPackagePlanner.bootDeepLink();
   }
-
-  function tryDeepLink() {
-    var params;
-    try { params = new URLSearchParams(window.location.search); } catch (_) { return; }
-    var pkgId = params.get('pkg');
-    var secId = params.get('section');
-    var recipeId = params.get('open');
-    if (!pkgId && !recipeId) return;
-
-    function openRecipeWhenReady() {
-      if (!recipeId || typeof openRecipe !== 'function') return;
-      if (!RECIPES.find(function (r) { return r.id === recipeId; })) return;
-      openRecipe(recipeId, { skipUrl: true, replaceUrl: true });
-    }
-
-    if (pkgId) {
-      _ensureBrowserOpen(function () {
-        if (!_activeEvent) renderEventTabs(_pkgData);
-        _activeEvent = pkgId;
-        document.querySelectorAll('.pkgs-event-tab').forEach(function (t) {
-          t.classList.toggle('pkgs-event-tab--active', t.getAttribute('data-pkg-id') === pkgId);
-        });
-        var pkg = _pkgData.packages.find(function (p) { return p.id === pkgId; });
-        if (!pkg) {
-          openRecipeWhenReady();
-          return;
-        }
-        renderSectionTabs(pkg);
-        var sec = secId
-          ? pkg.sections.find(function (s) { return s.id === secId; })
-          : pkg.sections[0];
-        if (sec) {
-          _activeSection = sec.id;
-          document.querySelectorAll('.pkgs-section-tab').forEach(function (t) {
-            t.classList.toggle('pkgs-section-tab--active', t.getAttribute('data-sec-id') === sec.id);
-          });
-          renderSection(sec);
-        }
-        _syncPkgUrl(recipeId ? { open: recipeId } : { clearOpen: true });
-        if (recipeId) _highlightByRecipeId(recipeId);
-        openRecipeWhenReady();
-      });
-      return;
-    }
-
-    openRecipeWhenReady();
-  }
-
-  function togglePackageBrowser() {
-    var el = document.getElementById('packageBrowser');
-    var btn = document.getElementById('pkgsToggle');
-    var open = el.hasAttribute('hidden');
-    if (open) {
-      el.removeAttribute('hidden');
-      btn.classList.add('pkgs-toggle--active');
-      btn.setAttribute('aria-expanded', 'true');
-      _loadPackages(function (d) {
-        if (!_activeEvent) renderEventTabs(d);
-      });
-    } else {
-      el.setAttribute('hidden', '');
-      btn.classList.remove('pkgs-toggle--active');
-      btn.setAttribute('aria-expanded', 'false');
-    }
-  }
-
-  function renderEventTabs(data) {
-    var tabs = document.getElementById('pkgsEventTabs');
-    tabs.innerHTML = data.packages.map(function (pkg) {
-      return '<button type="button" class="pkgs-event-tab" data-pkg-id="' + pkg.id + '" onclick="window._pkgBrowser.selectEvent(\'' + pkg.id + '\')">' +
-        '<span>' + pkg.icon + '</span> ' + _esc(pkg.label) + '</button>';
-    }).join('');
-    if (!_activeEvent) selectEvent(data.packages[0].id);
-  }
-
-  function selectEvent(id) {
-    _activeEvent = id;
-    _activeSection = null;
-    _activeItem = null;
-    // Update tab active state
-    document.querySelectorAll('.pkgs-event-tab').forEach(function (t) {
-      t.classList.toggle('pkgs-event-tab--active', t.getAttribute('data-pkg-id') === id);
-    });
-    var pkg = _pkgData.packages.find(function (p) { return p.id === id; });
-    if (!pkg) return;
-    renderSectionTabs(pkg);
-    renderSection(pkg.sections[0]);
-    _activeSection = pkg.sections[0].id;
-    _syncPkgUrl({ clearOpen: true });
-  }
-
-  function renderSectionTabs(pkg) {
-    var tabs = document.getElementById('pkgsSectionTabs');
-    tabs.innerHTML = pkg.sections.map(function (sec) {
-      return '<button type="button" class="pkgs-section-tab" data-sec-id="' + sec.id + '" onclick="window._pkgBrowser.selectSection(\'' + pkg.id + '\',\'' + sec.id + '\')">' +
-        _esc(sec.label) + '</button>';
-    }).join('');
-    if (pkg.sections[0]) {
-      tabs.querySelector('[data-sec-id="' + pkg.sections[0].id + '"]').classList.add('pkgs-section-tab--active');
-    }
-  }
-
-  function selectSection(pkgId, secId) {
-    _activeSection = secId;
-    _activeItem = null;
-    document.querySelectorAll('.pkgs-section-tab').forEach(function (t) {
-      t.classList.toggle('pkgs-section-tab--active', t.getAttribute('data-sec-id') === secId);
-    });
-    var pkg = _pkgData.packages.find(function (p) { return p.id === pkgId; });
-    if (!pkg) return;
-    var sec = pkg.sections.find(function (s) { return s.id === secId; });
-    if (sec) renderSection(sec);
-    _syncPkgUrl({ clearOpen: true });
-  }
-
-  function renderSection(sec) {
-    var html = '<div class="pkgs-section-meta">';
-    if (sec.price) html += '<strong>' + _esc(sec.price) + '</strong>';
-    if (sec.style) html += ' &nbsp;·&nbsp; ' + _esc(sec.style);
-    if (sec.desc) html += '<br>' + _esc(sec.desc);
-    html += '</div>';
-
-    sec.courses.forEach(function (course) {
-      html += '<div class="pkgs-course">';
-      html += '<div class="pkgs-course-label">' + _esc(course.course) + '</div>';
-      html += '<div class="pkgs-items">';
-      course.items.forEach(function (item) {
-        var tags = (item.tags || []);
-        var tagHtml = tags.length ? '<span class="pkgs-item__tags">' + tags.map(function (t) {
-          var cls = t === 'veg' ? 'veg' : (t === 'gf' || t === 'gf option') ? 'gf' : 'df';
-          return '<span class="pkgs-item__tag pkgs-item__tag--' + cls + '">' + _esc(t) + '</span>';
-        }).join('') + '</span>' : '';
-        var safeSearch = _esc(item.search).replace(/'/g, '&#39;');
-        var safeRecipeId = _esc(item.recipeId || '').replace(/'/g, '&#39;');
-        var safeName = _esc(item.name).replace(/'/g, '&#39;');
-        // Indicate whether a real recipe is linked (shows a tiny recipe icon)
-        var hasRecipe = item.recipeId ? ' pkgs-item--linked' : '';
-        var recipeHint = item.recipeId
-          ? '<span class="pkgs-item__recipe-icon" title="Opens real recipe with quantities" aria-hidden="true">&#9654;</span>'
-          : '';
-        html += '<button type="button" class="pkgs-item' + hasRecipe + '" data-recipe-id="' + safeRecipeId + '" onclick="window._pkgBrowser.searchDish(\'' + safeSearch + '\',this,\'' + safeRecipeId + '\')" title="' + safeName + '">' +
-          _esc(item.name) + recipeHint + tagHtml + '</button>';
-      });
-      html += '</div></div>';
-    });
-
-    document.getElementById('pkgsContent').innerHTML = html;
-  }
-
-  function searchDish(term, btn, recipeId) {
-    // Highlight the tapped item
-    document.querySelectorAll('.pkgs-item').forEach(function (el) { el.classList.remove('pkgs-item--active'); });
-    if (btn) btn.classList.add('pkgs-item--active');
-    _activeItem = term;
-
-    // Prefer opening the real recipe modal directly
-    if (recipeId && typeof openRecipe === 'function') {
-      var recipe = RECIPES.find(function (r) { return r.id === recipeId; });
-      if (recipe) {
-        _syncPkgUrl({ open: recipeId, push: true });
-        openRecipe(recipeId, { skipUrl: true });
-        document.getElementById('pkgsClear').removeAttribute('hidden');
-        return;
-      }
-    }
-
-    // Fallback: fill the search box and filter the recipe list
-    var searchEl = document.getElementById('search');
-    if (searchEl) {
-      searchEl.value = term;
-      searchEl.dispatchEvent(new Event('input', { bubbles: true }));
-    }
-
-    // Scroll to results
-    var searchWrap = document.getElementById('searchWrap');
-    if (searchWrap) {
-      setTimeout(function () {
-        searchWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 100);
-    }
-
-    // Show clear button
-    document.getElementById('pkgsClear').removeAttribute('hidden');
-  }
-
-  function clearPackageSearch() {
-    _activeItem = null;
-    document.querySelectorAll('.pkgs-item').forEach(function (el) { el.classList.remove('pkgs-item--active'); });
-    var searchEl = document.getElementById('search');
-    if (searchEl) {
-      searchEl.value = '';
-      searchEl.dispatchEvent(new Event('input', { bubbles: true }));
-    }
-    document.getElementById('pkgsClear').setAttribute('hidden', '');
-  }
-
-  window.togglePackageBrowser = togglePackageBrowser;
-  window.clearPackageSearch = clearPackageSearch;
-  window._pkgBrowser = {
-    selectEvent: selectEvent,
-    selectSection: selectSection,
-    searchDish: searchDish,
-    tryDeepLink: tryDeepLink,
-  };
-})();
+});
 
 // ── Init shared modules ───────────────────────────────
 KuschiFilterChips.init([
