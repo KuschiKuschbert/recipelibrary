@@ -19,35 +19,7 @@ legacy/duplicate slow-cooked-beef-albondigas-buffet — Slow Cooked Beef Albondi
 
 SERVICE VARIANT STATUS REVIEW
 -----------------------------
-needs_confirmation: 28
-- roast-beef-thyme-garlic-carvery.buffet
-- roast-beef-thyme-garlic-carvery.plated_main
-- lemon-thyme-garlic-roast-chicken-carvery.buffet
-- lemon-thyme-garlic-roast-chicken-carvery.plated_main
-- sicilian-roast-pork-apricot.buffet
-- sous-vide-pork-loin-apricot.plated_main
-- herb-crusted-pork-cutlet-cider-mustard.plated_main
-- greek-green-bean-salad.buffet
-- greek-green-bean-salad.platter
-- caesar-salad-buffet.buffet
-- honey-thyme-roasted-carrots-pistachio.buffet
-- honey-thyme-roasted-carrots-pistachio.plated_main
-- mediterranean-rice-pilaf.buffet
-- roast-root-veg-salad-cinnamon-maple.buffet
-- roast-pumpkin-pepita-salad-balsamic.buffet
-- roast-pumpkin-pepita-salad-balsamic.platter
-- roquette-parmesan-salad.plated_main
-- roquette-parmesan-salad.buffet
-- french-green-beans-shallots-mustard.plated_main
-- french-green-beans-shallots-mustard.buffet
-- creamy-potato-bake.buffet
-- creamy-potato-bake.platter
-- garlic-lemon-potatoes.buffet
-- pork-italian-herb-sausages.buffet
-- burnt-butter-mash.plated_main
-- burnt-butter-mash.buffet
-- house-focaccia.plated_main
-- house-focaccia.buffet
+needs_confirmation: 0
 missing_status: 0
 not_recommended: 31
 - oysters-kilpatrick.buffet
