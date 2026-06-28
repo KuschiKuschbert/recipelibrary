@@ -327,6 +327,8 @@
       return true;
     };
     var editingZones = false;
+    /** @type {Set<string>|null} */
+    var recipeIdFilter = null;
 
     function Kr() {
       return window.KuschiUserRecipes;
@@ -371,6 +373,7 @@
       var recipes = getRecipes() || [];
       for (var ri = 0; ri < recipes.length; ri++) {
         var r = recipes[ri];
+        if (recipeIdFilter && !recipeIdFilter.has(r.id)) continue;
         var ings = r.ingredients || [];
         for (var idx = 0; idx < ings.length; idx++) {
           var i = ings[idx];
@@ -592,9 +595,22 @@
     }
 
     function close() {
+      recipeIdFilter = null;
       var el = document.getElementById(overlayId);
       if (el) el.classList.remove('open');
       if (shouldReleaseBodyScroll()) document.body.style.overflow = '';
+    }
+
+    function setRecipeIdFilter(ids) {
+      if (!ids || !ids.length) {
+        recipeIdFilter = null;
+        return;
+      }
+      recipeIdFilter = new Set(ids);
+    }
+
+    function clearRecipeIdFilter() {
+      recipeIdFilter = null;
     }
 
     function toggleEditingZones() {
@@ -668,6 +684,13 @@
       renderOrderListBody();
     }
 
+    function buildFromRecipeIds(ids) {
+      setRecipeIdFilter(ids);
+      var lines = buildOrderLinesFlat();
+      recipeIdFilter = null;
+      return lines;
+    }
+
     return {
       open: open,
       close: close,
@@ -679,6 +702,9 @@
       buildOrderLinesFlat: buildOrderLinesFlat,
       toggleEditingZones: toggleEditingZones,
       isEditingZones: isEditingZones,
+      setRecipeIdFilter: setRecipeIdFilter,
+      clearRecipeIdFilter: clearRecipeIdFilter,
+      buildFromRecipeIds: buildFromRecipeIds,
     };
   }
 

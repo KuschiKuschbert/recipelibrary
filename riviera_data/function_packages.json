@@ -54,7 +54,12 @@
                   ],
                   "recipeId": "natural-oysters-champagne-mignonette"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Canapes (choose 4)",
@@ -121,7 +126,12 @@
                   ],
                   "recipeId": "chorizo-potatoes"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "pick",
+                "min": 4,
+                "max": 4
+              }
             },
             {
               "course": "Substantial Canapes (choose 2)",
@@ -159,7 +169,12 @@
                   ],
                   "recipeId": "maple-pumpkin-ravioli-burnt-butter"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "pick",
+                "min": 2,
+                "max": 2
+              }
             }
           ]
         },
@@ -234,7 +249,12 @@
                   ],
                   "recipeId": "chorizo-potatoes"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "pick",
+                "min": 3,
+                "max": 3
+              }
             },
             {
               "course": "Plated Main (alternate drop, choose 1–2)",
@@ -272,7 +292,12 @@
                   ],
                   "recipeId": "romesco"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "pick",
+                "min": 1,
+                "max": 2
+              }
             }
           ]
         },
@@ -313,7 +338,12 @@
                   ],
                   "recipeId": "natural-oysters-champagne-mignonette"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "pick",
+                "min": 2,
+                "max": 3
+              }
             },
             {
               "course": "Main (choose 2, alternate drop)",
@@ -368,7 +398,12 @@
                   ],
                   "recipeId": "mild-hot-honey"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "pick",
+                "min": 2,
+                "max": 2
+              }
             },
             {
               "course": "Sides (all included)",
@@ -408,7 +443,10 @@
                   ],
                   "recipeId": "whipped-butter"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "all"
+              }
             }
           ]
         },
@@ -449,7 +487,12 @@
                   ],
                   "recipeId": "natural-oysters-champagne-mignonette"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Mains (choose 2–4, shared to table)",
@@ -504,7 +547,12 @@
                   ],
                   "recipeId": "mild-hot-honey"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "pick",
+                "min": 2,
+                "max": 4
+              }
             }
           ]
         },
@@ -554,7 +602,12 @@
                   ],
                   "recipeId": "grilled-halloumi-plain"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "pick",
+                "min": 2,
+                "max": 2
+              }
             },
             {
               "course": "Fillings & Sauces",
@@ -577,7 +630,12 @@
                   ],
                   "recipeId": "garlic-lemon-potatoes"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             }
           ]
         },
@@ -619,7 +677,12 @@
                   "search": "prawn spring roll sweet chilli",
                   "recipeId": "natural-oysters-champagne-mignonette"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Substantial Platters (40 pieces)",
@@ -639,7 +702,12 @@
                   "search": "pizza gourmet",
                   "recipeId": "gourmet-pizza-scrolls"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             }
           ]
         },
@@ -676,7 +744,12 @@
                   ],
                   "recipeId": "kids-snack-pack"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "pick",
+                "min": 1,
+                "max": null
+              }
             }
           ]
         }
@@ -737,7 +810,12 @@
                   "search": "charcuterie grazing cheese deli",
                   "recipeId": "charcuterie-board-classic"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Hot Nibbles (20–25 pieces each)",
@@ -770,7 +848,12 @@
                   "search": "mixed hot nibbles finger food",
                   "recipeId": "funeral-mixed-hot-nibbles-box"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Finger Food & Lunch",
@@ -813,7 +896,12 @@
                   ],
                   "recipeId": "grilled-halloumi-plain"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Meat Platters (serves 12)",
@@ -867,7 +955,12 @@
                   ],
                   "recipeId": "lamb-cutlet"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Salads (serves 12–15)",
@@ -921,7 +1014,12 @@
                   "search": "potato bacon herb salad creamy",
                   "recipeId": "corporate-creamy-potato-bacon-herb-salad"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Cooked Sides (serves 12–15)",
@@ -958,7 +1056,12 @@
                   ],
                   "recipeId": "dinner-rolls-butter"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Substantial Platters (20 pieces)",
@@ -978,7 +1081,12 @@
                   "search": "chicken bacon slider smoky",
                   "recipeId": "chicken-bacon-brioche-slider"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             }
           ]
         },
@@ -1022,7 +1130,12 @@
                   ],
                   "recipeId": "platter-sweet-slices-cakes"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             }
           ]
         },
@@ -1063,7 +1176,12 @@
                   ],
                   "recipeId": "natural-oysters-champagne-mignonette"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "pick",
+                "min": 1,
+                "max": null
+              }
             }
           ]
         }
@@ -1146,7 +1264,12 @@
                   "search": "breakfast wrap bacon egg",
                   "recipeId": "corporate-breakfast-wraps"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             }
           ]
         },
@@ -1210,7 +1333,12 @@
                   ],
                   "recipeId": "corporate-gourmet-filled-cookies"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Savoury Options",
@@ -1243,7 +1371,12 @@
                   "search": "mini party pie beef",
                   "recipeId": "beef-party-pies"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             }
           ]
         },
@@ -1277,7 +1410,12 @@
                   "search": "pizza scrolls pumpkin feta pesto bocconcini",
                   "recipeId": "gourmet-pizza-scrolls"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Salad Bowls",
@@ -1310,7 +1448,12 @@
                   "search": "beef lasagne bolognese",
                   "recipeId": "corporate-beef-lasagne-side-salad"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Working Lunch Boxes ($24pp)",
@@ -1330,7 +1473,12 @@
                   "search": "croissant quiche breakfast box",
                   "recipeId": "mini-quiches-beetroot-balsamic"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             }
           ]
         },
@@ -1393,7 +1541,12 @@
                   ],
                   "recipeId": "lamb-cutlet"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Salads",
@@ -1452,7 +1605,12 @@
                   "search": "caesar salad bacon egg parmesan",
                   "recipeId": "caesar-salad-buffet"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Sides",
@@ -1486,7 +1644,12 @@
                   ],
                   "recipeId": "dinner-rolls-butter"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             }
           ]
         }
@@ -1543,7 +1706,12 @@
                   ],
                   "recipeId": "platter-scones-chantilly-jam"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             }
           ]
         },
@@ -1603,7 +1771,12 @@
                   ],
                   "recipeId": "roving-cannoli-tiramisu"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             }
           ]
         }
@@ -1664,7 +1837,12 @@
                   "search": "grazing box charcuterie cheese deli",
                   "recipeId": "charcuterie-board-classic"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Hot Nibbles (20–25 pieces)",
@@ -1697,7 +1875,12 @@
                   "search": "mixed hot nibbles finger food",
                   "recipeId": "funeral-mixed-hot-nibbles-box"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Finger Food & Sandwiches",
@@ -1722,7 +1905,12 @@
                   "search": "brioche rolls filled mixed",
                   "recipeId": "platter-filled-brioche-rolls"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Meat Platters (serves 12)",
@@ -1773,7 +1961,12 @@
                   ],
                   "recipeId": "lamb-cutlet"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Salads (serves 12–15)",
@@ -1827,7 +2020,12 @@
                   "search": "potato bacon herb salad",
                   "recipeId": "corporate-creamy-potato-bacon-herb-salad"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Cooked Sides (serves 12–15)",
@@ -1864,7 +2062,12 @@
                   ],
                   "recipeId": "dinner-rolls-butter"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             }
           ]
         },
@@ -1911,7 +2114,12 @@
                   ],
                   "recipeId": "platter-sweet-slices-cakes"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             }
           ]
         }
@@ -1995,7 +2203,12 @@
                   "search": "chicken lemon caper apricot almond rice pilaf",
                   "recipeId": "mediterranean-rice-pilaf"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "pick",
+                "min": 1,
+                "max": null
+              }
             },
             {
               "course": "Roving Dessert (add-on, from $16pp)",
@@ -2016,7 +2229,12 @@
                   ],
                   "recipeId": "roving-tiramisu-cups"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             }
           ]
         },
@@ -2071,7 +2289,12 @@
                   ],
                   "recipeId": "mild-hot-honey"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "pick",
+                "min": 1,
+                "max": null
+              }
             },
             {
               "course": "Side Dishes (choose from)",
@@ -2168,7 +2391,12 @@
                   ],
                   "recipeId": "roast-pumpkin-pepita-salad-balsamic"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "pick",
+                "min": 1,
+                "max": null
+              }
             }
           ]
         },
@@ -2204,7 +2432,12 @@
                   ],
                   "recipeId": "lamb-cutlet"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Sides",
@@ -2244,7 +2477,12 @@
                   ],
                   "recipeId": "roast-pumpkin-pepita-salad-balsamic"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             }
           ]
         },
@@ -2281,7 +2519,12 @@
                   "search": "chicken skewer labneh zesty roquette",
                   "recipeId": "chicken-skewer"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Mains",
@@ -2309,7 +2552,12 @@
                   ],
                   "recipeId": "romesco"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Desserts",
@@ -2348,7 +2596,12 @@
                   ],
                   "recipeId": "riviera-tiramisu-biscotti-hazelnut"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             }
           ]
         },
@@ -2389,7 +2642,12 @@
                   ],
                   "recipeId": "natural-oysters-champagne-mignonette"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Mains (shared)",
@@ -2444,7 +2702,12 @@
                   ],
                   "recipeId": "mild-hot-honey"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             },
             {
               "course": "Sides (included)",
@@ -2477,7 +2740,12 @@
                   ],
                   "recipeId": "roquette-parmesan-salad"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             }
           ]
         },
@@ -2527,7 +2795,12 @@
                   ],
                   "recipeId": "grilled-halloumi-plain"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "pick",
+                "min": 2,
+                "max": 2
+              }
             },
             {
               "course": "Fillings & Sides",
@@ -2550,7 +2823,12 @@
                   ],
                   "recipeId": "garlic-lemon-potatoes"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             }
           ]
         },
@@ -2607,7 +2885,12 @@
                   ],
                   "recipeId": "platter-sweet-slices-cakes"
                 }
-              ]
+              ],
+              "selection": {
+                "mode": "optional",
+                "min": 0,
+                "max": null
+              }
             }
           ]
         }

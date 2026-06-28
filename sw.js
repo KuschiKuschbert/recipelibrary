@@ -1,5 +1,5 @@
 'use strict';
-const CACHE_NAME = 'kuschi-kitchen-v11';
+const CACHE_NAME = 'kuschi-kitchen-v12';
 
 // App shell: HTML pages + core assets (precache on install)
 const SHELL_URLS = [
@@ -28,6 +28,8 @@ const SHELL_URLS = [
   './assets/flavor-explorer.js',
   './assets/pairing-atlas.js',
   './assets/prep-list.js',
+  './assets/package-planner.js',
+  './assets/package-prep-sheet.js',
   './assets/stocktake-list.js',
   './assets/riviera-canonical-ingredient.js',
   './assets/riviera-ingredient-merge.js',
