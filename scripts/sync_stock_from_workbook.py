@@ -149,7 +149,7 @@ def main() -> None:
     for item in wb_only:
         iid = next_id(item["storage"], counters)
         additions.append(
-            [item["storage"], iid, item["name"], item["brand"], item["unit"], "0"]
+            [item["storage"], iid, item["name"], item["brand"], item["unit"], "1"]
         )
 
     # Build report

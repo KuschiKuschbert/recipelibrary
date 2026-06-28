@@ -3362,7 +3362,7 @@
     "zone": "coldroom",
     "category": "Cold Room",
     "brand": "Aussie Sprouts",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "125 g"
   },
   {
@@ -3371,7 +3371,7 @@
     "zone": "coldroom",
     "category": "Cold Room",
     "brand": "Woolworth",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "250 g"
   },
   {
@@ -3380,7 +3380,7 @@
     "zone": "coldroom",
     "category": "Cold Room",
     "brand": "Anchor",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "1000 mL"
   },
   {
@@ -3389,7 +3389,7 @@
     "zone": "coldroom",
     "category": "Cold Room",
     "brand": "",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "1 pc"
   },
   {
@@ -3398,7 +3398,7 @@
     "zone": "coldroom",
     "category": "Cold Room",
     "brand": "Odd Bunch",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "1 pc"
   },
   {
@@ -3407,7 +3407,7 @@
     "zone": "coldroom",
     "category": "Cold Room",
     "brand": "Woolworth",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "10 g"
   },
   {
@@ -3416,7 +3416,7 @@
     "zone": "coldroom",
     "category": "Cold Room",
     "brand": "",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "500 g"
   },
   {
@@ -3425,7 +3425,7 @@
     "zone": "coldroom",
     "category": "Cold Room",
     "brand": "Zoosh",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "4500 g"
   },
   {
@@ -3434,7 +3434,7 @@
     "zone": "coldroom",
     "category": "Cold Room",
     "brand": "Hellmann's",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "2500 g"
   },
   {
@@ -3443,7 +3443,7 @@
     "zone": "coldroom",
     "category": "Cold Room",
     "brand": "Yarde Farm",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "2000 g"
   },
   {
@@ -3452,7 +3452,7 @@
     "zone": "coldroom",
     "category": "Cold Room",
     "brand": "Alfina",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "1000 g"
   },
   {
@@ -3461,7 +3461,7 @@
     "zone": "coldroom",
     "category": "Cold Room",
     "brand": "Aussie Sprouts",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "60 g"
   },
   {
@@ -3470,16 +3470,16 @@
     "zone": "coldroom",
     "category": "Cold Room",
     "brand": "Tabasco",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "60 mL"
   },
   {
     "id": "c165",
-    "name": "Shreedded Mozzarella",
+    "name": "Shredded Mozzarella",
     "zone": "coldroom",
     "category": "Cold Room",
     "brand": "Holy Cow",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "2000 g"
   },
   {
@@ -3488,7 +3488,7 @@
     "zone": "drystore",
     "category": "Dry Store",
     "brand": "Trumps",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "1000 g"
   },
   {
@@ -3497,7 +3497,7 @@
     "zone": "drystore",
     "category": "Dry Store",
     "brand": "Trumps",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "1000 g"
   },
   {
@@ -3506,7 +3506,7 @@
     "zone": "drystore",
     "category": "Dry Store",
     "brand": "Maggi",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "2400 g"
   },
   {
@@ -3515,7 +3515,7 @@
     "zone": "drystore",
     "category": "Dry Store",
     "brand": "Edlyn",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "5000 g"
   },
   {
@@ -3524,7 +3524,7 @@
     "zone": "drystore",
     "category": "Dry Store",
     "brand": "Caterers Choice",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "1500 g"
   },
   {
@@ -3533,7 +3533,7 @@
     "zone": "drystore",
     "category": "Dry Store",
     "brand": "Maggi",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "2000 g"
   },
   {
@@ -3542,7 +3542,7 @@
     "zone": "drystore",
     "category": "Dry Store",
     "brand": "Edlyn",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "10000 g"
   },
   {
@@ -3551,7 +3551,7 @@
     "zone": "drystore",
     "category": "Dry Store",
     "brand": "Kikkoman",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "600 mL"
   },
   {
@@ -3560,7 +3560,7 @@
     "zone": "drystore",
     "category": "Dry Store",
     "brand": "Caterers Choice",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "500 g"
   },
   {
@@ -3569,7 +3569,7 @@
     "zone": "drystore",
     "category": "Dry Store",
     "brand": "Caterers Choice",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "1000 g"
   },
   {
@@ -3578,7 +3578,7 @@
     "zone": "drystore",
     "category": "Dry Store",
     "brand": "Weston Milling",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "12500 g"
   },
   {
@@ -3587,7 +3587,7 @@
     "zone": "drystore",
     "category": "Dry Store",
     "brand": "Pandaroo",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "2000 mL"
   },
   {
@@ -3596,7 +3596,7 @@
     "zone": "drystore",
     "category": "Dry Store",
     "brand": "Peerless",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "20000 mL"
   },
   {
@@ -3605,7 +3605,7 @@
     "zone": "drystore",
     "category": "Dry Store",
     "brand": "Vegeta",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "1000 g"
   },
   {
@@ -3614,7 +3614,7 @@
     "zone": "freezer",
     "category": "Freezer",
     "brand": "Caterers Choice",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "192 pc"
   },
   {
@@ -3623,7 +3623,7 @@
     "zone": "freezer",
     "category": "Freezer",
     "brand": "House",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "1 pc"
   },
   {
@@ -3632,7 +3632,7 @@
     "zone": "freezer",
     "category": "Freezer",
     "brand": "House",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "1 pc"
   },
   {
@@ -3641,7 +3641,7 @@
     "zone": "freezer",
     "category": "Freezer",
     "brand": "Ingham",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "45 pc"
   },
   {
@@ -3650,7 +3650,7 @@
     "zone": "freezer",
     "category": "Freezer",
     "brand": "House",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "1000 g"
   },
   {
@@ -3659,7 +3659,7 @@
     "zone": "freezer",
     "category": "Freezer",
     "brand": "Everyday Cafe",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "12 pc"
   },
   {
@@ -3668,7 +3668,7 @@
     "zone": "freezer",
     "category": "Freezer",
     "brand": "House",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "1000 mL"
   },
   {
@@ -3677,7 +3677,7 @@
     "zone": "freezer",
     "category": "Freezer",
     "brand": "Priestleys",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "16 pc"
   },
   {
@@ -3686,7 +3686,7 @@
     "zone": "freezer",
     "category": "Freezer",
     "brand": "National Pies",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "48 pc"
   },
   {
@@ -3695,7 +3695,7 @@
     "zone": "freezer",
     "category": "Freezer",
     "brand": "Mccain",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "1000 g"
   },
   {
@@ -3704,7 +3704,7 @@
     "zone": "freezer",
     "category": "Freezer",
     "brand": "Everest",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "5000 mL"
   },
   {
@@ -3713,7 +3713,7 @@
     "zone": "freezer",
     "category": "Freezer",
     "brand": "House",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "1 pc"
   },
   {
@@ -3722,7 +3722,7 @@
     "zone": "freezer",
     "category": "Freezer",
     "brand": "House",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "1 pc"
   },
   {
@@ -3731,7 +3731,7 @@
     "zone": "freezer",
     "category": "Freezer",
     "brand": "Seacrest",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "5000 g"
   },
   {
@@ -3740,7 +3740,7 @@
     "zone": "freezer",
     "category": "Freezer",
     "brand": "House",
-    "defaultQty": "0",
+    "defaultQty": "1",
     "defaultUom": "1000 g"
   }
 ]
