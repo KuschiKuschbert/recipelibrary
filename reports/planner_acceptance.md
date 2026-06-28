@@ -50,6 +50,10 @@ Reports: `reports/package_recipe_coverage.md`, `reports/workbook_dish_gaps.md`
 
 ## Cycle 4 — Final signoff
 
-All backlog items #1–#4 green. P2 deferred: Epicure auto-suggest, pricing/GP, cloud sync, PDF export.
+All backlog items #1–#4 green. Automated smoke: `python3 scripts/planner_acceptance_smoke.py`.
 
-**SHIP:** Planner v1.1 loop complete on feature branch; merge `cursor/planner-v11-polish` when ready.
+**prepPhase:** Nine Portofino staples in `builtins.json` (`prepPhase` or step-aligned `prepPhases`); `classifyPhase` prefers explicit fields over heuristics.
+
+P2 deferred: Epicure auto-suggest, pricing/GP, cloud sync, PDF export.
+
+**Manual still recommended:** production tablet pass on GitHub Pages (timeline checkboxes, event date, print toggle, order list vs Shopping).

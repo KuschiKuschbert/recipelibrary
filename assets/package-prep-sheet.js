@@ -207,7 +207,11 @@
     });
   }
 
-  function classifyPhase(recipe, stepText, isService) {
+  function classifyPhase(recipe, stepText, isService, stepIndex) {
+    if (!isService && recipe && recipe.prepPhases && recipe.prepPhases[stepIndex]) {
+      var sp = String(recipe.prepPhases[stepIndex]);
+      if (sp === 'day_before' || sp === 'morning_of' || sp === 'service') return sp;
+    }
     if (recipe && recipe.prepPhase && !isService) {
       var pp = String(recipe.prepPhase);
       if (pp === 'day_before' || pp === 'morning_of' || pp === 'service') return pp;
@@ -249,7 +253,7 @@
         var paxHint = payload.pax + ' covers';
 
         (recipe.method_steps || []).forEach(function (step, si) {
-          var phase = classifyPhase(recipe, step, false);
+          var phase = classifyPhase(recipe, step, false, si);
           var norm = String(step).toLowerCase().replace(/\s+/g, ' ').trim().slice(0, 120);
           var key = phase + '\0' + norm;
           if (seen[key]) {
