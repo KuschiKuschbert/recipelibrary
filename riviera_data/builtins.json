@@ -121,7 +121,8 @@
       "Spoon 60–80ml warm Romesco as a base on each plate or slate. Arrange 3 arancini on top.",
       "Dot a small amount of Lemon Thyme Aioli on each arancini. Garnish with freshly picked microherbs. Serve immediately."
     ],
-    "note": "DO NOT vacuum seal — seal only. Defrost minimum 24 hours in coldroom before frying. Frying from frozen will result in a cold centre and over-coloured crust. Double-crumbing is recommended for canapé service durability."
+    "note": "DO NOT vacuum seal — seal only. Defrost minimum 24 hours in coldroom before frying. Frying from frozen will result in a cold centre and over-coloured crust. Double-crumbing is recommended for canapé service durability.",
+    "prepPhase": "day_before"
   },
   {
     "id": "calamari",
@@ -196,7 +197,8 @@
       "TAPAS: Spoon 30–40ml lemon dill aioli as a base on the plate. Arrange calamari and baby octopus on top. Scatter crispy capers and finish with microgreens.",
       "CANAPE: Small dot of aioli in bamboo boat. Calamari on top, 2–3 crispy capers to finish."
     ],
-    "note": "Calamari and octopus must be completely dry before coating — surface moisture creates steam in the fryer, producing a soggy crust. Pat dry before storing and again before coating at service. Oil temperature is critical: below 180°C the coating absorbs oil and goes limp."
+    "note": "Calamari and octopus must be completely dry before coating — surface moisture creates steam in the fryer, producing a soggy crust. Pat dry before storing and again before coating at service. Oil temperature is critical: below 180°C the coating absorbs oil and goes limp.",
+    "prepPhase": "day_before"
   },
   {
     "id": "oysters-kilpatrick",
@@ -273,7 +275,13 @@
       "Bake at 200°C for 6–8 minutes until the speck is golden and beginning to caramelise at the edges and the oyster is just warmed through. Do not overbake — the oyster should still be plump and just set, not shrunken.",
       "Spread rock salt 2cm thick on the serving tray or plate to stabilise shells. Nestle baked oysters into the salt. Garnish with rocket or microgreens and lemon rounds. Serve immediately."
     ],
-    "note": "Do not overbake. Oysters continue to carry-cook after leaving the oven. Target internal temperature of 65°C — the meat should be just opaque and plump. Shrunken, tight oyster meat means they are overcooked. Kilpatrick sauce can be made 3 days in advance and stored refrigerated in squeezy bottles."
+    "note": "Do not overbake. Oysters continue to carry-cook after leaving the oven. Target internal temperature of 65°C — the meat should be just opaque and plump. Shrunken, tight oyster meat means they are overcooked. Kilpatrick sauce can be made 3 days in advance and stored refrigerated in squeezy bottles.",
+    "prepPhases": [
+      "day_before",
+      "day_before",
+      "day_before",
+      "day_before"
+    ]
   },
   {
     "id": "veal-meatballs",
@@ -379,7 +387,8 @@
       "Toast 3 slices of focaccia (2 cm thick) on the kick oven or flat grill until golden on both sides.",
       "Top polpette with a generous pinch of freshly made gremolata and fine-grated Manchego. Arrange focaccia alongside. Serve immediately."
     ],
-    "note": "Beef and pork mince replaces the original veal — the 56/44 split gives depth from the beef and fat/sweetness from the pork. Panade is the full 2.5 kg milk — do not reduce or squeeze out. The wet panade is what gives these polpette their moisture and tenderness. Do not overwork the mix after combining. Balls are rolled at 60 g (pre-crumb weight) then crumbed in GF breadcrumbs for a crisp exterior. Keep mix cold throughout. Prep time approximately 75–90 minutes per full batch."
+    "note": "Beef and pork mince replaces the original veal — the 56/44 split gives depth from the beef and fat/sweetness from the pork. Panade is the full 2.5 kg milk — do not reduce or squeeze out. The wet panade is what gives these polpette their moisture and tenderness. Do not overwork the mix after combining. Balls are rolled at 60 g (pre-crumb weight) then crumbed in GF breadcrumbs for a crisp exterior. Keep mix cold throughout. Prep time approximately 75–90 minutes per full batch.",
+    "prepPhase": "day_before"
   },
   {
     "id": "chicken-skewer",
@@ -479,7 +488,8 @@
       "Lay defrosted skewers flat on trays in a single layer — do not overlap. Roast for 12–15 minutes, turning once at the halfway point, until golden with some caramelisation on the edges and internal temperature reaches 75°C. Do not undercook — chicken thigh at service must be fully cooked through.",
       "Spoon a heaped 40–50ml of herbed labneh onto the centre of each plate. Arrange 3 skewers on top. Crumble feta generously over and finish with green microherbs. Serve immediately."
     ],
-    "note": "RAW CUCUMBER IS A KUSCHI EXCLUSION — do not use in labneh or anywhere on this dish. Use pickled cucumber brine (30ml per 2kg yogurt batch) for brightness, or increase fresh dill. Chicken skewers must reach an internal temperature of 75°C before service. Do not roast from frozen."
+    "note": "RAW CUCUMBER IS A KUSCHI EXCLUSION — do not use in labneh or anywhere on this dish. Use pickled cucumber brine (30ml per 2kg yogurt batch) for brightness, or increase fresh dill. Chicken skewers must reach an internal temperature of 75°C before service. Do not roast from frozen.",
+    "prepPhase": "day_before"
   },
   {
     "id": "chorizo-potatoes",
@@ -548,7 +558,8 @@
       "Transfer hot potato pieces and chorizo to a large metal bowl. Add a generous spoon of Lemon Thyme Aioli and sliced shallots. Season with salt flakes and cracked pepper. Toss to coat — the aioli should lightly dress everything, not pool at the bottom.",
       "Serve 4–5 pieces in bamboo boats with a bamboo fork. Finish with an extra small dot of Lemon Thyme Aioli on top if desired."
     ],
-    "note": "Potato pieces must be fully chilled and dry before frying for maximum crispiness. Frying warm or damp potato produces a soft, oily crust. Aioli dressing should be light — toss and serve immediately, do not allow dressed potatoes to sit or they will go limp."
+    "note": "Potato pieces must be fully chilled and dry before frying for maximum crispiness. Frying warm or damp potato produces a soft, oily crust. Aioli dressing should be light — toss and serve immediately, do not allow dressed potatoes to sit or they will go limp.",
+    "prepPhase": "day_before"
   },
   {
     "id": "lamb-cutlet",
@@ -643,7 +654,14 @@
       "Rest cutlets for 3–4 minutes before plating. This is non-negotiable at 80 covers — resting ensures the juices redistribute and the cutlet holds on the plate.",
       "Lay a small bed of fresh rocket on the plate. Arrange 3 cutlets neatly on top, bones pointing upward. Drizzle Riviera House Emulsion generously over the cutlets, ensuring each is well-coated. Serve immediately."
     ],
-    "note": "Lamb cutlets are brined for 24 hours in the house Lamb Citrus Herb Brine (180g salt, 120g sugar, garlic, rosemary, thyme, lemon, 5L water) before cooking. Do NOT use the old 'season two days before' method — brine protocol replaces this entirely. Brine must be fully cold before meat is added. Pat cutlets completely dry after brining for an effective sear. Season lightly at service — the brine seasons from within."
+    "note": "Lamb cutlets are brined for 24 hours in the house Lamb Citrus Herb Brine (180g salt, 120g sugar, garlic, rosemary, thyme, lemon, 5L water) before cooking. Do NOT use the old 'season two days before' method — brine protocol replaces this entirely. Brine must be fully cold before meat is added. Pat cutlets completely dry after brining for an effective sear. Season lightly at service — the brine seasons from within.",
+    "prepPhases": [
+      "day_before",
+      "day_before",
+      "day_before",
+      "day_before",
+      "morning_of"
+    ]
   },
   {
     "id": "fish-slider",
@@ -759,7 +777,17 @@
       "ASSEMBLY (two-person flow): Person 1 — place brioche base on platter, add 3 g rocket (small pinch), pipe or spoon 22 g lemon caper aioli onto rocket. Person 2 — place fish on aioli, top with brioche lid, press gently, secure with bamboo skewer at an angle.",
       "Arrange 10 per platter, skewer-side up. Send immediately — do not hold assembled sliders."
     ],
-    "note": "Batter must be kept ice-cold throughout service — split into two bowls and rotate from fridge. Vodka in batter inhibits gluten development and flash-evaporates in the fryer, producing a lighter, crisper shell. Self-raising flour replaced with plain flour + cornflour for controlled leavening and superior texture. Aioli yield calculated at 22 g per slider with 10% buffer. Confirm reef fish species with supplier — coral trout preferred for firmness under high-heat fry."
+    "note": "Batter must be kept ice-cold throughout service — split into two bowls and rotate from fridge. Vodka in batter inhibits gluten development and flash-evaporates in the fryer, producing a lighter, crisper shell. Self-raising flour replaced with plain flour + cornflour for controlled leavening and superior texture. Aioli yield calculated at 22 g per slider with 10% buffer. Confirm reef fish species with supplier — coral trout preferred for firmness under high-heat fry.",
+    "prepPhases": [
+      "day_before",
+      "day_before",
+      "day_before",
+      "morning_of",
+      "day_before",
+      "day_before",
+      "day_before",
+      "day_before"
+    ]
   },
   {
     "id": "beef-kofta",
@@ -993,7 +1021,8 @@
       "PLATE: Place one cigar in each bamboo boat. Drizzle 5 ml thyme honey directly over cigar using a squeeze bottle — do not pool honey in the boat base. Finish with a small pinch of microherbs on top.",
       "Arrange 10 boats per platter. Garnish platter with a light scatter of remaining pecan crumb and a few whole cranberries for colour cues. Send immediately."
     ],
-    "note": "Garlic removed entirely — it was in the original spec but conflicts with the thyme-honey profile and the delicate lactic flavour of camembert. Butter was listed in method steps but absent from the original ingredient list — added at 150 g, calculated at 3 g per double-buttered strip with buffer. Filo packet quantities increased from 2 to 3 — 2 packets do not yield sufficient strips for 50 cigars when accounting for tears and trim waste. Fry temperature reduced to 175°C from implied high heat to prevent blowout."
+    "note": "Garlic removed entirely — it was in the original spec but conflicts with the thyme-honey profile and the delicate lactic flavour of camembert. Butter was listed in method steps but absent from the original ingredient list — added at 150 g, calculated at 3 g per double-buttered strip with buffer. Filo packet quantities increased from 2 to 3 — 2 packets do not yield sufficient strips for 50 cigars when accounting for tears and trim waste. Fry temperature reduced to 175°C from implied high heat to prevent blowout.",
+    "prepPhase": "day_before"
   },
   {
     "id": "romesco",
