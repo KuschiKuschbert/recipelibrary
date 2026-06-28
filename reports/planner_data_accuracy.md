@@ -19,6 +19,9 @@ Generated at 120 covers for cocktail and buffet styles.
 | arancini | 0.600 | 3 kg · Arborio Rice | PASS |
 | calamari | 6.000 | 12 kg · Pineapple Cut Squid Strips | PASS |
 | roast-beef-thyme-garlic-carvery | 3.000 | 24 kg · Carvery Beef, Cooked | PASS |
+| oysters-kilpatrick | 2.500 |  · Oysters | PASS |
+| chicken-skewer | 1.846 | 9.23 kg · Chicken Thigh | PASS |
+| chorizo-potatoes | 1.846 | 18.46 kg · White Washed Potatoes | PASS |
 
 ## Buffet · 120 covers
 
@@ -27,3 +30,6 @@ Generated at 120 covers for cocktail and buffet styles.
 | arancini | 0.600 | 3 kg · Arborio Rice | PASS |
 | calamari | 6.000 | 12 kg · Pineapple Cut Squid Strips | PASS |
 | roast-beef-thyme-garlic-carvery | 3.000 | 24 kg · Carvery Beef, Cooked | PASS |
+| oysters-kilpatrick | 2.500 |  · Oysters | PASS |
+| chicken-skewer | 1.846 | 9.23 kg · Chicken Thigh | PASS |
+| chorizo-potatoes | 1.846 | 18.46 kg · White Washed Potatoes | PASS |
