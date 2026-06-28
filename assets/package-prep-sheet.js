@@ -657,6 +657,20 @@
         });
         html += '</ul>';
       });
+      var X = window.KuschiPlannerExtras;
+      if (X && _built && _built.merged) {
+        var est = X.estimateShoppingCost(_built.merged);
+        if (est.covered > 0) {
+          html +=
+            '<div class="planner-shopping__cost">Est. food cost (partial): <strong>' +
+            esc(X.formatAud(est.total)) +
+            '</strong> · ' +
+            est.covered +
+            '/' +
+            est.lines +
+            ' lines priced · extend riviera_data/planner_unit_costs.json</div>';
+        }
+      }
       html += '</div>';
     } else if (_activeTab === 'recipes') {
       html = '<div class="planner-recipes">';
@@ -772,13 +786,23 @@
   }
 
   function open(payload) {
+    var finish = function () {
+      var extras = window.KuschiPlannerExtras;
+      var loadExtras =
+        extras && typeof extras.loadPlannerExtrasData === 'function'
+          ? extras.loadPlannerExtrasData()
+          : Promise.resolve();
+      loadExtras
+        .then(function () {
+          buildFromPayload(payload);
+        })
+        .catch(function () {
+          buildFromPayload(payload);
+        });
+    };
     loadPlannerData()
-      .then(function () {
-        buildFromPayload(payload);
-      })
-      .catch(function () {
-        buildFromPayload(payload);
-      });
+      .then(finish)
+      .catch(finish);
   }
 
   function close() {
@@ -887,6 +911,29 @@
       printBtn.addEventListener('click', function () {
         populatePrintRoot();
         window.print();
+      });
+    }
+    var downloadHtml = document.getElementById('plannerDownloadHtml');
+    if (downloadHtml) {
+      downloadHtml.addEventListener('click', function () {
+        populatePrintRoot();
+        var root = document.getElementById('plannerPrintRoot');
+        var X = window.KuschiPlannerExtras;
+        if (!root || !X || !_payload) return;
+        var title = _payload.eventLabel + ' · ' + _payload.sectionLabel + ' · ' + _payload.pax + ' covers';
+        X.downloadPlannerHtml(title, root.innerHTML);
+      });
+    }
+    var exportBundle = document.getElementById('plannerExportBundle');
+    if (exportBundle) {
+      exportBundle.addEventListener('click', function () {
+        var X = window.KuschiPlannerExtras;
+        var P = window.KuschiPackagePlanner;
+        if (!X || !P || typeof P.getState !== 'function') return;
+        X.downloadJson(
+          'kuschi-planner-bundle.json',
+          X.exportPlanBundle(P.getState(), { planId: _payload && _payload.planId })
+        );
       });
     }
     var printRecipes = document.getElementById('plannerPrintIncludeRecipes');

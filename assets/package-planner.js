@@ -369,6 +369,9 @@
         } else {
           html += '<span class="fn-dish-chip__badge">No recipe</span>';
         }
+        if (selected && hasRecipe && item.recipeId && window.KuschiPlannerExtras) {
+          html += window.KuschiPlannerExtras.renderHintChips(item.recipeId);
+        }
         html += '</div>';
       });
       html += '</div></section>';
@@ -506,11 +509,18 @@
         autoSelectAllCourses(data.packages[0].sections[0]);
         saveState();
       }
-      renderEventTabs();
-      var pkg = findPkg(_state.eventId);
-      if (pkg) renderSectionTabs(pkg);
-      renderBody();
-      syncUrl({ clearOpen: true });
+      function finishOpen() {
+        renderEventTabs();
+        var pkg = findPkg(_state.eventId);
+        if (pkg) renderSectionTabs(pkg);
+        renderBody();
+        syncUrl({ clearOpen: true });
+      }
+      if (window.KuschiPlannerExtras && typeof window.KuschiPlannerExtras.loadPlannerExtrasData === 'function') {
+        window.KuschiPlannerExtras.loadPlannerExtrasData().then(finishOpen).catch(finishOpen);
+      } else {
+        finishOpen();
+      }
     });
   }
 
@@ -559,6 +569,50 @@
     if (overlay) {
       overlay.addEventListener('click', function (ev) {
         if (ev.target === overlay) closePlanner();
+      });
+    }
+    var exportBtn = document.getElementById('fnPlannerExport');
+    if (exportBtn) {
+      exportBtn.addEventListener('click', function () {
+        var X = window.KuschiPlannerExtras;
+        if (!X) return;
+        X.downloadJson('kuschi-planner-plan.json', X.exportPlanBundle(_state));
+      });
+    }
+    var importBtn = document.getElementById('fnPlannerImport');
+    var importFile = document.getElementById('fnPlannerImportFile');
+    if (importBtn && importFile) {
+      importBtn.addEventListener('click', function () {
+        importFile.click();
+      });
+      importFile.addEventListener('change', function () {
+        var file = importFile.files && importFile.files[0];
+        importFile.value = '';
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function () {
+          try {
+            var bundle = JSON.parse(String(reader.result || ''));
+            var X = window.KuschiPlannerExtras;
+            if (!X) throw new Error('Planner extras not loaded');
+            X.importPlanBundle(bundle, {
+              applyState: function (st) {
+                _state = Object.assign({}, _state, st);
+                saveState();
+                loadPackages(function () {
+                  renderEventTabs();
+                  var pkg = findPkg(_state.eventId);
+                  if (pkg) renderSectionTabs(pkg);
+                  renderBody();
+                  syncUrl();
+                });
+              },
+            });
+          } catch (e) {
+            alert('Could not import plan: ' + (e && e.message ? e.message : 'invalid file'));
+          }
+        };
+        reader.readAsText(file);
       });
     }
   }

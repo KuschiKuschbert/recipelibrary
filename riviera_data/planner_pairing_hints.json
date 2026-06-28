@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "note": "Curated pairing bridges for planner chips. Regenerate with scripts/build_planner_pairing_hints.py when Epicure MCP is available.",
+  "hints": {
+    "arancini": ["saffron", "romesco", "lemon", "pecorino"],
+    "calamari": ["capers", "fennel", "parsley", "aioli"],
+    "oysters-kilpatrick": ["speck", "worcestershire", "lemon", "tabasco"],
+    "veal-meatballs": ["romesco", "manchego", "basil", "tomato"],
+    "camembert-cigars": ["honey", "thyme", "cranberry", "pecan"],
+    "lamb-cutlet": ["anchovy", "mint", "yogurt", "sumac"],
+    "chicken-skewer": ["labneh", "feta", "dill", "lemon"],
+    "chorizo-potatoes": ["aioli", "smoked paprika", "shallot", "parsley"],
+    "fish-slider": ["caper", "lemon", "dill", "aioli"],
+    "cotoletta-pinsa": ["mozzarella", "basil", "tomato", "parmesan"],
+    "roast-beef-thyme-garlic-carvery": ["horseradish", "mustard", "thyme", "red wine"],
+    "lemon-thyme-garlic-roast-chicken-carvery": ["lemon", "garlic", "thyme", "gravy"],
+    "beef-kofta": ["yogurt", "sumac", "pomegranate", "mint"],
+    "chilli-prawn-chorizo-casarecce": ["garlic", "white wine", "parsley", "lemon"],
+    "fillet-beef-tempranillo": ["shallot", "butter", "thyme", "red wine"],
+    "natural-oysters-champagne-mignonette": ["champagne", "shallot", "cucumber", "vinegar"],
+    "charcuterie-board-classic": ["fig", "grape", "mustard", "cornichon"],
+    "maple-pumpkin-ravioli-burnt-butter": ["sage", "parmesan", "amaretti", "nutmeg"]
+  }
+}

@@ -68,11 +68,31 @@ def main() -> int:
             fail(f"riviera.html missing {needle}")
 
     sw = (ROOT / "sw.js").read_text(encoding="utf-8")
-    if "kuschi-kitchen-v14" in sw:
-        ok("sw.js CACHE_NAME v14")
+    if "kuschi-kitchen-v15" in sw:
+        ok("sw.js CACHE_NAME v15")
     else:
         errors += 1
-        fail("sw.js not on v14")
+        fail("sw.js not on v15")
+
+    extras = ROOT / "assets/planner-extras.js"
+    r = subprocess.run(["node", "--check", str(extras)], capture_output=True, text=True)
+    if r.returncode == 0:
+        ok("node --check assets/planner-extras.js")
+    else:
+        errors += 1
+        fail(f"node --check assets/planner-extras.js: {r.stderr.strip()}")
+
+    for rel in (
+        "riviera_data/planner_pairing_hints.json",
+        "riviera_data/planner_unit_costs.json",
+    ):
+        p = ROOT / rel
+        if p.is_file():
+            json.loads(p.read_text())
+            ok(rel)
+        else:
+            errors += 1
+            fail(f"missing {rel}")
 
     builtins = json.loads((ROOT / "riviera_data/builtins.json").read_text())
     by_id = {r["id"]: r for r in builtins if isinstance(r, dict) and r.get("id")}

@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "note": "Estimated unit costs (AUD) per merge key qty unit — e.g. cost_per_unit is $ per kg when qty is in kg. Extend as supplier prices are confirmed.",
+  "currency": "AUD",
+  "items": {
+    "arborio rice": { "cost_per_unit": 4.5, "unit": "kg" },
+    "chorizo": { "cost_per_unit": 18.0, "unit": "kg" },
+    "mozzarella — whole": { "cost_per_unit": 14.0, "unit": "kg" },
+    "pineapple cut squid strips": { "cost_per_unit": 22.0, "unit": "kg" },
+    "baby octopus": { "cost_per_unit": 28.0, "unit": "kg" },
+    "chicken thigh": { "cost_per_unit": 12.0, "unit": "kg" },
+    "carvery beef, cooked": { "cost_per_unit": 24.0, "unit": "kg" },
+    "white washed potatoes": { "cost_per_unit": 2.5, "unit": "kg" },
+    "lamb cutlets": { "cost_per_unit": 32.0, "unit": "kg" },
+    "beef mince": { "cost_per_unit": 14.0, "unit": "kg" },
+    "pork mince": { "cost_per_unit": 11.0, "unit": "kg" },
+    "kewpie mayo": { "cost_per_unit": 8.0, "unit": "kg" },
+    "olive oil": { "cost_per_unit": 12.0, "unit": "L" },
+    "flour gf": { "cost_per_unit": 3.5, "unit": "kg" },
+    "breadcrumbs gf": { "cost_per_unit": 6.0, "unit": "kg" }
+  }
+}

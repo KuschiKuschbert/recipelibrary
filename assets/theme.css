@@ -3416,6 +3416,27 @@ body.planner-list-open {
   min-width: 180px;
   min-height: 44px;
 }
+.fn-planner__sync-btn {
+  min-height: 44px;
+  font-size: 12px;
+  padding: 0 12px;
+}
+.fn-dish-chip__hints {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+  padding-left: 4px;
+}
+.fn-dish-chip__hint {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 100px;
+  background: var(--gold-dim);
+  color: var(--gold-light);
+  border: 1px solid rgba(201, 169, 110, 0.25);
+}
 
 .fn-planner__body {
   flex: 1;
@@ -3660,6 +3681,15 @@ body.planner-list-open {
   color: var(--gold);
   font-weight: 600;
   margin-right: 6px;
+}
+.planner-shopping__cost {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--gold-dim);
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  font-size: 12px;
+  color: var(--gold-light);
 }
 
 .planner-recipe {

@@ -751,6 +751,9 @@
       <label class="fn-planner__date-label">Event date
         <input type="date" class="fn-planner__date-input" id="fnPlannerEventDate">
       </label>
+      <button type="button" class="btn-secondary fn-planner__sync-btn" id="fnPlannerExport" title="Export plan JSON">Export</button>
+      <button type="button" class="btn-secondary fn-planner__sync-btn" id="fnPlannerImport" title="Import plan JSON">Import</button>
+      <input type="file" id="fnPlannerImportFile" accept="application/json,.json" hidden>
       <button type="button" class="btn-primary fn-planner__generate" id="fnPlannerGenerate" disabled>Generate Full Planner List</button>
     </div>
     <div class="fn-planner__body" id="fnPlannerBody"></div>
@@ -779,7 +782,9 @@
       </label>
       <button type="button" class="btn-secondary" id="plannerCopyAll">Copy all</button>
       <button type="button" class="btn-secondary" id="plannerCopyTimeline">Copy timeline</button>
-      <button type="button" class="btn-secondary" id="plannerPrint">Print</button>
+      <button type="button" class="btn-secondary" id="plannerDownloadHtml">Download HTML</button>
+      <button type="button" class="btn-secondary" id="plannerExportBundle">Export bundle</button>
+      <button type="button" class="btn-secondary" id="plannerPrint">Print / PDF</button>
       <button type="button" class="btn-secondary" id="plannerOrderList">Order list</button>
       <button type="button" class="btn-secondary" id="plannerPrepBoard">Prep board</button>
     </div>
@@ -1003,6 +1008,7 @@
 <script src="assets/prep-list.js"></script>
 <script src="assets/overlay-stack.js"></script>
 <script src="assets/planner-scale.js"></script>
+<script src="assets/planner-extras.js"></script>
 <script src="assets/package-planner.js"></script>
 <script src="assets/package-prep-sheet.js"></script>
 <script src="assets/kuschi-recipe-ui.js"></script>
