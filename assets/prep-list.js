@@ -120,6 +120,7 @@
 
     var detailSheet = null;
     var detailKeydownBound = false;
+    var openedFromPlanner = false;
 
     function loadDoc() {
       if (!window.KuschiUserRecipes) {
@@ -490,20 +491,30 @@
       overlay.addEventListener('change', onOverlayChange);
     }
 
-    function open() {
+    function open(options) {
+      options = options || {};
       bindOverlay();
       renderBody();
+      openedFromPlanner = !!options.fromPlanner;
       var el = document.getElementById(overlayId);
       if (el) {
         el.classList.add('open');
+        if (openedFromPlanner) el.classList.add('modal-overlay--planner-child');
         document.body.style.overflow = 'hidden';
       }
     }
 
     function close() {
       closeTaskDetail();
+      if (openedFromPlanner && window.KuschiOverlayStack && typeof window.KuschiOverlayStack.pop === 'function') {
+        window.KuschiOverlayStack.pop();
+      }
       var el = document.getElementById(overlayId);
-      if (el) el.classList.remove('open');
+      if (el) {
+        el.classList.remove('open');
+        el.classList.remove('modal-overlay--planner-child');
+      }
+      openedFromPlanner = false;
       if (shouldReleaseBodyScroll()) document.body.style.overflow = '';
     }
 
@@ -558,6 +569,9 @@
       if (!tasks || !tasks.length) return 0;
       var doc = loadDoc();
       doc.tasks = doc.tasks || [];
+      if (opts.mode === 'replace') {
+        doc.tasks = [];
+      }
       var added = 0;
       tasks.forEach(function (t) {
         if (!t || !t.title) return;
@@ -571,6 +585,7 @@
           done: false,
         };
         if (t.notes) row.notes = String(t.notes).slice(0, 500);
+        if (opts.planId) row.plannerPlanId = String(opts.planId).slice(0, 80);
         doc.tasks.push(row);
         added++;
       });
@@ -582,6 +597,10 @@
       return added;
     }
 
+    function getTaskCount() {
+      return (loadDoc().tasks || []).length;
+    }
+
     return {
       open: open,
       close: close,
@@ -589,6 +608,7 @@
       submitAdd: submitAdd,
       tryCloseTaskDetail: tryCloseTaskDetail,
       importTasks: importTasks,
+      getTaskCount: getTaskCount,
       getSelectedActorId: function () {
         return loadDoc().selectedId || 'kuschi';
       },
