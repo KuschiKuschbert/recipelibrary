@@ -11,6 +11,10 @@ reports/translation_candidates.jsonl
 reports/cleanup_affected_ids.jsonl
 reports/translate_full.log
 
+# Workbook extract dumps (local pipeline input — regenerate with parse_menu_builder.py)
+reports/reference_sheet_extract.json
+reports/reference_sheet_extract_full.json
+
 # Optional pipeline / legacy dumps — not needed for GitHub Pages (see README “Repo size”)
 scraped_raw/
 kitchen_library_*.json

@@ -41,6 +41,13 @@ Script: `scripts/planner_apply_prep_phases.py` (**47** recipes patched across Po
 | `sync_stock_from_workbook.py --apply` | +1 row (`c166` Shreedded Mozzarella), 0 zone fixes |
 | Catalog rebuild | `riviera_data/stocktake_catalog.json` (417 items) |
 
-## 5. P2 backlog (not implemented — scoped)
+## 5. P2 backlog (v1 shipped — see planner_p2_backlog.md)
 
-See `reports/planner_p2_backlog.md` for Epicure auto-suggest, pricing/GP, PDF export, cloud sync.
+| Feature | v1 |
+|---------|-----|
+| PDF export | Print / PDF + Download HTML |
+| Epicure suggest | Static pairing hint chips |
+| Pricing / GP | Partial shopping cost from `planner_unit_costs.json` |
+| Cloud sync | Export / import JSON + bundle |
+
+Tablet checklist: `reports/planner_tablet_checklist.md`

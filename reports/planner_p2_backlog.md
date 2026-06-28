@@ -1,42 +1,29 @@
-# Planner P2 backlog
+# Planner P2 backlog — status
 
-Deferred feature projects after v1.1 + data accuracy + prepPhase passes.
+## PDF export — **v1 shipped (client-side)**
 
-## Epicure auto-suggest
+- **Print / PDF** — browser print dialog (`plannerPrint`)
+- **Download HTML** — offline file for print-to-PDF (`plannerDownloadHtml` + `KuschiPlannerExtras.downloadPlannerHtml`)
 
-**Goal:** When selecting package dishes in the planner, surface non-obvious pairings from the Epicure embedding model.
+Future: jsPDF for true `.pdf` binary if needed.
 
-**Touch points:** `assets/package-planner.js` (selection UI), optional MCP/`user-epicure` in agent workflows only — client-side would need a static pairing shard or lazy API.
+## Epicure auto-suggest — **v1 shipped (static hints)**
 
-**Effort:** Medium–large (data pipeline + UI chips).
+- `riviera_data/planner_pairing_hints.json` — curated bridge chips on selected planner dishes
+- Regenerate: `scripts/build_planner_pairing_hints.py` (wire Epicure MCP when available)
 
-## Pricing / GP
+Future: live Epicure API or richer static shard.
 
-**Goal:** Attach food cost or GP% to planner shopping lists from par/stock or supplier prices.
+## Pricing / GP — **v1 shipped (partial estimates)**
 
-**Touch points:** `mergeIngredients` output, `riviera_data/stocktake_catalog.json`, new cost map JSON.
+- `riviera_data/planner_unit_costs.json` — merge-key → AUD per unit
+- Shopping tab shows partial total when priced lines exist
 
-**Effort:** Large (cost SSOT + UI).
+Future: full cost SSOT from supplier feeds; GP% target per package.
 
-## PDF export
+## Cloud sync — **v1 shipped (file-based)**
 
-**Goal:** One-click PDF of manifest + timeline + shopping (+ optional recipes) instead of browser print.
+- **Export / Import** plan JSON on planner bar (`fnPlannerExport` / `fnPlannerImport`)
+- **Export bundle** from planner list (state + timeline localStorage keys)
 
-**Touch points:** `populatePrintRoot`, new print CSS or client PDF lib (jsPDF / print-to-PDF server).
-
-**Effort:** Medium.
-
-## Cloud sync
-
-**Goal:** Shared planner state (selections, event date, timeline checks) across tablets/staff.
-
-**Touch points:** Replace `localStorage` with authenticated backend or sync provider; migrate `kuschi_package_plan_v2` and timeline keys.
-
-**Effort:** Large (infra + auth).
-
-## Suggested order
-
-1. PDF export (staff-facing, no backend)
-2. Epicure suggest (differentiation)
-3. Pricing/GP (ops value, needs cost data)
-4. Cloud sync (multi-user)
+Future: authenticated multi-user backend sync.
