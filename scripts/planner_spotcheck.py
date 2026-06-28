@@ -81,7 +81,14 @@ def scale_qty(qty: str, factor: float) -> str:
 
 def main() -> None:
     builtins = json.loads((ROOT / "riviera_data/builtins.json").read_text())
-    ids = ["arancini", "calamari", "roast-beef-thyme-garlic-carvery"]
+    ids = [
+        "arancini",
+        "calamari",
+        "roast-beef-thyme-garlic-carvery",
+        "oysters-kilpatrick",
+        "chicken-skewer",
+        "chorizo-potatoes",
+    ]
     recipes = {r["id"]: r for r in builtins if r.get("id") in ids}
     variants = load_variants()
     redirects = json.loads((ROOT / "riviera_data/canonical_recipe_aliases.json").read_text()).get(

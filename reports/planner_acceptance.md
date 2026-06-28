@@ -50,6 +50,6 @@ Reports: `reports/package_recipe_coverage.md`, `reports/workbook_dish_gaps.md`
 
 ## Cycle 4 — Final signoff
 
-All backlog items #1–#4 green. P2 deferred: Epicure auto-suggest, pricing/GP, cloud sync, PDF export, remaining `"yield": "Scalable"` recipes (3 non-calamari).
+All backlog items #1–#4 green. P2 deferred: Epicure auto-suggest, pricing/GP, cloud sync, PDF export.
 
 **SHIP:** Planner v1.1 loop complete on feature branch; merge `cursor/planner-v11-polish` when ready.
