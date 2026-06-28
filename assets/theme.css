@@ -3395,6 +3395,22 @@ body.planner-list-open {
   background: var(--surface);
   color: var(--text);
 }
+.fn-planner__date-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text2);
+}
+.fn-planner__date-input {
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+}
 .fn-planner__generate {
   flex: 1;
   min-width: 180px;
@@ -3560,6 +3576,21 @@ body.planner-list-open {
   min-height: 40px;
   font-size: 12px;
 }
+.planner-list__print-opt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text2);
+  min-height: 40px;
+  padding: 0 4px;
+}
+.planner-list__print-opt input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--gold);
+}
 
 .planner-list__body {
   flex: 1;
@@ -3597,6 +3628,23 @@ body.planner-list-open {
   font-size: 13px;
   line-height: 1.45;
   color: var(--text2);
+}
+.planner-timeline__row--done {
+  opacity: 0.55;
+}
+.planner-timeline__row--done strong {
+  text-decoration: line-through;
+}
+.planner-timeline__check-btn {
+  margin-right: 6px;
+  padding: 0 4px;
+  border: none;
+  background: none;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--gold);
+  vertical-align: middle;
 }
 .planner-timeline__check {
   margin-right: 6px;
@@ -3762,6 +3810,30 @@ body.planner-list-open {
   margin: 16px 0 8px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+.planner-print-doc__date {
+  margin: -8px 0 12px;
+  font-size: 13px;
+  color: #444;
+}
+.planner-print-recipe {
+  margin-bottom: 16px;
+  page-break-inside: avoid;
+}
+.planner-print-recipe h3 {
+  font-size: 13px;
+  margin: 0 0 6px;
+}
+.planner-print-recipe__meta {
+  font-size: 11px;
+  color: #555;
+  margin: 0 0 6px;
+}
+.planner-print-recipe ul,
+.planner-print-recipe__method {
+  margin: 0 0 8px;
+  padding-left: 18px;
+  font-size: 11px;
 }
 .planner-print-doc pre {
   white-space: pre-wrap;

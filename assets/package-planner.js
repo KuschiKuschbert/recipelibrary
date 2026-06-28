@@ -4,10 +4,11 @@
 (function () {
   'use strict';
 
-  var STORAGE_KEY = 'kuschi_package_plan_v1';
+  var STORAGE_KEY = 'kuschi_package_plan_v2';
+  var STORAGE_KEY_V1 = 'kuschi_package_plan_v1';
   var _cfg = null;
   var _pkgData = null;
-  var _state = { eventId: null, sectionId: null, pax: 100, selections: {} };
+  var _state = { eventId: null, sectionId: null, pax: 100, eventDate: '', selections: {} };
 
   function esc(s) {
     return String(s || '')
@@ -32,6 +33,7 @@
   function loadState() {
     try {
       var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) raw = localStorage.getItem(STORAGE_KEY_V1);
       if (raw) {
         var parsed = JSON.parse(raw);
         if (parsed && typeof parsed === 'object') {
@@ -39,6 +41,7 @@
             eventId: parsed.eventId || null,
             sectionId: parsed.sectionId || null,
             pax: parsed.pax > 0 ? parsed.pax : 100,
+            eventDate: parsed.eventDate != null ? String(parsed.eventDate) : '',
             selections: parsed.selections && typeof parsed.selections === 'object' ? parsed.selections : {},
           };
         }
@@ -46,6 +49,23 @@
     } catch (_) {
       /* keep defaults */
     }
+  }
+
+  function encodeSelParam() {
+    return Object.keys(_state.selections)
+      .filter(function (k) {
+        return _state.selections[k];
+      })
+      .join(',');
+  }
+
+  function applySelParam(sel) {
+    if (!sel) return;
+    _state.selections = {};
+    sel.split(',').forEach(function (k) {
+      k = k.trim();
+      if (k) _state.selections[k] = true;
+    });
   }
 
   function saveState() {
@@ -66,6 +86,11 @@
       else p.delete('section');
       if (_state.pax > 0) p.set('pax', String(_state.pax));
       else p.delete('pax');
+      if (_state.eventDate) p.set('eventDate', _state.eventDate);
+      else p.delete('eventDate');
+      var sel = encodeSelParam();
+      if (sel) p.set('sel', sel);
+      else p.delete('sel');
       p.set('planner', '1');
       if (opts.open) p.set('open', opts.open);
       else if (opts.clearOpen) p.delete('open');
@@ -181,6 +206,7 @@
     if (_state.selections[key]) delete _state.selections[key];
     else _state.selections[key] = true;
     saveState();
+    syncUrl();
     renderBody();
   }
 
@@ -276,8 +302,12 @@
     var body = document.getElementById('fnPlannerBody');
     var genBtn = document.getElementById('fnPlannerGenerate');
     var paxInput = document.getElementById('fnPlannerPax');
+    var dateInput = document.getElementById('fnPlannerEventDate');
     if (paxInput && document.activeElement !== paxInput) {
       paxInput.value = String(_state.pax || 100);
+    }
+    if (dateInput && document.activeElement !== dateInput) {
+      dateInput.value = _state.eventDate || '';
     }
     if (!body) return;
     var pkg = findPkg(_state.eventId);
@@ -435,6 +465,7 @@
       style: sec.style || '',
       price: sec.price || '',
       pax: _state.pax,
+      eventDate: _state.eventDate || '',
       courses: coursesOut,
       recipeIds: recipeIds,
     };
@@ -516,6 +547,14 @@
         renderBody();
       });
     }
+    var dateInput = document.getElementById('fnPlannerEventDate');
+    if (dateInput) {
+      dateInput.addEventListener('change', function () {
+        _state.eventDate = dateInput.value || '';
+        saveState();
+        syncUrl();
+      });
+    }
     var overlay = document.getElementById('functionPlannerOverlay');
     if (overlay) {
       overlay.addEventListener('click', function (ev) {
@@ -534,12 +573,16 @@
     var pkgId = params.get('pkg');
     var secId = params.get('section');
     var pax = params.get('pax');
+    var eventDate = params.get('eventDate');
+    var sel = params.get('sel');
     var planner = params.get('planner');
     var recipeId = params.get('open');
     if (pax) {
       var pn = parseFloat(pax);
       if (pn > 0) _state.pax = pn;
     }
+    if (eventDate) _state.eventDate = eventDate;
+    if (sel) applySelParam(sel);
     if (pkgId) _state.eventId = pkgId;
     if (secId) _state.sectionId = secId;
 

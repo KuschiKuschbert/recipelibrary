@@ -28,6 +28,47 @@
   var _aliases = null;
   var _scrollToRecipeId = null;
   var _dataPromise = null;
+  var _includeRecipesInPrint = false;
+  var _timelineChecked = {};
+  var TIMELINE_CHECK_KEY = 'kuschi_planner_timeline_v1::';
+
+  function timelineRowId(row) {
+    return row.phase + '::' + String(row.text || '').slice(0, 80).replace(/\s+/g, ' ');
+  }
+
+  function loadTimelineChecks(planId) {
+    if (!planId) {
+      _timelineChecked = {};
+      return;
+    }
+    try {
+      var raw = localStorage.getItem(TIMELINE_CHECK_KEY + planId);
+      _timelineChecked = raw ? JSON.parse(raw) : {};
+      if (!_timelineChecked || typeof _timelineChecked !== 'object') _timelineChecked = {};
+    } catch (_) {
+      _timelineChecked = {};
+    }
+  }
+
+  function saveTimelineChecks(planId) {
+    if (!planId) return;
+    try {
+      localStorage.setItem(TIMELINE_CHECK_KEY + planId, JSON.stringify(_timelineChecked));
+    } catch (_) {
+      /* quota */
+    }
+  }
+
+  function toggleTimelineRow(rowId) {
+    if (_timelineChecked[rowId]) delete _timelineChecked[rowId];
+    else _timelineChecked[rowId] = true;
+    if (_payload && _payload.planId) saveTimelineChecks(_payload.planId);
+    if (_built) {
+      _built.timelineText = buildTimelineText(_built.timeline);
+      _built.fullText = buildFullDocument(_payload, _built.timeline, _built.merged);
+    }
+    renderTabContent();
+  }
 
   var VARIANT_URLS = [
     'riviera_data/service_variants.json',
@@ -167,6 +208,10 @@
   }
 
   function classifyPhase(recipe, stepText, isService) {
+    if (recipe && recipe.prepPhase && !isService) {
+      var pp = String(recipe.prepPhase);
+      if (pp === 'day_before' || pp === 'morning_of' || pp === 'service') return pp;
+    }
     var text = String(stepText || '').toLowerCase();
     var type = String(recipe.type || '').toLowerCase();
     if (isService) return 'service';
@@ -253,13 +298,15 @@
 
     Object.keys(seen).forEach(function (k) {
       var r = seen[k];
-      rows.push({
+      var row = {
         phase: r.phase,
         recipeId: r.recipeId,
         dishName: r.dishNames.join(', '),
         text: r.text,
         hint: r.hint,
-      });
+      };
+      row.rowId = timelineRowId(row);
+      rows.push(row);
     });
 
     var phaseRank = { day_before: 0, morning_of: 1, service: 2 };
@@ -283,6 +330,7 @@
         payload.pax +
         ' covers'
     );
+    if (payload.eventDate) lines.push(formatEventDate(payload.eventDate));
     if (payload.style) lines.push(payload.style + (payload.price ? ' · ' + payload.price : ''));
     lines.push('');
 
@@ -302,6 +350,17 @@
       lines.push('');
     });
     return lines.join('\n').trim();
+  }
+
+  function formatEventDate(iso) {
+    if (!iso) return '';
+    try {
+      var d = new Date(iso + 'T12:00:00');
+      if (isNaN(d.getTime())) return iso;
+      return d.toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+    } catch (_) {
+      return iso;
+    }
   }
 
   function mergeIngredients(payload) {
@@ -383,7 +442,7 @@
       if (!phaseRows.length) return;
       parts.push(PHASE_LABELS[phase]);
       phaseRows.forEach(function (r) {
-        parts.push('[ ] ' + r.dishName + ' — ' + r.text + ' (' + r.hint + ')');
+        parts.push(timelineCheckMark(r.rowId) + ' ' + r.dishName + ' — ' + r.text + ' (' + r.hint + ')');
       });
       parts.push('');
     });
@@ -400,6 +459,10 @@
     return parts.join('\n').trim();
   }
 
+  function timelineCheckMark(rowId) {
+    return _timelineChecked[rowId] ? '[x]' : '[ ]';
+  }
+
   function buildTimelineText(timeline) {
     var parts = [];
     PHASE_ORDER.forEach(function (phase) {
@@ -409,11 +472,40 @@
       if (!phaseRows.length) return;
       parts.push(PHASE_LABELS[phase]);
       phaseRows.forEach(function (r) {
-        parts.push('[ ] ' + r.dishName + ' — ' + r.text + ' (' + r.hint + ')');
+        parts.push(timelineCheckMark(r.rowId) + ' ' + r.dishName + ' — ' + r.text + ' (' + r.hint + ')');
       });
       parts.push('');
     });
     return parts.join('\n').trim();
+  }
+
+  function buildRecipesPrintHtml() {
+    if (!_payload) return '';
+    var html = '<h2>Recipes</h2>';
+    (_payload.courses || []).forEach(function (course) {
+      (course.items || []).forEach(function (item) {
+        var recipe = item.recipe;
+        if (!recipe) return;
+        var factor = scaleFactorForRecipe(recipe, _payload.pax, _payload.style);
+        html += '<div class="planner-print-recipe">';
+        html += '<h3>' + esc(item.name) + '</h3>';
+        html += '<p class="planner-print-recipe__meta">' + esc(recipe.type || '') + ' · Yield: ' + esc(recipe.yield || '') + ' · ×' + factor.toFixed(2) + '</p>';
+        html += '<ul>';
+        scaledIngredients(recipe, factor).forEach(function (ing) {
+          html += '<li>' + esc((ing.qty || '·') + ' · ' + ing.item + (ing.prep ? ' — ' + ing.prep : '')) + '</li>';
+        });
+        html += '</ul>';
+        if (recipe.method_steps && recipe.method_steps.length) {
+          html += '<ol class="planner-print-recipe__method">';
+          recipe.method_steps.forEach(function (s) {
+            html += '<li>' + esc(s) + '</li>';
+          });
+          html += '</ol>';
+        }
+        html += '</div>';
+      });
+    });
+    return html;
   }
 
   function copyText(text, toastMsg) {
@@ -446,6 +538,9 @@
     if (!root || !_built || !_payload) return;
     var html = '<div class="planner-print-doc">';
     html += '<h1>' + esc(_payload.eventLabel + ' · ' + _payload.sectionLabel + ' · ' + _payload.pax + ' covers') + '</h1>';
+    if (_payload.eventDate) {
+      html += '<p class="planner-print-doc__date">' + esc(formatEventDate(_payload.eventDate)) + '</p>';
+    }
     html += '<h2>Menu</h2><pre>' + esc(_built.manifest) + '</pre>';
     html += '<h2>Prep timeline</h2><pre>' + esc(_built.timelineText) + '</pre>';
     html += '<h2>Shopping</h2>';
@@ -459,6 +554,7 @@
       });
       html += '</ul>';
     });
+    if (_includeRecipesInPrint) html += buildRecipesPrintHtml();
     html += '</div>';
     root.innerHTML = html;
   }
@@ -521,8 +617,19 @@
         if (!rows.length) return;
         html += '<h3 class="planner-timeline__phase">' + esc(PHASE_LABELS[phase]) + '</h3><ul class="planner-timeline__list">';
         rows.forEach(function (r) {
+          var checked = !!_timelineChecked[r.rowId];
           html +=
-            '<li class="planner-timeline__row"><span class="planner-timeline__check">☐</span> ' +
+            '<li class="planner-timeline__row' +
+            (checked ? ' planner-timeline__row--done' : '') +
+            '"><button type="button" class="planner-timeline__check-btn" data-row-id="' +
+            esc(r.rowId) +
+            '" aria-pressed="' +
+            (checked ? 'true' : 'false') +
+            '" aria-label="' +
+            (checked ? 'Mark incomplete' : 'Mark complete') +
+            '">' +
+            (checked ? '☑' : '☐') +
+            '</button> ' +
             '<strong>' +
             esc(r.dishName) +
             '</strong> — ' +
@@ -593,6 +700,14 @@
 
     body.innerHTML = html;
 
+    if (_activeTab === 'timeline') {
+      body.querySelectorAll('.planner-timeline__check-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          toggleTimelineRow(btn.getAttribute('data-row-id') || '');
+        });
+      });
+    }
+
     if (_activeTab === 'menu') {
       body.querySelectorAll('.planner-manifest__item').forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -623,6 +738,7 @@
   function buildFromPayload(payload) {
     _payload = payload;
     _payload.planId = planIdFromPayload(payload);
+    loadTimelineChecks(_payload.planId);
     _activeTab = 'timeline';
     var timeline = buildPrepTimeline(payload);
     var merged = mergeIngredients(payload);
@@ -638,8 +754,9 @@
 
     var title = document.getElementById('plannerListTitle');
     if (title) {
-      title.textContent =
-        payload.eventLabel + ' · ' + payload.sectionLabel + ' · ' + payload.pax + ' covers';
+      var titleText = payload.eventLabel + ' · ' + payload.sectionLabel + ' · ' + payload.pax + ' covers';
+      if (payload.eventDate) titleText += ' · ' + formatEventDate(payload.eventDate);
+      title.textContent = titleText;
     }
 
     var overlay = document.getElementById('plannerListOverlay');
@@ -669,18 +786,14 @@
   function openOrderListSubset() {
     if (!_payload || !_payload.recipeIds || !_payload.recipeIds.length) return;
     var ids = _payload.recipeIds;
-    var scaleMap = {};
-    if (window.KuschiPlannerScale && typeof window.KuschiPlannerScale.buildScaleMapFromPayload === 'function') {
-      scaleMap = window.KuschiPlannerScale.buildScaleMapFromPayload(_payload);
-    }
-    var ctx = {
-      fromPlanner: true,
-      label: _payload.eventLabel + ' · ' + _payload.sectionLabel,
-      pax: _payload.pax,
-      recipeCount: ids.length,
-      scaleMap: scaleMap,
-    };
-    function run() {
+    function run(scaleMap) {
+      var ctx = {
+        fromPlanner: true,
+        label: _payload.eventLabel + ' · ' + _payload.sectionLabel,
+        pax: _payload.pax,
+        recipeCount: ids.length,
+        scaleMap: scaleMap || {},
+      };
       var ol = window.rivieraOrderList;
       if (!ol && window.ensureRivieraOrderList) ol = window.ensureRivieraOrderList();
       if (!ol || typeof ol.setRecipeIdFilter !== 'function') return;
@@ -689,12 +802,22 @@
       ol.setRecipeIdFilter(ids);
       ol.open({ fromPlanner: true });
     }
-    var loadFn = window.loadRivieraOrderListScript;
-    if (typeof loadFn === 'function') {
-      loadFn().then(run).catch(run);
-    } else {
-      run();
+    var scalePromise = Promise.resolve({});
+    var S = window.KuschiPlannerScale;
+    if (S && typeof S.loadServiceData === 'function' && typeof S.buildScaleMapFromPayload === 'function') {
+      scalePromise = S.loadServiceData().then(function () {
+        return S.buildScaleMapFromPayload(_payload);
+      });
     }
+    var loadFn = window.loadRivieraOrderListScript;
+    var orderPromise = typeof loadFn === 'function' ? loadFn() : Promise.resolve();
+    Promise.all([scalePromise, orderPromise])
+      .then(function (pair) {
+        run(pair[0]);
+      })
+      .catch(function () {
+        run({});
+      });
   }
 
   function importPrepBoard() {
@@ -758,7 +881,15 @@
     var printBtn = document.getElementById('plannerPrint');
     if (printBtn) {
       printBtn.addEventListener('click', function () {
+        populatePrintRoot();
         window.print();
+      });
+    }
+    var printRecipes = document.getElementById('plannerPrintIncludeRecipes');
+    if (printRecipes) {
+      printRecipes.addEventListener('change', function () {
+        _includeRecipesInPrint = !!printRecipes.checked;
+        populatePrintRoot();
       });
     }
     var orderBtn = document.getElementById('plannerOrderList');
