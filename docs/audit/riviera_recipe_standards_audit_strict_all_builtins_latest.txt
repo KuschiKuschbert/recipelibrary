@@ -1,13 +1,13 @@
 RIVIERA RECIPE STANDARDS AUDIT
 ====================================
-Built-in recipes: 134
+Built-in recipes: 146
 Service variant files: 4
 - riviera_data/service_variants.json
 - riviera_data/service_variants_canapes.json
 - riviera_data/service_variants_corporate.json
 - riviera_data/service_variants_mains_sides.json
 Service variant records: 89
-Canonical recipe groups: 1
+Canonical recipe groups: 10
 Recipe redirects: 2
 Strict missing variant scope: all builtins
 
@@ -78,4 +78,14 @@ ACTIVE FOOD RECIPES MISSING SERVICE VARIANTS
 - fruit-salad-yoghurt: Fruit Salad & Yoghurt [Corporate] — yield: 40 serves @ 150 g each
 - dessert-grazing-table-assembly: Dessert Grazing Table [Platter] — yield: 1 m table feeds 40 guests | 2 m table feeds 80–100 | 3 m table feeds 120–150
 - roving-tiramisu-cups: Roving Tiramisu Cups [Dessert] — yield: 40 individual 80–100 ml cups
+- margherita-pizza: Margherita Pizza [Main] — yield: 1 pizza · scale base batch for volume
+- pumpkin-soup: Pumpkin Soup [Starter] — yield: Approx. 4–5 L — 20–25 serves @ 200 ml
+- stuffed-squid: Stuffed Squid [Main] — yield: 1 serve — scale for Italian Long Lunch covers
+- cannelloni-ricotta-spinach: Cannelloni Ricotta & Spinach [Main] — yield: 2 shells per serve — scale batch for covers
+- porchetta-salsa-verde: Porchetta with Salsa Verde [Main] — yield: Approx. 12 kg rolled porchetta — 40–50 serves
+- cannellini-beans-pancetta-asparagus: Cannellini Beans with Pancetta & Asparagus [Side] — yield: Approx. 8–10 kg finished beans — 40 serves @ 200 g
+- rib-fillet-300: Rib Fillet 300 g [Main] — yield: 1 serve @ 300 g raw rib fillet
+- oysters-florentine: Oysters Florentine [Starter] — yield: 1 oyster per serve — scale for dozen orders
+- poached-salmon: Poached Salmon [Main] — yield: 1 serve @ 125 g salmon fillet
+- white-bread-roll-dough: White Bread Roll Dough [Bakery] — yield: 775 g dough batch — approx. 8–10 rolls
 
