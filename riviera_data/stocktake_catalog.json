@@ -3742,5 +3742,14 @@
     "brand": "House",
     "defaultQty": "1",
     "defaultUom": "1000 g"
+  },
+  {
+    "id": "c166",
+    "name": "Shreedded Mozzarella",
+    "zone": "coldroom",
+    "category": "Cold Room",
+    "brand": "Holy Cow",
+    "defaultQty": "1",
+    "defaultUom": "2000 g"
   }
 ]

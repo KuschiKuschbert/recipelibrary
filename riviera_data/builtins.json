@@ -918,7 +918,8 @@
       "ASSEMBLY: Open pita at one end to create a pocket. Place 3 g rocket inside base. Add one kofta. Spoon 30 g spicy capsicum sauce over kofta. Finish with a pinch of fresh herb mix. Serve open-faced or pocket-style per event brief.",
       "Arrange 10 per platter, alternating angles. Garnish platter edge with remaining herb mix. Send immediately — koftas lose texture if held more than 8 minutes post-oven."
     ],
-    "note": "Egg added as binder — critical for preventing split on reheating from frozen. Fat percentage in mince is non-negotiable at 20% minimum; extra-lean mince will produce dry, chalk-textured koftas. Spice quantities doubled from original spec — the original 10 g per spice across 4 kg mince was significantly under-seasoned. Taste test step is mandatory before shaping full batch."
+    "note": "Egg added as binder — critical for preventing split on reheating from frozen. Fat percentage in mince is non-negotiable at 20% minimum; extra-lean mince will produce dry, chalk-textured koftas. Spice quantities doubled from original spec — the original 10 g per spice across 4 kg mince was significantly under-seasoned. Taste test step is mandatory before shaping full batch.",
+    "prepPhase": "day_before"
   },
   {
     "id": "camembert-cigars",
@@ -1099,7 +1100,8 @@
     "service": [
       "Reheat from frozen in a saucepan over medium heat, stirring, until reaching 75°C minimum. Alternatively reheat in microwave in 60-second bursts, stirring between. Use as sauce base or accompaniment as required."
     ],
-    "note": "Made in-house using house tomato sugo. Freezes well — portion into PCs, label and freeze. Defrost overnight in coldroom. Also the base for Vodka Sauce."
+    "note": "Made in-house using house tomato sugo. Freezes well — portion into PCs, label and freeze. Defrost overnight in coldroom. Also the base for Vodka Sauce.",
+    "prepPhase": "day_before"
   },
   {
     "id": "lemon-dill-aioli",
@@ -1529,7 +1531,8 @@
       "Serve chilled. Use for chicken skewers, lamb dishes, mezze platters or canapé garnish.",
       "Stir well before each service. Portion into ramekins or pipe onto plates as required."
     ],
-    "note": "House version uses pickled cucumber (not raw) — diced pickled cucumber + brine gives brightness and crunch without raw cucumber. Scale: 1 kg labneh batch. Scaled from the 3 kg house batch."
+    "note": "House version uses pickled cucumber (not raw) — diced pickled cucumber + brine gives brightness and crunch without raw cucumber. Scale: 1 kg labneh batch. Scaled from the 3 kg house batch.",
+    "prepPhase": "day_before"
   },
   {
     "id": "pickled-cucumber-brine",
@@ -2219,7 +2222,8 @@
       "Serve at room temperature — honey thickens when cold. If too thick for service, warm the bottle briefly in warm water.",
       "Apply as a finishing drizzle, not a cooking glaze — heat will destroy the lemon and thyme aromatics."
     ],
-    "note": "Mild heat profile by design. For a medium-heat version, increase chilli flakes to 10 g. The 60–65°C infusion temperature is important — use a probe thermometer to confirm. Honey held at stable room temperature in sealed containers keeps well for up to 4 weeks. Refrigeration is not required but will extend shelf life — warm before service if refrigerated."
+    "note": "Mild heat profile by design. For a medium-heat version, increase chilli flakes to 10 g. The 60–65°C infusion temperature is important — use a probe thermometer to confirm. Honey held at stable room temperature in sealed containers keeps well for up to 4 weeks. Refrigeration is not required but will extend shelf life — warm before service if refrigerated.",
+    "prepPhase": "day_before"
   },
   {
     "id": "charcuterie-board-classic",
@@ -2315,7 +2319,8 @@
       "Replenish crackers every 10 minutes during passed or display service — they go first.",
       "Replace picked-at cheese pieces if board is on display longer than 30 minutes."
     ],
-    "note": "Chef's dip rotates by season or event — quince paste pairs with blue, hot honey with brie, romesco with cheddar and meats. Dried citrus slices are a house garnish — source pre-dried or dehydrate in-house at 80°C for 3–4 hours. Crackers must be kept away from grapes and dip ramekin to stay crisp."
+    "note": "Chef's dip rotates by season or event — quince paste pairs with blue, hot honey with brie, romesco with cheddar and meats. Dried citrus slices are a house garnish — source pre-dried or dehydrate in-house at 80°C for 3–4 hours. Crackers must be kept away from grapes and dip ramekin to stay crisp.",
+    "prepPhase": "day_before"
   },
   {
     "id": "nibble-platter-40",
@@ -3374,7 +3379,8 @@
       "PLATE SERVICE: Pool 80ml sauce in base of warm plate. Fan 3 slices of chicken on sauce. Capers scattered across chicken. Parsley and lemon zest finish.",
       "CRITICAL: Do not hold sauce above 75°C after lemon juice has been added — acid destabilises the cream emulsion. Add lemon juice only at the pass, not in the bain marie."
     ],
-    "note": "Primary failure mode: sauce breaking in the bain marie after lemon is added. Mitigation: hold cream reduction unseasoned and without lemon; finish each batch portion at the pass with lemon juice, cold butter, and capers. Dijon mustard acts as an emulsifier and stabilises the cream sauce under heat stress. White pepper is specified over black — cream sauces are visually ruined by black specks. Eschalots replace rough garlic-in-pan — provide a sweeter, more refined base appropriate for a cream sauce."
+    "note": "Primary failure mode: sauce breaking in the bain marie after lemon is added. Mitigation: hold cream reduction unseasoned and without lemon; finish each batch portion at the pass with lemon juice, cold butter, and capers. Dijon mustard acts as an emulsifier and stabilises the cream sauce under heat stress. White pepper is specified over black — cream sauces are visually ruined by black specks. Eschalots replace rough garlic-in-pan — provide a sweeter, more refined base appropriate for a cream sauce.",
+    "prepPhase": "day_before"
   },
   {
     "id": "natural-oysters-champagne-mignonette",
@@ -3456,7 +3462,15 @@
       "Replenish crushed ice throughout service — a warm plate is a rejection waiting to happen.",
       "Alert FOH: guests with shellfish allergies must be identified before the tray leaves the pass."
     ],
-    "note": "COUNCIL NOTES — The original ingredient quantity listed 48 oysters with no wastage buffer. In professional service, order 10–15% overage — 54 minimum for a 48-piece yield, accounting for rejects, broken shells, and the occasional bad oyster. Fresh water storage kills oysters; this has been clarified in the hold method. Mignonette maximum maceration time added at 4 hours — shallots sour past this point and become acrid. Pre-dress window tightened from 10 min to 8 min. Lemon wedges should be cut immediately before service, not in advance. White pepper added to the mignonette — it is a classical component that adds warmth without visual interruption. This is a simple dish; its quality is entirely dependent on sourcing and timing. Know your fishmonger and confirm delivery day-of."
+    "note": "COUNCIL NOTES — The original ingredient quantity listed 48 oysters with no wastage buffer. In professional service, order 10–15% overage — 54 minimum for a 48-piece yield, accounting for rejects, broken shells, and the occasional bad oyster. Fresh water storage kills oysters; this has been clarified in the hold method. Mignonette maximum maceration time added at 4 hours — shallots sour past this point and become acrid. Pre-dress window tightened from 10 min to 8 min. Lemon wedges should be cut immediately before service, not in advance. White pepper added to the mignonette — it is a classical component that adds warmth without visual interruption. This is a simple dish; its quality is entirely dependent on sourcing and timing. Know your fishmonger and confirm delivery day-of.",
+    "prepPhases": [
+      "day_before",
+      "day_before",
+      "day_before",
+      "day_before",
+      "service",
+      "morning_of"
+    ]
   },
   {
     "id": "greek-spiced-roast-lamb",
@@ -3564,7 +3578,8 @@
       "For 20 covers from 2 legs: each leg yields approximately 10 plated portions at 100 g served meat. Confirm yield from your supplier's legs before service.",
       "Two-person kitchen: one carves and plates, one ladles jus and garnishes. Do not let the lamb sit plated without jus — it dries immediately."
     ],
-    "note": "COUNCIL NOTES — Spice profile expanded with ground cumin and sweet paprika: the original recipe was underseasoned for the Greek profile and relied solely on cinnamon, oregano, and lemon. These additions do not overpower; they complete the aromatics. Garlic quantity increased from 8 to 10 cloves and the instruction to stud deep into the flesh has been made explicit — surface garlic burns at 200°C and turns acrid. Stock increased from 300 ml to 400 ml and water replaced with stock — water produces a thin, flat jus; the fond deserves better. White wine deglazing step added — essential for lifting the fond and adding acid structure to the jus. Rest time increased from 20 min to 25 min minimum. Jus finishing with fresh lemon juice off heat specified at 30 ml — this is the brightness that makes the dish sing; without it the jus is heavy and one-dimensional. Internal temperature range corrected to 88–92°C and probe technique (away from bone) specified — bone proximity falsifies the reading. Kick oven hold method added for buffet service: this is a two-person kitchen and the lamb must be managed correctly across a service window."
+    "note": "COUNCIL NOTES — Spice profile expanded with ground cumin and sweet paprika: the original recipe was underseasoned for the Greek profile and relied solely on cinnamon, oregano, and lemon. These additions do not overpower; they complete the aromatics. Garlic quantity increased from 8 to 10 cloves and the instruction to stud deep into the flesh has been made explicit — surface garlic burns at 200°C and turns acrid. Stock increased from 300 ml to 400 ml and water replaced with stock — water produces a thin, flat jus; the fond deserves better. White wine deglazing step added — essential for lifting the fond and adding acid structure to the jus. Rest time increased from 20 min to 25 min minimum. Jus finishing with fresh lemon juice off heat specified at 30 ml — this is the brightness that makes the dish sing; without it the jus is heavy and one-dimensional. Internal temperature range corrected to 88–92°C and probe technique (away from bone) specified — bone proximity falsifies the reading. Kick oven hold method added for buffet service: this is a two-person kitchen and the lamb must be managed correctly across a service window.",
+    "prepPhase": "day_before"
   },
   {
     "id": "creamy-potato-gratin",
@@ -3639,7 +3654,8 @@
       "Hold hot in bain marie covered with lid or foil, max 90 min before quality drops.",
       "Garnish with a small sprig of fresh thyme or chives at pass if plating to plate."
     ],
-    "note": "Sebago gives better starch binding than Desiree — use Sebago if available. Consistent 3mm slicing is critical for even cook; uneven slices cause underdone layers. Warming the cream mix before pouring helps the top layer cook evenly. Do not skip the rest before portioning — hot gratin will collapse."
+    "note": "Sebago gives better starch binding than Desiree — use Sebago if available. Consistent 3mm slicing is critical for even cook; uneven slices cause underdone layers. Warming the cream mix before pouring helps the top layer cook evenly. Do not skip the rest before portioning — hot gratin will collapse.",
+    "prepPhase": "day_before"
   },
   {
     "id": "garlic-herb-chat-potatoes-feta",
@@ -3733,7 +3749,8 @@
       "Whipped feta can be made up to 24 hours ahead — store covered in coldroom.",
       "Herb oil made same day; store at room temp in a squeeze bottle for easy service."
     ],
-    "note": "Danish feta gives a creamier, less grainy result than Greek block feta for the whip. Reduce cream to 80 ml if feta is very wet. Do not crowd roasting trays or potatoes will steam rather than roast — use two trays if needed."
+    "note": "Danish feta gives a creamier, less grainy result than Greek block feta for the whip. Reduce cream to 80 ml if feta is very wet. Do not crowd roasting trays or potatoes will steam rather than roast — use two trays if needed.",
+    "prepPhase": "day_before"
   },
   {
     "id": "broccoli-cauliflower-gratin",
@@ -3832,7 +3849,8 @@
       "Holds well in a covered bain marie for up to 60 min — crumb will soften but flavour holds.",
       "For crunch retention, keep tray uncovered under heat lamp rather than in bain marie."
     ],
-    "note": "Drain florets thoroughly after blanching — excess water will thin the béchamel in the tray. Cauliflower needs an extra minute of blanching over broccoli. Adding parmesan to the crumb improves colour and savouriness. Do not bake raw florets — they will undercook."
+    "note": "Drain florets thoroughly after blanching — excess water will thin the béchamel in the tray. Cauliflower needs an extra minute of blanching over broccoli. Adding parmesan to the crumb improves colour and savouriness. Do not bake raw florets — they will undercook.",
+    "prepPhase": "day_before"
   },
   {
     "id": "prosciutto-chicken-lemon-caper",
@@ -4039,7 +4057,8 @@
       "TIMING AT 80 COVERS: Sear beef in batches from 30 min before service start. Do not put all 20 portions in oven simultaneously — a loaded oven drops temperature. Preheat to 210°C and allow for recovery between batches.",
       "REST HOLD: Seared-and-rested fillets can hold at 58°C in a low oven for up to 15 min before quality drop."
     ],
-    "note": "Probe every fillet individually — 52°C out of oven, 55–57°C at plate. Rest is non-negotiable — 8 min minimum on a rack, not a flat tray. Jus must be mounted with butter off heat only — a broken jus on eye fillet at an event is a presentation failure. Tempranillo is the correct wine choice — dried-fruit and earthy tannin that complements beef without the jammy sweetness of Shiraz. Red wine vinegar (5ml) is flagged as optional acid correction at finish — add drop by drop if jus reads sweet-heavy."
+    "note": "Probe every fillet individually — 52°C out of oven, 55–57°C at plate. Rest is non-negotiable — 8 min minimum on a rack, not a flat tray. Jus must be mounted with butter off heat only — a broken jus on eye fillet at an event is a presentation failure. Tempranillo is the correct wine choice — dried-fruit and earthy tannin that complements beef without the jammy sweetness of Shiraz. Red wine vinegar (5ml) is flagged as optional acid correction at finish — add drop by drop if jus reads sweet-heavy.",
+    "prepPhase": "day_before"
   },
   {
     "id": "stuffed-mushroom-romesco",
@@ -4760,7 +4779,8 @@
       "Hold chilled on trays covered with cling film until service. Unwrap and plate at the last moment.",
       "Label each wrap type on the platter. Prawn wraps must be clearly identified for allergen awareness."
     ],
-    "note": "Cold tortillas will crack — bring to room temp before rolling. Drain slaw thoroughly before use or wraps will become soggy within 30 min. Do not overfill — the most common cause of wraps unrolling on the platter. Slice only at service for best cross-section presentation. Prawn wraps are an allergen risk — ensure separate handling and clear labelling."
+    "note": "Cold tortillas will crack — bring to room temp before rolling. Drain slaw thoroughly before use or wraps will become soggy within 30 min. Do not overfill — the most common cause of wraps unrolling on the platter. Slice only at service for best cross-section presentation. Prawn wraps are an allergen risk — ensure separate handling and clear labelling.",
+    "prepPhase": "day_before"
   },
   {
     "id": "platter-filled-brioche-rolls",
@@ -4869,7 +4889,8 @@
       "Remove cling wrap at last moment. Do not plate more than 20 min before guests arrive.",
       "Keep platter on ice bed or chilled surface if ambient temp exceeds 22°C."
     ],
-    "note": "Toast cut-side of rolls — prevents sogginess from fillings. Salmon cream piping bag speeds service significantly for large runs. Caesar chicken should be lightly dressed — overdressing makes rolls wet and heavy. Flag: no Kuschi exclusions present."
+    "note": "Toast cut-side of rolls — prevents sogginess from fillings. Salmon cream piping bag speeds service significantly for large runs. Caesar chicken should be lightly dressed — overdressing makes rolls wet and heavy. Flag: no Kuschi exclusions present.",
+    "prepPhase": "day_before"
   },
   {
     "id": "platter-roast-beef-beetroot-relish",
@@ -4950,7 +4971,13 @@
       "Do not stack — keeps crostini crisp and presentation clean.",
       "If holding beyond 15 min, keep components separate and assemble in two passes."
     ],
-    "note": "Horseradish pungency varies by brand — taste and adjust before service. Squeeze excess liquid from prepared horseradish thoroughly or cream will not hold. Roast beef should be clearly rare to medium-rare — grey beef reads as poor quality at canape level. Flag: no Kuschi exclusions present."
+    "note": "Horseradish pungency varies by brand — taste and adjust before service. Squeeze excess liquid from prepared horseradish thoroughly or cream will not hold. Roast beef should be clearly rare to medium-rare — grey beef reads as poor quality at canape level. Flag: no Kuschi exclusions present.",
+    "prepPhases": [
+      "day_before",
+      "day_before",
+      "morning_of",
+      "day_before"
+    ]
   },
   {
     "id": "platter-dietary-grazing",
@@ -5516,7 +5543,8 @@
       "Lamb can be cooked 30–40 min ahead and held at 60°C in bain marie.",
       "Pomegranate seeds scattered last — they bleed colour into the salad if left to sit."
     ],
-    "note": "Sumac is non-negotiable to fattoush character — do not substitute. Pomegranate seeds are both visual and textural; do not omit. Flatbread must be fully crisp before service — any softness will accelerate wilting in the bowl. For lamb mince, retain some larger chunks rather than fine crumble — gives better texture in the bowl. Flag: no Kuschi exclusions present."
+    "note": "Sumac is non-negotiable to fattoush character — do not substitute. Pomegranate seeds are both visual and textural; do not omit. Flatbread must be fully crisp before service — any softness will accelerate wilting in the bowl. For lamb mince, retain some larger chunks rather than fine crumble — gives better texture in the bowl. Flag: no Kuschi exclusions present.",
+    "prepPhase": "day_before"
   },
   {
     "id": "corporate-mediterranean-chicken-bowl",
@@ -5746,7 +5774,8 @@
       "Dress and plate side salad to order — pre-dressed leaves wilt within 10 min.",
       "Serve with a wedge of lemon on the side if desired."
     ],
-    "note": "Resting the lasagne is critical — cutting too early causes it to collapse and service becomes messy. Bolognese can and should be made the day before; flavour improves overnight. Béchamel quantity here (100 g butter / 100 g flour / 1.2 L milk) is a slightly richer ratio than the original — the additional liquid compensates for pasta absorption during baking and prevents a dry lasagne. Passata gives a lighter, cleaner sauce than canned tomatoes — correct for this style and yield size. Flag: recipe contains tomato (passata and tomato paste) as structural ingredients — confirm whether Kuschi's tomato exclusion applies to cooked/sauce form, as this would require a fundamental recipe change."
+    "note": "Resting the lasagne is critical — cutting too early causes it to collapse and service becomes messy. Bolognese can and should be made the day before; flavour improves overnight. Béchamel quantity here (100 g butter / 100 g flour / 1.2 L milk) is a slightly richer ratio than the original — the additional liquid compensates for pasta absorption during baking and prevents a dry lasagne. Passata gives a lighter, cleaner sauce than canned tomatoes — correct for this style and yield size. Flag: recipe contains tomato (passata and tomato paste) as structural ingredients — confirm whether Kuschi's tomato exclusion applies to cooked/sauce form, as this would require a fundamental recipe change.",
+    "prepPhase": "day_before"
   },
   {
     "id": "corporate-breakfast-wraps",
@@ -5971,7 +6000,8 @@
       "Remove cling film and plate at service. Arrange alternating bread types and fillings on platter.",
       "If holding on pass for more than 20 min, cover with a lightly dampened clean cloth to prevent edges drying."
     ],
-    "note": "Minimum 3 filling types across the batch — vary across white and wholemeal for presentation. Label each tray clearly by filling type. Chicken filling must remain chilled at all times; do not hold at room temperature for more than 30 min."
+    "note": "Minimum 3 filling types across the batch — vary across white and wholemeal for presentation. Label each tray clearly by filling type. Chicken filling must remain chilled at all times; do not hold at room temperature for more than 30 min.",
+    "prepPhase": "day_before"
   },
   {
     "id": "corporate-roast-veg-salad-bowl",
@@ -6076,7 +6106,8 @@
       "Assemble bowls or platters at service. Dressing on the side in a jug, or drizzled at the pass — do not pre-dress if holding.",
       "Can be served warm or at room temperature. If serving warm, reheat veg on a tray at 180°C for 8–10 min before assembly."
     ],
-    "note": "Vegan and GF. Roasted vegetables can be made a day ahead — store in the coldroom, bring to room temperature or reheat before service. Tahini dressing thickens significantly in the coldroom — loosen with water and whisk before service. Label clearly for allergens: sesame (tahini, seeds)."
+    "note": "Vegan and GF. Roasted vegetables can be made a day ahead — store in the coldroom, bring to room temperature or reheat before service. Tahini dressing thickens significantly in the coldroom — loosen with water and whisk before service. Label clearly for allergens: sesame (tahini, seeds).",
+    "prepPhase": "day_before"
   },
   {
     "id": "chilli-garlic-prawns-chorizo-rocket",
@@ -6168,7 +6199,8 @@
       "Service window per batch: 8–10 minutes including cook time. Four batches across a 35–40 minute canape run is achievable on one 6-burner ring with a wide sauté pan.",
       "Chorizo can be rendered up to 2 hours ahead and held at room temperature — re-crisp briefly in the pan during prawn cook. Garlic and chilli can be prepped and held chilled. Prawns must be stored in the coldroom and pulled batch by batch."
     ],
-    "note": "The two most common failures: wet prawns (steaming, not searing — grey colour, no crust, watery texture) and overcrowding (same effect). Both are temperature management problems. A 6-burner running one wide pan per ring can produce 80 prawns simultaneously across two pans if needed, but only with a second operator managing both pans. At 40 covers with a 2-person team, single-pan batching is the correct call. Chorizo fat is the umami spine of this dish — do not discard it. The butter mount is a small step that converts a flat lemon deglaze into a sauce that coats and carries the flavour."
+    "note": "The two most common failures: wet prawns (steaming, not searing — grey colour, no crust, watery texture) and overcrowding (same effect). Both are temperature management problems. A 6-burner running one wide pan per ring can produce 80 prawns simultaneously across two pans if needed, but only with a second operator managing both pans. At 40 covers with a 2-person team, single-pan batching is the correct call. Chorizo fat is the umami spine of this dish — do not discard it. The butter mount is a small step that converts a flat lemon deglaze into a sauce that coats and carries the flavour.",
+    "prepPhase": "day_before"
   },
   {
     "id": "slow-cooked-beef-albondigas-buffet",
@@ -6378,7 +6410,13 @@
       "Assemble no more than 10 min before passing — crostini soften rapidly once topped.",
       "Hold tomato mix separately in a chilled container until assembly. Drain again if mix has released more liquid while holding."
     ],
-    "note": "FLAG — KUSCHI EXCLUSION: Heirloom tomatoes are the key ingredient in this recipe. Tomatoes are on the Kuschi exclusion list. This item requires review before confirmation. Suggested substitutes: roasted capsicum and caramelised onion mix on goats cheese crostini; or whipped goats cheese with pickled shallots and fresh herb oil. Confirm with event coordinator before producing."
+    "note": "FLAG — KUSCHI EXCLUSION: Heirloom tomatoes are the key ingredient in this recipe. Tomatoes are on the Kuschi exclusion list. This item requires review before confirmation. Suggested substitutes: roasted capsicum and caramelised onion mix on goats cheese crostini; or whipped goats cheese with pickled shallots and fresh herb oil. Confirm with event coordinator before producing.",
+    "prepPhases": [
+      "morning_of",
+      "day_before",
+      "day_before",
+      "service"
+    ]
   },
   {
     "id": "greek-style-pulled-beef-buffet",
@@ -6689,7 +6727,17 @@
       "Serve immediately after dusting. Call the pass the moment shells are filled.",
       "Two-person team: one pipes and garnishes, one plates and dusts. Establish a rhythm — fill 4, plate 4, pass."
     ],
-    "note": "COUNCIL NOTES — Ricotta moisture is the single failure point in this dish. Under-drained ricotta will produce a wet, loose filling that softens the shell in under 5 min and pools on the plate. Weigh after draining — every time, every service. White chocolate quantity has been reduced from 80 g to 90 g and the melting temperature specified: chocolate added too hot will thin the ricotta and delay setting. Lemon zest added to the white choc ricotta is non-negotiable — without acid the filling is cloying and flat. Pistachio paste quality varies wildly — pure unsweetened Bronte paste is ideal; sweetened compound paste requires sugar reduction. Whipped cream should be firm soft peaks, not stiff — stiff cream will cause the pistachio filling to split when folded. Shell fill window is 15–20 min maximum; this must be communicated clearly at briefing. For 80-cover service, stagger filling in batches of 20."
+    "note": "COUNCIL NOTES — Ricotta moisture is the single failure point in this dish. Under-drained ricotta will produce a wet, loose filling that softens the shell in under 5 min and pools on the plate. Weigh after draining — every time, every service. White chocolate quantity has been reduced from 80 g to 90 g and the melting temperature specified: chocolate added too hot will thin the ricotta and delay setting. Lemon zest added to the white choc ricotta is non-negotiable — without acid the filling is cloying and flat. Pistachio paste quality varies wildly — pure unsweetened Bronte paste is ideal; sweetened compound paste requires sugar reduction. Whipped cream should be firm soft peaks, not stiff — stiff cream will cause the pistachio filling to split when folded. Shell fill window is 15–20 min maximum; this must be communicated clearly at briefing. For 80-cover service, stagger filling in batches of 20.",
+    "prepPhases": [
+      "day_before",
+      "day_before",
+      "day_before",
+      "morning_of",
+      "day_before",
+      "service",
+      "day_before",
+      "day_before"
+    ]
   },
   {
     "id": "strawberry-ricotta-cheesecake-plated",
@@ -6799,7 +6847,8 @@
       "Plate should be dry — wipe any strawberry juice from the rim before sending.",
       "For plated service at 20 covers: pre-portion cheesecake in coldroom, hold on lined tray. Plate strawberries and dust at pass — two-person team can turn 20 covers in under 4 min."
     ],
-    "note": "COUNCIL NOTES — Two structural problems in the original: ricotta drain quantity was understated (900 g raw to yield 800 g drained) and oven temperature at 160°C is too aggressive for a ricotta-dominant batter — 155°C prevents premature protein seize on the ricotta. Cornflour added at 15 g stabilises the set without compromising texture — standard in Italian-style cheesecakes. Eggs and cream cheese must be at room temperature; cold dairy causes lumps that cannot be beaten out without over-aerating. Balsamic in the strawberry macerations is optional but recommended — it adds depth that lemon alone cannot achieve. Drain macerated strawberry liquid before plating or the base becomes compromised mid-service. Base salt was missing from the original — it is essential for contrast against the sweet filling."
+    "note": "COUNCIL NOTES — Two structural problems in the original: ricotta drain quantity was understated (900 g raw to yield 800 g drained) and oven temperature at 160°C is too aggressive for a ricotta-dominant batter — 155°C prevents premature protein seize on the ricotta. Cornflour added at 15 g stabilises the set without compromising texture — standard in Italian-style cheesecakes. Eggs and cream cheese must be at room temperature; cold dairy causes lumps that cannot be beaten out without over-aerating. Balsamic in the strawberry macerations is optional but recommended — it adds depth that lemon alone cannot achieve. Drain macerated strawberry liquid before plating or the base becomes compromised mid-service. Base salt was missing from the original — it is essential for contrast against the sweet filling.",
+    "prepPhase": "day_before"
   },
   {
     "id": "riviera-tiramisu-biscotti-hazelnut",
@@ -6891,7 +6940,16 @@
       "For high-volume service: pre-cut portioned tray in coldroom, plate onto chilled plates at pass, dust cocoa, add biscotti, send immediately.",
       "Chilled plates are important — tiramisu softens fast on a warm plate at room temperature service."
     ],
-    "note": "COUNCIL NOTES — The original method omitted a pasteurisation temperature for the zabaglione, which is a food safety issue in a professional kitchen. Egg yolks over a bain marie without a target temperature is not sufficient — the mixture must reach 82°C to be considered pasteurised. This has been corrected with a probe thermometer step. Espresso quantity increased from 600 ml to 700 ml — 500 g of savoiardi requires adequate soak volume for a full double-layer tray; running short mid-assembly means dry biscuit in the second layer. Mascarpone must be at room temperature; cold mascarpone added to even a properly cooled zabaglione will cause the cream to seize and grain. Minimum set time increased from 4 hours to 6 hours — 4 hours produces a soft, borderline unportionable result at service. Cocoa dusting must be at pass only, never in advance — this is non-negotiable. Hazelnut biscotti positioning corrected: do not place on top of the cream."
+    "note": "COUNCIL NOTES — The original method omitted a pasteurisation temperature for the zabaglione, which is a food safety issue in a professional kitchen. Egg yolks over a bain marie without a target temperature is not sufficient — the mixture must reach 82°C to be considered pasteurised. This has been corrected with a probe thermometer step. Espresso quantity increased from 600 ml to 700 ml — 500 g of savoiardi requires adequate soak volume for a full double-layer tray; running short mid-assembly means dry biscuit in the second layer. Mascarpone must be at room temperature; cold mascarpone added to even a properly cooled zabaglione will cause the cream to seize and grain. Minimum set time increased from 4 hours to 6 hours — 4 hours produces a soft, borderline unportionable result at service. Cocoa dusting must be at pass only, never in advance — this is non-negotiable. Hazelnut biscotti positioning corrected: do not place on top of the cream.",
+    "prepPhases": [
+      "day_before",
+      "day_before",
+      "day_before",
+      "day_before",
+      "day_before",
+      "service",
+      "day_before"
+    ]
   },
   {
     "id": "kids-snack-pack",
@@ -7366,7 +7424,8 @@
       "Combine pesto cream and pasta within 1 hour of service only — pasta dressed too early will absorb dressing and dry out.",
       "Pine nuts, basil, and parmesan applied at the pass to maintain texture and colour."
     ],
-    "note": "Do not dress pasta ahead of time. Pesto oxidises and loses colour — combine no more than 1 hour before service. Bocconcini should be at room temperature before folding in — cold bocconcini seizes the dressing."
+    "note": "Do not dress pasta ahead of time. Pesto oxidises and loses colour — combine no more than 1 hour before service. Bocconcini should be at room temperature before folding in — cold bocconcini seizes the dressing.",
+    "prepPhase": "day_before"
   },
   {
     "id": "corporate-moroccan-couscous-salad",
@@ -7465,7 +7524,8 @@
       "If made ahead, loosen with an extra squeeze of lemon juice and a drizzle of EVOO before service — couscous absorbs dressing overnight.",
       "Toasted almonds applied at service only to maintain crunch."
     ],
-    "note": "Best made the day prior — flavours develop significantly overnight. Vegan confirmed: use vegetable stock only. Cinnamon quantity reduced to ½ tsp to avoid overpowering the harissa. Almonds must stay off the salad until service."
+    "note": "Best made the day prior — flavours develop significantly overnight. Vegan confirmed: use vegetable stock only. Cinnamon quantity reduced to ½ tsp to avoid overpowering the harissa. Almonds must stay off the salad until service.",
+    "prepPhase": "day_before"
   },
   {
     "id": "corporate-pumpkin-feta-pepita-salad",
@@ -7557,7 +7617,8 @@
       "Pepitas applied last to preserve crunch.",
       "For buffet service, keep dressing in a separate jug on the side."
     ],
-    "note": "Do not dress ahead. Roast pumpkin is an excellent prep-ahead component — roast the day before and hold in coldroom. Dice size increased to 3 cm (from 2 cm) to hold shape through roasting and avoid mushiness. Pepitas must go on at service."
+    "note": "Do not dress ahead. Roast pumpkin is an excellent prep-ahead component — roast the day before and hold in coldroom. Dice size increased to 3 cm (from 2 cm) to hold shape through roasting and avoid mushiness. Pepitas must go on at service.",
+    "prepPhase": "day_before"
   },
   {
     "id": "corporate-traditional-garden-salad",
@@ -7644,7 +7705,13 @@
       "For buffet service, present vinaigrette in a separate jug or squeeze bottle for self-service.",
       "All vegetables must be bone-dry before dressing — any water breaks the emulsion and dilutes flavour."
     ],
-    "note": "Vinaigrette yield approx. 130 ml — sufficient for 20 portions dressed to coat, not drench. Prep leaves and vegetables separately in coldroom and combine only at service. Snow peas can be blanched briefly (30 sec, iced) for a slightly more tender result if preferred."
+    "note": "Vinaigrette yield approx. 130 ml — sufficient for 20 portions dressed to coat, not drench. Prep leaves and vegetables separately in coldroom and combine only at service. Snow peas can be blanched briefly (30 sec, iced) for a slightly more tender result if preferred.",
+    "prepPhases": [
+      "day_before",
+      "day_before",
+      "day_before",
+      "morning_of"
+    ]
   },
   {
     "id": "corporate-creamy-potato-bacon-herb-salad",
@@ -7726,7 +7793,8 @@
       "Dress potatoes while warm for maximum flavour absorption, then hold at room temperature or lightly chilled (above 10°C).",
       "Bacon applied at service only to maintain crispness — pre-mixed bacon will go soft."
     ],
-    "note": "Kipfler gives the best waxy texture and holds shape well when sliced. Desiree is a reliable backup. Do not overcook — potato must hold its shape once sliced. Bacon quantity converted from '20 rashers' to approx. 400 g for accurate prep. Dress warm, serve at room temp."
+    "note": "Kipfler gives the best waxy texture and holds shape well when sliced. Desiree is a reliable backup. Do not overcook — potato must hold its shape once sliced. Bacon quantity converted from '20 rashers' to approx. 400 g for accurate prep. Dress warm, serve at room temp.",
+    "prepPhase": "day_before"
   },
   {
     "id": "funeral-spinach-ricotta-pastizzi-platter",
@@ -8157,7 +8225,8 @@
       "For function bread service: basket-lined portions on the table before the entrée.",
       "Bread must be fresh same day — do not hold overnight once cut."
     ],
-    "note": "Source: Riviera Menu Builder workbook / Breads tab. LOCKED HOUSE SOP per Recipe Migration Ledger. Primary bread for table service at plated functions."
+    "note": "Source: Riviera Menu Builder workbook / Breads tab. LOCKED HOUSE SOP per Recipe Migration Ledger. Primary bread for table service at plated functions.",
+    "prepPhase": "day_before"
   },
   {
     "id": "burnt-butter-mash",
@@ -8504,7 +8573,8 @@
       "Feasting/buffet: slice in kitchen, fan out on a hotel pan lined with parchment. Drizzle with reduction. Garnish with gremolata and serve warm.",
       "Hold at 65°C in bain marie. Carve no more than 20 minutes ahead of service — beef dries quickly once sliced."
     ],
-    "note": "Uses pre-cooked carvery beef from stock (Bidfood) for speed and volume consistency. Rest is critical — do not slice before minimum 20 minutes resting."
+    "note": "Uses pre-cooked carvery beef from stock (Bidfood) for speed and volume consistency. Rest is critical — do not slice before minimum 20 minutes resting.",
+    "prepPhase": "day_before"
   },
   {
     "id": "lemon-thyme-garlic-roast-chicken-carvery",
@@ -8576,7 +8646,8 @@
       "Buffet: fan portions on hotel pan, drizzle with pan juices. Garnish with thyme sprigs and lemon wedges.",
       "Hold at 65°C maximum 30 minutes before quality declines. Do not cover tightly — steam softens the skin."
     ],
-    "note": "Key carvery, buffet, and feasting format. Works with whole birds for presentation, or thigh fillets for volume speed."
+    "note": "Key carvery, buffet, and feasting format. Works with whole birds for presentation, or thigh fillets for volume speed.",
+    "prepPhase": "day_before"
   },
   {
     "id": "sicilian-roast-pork-apricot",
@@ -8672,7 +8743,8 @@
       "Buffet: arrange slices on hotel pan. Serve apricot compote in a small gastro alongside.",
       "Hold at 65°C. Pork belly is robust — holds quality well for 45–60 minutes in bain marie."
     ],
-    "note": "Carvery buffet format. Sicilian refers to the citrus-herb marinade style — orange and lemon with oregano and thyme."
+    "note": "Carvery buffet format. Sicilian refers to the citrus-herb marinade style — orange and lemon with oregano and thyme.",
+    "prepPhase": "day_before"
   },
   {
     "id": "sous-vide-pork-loin-apricot",
@@ -8946,7 +9018,8 @@
       "For buffet: present in a GN pan lined with paper. Top with feta and herbs at service.",
       "For plated: portion 80 g as a side. Add feta garnish last."
     ],
-    "note": "High-frequency salad appearing across carvery buffet, funeral/wake platters, corporate build-your-own and party menus."
+    "note": "High-frequency salad appearing across carvery buffet, funeral/wake platters, corporate build-your-own and party menus.",
+    "prepPhase": "day_before"
   },
   {
     "id": "caesar-salad-buffet",
@@ -9031,7 +9104,14 @@
       "For buffet: dress in batches so lettuce stays crisp. Use 2–3 smaller serving bowls rather than one large.",
       "Offer extra dressing and parmesan on the side."
     ],
-    "note": "Corporate build-your-own buffet salad. Does not hold well — dress to order or in small batches."
+    "note": "Corporate build-your-own buffet salad. Does not hold well — dress to order or in small batches.",
+    "prepPhases": [
+      "day_before",
+      "day_before",
+      "day_before",
+      "morning_of",
+      "day_before"
+    ]
   },
   {
     "id": "honey-thyme-roasted-carrots-pistachio",
@@ -9096,7 +9176,8 @@
       "Garnish with extra thyme and pistachios at service.",
       "For plated: fan 4–5 carrot halves on the plate. Drizzle with any collected honey from the pan."
     ],
-    "note": "Carvery and feasting buffet side. Sweet, nutty and aromatic — pairs well with roast lamb and chicken."
+    "note": "Carvery and feasting buffet side. Sweet, nutty and aromatic — pairs well with roast lamb and chicken.",
+    "prepPhase": "day_before"
   },
   {
     "id": "mediterranean-rice-pilaf",
@@ -9191,7 +9272,8 @@
       "For buffet: mound in a hotel pan and garnish with extra herbs and lemon wedges.",
       "Pairs well with Greek Spiced Roast Lamb, Roast Chicken and Chargrilled Lamb Cutlets."
     ],
-    "note": "High-frequency carvery buffet side. The aromatic herb and almond finish makes it a Riviera signature."
+    "note": "High-frequency carvery buffet side. The aromatic herb and almond finish makes it a Riviera signature.",
+    "prepPhase": "day_before"
   },
   {
     "id": "roast-root-veg-salad-cinnamon-maple",
@@ -9275,7 +9357,8 @@
       "Can be pre-roasted and re-warmed in the oven at 160°C for 10 minutes before serving.",
       "Scatter nuts last minute to maintain crunch."
     ],
-    "note": "Carvery buffet and BBQ buffet side. The cinnamon-maple nuts are the signature element — prepare them ahead and keep in an airtight container."
+    "note": "Carvery buffet and BBQ buffet side. The cinnamon-maple nuts are the signature element — prepare them ahead and keep in an airtight container.",
+    "prepPhase": "day_before"
   },
   {
     "id": "roast-pumpkin-pepita-salad-balsamic",
@@ -9343,7 +9426,8 @@
       "Serve warm or room temperature. Drizzle with extra balsamic at service.",
       "For buffet: can hold at room temperature for up to 2 hours. Do not refrigerate — pumpkin becomes watery."
     ],
-    "note": "Appears across carvery buffet and BBQ buffet menus. Simple, visual and crowd-pleasing."
+    "note": "Appears across carvery buffet and BBQ buffet menus. Simple, visual and crowd-pleasing.",
+    "prepPhase": "day_before"
   },
   {
     "id": "roquette-parmesan-salad",
@@ -9550,7 +9634,14 @@
       "Hold at 65°C in a bain marie for up to 1 hour.",
       "For platters/buffet: pre-portion into individual foil cups or serve from the pan."
     ],
-    "note": "High-frequency platter/buffet side appearing across party and funeral/wake menus. Can be baked a day ahead, refrigerated, and reheated."
+    "note": "High-frequency platter/buffet side appearing across party and funeral/wake menus. Can be baked a day ahead, refrigerated, and reheated.",
+    "prepPhases": [
+      "day_before",
+      "day_before",
+      "day_before",
+      "day_before",
+      "morning_of"
+    ]
   },
   {
     "id": "garlic-lemon-potatoes",
@@ -9666,7 +9757,8 @@
       "For buffet: arrange rolls in lined baskets or on a wooden board. Keep covered with a cloth napkin between refreshes.",
       "Butter in a cold ramekin — allow guests to serve themselves."
     ],
-    "note": "Standard bread service item for all seated functions. Two rolls per guest is the standard count; allocate 2.2 per guest for production to allow for attrition."
+    "note": "Standard bread service item for all seated functions. Two rolls per guest is the standard count; allocate 2.2 per guest for production to allow for attrition.",
+    "prepPhase": "day_before"
   },
   {
     "id": "pork-italian-herb-sausages",
@@ -9931,7 +10023,8 @@
       "The beetroot balsamic relish is the garnish and flavour contrast — do not serve plain.",
       "Pairs with sausage rolls and beef pies as the hot nibble platter trio."
     ],
-    "note": "Key party and corporate hot nibble item. The beetroot balsamic relish is specified in all catering brochures as the standard accompaniment."
+    "note": "Key party and corporate hot nibble item. The beetroot balsamic relish is specified in all catering brochures as the standard accompaniment.",
+    "prepPhase": "day_before"
   },
   {
     "id": "beef-cheeseburger-sliders",
@@ -10082,7 +10175,8 @@
       "For grazing tables: nest scrolls cut-side up in rows as a grazing add-on.",
       "Can be baked 4 hours ahead and refreshed at 160°C for 5 minutes."
     ],
-    "note": "Grazing table add-on item. The two varieties (pumpkin-feta-pesto and casalingo) can be mixed on the platter for visual interest."
+    "note": "Grazing table add-on item. The two varieties (pumpkin-feta-pesto and casalingo) can be mixed on the platter for visual interest.",
+    "prepPhase": "day_before"
   },
   {
     "id": "gourmet-brioche-sliders",
@@ -10241,7 +10335,8 @@
       "Garnish with a parsley leaf and lemon zest.",
       "Cook to order in batches for cocktail service — do not pre-batch as pasta absorbs sauce quickly."
     ],
-    "note": "Portofino Package substantial canapé. Elegant and punchy — ensure prawns are not overcooked. GF pasta available on request."
+    "note": "Portofino Package substantial canapé. Elegant and punchy — ensure prawns are not overcooked. GF pasta available on request.",
+    "prepPhase": "day_before"
   },
   {
     "id": "cotoletta-pinsa",
@@ -10330,7 +10425,8 @@
       "Serve whole or halved — depending on event style.",
       "The cotoletta must be freshly cooked and hot. Do not hold assembled for more than 5 minutes."
     ],
-    "note": "Riviera house specialty and Portofino Package substantial canapé. The pinsa/cotoletta combination is unique to Riviera. Crumbed chicken must be fried fresh."
+    "note": "Riviera house specialty and Portofino Package substantial canapé. The pinsa/cotoletta combination is unique to Riviera. Crumbed chicken must be fried fresh.",
+    "prepPhase": "day_before"
   },
   {
     "id": "maple-pumpkin-ravioli-burnt-butter",
@@ -10424,7 +10520,8 @@
       "For plated entrée: plate 6–8 ravioli, generous sauce, parmesan and a thyme sprig.",
       "Do not hold assembled — ravioli absorbs sauce quickly. Cook and sauce to order in small batches."
     ],
-    "note": "Portofino and Taormina Package vegetarian substantial canapé and plated entrée option. Wonton/gyoza wrappers are the volume shortcut — hand-made pasta for premium events."
+    "note": "Portofino and Taormina Package vegetarian substantial canapé and plated entrée option. Wonton/gyoza wrappers are the volume shortcut — hand-made pasta for premium events.",
+    "prepPhase": "day_before"
   },
   {
     "id": "souvlaki-gyros-assembly",
@@ -10626,7 +10723,8 @@
       "For plated: 2 kofta per serve in a mini pita with sauce and salad.",
       "Hold in bain marie at 65°C. Do not hold more than 30 minutes — lamb dries quickly."
     ],
-    "note": "Gyros Bar protein option for offsite events. Note: the existing beef-kofta recipe covers the Riviera tapas version. This is the lamb format for the gyros context."
+    "note": "Gyros Bar protein option for offsite events. Note: the existing beef-kofta recipe covers the Riviera tapas version. This is the lamb format for the gyros context.",
+    "prepPhase": "day_before"
   },
   {
     "id": "grilled-halloumi-plain",
