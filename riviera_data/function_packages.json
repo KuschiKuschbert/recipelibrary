@@ -1,0 +1,848 @@
+{
+  "version": "1.0",
+  "note": "Function packages data extracted from Riviera Yeppoon catering brochures. search_terms map each dish to keywords that work against the 38k recipe library.",
+  "packages": [
+    {
+      "id": "weddings",
+      "label": "Weddings",
+      "icon": "💍",
+      "color": "#c9a96e",
+      "sections": [
+        {
+          "id": "portofino",
+          "label": "Portofino Package",
+          "style": "Cocktail",
+          "price": "From $90pp",
+          "desc": "Cocktail-style. Grazing table or seafood fountain → canapes → substantial canapes",
+          "courses": [
+            {
+              "course": "Cocktail Hour",
+              "items": [
+                { "name": "Signature Grazing Table", "search": "grazing charcuterie cheese", "tags": ["gf option", "veg option"] },
+                { "name": "3-Tier Seafood Fountain — Prawns", "search": "tiger prawn cocktail", "tags": ["gf", "df"] },
+                { "name": "3-Tier Seafood Fountain — Oysters", "search": "oyster", "tags": ["gf", "df"] },
+                { "name": "3-Tier Seafood Fountain — Mixed", "search": "prawn oyster seafood", "tags": ["gf", "df"] }
+              ]
+            },
+            {
+              "course": "Canapes (choose 4)",
+              "items": [
+                { "name": "Chorizo & Mozzarella Arancini, Lemon & Dill Aioli", "search": "arancini chorizo mozzarella" },
+                { "name": "Calamari Fritti, Riviera House Aioli, Crispy Capers", "search": "calamari fritti", "tags": ["gf", "df"] },
+                { "name": "Slow Cooked Beef Albondigas, Romesco, Manchego", "search": "beef meatball albondigas romesco" },
+                { "name": "Camembert, Pecan & Cranberry Cigars, Thyme Honey", "search": "camembert pecan pastry cigars", "tags": ["veg"] },
+                { "name": "Kilpatrick Oyster, Crispy Speck, Worcestershire", "search": "oyster kilpatrick bacon", "tags": ["gf", "df"] },
+                { "name": "Chargrilled Lamb Cutlet, Riviera House Emulsion", "search": "lamb cutlet chargrilled", "tags": ["gf", "df"] },
+                { "name": "Zesty Chicken Skewer, Herbed Labneh", "search": "chicken skewer labneh lemon", "tags": ["gf"] },
+                { "name": "Crispy Fried Chorizo Potatoes, Lemon Thyme Aioli", "search": "chorizo potato crispy", "tags": ["gf", "df"] }
+              ]
+            },
+            {
+              "course": "Substantial Canapes (choose 2)",
+              "items": [
+                { "name": "Chilli Prawn & Chorizo Casarecce", "search": "prawn chorizo pasta casarecce" },
+                { "name": "Crispy Reef Fish Slider, Lemon Caper Aioli & Roquette", "search": "fish slider crispy lemon caper" },
+                { "name": "Cotoletta Pinsa — Crispy Chicken, Bolognese, Mozzarella", "search": "chicken cotoletta bolognese mozzarella" },
+                { "name": "Beef Kofta Souvlaki, Spicy Capsicum Sauce, Pita", "search": "beef kofta souvlaki capsicum" },
+                { "name": "Pulled Lamb, Moroccan Cous Cous, Harissa Yoghurt", "search": "pulled lamb moroccan couscous harissa" },
+                { "name": "Maple Pumpkin Ravioli, Burnt Butter & Sage", "search": "pumpkin ravioli burnt butter sage", "tags": ["veg"] }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "taormina",
+          "label": "Taormina Package",
+          "style": "Canapes + Plated Main",
+          "price": "From $88pp",
+          "desc": "Cocktail canapes then a plated alternate-drop main",
+          "courses": [
+            {
+              "course": "Canapes (choose 3)",
+              "items": [
+                { "name": "Chorizo & Mozzarella Arancini, Lemon & Dill Aioli", "search": "arancini chorizo" },
+                { "name": "Calamari Fritti, Riviera House Aioli, Crispy Capers", "search": "calamari fritti", "tags": ["gf", "df"] },
+                { "name": "Beef Albondigas, Romesco, Manchego", "search": "beef meatball romesco" },
+                { "name": "Camembert, Pecan & Cranberry Cigars, Thyme Honey", "search": "camembert cranberry pastry", "tags": ["veg"] },
+                { "name": "Kilpatrick Oyster, Crispy Speck, Worcestershire", "search": "oyster kilpatrick", "tags": ["gf"] },
+                { "name": "Chargrilled Lamb Cutlet, Riviera House Emulsion", "search": "lamb cutlet", "tags": ["gf", "df"] },
+                { "name": "Zesty Chicken Skewer, Herbed Labneh, Crumbled Feta", "search": "chicken skewer labneh", "tags": ["gf"] },
+                { "name": "Crispy Fried Chorizo Potatoes, Lemon Thyme Aioli", "search": "chorizo potato", "tags": ["gf", "df"] }
+              ]
+            },
+            {
+              "course": "Plated Main (alternate drop, choose 1–2)",
+              "items": [
+                { "name": "Lamb Cutlet, Moroccan Cous Cous, Tagine & Harissa Yoghurt", "search": "lamb cutlet tagine moroccan couscous" },
+                { "name": "Prosciutto Wrapped Chicken Breast, Potato, Lemon Caper Beurre Blanc", "search": "chicken breast prosciutto lemon caper" },
+                { "name": "Fillet of Beef, Riviera Potatoes, Greens, Tempranillo Reduction", "search": "beef fillet tenderloin tempranillo" },
+                { "name": "Baked Market Fish, Romesco Arancini, Greens, Lemon Dill Aioli", "search": "baked fish romesco arancini" },
+                { "name": "Herb Crusted Pork Cutlet, Confit Garlic Pomme Puree, Cider Mustard Cream", "search": "pork cutlet herb crust cider mustard" },
+                { "name": "Risotto Stuffed Mushroom, Romesco, Lemon Aioli, Greens", "search": "mushroom risotto stuffed romesco", "tags": ["veg"] }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "amalfi",
+          "label": "Amalfi Package",
+          "style": "2 or 3 Course Plated",
+          "price": "2 Course $89pp · 3 Course $109pp",
+          "desc": "Elegant alternate-drop dining. Entree, main and optional dessert",
+          "courses": [
+            {
+              "course": "Entree (choose 2 or 3 canape-style)",
+              "items": [
+                { "name": "Beef Albondigas, Romesco Sugo with Toasted Turkish", "search": "beef meatball albondigas romesco" },
+                { "name": "Zesty Chicken Skewer, Herbed Labneh, Roquette Prosciutto Salad", "search": "chicken skewer labneh roquette" },
+                { "name": "Baked Brie, Fig, Pistachio & Hot Honey", "search": "baked brie fig pistachio honey", "tags": ["veg"] },
+                { "name": "Natural Oysters, Champagne Mignonette", "search": "oyster champagne mignonette", "tags": ["gf", "df"] }
+              ]
+            },
+            {
+              "course": "Main (choose 2, alternate drop)",
+              "items": [
+                { "name": "Chargrilled Lamb Cutlets, Riviera House Emulsion", "search": "lamb cutlet chargrilled emulsion", "tags": ["gf", "df"] },
+                { "name": "Limoncello, Rosemary & Garlic Roast Chicken", "search": "roast chicken limoncello rosemary garlic", "tags": ["gf", "df"] },
+                { "name": "Tender Thyme & Garlic Roast Beef, Tempranillo Reduction", "search": "roast beef thyme garlic tempranillo", "tags": ["gf", "df"] },
+                { "name": "Sous Vide Pork Loin, Apricot & Sage Compote", "search": "pork loin sous vide apricot sage" },
+                { "name": "Chilli Garlic Prawns & Chorizo, Roquette Salad", "search": "prawn chorizo chilli garlic roquette", "tags": ["gf", "df"] },
+                { "name": "Grilled Haloumi, Roasted Red Grapes, Hot Honey Drizzle", "search": "haloumi grilled red grapes honey", "tags": ["gf", "veg"] }
+              ]
+            },
+            {
+              "course": "Sides (all included)",
+              "items": [
+                { "name": "Baby Chat Potatoes, Garlic Herb Butter, Whipped Feta", "search": "chat potato garlic herb butter feta", "tags": ["veg"] },
+                { "name": "French Green Beans, Shallots, Mustard Vinaigrette, Toasted Almonds", "search": "green beans shallots mustard vinaigrette", "tags": ["veg", "gf", "df"] },
+                { "name": "Roquette & Parmesan Salad, Balsamic Glaze", "search": "rocket parmesan salad balsamic", "tags": ["veg", "gf"] },
+                { "name": "Sourdough Focaccia, Whipped Herb Butter", "search": "sourdough focaccia herb butter", "tags": ["veg"] }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "la_tavola",
+          "label": "La Tavola Package",
+          "style": "Feasting / Shared to Table",
+          "price": "Main only $80pp · Entree & Main $90pp",
+          "desc": "Family-style shared dishes brought to the table",
+          "courses": [
+            {
+              "course": "Entree",
+              "items": [
+                { "name": "Beef Albondigas, Romesco Sugo with Toasted Turkish", "search": "beef meatball albondigas romesco" },
+                { "name": "Zesty Chicken Skewer, Herbed Labneh, Roquette Prosciutto Salad", "search": "chicken skewer labneh" },
+                { "name": "Baked Brie with Fig, Pistachio and Hot Honey", "search": "baked brie fig pistachio", "tags": ["veg"] },
+                { "name": "Natural Oysters, Champagne Mignonette", "search": "oyster champagne", "tags": ["gf", "df"] }
+              ]
+            },
+            {
+              "course": "Mains (choose 2–4, shared to table)",
+              "items": [
+                { "name": "Chargrilled Lamb Cutlets, Riviera House Emulsion", "search": "lamb cutlet chargrilled", "tags": ["gf", "df"] },
+                { "name": "Limoncello, Rosemary & Garlic Roast Chicken", "search": "roast chicken limoncello rosemary", "tags": ["gf", "df"] },
+                { "name": "Tender Thyme & Garlic Roast Beef, Tempranillo Reduction", "search": "roast beef thyme garlic", "tags": ["gf", "df"] },
+                { "name": "Sous Vide Pork Loin, Apricot & Sage Compote", "search": "pork loin apricot sage" },
+                { "name": "Chilli Garlic Prawns & Chorizo, Roquette Salad", "search": "prawn chorizo chilli garlic", "tags": ["gf", "df"] },
+                { "name": "Grilled Haloumi, Roasted Red Grapes, Hot Honey Drizzle", "search": "haloumi red grapes hot honey", "tags": ["veg", "gf"] }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "gyros",
+          "label": "MYO Gyros Bar",
+          "style": "Casual / Buffet",
+          "price": "From $32pp",
+          "desc": "Guests build their own gyros from protein options and fresh fillings",
+          "courses": [
+            {
+              "course": "Protein (choose 2)",
+              "items": [
+                { "name": "Slow Cooked Greek Style Beef", "search": "greek slow cooked beef", "tags": ["gf", "df"] },
+                { "name": "Chargrilled Lemon & Thyme Chicken", "search": "chicken lemon thyme chargrilled", "tags": ["gf", "df"] },
+                { "name": "Moroccan Spiced Pulled Lamb", "search": "pulled lamb moroccan spiced", "tags": ["gf", "df"] },
+                { "name": "Grilled Halloumi", "search": "haloumi grilled", "tags": ["veg", "gf"] }
+              ]
+            },
+            {
+              "course": "Fillings & Sauces",
+              "items": [
+                { "name": "Fluffy Souvlaki Breads + Tabouli + Tzatziki + Garlic Aioli", "search": "souvlaki pita tabouli tzatziki", "tags": ["veg option"] },
+                { "name": "Herbed Fries / Garlic Lemon Potatoes", "search": "garlic lemon potato fries", "tags": ["veg", "gf option", "df"] }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late_night",
+          "label": "Late Night Snacks",
+          "style": "Party Food",
+          "price": "From $105 per platter",
+          "desc": "Served 9:30–10:00pm. Hot platters only — not for main meal service",
+          "courses": [
+            {
+              "course": "Hot Platters (45–50 pieces)",
+              "items": [
+                { "name": "Mushroom & White Wine Arancini, Garlic Aioli", "search": "arancini mushroom white wine", "tags": ["veg"] },
+                { "name": "Gourmet Beef Sausage Rolls with Sauce", "search": "sausage roll beef gourmet" },
+                { "name": "Selection of Gourmet Party Pies with Sauce", "search": "party pie beef gourmet" },
+                { "name": "Mini Quiches with Beetroot Balsamic Relish", "search": "mini quiche beetroot" },
+                { "name": "Tiger Prawn Spring Rolls, Sweet Chilli", "search": "prawn spring roll sweet chilli" }
+              ]
+            },
+            {
+              "course": "Substantial Platters (40 pieces)",
+              "items": [
+                { "name": "Salt & Pepper Calamari & Chips, Tartare, Lemon", "search": "salt pepper calamari chips tartare" },
+                { "name": "Classic Beef Cheeseburger Sliders", "search": "beef cheeseburger slider" },
+                { "name": "Selection of Gourmet Pizzas", "search": "pizza gourmet" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "kids",
+          "label": "Kids Menu",
+          "style": "Children",
+          "price": "$20pp",
+          "desc": "All children at the function receive the same dish",
+          "courses": [
+            {
+              "course": "Choose One",
+              "items": [
+                { "name": "Chicken Nuggets & Chips, Sauce", "search": "chicken nuggets chips" },
+                { "name": "Beef Bolognese & Pasta", "search": "bolognese pasta spaghetti" },
+                { "name": "Fish & Chips, Sauce", "search": "fish chips" },
+                { "name": "Gelato & Toppings (dessert)", "search": "gelato ice cream", "tags": ["veg"] }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "parties",
+      "label": "Parties",
+      "icon": "🎉",
+      "color": "#7bae6e",
+      "sections": [
+        {
+          "id": "platters",
+          "label": "Crowd Pleaser Platters",
+          "style": "Self-service",
+          "price": "From $65 per platter (serves 12)",
+          "desc": "Served in grazing boxes, set out for guests to help themselves. No wait service included",
+          "courses": [
+            {
+              "course": "Sweets & Nibbles (each serves 12)",
+              "items": [
+                { "name": "House Baked Scones, Chantilly Cream & Jam", "search": "scones chantilly cream jam", "tags": ["veg"] },
+                { "name": "Sweet Slice & Cake Platter", "search": "slice cake sweet platter", "tags": ["veg"] },
+                { "name": "House Baked Muffins", "search": "muffins baked", "tags": ["veg"] },
+                { "name": "Seasonal Fruit Platter", "search": "fruit platter seasonal", "tags": ["veg", "gf", "df"] },
+                { "name": "Grazing Box (cheese, deli meats, fruit, nuts, crackers, dips, olives)", "search": "charcuterie grazing cheese deli" }
+              ]
+            },
+            {
+              "course": "Hot Nibbles (20–25 pieces each)",
+              "items": [
+                { "name": "House Baked Sausage Rolls with Sauce", "search": "sausage roll baked" },
+                { "name": "Flaky Beef Party Pies with Sauce", "search": "party pie beef flaky" },
+                { "name": "House Baked Mini Quiches with Sauce", "search": "mini quiche baked" },
+                { "name": "Spinach & Ricotta Pastizis with Tzatziki", "search": "spinach ricotta pastizzi tzatziki", "tags": ["veg"] },
+                { "name": "Mixed Box Hot Nibbles (40–50 pieces)", "search": "mixed hot nibbles finger food" }
+              ]
+            },
+            {
+              "course": "Finger Food & Lunch",
+              "items": [
+                { "name": "Ham & Cheese Croissants, Silky Dijon Emulsion", "search": "ham cheese croissant dijon" },
+                { "name": "Mixed Sandwich Platter (24 points)", "search": "mixed sandwiches platter" },
+                { "name": "Premium Filled Wraps (12)", "search": "gourmet wraps filled" },
+                { "name": "Filled Brioche Rolls — Smoked Chicken, Bacon & Almond", "search": "brioche roll smoked chicken bacon almond" },
+                { "name": "Filled Brioche Rolls — Chicken Schnitzel & Slaw", "search": "chicken schnitzel slaw roll" },
+                { "name": "Filled Brioche Rolls — Roast Beef, Beetroot Relish, Jarlsberg & Rocket", "search": "roast beef beetroot jarlsberg rocket roll" },
+                { "name": "Filled Brioche Rolls — Grilled Halloumi, Pesto & Pumpkin", "search": "halloumi pesto pumpkin roll", "tags": ["veg"] }
+              ]
+            },
+            {
+              "course": "Meat Platters (serves 12)",
+              "items": [
+                { "name": "Leg Ham Off The Bone, Beetroot Balsamic Relish", "search": "leg ham bone beetroot balsamic", "tags": ["gf", "df"] },
+                { "name": "Limoncello & Rosemary Roasted Chicken Pieces (GF, DF)", "search": "roasted chicken limoncello rosemary", "tags": ["gf", "df"] },
+                { "name": "Roast Beef with Beetroot Balsamic Relish (GF, DF)", "search": "roast beef beetroot balsamic relish", "tags": ["gf", "df"] },
+                { "name": "Lemon & Thyme Chicken Skewers, Herbed Labneh, Pita", "search": "chicken skewer lemon thyme labneh", "tags": ["gf"] },
+                { "name": "Spiced Lamb Koftas, Spicy Capsicum Cream, Pita", "search": "lamb kofta capsicum cream pita" },
+                { "name": "Chargrilled Lamb Cutlets, Chimichurri Emulsion", "search": "lamb cutlet chimichurri chargrilled", "tags": ["gf", "df"] }
+              ]
+            },
+            {
+              "course": "Salads (serves 12–15)",
+              "items": [
+                { "name": "Basil Pesto Pasta Salad — Pesto, Spinach, Feta, Tomato, Olives", "search": "pesto pasta salad spinach feta", "tags": ["veg"] },
+                { "name": "Greek Green Bean Salad — Feta, Tomato, Olives, Herbs, Zesty Dressing", "search": "greek green bean salad feta olives", "tags": ["veg", "gf"] },
+                { "name": "Moroccan Cous Cous — Pumpkin, Eggplant, Capsicum, Spinach, Mint, Lemon", "search": "moroccan couscous pumpkin eggplant mint", "tags": ["veg"] },
+                { "name": "Roast Pumpkin, Feta & Pepita Salad", "search": "roast pumpkin feta pepita salad", "tags": ["veg", "gf"] },
+                { "name": "Classic Garden Salad", "search": "garden salad classic", "tags": ["veg", "gf", "df"] },
+                { "name": "Creamy Potato, Bacon & Herb Salad", "search": "potato bacon herb salad creamy" }
+              ]
+            },
+            {
+              "course": "Cooked Sides (serves 12–15)",
+              "items": [
+                { "name": "Creamy Potato Bake", "search": "potato bake creamy", "tags": ["veg"] },
+                { "name": "Broccoli Cauliflower Gratin", "search": "broccoli cauliflower gratin bechamel", "tags": ["veg"] },
+                { "name": "House Baked Sourdough Focaccia with Butter", "search": "sourdough focaccia bread", "tags": ["veg"] },
+                { "name": "Dinner Rolls & Butter", "search": "dinner rolls bread", "tags": ["veg"] }
+              ]
+            },
+            {
+              "course": "Substantial Platters (20 pieces)",
+              "items": [
+                { "name": "Salt & Pepper Calamari & Chips, Tartare, Lemon", "search": "salt pepper calamari chips" },
+                { "name": "Classic Beef Cheeseburger Sliders", "search": "beef cheeseburger slider" },
+                { "name": "Smoky Chicken & Bacon Sliders", "search": "chicken bacon slider smoky" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "grazing",
+          "label": "Grazing Table",
+          "style": "Grazing",
+          "price": "1m $820 · 2m $1485 · 3m $2178 (inc. styling)",
+          "desc": "Cheeses, charcuterie, fresh fruits, gourmet biscuits, rustic breads, nuts, dips & olives. Styled with white plinths",
+          "courses": [
+            {
+              "course": "Grazing Add-Ons",
+              "items": [
+                { "name": "Gourmet Pizza Scrolls (40)", "search": "pizza scrolls gourmet" },
+                { "name": "Mini Quiches with House Relish (40)", "search": "mini quiche relish" },
+                { "name": "Gourmet Brioche Sliders (40)", "search": "brioche slider" },
+                { "name": "Ham, Cheese & Dijon Croissants (40)", "search": "ham cheese croissant dijon" },
+                { "name": "Seasonal Cut Fruit Bowl", "search": "fruit bowl seasonal watermelon rockmelon", "tags": ["veg", "gf", "df"] }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "seafood_fountain",
+          "label": "Seafood Fountain",
+          "style": "Show-piece",
+          "price": "From $25pp + $100 set-up fee",
+          "desc": "3-tier plantation fountain. Styled on cascading ice with lemon, cocktail sauce & garnishes. Min 40 people",
+          "courses": [
+            {
+              "course": "Choose Selection",
+              "items": [
+                { "name": "Purely Prawns — Fresh Tiger Prawns, Cocktail Sauce, Lemon", "search": "tiger prawn cocktail sauce", "tags": ["gf", "df"] },
+                { "name": "Oyster Bar — Premium Oysters, Shucked & Ready", "search": "oyster shucked fresh", "tags": ["gf", "df"] },
+                { "name": "Mixed — Tiger Prawns & Oysters", "search": "prawn oyster mixed seafood", "tags": ["gf", "df"] }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "corporate",
+      "label": "Corporate",
+      "icon": "💼",
+      "color": "#6e9abe",
+      "sections": [
+        {
+          "id": "breakfast_brunch",
+          "label": "Breakfast & Brunch",
+          "style": "Morning service",
+          "price": "From $7.50pp",
+          "desc": "For morning meetings and early starts. Minimum 12 people",
+          "courses": [
+            {
+              "course": "Breakfast Items",
+              "items": [
+                { "name": "Savoury Filled Croissants", "search": "savoury croissant filled" },
+                { "name": "Sweet Filled Croissants", "search": "sweet croissant filled", "tags": ["veg"] },
+                { "name": "House Baked Banana Bread, Whipped Honey Butter", "search": "banana bread honey butter", "tags": ["veg"] },
+                { "name": "Fruit Salad & Yoghurt", "search": "fruit salad yoghurt", "tags": ["veg", "gf"] },
+                { "name": "Mixed Bircher Muesli Bowls", "search": "bircher muesli oats yoghurt", "tags": ["veg"] },
+                { "name": "Waffles, Maple Syrup, Whipped Cream, Honey Cinnamon Butter", "search": "waffles maple syrup cream", "tags": ["veg"] },
+                { "name": "Bacon & Egg Muffins — Bacon, Egg, Cheese, BBQ Sauce", "search": "bacon egg muffin" },
+                { "name": "Bacon & Egg Paninis — Turkish, Bacon, Egg, Caramelised Onion Jam", "search": "bacon egg panini caramelised onion" },
+                { "name": "Breakfast Wraps — Bacon, Egg, Cheese & BBQ Sauce", "search": "breakfast wrap bacon egg" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "morning_afternoon_tea",
+          "label": "Morning / Afternoon Tea",
+          "style": "Tea break",
+          "price": "From $6.50pp",
+          "desc": "Sweet & savoury combo available at $12pp. Minimum 12 people",
+          "courses": [
+            {
+              "course": "Sweet Options",
+              "items": [
+                { "name": "Freshly Baked Scones, Jam & Chantilly Cream", "search": "scones jam chantilly cream", "tags": ["veg"] },
+                { "name": "House Baked Muffins", "search": "muffins baked", "tags": ["veg"] },
+                { "name": "Assorted Slices & Cakes", "search": "slices cakes assorted", "tags": ["veg"] },
+                { "name": "House Baked Banana Bread", "search": "banana bread baked", "tags": ["veg"] },
+                { "name": "Seasonal Fruit", "search": "seasonal fruit platter", "tags": ["veg", "gf", "df"] },
+                { "name": "Gourmet Filled Cookies", "search": "cookies filled gourmet", "tags": ["veg"] }
+              ]
+            },
+            {
+              "course": "Savoury Options",
+              "items": [
+                { "name": "Savoury Filled Mini Croissants", "search": "savoury mini croissant filled" },
+                { "name": "Homemade Mini Quiches with Beetroot Balsamic Relish", "search": "mini quiche beetroot balsamic" },
+                { "name": "Spinach & Feta Pastizis with Herbed Labneh", "search": "spinach feta pastizzi labneh", "tags": ["veg"] },
+                { "name": "Housemade Sausage Rolls with condiments", "search": "sausage rolls housemade" },
+                { "name": "Mini Beef Party Pie with condiments", "search": "mini party pie beef" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "corporate_lunch",
+          "label": "Lunch Options",
+          "style": "Working lunch",
+          "price": "From $9pp",
+          "desc": "Sandwiches, wraps, scrolls, salad bowls, working lunch boxes. Minimum 12 people",
+          "courses": [
+            {
+              "course": "Sandwiches, Wraps & Rolls",
+              "items": [
+                { "name": "Mixed Filled Sandwiches", "search": "mixed sandwiches classic fillings" },
+                { "name": "Mixed Filled Wraps", "search": "gourmet wraps mixed fillings" },
+                { "name": "Mixed Filled Brioche/Turkish/Focaccia Rolls", "search": "brioche turkish focaccia rolls mixed" },
+                { "name": "Mixed Gourmet Pizza Scrolls — Roast Pumpkin Feta Pesto, Casalingo Bocconcini", "search": "pizza scrolls pumpkin feta pesto bocconcini" }
+              ]
+            },
+            {
+              "course": "Salad Bowls",
+              "items": [
+                { "name": "Chicken Caesar Salad Bowl — Chicken, Bacon, Croutons, Parmesan, Egg", "search": "chicken caesar salad bacon egg" },
+                { "name": "Lamb Fattoush Salad Bowl — Lamb Kofta, Green Beans, Feta, Olives, Pita", "search": "lamb kofta fattoush salad feta olives" },
+                { "name": "Mediterranean Chicken Bowl — Grilled Chicken, Moroccan Vegetable Cous Cous, Tzatziki", "search": "chicken mediterranean couscous tzatziki" },
+                { "name": "Roasted Vegetable Salad Bowl — Moroccan Vegetable Medley, Cous Cous, Capsicum Cream", "search": "roasted vegetable moroccan couscous", "tags": ["veg"] },
+                { "name": "Beef Lasagne, Greek Side Salad", "search": "beef lasagne bolognese" }
+              ]
+            },
+            {
+              "course": "Working Lunch Boxes ($24pp)",
+              "items": [
+                { "name": "Sandwich/Wrap/Roll + Sweet Treat + Savoury Snack + Drink", "search": "sandwich wrap roll snack" },
+                { "name": "Salad Bowl + Sweet Treat + Drink", "search": "salad bowl sweet" },
+                { "name": "Breakfast Box — Savoury Croissant + Breakfast Sweet + Mini Quiche + Juice", "search": "croissant quiche breakfast box" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "corporate_buffet",
+          "label": "Build-Your-Own Buffet",
+          "style": "Buffet",
+          "price": "Meats from $5.50pp · Salads $3.75pp · Sides $3.50pp",
+          "desc": "Recommend 2–3 meats + 2 salads + sides + bread. Served in disposable kraft boxes. Minimum 12 people",
+          "courses": [
+            {
+              "course": "Meats",
+              "items": [
+                { "name": "Roast Beef Sliced, Caramelised Onion Jam", "search": "roast beef sliced caramelised onion", "tags": ["gf", "df"] },
+                { "name": "Leg Ham Off The Bone, Beetroot Balsamic Relish", "search": "leg ham beetroot balsamic", "tags": ["gf", "df"] },
+                { "name": "Limoncello & Rosemary Roast Chicken Pieces", "search": "roast chicken limoncello rosemary", "tags": ["gf", "df"] },
+                { "name": "Spiced Lamb Koftas, Spicy Capsicum Cream, Pita", "search": "lamb kofta capsicum cream" },
+                { "name": "Lemon & Thyme Chicken Skewers, Herbed Labneh, Pita", "search": "chicken skewer lemon thyme labneh", "tags": ["gf"] },
+                { "name": "Chargrilled Lamb Cutlets, Chimichurri", "search": "lamb cutlet chimichurri chargrilled", "tags": ["gf", "df"] }
+              ]
+            },
+            {
+              "course": "Salads",
+              "items": [
+                { "name": "Creamy Basil Pesto Pasta Salad", "search": "pesto pasta salad creamy", "tags": ["veg"] },
+                { "name": "Greek Green Bean Salad", "search": "greek green bean salad feta olives", "tags": ["veg", "gf"] },
+                { "name": "Moroccan Cous Cous Salad", "search": "moroccan couscous salad roast vegetable", "tags": ["veg"] },
+                { "name": "Pumpkin, Feta & Pepita Salad", "search": "roast pumpkin feta pepita salad", "tags": ["veg", "gf"] },
+                { "name": "Traditional Garden Salad", "search": "garden salad tomato cucumber", "tags": ["veg", "gf", "df"] },
+                { "name": "Creamy Potato, Bacon & Herb Salad", "search": "potato bacon herb salad" },
+                { "name": "Caesar Salad — Cos, Egg, Crispy Bacon, Parmesan", "search": "caesar salad bacon egg parmesan" }
+              ]
+            },
+            {
+              "course": "Sides",
+              "items": [
+                { "name": "Creamy Potato Bake — Bacon, Onion & Cheese", "search": "potato bake bacon cheese creamy" },
+                { "name": "Broccoli & Cauliflower Gratin — Bechamel, Cheese Crust", "search": "broccoli cauliflower gratin bechamel", "tags": ["veg"] },
+                { "name": "Housemade Sourdough Focaccia Bread & Butter", "search": "sourdough focaccia bread butter", "tags": ["veg"] },
+                { "name": "Dinner Rolls & Butter", "search": "dinner rolls bread", "tags": ["veg"] }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "baby_shower",
+      "label": "Baby Shower",
+      "icon": "👶",
+      "color": "#d4634b",
+      "sections": [
+        {
+          "id": "high_tea",
+          "label": "High Tea",
+          "style": "Afternoon tea",
+          "price": "$55pp + GST (min 12)",
+          "desc": "Presented on elegant high-tea China with unlimited tea and coffee throughout",
+          "courses": [
+            {
+              "course": "High Tea Menu",
+              "items": [
+                { "name": "Assorted Ribbon Sandwiches", "search": "ribbon sandwiches assorted finger" },
+                { "name": "Crispy Chorizo & Roasted Capsicum Arancini, Romesco Sauce, Lemon-Thyme Aioli", "search": "chorizo capsicum arancini romesco" },
+                { "name": "Freshly Baked Scones, House-made Jam, Lemon Curd & Whipped Cream", "search": "scones jam lemon curd cream", "tags": ["veg"] },
+                { "name": "Sweet Petit Fours — Assorted Delicate Bite-Sized Treats", "search": "petit fours sweet bites", "tags": ["veg"] },
+                { "name": "Unlimited Tea & Coffee", "search": "tea coffee", "tags": ["veg", "gf option"] }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "baby_graze",
+          "label": "Custom Graze",
+          "style": "Grazing",
+          "price": "$60pp + GST (min 12)",
+          "desc": "Curated grazing table themed to your colour palette. Styled to match (pink, blue, sage, neutral)",
+          "courses": [
+            {
+              "course": "Graze Items",
+              "items": [
+                { "name": "Smoked Chicken & Bacon Sliders", "search": "smoked chicken bacon slider" },
+                { "name": "Assorted Ribbon Sandwiches", "search": "ribbon sandwiches finger food" },
+                { "name": "Spinach & Feta Pastizzis with Tzatziki", "search": "spinach feta pastizzi tzatziki", "tags": ["veg"] },
+                { "name": "Fresh Fruit", "search": "fresh fruit seasonal", "tags": ["veg", "gf", "df"] },
+                { "name": "Selection of Sweets & Cakes", "search": "sweets cakes selection", "tags": ["veg"] },
+                { "name": "Signature Mocktail", "search": "mocktail cocktail non-alcoholic", "tags": ["veg", "gf", "df"] }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "funeral_wake",
+      "label": "Funeral & Wake",
+      "icon": "🕊",
+      "color": "#8a8278",
+      "sections": [
+        {
+          "id": "wake_platters",
+          "label": "Wake Platters",
+          "style": "Comforting crowd food",
+          "price": "From $45 per platter (serves 12–15)",
+          "desc": "Designed to make hosting easier during a difficult time. Delivered hot or available for pickup",
+          "courses": [
+            {
+              "course": "Sweets & Nibbles (serves 12)",
+              "items": [
+                { "name": "House Baked Scones, Chantilly Cream & Jam", "search": "scones chantilly cream jam", "tags": ["veg"] },
+                { "name": "Sweet Slice & Cake Platter", "search": "slice cake sweet", "tags": ["veg"] },
+                { "name": "House Baked Muffins (seasonal flavours)", "search": "muffins seasonal baked", "tags": ["veg"] },
+                { "name": "Seasonal Fruit Platter", "search": "fruit platter seasonal", "tags": ["veg", "gf", "df"] },
+                { "name": "Grazing Box (cheese, deli meats, fruit, nuts, crackers, dips, olives)", "search": "grazing box charcuterie cheese deli" }
+              ]
+            },
+            {
+              "course": "Hot Nibbles (20–25 pieces)",
+              "items": [
+                { "name": "House Baked Sausage Rolls with Sauce", "search": "sausage roll baked" },
+                { "name": "Flaky Beef Party Pies with Sauce", "search": "party pie beef" },
+                { "name": "House Baked Mini Quiches with Sauce", "search": "mini quiche baked" },
+                { "name": "Spinach & Ricotta Pastizis with Tzatziki", "search": "spinach ricotta pastizzi tzatziki", "tags": ["veg"] },
+                { "name": "Mixed Box Hot Nibbles (40–50 pieces)", "search": "mixed hot nibbles finger food" }
+              ]
+            },
+            {
+              "course": "Finger Food & Sandwiches",
+              "items": [
+                { "name": "Ham & Cheese Croissants, Silky Dijon Emulsion", "search": "ham cheese croissant dijon" },
+                { "name": "Mixed Sandwich Platter", "search": "sandwich platter mixed" },
+                { "name": "Premium Filled Wraps (12)", "search": "wraps filled gourmet" },
+                { "name": "Filled Brioche Rolls (12) — Chef Selection", "search": "brioche rolls filled mixed" }
+              ]
+            },
+            {
+              "course": "Meat Platters (serves 12)",
+              "items": [
+                { "name": "Leg Ham Off The Bone, Beetroot Balsamic Relish", "search": "leg ham beetroot balsamic", "tags": ["gf", "df"] },
+                { "name": "Limoncello & Rosemary Roasted Chicken Pieces", "search": "roasted chicken limoncello rosemary", "tags": ["gf", "df"] },
+                { "name": "Roast Beef with Beetroot Balsamic Relish", "search": "roast beef beetroot balsamic", "tags": ["gf", "df"] },
+                { "name": "Lemon & Thyme Chicken Skewers, Herbed Labneh, Pita", "search": "chicken skewer lemon thyme labneh" },
+                { "name": "Spiced Lamb Koftas, Spicy Capsicum Cream, Pita", "search": "lamb kofta capsicum cream" },
+                { "name": "Chargrilled Lamb Cutlets, Chimichurri Emulsion", "search": "lamb cutlet chimichurri chargrilled", "tags": ["gf", "df"] }
+              ]
+            },
+            {
+              "course": "Salads (serves 12–15)",
+              "items": [
+                { "name": "Basil Pesto Pasta Salad", "search": "pesto pasta salad spinach feta", "tags": ["veg"] },
+                { "name": "Greek Green Bean Salad", "search": "greek green bean salad feta olives", "tags": ["veg", "gf"] },
+                { "name": "Moroccan Cous Cous Salad", "search": "moroccan couscous pumpkin eggplant mint", "tags": ["veg"] },
+                { "name": "Roast Pumpkin, Feta & Pepita Salad", "search": "roast pumpkin feta pepita", "tags": ["veg", "gf"] },
+                { "name": "Classic Garden Salad", "search": "garden salad classic", "tags": ["veg", "gf", "df"] },
+                { "name": "Creamy Potato, Bacon & Herb Salad", "search": "potato bacon herb salad" }
+              ]
+            },
+            {
+              "course": "Cooked Sides (serves 12–15)",
+              "items": [
+                { "name": "Creamy Potato Bake", "search": "potato bake creamy cheese", "tags": ["veg"] },
+                { "name": "Broccoli Cauliflower Gratin", "search": "broccoli cauliflower gratin", "tags": ["veg"] },
+                { "name": "House Baked Sourdough Focaccia & Butter", "search": "sourdough focaccia bread", "tags": ["veg"] },
+                { "name": "Dinner Rolls & Butter", "search": "dinner rolls bread", "tags": ["veg"] }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "wake_grazing",
+          "label": "Grazing Table",
+          "style": "Grazing",
+          "price": "1m $650 · 2m $1250 · 3m $1999 (+ styling available)",
+          "desc": "Fully disposable grazing table. Set-up included; you provide the table",
+          "courses": [
+            {
+              "course": "Grazing Table Add-Ons",
+              "items": [
+                { "name": "Gourmet Pizza Scrolls (40)", "search": "pizza scrolls gourmet", "tags": ["veg"] },
+                { "name": "Mini Quiches with House Relish (40)", "search": "mini quiche house relish" },
+                { "name": "Gourmet Brioche Sliders (40)", "search": "brioche slider gourmet" },
+                { "name": "Ham, Cheese & Dijon Croissants (40)", "search": "ham cheese dijon croissant" },
+                { "name": "Seasonal Cut Fruit Bowl", "search": "watermelon rockmelon grapes pineapple", "tags": ["veg", "gf", "df"] }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "offsite",
+      "label": "Riviera Table",
+      "icon": "🚐",
+      "color": "#c9a96e",
+      "sections": [
+        {
+          "id": "canapes",
+          "label": "Canape Packages",
+          "style": "Cocktail",
+          "price": "4 canapés $54pp · 6 canapés $72pp · 8 canapés $89pp (min 40)",
+          "desc": "Hand-served by waitstaff. Roving dessert (cannoli or tiramisu) available as add-on",
+          "courses": [
+            {
+              "course": "Canapes (choose from)",
+              "items": [
+                { "name": "Bruschetta of Rare Roast Beef, Whipped Blue Cheese, Caramelised Onion Jam", "search": "bruschetta roast beef blue cheese caramelised onion" },
+                { "name": "Spanner Crab Cannoli, Lemon, Dijon, Riviera flavours", "search": "crab cannoli lemon dijon" },
+                { "name": "Prawn Brioche Slider, Cocktail Sauce, Crisp Lettuce", "search": "prawn brioche slider cocktail sauce" },
+                { "name": "Smoked Chicken & Bacon Brioche Slider, Rocket", "search": "smoked chicken bacon brioche slider" },
+                { "name": "Vintage Beef Brioche Slider, Aged Cheddar, Herbed Aioli, Tomato Relish", "search": "beef burger slider aged cheddar aioli" },
+                { "name": "Beef Polpette — Slow-cooked Italian Meatballs, Romesco, Manchego, Turkish", "search": "beef meatball polpette romesco manchego" },
+                { "name": "Chargrilled Lamb Cutlet, Riviera House Emulsion", "search": "lamb cutlet chargrilled emulsion", "tags": ["gf", "df"] },
+                { "name": "Zesty Limoncello Chicken Skewer, Herbed Labneh, Crumbled Feta, Pita", "search": "chicken skewer limoncello labneh feta", "tags": ["gf"] },
+                { "name": "Slow Cooked Lamb Shoulder Provençale, Cous Cous, Spiced Yoghurt", "search": "slow cooked lamb shoulder provencal couscous" },
+                { "name": "Beef Bourguignon, Rich Red Wine Sauce, Carrots, Bacon, Mushroom, Pomme Puree", "search": "beef bourguignon red wine bacon mushroom" },
+                { "name": "Creamy Lemon Caper Chicken, Apricot Almond Rice Pilaf", "search": "chicken lemon caper apricot almond rice pilaf" }
+              ]
+            },
+            {
+              "course": "Roving Dessert (add-on, from $16pp)",
+              "items": [
+                { "name": "Roving Cannoli — Ferrero/Hazelnut, White Chocolate Pistachio, Strawberry Ricotta, Tiramisu, Lemon Cheesecake", "search": "cannoli pistachio tiramisu ricotta", "tags": ["veg"] },
+                { "name": "Roving Tiramisu Cups — Espresso-soaked Sponge, Mascarpone, Cocoa", "search": "tiramisu mascarpone espresso", "tags": ["veg"] }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "carvery_buffet",
+          "label": "Carvery Buffet",
+          "style": "Buffet",
+          "price": "Luncheon Luxe $55pp · Indulgent Dinner $69pp · Riviera Spread $85pp (min 40)",
+          "desc": "Luncheon Luxe: 2 mains 3 sides. Indulgent Dinner: 3 mains 3 sides. Riviera Spread: 4 mains 4 sides. Served with sourdough focaccia & herb butter",
+          "courses": [
+            {
+              "course": "Mains (choose from)",
+              "items": [
+                { "name": "Greek Spiced Roast Lamb — Traditional Greek Inspired Flavours", "search": "roast lamb greek spiced", "tags": ["gf", "df"] },
+                { "name": "Lemon, Thyme & Garlic Roast Chicken", "search": "roast chicken lemon thyme garlic", "tags": ["gf", "df"] },
+                { "name": "Tender Thyme & Garlic Roast Beef, Tempranillo Reduction, Gremolata", "search": "roast beef thyme garlic tempranillo gremolata", "tags": ["gf", "df"] },
+                { "name": "Sicilian Citrus & Herb Roast Pork, Apricot Compote", "search": "roast pork sicilian citrus herb apricot" },
+                { "name": "Grilled Haloumi, Roasted Red Grapes, Hot Honey Drizzle", "search": "grilled haloumi red grapes hot honey", "tags": ["veg", "gf"] }
+              ]
+            },
+            {
+              "course": "Side Dishes (choose from)",
+              "items": [
+                { "name": "Creamy Potato Gratin — Potato, Cream, Golden Cheese", "search": "potato gratin cream cheese", "tags": ["veg"] },
+                { "name": "Garlic & Herb Chat Potatoes, Feta Cream", "search": "chat potato garlic herb feta cream", "tags": ["veg", "gf"] },
+                { "name": "Honey-Thyme Roasted Carrots, Pistachios", "search": "roasted carrot honey thyme pistachio", "tags": ["veg", "gf", "df"] },
+                { "name": "Provencal Vegetable Ratatouille, Rich Romesco Sauce", "search": "ratatouille provencal vegetable romesco", "tags": ["veg", "gf", "df"] },
+                { "name": "Broccoli & Cauliflower Gratin — Béchamel, Cheesy Crust", "search": "broccoli cauliflower gratin bechamel", "tags": ["veg"] },
+                { "name": "Mediterranean Rice Pilaf — Saffron, Almonds, Raisins, Herbs", "search": "rice pilaf saffron almond raisin mediterranean", "tags": ["veg", "gf", "df"] },
+                { "name": "Moroccan Cous Cous Salad — Cous Cous, Vegetables, Citrus, Spices", "search": "moroccan couscous vegetable citrus spiced", "tags": ["veg", "df"] },
+                { "name": "Roast Root Vegetable Salad, Cinnamon-Maple Nuts", "search": "roast root vegetable cinnamon maple nuts", "tags": ["veg", "gf", "df"] },
+                { "name": "Greek Green Bean Salad — Tomato, Olives, Feta, Herbed Vinaigrette", "search": "greek green bean tomato olive feta vinaigrette", "tags": ["veg", "gf"] },
+                { "name": "Roast Pumpkin & Pepita Salad, Balsamic Glaze", "search": "roast pumpkin pepita salad balsamic", "tags": ["veg", "gf"] }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "bbq_buffet",
+          "label": "BBQ Buffet",
+          "style": "BBQ / Outdoor",
+          "price": "$69pp — 3 mains + 4 sides (min 40)",
+          "desc": "Staffed service. Includes disposable plates, cutlery & napkins. Served with sourdough focaccia",
+          "courses": [
+            {
+              "course": "BBQ Mains",
+              "items": [
+                { "name": "Pork & Italian Herb Sausages", "search": "pork sausage italian herb" },
+                { "name": "Zesty Chicken Skewers, Herbed Labneh", "search": "chicken skewer zesty labneh", "tags": ["gf"] },
+                { "name": "Chargrilled Lamb Cutlets, Riviera House Emulsion", "search": "lamb cutlet chargrilled emulsion", "tags": ["gf", "df"] }
+              ]
+            },
+            {
+              "course": "Sides",
+              "items": [
+                { "name": "Creamy Potato Gratin", "search": "potato gratin cream cheese", "tags": ["veg"] },
+                { "name": "Moroccan Cous Cous Salad", "search": "moroccan couscous grilled vegetable spiced", "tags": ["veg"] },
+                { "name": "Roast Root Vegetable Salad, Cinnamon-Maple Nuts", "search": "roast root vegetable cinnamon maple", "tags": ["veg", "gf", "df"] },
+                { "name": "Roast Pumpkin & Pepita Salad", "search": "roast pumpkin pepita balsamic", "tags": ["veg", "gf"] }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "plated_meals",
+          "label": "Plated Meals",
+          "style": "Formal sit-down",
+          "price": "1 course $62pp · 2 course $89pp · 3 course $109pp (min 40)",
+          "desc": "Alternate drop, served to the table with sourdough focaccia & whipped herb butter",
+          "courses": [
+            {
+              "course": "Entrees",
+              "items": [
+                { "name": "Heirloom Tomato Bruschetta, Charred Sourdough, Whipped Goats Cheese, Balsamic", "search": "bruschetta tomato goat cheese balsamic sourdough", "tags": ["veg"] },
+                { "name": "Chilli Garlic Prawns & Chorizo, Roquette Salad", "search": "prawn chorizo chilli garlic roquette" },
+                { "name": "Slow Cooked Beef Albondigas, Romesco Sugo with Toasted Turkish", "search": "beef meatball albondigas romesco turkish" },
+                { "name": "Zesty Chicken Skewers, Creamy Herbed Labneh, Roquette Salad", "search": "chicken skewer labneh zesty roquette" }
+              ]
+            },
+            {
+              "course": "Mains",
+              "items": [
+                { "name": "Lamb Cutlet, Moroccan Cous Cous, Tagine Sauce & Harissa Yoghurt", "search": "lamb cutlet tagine moroccan couscous harissa" },
+                { "name": "Prosciutto Wrapped Chicken Breast, Potato, Greens, Lemon Caper Cream", "search": "chicken breast prosciutto wrapped lemon caper cream" },
+                { "name": "Fillet of Beef, Potato, Greens & Tempranillo Reduction", "search": "beef fillet tenderloin tempranillo potato greens" },
+                { "name": "Stuffed Mushroom, Romesco, Lemon Aioli, Greens", "search": "stuffed mushroom romesco lemon aioli", "tags": ["veg"] }
+              ]
+            },
+            {
+              "course": "Desserts",
+              "items": [
+                { "name": "Flourless Chocolate Torte, Hazelnut Mousse, Raspberry Compote, Frangelico Ganache", "search": "flourless chocolate torte hazelnut raspberry ganache", "tags": ["veg", "gf"] },
+                { "name": "Pavlova, White Chocolate Mousse, Lemon Curd, Raspberry Coulis, Freeze Dried Strawberry", "search": "pavlova white chocolate mousse lemon curd raspberry", "tags": ["veg", "gf"] },
+                { "name": "Duo of Cannoli — Pistachio White Chocolate & Strawberry Ricotta Cheesecake", "search": "cannoli pistachio white chocolate strawberry ricotta", "tags": ["veg"] },
+                { "name": "Riviera Tiramisu, Biscotti Soil, Hazelnut Mousse", "search": "tiramisu hazelnut biscotti mascarpone espresso", "tags": ["veg"] }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "feasting",
+          "label": "Feasting — Shared to Table",
+          "style": "Shared feast",
+          "price": "Main only $80pp · Entree & Main $90pp (min 40)",
+          "desc": "Dishes shared family-style to the table with bread & sides included",
+          "courses": [
+            {
+              "course": "Entrees",
+              "items": [
+                { "name": "Beef Albondigas, Romesco Sugo with Toasted Turkish", "search": "beef meatball albondigas romesco" },
+                { "name": "Zesty Chicken Skewer, Herbed Labneh, Roquette Prosciutto Salad", "search": "chicken skewer labneh roquette prosciutto" },
+                { "name": "Baked Brie with Fig, Pistachio and Hot Honey", "search": "baked brie fig pistachio honey", "tags": ["veg"] },
+                { "name": "Natural Oysters, Champagne Mignonette", "search": "oyster champagne mignonette", "tags": ["gf", "df"] }
+              ]
+            },
+            {
+              "course": "Mains (shared)",
+              "items": [
+                { "name": "Chargrilled Lamb Cutlets, Riviera House Emulsion", "search": "chargrilled lamb cutlets emulsion", "tags": ["gf", "df"] },
+                { "name": "Limoncello, Rosemary & Garlic Roast Chicken", "search": "roast chicken limoncello rosemary garlic", "tags": ["gf", "df"] },
+                { "name": "Tender Thyme & Garlic Roast Beef, Tempranillo Reduction", "search": "roast beef thyme garlic tempranillo", "tags": ["gf", "df"] },
+                { "name": "Sous Vide Pork Loin, Apricot & Sage Compote", "search": "pork loin sous vide apricot sage" },
+                { "name": "Chilli Garlic Prawns & Chorizo, Roquette Salad", "search": "prawn chorizo chilli garlic roquette", "tags": ["gf", "df"] },
+                { "name": "Grilled Haloumi, Roasted Red Grapes, Hot Honey Drizzle", "search": "haloumi grilled red grapes hot honey", "tags": ["veg", "gf"] }
+              ]
+            },
+            {
+              "course": "Sides (included)",
+              "items": [
+                { "name": "Baby Chat Potatoes, Garlic Herb Butter, Whipped Feta", "search": "chat potato garlic herb butter feta", "tags": ["veg", "gf"] },
+                { "name": "French Green Beans, Shallots, Mustard Vinaigrette, Toasted Almonds", "search": "green beans shallots mustard vinaigrette almond", "tags": ["veg", "gf", "df"] },
+                { "name": "Roquette, Parmesan Salad, Balsamic Glaze", "search": "rocket parmesan salad balsamic", "tags": ["veg", "gf"] }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "gyros_offsite",
+          "label": "MYO Gyros Bar",
+          "style": "Casual / Buffet",
+          "price": "From $32pp (min 40)",
+          "desc": "Guests build their own gyros. Served with garlic lemon potatoes. Disposable plates included",
+          "courses": [
+            {
+              "course": "Protein (choose 2)",
+              "items": [
+                { "name": "Greek Style Pulled Beef", "search": "greek pulled beef slow cooked", "tags": ["gf", "df"] },
+                { "name": "Chargrilled Lemon & Thyme Chicken", "search": "chicken lemon thyme chargrilled", "tags": ["gf", "df"] },
+                { "name": "Spiced Lamb Kofta", "search": "lamb kofta spiced", "tags": ["gf", "df"] },
+                { "name": "Grilled Halloumi", "search": "grilled haloumi halloumi", "tags": ["veg", "gf"] }
+              ]
+            },
+            {
+              "course": "Fillings & Sides",
+              "items": [
+                { "name": "Souvlaki Breads, Tabouli, Tzatziki, Garlic Aioli, Capsicum Sauce, Feta", "search": "souvlaki pita tabouli tzatziki garlic feta", "tags": ["veg option"] },
+                { "name": "Garlic Lemon Potatoes", "search": "garlic lemon potato greek", "tags": ["veg", "gf", "df"] }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "dessert_grazing",
+          "label": "Dessert Grazing Table",
+          "style": "Dessert",
+          "price": "From $22pp (min 40)",
+          "desc": "Hand-selected desserts, seasonal fruits, decadent cakes, petite pastries, artisan chocolates",
+          "courses": [
+            {
+              "course": "Dessert Table",
+              "items": [
+                { "name": "Assorted Decadent Cakes", "search": "cake decadent assorted", "tags": ["veg"] },
+                { "name": "Petite Pastries", "search": "pastry petite small sweet", "tags": ["veg"] },
+                { "name": "Handcrafted Slices", "search": "slice handcrafted sweet", "tags": ["veg"] },
+                { "name": "Artisan Chocolates", "search": "chocolate artisan truffle", "tags": ["veg", "gf"] },
+                { "name": "Locally Sourced Fresh Fruit", "search": "fresh fruit seasonal local", "tags": ["veg", "gf", "df"] }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
