@@ -329,6 +329,34 @@
     var editingZones = false;
     /** @type {Set<string>|null} */
     var recipeIdFilter = null;
+    /** @type {{ label?: string, pax?: number, recipeCount?: number, scaleMap?: Object, fromPlanner?: boolean }|null} */
+    var plannerContext = null;
+    var openedFromPlanner = false;
+    var plannerBannerId = config.plannerBannerId || 'orderListPlannerBanner';
+
+    function scaleQtyForPlanner(recipeId, qtyStr) {
+      if (!qtyStr || !plannerContext || !plannerContext.scaleMap) return qtyStr;
+      var factor = plannerContext.scaleMap[recipeId];
+      if (!factor || factor === 1) return qtyStr;
+      var S = window.KuschiPlannerScale;
+      if (S && typeof S.scaleQtyStr === 'function') return S.scaleQtyStr(qtyStr, factor);
+      return qtyStr;
+    }
+
+    function updatePlannerBanner() {
+      var banner = document.getElementById(plannerBannerId);
+      if (!banner) return;
+      if (plannerContext && plannerContext.label) {
+        banner.hidden = false;
+        var dishPart =
+          plannerContext.recipeCount != null ? ' · ' + plannerContext.recipeCount + ' dishes' : '';
+        banner.textContent =
+          'Planner · ' + plannerContext.label + ' · ' + plannerContext.pax + ' covers' + dishPart;
+      } else {
+        banner.hidden = true;
+        banner.textContent = '';
+      }
+    }
 
     function Kr() {
       return window.KuschiUserRecipes;
@@ -381,6 +409,7 @@
           var lineKey = r.id + '::' + idx;
           var o = overrides[lineKey] || {};
           var recipeQty = i.qty != null && String(i.qty).trim() !== '' ? String(i.qty).trim() : '';
+          recipeQty = scaleQtyForPlanner(r.id, recipeQty);
           var prep = i.prep ? ' — ' + i.prep : '';
           var recipeQtyDisplay = (recipeQty + prep) || '—';
           var defaultZone = storage.resolveDefaultZone(i.item);
@@ -583,22 +612,49 @@
       });
     }
 
-    function open() {
+    function open(options) {
+      options = options || {};
       editingZones = false;
       normalizeIncludedOverrides();
+      updatePlannerBanner();
       renderOrderListBody();
       var el = document.getElementById(overlayId);
       if (el) {
         el.classList.add('open');
+        if (openedFromPlanner || options.fromPlanner) {
+          el.classList.add('modal-overlay--planner-child');
+        }
         document.body.style.overflow = 'hidden';
       }
     }
 
     function close() {
-      recipeIdFilter = null;
+      var wasPlanner = openedFromPlanner;
+      if (wasPlanner && window.KuschiOverlayStack && typeof window.KuschiOverlayStack.pop === 'function') {
+        window.KuschiOverlayStack.pop();
+      }
       var el = document.getElementById(overlayId);
-      if (el) el.classList.remove('open');
+      if (el) {
+        el.classList.remove('open');
+        el.classList.remove('modal-overlay--planner-child');
+      }
+      recipeIdFilter = null;
+      plannerContext = null;
+      openedFromPlanner = false;
+      updatePlannerBanner();
       if (shouldReleaseBodyScroll()) document.body.style.overflow = '';
+    }
+
+    function setPlannerContext(ctx) {
+      plannerContext = ctx || null;
+      openedFromPlanner = !!(ctx && ctx.fromPlanner);
+      updatePlannerBanner();
+    }
+
+    function clearPlannerContext() {
+      plannerContext = null;
+      openedFromPlanner = false;
+      updatePlannerBanner();
     }
 
     function setRecipeIdFilter(ids) {
@@ -705,6 +761,8 @@
       setRecipeIdFilter: setRecipeIdFilter,
       clearRecipeIdFilter: clearRecipeIdFilter,
       buildFromRecipeIds: buildFromRecipeIds,
+      setPlannerContext: setPlannerContext,
+      clearPlannerContext: clearPlannerContext,
     };
   }
 

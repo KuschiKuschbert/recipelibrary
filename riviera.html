@@ -778,6 +778,8 @@
       <button type="button" class="btn-secondary" id="plannerPrepBoard">Prep board</button>
     </div>
     <div class="planner-list__body" id="plannerListBody"></div>
+    <div id="plannerPrintRoot" class="planner-print-root" aria-hidden="true"></div>
+    <div id="plannerCopyToast" class="planner-copy-toast" role="status" aria-live="polite"></div>
   </div>
 </div>
 
@@ -814,6 +816,7 @@
   <div class="modal order-list-modal">
     <button type="button" class="modal-close" onclick="closeOrderListModal()">✕</button>
     <div class="modal-title" style="margin-bottom:12px">Order list by storage</div>
+    <p id="orderListPlannerBanner" class="order-list-planner-banner" hidden></p>
     <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Grouped as Freezer, Cold room, Dry store, then Other. The same ingredient name is merged into one row even when recipes use different storage; the row sits under the most common zone. Use <strong>Edit storage zones</strong> when you need to move lines between areas.</p>
     <div id="orderListBody"></div>
     <div class="modal-section" style="margin-top:20px">Add ingredient</div>
@@ -992,6 +995,8 @@
 <script src="assets/riviera-order-override-remap-v2.js"></script>
 <script src="assets/user-recipes.js"></script>
 <script src="assets/prep-list.js"></script>
+<script src="assets/overlay-stack.js"></script>
+<script src="assets/planner-scale.js"></script>
 <script src="assets/package-planner.js"></script>
 <script src="assets/package-prep-sheet.js"></script>
 <script src="assets/kuschi-recipe-ui.js"></script>
@@ -1302,6 +1307,8 @@ function ensureRivieraOrderList() {
   }
   return rivieraOrderList;
 }
+window.ensureRivieraOrderList = ensureRivieraOrderList;
+window.loadRivieraOrderListScript = loadRivieraOrderListScript;
 window.__RIVIERA_STOCKTAKE_CATALOG_URL = siteBaseUrl() + '/riviera_data/stocktake_catalog.json';
 
 function withRivieraStocktakeList(callback) {
@@ -1390,6 +1397,7 @@ function initRivieraPrepList() {
 function openPrepModal() {
   if (rivieraPrepList) rivieraPrepList.open();
 }
+window.openPrepModal = openPrepModal;
 function closePrepModal() {
   if (rivieraPrepList) rivieraPrepList.close();
 }
@@ -1426,6 +1434,8 @@ function openOrderListModal() {
     .then(function () {
       var ol = ensureRivieraOrderList();
       if (ol) {
+        if (typeof ol.clearPlannerContext === 'function') ol.clearPlannerContext();
+        if (typeof ol.clearRecipeIdFilter === 'function') ol.clearRecipeIdFilter();
         ol.open();
         syncRivieraOrderListZoneEditButton();
       }

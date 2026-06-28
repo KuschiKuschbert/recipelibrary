@@ -100,23 +100,15 @@
   }
 
   function loadPlannerData() {
-    if (!_dataPromise) {
-      _dataPromise = Promise.all([
-        Promise.all(
-          VARIANT_URLS.map(function (path) {
-            return fetchJson(path).catch(function () {
-              return { service_variants: {} };
-            });
-          })
-        ).then(mergeVariantPayloads),
-        fetchJson('riviera_data/canonical_recipe_aliases.json').catch(function () {
-          return { recipe_id_redirects: {} };
-        }),
-      ]).then(function (pair) {
-        _variants = pair[0];
-        _aliases = pair[1];
-        return { variants: _variants, aliases: _aliases };
+    if (window.KuschiPlannerScale && typeof window.KuschiPlannerScale.loadServiceData === 'function') {
+      return window.KuschiPlannerScale.loadServiceData().then(function (d) {
+        _variants = d.variants;
+        _aliases = d.aliases;
+        return d;
       });
+    }
+    if (!_dataPromise) {
+      _dataPromise = Promise.resolve({ variants: {}, aliases: { recipe_id_redirects: {} } });
     }
     return _dataPromise;
   }
@@ -140,24 +132,16 @@
   }
 
   function parseYieldNum(y) {
+    var S = window.KuschiPlannerScale;
+    if (S) return S.parseYieldNum(y);
     var m = String(y || '').match(/[\d.]+/);
     return m ? parseFloat(m[0]) : 1;
   }
 
   function scaleQtyStr(qtyStr, factor) {
-    if (!qtyStr || factor === 1) return qtyStr || '';
-    var fracMap = { '½': 0.5, '¼': 0.25, '¾': 0.75, '⅓': 0.333, '⅔': 0.667 };
-    var str = String(qtyStr).trim();
-    Object.keys(fracMap).forEach(function (sym) {
-      str = str.split(sym).join(String(fracMap[sym]));
-    });
-    var m = str.match(/^([\d.]+)(.*)/);
-    if (!m) return qtyStr;
-    var num = parseFloat(m[1]);
-    var rest = m[2];
-    var scaled = num * factor;
-    var display = scaled % 1 === 0 ? String(scaled) : parseFloat(scaled.toFixed(2)).toString();
-    return display + rest;
+    var S = window.KuschiPlannerScale;
+    if (S) return S.scaleQtyStr(qtyStr, factor);
+    return qtyStr || '';
   }
 
   function serviceKeyFromStyle(style) {
@@ -166,26 +150,9 @@
   }
 
   function scaleFactorForRecipe(recipe, pax, style, variants, aliases) {
-    variants = variants || _variants;
-    aliases = aliases || _aliases;
-    var canonicalId = resolveRecipeId(recipe.id, aliases);
-    var svcKey = serviceKeyFromStyle(style);
-    var group = variants && variants.service_variants && variants.service_variants[canonicalId];
-    if (group) {
-      var rec = group[svcKey];
-      if (rec && rec.status !== 'not_recommended') {
-        var buffer = firstNum(rec.production_buffer_multiplier) || 1;
-        var ppg = firstNum(rec.production_pieces_per_guest) || firstNum(rec.pieces_per_guest);
-        var basePieces =
-          firstNum(group.base_prep && group.base_prep.base_yield_pieces) || parseYieldNum(recipe.yield);
-        if (ppg && basePieces && pax) {
-          return (pax * ppg * buffer) / basePieces;
-        }
-      }
-    }
-    var base = parseYieldNum(recipe.yield);
-    if (!base || base <= 0) base = 1;
-    return pax / base;
+    var S = window.KuschiPlannerScale;
+    if (S) return S.scaleFactorForRecipe(recipe, pax, style, variants || _variants, aliases || _aliases);
+    return pax / parseYieldNum(recipe && recipe.yield);
   }
 
   function scaledIngredients(recipe, factor) {
@@ -449,14 +416,58 @@
     return parts.join('\n').trim();
   }
 
-  function copyText(text) {
+  function copyText(text, toastMsg) {
+    var done = function () {
+      showCopyToast(toastMsg || 'Copied to clipboard');
+    };
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).catch(function () {
+      navigator.clipboard.writeText(text).then(done).catch(function () {
         fallbackCopy(text);
+        done();
       });
     } else {
       fallbackCopy(text);
+      done();
     }
+  }
+
+  function showCopyToast(msg) {
+    var t = document.getElementById('plannerCopyToast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('planner-copy-toast--show');
+    setTimeout(function () {
+      t.classList.remove('planner-copy-toast--show');
+    }, 2200);
+  }
+
+  function populatePrintRoot() {
+    var root = document.getElementById('plannerPrintRoot');
+    if (!root || !_built || !_payload) return;
+    var html = '<div class="planner-print-doc">';
+    html += '<h1>' + esc(_payload.eventLabel + ' · ' + _payload.sectionLabel + ' · ' + _payload.pax + ' covers') + '</h1>';
+    html += '<h2>Menu</h2><pre>' + esc(_built.manifest) + '</pre>';
+    html += '<h2>Prep timeline</h2><pre>' + esc(_built.timelineText) + '</pre>';
+    html += '<h2>Shopping</h2>';
+    var zoneLabels = { freezer: 'Freezer', coldroom: 'Cold room', drystore: 'Dry store', other: 'Other' };
+    ['freezer', 'coldroom', 'drystore', 'other'].forEach(function (z) {
+      var rows = _built.merged[z] || [];
+      if (!rows.length) return;
+      html += '<h3>' + esc(zoneLabels[z]) + '</h3><ul>';
+      rows.forEach(function (row) {
+        html += '<li>' + esc(row.qty + ' · ' + row.item) + '</li>';
+      });
+      html += '</ul>';
+    });
+    html += '</div>';
+    root.innerHTML = html;
+  }
+
+  function planIdFromPayload(payload) {
+    if (!payload) return '';
+    return [payload.eventId, payload.sectionId, payload.pax, (payload.recipeIds || []).join(',')]
+      .join('::')
+      .slice(0, 120);
   }
 
   function fallbackCopy(text) {
@@ -611,6 +622,7 @@
 
   function buildFromPayload(payload) {
     _payload = payload;
+    _payload.planId = planIdFromPayload(payload);
     _activeTab = 'timeline';
     var timeline = buildPrepTimeline(payload);
     var merged = mergeIngredients(payload);
@@ -622,6 +634,7 @@
       fullText: buildFullDocument(payload, timeline, merged),
       timelineText: buildTimelineText(timeline),
     };
+    populatePrintRoot();
 
     var title = document.getElementById('plannerListTitle');
     if (title) {
@@ -656,20 +669,29 @@
   function openOrderListSubset() {
     if (!_payload || !_payload.recipeIds || !_payload.recipeIds.length) return;
     var ids = _payload.recipeIds;
-    function run() {
-      if (window.KuschiOrderList && typeof window.KuschiOrderList.create === 'function') {
-        var ol = window.rivieraOrderList;
-        if (!ol && typeof ensureRivieraOrderList === 'function') {
-          ol = ensureRivieraOrderList();
-        }
-        if (ol && typeof ol.setRecipeIdFilter === 'function') {
-          ol.setRecipeIdFilter(ids);
-          ol.open();
-        }
-      }
+    var scaleMap = {};
+    if (window.KuschiPlannerScale && typeof window.KuschiPlannerScale.buildScaleMapFromPayload === 'function') {
+      scaleMap = window.KuschiPlannerScale.buildScaleMapFromPayload(_payload);
     }
-    if (typeof loadRivieraOrderListScript === 'function') {
-      loadRivieraOrderListScript().then(run).catch(run);
+    var ctx = {
+      fromPlanner: true,
+      label: _payload.eventLabel + ' · ' + _payload.sectionLabel,
+      pax: _payload.pax,
+      recipeCount: ids.length,
+      scaleMap: scaleMap,
+    };
+    function run() {
+      var ol = window.rivieraOrderList;
+      if (!ol && window.ensureRivieraOrderList) ol = window.ensureRivieraOrderList();
+      if (!ol || typeof ol.setRecipeIdFilter !== 'function') return;
+      if (window.KuschiOverlayStack) window.KuschiOverlayStack.push(['plannerListOverlay']);
+      ol.setPlannerContext(ctx);
+      ol.setRecipeIdFilter(ids);
+      ol.open({ fromPlanner: true });
+    }
+    var loadFn = window.loadRivieraOrderListScript;
+    if (typeof loadFn === 'function') {
+      loadFn().then(run).catch(run);
     } else {
       run();
     }
@@ -684,12 +706,27 @@
         priority: PHASE_PRIORITY[r.phase] || 'medium',
       };
     });
-    if (window.rivieraPrepList && typeof window.rivieraPrepList.importTasks === 'function') {
-      window.rivieraPrepList.importTasks(tasks);
-      if (typeof openPrepModal === 'function') openPrepModal();
+    var prep = window.rivieraPrepList;
+    if (!prep || typeof prep.importTasks !== 'function') {
+      alert('Prep board not ready — refresh and try again.');
       return;
     }
-    alert('Prep board not ready — refresh and try again.');
+    var existing = typeof prep.getTaskCount === 'function' ? prep.getTaskCount() : 0;
+    var mode = 'append';
+    if (existing > 0) {
+      mode = confirm(
+        'Replace all ' +
+          existing +
+          ' prep tasks with this planner timeline?\n\nOK = Replace\nCancel = Append ' +
+          tasks.length +
+          ' tasks'
+      )
+        ? 'replace'
+        : 'append';
+    }
+    prep.importTasks(tasks, { mode: mode, planId: _payload && _payload.planId });
+    if (window.KuschiOverlayStack) window.KuschiOverlayStack.push(['plannerListOverlay']);
+    prep.open({ fromPlanner: true });
   }
 
   function bindControls() {
@@ -709,13 +746,13 @@
     var copyAll = document.getElementById('plannerCopyAll');
     if (copyAll) {
       copyAll.addEventListener('click', function () {
-        if (_built) copyText(_built.fullText);
+        if (_built) copyText(_built.fullText, 'Full planner list copied');
       });
     }
     var copyTimeline = document.getElementById('plannerCopyTimeline');
     if (copyTimeline) {
       copyTimeline.addEventListener('click', function () {
-        if (_built) copyText(_built.timelineText);
+        if (_built) copyText(_built.timelineText, 'Timeline copied');
       });
     }
     var printBtn = document.getElementById('plannerPrint');
