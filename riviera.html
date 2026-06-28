@@ -2181,9 +2181,15 @@ void bootstrapRivieraRecipeData();
           return '<span class="pkgs-item__tag pkgs-item__tag--' + cls + '">' + _esc(t) + '</span>';
         }).join('') + '</span>' : '';
         var safeSearch = _esc(item.search).replace(/'/g, '&#39;');
+        var safeRecipeId = _esc(item.recipeId || '').replace(/'/g, '&#39;');
         var safeName = _esc(item.name).replace(/'/g, '&#39;');
-        html += '<button type="button" class="pkgs-item" onclick="window._pkgBrowser.searchDish(\'' + safeSearch + '\',this)" title="Search: ' + safeName + '">' +
-          _esc(item.name) + tagHtml + '</button>';
+        // Indicate whether a real recipe is linked (shows a tiny recipe icon)
+        var hasRecipe = item.recipeId ? ' pkgs-item--linked' : '';
+        var recipeHint = item.recipeId
+          ? '<span class="pkgs-item__recipe-icon" title="Opens real recipe with quantities" aria-hidden="true">&#9654;</span>'
+          : '';
+        html += '<button type="button" class="pkgs-item' + hasRecipe + '" onclick="window._pkgBrowser.searchDish(\'' + safeSearch + '\',this,\'' + safeRecipeId + '\')" title="' + safeName + '">' +
+          _esc(item.name) + recipeHint + tagHtml + '</button>';
       });
       html += '</div></div>';
     });
@@ -2191,13 +2197,23 @@ void bootstrapRivieraRecipeData();
     document.getElementById('pkgsContent').innerHTML = html;
   }
 
-  function searchDish(term, btn) {
+  function searchDish(term, btn, recipeId) {
     // Highlight the tapped item
     document.querySelectorAll('.pkgs-item').forEach(function (el) { el.classList.remove('pkgs-item--active'); });
     if (btn) btn.classList.add('pkgs-item--active');
     _activeItem = term;
 
-    // Fill the search box and trigger filter
+    // Prefer opening the real recipe modal directly
+    if (recipeId && typeof openRecipe === 'function') {
+      var recipe = RECIPES.find(function (r) { return r.id === recipeId; });
+      if (recipe) {
+        openRecipe(recipeId);
+        document.getElementById('pkgsClear').removeAttribute('hidden');
+        return;
+      }
+    }
+
+    // Fallback: fill the search box and filter the recipe list
     var searchEl = document.getElementById('search');
     if (searchEl) {
       searchEl.value = term;

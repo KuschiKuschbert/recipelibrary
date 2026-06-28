@@ -3244,3 +3244,18 @@ button, a, select, input, [role="button"] {
 .page-about__body p:last-child { margin: 0; }
 .page-about__body strong { color: var(--text2); font-weight: 600; }
 .page-about__body em { color: var(--text2); }
+
+/* Package browser: linked items have a subtle indicator */
+.pkgs-item--linked {
+  border-color: rgba(201,169,110,0.2);
+}
+.pkgs-item--linked:hover {
+  border-color: var(--gold);
+}
+.pkgs-item__recipe-icon {
+  font-size: 8px;
+  opacity: 0.5;
+  vertical-align: super;
+  margin-left: 3px;
+  color: var(--gold);
+}
