@@ -1,5 +1,5 @@
 {
-  "version": "2026-06-04-v3",
+  "version": "2026-06-28-v4",
   "status": "active_canonical_alias_map",
   "purpose": "Single source of truth for Riviera recipe naming where the same kitchen recipe appears under multiple menu names.",
   "canonical_recipes": {
@@ -15,6 +15,8 @@
       ],
       "aliases": [
         "polpette",
+        "polpette balls",
+        "polpette tapas",
         "meatballs",
         "veal meatballs",
         "beef meatballs",
@@ -30,11 +32,92 @@
       "cocktail_size_rule": "60 g pre-crumb is the normal cocktail standard. 80 g is substantial canape only if explicitly requested.",
       "duplicate_rule": "Do not use beef-polpette-canape or slow-cooked-beef-albondigas-buffet as separate active recipes. They are older service-format drafts and should redirect to the canonical Polpette recipe.",
       "notes": [
-        "Do not create separate active recipes for meatballs, albondigas and polpette without a deliberate menu decision.",
-        "Older DOCX wording may use veal meatballs or albondigas. Treat those as aliases, not separate production recipes.",
-        "The GitHub expansion draft beef-polpette-canape is not a separate production recipe; use the canonical 60 g Polpette standard instead.",
-        "The GitHub expansion draft slow-cooked-beef-albondigas-buffet is a buffet service wording/variant, not a separate production recipe."
+        "Do not create separate active recipes for meatballs, albondigas and polpette without a deliberate menu decision."
       ]
+    },
+    "arancini": {
+      "canonical_id": "arancini",
+      "canonical_name": "Chorizo & Mozzarella Arancini",
+      "aliases": [
+        "arancini",
+        "chorizo mozzarella arancini balls",
+        "chorizo mozzarella arancini tapas"
+      ],
+      "service_rule": "Workbook starter names map to the canonical arancini built-in."
+    },
+    "chicken-skewer": {
+      "canonical_id": "chicken-skewer",
+      "canonical_name": "Lemon Pepper Chicken Skewer",
+      "aliases": [
+        "limoncello chicken skewers",
+        "limoncello chicken skewers tapas",
+        "zesty chicken skewer"
+      ],
+      "service_rule": "Workbook Limoncello skewer cards map to chicken-skewer."
+    },
+    "beef-bourguignon": {
+      "canonical_id": "beef-bourguignon",
+      "canonical_name": "Beef Bourguignon",
+      "aliases": [
+        "beef bourguignon",
+        "beef burgignon"
+      ],
+      "service_rule": "Workbook Chef Selection typo (Burgignon) maps here — ignore the simplified pulled-beef costing stub on that card."
+    },
+    "house-scones": {
+      "canonical_id": "house-scones",
+      "canonical_name": "House Scones",
+      "aliases": [
+        "house scone platter",
+        "house baked scones platter"
+      ],
+      "service_rule": "Batch bake card; use platter-scones-chantilly-jam for the served platter format."
+    },
+    "platter-scones": {
+      "canonical_id": "platter-scones-chantilly-jam",
+      "canonical_name": "House Baked Scones Platter",
+      "aliases": [
+        "house scone platter",
+        "freshly baked scones platter"
+      ],
+      "service_rule": "Service platter format with jam and chantilly."
+    },
+    "fillet-beef": {
+      "canonical_id": "fillet-beef-tempranillo",
+      "canonical_name": "Fillet of Beef with Tempranillo Reduction",
+      "aliases": [
+        "eye fillet",
+        "fillet of beef"
+      ],
+      "service_rule": "Eye fillet steak mains map here; rib fillet 300 g is a separate recipe."
+    },
+    "margherita-pizza": {
+      "canonical_id": "margherita-pizza",
+      "canonical_name": "Margherita Pizza",
+      "aliases": [
+        "margareta",
+        "margherita",
+        "margherita pizza"
+      ],
+      "service_rule": "Workbook Pizzas tab spelling (Margareta)."
+    },
+    "cannellini-beans": {
+      "canonical_id": "cannellini-beans-pancetta-asparagus",
+      "canonical_name": "Cannellini Beans with Pancetta & Asparagus",
+      "aliases": [
+        "cannelini beans with charred asparagud and lemon",
+        "cannellini beans with charred asparagus and lemon"
+      ],
+      "service_rule": "Workbook Italian Long Lunch tab (typo: asparagud)."
+    },
+    "sweet-potato-topper": {
+      "canonical_id": "sweet-potato-topper",
+      "canonical_name": "Sweet Potato Topper",
+      "aliases": [
+        "the other topper",
+        "sweet potato topper"
+      ],
+      "service_rule": "Workbook Toppers tab."
     }
   },
   "recipe_id_redirects": {
@@ -43,6 +126,8 @@
   },
   "alias_to_canonical": {
     "polpette": "polpette",
+    "polpette balls": "polpette",
+    "polpette tapas": "polpette",
     "meatballs": "polpette",
     "veal meatballs": "polpette",
     "beef meatballs": "polpette",
@@ -52,6 +137,26 @@
     "slow cooked beef albondigas": "polpette",
     "slow cooked beef albondigas buffet": "polpette",
     "spanish meatballs": "polpette",
-    "beef polpette": "polpette"
+    "beef polpette": "polpette",
+    "arancini": "arancini",
+    "chorizo mozzarella arancini balls": "arancini",
+    "chorizo mozzarella arancini tapas": "arancini",
+    "limoncello chicken skewers": "chicken-skewer",
+    "limoncello chicken skewers tapas": "chicken-skewer",
+    "zesty chicken skewer": "chicken-skewer",
+    "beef bourguignon": "beef-bourguignon",
+    "beef burgignon": "beef-bourguignon",
+    "house scone platter": "platter-scones",
+    "house baked scones platter": "platter-scones",
+    "freshly baked scones platter": "platter-scones",
+    "eye fillet": "fillet-beef",
+    "fillet of beef": "fillet-beef",
+    "margareta": "margherita-pizza",
+    "margherita": "margherita-pizza",
+    "margherita pizza": "margherita-pizza",
+    "cannelini beans with charred asparagud and lemon": "cannellini-beans",
+    "cannellini beans with charred asparagus and lemon": "cannellini-beans",
+    "the other topper": "sweet-potato-topper",
+    "sweet potato topper": "sweet-potato-topper"
   }
 }

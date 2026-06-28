@@ -27,8 +27,9 @@ CATERING_DISH_TABS = {
     "Kids Meals", "Desserts",
 }
 SKIP_NAMES = {
-    "the riviera", "sp", "menu item", "beef thingamajigs", "pork thingies",
-    "kburger", "ksteak", "flap flaps", "chicken tiddies",
+    "the riviera", "sp", "menu item",
+    "beef thingamajigs", "pork thingies", "kburger", "ksteak",
+    "flap flaps", "chicken tiddies", "hot dogs", "brownie", "blondie",
 }
 
 
@@ -122,7 +123,7 @@ def main() -> None:
         seen: set[str] = set()
         for dish in dish_names:
             key = norm(dish)
-            if key in seen:
+            if key in seen or key in SKIP_NAMES:
                 continue
             seen.add(key)
             rid = match_dish(dish, names, name_to_id)
