@@ -748,6 +748,9 @@
       <label class="fn-planner__pax-label">Covers
         <input type="number" class="fn-planner__pax-input" id="fnPlannerPax" min="1" step="1" value="100" inputmode="numeric">
       </label>
+      <label class="fn-planner__date-label">Event date
+        <input type="date" class="fn-planner__date-input" id="fnPlannerEventDate">
+      </label>
       <button type="button" class="btn-primary fn-planner__generate" id="fnPlannerGenerate" disabled>Generate Full Planner List</button>
     </div>
     <div class="fn-planner__body" id="fnPlannerBody"></div>
@@ -771,6 +774,9 @@
       <button type="button" class="planner-list-tab" data-tab="recipes">Recipes</button>
     </div>
     <div class="planner-list__actions">
+      <label class="planner-list__print-opt">
+        <input type="checkbox" id="plannerPrintIncludeRecipes"> Include recipes
+      </label>
       <button type="button" class="btn-secondary" id="plannerCopyAll">Copy all</button>
       <button type="button" class="btn-secondary" id="plannerCopyTimeline">Copy timeline</button>
       <button type="button" class="btn-secondary" id="plannerPrint">Print</button>

@@ -89,8 +89,10 @@
   }
 
   function parseYieldNum(y) {
-    var m = String(y || '').match(/[\d.]+/);
-    return m ? parseFloat(m[0]) : 1;
+    var m = String(y || '').match(/\d[\d.]*/);
+    if (!m) return 1;
+    var n = parseFloat(m[0]);
+    return !isNaN(n) && n > 0 ? n : 1;
   }
 
   function firstNum(v) {
