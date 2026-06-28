@@ -201,7 +201,11 @@ def main():
                 for item in course.get("items", []):
                     item_name = item.get("name", "")
                     search = item.get("search", "")
-                    recipe_id = match_dish(item_name, search)
+                    linked_id = item.get("recipeId")
+                    if linked_id and linked_id in builtin_ids:
+                        recipe_id = linked_id
+                    else:
+                        recipe_id = match_dish(item_name, search)
 
                     entry = {
                         "event": pkg["label"],
@@ -210,6 +214,7 @@ def main():
                         "item_name": item_name,
                         "search": search,
                         "recipe_id": recipe_id,
+                        "linked_recipe_id": linked_id,
                         "matched": recipe_id is not None,
                         "recipe_name": builtin_by_id[recipe_id]["name"] if recipe_id else None,
                     }

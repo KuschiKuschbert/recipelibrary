@@ -980,6 +980,20 @@ function computeBuiltinRecipesMetric(builtins) {
   });
 }
 
+function rivieraSyncUrl(mutator, mode) {
+  try {
+    var params = new URLSearchParams(window.location.search);
+    mutator(params);
+    var qs = params.toString();
+    var url = window.location.pathname + (qs ? '?' + qs : '');
+    if (mode === 'push') {
+      history.pushState({ kuschiOpen: params.get('open') || null }, '', url);
+    } else {
+      history.replaceState({}, '', url);
+    }
+  } catch (_) {}
+}
+
 function finishRivieraBuiltinHydrate() {
   /* Yield one frame so "Loading…" can paint before filter DOM + full grid innerHTML. */
   function run() {
@@ -988,6 +1002,9 @@ function finishRivieraBuiltinHydrate() {
     filtered = [...RECIPES];
     populateFilters();
     applyFilters();
+    if (window._pkgBrowser && window._pkgBrowser.tryDeepLink) {
+      window._pkgBrowser.tryDeepLink();
+    }
   }
   if (typeof requestAnimationFrame === 'function') {
     requestAnimationFrame(function () {
@@ -1814,10 +1831,15 @@ function rivieraModalPerfEnabled() {
   }
 }
 
-function openRecipe(id) {
+function openRecipe(id, options) {
   const r = RECIPES.find(x => x.id === id);
   if (!r) return;
   currentRecipe = r;
+
+  if (!options || !options.skipUrl) {
+    var urlMode = (options && options.replaceUrl) ? 'replace' : 'push';
+    rivieraSyncUrl(function (p) { p.set('open', id); }, urlMode);
+  }
 
   const overlay = document.getElementById('modalOverlay');
   const modal = document.getElementById('modal');
@@ -2014,7 +2036,10 @@ function rescale(val, options) {
 
 function closeModal() {
   document.getElementById('modalOverlay').classList.remove('open', 'cook-mode');
-  if (window.KuschiCookMode) { KuschiCookMode.popOpen(); KuschiCookMode.cleanup(); }
+  if (window.KuschiCookMode) {
+    rivieraSyncUrl(function (p) { p.delete('open'); }, 'replace');
+    KuschiCookMode.cleanup();
+  }
   if (!document.getElementById('orderListOverlay').classList.contains('open') &&
       !document.getElementById('stocktakeOverlay').classList.contains('open') &&
       !document.getElementById('prepOverlay').classList.contains('open') &&
@@ -2098,6 +2123,82 @@ void bootstrapRivieraRecipeData();
       });
   }
 
+  function _ensureBrowserOpen(cb) {
+    var el = document.getElementById('packageBrowser');
+    var btn = document.getElementById('pkgsToggle');
+    el.removeAttribute('hidden');
+    btn.classList.add('pkgs-toggle--active');
+    btn.setAttribute('aria-expanded', 'true');
+    _loadPackages(cb);
+  }
+
+  function _syncPkgUrl(opts) {
+    opts = opts || {};
+    rivieraSyncUrl(function (p) {
+      if (_activeEvent) p.set('pkg', _activeEvent);
+      else p.delete('pkg');
+      if (_activeSection) p.set('section', _activeSection);
+      else p.delete('section');
+      if (opts.open) p.set('open', opts.open);
+      else if (opts.clearOpen) p.delete('open');
+    }, opts.push ? 'push' : 'replace');
+  }
+
+  function _highlightByRecipeId(recipeId) {
+    if (!recipeId) return;
+    document.querySelectorAll('.pkgs-item').forEach(function (el) {
+      var linked = el.getAttribute('data-recipe-id') === recipeId;
+      el.classList.toggle('pkgs-item--active', linked);
+    });
+  }
+
+  function tryDeepLink() {
+    var params;
+    try { params = new URLSearchParams(window.location.search); } catch (_) { return; }
+    var pkgId = params.get('pkg');
+    var secId = params.get('section');
+    var recipeId = params.get('open');
+    if (!pkgId && !recipeId) return;
+
+    function openRecipeWhenReady() {
+      if (!recipeId || typeof openRecipe !== 'function') return;
+      if (!RECIPES.find(function (r) { return r.id === recipeId; })) return;
+      openRecipe(recipeId, { skipUrl: true, replaceUrl: true });
+    }
+
+    if (pkgId) {
+      _ensureBrowserOpen(function () {
+        if (!_activeEvent) renderEventTabs(_pkgData);
+        _activeEvent = pkgId;
+        document.querySelectorAll('.pkgs-event-tab').forEach(function (t) {
+          t.classList.toggle('pkgs-event-tab--active', t.getAttribute('data-pkg-id') === pkgId);
+        });
+        var pkg = _pkgData.packages.find(function (p) { return p.id === pkgId; });
+        if (!pkg) {
+          openRecipeWhenReady();
+          return;
+        }
+        renderSectionTabs(pkg);
+        var sec = secId
+          ? pkg.sections.find(function (s) { return s.id === secId; })
+          : pkg.sections[0];
+        if (sec) {
+          _activeSection = sec.id;
+          document.querySelectorAll('.pkgs-section-tab').forEach(function (t) {
+            t.classList.toggle('pkgs-section-tab--active', t.getAttribute('data-sec-id') === sec.id);
+          });
+          renderSection(sec);
+        }
+        _syncPkgUrl(recipeId ? { open: recipeId } : { clearOpen: true });
+        if (recipeId) _highlightByRecipeId(recipeId);
+        openRecipeWhenReady();
+      });
+      return;
+    }
+
+    openRecipeWhenReady();
+  }
+
   function togglePackageBrowser() {
     var el = document.getElementById('packageBrowser');
     var btn = document.getElementById('pkgsToggle');
@@ -2138,6 +2239,7 @@ void bootstrapRivieraRecipeData();
     renderSectionTabs(pkg);
     renderSection(pkg.sections[0]);
     _activeSection = pkg.sections[0].id;
+    _syncPkgUrl({ clearOpen: true });
   }
 
   function renderSectionTabs(pkg) {
@@ -2161,6 +2263,7 @@ void bootstrapRivieraRecipeData();
     if (!pkg) return;
     var sec = pkg.sections.find(function (s) { return s.id === secId; });
     if (sec) renderSection(sec);
+    _syncPkgUrl({ clearOpen: true });
   }
 
   function renderSection(sec) {
@@ -2188,7 +2291,7 @@ void bootstrapRivieraRecipeData();
         var recipeHint = item.recipeId
           ? '<span class="pkgs-item__recipe-icon" title="Opens real recipe with quantities" aria-hidden="true">&#9654;</span>'
           : '';
-        html += '<button type="button" class="pkgs-item' + hasRecipe + '" onclick="window._pkgBrowser.searchDish(\'' + safeSearch + '\',this,\'' + safeRecipeId + '\')" title="' + safeName + '">' +
+        html += '<button type="button" class="pkgs-item' + hasRecipe + '" data-recipe-id="' + safeRecipeId + '" onclick="window._pkgBrowser.searchDish(\'' + safeSearch + '\',this,\'' + safeRecipeId + '\')" title="' + safeName + '">' +
           _esc(item.name) + recipeHint + tagHtml + '</button>';
       });
       html += '</div></div>';
@@ -2207,7 +2310,8 @@ void bootstrapRivieraRecipeData();
     if (recipeId && typeof openRecipe === 'function') {
       var recipe = RECIPES.find(function (r) { return r.id === recipeId; });
       if (recipe) {
-        openRecipe(recipeId);
+        _syncPkgUrl({ open: recipeId, push: true });
+        openRecipe(recipeId, { skipUrl: true });
         document.getElementById('pkgsClear').removeAttribute('hidden');
         return;
       }
@@ -2249,6 +2353,7 @@ void bootstrapRivieraRecipeData();
     selectEvent: selectEvent,
     selectSection: selectSection,
     searchDish: searchDish,
+    tryDeepLink: tryDeepLink,
   };
 })();
 
