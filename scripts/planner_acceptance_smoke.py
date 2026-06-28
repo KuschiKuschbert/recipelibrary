@@ -8,6 +8,31 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+PACKAGES_PATH = ROOT / "riviera_data" / "function_packages.json"
+PLANNER_SECTIONS = frozenset(
+    {
+        "portofino",
+        "corporate_lunch",
+        "corporate_buffet",
+        "carvery_buffet",
+        "plated_meals",
+    }
+)
+
+
+def planner_recipe_ids() -> set[str]:
+    data = json.loads(PACKAGES_PATH.read_text(encoding="utf-8"))
+    ids: set[str] = set()
+    for pkg in data.get("packages", []):
+        for sec in pkg.get("sections", []):
+            if sec.get("id") not in PLANNER_SECTIONS:
+                continue
+            for course in sec.get("courses", []):
+                for item in course.get("items", []):
+                    rid = item.get("recipeId")
+                    if rid:
+                        ids.add(rid)
+    return ids
 
 
 def ok(msg: str) -> None:
@@ -50,29 +75,24 @@ def main() -> int:
         fail("sw.js not on v14")
 
     builtins = json.loads((ROOT / "riviera_data/builtins.json").read_text())
-    portofino_ids = {
-        "arancini",
-        "calamari",
-        "oysters-kilpatrick",
-        "veal-meatballs",
-        "chicken-skewer",
-        "chorizo-potatoes",
-        "lamb-cutlet",
-        "camembert-cigars",
-        "fish-slider",
-    }
     by_id = {r["id"]: r for r in builtins if isinstance(r, dict) and r.get("id")}
-    for rid in sorted(portofino_ids):
+    planner_ids = planner_recipe_ids()
+    ok(f"planner package recipes to check: {len(planner_ids)}")
+    missing_prep = []
+    for rid in sorted(planner_ids):
         r = by_id.get(rid)
         if not r:
             errors += 1
-            fail(f"builtins missing {rid}")
+            fail(f"builtins missing planner recipe {rid}")
             continue
-        if r.get("prepPhase") or r.get("prepPhases"):
-            ok(f"{rid} has prepPhase(s)")
-        else:
+        if not (r.get("prepPhase") or r.get("prepPhases")):
+            missing_prep.append(rid)
+    if missing_prep:
+        for rid in missing_prep:
             errors += 1
             fail(f"{rid} missing prepPhase/prepPhases")
+    else:
+        ok("all planner package recipes have prepPhase(s)")
 
     if "Scalable" in json.dumps(builtins):
         errors += 1
