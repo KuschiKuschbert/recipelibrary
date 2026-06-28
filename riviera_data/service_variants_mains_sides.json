@@ -201,6 +201,172 @@
         "service_rule": "Serve hot from baking dish or GN with crust intact.",
         "status": "confirmed"
       }
+    },
+    "roast-beef-thyme-garlic-carvery": {
+      "recipe_id": "roast-beef-thyme-garlic-carvery",
+      "buffet": {
+        "portion": "2–3 thick slices per guest (approx. 150–180 g)",
+        "status": "needs_confirmation"
+      },
+      "plated_main": {
+        "portion": "2 thick slices with jus and gremolata",
+        "status": "needs_confirmation"
+      }
+    },
+    "lemon-thyme-garlic-roast-chicken-carvery": {
+      "recipe_id": "lemon-thyme-garlic-roast-chicken-carvery",
+      "buffet": {
+        "portion": "2 pieces (breast + thigh) per guest approx. 150 g",
+        "status": "needs_confirmation"
+      },
+      "plated_main": {
+        "portion": "1 portion carved to plate with jus",
+        "status": "needs_confirmation"
+      }
+    },
+    "sicilian-roast-pork-apricot": {
+      "recipe_id": "sicilian-roast-pork-apricot",
+      "buffet": {
+        "portion": "2–3 slices per guest approx. 150 g with apricot compote",
+        "status": "needs_confirmation"
+      }
+    },
+    "sous-vide-pork-loin-apricot": {
+      "recipe_id": "sous-vide-pork-loin-apricot",
+      "plated_main": {
+        "portion": "180–200 g pork steak with 40–50 ml compote and pan jus",
+        "status": "needs_confirmation"
+      }
+    },
+    "herb-crusted-pork-cutlet-cider-mustard": {
+      "recipe_id": "herb-crusted-pork-cutlet-cider-mustard",
+      "plated_main": {
+        "portion": "1 pork cutlet with pomme purée and cider mustard cream",
+        "status": "needs_confirmation"
+      }
+    },
+    "greek-green-bean-salad": {
+      "recipe_id": "greek-green-bean-salad",
+      "buffet": {
+        "portion": "80–100 g per guest",
+        "status": "needs_confirmation"
+      },
+      "platter": {
+        "portion": "portion by guest count at 80–100 g each",
+        "status": "needs_confirmation"
+      }
+    },
+    "caesar-salad-buffet": {
+      "recipe_id": "caesar-salad-buffet",
+      "buffet": {
+        "portion": "80–100 g per guest — dress in small batches to maintain crispness",
+        "status": "needs_confirmation"
+      }
+    },
+    "honey-thyme-roasted-carrots-pistachio": {
+      "recipe_id": "honey-thyme-roasted-carrots-pistachio",
+      "buffet": {
+        "portion": "80–100 g per guest",
+        "status": "needs_confirmation"
+      },
+      "plated_main": {
+        "portion": "4–5 carrot halves fanned alongside the main",
+        "status": "needs_confirmation"
+      }
+    },
+    "mediterranean-rice-pilaf": {
+      "recipe_id": "mediterranean-rice-pilaf",
+      "buffet": {
+        "portion": "100–120 g per guest",
+        "status": "needs_confirmation"
+      }
+    },
+    "roast-root-veg-salad-cinnamon-maple": {
+      "recipe_id": "roast-root-veg-salad-cinnamon-maple",
+      "buffet": {
+        "portion": "100 g per guest — add cinnamon-maple nuts at service",
+        "status": "needs_confirmation"
+      }
+    },
+    "roast-pumpkin-pepita-salad-balsamic": {
+      "recipe_id": "roast-pumpkin-pepita-salad-balsamic",
+      "buffet": {
+        "portion": "80–100 g per guest",
+        "status": "needs_confirmation"
+      },
+      "platter": {
+        "portion": "portion by guest count at 80–100 g each",
+        "status": "needs_confirmation"
+      }
+    },
+    "roquette-parmesan-salad": {
+      "recipe_id": "roquette-parmesan-salad",
+      "plated_main": {
+        "portion": "40–50 g dressed and plated alongside main",
+        "status": "needs_confirmation"
+      },
+      "buffet": {
+        "portion": "40–50 g per guest — dress immediately before service",
+        "status": "needs_confirmation"
+      }
+    },
+    "french-green-beans-shallots-mustard": {
+      "recipe_id": "french-green-beans-shallots-mustard",
+      "plated_main": {
+        "portion": "60–80 g per guest",
+        "status": "needs_confirmation"
+      },
+      "buffet": {
+        "portion": "60–80 g per guest — scatter almonds at service",
+        "status": "needs_confirmation"
+      }
+    },
+    "creamy-potato-bake": {
+      "recipe_id": "creamy-potato-bake",
+      "buffet": {
+        "portion": "150 g per guest — pre-portion into squares",
+        "status": "needs_confirmation"
+      },
+      "platter": {
+        "portion": "portion by guest count at 150 g each",
+        "status": "needs_confirmation"
+      }
+    },
+    "garlic-lemon-potatoes": {
+      "recipe_id": "garlic-lemon-potatoes",
+      "buffet": {
+        "portion": "120 g per guest",
+        "status": "needs_confirmation"
+      }
+    },
+    "pork-italian-herb-sausages": {
+      "recipe_id": "pork-italian-herb-sausages",
+      "buffet": {
+        "portion": "2 sausages per guest — production 2.2 per guest",
+        "status": "needs_confirmation"
+      }
+    },
+    "burnt-butter-mash": {
+      "recipe_id": "burnt-butter-mash",
+      "plated_main": {
+        "portion": "150–180 g per guest quenelled or piped",
+        "status": "needs_confirmation"
+      },
+      "buffet": {
+        "portion": "150–180 g per guest — hold in bain marie at 75°C",
+        "status": "needs_confirmation"
+      }
+    },
+    "house-focaccia": {
+      "recipe_id": "house-focaccia",
+      "plated_main": {
+        "portion": "2–3 portions per guest for table bread service",
+        "status": "needs_confirmation"
+      },
+      "buffet": {
+        "portion": "2–3 portions per guest in lined bread baskets",
+        "status": "needs_confirmation"
+      }
     }
   }
 }
