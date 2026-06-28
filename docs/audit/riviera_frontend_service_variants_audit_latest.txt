@@ -7,6 +7,6 @@ Expected service variant files: 5
 - riviera_data/service_variants_corporate.json
 - riviera_data/service_variants_mains_sides.json
 - riviera_data/service_variant_source_overrides.json
-Service variant records visible to frontend audit: 81
+Service variant records visible to frontend audit: 99
 
 Frontend service variant file coverage: OK

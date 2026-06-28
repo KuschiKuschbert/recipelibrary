@@ -1,12 +1,12 @@
 RIVIERA RECIPE STANDARDS AUDIT
 ====================================
-Built-in recipes: 89
+Built-in recipes: 134
 Service variant files: 4
 - riviera_data/service_variants.json
 - riviera_data/service_variants_canapes.json
 - riviera_data/service_variants_corporate.json
 - riviera_data/service_variants_mains_sides.json
-Service variant records: 71
+Service variant records: 89
 Canonical recipe groups: 1
 Recipe redirects: 2
 Strict missing variant scope: service variants only
@@ -19,7 +19,35 @@ legacy/duplicate slow-cooked-beef-albondigas-buffet — Slow Cooked Beef Albondi
 
 SERVICE VARIANT STATUS REVIEW
 -----------------------------
-needs_confirmation: 0
+needs_confirmation: 28
+- roast-beef-thyme-garlic-carvery.buffet
+- roast-beef-thyme-garlic-carvery.plated_main
+- lemon-thyme-garlic-roast-chicken-carvery.buffet
+- lemon-thyme-garlic-roast-chicken-carvery.plated_main
+- sicilian-roast-pork-apricot.buffet
+- sous-vide-pork-loin-apricot.plated_main
+- herb-crusted-pork-cutlet-cider-mustard.plated_main
+- greek-green-bean-salad.buffet
+- greek-green-bean-salad.platter
+- caesar-salad-buffet.buffet
+- honey-thyme-roasted-carrots-pistachio.buffet
+- honey-thyme-roasted-carrots-pistachio.plated_main
+- mediterranean-rice-pilaf.buffet
+- roast-root-veg-salad-cinnamon-maple.buffet
+- roast-pumpkin-pepita-salad-balsamic.buffet
+- roast-pumpkin-pepita-salad-balsamic.platter
+- roquette-parmesan-salad.plated_main
+- roquette-parmesan-salad.buffet
+- french-green-beans-shallots-mustard.plated_main
+- french-green-beans-shallots-mustard.buffet
+- creamy-potato-bake.buffet
+- creamy-potato-bake.platter
+- garlic-lemon-potatoes.buffet
+- pork-italian-herb-sausages.buffet
+- burnt-butter-mash.plated_main
+- burnt-butter-mash.buffet
+- house-focaccia.plated_main
+- house-focaccia.buffet
 missing_status: 0
 not_recommended: 31
 - oysters-kilpatrick.buffet
@@ -57,4 +85,25 @@ not_recommended: 31
 ACTIVE FOOD RECIPES MISSING SERVICE VARIANTS
 -----------------------------------------------
 - house-scones: House Scones [Bakery] — yield: 12 regular · 40 small (high tea) per batch · scones box = 12 regular + jam + cream
+- benedictine-caramel-custard: Benedictine Caramel Custard [Dessert] — yield: 35 plated dessert serves — approx. 1.2–1.4 L finished custard
+- dinner-rolls-butter: Dinner Rolls & Butter [Bakery] — yield: 40 serves — 2 rolls per guest
+- house-baked-muffins: House Baked Muffins [Bakery] — yield: 40 muffins — 40 serves of 1 each, or 20 serves of 2
+- house-baked-sausage-rolls: House Baked Sausage Rolls [Platter] — yield: 40–48 pieces per platter — 20–24 serves of 2 each
+- beef-party-pies: Flaky Beef Party Pies [Platter] — yield: 48 pieces per platter — 24 serves of 2 each
+- mini-quiches-beetroot-balsamic: Mini Quiches with Beetroot Balsamic Relish [Platter] — yield: 48 pieces per platter — 24 serves of 2 each
+- beef-cheeseburger-sliders: Classic Beef Cheeseburger Sliders [Platter] — yield: 40 sliders — 20–40 serves depending on portion context
+- gourmet-pizza-scrolls: Gourmet Pizza Scrolls [Platter] — yield: 40 pieces
+- gourmet-brioche-sliders: Gourmet Brioche Sliders [Platter] — yield: 40 sliders
+- chilli-prawn-chorizo-casarecce: Chilli Prawn & Chorizo Casarecce [Canape] — yield: 40 substantial canapé serves
+- cotoletta-pinsa: Cotoletta Pinsa [Canape] — yield: 40 substantial canapé serves
+- maple-pumpkin-ravioli-burnt-butter: Maple Pumpkin Ravioli [Canape] — yield: 40 serves as canapé — 4 ravioli per serve; or 20 serves as an entrée
+- souvlaki-gyros-assembly: MYO Gyros Bar — Souvlaki Assembly [Buffet] — yield: 40 guests — each builds their own gyros
+- spiced-lamb-kofta-offsite: Spiced Lamb Kofta [Main] — yield: 40 serves — 2 kofta per guest
+- grilled-halloumi-plain: Grilled Halloumi [Main] — yield: 40 serves — 2 slices per guest
+- ribbon-sandwiches: Assorted Ribbon Sandwiches [Platter] — yield: 48 sandwich points (24 strips cut in half) — serves 12–16
+- sweet-petit-fours: Sweet Petit Fours [Bakery] — yield: 48 pieces — 12 serves of 4
+- spinach-feta-pastizzi-warm: Spinach & Feta Pastizzis with Tzatziki [Platter] — yield: 40–48 pieces
+- fruit-salad-yoghurt: Fruit Salad & Yoghurt [Corporate] — yield: 40 serves @ 150 g each
+- dessert-grazing-table-assembly: Dessert Grazing Table [Platter] — yield: 1 m table feeds 40 guests | 2 m table feeds 80–100 | 3 m table feeds 120–150
+- roving-tiramisu-cups: Roving Tiramisu Cups [Dessert] — yield: 40 individual 80–100 ml cups
 
