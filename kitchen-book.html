@@ -668,10 +668,11 @@ let kitchenBookPrepList = null;
 let allRecipes = [];
 let filtered = [];
 let currentRecipe = null;
-const IS_LOW_MEMORY_DEVICE = document.documentElement.classList.contains('low-memory-device');
-const SEARCH_DEBOUNCE_MS = IS_LOW_MEMORY_DEVICE ? 220 : 150;
-let scheduledFilterTimer = null;
-let scheduledFilterFrame = null;
+const filterScheduler = KuschiRecipeUi.createFilterScheduler({
+  run: applyFilters,
+  lowMemoryDelay: 220,
+  defaultDelay: 150,
+});
 
 function toArr(v) { return Array.isArray(v) ? v : []; }
 
@@ -968,51 +969,9 @@ function loadRecipes() {
   applyFilters();
 }
 
-function clearScheduledFilter() {
-  if (scheduledFilterTimer) {
-    clearTimeout(scheduledFilterTimer);
-    scheduledFilterTimer = null;
-  }
-  if (scheduledFilterFrame) {
-    if (typeof cancelAnimationFrame === 'function') {
-      cancelAnimationFrame(scheduledFilterFrame);
-    } else {
-      clearTimeout(scheduledFilterFrame);
-    }
-    scheduledFilterFrame = null;
-  }
-}
-
-function setFilterPending(pending) {
-  const bar = document.getElementById('resultsBar');
-  const meta = document.getElementById('resultsMeta');
-  if (!bar || !meta) return;
-  bar.classList.toggle('is-searching', !!pending);
-  meta.textContent = pending ? 'Searching...' : '';
-}
-
-function scheduleApplyFilters(opts) {
-  const options = opts || {};
-  clearScheduledFilter();
-  if (options.immediate) {
-    setFilterPending(false);
-    applyFilters();
-    return;
-  }
-  setFilterPending(true);
-  scheduledFilterTimer = setTimeout(() => {
-    scheduledFilterTimer = null;
-    const run = () => {
-      scheduledFilterFrame = null;
-      applyFilters();
-    };
-    if (typeof requestAnimationFrame === 'function') {
-      scheduledFilterFrame = requestAnimationFrame(run);
-    } else {
-      scheduledFilterFrame = setTimeout(run, 0);
-    }
-  }, options.delay == null ? SEARCH_DEBOUNCE_MS : options.delay);
-}
+function clearScheduledFilter() { filterScheduler.clear(); }
+function setFilterPending(pending) { filterScheduler.setPending(pending); }
+function scheduleApplyFilters(opts) { filterScheduler.schedule(opts); }
 
 function applyFilters() {
   clearScheduledFilter();

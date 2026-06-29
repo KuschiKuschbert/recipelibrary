@@ -713,7 +713,6 @@
 <script>
 const IS_LOW_MEMORY_DEVICE = document.documentElement.classList.contains('low-memory-device');
 const PAGE_SIZE = IS_LOW_MEMORY_DEVICE ? 36 : 48;
-const SEARCH_DEBOUNCE_MS = IS_LOW_MEMORY_DEVICE ? 240 : 160;
 const CATALOG_RERENDER_DELAY_MS = IS_LOW_MEMORY_DEVICE ? 140 : 0;
 let allRecipes = [];
 let filtered = [];
@@ -723,8 +722,16 @@ let kuschiDisplayCount = PAGE_SIZE;
 let currentRecipe = null;
 /** Last applyFilters timing so pagination re-renders can keep showing ms when enabled. */
 let lastFilterMs = '';
-let scheduledFilterTimer = null;
-let scheduledFilterFrame = null;
+const filterScheduler = KuschiRecipeUi.createFilterScheduler({
+  run: applyFilters,
+  lowMemoryDelay: 240,
+  defaultDelay: 160,
+  shouldShowPending: ({ bar }) => {
+    const showFilterMs =
+      typeof localStorage !== 'undefined' && localStorage.getItem('kuschiShowFilterMs') === '1';
+    return !showFilterMs && bar.classList.contains('visible');
+  },
+});
 
 // ── Data Loading ──────────────────────────────────────
 /** Origin + directory of the current page (works for /repo, /repo/, /repo/index.html). */
@@ -928,46 +935,8 @@ function haystackMatchesTerm(hay, t) {
   return false;
 }
 
-function clearScheduledFilter() {
-  if (scheduledFilterTimer) {
-    clearTimeout(scheduledFilterTimer);
-    scheduledFilterTimer = null;
-  }
-  if (scheduledFilterFrame) {
-    cancelAnimationFrame(scheduledFilterFrame);
-    scheduledFilterFrame = null;
-  }
-}
-
-function setFilterPending(pending) {
-  const bar = document.getElementById('resultsBar');
-  const meta = document.getElementById('resultsMeta');
-  if (!bar || !meta) return;
-  bar.classList.toggle('is-searching', !!pending);
-  const showFilterMs =
-    typeof localStorage !== 'undefined' && localStorage.getItem('kuschiShowFilterMs') === '1';
-  if (pending && !showFilterMs && bar.classList.contains('visible')) {
-    meta.textContent = 'Searching...';
-  }
-}
-
-function scheduleApplyFilters(opts) {
-  const options = opts || {};
-  clearScheduledFilter();
-  if (options.immediate) {
-    setFilterPending(false);
-    applyFilters();
-    return;
-  }
-  setFilterPending(true);
-  scheduledFilterTimer = setTimeout(() => {
-    scheduledFilterTimer = null;
-    scheduledFilterFrame = requestAnimationFrame(() => {
-      scheduledFilterFrame = null;
-      applyFilters();
-    });
-  }, options.delay == null ? SEARCH_DEBOUNCE_MS : options.delay);
-}
+function clearScheduledFilter() { filterScheduler.clear(); }
+function scheduleApplyFilters(opts) { filterScheduler.schedule(opts); }
 
 function applyFilters() {
   clearScheduledFilter();

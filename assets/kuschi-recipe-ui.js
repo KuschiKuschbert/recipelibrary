@@ -110,11 +110,91 @@
     if (sync) sync();
   }
 
+  function createFilterScheduler(opts) {
+    opts = opts || {};
+    var run = typeof opts.run === 'function' ? opts.run : function () {};
+    var doc = w.document;
+    var lowMemory =
+      doc && doc.documentElement && doc.documentElement.classList.contains('low-memory-device');
+    var delay =
+      opts.delay != null
+        ? opts.delay
+        : lowMemory
+          ? (opts.lowMemoryDelay != null ? opts.lowMemoryDelay : 220)
+          : (opts.defaultDelay != null ? opts.defaultDelay : 150);
+    var timer = null;
+    var frame = null;
+    var pendingText = opts.pendingText == null ? 'Searching...' : String(opts.pendingText);
+    var barId = opts.resultsBarId || 'resultsBar';
+    var metaId = opts.resultsMetaId || 'resultsMeta';
+
+    function clear() {
+      if (timer) {
+        w.clearTimeout(timer);
+        timer = null;
+      }
+      if (frame) {
+        if (typeof w.cancelAnimationFrame === 'function') {
+          w.cancelAnimationFrame(frame);
+        } else {
+          w.clearTimeout(frame);
+        }
+        frame = null;
+      }
+    }
+
+    function setPending(pending) {
+      var bar = doc && doc.getElementById(barId);
+      var meta = doc && doc.getElementById(metaId);
+      if (!bar || !meta) return;
+      bar.classList.toggle('is-searching', !!pending);
+      if (pending) {
+        var shouldShow =
+          typeof opts.shouldShowPending === 'function'
+            ? opts.shouldShowPending({ bar: bar, meta: meta })
+            : true;
+        if (shouldShow) meta.textContent = pendingText;
+      } else if (opts.clearPendingText !== false) {
+        meta.textContent = '';
+      }
+    }
+
+    function schedule(scheduleOpts) {
+      var options = scheduleOpts || {};
+      clear();
+      if (options.immediate) {
+        setPending(false);
+        run();
+        return;
+      }
+      setPending(true);
+      timer = w.setTimeout(function () {
+        timer = null;
+        var go = function () {
+          frame = null;
+          run();
+        };
+        if (typeof w.requestAnimationFrame === 'function') {
+          frame = w.requestAnimationFrame(go);
+        } else {
+          frame = w.setTimeout(go, 0);
+        }
+      }, options.delay == null ? delay : options.delay);
+    }
+
+    return {
+      clear: clear,
+      schedule: schedule,
+      setPending: setPending,
+    };
+  }
+
   w.KuschiRecipeUi = {
     esc: esc,
     copyText: copyText,
     toast: toast,
     bindSearchClear: bindSearchClear,
+    createFilterScheduler: createFilterScheduler,
     syncSearchClear: syncSearchClear,
     /**
      * @param {{ idSuffix?: string, openByDefault?: boolean, modalInline?: boolean }} [opts]
