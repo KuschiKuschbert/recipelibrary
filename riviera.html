@@ -893,7 +893,7 @@
 
 <div class="results-bar visible" id="resultsBar">
   <div class="results-count" id="resultsCount"><span>…</span> loading</div>
-  <div></div>
+  <div class="results-meta" id="resultsMeta"></div>
 </div>
 
 <div id="content"></div>
@@ -1316,6 +1316,10 @@ let RECIPES = mergeRivieraRecipes();
 let filtered = [...RECIPES];
 let rivieraRecipeIndex = { byId: new Map(), hayById: new Map(), version: 0 };
 let rivieraFilterMemo = { key: '', ids: [] };
+const IS_LOW_MEMORY_DEVICE = document.documentElement.classList.contains('low-memory-device');
+const SEARCH_DEBOUNCE_MS = IS_LOW_MEMORY_DEVICE ? 220 : 150;
+let scheduledFilterTimer = null;
+let scheduledFilterFrame = null;
 
 function rivieraText(value) {
   return String(value || '').toLowerCase();
@@ -1965,7 +1969,54 @@ function fillSelect(id, items, label) {
 
 
 // ── Filter & Search ───────────────────────────
+function clearScheduledFilter() {
+  if (scheduledFilterTimer) {
+    clearTimeout(scheduledFilterTimer);
+    scheduledFilterTimer = null;
+  }
+  if (scheduledFilterFrame) {
+    if (typeof cancelAnimationFrame === 'function') {
+      cancelAnimationFrame(scheduledFilterFrame);
+    } else {
+      clearTimeout(scheduledFilterFrame);
+    }
+    scheduledFilterFrame = null;
+  }
+}
+
+function setFilterPending(pending) {
+  const bar = document.getElementById('resultsBar');
+  const meta = document.getElementById('resultsMeta');
+  if (!bar || !meta) return;
+  bar.classList.toggle('is-searching', !!pending);
+  meta.textContent = pending ? 'Searching...' : '';
+}
+
+function scheduleApplyFilters(opts) {
+  const options = opts || {};
+  clearScheduledFilter();
+  if (options.immediate) {
+    setFilterPending(false);
+    applyFilters();
+    return;
+  }
+  setFilterPending(true);
+  scheduledFilterTimer = setTimeout(() => {
+    scheduledFilterTimer = null;
+    const run = () => {
+      scheduledFilterFrame = null;
+      applyFilters();
+    };
+    if (typeof requestAnimationFrame === 'function') {
+      scheduledFilterFrame = requestAnimationFrame(run);
+    } else {
+      scheduledFilterFrame = setTimeout(run, 0);
+    }
+  }, options.delay == null ? SEARCH_DEBOUNCE_MS : options.delay);
+}
+
 function applyFilters() {
+  clearScheduledFilter();
   const q = document.getElementById('search').value.toLowerCase().trim();
   const course = document.getElementById('filterCourse').value;
   const protein = document.getElementById('filterProtein').value;
@@ -2002,6 +2053,7 @@ function applyFilters() {
 }
 
 function render() {
+  setFilterPending(false);
   const count = filtered.length;
   document.getElementById('resultsCount').innerHTML = `<span>${count}</span> recipe${count !== 1 ? 's' : ''}`;
   document.getElementById('totalCount').textContent = count;
@@ -2344,14 +2396,16 @@ function closeModal() {
 }
 
 // ── Event listeners ───────────────────────────
-let debounce;
 document.getElementById('search').addEventListener('input', () => {
-  clearTimeout(debounce);
-  debounce = setTimeout(applyFilters, 180);
+  scheduleApplyFilters();
 });
-KuschiRecipeUi.bindSearchClear({ inputId: 'search', buttonId: 'searchClear', onClear: applyFilters });
+KuschiRecipeUi.bindSearchClear({
+  inputId: 'search',
+  buttonId: 'searchClear',
+  onClear: () => scheduleApplyFilters({ immediate: true }),
+});
 ['filterCourse','filterProtein','filterDiet'].forEach(id =>
-  document.getElementById(id).addEventListener('change', applyFilters)
+  document.getElementById(id).addEventListener('change', () => scheduleApplyFilters({ immediate: true }))
 );
 function resetRivieraSearchAndFilters() {
   document.getElementById('search').value = '';
@@ -2359,7 +2413,7 @@ function resetRivieraSearchAndFilters() {
     document.getElementById(id).value = ''
   );
   KuschiRecipeUi.syncSearchClear('search');
-  applyFilters();
+  scheduleApplyFilters({ immediate: true });
 }
 
 document.getElementById('clearBtn').addEventListener('click', resetRivieraSearchAndFilters);
@@ -2422,7 +2476,7 @@ KuschiFilterChips.init([
   { chipId: 'chipCourse',     selectId: 'filterCourse',  label: 'Course' },
   { chipId: 'chipRivProtein', selectId: 'filterProtein', label: 'Protein' },
   { chipId: 'chipDiet',       selectId: 'filterDiet',    label: 'Dietary' },
-], applyFilters);
+], () => scheduleApplyFilters({ immediate: true }));
 
 KuschiCookMode.bindRouting(openRecipe, closeModal);
 </script>

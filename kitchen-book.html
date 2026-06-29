@@ -455,8 +455,9 @@
   </div>
 </div>
 
-<div class="results-bar" id="resultsBar">
+<div class="results-bar visible" id="resultsBar">
   <div class="results-count" id="resultsCount"></div>
+  <div class="results-meta" id="resultsMeta"></div>
 </div>
 
 <div id="content"></div>
@@ -667,6 +668,10 @@ let kitchenBookPrepList = null;
 let allRecipes = [];
 let filtered = [];
 let currentRecipe = null;
+const IS_LOW_MEMORY_DEVICE = document.documentElement.classList.contains('low-memory-device');
+const SEARCH_DEBOUNCE_MS = IS_LOW_MEMORY_DEVICE ? 220 : 150;
+let scheduledFilterTimer = null;
+let scheduledFilterFrame = null;
 
 function toArr(v) { return Array.isArray(v) ? v : []; }
 
@@ -963,7 +968,54 @@ function loadRecipes() {
   applyFilters();
 }
 
+function clearScheduledFilter() {
+  if (scheduledFilterTimer) {
+    clearTimeout(scheduledFilterTimer);
+    scheduledFilterTimer = null;
+  }
+  if (scheduledFilterFrame) {
+    if (typeof cancelAnimationFrame === 'function') {
+      cancelAnimationFrame(scheduledFilterFrame);
+    } else {
+      clearTimeout(scheduledFilterFrame);
+    }
+    scheduledFilterFrame = null;
+  }
+}
+
+function setFilterPending(pending) {
+  const bar = document.getElementById('resultsBar');
+  const meta = document.getElementById('resultsMeta');
+  if (!bar || !meta) return;
+  bar.classList.toggle('is-searching', !!pending);
+  meta.textContent = pending ? 'Searching...' : '';
+}
+
+function scheduleApplyFilters(opts) {
+  const options = opts || {};
+  clearScheduledFilter();
+  if (options.immediate) {
+    setFilterPending(false);
+    applyFilters();
+    return;
+  }
+  setFilterPending(true);
+  scheduledFilterTimer = setTimeout(() => {
+    scheduledFilterTimer = null;
+    const run = () => {
+      scheduledFilterFrame = null;
+      applyFilters();
+    };
+    if (typeof requestAnimationFrame === 'function') {
+      scheduledFilterFrame = requestAnimationFrame(run);
+    } else {
+      scheduledFilterFrame = setTimeout(run, 0);
+    }
+  }, options.delay == null ? SEARCH_DEBOUNCE_MS : options.delay);
+}
+
 function applyFilters() {
+  clearScheduledFilter();
   const q = document.getElementById('search').value.toLowerCase().trim();
   const terms = q ? q.split(/\s+/) : [];
   filtered = allRecipes.filter(r => {
@@ -981,6 +1033,7 @@ function applyFilters() {
 }
 
 function render() {
+  setFilterPending(false);
   const content = document.getElementById('content');
   if (!filtered.length) {
     const hasSearch = !!document.getElementById('search').value.trim();
@@ -1038,19 +1091,21 @@ function copyName(btn, name) {
   });
 }
 
-let debounce;
 document.getElementById('search').addEventListener('input', () => {
-  clearTimeout(debounce);
-  debounce = setTimeout(applyFilters, 180);
+  scheduleApplyFilters();
 });
 
 function clearKitchenBookSearch() {
   document.getElementById('search').value = '';
   KuschiRecipeUi.syncSearchClear('search');
-  applyFilters();
+  scheduleApplyFilters({ immediate: true });
 }
 
-KuschiRecipeUi.bindSearchClear({ inputId: 'search', buttonId: 'searchClear', onClear: applyFilters });
+KuschiRecipeUi.bindSearchClear({
+  inputId: 'search',
+  buttonId: 'searchClear',
+  onClear: () => scheduleApplyFilters({ immediate: true }),
+});
 
 document.addEventListener('keydown', e => {
   if (e.key === '/' && !['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) {
