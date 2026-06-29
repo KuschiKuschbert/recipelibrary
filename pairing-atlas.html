@@ -37,6 +37,11 @@
     padding-left: env(safe-area-inset-left, 0px);
     padding-right: env(safe-area-inset-right, 0px);
   }
+  @media (min-width: 900px) and (orientation: landscape), (min-width: 1100px) {
+    body.pa-page.has-app-nav {
+      padding-left: calc(var(--nav-rail-width, 72px) + env(safe-area-inset-left, 0px));
+    }
+  }
   body.pa-page::before {
     content: "";
     position: fixed;
@@ -223,6 +228,9 @@
     vertical-align: middle;
   }
   .pa-mx-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
     color: var(--text);
     text-decoration: none;
   }
@@ -321,7 +329,8 @@
 
   .pa-matrix tbody td {
     text-align: center;
-    padding: 8px 4px;
+    height: 44px;
+    padding: 9px 4px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   }
   .pa-matrix tbody tr:hover th,
@@ -346,12 +355,28 @@
 
   .pa-mx-ind {
     text-align: center;
-    padding: 8px 4px;
+    padding: 9px 4px;
     font-size: 12px;
     font-weight: 600;
     color: var(--text2);
     min-width: 44px;
     max-width: 56px;
+  }
+  @media (min-width: 700px) {
+    .pa-matrix tbody td {
+      height: 48px;
+      padding-top: 11px;
+      padding-bottom: 11px;
+    }
+    .pa-matrix th.pa-mx-spice,
+    .pa-matrix td.pa-mx-spice {
+      padding-top: 6px;
+      padding-bottom: 6px;
+    }
+    .pa-mx-link {
+      min-height: 44px;
+      padding-right: 8px;
+    }
   }
   .pa-matrix thead th.pa-mx-ind {
     z-index: 2;

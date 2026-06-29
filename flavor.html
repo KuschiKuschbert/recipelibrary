@@ -21,12 +21,16 @@
   .hero-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(32px, 5vw, 48px); font-weight: 700; color: var(--text); margin-bottom: 8px; }
   .hero-sub { font-size: 15px; color: var(--text2); max-width: 560px; margin: 0 auto; line-height: 1.55; }
   .flavor-page { max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; }
-  .flavor-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; }
-  .flavor-tabs button {
+  .flavor-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; align-items: center; }
+  .flavor-tabs button,
+  .flavor-pantry-link {
     padding: 10px 16px; border-radius: 100px; border: 1px solid var(--border); background: var(--surface);
-    color: var(--text2); font: inherit; font-size: 13px; cursor: pointer;
+    color: var(--text2); font: inherit; font-size: 13px; cursor: pointer; min-height: 44px;
+    display: inline-flex; align-items: center; justify-content: center; text-decoration: none;
   }
   .flavor-tabs button[aria-selected="true"] { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+  .flavor-pantry-link { margin-left: auto; border-radius: 12px; color: var(--gold-light); }
+  .flavor-pantry-link:hover { border-color: var(--gold); background: var(--gold-dim); }
   .flavor-search-wrap { margin-bottom: 20px; }
   .flavor-search-wrap input {
     width: 100%; max-width: 520px; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--border);
@@ -135,6 +139,11 @@
     font-size: 15px;
     box-sizing: border-box;
   }
+  @media (max-width: 860px) {
+    .flavor-tabs { align-items: stretch; }
+    .flavor-tabs button { flex: 1 1 180px; }
+    .flavor-pantry-link { margin-left: 0; flex: 1 1 100%; }
+  }
 </style>
 </head>
 <body class="has-app-nav">
@@ -160,7 +169,7 @@
     <button type="button" role="tab" data-flavor-tab="wheel" aria-selected="false">Thesaurus wheel</button>
     <button type="button" role="tab" data-flavor-tab="science" aria-selected="false">Science snippets</button>
     <button type="button" role="tab" data-flavor-tab="toolkit" aria-selected="false">Kitchen toolkit</button>
-    <a href="pantry.html" class="hero-nav-link" style="margin-left:auto;align-self:center;text-decoration:none;">Pantry → recipes</a>
+    <a href="pantry.html" class="flavor-pantry-link">Pantry → recipes</a>
   </div>
 
   <section class="flavor-tab-panel" data-panel="explore">

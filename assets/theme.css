@@ -3578,6 +3578,7 @@ html.lenovo-tab-one-profile .hero-actions button,
 html.lenovo-tab-one-profile .hero-actions .hero-nav-cluster a,
 html.lenovo-tab-one-profile .aroma-mode-btn,
 html.lenovo-tab-one-profile .flavor-tabs button,
+html.lenovo-tab-one-profile .flavor-pantry-link,
 html.lenovo-tab-one-profile .flavor-wheel-item,
 html.lenovo-tab-one-profile .sheet-book-item,
 html.lenovo-tab-one-profile .modal-copy-btn,
@@ -3743,6 +3744,19 @@ html.lenovo-tab-one-profile .flavor-toolkit-intro p,
 html.lenovo-tab-one-profile .aroma-panel-lead {
   font-size: 14px;
   line-height: 1.65;
+}
+
+html.lenovo-tab-one-profile .pantry-panel,
+html.lenovo-tab-one-profile .flavor-search-wrap input,
+html.lenovo-tab-one-profile .flavor-toolkit-filter,
+html.lenovo-tab-one-profile #flavorDetail,
+html.lenovo-tab-one-profile .pa-toolbar,
+html.lenovo-tab-one-profile .pa-matrix-wrap {
+  border-radius: 14px;
+}
+
+html.lenovo-tab-one-profile .pantry-card {
+  border-radius: 14px;
 }
 
 html.lenovo-tab-one-profile .badge,
@@ -4127,7 +4141,8 @@ body.has-app-nav .hero-nav-link,
 body.has-app-nav .hero-actions button,
 body.has-app-nav .hero-actions .hero-nav-cluster a,
 body.has-app-nav .aroma-mode-btn,
-body.has-app-nav .flavor-tabs button {
+body.has-app-nav .flavor-tabs button,
+body.has-app-nav .flavor-pantry-link {
   background: rgba(255, 255, 255, 0.065);
   border-color: rgba(255, 255, 255, 0.13);
 }
@@ -4137,6 +4152,10 @@ body.has-app-nav .flavor-tabs button[aria-selected="true"],
 body.has-app-nav .aroma-mode-btn[aria-pressed="true"] {
   background: rgba(201, 169, 110, 0.18);
   border-color: rgba(201, 169, 110, 0.55);
+}
+
+body.has-app-nav .flavor-pantry-link {
+  color: var(--gold-light);
 }
 
 body.has-app-nav .page-action-btn {
@@ -4277,6 +4296,13 @@ button, a, select, input, [role="button"] {
 /* Tablet: larger action buttons */
 @media (min-width: 768px) {
   .page-action-btn { min-height: 48px; font-size: 14px; }
+}
+
+html.lenovo-tab-one-profile .pkgs-clear {
+  min-height: 44px;
+  padding-left: 14px;
+  padding-right: 14px;
+  border-radius: 10px;
 }
 
 /* ── Page-about collapsible (replaces wall-of-text headers) ──────────────── */
