@@ -313,6 +313,126 @@
   .riv-event-strip { align-items: flex-start; flex-direction: column; }
   .riv-event-strip__actions { justify-content: flex-start; }
 }
+
+/* ── Riviera search command strip ───────────────────────────────────────── */
+body.riviera-page .search-wrap,
+body.riviera-page .filters-wrap {
+  max-width: 760px;
+}
+body.riviera-page .search-glass {
+  border-color: rgba(201, 169, 110, 0.22);
+}
+body.riviera-page .filters-wrap {
+  align-items: stretch;
+}
+body.riviera-page .filter-chip,
+body.riviera-page .clear-btn {
+  justify-content: center;
+}
+body.riviera-page .clear-btn {
+  min-width: 98px;
+  color: var(--text2);
+}
+body.riviera-page .clear-btn:disabled {
+  color: var(--text3);
+  cursor: default;
+  opacity: 0.5;
+}
+body.riviera-page .clear-btn:disabled:hover {
+  color: var(--text3);
+}
+body.riviera-page .results-bar {
+  display: grid;
+  grid-template-columns: minmax(140px, auto) minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+}
+body.riviera-page .results-meta {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+.riv-results-summary,
+.riv-results-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  max-width: 100%;
+  padding: 4px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.045);
+  color: var(--text2);
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.25;
+}
+.riv-results-summary {
+  color: var(--gold-light);
+  border-color: rgba(201, 169, 110, 0.22);
+  background: rgba(201, 169, 110, 0.08);
+}
+.riv-results-chip {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+body.riviera-page.riviera-search-active .results-bar {
+  border-color: rgba(201, 169, 110, 0.24);
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .search-wrap,
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .filters-wrap {
+  max-width: 800px;
+}
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .filters-wrap {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(92px, 0.58fr);
+  gap: 8px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .filter-chip,
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .clear-btn {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .clear-btn:disabled {
+  background: rgba(255, 255, 255, 0.025);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .results-bar {
+  grid-template-columns: minmax(132px, auto) minmax(0, 1fr);
+  max-width: 760px;
+  gap: 10px;
+}
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .results-meta {
+  gap: 5px;
+}
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-results-summary,
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-results-chip {
+  min-height: 30px;
+  font-size: 12px;
+}
+@media (max-width: 680px) {
+  html.lenovo-tab-one-profile body.riviera-page.has-app-nav .filters-wrap,
+  body.riviera-page .filters-wrap {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  body.riviera-page .results-bar,
+  html.lenovo-tab-one-profile body.riviera-page.has-app-nav .results-bar {
+    grid-template-columns: 1fr;
+  }
+  body.riviera-page .results-meta,
+  html.lenovo-tab-one-profile body.riviera-page.has-app-nav .results-meta {
+    justify-content: flex-start;
+  }
+}
 .card-elements {
   font-size: 13px;
   color: var(--text3);
@@ -1002,7 +1122,7 @@ html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-
   <div class="search-glass">
     <div class="search-inner">
       <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" class="search-input" id="search" placeholder="Search dishes, proteins, methods…" autocomplete="off" spellcheck="false">
+      <input type="text" class="search-input" id="search" placeholder="Search dishes, proteins, methods…" autocomplete="off" spellcheck="false" aria-label="Search Riviera recipes">
       <button type="button" class="search-clear" id="searchClear" hidden aria-label="Clear search" title="Clear search">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
@@ -1019,10 +1139,10 @@ html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-
   <button type="button" class="filter-chip" id="chipCourse" onclick="openFilterSheet('Course','filterCourse')">Course</button>
   <button type="button" class="filter-chip" id="chipRivProtein" onclick="openFilterSheet('Protein','filterProtein')">Protein</button>
   <button type="button" class="filter-chip" id="chipDiet" onclick="openFilterSheet('Dietary','filterDiet')">Dietary</button>
-  <button class="clear-btn" id="clearBtn">Clear all</button>
+  <button type="button" class="clear-btn" id="clearBtn" disabled aria-disabled="true">Clear all</button>
 </div>
 
-<div class="results-bar visible" id="resultsBar">
+<div class="results-bar visible" id="resultsBar" aria-live="polite">
   <div class="results-count" id="resultsCount"><span>…</span> loading</div>
   <div class="results-meta" id="resultsMeta"></div>
 </div>
@@ -2133,6 +2253,46 @@ function clearScheduledFilter() { filterScheduler.clear(); }
 function setFilterPending(pending) { filterScheduler.setPending(pending); }
 function scheduleApplyFilters(opts) { filterScheduler.schedule(opts); }
 
+function rivieraActiveControlEntries() {
+  const entries = [];
+  const q = document.getElementById('search').value.trim();
+  const course = document.getElementById('filterCourse').value;
+  const protein = document.getElementById('filterProtein').value;
+  const diet = document.getElementById('filterDiet').value;
+  const eventFilterOn = !!(window.KuschiRivieraEventContext && KuschiRivieraEventContext.isFilterOn());
+  if (q) entries.push({ label: 'Search', value: q });
+  if (course) entries.push({ label: 'Course', value: course });
+  if (protein) entries.push({ label: 'Protein', value: protein });
+  if (diet) entries.push({ label: 'Dietary', value: diet });
+  if (eventFilterOn) entries.push({ label: 'Event', value: 'Selected recipes' });
+  return entries;
+}
+
+function renderRivieraControlState(count) {
+  const entries = rivieraActiveControlEntries();
+  const active = entries.length > 0;
+  const clearBtn = document.getElementById('clearBtn');
+  const meta = document.getElementById('resultsMeta');
+  document.body.classList.toggle('riviera-search-active', active);
+  if (clearBtn) {
+    clearBtn.disabled = !active;
+    clearBtn.setAttribute('aria-disabled', active ? 'false' : 'true');
+  }
+  if (!meta) return;
+  const shownCount = Math.min(count, rivieraDisplayCount);
+  const shownLabel = RIVIERA_RENDER_BATCH && count > shownCount
+    ? `${shownCount.toLocaleString()} shown`
+    : 'All shown';
+  const chips = [
+    `<span class="riv-results-summary">${active ? 'Filtered' : 'All recipes'}</span>`,
+    ...entries.map(entry =>
+      `<span class="riv-results-chip">${KuschiRecipeUi.esc(entry.label)}: ${KuschiRecipeUi.esc(entry.value)}</span>`
+    ),
+    `<span class="riv-results-chip">${KuschiRecipeUi.esc(shownLabel)}</span>`
+  ];
+  meta.innerHTML = chips.join('');
+}
+
 function applyFilters() {
   clearScheduledFilter();
   const q = document.getElementById('search').value.toLowerCase().trim();
@@ -2176,6 +2336,7 @@ function render() {
   const count = filtered.length;
   document.getElementById('resultsCount').innerHTML = `<span>${count}</span> recipe${count !== 1 ? 's' : ''}`;
   document.getElementById('totalCount').textContent = count;
+  renderRivieraControlState(count);
 
   const content = document.getElementById('content');
   if (!count) {
@@ -2600,12 +2761,17 @@ KuschiRecipeUi.bindSearchClear({
   document.getElementById(id).addEventListener('change', () => scheduleApplyFilters({ immediate: true }))
 );
 function resetRivieraSearchAndFilters() {
+  const eventFilterWasOn = !!(window.KuschiRivieraEventContext && KuschiRivieraEventContext.isFilterOn());
   document.getElementById('search').value = '';
   ['filterCourse','filterProtein','filterDiet'].forEach(id =>
     document.getElementById(id).value = ''
   );
   KuschiRecipeUi.syncSearchClear('search');
-  scheduleApplyFilters({ immediate: true });
+  if (eventFilterWasOn && window.KuschiRivieraEventContext) {
+    KuschiRivieraEventContext.toggleFilter();
+  } else {
+    scheduleApplyFilters({ immediate: true });
+  }
 }
 
 document.getElementById('clearBtn').addEventListener('click', resetRivieraSearchAndFilters);
