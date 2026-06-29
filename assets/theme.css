@@ -7081,15 +7081,16 @@ html.lenovo-tab-one-profile .planner-list {
 
 html.lenovo-tab-one-profile .fn-planner__header,
 html.lenovo-tab-one-profile .planner-list__header {
-  min-height: 74px;
-  padding: 18px 22px 14px;
+  align-items: center;
+  min-height: 64px;
+  padding: 12px 20px 10px;
   background: rgba(12, 12, 12, 0.985);
   border-bottom-color: rgba(201, 169, 110, 0.16);
 }
 
 html.lenovo-tab-one-profile .fn-planner__title,
 html.lenovo-tab-one-profile .planner-list__title {
-  font-size: 21px;
+  font-size: 20px;
   line-height: 1.2;
 }
 
@@ -7100,17 +7101,19 @@ html.lenovo-tab-one-profile .planner-list__subtitle {
 
 html.lenovo-tab-one-profile .fn-planner__close,
 html.lenovo-tab-one-profile .planner-list__close {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
 }
 
 html.lenovo-tab-one-profile .fn-planner__tabs,
 html.lenovo-tab-one-profile .planner-list__tabs {
   flex-wrap: nowrap;
-  gap: 8px;
-  padding: 10px 20px;
+  gap: 7px;
+  padding: 8px 20px;
   overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   scroll-padding-left: 20px;
 }
@@ -7122,15 +7125,31 @@ html.lenovo-tab-one-profile .planner-list__tabs::-webkit-scrollbar {
 
 html.lenovo-tab-one-profile .fn-planner__tabs--section {
   padding-top: 0;
-  padding-bottom: 12px;
+  padding-bottom: 10px;
 }
 
 html.lenovo-tab-one-profile .fn-planner-tab,
 html.lenovo-tab-one-profile .planner-list-tab {
-  min-height: 46px;
-  padding: 10px 16px;
+  flex: 0 0 auto;
+  justify-content: center;
+  min-width: 104px;
+  max-width: 154px;
+  min-height: 42px;
+  padding: 9px 12px;
   border-radius: 12px;
-  font-size: 14px;
+  font-size: 13px;
+  line-height: 1.15;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+html.lenovo-tab-one-profile .fn-planner-tab span {
+  flex: 0 0 auto;
+}
+
+html.lenovo-tab-one-profile .fn-planner-tab--section {
+  min-width: 132px;
+  max-width: 178px;
 }
 
 html.lenovo-tab-one-profile .fn-planner__bar {
