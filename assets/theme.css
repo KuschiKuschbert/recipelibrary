@@ -6662,6 +6662,15 @@ body.planner-list-open {
   min-height: 40px;
   font-size: 12px;
 }
+.planner-list__action-group {
+  display: flex;
+  gap: 8px;
+  min-width: 0;
+}
+.planner-list__action-group .btn-secondary {
+  flex: 1 1 auto;
+  min-width: 0;
+}
 .planner-list__summary {
   display: flex;
   gap: 8px;
@@ -7349,30 +7358,29 @@ html.lenovo-tab-one-profile .fn-dish-chip__hint {
 }
 
 html.lenovo-tab-one-profile .planner-list__actions {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 7px;
-  padding: 7px 20px;
+  display: grid;
+  grid-template-columns:
+    minmax(138px, 0.95fr)
+    minmax(174px, 1.18fr)
+    minmax(190px, 1.32fr)
+    minmax(148px, 1fr);
+  gap: 6px;
+  padding: 7px 20px 8px;
   background: rgba(20, 20, 20, 0.98);
   border-bottom-color: rgba(201, 169, 110, 0.14);
   align-items: stretch;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
-  scroll-padding-left: 20px;
-  -webkit-overflow-scrolling: touch;
-}
-
-html.lenovo-tab-one-profile .planner-list__actions::-webkit-scrollbar {
-  display: none;
+  overflow: visible;
 }
 
 html.lenovo-tab-one-profile .planner-list__actions .btn-secondary {
-  flex: 0 0 clamp(104px, 18vw, 136px);
+  width: 100%;
+  min-width: 0;
   min-height: 44px;
   border-radius: 10px;
   font-size: 12px;
-  padding-inline: 11px;
+  padding-inline: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
@@ -7399,7 +7407,6 @@ html.lenovo-tab-one-profile .planner-list__summary-kicker {
 }
 
 html.lenovo-tab-one-profile .planner-list__primary-action {
-  flex-basis: clamp(108px, 18vw, 144px);
   min-height: 44px;
   border-color: rgba(201, 169, 110, 0.42);
   background:
@@ -7408,12 +7415,15 @@ html.lenovo-tab-one-profile .planner-list__primary-action {
   box-shadow: inset 0 0 0 1px rgba(201, 169, 110, 0.08);
 }
 
-html.lenovo-tab-one-profile .planner-list__print-group {
+html.lenovo-tab-one-profile .planner-list__action-group {
   display: grid;
-  flex: 0 0 clamp(214px, 31vw, 248px);
-  grid-template-columns: minmax(104px, 1fr) minmax(94px, auto);
-  gap: 7px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
   min-width: 0;
+}
+
+html.lenovo-tab-one-profile .planner-list__print-group {
+  grid-template-columns: minmax(94px, 1.08fr) minmax(72px, 0.92fr);
 }
 
 html.lenovo-tab-one-profile .planner-list__print-opt {
@@ -7663,9 +7673,12 @@ html.lenovo-tab-one-profile .planner-recipe__note {
 }
 
 @media (max-width: 560px) {
+  html.lenovo-tab-one-profile .planner-list__actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   html.lenovo-tab-one-profile .planner-list__print-group {
     grid-template-columns: 1fr;
-    flex-basis: min(78vw, 280px);
   }
 
   html.lenovo-tab-one-profile .planner-shopping__row {
