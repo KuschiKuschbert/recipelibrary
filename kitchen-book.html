@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=66">
+<link rel="stylesheet" href="assets/theme.css?v=67">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
@@ -527,24 +527,28 @@
     <div class="modal-title" style="margin-bottom:12px">Order list by storage</div>
     <p class="order-list-intro">Grouped as Freezer, Cold room, Dry store, then Other. Same ingredient names merge into one row. Use <strong>Edit storage zones</strong> when you need to move lines. Storage and order data for <strong>this book only</strong> — separate from Riviera and other kitchen books.</p>
     <div id="kbOrderListBody"></div>
-    <div class="modal-section" style="margin-top:20px">Add ingredient</div>
-    <p class="order-add-hint">Remembers this ingredient for next time in this book (same name → same storage) and adds a line to this book’s order.</p>
-    <div class="form-row"><label for="kbOrdNewName">Name</label><input id="kbOrdNewName" type="text" placeholder="e.g. Sumac" autocomplete="off" /></div>
-    <div class="form-row"><label for="kbOrdNewZone">Storage</label>
-      <select id="kbOrdNewZone">
-        <option value="freezer">Freezer</option>
-        <option value="coldroom">Cold room</option>
-        <option value="drystore">Dry store</option>
-        <option value="other">Other</option>
-      </select>
+    <div class="order-add-panel">
+      <div class="modal-section order-add-title">Add ingredient</div>
+      <p class="order-add-hint">Remembers this ingredient for next time in this book (same name → same storage) and adds a line to this book’s order.</p>
+      <div class="order-add-grid">
+        <div class="form-row order-add-name"><label for="kbOrdNewName">Name</label><input id="kbOrdNewName" type="text" placeholder="e.g. Sumac" autocomplete="off" /></div>
+        <div class="form-row"><label for="kbOrdNewZone">Storage</label>
+          <select id="kbOrdNewZone">
+            <option value="freezer">Freezer</option>
+            <option value="coldroom">Cold room</option>
+            <option value="drystore">Dry store</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-row"><label for="kbOrdNewQty">Order qty</label><input id="kbOrdNewQty" type="text" placeholder="e.g. 2 kg" autocomplete="off" /></div>
+        <button type="button" class="btn-secondary order-add-submit" aria-label="Remember ingredient for next time and add to this book order" onclick="submitKitchenBookOrderListAdd()">Remember &amp; add</button>
+      </div>
     </div>
-    <div class="form-row"><label for="kbOrdNewQty">Order quantity</label><input id="kbOrdNewQty" type="text" placeholder="e.g. 2 kg" autocomplete="off" /></div>
-    <button type="button" class="btn-secondary" onclick="submitKitchenBookOrderListAdd()">Remember for next time &amp; add</button>
-    <div class="order-actions">
-      <button type="button" class="btn-secondary" id="kbOrdZoneEditBtn" onclick="toggleKitchenBookOrderListEditingZones()">Edit storage zones</button>
-      <button type="button" class="btn-secondary" onclick="copyKitchenBookOrderListText()">Copy as text</button>
-      <button type="button" class="btn-secondary" onclick="copyKitchenBookOrderBundleJson()">Copy order data JSON</button>
-      <button type="button" class="btn-secondary" onclick="copyKitchenBookMasterIngredientsJson()">Copy remembered ingredients (JSON)</button>
+    <div class="order-actions order-actions--order-list">
+      <button type="button" class="btn-secondary order-action-primary" aria-label="Copy this book order list as text" onclick="copyKitchenBookOrderListText()">Copy text</button>
+      <button type="button" class="btn-secondary order-action-secondary" id="kbOrdZoneEditBtn" aria-label="Edit storage zones" onclick="toggleKitchenBookOrderListEditingZones()">Edit zones</button>
+      <button type="button" class="btn-secondary order-action-data" aria-label="Copy this book order data JSON" onclick="copyKitchenBookOrderBundleJson()">Order JSON</button>
+      <button type="button" class="btn-secondary order-action-data" aria-label="Copy this book remembered ingredients JSON" onclick="copyKitchenBookMasterIngredientsJson()">Saved JSON</button>
     </div>
   </div>
 </div>
@@ -942,7 +946,9 @@ function submitKitchenBookPrepAdd() {
 function syncKitchenBookOrderListZoneEditButton() {
   var btn = document.getElementById('kbOrdZoneEditBtn');
   if (!btn || !kitchenBookOrderList) return;
-  btn.textContent = kitchenBookOrderList.isEditingZones() ? 'Done' : 'Edit storage zones';
+  var editing = kitchenBookOrderList.isEditingZones();
+  btn.textContent = editing ? 'Done' : 'Edit zones';
+  btn.setAttribute('aria-label', editing ? 'Done editing storage zones' : 'Edit storage zones');
 }
 function toggleKitchenBookOrderListEditingZones() {
   if (!kitchenBookOrderList) return;

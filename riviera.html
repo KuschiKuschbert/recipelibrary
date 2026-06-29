@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=66">
+<link rel="stylesheet" href="assets/theme.css?v=67">
 <link rel="preload" href="riviera_data/builtins.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
@@ -1322,24 +1322,28 @@ html.lenovo-tab-one-profile .fn-planner__desc {
     <p id="orderListPlannerBanner" class="order-list-planner-banner" hidden></p>
     <p class="order-list-intro">Grouped as Freezer, Cold room, Dry store, then Other. The same ingredient name is merged into one row even when recipes use different storage; the row sits under the most common zone. Use <strong>Edit storage zones</strong> when you need to move lines between areas.</p>
     <div id="orderListBody"></div>
-    <div class="modal-section" style="margin-top:20px">Add ingredient</div>
-    <p class="order-add-hint">Remembers this ingredient for next time (same name → same storage) and adds a line to this order.</p>
-    <div class="form-row"><label for="ordNewName">Name</label><input id="ordNewName" type="text" placeholder="e.g. Sumac" autocomplete="off" /></div>
-    <div class="form-row"><label for="ordNewZone">Storage</label>
-      <select id="ordNewZone">
-        <option value="freezer">Freezer</option>
-        <option value="coldroom">Cold room</option>
-        <option value="drystore">Dry store</option>
-        <option value="other">Other</option>
-      </select>
+    <div class="order-add-panel">
+      <div class="modal-section order-add-title">Add ingredient</div>
+      <p class="order-add-hint">Remembers this ingredient for next time (same name → same storage) and adds a line to this order.</p>
+      <div class="order-add-grid">
+        <div class="form-row order-add-name"><label for="ordNewName">Name</label><input id="ordNewName" type="text" placeholder="e.g. Sumac" autocomplete="off" /></div>
+        <div class="form-row"><label for="ordNewZone">Storage</label>
+          <select id="ordNewZone">
+            <option value="freezer">Freezer</option>
+            <option value="coldroom">Cold room</option>
+            <option value="drystore">Dry store</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-row"><label for="ordNewQty">Order qty</label><input id="ordNewQty" type="text" placeholder="e.g. 2 kg" autocomplete="off" /></div>
+        <button type="button" class="btn-secondary order-add-submit" aria-label="Remember ingredient for next time and add to order" onclick="submitOrderListAdd()">Remember &amp; add</button>
+      </div>
     </div>
-    <div class="form-row"><label for="ordNewQty">Order quantity</label><input id="ordNewQty" type="text" placeholder="e.g. 2 kg" autocomplete="off" /></div>
-    <button type="button" class="btn-secondary" onclick="submitOrderListAdd()">Remember for next time &amp; add</button>
-    <div class="order-actions">
-      <button type="button" class="btn-secondary" id="rivieraOrdZoneEditBtn" onclick="toggleRivieraOrderListEditingZones()">Edit storage zones</button>
-      <button type="button" class="btn-secondary" onclick="copyOrderListText()">Copy as text</button>
-      <button type="button" class="btn-secondary" onclick="copyOrderBundleJson()">Copy order data JSON</button>
-      <button type="button" class="btn-secondary" onclick="copyMasterIngredientsJson()">Copy remembered ingredients (JSON)</button>
+    <div class="order-actions order-actions--order-list">
+      <button type="button" class="btn-secondary order-action-primary" aria-label="Copy order list as text" onclick="copyOrderListText()">Copy text</button>
+      <button type="button" class="btn-secondary order-action-secondary" id="rivieraOrdZoneEditBtn" aria-label="Edit storage zones" onclick="toggleRivieraOrderListEditingZones()">Edit zones</button>
+      <button type="button" class="btn-secondary order-action-data" aria-label="Copy order data JSON" onclick="copyOrderBundleJson()">Order JSON</button>
+      <button type="button" class="btn-secondary order-action-data" aria-label="Copy remembered ingredients JSON" onclick="copyMasterIngredientsJson()">Saved JSON</button>
     </div>
   </div>
 </div>
@@ -1986,12 +1990,15 @@ function syncRivieraOrderListZoneEditButton() {
   var btn = document.getElementById('rivieraOrdZoneEditBtn');
   if (!btn) return;
   if (!window.KuschiOrderList) {
-    btn.textContent = 'Edit storage zones';
+    btn.textContent = 'Edit zones';
+    btn.setAttribute('aria-label', 'Edit storage zones');
     return;
   }
   var ol = ensureRivieraOrderList();
   if (!ol) return;
-  btn.textContent = ol.isEditingZones() ? 'Done' : 'Edit storage zones';
+  var editing = ol.isEditingZones();
+  btn.textContent = editing ? 'Done' : 'Edit zones';
+  btn.setAttribute('aria-label', editing ? 'Done editing storage zones' : 'Edit storage zones');
 }
 function toggleRivieraOrderListEditingZones() {
   loadRivieraOrderListScript()

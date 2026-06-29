@@ -1531,6 +1531,31 @@ html.low-memory-device .kuschi-toast--show {
   margin-bottom: 12px;
   line-height: 1.5;
 }
+.order-add-panel {
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+.order-add-title {
+  margin-top: 0;
+}
+.order-add-grid {
+  display: grid;
+  grid-template-columns:
+    minmax(180px, 1.35fr)
+    minmax(118px, 0.55fr)
+    minmax(124px, 0.6fr)
+    minmax(150px, 0.62fr);
+  gap: 10px;
+  align-items: end;
+}
+.order-add-grid .form-row {
+  min-width: 0;
+  margin-bottom: 0;
+}
+.order-add-submit {
+  width: 100%;
+  min-height: 44px;
+}
 .order-actions {
   display: flex;
   flex-wrap: wrap;
@@ -1553,9 +1578,33 @@ html.low-memory-device .kuschi-toast--show {
   justify-content: center;
   min-height: 44px;
 }
+.order-actions--order-list .order-action-primary {
+  background: var(--gold-dim);
+  border-color: rgba(201, 169, 110, 0.36);
+  color: var(--gold);
+}
+.order-actions--order-list .order-action-primary:hover {
+  background: rgba(201, 169, 110, 0.24);
+  border-color: var(--gold);
+  color: var(--gold-light);
+}
+.order-actions--order-list .order-action-data {
+  color: var(--text3);
+}
 
 .order-list-modal > .btn-secondary:not(.modal-copy-btn) {
   min-height: 44px;
+}
+
+@media (max-width: 740px) {
+  .order-add-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(118px, 0.5fr);
+  }
+
+  .order-add-grid .order-add-name,
+  .order-add-grid .order-add-submit {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 860px) {
@@ -5407,6 +5456,49 @@ html.lenovo-tab-one-profile #kbOrderListOverlay .order-list-intro {
   line-height: 1.45;
 }
 
+html.lenovo-tab-one-profile #orderListOverlay .order-add-panel,
+html.lenovo-tab-one-profile #kbOrderListOverlay .order-add-panel {
+  margin-top: 14px;
+  margin-bottom: 36px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+html.lenovo-tab-one-profile #orderListOverlay .order-add-title,
+html.lenovo-tab-one-profile #kbOrderListOverlay .order-add-title {
+  min-height: 34px;
+  margin: 0;
+}
+
+html.lenovo-tab-one-profile #orderListOverlay .order-add-hint,
+html.lenovo-tab-one-profile #kbOrderListOverlay .order-add-hint {
+  display: none;
+}
+
+html.lenovo-tab-one-profile #orderListOverlay .order-add-grid,
+html.lenovo-tab-one-profile #kbOrderListOverlay .order-add-grid {
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(132px, 0.48fr)
+    minmax(132px, 0.48fr)
+    minmax(146px, 0.52fr);
+  gap: 8px;
+}
+
+html.lenovo-tab-one-profile #orderListOverlay .order-add-grid .form-row label,
+html.lenovo-tab-one-profile #kbOrderListOverlay .order-add-grid .form-row label {
+  margin-bottom: 5px;
+  font-size: 10px;
+}
+
+html.lenovo-tab-one-profile #orderListOverlay .order-add-submit,
+html.lenovo-tab-one-profile #kbOrderListOverlay .order-add-submit {
+  min-height: 48px;
+  padding: 10px 12px;
+  line-height: 1.15;
+  white-space: normal;
+}
+
 html.lenovo-tab-one-profile .stkt-uom-cell {
   gap: 8px;
 }
@@ -5424,6 +5516,24 @@ html.lenovo-tab-one-profile .order-actions .btn-secondary {
   flex: 1 1 180px;
   min-height: 48px;
   text-align: center;
+}
+
+html.lenovo-tab-one-profile #orderListOverlay .order-actions--order-list,
+html.lenovo-tab-one-profile #kbOrderListOverlay .order-actions--order-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 10px;
+  padding-bottom: max(10px, env(safe-area-inset-bottom, 0px));
+}
+
+html.lenovo-tab-one-profile #orderListOverlay .order-actions--order-list .btn-secondary,
+html.lenovo-tab-one-profile #kbOrderListOverlay .order-actions--order-list .btn-secondary {
+  min-width: 0;
+  padding: 9px 10px;
+  font-size: 12px;
+  line-height: 1.15;
 }
 
 html.lenovo-tab-one-profile .prep-board-modal .prep-actor-block {
