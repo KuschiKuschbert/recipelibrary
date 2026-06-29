@@ -7001,31 +7001,42 @@ html.lenovo-tab-one-profile .fn-dish-chip__hint {
 }
 
 html.lenovo-tab-one-profile .planner-list__actions {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-  padding: 12px 20px;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  padding: 10px 20px;
   background: rgba(20, 20, 20, 0.98);
   border-bottom-color: rgba(201, 169, 110, 0.14);
   align-items: stretch;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  scroll-padding-left: 20px;
+  -webkit-overflow-scrolling: touch;
+}
+
+html.lenovo-tab-one-profile .planner-list__actions::-webkit-scrollbar {
+  display: none;
 }
 
 html.lenovo-tab-one-profile .planner-list__actions .btn-secondary {
-  min-height: 48px;
+  flex: 0 0 clamp(128px, 23vw, 168px);
+  min-height: 46px;
   border-radius: 12px;
   font-size: 13px;
+  white-space: nowrap;
 }
 
 html.lenovo-tab-one-profile .planner-list__summary {
-  gap: 10px;
-  padding: 10px 20px;
+  gap: 8px;
+  padding: 8px 20px;
   background: rgba(20, 20, 20, 0.94);
   border-bottom-color: rgba(201, 169, 110, 0.14);
 }
 
 html.lenovo-tab-one-profile .planner-list__summary-chip {
-  min-height: 44px;
-  padding: 8px 12px;
+  min-height: 40px;
+  padding: 7px 11px;
   border-radius: 12px;
   font-size: 13px;
 }
@@ -7039,7 +7050,8 @@ html.lenovo-tab-one-profile .planner-list__summary-kicker {
 }
 
 html.lenovo-tab-one-profile .planner-list__primary-action {
-  min-height: 52px;
+  flex-basis: clamp(144px, 25vw, 184px);
+  min-height: 48px;
   border-color: rgba(201, 169, 110, 0.42);
   background:
     linear-gradient(180deg, rgba(201, 169, 110, 0.18), rgba(201, 169, 110, 0.08)),
@@ -7049,15 +7061,15 @@ html.lenovo-tab-one-profile .planner-list__primary-action {
 
 html.lenovo-tab-one-profile .planner-list__print-group {
   display: grid;
-  grid-column: span 2;
-  grid-template-columns: minmax(0, 1fr) minmax(132px, auto);
-  gap: 10px;
+  flex: 0 0 clamp(292px, 43vw, 360px);
+  grid-template-columns: minmax(150px, 1fr) minmax(124px, auto);
+  gap: 8px;
   min-width: 0;
 }
 
 html.lenovo-tab-one-profile .planner-list__print-opt {
-  min-height: 48px;
-  padding: 0 12px;
+  min-height: 46px;
+  padding: 0 11px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -7093,24 +7105,24 @@ html.lenovo-tab-one-profile .planner-manifest__course {
 html.lenovo-tab-one-profile .planner-timeline__row,
 html.lenovo-tab-one-profile .planner-shopping li,
 html.lenovo-tab-one-profile .planner-manifest__item {
-  margin-bottom: 8px;
-  padding: 12px 12px;
+  margin-bottom: 7px;
+  padding: 10px 12px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.042), rgba(255, 255, 255, 0.024));
   border: 1px solid rgba(255, 255, 255, 0.11);
   border-radius: 12px;
-  font-size: 15px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.42;
 }
 
 html.lenovo-tab-one-profile .planner-timeline__row {
-  grid-template-columns: 42px minmax(0, 1fr);
-  gap: 12px;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 10px;
 }
 
 html.lenovo-tab-one-profile .planner-timeline__check-btn {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 10px;
@@ -7127,8 +7139,8 @@ html.lenovo-tab-one-profile .planner-timeline__dish {
 }
 
 html.lenovo-tab-one-profile .planner-timeline__task {
-  font-size: 14px;
-  line-height: 1.45;
+  font-size: 13px;
+  line-height: 1.42;
 }
 
 html.lenovo-tab-one-profile .planner-timeline__phase-chip {
@@ -7143,19 +7155,22 @@ html.lenovo-tab-one-profile .planner-manifest__tags {
 }
 
 html.lenovo-tab-one-profile .planner-shopping__qty {
-  display: inline-block;
-  min-width: 72px;
+  display: block;
+  min-width: 0;
+  max-width: 100%;
   font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  text-align: right;
 }
 
 html.lenovo-tab-one-profile .planner-shopping__stats {
-  gap: 10px;
-  margin-bottom: 16px;
+  gap: 8px;
+  margin-bottom: 14px;
 }
 
 html.lenovo-tab-one-profile .planner-shopping__stat {
-  min-height: 42px;
-  padding: 8px 12px;
+  min-height: 40px;
+  padding: 7px 11px;
   border-radius: 12px;
   font-size: 13px;
 }
@@ -7165,7 +7180,21 @@ html.lenovo-tab-one-profile .planner-shopping__stat strong {
 }
 
 html.lenovo-tab-one-profile .planner-shopping__row {
-  gap: 14px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(170px, 0.46fr);
+  gap: 10px;
+  align-items: start;
+}
+
+html.lenovo-tab-one-profile .planner-shopping__row .planner-shopping__qty {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+html.lenovo-tab-one-profile .planner-shopping__item {
+  grid-column: 1;
+  grid-row: 1;
+  color: var(--text);
 }
 
 html.lenovo-tab-one-profile .planner-recipe {
@@ -7232,23 +7261,24 @@ html.lenovo-tab-one-profile .planner-recipe__service {
   }
 }
 
-@media (max-width: 720px) {
-  html.lenovo-tab-one-profile .planner-list__actions {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  html.lenovo-tab-one-profile .planner-list__print-group {
-    grid-column: 1 / -1;
-  }
-}
-
 @media (max-width: 560px) {
-  html.lenovo-tab-one-profile .planner-list__actions {
+  html.lenovo-tab-one-profile .planner-list__print-group {
+    grid-template-columns: 1fr;
+    flex-basis: min(78vw, 280px);
+  }
+
+  html.lenovo-tab-one-profile .planner-shopping__row {
     grid-template-columns: 1fr;
   }
 
-  html.lenovo-tab-one-profile .planner-list__print-group {
-    grid-template-columns: 1fr;
+  html.lenovo-tab-one-profile .planner-shopping__row .planner-shopping__qty,
+  html.lenovo-tab-one-profile .planner-shopping__item {
+    grid-column: 1;
+  }
+
+  html.lenovo-tab-one-profile .planner-shopping__row .planner-shopping__qty {
+    grid-row: 2;
+    text-align: left;
   }
 }
 
