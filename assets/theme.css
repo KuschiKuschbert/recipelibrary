@@ -3548,18 +3548,34 @@ html.lenovo-tab-one-profile body {
 }
 
 html.lenovo-tab-one-profile {
-  --app-header-h: 77px;
+  --app-header-h: 72px;
 }
 
 html.lenovo-tab-one-profile .app-header {
-  gap: 14px;
+  gap: 12px;
   min-height: var(--app-header-h, 65px);
-  padding-left: 22px;
-  padding-right: 22px;
+  padding:
+    max(12px, env(safe-area-inset-top, 0px))
+    20px
+    10px;
+  background: rgba(12, 12, 12, 0.985);
+  border-bottom-color: rgba(201, 169, 110, 0.14);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+}
+
+html.lenovo-tab-one-profile .app-header__brand {
+  gap: 10px;
+}
+
+html.lenovo-tab-one-profile .app-header__mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
 }
 
 html.lenovo-tab-one-profile .app-header__title {
   font-size: 17px;
+  line-height: 1.15;
 }
 
 html.lenovo-tab-one-profile .app-header__count {
@@ -3589,29 +3605,51 @@ html.lenovo-tab-one-profile .add-form-actions button.primary {
   font-size: 14px;
 }
 
+html.lenovo-tab-one-profile .app-header__btn {
+  padding-left: 13px;
+  padding-right: 13px;
+  border-radius: 12px;
+}
+
 html.lenovo-tab-one-profile .search-wrap,
 html.lenovo-tab-one-profile .filters-wrap {
   max-width: 760px;
 }
 
 html.lenovo-tab-one-profile .search-inner {
-  min-height: 50px;
-  padding: 10px 16px;
+  min-height: 48px;
+  padding: 0 14px;
+  gap: 9px;
+}
+
+html.lenovo-tab-one-profile .search-icon {
+  width: 19px;
+  height: 19px;
+  color: var(--gold-light);
+  opacity: 0.62;
 }
 
 html.lenovo-tab-one-profile .search-input {
-  font-size: 18px;
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+html.lenovo-tab-one-profile .search-shortcut {
+  display: none;
 }
 
 html.lenovo-tab-one-profile .filters-wrap {
-  gap: 10px;
-  padding-top: 8px;
-  padding-bottom: 10px;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 5px;
+  padding-bottom: 6px;
 }
 
 html.lenovo-tab-one-profile .filter-chip {
-  flex-basis: 128px;
+  flex-basis: 124px;
   justify-content: center;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 html.lenovo-tab-one-profile .results-count {
@@ -3619,33 +3657,88 @@ html.lenovo-tab-one-profile .results-count {
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .search-wrap {
+  top: var(--app-header-h, 72px);
+  z-index: 104;
+  margin-top: 8px;
+  padding-bottom: 6px;
   padding-left: 20px;
   padding-right: 20px;
+  background: linear-gradient(180deg, rgba(12, 12, 12, 0.985), rgba(12, 12, 12, 0.92));
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .search-glass {
+  padding: 4px;
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+    rgba(20, 20, 20, 0.96);
   border-color: rgba(201, 169, 110, 0.28);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.055),
-    0 10px 24px rgba(0, 0, 0, 0.18);
+    0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+html.lenovo-tab-one-profile body.has-app-nav .search-clear {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 12px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .filters-wrap {
-  top: calc(var(--app-header-h, 0px) + 76px);
+  top: calc(var(--app-header-h, 0px) + 64px);
+  z-index: 96;
   justify-content: flex-start;
+  background:
+    linear-gradient(180deg, rgba(12, 12, 12, 0.94), rgba(12, 12, 12, 0.98)),
+    var(--bg);
   border-bottom: 1px solid rgba(201, 169, 110, 0.12);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16);
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .filter-chip {
-  flex: 1 1 132px;
+  flex: 1 1 124px;
   max-width: none;
   border-radius: 12px;
+  background: rgba(255, 255, 255, 0.058);
+  border-color: rgba(255, 255, 255, 0.13);
+}
+
+html.lenovo-tab-one-profile body.has-app-nav .filter-chip--active {
+  background: rgba(201, 169, 110, 0.2);
+  border-color: rgba(201, 169, 110, 0.62);
+  color: var(--gold-light);
+}
+
+html.lenovo-tab-one-profile body.has-app-nav .filter-chip__x {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  border-radius: 8px;
+  background: rgba(12, 12, 12, 0.24);
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .clear-btn {
   border-radius: 12px;
   color: var(--text2);
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+html.lenovo-tab-one-profile .page-actions {
+  max-width: 760px;
+  gap: 8px;
+  padding-top: 6px;
+  padding-bottom: 2px;
+  justify-content: flex-start;
+}
+
+html.lenovo-tab-one-profile .page-action-btn {
+  padding-left: 14px;
+  padding-right: 14px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .results-bar {
@@ -4274,12 +4367,12 @@ html.lenovo-tab-one-profile .nav-item__label {
 
 @media (orientation: landscape) {
   html.lenovo-tab-one-profile {
-    --app-header-h: 71px;
+    --app-header-h: 68px;
   }
 
   html.lenovo-tab-one-profile .app-header {
-    padding-top: max(12px, env(safe-area-inset-top, 0px));
-    padding-bottom: 10px;
+    padding-top: max(10px, env(safe-area-inset-top, 0px));
+    padding-bottom: 9px;
   }
 
   html.lenovo-tab-one-profile .search-wrap {
