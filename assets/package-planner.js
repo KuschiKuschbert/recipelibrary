@@ -76,6 +76,10 @@
     }
   }
 
+  function useCompactPlannerCopy() {
+    return document.documentElement.classList.contains('lenovo-tab-one-profile');
+  }
+
   function syncUrl(opts) {
     if (!_cfg || typeof _cfg.syncUrl !== 'function') return;
     opts = opts || {};
@@ -450,10 +454,15 @@
     });
 
     if (genBtn) {
+      var compactCopy = useCompactPlannerCopy();
       genBtn.disabled = !sectionValid(sec) || !(_state.pax > 0);
       genBtn.textContent = ready
-        ? 'Generate Full Planner List (' + stats.selected + ' dishes)'
-        : 'Complete Required Choices';
+        ? compactCopy
+          ? 'Generate list (' + stats.selected + ')'
+          : 'Generate Full Planner List (' + stats.selected + ' dishes)'
+        : compactCopy
+          ? 'Finish choices'
+          : 'Complete Required Choices';
     }
   }
 
