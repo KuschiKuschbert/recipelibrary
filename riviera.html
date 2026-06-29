@@ -1012,7 +1012,7 @@
     <div class="form-row"><label>Note</label><input id="rvNote" placeholder="Optional" /></div>
     <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
       <button type="button" class="form-primary-btn" onclick="submitRivieraRecipe()">Save recipe</button>
-      <button type="button" class="btn-secondary" onclick="navigator.clipboard.writeText(KuschiUserRecipes.exportRiviera()).then(()=>alert('Copied Riviera JSON'))">Copy JSON backup</button>
+      <button type="button" class="btn-secondary" onclick="copyRivieraBackupJson()">Copy JSON backup</button>
     </div>
     </div>
     <div id="rvPanelFormat" role="tabpanel" aria-labelledby="rvTabFormat" hidden>
@@ -1935,6 +1935,12 @@ function submitRivieraRecipe() {
   closeAddRivieraModal();
   populateFilters();
   applyFilters();
+}
+
+function copyRivieraBackupJson() {
+  KuschiRecipeUi.copyText(KuschiUserRecipes.exportRiviera())
+    .then(() => alert('Copied Riviera JSON'))
+    .catch(() => alert('Could not copy Riviera JSON backup.'));
 }
 
 

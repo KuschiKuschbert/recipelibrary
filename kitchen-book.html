@@ -1181,8 +1181,11 @@ function removeCurrentBookRecipe() {
 }
 
 function copyRecipeNameBtn(btn, name) {
-  navigator.clipboard.writeText(name).then(() => {
+  KuschiRecipeUi.copyText(name).then(() => {
     btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy name', 1500);
+  }).catch(() => {
+    btn.textContent = 'Copy failed';
     setTimeout(() => btn.textContent = 'Copy name', 1500);
   });
 }
@@ -1201,9 +1204,12 @@ function copyBookRecipeText(id) {
   }
   text += '\nMethod:\n';
   toArr(d.instructions).forEach((s, i) => { text += (i+1) + '. ' + s + '\n'; });
-  navigator.clipboard.writeText(text).then(() => {
+  KuschiRecipeUi.copyText(text).then(() => {
     const bar = document.querySelector('.modal-copy-bar .modal-copy-btn');
     if (bar) { bar.textContent = 'Copied!'; setTimeout(() => bar.textContent = 'Copy as text', 1500); }
+  }).catch(() => {
+    const bar = document.querySelector('.modal-copy-bar .modal-copy-btn');
+    if (bar) { bar.textContent = 'Copy failed'; setTimeout(() => bar.textContent = 'Copy as text', 1500); }
   });
 }
 
@@ -1527,7 +1533,9 @@ function submitBookRecipe() {
 
 function exportBookBackup() {
   const t = KuschiUserRecipes.exportBookRecipes(CURRENT_BOOK_ID);
-  navigator.clipboard.writeText(t).then(() => alert('This book’s recipes JSON copied to clipboard'));
+  KuschiRecipeUi.copyText(t)
+    .then(() => alert('This book’s recipes JSON copied to clipboard'))
+    .catch(() => alert('Could not copy this book’s recipes JSON.'));
 }
 
 function openPageQrModal() {

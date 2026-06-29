@@ -1262,8 +1262,29 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 16px;
+  position: sticky;
+  bottom: -1px;
+  z-index: 4;
+  margin: 18px -32px -32px;
+  padding: 14px 32px max(14px, env(safe-area-inset-bottom, 0px));
+  background:
+    linear-gradient(180deg, rgba(20, 20, 20, 0.84), rgba(20, 20, 20, 0.98)),
+    var(--bg2);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -12px 28px rgba(0, 0, 0, 0.24);
 }
+
+.order-actions .btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+}
+
+.order-list-modal > .btn-secondary:not(.modal-copy-btn) {
+  min-height: 44px;
+}
+
 @media (max-width: 860px) {
   .order-line-row {
     grid-template-columns: 1fr 1fr;
@@ -3602,6 +3623,21 @@ html.lenovo-tab-one-profile .ord-zone-display,
 html.lenovo-tab-one-profile .stkt-zone-label,
 html.lenovo-tab-one-profile .order-add-hint {
   font-size: 13px;
+}
+
+html.lenovo-tab-one-profile .order-actions {
+  gap: 10px;
+  margin-left: -24px;
+  margin-right: -24px;
+  margin-bottom: -24px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+html.lenovo-tab-one-profile .order-actions .btn-secondary {
+  flex: 1 1 180px;
+  min-height: 48px;
+  text-align: center;
 }
 
 html.lenovo-tab-one-profile .nav-item {

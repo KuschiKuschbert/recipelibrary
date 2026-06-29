@@ -2113,7 +2113,9 @@ function submitKitchenRecipe() {
 }
 function exportKitchenBackup() {
   const t = KuschiUserRecipes.exportKitchen();
-  navigator.clipboard.writeText(t).then(() => alert('Kitchen user recipes JSON copied to clipboard'));
+  KuschiRecipeUi.copyText(t)
+    .then(() => alert('Kitchen user recipes JSON copied to clipboard'))
+    .catch(() => alert('Could not copy Kitchen JSON backup.'));
 }
 
 

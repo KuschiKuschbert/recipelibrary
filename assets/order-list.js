@@ -126,6 +126,20 @@
     return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
   }
 
+  function copyTextToClipboard(text, successMessage) {
+    var helper = window.KuschiRecipeUi && window.KuschiRecipeUi.copyText;
+    var p = helper
+      ? helper(text)
+      : navigator.clipboard && navigator.clipboard.writeText
+        ? navigator.clipboard.writeText(text)
+        : Promise.reject(new Error('Clipboard unavailable'));
+    p.then(function () {
+      alert(successMessage);
+    }).catch(function () {
+      alert('Could not copy. Select the text manually and try again.');
+    });
+  }
+
   function pickDisplayZoneForMerged(zoneTally) {
     if (!zoneTally || !zoneTally.length) return 'other';
     var counts = {};
@@ -702,23 +716,17 @@
         text += '\n';
       });
       var out = text.trim() || '(nothing to copy — add recipes or lines)';
-      navigator.clipboard.writeText(out).then(function () {
-        alert('Order list copied');
-      });
+      copyTextToClipboard(out, 'Order list copied');
     }
 
     function copyOrderBundleJson() {
       if (!storage.exportBundle) return;
-      navigator.clipboard.writeText(storage.exportBundle()).then(function () {
-        alert('Order bundle JSON copied');
-      });
+      copyTextToClipboard(storage.exportBundle(), 'Order bundle JSON copied');
     }
 
     function copyMasterIngredientsJson() {
       if (!storage.exportMaster) return;
-      navigator.clipboard.writeText(storage.exportMaster()).then(function () {
-        alert('Remembered ingredients JSON copied');
-      });
+      copyTextToClipboard(storage.exportMaster(), 'Remembered ingredients JSON copied');
     }
 
     function submitOrderListAdd() {

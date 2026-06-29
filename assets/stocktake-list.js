@@ -20,6 +20,20 @@
     return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
   }
 
+  function copyTextToClipboard(text, successMessage) {
+    var helper = window.KuschiRecipeUi && window.KuschiRecipeUi.copyText;
+    var p = helper
+      ? helper(text)
+      : navigator.clipboard && navigator.clipboard.writeText
+        ? navigator.clipboard.writeText(text)
+        : Promise.reject(new Error('Clipboard unavailable'));
+    p.then(function () {
+      alert(successMessage);
+    }).catch(function () {
+      alert('Could not copy. Select the text manually and try again.');
+    });
+  }
+
   function zoneLabels() {
     return (window.KuschiOrderList && window.KuschiOrderList.ZONE_LABELS) || {
       freezer: 'Freezer',
@@ -663,9 +677,7 @@
         text += '\n';
       });
       var out = text.trim() || '(empty)';
-      navigator.clipboard.writeText(out).then(function () {
-        alert('Stocktake copied');
-      });
+      copyTextToClipboard(out, 'Stocktake copied');
     }
 
     function printSheet() {
@@ -810,9 +822,7 @@
       } else {
         jsonStr = storage.exportJson();
       }
-      navigator.clipboard.writeText(jsonStr).then(function () {
-        alert('Stocktake JSON copied');
-      });
+      copyTextToClipboard(jsonStr, 'Stocktake JSON copied');
     }
 
     return {
