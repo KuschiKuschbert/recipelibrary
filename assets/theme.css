@@ -4351,21 +4351,90 @@ html.lenovo-tab-one-profile .add-form-actions {
 }
 
 html.lenovo-tab-one-profile .ar-modal-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
   margin-bottom: 20px;
 }
 
 html.lenovo-tab-one-profile .ar-modal-tabs button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-height: 48px;
   padding: 11px 18px;
   border-radius: 12px;
   font-size: 14px;
+  line-height: 1.25;
+  text-align: center;
 }
 
 html.lenovo-tab-one-profile #addRecipeOverlay .modal,
 html.lenovo-tab-one-profile #addRivieraOverlay .modal,
 html.lenovo-tab-one-profile #addKitchenBookOverlay .modal {
-  max-width: min(720px, calc(100vw - 28px));
+  max-width: min(780px, calc(100vw - 28px));
+  scroll-padding-bottom: 116px;
+}
+
+html.lenovo-tab-one-profile #addRecipeOverlay .modal > p,
+html.lenovo-tab-one-profile #addRivieraOverlay .modal > p,
+html.lenovo-tab-one-profile #addKitchenBookOverlay .modal > p,
+html.lenovo-tab-one-profile .ar-format-help,
+html.lenovo-tab-one-profile .ar-format-status,
+html.lenovo-tab-one-profile .ar-gemini-saved-strip,
+html.lenovo-tab-one-profile .ar-proxy-details summary {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+html.lenovo-tab-one-profile .ar-format-key-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(168px, auto);
+  gap: 10px 12px;
+  align-items: end;
+}
+
+html.lenovo-tab-one-profile .ar-format-key-row .form-row {
+  min-width: 0;
+}
+
+html.lenovo-tab-one-profile .ar-gemini-saved-strip {
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 12px;
+}
+
+html.lenovo-tab-one-profile .ar-gemini-saved-strip .btn-text-gemini {
+  min-height: 48px;
+  padding: 0 12px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+html.lenovo-tab-one-profile .ar-proxy-details summary {
+  min-height: 48px;
+  padding: 13px 12px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+html.lenovo-tab-one-profile textarea#arPasteRaw,
+html.lenovo-tab-one-profile textarea#rvPasteRaw {
+  min-height: 168px !important;
+}
+
+html.lenovo-tab-one-profile #arFormatBtn,
+html.lenovo-tab-one-profile #rvFormatBtn {
+  width: 100%;
+  min-height: 50px;
+}
+
+html.lenovo-tab-one-profile #rvPanelManual .form-primary-btn {
+  flex: 1 1 180px;
+  justify-content: center;
 }
 
 html.lenovo-tab-one-profile #pageQrOverlay .modal,
@@ -4432,21 +4501,81 @@ html.lenovo-tab-one-profile .prep-actor-remove {
 @media (max-width: 860px) {
   html.lenovo-tab-one-profile .ing-row,
   html.lenovo-tab-one-profile .ing-row-r {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px 12px;
+    padding: 12px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.024)),
+      rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+  }
+
+  html.lenovo-tab-one-profile .ing-row {
+    grid-template-columns: minmax(112px, 168px) minmax(76px, 116px) minmax(0, 1fr) 48px;
+    grid-template-rows: repeat(3, minmax(48px, auto));
+  }
+
+  html.lenovo-tab-one-profile .ing-row-r {
+    grid-template-columns: minmax(112px, 172px) minmax(0, 1fr) 48px;
+    grid-template-rows: repeat(2, minmax(48px, auto));
+  }
+
+  html.lenovo-tab-one-profile .ing-row .ar-qty {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  html.lenovo-tab-one-profile .ing-row .ar-unit {
+    grid-column: 2;
+    grid-row: 1;
   }
 
   html.lenovo-tab-one-profile .ing-row .ar-item,
-  html.lenovo-tab-one-profile .ing-row .ar-prep,
-  html.lenovo-tab-one-profile .ing-row-r .rv-item,
-  html.lenovo-tab-one-profile .ing-row-r .rv-prep {
+  html.lenovo-tab-one-profile .ing-row .ar-prep {
     grid-column: 1 / -1;
   }
 
-  html.lenovo-tab-one-profile .ing-row .btn-secondary,
-  html.lenovo-tab-one-profile .ing-row-r .btn-secondary {
+  html.lenovo-tab-one-profile .ing-row .ar-item {
+    grid-row: 2;
+  }
+
+  html.lenovo-tab-one-profile .ing-row .ar-prep {
+    grid-row: 3;
+  }
+
+  html.lenovo-tab-one-profile .ing-row-r .rv-qty {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  html.lenovo-tab-one-profile .ing-row-r .rv-item {
     grid-column: 2;
+    grid-row: 1;
+  }
+
+  html.lenovo-tab-one-profile .ing-row-r .rv-prep {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  html.lenovo-tab-one-profile .ing-row .btn-secondary {
+    grid-column: 4;
+    grid-row: 1;
+    align-self: stretch;
+    justify-self: stretch;
+    width: 48px;
+  }
+
+  html.lenovo-tab-one-profile .ing-row-r .btn-secondary {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: stretch;
     justify-self: end;
     width: 48px;
+  }
+
+  html.lenovo-tab-one-profile .ar-format-key-row {
+    grid-template-columns: 1fr;
   }
 }
 
