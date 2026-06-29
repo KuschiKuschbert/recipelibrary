@@ -1454,13 +1454,26 @@ html.low-memory-device .kuschi-toast--show {
   outline: none;
   border-color: var(--gold);
 }
+.ord-field-label {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--text3);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+  text-transform: uppercase;
+}
 /* Fixed-width unit column so every order-qty input gets the same width. */
 .ord-qty-with-unit {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 3.25rem;
-  gap: 8px;
+  gap: 4px 8px;
   align-items: center;
   min-width: 0;
+}
+.ord-qty-with-unit .ord-field-label {
+  grid-column: 1 / -1;
 }
 .ord-qty-with-unit .ord-order-qty,
 .ord-qty-with-unit .ord-order-qty-extra,
@@ -1476,14 +1489,35 @@ html.low-memory-device .kuschi-toast--show {
   overflow-wrap: anywhere;
 }
 .ord-zone-display {
+  display: block;
   font-size: 12px;
   color: var(--text3);
-  padding: 6px 2px;
   line-height: 1.35;
+}
+.ord-zone-control {
+  display: block;
+  min-width: 0;
 }
 .order-line-name {
   color: var(--text);
   font-weight: 500;
+}
+.order-line-need {
+  margin-top: 4px;
+  color: var(--text3);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.order-line-need span {
+  color: var(--gold);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
 }
 .order-add-hint {
   font-size: 12px;
@@ -1531,7 +1565,8 @@ html.low-memory-device .kuschi-toast--show {
     grid-column: 1;
   }
   .order-line-row .ord-zone,
-  .order-line-row .ord-zone-display {
+  .order-line-row .ord-zone-display,
+  .order-line-row .ord-zone-control {
     grid-row: 2;
     grid-column: 2;
   }
@@ -5133,8 +5168,19 @@ html.lenovo-tab-one-profile .order-add-hint {
   font-size: 13px;
 }
 
+html.lenovo-tab-one-profile .ord-field-label {
+  margin-bottom: 5px;
+  font-size: 10px;
+}
+
 html.lenovo-tab-one-profile .ord-unit-suffix {
   min-width: 0;
+}
+
+html.lenovo-tab-one-profile .order-line-need {
+  max-width: 100%;
+  margin-top: 6px;
+  font-size: 12px;
 }
 
 html.lenovo-tab-one-profile .stkt-uom-cell {
@@ -5331,7 +5377,7 @@ html.lenovo-tab-one-profile .nav-item__label {
   html.lenovo-tab-one-profile .order-line-row {
     position: relative;
     grid-template-columns: minmax(0, 1fr) minmax(170px, 0.72fr) 48px;
-    grid-template-rows: auto 48px;
+    grid-template-rows: auto auto;
     gap: 10px 12px;
     margin-bottom: 10px;
     padding: 14px 12px;
@@ -5352,7 +5398,8 @@ html.lenovo-tab-one-profile .nav-item__label {
   }
 
   html.lenovo-tab-one-profile .order-line-row .ord-zone,
-  html.lenovo-tab-one-profile .order-line-row .ord-zone-display {
+  html.lenovo-tab-one-profile .order-line-row .ord-zone-display,
+  html.lenovo-tab-one-profile .order-line-row .ord-zone-control {
     grid-column: 2 / 4;
     grid-row: 2;
   }
@@ -5381,7 +5428,7 @@ html.lenovo-tab-one-profile .nav-item__label {
   html.lenovo-tab-one-profile .order-line-sub {
     position: relative;
     grid-template-columns: 22px minmax(0, 1fr) minmax(148px, 0.62fr) 48px;
-    grid-template-rows: auto 48px;
+    grid-template-rows: auto auto;
     gap: 10px 12px;
     margin: -2px 0 10px 14px;
     padding: 12px;
@@ -5404,6 +5451,11 @@ html.lenovo-tab-one-profile .nav-item__label {
   }
 
   html.lenovo-tab-one-profile .order-line-sub .ord-qty-with-unit {
+    grid-column: 2 / 4;
+    grid-row: 2;
+  }
+
+  html.lenovo-tab-one-profile .order-line-sub .ord-zone-control {
     grid-column: 2 / 4;
     grid-row: 2;
   }

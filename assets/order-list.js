@@ -296,7 +296,19 @@
 
   function zoneDisplayHtml(zone) {
     var z = ZONE_ORDER.indexOf(zone) >= 0 ? zone : 'other';
-    return '<span class="ord-zone-display">' + esc(ZONE_LABELS[z]) + '</span>';
+    return (
+      '<span class="ord-zone-control ord-zone-control--display"><span class="ord-field-label">Storage</span><span class="ord-zone-display">' +
+      esc(ZONE_LABELS[z]) +
+      '</span></span>'
+    );
+  }
+
+  function zoneSelectControlHtml(selectHtml) {
+    return (
+      '<span class="ord-zone-control ord-zone-control--select"><span class="ord-field-label">Storage</span>' +
+      selectHtml +
+      '</span>'
+    );
   }
 
   function orderQtyInputBlock(inputAttrs, value, orderUnit, wrapperExtraClass) {
@@ -307,12 +319,25 @@
       '<div class="' +
       wclass +
       '">' +
+      '<span class="ord-field-label">Order</span>' +
       '<input type="text" ' +
       inputAttrs +
       ' value="' +
       escAttr(value) +
       '" placeholder="Order qty" />' +
       suffix +
+      '</div>'
+    );
+  }
+
+  function recipeNeedHtml(line) {
+    var text = String((line && line.recipeQtyDisplay) || '').trim();
+    if (!text || text === '—') return '';
+    return (
+      '<div class="order-line-need" title="' +
+      escAttr(text) +
+      '"><span>Need</span> ' +
+      esc(text) +
       '</div>'
     );
   }
@@ -485,14 +510,14 @@
 
     function recipeZoneControlHtml(line, keysEsc) {
       if (editingZones) {
-        return zoneSelectHtml(line.zone, 'ord-zone', 'recipe', keysEsc, null);
+        return zoneSelectControlHtml(zoneSelectHtml(line.zone, 'ord-zone', 'recipe', keysEsc, null));
       }
       return zoneDisplayHtml(line.zone);
     }
 
     function extraZoneControlHtml(line) {
       if (editingZones) {
-        return zoneSelectHtml(line.zone, 'ord-zone-extra', 'extra', '', line.extraId);
+        return zoneSelectControlHtml(zoneSelectHtml(line.zone, 'ord-zone-extra', 'extra', '', line.extraId));
       }
       return zoneDisplayHtml(line.zone);
     }
@@ -550,6 +575,7 @@
               '<div class="order-line-row" data-kind="recipe">' +
               '<div class="order-line-name">' +
               esc(line.item) +
+              recipeNeedHtml(line) +
               '</div>' +
               orderQtyWithUnitHtml(line.orderQty, keysEsc, ou) +
               recipeZoneControlHtml(line, keysEsc) +
@@ -564,6 +590,7 @@
                 '<span class="order-sub-merged" aria-hidden="true">↳</span>' +
                 '<div class="order-line-name order-sub-name">' +
                 esc(ex.name) +
+                recipeNeedHtml(ex) +
                 '</div>' +
                 orderQtyInputBlock(
                   'class="ord-extra-qty" data-extra-id="' + escAttr(xid) + '"',
@@ -583,6 +610,7 @@
               '<div class="order-line-row" data-kind="extra">' +
               '<div class="order-line-name">' +
               esc(line.item) +
+              recipeNeedHtml(line) +
               '</div>' +
               orderQtyInputBlock(
                 'class="ord-order-qty-extra" data-extra-id="' + escAttr(line.extraId) + '"',
