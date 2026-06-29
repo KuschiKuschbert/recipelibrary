@@ -575,6 +575,9 @@
     <div class="search-inner">
       <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input type="text" class="search-input" id="search" placeholder="Search recipes, ingredients, cuisines..." autocomplete="off" spellcheck="false">
+      <button type="button" class="search-clear" id="searchClear" hidden aria-label="Clear search" title="Clear search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
       <span class="search-shortcut">/</span>
     </div>
   </div>
@@ -982,7 +985,12 @@ function render(dt) {
 
   const content = document.getElementById('content');
   if (!filtered.length) {
-    content.innerHTML = '<div class="empty">No recipes found. Try different keywords or clear your filters.</div>';
+    content.innerHTML = `<div class="empty empty-search-state">
+      No recipes found. Try different keywords or clear your filters.
+      <div class="empty-actions">
+        <button type="button" class="empty-action-btn" onclick="resetSearchAndFilters()">Clear all</button>
+      </div>
+    </div>`;
     document.getElementById('pagination').innerHTML = '';
     return;
   }
@@ -1084,17 +1092,22 @@ document.getElementById('search').addEventListener('input', () => {
   debounce = setTimeout(applyFilters, 180);
 });
 
+KuschiRecipeUi.bindSearchClear({ inputId: 'search', buttonId: 'searchClear', onClear: applyFilters });
+
 ['filterCuisine','filterProtein','filterTag','filterCat'].forEach(id =>
   document.getElementById(id).addEventListener('change', applyFilters)
 );
 
-document.getElementById('clearBtn').addEventListener('click', () => {
+function resetSearchAndFilters() {
   document.getElementById('search').value = '';
   ['filterCuisine','filterProtein','filterTag','filterCat'].forEach(id =>
     document.getElementById(id).value = ''
   );
+  KuschiRecipeUi.syncSearchClear('search');
   applyFilters();
-});
+}
+
+document.getElementById('clearBtn').addEventListener('click', resetSearchAndFilters);
 
 // Filter chips provided by assets/kuschi-filter-chips.js
 
@@ -1143,6 +1156,7 @@ observer.observe(searchWrap);
 // Sub-shards: hash(id) % N → recipe_detail/detail_{L}_{bucket}.json (see scripts/recipe_pipeline_lib.py DETAIL_BUCKET_COUNT)
 const DETAIL_BUCKET_COUNT = 64;
 const detailCache = {};
+const detailInFlight = {};
 const recipeIndex = {};
 
 function detailBucketFromId(id) {
@@ -1193,18 +1207,26 @@ async function fetchDetailLegacy(letter) {
 async function fetchDetailSlice(letter, bucket) {
   const key = detailSliceCacheKey(letter, bucket);
   if (detailCache[key]) return detailCache[key];
-  const base = siteBaseUrl();
-  const pad = detailSubshardZeroPad();
-  const nb = String(bucket).padStart(pad, '0');
-  const url = `${base}/recipe_detail/detail_${letter}_${nb}.json`;
-  const resp = await fetch(url);
-  if (resp.status === 404) {
-    return fetchDetailLegacy(letter);
+  if (detailInFlight[key]) return detailInFlight[key];
+  detailInFlight[key] = (async function () {
+    const base = siteBaseUrl();
+    const pad = detailSubshardZeroPad();
+    const nb = String(bucket).padStart(pad, '0');
+    const url = `${base}/recipe_detail/detail_${letter}_${nb}.json`;
+    const resp = await fetch(url);
+    if (resp.status === 404) {
+      return fetchDetailLegacy(letter);
+    }
+    if (!resp.ok) throw new Error(`Detail slice not found for "${letter}" bucket ${bucket}`);
+    const data = await resp.json();
+    detailCache[key] = data;
+    return data;
+  })();
+  try {
+    return await detailInFlight[key];
+  } finally {
+    delete detailInFlight[key];
   }
-  if (!resp.ok) throw new Error(`Detail slice not found for "${letter}" bucket ${bucket}`);
-  const data = await resp.json();
-  detailCache[key] = data;
-  return data;
 }
 
 function catalogDetailBucketForId(id, info) {
@@ -1224,8 +1246,19 @@ function prefetchDetailShardForRecipeId(id) {
   fetchDetailSlice(info.letter, bucket).catch(() => {});
 }
 
-/** After grid render: prefetch detail sub-shards for letter+bucket on the first ~50 visible cards (idle). Helps touch devices where pointer prefetch has no lead time. */
+function kuschiDetailPrefetchBudget() {
+  const root = document.documentElement;
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if (connection && connection.saveData) return { cards: 4, slices: 3, totalSlices: 3 };
+  if (root.classList.contains('low-memory-device')) return { cards: 8, slices: 5, totalSlices: 5 };
+  if (root.classList.contains('lenovo-tab-one-profile')) return { cards: 12, slices: 8, totalSlices: 8 };
+  return { cards: 28, slices: 16, totalSlices: 24 };
+}
+
+/** After grid render: prefetch a small set of detail sub-shards while idle. Helps touch devices without flooding low-memory tablets. */
 let kuschiVisibleShardPrefetchGen = 0;
+let kuschiVisibleShardPrefetchTotal = 0;
+const kuschiVisibleShardPrefetchKeys = Object.create(null);
 function schedulePrefetchVisibleDetailShards() {
   const gen = ++kuschiVisibleShardPrefetchGen;
   const run = () => {
@@ -1233,10 +1266,11 @@ function schedulePrefetchVisibleDetailShards() {
     const content = document.getElementById('content');
     if (!content) return;
     const cards = content.querySelectorAll('.card[data-recipe-id]');
-    const maxCards = 50;
+    const budget = kuschiDetailPrefetchBudget();
     const userLet = (window.KuschiUserRecipes && KuschiUserRecipes.USER_LETTER) || '_USER';
     const seen = Object.create(null);
-    for (let i = 0; i < cards.length && i < maxCards; i++) {
+    let warmed = 0;
+    for (let i = 0; i < cards.length && i < budget.cards && warmed < budget.slices; i++) {
       const id = cards[i].getAttribute('data-recipe-id');
       if (!id || !recipeIndex[id]) continue;
       const letter = recipeIndex[id].letter;
@@ -1244,8 +1278,13 @@ function schedulePrefetchVisibleDetailShards() {
       const bucket = catalogDetailBucketForId(id, recipeIndex[id]);
       const sk = detailSliceCacheKey(letter, bucket);
       if (detailCache[sk]) continue;
+      if (kuschiVisibleShardPrefetchKeys[sk]) continue;
+      if (kuschiVisibleShardPrefetchTotal >= budget.totalSlices) break;
       if (seen[sk]) continue;
       seen[sk] = true;
+      kuschiVisibleShardPrefetchKeys[sk] = true;
+      kuschiVisibleShardPrefetchTotal++;
+      warmed++;
       fetchDetailSlice(letter, bucket).catch(() => {});
     }
   };

@@ -233,6 +233,7 @@ body {
 
 .search-input {
   flex: 1;
+  min-width: 0;
   background: none;
   border: none;
   font-size: 17px;
@@ -244,6 +245,38 @@ body {
 
 .search-input::placeholder {
   color: var(--text3);
+}
+
+.search-clear {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text3);
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.16s, border-color 0.16s, color 0.16s, transform 0.16s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.search-clear[hidden] {
+  display: none;
+}
+
+.search-clear:hover,
+.search-clear:focus-visible {
+  color: var(--gold);
+  border-color: rgba(201, 169, 110, 0.45);
+  background: rgba(201, 169, 110, 0.12);
+  outline: none;
+}
+
+.search-clear:active {
+  transform: scale(0.96);
 }
 
 .search-shortcut {
@@ -407,6 +440,42 @@ body {
   font-size: 16px;
   color: var(--text3);
   font-weight: 300;
+}
+
+.empty-search-state {
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.55;
+}
+
+.empty-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.empty-action-btn {
+  min-height: 44px;
+  padding: 10px 16px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold-light);
+  background: rgba(201, 169, 110, 0.13);
+  border: 1px solid rgba(201, 169, 110, 0.32);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.16s, border-color 0.16s, color 0.16s;
+}
+
+.empty-action-btn:hover,
+.empty-action-btn:focus-visible {
+  color: var(--gold);
+  background: rgba(201, 169, 110, 0.2);
+  border-color: rgba(201, 169, 110, 0.52);
+  outline: none;
 }
 
 /* ── Modal shell ────────────────────────────────────── */
@@ -3401,6 +3470,8 @@ html.lenovo-tab-one-profile .app-header__btn,
 html.lenovo-tab-one-profile .page-action-btn,
 html.lenovo-tab-one-profile .filter-chip,
 html.lenovo-tab-one-profile .clear-btn,
+html.lenovo-tab-one-profile .search-clear,
+html.lenovo-tab-one-profile .empty-action-btn,
 html.lenovo-tab-one-profile .hero-nav-link,
 html.lenovo-tab-one-profile .hero-actions button,
 html.lenovo-tab-one-profile .hero-actions .hero-nav-cluster a,

@@ -447,6 +447,9 @@
     <div class="search-inner">
       <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input type="text" class="search-input" id="search" placeholder="Search this book…" autocomplete="off" spellcheck="false">
+      <button type="button" class="search-clear" id="searchClear" hidden aria-label="Clear search" title="Clear search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
       <span class="search-shortcut">/</span>
     </div>
   </div>
@@ -980,7 +983,11 @@ function applyFilters() {
 function render() {
   const content = document.getElementById('content');
   if (!filtered.length) {
-    content.innerHTML = '<div class="empty">No recipes yet. Use + Add recipe or adjust search.</div>';
+    const hasSearch = !!document.getElementById('search').value.trim();
+    content.innerHTML = `<div class="empty empty-search-state">
+      ${allRecipes.length ? 'No recipes found in this book.' : 'No recipes yet. Use + Add recipe.'}
+      ${hasSearch ? '<div class="empty-actions"><button type="button" class="empty-action-btn" onclick="clearKitchenBookSearch()">Clear search</button></div>' : ''}
+    </div>`;
     return;
   }
   content.innerHTML = '<div class="grid">' + filtered.map(cardHTML).join('') + '</div>';
@@ -1003,7 +1010,7 @@ function cardHTML(r) {
   if (r.cat) badges += `<span class="badge badge-cat">${KuschiRecipeUi.esc(r.cat)}</span>`;
   const ings = (r.ing || []).slice(0, 8).map(i => `<strong>${KuschiRecipeUi.esc(i)}</strong>`).join(' · ');
   const rid = KuschiRecipeUi.esc(r.id || '');
-  return `<div class="card" onclick="openRecipe('${rid}')" style="cursor:pointer">
+  return `<div class="card" data-recipe-id="${rid}" role="button" tabindex="0" aria-label="Open recipe: ${name}" onclick="openRecipe('${rid}')" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();openRecipe('${rid}')}" style="cursor:pointer">
     <div class="card-header">
       <div class="card-name">${name}</div>
       <button class="copy-btn" onclick="event.stopPropagation();copyName(this,'${nameAttr}')" title="Copy recipe name">
@@ -1013,11 +1020,15 @@ function cardHTML(r) {
     ${cui}
     ${badges ? `<div class="card-badges">${badges}</div>` : ''}
     ${ings ? `<div class="card-ings">${ings}</div>` : ''}
+    <div class="card-footer" aria-hidden="true">
+      <span class="card-open-hint">Open recipe</span>
+      <span class="card-open-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+    </div>
   </div>`;
 }
 
 function copyName(btn, name) {
-  navigator.clipboard.writeText(name).then(() => {
+  KuschiRecipeUi.copyText(name).then(() => {
     btn.classList.add('copied');
     btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>';
     setTimeout(() => {
@@ -1032,6 +1043,14 @@ document.getElementById('search').addEventListener('input', () => {
   clearTimeout(debounce);
   debounce = setTimeout(applyFilters, 180);
 });
+
+function clearKitchenBookSearch() {
+  document.getElementById('search').value = '';
+  KuschiRecipeUi.syncSearchClear('search');
+  applyFilters();
+}
+
+KuschiRecipeUi.bindSearchClear({ inputId: 'search', buttonId: 'searchClear', onClear: applyFilters });
 
 document.addEventListener('keydown', e => {
   if (e.key === '/' && !['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) {

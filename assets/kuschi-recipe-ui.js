@@ -54,9 +54,42 @@
     return fallbackCopy();
   }
 
+  var searchClearSync = Object.create(null);
+
+  function bindSearchClear(opts) {
+    opts = opts || {};
+    var inputId = opts.inputId || 'search';
+    var buttonId = opts.buttonId || 'searchClear';
+    var input = w.document && w.document.getElementById(inputId);
+    var button = w.document && w.document.getElementById(buttonId);
+    if (!input || !button) return;
+
+    function sync() {
+      button.hidden = !input.value;
+    }
+
+    searchClearSync[inputId] = sync;
+    input.addEventListener('input', sync);
+    button.addEventListener('click', function () {
+      if (!input.value) return;
+      input.value = '';
+      sync();
+      input.focus();
+      if (typeof opts.onClear === 'function') opts.onClear();
+    });
+    sync();
+  }
+
+  function syncSearchClear(inputId) {
+    var sync = searchClearSync[inputId || 'search'];
+    if (sync) sync();
+  }
+
   w.KuschiRecipeUi = {
     esc: esc,
     copyText: copyText,
+    bindSearchClear: bindSearchClear,
+    syncSearchClear: syncSearchClear,
     /**
      * @param {{ idSuffix?: string, openByDefault?: boolean, modalInline?: boolean }} [opts]
      */
