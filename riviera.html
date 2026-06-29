@@ -897,6 +897,7 @@
 </div>
 
 <div id="content"></div>
+<div id="pagination" class="pagination"></div>
 
 
 <div class="modal-overlay" id="orderListOverlay" onclick="if(event.target===this)closeOrderListModal()">
@@ -1315,6 +1316,9 @@ function mergeRivieraRecipes() {
 }
 let RECIPES = mergeRivieraRecipes();
 let filtered = [...RECIPES];
+const IS_RIVIERA_LOW_MEMORY_DEVICE = document.documentElement.classList.contains('low-memory-device');
+const RIVIERA_RENDER_BATCH = IS_RIVIERA_LOW_MEMORY_DEVICE ? 36 : 0;
+let rivieraDisplayCount = RIVIERA_RENDER_BATCH || Number.MAX_SAFE_INTEGER;
 let rivieraRecipeIndex = { byId: new Map(), hayById: new Map(), version: 0 };
 let rivieraFilterMemo = { key: '', ids: [] };
 const filterScheduler = KuschiRecipeUi.createFilterScheduler({
@@ -2003,6 +2007,7 @@ function applyFilters() {
   const terms = q ? q.split(/\s+/).filter(Boolean) : [];
   const eventFilterOn = !!(window.KuschiRivieraEventContext && KuschiRivieraEventContext.isFilterOn());
   const memoKey = [rivieraRecipeIndex.version, q, course, protein, diet, eventFilterOn ? 'event' : 'all'].join('\u001f');
+  rivieraDisplayCount = RIVIERA_RENDER_BATCH || Number.MAX_SAFE_INTEGER;
 
   if (typeof updateFilterChips === 'function') updateFilterChips();
 
@@ -2045,9 +2050,39 @@ function render() {
         <button type="button" class="empty-action-btn" onclick="resetRivieraSearchAndFilters()">Clear all</button>
       </div>
     </div></div>`;
+    renderRivieraLoadMore();
     return;
   }
-  content.innerHTML = '<div class="grid">' + filtered.map(cardHTML).join('') + '</div>';
+  const page = filtered.slice(0, rivieraDisplayCount);
+  content.innerHTML = '<div class="grid">' + page.map(cardHTML).join('') + '</div>';
+  renderRivieraLoadMore();
+}
+
+function loadMoreRivieraRecipes() {
+  if (!RIVIERA_RENDER_BATCH) return;
+  const prev = rivieraDisplayCount;
+  rivieraDisplayCount = Math.min(prev + RIVIERA_RENDER_BATCH, filtered.length);
+  const fresh = filtered.slice(prev, rivieraDisplayCount);
+  const grid = document.querySelector('#content .grid');
+  if (grid) grid.insertAdjacentHTML('beforeend', fresh.map(cardHTML).join(''));
+  renderRivieraLoadMore();
+}
+
+function renderRivieraLoadMore() {
+  const pag = document.getElementById('pagination');
+  if (!pag) return;
+  if (!RIVIERA_RENDER_BATCH || filtered.length <= rivieraDisplayCount) {
+    pag.innerHTML = '';
+    return;
+  }
+  const remaining = filtered.length - rivieraDisplayCount;
+  const next = Math.min(RIVIERA_RENDER_BATCH, remaining);
+  pag.innerHTML = `<div class="load-more-wrap">
+    <button class="load-more-btn" onclick="loadMoreRivieraRecipes()">
+      Load ${next.toLocaleString()} more
+      <span class="load-more-count">(${remaining.toLocaleString()} remaining)</span>
+    </button>
+  </div>`;
 }
 
 function cardHTML(r) {

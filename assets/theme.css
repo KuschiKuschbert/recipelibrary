@@ -3978,7 +3978,7 @@ html.lenovo-tab-one-profile.low-memory-device body.has-app-nav .grid .card:hover
 html.lenovo-tab-one-profile.low-memory-device body.has-app-nav .grid .card,
 html.lenovo-tab-one-profile.low-memory-device body.has-app-nav .grid .card .copy-btn,
 html.lenovo-tab-one-profile.low-memory-device body.has-app-nav .grid .card .card-open-icon {
-  transition-duration: 0.12s;
+  transition-duration: 0.08s;
 }
 
 html.lenovo-tab-one-profile .results-meta,
@@ -5403,11 +5403,19 @@ html.low-memory-device .planner-list-overlay {
 
 html.low-memory-device .search-glass:focus-within,
 html.low-memory-device .card:hover,
+html.low-memory-device .card:active,
 html.low-memory-device .hero-nav-link:hover,
 html.low-memory-device .hero-actions button:hover,
 html.low-memory-device .hero-actions .hero-nav-cluster a:hover,
 html.low-memory-device .load-more-btn:hover {
   box-shadow: none;
+}
+
+html.low-memory-device .card:hover,
+html.low-memory-device .card:active,
+html.low-memory-device .grid .card:hover .card-open-icon,
+html.low-memory-device .grid .card:focus-visible .card-open-icon {
+  transform: none;
 }
 
 html.low-memory-device .card,
@@ -5418,6 +5426,14 @@ html.low-memory-device .hero-add-pair,
 html.low-memory-device .hero-add-trigger.hero-nav-link,
 html.low-memory-device .pkgs-browser {
   transition-duration: 0.16s;
+}
+
+html.low-memory-device .card,
+html.low-memory-device body.has-app-nav .grid .card,
+html.low-memory-device .card::before,
+html.low-memory-device .card .copy-btn,
+html.low-memory-device .card .card-open-icon {
+  transition-duration: 0.08s;
 }
 
 html.low-memory-device .modal,
@@ -5435,11 +5451,11 @@ html.low-memory-device .modal-copy-bar {
 }
 
 html.low-memory-device .card {
-  animation-duration: 0.18s;
+  animation: none !important;
 }
 
 html.low-memory-device .grid .card:nth-child(n) {
-  animation-delay: 0s;
+  animation-delay: 0s !important;
 }
 
 html.low-memory-device .modal-shell-bar {
