@@ -49,6 +49,7 @@
   .pantry-meta { font-size: 12px; color: var(--text3); margin-top: 5px; line-height: 1.5; }
   .pantry-match { font-size: 11px; color: var(--gold); margin-top: 4px; font-weight: 500; }
   .pantry-status { font-size: 13px; color: var(--text3); margin-top: 8px; }
+  .pantry-status.is-searching { color: var(--gold-light); font-weight: 600; }
   @media (min-width: 900px) and (orientation: landscape), (min-width: 1100px) {
     .pantry-wrap { padding-left: calc(var(--nav-rail-width, 72px) + 24px); }
   }
@@ -82,6 +83,7 @@
   <p class="pantry-status" id="pantryStatus">Loading pantry index…</p>
   <div id="out"></div>
 </div>
+<script src="assets/kuschi-recipe-ui.js"></script>
 <script>
 (function () {
   var SHARDS = [];
@@ -247,7 +249,19 @@
     return hit;
   }
 
-  document.getElementById('pantryGo').addEventListener('click', function () {
+  var pantrySearchScheduler = KuschiRecipeUi.createFilterScheduler({
+    run: runPantrySearch,
+    delay: 0,
+    onPending: function (ctx) {
+      var st = document.getElementById('pantryStatus');
+      if (!st) return false;
+      st.classList.toggle('is-searching', ctx.pending);
+      if (ctx.pending) st.textContent = 'Searching library…';
+      return false;
+    }
+  });
+
+  function runPantrySearch() {
     var raw = document.getElementById('pantryIn').value;
     var parts = raw.split(/[\n,]+/).map(function (s) { return s.trim(); }).filter(Boolean);
     var needToks = [];
@@ -260,12 +274,13 @@
     var out = document.getElementById('out');
     out.innerHTML = '';
     if (!needToks.length) {
+      pantrySearchScheduler.setPending(false);
       st.textContent = 'Add at least one ingredient.';
       return;
     }
-    st.textContent = 'Searching library…';
     loadRecipesForPantrySearch(needToks)
       .then(function (pack) {
+        pantrySearchScheduler.setPending(false);
         var all = pack.all;
         var scored = [];
         for (var i = 0; i < all.length; i++) {
@@ -289,8 +304,13 @@
         if (!scored.length) out.innerHTML = '<p class="pantry-status">No matches. Try broader names (e.g. “onion” not “yellow onion”).</p>';
       })
       .catch(function () {
+        pantrySearchScheduler.setPending(false);
         st.textContent = 'Failed to load index.';
       });
+  }
+
+  document.getElementById('pantryGo').addEventListener('click', function () {
+    pantrySearchScheduler.schedule();
   });
 
   Promise.all([loadCatalogManifest(), loadHayIndex()])

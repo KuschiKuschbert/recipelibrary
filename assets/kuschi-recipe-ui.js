@@ -146,6 +146,15 @@
     function setPending(pending) {
       var bar = doc && doc.getElementById(barId);
       var meta = doc && doc.getElementById(metaId);
+      if (typeof opts.onPending === 'function') {
+        var handled = opts.onPending({
+          pending: !!pending,
+          text: pendingText,
+          bar: bar,
+          meta: meta,
+        });
+        if (handled === false) return;
+      }
       if (!bar || !meta) return;
       bar.classList.toggle('is-searching', !!pending);
       if (pending) {

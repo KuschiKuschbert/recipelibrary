@@ -465,6 +465,7 @@
       <input type="search" class="search-input" id="aromaSearch" placeholder="Try a food or spice — lamb, cumin, lemongrass…" autocomplete="off" spellcheck="false" aria-label="Search foods and spices" />
     </div>
   </div>
+  <div class="search-status" id="aromaSearchStatus" aria-live="polite"></div>
 </div>
 
 <div class="aroma-page">
@@ -544,6 +545,7 @@
 
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/aroma-hints.js"></script>
+<script src="assets/kuschi-recipe-ui.js"></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
 <script>
 (function () {
@@ -1004,19 +1006,36 @@
     }
   }
 
-  var debounce;
-  searchEl.addEventListener('input', function () {
-    clearTimeout(debounce);
-    debounce = setTimeout(function () {
-      if (trySmartSearchFromMatrixOrBrowse()) return;
+  var aromaSearchScheduler = KuschiRecipeUi.createFilterScheduler({
+    run: function () {
+      if (trySmartSearchFromMatrixOrBrowse()) {
+        aromaSearchScheduler.setPending(false);
+        return;
+      }
       runSearch();
-    }, 200);
+      aromaSearchScheduler.setPending(false);
+    },
+    lowMemoryDelay: 240,
+    defaultDelay: 180,
+    onPending: function (ctx) {
+      var meta = document.getElementById('aromaSearchStatus');
+      var wrap = searchEl && searchEl.closest ? searchEl.closest('.search-wrap') : null;
+      if (wrap) wrap.classList.toggle('is-searching', ctx.pending);
+      if (meta) {
+        meta.classList.toggle('is-searching', ctx.pending);
+        meta.textContent = ctx.pending ? ctx.text : '';
+      }
+      return false;
+    }
+  });
+
+  searchEl.addEventListener('input', function () {
+    aromaSearchScheduler.schedule();
   });
   searchEl.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
       e.preventDefault();
-      if (trySmartSearchFromMatrixOrBrowse()) return;
-      runSearch();
+      aromaSearchScheduler.schedule({ immediate: true });
     }
   });
 

@@ -20,6 +20,9 @@
   var flavourIngredients = null;
   var flavourByCollapsedKey = null;
   var lastDetailId = null;
+  var searchScheduler = null;
+  var toolkitFilterScheduler = null;
+  var loadStatusText = '';
 
   function norm(s) {
     return String(s || '')
@@ -406,9 +409,25 @@
         });
       });
     }
+    toolkitFilterScheduler =
+      global.KuschiRecipeUi && typeof global.KuschiRecipeUi.createFilterScheduler === 'function'
+        ? global.KuschiRecipeUi.createFilterScheduler({
+            run: function () {
+              applyFilter();
+              toolkitFilterScheduler.setPending(false);
+            },
+            lowMemoryDelay: 180,
+            defaultDelay: 120,
+            onPending: function () { return false; },
+          })
+        : null;
     inp.addEventListener('input', function () {
-      clearTimeout(inp._tkFt);
-      inp._tkFt = setTimeout(applyFilter, 120);
+      if (toolkitFilterScheduler) {
+        toolkitFilterScheduler.schedule();
+      } else {
+        clearTimeout(inp._tkFt);
+        inp._tkFt = setTimeout(applyFilter, 120);
+      }
     });
   }
 
@@ -698,6 +717,26 @@
     });
   }
 
+  function setFlavorSearchPending(pending, text) {
+    var el = document.getElementById('flavorLoadStatus');
+    if (!el) return;
+    el.classList.toggle('is-searching', !!pending);
+    el.textContent = pending ? text : loadStatusText;
+  }
+
+  function scheduleFlavorSearch(opts) {
+    if (searchScheduler) {
+      searchScheduler.schedule(opts);
+      return;
+    }
+    clearTimeout(scheduleFlavorSearch._timer);
+    if (opts && opts.immediate) {
+      runSearch();
+      return;
+    }
+    scheduleFlavorSearch._timer = setTimeout(runSearch, 200);
+  }
+
   function initTabs() {
     document.querySelectorAll('[data-flavor-tab]').forEach(function (tab) {
       tab.addEventListener('click', function () {
@@ -724,12 +763,14 @@
       ensureLoaded()
         .then(function () {
           var el = document.getElementById('flavorLoadStatus');
-          if (el) el.textContent = unified.length + ' unified rows · Thesaurus ' + wheel.length + ' · Links ' + pairings.length;
+          loadStatusText = unified.length + ' unified rows · Thesaurus ' + wheel.length + ' · Links ' + pairings.length;
+          if (el) el.textContent = loadStatusText;
           ensureFlavourKb().then(function (kb) {
             var st = document.getElementById('flavorLoadStatus');
             if (st && kb && kb.stats) {
-              st.textContent +=
+              loadStatusText +=
                 ' · Toolkit v' + (kb.stats.version || '1.1') + ' (' + (kb.stats.total_ingredients || '') + ' ingredients)';
+              st.textContent = loadStatusText;
             }
           });
           var inp = document.getElementById('flavorSearch');
@@ -763,9 +804,23 @@
     initTabs();
     var inp = document.getElementById('flavorSearch');
     if (inp) {
+      searchScheduler =
+        global.KuschiRecipeUi && typeof global.KuschiRecipeUi.createFilterScheduler === 'function'
+          ? global.KuschiRecipeUi.createFilterScheduler({
+              run: function () {
+                runSearch();
+                searchScheduler.setPending(false);
+              },
+              lowMemoryDelay: 240,
+              defaultDelay: 180,
+              onPending: function (ctx) {
+                setFlavorSearchPending(ctx.pending, ctx.text);
+                return false;
+              },
+            })
+          : null;
       inp.addEventListener('input', function () {
-        clearTimeout(inp._ft);
-        inp._ft = setTimeout(runSearch, 200);
+        scheduleFlavorSearch();
       });
     }
   }

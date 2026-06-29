@@ -411,6 +411,24 @@ body {
   font-weight: 600;
 }
 
+.search-status,
+.status-searching {
+  color: var(--text3);
+  font-size: 12px;
+}
+
+.search-status {
+  min-height: 18px;
+  margin-top: 8px;
+  text-align: right;
+}
+
+.search-status.is-searching,
+.status-searching.is-searching {
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
 /* ── Loading / empty ────────────────────────────────── */
 .loading {
   text-align: center;
