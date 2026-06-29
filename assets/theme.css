@@ -930,6 +930,14 @@ html.low-memory-device .kuschi-toast--show {
   border-radius: 8px;
 }
 
+.modal-steps--prep li::before {
+  content: "P" counter(step);
+}
+
+.modal-steps--service li::before {
+  content: "S" counter(step);
+}
+
 .modal-loading {
   text-align: center;
   padding: 40px;
@@ -4283,6 +4291,23 @@ html.lenovo-tab-one-profile body.has-app-nav .modal-section {
   letter-spacing: 0.12em;
 }
 
+html.lenovo-tab-one-profile body.has-app-nav .modal-section--prep,
+html.lenovo-tab-one-profile body.has-app-nav .modal-section--service {
+  margin-top: 32px;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav .modal-section--prep {
+  border-left-color: rgba(201, 169, 110, 0.54);
+}
+
+html.lenovo-tab-one-profile body.has-app-nav .modal-section--service {
+  color: #bfe9cb;
+  background:
+    linear-gradient(90deg, rgba(126, 200, 154, 0.12), rgba(255, 255, 255, 0.025));
+  border-color: rgba(126, 200, 154, 0.18);
+  border-left-color: rgba(126, 200, 154, 0.54);
+}
+
 html.lenovo-tab-one-profile body.has-app-nav .modal-ing {
   grid-template-columns: minmax(92px, max-content) minmax(0, 1fr);
   gap: 0 18px;
@@ -4342,10 +4367,26 @@ html.lenovo-tab-one-profile body.has-app-nav .modal-steps li {
 html.lenovo-tab-one-profile body.has-app-nav .modal-steps li::before {
   left: 16px;
   top: 16px;
-  width: 36px;
+  width: 40px;
   height: 36px;
   border-radius: 10px;
-  font-size: 14px;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav .modal-steps--prep li {
+  border-color: rgba(201, 169, 110, 0.14);
+}
+
+html.lenovo-tab-one-profile body.has-app-nav .modal-steps--service li {
+  background:
+    linear-gradient(180deg, rgba(126, 200, 154, 0.07), rgba(255, 255, 255, 0.024));
+  border-color: rgba(126, 200, 154, 0.16);
+}
+
+html.lenovo-tab-one-profile body.has-app-nav .modal-steps--service li::before {
+  background: rgba(126, 200, 154, 0.14);
+  color: #bfe9cb;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .modal-steps li.step-done {
@@ -4455,9 +4496,9 @@ html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal-step
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal-steps li::before {
   left: 18px;
   top: 18px;
-  width: 40px;
+  width: 44px;
   height: 40px;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .cook-step-nav {

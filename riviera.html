@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=48">
+<link rel="stylesheet" href="assets/theme.css?v=49">
 <link rel="preload" href="riviera_data/builtins.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
@@ -2261,6 +2261,12 @@ function openRecipe(id, options) {
           const ingsHTML = buildIngsHTML(r.ingredients, 1);
           const steps = r.method_steps.map(s => `<li>${KuschiRecipeUi.esc(s)}</li>`).join('');
           const service = r.service.map(s => `<li>${KuschiRecipeUi.esc(s)}</li>`).join('');
+          const prepBlock = steps
+            ? `<div class="modal-section modal-section--prep">Prep Method</div><ol class="modal-steps modal-steps--prep">${steps}</ol>`
+            : '';
+          const serviceBlock = service
+            ? `<div class="modal-section modal-section--service">On the Day — Service</div><ol class="modal-steps modal-steps--service">${service}</ol>`
+            : '';
           const note = r.note ? `<div class="modal-note">⚠ ${KuschiRecipeUi.esc(r.note)}</div>` : '';
           const label = `<div class="label-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> Label: DATE MADE · ${KuschiRecipeUi.esc(r.label)}</div>`;
           const adminActions = isRivieraAdminUnlocked()
@@ -2302,7 +2308,7 @@ function openRecipe(id, options) {
             if (!guard()) return;
             heavy.insertAdjacentHTML(
               'beforeend',
-              `<div class="modal-section">Prep Method</div><ol class="modal-steps">${steps}</ol><div class="modal-section">On the Day — Service</div><ol class="modal-steps">${service}</ol>`
+              prepBlock + serviceBlock
             );
             heavy.insertAdjacentHTML('beforeend', aromaHintHtml);
 
