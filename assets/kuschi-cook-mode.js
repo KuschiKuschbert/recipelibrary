@@ -37,6 +37,8 @@
         try { KuschiScreenWake.request(); } catch (_) {}
       }
       buildCookModeStepNav();
+    } else {
+      _cleanupCookMode();
     }
   }
 
@@ -52,6 +54,7 @@
     var total = steps.length;
     var prevBtn = null;
     var nextBtn = null;
+    var previewEl = null;
 
     function prefersInstantStepScroll() {
       var root = document.documentElement;
@@ -70,7 +73,10 @@
         el.classList.toggle('cook-step-past', i < currentStep);
       });
       var counter = document.getElementById('cookStepCounter');
-      if (counter) counter.textContent = (currentStep + 1) + ' / ' + total;
+      if (counter) counter.textContent = 'Step ' + (currentStep + 1) + ' / ' + total;
+      if (previewEl) {
+        previewEl.textContent = (steps[currentStep].textContent || '').trim().replace(/\s+/g, ' ');
+      }
       if (prevBtn) {
         prevBtn.disabled = currentStep === 0;
         prevBtn.setAttribute('aria-disabled', currentStep === 0 ? 'true' : 'false');
@@ -92,7 +98,10 @@
       '<button class="cook-step-prev" type="button" onclick="cookStepNav.prev()" aria-label="Previous step">' +
         '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>' +
       '</button>' +
-      '<span class="cook-step-counter" id="cookStepCounter">1 / ' + total + '</span>' +
+      '<span class="cook-step-meter" aria-live="polite">' +
+        '<span class="cook-step-counter" id="cookStepCounter">Step 1 / ' + total + '</span>' +
+        '<span class="cook-step-preview" id="cookStepPreview"></span>' +
+      '</span>' +
       '<button class="cook-step-next" type="button" onclick="cookStepNav.next()" aria-label="Next step">' +
         '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>' +
       '</button>';
@@ -101,6 +110,19 @@
     if (modal) modal.appendChild(nav);
     prevBtn = nav.querySelector('.cook-step-prev');
     nextBtn = nav.querySelector('.cook-step-next');
+    previewEl = nav.querySelector('#cookStepPreview');
+
+    function handleStepClick(e) {
+      if (!overlay.classList.contains('cook-mode')) return;
+      var stepEl = e.target.closest('.modal-steps li, .modal-step');
+      if (!stepEl || !overlay.contains(stepEl)) return;
+      var idx = Array.prototype.indexOf.call(steps, stepEl);
+      if (idx >= 0) goToStep(idx);
+    }
+    overlay.addEventListener('click', handleStepClick);
+    nav._kuschiCookCleanup = function () {
+      overlay.removeEventListener('click', handleStepClick);
+    };
 
     window.cookStepNav = {
       prev: function () { goToStep(currentStep - 1); },
@@ -113,10 +135,18 @@
   // Remove the step nav when the modal closes so it rebuilds fresh next open.
   function _cleanupCookMode() {
     var nav = document.getElementById('cookStepNav');
-    if (nav) nav.remove();
+    if (nav) {
+      if (typeof nav._kuschiCookCleanup === 'function') nav._kuschiCookCleanup();
+      nav.remove();
+    }
     window.cookStepNav = null;
     var overlay = document.getElementById(_overlayId);
-    if (overlay) overlay.classList.remove('cook-mode');
+    if (overlay) {
+      overlay.classList.remove('cook-mode');
+      overlay.querySelectorAll('.cook-step-active, .cook-step-past').forEach(function (el) {
+        el.classList.remove('cook-step-active', 'cook-step-past');
+      });
+    }
     var btn = document.getElementById('cookModeBtn');
     if (btn) btn.classList.remove('cook-mode-btn--active');
   }
