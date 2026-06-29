@@ -157,6 +157,23 @@
     if (p) p.hidden = subTab !== 'add';
   }
 
+  function syncPriorityQuickButtons(priorityId) {
+    if (!priorityId) return;
+    var input = document.getElementById(priorityId);
+    if (!input) return;
+    var val = input.value === 'high' || input.value === 'low' ? input.value : 'medium';
+    if (input.value !== val) input.value = val;
+    var groups = document.querySelectorAll('.prep-priority-quick[data-prep-priority-target]');
+    Array.prototype.forEach.call(groups, function (group) {
+      if (group.getAttribute('data-prep-priority-target') !== priorityId) return;
+      Array.prototype.forEach.call(group.querySelectorAll('[data-priority]'), function (btn) {
+        var active = btn.getAttribute('data-priority') === val;
+        btn.classList.toggle('prep-priority-pill--active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+    });
+  }
+
   function create(config) {
     var overlayId = config.overlayId;
     var bodyId = config.bodyId;
@@ -409,8 +426,7 @@
           (rows || '<p class="prep-empty">No tasks yet. Switch to <strong>Add task</strong> to create one.</p>') +
           '</div>';
       } else {
-        listBlock =
-          '<p class="prep-add-hint prep-add-hint--tab">Tasks are <strong>fixed</strong> after you save them — only <strong>Done</strong> can be changed on the All tasks tab.</p>';
+        listBlock = '';
       }
 
       body.innerHTML =
@@ -442,6 +458,7 @@
 
       var assigneeFormEl = formIds.assignee ? document.getElementById(formIds.assignee) : null;
       fillAssigneeSelect(assigneeFormEl, loadDoc());
+      syncPriorityQuickButtons(formIds.priority);
     }
 
     function onOverlayClick(e) {
@@ -458,6 +475,16 @@
       if (act === 'open-task') {
         var oid = btn.getAttribute('data-task-id');
         if (oid) openTaskDetail(oid);
+        return;
+      }
+
+      if (act === 'quick-priority') {
+        var prQuick = btn.getAttribute('data-priority');
+        if (prQuick !== 'high' && prQuick !== 'medium' && prQuick !== 'low') return;
+        var priorityEl = formIds.priority ? document.getElementById(formIds.priority) : null;
+        if (!priorityEl) return;
+        priorityEl.value = prQuick;
+        syncPriorityQuickButtons(formIds.priority);
         return;
       }
 
@@ -542,6 +569,9 @@
         saveDoc(doc1);
         renderBody();
         return;
+      }
+      if (el.id && el.id === formIds.priority) {
+        syncPriorityQuickButtons(formIds.priority);
       }
     }
 

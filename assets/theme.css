@@ -2701,13 +2701,82 @@ button.kuschi-flavor-retry:hover {
 .prep-add-panel {
   margin-top: 4px;
 }
-.prep-add-hint {
-  font-size: 13px;
-  color: var(--text3);
-  line-height: 1.55;
+.prep-add-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.024)),
+    rgba(255, 255, 255, 0.025);
 }
-.prep-add-hint--tab {
-  margin: 8px 0 0;
+.prep-add-head {
+  display: grid;
+  gap: 4px;
+}
+.prep-add-title {
+  margin-top: 0 !important;
+}
+.prep-add-form .form-row {
+  margin-bottom: 0;
+}
+.prep-add-field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.prep-form-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: var(--text3);
+}
+.prep-priority-quick {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.prep-priority-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.15;
+  cursor: pointer;
+}
+.prep-priority-pill--high.prep-priority-pill--active {
+  border-color: rgba(201, 169, 110, 0.5);
+  background: rgba(201, 169, 110, 0.16);
+  color: var(--gold-light);
+}
+.prep-priority-pill--medium.prep-priority-pill--active {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+}
+.prep-priority-pill--low.prep-priority-pill--active {
+  border-color: rgba(122, 193, 139, 0.35);
+  background: rgba(122, 193, 139, 0.1);
+  color: var(--green);
+}
+.prep-add-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+.prep-save-task-btn {
+  min-width: 160px;
 }
 .prep-board-status {
   display: flex;
@@ -2997,6 +3066,10 @@ button.prep-task-card:hover {
   word-break: break-word;
 }
 @media (max-width: 520px) {
+  .prep-add-field-grid {
+    grid-template-columns: 1fr;
+  }
+
   .prep-task-card-row {
     flex-wrap: wrap;
   }
@@ -5324,13 +5397,79 @@ html.lenovo-tab-one-profile .prep-add-teammate .btn-secondary {
   min-height: 50px;
 }
 
+html.lenovo-tab-one-profile .prep-add-panel {
+  margin-top: 8px;
+  scroll-margin-bottom: 96px;
+}
+
+html.lenovo-tab-one-profile .prep-add-form {
+  gap: 12px;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 14px;
+}
+
+html.lenovo-tab-one-profile .prep-add-head {
+  gap: 3px;
+}
+
+html.lenovo-tab-one-profile .prep-add-title {
+  margin-bottom: 0;
+  font-size: 13px;
+}
+
+html.lenovo-tab-one-profile .prep-add-panel .form-row {
+  margin-bottom: 0;
+}
+
+html.lenovo-tab-one-profile .prep-add-field-grid {
+  gap: 10px;
+}
+
+html.lenovo-tab-one-profile .prep-form-label {
+  margin-bottom: 7px;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--text3);
+}
+
+html.lenovo-tab-one-profile .prep-priority-quick {
+  gap: 7px;
+}
+
+html.lenovo-tab-one-profile .prep-priority-pill {
+  min-height: 48px;
+  padding: 0 8px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+html.lenovo-tab-one-profile .prep-add-actions {
+  position: sticky;
+  bottom: -24px;
+  z-index: 4;
+  margin: 14px -24px -24px;
+  padding: 12px 24px max(14px, calc(14px + env(safe-area-inset-bottom, 0px)));
+  background:
+    linear-gradient(180deg, rgba(20, 20, 20, 0.88), rgba(20, 20, 20, 0.985)),
+    var(--bg2);
+  border-top: 1px solid rgba(201, 169, 110, 0.18);
+  box-shadow: 0 -10px 24px rgba(0, 0, 0, 0.24);
+}
+
+html.lenovo-tab-one-profile .prep-save-task-btn {
+  width: 100%;
+  min-height: 50px;
+  justify-content: center;
+  border-radius: 12px;
+}
+
 html.lenovo-tab-one-profile .prep-subtabs {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   margin: 18px 0 14px;
 }
 
-html.lenovo-tab-one-profile .prep-add-hint,
 html.lenovo-tab-one-profile .prep-empty {
   font-size: 14px;
 }
@@ -5699,6 +5838,13 @@ html.lenovo-tab-one-profile .nav-item__label {
   html.lenovo-tab-one-profile body.has-app-nav .modal {
     padding: 24px 28px max(28px, calc(28px + env(safe-area-inset-bottom, 0px)));
   }
+
+  html.lenovo-tab-one-profile .prep-add-actions {
+    margin-right: -28px;
+    margin-left: -28px;
+    padding-right: 28px;
+    padding-left: 28px;
+  }
 }
 
 @media (orientation: landscape) {
@@ -5857,7 +6003,8 @@ html.low-memory-device .cook-step-next,
 html.low-memory-device .prep-actor-chip,
 html.low-memory-device .prep-subtab,
 html.low-memory-device .prep-task-card,
-html.low-memory-device .prep-task-detail-sheet__panel {
+html.low-memory-device .prep-task-detail-sheet__panel,
+html.low-memory-device .prep-priority-pill {
   transition: none;
 }
 
@@ -5875,7 +6022,8 @@ html.low-memory-device .modal-copy-bar {
 }
 
 html.low-memory-device .prep-task-card,
-html.low-memory-device .prep-task-detail-sheet__panel {
+html.low-memory-device .prep-task-detail-sheet__panel,
+html.low-memory-device .prep-add-actions {
   box-shadow: none;
 }
 

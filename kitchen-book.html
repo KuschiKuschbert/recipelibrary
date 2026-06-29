@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=57">
+<link rel="stylesheet" href="assets/theme.css?v=58">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
@@ -587,19 +587,27 @@
     <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Choose <strong>who is working</strong> on this device, add teammates if needed, then track prep tasks for <strong>this book</strong>. Stored on this browser only.</p>
     <div id="kbPrepBody"></div>
     <div id="kbPrepAddPanel" class="prep-add-panel" hidden>
-      <div class="modal-section" style="margin-top:20px">Add task</div>
-      <p class="prep-add-hint" style="margin-bottom:12px">Fill in and save — the task will appear on <strong>All tasks</strong> and cannot be edited afterward (only marked Done).</p>
-      <div class="form-row"><label for="kbPrepNewTitle">Title</label><input id="kbPrepNewTitle" type="text" placeholder="e.g. Pick herbs" autocomplete="off" maxlength="500" /></div>
-      <div class="form-row"><label for="kbPrepNewAssignee">Assignee</label><select id="kbPrepNewAssignee"></select></div>
-      <div class="form-row"><label for="kbPrepNewPriority">Priority</label>
-        <select id="kbPrepNewPriority">
-          <option value="high">High</option>
-          <option value="medium" selected>Medium</option>
-          <option value="low">Low</option>
-        </select>
+      <div class="prep-add-form">
+        <div class="prep-add-head">
+          <div class="modal-section prep-add-title">Add task</div>
+        </div>
+        <div class="form-row prep-add-title-row"><label for="kbPrepNewTitle">Task</label><input id="kbPrepNewTitle" type="text" placeholder="e.g. Pick herbs" autocomplete="off" maxlength="500" /></div>
+        <div class="prep-add-field-grid">
+          <div class="form-row"><label for="kbPrepNewAssignee">Assignee</label><select id="kbPrepNewAssignee"></select></div>
+          <div class="form-row prep-priority-field"><span class="prep-form-label">Priority</span>
+            <input id="kbPrepNewPriority" type="hidden" value="medium" />
+            <div class="prep-priority-quick" role="group" aria-label="Priority shortcuts" data-prep-priority-target="kbPrepNewPriority">
+              <button type="button" class="prep-priority-pill prep-priority-pill--high" data-prep-act="quick-priority" data-priority="high" aria-pressed="false">High</button>
+              <button type="button" class="prep-priority-pill prep-priority-pill--medium prep-priority-pill--active" data-prep-act="quick-priority" data-priority="medium" aria-pressed="true">Medium</button>
+              <button type="button" class="prep-priority-pill prep-priority-pill--low" data-prep-act="quick-priority" data-priority="low" aria-pressed="false">Low</button>
+            </div>
+          </div>
+        </div>
+        <div class="form-row prep-add-notes-row"><label for="kbPrepNewNotes">Notes (optional)</label><input id="kbPrepNewNotes" type="text" placeholder="Short note" autocomplete="off" maxlength="500" /></div>
       </div>
-      <div class="form-row"><label for="kbPrepNewNotes">Notes (optional)</label><input id="kbPrepNewNotes" type="text" placeholder="Short note" autocomplete="off" maxlength="500" /></div>
-      <button type="button" class="btn-secondary" onclick="submitKitchenBookPrepAdd()">Save task</button>
+      <div class="prep-add-actions">
+        <button type="button" class="btn-secondary prep-save-task-btn" onclick="submitKitchenBookPrepAdd()">Save task</button>
+      </div>
     </div>
   </div>
 </div>
@@ -644,7 +652,7 @@
 
 <script src="assets/riviera-canonical-ingredient.js"></script>
 <script src="assets/user-recipes.js"></script>
-<script src="assets/prep-list.js?v=46"></script>
+<script src="assets/prep-list.js?v=47"></script>
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/aroma-hints.js"></script>
 <script src="assets/kuschi-recipe-ui.js"></script>
