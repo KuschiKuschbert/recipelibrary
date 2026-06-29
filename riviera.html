@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=67">
+<link rel="stylesheet" href="assets/theme.css?v=68">
 <link rel="preload" href="riviera_data/builtins.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
@@ -1422,16 +1422,18 @@ html.lenovo-tab-one-profile .fn-planner__desc {
     </div>
     <div id="rvPanelManual" class="ar-panel ar-panel--manual" role="tabpanel" aria-labelledby="rvTabManual">
     <div id="rvFormatReview" class="format-review-card" hidden aria-live="polite"></div>
-    <div class="form-row"><label>Name</label><input id="rvName" type="text" /></div>
-    <div class="form-row"><label>Subtitle</label><input id="rvSub" type="text" placeholder="Optional" /></div>
-    <div class="form-row"><label>Type</label><input id="rvType" type="text" placeholder="e.g. Tapas" /></div>
-    <div class="form-row"><label>Course</label><input id="rvCourse" type="text" placeholder="e.g. Canape" /></div>
-    <div class="form-row"><label>Protein (comma)</label><input id="rvProtein" placeholder="chicken, dairy" /></div>
-    <div class="form-row"><label>Dietary (comma)</label><input id="rvDiet" placeholder="Gluten-Free" /></div>
-    <div class="form-row"><label>Method</label><input id="rvMethod" placeholder="e.g. Oven" /></div>
-    <div class="form-row"><label>Yield</label><input id="rvYield" /></div>
-    <div class="form-row"><label>Label (prep label)</label><input id="rvLabel" /></div>
-    <div class="form-row"><label>Elements (comma)</label><input id="rvElements" placeholder="Optional" /></div>
+    <div class="add-recipe-meta-grid add-recipe-meta-grid--riviera">
+      <div class="form-row add-meta-name"><label>Name</label><input id="rvName" type="text" /></div>
+      <div class="form-row add-meta-wide"><label>Subtitle</label><input id="rvSub" type="text" placeholder="Optional" /></div>
+      <div class="form-row"><label>Type</label><input id="rvType" type="text" placeholder="e.g. Tapas" /></div>
+      <div class="form-row"><label>Course</label><input id="rvCourse" type="text" placeholder="e.g. Canape" /></div>
+      <div class="form-row"><label>Protein</label><input id="rvProtein" placeholder="chicken, dairy" /></div>
+      <div class="form-row"><label>Dietary</label><input id="rvDiet" placeholder="Gluten-Free" /></div>
+      <div class="form-row"><label>Method</label><input id="rvMethod" placeholder="e.g. Oven" /></div>
+      <div class="form-row"><label>Yield</label><input id="rvYield" /></div>
+      <div class="form-row"><label>Prep label</label><input id="rvLabel" /></div>
+      <div class="form-row"><label>Elements</label><input id="rvElements" placeholder="Optional" /></div>
+    </div>
     <div class="modal-section" style="margin-top:8px">Ingredients</div>
     <div id="rvIngRows"></div>
     <div id="rvAromaAddPanel"></div>
@@ -1441,11 +1443,11 @@ html.lenovo-tab-one-profile .fn-planner__desc {
     <div class="form-row"><label>Note</label><input id="rvNote" placeholder="Optional" /></div>
     <div class="add-form-actions">
       <button type="button" class="form-primary-btn" onclick="submitRivieraRecipe()">Save recipe</button>
-      <button type="button" class="btn-secondary" onclick="copyRivieraBackupJson()">Copy JSON backup</button>
+      <button type="button" class="btn-secondary" aria-label="Copy JSON backup" onclick="copyRivieraBackupJson()">Backup JSON</button>
     </div>
     </div>
     <div id="rvPanelFormat" class="ar-panel ar-panel--format" role="tabpanel" aria-labelledby="rvTabFormat" hidden>
-      <p class="ar-format-help">Same Gemini key as Kitchen (this device). <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">AI Studio</a> · <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Cloud restrictions</a>. Text sent to Google.</p>
+      <p class="ar-format-help">Same Gemini key as Kitchen. Formats pasted text, URL, PDF/DOCX, or image; text is sent to Google. <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Get key</a> · <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Restrict</a></p>
       <div id="rvGeminiKeySavedStrip" class="ar-gemini-saved-strip" hidden>
         <span>API key saved on this device.</span>
         <button type="button" class="btn-secondary" onclick="showRivieraGeminiKeyEditor()">Change</button>
@@ -1469,7 +1471,7 @@ html.lenovo-tab-one-profile .fn-planner__desc {
       </details>
       <div class="form-row"><label for="rvPasteRaw">Recipe text</label><textarea id="rvPasteRaw" placeholder="Or paste ingredients, prep, service…" style="min-height:120px"></textarea></div>
       <div class="ar-format-actions">
-        <button type="button" class="btn-secondary" id="rvFormatBtn" onclick="formatRivieraRecipeWithGemini()">Format into manual form</button>
+        <button type="button" class="btn-secondary" id="rvFormatBtn" aria-label="Format into manual form" onclick="formatRivieraRecipeWithGemini()">Format draft</button>
         <p class="ar-format-status" id="rvFormatStatus"></p>
       </div>
     </div>

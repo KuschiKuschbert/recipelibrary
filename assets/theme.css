@@ -1110,6 +1110,16 @@ html.low-memory-device .kuschi-toast--show {
   min-width: 0;
 }
 
+.add-recipe-meta-grid {
+  display: grid;
+  gap: 0 12px;
+  margin-bottom: 12px;
+}
+
+.add-recipe-meta-grid .form-row {
+  min-width: 0;
+}
+
 .ar-format-source-grid {
   display: grid;
   gap: 12px;
@@ -4935,20 +4945,45 @@ html.lenovo-tab-one-profile .ar-panel--format {
   gap: 12px;
 }
 
-html.lenovo-tab-one-profile .ar-format-source-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin-bottom: 2px;
-  padding: 12px;
+html.lenovo-tab-one-profile .add-recipe-meta-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+  padding: 10px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.024));
+    linear-gradient(180deg, rgba(255, 255, 255, 0.042), rgba(255, 255, 255, 0.022)),
+    rgba(255, 255, 255, 0.022);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;
 }
 
+html.lenovo-tab-one-profile .add-recipe-meta-grid .form-row {
+  margin-bottom: 0;
+}
+
+html.lenovo-tab-one-profile .add-recipe-meta-grid .add-meta-name,
+html.lenovo-tab-one-profile .add-recipe-meta-grid .add-meta-wide {
+  grid-column: span 2;
+}
+
+html.lenovo-tab-one-profile .ar-format-source-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 2px;
+  padding: 10px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.022));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
 html.lenovo-tab-one-profile .ar-format-source-grid .form-row {
   margin-bottom: 0;
+}
+
+html.lenovo-tab-one-profile .ar-format-source-grid input[type='file'] {
+  font-size: 13px;
 }
 
 html.lenovo-tab-one-profile .ar-gemini-saved-strip {
@@ -4968,7 +5003,7 @@ html.lenovo-tab-one-profile .ar-gemini-saved-strip .btn-text-gemini {
 
 html.lenovo-tab-one-profile .ar-proxy-details summary {
   min-height: 48px;
-  padding: 13px 12px;
+  padding: 12px;
   background: rgba(255, 255, 255, 0.035);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
@@ -5309,13 +5344,6 @@ html.lenovo-tab-one-profile .prep-actor-remove {
     width: 48px;
   }
 
-  html.lenovo-tab-one-profile .ar-format-key-row {
-    grid-template-columns: 1fr;
-  }
-
-  html.lenovo-tab-one-profile .ar-format-source-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 560px) {
@@ -5325,6 +5353,20 @@ html.lenovo-tab-one-profile .prep-actor-remove {
 
   html.lenovo-tab-one-profile .format-review-card,
   html.lenovo-tab-one-profile .format-review-card__actions {
+    grid-template-columns: 1fr;
+  }
+
+  html.lenovo-tab-one-profile .add-recipe-meta-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  html.lenovo-tab-one-profile .add-recipe-meta-grid .add-meta-name,
+  html.lenovo-tab-one-profile .add-recipe-meta-grid .add-meta-wide {
+    grid-column: 1 / -1;
+  }
+
+  html.lenovo-tab-one-profile .ar-format-key-row,
+  html.lenovo-tab-one-profile .ar-format-source-grid {
     grid-template-columns: 1fr;
   }
 

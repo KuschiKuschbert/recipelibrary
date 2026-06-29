@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=67">
+<link rel="stylesheet" href="assets/theme.css?v=68">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
@@ -473,12 +473,14 @@
     </div>
     <div id="arPanelManual" class="ar-panel ar-panel--manual" role="tabpanel" aria-labelledby="arTabManual">
     <div id="arFormatReview" class="format-review-card" hidden aria-live="polite"></div>
-    <div class="form-row"><label for="arName">Name</label><input id="arName" type="text" placeholder="Recipe name" required /></div>
-    <div class="form-row"><label for="arYield">Yield</label><input id="arYield" type="text" placeholder="e.g. 4 servings" /></div>
-    <div class="form-row"><label for="arCuisine">Cuisine</label><input id="arCuisine" type="text" placeholder="Optional" /></div>
-    <div class="form-row"><label for="arCategory">Category</label><input id="arCategory" type="text" placeholder="Optional" /></div>
-    <div class="form-row"><label for="arProtein">Protein tags</label><input id="arProtein" type="text" placeholder="comma-separated: chicken, dairy" /></div>
-    <div class="form-row"><label for="arTags">Dietary tags</label><input id="arTags" type="text" placeholder="comma-separated: gluten-free" /></div>
+    <div class="add-recipe-meta-grid add-recipe-meta-grid--kitchen">
+      <div class="form-row add-meta-name"><label for="arName">Name</label><input id="arName" type="text" placeholder="Recipe name" required /></div>
+      <div class="form-row"><label for="arYield">Yield</label><input id="arYield" type="text" placeholder="e.g. 4 servings" /></div>
+      <div class="form-row"><label for="arCuisine">Cuisine</label><input id="arCuisine" type="text" placeholder="Optional" /></div>
+      <div class="form-row"><label for="arCategory">Category</label><input id="arCategory" type="text" placeholder="Optional" /></div>
+      <div class="form-row add-meta-wide"><label for="arProtein">Protein tags</label><input id="arProtein" type="text" placeholder="comma-separated: chicken, dairy" /></div>
+      <div class="form-row add-meta-wide"><label for="arTags">Dietary tags</label><input id="arTags" type="text" placeholder="comma-separated: gluten-free" /></div>
+    </div>
     <div class="modal-section" style="margin-top:8px">Ingredients</div>
     <div id="arIngRows"></div>
     <div id="kbAromaAddPanel"></div>
@@ -486,11 +488,11 @@
     <div class="form-row" style="margin-top:16px"><label for="arMethod">Method (one step per line)</label><textarea id="arMethod" placeholder="1. First step…"></textarea></div>
     <div class="add-form-actions">
       <button type="button" class="primary" onclick="submitBookRecipe()">Save recipe</button>
-      <button type="button" class="btn-secondary" onclick="exportBookBackup()">Copy JSON backup</button>
+      <button type="button" class="btn-secondary" aria-label="Copy JSON backup" onclick="exportBookBackup()">Backup JSON</button>
     </div>
     </div>
     <div id="arPanelFormat" class="ar-panel ar-panel--format" role="tabpanel" aria-labelledby="arTabFormat" hidden>
-      <p class="ar-format-help">Key from <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">AI Studio</a>; <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">restrict in Cloud</a> (referrers + Generative Language API). Stored on this device only. Text is sent to Google.</p>
+      <p class="ar-format-help">Gemini formats pasted text, URL, PDF/DOCX, or image. Key stays on this device; recipe text is sent to Google. <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Get key</a> · <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Restrict</a></p>
       <div id="arGeminiKeySavedStrip" class="ar-gemini-saved-strip" hidden>
         <span>API key saved on this device.</span>
         <button type="button" class="btn-secondary" onclick="showKitchenGeminiKeyEditor()">Change</button>
@@ -514,7 +516,7 @@
       </details>
       <div class="form-row"><label for="arPasteRaw">Recipe text</label><textarea id="arPasteRaw" placeholder="Or paste ingredients and method here…" style="min-height:120px"></textarea></div>
       <div class="ar-format-actions">
-        <button type="button" class="btn-secondary" id="arFormatBtn" onclick="formatKitchenRecipeWithGemini()">Format into manual form</button>
+        <button type="button" class="btn-secondary" id="arFormatBtn" aria-label="Format into manual form" onclick="formatKitchenRecipeWithGemini()">Format draft</button>
         <p class="ar-format-status" id="arFormatStatus"></p>
       </div>
     </div>
