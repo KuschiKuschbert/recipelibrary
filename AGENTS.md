@@ -8,6 +8,13 @@ Personal **Kuschi Kitchen Library** (GitHub Pages, public repo).
 4. Follow **`~/.cursor/rules/token-efficiency.mdc`** (global Cursor rule) to limit **LLM context** usage (discovery, large JSON/HTML, tool output).
 5. Match existing HTML theme ([index.html](index.html)) per `theme.mdc`.
 
+## Global culinary routing
+
+- Treat `kitchen-council` as a **global default skill** for this workspace whenever the user asks anything kitchen/food related (recipes, flavour, prep, technique, menu ideas, service feasibility, ingredient swaps, "what's missing", "improve/elevate/fix this dish", etc.).
+- Auto-activate the skill even when the user does **not** explicitly write `@kitchen-council`.
+- Use the skill's tiering/output rules as the response contract for culinary questions.
+- Only skip `kitchen-council` when the user clearly requests non-culinary technical work (code/data/site operations) with no food decision involved.
+
 ## Canonical clone (kitchen library)
 
 **Primary working copy:** this repo (`recipelibrary-1` on disk). Other paths such as `~/recipelibrary` or `~/Desktop/recipelibrary` may be older duplicates—confirm `git remote -v` and path before large edits or agent-wide search so work is not applied to the wrong tree.
