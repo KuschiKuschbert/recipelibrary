@@ -102,6 +102,8 @@
     }
 
     var filterText = state.filterActive ? 'Showing event recipes' : 'Show event recipes';
+    var filterClass = state.filterActive ? ' riv-event-strip__btn--active' : '';
+    var filterPressed = state.filterActive ? 'true' : 'false';
     host.hidden = false;
     host.innerHTML =
       '<div class="riv-event-strip__main">' +
@@ -110,7 +112,7 @@
       '<span>' + esc(eventMeta(payload)) + '</span>' +
       '</div>' +
       '<div class="riv-event-strip__actions">' +
-      '<button type="button" class="page-action-btn riv-event-strip__btn" onclick="KuschiRivieraEventContext.toggleFilter()">' + esc(filterText) + '</button>' +
+      '<button type="button" class="page-action-btn riv-event-strip__btn' + filterClass + '" aria-pressed="' + filterPressed + '" onclick="KuschiRivieraEventContext.toggleFilter()">' + esc(filterText) + '</button>' +
       '<button type="button" class="page-action-btn riv-event-strip__btn" onclick="KuschiRivieraEventContext.openPlannerList()">Planner list</button>' +
       '<button type="button" class="page-action-btn riv-event-strip__btn" onclick="KuschiRivieraEventContext.openOrderList()">Event order</button>' +
       '<button type="button" class="page-action-btn riv-event-strip__btn" onclick="KuschiRivieraEventContext.openPrepBoard()">Prep board</button>' +
@@ -142,6 +144,7 @@
     if (!activePayload()) return;
     state.filterActive = !state.filterActive;
     saveState();
+    render();
     requestRecipeRefresh();
   }
 
@@ -158,11 +161,14 @@
     var payload = activePayload();
     if (!payload || !hasRecipe(recipeId)) return '';
     return (
-      '<div class="riv-event-modal-actions">' +
-      '<span class="riv-event-modal-actions__label">' + esc(eventLabel(payload) || 'Active function') + '</span>' +
-      '<button type="button" class="btn-secondary" onclick="KuschiRivieraEventContext.openPlannerList()">Planner list</button>' +
-      '<button type="button" class="btn-secondary" onclick="KuschiRivieraEventContext.openOrderList()">Event order</button>' +
-      '<button type="button" class="btn-secondary" onclick="KuschiRivieraEventContext.openPrepBoard()">Prep board</button>' +
+      '<div class="riv-event-modal-actions" aria-label="Active function actions">' +
+      '<span class="riv-event-modal-actions__eyebrow">Active function</span>' +
+      '<span class="riv-event-modal-actions__label">' + esc(eventLabel(payload) || 'Function plan') + '</span>' +
+      '<div class="riv-event-modal-actions__buttons">' +
+      '<button type="button" class="btn-secondary riv-event-modal-actions__btn" onclick="KuschiRivieraEventContext.openPlannerList()" aria-label="Open planner list">Planner</button>' +
+      '<button type="button" class="btn-secondary riv-event-modal-actions__btn" onclick="KuschiRivieraEventContext.openOrderList()" aria-label="Open event order">Order</button>' +
+      '<button type="button" class="btn-secondary riv-event-modal-actions__btn" onclick="KuschiRivieraEventContext.openPrepBoard()" aria-label="Open prep board">Prep</button>' +
+      '</div>' +
       '</div>'
     );
   }

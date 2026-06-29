@@ -4716,6 +4716,160 @@ html.lenovo-tab-one-profile body.has-app-nav .modal-steps--service li::before {
   color: #bfe9cb;
 }
 
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-event-strip {
+  max-width: min(760px, calc(100vw - 28px));
+  margin: 2px auto 10px;
+  padding: 9px 12px;
+  border: 1px solid rgba(201, 169, 110, 0.16);
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(201, 169, 110, 0.055), rgba(255, 255, 255, 0.022)),
+    rgba(255, 255, 255, 0.024);
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-event-strip__main {
+  gap: 6px 9px;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-event-strip__main strong {
+  flex-basis: 100%;
+  font-size: 14px;
+  line-height: 1.24;
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-event-strip__eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-event-strip__actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  gap: 7px;
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-event-strip__btn {
+  justify-content: center;
+  min-width: 0;
+  min-height: 44px;
+  padding: 7px 8px;
+  border-radius: 10px;
+  font-size: 11.5px;
+  line-height: 1.18;
+  text-align: center;
+  white-space: normal;
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-event-strip__btn:first-child,
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-event-strip__btn--clear {
+  grid-column: span 3;
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-event-modal-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 7px;
+  margin: -2px 0 12px;
+  padding: 9px 10px;
+  border: 1px solid rgba(201, 169, 110, 0.16);
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(201, 169, 110, 0.06), rgba(255, 255, 255, 0.024)),
+    rgba(255, 255, 255, 0.024);
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-event-modal-actions__eyebrow {
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-event-modal-actions__label {
+  min-width: 0;
+  color: var(--gold-light);
+  font-size: 12.5px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-event-modal-actions__buttons {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-event-modal-actions__btn {
+  justify-content: center;
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .modal-section--prep,
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .modal-section--service {
+  position: relative;
+  min-height: 34px;
+  margin-top: 20px;
+  padding-right: 78px;
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .modal-section--prep::after,
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .modal-section--service::after {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 3px 7px;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .modal-section--prep::after {
+  content: 'PREP';
+  color: var(--gold-light);
+  background: rgba(201, 169, 110, 0.1);
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .modal-section--service::after {
+  content: 'SERVICE';
+  color: #bfe9cb;
+  background: rgba(126, 200, 154, 0.1);
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .modal-steps--prep,
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .modal-steps--service {
+  gap: 6px;
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .modal-steps--prep li {
+  background:
+    linear-gradient(180deg, rgba(201, 169, 110, 0.07), rgba(255, 255, 255, 0.024));
+  border-color: rgba(201, 169, 110, 0.2);
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .modal-steps--prep li::before {
+  background: rgba(201, 169, 110, 0.16);
+  color: var(--gold-light);
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .modal-steps--service li {
+  background:
+    linear-gradient(180deg, rgba(126, 200, 154, 0.09), rgba(255, 255, 255, 0.024));
+  border-color: rgba(126, 200, 154, 0.22);
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .modal-note,
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .label-box {
+  margin-top: 12px;
+}
+
 html.lenovo-tab-one-profile body.has-app-nav .modal-steps li.step-done {
   background: rgba(201, 169, 110, 0.045);
   border-color: rgba(201, 169, 110, 0.18);
