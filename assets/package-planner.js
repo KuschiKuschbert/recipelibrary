@@ -327,7 +327,8 @@
     (sec.courses || []).forEach(function (course, ci) {
       var val = courseValidation(sec, ci);
       var countCls = val.valid ? 'fn-selection-count--valid' : 'fn-selection-count--invalid';
-      html += '<section class="fn-course">';
+      var courseCls = val.valid ? 'fn-course fn-course--valid' : 'fn-course fn-course--invalid';
+      html += '<section class="' + courseCls + '">';
       html += '<div class="fn-course__head">';
       html += '<h3 class="fn-course__label">' + esc(course.course) + '</h3>';
       html += '<span class="fn-selection-count ' + countCls + '">' + esc(val.label) + '</span>';
@@ -356,16 +357,26 @@
           '" data-has-recipe="' +
           (hasRecipe ? '1' : '0') +
           '"' +
+          ' aria-pressed="' +
+          (selected ? 'true' : 'false') +
+          '"' +
           (hasRecipe ? '' : ' disabled') +
           '>' +
+          '<span class="fn-dish-chip__state" aria-hidden="true">' +
+          (selected ? '✓' : '+') +
+          '</span><span class="fn-dish-chip__content"><span class="fn-dish-chip__name">' +
           esc(item.name) +
-          tags +
+          '</span>' +
+          (tags ? '<span class="fn-dish-chip__tags">' + tags + '</span>' : '') +
+          '</span>' +
           '</button>';
         if (hasRecipe) {
           html +=
             '<button type="button" class="fn-dish-chip__open" data-recipe-id="' +
             escAttr(item.recipeId) +
-            '" title="Open recipe">▶</button>';
+            '" title="Open recipe" aria-label="Open recipe: ' +
+            escAttr(item.name) +
+            '">▶</button>';
         } else {
           html += '<span class="fn-dish-chip__badge">No recipe</span>';
         }

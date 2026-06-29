@@ -6143,13 +6143,17 @@ body.planner-list-open {
   gap: 8px;
 }
 .fn-dish-chip-wrap {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: stretch;
-  gap: 2px;
+  gap: 6px;
   max-width: 100%;
 }
 .fn-dish-chip {
-  flex: 1;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
   min-width: 0;
   text-align: left;
   padding: 10px 12px;
@@ -6163,9 +6167,41 @@ body.planner-list-open {
   color: var(--text2);
   cursor: pointer;
 }
+.fn-dish-chip__state {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-top: -1px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text3);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+.fn-dish-chip__content {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+.fn-dish-chip__name {
+  min-width: 0;
+}
+.fn-dish-chip__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
 .fn-dish-chip--selected {
   border-color: var(--gold);
   background: var(--gold-dim);
+  color: var(--gold-light);
+}
+.fn-dish-chip--selected .fn-dish-chip__state {
+  border-color: rgba(201, 169, 110, 0.62);
+  background: rgba(201, 169, 110, 0.18);
   color: var(--gold-light);
 }
 .fn-dish-chip--no-recipe {
@@ -6173,8 +6209,8 @@ body.planner-list-open {
   cursor: not-allowed;
 }
 .fn-dish-chip__tag {
-  display: inline-block;
-  margin-left: 6px;
+  display: inline-flex;
+  align-items: center;
   font-size: 9px;
   font-weight: 700;
   text-transform: uppercase;
@@ -6197,6 +6233,9 @@ body.planner-list-open {
   font-size: 10px;
   color: var(--text3);
   padding: 0 6px;
+}
+.fn-dish-chip__hints {
+  grid-column: 1 / -1;
 }
 
 .planner-list__tabs {
@@ -6577,6 +6616,21 @@ html.lenovo-tab-one-profile .fn-course {
   margin-bottom: 24px;
 }
 
+html.lenovo-tab-one-profile .fn-course__head {
+  align-items: center;
+  padding: 0 2px 2px;
+}
+
+html.lenovo-tab-one-profile .fn-course--invalid .fn-course__head {
+  border-left: 3px solid rgba(232, 160, 160, 0.6);
+  padding-left: 10px;
+}
+
+html.lenovo-tab-one-profile .fn-course--valid .fn-course__head {
+  border-left: 3px solid rgba(126, 200, 154, 0.42);
+  padding-left: 10px;
+}
+
 html.lenovo-tab-one-profile .fn-course__label {
   font-size: 16px;
 }
@@ -6596,15 +6650,54 @@ html.lenovo-tab-one-profile .fn-dish-chips {
 }
 
 html.lenovo-tab-one-profile .fn-dish-chip-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 48px;
+  gap: 8px;
   min-width: 0;
 }
 
 html.lenovo-tab-one-profile .fn-dish-chip {
   min-height: 54px;
-  padding: 12px 14px;
+  padding: 12px 14px 12px 12px;
   border-radius: 12px;
   font-size: 14px;
   line-height: 1.4;
+}
+
+html.lenovo-tab-one-profile .fn-dish-chip__state {
+  width: 24px;
+  height: 24px;
+  margin-top: 0;
+  font-size: 14px;
+}
+
+html.lenovo-tab-one-profile .fn-dish-chip__content {
+  gap: 6px;
+}
+
+html.lenovo-tab-one-profile .fn-dish-chip__name {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+html.lenovo-tab-one-profile .fn-dish-chip--selected {
+  box-shadow:
+    inset 4px 0 0 rgba(201, 169, 110, 0.52),
+    inset 0 0 0 1px rgba(201, 169, 110, 0.18);
+}
+
+html.lenovo-tab-one-profile .fn-dish-chip__tags {
+  gap: 5px;
+}
+
+html.lenovo-tab-one-profile .fn-dish-chip__tag {
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  font-size: 10px;
 }
 
 html.lenovo-tab-one-profile .fn-dish-chip__open {
@@ -6612,6 +6705,11 @@ html.lenovo-tab-one-profile .fn-dish-chip__open {
   min-height: 54px;
   border-radius: 12px;
   font-size: 12px;
+}
+
+html.lenovo-tab-one-profile .fn-dish-chip__hints {
+  margin-top: -2px;
+  padding-left: 36px;
 }
 
 html.lenovo-tab-one-profile .fn-dish-chip__hint {
