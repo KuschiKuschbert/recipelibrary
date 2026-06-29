@@ -242,6 +242,77 @@
   color: var(--blue);
   border: 1px solid rgba(110,154,190,0.2);
 }
+.badge-event {
+  background: rgba(201,169,110,0.14);
+  color: var(--gold-light);
+  border: 1px solid rgba(201,169,110,0.28);
+}
+.riv-event-strip {
+  max-width: 1200px;
+  margin: 4px auto 8px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.riv-event-strip[hidden] { display: none; }
+.riv-event-strip__main {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--text3);
+}
+.riv-event-strip__main strong {
+  color: var(--text);
+  font-weight: 650;
+}
+.riv-event-strip__eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.riv-event-strip__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.riv-event-strip__btn {
+  min-height: 36px;
+  padding: 7px 12px;
+  font-size: 12px;
+}
+.riv-event-strip__btn--clear {
+  color: var(--text3);
+}
+.riv-event-modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: -2px 0 16px;
+  padding: 10px 0 12px;
+  border-bottom: 1px solid var(--border);
+}
+.riv-event-modal-actions__label {
+  color: var(--gold-light);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+@media (max-width: 720px) {
+  .riv-event-strip { align-items: flex-start; flex-direction: column; }
+  .riv-event-strip__actions { justify-content: flex-start; }
+}
 .card-elements {
   font-size: 13px;
   color: var(--text3);
@@ -720,6 +791,8 @@
   </button>
 </div>
 
+<div id="rivieraEventContext" class="riv-event-strip" hidden></div>
+
 <!-- ── Function Package Browser ───────────────────────────────────────────── -->
 <div id="packageBrowser" class="pkgs-browser" hidden aria-label="Function package browser">
   <div class="pkgs-browser__inner">
@@ -1011,6 +1084,7 @@
 <script src="assets/planner-extras.js"></script>
 <script src="assets/package-planner.js"></script>
 <script src="assets/package-prep-sheet.js"></script>
+<script src="assets/riviera-event-context.js"></script>
 <script src="assets/kuschi-recipe-ui.js"></script>
 <script src="assets/recipe-metric-normalize.js"></script>
 <script src="assets/flavour-toolkit-lookup.js" defer></script>
@@ -1854,6 +1928,7 @@ function applyFilters() {
     if (course && r.course !== course) return false;
     if (protein && !r.protein.includes(protein)) return false;
     if (diet && !r.diet.includes(diet)) return false;
+    if (window.KuschiRivieraEventContext && KuschiRivieraEventContext.isFilterOn() && !KuschiRivieraEventContext.hasRecipe(r.id)) return false;
     return true;
   });
 
@@ -1875,6 +1950,7 @@ function render() {
 
 function cardHTML(r) {
   const badges = [
+    window.KuschiRivieraEventContext ? KuschiRivieraEventContext.cardBadge(r.id) : '',
     ...r.protein.map(p => `<span class="badge badge-course">${KuschiRecipeUi.esc(p)}</span>`),
     ...r.diet.map(d => `<span class="badge badge-diet">${KuschiRecipeUi.esc(d)}</span>`),
     r.method ? `<span class="badge badge-method">${KuschiRecipeUi.esc(r.method)}</span>` : ''
@@ -1916,10 +1992,12 @@ function openRecipe(id, options) {
   const modal = document.getElementById('modal');
 
   const badges = [
+    window.KuschiRivieraEventContext ? KuschiRivieraEventContext.cardBadge(r.id) : '',
     ...r.protein.map(p => `<span class="badge badge-course">${KuschiRecipeUi.esc(p)}</span>`),
     ...r.diet.map(d => `<span class="badge badge-diet">${KuschiRecipeUi.esc(d)}</span>`),
     r.method ? `<span class="badge badge-method">${KuschiRecipeUi.esc(r.method)}</span>` : ''
   ].join('');
+  const eventActions = window.KuschiRivieraEventContext ? KuschiRivieraEventContext.modalActions(r.id) : '';
 
   const baseYield = parseYieldNum(r.yield);
   const recipeId = r.id;
@@ -1934,6 +2012,7 @@ function openRecipe(id, options) {
     <div class="modal-title">${KuschiRecipeUi.esc(r.name)}</div>
     <div class="modal-type">${KuschiRecipeUi.esc(r.type)} · Yield: ${KuschiRecipeUi.esc(r.yield)}</div>
     <div class="modal-badges">${badges}</div>
+    ${eventActions}
     <div class="modal-scale">
       <label>Scale to pax:</label>
       <input type="number" id="scaleInput" min="1" value="${baseYield}" oninput="rescale(this.value)" />
@@ -2170,6 +2249,7 @@ document.addEventListener('keydown', e => {
 })();
 updateRivieraAdminChrome();
 void bootstrapRivieraRecipeData().then(function () {
+  if (window.KuschiRivieraEventContext) KuschiRivieraEventContext.render();
   if (window.KuschiPackagePlanner) {
     KuschiPackagePlanner.init({
       getRecipes: function () {
@@ -2179,6 +2259,10 @@ void bootstrapRivieraRecipeData().then(function () {
       siteBaseUrl: siteBaseUrl,
       syncUrl: rivieraSyncUrl,
       onGenerate: function (payload) {
+        if (window.KuschiRivieraEventContext) {
+          KuschiRivieraEventContext.setActivePayload(payload);
+          applyFilters();
+        }
         if (window.KuschiPackagePrepSheet) KuschiPackagePrepSheet.open(payload);
       },
     });

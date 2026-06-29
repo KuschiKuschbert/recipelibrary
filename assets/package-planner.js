@@ -690,6 +690,9 @@
     getState: function () {
       return Object.assign({}, _state);
     },
+    getActivePayload: function () {
+      return buildPlanPayload();
+    },
     tryDeepLink: tryDeepLink,
     bootDeepLink: bootDeepLink,
   };
