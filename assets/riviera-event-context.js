@@ -7,6 +7,8 @@
 
   var STORAGE_KEY = 'kuschi_riviera_active_event_v1';
   var state = loadState();
+  var recipeSetCacheKey = '';
+  var recipeSetCache = null;
 
   function esc(s) {
     return String(s || '')
@@ -60,9 +62,14 @@
   function recipeIdSet() {
     var payload = activePayload();
     var out = {};
-    (payload && payload.recipeIds ? payload.recipeIds : []).forEach(function (id) {
+    var ids = payload && payload.recipeIds ? payload.recipeIds : [];
+    var key = ids.join('\u001f');
+    if (recipeSetCache && recipeSetCacheKey === key) return recipeSetCache;
+    ids.forEach(function (id) {
       out[id] = true;
     });
+    recipeSetCacheKey = key;
+    recipeSetCache = out;
     return out;
   }
 

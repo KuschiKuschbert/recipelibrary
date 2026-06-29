@@ -1137,8 +1137,7 @@ function finishRivieraBuiltinHydrate() {
   /* Yield one frame so "Loading…" can paint before filter DOM + full grid innerHTML. */
   function run() {
     BUILTIN_RECIPES_METRIC = computeBuiltinRecipesMetric(BUILTIN_RECIPES);
-    RECIPES = mergeRivieraRecipes();
-    filtered = [...RECIPES];
+    refreshRivieraRecipes();
     populateFilters();
     applyFilters();
   }
@@ -1290,7 +1289,7 @@ function rivieraRestoreHiddenBuiltins() {
   if (!isRivieraAdminUnlocked()) return;
   if (!confirm('Show all hidden built-in recipes again on this device?')) return;
   if (window.KuschiUserRecipes) KuschiUserRecipes.restoreAllHiddenRivieraBuiltins();
-  RECIPES = mergeRivieraRecipes();
+  refreshRivieraRecipes();
   populateFilters();
   applyFilters();
 }
@@ -1311,6 +1310,58 @@ function mergeRivieraRecipes() {
   return u.concat(builtins);
 }
 let RECIPES = mergeRivieraRecipes();
+let filtered = [...RECIPES];
+let rivieraRecipeIndex = { byId: new Map(), hayById: new Map(), version: 0 };
+let rivieraFilterMemo = { key: '', ids: [] };
+
+function rivieraText(value) {
+  return String(value || '').toLowerCase();
+}
+
+function rivieraRecipeSearchHay(recipe) {
+  const parts = [
+    recipe.name,
+    recipe.subtitle,
+    recipe.type,
+    recipe.course,
+    recipe.method,
+    recipe.yield,
+    recipe.label,
+  ];
+  (recipe.protein || []).forEach((p) => parts.push(p));
+  (recipe.diet || []).forEach((d) => parts.push(d));
+  (recipe.elements || []).forEach((e) => parts.push(e));
+  (recipe.ingredients || []).forEach((i) => {
+    parts.push(i.qty, i.item, i.prep);
+  });
+  (recipe.method_steps || []).forEach((s) => parts.push(s));
+  (recipe.service || []).forEach((s) => parts.push(s));
+  return rivieraText(parts.filter(Boolean).join(' '));
+}
+
+function rebuildRivieraRecipeIndex() {
+  const byId = new Map();
+  const hayById = new Map();
+  RECIPES.forEach((recipe) => {
+    if (!recipe || !recipe.id) return;
+    byId.set(recipe.id, recipe);
+    hayById.set(recipe.id, rivieraRecipeSearchHay(recipe));
+  });
+  rivieraRecipeIndex = {
+    byId,
+    hayById,
+    version: rivieraRecipeIndex.version + 1,
+  };
+  rivieraFilterMemo = { key: '', ids: [] };
+}
+
+function refreshRivieraRecipes() {
+  RECIPES = mergeRivieraRecipes();
+  rebuildRivieraRecipeIndex();
+  return RECIPES;
+}
+
+rebuildRivieraRecipeIndex();
 
 let rivieraOrderList = null;
 let rivieraPrepList = null;
@@ -1338,8 +1389,7 @@ const _rivieraOrderListConfig = {
   bodyId: 'orderListBody',
   formIds: { name: 'ordNewName', zone: 'ordNewZone', qty: 'ordNewQty' },
   getRecipes: function () {
-    RECIPES = mergeRivieraRecipes();
-    return RECIPES;
+    return refreshRivieraRecipes();
   },
   storage: {
     loadOverrides: function () {
@@ -1878,7 +1928,7 @@ function submitRivieraRecipe() {
     service,
     note: document.getElementById('rvNote').value.trim() || null
   });
-  RECIPES = mergeRivieraRecipes();
+  refreshRivieraRecipes();
   closeAddRivieraModal();
   populateFilters();
   applyFilters();
@@ -1906,31 +1956,38 @@ function fillSelect(id, items, label) {
 
 
 // ── Filter & Search ───────────────────────────
-let filtered = [...RECIPES];
-
 function applyFilters() {
   const q = document.getElementById('search').value.toLowerCase().trim();
   const course = document.getElementById('filterCourse').value;
   const protein = document.getElementById('filterProtein').value;
   const diet = document.getElementById('filterDiet').value;
-  const terms = q ? q.split(/\s+/) : [];
+  const terms = q ? q.split(/\s+/).filter(Boolean) : [];
+  const eventFilterOn = !!(window.KuschiRivieraEventContext && KuschiRivieraEventContext.isFilterOn());
+  const memoKey = [rivieraRecipeIndex.version, q, course, protein, diet, eventFilterOn ? 'event' : 'all'].join('\u001f');
 
   if (typeof updateFilterChips === 'function') updateFilterChips();
 
+  if (!eventFilterOn && rivieraFilterMemo.key === memoKey) {
+    filtered = rivieraFilterMemo.ids.map((id) => rivieraRecipeIndex.byId.get(id)).filter(Boolean);
+    render();
+    return;
+  }
+
   filtered = RECIPES.filter(r => {
     if (terms.length) {
-      const hay = [r.name, r.subtitle, r.type, r.method,
-        ...r.protein, ...r.diet, ...r.elements,
-        r.ingredients.map(i => i.item).join(' ')
-      ].join(' ').toLowerCase();
+      const hay = rivieraRecipeIndex.hayById.get(r.id) || rivieraRecipeSearchHay(r);
       if (!terms.every(t => hay.includes(t))) return false;
     }
     if (course && r.course !== course) return false;
     if (protein && !r.protein.includes(protein)) return false;
     if (diet && !r.diet.includes(diet)) return false;
-    if (window.KuschiRivieraEventContext && KuschiRivieraEventContext.isFilterOn() && !KuschiRivieraEventContext.hasRecipe(r.id)) return false;
+    if (eventFilterOn && !KuschiRivieraEventContext.hasRecipe(r.id)) return false;
     return true;
   });
+
+  if (!eventFilterOn) {
+    rivieraFilterMemo = { key: memoKey, ids: filtered.map((r) => r.id) };
+  }
 
   render();
 }
@@ -1979,7 +2036,7 @@ function rivieraModalPerfEnabled() {
 }
 
 function openRecipe(id, options) {
-  const r = RECIPES.find(x => x.id === id);
+  const r = rivieraRecipeIndex.byId.get(id) || RECIPES.find(x => x.id === id);
   if (!r) return;
   currentRecipe = r;
 
@@ -2120,7 +2177,7 @@ function rivieraHideCurrentBuiltin() {
   }
   KuschiUserRecipes.hideRivieraBuiltin(currentRecipe.id);
   closeModal();
-  RECIPES = mergeRivieraRecipes();
+  refreshRivieraRecipes();
   populateFilters();
   applyFilters();
 }
@@ -2133,7 +2190,7 @@ function rivieraRemoveCurrentUserRecipe() {
     return;
   }
   closeModal();
-  RECIPES = mergeRivieraRecipes();
+  refreshRivieraRecipes();
   populateFilters();
   applyFilters();
 }
