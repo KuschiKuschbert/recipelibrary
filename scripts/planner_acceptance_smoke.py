@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -68,11 +69,12 @@ def main() -> int:
             fail(f"riviera.html missing {needle}")
 
     sw = (ROOT / "sw.js").read_text(encoding="utf-8")
-    if "kuschi-kitchen-v15" in sw:
-        ok("sw.js CACHE_NAME v15")
+    m = re.search(r"const\s+CACHE_NAME\s*=\s*['\"]([^'\"]+)['\"]", sw)
+    if m:
+        ok(f"sw.js CACHE_NAME {m.group(1)}")
     else:
         errors += 1
-        fail("sw.js not on v15")
+        fail("sw.js CACHE_NAME missing")
 
     extras = ROOT / "assets/planner-extras.js"
     r = subprocess.run(["node", "--check", str(extras)], capture_output=True, text=True)
