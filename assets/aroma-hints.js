@@ -1194,9 +1194,9 @@
         '</div>' +
         '<div class="kuschi-modal-seasoning-body" data-aroma-hint-body="1">' +
         '<div class="kuschi-modal-seasoning-idle">' +
-        '<p class="kuschi-modal-seasoning-idle-text"><strong>See Aroma matches</strong> for this ingredient list. Tap below to load — spice pages open in a <strong>new tab</strong> so you keep this recipe open.</p>' +
+        '<p class="kuschi-modal-seasoning-idle-text"><strong>Load matched spices</strong> for this ingredient list. Spice pages open in a <strong>new tab</strong>, keeping this recipe here.</p>' +
         '<div class="kuschi-modal-seasoning-actions">' +
-        '<button type="button" class="modal-copy-btn kuschi-modal-seasoning-load-btn" data-aroma-inline-load="1">Load seasoning suggestions</button>' +
+        '<button type="button" class="modal-copy-btn kuschi-modal-seasoning-load-btn" data-aroma-inline-load="1">Load seasoning tips</button>' +
         '</div></div></div></div>'
       );
     }
@@ -1262,7 +1262,7 @@
           '<div class="loader aroma-hint-loader" aria-hidden="true"></div>' +
           '<div class="kuschi-seasoning-loading-copy">' +
           '<span class="kuschi-seasoning-loading-title">Building suggestions</span>' +
-          '<span class="kuschi-seasoning-loading-hint">From your ingredient list — usually a moment</span>' +
+          '<span class="kuschi-seasoning-loading-hint">From your ingredient list; usually a moment.</span>' +
           '</div></div>' +
           '<div class="kuschi-seasoning-skeleton">' +
           '<span class="kuschi-seasoning-skel kuschi-seasoning-skel--a"></span>' +
@@ -1361,10 +1361,10 @@
                 .join('');
               if (summaryEl2) summaryEl2.textContent = 'Seasoning ideas';
               var introPart = isInline
-                ? '<p class="kuschi-modal-seasoning-intro aroma-hint-empty">Suggested harmonizers from the Aroma index, matched to this recipe’s ingredients. Full detail opens in a <strong>new tab</strong> when you use a chip.</p>'
+                ? '<p class="kuschi-modal-seasoning-intro aroma-hint-empty">Top harmonizers matched to this recipe. Tap a chip for Aroma detail in a <strong>new tab</strong>.</p>'
                 : '';
               var moreLink = isInline
-                ? '<p class="aroma-hint-more"><a href="aroma.html" target="_blank" rel="noopener noreferrer">Browse all spices in Aroma lookup →</a></p>'
+                ? '<p class="aroma-hint-more"><a href="aroma.html" target="_blank" rel="noopener noreferrer">Open Aroma lookup →</a></p>'
                 : '<p class="aroma-hint-more"><a href="aroma.html">Open Aroma lookup →</a></p>';
               var chipsBlock =
                 introPart +
@@ -1373,8 +1373,8 @@
                 '</div>' +
                 moreLink +
                 '<details class="kuschi-more-flavor-details" data-kuschi-more-flavor="1" data-kuschi-flavor-state="idle">' +
-                '<summary class="kuschi-more-flavor-summary">More flavour &amp; pairing notes</summary>' +
-                '<p class="kuschi-flavor-lazy-intro">Substitutes, taste balance, and cuisine ideas from the flavour book. Opens on demand (~2&nbsp;MB the first time).</p>' +
+                '<summary class="kuschi-more-flavor-summary">More flavour notes</summary>' +
+                '<p class="kuschi-flavor-lazy-intro">Substitutes, balance, and cuisine ideas from the flavour book. Loads only when opened.</p>' +
                 '</details>';
               if (isInline) {
                 wrapEl.setAttribute('aria-busy', 'false');
