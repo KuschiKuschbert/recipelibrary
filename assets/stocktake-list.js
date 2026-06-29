@@ -206,6 +206,7 @@
       '" value="' +
       escAttr(state.uom) +
       '" placeholder="UOM"' +
+      ' aria-label="Unit of measure"' +
       (uomRo ? ' readonly' : '') +
       (uomTitle ? ' title="' + escAttr(uomTitle) + '"' : '') +
       ' />';
@@ -214,14 +215,14 @@
       escAttr(rowId) +
       '" value="' +
       escAttr(state.qty) +
-      '" placeholder="Qty on hand" />' +
+      '" placeholder="Count" aria-label="Quantity on hand" />' +
       '<input type="text" class="stkt-field stkt-brand' +
       (brandRo ? ' stkt-field--locked' : '') +
       '" data-row-id="' +
       escAttr(rowId) +
       '" value="' +
       escAttr(state.brand) +
-      '" placeholder="Brand"' +
+      '" placeholder="Brand" aria-label="Brand"' +
       (brandRo ? ' readonly' : '') +
       (brandTitle ? ' title="' + escAttr(brandTitle) + '"' : '') +
       ' />' +
