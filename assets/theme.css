@@ -1370,6 +1370,10 @@ html.low-memory-device .kuschi-toast--show {
   margin-bottom: 20px;
 }
 .order-zone-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 2px;
@@ -1378,6 +1382,24 @@ html.low-memory-device .kuschi-toast--show {
   margin-bottom: 10px;
   padding-bottom: 6px;
   border-bottom: 1px solid var(--border);
+}
+.order-zone-title {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.order-zone-count {
+  flex: 0 0 auto;
+  padding: 2px 8px;
+  border: 1px solid rgba(201, 169, 110, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.045);
+  color: var(--text2);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.35;
+  text-transform: none;
+  white-space: nowrap;
 }
 .order-line-row {
   display: grid;
@@ -4863,6 +4885,11 @@ html.lenovo-tab-one-profile .order-zone-block:not(.stkt-zone-block) {
 html.lenovo-tab-one-profile .order-zone-block:not(.stkt-zone-block) .order-zone-head {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 3;
   min-height: 38px;
   margin-bottom: 12px;
   padding: 0 12px;
@@ -4893,6 +4920,11 @@ html.lenovo-tab-one-profile .stkt-zone-block {
 html.lenovo-tab-one-profile .stkt-zone-block .order-zone-head {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 3;
   min-height: 38px;
   margin-bottom: 12px;
   padding: 0 12px;
@@ -4903,6 +4935,13 @@ html.lenovo-tab-one-profile .stkt-zone-block .order-zone-head {
   border-radius: 12px;
   font-size: 12px;
   letter-spacing: 0.12em;
+}
+
+html.lenovo-tab-one-profile .order-zone-count {
+  min-width: 64px;
+  padding: 4px 9px;
+  font-size: 12px;
+  text-align: center;
 }
 
 html.lenovo-tab-one-profile .stkt-line-name {

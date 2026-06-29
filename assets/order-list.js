@@ -495,6 +495,29 @@
       return zoneDisplayHtml(line.zone);
     }
 
+    function visibleItemCount(rows) {
+      return rows.reduce(function (total, line) {
+        return total + 1 + ((line.extraIds && line.extraIds.length) || 0);
+      }, 0);
+    }
+
+    function itemCountLabel(count) {
+      return count === 1 ? '1 item' : count + ' items';
+    }
+
+    function zoneHeaderHtml(label, count) {
+      return (
+        '<div class="order-zone-head">' +
+        '<span class="order-zone-title">' +
+        esc(label) +
+        '</span>' +
+        '<span class="order-zone-count">' +
+        esc(itemCountLabel(count)) +
+        '</span>' +
+        '</div>'
+      );
+    }
+
     function renderOrderListBody() {
       var body = document.getElementById(bodyId);
       if (!body || !Kr()) return;
@@ -510,7 +533,7 @@
         var rows = grouped[z];
         if (!rows.length) return;
         html += '<div class="order-zone-block">';
-        html += '<div class="order-zone-head">' + esc(ZONE_LABELS[z]) + '</div>';
+        html += zoneHeaderHtml(ZONE_LABELS[z], visibleItemCount(rows));
         rows.forEach(function (line) {
           if (line.kind === 'recipe') {
             var keysEsc = (line.mergedLineKeys || [line.lineKey]).map(escAttr).join(MERGED_LINE_KEYS_SEP);

@@ -63,6 +63,29 @@
     return 'builtin:' + String(catalogId || '');
   }
 
+  function visibleOrderItemCount(rows) {
+    return rows.reduce(function (total, line) {
+      return total + 1 + ((line.extraIds && line.extraIds.length) || 0);
+    }, 0);
+  }
+
+  function itemCountLabel(count) {
+    return count === 1 ? '1 item' : count + ' items';
+  }
+
+  function zoneHeaderHtml(label, count) {
+    return (
+      '<div class="order-zone-head">' +
+      '<span class="order-zone-title">' +
+      esc(label) +
+      '</span>' +
+      '<span class="order-zone-count">' +
+      esc(itemCountLabel(count)) +
+      '</span>' +
+      '</div>'
+    );
+  }
+
   function lineStateFromDoc(doc, rowId, defaultUom) {
     var lines = doc.lines || {};
     var st = lines[rowId];
@@ -314,7 +337,7 @@
         var builtinFlat = builtinsFlatForZone(z, getBuiltinCatalogArray(), recipeKeys, k);
         if (!rows.length && !stxRows.length && !builtinFlat.length) return;
         html += '<div class="order-zone-block stkt-zone-block">';
-        html += '<div class="order-zone-head">' + esc(ZL[z]) + '</div>';
+        html += zoneHeaderHtml(ZL[z], visibleOrderItemCount(rows) + stxRows.length + builtinFlat.length);
 
         rows.forEach(function (line) {
           var defaultUom = line.orderUnit != null ? String(line.orderUnit) : '';
