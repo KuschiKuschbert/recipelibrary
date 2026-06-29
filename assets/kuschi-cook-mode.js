@@ -50,6 +50,18 @@
 
     var currentStep = 0;
     var total = steps.length;
+    var prevBtn = null;
+    var nextBtn = null;
+
+    function prefersInstantStepScroll() {
+      var root = document.documentElement;
+      if (root && root.classList.contains('low-memory-device')) return true;
+      try {
+        return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+      } catch (_) {
+        return false;
+      }
+    }
 
     function goToStep(idx) {
       currentStep = Math.max(0, Math.min(total - 1, idx));
@@ -59,7 +71,18 @@
       });
       var counter = document.getElementById('cookStepCounter');
       if (counter) counter.textContent = (currentStep + 1) + ' / ' + total;
-      steps[currentStep].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (prevBtn) {
+        prevBtn.disabled = currentStep === 0;
+        prevBtn.setAttribute('aria-disabled', currentStep === 0 ? 'true' : 'false');
+      }
+      if (nextBtn) {
+        nextBtn.disabled = currentStep === total - 1;
+        nextBtn.setAttribute('aria-disabled', currentStep === total - 1 ? 'true' : 'false');
+      }
+      steps[currentStep].scrollIntoView({
+        behavior: prefersInstantStepScroll() ? 'auto' : 'smooth',
+        block: 'center',
+      });
     }
 
     var nav = document.createElement('div');
@@ -76,6 +99,8 @@
 
     var modal = document.getElementById(_modalId);
     if (modal) modal.appendChild(nav);
+    prevBtn = nav.querySelector('.cook-step-prev');
+    nextBtn = nav.querySelector('.cook-step-next');
 
     window.cookStepNav = {
       prev: function () { goToStep(currentStep - 1); },
