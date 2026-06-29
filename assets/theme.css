@@ -3987,6 +3987,134 @@ html.lenovo-tab-one-profile .stkt-line-row .stkt-field {
   font-size: 16px;
 }
 
+html.lenovo-tab-one-profile .form-row {
+  margin-bottom: 16px;
+}
+
+html.lenovo-tab-one-profile .form-row label,
+html.lenovo-tab-one-profile .prep-actor-label {
+  margin-bottom: 8px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+
+html.lenovo-tab-one-profile .btn-secondary,
+html.lenovo-tab-one-profile .form-primary-btn,
+html.lenovo-tab-one-profile .add-form-actions button.primary,
+html.lenovo-tab-one-profile .order-list-modal > .btn-secondary:not(.modal-copy-btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 11px 16px;
+  border-radius: 12px;
+}
+
+html.lenovo-tab-one-profile .add-form-actions {
+  gap: 12px;
+  margin-top: 22px;
+}
+
+html.lenovo-tab-one-profile .ar-modal-tabs {
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+html.lenovo-tab-one-profile .ar-modal-tabs button {
+  min-height: 48px;
+  padding: 11px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+html.lenovo-tab-one-profile #addRecipeOverlay .modal,
+html.lenovo-tab-one-profile #addRivieraOverlay .modal,
+html.lenovo-tab-one-profile #addKitchenBookOverlay .modal {
+  max-width: min(720px, calc(100vw - 28px));
+}
+
+html.lenovo-tab-one-profile #pageQrOverlay .modal,
+html.lenovo-tab-one-profile #rivieraAdminOverlay .modal,
+html.lenovo-tab-one-profile #kbAdminOverlay .modal {
+  max-width: min(560px, calc(100vw - 28px));
+}
+
+html.lenovo-tab-one-profile .ing-row {
+  grid-template-columns: 84px 68px minmax(0, 1.18fr) minmax(0, 1fr) 48px;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+html.lenovo-tab-one-profile .ing-row-r {
+  grid-template-columns: minmax(116px, 0.75fr) minmax(0, 1.45fr) minmax(0, 1fr) 48px;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+html.lenovo-tab-one-profile .ing-row input,
+html.lenovo-tab-one-profile .ing-row-r input {
+  min-height: 48px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+html.lenovo-tab-one-profile .ing-row .btn-secondary,
+html.lenovo-tab-one-profile .ing-row-r .btn-secondary {
+  min-width: 48px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+html.lenovo-tab-one-profile .prep-actor-row,
+html.lenovo-tab-one-profile .prep-subtabs,
+html.lenovo-tab-one-profile .prep-add-teammate {
+  gap: 10px;
+}
+
+html.lenovo-tab-one-profile .prep-actor-chip,
+html.lenovo-tab-one-profile .prep-subtab,
+html.lenovo-tab-one-profile .prep-teammate-input {
+  min-height: 48px;
+  font-size: 14px;
+}
+
+html.lenovo-tab-one-profile .prep-hide-done {
+  min-height: 48px;
+}
+
+html.lenovo-tab-one-profile .prep-hide-done input {
+  width: 22px;
+  height: 22px;
+}
+
+html.lenovo-tab-one-profile .prep-actor-remove {
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 10px;
+}
+
+@media (max-width: 860px) {
+  html.lenovo-tab-one-profile .ing-row,
+  html.lenovo-tab-one-profile .ing-row-r {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  html.lenovo-tab-one-profile .ing-row .ar-item,
+  html.lenovo-tab-one-profile .ing-row .ar-prep,
+  html.lenovo-tab-one-profile .ing-row-r .rv-item,
+  html.lenovo-tab-one-profile .ing-row-r .rv-prep {
+    grid-column: 1 / -1;
+  }
+
+  html.lenovo-tab-one-profile .ing-row .btn-secondary,
+  html.lenovo-tab-one-profile .ing-row-r .btn-secondary {
+    grid-column: 2;
+    justify-self: end;
+    width: 48px;
+  }
+}
+
 html.lenovo-tab-one-profile .order-line-row,
 html.lenovo-tab-one-profile .order-line-sub,
 html.lenovo-tab-one-profile .stkt-line-row {
