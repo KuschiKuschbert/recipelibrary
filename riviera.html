@@ -2283,7 +2283,7 @@ function rivieraRemoveCurrentUserRecipe() {
 
 // ── Scaler helpers ────────────────────────────
 function parseYieldNum(y) {
-  const m = String(y || '').match(/[\d.]+/);
+  const m = String(y || '').match(/\d+(?:\.\d+)?/);
   return m ? parseFloat(m[0]) : 1;
 }
 

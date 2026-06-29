@@ -1115,6 +1115,8 @@ function closeModal() {
 }
 
 function renderBookRecipeDetail(r) {
+  const bookRecipeId = KuschiRecipeUi.esc(r.id || '');
+  const bookRecipeName = KuschiRecipeUi.esc(r.name || '').replace(/'/g,"\\'");
   let html = `<div class="modal-top-bar">`;
   html += `<button type="button" class="modal-wake-pill" data-kuschi-wake aria-pressed="false"><span data-kuschi-wake-label>Stay awake</span></button>`;
   html += `<button type="button" class="cook-mode-btn" id="cookModeBtn" onclick="toggleCookMode()" title="Cook Mode — full screen, large text"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg> Cook</button>`;
@@ -1132,6 +1134,10 @@ function renderBookRecipeDetail(r) {
   if (r.source) meta.push(`Source: <span>${KuschiRecipeUi.esc(r.source.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase()))}</span>`);
   if (r.yield) meta.push(`Yield: <span>${KuschiRecipeUi.esc(r.yield)}</span>`);
   if (meta.length) html += `<div class="modal-meta">${meta.join(' · ')}</div>`;
+  html += `<div class="modal-quick-actions" aria-label="Recipe actions">`;
+  html += `<button type="button" class="modal-quick-action modal-quick-action--primary" data-default-label="Copy text" onclick="copyBookRecipeText('${bookRecipeId}', this)">Copy text</button>`;
+  html += `<button type="button" class="modal-quick-action" data-default-label="Copy name" onclick="copyRecipeNameBtn(this, '${bookRecipeName}')">Copy name</button>`;
+  html += `</div>`;
   const baseYield = parseModalYield(r.yield);
   html += `<div class="modal-scale">
     <label>Scale to pax:</label>
@@ -1162,8 +1168,8 @@ function renderBookRecipeDetail(r) {
   }
   html += KuschiRecipeUi.aromaSeasoningSectionHtml({ idSuffix: 'Kb', modalInline: true });
   html += `<div class="modal-copy-bar">`;
-  html += `<button class="modal-copy-btn" onclick="copyBookRecipeText('${KuschiRecipeUi.esc(r.id)}')">Copy as text</button>`;
-  html += `<button class="modal-copy-btn" onclick="copyRecipeNameBtn(this, '${KuschiRecipeUi.esc(r.name).replace(/'/g,"\\'")}')">Copy name</button>`;
+  html += `<button class="modal-copy-btn" data-default-label="Copy as text" onclick="copyBookRecipeText('${bookRecipeId}', this)">Copy as text</button>`;
+  html += `<button class="modal-copy-btn" data-default-label="Copy name" onclick="copyRecipeNameBtn(this, '${bookRecipeName}')">Copy name</button>`;
   html += `</div>`;
   return html;
 }
@@ -1181,16 +1187,17 @@ function removeCurrentBookRecipe() {
 }
 
 function copyRecipeNameBtn(btn, name) {
+  const defaultLabel = (btn && btn.getAttribute('data-default-label')) || 'Copy name';
   KuschiRecipeUi.copyText(name).then(() => {
     btn.textContent = 'Copied!';
-    setTimeout(() => btn.textContent = 'Copy name', 1500);
+    setTimeout(() => btn.textContent = defaultLabel, 1500);
   }).catch(() => {
     btn.textContent = 'Copy failed';
-    setTimeout(() => btn.textContent = 'Copy name', 1500);
+    setTimeout(() => btn.textContent = defaultLabel, 1500);
   });
 }
 
-function copyBookRecipeText(id) {
+function copyBookRecipeText(id, btn) {
   const r = KuschiUserRecipes.getBookRecipeById(CURRENT_BOOK_ID, id);
   if (!r) return;
   const d = KuschiUserRecipes.kitchenToDetail(r);
@@ -1205,11 +1212,13 @@ function copyBookRecipeText(id) {
   text += '\nMethod:\n';
   toArr(d.instructions).forEach((s, i) => { text += (i+1) + '. ' + s + '\n'; });
   KuschiRecipeUi.copyText(text).then(() => {
-    const bar = document.querySelector('.modal-copy-bar .modal-copy-btn');
-    if (bar) { bar.textContent = 'Copied!'; setTimeout(() => bar.textContent = 'Copy as text', 1500); }
+    const bar = btn || document.querySelector('.modal-copy-bar .modal-copy-btn');
+    const defaultLabel = (bar && bar.getAttribute('data-default-label')) || 'Copy as text';
+    if (bar) { bar.textContent = 'Copied!'; setTimeout(() => bar.textContent = defaultLabel, 1500); }
   }).catch(() => {
-    const bar = document.querySelector('.modal-copy-bar .modal-copy-btn');
-    if (bar) { bar.textContent = 'Copy failed'; setTimeout(() => bar.textContent = 'Copy as text', 1500); }
+    const bar = btn || document.querySelector('.modal-copy-bar .modal-copy-btn');
+    const defaultLabel = (bar && bar.getAttribute('data-default-label')) || 'Copy as text';
+    if (bar) { bar.textContent = 'Copy failed'; setTimeout(() => bar.textContent = defaultLabel, 1500); }
   });
 }
 
