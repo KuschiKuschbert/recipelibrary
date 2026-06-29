@@ -583,9 +583,75 @@
     document.body.removeChild(ta);
   }
 
+  function countPayloadRecipes(payload) {
+    if (!payload) return 0;
+    if (payload.recipeIds && payload.recipeIds.length) return payload.recipeIds.length;
+    return (payload.courses || []).reduce(function (sum, course) {
+      return sum + ((course.items || []).length || 0);
+    }, 0);
+  }
+
+  function countShoppingLines(merged) {
+    var total = 0;
+    ['freezer', 'coldroom', 'drystore', 'other'].forEach(function (zone) {
+      total += ((merged && merged[zone]) || []).length;
+    });
+    return total;
+  }
+
+  function activeTabLabel(tab) {
+    return {
+      menu: 'Menu',
+      timeline: 'Timeline',
+      shopping: 'Shopping',
+      recipes: 'Recipes',
+    }[tab] || 'Timeline';
+  }
+
+  function summaryChip(label, value, mod) {
+    return (
+      '<span class="planner-list__summary-chip' +
+      (mod ? ' planner-list__summary-chip--' + mod : '') +
+      '"><span class="planner-list__summary-kicker">' +
+      esc(label) +
+      '</span><strong>' +
+      esc(value) +
+      '</strong></span>'
+    );
+  }
+
+  function renderSummary() {
+    var summary = document.getElementById('plannerListSummary');
+    if (!summary) return;
+    if (!_payload || !_built) {
+      summary.hidden = true;
+      summary.innerHTML = '';
+      return;
+    }
+    var courseCount = (_payload.courses || []).filter(function (course) {
+      return (course.items || []).length;
+    }).length;
+    var recipeCount = countPayloadRecipes(_payload);
+    var timelineTotal = (_built.timeline || []).length;
+    var timelineDone = 0;
+    (_built.timeline || []).forEach(function (row) {
+      if (_timelineChecked[row.rowId]) timelineDone += 1;
+    });
+    var shoppingLines = countShoppingLines(_built.merged);
+    var chips = [summaryChip('View', activeTabLabel(_activeTab), 'focus')];
+    if (_payload.eventDate) chips.push(summaryChip('Date', formatEventDate(_payload.eventDate), ''));
+    chips.push(summaryChip('Covers', String(_payload.pax || 0), ''));
+    chips.push(summaryChip('Menu', recipeCount + ' dishes / ' + courseCount + ' courses', ''));
+    chips.push(summaryChip('Prep', timelineDone + '/' + timelineTotal + ' done', ''));
+    chips.push(summaryChip('Shop', shoppingLines + ' lines', ''));
+    summary.innerHTML = chips.join('');
+    summary.hidden = false;
+  }
+
   function renderTabContent() {
     var body = document.getElementById('plannerListBody');
     if (!body || !_built) return;
+    renderSummary();
     var html = '';
 
     if (_activeTab === 'menu') {
@@ -633,11 +699,13 @@
             (checked ? 'Mark incomplete' : 'Mark complete') +
             '">' +
             (checked ? '☑' : '☐') +
-            '</button><span class="planner-timeline__main"><strong class="planner-timeline__dish">' +
+            '</button><span class="planner-timeline__main"><span class="planner-timeline__top"><strong class="planner-timeline__dish">' +
             esc(r.dishName) +
-            '</strong><span class="planner-timeline__task"> — ' +
+            '</strong><span class="planner-timeline__phase-chip">' +
+            esc(PHASE_LABELS[r.phase] || 'Prep') +
+            '</span></span><span class="planner-timeline__task">' +
             esc(r.text) +
-            '</span><span class="planner-timeline__hint">' +
+            '</span><span class="planner-timeline__meta">' +
             esc(r.hint) +
             '</span></span></li>';
         });

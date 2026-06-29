@@ -6319,6 +6319,48 @@ body.planner-list-open {
   min-height: 40px;
   font-size: 12px;
 }
+.planner-list__summary {
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(20, 20, 20, 0.72);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  flex-shrink: 0;
+}
+.planner-list__summary[hidden] {
+  display: none;
+}
+.planner-list__summary-chip {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  min-height: 36px;
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--text2);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.planner-list__summary-chip--focus {
+  border-color: rgba(201, 169, 110, 0.38);
+  background: rgba(201, 169, 110, 0.11);
+}
+.planner-list__summary-kicker {
+  color: var(--text3);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+.planner-list__summary-chip strong {
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 650;
+}
 .planner-list__print-group {
   display: flex;
   flex: 1 1 280px;
@@ -6368,7 +6410,7 @@ body.planner-list-open {
   font-weight: 600;
   color: var(--gold-light);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
 }
 .planner-timeline__list,
 .planner-shopping ul {
@@ -6405,13 +6447,45 @@ body.planner-list-open {
   vertical-align: middle;
 }
 .planner-timeline__main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   min-width: 0;
+}
+.planner-timeline__top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+.planner-timeline__dish {
+  color: var(--text);
+}
+.planner-timeline__task {
+  display: block;
+  color: var(--text2);
+}
+.planner-timeline__phase-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 2px 8px;
+  border: 1px solid rgba(201, 169, 110, 0.22);
+  border-radius: 999px;
+  background: rgba(201, 169, 110, 0.08);
+  color: var(--gold-light);
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 .planner-timeline__check {
   margin-right: 6px;
   opacity: 0.5;
 }
-.planner-timeline__hint {
+.planner-timeline__hint,
+.planner-timeline__meta {
   display: block;
   margin-top: 4px;
   font-size: 11px;
@@ -6773,6 +6847,28 @@ html.lenovo-tab-one-profile .planner-list__actions .btn-secondary {
   font-size: 13px;
 }
 
+html.lenovo-tab-one-profile .planner-list__summary {
+  gap: 10px;
+  padding: 10px 20px;
+  background: rgba(20, 20, 20, 0.94);
+  border-bottom-color: rgba(201, 169, 110, 0.14);
+}
+
+html.lenovo-tab-one-profile .planner-list__summary-chip {
+  min-height: 44px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+html.lenovo-tab-one-profile .planner-list__summary-chip strong {
+  font-size: 14px;
+}
+
+html.lenovo-tab-one-profile .planner-list__summary-kicker {
+  font-size: 11px;
+}
+
 html.lenovo-tab-one-profile .planner-list__primary-action {
   min-height: 52px;
   border-color: rgba(201, 169, 110, 0.42);
@@ -6822,7 +6918,7 @@ html.lenovo-tab-one-profile .planner-manifest__course {
   border-left: 3px solid rgba(201, 169, 110, 0.44);
   border-radius: 10px;
   font-size: 13px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0;
 }
 
 html.lenovo-tab-one-profile .planner-timeline__row,
@@ -6852,7 +6948,27 @@ html.lenovo-tab-one-profile .planner-timeline__check-btn {
   vertical-align: middle;
 }
 
+html.lenovo-tab-one-profile .planner-timeline__main {
+  gap: 6px;
+}
+
+html.lenovo-tab-one-profile .planner-timeline__dish {
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+html.lenovo-tab-one-profile .planner-timeline__task {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+html.lenovo-tab-one-profile .planner-timeline__phase-chip {
+  min-height: 24px;
+  font-size: 12px;
+}
+
 html.lenovo-tab-one-profile .planner-timeline__hint,
+html.lenovo-tab-one-profile .planner-timeline__meta,
 html.lenovo-tab-one-profile .planner-manifest__tags {
   font-size: 12px;
 }
@@ -6902,7 +7018,7 @@ html.lenovo-tab-one-profile .planner-recipe__service {
   }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 720px) {
   html.lenovo-tab-one-profile .planner-list__actions {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -7000,6 +7116,7 @@ html.lenovo-tab-one-profile .planner-recipe__service {
   body.planner-list-open .results-bar,
   body.planner-list-open #content,
   body.planner-list-open .planner-list__tabs,
+  body.planner-list-open .planner-list__summary,
   body.planner-list-open .planner-list__actions,
   body.planner-list-open .planner-list__close,
   body.planner-list-open .planner-list__body {
