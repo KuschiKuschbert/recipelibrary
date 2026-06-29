@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=45">
+<link rel="stylesheet" href="assets/theme.css?v=46">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
@@ -621,7 +621,7 @@
       <button type="button" role="tab" class="active" id="arTabManual" aria-selected="true" onclick="setAddRecipeTab('manual')">Manual</button>
       <button type="button" role="tab" id="arTabFormat" aria-selected="false" onclick="setAddRecipeTab('format')">Paste &amp; format</button>
     </div>
-    <div id="arPanelManual" role="tabpanel" aria-labelledby="arTabManual">
+    <div id="arPanelManual" class="ar-panel ar-panel--manual" role="tabpanel" aria-labelledby="arTabManual">
     <div id="arFormatReview" class="format-review-card" hidden aria-live="polite"></div>
     <div class="form-row"><label for="arName">Name</label><input id="arName" type="text" placeholder="Recipe name" required /></div>
     <div class="form-row"><label for="arYield">Yield</label><input id="arYield" type="text" placeholder="e.g. 4 servings" /></div>
@@ -639,7 +639,7 @@
       <button type="button" class="btn-secondary" onclick="exportKitchenBackup()">Copy JSON backup</button>
     </div>
     </div>
-    <div id="arPanelFormat" role="tabpanel" aria-labelledby="arTabFormat" hidden>
+    <div id="arPanelFormat" class="ar-panel ar-panel--format" role="tabpanel" aria-labelledby="arTabFormat" hidden>
       <p class="ar-format-help">Key from <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">AI Studio</a>; <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">restrict in Cloud</a> (referrers + Generative Language API). Stored on this device only. Text is sent to Google.</p>
       <div id="arGeminiKeySavedStrip" class="ar-gemini-saved-strip" hidden>
         <span>API key saved on this device.</span>
@@ -650,8 +650,10 @@
         <div class="form-row" style="flex:2;min-width:220px"><label for="arGeminiKey">Gemini API key</label><input id="arGeminiKey" type="password" autocomplete="off" placeholder="AIza…" /></div>
         <button type="button" class="btn-secondary" onclick="saveKitchenGeminiKey()" style="margin-bottom:2px">Remember on device</button>
       </div>
-      <div class="form-row"><label for="arRecipeUrl">Recipe page URL (optional)</label><input type="url" id="arRecipeUrl" inputmode="url" autocomplete="off" placeholder="https://…" /></div>
-      <div class="form-row"><label for="arRecipeFile">Upload PDF, DOCX, or image (optional)</label><input type="file" id="arRecipeFile" accept=".pdf,.docx,application/pdf,image/*,application/vnd.openxmlformats-officedocument.wordprocessingml.document" /></div>
+      <div class="ar-format-source-grid">
+        <div class="form-row"><label for="arRecipeUrl">Recipe page URL (optional)</label><input type="url" id="arRecipeUrl" inputmode="url" autocomplete="off" placeholder="https://…" /></div>
+        <div class="form-row"><label for="arRecipeFile">Upload PDF, DOCX, or image (optional)</label><input type="file" id="arRecipeFile" accept=".pdf,.docx,application/pdf,image/*,application/vnd.openxmlformats-officedocument.wordprocessingml.document" /></div>
+      </div>
       <details class="ar-proxy-details" style="margin-bottom:14px">
         <summary>Optional fetch proxy (for recipe URLs when the site blocks the browser)</summary>
         <p class="ar-format-help" style="margin-top:10px">Optional proxy base URL for recipe fetch if the site blocks the browser (<code>workers/recipe-fetch-proxy.js</code>).</p>
@@ -661,8 +663,10 @@
         </div>
       </details>
       <div class="form-row"><label for="arPasteRaw">Recipe text</label><textarea id="arPasteRaw" placeholder="Or paste ingredients and method here…" style="min-height:120px"></textarea></div>
-      <button type="button" class="btn-secondary" id="arFormatBtn" onclick="formatKitchenRecipeWithGemini()">Format into manual form</button>
-      <p class="ar-format-status" id="arFormatStatus"></p>
+      <div class="ar-format-actions">
+        <button type="button" class="btn-secondary" id="arFormatBtn" onclick="formatKitchenRecipeWithGemini()">Format into manual form</button>
+        <p class="ar-format-status" id="arFormatStatus"></p>
+      </div>
     </div>
   </div>
 </div>

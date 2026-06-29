@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=45">
+<link rel="stylesheet" href="assets/theme.css?v=46">
 <link rel="preload" href="riviera_data/builtins.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
@@ -993,7 +993,7 @@
       <button type="button" role="tab" class="active" id="rvTabManual" aria-selected="true" onclick="setRivieraAddTab('manual')">Manual</button>
       <button type="button" role="tab" id="rvTabFormat" aria-selected="false" onclick="setRivieraAddTab('format')">Paste &amp; format</button>
     </div>
-    <div id="rvPanelManual" role="tabpanel" aria-labelledby="rvTabManual">
+    <div id="rvPanelManual" class="ar-panel ar-panel--manual" role="tabpanel" aria-labelledby="rvTabManual">
     <div id="rvFormatReview" class="format-review-card" hidden aria-live="polite"></div>
     <div class="form-row"><label>Name</label><input id="rvName" type="text" /></div>
     <div class="form-row"><label>Subtitle</label><input id="rvSub" type="text" placeholder="Optional" /></div>
@@ -1012,12 +1012,12 @@
     <div class="form-row"><label>Prep method (one line per step)</label><textarea id="rvSteps"></textarea></div>
     <div class="form-row"><label>Service (one line per step)</label><textarea id="rvService" placeholder="Optional"></textarea></div>
     <div class="form-row"><label>Note</label><input id="rvNote" placeholder="Optional" /></div>
-    <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+    <div class="add-form-actions">
       <button type="button" class="form-primary-btn" onclick="submitRivieraRecipe()">Save recipe</button>
       <button type="button" class="btn-secondary" onclick="copyRivieraBackupJson()">Copy JSON backup</button>
     </div>
     </div>
-    <div id="rvPanelFormat" role="tabpanel" aria-labelledby="rvTabFormat" hidden>
+    <div id="rvPanelFormat" class="ar-panel ar-panel--format" role="tabpanel" aria-labelledby="rvTabFormat" hidden>
       <p class="ar-format-help">Same Gemini key as Kitchen (this device). <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">AI Studio</a> · <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Cloud restrictions</a>. Text sent to Google.</p>
       <div id="rvGeminiKeySavedStrip" class="ar-gemini-saved-strip" hidden>
         <span>API key saved on this device.</span>
@@ -1028,8 +1028,10 @@
         <div class="form-row" style="flex:2;min-width:220px"><label for="rvGeminiKey">Gemini API key</label><input id="rvGeminiKey" type="password" autocomplete="off" placeholder="AIza…" /></div>
         <button type="button" class="btn-secondary" onclick="saveRivieraGeminiKey()" style="margin-bottom:2px">Remember on device</button>
       </div>
-      <div class="form-row"><label for="rvRecipeUrl">Recipe page URL (optional)</label><input type="url" id="rvRecipeUrl" inputmode="url" autocomplete="off" placeholder="https://…" /></div>
-      <div class="form-row"><label for="rvRecipeFile">Upload PDF, DOCX, or image (optional)</label><input type="file" id="rvRecipeFile" accept=".pdf,.docx,application/pdf,image/*,application/vnd.openxmlformats-officedocument.wordprocessingml.document" /></div>
+      <div class="ar-format-source-grid">
+        <div class="form-row"><label for="rvRecipeUrl">Recipe page URL (optional)</label><input type="url" id="rvRecipeUrl" inputmode="url" autocomplete="off" placeholder="https://…" /></div>
+        <div class="form-row"><label for="rvRecipeFile">Upload PDF, DOCX, or image (optional)</label><input type="file" id="rvRecipeFile" accept=".pdf,.docx,application/pdf,image/*,application/vnd.openxmlformats-officedocument.wordprocessingml.document" /></div>
+      </div>
       <details class="ar-proxy-details" style="margin-bottom:14px">
         <summary>Optional fetch proxy (for recipe URLs when the site blocks the browser)</summary>
         <p class="ar-format-help" style="margin-top:10px">Optional proxy for recipe URL fetch, shared with Kitchen (<code>workers/recipe-fetch-proxy.js</code>).</p>
@@ -1039,8 +1041,10 @@
         </div>
       </details>
       <div class="form-row"><label for="rvPasteRaw">Recipe text</label><textarea id="rvPasteRaw" placeholder="Or paste ingredients, prep, service…" style="min-height:120px"></textarea></div>
-      <button type="button" class="btn-secondary" id="rvFormatBtn" onclick="formatRivieraRecipeWithGemini()">Format into manual form</button>
-      <p class="ar-format-status" id="rvFormatStatus"></p>
+      <div class="ar-format-actions">
+        <button type="button" class="btn-secondary" id="rvFormatBtn" onclick="formatRivieraRecipeWithGemini()">Format into manual form</button>
+        <p class="ar-format-status" id="rvFormatStatus"></p>
+      </div>
     </div>
   </div>
 </div>

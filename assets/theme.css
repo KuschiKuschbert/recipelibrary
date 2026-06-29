@@ -1098,6 +1098,26 @@ html.low-memory-device .kuschi-toast--show {
   background: rgba(201, 169, 110, 0.25);
 }
 
+.ar-panel {
+  min-width: 0;
+}
+
+.ar-format-source-grid {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.ar-format-actions {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.ar-format-actions .ar-format-status {
+  margin: 0;
+}
+
 .format-review-card[hidden] {
   display: none !important;
 }
@@ -4568,6 +4588,27 @@ html.lenovo-tab-one-profile .ar-format-key-row .form-row {
   min-width: 0;
 }
 
+html.lenovo-tab-one-profile .ar-panel--format {
+  display: grid;
+  gap: 12px;
+}
+
+html.lenovo-tab-one-profile .ar-format-source-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 2px;
+  padding: 12px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.024));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+}
+
+html.lenovo-tab-one-profile .ar-format-source-grid .form-row {
+  margin-bottom: 0;
+}
+
 html.lenovo-tab-one-profile .ar-gemini-saved-strip {
   gap: 10px;
   padding: 10px 12px;
@@ -4600,6 +4641,46 @@ html.lenovo-tab-one-profile #arFormatBtn,
 html.lenovo-tab-one-profile #rvFormatBtn {
   width: 100%;
   min-height: 50px;
+}
+
+html.lenovo-tab-one-profile #addRecipeOverlay .add-form-actions,
+html.lenovo-tab-one-profile #addRivieraOverlay .add-form-actions,
+html.lenovo-tab-one-profile #addRecipeOverlay .ar-format-actions,
+html.lenovo-tab-one-profile #addRivieraOverlay .ar-format-actions {
+  position: sticky;
+  bottom: -1px;
+  z-index: 5;
+  margin: 18px -28px -28px;
+  padding: 12px 28px max(14px, calc(14px + env(safe-area-inset-bottom, 0px)));
+  background:
+    linear-gradient(180deg, rgba(20, 20, 20, 0.9), rgba(20, 20, 20, 0.985)),
+    var(--bg2);
+  border-top: 1px solid rgba(201, 169, 110, 0.18);
+  box-shadow: 0 -10px 24px rgba(0, 0, 0, 0.24);
+}
+
+html.lenovo-tab-one-profile #addRecipeOverlay .add-form-actions,
+html.lenovo-tab-one-profile #addRivieraOverlay .add-form-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(164px, auto);
+  align-items: stretch;
+}
+
+html.lenovo-tab-one-profile #addRecipeOverlay .add-form-actions button,
+html.lenovo-tab-one-profile #addRivieraOverlay .add-form-actions button {
+  justify-content: center;
+}
+
+html.lenovo-tab-one-profile #addRecipeOverlay .ar-format-actions,
+html.lenovo-tab-one-profile #addRivieraOverlay .ar-format-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+}
+
+html.lenovo-tab-one-profile #addRecipeOverlay .ar-format-actions .ar-format-status,
+html.lenovo-tab-one-profile #addRivieraOverlay .ar-format-actions .ar-format-status {
+  min-height: 20px;
 }
 
 html.lenovo-tab-one-profile #rvPanelManual .form-primary-btn {
@@ -4889,6 +4970,10 @@ html.lenovo-tab-one-profile .prep-actor-remove {
   html.lenovo-tab-one-profile .ar-format-key-row {
     grid-template-columns: 1fr;
   }
+
+  html.lenovo-tab-one-profile .ar-format-source-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 560px) {
@@ -4898,6 +4983,11 @@ html.lenovo-tab-one-profile .prep-actor-remove {
 
   html.lenovo-tab-one-profile .format-review-card,
   html.lenovo-tab-one-profile .format-review-card__actions {
+    grid-template-columns: 1fr;
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay .add-form-actions,
+  html.lenovo-tab-one-profile #addRivieraOverlay .add-form-actions {
     grid-template-columns: 1fr;
   }
 }
@@ -5445,6 +5535,15 @@ html.lenovo-tab-one-profile .nav-item__label {
   html.lenovo-tab-one-profile body.has-app-nav .modal {
     max-width: min(860px, calc(100vw - var(--nav-rail-width, 0px) - 28px));
     padding: 22px 24px max(24px, calc(24px + env(safe-area-inset-bottom, 0px)));
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay .add-form-actions,
+  html.lenovo-tab-one-profile #addRivieraOverlay .add-form-actions,
+  html.lenovo-tab-one-profile #addRecipeOverlay .ar-format-actions,
+  html.lenovo-tab-one-profile #addRivieraOverlay .ar-format-actions {
+    margin: 18px -24px -24px;
+    padding-right: 24px;
+    padding-left: 24px;
   }
 
   html.lenovo-tab-one-profile body.has-app-nav .modal-top-bar {
