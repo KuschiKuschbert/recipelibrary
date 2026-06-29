@@ -891,6 +891,50 @@
     }
   }
 
+  function makeSearchScheduler(run, label) {
+    var statusEl = document.getElementById('paSearchStatus');
+    if (window.KuschiRecipeUi && typeof window.KuschiRecipeUi.createFilterScheduler === 'function') {
+      var scheduler = window.KuschiRecipeUi.createFilterScheduler({
+        run: function () {
+          run();
+          scheduler.setPending(false);
+        },
+        lowMemoryDelay: 220,
+        defaultDelay: 150,
+        pendingText: label || 'Filtering...',
+        onPending: function (ctx) {
+          if (statusEl) {
+            statusEl.classList.toggle('is-searching', ctx.pending);
+            statusEl.textContent = ctx.pending ? ctx.text : '';
+          }
+          return false;
+        },
+      });
+      return function (opts) {
+        scheduler.schedule(opts);
+      };
+    }
+    var timer = null;
+    return function (opts) {
+      clearTimeout(timer);
+      if (opts && opts.immediate) {
+        run();
+        return;
+      }
+      if (statusEl) {
+        statusEl.classList.add('is-searching');
+        statusEl.textContent = label || 'Filtering...';
+      }
+      timer = setTimeout(function () {
+        run();
+        if (statusEl) {
+          statusEl.classList.remove('is-searching');
+          statusEl.textContent = '';
+        }
+      }, 150);
+    };
+  }
+
   function getFoodsSorted() {
     if (!state.foodPairings) return [];
     return state.foodPairings.slice().sort(function (a, b) {
@@ -1007,6 +1051,12 @@
     var foodPri = document.getElementById('paFoodModePriority');
     var foodAll = document.getElementById('paFoodModeAll');
     var foodSearch = document.getElementById('paFoodSearch');
+    var scheduleSpiceFilter = makeSearchScheduler(function () {
+      if (search) applySpiceFilter(search.value);
+    }, 'Filtering spices...');
+    var scheduleFoodFilter = makeSearchScheduler(function () {
+      if (foodSearch) applyFoodFilter(foodSearch.value);
+    }, 'Filtering foods...');
 
     if (!spiceHost) return;
 
@@ -1121,12 +1171,12 @@
 
         if (search) {
           search.addEventListener('input', function () {
-            applySpiceFilter(search.value);
+            scheduleSpiceFilter();
           });
         }
         if (foodSearch) {
           foodSearch.addEventListener('input', function () {
-            applyFoodFilter(foodSearch.value);
+            scheduleFoodFilter();
           });
         }
 

@@ -166,6 +166,13 @@
     margin-bottom: 12px;
     line-height: 1.45;
   }
+  .pa-status.is-searching {
+    color: var(--gold-light);
+    font-weight: 600;
+  }
+  .pa-search-status:empty {
+    display: none;
+  }
 
   .pa-matrix-wrap {
     overflow: auto;
@@ -690,6 +697,7 @@
   <main id="paMain">
     <p class="pa-status" id="paStatus" aria-live="polite">Loading…</p>
     <p class="pa-status pa-enrich-status" id="paEnrichStatus" aria-live="polite"></p>
+    <p class="pa-status pa-search-status" id="paSearchStatus" aria-live="polite"></p>
     <div class="pa-matrix-legend" id="paSpiceLegend" aria-label="How to read the spice matrix">
       <strong>How to read the spice matrix</strong>
       <p class="pa-legend-lead">
@@ -783,6 +791,7 @@
 </div>
 
 <script src="assets/flavour-toolkit-lookup.js"></script>
+<script src="assets/kuschi-recipe-ui.js"></script>
 <script src="assets/pairing-atlas.js"></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
 <script src="assets/app-nav.js"></script>
