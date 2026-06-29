@@ -633,14 +633,13 @@
             (checked ? 'Mark incomplete' : 'Mark complete') +
             '">' +
             (checked ? '☑' : '☐') +
-            '</button> ' +
-            '<strong>' +
+            '</button><span class="planner-timeline__main"><strong class="planner-timeline__dish">' +
             esc(r.dishName) +
-            '</strong> — ' +
+            '</strong><span class="planner-timeline__task"> — ' +
             esc(r.text) +
-            '<span class="planner-timeline__hint">' +
+            '</span><span class="planner-timeline__hint">' +
             esc(r.hint) +
-            '</span></li>';
+            '</span></span></li>';
         });
         html += '</ul>';
       });
