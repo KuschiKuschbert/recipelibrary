@@ -406,6 +406,11 @@ body {
   color: var(--text3);
 }
 
+.results-bar.is-searching .results-meta {
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
 /* ── Loading / empty ────────────────────────────────── */
 .loading {
   text-align: center;

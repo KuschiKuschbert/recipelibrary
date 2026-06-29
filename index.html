@@ -711,7 +711,10 @@
 <script src="assets/kuschi-filter-chips.js"></script>
 <script src="assets/kuschi-cook-mode.js"></script>
 <script>
-const PAGE_SIZE = document.documentElement.classList.contains('low-memory-device') ? 36 : 48;
+const IS_LOW_MEMORY_DEVICE = document.documentElement.classList.contains('low-memory-device');
+const PAGE_SIZE = IS_LOW_MEMORY_DEVICE ? 36 : 48;
+const SEARCH_DEBOUNCE_MS = IS_LOW_MEMORY_DEVICE ? 240 : 160;
+const CATALOG_RERENDER_DELAY_MS = IS_LOW_MEMORY_DEVICE ? 140 : 0;
 let allRecipes = [];
 let filtered = [];
 let currentPage = 1;
@@ -720,6 +723,8 @@ let kuschiDisplayCount = PAGE_SIZE;
 let currentRecipe = null;
 /** Last applyFilters timing so pagination re-renders can keep showing ms when enabled. */
 let lastFilterMs = '';
+let scheduledFilterTimer = null;
+let scheduledFilterFrame = null;
 
 // ── Data Loading ──────────────────────────────────────
 /** Origin + directory of the current page (works for /repo, /repo/, /repo/index.html). */
@@ -923,7 +928,49 @@ function haystackMatchesTerm(hay, t) {
   return false;
 }
 
+function clearScheduledFilter() {
+  if (scheduledFilterTimer) {
+    clearTimeout(scheduledFilterTimer);
+    scheduledFilterTimer = null;
+  }
+  if (scheduledFilterFrame) {
+    cancelAnimationFrame(scheduledFilterFrame);
+    scheduledFilterFrame = null;
+  }
+}
+
+function setFilterPending(pending) {
+  const bar = document.getElementById('resultsBar');
+  const meta = document.getElementById('resultsMeta');
+  if (!bar || !meta) return;
+  bar.classList.toggle('is-searching', !!pending);
+  const showFilterMs =
+    typeof localStorage !== 'undefined' && localStorage.getItem('kuschiShowFilterMs') === '1';
+  if (pending && !showFilterMs && bar.classList.contains('visible')) {
+    meta.textContent = 'Searching...';
+  }
+}
+
+function scheduleApplyFilters(opts) {
+  const options = opts || {};
+  clearScheduledFilter();
+  if (options.immediate) {
+    setFilterPending(false);
+    applyFilters();
+    return;
+  }
+  setFilterPending(true);
+  scheduledFilterTimer = setTimeout(() => {
+    scheduledFilterTimer = null;
+    scheduledFilterFrame = requestAnimationFrame(() => {
+      scheduledFilterFrame = null;
+      applyFilters();
+    });
+  }, options.delay == null ? SEARCH_DEBOUNCE_MS : options.delay);
+}
+
 function applyFilters() {
+  clearScheduledFilter();
   const t0 = performance.now();
   const q = document.getElementById('search').value.toLowerCase().trim();
   const cuisine = document.getElementById('filterCuisine').value;
@@ -976,6 +1023,7 @@ function applyFilters() {
 function render(dt) {
   const bar = document.getElementById('resultsBar');
   bar.classList.add('visible');
+  bar.classList.remove('is-searching');
   document.getElementById('resultsCount').innerHTML =
     `<span>${filtered.length.toLocaleString()}</span> recipe${filtered.length !== 1 ? 's' : ''}`;
   const showFilterMs =
@@ -1086,16 +1134,14 @@ function copyName(btn, name) {
 
 
 // ── Event Listeners ───────────────────────────────────
-let debounce;
 document.getElementById('search').addEventListener('input', () => {
-  clearTimeout(debounce);
-  debounce = setTimeout(applyFilters, 180);
+  scheduleApplyFilters();
 });
 
-KuschiRecipeUi.bindSearchClear({ inputId: 'search', buttonId: 'searchClear', onClear: applyFilters });
+KuschiRecipeUi.bindSearchClear({ inputId: 'search', buttonId: 'searchClear', onClear: () => scheduleApplyFilters({ immediate: true }) });
 
 ['filterCuisine','filterProtein','filterTag','filterCat'].forEach(id =>
-  document.getElementById(id).addEventListener('change', applyFilters)
+  document.getElementById(id).addEventListener('change', () => scheduleApplyFilters({ immediate: true }))
 );
 
 function resetSearchAndFilters() {
@@ -1104,7 +1150,7 @@ function resetSearchAndFilters() {
     document.getElementById(id).value = ''
   );
   KuschiRecipeUi.syncSearchClear('search');
-  applyFilters();
+  scheduleApplyFilters({ immediate: true });
 }
 
 document.getElementById('clearBtn').addEventListener('click', resetSearchAndFilters);
@@ -2256,16 +2302,23 @@ async function _bootstrapRecipes() {
     let firstShardRendered = false;
 
     let pendingRerender = false;
+    let pendingRerenderTimer = null;
     function scheduleRerender() {
       if (pendingRerender) return;
       pendingRerender = true;
-      requestAnimationFrame(() => {
+      const run = () => requestAnimationFrame(() => {
+        pendingRerenderTimer = null;
         pendingRerender = false;
         filterMemo.clear();
         document.getElementById('totalCount').textContent =
           allRecipes.length.toLocaleString() + (loadedShards < files.length ? '+' : '');
         applyFilters();
       });
+      if (CATALOG_RERENDER_DELAY_MS) {
+        pendingRerenderTimer = setTimeout(run, CATALOG_RERENDER_DELAY_MS);
+      } else {
+        run();
+      }
     }
 
     const shardPromises = files.map(f => {
@@ -2311,6 +2364,11 @@ async function _bootstrapRecipes() {
     // ── Step 5: await all shards then finalise ──
     await Promise.allSettled(shardPromises);
 
+    if (pendingRerenderTimer) {
+      clearTimeout(pendingRerenderTimer);
+      pendingRerenderTimer = null;
+      pendingRerender = false;
+    }
     filterMemo.clear();
     levMemo.clear();
     document.getElementById('loading').style.display = 'none';
