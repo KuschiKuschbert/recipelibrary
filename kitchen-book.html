@@ -1556,7 +1556,7 @@ function submitBookRecipe() {
   const instructions = document.getElementById('arMethod').value.split('\n').map(s => s.trim()).filter(Boolean);
   const protein = document.getElementById('arProtein').value.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
   const tags = document.getElementById('arTags').value.split(',').map(s => s.trim()).filter(Boolean);
-  KuschiUserRecipes.addBookRecipe(CURRENT_BOOK_ID, {
+  const saved = KuschiUserRecipes.addBookRecipe(CURRENT_BOOK_ID, {
     name,
     yield: document.getElementById('arYield').value.trim() || null,
     cuisine: document.getElementById('arCuisine').value.trim() || null,
@@ -1568,6 +1568,9 @@ function submitBookRecipe() {
   });
   closeAddRecipeModal();
   loadRecipes();
+  if (window.KuschiRecipeUi && KuschiRecipeUi.toastSavedRecipe) {
+    KuschiRecipeUi.toastSavedRecipe(saved, (rec) => openRecipe(rec.id));
+  }
 }
 
 function exportBookBackup() {

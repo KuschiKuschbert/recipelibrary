@@ -1937,7 +1937,7 @@ function submitRivieraRecipe() {
   const protein = document.getElementById('rvProtein').value.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
   const diet = document.getElementById('rvDiet').value.split(',').map(s => s.trim()).filter(Boolean);
   const elements = document.getElementById('rvElements').value.split(',').map(s => s.trim()).filter(Boolean);
-  KuschiUserRecipes.addRivieraRecipe({
+  const saved = KuschiUserRecipes.addRivieraRecipe({
     name,
     subtitle: document.getElementById('rvSub').value.trim(),
     type: document.getElementById('rvType').value.trim() || 'Custom',
@@ -1957,6 +1957,9 @@ function submitRivieraRecipe() {
   closeAddRivieraModal();
   populateFilters();
   applyFilters();
+  if (window.KuschiRecipeUi && KuschiRecipeUi.toastSavedRecipe) {
+    KuschiRecipeUi.toastSavedRecipe(saved, (rec) => openRecipe(rec.id));
+  }
 }
 
 function copyRivieraBackupJson() {

@@ -12,8 +12,8 @@
  *   Call KuschiCookMode.bindRouting(openFn, closeFn) once the page is ready.
  *   - openFn(id): page-specific function that opens a recipe modal (e.g. openRecipe)
  *   - closeFn():  page-specific function that closes the modal (e.g. closeModal)
- *   On open:  pushes ?open=<id> into history.
- *   On close: pops the ?open= param out of history.
+ *   On open:  pushes/updates ?open=<id> in history.
+ *   On close: pops only the ?open= param out of history.
  *   popstate: Android/desktop back button closes the modal instead of navigating away.
  *   On load:  if ?open=<id> is present, calls openFn after a short delay.
  */
@@ -102,15 +102,22 @@
 
   function _pushOpen(id) {
     try {
-      var url = window.location.pathname + '?open=' + encodeURIComponent(id);
+      var p = new URLSearchParams(window.location.search);
+      p.set('open', id);
+      var qs = p.toString();
+      var url = window.location.pathname + (qs ? '?' + qs : '') + window.location.hash;
       history.pushState({ kuschiOpen: id }, '', url);
     } catch (_) {}
   }
 
   function _popOpen() {
     try {
-      if (history.state && history.state.kuschiOpen) {
-        history.pushState({}, '', window.location.pathname);
+      var p = new URLSearchParams(window.location.search);
+      if ((history.state && history.state.kuschiOpen) || p.has('open')) {
+        p.delete('open');
+        var qs = p.toString();
+        var url = window.location.pathname + (qs ? '?' + qs : '') + window.location.hash;
+        history.pushState({}, '', url);
       }
     } catch (_) {}
   }

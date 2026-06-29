@@ -56,10 +56,13 @@
 
   var toastTimer = null;
 
+  var SAVED_RECIPE_TOAST_KEY = 'kuschiSavedRecipeToast';
+
   function toast(message, opts) {
     var doc = w.document;
     if (!doc || !doc.body) return;
     var options = opts || {};
+    var hasAction = options.actionLabel && typeof options.onAction === 'function';
     var el = doc.getElementById('kuschiToast');
     if (!el) {
       el = doc.createElement('div');
@@ -70,13 +73,74 @@
       el.setAttribute('aria-atomic', 'true');
       doc.body.appendChild(el);
     }
-    el.textContent = String(message || '');
+    el.innerHTML = '';
+    var text = doc.createElement('span');
+    text.className = 'kuschi-toast__message';
+    text.textContent = String(message || '');
+    el.appendChild(text);
+    if (hasAction) {
+      var action = doc.createElement('button');
+      action.type = 'button';
+      action.className = 'kuschi-toast__action';
+      action.setAttribute('aria-label', 'Open saved recipe');
+      action.textContent = String(options.actionLabel || '');
+      action.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        w.clearTimeout(toastTimer);
+        el.classList.remove('kuschi-toast--show');
+        options.onAction();
+      });
+      el.appendChild(action);
+    }
     el.classList.toggle('kuschi-toast--error', options.kind === 'error');
+    el.classList.toggle('kuschi-toast--has-action', !!hasAction);
     el.classList.add('kuschi-toast--show');
     w.clearTimeout(toastTimer);
     toastTimer = w.setTimeout(function () {
       el.classList.remove('kuschi-toast--show');
-    }, options.duration || (options.kind === 'error' ? 2600 : 1800));
+    }, options.duration || (hasAction ? 9000 : (options.kind === 'error' ? 2600 : 1800)));
+  }
+
+  function toastSavedRecipe(recipe, onOpen, opts) {
+    var rec = recipe || {};
+    var label = String(rec.name || 'Recipe');
+    toast('Saved: ' + label, {
+      actionLabel: 'Open',
+      duration: opts && opts.duration,
+      onAction: function () {
+        if (typeof onOpen === 'function') onOpen(rec);
+      },
+    });
+  }
+
+  function rememberSavedRecipeToast(scope, recipe) {
+    if (!w.sessionStorage || !recipe || !recipe.id) return;
+    try {
+      w.sessionStorage.setItem(SAVED_RECIPE_TOAST_KEY, JSON.stringify({
+        scope: String(scope || ''),
+        id: String(recipe.id),
+        name: String(recipe.name || 'Recipe'),
+        savedAt: Date.now(),
+      }));
+    } catch (e) {
+      /* ignore */
+    }
+  }
+
+  function consumeSavedRecipeToast(scope) {
+    if (!w.sessionStorage) return null;
+    try {
+      var raw = w.sessionStorage.getItem(SAVED_RECIPE_TOAST_KEY);
+      if (!raw) return null;
+      w.sessionStorage.removeItem(SAVED_RECIPE_TOAST_KEY);
+      var rec = JSON.parse(raw);
+      if (!rec || rec.scope !== String(scope || '') || !rec.id) return null;
+      if (Date.now() - Number(rec.savedAt || 0) > 120000) return null;
+      return rec;
+    } catch (e) {
+      return null;
+    }
   }
 
   var searchClearSync = Object.create(null);
@@ -202,6 +266,9 @@
     esc: esc,
     copyText: copyText,
     toast: toast,
+    toastSavedRecipe: toastSavedRecipe,
+    rememberSavedRecipeToast: rememberSavedRecipeToast,
+    consumeSavedRecipeToast: consumeSavedRecipeToast,
     bindSearchClear: bindSearchClear,
     createFilterScheduler: createFilterScheduler,
     syncSearchClear: syncSearchClear,

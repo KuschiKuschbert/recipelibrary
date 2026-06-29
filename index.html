@@ -2129,7 +2129,7 @@ function submitKitchenRecipe() {
   const instructions = document.getElementById('arMethod').value.split('\n').map(s => s.trim()).filter(Boolean);
   const protein = document.getElementById('arProtein').value.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
   const tags = document.getElementById('arTags').value.split(',').map(s => s.trim()).filter(Boolean);
-  KuschiUserRecipes.addKitchenRecipe({
+  const saved = KuschiUserRecipes.addKitchenRecipe({
     name,
     yield: document.getElementById('arYield').value.trim() || null,
     cuisine: document.getElementById('arCuisine').value.trim() || null,
@@ -2139,9 +2139,20 @@ function submitKitchenRecipe() {
     ingredients,
     instructions
   });
+  if (window.KuschiRecipeUi && KuschiRecipeUi.rememberSavedRecipeToast) {
+    KuschiRecipeUi.rememberSavedRecipeToast('kitchen', saved);
+  }
   closeAddRecipeModal();
   location.reload();
 }
+
+function showPendingKitchenSavedRecipeToast() {
+  if (!window.KuschiRecipeUi || !KuschiRecipeUi.consumeSavedRecipeToast || !KuschiRecipeUi.toastSavedRecipe) return;
+  const saved = KuschiRecipeUi.consumeSavedRecipeToast('kitchen');
+  if (!saved) return;
+  KuschiRecipeUi.toastSavedRecipe(saved, (rec) => openRecipe(rec.id));
+}
+
 function exportKitchenBackup() {
   const t = KuschiUserRecipes.exportKitchen();
   KuschiRecipeUi.copyText(t)
@@ -2194,6 +2205,17 @@ function submitNewKitchenBook() {
   const b = KuschiUserRecipes.createCustomBook(name);
   window.location.href = 'kitchen-book.html?b=' + encodeURIComponent(b.id);
 }
+
+function openKitchenBookModalFromHash() {
+  if (window.location.hash !== '#new-kitchen-book') return;
+  if (window.history && window.history.replaceState) {
+    window.history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
+  openAddKitchenBookModal();
+}
+
+window.addEventListener('hashchange', openKitchenBookModalFromHash);
+setTimeout(openKitchenBookModalFromHash, 0);
 
 // ── Init ──────────────────────────────────────────────
 function openPageQrModal() {
@@ -2279,6 +2301,7 @@ async function _bootstrapRecipes() {
       for (const r of userRows) { if (!r._searchHay) r._searchHay = buildHayForRecipe(r); }
       allRecipes.push(...userRows);
       indexRecipeSlice(userRows);
+      showPendingKitchenSavedRecipeToast();
     }
 
     // ── Step 4: stream shards — first arrival shows recipes, rest add silently ──

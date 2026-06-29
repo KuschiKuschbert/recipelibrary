@@ -259,10 +259,10 @@
 </a>`).join('');
     }
 
-    html += `<a href="${_href('index.html')}" class="sheet-book-item sheet-book-item--new" id="navNewBookBtn">
+    html += `<button type="button" class="sheet-book-item sheet-book-item--new" id="navNewBookBtn" onclick="kuschiCreateKitchenBook()">
   <span class="sheet-book-item__icon" aria-hidden="true">+</span>
   <span class="sheet-book-item__name">New kitchen book</span>
-</a>`;
+</button>`;
 
     el.innerHTML = html;
   }
@@ -294,6 +294,15 @@
   // ─── QR nav delegate ───────────────────────────────────────────────────────
   window.kuschiNavQR = function () {
     if (typeof openPageQrModal === 'function') openPageQrModal();
+  };
+
+  window.kuschiCreateKitchenBook = function () {
+    window.kuschiNavSheet(null);
+    if (typeof window.openAddKitchenBookModal === 'function') {
+      window.openAddKitchenBookModal();
+      return;
+    }
+    window.location.href = _href('index.html') + '#new-kitchen-book';
   };
 
   // ─── iOS tip (show once, 4 seconds after load) ─────────────────────────────

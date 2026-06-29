@@ -596,6 +596,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
   padding: 10px 16px;
   background: rgba(20, 17, 13, 0.96);
   border: 1px solid rgba(201, 169, 110, 0.64);
@@ -610,6 +611,44 @@ body {
   opacity: 0;
   transform: translateX(-50%) translateY(14px);
   transition: opacity 0.16s ease, transform 0.16s ease;
+}
+
+.kuschi-toast--has-action {
+  justify-content: space-between;
+  padding: 8px 8px 8px 14px;
+}
+
+.kuschi-toast--has-action.kuschi-toast--show {
+  pointer-events: auto;
+}
+
+.kuschi-toast__message {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.kuschi-toast--has-action .kuschi-toast__message {
+  flex: 1;
+  text-align: left;
+}
+
+.kuschi-toast__action {
+  min-width: 64px;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid rgba(201, 169, 110, 0.66);
+  border-radius: 8px;
+  background: rgba(201, 169, 110, 0.15);
+  color: var(--gold-light);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.kuschi-toast__action:active {
+  transform: translateY(1px);
 }
 
 .kuschi-toast--show {
@@ -627,6 +666,11 @@ html.low-memory-device .kuschi-toast {
   font-size: 15px;
   transition: none;
   transform: translateX(-50%);
+}
+
+html.low-memory-device .kuschi-toast__action {
+  min-height: 42px;
+  font-size: 14px;
 }
 
 html.low-memory-device .kuschi-toast--show {
@@ -3181,7 +3225,13 @@ body.has-app-nav {
   transition: background 0.15s, border-color 0.15s;
   -webkit-tap-highlight-color: transparent;
   min-height: 56px;
+  width: 100%;
 }
+
+button.sheet-book-item {
+  appearance: none;
+}
+
 .sheet-book-item:hover, .sheet-book-item:active {
   background: var(--surface-hover);
   border-color: var(--border-hover);
