@@ -6496,6 +6496,65 @@ body.planner-list-open {
   font-weight: 600;
   margin-right: 6px;
 }
+.planner-shopping__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.planner-shopping__stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  min-height: 34px;
+  padding: 6px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--text2);
+  font-size: 12px;
+}
+.planner-shopping__stat-label {
+  color: var(--text3);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+.planner-shopping__stat strong {
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 650;
+}
+.planner-shopping__zone {
+  justify-content: space-between;
+  gap: 10px;
+}
+.planner-shopping__zone span {
+  color: var(--text3);
+  font-size: 11px;
+}
+.planner-shopping__list {
+  margin-bottom: 14px;
+}
+.planner-shopping__row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.planner-shopping__row .planner-shopping__qty {
+  flex: 0 1 auto;
+  max-width: min(44%, 300px);
+  margin-right: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+.planner-shopping__item {
+  flex: 1 1 160px;
+  min-width: 0;
+  color: var(--text2);
+  overflow-wrap: anywhere;
+}
 .planner-shopping__cost {
   margin-top: 16px;
   padding: 12px 14px;
@@ -7037,6 +7096,26 @@ html.lenovo-tab-one-profile .planner-shopping__qty {
   font-variant-numeric: tabular-nums;
 }
 
+html.lenovo-tab-one-profile .planner-shopping__stats {
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+html.lenovo-tab-one-profile .planner-shopping__stat {
+  min-height: 42px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+html.lenovo-tab-one-profile .planner-shopping__stat strong {
+  font-size: 15px;
+}
+
+html.lenovo-tab-one-profile .planner-shopping__row {
+  gap: 14px;
+}
+
 html.lenovo-tab-one-profile .planner-recipe {
   border-radius: 14px;
 }
@@ -7180,6 +7259,36 @@ html.lenovo-tab-one-profile .planner-recipe__service {
   border: 1px solid #bbb;
   border-radius: 4px;
   font-size: 11px;
+}
+.planner-print-shopping__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0 0 8px;
+}
+.planner-print-shopping__stat {
+  display: inline-flex;
+  gap: 4px;
+  padding: 2px 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 10px;
+}
+.planner-print-shopping__stat-label {
+  color: #555;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.planner-print-doc h3 span {
+  color: #555;
+  font-size: 10px;
+  font-weight: 400;
+}
+.planner-print-shopping__list li {
+  display: grid;
+  grid-template-columns: minmax(70px, auto) minmax(0, 1fr);
+  gap: 8px;
+  break-inside: avoid;
 }
 .planner-print-recipe {
   margin-bottom: 18px;

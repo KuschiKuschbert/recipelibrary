@@ -347,7 +347,7 @@
     var editingZones = false;
     /** @type {Set<string>|null} */
     var recipeIdFilter = null;
-    /** @type {{ label?: string, pax?: number, recipeCount?: number, scaleMap?: Object, fromPlanner?: boolean }|null} */
+    /** @type {{ label?: string, pax?: number, recipeCount?: number, shoppingLineCount?: number, scaleMap?: Object, fromPlanner?: boolean }|null} */
     var plannerContext = null;
     var openedFromPlanner = false;
     var plannerBannerId = config.plannerBannerId || 'orderListPlannerBanner';
@@ -368,8 +368,10 @@
         banner.hidden = false;
         var dishPart =
           plannerContext.recipeCount != null ? ' · ' + plannerContext.recipeCount + ' dishes' : '';
+        var shoppingPart =
+          plannerContext.shoppingLineCount != null ? ' · ' + plannerContext.shoppingLineCount + ' planner lines' : '';
         banner.textContent =
-          'Planner · ' + plannerContext.label + ' · ' + plannerContext.pax + ' covers' + dishPart;
+          'Planner · ' + plannerContext.label + ' · ' + plannerContext.pax + ' covers' + dishPart + shoppingPart;
       } else {
         banner.hidden = true;
         banner.textContent = '';

@@ -10,6 +10,8 @@
     morning_of: 'Morning of',
     service: 'Service',
   };
+  var ZONE_ORDER = ['freezer', 'coldroom', 'drystore', 'other'];
+  var ZONE_LABELS = { freezer: 'Freezer', coldroom: 'Cold room', drystore: 'Dry store', other: 'Other' };
   var PHASE_PRIORITY = { day_before: 'low', morning_of: 'medium', service: 'high' };
   var STYLE_TO_SERVICE = {
     cocktail: 'cocktail',
@@ -540,6 +542,30 @@
     );
   }
 
+  function renderShoppingStats(stats, blockClass) {
+    return (
+      '<div class="' +
+      blockClass +
+      '__stats">' +
+      stats
+        .map(function (stat) {
+          return (
+            '<span class="' +
+            blockClass +
+            '__stat"><span class="' +
+            blockClass +
+            '__stat-label">' +
+            esc(stat.label) +
+            '</span><strong>' +
+            esc(stat.count) +
+            '</strong></span>'
+          );
+        })
+        .join('') +
+      '</div>'
+    );
+  }
+
   function buildRecipesPrintHtml() {
     if (!_payload) return '';
     var html = '<h2>Recipes</h2>';
@@ -613,6 +639,7 @@
   function populatePrintRoot() {
     var root = document.getElementById('plannerPrintRoot');
     if (!root || !_built || !_payload) return;
+    var shoppingStats = shoppingZoneStats(_built.merged);
     var html = '<div class="planner-print-doc">';
     html += '<h1>' + esc(_payload.eventLabel + ' · ' + _payload.sectionLabel + ' · ' + _payload.pax + ' covers') + '</h1>';
     if (_payload.eventDate) {
@@ -630,13 +657,13 @@
     html += '<h2>Menu</h2><pre>' + esc(_built.manifest) + '</pre>';
     html += '<h2>Prep timeline</h2><pre>' + esc(_built.timelineText) + '</pre>';
     html += '<h2>Shopping</h2>';
-    var zoneLabels = { freezer: 'Freezer', coldroom: 'Cold room', drystore: 'Dry store', other: 'Other' };
-    ['freezer', 'coldroom', 'drystore', 'other'].forEach(function (z) {
+    html += renderShoppingStats(shoppingStats, 'planner-print-shopping');
+    ZONE_ORDER.forEach(function (z) {
       var rows = _built.merged[z] || [];
       if (!rows.length) return;
-      html += '<h3>' + esc(zoneLabels[z]) + '</h3><ul>';
+      html += '<h3>' + esc(ZONE_LABELS[z]) + ' <span>' + rows.length + '</span></h3><ul class="planner-print-shopping__list">';
       rows.forEach(function (row) {
-        html += '<li>' + esc(row.qty + ' · ' + row.item) + '</li>';
+        html += '<li><strong>' + esc(row.qty) + '</strong><span>' + esc(row.item) + '</span></li>';
       });
       html += '</ul>';
     });
@@ -675,10 +702,22 @@
 
   function countShoppingLines(merged) {
     var total = 0;
-    ['freezer', 'coldroom', 'drystore', 'other'].forEach(function (zone) {
+    ZONE_ORDER.forEach(function (zone) {
       total += ((merged && merged[zone]) || []).length;
     });
     return total;
+  }
+
+  function shoppingZoneStats(merged) {
+    return ZONE_ORDER.map(function (zone) {
+      return {
+        zone: zone,
+        label: ZONE_LABELS[zone],
+        count: ((merged && merged[zone]) || []).length,
+      };
+    }).filter(function (item) {
+      return item.count > 0;
+    });
   }
 
   function activeTabLabel(tab) {
@@ -795,16 +834,27 @@
       });
       html += '</div>';
     } else if (_activeTab === 'shopping') {
-      var zoneLabels = { freezer: 'Freezer', coldroom: 'Cold room', drystore: 'Dry store', other: 'Other' };
+      var zoneStats = shoppingZoneStats(_built.merged);
       html = '<div class="planner-shopping">';
-      ['freezer', 'coldroom', 'drystore', 'other'].forEach(function (z) {
+      html += renderShoppingStats(zoneStats, 'planner-shopping');
+      ZONE_ORDER.forEach(function (z) {
         var rows = _built.merged[z] || [];
         if (!rows.length) return;
-        html += '<h3 class="planner-shopping__zone">' + esc(zoneLabels[z]) + '</h3><ul>';
+        html +=
+          '<section class="planner-shopping__zone-block"><h3 class="planner-shopping__zone">' +
+          esc(ZONE_LABELS[z]) +
+          '<span>' +
+          rows.length +
+          '</span></h3><ul class="planner-shopping__list">';
         rows.forEach(function (row) {
-          html += '<li><span class="planner-shopping__qty">' + esc(row.qty) + '</span> ' + esc(row.item) + '</li>';
+          html +=
+            '<li class="planner-shopping__row"><span class="planner-shopping__qty">' +
+            esc(row.qty) +
+            '</span><span class="planner-shopping__item">' +
+            esc(row.item) +
+            '</span></li>';
         });
-        html += '</ul>';
+        html += '</ul></section>';
       });
       var X = window.KuschiPlannerExtras;
       if (X && _built && _built.merged) {
@@ -817,7 +867,7 @@
             est.covered +
             '/' +
             est.lines +
-            ' lines priced · extend riviera_data/planner_unit_costs.json</div>';
+            ' lines priced</div>';
         }
       }
       html += '</div>';
@@ -981,6 +1031,7 @@
         label: _payload.eventLabel + ' · ' + _payload.sectionLabel,
         pax: _payload.pax,
         recipeCount: ids.length,
+        shoppingLineCount: _built && _built.merged ? countShoppingLines(_built.merged) : null,
         scaleMap: scaleMap || {},
       };
       var ol = window.rivieraOrderList;
