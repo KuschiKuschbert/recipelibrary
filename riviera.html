@@ -2006,6 +2006,8 @@ function render() {
 }
 
 function cardHTML(r) {
+  const rid = KuschiRecipeUi.esc(r.id || '');
+  const name = KuschiRecipeUi.esc(r.name || 'Untitled');
   const badges = [
     window.KuschiRivieraEventContext ? KuschiRivieraEventContext.cardBadge(r.id) : '',
     ...r.protein.map(p => `<span class="badge badge-course">${KuschiRecipeUi.esc(p)}</span>`),
@@ -2015,12 +2017,76 @@ function cardHTML(r) {
 
   const elements = r.elements.slice(0,4).join(' · ');
 
-  return `<div class="card" onclick="openRecipe('${r.id}')">
-    <div class="card-name">${KuschiRecipeUi.esc(r.name)}</div>
+  return `<div class="card" data-recipe-id="${rid}" role="button" tabindex="0" aria-label="Open recipe: ${name}" onclick="openRecipe('${rid}')" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();openRecipe('${rid}')}">
+    <div class="card-name">${name}</div>
     <div class="card-type">${KuschiRecipeUi.esc(r.type)} · ${KuschiRecipeUi.esc(r.yield)}</div>
     <div class="card-badges">${badges}</div>
     <div class="card-elements">${KuschiRecipeUi.esc(elements)}</div>
+    <div class="card-footer" aria-hidden="true">
+      <span class="card-open-hint">Open recipe</span>
+      <span class="card-open-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+    </div>
   </div>`;
+}
+
+function flashRivieraCopyButton(btn, fallbackLabel, statusLabel) {
+  if (!btn) return;
+  const defaultLabel = btn.getAttribute('data-default-label') || fallbackLabel;
+  btn.textContent = statusLabel || 'Copied!';
+  setTimeout(function () {
+    btn.textContent = defaultLabel;
+  }, 1500);
+}
+
+function copyRivieraRecipeName(btn, name) {
+  KuschiRecipeUi.copyText(name).then(function () {
+    flashRivieraCopyButton(btn, 'Copy name');
+  }).catch(function () {
+    flashRivieraCopyButton(btn, 'Copy name', 'Copy failed');
+  });
+}
+
+function copyRivieraRecipeText(id, btn) {
+  const r = rivieraRecipeIndex.byId.get(id) || RECIPES.find(x => x.id === id);
+  if (!r) return;
+  let text = r.name + '\n';
+  const meta = [r.type || '', r.yield ? 'Yield: ' + r.yield : ''].filter(Boolean).join(' · ');
+  if (meta) text += meta + '\n';
+
+  if (Array.isArray(r.elements) && r.elements.length) {
+    text += '\nElements:\n';
+    r.elements.forEach(function (element) {
+      text += '- ' + element + '\n';
+    });
+  }
+
+  text += '\nIngredients:\n';
+  (Array.isArray(r.ingredients) ? r.ingredients : []).forEach(function (ing) {
+    if (!ing || !ing.item) return;
+    text += '- ' + (ing.qty ? ing.qty + ' ' : '') + ing.item + (ing.prep ? ', ' + ing.prep : '') + '\n';
+  });
+
+  if (Array.isArray(r.method_steps) && r.method_steps.length) {
+    text += '\nPrep Method:\n';
+    r.method_steps.forEach(function (step, i) {
+      text += (i + 1) + '. ' + step + '\n';
+    });
+  }
+
+  if (Array.isArray(r.service) && r.service.length) {
+    text += '\nOn the Day - Service:\n';
+    r.service.forEach(function (step, i) {
+      text += (i + 1) + '. ' + step + '\n';
+    });
+  }
+
+  if (r.note) text += '\nNote:\n' + r.note + '\n';
+
+  KuschiRecipeUi.copyText(text).then(function () {
+    flashRivieraCopyButton(btn, 'Copy text');
+  }).catch(function () {
+    flashRivieraCopyButton(btn, 'Copy text', 'Copy failed');
+  });
 }
 
 // ── Modal ─────────────────────────────────────
@@ -2058,6 +2124,8 @@ function openRecipe(id, options) {
 
   const baseYield = parseYieldNum(r.yield);
   const recipeId = r.id;
+  const recipeIdHtml = KuschiRecipeUi.esc(recipeId);
+  const recipeNameAttr = KuschiRecipeUi.esc(r.name || '').replace(/'/g,"\\'");
 
   // Phase A — light shell so overlay can open and accept input before heavy DOM.
   modal.innerHTML = `
@@ -2070,6 +2138,10 @@ function openRecipe(id, options) {
     <div class="modal-type">${KuschiRecipeUi.esc(r.type)} · Yield: ${KuschiRecipeUi.esc(r.yield)}</div>
     <div class="modal-badges">${badges}</div>
     ${eventActions}
+    <div class="modal-quick-actions" aria-label="Recipe actions">
+      <button type="button" class="modal-quick-action modal-quick-action--primary" data-default-label="Copy text" onclick="copyRivieraRecipeText('${recipeIdHtml}', this)">Copy text</button>
+      <button type="button" class="modal-quick-action" data-default-label="Copy name" onclick="copyRivieraRecipeName(this, '${recipeNameAttr}')">Copy name</button>
+    </div>
     <div class="modal-scale">
       <label>Scale to pax:</label>
       <input type="number" id="scaleInput" min="1" value="${baseYield}" oninput="rescale(this.value)" />

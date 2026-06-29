@@ -1048,7 +1048,7 @@ function cardHTML(r) {
   const ings = (r.ing || []).slice(0, 8).map(i => `<strong>${KuschiRecipeUi.esc(i)}</strong>`).join(' · ');
   const rid = KuschiRecipeUi.esc(r.id || '');
 
-  return `<div class="card" data-recipe-id="${rid}" onclick="openRecipe('${rid}')" style="cursor:pointer">
+  return `<div class="card" data-recipe-id="${rid}" role="button" tabindex="0" aria-label="Open recipe: ${name}" onclick="openRecipe('${rid}')" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();openRecipe('${rid}')}" style="cursor:pointer">
     <div class="card-header">
       <div class="card-name">${name}</div>
       <button class="copy-btn" onclick="event.stopPropagation();copyName(this,'${nameAttr}')" title="Copy recipe name">
@@ -1058,11 +1058,15 @@ function cardHTML(r) {
     ${cui}
     ${badges ? `<div class="card-badges">${badges}</div>` : ''}
     ${ings ? `<div class="card-ings">${ings}</div>` : ''}
+    <div class="card-footer" aria-hidden="true">
+      <span class="card-open-hint">Open recipe</span>
+      <span class="card-open-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+    </div>
   </div>`;
 }
 
 function copyName(btn, name) {
-  navigator.clipboard.writeText(name).then(() => {
+  KuschiRecipeUi.copyText(name).then(() => {
     btn.classList.add('copied');
     btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>';
     setTimeout(() => {
@@ -1408,6 +1412,8 @@ document.addEventListener('keydown', (e) => {
 });
 
 function kitchenModalShellTop(r) {
+  const modalRecipeId = KuschiRecipeUi.esc(r.id || '');
+  const modalRecipeName = KuschiRecipeUi.esc(r.name || '').replace(/'/g,"\\'");
   let html = `<div class="modal-top-bar">`;
   html += `<button type="button" class="modal-wake-pill" data-kuschi-wake aria-pressed="false"><span data-kuschi-wake-label>Stay awake</span></button>`;
   html += `<button type="button" class="cook-mode-btn" id="cookModeBtn" onclick="toggleCookMode()" title="Cook Mode — full screen, large text">
@@ -1433,6 +1439,11 @@ function kitchenModalShellTop(r) {
   if (r.source) meta.push(`Source: <span>${KuschiRecipeUi.esc(r.source.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase()))}</span>`);
   if (r.yield) meta.push(`Yield: <span>${KuschiRecipeUi.esc(r.yield)}</span>`);
   if (meta.length) html += `<div class="modal-meta">${meta.join(' · ')}</div>`;
+
+  html += `<div class="modal-quick-actions" aria-label="Recipe actions">`;
+  html += `<button type="button" class="modal-quick-action modal-quick-action--primary" data-default-label="Copy text" onclick="copyRecipeText('${modalRecipeId}', this)">Copy text</button>`;
+  html += `<button type="button" class="modal-quick-action" data-default-label="Copy name" onclick="copyRecipeName(this, '${modalRecipeName}')">Copy name</button>`;
+  html += `</div>`;
 
   const baseYield = parseModalYield(r.yield);
   html += `<div class="modal-scale">
@@ -1474,7 +1485,7 @@ function renderKitchenModalMethodBlock(r) {
 function renderKitchenModalAromaAndCopyBlock(r) {
   let html = KuschiRecipeUi.aromaSeasoningSectionHtml({ idSuffix: 'Idx', modalInline: true });
   html += `<div class="modal-copy-bar">`;
-  html += `<button class="modal-copy-btn" onclick="copyRecipeText('${KuschiRecipeUi.esc(r.id)}')">Copy as text</button>`;
+  html += `<button class="modal-copy-btn" data-default-label="Copy as text" onclick="copyRecipeText('${KuschiRecipeUi.esc(r.id)}', this)">Copy as text</button>`;
   html += `<button class="modal-copy-btn" onclick="copyRecipeName(this, '${KuschiRecipeUi.esc(r.name).replace(/'/g,"\\'")}')">Copy name</button>`;
   html += `</div>`;
   return html;
@@ -1561,14 +1572,25 @@ function renderRecipeDetail(r) {
   return kitchenModalShellTop(r) + `<div id="kitchenModalHeavy" class="kitchen-modal-heavy">${renderKitchenModalHeavy(r)}</div>`;
 }
 
+function flashModalCopyButton(btn, fallbackLabel, statusLabel) {
+  const target = btn || document.querySelector('.modal-copy-btn, .modal-quick-action');
+  if (!target) return;
+  const defaultLabel = target.getAttribute('data-default-label') || fallbackLabel;
+  target.textContent = statusLabel || 'Copied!';
+  setTimeout(() => {
+    target.textContent = defaultLabel;
+  }, 1500);
+}
+
 function copyRecipeName(btn, name) {
-  navigator.clipboard.writeText(name).then(() => {
-    btn.textContent = 'Copied!';
-    setTimeout(() => btn.textContent = 'Copy name', 1500);
+  KuschiRecipeUi.copyText(name).then(() => {
+    flashModalCopyButton(btn, 'Copy name');
+  }).catch(() => {
+    flashModalCopyButton(btn, 'Copy name', 'Copy failed');
   });
 }
 
-async function copyRecipeText(id) {
+async function copyRecipeText(id, btn) {
   if (window.KuschiUserRecipes && id && String(id).startsWith('user-')) {
     const r = KuschiUserRecipes.getKitchenById(id);
     if (!r) return;
@@ -1583,9 +1605,10 @@ async function copyRecipeText(id) {
     }
     text += '\nMethod:\n';
     toArr(d.instructions).forEach((s, i) => { text += (i+1) + '. ' + s + '\n'; });
-    navigator.clipboard.writeText(text).then(() => {
-      const btn = document.querySelector('.modal-copy-btn');
-      if (btn) { btn.textContent = 'Copied!'; setTimeout(() => btn.textContent = 'Copy as text', 1500); }
+    KuschiRecipeUi.copyText(text).then(() => {
+      flashModalCopyButton(btn, 'Copy as text');
+    }).catch(() => {
+      flashModalCopyButton(btn, 'Copy as text', 'Copy failed');
     });
     return;
   }
@@ -1607,9 +1630,10 @@ async function copyRecipeText(id) {
   text += '\nMethod:\n';
   toArr(r.instructions).forEach((s, i) => { text += `${i+1}. ${s}\n`; });
 
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.querySelector('.modal-copy-btn');
-    if (btn) { btn.textContent = 'Copied!'; setTimeout(() => btn.textContent = 'Copy as text', 1500); }
+  KuschiRecipeUi.copyText(text).then(() => {
+    flashModalCopyButton(btn, 'Copy as text');
+  }).catch(() => {
+    flashModalCopyButton(btn, 'Copy as text', 'Copy failed');
   });
 }
 

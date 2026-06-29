@@ -585,6 +585,46 @@ body {
   color: var(--text2);
 }
 
+.modal-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 14px 0 18px;
+}
+
+.modal-quick-action {
+  min-height: 44px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text2);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.16s, border-color 0.16s, color 0.16s, transform 0.16s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.modal-quick-action--primary {
+  color: var(--gold-light);
+  background: rgba(201, 169, 110, 0.14);
+  border-color: rgba(201, 169, 110, 0.35);
+}
+
+.modal-quick-action:hover,
+.modal-quick-action:focus-visible {
+  color: var(--gold);
+  border-color: rgba(201, 169, 110, 0.55);
+  background: rgba(201, 169, 110, 0.12);
+  outline: none;
+}
+
+.modal-quick-action:active {
+  transform: scale(0.98);
+}
+
 .modal-scale {
   display: flex;
   align-items: center;
@@ -897,6 +937,57 @@ body {
   padding: 20px 24px 32px;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.grid .card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card-open-hint {
+  color: var(--gold-light);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.card-open-icon {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  background: rgba(201, 169, 110, 0.1);
+  border: 1px solid rgba(201, 169, 110, 0.25);
+  border-radius: 10px;
+  transition: transform 0.16s, background 0.16s, border-color 0.16s;
+}
+
+.grid .card:hover .card-open-icon,
+.grid .card:focus-visible .card-open-icon {
+  transform: translateX(2px);
+  background: rgba(201, 169, 110, 0.18);
+  border-color: rgba(201, 169, 110, 0.5);
+}
+
+.grid .card:focus-visible {
+  outline: 2px solid rgba(201, 169, 110, 0.65);
+  outline-offset: 3px;
 }
 
 /* Tablet portrait: 2 columns */
@@ -3318,6 +3409,7 @@ html.lenovo-tab-one-profile .flavor-tabs button,
 html.lenovo-tab-one-profile .flavor-wheel-item,
 html.lenovo-tab-one-profile .sheet-book-item,
 html.lenovo-tab-one-profile .modal-copy-btn,
+html.lenovo-tab-one-profile .modal-quick-action,
 html.lenovo-tab-one-profile .btn-secondary,
 html.lenovo-tab-one-profile .add-form-actions button.primary {
   min-height: 48px;
@@ -3607,6 +3699,15 @@ body.has-app-nav .aroma-neighbor-card {
 body.has-app-nav .grid .card::before {
   opacity: 0.42;
   background: linear-gradient(90deg, rgba(201, 169, 110, 0.85), rgba(201, 169, 110, 0.16), transparent);
+}
+
+body.has-app-nav .grid .card .card-footer {
+  border-color: rgba(201, 169, 110, 0.16);
+}
+
+body.has-app-nav .grid .card .card-open-icon {
+  background: rgba(201, 169, 110, 0.12);
+  border-color: rgba(201, 169, 110, 0.32);
 }
 
 body.has-app-nav .grid .card:hover,

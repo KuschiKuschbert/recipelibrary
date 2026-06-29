@@ -13,8 +13,50 @@
       .replace(/"/g, '&quot;');
   }
 
+  function copyText(text) {
+    var value = String(text == null ? '' : text);
+    function fallbackCopy() {
+      return new Promise(function (resolve, reject) {
+        var doc = w.document;
+        if (!doc || !doc.body || !doc.execCommand) {
+          reject(new Error('Clipboard unavailable'));
+          return;
+        }
+        var active = doc.activeElement;
+        var ta = doc.createElement('textarea');
+        ta.value = value;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        ta.style.top = '0';
+        ta.style.opacity = '0';
+        doc.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        try {
+          if (doc.execCommand('copy')) {
+            resolve();
+          } else {
+            reject(new Error('Copy command failed'));
+          }
+        } catch (err) {
+          reject(err);
+        } finally {
+          doc.body.removeChild(ta);
+          if (active && active.focus) active.focus();
+        }
+      });
+    }
+
+    if (w.navigator && w.navigator.clipboard && w.navigator.clipboard.writeText) {
+      return w.navigator.clipboard.writeText(value).catch(fallbackCopy);
+    }
+    return fallbackCopy();
+  }
+
   w.KuschiRecipeUi = {
     esc: esc,
+    copyText: copyText,
     /**
      * @param {{ idSuffix?: string, openByDefault?: boolean, modalInline?: boolean }} [opts]
      */
