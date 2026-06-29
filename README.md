@@ -143,6 +143,8 @@ python3 scripts/ship_check.py
 
 This wraps JavaScript syntax checks, planner smoke tests, service-worker cache validation, a dependency-free static HTTP smoke check, and warning-only UI/docs copy fluff warnings. Individual checks are also available as `scripts/validate_sw.py`, `scripts/static_smoke.py`, and `scripts/check_copy_fluff.py --warn-only`.
 
+The quality direction lives in [docs/quality_roadmap.md](docs/quality_roadmap.md).
+
 ## Repo size (optional local artifacts)
 
 These paths are **gitignored** and **not required** for GitHub Pages. They stay useful on a dev machine for imports and pipelines; clone the repo without them if you only need the live site.

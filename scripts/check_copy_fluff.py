@@ -30,6 +30,21 @@ GENERATED_JS = {
     "assets/riviera-order-override-remap-v2.js",
 }
 
+ALLOWLIST = (
+    {
+        "path": "README.md",
+        "rule": "placeholder",
+        "contains": "your-worker.workers.dev",
+        "reason": "Documented example proxy URL for local setup.",
+    },
+    {
+        "path": "reports/workbook_catalogue.md",
+        "rule": "placeholder",
+        "contains": "template_demo",
+        "reason": "Workbook parser category for legacy template/demo tabs.",
+    },
+)
+
 
 @dataclass(frozen=True)
 class Rule:
@@ -137,6 +152,8 @@ def scan_text(path: Path, line_no: int, raw: str) -> list[Finding]:
     out: list[Finding] = []
     for rule in RULES:
         if rule.pattern.search(text):
+            if is_allowlisted(rel(path), rule.name, text):
+                continue
             out.append(
                 Finding(
                     path=rel(path),
@@ -147,6 +164,17 @@ def scan_text(path: Path, line_no: int, raw: str) -> list[Finding]:
                 )
             )
     return out
+
+
+def is_allowlisted(path: str, rule_name: str, text: str) -> bool:
+    for item in ALLOWLIST:
+        if item["path"] != path:
+            continue
+        if item["rule"] != rule_name:
+            continue
+        if item["contains"] in text:
+            return True
+    return False
 
 
 def scan_html_or_md(path: Path) -> list[Finding]:
