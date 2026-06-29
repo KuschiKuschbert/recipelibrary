@@ -321,6 +321,135 @@
   border-top: 1px solid var(--border);
 }
 .card-elements strong { color: var(--text2); font-weight: 400; }
+.riv-card-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(78px, max-content);
+  gap: 12px;
+  align-items: start;
+  margin-bottom: 12px;
+}
+.riv-card-title-wrap {
+  min-width: 0;
+}
+.riv-card-top .card-name {
+  margin-bottom: 6px;
+}
+.riv-card-top .card-type {
+  margin-bottom: 0;
+}
+.riv-card-yield {
+  display: -webkit-box;
+  overflow: hidden;
+  max-width: 118px;
+  padding: 7px 9px;
+  border: 1px solid rgba(201, 169, 110, 0.24);
+  border-radius: 10px;
+  color: var(--gold-light);
+  background: rgba(201, 169, 110, 0.09);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+  text-align: right;
+  text-transform: uppercase;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.riv-card-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.riv-card-stat {
+  min-width: 0;
+  min-height: 40px;
+  padding: 7px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9px;
+  color: var(--text3);
+  background: rgba(255, 255, 255, 0.035);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+.riv-card-stat strong {
+  display: block;
+  color: var(--text);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+  margin-bottom: 3px;
+}
+.riv-card-stat span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.riv-card-stat--service strong {
+  color: #bfe9cb;
+}
+.riv-card-elements {
+  display: grid;
+  gap: 5px;
+}
+.riv-card-elements-label {
+  color: var(--gold-light);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+.riv-card-elements-text {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.badge-more {
+  background: rgba(255, 255, 255, 0.065);
+  color: var(--text2);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card {
+  min-height: 286px;
+}
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-top {
+  gap: 10px;
+  margin-bottom: 10px;
+}
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-top .card-name {
+  margin-bottom: 5px;
+}
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-yield {
+  min-height: 44px;
+  max-width: 124px;
+  padding: 8px 10px;
+  font-size: 11px;
+}
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-stats {
+  gap: 7px;
+  margin-bottom: 11px;
+}
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-stat {
+  min-height: 44px;
+  padding: 7px 8px;
+}
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-stat strong {
+  font-size: 18px;
+}
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-elements {
+  display: grid;
+  overflow: visible;
+  -webkit-line-clamp: initial;
+}
 
 /* ── Empty ── */
 .empty {
@@ -746,7 +875,7 @@
 
 </style>
 </head>
-<body class="has-app-nav">
+<body class="has-app-nav riviera-page">
 
 <header class="app-header">
   <div class="app-header__brand">
@@ -2091,23 +2220,60 @@ function renderRivieraLoadMore() {
   </div>`;
 }
 
+function rivieraCardYieldText(rawYield) {
+  const text = String(rawYield || '').trim();
+  if (!text) return 'Yield';
+  const beforeParen = text.match(/^(.+?)\s*\(/);
+  if (beforeParen && beforeParen[1].trim().length >= 6) return beforeParen[1].trim();
+  const beforeDash = text.split(/\s+[–—-]\s+/)[0].trim();
+  if (beforeDash && beforeDash.length >= 6 && beforeDash.length < text.length) return beforeDash;
+  if (text.length <= 38) return text;
+  return text.slice(0, 35).trim().replace(/[,\s;:]+$/, '') + '…';
+}
+
 function cardHTML(r) {
   const rid = KuschiRecipeUi.esc(r.id || '');
-  const name = KuschiRecipeUi.esc(r.name || 'Untitled');
-  const badges = [
+  const rawName = r.name || 'Untitled';
+  const name = KuschiRecipeUi.esc(rawName);
+  const rawYield = r.yield || 'Yield';
+  const cardYield = rivieraCardYieldText(rawYield);
+  const protein = Array.isArray(r.protein) ? r.protein : [];
+  const diet = Array.isArray(r.diet) ? r.diet : [];
+  const badgeItems = [
     window.KuschiRivieraEventContext ? KuschiRivieraEventContext.cardBadge(r.id) : '',
-    ...r.protein.map(p => `<span class="badge badge-course">${KuschiRecipeUi.esc(p)}</span>`),
-    ...r.diet.map(d => `<span class="badge badge-diet">${KuschiRecipeUi.esc(d)}</span>`),
+    ...protein.map(p => `<span class="badge badge-course">${KuschiRecipeUi.esc(p)}</span>`),
+    ...diet.map(d => `<span class="badge badge-diet">${KuschiRecipeUi.esc(d)}</span>`),
     r.method ? `<span class="badge badge-method">${KuschiRecipeUi.esc(r.method)}</span>` : ''
-  ].join('');
+  ].filter(Boolean);
+  const hiddenBadgeCount = Math.max(0, badgeItems.length - 4);
+  const badges = badgeItems.slice(0, 4).join('') +
+    (hiddenBadgeCount ? `<span class="badge badge-more">+${hiddenBadgeCount}</span>` : '');
+  const ingredientsCount = Array.isArray(r.ingredients) ? r.ingredients.length : 0;
+  const prepCount = Array.isArray(r.method_steps) ? r.method_steps.length : 0;
+  const serviceCount = Array.isArray(r.service) ? r.service.length : 0;
+  const elements = Array.isArray(r.elements) ? r.elements.slice(0,4).join(' · ') : '';
+  const elementsBlock = elements
+    ? `<div class="card-elements riv-card-elements"><span class="riv-card-elements-label">Elements</span><span class="riv-card-elements-text">${KuschiRecipeUi.esc(elements)}</span></div>`
+    : '';
+  const ariaLabel = KuschiRecipeUi.esc(
+    `Open recipe: ${rawName}. ${ingredientsCount} ingredients, ${prepCount} prep steps, ${serviceCount} service steps.`
+  );
 
-  const elements = r.elements.slice(0,4).join(' · ');
-
-  return `<div class="card" data-recipe-id="${rid}" role="button" tabindex="0" aria-label="Open recipe: ${name}" onclick="openRecipe('${rid}')" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();openRecipe('${rid}')}">
-    <div class="card-name">${name}</div>
-    <div class="card-type">${KuschiRecipeUi.esc(r.type)} · ${KuschiRecipeUi.esc(r.yield)}</div>
+  return `<div class="card riv-card" data-recipe-id="${rid}" role="button" tabindex="0" aria-label="${ariaLabel}" onclick="openRecipe('${rid}')" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();openRecipe('${rid}')}">
+    <div class="riv-card-top">
+      <div class="riv-card-title-wrap">
+        <div class="card-name">${name}</div>
+        <div class="card-type">${KuschiRecipeUi.esc(r.type || 'Recipe')}</div>
+      </div>
+      <div class="riv-card-yield" title="${KuschiRecipeUi.esc(rawYield)}">${KuschiRecipeUi.esc(cardYield)}</div>
+    </div>
+    <div class="riv-card-stats" aria-hidden="true">
+      <span class="riv-card-stat"><strong>${ingredientsCount}</strong><span>ingredients</span></span>
+      <span class="riv-card-stat"><strong>${prepCount}</strong><span>prep</span></span>
+      <span class="riv-card-stat riv-card-stat--service"><strong>${serviceCount}</strong><span>service</span></span>
+    </div>
     <div class="card-badges">${badges}</div>
-    <div class="card-elements">${KuschiRecipeUi.esc(elements)}</div>
+    ${elementsBlock}
     <div class="card-footer" aria-hidden="true">
       <span class="card-open-hint">Open recipe</span>
       <span class="card-open-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
