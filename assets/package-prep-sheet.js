@@ -483,6 +483,63 @@
     return parts.join('\n').trim();
   }
 
+  function recipeMetricItems(courseName, recipe, factor) {
+    var methodCount = (recipe.method_steps || []).length;
+    var serviceCount = (recipe.service || []).length;
+    var yieldLabel = String(recipe.yield || 'Batch').split(/\s+[—-]\s+/)[0].trim();
+    if (yieldLabel.length > 42) yieldLabel = yieldLabel.slice(0, 39) + '...';
+    var items = [{ label: 'Course', value: courseName || 'Recipe' }];
+    if (recipe.type) items.push({ label: 'Type', value: recipe.type });
+    items.push({ label: 'Yield', value: yieldLabel || 'Batch' });
+    items.push({ label: 'Scale', value: '×' + factor.toFixed(2) });
+    items.push({ label: 'Ings', value: String((recipe.ingredients || []).length) });
+    items.push({ label: 'Prep', value: String(methodCount) });
+    items.push({ label: 'Service', value: String(serviceCount) });
+    return items;
+  }
+
+  function renderMetricChips(items, blockClass) {
+    return (
+      '<div class="' +
+      blockClass +
+      '__metrics">' +
+      items
+        .map(function (item) {
+          return (
+            '<span class="' +
+            blockClass +
+            '__metric"><span class="' +
+            blockClass +
+            '__metric-label">' +
+            esc(item.label) +
+            '</span><strong>' +
+            esc(item.value) +
+            '</strong></span>'
+          );
+        })
+        .join('') +
+      '</div>'
+    );
+  }
+
+  function renderScreenSectionLabel(label, count) {
+    return (
+      '<p class="planner-recipe__section-label">' +
+      esc(label) +
+      (count != null ? ' <span>' + esc(count) + '</span>' : '') +
+      '</p>'
+    );
+  }
+
+  function renderPrintSectionTitle(label, count) {
+    return (
+      '<p class="planner-print-recipe__section-title">' +
+      esc(label) +
+      (count != null ? ' <span>' + esc(count) + '</span>' : '') +
+      '</p>'
+    );
+  }
+
   function buildRecipesPrintHtml() {
     if (!_payload) return '';
     var html = '<h2>Recipes</h2>';
@@ -491,20 +548,36 @@
         var recipe = item.recipe;
         if (!recipe) return;
         var factor = scaleFactorForRecipe(recipe, _payload.pax, _payload.style);
+        var ingredients = scaledIngredients(recipe, factor);
+        var method = recipe.method_steps || [];
+        var service = recipe.service || [];
         html += '<div class="planner-print-recipe">';
         html += '<h3>' + esc(item.name) + '</h3>';
-        html += '<p class="planner-print-recipe__meta">' + esc(recipe.type || '') + ' · Yield: ' + esc(recipe.yield || '') + ' · ×' + factor.toFixed(2) + '</p>';
-        html += '<ul>';
-        scaledIngredients(recipe, factor).forEach(function (ing) {
+        html += renderMetricChips(recipeMetricItems(course.course, recipe, factor), 'planner-print-recipe');
+        html += renderPrintSectionTitle('Ingredients', ingredients.length);
+        html += '<ul class="planner-print-recipe__ingredients">';
+        ingredients.forEach(function (ing) {
           html += '<li>' + esc((ing.qty || '·') + ' · ' + ing.item + (ing.prep ? ' — ' + ing.prep : '')) + '</li>';
         });
         html += '</ul>';
-        if (recipe.method_steps && recipe.method_steps.length) {
+        if (method.length) {
+          html += renderPrintSectionTitle('Method', method.length);
           html += '<ol class="planner-print-recipe__method">';
-          recipe.method_steps.forEach(function (s) {
+          method.forEach(function (s) {
             html += '<li>' + esc(s) + '</li>';
           });
           html += '</ol>';
+        }
+        if (service.length) {
+          html += renderPrintSectionTitle('Service', service.length);
+          html += '<ol class="planner-print-recipe__service">';
+          service.forEach(function (s) {
+            html += '<li>' + esc(s) + '</li>';
+          });
+          html += '</ol>';
+        }
+        if (recipe.note) {
+          html += '<p class="planner-print-recipe__note">' + esc(recipe.note) + '</p>';
         }
         html += '</div>';
       });
@@ -545,6 +618,15 @@
     if (_payload.eventDate) {
       html += '<p class="planner-print-doc__date">' + esc(formatEventDate(_payload.eventDate)) + '</p>';
     }
+    html +=
+      '<div class="planner-print-doc__meta">' +
+      '<span><strong>' +
+      esc(countPayloadRecipes(_payload)) +
+      '</strong> dishes</span><span><strong>' +
+      esc((_built.timeline || []).length) +
+      '</strong> prep tasks</span><span><strong>' +
+      esc(countShoppingLines(_built.merged)) +
+      '</strong> shopping lines</span></div>';
     html += '<h2>Menu</h2><pre>' + esc(_built.manifest) + '</pre>';
     html += '<h2>Prep timeline</h2><pre>' + esc(_built.timelineText) + '</pre>';
     html += '<h2>Shopping</h2>';
@@ -746,35 +828,47 @@
           var recipe = item.recipe;
           if (!recipe) return;
           var factor = scaleFactorForRecipe(recipe, _payload.pax, _payload.style);
+          var ingredients = scaledIngredients(recipe, factor);
+          var method = recipe.method_steps || [];
+          var service = recipe.service || [];
           html += '<details class="planner-recipe" data-recipe-id="' + esc(recipe.id) + '" open>';
-          html += '<summary class="planner-recipe__head">' + esc(item.name) + '</summary>';
-          html += '<p class="planner-recipe__meta">' + esc(recipe.type || '') + ' · Yield: ' + esc(recipe.yield || '') + ' · ×' + factor.toFixed(2) + '</p>';
+          html +=
+            '<summary class="planner-recipe__head"><span class="planner-recipe__head-title">' +
+            esc(item.name) +
+            '</span><span class="planner-recipe__head-count">' +
+            esc(method.length + ' prep · ' + service.length + ' service') +
+            '</span></summary>';
+          html += renderMetricChips(recipeMetricItems(course.course, recipe, factor), 'planner-recipe');
+          html += renderScreenSectionLabel('Ingredients', ingredients.length);
           html += '<div class="planner-recipe__ings">';
-          scaledIngredients(recipe, factor).forEach(function (ing) {
+          ingredients.forEach(function (ing) {
             html +=
               '<div class="planner-recipe__ing"><span class="planner-recipe__qty">' +
               esc(ing.qty || '·') +
-              '</span> ' +
+              '</span><span class="planner-recipe__ing-main">' +
               esc(ing.item) +
-              (ing.prep ? ' <em>— ' + esc(ing.prep) + '</em>' : '') +
-              '</div>';
+              (ing.prep ? ' <em>' + esc(ing.prep) + '</em>' : '') +
+              '</span></div>';
           });
           html += '</div>';
-          if (recipe.method_steps && recipe.method_steps.length) {
+          if (method.length) {
+            html += renderScreenSectionLabel('Method', method.length);
             html += '<ol class="planner-recipe__method">';
-            recipe.method_steps.forEach(function (s) {
+            method.forEach(function (s) {
               html += '<li>' + esc(s) + '</li>';
             });
             html += '</ol>';
           }
-          if (recipe.service && recipe.service.length) {
-            html += '<p class="planner-recipe__service-label">Service</p><ol class="planner-recipe__service">';
-            recipe.service.forEach(function (s) {
+          if (service.length) {
+            html += renderScreenSectionLabel('Service', service.length);
+            html += '<ol class="planner-recipe__service">';
+            service.forEach(function (s) {
               html += '<li>' + esc(s) + '</li>';
             });
             html += '</ol>';
           }
           if (recipe.note) {
+            html += renderScreenSectionLabel('Note', null);
             html += '<p class="planner-recipe__note">' + esc(recipe.note) + '</p>';
           }
           html += '</details>';

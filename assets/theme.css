@@ -6514,43 +6514,101 @@ body.planner-list-open {
   overflow: hidden;
 }
 .planner-recipe__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
   padding: 12px 14px;
   font-weight: 600;
   cursor: pointer;
   color: var(--text);
 }
-.planner-recipe__meta {
-  padding: 0 14px 8px;
-  margin: 0;
-  font-size: 11px;
+.planner-recipe__head-title {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.planner-recipe__head-count {
   color: var(--text3);
+  font-size: 11px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.planner-recipe__metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 14px 10px;
+}
+.planner-recipe__metric {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  min-height: 28px;
+  padding: 4px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--text2);
+  font-size: 11px;
+}
+.planner-recipe__metric-label {
+  color: var(--text3);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+.planner-recipe__metric strong {
+  color: var(--text);
+  font-weight: 650;
+}
+.planner-recipe__section-label {
+  padding: 0 14px;
+  margin: 4px 0 7px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+.planner-recipe__section-label span {
+  color: var(--text3);
+  font-weight: 650;
 }
 .planner-recipe__ings {
-  padding: 0 14px 10px;
+  padding: 0 14px 12px;
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 4px 10px;
+  grid-template-columns: 1fr;
+  gap: 6px;
   font-size: 12px;
+}
+.planner-recipe__ing {
+  display: grid;
+  grid-template-columns: minmax(58px, auto) minmax(0, 1fr);
+  gap: 10px;
 }
 .planner-recipe__qty {
   color: var(--gold);
   font-weight: 600;
   white-space: nowrap;
 }
+.planner-recipe__ing-main {
+  min-width: 0;
+}
+.planner-recipe__ing-main em {
+  color: var(--text3);
+  font-style: normal;
+}
+.planner-recipe__ing-main em::before {
+  content: " - ";
+}
 .planner-recipe__method,
 .planner-recipe__service {
-  margin: 0 14px 12px;
+  margin: 0 14px 14px;
   padding-left: 18px;
   font-size: 12px;
   line-height: 1.55;
   color: var(--text2);
-}
-.planner-recipe__service-label {
-  margin: 0 14px 6px;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--gold);
-  text-transform: uppercase;
 }
 .planner-recipe__note {
   margin: 0 14px 12px;
@@ -6989,10 +7047,35 @@ html.lenovo-tab-one-profile .planner-recipe__head {
   font-size: 15px;
 }
 
-html.lenovo-tab-one-profile .planner-recipe__meta,
-html.lenovo-tab-one-profile .planner-recipe__service-label,
+html.lenovo-tab-one-profile .planner-recipe__head-count,
+html.lenovo-tab-one-profile .planner-recipe__section-label,
 html.lenovo-tab-one-profile .planner-recipe__note {
   font-size: 13px;
+}
+
+html.lenovo-tab-one-profile .planner-recipe__metrics {
+  gap: 8px;
+  padding: 0 16px 12px;
+}
+
+html.lenovo-tab-one-profile .planner-recipe__metric {
+  min-height: 34px;
+  padding: 6px 9px;
+  font-size: 13px;
+}
+
+html.lenovo-tab-one-profile .planner-recipe__metric-label {
+  font-size: 10px;
+}
+
+html.lenovo-tab-one-profile .planner-recipe__ings {
+  gap: 8px;
+  padding: 0 16px 14px;
+}
+
+html.lenovo-tab-one-profile .planner-recipe__ing {
+  grid-template-columns: minmax(74px, auto) minmax(0, 1fr);
+  gap: 12px;
 }
 
 html.lenovo-tab-one-profile .planner-recipe__ings,
@@ -7076,31 +7159,78 @@ html.lenovo-tab-one-profile .planner-recipe__service {
 .planner-print-doc h2 {
   font-size: 14px;
   margin: 16px 0 8px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid #bbb;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
 }
 .planner-print-doc__date {
   margin: -8px 0 12px;
   font-size: 13px;
   color: #444;
 }
+.planner-print-doc__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 12px;
+}
+.planner-print-doc__meta span {
+  padding: 3px 7px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 11px;
+}
 .planner-print-recipe {
-  margin-bottom: 16px;
+  margin-bottom: 18px;
+  padding-top: 8px;
+  border-top: 1px solid #ddd;
   page-break-inside: avoid;
 }
 .planner-print-recipe h3 {
-  font-size: 13px;
-  margin: 0 0 6px;
+  font-size: 14px;
+  margin: 0 0 5px;
 }
-.planner-print-recipe__meta {
-  font-size: 11px;
+.planner-print-recipe__metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0 0 7px;
+}
+.planner-print-recipe__metric {
+  display: inline-flex;
+  gap: 4px;
+  padding: 2px 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 10px;
+}
+.planner-print-recipe__metric-label {
   color: #555;
-  margin: 0 0 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.planner-print-recipe__section-title {
+  margin: 8px 0 3px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.planner-print-recipe__section-title span {
+  color: #555;
 }
 .planner-print-recipe ul,
-.planner-print-recipe__method {
+.planner-print-recipe__method,
+.planner-print-recipe__service {
   margin: 0 0 8px;
   padding-left: 18px;
+  font-size: 11px;
+}
+.planner-print-recipe__note {
+  margin: 8px 0 0;
+  padding: 5px 7px;
+  border-left: 2px solid #999;
+  background: #f5f5f5;
   font-size: 11px;
 }
 .planner-print-doc pre {
