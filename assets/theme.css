@@ -2635,6 +2635,43 @@ button.kuschi-flavor-retry:hover {
 .prep-add-hint--tab {
   margin: 8px 0 0;
 }
+.prep-board-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 10px;
+}
+.prep-board-status__item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--text2);
+  line-height: 1;
+}
+.prep-board-status__number {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.prep-board-status__label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--text3);
+}
+.prep-board-status__item--open .prep-board-status__number,
+.prep-board-status__item--high .prep-board-status__number {
+  color: var(--gold);
+}
+.prep-board-status__item--done .prep-board-status__number {
+  color: var(--green);
+}
 .prep-hide-done {
   display: flex;
   align-items: center;
@@ -2665,6 +2702,7 @@ button.kuschi-flavor-retry:hover {
   align-items: stretch;
   gap: 10px;
   margin-bottom: 12px;
+  contain: layout style;
 }
 .prep-task-done--row {
   flex-shrink: 0;
@@ -2697,6 +2735,7 @@ button.kuschi-flavor-retry:hover {
   background: var(--surface);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04);
   font: inherit;
+  overflow-wrap: anywhere;
 }
 button.prep-task-card {
   cursor: pointer;
@@ -5040,6 +5079,28 @@ html.lenovo-tab-one-profile .prep-empty {
   font-size: 14px;
 }
 
+html.lenovo-tab-one-profile .prep-board-status {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 10px 0 10px;
+}
+
+html.lenovo-tab-one-profile .prep-board-status__item {
+  justify-content: center;
+  min-height: 44px;
+  padding: 8px 6px;
+  border-radius: 12px;
+}
+
+html.lenovo-tab-one-profile .prep-board-status__number {
+  font-size: 18px;
+}
+
+html.lenovo-tab-one-profile .prep-board-status__label {
+  font-size: 12px;
+}
+
 html.lenovo-tab-one-profile .prep-hide-done {
   min-height: 48px;
   margin: 12px 0 10px;
@@ -5057,27 +5118,27 @@ html.lenovo-tab-one-profile .prep-task-list {
 
 html.lenovo-tab-one-profile .prep-task-card-row {
   display: grid;
-  grid-template-columns: 64px minmax(0, 1fr);
-  gap: 12px;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 10px;
   margin-bottom: 0;
 }
 
 html.lenovo-tab-one-profile .prep-task-done--row {
-  min-width: 64px;
-  min-height: 78px;
-  padding: 8px 4px;
+  min-width: 56px;
+  min-height: 72px;
+  padding: 6px 3px;
   border-radius: 12px;
   font-size: 12px;
 }
 
 html.lenovo-tab-one-profile .prep-task-done--row input {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
 }
 
 html.lenovo-tab-one-profile .prep-task-card {
-  min-height: 78px;
-  padding: 14px 16px;
+  min-height: 72px;
+  padding: 12px 14px;
   border-radius: 14px;
 }
 

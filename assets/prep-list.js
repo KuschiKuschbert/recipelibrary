@@ -81,6 +81,55 @@
     return 'Medium';
   }
 
+  function countOpenTasks(tasks) {
+    return (tasks || []).reduce(function (n, t) {
+      return n + (t && !t.done ? 1 : 0);
+    }, 0);
+  }
+
+  function countDoneTasks(tasks) {
+    return (tasks || []).reduce(function (n, t) {
+      return n + (t && t.done ? 1 : 0);
+    }, 0);
+  }
+
+  function countOpenHighTasks(tasks) {
+    return (tasks || []).reduce(function (n, t) {
+      return n + (t && !t.done && t.priority === 'high' ? 1 : 0);
+    }, 0);
+  }
+
+  function prepStatusItemHtml(label, value, mod) {
+    return (
+      '<span class="prep-board-status__item prep-board-status__item--' +
+      escAttr(mod || 'default') +
+      '">' +
+      '<span class="prep-board-status__number">' +
+      esc(value) +
+      '</span>' +
+      '<span class="prep-board-status__label">' +
+      esc(label) +
+      '</span>' +
+      '</span>'
+    );
+  }
+
+  function prepStatusHtml(tasks, visibleTasks, hideDone) {
+    var all = tasks || [];
+    var open = countOpenTasks(all);
+    var done = countDoneTasks(all);
+    var high = countOpenHighTasks(all);
+    var visible = visibleTasks ? visibleTasks.length : all.length;
+    var html =
+      prepStatusItemHtml('Open', open, 'open') +
+      prepStatusItemHtml('High', high, 'high') +
+      prepStatusItemHtml('Done', done, 'done');
+    if (hideDone && done > 0) {
+      html += prepStatusItemHtml('Showing', visible, 'showing');
+    }
+    return '<div class="prep-board-status" aria-label="Prep task summary">' + html + '</div>';
+  }
+
   function fillAssigneeSelect(sel, doc) {
     if (!sel) return;
     var cur = sel.value;
@@ -340,6 +389,7 @@
           })
           .join('');
         listBlock =
+          prepStatusHtml(doc.tasks || [], sorted, hideDone) +
           '<label class="prep-hide-done"><input type="checkbox" data-prep-act="toggle-hide-done"' +
           (hideDone ? ' checked' : '') +
           ' /> Hide completed</label>' +
