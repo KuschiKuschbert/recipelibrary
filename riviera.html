@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=61">
+<link rel="stylesheet" href="assets/theme.css?v=62">
 <link rel="preload" href="riviera_data/builtins.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
@@ -1199,18 +1199,18 @@ html.lenovo-tab-one-profile .fn-planner__desc {
     </div>
     <div class="planner-list__summary" id="plannerListSummary" aria-live="polite" hidden></div>
     <div class="planner-list__actions">
-      <button type="button" class="btn-secondary planner-list__primary-action" id="plannerOrderList">Order list</button>
-      <button type="button" class="btn-secondary planner-list__primary-action" id="plannerPrepBoard">Prep board</button>
+      <button type="button" class="btn-secondary planner-list__primary-action" id="plannerOrderList" title="Open order list">Order</button>
+      <button type="button" class="btn-secondary planner-list__primary-action" id="plannerPrepBoard" title="Open prep board">Prep</button>
       <div class="planner-list__print-group">
         <label class="planner-list__print-opt">
-          <input type="checkbox" id="plannerPrintIncludeRecipes"> Include recipes
+          <input type="checkbox" id="plannerPrintIncludeRecipes"> Recipes
         </label>
-        <button type="button" class="btn-secondary" id="plannerPrint">Print / PDF</button>
+        <button type="button" class="btn-secondary" id="plannerPrint" title="Print or save PDF">Print</button>
       </div>
       <button type="button" class="btn-secondary" id="plannerCopyTimeline">Copy timeline</button>
       <button type="button" class="btn-secondary" id="plannerCopyAll">Copy all</button>
-      <button type="button" class="btn-secondary" id="plannerDownloadHtml">Download HTML</button>
-      <button type="button" class="btn-secondary" id="plannerExportBundle">Export bundle</button>
+      <button type="button" class="btn-secondary" id="plannerDownloadHtml" title="Download planner HTML">HTML</button>
+      <button type="button" class="btn-secondary" id="plannerExportBundle" title="Export planner bundle">Bundle</button>
     </div>
     <div class="planner-list__body" id="plannerListBody"></div>
     <div id="plannerPrintRoot" class="planner-print-root" aria-hidden="true"></div>
