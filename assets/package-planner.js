@@ -201,6 +201,27 @@
     return true;
   }
 
+  function sectionStats(sec) {
+    var out = {
+      selected: 0,
+      linked: 0,
+      courses: 0,
+      readyCourses: 0,
+      needsCourses: 0,
+    };
+    if (!sec) return out;
+    out.courses = (sec.courses || []).length;
+    (sec.courses || []).forEach(function (course, ci) {
+      var stats = countSelectedInCourse(sec, ci);
+      var val = courseValidation(sec, ci);
+      out.selected += stats.count;
+      out.linked += stats.linked;
+      if (val.valid) out.readyCourses++;
+      else out.needsCourses++;
+    });
+    return out;
+  }
+
   function toggleItem(courseIdx, itemIdx) {
     var key = itemKey(_state.eventId, _state.sectionId, courseIdx, itemIdx);
     if (_state.selections[key]) delete _state.selections[key];
@@ -314,13 +335,39 @@
     var sec = findSection(pkg, _state.sectionId);
     if (!sec) {
       body.innerHTML = '<p class="fn-planner__hint">Select an event and package.</p>';
-      if (genBtn) genBtn.disabled = true;
+      if (genBtn) {
+        genBtn.disabled = true;
+        genBtn.textContent = 'Generate Full Planner List';
+      }
       return;
     }
 
-    var html = '<div class="fn-planner__meta">';
-    if (sec.price) html += '<strong>' + esc(sec.price) + '</strong>';
-    if (sec.style) html += ' · ' + esc(sec.style);
+    var stats = sectionStats(sec);
+    var ready = stats.needsCourses === 0;
+    var readyText = ready
+      ? stats.readyCourses + '/' + stats.courses + ' courses ready'
+      : stats.needsCourses + ' course' + (stats.needsCourses !== 1 ? 's' : '') + ' need choices';
+    var summaryStatusCls = ready
+      ? ' fn-planner__summary-status--ready'
+      : ' fn-planner__summary-status--needs';
+    var html = '<div class="fn-planner__summary">';
+    html += '<div class="fn-planner__summary-main">';
+    html += '<span class="fn-planner__summary-eyebrow">Current package</span>';
+    html += '<strong>' + esc(sec.label || 'Package') + '</strong>';
+    html += '<span>' + esc([pkg && pkg.label, sec.style].filter(Boolean).join(' · ')) + '</span>';
+    html += '</div>';
+    html += '<div class="fn-planner__summary-chips">';
+    html += '<span class="fn-planner__summary-chip"><strong>' + stats.selected + '</strong> selected</span>';
+    html += '<span class="fn-planner__summary-chip">' + stats.linked + ' linked dishes</span>';
+    html += '<span class="fn-planner__summary-chip"><strong>' + esc(String(_state.pax || 100)) + '</strong> covers</span>';
+    if (_state.eventDate) {
+      html += '<span class="fn-planner__summary-chip">' + esc(_state.eventDate) + '</span>';
+    }
+    if (sec.price) {
+      html += '<span class="fn-planner__summary-chip">' + esc(sec.price) + '</span>';
+    }
+    html += '<span class="fn-planner__summary-status' + summaryStatusCls + '">' + esc(readyText) + '</span>';
+    html += '</div>';
     if (sec.desc) html += '<p class="fn-planner__desc">' + esc(sec.desc) + '</p>';
     html += '</div>';
 
@@ -404,6 +451,9 @@
 
     if (genBtn) {
       genBtn.disabled = !sectionValid(sec) || !(_state.pax > 0);
+      genBtn.textContent = ready
+        ? 'Generate Full Planner List (' + stats.selected + ' dishes)'
+        : 'Complete Required Choices';
     }
   }
 
