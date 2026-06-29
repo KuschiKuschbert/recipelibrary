@@ -3552,6 +3552,108 @@ html.low-memory-device .modal-shell-bar {
   animation-duration: 0.9s;
 }
 
+/* ── Visible UI polish across the app shell ─────────────────────────────── */
+body.has-app-nav .search-glass {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02)),
+    var(--glass);
+  border-color: rgba(201, 169, 110, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+body.has-app-nav .search-glass:focus-within {
+  border-color: rgba(201, 169, 110, 0.55);
+}
+
+body.has-app-nav .filter-chip,
+body.has-app-nav .clear-btn,
+body.has-app-nav .page-action-btn,
+body.has-app-nav .hero-nav-link,
+body.has-app-nav .hero-actions button,
+body.has-app-nav .hero-actions .hero-nav-cluster a,
+body.has-app-nav .aroma-mode-btn,
+body.has-app-nav .flavor-tabs button {
+  background: rgba(255, 255, 255, 0.065);
+  border-color: rgba(255, 255, 255, 0.13);
+}
+
+body.has-app-nav .filter-chip--active,
+body.has-app-nav .flavor-tabs button[aria-selected="true"],
+body.has-app-nav .aroma-mode-btn[aria-pressed="true"] {
+  background: rgba(201, 169, 110, 0.18);
+  border-color: rgba(201, 169, 110, 0.55);
+}
+
+body.has-app-nav .page-action-btn {
+  border-radius: 12px;
+}
+
+body.has-app-nav .grid .card,
+body.has-app-nav .pantry-card,
+body.has-app-nav .flavor-result-row,
+body.has-app-nav .flavor-toolkit-card,
+body.has-app-nav .flavor-toolkit-cuisine,
+body.has-app-nav .flavor-toolkit-blend,
+body.has-app-nav .aroma-result-row,
+body.has-app-nav .aroma-browse-card,
+body.has-app-nav .aroma-neighbor-card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.035)),
+    var(--surface);
+  border-color: rgba(255, 255, 255, 0.13);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045);
+}
+
+body.has-app-nav .grid .card::before {
+  opacity: 0.42;
+  background: linear-gradient(90deg, rgba(201, 169, 110, 0.85), rgba(201, 169, 110, 0.16), transparent);
+}
+
+body.has-app-nav .grid .card:hover,
+body.has-app-nav .pantry-card:hover,
+body.has-app-nav .flavor-result-row:hover,
+body.has-app-nav .aroma-result-row:hover,
+body.has-app-nav .aroma-browse-card:hover,
+body.has-app-nav .aroma-neighbor-card:hover {
+  border-color: rgba(201, 169, 110, 0.45);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.045)),
+    var(--surface-hover);
+}
+
+body.has-app-nav .grid .card .card-name,
+body.has-app-nav .pantry-name,
+body.has-app-nav .flavor-result-name {
+  font-size: 18px;
+}
+
+body.has-app-nav .grid .card .card-cuisine,
+body.has-app-nav .grid .card .card-type {
+  opacity: 1;
+}
+
+body.has-app-nav .grid .card .card-ings,
+body.has-app-nav .grid .card .card-elements {
+  color: var(--text2);
+}
+
+body.has-app-nav .grid .card .badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+
+body.has-app-nav .modal {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)),
+    var(--bg2);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+body.has-app-nav .modal-section {
+  letter-spacing: 1.6px;
+}
+
 /* Prevent double-tap zoom on all interactive controls (no 300ms tap delay) */
 button, a, select, input, [role="button"] {
   touch-action: manipulation;

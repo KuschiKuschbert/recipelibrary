@@ -35,19 +35,33 @@
     var root = document.documentElement;
     var w = Math.round(window.innerWidth || root.clientWidth || 0);
     var h = Math.round(window.innerHeight || root.clientHeight || 0);
-    return { width: w, height: h, shortEdge: Math.min(w, h), longEdge: Math.max(w, h) };
+    var sw = Math.round((window.screen && window.screen.width) || 0);
+    var sh = Math.round((window.screen && window.screen.height) || 0);
+    return {
+      width: w,
+      height: h,
+      shortEdge: Math.min(w, h),
+      longEdge: Math.max(w, h),
+      screenShortEdge: sw && sh ? Math.min(sw, sh) : 0,
+      screenLongEdge: sw && sh ? Math.max(sw, sh) : 0
+    };
   }
 
   function _applyDeviceProfile() {
     var root = document.documentElement;
     var vp = _viewport();
-    var tabletShape = vp.shortEdge >= 700 && vp.shortEdge <= 900 && vp.longEdge >= 1000 && vp.longEdge <= 1450;
+    var coarsePointer = false;
+    try { coarsePointer = window.matchMedia && window.matchMedia('(pointer: coarse)').matches; } catch (_) {}
+    var viewportTablet = vp.shortEdge >= 640 && vp.shortEdge <= 930 && vp.longEdge >= 900 && vp.longEdge <= 1500;
+    var screenTablet = vp.screenShortEdge >= 700 && vp.screenShortEdge <= 930 && vp.screenLongEdge >= 1000 && vp.screenLongEdge <= 1500;
+    var tabletShape = viewportTablet || (screenTablet && (coarsePointer || vp.shortEdge >= 560));
     var memory = Number(navigator.deviceMemory || 0);
     var lowMemory = tabletShape || (memory > 0 && memory <= 4);
 
     root.classList.toggle('lenovo-tab-one-profile', tabletShape);
     root.classList.toggle('low-memory-device', lowMemory);
     root.dataset.kuschiViewport = vp.width + 'x' + vp.height;
+    if (vp.screenShortEdge) root.dataset.kuschiScreen = vp.screenShortEdge + 'x' + vp.screenLongEdge;
     if (memory > 0) root.dataset.kuschiMemoryGb = String(memory);
   }
 
