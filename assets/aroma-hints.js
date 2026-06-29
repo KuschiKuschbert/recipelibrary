@@ -1506,7 +1506,7 @@
               })
               .join('');
             inner3.innerHTML =
-              '<details class="aroma-add-details">' +
+              '<details class="aroma-add-details" open>' +
               '<summary>Seasoning suggestions</summary>' +
               '<p class="aroma-hint-intro">Based on your ingredient list. Tap to add (pinch / to taste).</p>' +
               '<div class="aroma-suggest-btns">' +

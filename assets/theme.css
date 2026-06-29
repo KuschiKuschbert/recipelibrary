@@ -4437,6 +4437,105 @@ html.lenovo-tab-one-profile #rvPanelManual .form-primary-btn {
   justify-content: center;
 }
 
+html.lenovo-tab-one-profile .aroma-add-panel {
+  margin: 14px 0 12px;
+  padding: 10px;
+  background:
+    linear-gradient(180deg, rgba(201, 169, 110, 0.055), rgba(255, 255, 255, 0.024)),
+    rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(201, 169, 110, 0.16);
+  border-radius: 14px;
+  contain: layout style;
+}
+
+html.lenovo-tab-one-profile .aroma-add-details summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+  padding: 0 10px;
+  border-radius: 12px;
+  color: var(--gold-light);
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+html.lenovo-tab-one-profile .aroma-add-details summary::after {
+  content: '+';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  border-radius: 9px;
+  background: rgba(201, 169, 110, 0.12);
+  color: var(--gold);
+  font-size: 18px;
+  line-height: 1;
+}
+
+html.lenovo-tab-one-profile .aroma-add-details[open] summary::after {
+  content: '-';
+}
+
+html.lenovo-tab-one-profile .aroma-add-panel .aroma-hint-loading {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+html.lenovo-tab-one-profile .aroma-add-panel .aroma-hint-intro,
+html.lenovo-tab-one-profile .aroma-add-panel .aroma-hint-empty {
+  margin: 0;
+  padding: 0 10px 10px;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+html.lenovo-tab-one-profile .aroma-suggest-btns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 4px;
+}
+
+html.lenovo-tab-one-profile .aroma-suggest-btn {
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  justify-content: flex-start;
+  padding: 9px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.13);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.25;
+  text-align: left;
+}
+
+html.lenovo-tab-one-profile .aroma-suggest-name {
+  min-width: 0;
+  flex: 1 1 112px;
+  display: -webkit-box;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+html.lenovo-tab-one-profile .aroma-suggest-btn .aroma-group-badge {
+  flex: 0 0 auto;
+  margin-left: 0;
+  padding: 2px 5px;
+  border-radius: 6px;
+  font-size: 10px;
+}
+
 html.lenovo-tab-one-profile #pageQrOverlay .modal,
 html.lenovo-tab-one-profile #rivieraAdminOverlay .modal,
 html.lenovo-tab-one-profile #kbAdminOverlay .modal {
@@ -4575,6 +4674,12 @@ html.lenovo-tab-one-profile .prep-actor-remove {
   }
 
   html.lenovo-tab-one-profile .ar-format-key-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  html.lenovo-tab-one-profile .aroma-suggest-btns {
     grid-template-columns: 1fr;
   }
 }

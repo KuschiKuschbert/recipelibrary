@@ -1880,14 +1880,15 @@ function refreshRvAromaAddPanel() {
     refreshRvAromaAddPanel();
   });
 }
-const debouncedRefreshRvAroma =
-  window.KuschiAromaHints && KuschiAromaHints.debounce
-    ? KuschiAromaHints.debounce(() => refreshRvAromaAddPanel(), 400)
-    : () => {};
+let rvAromaRefreshTimer = null;
+function debouncedRefreshRvAroma() {
+  clearTimeout(rvAromaRefreshTimer);
+  rvAromaRefreshTimer = setTimeout(() => refreshRvAromaAddPanel(), 400);
+}
 (function initRvAromaAddListeners() {
   const overlay = document.getElementById('addRivieraOverlay');
   const prot = document.getElementById('rvProtein');
-  if (!overlay || !prot || !window.KuschiAromaHints) return;
+  if (!overlay || !prot) return;
   overlay.addEventListener('input', (e) => {
     if (e.target && e.target.classList && e.target.classList.contains('rv-item')) debouncedRefreshRvAroma();
   });
