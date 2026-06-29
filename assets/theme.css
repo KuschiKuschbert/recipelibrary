@@ -2579,6 +2579,10 @@ button.kuschi-flavor-retry:hover {
   gap: 4px;
 }
 .prep-actor-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
   min-height: 44px;
   padding: 0 18px;
   font-size: 13px;
@@ -2590,6 +2594,8 @@ button.kuschi-flavor-retry:hover {
   background: var(--surface);
   color: var(--text);
   cursor: pointer;
+  text-align: center;
+  overflow-wrap: anywhere;
   transition:
     background 0.15s,
     border-color 0.15s,
@@ -2661,6 +2667,10 @@ button.kuschi-flavor-retry:hover {
   margin: 16px 0 12px;
 }
 .prep-subtab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
   min-height: 44px;
   padding: 0 18px;
   font-size: 13px;
@@ -2672,6 +2682,7 @@ button.kuschi-flavor-retry:hover {
   background: var(--surface);
   color: var(--text2);
   cursor: pointer;
+  text-align: center;
   transition:
     background 0.15s,
     border-color 0.15s,
@@ -2839,18 +2850,57 @@ button.prep-task-card:hover {
   margin-bottom: 6px;
 }
 .prep-task-card-meta {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
   font-size: 12px;
   color: var(--text3);
   line-height: 1.45;
 }
-.prep-task-card-hint {
-  display: block;
+.prep-task-card-chip {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 22px;
+  padding: 2px 7px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 7px;
+  background: rgba(0, 0, 0, 0.13);
+  color: var(--text2);
   font-size: 11px;
+  font-weight: 650;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+.prep-task-card-chip--priority-high {
+  border-color: rgba(201, 169, 110, 0.36);
+  background: rgba(201, 169, 110, 0.13);
+  color: var(--gold-light);
+}
+.prep-task-card-chip--priority-low {
   color: var(--text3);
-  margin-top: 8px;
-  font-style: italic;
-  opacity: 0.9;
+}
+.prep-task-card-note {
+  min-width: 0;
+  flex: 1 1 160px;
+  color: var(--text3);
+  overflow-wrap: anywhere;
+}
+.prep-task-card-detail-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 2px 8px;
+  border-radius: 7px;
+  border: 1px solid rgba(201, 169, 110, 0.22);
+  background: rgba(201, 169, 110, 0.1);
+  color: var(--gold-light);
+  font-size: 11px;
+  margin-top: 0;
+  font-weight: 650;
+  line-height: 1.25;
 }
 .prep-task-done {
   display: flex;
@@ -2866,7 +2916,7 @@ button.prep-task-card:hover {
   accent-color: var(--green);
 }
 .prep-task-detail-sheet {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 20;
   display: flex;
@@ -2874,6 +2924,7 @@ button.prep-task-card:hover {
   justify-content: center;
   padding: 12px;
   box-sizing: border-box;
+  overscroll-behavior: contain;
 }
 .prep-task-detail-sheet[hidden] {
   display: none !important;
@@ -5250,6 +5301,10 @@ html.lenovo-tab-one-profile .prep-subtab {
   padding: 0 16px;
   border-radius: 12px;
   font-size: 14px;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 html.lenovo-tab-one-profile .prep-actor-remove {
@@ -5314,47 +5369,72 @@ html.lenovo-tab-one-profile .prep-hide-done {
 
 html.lenovo-tab-one-profile .prep-task-list {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 html.lenovo-tab-one-profile .prep-task-card-row {
   display: grid;
-  grid-template-columns: 56px minmax(0, 1fr);
-  gap: 10px;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 8px;
+  align-items: stretch;
   margin-bottom: 0;
 }
 
 html.lenovo-tab-one-profile .prep-task-done--row {
-  min-width: 56px;
-  min-height: 72px;
+  min-width: 52px;
+  min-height: 68px;
   padding: 6px 3px;
   border-radius: 12px;
-  font-size: 12px;
+  font-size: 11px;
+  line-height: 1.1;
 }
 
 html.lenovo-tab-one-profile .prep-task-done--row input {
-  width: 22px;
-  height: 22px;
+  width: 21px;
+  height: 21px;
+}
+
+html.lenovo-tab-one-profile .prep-task-done--row:has(input:checked) {
+  border-color: rgba(122, 193, 139, 0.48);
+  background: rgba(122, 193, 139, 0.1);
+  color: var(--green);
 }
 
 html.lenovo-tab-one-profile .prep-task-card {
-  min-height: 72px;
-  padding: 12px 14px;
-  border-radius: 14px;
+  min-height: 68px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  box-shadow: none;
 }
 
 html.lenovo-tab-one-profile .prep-task-card-title {
-  font-size: 16px;
-  line-height: 1.35;
+  font-size: 15px;
+  line-height: 1.32;
+  margin-bottom: 7px;
 }
 
 html.lenovo-tab-one-profile .prep-task-card-meta {
-  font-size: 13px;
-  line-height: 1.45;
+  gap: 5px;
+  font-size: 12px;
+  line-height: 1.35;
 }
 
-html.lenovo-tab-one-profile .prep-task-card-hint {
-  font-size: 12px;
+html.lenovo-tab-one-profile .prep-task-card-chip {
+  min-height: 23px;
+  padding: 2px 7px;
+  font-size: 11px;
+}
+
+html.lenovo-tab-one-profile .prep-task-card-note {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+html.lenovo-tab-one-profile .prep-task-card-detail-pill {
+  min-height: 24px;
+  font-size: 11px;
 }
 
 html.lenovo-tab-one-profile .prep-task-detail-sheet {
@@ -5363,9 +5443,10 @@ html.lenovo-tab-one-profile .prep-task-detail-sheet {
 
 html.lenovo-tab-one-profile .prep-task-detail-sheet__panel {
   max-width: min(640px, calc(100vw - 40px));
-  max-height: min(72vh, 680px);
-  padding: 60px 22px 24px;
+  max-height: min(74vh, 680px);
+  padding: 58px 22px max(24px, calc(24px + env(safe-area-inset-bottom, 0px)));
   border-radius: 16px;
+  overscroll-behavior: contain;
 }
 
 html.lenovo-tab-one-profile .prep-task-detail-sheet__close {
@@ -5698,9 +5779,14 @@ html.lenovo-tab-one-profile .nav-item__label {
   html.lenovo-tab-one-profile .flavor-toolkit-blend,
   html.lenovo-tab-one-profile .aroma-result-row,
   html.lenovo-tab-one-profile .aroma-browse-card,
-  html.lenovo-tab-one-profile .aroma-neighbor-card {
+  html.lenovo-tab-one-profile .aroma-neighbor-card,
+  html.lenovo-tab-one-profile .prep-task-card-row {
     content-visibility: auto;
     contain-intrinsic-size: auto 180px;
+  }
+
+  html.lenovo-tab-one-profile .prep-task-card-row {
+    contain-intrinsic-size: auto 76px;
   }
 }
 
@@ -5767,7 +5853,11 @@ html.low-memory-device .modal-step,
 html.low-memory-device .modal-steps li,
 html.low-memory-device .cook-mode-btn,
 html.low-memory-device .cook-step-prev,
-html.low-memory-device .cook-step-next {
+html.low-memory-device .cook-step-next,
+html.low-memory-device .prep-actor-chip,
+html.low-memory-device .prep-subtab,
+html.low-memory-device .prep-task-card,
+html.low-memory-device .prep-task-detail-sheet__panel {
   transition: none;
 }
 
@@ -5781,6 +5871,11 @@ html.low-memory-device .modal-top-bar {
 }
 
 html.low-memory-device .modal-copy-bar {
+  box-shadow: none;
+}
+
+html.low-memory-device .prep-task-card,
+html.low-memory-device .prep-task-detail-sheet__panel {
   box-shadow: none;
 }
 

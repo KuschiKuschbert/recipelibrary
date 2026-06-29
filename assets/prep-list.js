@@ -6,7 +6,7 @@
   'use strict';
 
   var PREVIEW_TITLE_LEN = 68;
-  var PREVIEW_NOTES_LEN = 40;
+  var PREVIEW_NOTES_LEN = 34;
 
   function esc(s) {
     return String(s || '')
@@ -79,6 +79,12 @@
     if (p === 'high') return 'High';
     if (p === 'low') return 'Low';
     return 'Medium';
+  }
+
+  function priorityClass(p) {
+    if (p === 'high') return ' prep-task-card-chip--priority-high';
+    if (p === 'low') return ' prep-task-card-chip--priority-low';
+    return ' prep-task-card-chip--priority-medium';
   }
 
   function countOpenTasks(tasks) {
@@ -333,13 +339,7 @@
             var notesLong = notesStr.length > PREVIEW_NOTES_LEN;
             var openable = titleLong || notesLong;
             var titleShow = titleLong ? truncate(titleFull, PREVIEW_TITLE_LEN) : titleFull;
-            var metaCore = assignLabel + ' · ' + prLab;
-            var metaExtra = '';
-            if (notesStr && !notesLong) {
-              metaExtra = ' · ' + notesStr;
-            } else if (notesStr && notesLong) {
-              metaExtra = ' · ' + truncate(notesStr, PREVIEW_NOTES_LEN);
-            }
+            var notesPreview = notesStr ? (notesLong ? truncate(notesStr, PREVIEW_NOTES_LEN) : notesStr) : '';
             var prioMod =
               ph === 'high' ? ' prep-task-card--prio-high' : ph === 'low' ? ' prep-task-card--prio-low' : '';
             var cardMod =
@@ -347,7 +347,7 @@
               prioMod +
               assigneeCardClass(t.assigneeId);
             var hint = openable
-              ? '<span class="prep-task-card-hint">Tap for full text</span>'
+              ? '<span class="prep-task-card-detail-pill">Details</span>'
               : '';
 
             var cardInner =
@@ -355,9 +355,17 @@
               esc(titleShow) +
               '</span>' +
               '<span class="prep-task-card-meta">' +
-              esc(metaCore + metaExtra) +
+              '<span class="prep-task-card-chip prep-task-card-chip--assignee">' +
+              esc(assignLabel) +
               '</span>' +
-              hint;
+              '<span class="prep-task-card-chip prep-task-card-chip--priority' +
+              priorityClass(ph) +
+              '">' +
+              esc(prLab) +
+              '</span>' +
+              (notesPreview ? '<span class="prep-task-card-note">' + esc(notesPreview) + '</span>' : '') +
+              hint +
+              '</span>';
 
             var cardOpen;
             if (openable) {
@@ -366,6 +374,8 @@
                 cardMod +
                 '" data-prep-act="open-task" data-task-id="' +
                 tid +
+                '" aria-label="Open task details: ' +
+                escAttr(titleFull || 'Task') +
                 '">' +
                 cardInner +
                 '</button>';
@@ -374,10 +384,12 @@
             }
 
             return (
-              '<div class="prep-task-card-row">' +
+              '<div class="prep-task-card-row" role="listitem">' +
               '<label class="prep-task-done prep-task-done--row">' +
               '<input type="checkbox" data-prep-act="toggle-done" data-task-id="' +
               tid +
+              '" aria-label="' +
+              escAttr((t.done ? 'Mark not done: ' : 'Mark done: ') + (titleFull || 'Task')) +
               '"' +
               doneCh +
               ' />' +
