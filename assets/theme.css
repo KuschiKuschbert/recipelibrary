@@ -3786,6 +3786,13 @@ html.lenovo-tab-one-profile body.has-app-nav .modal {
   scroll-padding-top: 76px;
 }
 
+html.lenovo-tab-one-profile body.has-app-nav #modalOverlay .modal {
+  max-width: min(760px, calc(100vw - 28px));
+  max-height: min(94vh, 94dvh);
+  padding: 24px 28px max(28px, calc(28px + env(safe-area-inset-bottom, 0px)));
+  transform: none;
+}
+
 html.lenovo-tab-one-profile body.has-app-nav .modal-top-bar {
   top: 0;
   margin: -24px -28px 18px;
@@ -3882,21 +3889,34 @@ html.lenovo-tab-one-profile body.has-app-nav .modal-section {
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .modal-ing {
-  grid-template-columns: minmax(72px, max-content) minmax(0, 1fr);
-  gap: 0 14px;
-  padding: 8px 14px;
+  grid-template-columns: minmax(82px, max-content) minmax(0, 1fr);
+  gap: 0 16px;
+  padding: 10px 14px;
   background: rgba(255, 255, 255, 0.035);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  font-size: 15px;
-  line-height: 1.45;
+  border-radius: 14px;
+  font-size: 16px;
+  line-height: 1.55;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .modal-ing .ing-qty,
 html.lenovo-tab-one-profile body.has-app-nav .modal-ing .ing-item {
   min-width: 0;
-  padding: 8px 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 9px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav .modal-ing .ing-qty {
+  justify-content: flex-end;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav .modal-ing .ing-item {
+  justify-content: flex-start;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .modal-ing .ing-qty:nth-last-child(-n+2),
@@ -3906,22 +3926,31 @@ html.lenovo-tab-one-profile body.has-app-nav .modal-ing .ing-item:nth-last-child
 
 html.lenovo-tab-one-profile body.has-app-nav .modal-steps {
   display: grid;
-  gap: 8px;
+  gap: 10px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .modal-steps li {
-  min-height: 52px;
-  padding: 12px 14px 12px 60px;
+  min-height: 58px;
+  padding: 14px 16px 14px 66px;
   background: rgba(255, 255, 255, 0.035);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  font-size: 15px;
-  line-height: 1.55;
+  border-radius: 14px;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .modal-steps li::before {
   left: 14px;
-  top: 12px;
+  top: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav .modal-steps li.step-done {
+  background: rgba(201, 169, 110, 0.045);
+  border-color: rgba(201, 169, 110, 0.18);
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .modal-copy-bar {
@@ -4107,6 +4136,16 @@ html.low-memory-device .hero-add-pair,
 html.low-memory-device .hero-add-trigger.hero-nav-link,
 html.low-memory-device .pkgs-browser {
   transition-duration: 0.16s;
+}
+
+html.low-memory-device .modal,
+html.low-memory-device .modal-overlay,
+html.low-memory-device .modal-top-bar {
+  transition: none;
+}
+
+html.low-memory-device .modal-top-bar {
+  box-shadow: none;
 }
 
 html.low-memory-device .card {
