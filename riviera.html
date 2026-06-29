@@ -1939,8 +1939,8 @@ function submitRivieraRecipe() {
 
 function copyRivieraBackupJson() {
   KuschiRecipeUi.copyText(KuschiUserRecipes.exportRiviera())
-    .then(() => alert('Copied Riviera JSON'))
-    .catch(() => alert('Could not copy Riviera JSON backup.'));
+    .then(() => KuschiRecipeUi.toast('Riviera JSON copied'))
+    .catch(() => KuschiRecipeUi.toast('Could not copy Riviera JSON backup.', { kind: 'error' }));
 }
 
 

@@ -1534,8 +1534,8 @@ function submitBookRecipe() {
 function exportBookBackup() {
   const t = KuschiUserRecipes.exportBookRecipes(CURRENT_BOOK_ID);
   KuschiRecipeUi.copyText(t)
-    .then(() => alert('This book’s recipes JSON copied to clipboard'))
-    .catch(() => alert('Could not copy this book’s recipes JSON.'));
+    .then(() => KuschiRecipeUi.toast('Book recipes JSON copied'))
+    .catch(() => KuschiRecipeUi.toast('Could not copy book recipes JSON.', { kind: 'error' }));
 }
 
 function openPageQrModal() {

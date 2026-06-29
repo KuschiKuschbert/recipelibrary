@@ -2114,8 +2114,8 @@ function submitKitchenRecipe() {
 function exportKitchenBackup() {
   const t = KuschiUserRecipes.exportKitchen();
   KuschiRecipeUi.copyText(t)
-    .then(() => alert('Kitchen user recipes JSON copied to clipboard'))
-    .catch(() => alert('Could not copy Kitchen JSON backup.'));
+    .then(() => KuschiRecipeUi.toast('Kitchen JSON copied'))
+    .catch(() => KuschiRecipeUi.toast('Could not copy Kitchen JSON backup.', { kind: 'error' }));
 }
 
 

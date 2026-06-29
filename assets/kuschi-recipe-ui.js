@@ -54,6 +54,31 @@
     return fallbackCopy();
   }
 
+  var toastTimer = null;
+
+  function toast(message, opts) {
+    var doc = w.document;
+    if (!doc || !doc.body) return;
+    var options = opts || {};
+    var el = doc.getElementById('kuschiToast');
+    if (!el) {
+      el = doc.createElement('div');
+      el.id = 'kuschiToast';
+      el.className = 'kuschi-toast';
+      el.setAttribute('role', 'status');
+      el.setAttribute('aria-live', 'polite');
+      el.setAttribute('aria-atomic', 'true');
+      doc.body.appendChild(el);
+    }
+    el.textContent = String(message || '');
+    el.classList.toggle('kuschi-toast--error', options.kind === 'error');
+    el.classList.add('kuschi-toast--show');
+    w.clearTimeout(toastTimer);
+    toastTimer = w.setTimeout(function () {
+      el.classList.remove('kuschi-toast--show');
+    }, options.duration || (options.kind === 'error' ? 2600 : 1800));
+  }
+
   var searchClearSync = Object.create(null);
 
   function bindSearchClear(opts) {
@@ -88,6 +113,7 @@
   w.KuschiRecipeUi = {
     esc: esc,
     copyText: copyText,
+    toast: toast,
     bindSearchClear: bindSearchClear,
     syncSearchClear: syncSearchClear,
     /**

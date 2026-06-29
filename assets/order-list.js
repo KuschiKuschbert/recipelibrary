@@ -128,15 +128,19 @@
 
   function copyTextToClipboard(text, successMessage) {
     var helper = window.KuschiRecipeUi && window.KuschiRecipeUi.copyText;
+    var toast = window.KuschiRecipeUi && window.KuschiRecipeUi.toast;
     var p = helper
       ? helper(text)
       : navigator.clipboard && navigator.clipboard.writeText
         ? navigator.clipboard.writeText(text)
         : Promise.reject(new Error('Clipboard unavailable'));
     p.then(function () {
-      alert(successMessage);
+      if (toast) toast(successMessage);
+      else alert(successMessage);
     }).catch(function () {
-      alert('Could not copy. Select the text manually and try again.');
+      var message = 'Could not copy. Select the text manually and try again.';
+      if (toast) toast(message, { kind: 'error' });
+      else alert(message);
     });
   }
 
