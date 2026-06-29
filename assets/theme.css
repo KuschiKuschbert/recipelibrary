@@ -58,6 +58,140 @@ body {
   padding-right: env(safe-area-inset-right, 0px);
 }
 
+/* ── App header (compact brand strip) ───────────────── */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: max(16px, env(safe-area-inset-top, 0px)) 20px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 110;
+}
+
+.app-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.app-header__mark {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gold-dim);
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  border-radius: 10px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.app-header__info {
+  min-width: 0;
+}
+
+.app-header__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-header__count {
+  font-size: 11px;
+  color: var(--text3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-header__count b {
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.app-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.app-header__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  min-height: 38px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--text2);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app-header__btn:hover {
+  border-color: var(--border-hover);
+  color: var(--text);
+}
+
+.app-header__btn:active {
+  background: var(--surface-hover);
+}
+
+.app-header__btn--add,
+.app-header__btn[data-km-active="true"] {
+  background: var(--gold-dim);
+  border-color: rgba(201, 169, 110, 0.3);
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.app-header__btn--add:hover {
+  background: rgba(201, 169, 110, 0.25);
+  border-color: var(--gold);
+  color: var(--gold-light);
+}
+
+.app-header__btn-label {
+  font-size: 11px;
+}
+
+@media (max-width: 480px) {
+  .app-header__btn-label {
+    display: none;
+  }
+
+  .app-header__btn {
+    padding: 8px 10px;
+  }
+
+  .app-header__mark {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+}
+
 /* ── Search ─────────────────────────────────────────── */
 .search-wrap {
   max-width: 680px;
@@ -3141,6 +3275,282 @@ html.kitchen-mode .modal-title   { font-size: 28px; }
 html.kitchen-mode .modal-ing     { font-size: 17px; line-height: 1.8; }
 html.kitchen-mode .modal-steps li,
 html.kitchen-mode .modal-step    { font-size: 17px; line-height: 1.75; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   LENOVO TAB ONE / SMALL ANDROID TABLET PROFILE
+   Auto-applied by assets/kuschi-kitchen-mode.js for roughly 800x1340 /
+   1340x800 viewports, or for 4GB-ish devices via html.low-memory-device.
+   ──────────────────────────────────────────────────────────────────────────── */
+
+html.lenovo-tab-one-profile body {
+  font-size: 16px;
+}
+
+html.lenovo-tab-one-profile {
+  --app-header-h: 77px;
+}
+
+html.lenovo-tab-one-profile .app-header {
+  gap: 14px;
+  min-height: var(--app-header-h, 65px);
+  padding-left: 22px;
+  padding-right: 22px;
+}
+
+html.lenovo-tab-one-profile .app-header__title {
+  font-size: 17px;
+}
+
+html.lenovo-tab-one-profile .app-header__count {
+  font-size: 12px;
+  color: var(--text2);
+}
+
+html.lenovo-tab-one-profile .app-header__btn,
+html.lenovo-tab-one-profile .page-action-btn,
+html.lenovo-tab-one-profile .filter-chip,
+html.lenovo-tab-one-profile .clear-btn,
+html.lenovo-tab-one-profile .hero-nav-link,
+html.lenovo-tab-one-profile .hero-actions button,
+html.lenovo-tab-one-profile .hero-actions .hero-nav-cluster a,
+html.lenovo-tab-one-profile .aroma-mode-btn,
+html.lenovo-tab-one-profile .flavor-tabs button,
+html.lenovo-tab-one-profile .flavor-wheel-item,
+html.lenovo-tab-one-profile .sheet-book-item,
+html.lenovo-tab-one-profile .modal-copy-btn,
+html.lenovo-tab-one-profile .btn-secondary,
+html.lenovo-tab-one-profile .add-form-actions button.primary {
+  min-height: 48px;
+  font-size: 14px;
+}
+
+html.lenovo-tab-one-profile .search-wrap,
+html.lenovo-tab-one-profile .filters-wrap {
+  max-width: 760px;
+}
+
+html.lenovo-tab-one-profile .search-inner {
+  min-height: 50px;
+  padding: 10px 16px;
+}
+
+html.lenovo-tab-one-profile .search-input {
+  font-size: 18px;
+}
+
+html.lenovo-tab-one-profile .filters-wrap {
+  gap: 10px;
+  padding-top: 8px;
+  padding-bottom: 10px;
+}
+
+html.lenovo-tab-one-profile .filter-chip {
+  flex-basis: 128px;
+  justify-content: center;
+}
+
+html.lenovo-tab-one-profile .results-count {
+  font-size: 24px;
+}
+
+html.lenovo-tab-one-profile .results-meta,
+html.lenovo-tab-one-profile .loading-text,
+html.lenovo-tab-one-profile .empty,
+html.lenovo-tab-one-profile .pantry-lead,
+html.lenovo-tab-one-profile .pantry-status,
+html.lenovo-tab-one-profile .flavor-empty,
+html.lenovo-tab-one-profile .aroma-empty {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+html.lenovo-tab-one-profile .card-name,
+html.lenovo-tab-one-profile .pantry-name,
+html.lenovo-tab-one-profile .flavor-result-name {
+  font-size: 18px;
+}
+
+html.lenovo-tab-one-profile .card-ings,
+html.lenovo-tab-one-profile .card-elements,
+html.lenovo-tab-one-profile .pantry-meta,
+html.lenovo-tab-one-profile .flavor-subst,
+html.lenovo-tab-one-profile .flavor-fk-aroma-line,
+html.lenovo-tab-one-profile .flavor-toolkit-intro p,
+html.lenovo-tab-one-profile .aroma-panel-lead {
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+html.lenovo-tab-one-profile .badge,
+html.lenovo-tab-one-profile .flavor-badge,
+html.lenovo-tab-one-profile .aroma-quick-pass-badge {
+  font-size: 12px;
+  padding: 4px 10px;
+}
+
+html.lenovo-tab-one-profile .modal {
+  max-height: min(92vh, 92dvh);
+}
+
+html.lenovo-tab-one-profile .modal-title {
+  font-size: 28px;
+}
+
+html.lenovo-tab-one-profile .modal-meta,
+html.lenovo-tab-one-profile .modal-note,
+html.lenovo-tab-one-profile .element-chip,
+html.lenovo-tab-one-profile .aroma-pair-col p {
+  font-size: 14px;
+}
+
+html.lenovo-tab-one-profile .modal-close,
+html.lenovo-tab-one-profile .modal-wake-pill,
+html.lenovo-tab-one-profile .cook-mode-btn,
+html.lenovo-tab-one-profile .nav-sheet__close {
+  min-width: 48px;
+  min-height: 48px;
+}
+
+html.lenovo-tab-one-profile .form-row input:not([type='checkbox']):not([type='radio']),
+html.lenovo-tab-one-profile .form-row textarea,
+html.lenovo-tab-one-profile .form-row select,
+html.lenovo-tab-one-profile .flavor-search-wrap input,
+html.lenovo-tab-one-profile .flavor-toolkit-filter,
+html.lenovo-tab-one-profile textarea#pantryIn,
+html.lenovo-tab-one-profile .order-line-row input[type='text'],
+html.lenovo-tab-one-profile .order-line-row select,
+html.lenovo-tab-one-profile .order-line-sub .ord-extra-qty,
+html.lenovo-tab-one-profile .stkt-line-row .stkt-field {
+  min-height: 48px;
+  padding: 11px 12px;
+  font-size: 16px;
+}
+
+html.lenovo-tab-one-profile .order-line-row,
+html.lenovo-tab-one-profile .order-line-sub,
+html.lenovo-tab-one-profile .stkt-line-row {
+  font-size: 14px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+html.lenovo-tab-one-profile .ord-unit-suffix,
+html.lenovo-tab-one-profile .ord-zone-display,
+html.lenovo-tab-one-profile .stkt-zone-label,
+html.lenovo-tab-one-profile .order-add-hint {
+  font-size: 13px;
+}
+
+html.lenovo-tab-one-profile .nav-item {
+  min-height: 56px;
+}
+
+html.lenovo-tab-one-profile .nav-item__label {
+  font-size: 11px;
+}
+
+@media (orientation: portrait) {
+  html.lenovo-tab-one-profile .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  html.lenovo-tab-one-profile .modal {
+    padding: 28px;
+  }
+}
+
+@media (orientation: landscape) {
+  html.lenovo-tab-one-profile {
+    --app-header-h: 71px;
+  }
+
+  html.lenovo-tab-one-profile .app-header {
+    padding-top: max(12px, env(safe-area-inset-top, 0px));
+    padding-bottom: 10px;
+  }
+
+  html.lenovo-tab-one-profile .search-wrap {
+    margin-top: 8px;
+  }
+
+  html.lenovo-tab-one-profile .filters-wrap {
+    margin-top: 10px;
+  }
+
+  html.lenovo-tab-one-profile .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    padding-top: 16px;
+  }
+
+  html.lenovo-tab-one-profile .modal {
+    max-height: min(94vh, 94dvh);
+    padding: 24px;
+  }
+}
+
+@supports (content-visibility: auto) {
+  html.lenovo-tab-one-profile .card,
+  html.lenovo-tab-one-profile .pantry-card,
+  html.lenovo-tab-one-profile .flavor-result-row,
+  html.lenovo-tab-one-profile .flavor-toolkit-card,
+  html.lenovo-tab-one-profile .flavor-toolkit-cuisine,
+  html.lenovo-tab-one-profile .flavor-toolkit-blend,
+  html.lenovo-tab-one-profile .aroma-result-row,
+  html.lenovo-tab-one-profile .aroma-browse-card,
+  html.lenovo-tab-one-profile .aroma-neighbor-card {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 180px;
+  }
+}
+
+html.low-memory-device .search-glass,
+html.low-memory-device .app-nav,
+html.low-memory-device .cook-step-nav,
+html.low-memory-device .nav-sheet__backdrop {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+html.low-memory-device .search-glass,
+html.low-memory-device .app-nav,
+html.low-memory-device .cook-step-nav {
+  background: rgba(20, 20, 20, 0.96);
+}
+
+html.low-memory-device .search-glass:focus-within,
+html.low-memory-device .card:hover,
+html.low-memory-device .hero-nav-link:hover,
+html.low-memory-device .hero-actions button:hover,
+html.low-memory-device .hero-actions .hero-nav-cluster a:hover,
+html.low-memory-device .load-more-btn:hover {
+  box-shadow: none;
+}
+
+html.low-memory-device .card,
+html.low-memory-device .modal,
+html.low-memory-device .modal-overlay,
+html.low-memory-device .nav-sheet__panel,
+html.low-memory-device .hero-add-pair,
+html.low-memory-device .hero-add-trigger.hero-nav-link,
+html.low-memory-device .pkgs-browser {
+  transition-duration: 0.16s;
+}
+
+html.low-memory-device .card {
+  animation-duration: 0.18s;
+}
+
+html.low-memory-device .grid .card:nth-child(n) {
+  animation-delay: 0s;
+}
+
+html.low-memory-device .modal-shell-bar {
+  animation-duration: 0.9s;
+}
 
 /* Prevent double-tap zoom on all interactive controls (no 300ms tap delay) */
 button, a, select, input, [role="button"] {

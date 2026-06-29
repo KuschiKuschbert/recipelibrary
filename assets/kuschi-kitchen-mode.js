@@ -1,7 +1,7 @@
 'use strict';
 /**
  * kuschi-kitchen-mode.js
- * Persisted "Kitchen Mode" large-type toggle.
+ * Persisted "Kitchen Mode" large-type toggle + small-tablet profile.
  *
  * Applies html.kitchen-mode from localStorage on every page load.
  * Auto-wires any element with [data-kitchen-mode-toggle] or id="kmToggleBtn".
@@ -10,6 +10,8 @@
  */
 (function () {
   var LS_KEY = 'kuschiKitchenMode';
+  var PROFILE_RESIZE_DELAY = 120;
+  var profileTimer = null;
 
   function _isActive() {
     return document.documentElement.classList.contains('kitchen-mode');
@@ -29,6 +31,31 @@
     _syncButtons(on);
   }
 
+  function _viewport() {
+    var root = document.documentElement;
+    var w = Math.round(window.innerWidth || root.clientWidth || 0);
+    var h = Math.round(window.innerHeight || root.clientHeight || 0);
+    return { width: w, height: h, shortEdge: Math.min(w, h), longEdge: Math.max(w, h) };
+  }
+
+  function _applyDeviceProfile() {
+    var root = document.documentElement;
+    var vp = _viewport();
+    var tabletShape = vp.shortEdge >= 700 && vp.shortEdge <= 900 && vp.longEdge >= 1000 && vp.longEdge <= 1450;
+    var memory = Number(navigator.deviceMemory || 0);
+    var lowMemory = tabletShape || (memory > 0 && memory <= 4);
+
+    root.classList.toggle('lenovo-tab-one-profile', tabletShape);
+    root.classList.toggle('low-memory-device', lowMemory);
+    root.dataset.kuschiViewport = vp.width + 'x' + vp.height;
+    if (memory > 0) root.dataset.kuschiMemoryGb = String(memory);
+  }
+
+  function _scheduleDeviceProfile() {
+    clearTimeout(profileTimer);
+    profileTimer = setTimeout(_applyDeviceProfile, PROFILE_RESIZE_DELAY);
+  }
+
   function toggle() {
     var active = document.documentElement.classList.toggle('kitchen-mode');
     _syncButtons(active);
@@ -38,13 +65,20 @@
 
   // Run immediately — scripts at end of <body> have full DOM access.
   _apply();
+  _applyDeviceProfile();
 
   // Also re-sync after DOMContentLoaded (for pages that load the script in <head>).
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', _apply);
+    document.addEventListener('DOMContentLoaded', function () {
+      _apply();
+      _applyDeviceProfile();
+    });
   }
 
-  window.KuschiKitchenMode = { toggle: toggle, isActive: _isActive };
+  window.addEventListener('resize', _scheduleDeviceProfile, { passive: true });
+  window.addEventListener('orientationchange', _scheduleDeviceProfile, { passive: true });
+
+  window.KuschiKitchenMode = { toggle: toggle, isActive: _isActive, applyDeviceProfile: _applyDeviceProfile };
 
   // Global alias so inline onclick="toggleKitchenMode()" works with zero per-page JS.
   window.toggleKitchenMode = toggle;

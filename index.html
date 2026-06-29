@@ -708,7 +708,7 @@
 <script src="assets/kuschi-filter-chips.js"></script>
 <script src="assets/kuschi-cook-mode.js"></script>
 <script>
-const PAGE_SIZE = 48;
+const PAGE_SIZE = document.documentElement.classList.contains('low-memory-device') ? 36 : 48;
 let allRecipes = [];
 let filtered = [];
 let currentPage = 1;
