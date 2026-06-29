@@ -187,6 +187,111 @@
     return generateStructuredFromParts(apiKey, systemText, [{ text: userText }], responseSchema);
   }
 
+  function escHtml(value) {
+    return String(value == null ? '' : value).replace(/[&<>"']/g, function (ch) {
+      return {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+      }[ch];
+    });
+  }
+
+  function countFilledItems(list) {
+    if (!Array.isArray(list)) return 0;
+    return list.filter(function (item) {
+      if (item == null) return false;
+      if (typeof item === 'string') return item.trim() !== '';
+      if (typeof item === 'object') {
+        return Object.keys(item).some(function (key) {
+          return String(item[key] == null ? '' : item[key]).trim() !== '';
+        });
+      }
+      return true;
+    }).length;
+  }
+
+  function plural(count, one, many) {
+    return count + ' ' + (count === 1 ? one : many);
+  }
+
+  function formatReviewSummary(kind, data) {
+    var obj = data && typeof data === 'object' ? data : {};
+    var ingredients = countFilledItems(obj.ingredients);
+    var parts = [];
+    if (ingredients) parts.push(plural(ingredients, 'ingredient', 'ingredients'));
+    if (kind === 'riviera') {
+      var prep = countFilledItems(obj.method_steps);
+      var service = countFilledItems(obj.service);
+      if (prep) parts.push(plural(prep, 'prep step', 'prep steps'));
+      if (service) parts.push(plural(service, 'service step', 'service steps'));
+    } else {
+      var steps = countFilledItems(obj.instructions);
+      if (steps) parts.push(plural(steps, 'step', 'steps'));
+    }
+    if (!parts.length) return 'Manual form filled from your source.';
+    return parts.join(' / ') + ' filled from your source.';
+  }
+
+  function clearFormatReview(noticeId) {
+    var notice = document.getElementById(noticeId);
+    if (!notice) return;
+    notice.hidden = true;
+    notice.textContent = '';
+  }
+
+  function showFormatReview(options) {
+    var opts = options || {};
+    var notice = document.getElementById(opts.noticeId);
+    if (!notice) {
+      var panel = document.getElementById(opts.panelId);
+      if (!panel) return;
+      notice = document.createElement('div');
+      notice.id = opts.noticeId;
+      notice.className = 'format-review-card';
+      notice.hidden = true;
+      notice.setAttribute('aria-live', 'polite');
+      panel.insertBefore(notice, panel.firstChild);
+    }
+    var title = opts.title || 'Formatted draft ready';
+    var summary = opts.summary || 'Manual form filled from your source.';
+    var primaryLabel = opts.primaryLabel || 'Save recipe';
+    var secondaryLabel = opts.secondaryLabel || 'Back to paste';
+    notice.innerHTML =
+      '<div class="format-review-card__text">' +
+      '<strong class="format-review-card__title">' +
+      escHtml(title) +
+      '</strong>' +
+      '<span class="format-review-card__summary">' +
+      escHtml(summary) +
+      '</span>' +
+      '</div>' +
+      '<div class="format-review-card__actions">' +
+      '<button type="button" class="format-review-card__primary" data-format-review-primary>' +
+      escHtml(primaryLabel) +
+      '</button>' +
+      '<button type="button" class="btn-secondary" data-format-review-secondary>' +
+      escHtml(secondaryLabel) +
+      '</button>' +
+      '</div>';
+    notice.hidden = false;
+    var primary = notice.querySelector('[data-format-review-primary]');
+    var secondary = notice.querySelector('[data-format-review-secondary]');
+    if (primary && typeof opts.onPrimary === 'function') primary.addEventListener('click', opts.onPrimary);
+    if (secondary && typeof opts.onSecondary === 'function') secondary.addEventListener('click', opts.onSecondary);
+    if (opts.scroll !== false && typeof notice.scrollIntoView === 'function') {
+      var reduceMotion =
+        document.documentElement.classList.contains('low-memory-device') ||
+        (global.matchMedia && global.matchMedia('(prefers-reduced-motion: reduce)').matches);
+      var schedule = typeof requestAnimationFrame === 'function' ? requestAnimationFrame : setTimeout;
+      schedule(function () {
+        notice.scrollIntoView({ block: 'nearest', behavior: reduceMotion ? 'auto' : 'smooth' });
+      });
+    }
+  }
+
   /**
    * Fetch recipe page HTML/text. Tries browser fetch first; on failure uses optional proxy base URL
    * (GET base?url=encoded). Proxy returns text/plain or JSON { text } | { html }.
@@ -235,5 +340,8 @@
     generateStructured: generateStructured,
     generateStructuredFromParts: generateStructuredFromParts,
     fetchUrlAsPlainText: fetchUrlAsPlainText,
+    formatReviewSummary: formatReviewSummary,
+    showFormatReview: showFormatReview,
+    clearFormatReview: clearFormatReview,
   };
 })(typeof window !== 'undefined' ? window : this);

@@ -472,6 +472,7 @@
       <button type="button" role="tab" id="arTabFormat" aria-selected="false" onclick="setAddRecipeTab('format')">Paste &amp; format</button>
     </div>
     <div id="arPanelManual" role="tabpanel" aria-labelledby="arTabManual">
+    <div id="arFormatReview" class="format-review-card" hidden aria-live="polite"></div>
     <div class="form-row"><label for="arName">Name</label><input id="arName" type="text" placeholder="Recipe name" required /></div>
     <div class="form-row"><label for="arYield">Yield</label><input id="arYield" type="text" placeholder="e.g. 4 servings" /></div>
     <div class="form-row"><label for="arCuisine">Cuisine</label><input id="arCuisine" type="text" placeholder="Optional" /></div>
@@ -1293,6 +1294,7 @@ function setAddRecipeTab(which) {
   tabF.classList.toggle('active', !isManual);
   tabF.setAttribute('aria-selected', !isManual);
   if (which === 'format') {
+    if (window.KuschiRecipeGemini) KuschiRecipeGemini.clearFormatReview('arFormatReview');
     updateKitchenGeminiKeyUi();
     syncKitchenImportUi();
   }
@@ -1398,6 +1400,7 @@ async function formatKitchenRecipeWithGemini() {
   const raw = document.getElementById('arPasteRaw').value.trim();
   statusEl.textContent = '';
   statusEl.classList.remove('error');
+  if (window.KuschiRecipeGemini) KuschiRecipeGemini.clearFormatReview('arFormatReview');
   if (!window.KuschiRecipeGemini) {
     statusEl.textContent = 'recipe-gemini-format.js failed to load.';
     statusEl.classList.add('error');
@@ -1450,8 +1453,20 @@ async function formatKitchenRecipeWithGemini() {
     document.getElementById('arPasteRaw').value = '';
     if (fileEl) fileEl.value = '';
     if (urlEl) urlEl.value = '';
-    statusEl.textContent = 'Done — review the manual tab and save when ready.';
+    statusEl.textContent = 'Formatted draft ready.';
     setAddRecipeTab('manual');
+    KuschiRecipeGemini.showFormatReview({
+      noticeId: 'arFormatReview',
+      panelId: 'arPanelManual',
+      summary: KuschiRecipeGemini.formatReviewSummary('kitchen', parsed),
+      primaryLabel: 'Save recipe',
+      secondaryLabel: 'Back to paste',
+      onPrimary: submitBookRecipe,
+      onSecondary: function () {
+        KuschiRecipeGemini.clearFormatReview('arFormatReview');
+        setAddRecipeTab('format');
+      }
+    });
   } catch (e) {
     statusEl.classList.add('error');
     statusEl.textContent = e.message || String(e);
@@ -1474,6 +1489,7 @@ function openAddRecipeModal() {
   if (ru) ru.value = '';
   const st = document.getElementById('arFormatStatus');
   if (st) { st.textContent = ''; st.classList.remove('error'); }
+  if (window.KuschiRecipeGemini) KuschiRecipeGemini.clearFormatReview('arFormatReview');
   if (typeof refreshKbAromaAddPanel === 'function') refreshKbAromaAddPanel();
 }
 

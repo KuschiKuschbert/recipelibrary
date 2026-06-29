@@ -993,6 +993,7 @@
       <button type="button" role="tab" id="rvTabFormat" aria-selected="false" onclick="setRivieraAddTab('format')">Paste &amp; format</button>
     </div>
     <div id="rvPanelManual" role="tabpanel" aria-labelledby="rvTabManual">
+    <div id="rvFormatReview" class="format-review-card" hidden aria-live="polite"></div>
     <div class="form-row"><label>Name</label><input id="rvName" type="text" /></div>
     <div class="form-row"><label>Subtitle</label><input id="rvSub" type="text" placeholder="Optional" /></div>
     <div class="form-row"><label>Type</label><input id="rvType" type="text" placeholder="e.g. Tapas" /></div>
@@ -1648,6 +1649,7 @@ function setRivieraAddTab(which) {
   tabF.classList.toggle('active', !isManual);
   tabF.setAttribute('aria-selected', !isManual);
   if (which === 'format') {
+    if (window.KuschiRecipeGemini) KuschiRecipeGemini.clearFormatReview('rvFormatReview');
     updateRivieraGeminiKeyUi();
     syncRivieraImportUi();
   }
@@ -1762,6 +1764,7 @@ async function formatRivieraRecipeWithGemini() {
   const raw = document.getElementById('rvPasteRaw').value.trim();
   statusEl.textContent = '';
   statusEl.classList.remove('error');
+  if (window.KuschiRecipeGemini) KuschiRecipeGemini.clearFormatReview('rvFormatReview');
   if (!window.KuschiRecipeGemini) {
     statusEl.textContent = 'recipe-gemini-format.js failed to load.';
     statusEl.classList.add('error');
@@ -1821,8 +1824,20 @@ async function formatRivieraRecipeWithGemini() {
     document.getElementById('rvPasteRaw').value = '';
     if (fileEl) fileEl.value = '';
     if (urlEl) urlEl.value = '';
-    statusEl.textContent = 'Done — review the manual tab and save when ready.';
+    statusEl.textContent = 'Formatted draft ready.';
     setRivieraAddTab('manual');
+    KuschiRecipeGemini.showFormatReview({
+      noticeId: 'rvFormatReview',
+      panelId: 'rvPanelManual',
+      summary: KuschiRecipeGemini.formatReviewSummary('riviera', parsed),
+      primaryLabel: 'Save recipe',
+      secondaryLabel: 'Back to paste',
+      onPrimary: submitRivieraRecipe,
+      onSecondary: function () {
+        KuschiRecipeGemini.clearFormatReview('rvFormatReview');
+        setRivieraAddTab('format');
+      }
+    });
   } catch (e) {
     statusEl.classList.add('error');
     statusEl.textContent = e.message || String(e);
@@ -1846,6 +1861,7 @@ function openAddRivieraModal() {
     st.textContent = '';
     st.classList.remove('error');
   }
+  if (window.KuschiRecipeGemini) KuschiRecipeGemini.clearFormatReview('rvFormatReview');
   document.getElementById('addRivieraOverlay').classList.add('open');
   if (typeof refreshRvAromaAddPanel === 'function') refreshRvAromaAddPanel();
 }
