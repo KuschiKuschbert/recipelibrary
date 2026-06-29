@@ -5926,13 +5926,18 @@ html.lenovo-tab-one-profile .nav-item__label {
   html.lenovo-tab-one-profile .aroma-result-row,
   html.lenovo-tab-one-profile .aroma-browse-card,
   html.lenovo-tab-one-profile .aroma-neighbor-card,
-  html.lenovo-tab-one-profile .prep-task-card-row {
+  html.lenovo-tab-one-profile .prep-task-card-row,
+  html.lenovo-tab-one-profile .fn-course {
     content-visibility: auto;
     contain-intrinsic-size: auto 180px;
   }
 
   html.lenovo-tab-one-profile .prep-task-card-row {
     contain-intrinsic-size: auto 76px;
+  }
+
+  html.lenovo-tab-one-profile .fn-course {
+    contain-intrinsic-size: auto 360px;
   }
 }
 
@@ -6023,7 +6028,8 @@ html.low-memory-device .modal-copy-bar {
 
 html.low-memory-device .prep-task-card,
 html.low-memory-device .prep-task-detail-sheet__panel,
-html.low-memory-device .prep-add-actions {
+html.low-memory-device .prep-add-actions,
+html.low-memory-device .fn-planner__bar {
   box-shadow: none;
 }
 
@@ -7128,14 +7134,23 @@ html.lenovo-tab-one-profile .planner-list-tab {
 }
 
 html.lenovo-tab-one-profile .fn-planner__bar {
+  order: 3;
+  position: static;
+  top: auto;
+  z-index: 3;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: stretch;
   gap: 10px;
-  padding: 12px 20px;
+  padding: 10px 20px max(12px, calc(12px + env(safe-area-inset-bottom, 0px)));
   background: rgba(20, 20, 20, 0.98);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  border-bottom-color: rgba(201, 169, 110, 0.14);
+  border-top: 1px solid rgba(201, 169, 110, 0.16);
+  border-bottom: 0;
+  box-shadow: 0 -10px 24px rgba(0, 0, 0, 0.22);
+}
+
+html.low-memory-device.lenovo-tab-one-profile .fn-planner__bar {
+  box-shadow: none;
 }
 
 html.lenovo-tab-one-profile .fn-planner__pax-label,
@@ -7171,6 +7186,7 @@ html.lenovo-tab-one-profile .fn-planner__generate {
 
 html.lenovo-tab-one-profile .fn-planner__body,
 html.lenovo-tab-one-profile .planner-list__body {
+  order: 2;
   padding: 16px 20px 36px;
 }
 
@@ -7182,83 +7198,102 @@ html.lenovo-tab-one-profile .fn-planner__error {
 }
 
 html.lenovo-tab-one-profile .fn-course {
-  margin-bottom: 24px;
+  margin: 0 0 16px;
+  padding-top: 2px;
 }
 
 html.lenovo-tab-one-profile .fn-course__head {
   align-items: center;
-  padding: 0 2px 2px;
+  gap: 10px;
+  min-height: 42px;
+  margin-bottom: 8px;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.032);
+  border: 1px solid rgba(255, 255, 255, 0.085);
+  border-radius: 12px;
 }
 
 html.lenovo-tab-one-profile .fn-course--invalid .fn-course__head {
   border-left: 3px solid rgba(232, 160, 160, 0.6);
-  padding-left: 10px;
+  padding-left: 9px;
 }
 
 html.lenovo-tab-one-profile .fn-course--valid .fn-course__head {
   border-left: 3px solid rgba(126, 200, 154, 0.42);
-  padding-left: 10px;
+  padding-left: 9px;
 }
 
 html.lenovo-tab-one-profile .fn-course__label {
-  font-size: 16px;
+  min-width: 0;
+  font-size: 15px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 
 html.lenovo-tab-one-profile .fn-selection-count {
   min-height: 30px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
   padding: 5px 10px;
+  border-radius: 10px;
   font-size: 12px;
+  text-align: center;
+  white-space: nowrap;
 }
 
 html.lenovo-tab-one-profile .fn-dish-chips {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  gap: 8px;
 }
 
 html.lenovo-tab-one-profile .fn-dish-chip-wrap {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 48px;
-  gap: 8px;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  gap: 6px;
   min-width: 0;
 }
 
 html.lenovo-tab-one-profile .fn-dish-chip {
-  min-height: 54px;
-  padding: 12px 14px 12px 12px;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 7px;
+  min-height: 50px;
+  padding: 9px 10px;
   border-radius: 12px;
-  font-size: 14px;
-  line-height: 1.4;
+  font-size: 13px;
+  line-height: 1.28;
 }
 
 html.lenovo-tab-one-profile .fn-dish-chip__state {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   margin-top: 0;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 html.lenovo-tab-one-profile .fn-dish-chip__content {
-  gap: 6px;
+  gap: 4px;
 }
 
 html.lenovo-tab-one-profile .fn-dish-chip__name {
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
 }
 
 html.lenovo-tab-one-profile .fn-dish-chip--selected {
   box-shadow:
-    inset 4px 0 0 rgba(201, 169, 110, 0.52),
-    inset 0 0 0 1px rgba(201, 169, 110, 0.18);
+    inset 4px 0 0 rgba(201, 169, 110, 0.58),
+    inset 0 0 0 1px rgba(201, 169, 110, 0.22);
 }
 
 html.lenovo-tab-one-profile .fn-dish-chip__tags {
   gap: 5px;
+  max-height: 20px;
+  overflow: hidden;
 }
 
 html.lenovo-tab-one-profile .fn-dish-chip__tag {
@@ -7270,15 +7305,15 @@ html.lenovo-tab-one-profile .fn-dish-chip__tag {
 }
 
 html.lenovo-tab-one-profile .fn-dish-chip__open {
-  width: 48px;
-  min-height: 54px;
+  width: 44px;
+  min-height: 50px;
   border-radius: 12px;
   font-size: 12px;
 }
 
 html.lenovo-tab-one-profile .fn-dish-chip__hints {
-  margin-top: -2px;
-  padding-left: 36px;
+  margin-top: -1px;
+  padding-left: 31px;
 }
 
 html.lenovo-tab-one-profile .fn-dish-chip__hint {
