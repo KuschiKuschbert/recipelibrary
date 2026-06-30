@@ -10275,6 +10275,11 @@ html.lenovo-tab-one-profile .planner-recipe__note {
 }
 
 @media (orientation: landscape) {
+  html.lenovo-tab-one-profile .fn-planner,
+  html.lenovo-tab-one-profile .planner-list {
+    max-width: min(1120px, 100vw);
+  }
+
   html.lenovo-tab-one-profile .fn-planner__bar {
     grid-template-columns:
       minmax(96px, 0.54fr)
@@ -10287,6 +10292,10 @@ html.lenovo-tab-one-profile .planner-recipe__note {
 
   html.lenovo-tab-one-profile .fn-planner__generate {
     grid-column: auto;
+  }
+
+  html.lenovo-tab-one-profile .fn-dish-chips {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
