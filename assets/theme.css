@@ -7210,15 +7210,15 @@ html.lenovo-tab-one-profile .nav-item__label {
     position: relative;
     grid-template-columns: minmax(0, 1fr) minmax(164px, 0.46fr) 44px;
     grid-template-rows: auto;
-    gap: 6px 8px;
-    margin-bottom: 5px;
-    padding: 7px 8px;
+    gap: 5px 7px;
+    margin-bottom: 4px;
+    padding: 5px 7px;
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.038), rgba(255, 255, 255, 0.022));
     border: 1px solid rgba(255, 255, 255, 0.11);
     border-radius: 10px;
     content-visibility: auto;
-    contain-intrinsic-size: auto 62px;
+    contain-intrinsic-size: auto 56px;
   }
 
   html.lenovo-tab-one-profile .order-line-row[data-kind='recipe'] {
@@ -7277,8 +7277,8 @@ html.lenovo-tab-one-profile .nav-item__label {
   html.lenovo-tab-one-profile .order-line-row:has(.ord-zone-control--select) {
     grid-template-columns: minmax(0, 1fr) minmax(158px, 0.68fr) 44px;
     grid-template-rows: auto auto;
-    gap: 7px 8px;
-    padding: 8px;
+    gap: 6px 7px;
+    padding: 6px 7px;
   }
 
   html.lenovo-tab-one-profile .order-line-row:has(.ord-zone-control--select) .order-line-name {
@@ -7302,7 +7302,7 @@ html.lenovo-tab-one-profile .nav-item__label {
   html.lenovo-tab-one-profile .order-line-sub .ord-extra-qty {
     min-width: 0;
     min-height: 42px;
-    padding: 7px 8px;
+    padding: 6px 7px;
     border-radius: 9px;
     font-size: 14px;
     overflow: hidden;
@@ -7313,15 +7313,15 @@ html.lenovo-tab-one-profile .nav-item__label {
     position: relative;
     grid-template-columns: 18px minmax(0, 1fr) minmax(144px, 0.46fr) 44px;
     grid-template-rows: auto;
-    gap: 6px 8px;
-    margin: -1px 0 5px 8px;
-    padding: 6px 8px;
+    gap: 5px 7px;
+    margin: -1px 0 4px 8px;
+    padding: 5px 7px;
     background: rgba(255, 255, 255, 0.024);
     border: 1px solid rgba(255, 255, 255, 0.09);
     border-left: 3px solid rgba(201, 169, 110, 0.28);
     border-radius: 9px;
     content-visibility: auto;
-    contain-intrinsic-size: auto 56px;
+    contain-intrinsic-size: auto 52px;
   }
 
   html.lenovo-tab-one-profile .order-line-sub .order-sub-merged {
@@ -7355,6 +7355,50 @@ html.lenovo-tab-one-profile .nav-item__label {
     min-height: 42px;
     padding-left: 0;
     padding-right: 0;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 900px) {
+  html.lenovo-tab-one-profile .order-line-row:has(.ord-zone-control--select) {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(164px, 0.42fr)
+      minmax(150px, 0.38fr);
+    grid-template-rows: minmax(42px, auto);
+    align-items: center;
+    contain-intrinsic-size: auto 56px;
+  }
+
+  html.lenovo-tab-one-profile .order-line-row[data-kind='extra']:has(.ord-zone-control--select) {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(150px, 0.38fr)
+      minmax(138px, 0.34fr)
+      42px;
+  }
+
+  html.lenovo-tab-one-profile .order-line-row:has(.ord-zone-control--select) .order-line-name {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  html.lenovo-tab-one-profile .order-line-row:has(.ord-zone-control--select) .ord-qty-with-unit {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  html.lenovo-tab-one-profile .order-line-row:has(.ord-zone-control--select) .ord-zone-control {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  html.lenovo-tab-one-profile .order-line-row[data-kind='extra']:has(.ord-zone-control--select) button.ord-remove {
+    grid-column: 4;
+    grid-row: 1;
+    align-self: stretch;
+    justify-self: stretch;
+    min-width: 42px;
+    min-height: 42px;
   }
 }
 
@@ -7471,12 +7515,12 @@ html.lenovo-tab-one-profile .nav-item__label {
       minmax(106px, 0.48fr)
       minmax(76px, 0.32fr);
     grid-template-rows: minmax(42px, auto);
-    gap: 5px;
-    min-height: 54px;
-    margin-bottom: 4px;
-    padding: 5px 8px;
+    gap: 4px;
+    min-height: 50px;
+    margin-bottom: 3px;
+    padding: 3px 7px;
     border-radius: 10px;
-    contain-intrinsic-size: auto 58px;
+    contain-intrinsic-size: auto 52px;
   }
 
   html.lenovo-tab-one-profile .stkt-line-row.stkt-line-sub {
@@ -7541,7 +7585,7 @@ html.lenovo-tab-one-profile .nav-item__label {
   html.lenovo-tab-one-profile .stkt-line-row .stkt-field {
     min-width: 0;
     min-height: 42px;
-    padding: 6px 7px;
+    padding: 5px 6px;
     font-size: 13.5px;
     overflow: hidden;
     text-overflow: ellipsis;
