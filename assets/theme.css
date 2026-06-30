@@ -4464,7 +4464,13 @@ html.lenovo-tab-one-profile .app-header__title {
 
 html.lenovo-tab-one-profile .app-header__count {
   font-size: 12px;
+  line-height: 1.25;
   color: var(--text2);
+}
+
+html.lenovo-tab-one-profile .app-header__btn-label {
+  font-size: 12px;
+  line-height: 1.15;
 }
 
 html.lenovo-tab-one-profile .app-header__btn,
@@ -4877,6 +4883,12 @@ html.lenovo-tab-one-profile .empty {
 
 html.lenovo-tab-one-profile .empty-search-state {
   color: var(--text2);
+}
+
+html.lenovo-tab-one-profile .empty-kicker {
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: 1.2;
 }
 
 html.lenovo-tab-one-profile .empty-title {
@@ -5451,7 +5463,7 @@ html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-event-strip__main
   grid-template-columns: minmax(0, 1fr);
   gap: 2px;
   min-width: 0;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.25;
 }
 
@@ -5465,8 +5477,8 @@ html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-event-strip__main
 }
 
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-event-strip__eyebrow {
-  font-size: 9.5px;
-  letter-spacing: 0.08em;
+  font-size: 12px;
+  letter-spacing: 0;
 }
 
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-event-strip__actions {
@@ -5482,7 +5494,7 @@ html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-event-strip__btn 
   min-height: 44px;
   padding: 6px 5px;
   border-radius: 9px;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.1;
   text-align: center;
   white-space: normal;
@@ -7943,8 +7955,13 @@ html.lenovo-tab-one-profile .nav-item__icon svg {
   height: 23px;
 }
 
+html.lenovo-tab-one-profile .nav-brand__name {
+  font-size: 12px;
+  letter-spacing: 0;
+}
+
 html.lenovo-tab-one-profile .nav-item__label {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 650;
   letter-spacing: 0;
   line-height: 1.05;
@@ -9373,7 +9390,7 @@ html.lenovo-tab-one-profile body.has-app-nav .aroma-matrix-toolbar select {
 
   html.lenovo-tab-one-profile .nb-status {
     margin: 6px 0 8px;
-    font-size: 11.5px;
+    font-size: 12px;
   }
 
   html.lenovo-tab-one-profile .nb-filters {
