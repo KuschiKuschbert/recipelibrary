@@ -4858,6 +4858,20 @@ html.lenovo-tab-one-profile body.has-app-nav #modalOverlay .modal-ing {
   line-height: 1.4;
 }
 
+@media (min-width: 720px) {
+  html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal-ing {
+    grid-template-columns:
+      minmax(64px, max-content) minmax(0, 1fr)
+      minmax(64px, max-content) minmax(0, 1fr);
+    gap: 0 10px;
+  }
+
+  html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal-ing .ing-qty:nth-child(4n + 3) {
+    padding-left: 10px;
+    border-left: 1px solid rgba(255, 255, 255, 0.09);
+  }
+}
+
 html.lenovo-tab-one-profile body.has-app-nav .modal-ing .ing-qty,
 html.lenovo-tab-one-profile body.has-app-nav .modal-ing .ing-item {
   min-width: 0;
