@@ -4004,6 +4004,8 @@ button.sheet-book-item {
 
 /* Filter sheet option items */
 .filter-sheet__option {
+  box-sizing: border-box;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -5874,7 +5876,7 @@ html.lenovo-tab-one-profile .nav-sheet__close {
 }
 
 html.lenovo-tab-one-profile .filter-sheet__panel {
-  max-width: min(620px, calc(100vw - 20px));
+  max-width: min(720px, calc(100vw - 20px));
   max-height: min(88vh, 88dvh);
   border-radius: 16px 16px 0 0;
 }
@@ -5892,15 +5894,18 @@ html.lenovo-tab-one-profile .filter-sheet__panel .nav-sheet__close {
   min-height: 44px;
 }
 
-html.lenovo-tab-one-profile .filter-sheet__list {
-  gap: 0;
+html.lenovo-tab-one-profile .filter-sheet__panel .filter-sheet__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+  gap: 8px;
   max-height: calc(min(88vh, 88dvh) - 112px);
-  padding-top: 6px;
-  padding-bottom: 6px;
+  padding: 10px;
 }
 
 html.lenovo-tab-one-profile .filter-sheet__search-wrap {
-  padding: 7px 12px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.032);
 }
 
 html.lenovo-tab-one-profile .filter-sheet__search {
@@ -5910,11 +5915,63 @@ html.lenovo-tab-one-profile .filter-sheet__search {
 }
 
 html.lenovo-tab-one-profile .filter-sheet__option {
+  width: auto;
   min-height: 48px;
-  padding: 10px 14px;
-  font-size: 15px;
+  min-width: 0;
+  padding: 10px 42px 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.105);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text2);
+  font-size: 14px;
+  font-weight: 650;
   line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   transition-duration: 0.08s;
+}
+
+html.lenovo-tab-one-profile .filter-sheet__option:hover,
+html.lenovo-tab-one-profile .filter-sheet__option:active {
+  border-color: rgba(201, 169, 110, 0.34);
+  background: rgba(201, 169, 110, 0.085);
+  color: var(--text);
+}
+
+html.lenovo-tab-one-profile .filter-sheet__option--active {
+  border-color: rgba(201, 169, 110, 0.62);
+  background: rgba(201, 169, 110, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(201, 169, 110, 0.12);
+  color: var(--gold-light);
+}
+
+html.lenovo-tab-one-profile .filter-sheet__check {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  transform: translateY(-50%);
+}
+
+html.lenovo-tab-one-profile .filter-sheet__option--active .filter-sheet__check {
+  display: inline-flex;
+}
+
+html.lenovo-tab-one-profile .filter-sheet__empty {
+  grid-column: 1 / -1;
+}
+
+html.low-memory-device.lenovo-tab-one-profile .filter-sheet__list {
+  scroll-behavior: auto;
+}
+
+html.low-memory-device.lenovo-tab-one-profile .filter-sheet__option {
+  transition: none;
 }
 
 html.lenovo-tab-one-profile .form-row input:not([type='checkbox']):not([type='radio']),

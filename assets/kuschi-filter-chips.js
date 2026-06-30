@@ -49,7 +49,7 @@
         '<div class="filter-sheet__search-wrap" id="filterSheetSearchWrap" hidden>' +
           '<input class="filter-sheet__search" id="filterSheetSearch" type="search" autocomplete="off" spellcheck="false" aria-label="Search filter options">' +
         '</div>' +
-        '<div class="nav-sheet__books filter-sheet__list" id="filterSheetList"></div>' +
+        '<div class="nav-sheet__books filter-sheet__list" id="filterSheetList" role="listbox"></div>' +
       '</div>' +
     '</div>';
     document.body.appendChild(div.firstChild);
@@ -112,7 +112,9 @@
       var btn = document.createElement('button');
       btn.className = 'filter-sheet__option' + (active ? ' filter-sheet__option--active' : '');
       btn.type = 'button';
+      btn.setAttribute('role', 'option');
       btn.setAttribute('aria-selected', active ? 'true' : 'false');
+      btn.setAttribute('aria-label', active ? label + ', selected' : label);
       btn.appendChild(document.createTextNode(label));
       var check = document.createElement('span');
       check.className = 'filter-sheet__check';
@@ -170,6 +172,7 @@
     var searchWrap = document.getElementById('filterSheetSearchWrap');
     var search = document.getElementById('filterSheetSearch');
     if (titleEl) titleEl.textContent = label;
+    if (listEl) listEl.setAttribute('aria-label', String(label || 'Filter') + ' options');
     if (searchWrap) searchWrap.hidden = sel.options.length < 9;
     if (search) {
       search.value = '';
