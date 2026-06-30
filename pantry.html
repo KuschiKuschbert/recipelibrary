@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Kitchen">
-<link rel="stylesheet" href="assets/theme.css?v=141">
+<link rel="stylesheet" href="assets/theme.css?v=142">
 <link rel="preload" href="pantry_data/shard_hay_index.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -434,6 +434,17 @@
     }
   });
 
+  function clearPantrySearch() {
+    var input = document.getElementById('pantryIn');
+    var out = document.getElementById('out');
+    var st = document.getElementById('pantryStatus');
+    if (input) input.value = '';
+    if (out) out.innerHTML = '';
+    if (st) st.textContent = 'Ready - add ingredients and tap Find recipes.';
+    if (input) input.focus();
+  }
+  window.clearPantrySearch = clearPantrySearch;
+
   function runPantrySearch() {
     var raw = document.getElementById('pantryIn').value;
     var parts = raw.split(/[\n,]+/).map(function (s) { return s.trim(); }).filter(Boolean);
@@ -487,7 +498,15 @@
             }
           });
         });
-        if (!scored.length) out.innerHTML = '<p class="pantry-status">No matches. Try broader names (e.g. “onion” not “yellow onion”).</p>';
+        if (!scored.length) {
+          out.innerHTML =
+            '<div class="empty empty-search-state">' +
+            '<div class="empty-kicker">No match</div>' +
+            '<h2 class="empty-title">No pantry matches</h2>' +
+            '<p class="empty-body">Try broader ingredient names like onion instead of yellow onion.</p>' +
+            '<div class="empty-actions"><button type="button" class="empty-action-btn" onclick="clearPantrySearch()">Clear ingredients</button></div>' +
+            '</div>';
+        }
       })
       .catch(function () {
         pantrySearchScheduler.setPending(false);

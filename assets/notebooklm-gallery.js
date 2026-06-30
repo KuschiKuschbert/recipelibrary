@@ -103,8 +103,12 @@
       } else {
         if (empty) empty.hidden = true;
         grid.innerHTML =
-          '<p class="nb-status" style="grid-column:1/-1;margin:0">' +
-          'No match — <a href="notebooklm-gallery.html" style="color:var(--gold)">show all</a>.</p>';
+          '<div class="empty empty-search-state">' +
+          '<div class="empty-kicker">No match</div>' +
+          '<h2 class="empty-title">No visual guides found</h2>' +
+          '<p class="empty-body">Clear the filter to show the full gallery.</p>' +
+          '<div class="empty-actions"><a class="empty-action-btn" href="notebooklm-gallery.html">Show all</a></div>' +
+          '</div>';
       }
       if (chips) {
         chips.innerHTML = '';

@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=141">
+<link rel="stylesheet" href="assets/theme.css?v=142">
 <style>
   :root { --app-header-h: 65px; }
   body.nb-page {
@@ -143,13 +143,7 @@
     margin: 8px 0 0;
   }
   .nb-empty {
-    border: 1px dashed var(--border);
-    border-radius: var(--radius);
-    padding: 28px 20px;
-    text-align: center;
-    color: var(--text2);
-    font-size: 14px;
-    line-height: 1.6;
+    margin-top: 16px;
   }
   .nb-empty a { color: var(--gold); }
   .nb-empty code { font-size: 12px; color: var(--text3); }
@@ -219,10 +213,11 @@
   <p class="nb-status" id="nbStatus" aria-live="polite">Loading manifest…</p>
   <div class="nb-filters" id="nbFilterChips"></div>
 
-  <div id="nbEmpty" class="nb-empty" hidden>
-    <p><strong>No images yet.</strong></p>
-    <p>Export from NotebookLM → save under <code>notebooklm/exports/</code> → add an entry to <code>notebooklm/manifest.json</code>.</p>
-    <p><a href="notebooklm/README.md">Full instructions (README)</a></p>
+  <div id="nbEmpty" class="nb-empty empty empty-search-state" hidden>
+    <div class="empty-kicker">Empty gallery</div>
+    <h2 class="empty-title">No visual guides yet</h2>
+    <p class="empty-body">Add entries to <code>notebooklm/manifest.json</code> after exporting images.</p>
+    <div class="empty-actions"><a class="empty-action-btn" href="notebooklm/README.md">Open README</a></div>
   </div>
 
   <div class="nb-grid" id="nbGrid" role="list"></div>

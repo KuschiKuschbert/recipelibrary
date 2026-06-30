@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=141">
+<link rel="stylesheet" href="assets/theme.css?v=142">
 <style>
   :root { --app-header-h: 65px; }
   .hero { text-align: center; padding: 48px 24px 24px; position: relative; display: none; }
@@ -445,7 +445,13 @@
     </div>
     <div class="flavor-layout">
       <div id="flavorResults" class="flavor-results"></div>
-      <div id="flavorDetail"><p class="flavor-empty">Select an ingredient for pairings, avoids, and aroma links.</p></div>
+      <div id="flavorDetail">
+        <div class="empty empty-search-state">
+          <div class="empty-kicker">Explore</div>
+          <h2 class="empty-title">Pick an ingredient</h2>
+          <p class="empty-body">Search or choose a result to see pairings, avoids, and aroma links.</p>
+        </div>
+      </div>
     </div>
   </section>
 

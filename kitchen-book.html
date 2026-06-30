@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=141">
+<link rel="stylesheet" href="assets/theme.css?v=142">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
@@ -1021,9 +1021,19 @@ function render() {
   const content = document.getElementById('content');
   if (!filtered.length) {
     const hasSearch = !!document.getElementById('search').value.trim();
+    const emptyTitle = allRecipes.length ? 'No recipes found' : 'This book is empty';
+    const emptyBody = allRecipes.length
+      ? 'Try a broader keyword or clear the search.'
+      : 'Add the first recipe to start building this kitchen book.';
+    const emptyKicker = allRecipes.length ? 'No match' : 'New book';
+    const emptyActions = hasSearch
+      ? '<div class="empty-actions"><button type="button" class="empty-action-btn" onclick="clearKitchenBookSearch()">Clear search</button></div>'
+      : (!allRecipes.length ? '<div class="empty-actions"><button type="button" class="empty-action-btn" onclick="openAddRecipeModal()">Add recipe</button></div>' : '');
     content.innerHTML = `<div class="empty empty-search-state">
-      ${allRecipes.length ? 'No recipes found in this book.' : 'No recipes yet. Use + Add recipe.'}
-      ${hasSearch ? '<div class="empty-actions"><button type="button" class="empty-action-btn" onclick="clearKitchenBookSearch()">Clear search</button></div>' : ''}
+      <div class="empty-kicker">${emptyKicker}</div>
+      <h2 class="empty-title">${emptyTitle}</h2>
+      <p class="empty-body">${emptyBody}</p>
+      ${emptyActions}
     </div>`;
     return;
   }

@@ -689,7 +689,13 @@
     var list = document.getElementById('flavorResults');
     if (!list) return;
     if (!rows.length) {
-      list.innerHTML = '<p class="flavor-empty">No matches. Try another name.</p>';
+      list.innerHTML =
+        '<div class="empty empty-search-state">' +
+        '<div class="empty-kicker">No match</div>' +
+        '<h2 class="empty-title">No ingredients found</h2>' +
+        '<p class="empty-body">Try a broader name, or switch to Aroma for spice-led lookup.</p>' +
+        '<div class="empty-actions"><a class="empty-action-btn" href="aroma.html">Open Aroma</a></div>' +
+        '</div>';
       return;
     }
     list.innerHTML = rows

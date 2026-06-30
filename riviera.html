@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=141">
+<link rel="stylesheet" href="assets/theme.css?v=142">
 <link rel="preload" href="riviera_data/builtins.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
@@ -795,11 +795,6 @@ html.lenovo-tab-one-profile.low-memory-device body.riviera-page.has-app-nav .gri
 
 /* ── Empty ── */
 .empty {
-  text-align: center;
-  padding: 80px 24px;
-  font-size: 16px;
-  color: var(--text3);
-  font-weight: 300;
   grid-column: 1 / -1;
 }
 
@@ -1804,7 +1799,11 @@ async function bootstrapRivieraRecipeData() {
   const resultsEl = document.getElementById('resultsCount');
   if (content) {
     content.innerHTML =
-      '<div class="grid"><div class="empty" style="padding:48px 24px;text-align:center;color:var(--text3)">Loading prep-chef recipes…</div></div>';
+      '<div class="grid"><div class="empty empty-search-state" role="status">' +
+      '<div class="empty-kicker">Loading</div>' +
+      '<h2 class="empty-title">Preparing Riviera recipes</h2>' +
+      '<p class="empty-body">Loading the prep-chef set.</p>' +
+      '</div></div>';
   }
   if (resultsEl) resultsEl.innerHTML = '<span>…</span> loading';
   try {
@@ -1812,7 +1811,12 @@ async function bootstrapRivieraRecipeData() {
   } catch (err) {
     if (content) {
       content.innerHTML =
-        '<div class="grid"><div class="empty" style="padding:48px 24px;text-align:center;color:#e8a0a0">Could not load recipe data. Check your connection and refresh.</div></div>';
+        '<div class="grid"><div class="empty empty--error" role="alert">' +
+        '<div class="empty-kicker">Load failed</div>' +
+        '<h2 class="empty-title">Recipe data did not load</h2>' +
+        '<p class="empty-body">Check the connection and try again.</p>' +
+        '<div class="empty-actions"><button type="button" class="empty-action-btn" onclick="location.reload()">Retry</button></div>' +
+        '</div></div>';
     }
     if (resultsEl) resultsEl.innerHTML = '<span>0</span> recipes';
     console.error(err);
@@ -2744,7 +2748,9 @@ function render() {
   const content = document.getElementById('content');
   if (!count) {
     content.innerHTML = `<div class="grid"><div class="empty empty-search-state">
-      No recipes found. Try different keywords or clear filters.
+      <div class="empty-kicker">No match</div>
+      <h2 class="empty-title">No Riviera recipes found</h2>
+      <p class="empty-body">Try a broader keyword or clear the active filters.</p>
       <div class="empty-actions">
         <button type="button" class="empty-action-btn" onclick="resetRivieraSearchAndFilters()">Clear all</button>
       </div>

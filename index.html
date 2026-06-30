@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=141">
+<link rel="stylesheet" href="assets/theme.css?v=142">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
@@ -1010,7 +1010,9 @@ function render(dt) {
   const content = document.getElementById('content');
   if (!filtered.length) {
     content.innerHTML = `<div class="empty empty-search-state">
-      No recipes found. Try different keywords or clear your filters.
+      <div class="empty-kicker">No match</div>
+      <h2 class="empty-title">No recipes found</h2>
+      <p class="empty-body">Try a broader keyword or clear the active filters.</p>
       <div class="empty-actions">
         <button type="button" class="empty-action-btn" onclick="resetSearchAndFilters()">Clear all</button>
       </div>
@@ -2431,8 +2433,16 @@ async function _bootstrapRecipes() {
       }
     }
   } catch(e) {
+    const msg = window.KuschiRecipeUi ? KuschiRecipeUi.esc(e.message || String(e)) : 'Unknown error';
     document.getElementById('loading').innerHTML =
-      `<div class="loading-text" style="color:var(--accent)">Failed to load recipes: ${e.message}</div>`;
+      `<div class="empty empty--error" role="alert">
+        <div class="empty-kicker">Load failed</div>
+        <h2 class="empty-title">Recipes did not load</h2>
+        <p class="empty-body">${msg}</p>
+        <div class="empty-actions">
+          <button type="button" class="empty-action-btn" onclick="location.reload()">Retry</button>
+        </div>
+      </div>`;
   } finally {
     refreshCustomBookNav();
   }
