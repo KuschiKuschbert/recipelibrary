@@ -7286,6 +7286,117 @@ html.lenovo-tab-one-profile .nav-item__label {
   font-size: 11px;
 }
 
+html.lenovo-tab-one-profile .nav-sheet {
+  padding:
+    max(12px, env(safe-area-inset-top, 0px))
+    max(14px, env(safe-area-inset-right, 0px))
+    0
+    max(14px, env(safe-area-inset-left, 0px));
+}
+
+html.lenovo-tab-one-profile .nav-sheet__panel {
+  width: min(760px, calc(100vw - 28px));
+  max-width: none;
+  padding-bottom: max(14px, calc(14px + env(safe-area-inset-bottom, 0px)));
+  border-radius: 16px 16px 0 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018)),
+    var(--bg2);
+}
+
+html.lenovo-tab-one-profile .nav-sheet__header {
+  min-height: 56px;
+  padding: 8px 12px 8px 16px;
+}
+
+html.lenovo-tab-one-profile .nav-sheet__title {
+  font-size: 13px;
+}
+
+html.lenovo-tab-one-profile .nav-sheet__close {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+html.lenovo-tab-one-profile .nav-sheet__grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  padding: 10px;
+}
+
+html.lenovo-tab-one-profile .sheet-item {
+  min-height: 68px;
+  padding: 9px 6px 8px;
+  gap: 5px;
+  border-radius: 12px;
+}
+
+html.lenovo-tab-one-profile .sheet-item__icon {
+  width: 25px;
+  height: 25px;
+}
+
+html.lenovo-tab-one-profile .sheet-item__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+html.lenovo-tab-one-profile .sheet-item__label {
+  font-size: 11px;
+  line-height: 1.15;
+}
+
+html.lenovo-tab-one-profile .nav-sheet__books {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  max-height: 46dvh;
+  padding: 10px;
+}
+
+html.lenovo-tab-one-profile .sheet-book-item {
+  min-width: 0;
+  min-height: 58px;
+  width: auto;
+  padding: 10px 12px;
+  gap: 9px;
+  border-radius: 12px;
+}
+
+html.lenovo-tab-one-profile .sheet-book-item__name {
+  min-width: 0;
+  font-size: 13px;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+html.lenovo-tab-one-profile .sheet-book-item__sub {
+  flex: 0 0 auto;
+  font-size: 10.5px;
+}
+
+@media (min-width: 900px) and (orientation: landscape),
+       (min-width: 1100px) {
+  html.lenovo-tab-one-profile .nav-sheet {
+    align-items: center;
+    padding:
+      max(14px, env(safe-area-inset-top, 0px))
+      max(14px, env(safe-area-inset-right, 0px))
+      max(14px, env(safe-area-inset-bottom, 0px))
+      calc(var(--nav-rail-width, 72px) + max(14px, env(safe-area-inset-left, 0px)));
+  }
+
+  html.lenovo-tab-one-profile .nav-sheet__panel {
+    width: min(640px, calc(100vw - var(--nav-rail-width, 72px) - 40px));
+    border-radius: 16px;
+    padding-bottom: 10px;
+  }
+}
+
 @media (max-width: 860px) {
   html.lenovo-tab-one-profile .order-line-row {
     position: relative;

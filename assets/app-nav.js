@@ -156,7 +156,7 @@
         const sheetId = it.key === 'books' ? 'booksSheet' : 'moreSheet';
         const isActive = it.key === ACTIVE;
         const activeCls = isActive ? ' nav-item--active' : '';
-        return `<button type="button" class="nav-item${activeCls}" data-nav-key="${it.key}" aria-haspopup="dialog" onclick="kuschiNavSheet('${sheetId}')">
+        return `<button type="button" class="nav-item${activeCls}" data-nav-key="${it.key}" aria-haspopup="dialog" aria-controls="${sheetId}" aria-expanded="false" onclick="kuschiNavSheet('${sheetId}')">
   <span class="nav-item__icon" aria-hidden="true">${it.icon}</span>
   <span class="nav-item__label">${it.label}</span>
 </button>`;
@@ -273,6 +273,12 @@
 
   // ─── Sheet open/close ───────────────────────────────────────────────────────
   let _activeSheet = null;
+  function _syncSheetTriggers() {
+    document.querySelectorAll('.nav-item[aria-controls]').forEach((btn) => {
+      btn.setAttribute('aria-expanded', btn.getAttribute('aria-controls') === _activeSheet ? 'true' : 'false');
+    });
+  }
+
   window.kuschiNavSheet = function (id) {
     if (_activeSheet) {
       const prev = document.getElementById(_activeSheet);
@@ -282,8 +288,9 @@
     if (id) {
       if (id === 'booksSheet') _populateBooksSheet(); // refresh on open
       const el = document.getElementById(id);
-      if (el) { el.hidden = false; }
+      if (el) { el.hidden = false; el.setAttribute('aria-modal', 'true'); }
     }
+    _syncSheetTriggers();
   };
 
   // Close sheet on Escape
