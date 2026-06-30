@@ -628,9 +628,13 @@ html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid {
 }
 
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card {
-  min-height: 136px;
-  padding: 7px 8px 8px;
+  min-height: 142px;
+  padding: 8px 38px 8px 9px;
   border-radius: 9px;
+  border-color: rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.038), rgba(255, 255, 255, 0.018)),
+    var(--surface);
 }
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-top {
   grid-template-columns: minmax(0, 1fr) minmax(74px, max-content);
@@ -638,8 +642,9 @@ html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-
   margin-bottom: 3px;
 }
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-top .card-name {
-  font-size: 15.5px;
-  line-height: 1.12;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.14;
   margin-bottom: 1px;
 }
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-yield {
@@ -671,6 +676,9 @@ html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-
   font-size: 13.5px;
   margin-bottom: 0;
 }
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-stat--prep strong {
+  color: var(--gold-light);
+}
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-stat span {
   display: inline;
   min-width: 0;
@@ -687,6 +695,7 @@ html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .card-badg
   gap: 3px;
   max-height: 19px;
   margin-bottom: 3px;
+  padding-right: 2px;
 }
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .badge {
   min-height: 19px;
@@ -699,6 +708,7 @@ html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-
   grid-template-columns: minmax(0, 1fr);
   align-items: baseline;
   gap: 0;
+  max-width: 100%;
   padding-top: 3px;
   overflow: hidden;
   font-size: 11px;
@@ -719,16 +729,27 @@ html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-
   -webkit-line-clamp: unset;
 }
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .card-footer {
-  display: none;
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+  display: flex;
+  justify-content: center;
+  min-height: 30px;
+  padding-top: 0;
+  border-top: 0;
+  pointer-events: none;
 }
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .card-open-hint {
   display: none;
 }
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .card-open-icon {
-  width: 32px;
-  height: 32px;
-  min-width: 32px;
-  border-radius: 10px;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  border-radius: 9px;
+  border-color: rgba(201, 169, 110, 0.3);
+  background: rgba(201, 169, 110, 0.1);
+  color: var(--gold-light);
 }
 html.lenovo-tab-one-profile.low-memory-device body.riviera-page.has-app-nav .grid .card {
   animation: none;
@@ -2786,8 +2807,8 @@ function cardHTML(r) {
       <div class="riv-card-yield" title="${KuschiRecipeUi.esc(rawYield)}">${KuschiRecipeUi.esc(cardYield)}</div>
     </div>
     <div class="riv-card-stats" aria-hidden="true">
-      <span class="riv-card-stat"><strong>${ingredientsCount}</strong><span>ingredients</span></span>
-      <span class="riv-card-stat"><strong>${prepCount}</strong><span>prep</span></span>
+      <span class="riv-card-stat riv-card-stat--ingredients"><strong>${ingredientsCount}</strong><span>ingredients</span></span>
+      <span class="riv-card-stat riv-card-stat--prep"><strong>${prepCount}</strong><span>prep</span></span>
       <span class="riv-card-stat riv-card-stat--service"><strong>${serviceCount}</strong><span>service</span></span>
     </div>
     <div class="card-badges">${badges}</div>
