@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=75">
+<link rel="stylesheet" href="assets/theme.css?v=76">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
@@ -1041,8 +1041,15 @@ function loadMore() {
 function renderLoadMore() {
   const pag = document.getElementById('pagination');
   const remaining = filtered.length - kuschiDisplayCount;
+  const shown = Math.min(kuschiDisplayCount, filtered.length);
+  if (remaining <= 0 && shown <= PAGE_SIZE) {
+    pag.innerHTML = '';
+    return;
+  }
 
-  let html = '<div class="load-more-wrap">';
+  let html = `<div class="load-more-wrap">
+    <div class="load-more-summary">Showing ${shown.toLocaleString()} of ${filtered.length.toLocaleString()} recipes</div>
+    <div class="load-more-actions">`;
   if (remaining > 0) {
     const next = Math.min(PAGE_SIZE, remaining);
     html += `<button class="load-more-btn" onclick="loadMore()">
@@ -1051,13 +1058,20 @@ function renderLoadMore() {
     </button>`;
   }
   if (kuschiDisplayCount > PAGE_SIZE) {
-    html += `<button class="back-to-top-btn" onclick="document.getElementById('searchWrap').scrollIntoView({behavior:'smooth'})">
+    html += `<button class="back-to-top-btn" onclick="scrollKitchenListTop()">
       ↑ Back to top
     </button>`;
   }
-  html += '</div>';
+  html += '</div></div>';
 
   pag.innerHTML = html;
+}
+
+function scrollKitchenListTop() {
+  const target = document.getElementById('searchWrap');
+  if (!target) return;
+  const instant = document.documentElement.classList.contains('low-memory-device');
+  target.scrollIntoView({ behavior: instant ? 'auto' : 'smooth', block: 'start' });
 }
 
 function cardHTML(r) {

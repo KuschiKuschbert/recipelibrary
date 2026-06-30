@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=75">
+<link rel="stylesheet" href="assets/theme.css?v=76">
 <link rel="preload" href="riviera_data/builtins.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
@@ -2575,18 +2575,34 @@ function loadMoreRivieraRecipes() {
 function renderRivieraLoadMore() {
   const pag = document.getElementById('pagination');
   if (!pag) return;
-  if (!RIVIERA_RENDER_BATCH || filtered.length <= rivieraDisplayCount) {
+  if (!RIVIERA_RENDER_BATCH) {
     pag.innerHTML = '';
     return;
   }
+  const shown = Math.min(rivieraDisplayCount, filtered.length);
   const remaining = filtered.length - rivieraDisplayCount;
-  const next = Math.min(RIVIERA_RENDER_BATCH, remaining);
+  if (remaining <= 0 && shown <= RIVIERA_RENDER_BATCH) {
+    pag.innerHTML = '';
+    return;
+  }
+  const next = Math.min(RIVIERA_RENDER_BATCH, Math.max(0, remaining));
   pag.innerHTML = `<div class="load-more-wrap">
-    <button class="load-more-btn" onclick="loadMoreRivieraRecipes()">
-      Load ${next.toLocaleString()} more
-      <span class="load-more-count">(${remaining.toLocaleString()} remaining)</span>
-    </button>
+    <div class="load-more-summary">Showing ${shown.toLocaleString()} of ${filtered.length.toLocaleString()} recipes</div>
+    <div class="load-more-actions">
+      ${remaining > 0 ? `<button class="load-more-btn" onclick="loadMoreRivieraRecipes()">
+        Load ${next.toLocaleString()} more
+        <span class="load-more-count">(${remaining.toLocaleString()} remaining)</span>
+      </button>` : ''}
+      ${shown > RIVIERA_RENDER_BATCH ? `<button class="back-to-top-btn" onclick="scrollRivieraListTop()">↑ Back to top</button>` : ''}
+    </div>
   </div>`;
+}
+
+function scrollRivieraListTop() {
+  const target = document.getElementById('searchWrap');
+  if (!target) return;
+  const instant = document.documentElement.classList.contains('low-memory-device');
+  target.scrollIntoView({ behavior: instant ? 'auto' : 'smooth', block: 'start' });
 }
 
 function rivieraCardYieldText(rawYield) {
