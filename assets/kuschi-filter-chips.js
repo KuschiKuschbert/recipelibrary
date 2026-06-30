@@ -22,9 +22,11 @@
 
   var _configs = [];
   var _onChange = null;
+  var _activeSelectId = '';
+  var _activeLabel = '';
+  var _sheetLocked = false;
 
   var _CHECK_ICON = '<svg class="filter-sheet__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
-  var _EMPTY_CHECK = '<svg class="filter-sheet__check" viewBox="0 0 24 24"></svg>';
 
   function _esc(s) {
     return String(s)
@@ -44,10 +46,94 @@
           '<span class="nav-sheet__title" id="filterSheetTitle">Filter</span>' +
           '<button class="nav-sheet__close" type="button" onclick="closeFilterSheet()">&#x2715;</button>' +
         '</div>' +
+        '<div class="filter-sheet__search-wrap" id="filterSheetSearchWrap" hidden>' +
+          '<input class="filter-sheet__search" id="filterSheetSearch" type="search" autocomplete="off" spellcheck="false" aria-label="Search filter options">' +
+        '</div>' +
         '<div class="nav-sheet__books filter-sheet__list" id="filterSheetList"></div>' +
       '</div>' +
     '</div>';
     document.body.appendChild(div.firstChild);
+    var search = document.getElementById('filterSheetSearch');
+    if (search) search.addEventListener('input', _renderFilterOptions);
+  }
+
+  function _normalizeSearch(s) {
+    return String(s || '').trim().toLowerCase();
+  }
+
+  function _lockSheetScroll() {
+    if (_sheetLocked) return;
+    if (window.KuschiRecipeUi && KuschiRecipeUi.lockPageScroll) {
+      KuschiRecipeUi.lockPageScroll();
+    } else {
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+    }
+    _sheetLocked = true;
+  }
+
+  function _unlockSheetScroll() {
+    if (!_sheetLocked) return;
+    if (window.KuschiRecipeUi && KuschiRecipeUi.unlockPageScroll) {
+      KuschiRecipeUi.unlockPageScroll();
+    } else {
+      var anyOpen = document.querySelector('.modal-overlay.open, .nav-sheet:not([hidden])');
+      if (!anyOpen) {
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+      }
+    }
+    _sheetLocked = false;
+  }
+
+  function _optionLabel(opt, index) {
+    var text = String(opt && opt.textContent ? opt.textContent : '');
+    if (index === 0 && opt && !opt.value) return 'All ' + _activeLabel.toLowerCase();
+    return text;
+  }
+
+  function _renderFilterOptions() {
+    var sel = document.getElementById(_activeSelectId);
+    var listEl = document.getElementById('filterSheetList');
+    var search = document.getElementById('filterSheetSearch');
+    if (!sel || !listEl) return;
+
+    var query = _normalizeSearch(search && search.value);
+    var frag = document.createDocumentFragment();
+    var matches = 0;
+    for (var i = 0; i < sel.options.length; i++) {
+      var opt = sel.options[i];
+      var label = _optionLabel(opt, i);
+      if (query && i !== 0 && _normalizeSearch(label + ' ' + opt.value).indexOf(query) === -1) {
+        continue;
+      }
+
+      var active = opt.value === sel.value;
+      var btn = document.createElement('button');
+      btn.className = 'filter-sheet__option' + (active ? ' filter-sheet__option--active' : '');
+      btn.type = 'button';
+      btn.setAttribute('aria-selected', active ? 'true' : 'false');
+      btn.appendChild(document.createTextNode(label));
+      var check = document.createElement('span');
+      check.className = 'filter-sheet__check';
+      check.innerHTML = _CHECK_ICON;
+      btn.appendChild(check);
+      btn.addEventListener('click', (function (value) {
+        return function () { setFilterValue(_activeSelectId, value); };
+      })(opt.value));
+      frag.appendChild(btn);
+      matches++;
+    }
+
+    listEl.innerHTML = '';
+    if (matches) {
+      listEl.appendChild(frag);
+    } else {
+      var empty = document.createElement('div');
+      empty.className = 'filter-sheet__empty';
+      empty.textContent = 'No matching options';
+      listEl.appendChild(empty);
+    }
   }
 
   // ── Chip sync ─────────────────────────────────────────────────────────────
@@ -74,27 +160,31 @@
     var sel = document.getElementById(selectId);
     if (!sel) return;
 
-    var html = '';
-    for (var i = 0; i < sel.options.length; i++) {
-      var opt = sel.options[i];
-      var active = opt.value === sel.value;
-      var cls = 'filter-sheet__option' + (active ? ' filter-sheet__option--active' : '');
-      // Encode selectId and value safely for the onclick attribute
-      var safeSelectId = _esc(selectId);
-      var safeValue = _esc(opt.value).replace(/'/g, '&#39;');
-      html += '<button class="' + cls + '" type="button"' +
-        ' onclick="setFilterValue(\'' + safeSelectId + '\',\'' + safeValue + '\')">' +
-        _esc(opt.textContent) + (active ? _CHECK_ICON : _EMPTY_CHECK) +
-        '</button>';
-    }
+    _activeSelectId = selectId;
+    _activeLabel = label || 'filter';
 
     var titleEl = document.getElementById('filterSheetTitle');
     var listEl  = document.getElementById('filterSheetList');
+    var searchWrap = document.getElementById('filterSheetSearchWrap');
+    var search = document.getElementById('filterSheetSearch');
     if (titleEl) titleEl.textContent = label;
-    if (listEl)  listEl.innerHTML = html;
+    if (searchWrap) searchWrap.hidden = sel.options.length < 9;
+    if (search) {
+      search.value = '';
+      search.placeholder = 'Search ' + String(label || 'options').toLowerCase();
+    }
+    if (listEl) _renderFilterOptions();
 
     var sheet = document.getElementById('filterSheet');
-    if (sheet) { sheet.removeAttribute('hidden'); document.body.style.overflow = 'hidden'; }
+    if (sheet) {
+      var wasHidden = sheet.hidden;
+      if (wasHidden) _lockSheetScroll();
+      sheet.removeAttribute('hidden');
+      window.requestAnimationFrame(function () {
+        var active = listEl && listEl.querySelector('.filter-sheet__option--active');
+        if (active && active.scrollIntoView) active.scrollIntoView({ block: 'nearest' });
+      });
+    }
   }
 
   // ── Value set ─────────────────────────────────────────────────────────────
@@ -114,9 +204,9 @@
   // ── Sheet close ───────────────────────────────────────────────────────────
   function closeFilterSheet() {
     var sheet = document.getElementById('filterSheet');
+    var wasOpen = sheet && !sheet.hidden;
     if (sheet) sheet.setAttribute('hidden', '');
-    var anyOpen = document.querySelector('.modal-overlay.open, .nav-sheet:not([hidden])');
-    if (!anyOpen) document.body.style.overflow = '';
+    if (wasOpen) _unlockSheetScroll();
   }
 
   // ── Escape key ────────────────────────────────────────────────────────────
