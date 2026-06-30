@@ -3427,6 +3427,7 @@ body.has-app-nav {
   -webkit-backdrop-filter: blur(40px) saturate(180%);
   border-color: var(--border);
   border-style: solid;
+  contain: layout paint style;
   /* Transition for smooth rotate switch */
   transition: width 0.2s ease, height 0.2s ease;
 }
@@ -3477,6 +3478,8 @@ body.has-app-nav {
   min-height: 48px;
   position: relative;
   transition: color 0.15s;
+  touch-action: manipulation;
+  user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -3502,6 +3505,9 @@ body.has-app-nav {
   font-weight: 500;
   letter-spacing: 0.2px;
   line-height: 1;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
@@ -4361,6 +4367,8 @@ html.lenovo-tab-one-profile body {
 
 html.lenovo-tab-one-profile {
   --app-header-h: 72px;
+  --nav-rail-width: 78px;
+  --nav-tabbar-height: 66px;
 }
 
 html.lenovo-tab-one-profile .app-header {
@@ -4551,16 +4559,44 @@ html.lenovo-tab-one-profile body.has-app-nav .clear-btn {
 }
 
 html.lenovo-tab-one-profile .page-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+  align-items: stretch;
   max-width: 760px;
-  gap: 7px;
-  padding-top: 5px;
+  gap: 8px;
+  padding-top: 6px;
   padding-bottom: 0;
-  justify-content: flex-start;
 }
 
 html.lenovo-tab-one-profile .page-action-btn {
-  padding-left: 14px;
-  padding-right: 14px;
+  justify-content: center;
+  min-width: 0;
+  min-height: 48px;
+  padding: 9px 10px;
+  border-radius: 12px;
+  border-color: rgba(255, 255, 255, 0.13);
+  background: rgba(255, 255, 255, 0.055);
+  color: var(--text2);
+  font-size: 13px;
+  line-height: 1.15;
+  text-align: center;
+  white-space: normal;
+}
+
+html.lenovo-tab-one-profile .page-action-btn:hover,
+html.lenovo-tab-one-profile .page-action-btn:focus-visible {
+  border-color: rgba(201, 169, 110, 0.46);
+  color: var(--text);
+}
+
+html.lenovo-tab-one-profile .page-action-btn:active {
+  background: rgba(201, 169, 110, 0.14);
+}
+
+html.lenovo-tab-one-profile .page-action-btn svg {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .results-bar {
@@ -7701,10 +7737,52 @@ html.lenovo-tab-one-profile .prep-task-detail-sheet__body {
 
 html.lenovo-tab-one-profile .nav-item {
   min-height: 56px;
+  padding: 6px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  color: rgba(245, 240, 230, 0.68);
+  isolation: isolate;
+}
+
+html.lenovo-tab-one-profile .app-nav {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.018)),
+    rgba(17, 17, 17, 0.97);
+  border-color: rgba(201, 169, 110, 0.2);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.28);
+}
+
+html.lenovo-tab-one-profile .nav-items {
+  gap: 3px;
+  padding: 5px 6px;
+}
+
+html.lenovo-tab-one-profile .nav-item__icon {
+  width: 28px;
+  height: 26px;
+}
+
+html.lenovo-tab-one-profile .nav-item__icon svg {
+  width: 23px;
+  height: 23px;
 }
 
 html.lenovo-tab-one-profile .nav-item__label {
   font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0;
+  line-height: 1.05;
+}
+
+html.lenovo-tab-one-profile .nav-item--active {
+  color: var(--gold-light);
+  background: rgba(201, 169, 110, 0.16);
+  border-color: rgba(201, 169, 110, 0.44);
+  box-shadow: inset 0 0 0 1px rgba(201, 169, 110, 0.08);
+}
+
+html.lenovo-tab-one-profile .nav-item--active .nav-item__icon::after {
+  display: none;
 }
 
 html.lenovo-tab-one-profile .nav-sheet {
@@ -7718,11 +7796,14 @@ html.lenovo-tab-one-profile .nav-sheet {
 html.lenovo-tab-one-profile .nav-sheet__panel {
   width: min(760px, calc(100vw - 28px));
   max-width: none;
+  max-height: calc(100dvh - 24px);
+  overflow: hidden;
   padding-bottom: max(14px, calc(14px + env(safe-area-inset-bottom, 0px)));
   border-radius: 16px 16px 0 0;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018)),
     var(--bg2);
+  box-shadow: 0 -18px 40px rgba(0, 0, 0, 0.42);
 }
 
 html.lenovo-tab-one-profile .nav-sheet__header {
@@ -7745,6 +7826,8 @@ html.lenovo-tab-one-profile .nav-sheet__grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
   padding: 10px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 html.lenovo-tab-one-profile .sheet-item {
@@ -7752,6 +7835,7 @@ html.lenovo-tab-one-profile .sheet-item {
   padding: 9px 6px 8px;
   gap: 5px;
   border-radius: 12px;
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 html.lenovo-tab-one-profile .sheet-item__icon {
@@ -7767,6 +7851,9 @@ html.lenovo-tab-one-profile .sheet-item__icon svg {
 html.lenovo-tab-one-profile .sheet-item__label {
   font-size: 11px;
   line-height: 1.15;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 html.lenovo-tab-one-profile .nav-sheet__books {
@@ -7775,6 +7862,7 @@ html.lenovo-tab-one-profile .nav-sheet__books {
   gap: 8px;
   max-height: 46dvh;
   padding: 10px;
+  overscroll-behavior: contain;
 }
 
 html.lenovo-tab-one-profile .sheet-book-item {
@@ -7815,6 +7903,36 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
     width: min(640px, calc(100vw - var(--nav-rail-width, 72px) - 40px));
     border-radius: 16px;
     padding-bottom: 10px;
+  }
+
+  html.lenovo-tab-one-profile .app-nav {
+    box-shadow: 10px 0 24px rgba(0, 0, 0, 0.22);
+  }
+
+  html.lenovo-tab-one-profile .nav-brand-wrap {
+    padding: 13px 0 10px;
+  }
+
+  html.lenovo-tab-one-profile .nav-brand__mark {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+  }
+
+  html.lenovo-tab-one-profile .nav-items {
+    gap: 4px;
+    padding: 6px 6px 12px;
+  }
+
+  html.lenovo-tab-one-profile .nav-item {
+    width: calc(100% - 10px);
+    min-height: 58px;
+    padding: 8px 4px;
+  }
+
+  html.lenovo-tab-one-profile .nav-item--active::before {
+    left: -6px;
+    height: 32px;
   }
 }
 
@@ -9121,7 +9239,10 @@ html.low-memory-device .card:active,
 html.low-memory-device .hero-nav-link:hover,
 html.low-memory-device .hero-actions button:hover,
 html.low-memory-device .hero-actions .hero-nav-cluster a:hover,
-html.low-memory-device .load-more-btn:hover {
+html.low-memory-device .load-more-btn:hover,
+html.low-memory-device .app-nav,
+html.low-memory-device .nav-sheet__panel,
+html.low-memory-device .page-action-btn {
   box-shadow: none;
 }
 
@@ -9146,7 +9267,11 @@ html.low-memory-device .card,
 html.low-memory-device body.has-app-nav .grid .card,
 html.low-memory-device .card::before,
 html.low-memory-device .card .copy-btn,
-html.low-memory-device .card .card-open-icon {
+html.low-memory-device .card .card-open-icon,
+html.low-memory-device .nav-item,
+html.low-memory-device .sheet-item,
+html.low-memory-device .sheet-book-item,
+html.low-memory-device .page-action-btn {
   transition-duration: 0.08s;
 }
 
