@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=94">
+<link rel="stylesheet" href="assets/theme.css?v=95">
 <link rel="preload" href="riviera_data/builtins.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
@@ -443,8 +443,8 @@ html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-results-chip {
   font-size: 12px;
 }
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid {
-  gap: 10px;
-  padding: 8px 20px 28px;
+  gap: 8px;
+  padding: 6px 20px 24px;
 }
 @media (max-width: 680px) {
   html.lenovo-tab-one-profile body.riviera-page.has-app-nav .filters-wrap,
@@ -566,78 +566,89 @@ html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid {
 }
 
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card {
-  min-height: 206px;
-  padding: 10px;
-  border-radius: 10px;
+  min-height: 176px;
+  padding: 8px;
+  border-radius: 9px;
 }
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-top {
-  grid-template-columns: minmax(0, 1fr) minmax(86px, max-content);
-  gap: 7px;
-  margin-bottom: 6px;
+  grid-template-columns: minmax(0, 1fr) minmax(74px, max-content);
+  gap: 5px;
+  margin-bottom: 4px;
 }
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-top .card-name {
-  font-size: 16px;
-  line-height: 1.18;
-  margin-bottom: 3px;
-}
-html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-yield {
-  min-height: 32px;
-  max-width: 108px;
-  padding: 4px 6px;
-  border-radius: 8px;
-  font-size: 9px;
-  line-height: 1.18;
-}
-html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-stats {
-  gap: 4px;
-  margin-bottom: 6px;
-}
-html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-stat {
-  min-height: 30px;
-  padding: 4px 5px;
-  border-radius: 8px;
-  font-size: 9px;
-  letter-spacing: 0.03em;
-}
-html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-stat strong {
-  font-size: 14px;
+  font-size: 15px;
+  line-height: 1.14;
   margin-bottom: 2px;
 }
-html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .card-type {
-  min-height: 16px;
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-yield {
+  min-height: 28px;
+  max-width: 98px;
+  padding: 3px 5px;
+  border-radius: 7px;
+  font-size: 8.5px;
+  line-height: 1.1;
+}
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-stats {
+  gap: 3px;
   margin-bottom: 4px;
-  font-size: 10px;
-  line-height: 1.25;
-  letter-spacing: 0.07em;
+}
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-stat {
+  min-height: 26px;
+  padding: 3px 4px;
+  border-radius: 7px;
+  font-size: 8.5px;
+  letter-spacing: 0.02em;
+  line-height: 1.12;
+}
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-stat strong {
+  font-size: 13px;
+  margin-bottom: 1px;
+}
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .card-type {
+  min-height: 14px;
+  margin-bottom: 3px;
+  font-size: 9.5px;
+  line-height: 1.16;
+  letter-spacing: 0.06em;
 }
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .card-badges {
-  gap: 4px;
-  max-height: 46px;
-  margin-bottom: 6px;
+  gap: 3px;
+  max-height: 20px;
+  margin-bottom: 4px;
 }
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .badge {
-  min-height: 22px;
-  padding: 3px 7px;
-  font-size: 10px;
-  line-height: 1.2;
+  min-height: 20px;
+  padding: 2px 5px;
+  font-size: 9px;
+  line-height: 1.1;
 }
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-elements {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
   gap: 3px;
-  padding-top: 6px;
+  padding-top: 4px;
   overflow: hidden;
-  font-size: 11.5px;
-  line-height: 1.38;
+  font-size: 10.5px;
+  line-height: 1.25;
 }
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-elements-label {
-  font-size: 9px;
+  display: block;
+  font-size: 8.5px;
+}
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-elements-label::after {
+  content: ":";
 }
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-elements-text {
-  -webkit-line-clamp: 2;
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  -webkit-line-clamp: unset;
 }
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .card-footer {
-  justify-content: flex-end;
-  min-height: 30px;
-  padding-top: 5px;
+  display: none;
 }
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .card-open-hint {
   display: none;
