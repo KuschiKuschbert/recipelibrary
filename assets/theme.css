@@ -7741,6 +7741,89 @@ body.has-app-nav .grid .card .badge {
   min-height: 24px;
 }
 
+html.lenovo-tab-one-profile body.catalog-page.has-app-nav .search-wrap {
+  margin-top: 2px;
+  padding-bottom: 1px;
+}
+
+html.lenovo-tab-one-profile body.catalog-page.has-app-nav .search-glass {
+  padding: 2px;
+  border-radius: 12px;
+}
+
+html.lenovo-tab-one-profile body.catalog-page.has-app-nav .filters-wrap {
+  gap: 5px;
+  margin-top: 4px;
+  padding: 1px 20px 2px;
+}
+
+html.lenovo-tab-one-profile body.catalog-page.has-app-nav .filter-chip,
+html.lenovo-tab-one-profile body.catalog-page.has-app-nav .clear-btn {
+  min-height: 44px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+html.lenovo-tab-one-profile body.catalog-page.has-app-nav .results-bar {
+  min-height: 38px;
+  margin-top: 6px;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+html.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid {
+  gap: 8px;
+  padding-top: 5px;
+}
+
+html.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card {
+  min-height: 180px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+html.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card .card-header {
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+html.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card .card-name {
+  font-size: 17px;
+  line-height: 1.16;
+}
+
+html.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card .card-cuisine {
+  min-height: 13px;
+  margin-bottom: 5px;
+  font-size: 10.5px;
+  line-height: 1.18;
+}
+
+html.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card .card-badges {
+  gap: 3px;
+  max-height: 20px;
+  margin-bottom: 5px;
+}
+
+html.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card .badge {
+  min-height: 20px;
+  padding: 2px 6px;
+  font-size: 9.5px;
+  line-height: 1.05;
+}
+
+html.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card .card-ings {
+  padding-top: 6px;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+html.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card .card-footer {
+  display: none;
+}
+
 body.has-app-nav .modal {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)),
