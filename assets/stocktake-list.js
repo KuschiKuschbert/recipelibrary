@@ -317,6 +317,56 @@
       return overlay ? overlay.querySelector('.modal.order-list-modal') : null;
     }
 
+    function addPanelElement() {
+      var overlay = document.getElementById(overlayId);
+      return overlay ? overlay.querySelector('.stocktake-add-panel') : null;
+    }
+
+    function focusAddNameField() {
+      var nameEl = document.getElementById(formIds.name);
+      if (!nameEl) return;
+      try {
+        nameEl.focus({ preventScroll: true });
+      } catch (e) {
+        nameEl.focus();
+      }
+      if (typeof nameEl.select === 'function') nameEl.select();
+    }
+
+    function scrollToAddPanel() {
+      var scroller = modalScrollElement();
+      var panel = addPanelElement();
+      if (!scroller || !panel) return;
+
+      var zoneEl = document.getElementById(formIds.zone);
+      if (zoneEl && filterState.zone && filterState.zone !== 'all') zoneEl.value = filterState.zone;
+
+      var tools = document.getElementById(bodyId + 'Tools');
+      var stickyOffset = tools ? tools.getBoundingClientRect().height + 14 : 14;
+      panel.classList.add('stocktake-add-panel--focus');
+      window.setTimeout(function () {
+        panel.classList.remove('stocktake-add-panel--focus');
+      }, 900);
+
+      function settle(attempt) {
+        var panelRect = panel.getBoundingClientRect();
+        var scrollerRect = scroller.getBoundingClientRect();
+        var targetTop = scroller.scrollTop + panelRect.top - scrollerRect.top - stickyOffset;
+        scroller.scrollTo(0, Math.max(0, targetTop));
+        if (attempt < 4) {
+          window.requestAnimationFrame(function () {
+            settle(attempt + 1);
+          });
+          return;
+        }
+        focusAddNameField();
+      }
+
+      window.requestAnimationFrame(function () {
+        settle(0);
+      });
+    }
+
     function rowFilterText(row) {
       var parts = [];
       var name = row.querySelector('.stkt-line-name');
@@ -366,6 +416,7 @@
         escAttr(searchId) +
         '" class="stocktake-search-input" type="search" inputmode="search" autocomplete="off" placeholder="Item or brand" />' +
         '<button type="button" class="btn-secondary stocktake-search-clear">Clear</button>' +
+        '<button type="button" class="btn-secondary stocktake-add-jump">Add line</button>' +
         '<div class="stocktake-filter-status" aria-live="polite">' +
         esc(filterStatusLabel(total, total)) +
         '</div>'
@@ -420,6 +471,11 @@
             scheduleApplyFilter(true);
             if (currentInput) currentInput.focus();
           });
+        }
+
+        var addBtn = tools.querySelector('.stocktake-add-jump');
+        if (addBtn) {
+          addBtn.addEventListener('click', scrollToAddPanel);
         }
       }
 
@@ -796,6 +852,7 @@
       if (brandEl) brandEl.value = '';
       if (uomEl) uomEl.value = '';
       renderBody();
+      window.requestAnimationFrame(scrollToAddPanel);
     }
 
     function clearCounted() {
