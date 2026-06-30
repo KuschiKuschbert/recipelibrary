@@ -4654,6 +4654,7 @@ html.lenovo-tab-one-profile body.has-app-nav .grid .card .copy-btn {
 
 html.lenovo-tab-one-profile.low-memory-device body.has-app-nav .grid .card:hover {
   transform: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045);
 }
 
 html.lenovo-tab-one-profile.low-memory-device body.has-app-nav .grid .card,
