@@ -9456,7 +9456,8 @@ html.lenovo-tab-one-profile body.has-app-nav .aroma-matrix-toolbar select {
   html.lenovo-tab-one-profile .planner-shopping__row,
   html.lenovo-tab-one-profile .planner-manifest__item,
   html.lenovo-tab-one-profile .planner-recipe,
-  html.lenovo-tab-one-profile .fn-course {
+  html.lenovo-tab-one-profile .fn-course,
+  html.lenovo-tab-one-profile .pkgs-course {
     content-visibility: auto;
     contain-intrinsic-size: auto 180px;
   }
@@ -9505,11 +9506,38 @@ html.lenovo-tab-one-profile body.has-app-nav .aroma-matrix-toolbar select {
     contain-intrinsic-size: auto 360px;
   }
 
+  html.lenovo-tab-one-profile .pkgs-course {
+    contain-intrinsic-size: auto 132px;
+  }
+
   @media (min-width: 901px) and (max-height: 900px) and (orientation: landscape) {
     html.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card {
       contain-intrinsic-size: auto 164px;
     }
   }
+}
+
+html.low-memory-device,
+html.low-memory-device body {
+  scroll-behavior: auto;
+  overscroll-behavior-y: contain;
+}
+
+html.low-memory-device :where(
+  .modal,
+  .modal-ing--dense,
+  .modal-recipe-col--setup .modal-ing,
+  .nav-sheet__books,
+  .nav-sheet__grid,
+  .filter-sheet__list,
+  .pkgs-content,
+  .fn-planner__tabs,
+  .planner-list__tabs,
+  .fn-planner__body,
+  .planner-list__body,
+  .prep-task-detail-sheet__panel
+) {
+  scroll-behavior: auto;
 }
 
 html.low-memory-device .search-glass,
@@ -9596,6 +9624,7 @@ html.low-memory-device .cook-step-next,
 html.low-memory-device .pkgs-event-tab,
 html.low-memory-device .pkgs-section-tab,
 html.low-memory-device .pkgs-item,
+html.low-memory-device .pkgs-clear,
 html.low-memory-device .fn-dish-chip,
 html.low-memory-device .fn-dish-chip__open,
 html.low-memory-device .planner-list-tab,
@@ -9706,6 +9735,18 @@ html.low-memory-device .kuschi-modal-seasoning-content--entering {
 
 html.low-memory-device .kuschi-aroma-chip-preview {
   transition: none;
+}
+
+html.low-memory-device.lenovo-tab-one-profile .pkgs-browser,
+html.low-memory-device .page-about summary::before {
+  transition: none;
+}
+
+html.low-memory-device.lenovo-tab-one-profile .pkgs-content,
+html.low-memory-device.lenovo-tab-one-profile .fn-planner__body,
+html.low-memory-device.lenovo-tab-one-profile .planner-list__body {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: auto;
 }
 
 /* ── Visible UI polish across the app shell ─────────────────────────────── */
@@ -10279,6 +10320,11 @@ html.low-memory-device.lenovo-tab-one-profile body.catalog-page.has-app-nav .gri
 html.low-memory-device.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card .copy-btn,
 html.low-memory-device.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card .card-open-icon {
   transition-duration: 0.08s;
+}
+
+html.low-memory-device.lenovo-tab-one-profile body.has-app-nav .pkgs-browser {
+  transition: none;
+  animation: none;
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
