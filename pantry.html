@@ -115,6 +115,11 @@
       padding: 3px 7px;
       font-size: 10.5px;
     }
+    html.lenovo-tab-one-profile.low-memory-device textarea,
+    html.lenovo-tab-one-profile.low-memory-device button.primary,
+    html.lenovo-tab-one-profile.low-memory-device .pantry-card {
+      transition-duration: 0.08s;
+    }
   }
   @media (min-width: 900px) and (orientation: landscape), (min-width: 1100px) {
     .pantry-wrap {
@@ -123,6 +128,98 @@
     }
     #out {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 901px) and (max-height: 900px) and (orientation: landscape) {
+    html.lenovo-tab-one-profile .pantry-wrap {
+      max-width: 1216px;
+      padding: 12px 16px 28px;
+    }
+    html.lenovo-tab-one-profile .pantry-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
+      gap: 10px 14px;
+      padding: 13px;
+      align-items: end;
+    }
+    html.lenovo-tab-one-profile .pantry-lead {
+      grid-column: 1 / -1;
+      margin-bottom: 0;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+    html.lenovo-tab-one-profile textarea {
+      min-height: 72px;
+      padding: 11px 13px;
+      border-radius: 10px;
+      font-size: 16px;
+      line-height: 1.35;
+    }
+    html.lenovo-tab-one-profile .pantry-action-row {
+      align-content: stretch;
+      align-self: stretch;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 0;
+    }
+    html.lenovo-tab-one-profile button.primary {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 14px;
+      border-radius: 10px;
+    }
+    html.lenovo-tab-one-profile .pantry-status {
+      flex: 1 1 auto;
+      width: 100%;
+      min-height: 0;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    html.lenovo-tab-one-profile #out {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+    html.lenovo-tab-one-profile .pantry-card {
+      min-height: 118px;
+      padding: 12px;
+      gap: 7px;
+      border-radius: 10px;
+    }
+    html.lenovo-tab-one-profile .pantry-card:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-hover);
+    }
+    html.lenovo-tab-one-profile.low-memory-device .pantry-card:hover {
+      background: var(--surface);
+      border-color: var(--border);
+    }
+    html.lenovo-tab-one-profile .pantry-name {
+      display: -webkit-box;
+      overflow: hidden;
+      min-height: 2.3em;
+      font-size: 15.5px;
+      line-height: 1.15;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+    html.lenovo-tab-one-profile .pantry-meta {
+      font-size: 11.5px;
+      line-height: 1.3;
+    }
+    html.lenovo-tab-one-profile .pantry-match-chips {
+      max-height: 24px;
+      overflow: hidden;
+      gap: 4px;
+    }
+    html.lenovo-tab-one-profile .pantry-match-chip {
+      min-height: 20px;
+      padding: 2px 6px;
+      font-size: 9.5px;
+      line-height: 1.05;
+    }
+    html.lenovo-tab-one-profile .pantry-open-hint {
+      display: none;
     }
   }
 </style>
