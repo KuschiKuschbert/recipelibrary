@@ -10929,6 +10929,86 @@ html.lenovo-tab-one-profile .planner-recipe__note {
 }
 
 @media (min-width: 901px) and (max-height: 900px) and (orientation: landscape) {
+  html.lenovo-tab-one-profile .fn-planner__bar {
+    grid-template-columns:
+      minmax(154px, 0.42fr)
+      minmax(224px, 0.6fr)
+      minmax(70px, 0.18fr)
+      minmax(70px, 0.18fr)
+      minmax(250px, 1fr);
+    align-items: center;
+    gap: 5px;
+    padding: 4px 16px max(4px, calc(4px + env(safe-area-inset-bottom, 0px)));
+  }
+
+  html.lenovo-tab-one-profile .fn-planner__pax-label,
+  html.lenovo-tab-one-profile .fn-planner__date-label {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+  }
+
+  html.lenovo-tab-one-profile .fn-planner__pax-input,
+  html.lenovo-tab-one-profile .fn-planner__date-input,
+  html.lenovo-tab-one-profile .fn-planner__sync-btn {
+    min-height: 44px;
+  }
+
+  html.lenovo-tab-one-profile .fn-planner__body {
+    padding-bottom: 18px;
+  }
+
+  html.lenovo-tab-one-profile .fn-dish-chips {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4px;
+  }
+
+  html.lenovo-tab-one-profile .fn-dish-chip-wrap {
+    grid-template-columns: minmax(0, 1fr) 44px;
+    gap: 4px;
+  }
+
+  html.lenovo-tab-one-profile .fn-dish-chip {
+    grid-template-columns: 16px minmax(0, 1fr);
+    gap: 4px;
+    min-height: 44px;
+    padding: 5px 6px;
+    border-radius: 9px;
+    font-size: 11.4px;
+    line-height: 1.16;
+  }
+
+  html.lenovo-tab-one-profile .fn-dish-chip__state {
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+  }
+
+  html.lenovo-tab-one-profile .fn-dish-chip__content {
+    gap: 1px;
+  }
+
+  html.lenovo-tab-one-profile .fn-dish-chip__tags {
+    max-height: 13px;
+  }
+
+  html.lenovo-tab-one-profile .fn-dish-chip__tag {
+    font-size: 8px;
+  }
+
+  html.lenovo-tab-one-profile .fn-dish-chip__hints {
+    max-height: 15px;
+    margin-top: -1px;
+    padding-left: 22px;
+  }
+
+  html.lenovo-tab-one-profile .fn-dish-chip__hint {
+    padding: 0 4px;
+    font-size: 9px;
+  }
+
   html.lenovo-tab-one-profile .planner-list__body:has(.planner-recipes) {
     padding: 10px 16px 22px;
   }
