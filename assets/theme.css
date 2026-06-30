@@ -1172,6 +1172,7 @@ html.low-memory-device .kuschi-toast--show {
 
 .ing-remove-btn {
   align-self: stretch;
+  min-height: 44px;
 }
 
 .add-ingredient-row-btn {
@@ -6257,6 +6258,112 @@ html.lenovo-tab-one-profile .prep-actor-remove {
     width: 48px;
   }
 
+}
+
+@media (min-width: 721px) and (max-width: 900px) {
+  html.lenovo-tab-one-profile .ing-row,
+  html.lenovo-tab-one-profile .ing-row-r {
+    grid-template-rows: minmax(44px, auto);
+    gap: 6px;
+    margin-bottom: 6px;
+    padding: 8px;
+    border-radius: 12px;
+  }
+
+  html.lenovo-tab-one-profile .ing-row {
+    grid-template-columns:
+      minmax(72px, 0.36fr)
+      minmax(58px, 0.27fr)
+      minmax(0, 1.15fr)
+      minmax(0, 0.95fr)
+      44px;
+  }
+
+  html.lenovo-tab-one-profile .ing-row-r {
+    grid-template-columns:
+      minmax(96px, 0.42fr)
+      minmax(0, 1.2fr)
+      minmax(0, 1fr)
+      44px;
+  }
+
+  html.lenovo-tab-one-profile .ing-row .ing-field,
+  html.lenovo-tab-one-profile .ing-row-r .ing-field {
+    min-width: 0;
+  }
+
+  html.lenovo-tab-one-profile .ing-row .ing-field--qty,
+  html.lenovo-tab-one-profile .ing-row .ing-field--unit,
+  html.lenovo-tab-one-profile .ing-row .ing-field--item,
+  html.lenovo-tab-one-profile .ing-row .ing-field--prep,
+  html.lenovo-tab-one-profile .ing-row-r .ing-field--qty,
+  html.lenovo-tab-one-profile .ing-row-r .ing-field--item,
+  html.lenovo-tab-one-profile .ing-row-r .ing-field--prep {
+    grid-row: 1;
+  }
+
+  html.lenovo-tab-one-profile .ing-row .ing-field--qty {
+    grid-column: 1;
+  }
+
+  html.lenovo-tab-one-profile .ing-row .ing-field--unit {
+    grid-column: 2;
+  }
+
+  html.lenovo-tab-one-profile .ing-row .ing-field--item {
+    grid-column: 3;
+  }
+
+  html.lenovo-tab-one-profile .ing-row .ing-field--prep {
+    grid-column: 4;
+  }
+
+  html.lenovo-tab-one-profile .ing-row-r .ing-field--qty {
+    grid-column: 1;
+  }
+
+  html.lenovo-tab-one-profile .ing-row-r .ing-field--item {
+    grid-column: 2;
+  }
+
+  html.lenovo-tab-one-profile .ing-row-r .ing-field--prep {
+    grid-column: 3;
+  }
+
+  html.lenovo-tab-one-profile .ing-row input,
+  html.lenovo-tab-one-profile .ing-row-r input {
+    min-height: 44px;
+    padding: 18px 9px 5px;
+    border-radius: 9px;
+    font-size: 14px;
+  }
+
+  html.lenovo-tab-one-profile .ing-row .ing-field-label,
+  html.lenovo-tab-one-profile .ing-row-r .ing-field-label {
+    top: 6px;
+    left: 9px;
+    font-size: 8.5px;
+    letter-spacing: 0.08em;
+  }
+
+  html.lenovo-tab-one-profile .ing-row .btn-secondary,
+  html.lenovo-tab-one-profile .ing-row-r .btn-secondary {
+    grid-row: 1;
+    align-self: stretch;
+    justify-self: stretch;
+    width: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 9px;
+  }
+
+  html.lenovo-tab-one-profile .ing-row .btn-secondary {
+    grid-column: 5;
+  }
+
+  html.lenovo-tab-one-profile .ing-row-r .btn-secondary {
+    grid-column: 4;
+  }
 }
 
 @media (max-width: 560px) {
