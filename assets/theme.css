@@ -4483,10 +4483,19 @@ html.lenovo-tab-one-profile .flavor-wheel-item,
 html.lenovo-tab-one-profile .sheet-book-item,
 html.lenovo-tab-one-profile .modal-copy-btn,
 html.lenovo-tab-one-profile .modal-quick-action,
+html.lenovo-tab-one-profile .modal-close,
 html.lenovo-tab-one-profile .btn-secondary,
 html.lenovo-tab-one-profile .add-form-actions button.primary {
   min-height: 48px;
   font-size: 14px;
+}
+
+html.lenovo-tab-one-profile .modal-close {
+  min-width: 48px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  font-size: 19px;
 }
 
 html.lenovo-tab-one-profile .app-header__btn {
