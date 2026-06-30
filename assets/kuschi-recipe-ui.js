@@ -312,6 +312,23 @@
     scrollLockY = 0;
   }
 
+  function syncModalCopyDock(modalEl) {
+    if (!modalEl || !modalEl.classList) return;
+    var run = function () {
+      var bar = modalEl.querySelector('.modal-copy-bar');
+      modalEl.classList.remove('modal--static-copy-bar');
+      if (!bar) return;
+      var overflow = modalEl.scrollHeight - modalEl.clientHeight;
+      var barHeight = bar.offsetHeight || 56;
+      modalEl.classList.toggle('modal--static-copy-bar', overflow <= barHeight + 32);
+    };
+    if (typeof w.requestAnimationFrame === 'function') {
+      w.requestAnimationFrame(run);
+    } else {
+      w.setTimeout(run, 0);
+    }
+  }
+
   w.KuschiRecipeUi = {
     esc: esc,
     copyText: copyText,
@@ -324,6 +341,7 @@
     lockPageScroll: lockPageScroll,
     unlockPageScroll: unlockPageScroll,
     syncSearchClear: syncSearchClear,
+    syncModalCopyDock: syncModalCopyDock,
     /**
      * @param {{ idSuffix?: string, openByDefault?: boolean, modalInline?: boolean }} [opts]
      */

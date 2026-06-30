@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=103">
+<link rel="stylesheet" href="assets/theme.css?v=104">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
@@ -708,7 +708,7 @@
 <script src="assets/user-recipes.js"></script>
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/aroma-hints.js"></script>
-<script src="assets/kuschi-recipe-ui.js?v=3"></script>
+<script src="assets/kuschi-recipe-ui.js?v=4"></script>
 <script src="assets/recipe-gemini-format.js" defer></script>
 <script src="assets/recipe-import-helpers.js" defer></script>
 <script src="assets/recipe-metric-normalize.js"></script>
@@ -1515,17 +1515,18 @@ function kitchenModalShellTop(r) {
   if (r.yield) meta.push(`Yield: <span>${KuschiRecipeUi.esc(r.yield)}</span>`);
   if (meta.length) html += `<div class="modal-meta">${meta.join(' · ')}</div>`;
 
+  const baseYield = parseModalYield(r.yield);
+  html += `<div class="modal-control-grid">`;
   html += `<div class="modal-quick-actions" aria-label="Recipe actions">`;
   html += `<button type="button" class="modal-quick-action modal-quick-action--primary" data-default-label="Copy text" onclick="copyRecipeText('${modalRecipeId}', this)">Copy text</button>`;
   html += `<button type="button" class="modal-quick-action" data-default-label="Copy name" onclick="copyRecipeName(this, '${modalRecipeName}')">Copy name</button>`;
   html += `</div>`;
-
-  const baseYield = parseModalYield(r.yield);
   html += `<div class="modal-scale">
     <label>Scale to pax:</label>
     <input type="number" id="modalScaleInput" min="1" value="${baseYield}" oninput="rescaleModal(this.value)" />
     <span class="modal-scale-factor" id="modalScaleFactor"></span>
   </div>`;
+  html += `</div>`;
   return html;
 }
 
@@ -1630,6 +1631,7 @@ function scheduleKitchenModalHeavyFill(modal, r, recipeId) {
         const h3 = heavyEl();
         if (!h3) return;
         h3.insertAdjacentHTML('beforeend', renderKitchenModalAromaAndCopyBlock(r));
+        if (window.KuschiRecipeUi) KuschiRecipeUi.syncModalCopyDock(modal);
         if (modalPerf) {
           console.log('[Kuschi modal] aroma+copy insertAdjacentHTML ms', (performance.now() - t2).toFixed(1));
         }

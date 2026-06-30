@@ -5396,6 +5396,12 @@ html.lenovo-tab-one-profile body.has-app-nav .modal-copy-bar {
   box-shadow: 0 -6px 14px rgba(0, 0, 0, 0.18);
 }
 
+html.lenovo-tab-one-profile body.has-app-nav .modal.modal--static-copy-bar .modal-copy-bar {
+  position: static;
+  margin-bottom: 0;
+  box-shadow: none;
+}
+
 html.lenovo-tab-one-profile body.has-app-nav .modal-copy-btn {
   min-height: 44px;
   padding: 8px 10px;
