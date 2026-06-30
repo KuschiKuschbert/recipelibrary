@@ -785,6 +785,10 @@ html.low-memory-device .kuschi-toast--show {
   margin: 14px 0 18px;
 }
 
+.modal-control-grid {
+  display: block;
+}
+
 .modal-quick-action {
   min-height: 44px;
   padding: 10px 12px;
@@ -4757,13 +4761,30 @@ html.lenovo-tab-one-profile body.has-app-nav .modal-quick-action {
   font-size: 12px;
 }
 
+html.lenovo-tab-one-profile body.has-app-nav .modal-control-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(236px, 0.58fr);
+  gap: 8px;
+  align-items: stretch;
+  margin: 8px 0 12px;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav .modal-control-grid .modal-quick-actions {
+  margin: 0;
+  gap: 6px;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav .modal-control-grid .modal-scale {
+  margin: 0;
+}
+
 html.lenovo-tab-one-profile body.has-app-nav .modal-scale {
   display: grid;
-  grid-template-columns: auto minmax(92px, 112px) minmax(0, 1fr);
-  min-height: 54px;
+  grid-template-columns: auto minmax(88px, 104px) minmax(0, 1fr);
+  min-height: 48px;
   margin-bottom: 14px;
-  padding: 7px 10px;
-  gap: 9px;
+  padding: 4px 8px;
+  gap: 7px;
   border-radius: 10px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025)),
@@ -4771,7 +4792,7 @@ html.lenovo-tab-one-profile body.has-app-nav .modal-scale {
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .modal-scale:has(.modal-scale-factor:empty) {
-  grid-template-columns: auto minmax(92px, 112px);
+  grid-template-columns: auto minmax(88px, 104px);
   justify-content: start;
 }
 
@@ -4786,10 +4807,16 @@ html.lenovo-tab-one-profile body.has-app-nav .modal-scale-factor:empty {
 
 html.lenovo-tab-one-profile body.has-app-nav .modal-scale input {
   width: 100%;
-  min-width: 78px;
+  min-width: 76px;
   min-height: 44px;
-  padding: 7px 9px;
+  padding: 6px 8px;
   font-size: 15px;
+}
+
+@media (max-width: 680px) {
+  html.lenovo-tab-one-profile body.has-app-nav .modal-control-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .modal-section {
