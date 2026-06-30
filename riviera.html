@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=71">
+<link rel="stylesheet" href="assets/theme.css?v=72">
 <link rel="preload" href="riviera_data/builtins.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
@@ -1253,8 +1253,8 @@ html.lenovo-tab-one-profile .fn-planner__desc {
       <label class="fn-planner__date-label">Event date
         <input type="date" class="fn-planner__date-input" id="fnPlannerEventDate">
       </label>
-      <button type="button" class="btn-secondary fn-planner__sync-btn" id="fnPlannerExport" title="Export plan JSON">Export</button>
-      <button type="button" class="btn-secondary fn-planner__sync-btn" id="fnPlannerImport" title="Import plan JSON">Import</button>
+      <button type="button" class="btn-secondary fn-planner__sync-btn fn-planner__utility-btn" id="fnPlannerExport" title="Export plan JSON" aria-label="Export plan JSON">Export</button>
+      <button type="button" class="btn-secondary fn-planner__sync-btn fn-planner__utility-btn" id="fnPlannerImport" title="Import plan JSON" aria-label="Import plan JSON">Import</button>
       <input type="file" id="fnPlannerImportFile" accept="application/json,.json" hidden>
       <button type="button" class="btn-primary fn-planner__generate" id="fnPlannerGenerate" disabled>Generate Full Planner List</button>
     </div>
