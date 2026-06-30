@@ -19,17 +19,27 @@
   :root { --app-header-h: 65px; }
   .pa-skip {
     position: absolute;
-    left: -9999px;
+    left: 12px;
     top: 8px;
     z-index: 9999;
-    padding: 8px 14px;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 10px 14px;
     background: var(--gold);
     color: #0c0c0c;
     font-weight: 600;
     border-radius: 8px;
     text-decoration: none;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(calc(-100% - 16px));
   }
-  .pa-skip:focus { left: 12px; }
+  .pa-skip:focus {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
 
   body.pa-page {
     position: relative;
@@ -186,6 +196,9 @@
     border-radius: var(--radius);
     background: rgba(20, 20, 20, 0.45);
     max-height: min(72vh, 720px);
+    max-width: 100%;
+    overscroll-behavior-inline: contain;
+    scrollbar-gutter: stable;
   }
 
   .pa-matrix {
@@ -228,8 +241,10 @@
     vertical-align: middle;
   }
   .pa-mx-link {
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    width: 100%;
+    min-width: 44px;
     min-height: 36px;
     color: var(--text);
     text-decoration: none;
@@ -554,6 +569,7 @@
     margin-top: 40px;
     padding-top: 28px;
     border-top: 1px solid var(--border);
+    overflow-x: clip;
   }
   .pa-food-title {
     font-family: 'Playfair Display', Georgia, serif;
@@ -575,9 +591,14 @@
     border-radius: var(--radius);
     background: rgba(20, 20, 20, 0.45);
     max-height: min(65vh, 640px);
+    max-width: 100%;
+    overscroll-behavior-inline: contain;
+    scrollbar-gutter: stable;
   }
   .pa-food-matrix {
     min-width: 720px;
+    width: max-content;
+    max-width: none;
   }
   .pa-food-matrix th.pa-fx-food,
   .pa-food-matrix td.pa-fx-food {
@@ -621,6 +642,10 @@
   html.low-memory-device .pa-food-matrix thead th {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+  }
+  html.low-memory-device .pa-food-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 760px;
   }
   .pa-fx-spice-main {
     display: block;
@@ -713,6 +738,20 @@
     font-size: 14px;
     color: var(--text3);
     line-height: 1.5;
+  }
+
+  html.lenovo-tab-one-profile .pa-th-sub {
+    font-size: 11px;
+    line-height: 1.15;
+  }
+
+  html.lenovo-tab-one-profile .pa-fx-spice-main {
+    font-size: 11px;
+    line-height: 1.15;
+  }
+
+  html.lenovo-tab-one-profile .pa-fx-spice-sub {
+    display: none;
   }
 
   @media (min-width: 721px) and (max-width: 900px) {
@@ -1031,6 +1070,20 @@
       font-size: 13px;
       line-height: 1.45;
     }
+  }
+
+  html.lenovo-tab-one-profile .pa-toolbar-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  html.lenovo-tab-one-profile .pa-mx-g-main {
+    font-size: 12.5px;
+  }
+
+  html.lenovo-tab-one-profile .pa-mx-g-sub {
+    font-size: 11px;
+    line-height: 1.15;
   }
 
   @media (prefers-reduced-motion: reduce) {
