@@ -63,10 +63,31 @@
   .pantry-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
   .pantry-name { font-weight: 600; font-size: 17px; line-height: 1.25; font-family: 'Playfair Display', serif; color: var(--text); }
   .pantry-meta { font-size: 12px; color: var(--text3); line-height: 1.5; }
-  .pantry-match { font-size: 11px; color: var(--gold); margin-top: 4px; font-weight: 500; }
+  .pantry-match-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-height: 25px;
+  }
+  .pantry-match-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 25px;
+    padding: 3px 8px;
+    border: 1px solid rgba(201,169,110,0.22);
+    border-radius: 999px;
+    background: rgba(201,169,110,0.09);
+    color: var(--gold-light);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+  }
   .pantry-open-hint {
     margin-top: auto;
-    padding-top: 10px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    padding-top: 8px;
     border-top: 1px solid rgba(255,255,255,0.08);
     color: var(--gold-light);
     font-size: 11px;
@@ -79,6 +100,21 @@
   @media (max-width: 680px) {
     .pantry-panel { padding: 14px; }
     button.primary { width: 100%; }
+  }
+  @media (min-width: 720px) {
+    html.lenovo-tab-one-profile #out {
+      gap: 10px;
+    }
+    html.lenovo-tab-one-profile .pantry-card {
+      min-height: 132px;
+      padding: 14px;
+      gap: 8px;
+    }
+    html.lenovo-tab-one-profile .pantry-match-chip {
+      min-height: 23px;
+      padding: 3px 7px;
+      font-size: 10.5px;
+    }
   }
   @media (min-width: 900px) and (orientation: landscape), (min-width: 1100px) {
     .pantry-wrap {
@@ -278,15 +314,15 @@
     });
   }
 
-  function scoreRecipe(r, needToks) {
+  function matchedTokensForRecipe(r, needToks) {
     var ing = (r.ing || []).join(' ').toLowerCase();
     var name = (r.name || '').toLowerCase();
     var hay = ing + ' ' + name;
-    var hit = 0;
+    var matched = [];
     for (var i = 0; i < needToks.length; i++) {
-      if (hay.indexOf(needToks[i]) >= 0) hit++;
+      if (hay.indexOf(needToks[i]) >= 0) matched.push(needToks[i]);
     }
-    return hit;
+    return matched;
   }
 
   var pantrySearchScheduler = KuschiRecipeUi.createFilterScheduler({
@@ -324,17 +360,22 @@
         var all = pack.all;
         var scored = [];
         for (var i = 0; i < all.length; i++) {
-          var sc = scoreRecipe(all[i], needToks);
-          if (sc > 0) scored.push({ r: all[i], sc: sc });
+          var matches = matchedTokensForRecipe(all[i], needToks);
+          var sc = matches.length;
+          if (sc > 0) scored.push({ r: all[i], sc: sc, matches: matches });
         }
         scored.sort(function (a, b) { return b.sc - a.sc || (a.r.name || '').localeCompare(b.r.name || ''); });
-        var seg = pack.shardCount < SHARDS.length ? ' (scanned ' + pack.shardCount + ' of ' + SHARDS.length + ' index parts)' : '';
-        st.textContent = scored.length + ' recipes match at least one token (' + needToks.join(', ') + ').' + seg;
+        var seg = pack.shardCount < SHARDS.length ? ' · scanned ' + pack.shardCount + '/' + SHARDS.length + ' index parts' : '';
+        st.textContent = scored.length + ' matches · ' + needToks.length + ' tokens · ' + needToks.join(', ') + seg;
         out.innerHTML = scored.slice(0, 40).map(function (x) {
+          var chips = x.matches.slice(0, 5).map(function (tok) {
+            return '<span class="pantry-match-chip">' + esc(tok) + '</span>';
+          }).join('');
           return '<div class="pantry-card" role="button" tabindex="0" data-open-id="' + esc(x.r.id) + '">' +
             '<div class="pantry-name">' + esc(x.r.name || '') + '</div>' +
-            '<div class="pantry-meta">Match score ' + x.sc + ' · ' + esc(x.r.cui || 'Kitchen library') + '</div>' +
-            '<div class="pantry-open-hint">Open recipe</div></div>';
+            '<div class="pantry-meta">Matched ' + x.sc + '/' + needToks.length + ' · ' + esc(x.r.cui || 'Kitchen library') + '</div>' +
+            '<div class="pantry-match-chips">' + chips + '</div>' +
+            '<div class="pantry-open-hint">Tap anywhere to open</div></div>';
         }).join('');
         out.querySelectorAll('.pantry-card').forEach(function (el) {
           function openCard() {
