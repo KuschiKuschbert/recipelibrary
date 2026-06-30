@@ -11100,6 +11100,173 @@ html.lenovo-tab-one-profile .planner-recipe__note {
     padding: 4px 7px;
   }
 
+  html.lenovo-tab-one-profile #prepOverlay .modal.order-list-modal,
+  html.lenovo-tab-one-profile #kbPrepOverlay .modal.order-list-modal {
+    max-width: min(1120px, calc(100vw - 28px));
+    padding: 14px 16px max(16px, calc(16px + env(safe-area-inset-bottom, 0px)));
+  }
+
+  html.lenovo-tab-one-profile #prepOverlay .prep-board-modal > .modal-title,
+  html.lenovo-tab-one-profile #kbPrepOverlay .prep-board-modal > .modal-title {
+    margin-bottom: 5px !important;
+    padding-right: 50px;
+    font-size: 21px;
+    line-height: 1.12;
+  }
+
+  html.lenovo-tab-one-profile #prepOverlay .prep-board-modal > p,
+  html.lenovo-tab-one-profile #kbPrepOverlay .prep-board-modal > p {
+    display: none;
+  }
+
+  html.lenovo-tab-one-profile .prep-board-modal .prep-actor-block {
+    display: grid;
+    grid-template-columns: minmax(330px, 0.58fr) minmax(300px, 0.42fr);
+    grid-template-areas:
+      "label teammate"
+      "actors teammate";
+    align-items: end;
+    gap: 4px 10px;
+    margin-bottom: 7px;
+  }
+
+  html.lenovo-tab-one-profile .prep-actor-label {
+    grid-area: label;
+    margin-bottom: 0;
+    font-size: 9.5px;
+    line-height: 1.1;
+    letter-spacing: 0.08em;
+  }
+
+  html.lenovo-tab-one-profile .prep-actor-row {
+    grid-area: actors;
+    gap: 5px;
+  }
+
+  html.lenovo-tab-one-profile .prep-add-teammate {
+    grid-area: teammate;
+    align-self: end;
+    grid-template-columns: minmax(0, 1fr) minmax(110px, auto);
+    gap: 5px;
+    margin-top: 0;
+  }
+
+  html.lenovo-tab-one-profile .prep-actor-chip,
+  html.lenovo-tab-one-profile .prep-actor-remove,
+  html.lenovo-tab-one-profile .prep-teammate-input,
+  html.lenovo-tab-one-profile .prep-add-teammate .btn-secondary,
+  html.lenovo-tab-one-profile .prep-subtab {
+    min-height: 44px;
+  }
+
+  html.lenovo-tab-one-profile .prep-actor-chip {
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  html.lenovo-tab-one-profile .prep-actor-remove {
+    min-height: 44px;
+  }
+
+  html.lenovo-tab-one-profile .prep-add-teammate .btn-secondary {
+    padding-inline: 8px;
+    font-size: 11.5px;
+  }
+
+  html.lenovo-tab-one-profile .prep-teammate-input {
+    padding: 6px 9px;
+    font-size: 12.5px;
+  }
+
+  html.lenovo-tab-one-profile .prep-subtabs {
+    gap: 5px;
+    margin: 6px 0 5px;
+  }
+
+  html.lenovo-tab-one-profile .prep-subtab {
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  html.lenovo-tab-one-profile .prep-board-status {
+    gap: 4px;
+    margin: 4px 0;
+  }
+
+  html.lenovo-tab-one-profile .prep-board-status__item {
+    min-height: 30px;
+    padding: 3px 5px;
+    border-radius: 8px;
+  }
+
+  html.lenovo-tab-one-profile .prep-board-status__number {
+    font-size: 14px;
+  }
+
+  html.lenovo-tab-one-profile .prep-board-status__label {
+    font-size: 9.8px;
+  }
+
+  html.lenovo-tab-one-profile .prep-hide-done {
+    min-height: 44px;
+    margin: 4px 0;
+    padding: 0 8px;
+    font-size: 12px;
+  }
+
+  html.lenovo-tab-one-profile .prep-task-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px 8px;
+  }
+
+  html.lenovo-tab-one-profile .prep-task-card-row {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 5px;
+  }
+
+  html.lenovo-tab-one-profile .prep-task-done--row {
+    min-width: 44px;
+    min-height: 56px;
+    padding: 4px 1px;
+    border-radius: 9px;
+    font-size: 9.5px;
+  }
+
+  html.lenovo-tab-one-profile .prep-task-done--row input {
+    width: 20px;
+    height: 20px;
+  }
+
+  html.lenovo-tab-one-profile .prep-task-card {
+    min-height: 56px;
+    padding: 7px 8px;
+    border-radius: 9px;
+  }
+
+  html.lenovo-tab-one-profile .prep-task-card-title {
+    font-size: 12.5px;
+    line-height: 1.18;
+    margin-bottom: 4px;
+  }
+
+  html.lenovo-tab-one-profile .prep-task-card-meta {
+    gap: 3px;
+    font-size: 10.2px;
+    line-height: 1.18;
+  }
+
+  html.lenovo-tab-one-profile .prep-task-card-chip,
+  html.lenovo-tab-one-profile .prep-task-card-detail-pill {
+    min-height: 19px;
+    padding: 1px 5px;
+    border-radius: 6px;
+    font-size: 9.8px;
+  }
+
+  html.lenovo-tab-one-profile .prep-task-card-note {
+    display: none;
+  }
+
   html.lenovo-tab-one-profile .planner-list__body:has(.planner-recipes) {
     padding: 10px 16px 22px;
   }
