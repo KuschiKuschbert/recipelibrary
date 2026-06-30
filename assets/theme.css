@@ -9182,6 +9182,116 @@ html.lenovo-tab-one-profile .planner-recipe__note {
 }
 
 @media (min-width: 721px) and (max-width: 900px) {
+  html.lenovo-tab-one-profile .planner-list__header {
+    min-height: 56px;
+    padding: 8px 16px 7px;
+    gap: 10px;
+  }
+
+  html.lenovo-tab-one-profile .planner-list__header > div {
+    min-width: 0;
+  }
+
+  html.lenovo-tab-one-profile .planner-list__title {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 17px;
+    line-height: 1.18;
+  }
+
+  html.lenovo-tab-one-profile .planner-list__subtitle {
+    margin-top: 2px;
+    font-size: 11px;
+    line-height: 1.2;
+  }
+
+  html.lenovo-tab-one-profile .planner-list__close {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+  }
+
+  html.lenovo-tab-one-profile .planner-list__tabs {
+    gap: 5px;
+    padding: 5px 16px 6px;
+    scroll-padding-left: 16px;
+  }
+
+  html.lenovo-tab-one-profile .planner-list-tab {
+    min-width: 96px;
+    max-width: 136px;
+    min-height: 44px;
+    padding: 7px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+  }
+
+  html.lenovo-tab-one-profile .planner-list__summary {
+    gap: 5px;
+    padding: 5px 16px;
+  }
+
+  html.lenovo-tab-one-profile .planner-list__summary-chip {
+    min-height: 30px;
+    padding: 4px 8px;
+    border-radius: 9px;
+    font-size: 11px;
+  }
+
+  html.lenovo-tab-one-profile .planner-list__summary-chip strong {
+    font-size: 12px;
+  }
+
+  html.lenovo-tab-one-profile .planner-list__summary-kicker {
+    font-size: 9.5px;
+  }
+
+  html.lenovo-tab-one-profile .planner-list__actions {
+    grid-template-columns:
+      minmax(166px, 1.08fr)
+      minmax(152px, 0.92fr)
+      minmax(160px, 0.98fr)
+      minmax(138px, 0.78fr);
+    gap: 5px;
+    padding: 4px 16px 5px;
+  }
+
+  html.lenovo-tab-one-profile .planner-list__action-group {
+    gap: 5px;
+  }
+
+  html.lenovo-tab-one-profile .planner-list__actions .btn-secondary,
+  html.lenovo-tab-one-profile .planner-list__print-opt,
+  html.lenovo-tab-one-profile .planner-list__primary-action {
+    min-height: 44px;
+    border-radius: 9px;
+  }
+
+  html.lenovo-tab-one-profile .planner-list__actions .btn-secondary {
+    padding-inline: 6px;
+    font-size: 11.5px;
+  }
+
+  html.lenovo-tab-one-profile .planner-list__action-group--ops .planner-list__primary-action {
+    font-size: 12px;
+  }
+
+  html.lenovo-tab-one-profile .planner-list__print-opt {
+    padding: 0 7px;
+    font-size: 11px;
+  }
+
+  html.lenovo-tab-one-profile .planner-list__print-opt input {
+    width: 18px;
+    height: 18px;
+  }
+
+  html.lenovo-tab-one-profile .planner-list__body {
+    padding: 10px 16px 24px;
+  }
+
   html.lenovo-tab-one-profile .prep-task-list {
     gap: 6px;
   }
