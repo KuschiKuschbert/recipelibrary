@@ -7502,9 +7502,9 @@ html.lenovo-tab-one-profile #kbOrderListOverlay .order-actions--order-list {
 html.lenovo-tab-one-profile #orderListOverlay .order-actions--order-list .btn-secondary,
 html.lenovo-tab-one-profile #kbOrderListOverlay .order-actions--order-list .btn-secondary {
   min-width: 0;
-  min-height: 44px;
-  padding: 7px 8px;
-  font-size: 11.5px;
+  min-height: 48px;
+  padding: 8px 7px;
+  font-size: 12.5px;
   line-height: 1.15;
 }
 
@@ -7526,9 +7526,9 @@ html.lenovo-tab-one-profile #kbStocktakeOverlay .stocktake-actions {
 html.lenovo-tab-one-profile #stocktakeOverlay .stocktake-actions .btn-secondary,
 html.lenovo-tab-one-profile #kbStocktakeOverlay .stocktake-actions .btn-secondary {
   min-width: 0;
-  min-height: 44px;
-  padding: 7px 7px;
-  font-size: 11.5px;
+  min-height: 48px;
+  padding: 8px 7px;
+  font-size: 12.5px;
   line-height: 1.15;
   white-space: normal;
 }
@@ -10100,6 +10100,8 @@ html.lenovo-tab-one-profile .pkgs-clear {
   min-height: 44px;
   padding-left: 14px;
   padding-right: 14px;
+  font-size: 12.5px;
+  line-height: 1.15;
   border-radius: 10px;
 }
 
