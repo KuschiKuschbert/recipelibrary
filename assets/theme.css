@@ -6260,13 +6260,13 @@ html.lenovo-tab-one-profile .back-to-top-btn {
 }
 
 html.lenovo-tab-one-profile .aroma-add-panel {
-  margin: 14px 0 12px;
-  padding: 10px;
+  margin: 8px 0 8px;
+  padding: 6px;
   background:
     linear-gradient(180deg, rgba(201, 169, 110, 0.055), rgba(255, 255, 255, 0.024)),
     rgba(255, 255, 255, 0.025);
   border: 1px solid rgba(201, 169, 110, 0.16);
-  border-radius: 14px;
+  border-radius: 12px;
   contain: layout style;
 }
 
@@ -6274,12 +6274,12 @@ html.lenovo-tab-one-profile .aroma-add-details summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  min-height: 48px;
-  padding: 0 10px;
-  border-radius: 12px;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 9px;
+  border-radius: 10px;
   color: var(--gold-light);
-  font-size: 14px;
+  font-size: 13.5px;
   line-height: 1.25;
 }
 
@@ -6305,37 +6305,37 @@ html.lenovo-tab-one-profile .aroma-add-details[open] summary::after {
 html.lenovo-tab-one-profile .aroma-add-panel .aroma-hint-loading {
   display: flex;
   align-items: center;
-  min-height: 48px;
-  padding: 0 10px;
+  min-height: 44px;
+  padding: 0 9px;
   font-size: 13px;
 }
 
 html.lenovo-tab-one-profile .aroma-add-panel .aroma-hint-intro,
 html.lenovo-tab-one-profile .aroma-add-panel .aroma-hint-empty {
   margin: 0;
-  padding: 0 10px 10px;
-  font-size: 13px;
-  line-height: 1.55;
+  padding: 0 9px 8px;
+  font-size: 12.5px;
+  line-height: 1.45;
 }
 
 html.lenovo-tab-one-profile .aroma-suggest-btns {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-  margin-top: 4px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 2px;
 }
 
 html.lenovo-tab-one-profile .aroma-suggest-btn {
   width: 100%;
   min-width: 0;
-  min-height: 48px;
+  min-height: 44px;
   justify-content: flex-start;
-  padding: 9px 10px;
-  border-radius: 12px;
+  padding: 7px 8px;
+  border-radius: 10px;
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.13);
   color: var(--text);
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.25;
   text-align: left;
 }
@@ -6513,10 +6513,10 @@ html.lenovo-tab-one-profile .prep-actor-remove {
   html.lenovo-tab-one-profile .ing-row,
   html.lenovo-tab-one-profile .ing-row-r {
     grid-template-rows: minmax(44px, auto);
-    gap: 6px;
-    margin-bottom: 6px;
-    padding: 8px;
-    border-radius: 12px;
+    gap: 5px;
+    margin-bottom: 5px;
+    padding: 6px;
+    border-radius: 10px;
   }
 
   html.lenovo-tab-one-profile .ing-row {
@@ -6582,16 +6582,16 @@ html.lenovo-tab-one-profile .prep-actor-remove {
   html.lenovo-tab-one-profile .ing-row input,
   html.lenovo-tab-one-profile .ing-row-r input {
     min-height: 44px;
-    padding: 18px 9px 5px;
+    padding: 17px 8px 4px;
     border-radius: 9px;
     font-size: 14px;
   }
 
   html.lenovo-tab-one-profile .ing-row .ing-field-label,
   html.lenovo-tab-one-profile .ing-row-r .ing-field-label {
-    top: 6px;
+    top: 5px;
     left: 9px;
-    font-size: 8.5px;
+    font-size: 9px;
     letter-spacing: 0.08em;
   }
 

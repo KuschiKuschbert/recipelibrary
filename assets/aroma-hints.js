@@ -62,6 +62,15 @@
   /** normKey(unified.name) -> row for O(1) exact match before linear scan */
   var unifiedByNormName = Object.create(null);
 
+  function compactAddRecipePanel() {
+    var root = global.document && global.document.documentElement;
+    return !!(
+      root &&
+      root.classList &&
+      (root.classList.contains('lenovo-tab-one-profile') || root.classList.contains('low-memory-device'))
+    );
+  }
+
   function normKey(s) {
     if (window.KuschiUserRecipes && typeof KuschiUserRecipes.canonicalOrderMergeKey === 'function') {
       return KuschiUserRecipes.canonicalOrderMergeKey(s);
@@ -1505,9 +1514,16 @@
                 );
               })
               .join('');
+            var compactPanel = compactAddRecipePanel();
+            var openAttr = compactPanel ? ' data-compact-default="1"' : ' open';
+            var summaryText = compactPanel ? 'Seasoning suggestions (' + top.length + ')' : 'Seasoning suggestions';
             inner3.innerHTML =
-              '<details class="aroma-add-details" open>' +
-              '<summary>Seasoning suggestions</summary>' +
+              '<details class="aroma-add-details"' +
+              openAttr +
+              '>' +
+              '<summary>' +
+              summaryText +
+              '</summary>' +
               '<p class="aroma-hint-intro">Based on your ingredient list. Tap to add (pinch / to taste).</p>' +
               '<div class="aroma-suggest-btns">' +
               btns +
