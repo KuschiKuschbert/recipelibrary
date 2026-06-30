@@ -872,6 +872,13 @@ html.low-memory-device .kuschi-toast--show {
   border-bottom: 1px solid var(--border);
 }
 
+.modal-section-count {
+  margin-left: 8px;
+  color: var(--text3);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
 .modal-ing {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -4842,6 +4849,23 @@ html.lenovo-tab-one-profile body.has-app-nav .modal-section {
   letter-spacing: 0.1em;
 }
 
+html.lenovo-tab-one-profile body.has-app-nav .modal-section-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  min-height: 18px;
+  margin-left: auto;
+  padding: 1px 7px;
+  border: 1px solid rgba(201, 169, 110, 0.18);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.16);
+  color: var(--gold-light);
+  font-size: 9.5px;
+  line-height: 1;
+  letter-spacing: 0.05em;
+}
+
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay .modal-section--prep,
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay .modal-section--service {
   position: sticky;
@@ -4945,6 +4969,23 @@ html.lenovo-tab-one-profile body.has-app-nav .modal-ing .ing-item {
 html.lenovo-tab-one-profile body.has-app-nav .modal-ing .ing-qty:nth-last-child(-n+2),
 html.lenovo-tab-one-profile body.has-app-nav .modal-ing .ing-item:nth-last-child(-n+2) {
   border-bottom: none;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal-ing--dense {
+  max-height: 430px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-padding: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 169, 110, 0.45) transparent;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal-ing--dense .ing-qty,
+html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal-ing--dense .ing-item {
+  min-height: 27px;
+  padding: 3px 0;
+  font-size: 12.8px;
+  line-height: 1.24;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .modal-steps {
@@ -5056,6 +5097,26 @@ html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .moda
   height: 24px;
   border-radius: 7px;
   font-size: 10px;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal:has(.modal-steps li:nth-child(36)) .modal-steps {
+  gap: 3px;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal:has(.modal-steps li:nth-child(36)) .modal-steps li {
+  min-height: 36px;
+  padding: 5px 8px 5px 39px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  line-height: 1.22;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal:has(.modal-steps li:nth-child(36)) .modal-steps li::before {
+  left: 8px;
+  top: 5px;
+  width: 24px;
+  height: 23px;
+  font-size: 9.5px;
 }
 
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-event-strip {
@@ -7867,6 +7928,11 @@ html.low-memory-device #modalOverlay.cook-mode .cook-step-nav {
 
 html.low-memory-device .modal-copy-bar {
   box-shadow: none;
+}
+
+html.low-memory-device .modal,
+html.low-memory-device .modal-ing--dense {
+  scroll-behavior: auto;
 }
 
 html.low-memory-device .prep-task-card,

@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=112">
+<link rel="stylesheet" href="assets/theme.css?v=113">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
@@ -1188,8 +1188,9 @@ function renderBookRecipeDetail(r) {
   html += `</div>`;
   const ings = toArr(r.ingredients).filter(i => i && i.item);
   if (ings.length) {
-    html += `<div class="modal-section">Ingredients</div>`;
-    html += `<div class="modal-ing" id="modalIngGrid">`;
+    const denseClass = ings.length > 28 ? ' modal-ing--dense' : '';
+    html += `<div class="modal-section">Ingredients <span class="modal-section-count">${ings.length}</span></div>`;
+    html += `<div class="modal-ing${denseClass}" id="modalIngGrid">`;
     for (const i of ings) {
       const qty = [i.qty || '', i.unit || ''].filter(Boolean).join(' ');
       const prep = i.prep ? ` <span class="ing-prep">— ${KuschiRecipeUi.esc(i.prep)}</span>` : '';
@@ -1200,7 +1201,7 @@ function renderBookRecipeDetail(r) {
   }
   const steps = toArr(r.instructions);
   if (steps.length) {
-    html += `<div class="modal-section">Method</div>`;
+    html += `<div class="modal-section">Method <span class="modal-section-count">${steps.length}</span></div>`;
     html += `<ol class="modal-steps">`;
     steps.forEach((step, index) => {
       const number = index + 1;
