@@ -1,5 +1,5 @@
 'use strict';
-const CACHE_NAME = 'kuschi-kitchen-v167';
+const CACHE_NAME = 'kuschi-kitchen-v168';
 
 // App shell: HTML pages + core assets (precache on install)
 const SHELL_URLS = [
