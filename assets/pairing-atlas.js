@@ -969,6 +969,27 @@
     el.textContent = base;
   }
 
+  function compactTabletProfile() {
+    var root = document.documentElement;
+    var tabletViewport =
+      window.matchMedia &&
+      window.matchMedia('(min-width: 721px) and (max-width: 900px) and (orientation: portrait)').matches;
+    return !!(
+      tabletViewport ||
+      (root &&
+        root.classList &&
+        (root.classList.contains('lenovo-tab-one-profile') || root.classList.contains('low-memory-device')))
+    );
+  }
+
+  function collapseTabletGuides() {
+    if (!compactTabletProfile()) return;
+    ['paSpiceLegend', 'paFoodLegend'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el && el.tagName && el.tagName.toLowerCase() === 'details') el.removeAttribute('open');
+    });
+  }
+
   function loadEnrichment(statusEl, spiceHost, foodHost, onDone) {
     Promise.all([
       fetch(UNIFIED).then(function (r) {
@@ -1040,6 +1061,7 @@
   }
 
   function init() {
+    collapseTabletGuides();
     var spiceHost = document.getElementById('paMatrixHost');
     var foodHost = document.getElementById('paFoodMatrixHost');
     var status = document.getElementById('paStatus');

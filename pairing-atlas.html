@@ -309,6 +309,48 @@
     list-style-position: outside;
   }
   .pa-matrix-legend summary:hover { color: var(--text); }
+  .pa-matrix-legend > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 44px;
+    list-style: none;
+  }
+  .pa-matrix-legend > summary::-webkit-details-marker {
+    display: none;
+  }
+  .pa-matrix-legend > summary::after {
+    content: '+';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    flex: 0 0 auto;
+    border-radius: 9px;
+    background: rgba(201, 169, 110, 0.12);
+    color: var(--gold);
+    font-size: 18px;
+    line-height: 1;
+  }
+  .pa-matrix-legend[open] > summary::after {
+    content: '-';
+  }
+  .pa-legend-title {
+    color: var(--gold);
+  }
+  .pa-legend-kicker {
+    margin-left: auto;
+    color: var(--text3);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .pa-legend-body {
+    margin-top: 10px;
+  }
   .pa-matrix-legend .pa-legend-more {
     margin: 10px 0 0;
     padding-left: 0;
@@ -663,6 +705,148 @@
     line-height: 1.5;
   }
 
+  @media (min-width: 721px) and (max-width: 900px) {
+    html.lenovo-tab-one-profile body.pa-page::before {
+      display: none;
+    }
+
+    html.lenovo-tab-one-profile .pa-shell {
+      padding: 12px 16px max(84px, calc(var(--nav-tabbar-height, 0px) + 24px));
+    }
+
+    html.lenovo-tab-one-profile .page-about {
+      margin-top: 6px;
+      padding-inline: 12px;
+    }
+
+    html.lenovo-tab-one-profile .pa-toolbar {
+      gap: 6px;
+      margin: 8px 0;
+      padding: 8px;
+      border-radius: 12px;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    html.lenovo-tab-one-profile .pa-toolbar-label {
+      width: auto;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      margin: 0;
+      padding: 0 2px;
+      font-size: 10px;
+      line-height: 1.15;
+      letter-spacing: 0.09em;
+    }
+
+    html.lenovo-tab-one-profile .pa-mode {
+      flex: 1 1 170px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    html.lenovo-tab-one-profile .pa-mode button {
+      min-width: 0;
+      min-height: 44px;
+      padding: 8px 9px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      line-height: 1.15;
+      white-space: normal;
+    }
+
+    html.lenovo-tab-one-profile .pa-search {
+      flex: 1 1 220px;
+      min-height: 44px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    html.lenovo-tab-one-profile .pa-toolbar-hint {
+      display: none;
+    }
+
+    html.lenovo-tab-one-profile .pa-status {
+      margin-bottom: 6px;
+      font-size: 11.5px;
+      line-height: 1.35;
+    }
+
+    html.lenovo-tab-one-profile .pa-matrix-legend {
+      margin-bottom: 8px;
+      padding: 6px 8px;
+      border-radius: 12px;
+    }
+
+    html.lenovo-tab-one-profile .pa-matrix-legend > summary {
+      min-height: 44px;
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
+    html.lenovo-tab-one-profile .pa-legend-kicker {
+      display: none;
+    }
+
+    html.lenovo-tab-one-profile .pa-matrix-legend[open] .pa-legend-body {
+      max-height: min(42dvh, 420px);
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-right: 4px;
+    }
+
+    html.lenovo-tab-one-profile .pa-matrix-wrap,
+    html.lenovo-tab-one-profile .pa-food-matrix-wrap {
+      border-radius: 12px;
+      max-height: min(78dvh, 760px);
+    }
+
+    html.lenovo-tab-one-profile .pa-matrix {
+      min-width: 600px;
+      font-size: 12px;
+    }
+
+    html.lenovo-tab-one-profile .pa-matrix th.pa-mx-spice,
+    html.lenovo-tab-one-profile .pa-matrix td.pa-mx-spice,
+    html.lenovo-tab-one-profile .pa-food-matrix th.pa-fx-food,
+    html.lenovo-tab-one-profile .pa-food-matrix td.pa-fx-food {
+      max-width: 156px;
+      padding: 6px 8px;
+    }
+
+    html.lenovo-tab-one-profile .pa-matrix tbody td {
+      height: 44px;
+      padding: 7px 3px;
+    }
+
+    html.lenovo-tab-one-profile .pa-mx-link {
+      min-height: 44px;
+      padding-right: 4px;
+    }
+
+    html.lenovo-tab-one-profile .pa-legend {
+      display: none;
+    }
+
+    html.lenovo-tab-one-profile .pa-food-section {
+      margin-top: 22px;
+      padding-top: 18px;
+    }
+
+    html.lenovo-tab-one-profile .pa-food-title {
+      margin-bottom: 6px;
+    }
+
+    html.lenovo-tab-one-profile .pa-food-sub {
+      margin-bottom: 10px;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     body.pa-page::before { display: none; }
   }
@@ -723,8 +907,9 @@
     <p class="pa-status" id="paStatus" aria-live="polite">Loading…</p>
     <p class="pa-status pa-enrich-status" id="paEnrichStatus" aria-live="polite"></p>
     <p class="pa-status pa-search-status" id="paSearchStatus" aria-live="polite"></p>
-    <div class="pa-matrix-legend" id="paSpiceLegend" aria-label="How to read the spice matrix">
-      <strong>How to read the spice matrix</strong>
+    <details class="pa-matrix-legend" id="paSpiceLegend" aria-label="How to read the spice matrix" open>
+      <summary><span class="pa-legend-title">How to read the spice matrix</span><span class="pa-legend-kicker">Guide</span></summary>
+      <div class="pa-legend-body">
       <p class="pa-legend-lead">
         Read across a row for one spice. The first column is its name (the link goes to the full Aroma profile). The next eight columns are <em>not</em> foods and <em>not</em> “how strong” the spice is — they are
         <strong>aroma families</strong> from the reference classification. Think of them as columns on a printed aroma chart.
@@ -766,7 +951,8 @@
           </li>
         </ul>
       </details>
-    </div>
+      </div>
+    </details>
     <div class="pa-matrix-wrap" id="paMatrixHost"></div>
     <p class="pa-legend">
       Column wording is aligned with a Vierich/Vilgis-style aroma sheet (e.g. <code>aroma_matrix_sheet_1.pdf</code>); G numbers match
@@ -793,8 +979,9 @@
           <strong>Priority 25</strong> = spice columns match the sheet’s priority list. <strong>All spices</strong> = one column per spice in <code>ingredients.json</code> (can be 100+ columns).
         </p>
       </div>
-      <div class="pa-matrix-legend" id="paFoodLegend" aria-label="How to read the food matrix">
-        <strong>How to read the food × spice grid</strong>
+      <details class="pa-matrix-legend" id="paFoodLegend" aria-label="How to read the food matrix" open>
+        <summary><span class="pa-legend-title">How to read the food × spice grid</span><span class="pa-legend-kicker">Guide</span></summary>
+        <div class="pa-legend-body">
         <p class="pa-legend-lead">
           Scan along a <strong>row</strong> to see which spices the extract associates with that food. Scan down a <strong>column</strong> to see which foods use that spice as a listed seasoning.
           This is still extract data, not a universal truth about cooking.
@@ -805,7 +992,8 @@
           <li><strong>Headers</strong> — First line is shortened if the name is long; second line shows the full spice name when needed. Hover (or screen reader) gives the full title.</li>
           <li><strong>Tap a food row</strong> — Opens a list of all seasonings as chips with links to Aroma profiles.</li>
         </ul>
-      </div>
+        </div>
+      </details>
       <div class="pa-food-matrix-wrap" id="paFoodMatrixHost"></div>
     </section>
   </main>
@@ -817,7 +1005,7 @@
 
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/kuschi-recipe-ui.js?v=4"></script>
-<script src="assets/pairing-atlas.js"></script>
+<script src="assets/pairing-atlas.js?v=2"></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
 <script src="assets/app-nav.js"></script>
 <style>
