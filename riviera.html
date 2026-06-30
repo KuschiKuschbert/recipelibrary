@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=134">
+<link rel="stylesheet" href="assets/theme.css?v=135">
 <link rel="preload" href="riviera_data/builtins.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
@@ -3014,10 +3014,10 @@ function openRecipe(id, options) {
             return `<li data-cook-phase="Service" data-cook-step-label="S${number}" data-cook-phase-index="${number}" data-cook-phase-total="${r.service.length}">${KuschiRecipeUi.esc(s)}</li>`;
           }).join('');
           const prepBlock = steps
-            ? `<div class="modal-section modal-section--prep">Prep Method</div><ol class="modal-steps modal-steps--prep">${steps}</ol>`
+            ? `<div class="modal-section modal-section--prep">Prep Method <span class="modal-section-count">${r.method_steps.length}</span></div><ol class="modal-steps modal-steps--prep">${steps}</ol>`
             : '';
           const serviceBlock = service
-            ? `<div class="modal-section modal-section--service">On the Day — Service</div><ol class="modal-steps modal-steps--service">${service}</ol>`
+            ? `<div class="modal-section modal-section--service">On the Day — Service <span class="modal-section-count">${r.service.length}</span></div><ol class="modal-steps modal-steps--service">${service}</ol>`
             : '';
           const note = r.note ? `<div class="modal-note">⚠ ${KuschiRecipeUi.esc(r.note)}</div>` : '';
           const label = `<div class="label-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> Label: DATE MADE · ${KuschiRecipeUi.esc(r.label)}</div>`;
@@ -3041,9 +3041,9 @@ function openRecipe(id, options) {
           heavy.innerHTML = `
     <div class="modal-recipe-layout">
       <div class="modal-recipe-col modal-recipe-col--setup">
-        <div class="modal-section modal-section--elements">Elements</div>
+        <div class="modal-section modal-section--elements">Elements <span class="modal-section-count">${r.elements.length}</span></div>
         <div class="modal-elements">${elements}</div>
-        <div class="modal-section modal-section--ingredients">Ingredients</div>
+        <div class="modal-section modal-section--ingredients">Ingredients <span class="modal-section-count">${r.ingredients.length}</span></div>
         <div class="modal-ing${r.ingredients.length <= 10 ? ' modal-ing--wide' : ''}" id="ingGrid">${ingsHTML}</div>
       </div>
       <div class="modal-recipe-col modal-recipe-col--method" id="rivieraModalMethodCol"></div>
