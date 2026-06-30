@@ -8651,6 +8651,207 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
   }
 }
 
+/* Lenovo tablet utility pages: Pantry, Aroma, Flavor, Matrix, Visual Guides */
+html.lenovo-tab-one-profile .nb-shell {
+  max-width: min(1040px, 100vw);
+  padding: 12px 20px max(84px, calc(var(--nav-tabbar-height, 0px) + 24px));
+}
+
+html.lenovo-tab-one-profile .nb-status {
+  min-height: 24px;
+  margin: 8px 0 10px;
+  color: var(--text3);
+  font-size: 12.5px;
+  line-height: 1.35;
+}
+
+html.lenovo-tab-one-profile .nb-filters {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+html.lenovo-tab-one-profile .nb-chip-label {
+  grid-column: 1 / -1;
+  align-self: center;
+  color: var(--text3);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+html.lenovo-tab-one-profile .nb-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 44px;
+  padding: 7px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.15;
+  text-align: center;
+  touch-action: manipulation;
+}
+
+html.lenovo-tab-one-profile .nb-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+html.lenovo-tab-one-profile .nb-card {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+html.lenovo-tab-one-profile .nb-card-hit {
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+html.lenovo-tab-one-profile .nb-thumb {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+html.lenovo-tab-one-profile .nb-card-body {
+  padding: 10px 12px 12px;
+}
+
+html.lenovo-tab-one-profile .nb-card-title {
+  display: -webkit-box;
+  max-height: 2.45em;
+  margin-bottom: 5px;
+  overflow: hidden;
+  font-size: 16px;
+  line-height: 1.2;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+html.lenovo-tab-one-profile .nb-card-blurb {
+  display: -webkit-box;
+  max-height: 2.75em;
+  overflow: hidden;
+  font-size: 12.5px;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+html.lenovo-tab-one-profile .nb-card-src {
+  margin-top: 6px;
+  font-size: 10.5px;
+}
+
+html.lenovo-tab-one-profile .nb-footer {
+  margin-top: 28px;
+  padding-top: 14px;
+}
+
+html.lenovo-tab-one-profile #nbModal .modal {
+  max-width: min(1024px, calc(100vw - 28px));
+  max-height: min(94vh, 94dvh);
+  padding: 12px;
+  border-radius: 14px;
+}
+
+html.lenovo-tab-one-profile #nbModal .modal-close {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+html.lenovo-tab-one-profile #nbModalImg {
+  max-height: calc(100dvh - 132px);
+  border-radius: 10px;
+}
+
+html.lenovo-tab-one-profile .nb-modal-cap {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.35;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav .flavor-result-row,
+html.lenovo-tab-one-profile body.has-app-nav .aroma-result-row,
+html.lenovo-tab-one-profile body.has-app-nav .aroma-browse-card,
+html.lenovo-tab-one-profile body.has-app-nav .aroma-neighbor-card {
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav .aroma-chip,
+html.lenovo-tab-one-profile body.has-app-nav .flavor-pair-chip {
+  min-height: 44px;
+  align-items: center;
+  touch-action: manipulation;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav .aroma-matrix-toolbar label {
+  min-height: 44px;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav .aroma-matrix-toolbar select {
+  min-height: 44px;
+  font-size: 13px;
+}
+
+@media (min-width: 901px) and (max-height: 900px) and (orientation: landscape) {
+  html.lenovo-tab-one-profile .nb-shell {
+    max-width: min(1216px, 100vw);
+    padding: 10px 16px max(72px, calc(var(--nav-tabbar-height, 0px) + 18px));
+  }
+
+  html.lenovo-tab-one-profile .nb-status {
+    margin: 6px 0 8px;
+    font-size: 11.5px;
+  }
+
+  html.lenovo-tab-one-profile .nb-filters {
+    grid-template-columns: minmax(88px, auto) repeat(5, minmax(0, 1fr));
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+
+  html.lenovo-tab-one-profile .nb-chip-label {
+    grid-column: auto;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  html.lenovo-tab-one-profile .nb-chip {
+    min-height: 44px;
+    padding: 6px 7px;
+    font-size: 11.5px;
+  }
+
+  html.lenovo-tab-one-profile .nb-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  html.lenovo-tab-one-profile .nb-card-body {
+    padding: 9px 11px 10px;
+  }
+
+  html.lenovo-tab-one-profile .nb-card-title {
+    font-size: 15.5px;
+    line-height: 1.18;
+  }
+
+  html.lenovo-tab-one-profile .nb-card-blurb {
+    font-size: 12px;
+    line-height: 1.32;
+  }
+
+  html.lenovo-tab-one-profile .nb-footer {
+    margin-top: 22px;
+  }
+}
+
 @supports (content-visibility: auto) {
   html.lenovo-tab-one-profile .card,
   html.lenovo-tab-one-profile .pantry-card,
@@ -8661,6 +8862,7 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
   html.lenovo-tab-one-profile .aroma-result-row,
   html.lenovo-tab-one-profile .aroma-browse-card,
   html.lenovo-tab-one-profile .aroma-neighbor-card,
+  html.lenovo-tab-one-profile .nb-card,
   html.lenovo-tab-one-profile .kuschi-flavor-extras,
   html.lenovo-tab-one-profile .kuschi-pass-toolkit,
   html.lenovo-tab-one-profile .prep-task-card-row,
@@ -8782,7 +8984,17 @@ html.low-memory-device.lenovo-tab-one-profile .stkt-line-row,
 html.low-memory-device.lenovo-tab-one-profile .stocktake-zone-filter,
 html.low-memory-device.lenovo-tab-one-profile .stocktake-search-input,
 html.low-memory-device.lenovo-tab-one-profile .stocktake-search-clear,
-html.low-memory-device.lenovo-tab-one-profile .stocktake-add-jump {
+html.low-memory-device.lenovo-tab-one-profile .stocktake-add-jump,
+html.low-memory-device.lenovo-tab-one-profile .nb-card,
+html.low-memory-device.lenovo-tab-one-profile .nb-chip,
+html.low-memory-device.lenovo-tab-one-profile .flavor-result-row,
+html.low-memory-device.lenovo-tab-one-profile .flavor-tabs button,
+html.low-memory-device.lenovo-tab-one-profile .flavor-pantry-link,
+html.low-memory-device.lenovo-tab-one-profile .aroma-mode-btn,
+html.low-memory-device.lenovo-tab-one-profile .aroma-result-row,
+html.low-memory-device.lenovo-tab-one-profile .aroma-browse-card,
+html.low-memory-device.lenovo-tab-one-profile .aroma-neighbor-card,
+html.low-memory-device.lenovo-tab-one-profile .aroma-chip {
   transition: none;
 }
 
