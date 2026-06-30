@@ -847,6 +847,182 @@
     }
   }
 
+  @media (min-width: 901px) and (max-height: 900px) and (orientation: landscape) {
+    html.lenovo-tab-one-profile body.pa-page::before {
+      display: none;
+    }
+
+    html.lenovo-tab-one-profile .pa-shell {
+      max-width: min(1216px, 100vw);
+      padding: 10px 16px max(72px, calc(var(--nav-tabbar-height, 0px) + 18px));
+    }
+
+    html.lenovo-tab-one-profile .page-about {
+      margin-top: 2px;
+      padding-inline: 10px;
+    }
+
+    html.lenovo-tab-one-profile .pa-toolbar {
+      gap: 6px;
+      margin: 8px 0;
+      padding: 8px;
+      border-radius: 12px;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    html.lenovo-tab-one-profile .pa-toolbar-label {
+      width: auto;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      margin: 0;
+      padding: 0 2px;
+      font-size: 10px;
+      line-height: 1.15;
+      letter-spacing: 0.09em;
+    }
+
+    html.lenovo-tab-one-profile .pa-mode {
+      flex: 0 1 196px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    html.lenovo-tab-one-profile .pa-mode button {
+      min-width: 0;
+      min-height: 44px;
+      padding: 8px 9px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      line-height: 1.15;
+      white-space: normal;
+    }
+
+    html.lenovo-tab-one-profile .pa-search {
+      flex: 1 1 280px;
+      min-height: 44px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    html.lenovo-tab-one-profile .pa-toolbar-hint {
+      display: none;
+    }
+
+    html.lenovo-tab-one-profile .pa-status {
+      margin-bottom: 6px;
+      font-size: 11.5px;
+      line-height: 1.35;
+    }
+
+    html.lenovo-tab-one-profile .pa-matrix-legend {
+      margin-bottom: 8px;
+      padding: 6px 8px;
+      border-radius: 12px;
+    }
+
+    html.lenovo-tab-one-profile .pa-matrix-legend > summary {
+      min-height: 44px;
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
+    html.lenovo-tab-one-profile .pa-legend-kicker {
+      display: none;
+    }
+
+    html.lenovo-tab-one-profile .pa-matrix-legend[open] .pa-legend-body {
+      max-height: min(34dvh, 260px);
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-right: 4px;
+    }
+
+    html.lenovo-tab-one-profile .pa-matrix-wrap {
+      border-radius: 12px;
+      max-height: calc(100dvh - 332px);
+    }
+
+    html.lenovo-tab-one-profile .pa-food-matrix-wrap {
+      border-radius: 12px;
+      max-height: min(70dvh, 620px);
+    }
+
+    html.lenovo-tab-one-profile .pa-matrix {
+      min-width: 600px;
+      font-size: 12px;
+    }
+
+    html.lenovo-tab-one-profile .pa-matrix thead th,
+    html.lenovo-tab-one-profile .pa-food-matrix thead th {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    html.lenovo-tab-one-profile .pa-matrix th.pa-mx-spice,
+    html.lenovo-tab-one-profile .pa-matrix td.pa-mx-spice,
+    html.lenovo-tab-one-profile .pa-food-matrix th.pa-fx-food,
+    html.lenovo-tab-one-profile .pa-food-matrix td.pa-fx-food {
+      max-width: 168px;
+      padding: 0 8px;
+    }
+
+    html.lenovo-tab-one-profile .pa-matrix tbody td {
+      height: 44px;
+      padding: 5px 3px;
+    }
+
+    html.lenovo-tab-one-profile .pa-mx-link {
+      min-height: 44px;
+      padding-right: 4px;
+    }
+
+    html.lenovo-tab-one-profile .pa-drawer-card {
+      max-height: min(42dvh, 320px);
+      padding: 12px 14px 14px;
+    }
+
+    html.lenovo-tab-one-profile .pa-drawer-title {
+      font-size: 17px;
+    }
+
+    html.lenovo-tab-one-profile .pa-sec {
+      margin-bottom: 12px;
+    }
+
+    html.lenovo-tab-one-profile .pa-sec p {
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    html.lenovo-tab-one-profile .pa-chip {
+      padding: 4px 8px;
+      font-size: 11.5px;
+    }
+
+    html.lenovo-tab-one-profile .pa-legend {
+      display: none;
+    }
+
+    html.lenovo-tab-one-profile .pa-food-section {
+      margin-top: 24px;
+      padding-top: 18px;
+    }
+
+    html.lenovo-tab-one-profile .pa-food-title {
+      margin-bottom: 6px;
+    }
+
+    html.lenovo-tab-one-profile .pa-food-sub {
+      margin-bottom: 10px;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     body.pa-page::before { display: none; }
   }
