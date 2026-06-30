@@ -5753,7 +5753,7 @@ html.lenovo-tab-one-profile .ar-modal-tabs {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 html.lenovo-tab-one-profile .ar-modal-tabs button {
@@ -5787,9 +5787,19 @@ html.lenovo-tab-one-profile #addRivieraOverlay .modal {
   transform: none;
 }
 
+html.lenovo-tab-one-profile #addRecipeOverlay .modal-title,
+html.lenovo-tab-one-profile #addRivieraOverlay .modal-title {
+  margin-bottom: 10px !important;
+}
+
+html.lenovo-tab-one-profile #addRecipeOverlay .modal > p,
+html.lenovo-tab-one-profile #addRivieraOverlay .modal > p {
+  margin-bottom: 10px !important;
+}
+
 html.lenovo-tab-one-profile #addRecipeOverlay .form-row,
 html.lenovo-tab-one-profile #addRivieraOverlay .form-row {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 html.lenovo-tab-one-profile #addRecipeOverlay .form-row label,
@@ -5871,14 +5881,14 @@ html.lenovo-tab-one-profile .ar-format-key-row .form-row {
 
 html.lenovo-tab-one-profile .ar-panel--format {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 html.lenovo-tab-one-profile .add-recipe-meta-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
-  margin-bottom: 10px;
-  padding: 8px;
+  gap: 7px;
+  margin-bottom: 8px;
+  padding: 7px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.042), rgba(255, 255, 255, 0.022)),
     rgba(255, 255, 255, 0.022);
@@ -5964,8 +5974,8 @@ html.lenovo-tab-one-profile #addRivieraOverlay .ar-format-actions {
   position: sticky;
   bottom: -1px;
   z-index: 5;
-  margin: 12px -28px -24px;
-  padding: 7px 28px max(9px, calc(9px + env(safe-area-inset-bottom, 0px)));
+  margin: 10px -20px -22px;
+  padding: 7px 20px max(9px, calc(9px + env(safe-area-inset-bottom, 0px)));
   background:
     linear-gradient(180deg, rgba(20, 20, 20, 0.9), rgba(20, 20, 20, 0.985)),
     var(--bg2);
@@ -6045,6 +6055,87 @@ html.lenovo-tab-one-profile .format-review-card .btn-secondary {
   border-radius: 12px;
   font-size: 14px;
   white-space: nowrap;
+}
+
+@media (min-width: 721px) and (max-width: 900px) and (orientation: portrait) {
+  html.lenovo-tab-one-profile .add-recipe-meta-grid--kitchen {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  html.lenovo-tab-one-profile .add-recipe-meta-grid--kitchen .add-meta-name {
+    grid-column: span 3;
+  }
+
+  html.lenovo-tab-one-profile .add-recipe-meta-grid--kitchen .add-meta-wide {
+    grid-column: span 3;
+  }
+
+  html.lenovo-tab-one-profile #arPanelFormat,
+  html.lenovo-tab-one-profile #rvPanelFormat {
+    grid-template-columns: minmax(250px, 0.9fr) minmax(0, 1.1fr);
+    grid-template-areas:
+      "help paste"
+      "key paste"
+      "source paste"
+      "proxy actions";
+    gap: 8px 12px;
+    align-items: start;
+  }
+
+  html.lenovo-tab-one-profile #arPanelFormat .ar-format-help--links,
+  html.lenovo-tab-one-profile #rvPanelFormat .ar-format-help--links {
+    grid-area: help;
+    margin: 0;
+  }
+
+  html.lenovo-tab-one-profile #arGeminiKeySavedStrip,
+  html.lenovo-tab-one-profile #rvGeminiKeySavedStrip,
+  html.lenovo-tab-one-profile #arGeminiKeySection,
+  html.lenovo-tab-one-profile #rvGeminiKeySection {
+    grid-area: key;
+  }
+
+  html.lenovo-tab-one-profile #arPanelFormat .ar-format-source-grid,
+  html.lenovo-tab-one-profile #rvPanelFormat .ar-format-source-grid {
+    grid-area: source;
+    grid-template-columns: 1fr;
+  }
+
+  html.lenovo-tab-one-profile #arPanelFormat .ar-proxy-details,
+  html.lenovo-tab-one-profile #rvPanelFormat .ar-proxy-details {
+    grid-area: proxy;
+    margin-bottom: 0 !important;
+  }
+
+  html.lenovo-tab-one-profile #arPanelFormat > .form-row:has(#arPasteRaw),
+  html.lenovo-tab-one-profile #rvPanelFormat > .form-row:has(#rvPasteRaw) {
+    grid-area: paste;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    min-height: 0;
+    margin-bottom: 0;
+  }
+
+  html.lenovo-tab-one-profile #arPanelFormat textarea#arPasteRaw,
+  html.lenovo-tab-one-profile #rvPanelFormat textarea#rvPasteRaw {
+    flex: 1 1 auto;
+    min-height: 336px !important;
+  }
+
+  html.lenovo-tab-one-profile #arPanelFormat .ar-format-actions,
+  html.lenovo-tab-one-profile #rvPanelFormat .ar-format-actions {
+    grid-area: actions;
+    position: static;
+    margin: 0;
+    padding: 8px;
+    border: 1px solid rgba(201, 169, 110, 0.16);
+    border-radius: 12px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.025)),
+      rgba(255, 255, 255, 0.03);
+    box-shadow: none;
+  }
 }
 
 html.lenovo-tab-one-profile .footer {
