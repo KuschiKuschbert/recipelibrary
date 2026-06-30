@@ -101,7 +101,8 @@
       return;
     }
 
-    var filterText = state.filterActive ? 'Showing event recipes' : 'Show event recipes';
+    var filterText = 'Event only';
+    var filterAria = state.filterActive ? 'Showing event recipes' : 'Show event recipes';
     var filterClass = state.filterActive ? ' riv-event-strip__btn--active' : '';
     var filterPressed = state.filterActive ? 'true' : 'false';
     host.hidden = false;
@@ -112,11 +113,11 @@
       '<span>' + esc(eventMeta(payload)) + '</span>' +
       '</div>' +
       '<div class="riv-event-strip__actions">' +
-      '<button type="button" class="page-action-btn riv-event-strip__btn' + filterClass + '" aria-pressed="' + filterPressed + '" onclick="KuschiRivieraEventContext.toggleFilter()">' + esc(filterText) + '</button>' +
-      '<button type="button" class="page-action-btn riv-event-strip__btn" onclick="KuschiRivieraEventContext.openPlannerList()">Planner list</button>' +
-      '<button type="button" class="page-action-btn riv-event-strip__btn" onclick="KuschiRivieraEventContext.openOrderList()">Event order</button>' +
-      '<button type="button" class="page-action-btn riv-event-strip__btn" onclick="KuschiRivieraEventContext.openPrepBoard()">Prep board</button>' +
-      '<button type="button" class="page-action-btn riv-event-strip__btn riv-event-strip__btn--clear" onclick="KuschiRivieraEventContext.clear()">Clear</button>' +
+      '<button type="button" class="page-action-btn riv-event-strip__btn' + filterClass + '" aria-label="' + esc(filterAria) + '" aria-pressed="' + filterPressed + '" onclick="KuschiRivieraEventContext.toggleFilter()">' + esc(filterText) + '</button>' +
+      '<button type="button" class="page-action-btn riv-event-strip__btn" onclick="KuschiRivieraEventContext.openPlannerList()" aria-label="Open planner list">Planner</button>' +
+      '<button type="button" class="page-action-btn riv-event-strip__btn" onclick="KuschiRivieraEventContext.openOrderList()" aria-label="Open event order">Order</button>' +
+      '<button type="button" class="page-action-btn riv-event-strip__btn" onclick="KuschiRivieraEventContext.openPrepBoard()" aria-label="Open prep board">Prep</button>' +
+      '<button type="button" class="page-action-btn riv-event-strip__btn riv-event-strip__btn--clear" onclick="KuschiRivieraEventContext.clear()" aria-label="Clear active function">Clear</button>' +
       '</div>';
   }
 
