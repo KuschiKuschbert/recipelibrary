@@ -6464,10 +6464,11 @@ html.lenovo-tab-one-profile #kbOrderListOverlay .modal.order-list-modal,
 html.lenovo-tab-one-profile #prepOverlay .modal.order-list-modal,
 html.lenovo-tab-one-profile #kbPrepOverlay .modal.order-list-modal {
   max-width: min(780px, calc(100vw - 28px));
+  overflow-x: hidden;
 }
 
 html.lenovo-tab-one-profile .order-zone-block:not(.stkt-zone-block) {
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 html.lenovo-tab-one-profile .order-zone-block:not(.stkt-zone-block) .order-zone-head {
@@ -6478,27 +6479,29 @@ html.lenovo-tab-one-profile .order-zone-block:not(.stkt-zone-block) .order-zone-
   position: sticky;
   top: 0;
   z-index: 3;
-  min-height: 34px;
-  margin-bottom: 8px;
-  padding: 0 10px;
+  min-height: 30px;
+  margin-bottom: 6px;
+  padding: 0 9px;
   background:
     linear-gradient(90deg, rgba(201, 169, 110, 0.11), rgba(255, 255, 255, 0.025));
   border: 1px solid rgba(201, 169, 110, 0.15);
   border-left: 4px solid rgba(201, 169, 110, 0.44);
-  border-radius: 12px;
-  font-size: 12px;
-  letter-spacing: 0.12em;
+  border-radius: 10px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
 }
 
 html.lenovo-tab-one-profile .order-line-name {
-  font-size: 14px;
-  line-height: 1.35;
+  font-size: 13.5px;
+  line-height: 1.28;
+  overflow: hidden;
   overflow-wrap: anywhere;
 }
 
 html.lenovo-tab-one-profile #stocktakeOverlay .modal.order-list-modal,
 html.lenovo-tab-one-profile #kbStocktakeOverlay .modal.order-list-modal {
   max-width: min(780px, calc(100vw - 28px));
+  overflow-x: hidden;
 }
 
 html.lenovo-tab-one-profile .stocktake-intro {
@@ -6506,14 +6509,15 @@ html.lenovo-tab-one-profile .stocktake-intro {
   margin: -2px 52px 12px 0;
   color: var(--text3);
   font-size: 12px;
-  line-height: 1.42;
+  line-height: 1.38;
+  max-height: 33px;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
 }
 
 html.lenovo-tab-one-profile .stkt-zone-block {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 html.lenovo-tab-one-profile .stkt-zone-block .order-zone-head {
@@ -6524,28 +6528,29 @@ html.lenovo-tab-one-profile .stkt-zone-block .order-zone-head {
   position: sticky;
   top: 0;
   z-index: 3;
-  min-height: 38px;
-  margin-bottom: 12px;
-  padding: 0 12px;
+  min-height: 32px;
+  margin-bottom: 8px;
+  padding: 0 10px;
   background:
     linear-gradient(90deg, rgba(201, 169, 110, 0.11), rgba(255, 255, 255, 0.025));
   border: 1px solid rgba(201, 169, 110, 0.15);
   border-left: 4px solid rgba(201, 169, 110, 0.44);
-  border-radius: 12px;
-  font-size: 12px;
-  letter-spacing: 0.12em;
+  border-radius: 10px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
 }
 
 html.lenovo-tab-one-profile .order-zone-count {
-  min-width: 64px;
-  padding: 4px 9px;
-  font-size: 12px;
+  min-width: 58px;
+  padding: 3px 8px;
+  font-size: 11px;
   text-align: center;
 }
 
 html.lenovo-tab-one-profile .stkt-line-name {
-  font-size: 15px;
-  line-height: 1.35;
+  font-size: 14px;
+  line-height: 1.28;
+  overflow: hidden;
   overflow-wrap: anywhere;
 }
 
@@ -6559,7 +6564,7 @@ html.lenovo-tab-one-profile .ord-unit-suffix,
 html.lenovo-tab-one-profile .ord-zone-display,
 html.lenovo-tab-one-profile .stkt-zone-label,
 html.lenovo-tab-one-profile .order-add-hint {
-  font-size: 13px;
+  font-size: 12px;
 }
 
 html.lenovo-tab-one-profile .ord-field-label {
@@ -6573,15 +6578,20 @@ html.lenovo-tab-one-profile .ord-unit-suffix {
 
 html.lenovo-tab-one-profile .order-line-need {
   max-width: 100%;
-  margin-top: 4px;
-  font-size: 12px;
+  margin-top: 2px;
+  font-size: 11px;
+  line-height: 1.25;
 }
 
 html.lenovo-tab-one-profile #orderListOverlay .order-list-intro,
 html.lenovo-tab-one-profile #kbOrderListOverlay .order-list-intro {
+  display: -webkit-box;
   margin: -2px 52px 12px 0;
   font-size: 12px;
-  line-height: 1.45;
+  line-height: 1.38;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 html.lenovo-tab-one-profile #orderListOverlay .order-add-panel,
@@ -6689,17 +6699,18 @@ html.lenovo-tab-one-profile #orderListOverlay .order-actions--order-list,
 html.lenovo-tab-one-profile #kbOrderListOverlay .order-actions--order-list {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
-  margin-top: 14px;
-  padding-top: 10px;
-  padding-bottom: max(10px, env(safe-area-inset-bottom, 0px));
+  gap: 6px;
+  margin-top: 12px;
+  padding-top: 8px;
+  padding-bottom: max(8px, env(safe-area-inset-bottom, 0px));
 }
 
 html.lenovo-tab-one-profile #orderListOverlay .order-actions--order-list .btn-secondary,
 html.lenovo-tab-one-profile #kbOrderListOverlay .order-actions--order-list .btn-secondary {
   min-width: 0;
-  padding: 9px 10px;
-  font-size: 12px;
+  min-height: 44px;
+  padding: 7px 8px;
+  font-size: 11.5px;
   line-height: 1.15;
 }
 
@@ -6712,17 +6723,18 @@ html.lenovo-tab-one-profile #kbStocktakeOverlay .stocktake-actions {
     minmax(86px, 0.74fr)
     minmax(106px, 0.92fr)
     minmax(90px, 0.78fr);
-  gap: 8px;
-  margin-top: 14px;
-  padding-top: 10px;
-  padding-bottom: max(10px, env(safe-area-inset-bottom, 0px));
+  gap: 6px;
+  margin-top: 12px;
+  padding-top: 8px;
+  padding-bottom: max(8px, env(safe-area-inset-bottom, 0px));
 }
 
 html.lenovo-tab-one-profile #stocktakeOverlay .stocktake-actions .btn-secondary,
 html.lenovo-tab-one-profile #kbStocktakeOverlay .stocktake-actions .btn-secondary {
   min-width: 0;
-  padding: 9px 8px;
-  font-size: 12px;
+  min-height: 44px;
+  padding: 7px 7px;
+  font-size: 11.5px;
   line-height: 1.15;
   white-space: normal;
 }
@@ -7002,21 +7014,21 @@ html.lenovo-tab-one-profile .nav-item__label {
 @media (max-width: 860px) {
   html.lenovo-tab-one-profile .order-line-row {
     position: relative;
-    grid-template-columns: minmax(0, 1fr) minmax(176px, 0.5fr) 48px;
+    grid-template-columns: minmax(0, 1fr) minmax(164px, 0.46fr) 44px;
     grid-template-rows: auto;
-    gap: 8px 10px;
-    margin-bottom: 7px;
-    padding: 10px;
+    gap: 6px 8px;
+    margin-bottom: 5px;
+    padding: 7px 8px;
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.038), rgba(255, 255, 255, 0.022));
     border: 1px solid rgba(255, 255, 255, 0.11);
-    border-radius: 12px;
+    border-radius: 10px;
     content-visibility: auto;
-    contain-intrinsic-size: auto 82px;
+    contain-intrinsic-size: auto 62px;
   }
 
   html.lenovo-tab-one-profile .order-line-row[data-kind='recipe'] {
-    grid-template-columns: minmax(0, 1fr) minmax(176px, 0.5fr);
+    grid-template-columns: minmax(0, 1fr) minmax(164px, 0.46fr);
   }
 
   html.lenovo-tab-one-profile .order-line-row .order-line-name {
@@ -7032,8 +7044,8 @@ html.lenovo-tab-one-profile .nav-item__label {
 
   html.lenovo-tab-one-profile .order-line-row .ord-qty-with-unit,
   html.lenovo-tab-one-profile .order-line-sub .ord-qty-with-unit {
-    grid-template-columns: minmax(0, 1fr) 2.7rem;
-    gap: 4px 6px;
+    grid-template-columns: minmax(0, 1fr) 2.45rem;
+    gap: 3px 5px;
   }
 
   html.lenovo-tab-one-profile .order-line-row .ord-field-label,
@@ -7069,10 +7081,10 @@ html.lenovo-tab-one-profile .nav-item__label {
   }
 
   html.lenovo-tab-one-profile .order-line-row:has(.ord-zone-control--select) {
-    grid-template-columns: minmax(0, 1fr) minmax(170px, 0.72fr) 48px;
+    grid-template-columns: minmax(0, 1fr) minmax(158px, 0.68fr) 44px;
     grid-template-rows: auto auto;
-    gap: 9px 10px;
-    padding: 12px 10px;
+    gap: 7px 8px;
+    padding: 8px;
   }
 
   html.lenovo-tab-one-profile .order-line-row:has(.ord-zone-control--select) .order-line-name {
@@ -7094,22 +7106,28 @@ html.lenovo-tab-one-profile .nav-item__label {
   html.lenovo-tab-one-profile .order-line-row input[type='text'],
   html.lenovo-tab-one-profile .order-line-row select,
   html.lenovo-tab-one-profile .order-line-sub .ord-extra-qty {
-    border-radius: 10px;
+    min-width: 0;
+    min-height: 42px;
+    padding: 7px 8px;
+    border-radius: 9px;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   html.lenovo-tab-one-profile .order-line-sub {
     position: relative;
-    grid-template-columns: 20px minmax(0, 1fr) minmax(154px, 0.5fr) 48px;
+    grid-template-columns: 18px minmax(0, 1fr) minmax(144px, 0.46fr) 44px;
     grid-template-rows: auto;
-    gap: 8px 10px;
-    margin: -1px 0 7px 10px;
-    padding: 8px 10px;
+    gap: 6px 8px;
+    margin: -1px 0 5px 8px;
+    padding: 6px 8px;
     background: rgba(255, 255, 255, 0.024);
     border: 1px solid rgba(255, 255, 255, 0.09);
     border-left: 3px solid rgba(201, 169, 110, 0.28);
-    border-radius: 10px;
+    border-radius: 9px;
     content-visibility: auto;
-    contain-intrinsic-size: auto 64px;
+    contain-intrinsic-size: auto 56px;
   }
 
   html.lenovo-tab-one-profile .order-line-sub .order-sub-merged {
@@ -7139,8 +7157,8 @@ html.lenovo-tab-one-profile .nav-item__label {
     grid-column: 4;
     grid-row: 1;
     justify-self: end;
-    min-width: 48px;
-    min-height: 48px;
+    min-width: 44px;
+    min-height: 42px;
     padding-left: 0;
     padding-right: 0;
   }
@@ -7253,28 +7271,28 @@ html.lenovo-tab-one-profile .nav-item__label {
 @media (min-width: 721px) and (max-width: 900px) {
   html.lenovo-tab-one-profile .stkt-line-row {
     grid-template-columns:
-      minmax(0, 1.24fr)
-      minmax(68px, 0.3fr)
-      minmax(94px, 0.42fr)
-      minmax(112px, 0.52fr)
-      minmax(84px, 0.36fr);
-    grid-template-rows: minmax(44px, auto);
-    gap: 6px;
-    min-height: 60px;
-    margin-bottom: 6px;
-    padding: 7px 9px;
-    border-radius: 12px;
-    contain-intrinsic-size: auto 64px;
+      minmax(0, 1.28fr)
+      minmax(62px, 0.26fr)
+      minmax(86px, 0.36fr)
+      minmax(106px, 0.48fr)
+      minmax(76px, 0.32fr);
+    grid-template-rows: minmax(42px, auto);
+    gap: 5px;
+    min-height: 54px;
+    margin-bottom: 4px;
+    padding: 5px 8px;
+    border-radius: 10px;
+    contain-intrinsic-size: auto 58px;
   }
 
   html.lenovo-tab-one-profile .stkt-line-row.stkt-line-sub {
     grid-template-columns:
-      minmax(0, 1.24fr)
-      minmax(68px, 0.3fr)
-      minmax(94px, 0.42fr)
-      minmax(112px, 0.52fr)
-      minmax(84px, 0.36fr);
-    padding-left: 10px;
+      minmax(0, 1.28fr)
+      minmax(62px, 0.26fr)
+      minmax(86px, 0.36fr)
+      minmax(106px, 0.48fr)
+      minmax(76px, 0.32fr);
+    padding-left: 8px;
   }
 
   html.lenovo-tab-one-profile .stkt-line-row .stkt-line-name,
@@ -7290,11 +7308,11 @@ html.lenovo-tab-one-profile .nav-item__label {
   }
 
   html.lenovo-tab-one-profile .stkt-line-sub .stkt-line-name {
-    padding-left: 16px;
+    padding-left: 14px;
   }
 
   html.lenovo-tab-one-profile .stkt-line-sub .order-sub-merged {
-    left: 10px;
+    left: 8px;
     top: 50%;
     transform: translateY(-50%);
   }
@@ -7305,9 +7323,9 @@ html.lenovo-tab-one-profile .nav-item__label {
     align-self: center;
     justify-self: stretch;
     justify-content: center;
-    min-height: 34px;
-    padding: 4px 6px;
-    font-size: 11px;
+    min-height: 28px;
+    padding: 3px 5px;
+    font-size: 10.5px;
     text-align: center;
   }
 
@@ -7327,9 +7345,12 @@ html.lenovo-tab-one-profile .nav-item__label {
   }
 
   html.lenovo-tab-one-profile .stkt-line-row .stkt-field {
-    min-height: 44px;
-    padding: 8px 9px;
-    font-size: 14px;
+    min-width: 0;
+    min-height: 42px;
+    padding: 6px 7px;
+    font-size: 13.5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   html.lenovo-tab-one-profile .stkt-badge {
@@ -7340,11 +7361,11 @@ html.lenovo-tab-one-profile .nav-item__label {
 
   html.lenovo-tab-one-profile .stkt-line-row--stx {
     grid-template-columns:
-      minmax(0, 1.12fr)
-      minmax(68px, 0.28fr)
-      minmax(88px, 0.38fr)
-      minmax(104px, 0.46fr)
-      minmax(78px, 0.34fr)
+      minmax(0, 1.16fr)
+      minmax(62px, 0.24fr)
+      minmax(82px, 0.34fr)
+      minmax(98px, 0.44fr)
+      minmax(72px, 0.3fr)
       44px;
   }
 
@@ -7363,7 +7384,7 @@ html.lenovo-tab-one-profile .nav-item__label {
     align-self: stretch;
     justify-self: stretch;
     min-width: 44px;
-    min-height: 44px;
+    min-height: 42px;
   }
 }
 
