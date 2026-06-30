@@ -32,6 +32,7 @@
   var _dataPromise = null;
   var _includeRecipesInPrint = false;
   var _timelineChecked = {};
+  var _prepImportChoice = null;
   var TIMELINE_CHECK_KEY = 'kuschi_planner_timeline_v1::';
 
   function timelineRowId(row) {
@@ -636,6 +637,72 @@
     }, 2200);
   }
 
+  function closePrepImportChoice() {
+    if (!_prepImportChoice) return;
+    if (typeof _prepImportChoice._cleanup === 'function') _prepImportChoice._cleanup();
+    if (_prepImportChoice.parentNode) _prepImportChoice.parentNode.removeChild(_prepImportChoice);
+    _prepImportChoice = null;
+    document.body.classList.remove('planner-prep-choice-open');
+  }
+
+  function showPrepImportChoice(existingCount, incomingCount, onChoose) {
+    closePrepImportChoice();
+    var sheet = document.createElement('div');
+    sheet.className = 'planner-prep-choice';
+    sheet.setAttribute('role', 'dialog');
+    sheet.setAttribute('aria-modal', 'true');
+    sheet.setAttribute('aria-labelledby', 'plannerPrepChoiceTitle');
+    sheet.innerHTML =
+      '<div class="planner-prep-choice__backdrop" data-choice="cancel"></div>' +
+      '<section class="planner-prep-choice__panel">' +
+      '<div class="planner-prep-choice__copy">' +
+      '<p class="planner-prep-choice__eyebrow">Prep board import</p>' +
+      '<h3 id="plannerPrepChoiceTitle">Keep existing prep tasks?</h3>' +
+      '<p>The prep board already has <strong>' +
+      esc(existingCount) +
+      '</strong> tasks. Add <strong>' +
+      esc(incomingCount) +
+      '</strong> planner tasks, or replace the board with this timeline.</p>' +
+      '</div>' +
+      '<div class="planner-prep-choice__actions">' +
+      '<button type="button" class="btn-secondary planner-prep-choice__append" data-choice="append">Append tasks</button>' +
+      '<button type="button" class="btn-secondary planner-prep-choice__replace" data-choice="replace">Replace board</button>' +
+      '<button type="button" class="btn-secondary planner-prep-choice__cancel" data-choice="cancel">Cancel</button>' +
+      '</div>' +
+      '</section>';
+
+    function finish(mode) {
+      closePrepImportChoice();
+      if (mode && typeof onChoose === 'function') onChoose(mode);
+    }
+
+    function onClick(ev) {
+      var target = ev.target.closest('[data-choice]');
+      if (!target || !sheet.contains(target)) return;
+      var choice = target.getAttribute('data-choice');
+      finish(choice === 'replace' || choice === 'append' ? choice : null);
+    }
+
+    function onKey(ev) {
+      if (ev.key === 'Escape') {
+        ev.preventDefault();
+        finish(null);
+      }
+    }
+
+    sheet._cleanup = function () {
+      sheet.removeEventListener('click', onClick);
+      document.removeEventListener('keydown', onKey, true);
+    };
+    sheet.addEventListener('click', onClick);
+    document.addEventListener('keydown', onKey, true);
+    document.body.appendChild(sheet);
+    document.body.classList.add('planner-prep-choice-open');
+    _prepImportChoice = sheet;
+    var primary = sheet.querySelector('.planner-prep-choice__append');
+    if (primary && typeof primary.focus === 'function') primary.focus();
+  }
+
   function populatePrintRoot() {
     var root = document.getElementById('plannerPrintRoot');
     if (!root || !_built || !_payload) return;
@@ -1017,6 +1084,7 @@
   }
 
   function close() {
+    closePrepImportChoice();
     var overlay = document.getElementById('plannerListOverlay');
     if (overlay) overlay.classList.remove('open');
     document.body.classList.remove('planner-list-open');
@@ -1075,21 +1143,16 @@
       return;
     }
     var existing = typeof prep.getTaskCount === 'function' ? prep.getTaskCount() : 0;
-    var mode = 'append';
-    if (existing > 0) {
-      mode = confirm(
-        'Replace all ' +
-          existing +
-          ' prep tasks with this planner timeline?\n\nOK = Replace\nCancel = Append ' +
-          tasks.length +
-          ' tasks'
-      )
-        ? 'replace'
-        : 'append';
+    function openPrepWithMode(mode) {
+      prep.importTasks(tasks, { mode: mode, planId: _payload && _payload.planId });
+      if (window.KuschiOverlayStack) window.KuschiOverlayStack.push(['plannerListOverlay']);
+      prep.open({ fromPlanner: true });
     }
-    prep.importTasks(tasks, { mode: mode, planId: _payload && _payload.planId });
-    if (window.KuschiOverlayStack) window.KuschiOverlayStack.push(['plannerListOverlay']);
-    prep.open({ fromPlanner: true });
+    if (existing > 0) {
+      showPrepImportChoice(existing, tasks.length, openPrepWithMode);
+      return;
+    }
+    openPrepWithMode('append');
   }
 
   function bindControls() {
