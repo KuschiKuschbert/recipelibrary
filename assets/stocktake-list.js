@@ -617,6 +617,13 @@
           escAttr(String(zoneIntrinsicSize)) +
           'px">';
         html += zoneHeaderHtml(ZL[z], visibleRows);
+        html +=
+          '<div class="stkt-column-head" aria-hidden="true">' +
+          '<span class="stkt-column-head__item">Item</span>' +
+          '<span class="stkt-column-head__qty">Count</span>' +
+          '<span class="stkt-column-head__brand">Brand</span>' +
+          '<span class="stkt-column-head__uom">UOM</span>' +
+          '</div>';
 
         rows.forEach(function (line) {
           var defaultUom = line.orderUnit != null ? String(line.orderUnit) : '';

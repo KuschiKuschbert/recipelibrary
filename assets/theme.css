@@ -2096,6 +2096,9 @@ html.low-memory-device .kuschi-toast--show {
 .stkt-row-spacer {
   display: block;
 }
+.stkt-column-head {
+  display: none;
+}
 /* Sub-row (folded order extra): arrow + same fields as main row */
 .stkt-line-row.stkt-line-sub {
   grid-template-columns: 22px minmax(0, 1.28fr) 80px minmax(0, 0.68fr) minmax(0, 0.78fr) minmax(0, 1fr) 32px;
@@ -7353,6 +7356,43 @@ html.lenovo-tab-one-profile .stkt-zone-block .order-zone-head {
   letter-spacing: 0.08em;
 }
 
+html.lenovo-tab-one-profile .stkt-column-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) 88px minmax(0, 0.75fr) minmax(0, 0.85fr) minmax(0, 1fr) 36px;
+  gap: 8px;
+  align-items: center;
+  min-height: 28px;
+  margin: -4px 0 4px;
+  padding: 0 7px;
+  background:
+    linear-gradient(180deg, rgba(20, 20, 20, 0.98), rgba(20, 20, 20, 0.92)),
+    var(--bg2);
+  border: 1px solid rgba(201, 169, 110, 0.11);
+  border-radius: 8px;
+  color: var(--text3);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+html.lenovo-tab-one-profile .stkt-column-head__item {
+  grid-column: 1;
+}
+
+html.lenovo-tab-one-profile .stkt-column-head__qty {
+  grid-column: 3;
+}
+
+html.lenovo-tab-one-profile .stkt-column-head__brand {
+  grid-column: 4;
+}
+
+html.lenovo-tab-one-profile .stkt-column-head__uom {
+  grid-column: 5;
+}
+
 html.lenovo-tab-one-profile .order-zone-count {
   min-width: 58px;
   padding: 3px 8px;
@@ -8385,6 +8425,28 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
     padding-left: 8px;
   }
 
+  html.lenovo-tab-one-profile .stkt-column-head {
+    grid-template-columns:
+      minmax(0, 1.46fr)
+      minmax(92px, 0.34fr)
+      minmax(136px, 0.52fr)
+      minmax(78px, 0.28fr);
+    gap: 4px 5px;
+    margin-bottom: 3px;
+  }
+
+  html.lenovo-tab-one-profile .stkt-column-head__qty {
+    grid-column: 2;
+  }
+
+  html.lenovo-tab-one-profile .stkt-column-head__brand {
+    grid-column: 3;
+  }
+
+  html.lenovo-tab-one-profile .stkt-column-head__uom {
+    grid-column: 4;
+  }
+
   html.lenovo-tab-one-profile .stkt-line-row .stkt-line-name,
   html.lenovo-tab-one-profile .stkt-line-sub .stkt-line-name {
     grid-column: 1;
@@ -9023,6 +9085,32 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
       minmax(120px, 0.42fr)
       42px;
     padding-left: 8px;
+  }
+
+  html.lenovo-tab-one-profile #stocktakeOverlay .stkt-column-head,
+  html.lenovo-tab-one-profile #kbStocktakeOverlay .stkt-column-head {
+    grid-template-columns:
+      minmax(0, 1.72fr)
+      minmax(92px, 0.32fr)
+      minmax(140px, 0.48fr)
+      minmax(120px, 0.42fr)
+      42px;
+    gap: 4px 6px;
+  }
+
+  html.lenovo-tab-one-profile #stocktakeOverlay .stkt-column-head__qty,
+  html.lenovo-tab-one-profile #kbStocktakeOverlay .stkt-column-head__qty {
+    grid-column: 2;
+  }
+
+  html.lenovo-tab-one-profile #stocktakeOverlay .stkt-column-head__brand,
+  html.lenovo-tab-one-profile #kbStocktakeOverlay .stkt-column-head__brand {
+    grid-column: 3;
+  }
+
+  html.lenovo-tab-one-profile #stocktakeOverlay .stkt-column-head__uom,
+  html.lenovo-tab-one-profile #kbStocktakeOverlay .stkt-column-head__uom {
+    grid-column: 4;
   }
 
   html.lenovo-tab-one-profile #stocktakeOverlay .stkt-line-row .stkt-line-name,
