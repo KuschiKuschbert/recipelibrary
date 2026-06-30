@@ -9688,10 +9688,10 @@ html.lenovo-tab-one-profile .fn-dish-chip__hint {
 html.lenovo-tab-one-profile .planner-list__actions {
   display: grid;
   grid-template-columns:
-    minmax(178px, 1.1fr)
-    minmax(164px, 0.95fr)
-    minmax(172px, 1fr)
-    minmax(148px, 0.82fr);
+    minmax(204px, 1.22fr)
+    minmax(150px, 0.82fr)
+    minmax(158px, 0.86fr)
+    minmax(138px, 0.72fr);
   gap: 6px;
   padding: 7px 20px 8px;
   background: rgba(20, 20, 20, 0.98);
@@ -9705,7 +9705,7 @@ html.lenovo-tab-one-profile .planner-list__actions .btn-secondary {
   min-width: 0;
   min-height: 44px;
   border-radius: 10px;
-  font-size: 12px;
+  font-size: 11.5px;
   padding-inline: 8px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -9736,15 +9736,17 @@ html.lenovo-tab-one-profile .planner-list__summary-kicker {
 
 html.lenovo-tab-one-profile .planner-list__primary-action {
   min-height: 44px;
-  border-color: rgba(201, 169, 110, 0.42);
+  border-color: rgba(201, 169, 110, 0.62);
   background:
-    linear-gradient(180deg, rgba(201, 169, 110, 0.18), rgba(201, 169, 110, 0.08)),
+    linear-gradient(180deg, rgba(201, 169, 110, 0.24), rgba(201, 169, 110, 0.11)),
     var(--surface);
-  box-shadow: inset 0 0 0 1px rgba(201, 169, 110, 0.08);
+  color: var(--gold-light);
+  font-weight: 700;
+  box-shadow: inset 0 0 0 1px rgba(201, 169, 110, 0.14);
 }
 
 html.lenovo-tab-one-profile .planner-list__action-group--ops .planner-list__primary-action {
-  font-size: 12.5px;
+  font-size: 13px;
 }
 
 html.lenovo-tab-one-profile .planner-list__action-group {
@@ -9758,13 +9760,32 @@ html.lenovo-tab-one-profile .planner-list__print-group {
   grid-template-columns: minmax(94px, 1.08fr) minmax(72px, 0.92fr);
 }
 
+html.lenovo-tab-one-profile .planner-list__action-group:not(.planner-list__action-group--ops) {
+  gap: 4px;
+  padding: 3px;
+  background: rgba(255, 255, 255, 0.026);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: 12px;
+}
+
+html.lenovo-tab-one-profile .planner-list__action-group:not(.planner-list__action-group--ops) .btn-secondary {
+  min-height: 44px;
+  background: rgba(255, 255, 255, 0.018);
+  border-color: transparent;
+  color: var(--text3);
+  font-size: 11px;
+  font-weight: 600;
+}
+
 html.lenovo-tab-one-profile .planner-list__print-opt {
   min-height: 44px;
   padding: 0 9px;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.018);
+  border: 1px solid transparent;
   border-radius: 10px;
-  font-size: 12px;
+  color: var(--text3);
+  font-size: 11px;
+  font-weight: 600;
 }
 
 html.lenovo-tab-one-profile .planner-list__print-opt input {
