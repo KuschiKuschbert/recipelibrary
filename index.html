@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=74">
+<link rel="stylesheet" href="assets/theme.css?v=75">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
@@ -642,7 +642,7 @@
     </div>
     </div>
     <div id="arPanelFormat" class="ar-panel ar-panel--format" role="tabpanel" aria-labelledby="arTabFormat" hidden>
-      <p class="ar-format-help">Gemini formats pasted text, URL, PDF/DOCX, or image. Key stays on this device; recipe text is sent to Google. <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Get key</a> · <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Restrict</a></p>
+      <p class="ar-format-help ar-format-help--links"><span>Gemini formats pasted text, URL, PDF/DOCX, or image. Key stays on this device; recipe text is sent to Google.</span><span class="ar-help-links"><a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Get key</a><a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Restrict</a></span></p>
       <div id="arGeminiKeySavedStrip" class="ar-gemini-saved-strip" hidden>
         <span>API key saved on this device.</span>
         <button type="button" class="btn-secondary" onclick="showKitchenGeminiKeyEditor()">Change</button>
@@ -678,7 +678,7 @@
 </div>
 
 <div class="footer" id="footer" style="display:none">
-  <div class="footer-text">Kuschi Kitchen Library v3.0 · <a href="aroma.html">Aroma</a> · <a href="riviera.html">Riviera</a> · <a href="https://github.com/KuschiKuschbert/recipelibrary" target="_blank">GitHub</a></div>
+  <div class="footer-text"><span class="footer-note">Kuschi Kitchen Library v3.0</span><span class="footer-links" aria-label="Kitchen links"><span class="footer-sep" aria-hidden="true">·</span><a href="aroma.html">Aroma</a><span class="footer-sep" aria-hidden="true">·</span><a href="riviera.html">Riviera</a><span class="footer-sep" aria-hidden="true">·</span><a href="https://github.com/KuschiKuschbert/recipelibrary" target="_blank" rel="noopener">GitHub</a></span></div>
 </div>
 
 

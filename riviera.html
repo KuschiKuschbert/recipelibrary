@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=74">
+<link rel="stylesheet" href="assets/theme.css?v=75">
 <link rel="preload" href="riviera_data/builtins.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
@@ -1474,7 +1474,7 @@ html.lenovo-tab-one-profile .fn-planner__desc {
     </div>
     </div>
     <div id="rvPanelFormat" class="ar-panel ar-panel--format" role="tabpanel" aria-labelledby="rvTabFormat" hidden>
-      <p class="ar-format-help">Same Gemini key as Kitchen. Formats pasted text, URL, PDF/DOCX, or image; text is sent to Google. <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Get key</a> · <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Restrict</a></p>
+      <p class="ar-format-help ar-format-help--links"><span>Same Gemini key as Kitchen. Formats pasted text, URL, PDF/DOCX, or image; text is sent to Google.</span><span class="ar-help-links"><a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Get key</a><a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Restrict</a></span></p>
       <div id="rvGeminiKeySavedStrip" class="ar-gemini-saved-strip" hidden>
         <span>API key saved on this device.</span>
         <button type="button" class="btn-secondary" onclick="showRivieraGeminiKeyEditor()">Change</button>
@@ -1510,7 +1510,7 @@ html.lenovo-tab-one-profile .fn-planner__desc {
 </div>
 
 <div class="footer">
-  <div class="footer-text">Riviera prep set · Personal static site (GitHub Pages)</div>
+  <div class="footer-text"><span class="footer-note">Riviera prep set · Personal static site (GitHub Pages)</span></div>
   <div class="footer-riviera-admin" id="rivieraAdminChrome">
     <button type="button" class="btn-text riv-admin-btn" id="rivieraAdminOpenBtn" onclick="openRivieraAdminModal()">Admin</button>
     <span id="rivieraAdminUnlockedStrip" class="riv-admin-unlocked" style="display:none">

@@ -1025,6 +1025,24 @@ html.low-memory-device .kuschi-toast--show {
   text-decoration: none;
 }
 
+.footer-note,
+.footer-links {
+  display: inline;
+}
+
+.footer-sep {
+  color: var(--text3);
+  margin: 0 3px;
+}
+
+.ar-help-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
 /* ── Form helpers (add-recipe / order list) ─────────── */
 .form-row {
   margin-bottom: 14px;
@@ -4605,10 +4623,10 @@ html.lenovo-tab-one-profile body.has-app-nav .modal-quick-action {
 
 html.lenovo-tab-one-profile body.has-app-nav .modal-scale {
   display: grid;
-  grid-template-columns: auto minmax(78px, 92px) minmax(0, 1fr);
-  min-height: 50px;
+  grid-template-columns: auto minmax(92px, 112px) minmax(0, 1fr);
+  min-height: 54px;
   margin-bottom: 14px;
-  padding: 8px 10px;
+  padding: 7px 10px;
   gap: 9px;
   border-radius: 10px;
   background:
@@ -4616,15 +4634,24 @@ html.lenovo-tab-one-profile body.has-app-nav .modal-scale {
     rgba(255, 255, 255, 0.035);
 }
 
+html.lenovo-tab-one-profile body.has-app-nav .modal-scale:has(.modal-scale-factor:empty) {
+  grid-template-columns: auto minmax(92px, 112px);
+  justify-content: start;
+}
+
 html.lenovo-tab-one-profile body.has-app-nav .modal-scale label,
 html.lenovo-tab-one-profile body.has-app-nav .modal-scale-factor {
   font-size: 11px;
 }
 
+html.lenovo-tab-one-profile body.has-app-nav .modal-scale-factor:empty {
+  display: none;
+}
+
 html.lenovo-tab-one-profile body.has-app-nav .modal-scale input {
   width: 100%;
   min-width: 78px;
-  min-height: 40px;
+  min-height: 44px;
   padding: 7px 9px;
   font-size: 15px;
 }
@@ -5396,6 +5423,34 @@ html.lenovo-tab-one-profile .ar-proxy-details summary {
   line-height: 1.6;
 }
 
+html.lenovo-tab-one-profile .ar-format-help--links {
+  display: grid;
+  gap: 8px;
+}
+
+html.lenovo-tab-one-profile .ar-help-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-left: 0;
+}
+
+html.lenovo-tab-one-profile .ar-help-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 13px;
+  border: 1px solid rgba(201, 169, 110, 0.25);
+  border-radius: 10px;
+  background: rgba(201, 169, 110, 0.09);
+  color: var(--gold-light);
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.15;
+  text-decoration: none;
+}
+
 html.lenovo-tab-one-profile .ar-format-key-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(168px, auto);
@@ -5573,6 +5628,71 @@ html.lenovo-tab-one-profile .format-review-card .btn-secondary {
   border-radius: 12px;
   font-size: 14px;
   white-space: nowrap;
+}
+
+html.lenovo-tab-one-profile .footer {
+  margin-top: 16px;
+  padding: 20px 20px max(22px, env(safe-area-inset-bottom, 0px));
+}
+
+html.lenovo-tab-one-profile .footer-text {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  color: var(--text3);
+  font-size: 13px;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+html.lenovo-tab-one-profile .footer-note {
+  display: block;
+}
+
+html.lenovo-tab-one-profile .footer-links,
+html.lenovo-tab-one-profile .footer-riviera-admin,
+html.lenovo-tab-one-profile .footer-kb-admin {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+html.lenovo-tab-one-profile .footer-sep {
+  display: none;
+}
+
+html.lenovo-tab-one-profile .footer-text a,
+html.lenovo-tab-one-profile .footer .riv-admin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 13px;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  color: var(--text2);
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.15;
+  text-decoration: none;
+}
+
+html.lenovo-tab-one-profile .footer-text a:hover,
+html.lenovo-tab-one-profile .footer .riv-admin-btn:hover {
+  border-color: rgba(201, 169, 110, 0.42);
+  color: var(--gold-light);
+}
+
+html.lenovo-tab-one-profile .footer .riv-admin-unlocked .riv-admin-btn {
+  margin: 0;
+}
+
+html.lenovo-tab-one-profile .footer #kbDeleteBookBtn {
+  min-height: 44px;
+  margin-top: 8px !important;
+  font-size: 12.5px !important;
 }
 
 html.lenovo-tab-one-profile .aroma-add-panel {

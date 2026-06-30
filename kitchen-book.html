@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=74">
+<link rel="stylesheet" href="assets/theme.css?v=75">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
@@ -492,7 +492,7 @@
     </div>
     </div>
     <div id="arPanelFormat" class="ar-panel ar-panel--format" role="tabpanel" aria-labelledby="arTabFormat" hidden>
-      <p class="ar-format-help">Gemini formats pasted text, URL, PDF/DOCX, or image. Key stays on this device; recipe text is sent to Google. <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Get key</a> · <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Restrict</a></p>
+      <p class="ar-format-help ar-format-help--links"><span>Gemini formats pasted text, URL, PDF/DOCX, or image. Key stays on this device; recipe text is sent to Google.</span><span class="ar-help-links"><a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Get key</a><a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Restrict</a></span></p>
       <div id="arGeminiKeySavedStrip" class="ar-gemini-saved-strip" hidden>
         <span>API key saved on this device.</span>
         <button type="button" class="btn-secondary" onclick="showKitchenGeminiKeyEditor()">Change</button>
@@ -635,7 +635,7 @@
       </span>
     </div>
     <button type="button" class="btn-secondary" id="kbDeleteBookBtn" onclick="deleteThisKitchenBook()" style="display:none;margin-top:10px;font-size:12px">Delete this kitchen book…</button>
-    <div style="margin-top:10px">Personal static site (GitHub Pages)</div>
+    <div class="footer-note" style="margin-top:10px">Personal static site (GitHub Pages)</div>
   </div>
 </div>
 
