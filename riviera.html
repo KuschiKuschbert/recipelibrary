@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=121">
+<link rel="stylesheet" href="assets/theme.css?v=122">
 <link rel="preload" href="riviera_data/builtins.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
@@ -2979,10 +2979,16 @@ function openRecipe(id, options) {
           }
 
           heavy.innerHTML = `
-    <div class="modal-section">Elements</div>
-    <div class="modal-elements">${elements}</div>
-    <div class="modal-section">Ingredients</div>
-    <div class="modal-ing${r.ingredients.length <= 10 ? ' modal-ing--wide' : ''}" id="ingGrid">${ingsHTML}</div>`;
+    <div class="modal-recipe-layout">
+      <div class="modal-recipe-col modal-recipe-col--setup">
+        <div class="modal-section modal-section--elements">Elements</div>
+        <div class="modal-elements">${elements}</div>
+        <div class="modal-section modal-section--ingredients">Ingredients</div>
+        <div class="modal-ing${r.ingredients.length <= 10 ? ' modal-ing--wide' : ''}" id="ingGrid">${ingsHTML}</div>
+      </div>
+      <div class="modal-recipe-col modal-recipe-col--method" id="rivieraModalMethodCol"></div>
+    </div>
+    <div class="modal-recipe-after" id="rivieraModalAfter"></div>`;
           heavy.removeAttribute('aria-busy');
           if (rvPerf) {
             console.log('[Riviera modal] heavy chunk1 innerHTML ms', (performance.now() - tRv0).toFixed(1));
@@ -2998,15 +3004,18 @@ function openRecipe(id, options) {
 
           setTimeout(function chunk2() {
             if (!guard()) return;
-            heavy.insertAdjacentHTML(
+            const methodCol = document.getElementById('rivieraModalMethodCol') || heavy;
+            const modalAfter = document.getElementById('rivieraModalAfter') || heavy;
+            methodCol.insertAdjacentHTML(
               'beforeend',
               prepBlock + serviceBlock
             );
-            heavy.insertAdjacentHTML('beforeend', aromaHintHtml);
+            modalAfter.insertAdjacentHTML('beforeend', aromaHintHtml);
 
             setTimeout(function chunk3() {
               if (!guard()) return;
-              heavy.insertAdjacentHTML('beforeend', `${note}${label}${adminActions}`);
+              const modalAfter = document.getElementById('rivieraModalAfter') || heavy;
+              modalAfter.insertAdjacentHTML('beforeend', `${note}${label}${adminActions}`);
               scaleInp = document.getElementById('scaleInput');
               if (scaleInp) rescale(scaleInp.value, { skipIfIdentity: true });
               setTimeout(function () {

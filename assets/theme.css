@@ -10302,6 +10302,10 @@ html.lenovo-tab-one-profile .planner-recipe__note {
     max-width: min(1120px, 100vw);
   }
 
+  html.lenovo-tab-one-profile body.has-app-nav #modalOverlay .modal {
+    max-width: min(1120px, calc(100vw - 28px));
+  }
+
   html.lenovo-tab-one-profile .fn-planner__bar {
     grid-template-columns:
       minmax(96px, 0.54fr)
@@ -10365,6 +10369,42 @@ html.lenovo-tab-one-profile .planner-recipe__note {
     font-size: 10.5px;
     line-height: 1.2;
     text-align: right;
+  }
+
+  html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal-recipe-layout {
+    display: grid;
+    grid-template-columns: minmax(360px, 0.38fr) minmax(0, 0.62fr);
+    gap: 10px;
+    align-items: start;
+    margin-top: 2px;
+  }
+
+  html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal-recipe-col {
+    min-width: 0;
+  }
+
+  html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal-recipe-col > .modal-section:first-child {
+    margin-top: 0;
+  }
+
+  html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal-recipe-col--setup .modal-ing {
+    grid-template-columns: minmax(64px, max-content) minmax(0, 1fr);
+    max-height: min(340px, calc(100vh - 420px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(201, 169, 110, 0.45) transparent;
+  }
+
+  html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal-recipe-col--setup .modal-ing .ing-qty:nth-child(4n + 3) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal-recipe-col--method .modal-section--prep,
+  html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal-recipe-col--method .modal-section--service {
+    position: static;
+    box-shadow: none;
   }
 
   html.lenovo-tab-one-profile .planner-shopping__row {
