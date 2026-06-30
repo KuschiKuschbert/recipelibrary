@@ -1132,6 +1132,10 @@ html.low-memory-device .kuschi-toast--show {
   min-width: 0;
 }
 
+.ar-panel[hidden] {
+  display: none !important;
+}
+
 .add-recipe-meta-grid {
   display: grid;
   gap: 0 12px;
@@ -1146,6 +1150,8 @@ html.low-memory-device .kuschi-toast--show {
   position: relative;
   display: block;
   min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .ing-field-label {
@@ -1164,7 +1170,9 @@ html.low-memory-device .kuschi-toast--show {
 
 .ing-row .ing-field input,
 .ing-row-r .ing-field input {
+  width: 100%;
   min-height: 44px;
+  box-sizing: border-box;
   padding-top: 20px;
   padding-bottom: 6px;
 }
