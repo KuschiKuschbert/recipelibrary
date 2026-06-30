@@ -8111,6 +8111,170 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
 }
 
 @media (min-width: 901px) and (max-height: 900px) and (orientation: landscape) {
+  html.lenovo-tab-one-profile #addRecipeOverlay .modal,
+  html.lenovo-tab-one-profile #addRivieraOverlay .modal {
+    max-width: min(1120px, calc(100vw - var(--nav-rail-width, 72px) - 36px));
+    padding: 14px 16px max(16px, calc(16px + env(safe-area-inset-bottom, 0px)));
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay .modal-title,
+  html.lenovo-tab-one-profile #addRivieraOverlay .modal-title {
+    margin-bottom: 8px !important;
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay .modal > p,
+  html.lenovo-tab-one-profile #addRivieraOverlay .modal > p {
+    margin-right: 52px;
+    margin-bottom: 8px !important;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay .ar-modal-tabs,
+  html.lenovo-tab-one-profile #addRivieraOverlay .ar-modal-tabs {
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay .ar-modal-tabs button,
+  html.lenovo-tab-one-profile #addRivieraOverlay .ar-modal-tabs button {
+    min-height: 44px;
+    padding: 7px 12px;
+    border-radius: 9px;
+    font-size: 12.5px;
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay .add-recipe-meta-grid,
+  html.lenovo-tab-one-profile #addRivieraOverlay .add-recipe-meta-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 5px;
+    margin-bottom: 6px;
+    padding: 6px;
+    border-radius: 11px;
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay .form-row,
+  html.lenovo-tab-one-profile #addRivieraOverlay .form-row {
+    margin-bottom: 6px;
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay .form-row label,
+  html.lenovo-tab-one-profile #addRivieraOverlay .form-row label {
+    margin-bottom: 4px;
+    font-size: 11.5px;
+    line-height: 1.15;
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay .form-row input:not([type='checkbox']):not([type='radio']),
+  html.lenovo-tab-one-profile #addRecipeOverlay .form-row textarea,
+  html.lenovo-tab-one-profile #addRecipeOverlay .form-row select,
+  html.lenovo-tab-one-profile #addRivieraOverlay .form-row input:not([type='checkbox']):not([type='radio']),
+  html.lenovo-tab-one-profile #addRivieraOverlay .form-row textarea,
+  html.lenovo-tab-one-profile #addRivieraOverlay .form-row select {
+    min-height: 44px;
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay .ar-panel--manual,
+  html.lenovo-tab-one-profile #addRivieraOverlay .ar-panel--manual {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px 10px;
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay .ar-panel--manual > .format-review-card,
+  html.lenovo-tab-one-profile #addRecipeOverlay .ar-panel--manual > .add-recipe-meta-grid,
+  html.lenovo-tab-one-profile #addRecipeOverlay .ar-panel--manual > .modal-section,
+  html.lenovo-tab-one-profile #addRecipeOverlay .ar-panel--manual > #arIngRows,
+  html.lenovo-tab-one-profile #addRecipeOverlay .ar-panel--manual > #indexAromaAddPanel,
+  html.lenovo-tab-one-profile #addRecipeOverlay .ar-panel--manual > #kbAromaAddPanel,
+  html.lenovo-tab-one-profile #addRecipeOverlay .ar-panel--manual > .add-ingredient-row-btn,
+  html.lenovo-tab-one-profile #addRecipeOverlay .ar-panel--manual > .add-form-actions,
+  html.lenovo-tab-one-profile #addRivieraOverlay .ar-panel--manual > .format-review-card,
+  html.lenovo-tab-one-profile #addRivieraOverlay .ar-panel--manual > .add-recipe-meta-grid,
+  html.lenovo-tab-one-profile #addRivieraOverlay .ar-panel--manual > .modal-section,
+  html.lenovo-tab-one-profile #addRivieraOverlay .ar-panel--manual > #rvIngRows,
+  html.lenovo-tab-one-profile #addRivieraOverlay .ar-panel--manual > #rvAromaAddPanel,
+  html.lenovo-tab-one-profile #addRivieraOverlay .ar-panel--manual > .add-ingredient-row-btn,
+  html.lenovo-tab-one-profile #addRivieraOverlay .ar-panel--manual > .add-form-actions {
+    grid-column: 1 / -1;
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay #arPanelManual > .form-row:has(#arMethod),
+  html.lenovo-tab-one-profile #addRivieraOverlay #rvPanelManual > .form-row:has(#rvNote) {
+    grid-column: 1 / -1;
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay .ing-row,
+  html.lenovo-tab-one-profile #addRivieraOverlay .ing-row-r {
+    gap: 5px;
+    margin-bottom: 5px;
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay .ing-row {
+    grid-template-columns:
+      minmax(74px, 0.34fr)
+      minmax(60px, 0.26fr)
+      minmax(0, 1.2fr)
+      minmax(0, 0.95fr)
+      44px;
+  }
+
+  html.lenovo-tab-one-profile #addRivieraOverlay .ing-row-r {
+    grid-template-columns:
+      minmax(110px, 0.46fr)
+      minmax(0, 1.35fr)
+      minmax(0, 0.95fr)
+      44px;
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay .ing-row input,
+  html.lenovo-tab-one-profile #addRivieraOverlay .ing-row-r input {
+    min-height: 44px;
+    padding: 17px 8px 4px;
+    border-radius: 8px;
+    font-size: 13.5px;
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay .ing-row .ing-field-label,
+  html.lenovo-tab-one-profile #addRivieraOverlay .ing-row-r .ing-field-label {
+    top: 5px;
+    left: 9px;
+    font-size: 8.5px;
+    letter-spacing: 0.08em;
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay .ing-row .btn-secondary,
+  html.lenovo-tab-one-profile #addRivieraOverlay .ing-row-r .btn-secondary {
+    width: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 8px;
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay .add-ingredient-row-btn,
+  html.lenovo-tab-one-profile #addRivieraOverlay .add-ingredient-row-btn {
+    min-height: 44px;
+    margin-bottom: 0;
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay .add-form-actions,
+  html.lenovo-tab-one-profile #addRivieraOverlay .add-form-actions,
+  html.lenovo-tab-one-profile #addRecipeOverlay .ar-format-actions,
+  html.lenovo-tab-one-profile #addRivieraOverlay .ar-format-actions {
+    margin: 8px -16px -16px;
+    padding: 6px 16px max(8px, calc(8px + env(safe-area-inset-bottom, 0px)));
+  }
+
+  html.lenovo-tab-one-profile #addRecipeOverlay .add-form-actions button,
+  html.lenovo-tab-one-profile #addRivieraOverlay .add-form-actions button,
+  html.lenovo-tab-one-profile #addRecipeOverlay .ar-format-actions button,
+  html.lenovo-tab-one-profile #addRivieraOverlay .ar-format-actions button {
+    min-height: 44px;
+    padding: 7px 12px;
+  }
+
   html.lenovo-tab-one-profile #orderListOverlay .modal.order-list-modal,
   html.lenovo-tab-one-profile #kbOrderListOverlay .modal.order-list-modal,
   html.lenovo-tab-one-profile #stocktakeOverlay .modal.order-list-modal,
