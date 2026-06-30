@@ -8375,6 +8375,89 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
     padding: 7px 12px;
   }
 
+  html.lenovo-tab-one-profile #arPanelFormat,
+  html.lenovo-tab-one-profile #rvPanelFormat {
+    grid-template-columns: minmax(310px, 0.42fr) minmax(0, 0.58fr);
+    grid-template-areas:
+      "help paste"
+      "key paste"
+      "source paste"
+      "proxy actions";
+    gap: 7px 12px;
+    align-items: start;
+  }
+
+  html.lenovo-tab-one-profile #arPanelFormat .ar-format-help--links,
+  html.lenovo-tab-one-profile #rvPanelFormat .ar-format-help--links {
+    grid-area: help;
+    margin: 0;
+    padding: 8px 10px;
+    background: rgba(201, 169, 110, 0.06);
+    border: 1px solid rgba(201, 169, 110, 0.14);
+    border-radius: 12px;
+  }
+
+  html.lenovo-tab-one-profile #arGeminiKeySavedStrip,
+  html.lenovo-tab-one-profile #rvGeminiKeySavedStrip,
+  html.lenovo-tab-one-profile #arGeminiKeySection,
+  html.lenovo-tab-one-profile #rvGeminiKeySection {
+    grid-area: key;
+  }
+
+  html.lenovo-tab-one-profile #arGeminiKeySection,
+  html.lenovo-tab-one-profile #rvGeminiKeySection {
+    grid-template-columns: minmax(0, 1fr) minmax(124px, 0.36fr);
+    margin-bottom: 0 !important;
+  }
+
+  html.lenovo-tab-one-profile #arPanelFormat .ar-format-source-grid,
+  html.lenovo-tab-one-profile #rvPanelFormat .ar-format-source-grid {
+    grid-area: source;
+    grid-template-columns: 1fr;
+    padding: 7px;
+  }
+
+  html.lenovo-tab-one-profile #arPanelFormat .ar-proxy-details,
+  html.lenovo-tab-one-profile #rvPanelFormat .ar-proxy-details {
+    grid-area: proxy;
+    margin-bottom: 0 !important;
+  }
+
+  html.lenovo-tab-one-profile #arPanelFormat > .form-row:has(#arPasteRaw),
+  html.lenovo-tab-one-profile #rvPanelFormat > .form-row:has(#rvPasteRaw) {
+    grid-area: paste;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    min-height: 0;
+    margin-bottom: 0;
+  }
+
+  html.lenovo-tab-one-profile #arPanelFormat textarea#arPasteRaw,
+  html.lenovo-tab-one-profile #rvPanelFormat textarea#rvPasteRaw {
+    flex: 1 1 auto;
+    min-height: clamp(240px, calc(100dvh - 390px), 360px) !important;
+  }
+
+  html.lenovo-tab-one-profile #arPanelFormat .ar-format-actions,
+  html.lenovo-tab-one-profile #rvPanelFormat .ar-format-actions {
+    grid-area: actions;
+    position: static;
+    margin: 0;
+    padding: 8px;
+    border: 1px solid rgba(201, 169, 110, 0.16);
+    border-radius: 12px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.025)),
+      rgba(255, 255, 255, 0.03);
+    box-shadow: none;
+  }
+
+  html.lenovo-tab-one-profile #arPanelFormat .ar-format-actions button,
+  html.lenovo-tab-one-profile #rvPanelFormat .ar-format-actions button {
+    min-height: 48px;
+  }
+
   html.lenovo-tab-one-profile #orderListOverlay .modal.order-list-modal,
   html.lenovo-tab-one-profile #kbOrderListOverlay .modal.order-list-modal,
   html.lenovo-tab-one-profile #stocktakeOverlay .modal.order-list-modal,
@@ -8994,7 +9077,15 @@ html.low-memory-device.lenovo-tab-one-profile .aroma-mode-btn,
 html.low-memory-device.lenovo-tab-one-profile .aroma-result-row,
 html.low-memory-device.lenovo-tab-one-profile .aroma-browse-card,
 html.low-memory-device.lenovo-tab-one-profile .aroma-neighbor-card,
-html.low-memory-device.lenovo-tab-one-profile .aroma-chip {
+html.low-memory-device.lenovo-tab-one-profile .aroma-chip,
+html.low-memory-device.lenovo-tab-one-profile .ar-modal-tabs button,
+html.low-memory-device.lenovo-tab-one-profile .ar-help-links a,
+html.low-memory-device.lenovo-tab-one-profile .ar-gemini-saved-strip,
+html.low-memory-device.lenovo-tab-one-profile .ar-proxy-details summary,
+html.low-memory-device.lenovo-tab-one-profile .ar-format-source-grid input[type='file'],
+html.low-memory-device.lenovo-tab-one-profile .format-review-card,
+html.low-memory-device.lenovo-tab-one-profile .format-review-card__primary,
+html.low-memory-device.lenovo-tab-one-profile .format-review-card .btn-secondary {
   transition: none;
 }
 
