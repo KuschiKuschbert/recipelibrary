@@ -8547,6 +8547,10 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
   html.lenovo-tab-one-profile .kuschi-flavor-extras,
   html.lenovo-tab-one-profile .kuschi-pass-toolkit,
   html.lenovo-tab-one-profile .prep-task-card-row,
+  html.lenovo-tab-one-profile .planner-timeline__row,
+  html.lenovo-tab-one-profile .planner-shopping__row,
+  html.lenovo-tab-one-profile .planner-manifest__item,
+  html.lenovo-tab-one-profile .planner-recipe,
   html.lenovo-tab-one-profile .fn-course {
     content-visibility: auto;
     contain-intrinsic-size: auto 180px;
@@ -8554,6 +8558,16 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
 
   html.lenovo-tab-one-profile .prep-task-card-row {
     contain-intrinsic-size: auto 76px;
+  }
+
+  html.lenovo-tab-one-profile .planner-timeline__row,
+  html.lenovo-tab-one-profile .planner-shopping__row,
+  html.lenovo-tab-one-profile .planner-manifest__item {
+    contain-intrinsic-size: auto 56px;
+  }
+
+  html.lenovo-tab-one-profile .planner-recipe {
+    contain-intrinsic-size: auto 220px;
   }
 
   html.lenovo-tab-one-profile .fn-course {
@@ -8565,8 +8579,11 @@ html.low-memory-device .search-glass,
 html.low-memory-device .app-nav,
 html.low-memory-device .cook-step-nav,
 html.low-memory-device .nav-sheet__backdrop,
+html.low-memory-device .modal-overlay,
+html.low-memory-device .prep-task-detail-sheet__backdrop,
 html.low-memory-device .fn-planner-overlay,
-html.low-memory-device .planner-list-overlay {
+html.low-memory-device .planner-list-overlay,
+html.low-memory-device .planner-prep-choice__backdrop {
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
@@ -8574,6 +8591,7 @@ html.low-memory-device .planner-list-overlay {
 html.low-memory-device .search-glass,
 html.low-memory-device .app-nav,
 html.low-memory-device .cook-step-nav,
+html.low-memory-device .modal-overlay,
 html.low-memory-device .fn-planner-overlay,
 html.low-memory-device .planner-list-overlay {
   background: rgba(20, 20, 20, 0.96);
@@ -8622,6 +8640,7 @@ html.low-memory-device .modal-top-bar {
 
 html.low-memory-device .modal-step,
 html.low-memory-device .modal-steps li,
+html.low-memory-device .kuschi-toast,
 html.low-memory-device .cook-mode-btn,
 html.low-memory-device .cook-step-prev,
 html.low-memory-device .cook-step-next,
@@ -8630,6 +8649,11 @@ html.low-memory-device .pkgs-section-tab,
 html.low-memory-device .pkgs-item,
 html.low-memory-device .fn-dish-chip,
 html.low-memory-device .fn-dish-chip__open,
+html.low-memory-device .planner-list-tab,
+html.low-memory-device .planner-list__actions .btn-secondary,
+html.low-memory-device .planner-list__print-opt,
+html.low-memory-device .planner-copy-toast,
+html.low-memory-device .planner-prep-choice__actions .btn-secondary,
 html.low-memory-device .prep-actor-chip,
 html.low-memory-device .prep-subtab,
 html.low-memory-device .prep-task-card,
@@ -8644,6 +8668,16 @@ html.low-memory-device .cook-step-next:active {
 }
 
 html.low-memory-device .modal-top-bar {
+  box-shadow: none;
+}
+
+html.low-memory-device .fn-planner,
+html.low-memory-device .planner-list,
+html.low-memory-device .planner-recipe,
+html.low-memory-device .planner-list__primary-action,
+html.low-memory-device .planner-prep-choice__panel,
+html.low-memory-device .planner-copy-toast,
+html.low-memory-device .kuschi-toast {
   box-shadow: none;
 }
 
