@@ -3921,6 +3921,30 @@ button.sheet-book-item {
   background: var(--gold-dim);
   border-color: rgba(201,169,110,0.45);
   color: var(--gold-light);
+  justify-content: flex-start;
+}
+
+.filter-chip__label {
+  flex: 0 0 auto;
+  color: rgba(201, 169, 110, 0.78);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.filter-chip__label::after {
+  content: ':';
+}
+
+.filter-chip__value {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--gold-light);
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .filter-chip__x {
@@ -4494,7 +4518,16 @@ html.lenovo-tab-one-profile body.has-app-nav .filter-chip {
 html.lenovo-tab-one-profile body.has-app-nav .filter-chip--active {
   background: rgba(201, 169, 110, 0.2);
   border-color: rgba(201, 169, 110, 0.62);
+  box-shadow: inset 0 0 0 1px rgba(201, 169, 110, 0.14);
   color: var(--gold-light);
+}
+
+html.lenovo-tab-one-profile body.has-app-nav .filter-chip__label {
+  font-size: 8.5px;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav .filter-chip__value {
+  font-size: 12px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .filter-chip__x {

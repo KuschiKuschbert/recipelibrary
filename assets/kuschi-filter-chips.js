@@ -145,7 +145,9 @@
       var val = sel.value;
       if (val) {
         chip.classList.add('filter-chip--active');
-        chip.innerHTML = _esc(val) +
+        chip.innerHTML =
+          '<span class="filter-chip__label">' + _esc(def.label) + '</span>' +
+          '<span class="filter-chip__value">' + _esc(val) + '</span>' +
           '<span class="filter-chip__x" role="button" aria-label="Clear ' + _esc(def.label) + ' filter"' +
           ' onclick="event.stopPropagation();clearFilterChip(\'' + _esc(def.selectId) + '\')">&#x00D7;</span>';
       } else {
