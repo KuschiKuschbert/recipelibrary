@@ -8417,17 +8417,17 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
     grid-template-columns:
       minmax(0, 1.78fr)
       minmax(158px, 0.46fr)
-      minmax(108px, 0.32fr)
-      34px;
+      minmax(112px, 0.32fr)
+      42px;
     align-items: center;
     gap: 4px 6px;
-    min-height: 46px;
+    min-height: 50px;
     margin-bottom: 3px;
-    padding: 4px 6px;
+    padding: 4px 7px;
     border-radius: 9px;
     font-size: 12.5px;
     line-height: 1.2;
-    contain-intrinsic-size: auto 48px;
+    contain-intrinsic-size: auto 52px;
   }
 
   html.lenovo-tab-one-profile #orderListOverlay .order-line-row .order-line-name,
@@ -8441,6 +8441,13 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
     line-height: 1.24;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+  }
+
+  html.lenovo-tab-one-profile #orderListOverlay .order-line-row .order-line-need,
+  html.lenovo-tab-one-profile #kbOrderListOverlay .order-line-row .order-line-need {
+    margin-top: 1px;
+    font-size: 10.5px;
+    line-height: 1.15;
   }
 
   html.lenovo-tab-one-profile #orderListOverlay .order-line-row .ord-qty-with-unit,
@@ -8473,36 +8480,45 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
   html.lenovo-tab-one-profile #orderListOverlay .order-line-row select,
   html.lenovo-tab-one-profile #kbOrderListOverlay .order-line-row input[type='text'],
   html.lenovo-tab-one-profile #kbOrderListOverlay .order-line-row select {
-    min-height: 38px;
+    min-height: 42px;
     padding: 5px 7px;
     border-radius: 8px;
-    font-size: 13px;
+    font-size: 13.5px;
   }
 
   html.lenovo-tab-one-profile #orderListOverlay .order-line-row button.ord-remove,
   html.lenovo-tab-one-profile #kbOrderListOverlay .order-line-row button.ord-remove {
     grid-column: 4;
     grid-row: 1;
-    min-width: 34px;
-    min-height: 38px;
+    min-width: 42px;
+    min-height: 42px;
     padding: 0;
+    touch-action: manipulation;
   }
 
   html.lenovo-tab-one-profile #orderListOverlay .order-line-sub,
   html.lenovo-tab-one-profile #kbOrderListOverlay .order-line-sub {
-    grid-template-columns: 18px minmax(0, 1fr) minmax(150px, 0.44fr) 34px;
+    grid-template-columns: 18px minmax(0, 1fr) minmax(150px, 0.44fr) 42px;
     gap: 4px 6px;
     margin: -1px 0 3px 8px;
-    padding: 4px 6px;
+    padding: 4px 7px;
     border-radius: 8px;
-    contain-intrinsic-size: auto 46px;
+    contain-intrinsic-size: auto 50px;
   }
 
   html.lenovo-tab-one-profile #orderListOverlay .order-line-sub .ord-extra-qty,
   html.lenovo-tab-one-profile #kbOrderListOverlay .order-line-sub .ord-extra-qty {
-    min-height: 38px;
+    min-height: 42px;
     padding: 5px 7px;
-    font-size: 13px;
+    font-size: 13.5px;
+  }
+
+  html.lenovo-tab-one-profile #orderListOverlay .order-line-sub .ord-remove-extra,
+  html.lenovo-tab-one-profile #kbOrderListOverlay .order-line-sub .ord-remove-extra {
+    min-width: 42px;
+    min-height: 42px;
+    padding: 0;
+    touch-action: manipulation;
   }
 
   html.lenovo-tab-one-profile #stocktakeOverlay .stocktake-tools,
@@ -8521,9 +8537,9 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
   html.lenovo-tab-one-profile #kbStocktakeOverlay .stocktake-search-clear,
   html.lenovo-tab-one-profile #stocktakeOverlay .stocktake-add-jump,
   html.lenovo-tab-one-profile #kbStocktakeOverlay .stocktake-add-jump {
-    min-height: 36px;
+    min-height: 40px;
     border-radius: 8px;
-    font-size: 11px;
+    font-size: 11.5px;
   }
 
   html.lenovo-tab-one-profile #stocktakeOverlay .stkt-line-row,
@@ -8533,16 +8549,16 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
       minmax(0, 1.72fr)
       minmax(92px, 0.32fr)
       minmax(140px, 0.48fr)
-      minmax(128px, 0.42fr)
-      34px;
-    grid-template-rows: minmax(38px, auto);
+      minmax(120px, 0.42fr)
+      42px;
+    grid-template-rows: minmax(42px, auto);
     align-items: center;
     gap: 4px 6px;
-    min-height: 44px;
+    min-height: 48px;
     margin-bottom: 3px;
-    padding: 3px 6px;
+    padding: 3px 7px;
     border-radius: 9px;
-    contain-intrinsic-size: auto 46px;
+    contain-intrinsic-size: auto 50px;
   }
 
   html.lenovo-tab-one-profile #stocktakeOverlay .stkt-line-row.stkt-line-sub,
@@ -8551,8 +8567,8 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
       minmax(0, 1.72fr)
       minmax(92px, 0.32fr)
       minmax(140px, 0.48fr)
-      minmax(128px, 0.42fr)
-      34px;
+      minmax(120px, 0.42fr)
+      42px;
     padding-left: 8px;
   }
 
@@ -8606,10 +8622,10 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
 
   html.lenovo-tab-one-profile #stocktakeOverlay .stkt-line-row .stkt-field,
   html.lenovo-tab-one-profile #kbStocktakeOverlay .stkt-line-row .stkt-field {
-    min-height: 38px;
-    padding: 5px 7px;
+    min-height: 42px;
+    padding: 5px 8px;
     border-radius: 8px;
-    font-size: 13px;
+    font-size: 13.5px;
   }
 
   html.lenovo-tab-one-profile #stocktakeOverlay .stkt-line-row .stkt-remove-stx,
@@ -8617,9 +8633,10 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
     position: static;
     grid-column: 5;
     grid-row: 1;
-    min-width: 34px;
-    min-height: 38px;
+    min-width: 42px;
+    min-height: 42px;
     padding: 0;
+    touch-action: manipulation;
   }
 
   html.lenovo-tab-one-profile #orderListOverlay .order-actions,
@@ -8758,7 +8775,14 @@ html.low-memory-device .prep-actor-chip,
 html.low-memory-device .prep-subtab,
 html.low-memory-device .prep-task-card,
 html.low-memory-device .prep-task-detail-sheet__panel,
-html.low-memory-device .prep-priority-pill {
+html.low-memory-device .prep-priority-pill,
+html.low-memory-device.lenovo-tab-one-profile .order-line-row,
+html.low-memory-device.lenovo-tab-one-profile .order-line-sub,
+html.low-memory-device.lenovo-tab-one-profile .stkt-line-row,
+html.low-memory-device.lenovo-tab-one-profile .stocktake-zone-filter,
+html.low-memory-device.lenovo-tab-one-profile .stocktake-search-input,
+html.low-memory-device.lenovo-tab-one-profile .stocktake-search-clear,
+html.low-memory-device.lenovo-tab-one-profile .stocktake-add-jump {
   transition: none;
 }
 
