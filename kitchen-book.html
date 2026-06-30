@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=79">
+<link rel="stylesheet" href="assets/theme.css?v=80">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
@@ -484,7 +484,7 @@
     <div class="modal-section" style="margin-top:8px">Ingredients</div>
     <div id="arIngRows"></div>
     <div id="kbAromaAddPanel"></div>
-    <button type="button" class="btn-secondary" onclick="addKitchenIngRow()">+ Ingredient row</button>
+    <button type="button" class="btn-secondary add-ingredient-row-btn" onclick="addKitchenIngRow()">+ Ingredient row</button>
     <div class="form-row" style="margin-top:16px"><label for="arMethod">Method (one step per line)</label><textarea id="arMethod" placeholder="1. First step…"></textarea></div>
     <div class="add-form-actions">
       <button type="button" class="primary" onclick="submitBookRecipe()">Save recipe</button>
@@ -1534,7 +1534,7 @@ function addKitchenIngRow() {
   const wrap = document.getElementById('arIngRows');
   const row = document.createElement('div');
   row.className = 'ing-row';
-  row.innerHTML = '<input type="text" placeholder="Qty" class="ar-qty" /><input type="text" placeholder="Unit" class="ar-unit" /><input type="text" placeholder="Ingredient" class="ar-item" /><input type="text" placeholder="Prep" class="ar-prep" /><button type="button" class="btn-secondary" onclick="this.parentElement.remove()">✕</button>';
+  row.innerHTML = '<label class="ing-field ing-field--qty"><span class="ing-field-label">Qty</span><input type="text" placeholder="2" class="ar-qty" aria-label="Ingredient quantity" /></label><label class="ing-field ing-field--unit"><span class="ing-field-label">Unit</span><input type="text" placeholder="kg" class="ar-unit" aria-label="Ingredient unit" /></label><label class="ing-field ing-field--item"><span class="ing-field-label">Ingredient</span><input type="text" placeholder="Ingredient name" class="ar-item" aria-label="Ingredient name" /></label><label class="ing-field ing-field--prep"><span class="ing-field-label">Prep</span><input type="text" placeholder="diced, toasted, optional" class="ar-prep" aria-label="Ingredient preparation note" /></label><button type="button" class="btn-secondary ing-remove-btn" aria-label="Remove ingredient row" title="Remove row" onclick="this.parentElement.remove()">✕</button>';
   wrap.appendChild(row);
   if (typeof debouncedRefreshKbAroma === 'function') debouncedRefreshKbAroma();
 }
