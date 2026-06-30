@@ -5003,6 +5003,61 @@ html.lenovo-tab-one-profile body.has-app-nav .modal-steps--service li::before {
   color: #bfe9cb;
 }
 
+html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal:has(.modal-steps li:nth-child(18)) .modal-section {
+  min-height: 26px;
+  margin: 11px 0 5px;
+  padding: 0 8px;
+  border-radius: 7px;
+  font-size: 10px;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal:has(.modal-steps li:nth-child(18)) .modal-ing {
+  gap: 0 7px;
+  padding: 5px 8px;
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+@media (min-width: 720px) {
+  html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal:has(.modal-steps li:nth-child(18)) .modal-ing {
+    grid-template-columns:
+      minmax(52px, max-content) minmax(0, 1fr)
+      minmax(52px, max-content) minmax(0, 1fr);
+    gap: 0 7px;
+  }
+
+  html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal:has(.modal-steps li:nth-child(18)) .modal-ing .ing-qty:nth-child(4n + 3) {
+    padding-left: 7px;
+  }
+}
+
+html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal:has(.modal-steps li:nth-child(18)) .modal-ing .ing-qty,
+html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal:has(.modal-steps li:nth-child(18)) .modal-ing .ing-item {
+  min-height: 28px;
+  padding: 3px 0;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal:has(.modal-steps li:nth-child(18)) .modal-steps {
+  gap: 4px;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal:has(.modal-steps li:nth-child(18)) .modal-steps li {
+  min-height: 40px;
+  padding: 6px 9px 6px 42px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.26;
+}
+
+html.lenovo-tab-one-profile body.has-app-nav #modalOverlay:not(.cook-mode) .modal:has(.modal-steps li:nth-child(18)) .modal-steps li::before {
+  left: 8px;
+  top: 6px;
+  width: 25px;
+  height: 24px;
+  border-radius: 7px;
+  font-size: 10px;
+}
+
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .riv-event-strip {
   display: grid;
   grid-template-columns: minmax(0, 0.78fr) minmax(420px, 1.22fr);
