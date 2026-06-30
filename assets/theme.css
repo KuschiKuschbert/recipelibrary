@@ -5475,19 +5475,19 @@ html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal {
   height: 100dvh;
   max-height: 100dvh;
   padding:
-    max(18px, env(safe-area-inset-top, 0px))
-    max(28px, env(safe-area-inset-right, 0px))
-    max(112px, calc(112px + env(safe-area-inset-bottom, 0px)))
-    max(28px, env(safe-area-inset-left, 0px));
+    max(16px, env(safe-area-inset-top, 0px))
+    max(24px, env(safe-area-inset-right, 0px))
+    max(98px, calc(98px + env(safe-area-inset-bottom, 0px)))
+    max(24px, env(safe-area-inset-left, 0px));
   border: none;
   border-radius: 0;
-  scroll-padding-top: 74px;
-  scroll-padding-bottom: 116px;
+  scroll-padding-top: 68px;
+  scroll-padding-bottom: 100px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal-top-bar {
-  margin: -18px -28px 14px;
-  padding: 7px 16px;
+  margin: -16px -24px 12px;
+  padding: 6px 14px;
   gap: 6px;
   border-radius: 0;
   box-shadow: none;
@@ -5507,63 +5507,78 @@ html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal-cuis
 }
 
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal-scale {
-  min-height: 68px;
-  margin-bottom: 26px;
+  min-height: 62px;
+  margin-bottom: 20px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal-section {
-  min-height: 42px;
-  margin-top: 30px;
-  font-size: 13px;
+  min-height: 36px;
+  margin-top: 22px;
+  font-size: 12px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal-ing {
-  grid-template-columns: minmax(104px, max-content) minmax(0, 1fr);
-  gap: 0 20px;
-  padding: 14px 18px;
-  font-size: 18px;
-  line-height: 1.68;
+  grid-template-columns: minmax(92px, max-content) minmax(0, 1fr);
+  gap: 0 16px;
+  padding: 10px 14px;
+  font-size: 17px;
+  line-height: 1.48;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal-ing .ing-qty,
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal-ing .ing-item {
-  min-height: 52px;
-  padding: 11px 0;
+  min-height: 44px;
+  padding: 8px 0;
+}
+
+@media (min-width: 720px) {
+  html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal:has(.modal-steps li:nth-child(18)) .modal-ing {
+    grid-template-columns:
+      minmax(74px, max-content) minmax(0, 1fr)
+      minmax(74px, max-content) minmax(0, 1fr);
+    gap: 0 12px;
+  }
+
+  html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal:has(.modal-steps li:nth-child(18)) .modal-ing .ing-qty:nth-child(4n + 3) {
+    padding-left: 12px;
+    border-left: 1px solid rgba(255, 255, 255, 0.09);
+  }
 }
 
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal-steps {
-  gap: 14px;
+  gap: 10px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal-steps li,
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal-step {
-  min-height: 74px;
-  padding: 17px 18px 17px 78px;
-  font-size: 19px;
-  line-height: 1.58;
+  min-height: 66px;
+  padding: 14px 16px 14px 68px;
+  font-size: 18px;
+  line-height: 1.46;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.024));
   border: 1px solid rgba(255, 255, 255, 0.11);
-  border-radius: 12px;
+  border-radius: 10px;
   overflow-wrap: anywhere;
   text-wrap: pretty;
-  scroll-margin-top: 82px;
-  scroll-margin-bottom: 116px;
+  scroll-margin-top: 74px;
+  scroll-margin-bottom: 98px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
 }
 
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal-steps li::before {
-  left: 18px;
-  top: 18px;
-  width: 42px;
-  height: 38px;
-  font-size: 15px;
+  left: 16px;
+  top: 14px;
+  width: 36px;
+  height: 34px;
+  font-size: 13px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal-steps li.cook-step-active,
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal-step.cook-step-active {
   background:
     linear-gradient(90deg, rgba(201, 169, 110, 0.18), rgba(255, 255, 255, 0.05)) !important;
+  border-left: 5px solid rgba(201, 169, 110, 0.82);
   border-color: rgba(201, 169, 110, 0.48);
   color: var(--text);
   opacity: 1;
@@ -5583,21 +5598,21 @@ html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .cook-step-
   right: 0;
   bottom: 0;
   display: grid;
-  grid-template-columns: 52px minmax(0, 1fr) 52px;
+  grid-template-columns: 48px minmax(0, 1fr) 48px;
   align-items: center;
-  min-height: 84px;
-  gap: 10px;
+  min-height: 76px;
+  gap: 8px;
   margin: 0;
-  padding: 7px 20px max(10px, calc(10px + env(safe-area-inset-bottom, 0px)));
+  padding: 6px 18px max(8px, calc(8px + env(safe-area-inset-bottom, 0px)));
   border-top-color: rgba(201, 169, 110, 0.2);
   box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.22);
 }
 
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .cook-step-prev,
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .cook-step-next {
-  width: 52px;
-  height: 52px;
-  min-height: 52px;
+  width: 48px;
+  height: 48px;
+  min-height: 48px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.065);
   border-color: rgba(255, 255, 255, 0.14);
@@ -5605,13 +5620,13 @@ html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .cook-step-
 
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .cook-step-counter {
   color: var(--gold-light);
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.2;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .cook-step-phase {
-  min-height: 22px;
-  padding: 3px 8px;
+  min-height: 20px;
+  padding: 2px 8px;
   font-size: 10px;
 }
 
@@ -5622,7 +5637,7 @@ html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .cook-step-
 }
 
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .cook-step-preview {
-  max-width: 34em;
+  max-width: 38em;
   color: var(--text2);
   font-size: 12.5px;
   line-height: 1.22;
