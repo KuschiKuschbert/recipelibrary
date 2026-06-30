@@ -4118,9 +4118,9 @@ html.lenovo-tab-one-profile .filters-wrap {
 }
 
 html.lenovo-tab-one-profile .search-inner {
-  min-height: 48px;
-  padding: 0 14px;
-  gap: 9px;
+  min-height: 44px;
+  padding: 0 12px;
+  gap: 8px;
 }
 
 html.lenovo-tab-one-profile .search-icon {
@@ -4131,7 +4131,7 @@ html.lenovo-tab-one-profile .search-icon {
 }
 
 html.lenovo-tab-one-profile .search-input {
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.35;
 }
 
@@ -4160,8 +4160,8 @@ html.lenovo-tab-one-profile .results-count {
 html.lenovo-tab-one-profile body.has-app-nav .search-wrap {
   top: var(--app-header-h, 72px);
   z-index: 104;
-  margin-top: 8px;
-  padding-bottom: 6px;
+  margin-top: 6px;
+  padding-bottom: 4px;
   padding-left: 20px;
   padding-right: 20px;
   background: linear-gradient(180deg, rgba(12, 12, 12, 0.985), rgba(12, 12, 12, 0.92));
@@ -4180,14 +4180,14 @@ html.lenovo-tab-one-profile body.has-app-nav .search-glass {
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .search-clear {
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 11px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .filters-wrap {
-  top: calc(var(--app-header-h, 0px) + 64px);
+  top: calc(var(--app-header-h, 0px) + 58px);
   z-index: 96;
   justify-content: flex-start;
   background:
@@ -4200,6 +4200,7 @@ html.lenovo-tab-one-profile body.has-app-nav .filters-wrap {
 html.lenovo-tab-one-profile body.has-app-nav .filter-chip {
   flex: 1 1 124px;
   max-width: none;
+  min-height: 44px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.058);
   border-color: rgba(255, 255, 255, 0.13);
@@ -4231,9 +4232,9 @@ html.lenovo-tab-one-profile body.has-app-nav .clear-btn {
 
 html.lenovo-tab-one-profile .page-actions {
   max-width: 760px;
-  gap: 8px;
-  padding-top: 6px;
-  padding-bottom: 2px;
+  gap: 7px;
+  padding-top: 5px;
+  padding-bottom: 0;
   justify-content: flex-start;
 }
 
@@ -4244,8 +4245,8 @@ html.lenovo-tab-one-profile .page-action-btn {
 
 html.lenovo-tab-one-profile body.has-app-nav .results-bar {
   max-width: 760px;
-  min-height: 42px;
-  margin-top: 18px;
+  min-height: 38px;
+  margin-top: 12px;
   padding-left: 20px;
   padding-right: 20px;
   align-items: center;
@@ -4260,18 +4261,19 @@ html.lenovo-tab-one-profile body.has-app-nav .results-count {
 
 html.lenovo-tab-one-profile body.has-app-nav .results-count span {
   font-family: 'Playfair Display', serif;
-  font-size: 25px;
+  font-size: 22px;
   margin-right: 4px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .grid {
-  padding-top: 12px;
+  gap: 10px;
+  padding-top: 10px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .grid .card {
-  min-height: 244px;
-  padding: 14px;
-  border-radius: 14px;
+  min-height: 218px;
+  padding: 12px;
+  border-radius: 12px;
   transition:
     border-color 0.16s,
     background 0.16s,
@@ -4285,15 +4287,15 @@ html.lenovo-tab-one-profile body.has-app-nav .grid .card::before {
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .grid .card .card-header {
-  gap: 12px;
-  margin-bottom: 9px;
+  gap: 10px;
+  margin-bottom: 7px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .grid .card .card-name {
   display: -webkit-box;
   overflow: hidden;
-  font-size: 20px;
-  line-height: 1.22;
+  font-size: 18px;
+  line-height: 1.2;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
@@ -4302,65 +4304,66 @@ html.lenovo-tab-one-profile body.has-app-nav .grid .card .card-cuisine,
 html.lenovo-tab-one-profile body.has-app-nav .grid .card .card-type {
   display: -webkit-box;
   overflow: hidden;
-  min-height: 20px;
-  margin-bottom: 9px;
+  min-height: 16px;
+  margin-bottom: 7px;
   color: var(--gold-light);
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.08em;
-  line-height: 1.35;
+  line-height: 1.25;
   opacity: 1;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .grid .card .card-badges {
-  gap: 6px;
-  max-height: 62px;
-  margin-bottom: 9px;
+  gap: 4px;
+  max-height: 52px;
+  margin-bottom: 7px;
   overflow: hidden;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .grid .card .badge {
-  min-height: 26px;
-  padding: 4px 9px;
-  line-height: 1.25;
+  min-height: 22px;
+  padding: 3px 7px;
+  font-size: 10px;
+  line-height: 1.2;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .grid .card .card-ings,
 html.lenovo-tab-one-profile body.has-app-nav .grid .card .card-elements {
   display: -webkit-box;
   overflow: hidden;
-  padding-top: 10px;
+  padding-top: 8px;
   color: var(--text2);
-  line-height: 1.55;
+  font-size: 13px;
+  line-height: 1.42;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .grid .card .card-footer {
-  min-height: 48px;
-  padding-top: 10px;
+  justify-content: flex-end;
+  min-height: 38px;
+  padding-top: 7px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .grid .card .card-open-hint {
-  color: var(--gold-light);
-  font-size: 12px;
-  line-height: 1.25;
+  display: none;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .grid .card .card-open-icon {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  border-radius: 12px;
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border-radius: 11px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .grid .card .copy-btn {
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  min-height: 48px;
-  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 11px;
   background: rgba(255, 255, 255, 0.055);
 }
 
@@ -6759,13 +6762,13 @@ html.lenovo-tab-one-profile .nav-item__label {
 @media (orientation: portrait) {
   html.lenovo-tab-one-profile .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
+    gap: 10px;
     padding-left: 20px;
     padding-right: 20px;
   }
 
   html.lenovo-tab-one-profile body.has-app-nav .grid .card {
-    min-height: 244px;
+    min-height: 218px;
   }
 
   html.lenovo-tab-one-profile .modal {
