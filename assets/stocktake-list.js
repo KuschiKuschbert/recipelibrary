@@ -263,6 +263,11 @@
     var lazyCatalogNotLoaded = {};
     var lazyBuiltinCatalog = lazyCatalogNotLoaded;
     var lazyBuiltinLoading = null;
+    var filterApplyFrame = 0;
+    var filterState = {
+      zone: 'all',
+      query: '',
+    };
 
     function getBuiltinCatalogArray() {
       if (staticBuiltinCatalog) return staticBuiltinCatalog;
@@ -292,6 +297,214 @@
 
     function Kr() {
       return window.KuschiUserRecipes;
+    }
+
+    function normalizeFilterText(value) {
+      return String(value || '')
+        .toLowerCase()
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function zoneButtonLabel(zone, label) {
+      if (zone === 'coldroom') return 'Cold';
+      if (zone === 'drystore') return 'Dry';
+      return label;
+    }
+
+    function modalScrollElement() {
+      var overlay = document.getElementById(overlayId);
+      return overlay ? overlay.querySelector('.modal.order-list-modal') : null;
+    }
+
+    function rowFilterText(row) {
+      var parts = [];
+      var name = row.querySelector('.stkt-line-name');
+      var zone = row.querySelector('.stkt-zone-label');
+      if (name) parts.push(name.textContent);
+      if (zone) parts.push(zone.textContent);
+      row.querySelectorAll('.stkt-field').forEach(function (field) {
+        parts.push(field.value || field.getAttribute('value') || field.placeholder || '');
+      });
+      return normalizeFilterText(parts.join(' '));
+    }
+
+    function filterStatusLabel(shown, total) {
+      if (!total) return 'No lines';
+      if (shown === total) return itemCountLabel(total);
+      return shown + ' of ' + total;
+    }
+
+    function buildFilterToolsHtml(searchId, counts, ZL) {
+      var total = ZONE_ORDER.reduce(function (sum, zone) {
+        return sum + (counts[zone] || 0);
+      }, 0);
+      var buttons =
+        '<button type="button" class="stocktake-zone-filter" data-stocktake-zone="all">' +
+        '<span>All</span><span class="stocktake-zone-filter__count">' +
+        esc(String(total)) +
+        '</span></button>';
+      ZONE_ORDER.forEach(function (zone) {
+        buttons +=
+          '<button type="button" class="stocktake-zone-filter" data-stocktake-zone="' +
+          escAttr(zone) +
+          '">' +
+          '<span>' +
+          esc(zoneButtonLabel(zone, ZL[zone] || zone)) +
+          '</span><span class="stocktake-zone-filter__count">' +
+          esc(String(counts[zone] || 0)) +
+          '</span></button>';
+      });
+      return (
+        '<div class="stocktake-zone-filters" role="group" aria-label="Stocktake zones">' +
+        buttons +
+        '</div>' +
+        '<label class="stocktake-search-label" for="' +
+        escAttr(searchId) +
+        '">Find</label>' +
+        '<input id="' +
+        escAttr(searchId) +
+        '" class="stocktake-search-input" type="search" inputmode="search" autocomplete="off" placeholder="Item or brand" />' +
+        '<button type="button" class="btn-secondary stocktake-search-clear">Clear</button>' +
+        '<div class="stocktake-filter-status" aria-live="polite">' +
+        esc(filterStatusLabel(total, total)) +
+        '</div>'
+      );
+    }
+
+    function updateFilterControls(counts, ZL) {
+      var body = document.getElementById(bodyId);
+      if (!body) return null;
+      var searchId = bodyId + 'Search';
+      var toolsId = bodyId + 'Tools';
+      var tools = document.getElementById(toolsId);
+      if (!tools) {
+        tools = document.createElement('div');
+        tools.id = toolsId;
+        tools.className = 'stocktake-tools';
+        tools.setAttribute('data-stocktake-tools', '');
+        tools.innerHTML = buildFilterToolsHtml(searchId, counts, ZL);
+        body.parentNode.insertBefore(tools, body);
+
+        tools.querySelectorAll('[data-stocktake-zone]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            filterState.zone = btn.getAttribute('data-stocktake-zone') || 'all';
+            scheduleApplyFilter(true);
+          });
+        });
+
+        var input = tools.querySelector('.stocktake-search-input');
+        if (input) {
+          input.addEventListener('input', function () {
+            filterState.query = input.value;
+            scheduleApplyFilter(true);
+          });
+          input.addEventListener('keydown', function (event) {
+            if (event.key !== 'Escape' || (!filterState.query && filterState.zone === 'all')) return;
+            event.preventDefault();
+            event.stopPropagation();
+            filterState.query = '';
+            filterState.zone = 'all';
+            input.value = '';
+            scheduleApplyFilter(true);
+          });
+        }
+
+        var clearBtn = tools.querySelector('.stocktake-search-clear');
+        if (clearBtn) {
+          clearBtn.addEventListener('click', function () {
+            filterState.zone = 'all';
+            filterState.query = '';
+            var currentInput = tools.querySelector('.stocktake-search-input');
+            if (currentInput) currentInput.value = '';
+            scheduleApplyFilter(true);
+            if (currentInput) currentInput.focus();
+          });
+        }
+      }
+
+      var total = ZONE_ORDER.reduce(function (sum, zone) {
+        return sum + (counts[zone] || 0);
+      }, 0);
+      tools.querySelectorAll('[data-stocktake-zone]').forEach(function (btn) {
+        var zone = btn.getAttribute('data-stocktake-zone') || 'all';
+        var label = zone === 'all' ? 'All' : zoneButtonLabel(zone, ZL[zone] || zone);
+        var count = zone === 'all' ? total : counts[zone] || 0;
+        btn.innerHTML =
+          '<span>' +
+          esc(label) +
+          '</span><span class="stocktake-zone-filter__count">' +
+          esc(String(count)) +
+          '</span>';
+        btn.classList.toggle('stocktake-zone-filter--active', filterState.zone === zone);
+        btn.setAttribute('aria-pressed', filterState.zone === zone ? 'true' : 'false');
+      });
+
+      var inputEl = tools.querySelector('.stocktake-search-input');
+      if (inputEl && inputEl.value !== filterState.query) inputEl.value = filterState.query;
+      return tools;
+    }
+
+    function applyStocktakeFilter(scrollToTop) {
+      filterApplyFrame = 0;
+      var body = document.getElementById(bodyId);
+      if (!body) return;
+      var tools = document.getElementById(bodyId + 'Tools');
+      var query = normalizeFilterText(filterState.query);
+      var activeZone = filterState.zone || 'all';
+      var total = 0;
+      var shown = 0;
+
+      body.querySelectorAll('.stkt-zone-block').forEach(function (zoneBlock) {
+        var zone = zoneBlock.getAttribute('data-zone') || 'other';
+        var zoneAllowed = activeZone === 'all' || activeZone === zone;
+        var zoneShown = 0;
+        zoneBlock.querySelectorAll('.stkt-line-row').forEach(function (row) {
+          total += 1;
+          var rowAllowed = zoneAllowed && (!query || rowFilterText(row).indexOf(query) !== -1);
+          row.classList.toggle('stkt-line-row--filtered', !rowAllowed);
+          if (rowAllowed) {
+            shown += 1;
+            zoneShown += 1;
+          }
+        });
+        zoneBlock.querySelectorAll('.stkt-line-block').forEach(function (lineBlock) {
+          lineBlock.classList.toggle(
+            'stkt-line-block--filtered',
+            !lineBlock.querySelector('.stkt-line-row:not(.stkt-line-row--filtered)')
+          );
+        });
+        zoneBlock.classList.toggle('stkt-zone-block--hidden', zoneShown === 0);
+      });
+
+      if (tools) {
+        tools.classList.toggle('stocktake-tools--active', !!query || activeZone !== 'all');
+        tools.querySelectorAll('[data-stocktake-zone]').forEach(function (btn) {
+          var zone = btn.getAttribute('data-stocktake-zone') || 'all';
+          btn.classList.toggle('stocktake-zone-filter--active', activeZone === zone);
+          btn.setAttribute('aria-pressed', activeZone === zone ? 'true' : 'false');
+        });
+        var status = tools.querySelector('.stocktake-filter-status');
+        if (status) {
+          status.textContent =
+            (activeZone === 'all' ? '' : zoneButtonLabel(activeZone, zoneLabels()[activeZone] || activeZone) + ' · ') +
+            filterStatusLabel(shown, total);
+        }
+        var clear = tools.querySelector('.stocktake-search-clear');
+        if (clear) clear.disabled = !query && activeZone === 'all';
+      }
+
+      if (scrollToTop) {
+        var scroller = modalScrollElement();
+        if (scroller) scroller.scrollTo(0, 0);
+      }
+    }
+
+    function scheduleApplyFilter(scrollToTop) {
+      if (filterApplyFrame) window.cancelAnimationFrame(filterApplyFrame);
+      filterApplyFrame = window.requestAnimationFrame(function () {
+        applyStocktakeFilter(scrollToTop);
+      });
     }
 
     function renderBody() {
@@ -332,15 +545,19 @@
       });
 
       var html = '';
+      var zoneCounts = { freezer: 0, coldroom: 0, drystore: 0, other: 0 };
       ZONE_ORDER.forEach(function (z) {
         var rows = byZone[z];
         var stxRows = stxByZone[z];
         var builtinFlat = builtinsFlatForZone(z, getBuiltinCatalogArray(), recipeKeys, k);
         if (!rows.length && !stxRows.length && !builtinFlat.length) return;
         var visibleRows = visibleOrderItemCount(rows) + stxRows.length + builtinFlat.length;
+        zoneCounts[z] = visibleRows;
         var zoneIntrinsicSize = 48 + Math.max(1, visibleRows) * 53;
         html +=
-          '<div class="order-zone-block stkt-zone-block" style="--stkt-zone-size:' +
+          '<div class="order-zone-block stkt-zone-block" data-zone="' +
+          escAttr(z) +
+          '" style="--stkt-zone-size:' +
           escAttr(String(zoneIntrinsicSize)) +
           'px">';
         html += zoneHeaderHtml(ZL[z], visibleRows);
@@ -442,6 +659,8 @@
           '<p style="font-size:14px;color:var(--text3)">No ingredients yet. Add recipes to this book or use Add line below.</p>';
       }
       body.innerHTML = html;
+      updateFilterControls(zoneCounts, ZL);
+      applyStocktakeFilter(false);
 
       function patchFromInput(el, field) {
         var rowId = el.getAttribute('data-row-id');
@@ -514,6 +733,8 @@
     }
 
     function open() {
+      filterState.zone = 'all';
+      filterState.query = '';
       var needsFetch =
         builtinCatalogUrl && !staticBuiltinCatalog && lazyBuiltinCatalog === lazyCatalogNotLoaded;
       if (needsFetch) {
