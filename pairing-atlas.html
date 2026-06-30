@@ -739,6 +739,9 @@
     color: var(--text3);
     line-height: 1.5;
   }
+  .pa-food-matrix-wrap[aria-busy="true"] {
+    min-height: min(65vh, 640px);
+  }
 
   html.lenovo-tab-one-profile .pa-th-sub {
     font-size: 11px;
@@ -851,6 +854,10 @@
     html.lenovo-tab-one-profile .pa-food-matrix-wrap {
       border-radius: 12px;
       max-height: min(78dvh, 760px);
+    }
+
+    html.lenovo-tab-one-profile .pa-food-matrix-wrap[aria-busy="true"] {
+      min-height: min(58dvh, 560px);
     }
 
     html.lenovo-tab-one-profile .pa-matrix {
@@ -998,6 +1005,10 @@
     html.lenovo-tab-one-profile .pa-food-matrix-wrap {
       border-radius: 12px;
       max-height: min(70dvh, 620px);
+    }
+
+    html.lenovo-tab-one-profile .pa-food-matrix-wrap[aria-busy="true"] {
+      min-height: min(60dvh, 560px);
     }
 
     html.lenovo-tab-one-profile .pa-matrix {
@@ -1244,7 +1255,7 @@
 
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/kuschi-recipe-ui.js?v=4"></script>
-<script src="assets/pairing-atlas.js?v=2"></script>
+<script src="assets/pairing-atlas.js?v=4"></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
 <script src="assets/app-nav.js?v=2"></script>
 <style>

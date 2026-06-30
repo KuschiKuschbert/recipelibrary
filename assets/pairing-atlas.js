@@ -27,6 +27,8 @@
     openDrawerSpiceId: null,
     openDrawerFoodId: null,
   };
+  var foodMatrixPainted = false;
+  var foodMatrixObserver = null;
 
   function esc(s) {
     return String(s || '')
@@ -772,6 +774,8 @@
   function paintFoodMatrix(host) {
     if (!host) return;
     if (!state.foodPairings || !state.enriched) {
+      foodMatrixPainted = false;
+      host.removeAttribute('aria-busy');
       host.innerHTML =
         '<p class="pa-food-placeholder">Food × spice matrix appears when cross-book data finishes loading.</p>';
       return;
@@ -781,6 +785,8 @@
     });
     var spiceCols = getSpiceColumnIds();
     host.innerHTML = buildFoodTable(state.meta, foods, spiceCols);
+    host.removeAttribute('aria-busy');
+    foodMatrixPainted = true;
     if (state.openDrawerFoodId) {
       var fOpen = null;
       for (var fi = 0; fi < foods.length; fi++) {
@@ -990,6 +996,63 @@
     });
   }
 
+  function cancelFoodMatrixObserver() {
+    if (foodMatrixObserver && typeof foodMatrixObserver.disconnect === 'function') {
+      foodMatrixObserver.disconnect();
+    }
+    foodMatrixObserver = null;
+  }
+
+  function paintFoodMatrixNow(host) {
+    cancelFoodMatrixObserver();
+    paintFoodMatrix(host);
+  }
+
+  function scheduleFoodMatrixPaint(host, options) {
+    if (!host) return;
+    if (options && options.stale) foodMatrixPainted = false;
+    if (!state.enriched) {
+      paintFoodMatrix(host);
+      return;
+    }
+    if ((options && options.force) || !compactTabletProfile()) {
+      paintFoodMatrixNow(host);
+      return;
+    }
+    if (foodMatrixPainted && host.querySelector('#paFoodMatrix')) return;
+
+    foodMatrixPainted = false;
+    host.setAttribute('aria-busy', 'true');
+    host.innerHTML = '<p class="pa-food-placeholder">Preparing food × spice matrix…</p>';
+
+    function run() {
+      if (!state.enriched || foodMatrixPainted) return;
+      paintFoodMatrixNow(host);
+    }
+
+    cancelFoodMatrixObserver();
+    if (typeof window.IntersectionObserver === 'function') {
+      foodMatrixObserver = new window.IntersectionObserver(
+        function (entries) {
+          for (var i = 0; i < entries.length; i++) {
+            if (entries[i].isIntersecting) {
+              run();
+              break;
+            }
+          }
+        },
+        { root: null, rootMargin: '120px 0px', threshold: 0 }
+      );
+      foodMatrixObserver.observe(host);
+      return;
+    }
+    if (typeof requestIdleCallback === 'function') {
+      requestIdleCallback(run, { timeout: 2200 });
+    } else {
+      setTimeout(run, 900);
+    }
+  }
+
   function loadEnrichment(statusEl, spiceHost, foodHost, onDone) {
     Promise.all([
       fetch(UNIFIED).then(function (r) {
@@ -1042,7 +1105,7 @@
         }
 
         paintSpiceMatrix(spiceHost);
-        paintFoodMatrix(foodHost);
+        scheduleFoodMatrixPaint(foodHost);
         updateStatus(statusEl);
         var s = document.getElementById('paEnrichStatus');
         if (s) s.textContent = '';
@@ -1101,7 +1164,7 @@
           removeSpiceDrawer(spiceHost);
           removeFoodDrawer(foodHost);
           paintSpiceMatrix(spiceHost);
-          paintFoodMatrix(foodHost);
+          scheduleFoodMatrixPaint(foodHost, { stale: true });
           if (search && search.value) applySpiceFilter(search.value);
           if (foodSearch && foodSearch.value) applyFoodFilter(foodSearch.value);
           updateStatus(status);
@@ -1176,7 +1239,7 @@
             foodPri.setAttribute('aria-pressed', 'true');
             if (foodAll) foodAll.setAttribute('aria-pressed', 'false');
             state.openDrawerFoodId = null;
-            if (state.enriched) paintFoodMatrix(foodHost);
+            if (state.enriched) scheduleFoodMatrixPaint(foodHost, { force: true });
             if (foodSearch && foodSearch.value) applyFoodFilter(foodSearch.value);
           });
         }
@@ -1186,7 +1249,7 @@
             foodAll.setAttribute('aria-pressed', 'true');
             if (foodPri) foodPri.setAttribute('aria-pressed', 'false');
             state.openDrawerFoodId = null;
-            if (state.enriched) paintFoodMatrix(foodHost);
+            if (state.enriched) scheduleFoodMatrixPaint(foodHost, { force: true });
             if (foodSearch && foodSearch.value) applyFoodFilter(foodSearch.value);
           });
         }
@@ -1198,6 +1261,7 @@
         }
         if (foodSearch) {
           foodSearch.addEventListener('input', function () {
+            if (state.enriched && !foodMatrixPainted) scheduleFoodMatrixPaint(foodHost, { force: true });
             scheduleFoodFilter();
           });
         }
