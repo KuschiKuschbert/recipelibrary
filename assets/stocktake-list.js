@@ -337,8 +337,13 @@
         var stxRows = stxByZone[z];
         var builtinFlat = builtinsFlatForZone(z, getBuiltinCatalogArray(), recipeKeys, k);
         if (!rows.length && !stxRows.length && !builtinFlat.length) return;
-        html += '<div class="order-zone-block stkt-zone-block">';
-        html += zoneHeaderHtml(ZL[z], visibleOrderItemCount(rows) + stxRows.length + builtinFlat.length);
+        var visibleRows = visibleOrderItemCount(rows) + stxRows.length + builtinFlat.length;
+        var zoneIntrinsicSize = 48 + Math.max(1, visibleRows) * 53;
+        html +=
+          '<div class="order-zone-block stkt-zone-block" style="--stkt-zone-size:' +
+          escAttr(String(zoneIntrinsicSize)) +
+          'px">';
+        html += zoneHeaderHtml(ZL[z], visibleRows);
 
         rows.forEach(function (line) {
           var defaultUom = line.orderUnit != null ? String(line.orderUnit) : '';

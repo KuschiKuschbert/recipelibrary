@@ -6773,6 +6773,8 @@ html.lenovo-tab-one-profile .stocktake-intro {
 
 html.lenovo-tab-one-profile .stkt-zone-block {
   margin-bottom: 12px;
+  content-visibility: auto;
+  contain-intrinsic-size: auto var(--stkt-zone-size, 1280px);
 }
 
 html.lenovo-tab-one-profile .stkt-zone-block .order-zone-head {
@@ -6807,6 +6809,7 @@ html.lenovo-tab-one-profile .stkt-line-name {
   line-height: 1.28;
   overflow: hidden;
   overflow-wrap: anywhere;
+  hyphens: auto;
 }
 
 html.lenovo-tab-one-profile .stkt-badge {
@@ -6894,6 +6897,13 @@ html.lenovo-tab-one-profile #kbOrderListOverlay .order-add-submit {
 
 html.lenovo-tab-one-profile .stkt-uom-cell {
   gap: 8px;
+}
+
+html.lenovo-tab-one-profile .stkt-line-row,
+html.lenovo-tab-one-profile .stkt-line-row .stkt-field,
+html.lenovo-tab-one-profile #stocktakeOverlay .stocktake-actions .btn-secondary,
+html.lenovo-tab-one-profile #kbStocktakeOverlay .stocktake-actions .btn-secondary {
+  transition-duration: 0.08s;
 }
 
 html.lenovo-tab-one-profile .stocktake-add-panel {
@@ -7636,19 +7646,7 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
   }
 
   html.lenovo-tab-one-profile .stkt-line-row .stkt-zone-label {
-    grid-column: 3;
-    grid-row: 1;
-    justify-self: end;
-    align-self: start;
-    display: inline-flex;
-    align-items: center;
-    width: fit-content;
-    min-height: 26px;
-    padding: 3px 8px;
-    background: rgba(255, 255, 255, 0.055);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 999px;
-    line-height: 1.2;
+    display: none;
   }
 
   html.lenovo-tab-one-profile .stkt-line-row .stkt-qty {
@@ -7690,7 +7688,7 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
   }
 
   html.lenovo-tab-one-profile .stkt-line-row--stx .stkt-zone-label {
-    margin-right: 56px;
+    display: none;
   }
 
   html.lenovo-tab-one-profile .stkt-line-row .stkt-row-spacer {
@@ -7701,13 +7699,12 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
 @media (min-width: 721px) and (max-width: 900px) {
   html.lenovo-tab-one-profile .stkt-line-row {
     grid-template-columns:
-      minmax(0, 1.28fr)
-      minmax(62px, 0.26fr)
-      minmax(86px, 0.36fr)
-      minmax(106px, 0.48fr)
-      minmax(76px, 0.32fr);
+      minmax(0, 1.46fr)
+      minmax(92px, 0.34fr)
+      minmax(136px, 0.52fr)
+      minmax(78px, 0.28fr);
     grid-template-rows: minmax(42px, auto);
-    gap: 4px;
+    gap: 4px 5px;
     min-height: 50px;
     margin-bottom: 3px;
     padding: 3px 7px;
@@ -7717,11 +7714,10 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
 
   html.lenovo-tab-one-profile .stkt-line-row.stkt-line-sub {
     grid-template-columns:
-      minmax(0, 1.28fr)
-      minmax(62px, 0.26fr)
-      minmax(86px, 0.36fr)
-      minmax(106px, 0.48fr)
-      minmax(76px, 0.32fr);
+      minmax(0, 1.46fr)
+      minmax(92px, 0.34fr)
+      minmax(136px, 0.52fr)
+      minmax(78px, 0.28fr);
     padding-left: 8px;
   }
 
@@ -7748,29 +7744,21 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
   }
 
   html.lenovo-tab-one-profile .stkt-line-row .stkt-zone-label {
-    grid-column: 2;
-    grid-row: 1;
-    align-self: center;
-    justify-self: stretch;
-    justify-content: center;
-    min-height: 28px;
-    padding: 3px 5px;
-    font-size: 10.5px;
-    text-align: center;
+    display: none;
   }
 
   html.lenovo-tab-one-profile .stkt-line-row .stkt-qty {
-    grid-column: 3;
+    grid-column: 2;
     grid-row: 1;
   }
 
   html.lenovo-tab-one-profile .stkt-line-row .stkt-brand {
-    grid-column: 4;
+    grid-column: 3;
     grid-row: 1;
   }
 
   html.lenovo-tab-one-profile .stkt-line-row .stkt-uom-cell {
-    grid-column: 5;
+    grid-column: 4;
     grid-row: 1;
   }
 
@@ -7791,11 +7779,10 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
 
   html.lenovo-tab-one-profile .stkt-line-row--stx {
     grid-template-columns:
-      minmax(0, 1.16fr)
-      minmax(62px, 0.24fr)
-      minmax(82px, 0.34fr)
-      minmax(98px, 0.44fr)
-      minmax(72px, 0.3fr)
+      minmax(0, 1.34fr)
+      minmax(86px, 0.32fr)
+      minmax(124px, 0.48fr)
+      minmax(74px, 0.28fr)
       44px;
   }
 
@@ -7809,7 +7796,7 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
 
   html.lenovo-tab-one-profile .stkt-line-row .stkt-remove-stx {
     position: static;
-    grid-column: 6;
+    grid-column: 5;
     grid-row: 1;
     align-self: stretch;
     justify-self: stretch;
