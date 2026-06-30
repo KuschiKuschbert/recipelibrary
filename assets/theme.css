@@ -10055,6 +10055,29 @@ html.low-memory-device.lenovo-tab-one-profile body.has-app-nav :where(
   box-shadow: none;
 }
 
+html.low-memory-device.lenovo-tab-one-profile body.has-app-nav :where(
+  .app-nav,
+  .app-header__btn,
+  .search-glass,
+  .filter-chip,
+  .clear-btn,
+  .results-bar,
+  .grid .card,
+  .grid .card .copy-btn,
+  .grid .card .card-open-icon,
+  .pkgs-browser,
+  .modal-close,
+  .form-primary-btn
+) {
+  transition-duration: 0.08s;
+}
+
+html.low-memory-device.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card,
+html.low-memory-device.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card .copy-btn,
+html.low-memory-device.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card .card-open-icon {
+  transition-duration: 0.08s;
+}
+
 /* ════════════════════════════════════════════════════════════════════════════
    PAGE-LEVEL SHARED COMPONENTS
    ──────────────────────────────────────────────────────────────────────────── */
