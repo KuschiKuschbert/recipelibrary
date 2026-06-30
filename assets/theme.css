@@ -9048,57 +9048,78 @@ html.lenovo-tab-one-profile .planner-shopping__qty {
 }
 
 html.lenovo-tab-one-profile .planner-shopping__stats {
-  gap: 6px;
-  margin-bottom: 10px;
+  gap: 5px;
+  margin-bottom: 8px;
 }
 
 html.lenovo-tab-one-profile .planner-shopping__stat {
-  min-height: 34px;
-  padding: 5px 9px;
-  border-radius: 10px;
-  font-size: 12px;
+  min-height: 30px;
+  padding: 4px 8px;
+  border-radius: 9px;
+  font-size: 11.5px;
 }
 
 html.lenovo-tab-one-profile .planner-shopping__stat strong {
-  font-size: 14px;
+  font-size: 13px;
+}
+
+html.lenovo-tab-one-profile .planner-shopping__stat-label {
+  font-size: 9.5px;
+}
+
+html.lenovo-tab-one-profile .planner-shopping__list {
+  margin-bottom: 10px;
 }
 
 html.lenovo-tab-one-profile .planner-shopping__row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(150px, 0.42fr);
-  gap: 8px;
+  grid-template-columns: minmax(0, 1fr) minmax(120px, 0.34fr);
+  gap: 6px;
   align-items: start;
+  padding: 6px 8px;
+  border-radius: 9px;
+  font-size: 12.5px;
+  line-height: 1.28;
 }
 
 html.lenovo-tab-one-profile .planner-shopping__row .planner-shopping__qty {
   grid-column: 2;
   grid-row: 1;
+  font-size: 12px;
+  line-height: 1.28;
 }
 
 html.lenovo-tab-one-profile .planner-shopping__item {
   grid-column: 1;
   grid-row: 1;
   color: var(--text);
+  line-height: 1.28;
+}
+
+html.lenovo-tab-one-profile .planner-shopping__cost {
+  margin-top: 10px;
+  padding: 9px 10px;
+  font-size: 11.5px;
 }
 
 html.lenovo-tab-one-profile .planner-recipe {
-  margin-bottom: 9px;
-  border-radius: 10px;
+  margin-bottom: 7px;
+  border-radius: 9px;
 }
 
 html.lenovo-tab-one-profile .planner-recipe__head {
   align-items: center;
-  min-height: 46px;
-  padding: 10px 12px;
-  font-size: 14px;
-  line-height: 1.25;
+  min-height: 44px;
+  padding: 8px 10px;
+  font-size: 13.5px;
+  line-height: 1.22;
 }
 
 html.lenovo-tab-one-profile .planner-recipe__head-title {
   flex: 1 1 auto;
   min-width: 0;
-  max-height: 2.5em;
-  line-height: 1.25;
+  max-height: 2.44em;
+  line-height: 1.22;
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
@@ -9113,42 +9134,44 @@ html.lenovo-tab-one-profile .planner-recipe__note {
 
 html.lenovo-tab-one-profile .planner-recipe__head-count {
   flex: 0 0 auto;
-  padding: 3px 7px;
+  padding: 2px 6px;
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.035);
+  font-size: 11px;
 }
 
 html.lenovo-tab-one-profile .planner-recipe__metrics {
-  gap: 6px;
-  padding: 0 12px 8px;
+  gap: 5px;
+  padding: 0 10px 6px;
 }
 
 html.lenovo-tab-one-profile .planner-recipe__metric {
-  min-height: 30px;
-  padding: 5px 8px;
+  min-height: 26px;
+  padding: 3px 7px;
   border-radius: 8px;
-  font-size: 12px;
+  font-size: 11.5px;
 }
 
 html.lenovo-tab-one-profile .planner-recipe__metric-label {
-  font-size: 9px;
+  font-size: 8.5px;
 }
 
 html.lenovo-tab-one-profile .planner-recipe__section-label {
-  margin: 2px 0 5px;
-  padding: 0 12px;
+  margin: 1px 0 4px;
+  padding: 0 10px;
+  font-size: 11px;
 }
 
 html.lenovo-tab-one-profile .planner-recipe__ings {
-  gap: 5px;
-  padding: 0 12px 10px;
+  gap: 4px;
+  padding: 0 10px 8px;
 }
 
 html.lenovo-tab-one-profile .planner-recipe__ing {
-  grid-template-columns: minmax(64px, auto) minmax(0, 1fr);
-  gap: 10px;
-  padding-bottom: 4px;
+  grid-template-columns: minmax(58px, auto) minmax(0, 1fr);
+  gap: 8px;
+  padding-bottom: 3px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.055);
 }
 
@@ -9160,25 +9183,26 @@ html.lenovo-tab-one-profile .planner-recipe__ing:last-child {
 html.lenovo-tab-one-profile .planner-recipe__ings,
 html.lenovo-tab-one-profile .planner-recipe__method,
 html.lenovo-tab-one-profile .planner-recipe__service {
-  font-size: 13px;
-  line-height: 1.48;
+  font-size: 12.5px;
+  line-height: 1.38;
 }
 
 html.lenovo-tab-one-profile .planner-recipe__method,
 html.lenovo-tab-one-profile .planner-recipe__service {
-  margin: 0 12px 12px;
-  padding-left: 20px;
+  margin: 0 10px 10px;
+  padding-left: 18px;
 }
 
 html.lenovo-tab-one-profile .planner-recipe__method li,
 html.lenovo-tab-one-profile .planner-recipe__service li {
-  margin-bottom: 5px;
+  margin-bottom: 3px;
 }
 
 html.lenovo-tab-one-profile .planner-recipe__note {
-  margin: 0 12px 10px;
-  padding: 8px;
-  line-height: 1.45;
+  margin: 0 10px 8px;
+  padding: 7px;
+  font-size: 11.5px;
+  line-height: 1.35;
 }
 
 @media (min-width: 721px) and (max-width: 900px) {
