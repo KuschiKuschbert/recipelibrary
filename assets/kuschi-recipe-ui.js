@@ -262,6 +262,56 @@
     };
   }
 
+  var scrollLockDepth = 0;
+  var scrollLockY = 0;
+  var scrollLockPrev = null;
+
+  function lockPageScroll() {
+    var doc = w.document;
+    if (!doc || !doc.body || !doc.documentElement) return;
+    scrollLockDepth += 1;
+    if (scrollLockDepth > 1) return;
+    scrollLockY = w.scrollY || doc.documentElement.scrollTop || doc.body.scrollTop || 0;
+    scrollLockPrev = {
+      htmlOverflow: doc.documentElement.style.overflow || '',
+      bodyOverflow: doc.body.style.overflow || '',
+      bodyPosition: doc.body.style.position || '',
+      bodyTop: doc.body.style.top || '',
+      bodyLeft: doc.body.style.left || '',
+      bodyRight: doc.body.style.right || '',
+      bodyWidth: doc.body.style.width || '',
+    };
+    doc.documentElement.style.overflow = 'hidden';
+    doc.body.style.overflow = 'hidden';
+    doc.body.style.position = 'fixed';
+    doc.body.style.top = '-' + scrollLockY + 'px';
+    doc.body.style.left = '0';
+    doc.body.style.right = '0';
+    doc.body.style.width = '100%';
+  }
+
+  function unlockPageScroll(force) {
+    var doc = w.document;
+    if (!doc || !doc.body || !doc.documentElement) return;
+    if (!force && scrollLockDepth > 1) {
+      scrollLockDepth -= 1;
+      return;
+    }
+    if (!scrollLockDepth && !scrollLockPrev) return;
+    scrollLockDepth = 0;
+    var prev = scrollLockPrev || {};
+    scrollLockPrev = null;
+    doc.documentElement.style.overflow = prev.htmlOverflow || '';
+    doc.body.style.overflow = prev.bodyOverflow || '';
+    doc.body.style.position = prev.bodyPosition || '';
+    doc.body.style.top = prev.bodyTop || '';
+    doc.body.style.left = prev.bodyLeft || '';
+    doc.body.style.right = prev.bodyRight || '';
+    doc.body.style.width = prev.bodyWidth || '';
+    if (typeof w.scrollTo === 'function') w.scrollTo(0, scrollLockY || 0);
+    scrollLockY = 0;
+  }
+
   w.KuschiRecipeUi = {
     esc: esc,
     copyText: copyText,
@@ -271,6 +321,8 @@
     consumeSavedRecipeToast: consumeSavedRecipeToast,
     bindSearchClear: bindSearchClear,
     createFilterScheduler: createFilterScheduler,
+    lockPageScroll: lockPageScroll,
+    unlockPageScroll: unlockPageScroll,
     syncSearchClear: syncSearchClear,
     /**
      * @param {{ idSuffix?: string, openByDefault?: boolean, modalInline?: boolean }} [opts]

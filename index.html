@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=77">
+<link rel="stylesheet" href="assets/theme.css?v=78">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
@@ -708,7 +708,7 @@
 <script src="assets/user-recipes.js"></script>
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/aroma-hints.js"></script>
-<script src="assets/kuschi-recipe-ui.js"></script>
+<script src="assets/kuschi-recipe-ui.js?v=3"></script>
 <script src="assets/recipe-gemini-format.js" defer></script>
 <script src="assets/recipe-import-helpers.js" defer></script>
 <script src="assets/recipe-metric-normalize.js"></script>
@@ -1758,7 +1758,12 @@ function closeAddRecipeModal() {
   if (!document.getElementById('modalOverlay').classList.contains('open') &&
       !document.getElementById('pageQrOverlay').classList.contains('open') &&
       !(document.getElementById('addKitchenBookOverlay') && document.getElementById('addKitchenBookOverlay').classList.contains('open'))) {
-    document.body.style.overflow = '';
+    if (window.KuschiRecipeUi && KuschiRecipeUi.unlockPageScroll) {
+      KuschiRecipeUi.unlockPageScroll();
+    } else {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    }
   }
 }
 
@@ -2070,7 +2075,12 @@ function openAddRecipeModal() {
   closeHeroBooksSplit();
   closeHeroLookupSplit();
   document.getElementById('addRecipeOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  if (window.KuschiRecipeUi && KuschiRecipeUi.lockPageScroll) {
+    KuschiRecipeUi.lockPageScroll();
+  } else {
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+  }
   document.getElementById('arIngRows').innerHTML = '';
   addKitchenIngRow();
   setAddRecipeTab('manual');

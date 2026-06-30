@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=77">
+<link rel="stylesheet" href="assets/theme.css?v=78">
 <link rel="preload" href="riviera_data/builtins.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
@@ -1550,7 +1550,7 @@ html.lenovo-tab-one-profile .fn-planner__desc {
 <script src="assets/package-planner.js?v=2"></script>
 <script src="assets/package-prep-sheet.js"></script>
 <script src="assets/riviera-event-context.js?v=3"></script>
-<script src="assets/kuschi-recipe-ui.js"></script>
+<script src="assets/kuschi-recipe-ui.js?v=3"></script>
 <script src="assets/recipe-metric-normalize.js"></script>
 <script src="assets/flavour-toolkit-lookup.js" defer></script>
 <script src="assets/aroma-hints.js" defer></script>
@@ -2101,6 +2101,18 @@ function submitOrderListAdd() {
 }
 function closeAddRivieraModal() {
   document.getElementById('addRivieraOverlay').classList.remove('open');
+  const overlayOpen = ['modalOverlay', 'orderListOverlay', 'stocktakeOverlay', 'prepOverlay', 'functionPlannerOverlay', 'plannerListOverlay', 'pageQrOverlay', 'rivieraAdminOverlay'].some((id) => {
+    const el = document.getElementById(id);
+    return !!(el && el.classList.contains('open'));
+  });
+  if (!overlayOpen) {
+    if (window.KuschiRecipeUi && KuschiRecipeUi.unlockPageScroll) {
+      KuschiRecipeUi.unlockPageScroll();
+    } else {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    }
+  }
 }
 
 function setRivieraAddTab(which) {
@@ -2330,6 +2342,12 @@ function openAddRivieraModal() {
   }
   if (window.KuschiRecipeGemini) KuschiRecipeGemini.clearFormatReview('rvFormatReview');
   document.getElementById('addRivieraOverlay').classList.add('open');
+  if (window.KuschiRecipeUi && KuschiRecipeUi.lockPageScroll) {
+    KuschiRecipeUi.lockPageScroll();
+  } else {
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+  }
   if (typeof refreshRvAromaAddPanel === 'function') refreshRvAromaAddPanel();
 }
 function addRivIngRow() {
