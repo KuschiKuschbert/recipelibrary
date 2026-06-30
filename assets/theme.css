@@ -4956,7 +4956,8 @@ html.lenovo-tab-one-profile body.has-app-nav .modal-top-bar .modal-wake-pill {
   flex: 1 1 auto;
   max-width: 154px;
   padding-inline: 9px;
-  font-size: 10px;
+  font-size: 12px;
+  line-height: 1.1;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .modal-top-bar .cook-mode-btn {
@@ -7233,10 +7234,10 @@ html.lenovo-tab-one-profile .stocktake-zone-filters {
 
 html.lenovo-tab-one-profile .stocktake-zone-filter {
   min-width: 0;
-  min-height: 40px;
-  padding: 5px 5px;
+  min-height: 44px;
+  padding: 6px 5px;
   border-radius: 9px;
-  font-size: 11.5px;
+  font-size: 12.5px;
   transition-duration: 0.08s;
 }
 
@@ -7255,7 +7256,7 @@ html.lenovo-tab-one-profile .stocktake-search-label {
 }
 
 html.lenovo-tab-one-profile .stocktake-search-input {
-  min-height: 40px;
+  min-height: 44px;
   padding: 7px 9px;
   border-radius: 9px;
   font-size: 14px;
@@ -7264,19 +7265,19 @@ html.lenovo-tab-one-profile .stocktake-search-input {
 
 html.lenovo-tab-one-profile .stocktake-search-clear {
   min-width: 0;
-  min-height: 40px;
+  min-height: 44px;
   padding: 6px 7px;
   border-radius: 9px;
-  font-size: 11.5px;
+  font-size: 12.5px;
   transition-duration: 0.08s;
 }
 
 html.lenovo-tab-one-profile .stocktake-add-jump {
   min-width: 0;
-  min-height: 40px;
+  min-height: 44px;
   padding: 6px 7px;
   border-radius: 9px;
-  font-size: 11.5px;
+  font-size: 12.5px;
   line-height: 1.05;
   transition-duration: 0.08s;
   white-space: normal;
@@ -8936,9 +8937,9 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
   html.lenovo-tab-one-profile #kbStocktakeOverlay .stocktake-search-clear,
   html.lenovo-tab-one-profile #stocktakeOverlay .stocktake-add-jump,
   html.lenovo-tab-one-profile #kbStocktakeOverlay .stocktake-add-jump {
-    min-height: 40px;
+    min-height: 44px;
     border-radius: 8px;
-    font-size: 11.5px;
+    font-size: 12.5px;
   }
 
   html.lenovo-tab-one-profile #stocktakeOverlay .stkt-line-row,
@@ -10067,9 +10068,15 @@ html.low-memory-device.lenovo-tab-one-profile body.has-app-nav :where(
   .grid .card .card-open-icon,
   .pkgs-browser,
   .modal-close,
-  .form-primary-btn
+  .modal-wake-pill,
+  .modal-quick-action,
+  .modal-copy-btn,
+  .form-primary-btn,
+  .nav-sheet__panel,
+  .nav-sheet__close
 ) {
   transition-duration: 0.08s;
+  animation-duration: 0.08s;
 }
 
 html.low-memory-device.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card,
