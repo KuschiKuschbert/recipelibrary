@@ -138,14 +138,42 @@
     });
   }
 
-  function autoSelectAllCourses(sec) {
+  function autoSelectDefaultCourses(sec) {
     if (!sec || !_state.eventId || !_state.sectionId) return;
     (sec.courses || []).forEach(function (course, ci) {
       var sel = course.selection || { mode: 'optional' };
-      if (sel.mode !== 'all') return;
+      var linkedKeys = [];
       (course.items || []).forEach(function (item, ii) {
         if (!item.recipeId) return;
-        _state.selections[itemKey(_state.eventId, _state.sectionId, ci, ii)] = true;
+        linkedKeys.push(itemKey(_state.eventId, _state.sectionId, ci, ii));
+      });
+      if (!linkedKeys.length) return;
+      if (sel.mode === 'all') {
+        linkedKeys.forEach(function (key) {
+          _state.selections[key] = true;
+        });
+        return;
+      }
+      if (sel.mode !== 'pick') return;
+      var min = sel.min != null ? sel.min : 1;
+      var max = sel.max != null ? sel.max : null;
+      var target = max != null ? Math.min(Math.max(min, 0), max) : Math.max(min, 0);
+      if (!target) return;
+      var selected = linkedKeys.filter(function (key) {
+        return _state.selections[key];
+      });
+      if (max != null && selected.length > max) {
+        selected.slice(max).forEach(function (key) {
+          delete _state.selections[key];
+        });
+        selected = selected.slice(0, max);
+      }
+      linkedKeys.forEach(function (key) {
+        if (selected.length >= target) return;
+        if (!_state.selections[key]) {
+          _state.selections[key] = true;
+          selected.push(key);
+        }
       });
     });
   }
@@ -304,7 +332,7 @@
     var pkg = findPkg(id);
     if (!pkg || !pkg.sections || !pkg.sections.length) return;
     _state.sectionId = pkg.sections[0].id;
-    autoSelectAllCourses(pkg.sections[0]);
+    autoSelectDefaultCourses(pkg.sections[0]);
     saveState();
     syncUrl({ clearOpen: true });
     renderEventTabs();
@@ -316,7 +344,7 @@
     _state.sectionId = secId;
     var pkg = findPkg(pkgId);
     var sec = findSection(pkg, secId);
-    autoSelectAllCourses(sec);
+    autoSelectDefaultCourses(sec);
     saveState();
     syncUrl({ clearOpen: true });
     renderSectionTabs(pkg);
@@ -576,12 +604,14 @@
       if (!_state.eventId && data.packages && data.packages.length) {
         _state.eventId = data.packages[0].id;
         _state.sectionId = data.packages[0].sections[0].id;
-        autoSelectAllCourses(data.packages[0].sections[0]);
         saveState();
       }
       function finishOpen() {
-        renderEventTabs();
         var pkg = findPkg(_state.eventId);
+        var sec = findSection(pkg, _state.sectionId);
+        autoSelectDefaultCourses(sec);
+        saveState();
+        renderEventTabs();
         if (pkg) renderSectionTabs(pkg);
         renderBody();
         syncUrl({ clearOpen: true });
@@ -730,7 +760,7 @@
               _state.sectionId = pkg.sections[0].id;
             }
             var sec = findSection(pkg, _state.sectionId);
-            autoSelectAllCourses(sec);
+            autoSelectDefaultCourses(sec);
           }
         }
         saveState();
