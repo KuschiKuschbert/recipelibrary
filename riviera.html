@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=76">
+<link rel="stylesheet" href="assets/theme.css?v=77">
 <link rel="preload" href="riviera_data/builtins.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
@@ -1557,7 +1557,7 @@ html.lenovo-tab-one-profile .fn-planner__desc {
 <script src="assets/screen-wake.js" defer></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
 <script src="assets/kuschi-filter-chips.js"></script>
-<script src="assets/kuschi-cook-mode.js?v=3"></script>
+<script src="assets/kuschi-cook-mode.js?v=4"></script>
 <script>
 /** Static JSON (same-origin) — keeps initial HTML/JS parse small; merged after fetch. */
 const RIVIERA_BUILTINS_URL = 'riviera_data/builtins.json';
@@ -2810,8 +2810,14 @@ function openRecipe(id, options) {
 
           const elements = r.elements.map(e => `<span class="element-chip">${KuschiRecipeUi.esc(e)}</span>`).join('');
           const ingsHTML = buildIngsHTML(r.ingredients, 1);
-          const steps = r.method_steps.map(s => `<li>${KuschiRecipeUi.esc(s)}</li>`).join('');
-          const service = r.service.map(s => `<li>${KuschiRecipeUi.esc(s)}</li>`).join('');
+          const steps = r.method_steps.map((s, i) => {
+            const number = i + 1;
+            return `<li data-cook-phase="Prep" data-cook-step-label="P${number}" data-cook-phase-index="${number}" data-cook-phase-total="${r.method_steps.length}">${KuschiRecipeUi.esc(s)}</li>`;
+          }).join('');
+          const service = r.service.map((s, i) => {
+            const number = i + 1;
+            return `<li data-cook-phase="Service" data-cook-step-label="S${number}" data-cook-phase-index="${number}" data-cook-phase-total="${r.service.length}">${KuschiRecipeUi.esc(s)}</li>`;
+          }).join('');
           const prepBlock = steps
             ? `<div class="modal-section modal-section--prep">Prep Method</div><ol class="modal-steps modal-steps--prep">${steps}</ol>`
             : '';

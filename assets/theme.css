@@ -4029,6 +4029,35 @@ button.sheet-book-item {
   text-align: center;
 }
 
+.cook-step-phase {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  min-height: 22px;
+  padding: 3px 9px;
+  border: 1px solid rgba(201, 169, 110, 0.24);
+  border-radius: 999px;
+  background: rgba(201, 169, 110, 0.1);
+  color: var(--gold-light);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.15;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.cook-step-phase[hidden] {
+  display: none;
+}
+
+.cook-step-nav[data-cook-phase="service"] .cook-step-phase {
+  border-color: rgba(126, 200, 154, 0.24);
+  background: rgba(126, 200, 154, 0.1);
+  color: #bfe9cb;
+}
+
 .cook-step-meter {
   display: flex;
   min-width: 0;
@@ -5325,9 +5354,9 @@ html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .cook-step-
   display: grid;
   grid-template-columns: 60px minmax(0, 1fr) 60px;
   align-items: center;
-  min-height: 94px;
+  min-height: 98px;
   margin: 0;
-  padding: 10px 24px max(12px, calc(12px + env(safe-area-inset-bottom, 0px)));
+  padding: 9px 24px max(12px, calc(12px + env(safe-area-inset-bottom, 0px)));
   border-top-color: rgba(201, 169, 110, 0.2);
   box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.22);
 }
@@ -5348,16 +5377,24 @@ html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .cook-step-
   line-height: 1.2;
 }
 
+html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .cook-step-phase {
+  min-height: 22px;
+  padding: 3px 8px;
+  font-size: 10px;
+}
+
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .cook-step-meter {
   min-width: 0;
   padding: 0 6px;
+  gap: 4px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .cook-step-preview {
   max-width: 34em;
   color: var(--text2);
-  font-size: 13px;
-  line-height: 1.28;
+  font-size: 12.5px;
+  line-height: 1.22;
+  -webkit-line-clamp: 1;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal-copy-bar {

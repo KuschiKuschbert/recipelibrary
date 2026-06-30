@@ -21,6 +21,25 @@
 
   var _overlayId = 'modalOverlay';
   var _modalId   = 'modal';
+  var _cookNavRetryTimer = null;
+
+  function clearCookNavRetry() {
+    if (!_cookNavRetryTimer) return;
+    clearTimeout(_cookNavRetryTimer);
+    _cookNavRetryTimer = null;
+  }
+
+  function scheduleCookNavRetry(overlay) {
+    if (!overlay || !overlay.classList.contains('cook-mode')) return;
+    var retries = overlay._kuschiCookNavRetries || 0;
+    if (retries >= 12) return;
+    overlay._kuschiCookNavRetries = retries + 1;
+    clearCookNavRetry();
+    _cookNavRetryTimer = setTimeout(function () {
+      _cookNavRetryTimer = null;
+      buildCookModeStepNav();
+    }, 140);
+  }
 
   // ── Cook Mode ─────────────────────────────────────────────────────────────
   function toggleCookMode() {
@@ -48,13 +67,41 @@
     var overlay = document.getElementById(_overlayId);
     if (!overlay) return;
     var steps = overlay.querySelectorAll('.modal-steps li, .modal-step');
-    if (!steps.length) return;
+    if (!steps.length) {
+      scheduleCookNavRetry(overlay);
+      return;
+    }
+    overlay._kuschiCookNavRetries = 0;
+    clearCookNavRetry();
 
     var currentStep = 0;
     var total = steps.length;
     var prevBtn = null;
     var nextBtn = null;
+    var phaseEl = null;
     var previewEl = null;
+    var stepMeta = Array.prototype.map.call(steps, function (el, i) {
+      return {
+        phase: el.getAttribute('data-cook-phase') || '',
+        label: el.getAttribute('data-cook-step-label') || String(i + 1),
+        phaseIndex: el.getAttribute('data-cook-phase-index') || '',
+        phaseTotal: el.getAttribute('data-cook-phase-total') || '',
+      };
+    });
+
+    function phaseLabel(meta) {
+      if (!meta || !meta.phase) return '';
+      if (meta.phaseIndex && meta.phaseTotal) {
+        return meta.phase + ' ' + meta.label + ' of ' + meta.phaseTotal;
+      }
+      return meta.phase + ' ' + meta.label;
+    }
+
+    function navLabel(idx) {
+      var meta = stepMeta[idx];
+      var label = phaseLabel(meta);
+      return label || ('Step ' + (idx + 1));
+    }
 
     function prefersInstantStepScroll() {
       var root = document.documentElement;
@@ -71,7 +118,18 @@
       steps.forEach(function (el, i) {
         el.classList.toggle('cook-step-active', i === currentStep);
         el.classList.toggle('cook-step-past', i < currentStep);
+        if (i === currentStep) el.setAttribute('aria-current', 'step');
+        else el.removeAttribute('aria-current');
       });
+      var meta = stepMeta[currentStep] || {};
+      if (nav) {
+        nav.setAttribute('data-cook-phase', (meta.phase || 'method').toLowerCase());
+      }
+      if (phaseEl) {
+        var label = phaseLabel(meta);
+        phaseEl.textContent = label;
+        phaseEl.hidden = !label;
+      }
       var counter = document.getElementById('cookStepCounter');
       if (counter) counter.textContent = 'Step ' + (currentStep + 1) + ' / ' + total;
       if (previewEl) {
@@ -80,10 +138,12 @@
       if (prevBtn) {
         prevBtn.disabled = currentStep === 0;
         prevBtn.setAttribute('aria-disabled', currentStep === 0 ? 'true' : 'false');
+        prevBtn.setAttribute('aria-label', currentStep === 0 ? 'Previous step' : 'Previous step: ' + navLabel(currentStep - 1));
       }
       if (nextBtn) {
         nextBtn.disabled = currentStep === total - 1;
         nextBtn.setAttribute('aria-disabled', currentStep === total - 1 ? 'true' : 'false');
+        nextBtn.setAttribute('aria-label', currentStep === total - 1 ? 'Next step' : 'Next step: ' + navLabel(currentStep + 1));
       }
       steps[currentStep].scrollIntoView({
         behavior: prefersInstantStepScroll() ? 'auto' : 'smooth',
@@ -99,6 +159,7 @@
         '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>' +
       '</button>' +
       '<span class="cook-step-meter" aria-live="polite">' +
+        '<span class="cook-step-phase" id="cookStepPhase" hidden></span>' +
         '<span class="cook-step-counter" id="cookStepCounter">Step 1 / ' + total + '</span>' +
         '<span class="cook-step-preview" id="cookStepPreview"></span>' +
       '</span>' +
@@ -110,6 +171,7 @@
     if (modal) modal.appendChild(nav);
     prevBtn = nav.querySelector('.cook-step-prev');
     nextBtn = nav.querySelector('.cook-step-next');
+    phaseEl = nav.querySelector('#cookStepPhase');
     previewEl = nav.querySelector('#cookStepPreview');
 
     function handleStepClick(e) {
@@ -134,6 +196,7 @@
 
   // Remove the step nav when the modal closes so it rebuilds fresh next open.
   function _cleanupCookMode() {
+    clearCookNavRetry();
     var nav = document.getElementById('cookStepNav');
     if (nav) {
       if (typeof nav._kuschiCookCleanup === 'function') nav._kuschiCookCleanup();
@@ -145,6 +208,9 @@
       overlay.classList.remove('cook-mode');
       overlay.querySelectorAll('.cook-step-active, .cook-step-past').forEach(function (el) {
         el.classList.remove('cook-step-active', 'cook-step-past');
+      });
+      overlay.querySelectorAll('[aria-current="step"]').forEach(function (el) {
+        el.removeAttribute('aria-current');
       });
     }
     var btn = document.getElementById('cookModeBtn');
