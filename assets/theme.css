@@ -4630,7 +4630,7 @@ html.lenovo-tab-one-profile body.has-app-nav .modal {
   max-height: min(94vh, 94dvh);
   padding: 18px 20px max(22px, calc(22px + env(safe-area-inset-bottom, 0px)));
   border-radius: 14px;
-  scroll-padding-top: 62px;
+  scroll-padding-top: 58px;
   scroll-padding-bottom: 84px;
   overscroll-behavior: contain;
 }
@@ -4645,9 +4645,9 @@ html.lenovo-tab-one-profile body.has-app-nav #modalOverlay .modal {
 
 html.lenovo-tab-one-profile body.has-app-nav .modal-top-bar {
   top: 0;
-  margin: -18px -20px 12px;
-  padding: 8px 10px;
-  gap: 8px;
+  margin: -18px -20px 10px;
+  padding: 5px 10px;
+  gap: 6px;
   background: rgba(20, 20, 20, 0.98);
   border-bottom-color: rgba(201, 169, 110, 0.18);
   border-radius: 14px 14px 0 0;
@@ -4663,15 +4663,15 @@ html.lenovo-tab-one-profile body.has-app-nav .modal-top-bar .modal-wake-pill {
 
 html.lenovo-tab-one-profile body.has-app-nav .modal-top-bar .modal-wake-pill {
   flex: 1 1 auto;
-  max-width: 160px;
-  padding-inline: 10px;
+  max-width: 154px;
+  padding-inline: 9px;
   font-size: 10px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .modal-top-bar .cook-mode-btn {
   justify-content: center;
-  min-width: 78px;
-  padding-inline: 10px;
+  min-width: 74px;
+  padding-inline: 9px;
 }
 
 html.lenovo-tab-one-profile .modal-title {
@@ -4808,7 +4808,7 @@ html.lenovo-tab-one-profile body.has-app-nav .modal-section {
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay .modal-section--prep,
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay .modal-section--service {
   position: sticky;
-  top: 60px;
+  top: 56px;
   z-index: 2;
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.16);
 }
@@ -5356,13 +5356,14 @@ html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal {
     max(28px, env(safe-area-inset-left, 0px));
   border: none;
   border-radius: 0;
-  scroll-padding-top: 84px;
+  scroll-padding-top: 74px;
   scroll-padding-bottom: 116px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal-top-bar {
-  margin: -18px -28px 20px;
-  padding: 12px 18px;
+  margin: -18px -28px 14px;
+  padding: 7px 16px;
+  gap: 6px;
   border-radius: 0;
   box-shadow: none;
 }
@@ -5421,7 +5422,7 @@ html.lenovo-tab-one-profile body.has-app-nav #modalOverlay.cook-mode .modal-step
   border-radius: 12px;
   overflow-wrap: anywhere;
   text-wrap: pretty;
-  scroll-margin-top: 94px;
+  scroll-margin-top: 82px;
   scroll-margin-bottom: 116px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
 }
@@ -7249,7 +7250,7 @@ html.lenovo-tab-one-profile .nav-item__label {
   }
 
   html.lenovo-tab-one-profile body.has-app-nav .modal-top-bar {
-    margin: -18px -20px 12px;
+    margin: -18px -20px 10px;
   }
 
   html.lenovo-tab-one-profile body.has-app-nav .modal-copy-bar {
