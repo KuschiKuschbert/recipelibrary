@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=72">
+<link rel="stylesheet" href="assets/theme.css?v=73">
 <link rel="preload" href="aroma_data/ingredients_modal_core.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
@@ -559,29 +559,33 @@
   <div class="modal order-list-modal stocktake-modal">
     <button type="button" class="modal-close" onclick="closeKitchenBookStocktakeModal()">✕</button>
     <div class="modal-title" style="margin-bottom:12px">Stocktake checklist</div>
-    <p style="font-size:13px;color:var(--text3);margin-bottom:16px">Same ingredients as this book’s order list (merged by name and zone). When you leave the <strong>brand</strong> or <strong>UOM</strong> field, it locks for a cleaner list — <strong>double-click</strong> a locked field to edit again. Lines you add here are <strong>only</strong> on this stocktake sheet. Use <strong>Copy stocktake JSON</strong> and <strong>Import JSON…</strong> to move this checklist to another device (save or share the JSON as a file where needed).</p>
+    <p class="stocktake-intro">Same ingredients as this book’s order list (merged by name and zone). When you leave the <strong>brand</strong> or <strong>UOM</strong> field, it locks for a cleaner list — <strong>double-click</strong> a locked field to edit again. Lines you add here are <strong>only</strong> on this stocktake sheet. Use <strong>Copy stocktake JSON</strong> and <strong>Import JSON…</strong> to move this checklist to another device (save or share the JSON as a file where needed).</p>
     <div id="kbStocktakeBody"></div>
-    <div class="modal-section" style="margin-top:20px">Add line (stocktake only)</div>
-    <p class="order-add-hint">Does not add to the order list — only to this checklist.</p>
-    <div class="form-row"><label for="kbStNewName">Name</label><input id="kbStNewName" type="text" placeholder="e.g. Labels" autocomplete="off" /></div>
-    <div class="form-row"><label for="kbStNewZone">Storage</label>
-      <select id="kbStNewZone">
-        <option value="freezer">Freezer</option>
-        <option value="coldroom">Cold room</option>
-        <option value="drystore">Dry store</option>
-        <option value="other">Other</option>
-      </select>
+    <div class="stocktake-add-panel">
+      <div class="modal-section stocktake-add-title">Add line (stocktake only)</div>
+      <p class="order-add-hint stocktake-add-hint">Does not add to the order list — only to this checklist.</p>
+      <div class="stocktake-add-grid">
+        <div class="form-row stocktake-add-name"><label for="kbStNewName">Name</label><input id="kbStNewName" type="text" placeholder="e.g. Labels" autocomplete="off" /></div>
+        <div class="form-row"><label for="kbStNewZone">Storage</label>
+          <select id="kbStNewZone">
+            <option value="freezer">Freezer</option>
+            <option value="coldroom">Cold room</option>
+            <option value="drystore">Dry store</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-row"><label for="kbStNewQty">Quantity</label><input id="kbStNewQty" type="text" placeholder="e.g. 3" autocomplete="off" /></div>
+        <div class="form-row"><label for="kbStNewBrand">Brand</label><input id="kbStNewBrand" type="text" placeholder="e.g. Supplier" autocomplete="off" /></div>
+        <div class="form-row"><label for="kbStNewUom">UOM</label><input id="kbStNewUom" type="text" placeholder="e.g. kg, box" autocomplete="off" /></div>
+        <button type="button" class="btn-secondary stocktake-add-submit" onclick="submitKitchenBookStocktakeAdd()">Add to stocktake</button>
+      </div>
     </div>
-    <div class="form-row"><label for="kbStNewQty">Quantity (optional)</label><input id="kbStNewQty" type="text" placeholder="e.g. 3" autocomplete="off" /></div>
-    <div class="form-row"><label for="kbStNewBrand">Brand (optional)</label><input id="kbStNewBrand" type="text" placeholder="e.g. Supplier" autocomplete="off" /></div>
-    <div class="form-row"><label for="kbStNewUom">UOM (optional)</label><input id="kbStNewUom" type="text" placeholder="e.g. kg, box" autocomplete="off" /></div>
-    <button type="button" class="btn-secondary" onclick="submitKitchenBookStocktakeAdd()">Add to stocktake</button>
-    <div class="order-actions">
-      <button type="button" class="btn-secondary" onclick="clearKitchenBookStocktakeCounts()">Clear counted qty &amp; brand</button>
-      <button type="button" class="btn-secondary" onclick="copyKitchenBookStocktakeText()">Copy as text</button>
-      <button type="button" class="btn-secondary" onclick="printKitchenBookStocktakeSheet()">Print checklist</button>
-      <button type="button" class="btn-secondary" onclick="copyKitchenBookStocktakeJson()">Copy stocktake JSON</button>
-      <button type="button" class="btn-secondary" onclick="importKitchenBookStocktakeJsonFile()">Import JSON…</button>
+    <div class="order-actions stocktake-actions" aria-label="Stocktake actions">
+      <button type="button" class="btn-secondary stocktake-action-clear" aria-label="Clear counted quantities and brands" onclick="clearKitchenBookStocktakeCounts()">Clear counts</button>
+      <button type="button" class="btn-secondary stocktake-action-copy" aria-label="Copy stocktake as text" onclick="copyKitchenBookStocktakeText()">Copy text</button>
+      <button type="button" class="btn-secondary stocktake-action-print" aria-label="Print stocktake checklist" onclick="printKitchenBookStocktakeSheet()">Print</button>
+      <button type="button" class="btn-secondary stocktake-action-json" aria-label="Copy stocktake JSON" onclick="copyKitchenBookStocktakeJson()">Copy JSON</button>
+      <button type="button" class="btn-secondary stocktake-action-import" aria-label="Import stocktake JSON" onclick="importKitchenBookStocktakeJsonFile()">Import</button>
     </div>
   </div>
 </div>
