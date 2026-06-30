@@ -4511,6 +4511,7 @@ html.lenovo-tab-one-profile .search-icon {
 }
 
 html.lenovo-tab-one-profile .search-input {
+  min-height: 44px;
   font-size: 16px;
   line-height: 1.35;
 }
@@ -10110,6 +10111,7 @@ html.lenovo-tab-one-profile .pkgs-clear {
 }
 
 .page-about summary {
+  min-height: 44px;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.5px;

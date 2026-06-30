@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=143">
+<link rel="stylesheet" href="assets/theme.css?v=144">
 <style>
   :root { --app-header-h: 65px; }
   .pa-skip {
@@ -302,6 +302,9 @@
     border-top: 1px solid var(--border);
   }
   .pa-matrix-legend summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
     cursor: pointer;
     font-weight: 600;
     color: var(--gold);
@@ -611,6 +614,13 @@
     line-height: 1.15;
     max-width: 4.75rem;
     min-width: 2.5rem;
+  }
+
+  html.low-memory-device .pa-toolbar,
+  html.low-memory-device .pa-matrix thead th,
+  html.low-memory-device .pa-food-matrix thead th {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
   .pa-fx-spice-main {
     display: block;
