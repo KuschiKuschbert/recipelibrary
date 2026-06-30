@@ -9200,6 +9200,22 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
     padding-right: 16px;
     padding-left: 16px;
   }
+
+  @supports (content-visibility: auto) {
+    html.low-memory-device.lenovo-tab-one-profile #orderListOverlay .order-line-row,
+    html.low-memory-device.lenovo-tab-one-profile #kbOrderListOverlay .order-line-row,
+    html.low-memory-device.lenovo-tab-one-profile #stocktakeOverlay .stkt-line-row,
+    html.low-memory-device.lenovo-tab-one-profile #kbStocktakeOverlay .stkt-line-row {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 56px;
+    }
+
+    html.low-memory-device.lenovo-tab-one-profile #orderListOverlay .order-line-sub,
+    html.low-memory-device.lenovo-tab-one-profile #kbOrderListOverlay .order-line-sub {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 50px;
+    }
+  }
 }
 
 /* Lenovo tablet utility pages: Pantry, Aroma, Flavor, Matrix, Visual Guides */
