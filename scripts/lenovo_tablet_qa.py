@@ -175,6 +175,7 @@ def write_artifact_manifest(
     artifacts: list[dict[str, Any]],
     action_timings: list[dict[str, Any]],
     long_task_metrics: list[dict[str, Any]],
+    browser_event_metrics: list[dict[str, Any]],
     cpu_throttle_rate_value: float,
     issues: list[Issue],
 ) -> Path:
@@ -191,6 +192,7 @@ def write_artifact_manifest(
         "artifacts": artifacts,
         "actionTimings": action_timings,
         "longTaskMetrics": long_task_metrics,
+        "browserEventMetrics": browser_event_metrics,
         "issues": [issue.__dict__ for issue in issues],
     }
     manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
@@ -520,6 +522,40 @@ def browser_resource_label(url: str) -> str:
     path = unquote(parsed.path or "/")
     label = path + (f"?{parsed.query}" if parsed.query else "")
     return label[:220]
+
+
+def browser_event_text(value: Any, limit: int = 240) -> str:
+    return str(value or "").replace("\n", " ").strip()[:limit]
+
+
+def console_source_label(message: Any) -> str:
+    try:
+        location = getattr(message, "location", {})
+        if callable(location):
+            location = location()
+    except PlaywrightError:
+        location = {}
+    if not isinstance(location, dict):
+        return ""
+    url = location.get("url") or ""
+    if not url:
+        return ""
+    line = location.get("lineNumber")
+    column = location.get("columnNumber")
+    suffix = ""
+    if line is not None:
+        suffix = f":{int(line) + 1}"
+        if column is not None:
+            suffix += f":{int(column) + 1}"
+    return f"{browser_resource_label(url)}{suffix}"
+
+
+def describe_browser_event(event: dict[str, Any]) -> str:
+    text = event.get("text") or event.get("failure") or event.get("status") or ""
+    source = event.get("source") or event.get("url") or ""
+    if source and text:
+        return f"{text} ({source})"[:260]
+    return browser_event_text(text or source, 260)
 
 
 def is_same_origin_resource(base: str, url: str) -> bool:
@@ -2063,6 +2099,7 @@ def run_page(
     artifacts: list[dict[str, Any]] | None = None,
     action_timings: list[dict[str, Any]] | None = None,
     long_task_metrics: list[dict[str, Any]] | None = None,
+    browser_event_metrics: list[dict[str, Any]] | None = None,
     cpu_throttle_rate_value: float = 1.0,
 ) -> list[Issue]:
     context = browser.new_context(
@@ -2074,10 +2111,27 @@ def run_page(
     )
     page = context.new_page()
     page.add_init_script(long_task_observer_script())
-    console_errors: list[str] = []
-    page_errors: list[str] = []
-    failed_requests: list[str] = []
-    bad_responses: list[str] = []
+    console_errors: list[dict[str, Any]] = []
+    page_errors: list[dict[str, Any]] = []
+    failed_requests: list[dict[str, Any]] = []
+    bad_responses: list[dict[str, Any]] = []
+
+    def record_console(message: Any) -> None:
+        msg_type = getattr(message, "type", "")
+        if msg_type != "error":
+            return
+        text = getattr(message, "text", "")
+        if callable(text):
+            try:
+                text = text()
+            except PlaywrightError:
+                text = ""
+        console_errors.append(
+            {
+                "text": browser_event_text(text),
+                "source": console_source_label(message),
+            }
+        )
 
     def record_failed_request(request: Any) -> None:
         url = getattr(request, "url", "")
@@ -2089,17 +2143,27 @@ def run_page(
                 failure = failure()
             except PlaywrightError:
                 failure = ""
-        failed_requests.append(f"{browser_resource_label(url)} {str(failure or '').strip()}"[:240])
+        failed_requests.append(
+            {
+                "url": browser_resource_label(url),
+                "failure": browser_event_text(failure or "request failed"),
+            }
+        )
 
     def record_response(response: Any) -> None:
         status = int(getattr(response, "status", 0) or 0)
         url = getattr(response, "url", "")
         if status < 400 or not is_same_origin_resource(base, url):
             return
-        bad_responses.append(f"{status} {browser_resource_label(url)}"[:240])
+        bad_responses.append(
+            {
+                "status": status,
+                "url": browser_resource_label(url),
+            }
+        )
 
-    page.on("console", lambda msg: console_errors.append(msg.text) if msg.type == "error" else None)
-    page.on("pageerror", lambda exc: page_errors.append(str(exc)) if exc else None)
+    page.on("console", record_console)
+    page.on("pageerror", lambda exc: page_errors.append({"text": browser_event_text(exc)}) if exc else None)
     page.on("requestfailed", record_failed_request)
     page.on("response", record_response)
     issues: list[Issue] = []
@@ -2164,6 +2228,40 @@ def run_page(
             }
         )
 
+    def record_browser_event_metric() -> None:
+        if browser_event_metrics is None:
+            return
+        motion_name = "reduced-motion" if reduced_motion else "normal-motion"
+        browser_event_metrics.append(
+            {
+                "page": page_path,
+                "viewport": viewport_name,
+                "width": width,
+                "height": height,
+                "motion": motion_name,
+                "cpuThrottleRate": cpu_throttle_rate_value,
+                "url": page.url,
+                "consoleErrorCount": len(console_errors),
+                "pageErrorCount": len(page_errors),
+                "failedRequestCount": len(failed_requests),
+                "badResponseCount": len(bad_responses),
+                "consoleErrors": console_errors[:8],
+                "pageErrors": page_errors[:8],
+                "failedRequests": failed_requests[:8],
+                "badResponses": bad_responses[:8],
+            }
+        )
+
+    def append_browser_event_issues() -> None:
+        for msg in console_errors[:5]:
+            issues.append(Issue(page_path, viewport_name, f"console error: {describe_browser_event(msg)}"))
+        for msg in page_errors[:5]:
+            issues.append(Issue(page_path, viewport_name, f"page error: {describe_browser_event(msg)}"))
+        for msg in failed_requests[:5]:
+            issues.append(Issue(page_path, viewport_name, f"request failed: {describe_browser_event(msg)}"))
+        for msg in bad_responses[:5]:
+            issues.append(Issue(page_path, viewport_name, f"bad response: {describe_browser_event(msg)}"))
+
     try:
         if cpu_throttle_rate_value > 1:
             try:
@@ -2197,17 +2295,11 @@ def run_page(
         for metric in collect_metrics(page):
             record_long_task_metric(metric)
             issues.extend(issues_from_metrics(page_path, viewport_name, metric, reduced_motion))
-        for msg in console_errors[:5]:
-            issues.append(Issue(page_path, viewport_name, f"console error: {msg[:220]}"))
-        for msg in page_errors[:5]:
-            issues.append(Issue(page_path, viewport_name, f"page error: {msg[:220]}"))
-        for msg in failed_requests[:5]:
-            issues.append(Issue(page_path, viewport_name, f"request failed: {msg[:220]}"))
-        for msg in bad_responses[:5]:
-            issues.append(Issue(page_path, viewport_name, f"bad response: {msg[:220]}"))
     except (PlaywrightTimeoutError, PlaywrightError) as exc:
         issues.append(Issue(page_path, viewport_name, f"browser QA failed: {exc}"))
     finally:
+        append_browser_event_issues()
+        record_browser_event_metric()
         context.close()
     return issues
 
@@ -2284,6 +2376,7 @@ def main(argv: list[str] | None = None) -> int:
     artifacts: list[dict[str, Any]] = []
     action_timings: list[dict[str, Any]] = []
     long_task_metrics: list[dict[str, Any]] = []
+    browser_event_metrics: list[dict[str, Any]] = []
     server, base = start_server()
     all_issues: list[Issue] = []
     try:
@@ -2310,6 +2403,7 @@ def main(argv: list[str] | None = None) -> int:
                                 artifacts,
                                 action_timings if artifacts_dir else None,
                                 long_task_metrics if artifacts_dir else None,
+                                browser_event_metrics if artifacts_dir else None,
                                 cpu_throttle_rate_value,
                             )
                             if issues:
@@ -2329,6 +2423,7 @@ def main(argv: list[str] | None = None) -> int:
             artifacts,
             action_timings,
             long_task_metrics,
+            browser_event_metrics,
             cpu_throttle_rate_value,
             all_issues,
         )
