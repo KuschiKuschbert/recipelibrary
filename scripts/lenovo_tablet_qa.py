@@ -62,6 +62,7 @@ LONG_TASK_COUNT_BUDGET = 12
 DECISION_RESPONSE_MS_BUDGET = 1_200
 ACTION_RESPONSE_MS_BUDGET = 900
 FLAVOR_QUICK_ANSWER_MS_BUDGET = 240
+INPUT_ONLY_ANSWER_MS_BUDGET = 120
 TASK_FIRST_READABLE_TEXT_MIN_PX = 12
 
 CaptureState = Callable[[str], None]
@@ -992,6 +993,18 @@ def run_pairing_decision_smoke(
         )
     except PlaywrightTimeoutError:
         problems.append("Pairing Atlas enrichment did not finish before drawer smoke")
+    timed_interaction(
+        page,
+        "Pairing Atlas input-only lamb answer",
+        lambda: search.fill("what should I season lamb with?"),
+        "() => !!document.querySelector('#paDecisionBody .pa-answer[data-decision-food-id=\"roasted-lamb\"]')",
+        problems,
+        INPUT_ONLY_ANSWER_MS_BUDGET,
+        timing_sink=timing_sink,
+    )
+    input_only_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
+    if "Roasted Lamb" not in input_only_text or "Cumin" not in input_only_text:
+        problems.append("Pairing Atlas input-only lamb answer did not render Roasted Lamb with Cumin before submit")
     lamb_preset = page.locator('.pa-decision [data-ingredient-flow-preset-id="lamb"]')
     if lamb_preset.count() != 1:
         problems.append("Pairing Atlas Lamb quick preset is missing")

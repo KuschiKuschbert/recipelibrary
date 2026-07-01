@@ -2102,9 +2102,7 @@
         if (decisionSearch) {
           decisionSearch.addEventListener('input', function () {
             clearTimeout(decisionTimer);
-            decisionTimer = setTimeout(function () {
-              updateDecisionPanel(decisionSearch.value, { selectDefault: false });
-            }, 120);
+            updateDecisionPanel(decisionSearch.value, { selectDefault: false });
           });
           if (window.KuschiIngredientFlow && typeof window.KuschiIngredientFlow.wirePresetButtons === 'function') {
             window.KuschiIngredientFlow.wirePresetButtons(document.querySelector('.pa-decision'), {
