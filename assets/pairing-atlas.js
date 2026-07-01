@@ -371,6 +371,7 @@
     var id = item && item.id ? item.id : '';
     var href = options && options.href;
     if (!href && id && options && options.kind === 'spice') href = 'aroma.html?spice=' + encodeURIComponent(id);
+    if (!href && id && options && options.kind === 'food') href = 'pairing-atlas.html?ingredient=' + encodeURIComponent(text);
     if (!href && options && options.kind === 'flavor') href = 'flavor.html?q=' + encodeURIComponent(text);
     return href;
   }
@@ -392,7 +393,17 @@
 
   function seasoningDrillAttrs(item) {
     var id = item && item.id ? item.id : '';
-    return id ? { 'data-pa-seasoning-id': id } : null;
+    return id ? { 'data-pa-seasoning-id': id, 'data-pa-spice-drill-id': id } : null;
+  }
+
+  function spiceDrillAttrs(item) {
+    var id = item && item.id ? item.id : '';
+    return id ? { 'data-pa-spice-drill-id': id } : null;
+  }
+
+  function foodDrillAttrs(item) {
+    var id = item && item.id ? item.id : '';
+    return id ? { 'data-pa-food-drill-id': id } : null;
   }
 
   function drawerSummaryText(items, limit) {
@@ -502,9 +513,13 @@
         ) +
         flow.grid(
           [
-            flow.section('Best fast matches', chipListHtml(harmony, { kind: 'spice', empty: 'No spice harmony links in the Aroma extract.' }), { className: 'pa-answer__section' }),
+            flow.section('Best fast matches', chipListHtml(harmony, { kind: 'spice', empty: 'No spice harmony links in the Aroma extract.', attrsForItem: spiceDrillAttrs }), {
+              className: 'pa-answer__section',
+            }),
             flow.section('Flavor Bible adds', chipListHtml(flavorPairs, { kind: 'flavor', empty: state.enriched ? 'No Flavor Bible pairings for this ingredient id.' : 'Loading Flavor Bible rows...' }), { className: 'pa-answer__section' }),
-            flow.section('Foods that use it', chipListHtml(foods, { empty: state.enriched ? 'No food-pairing rows list this spice yet.' : 'Loading food rows...' }), { className: 'pa-answer__section' }),
+            flow.section('Foods that use it', chipListHtml(foods, { kind: 'food', empty: state.enriched ? 'No food-pairing rows list this spice yet.' : 'Loading food rows...', attrsForItem: foodDrillAttrs }), {
+              className: 'pa-answer__section',
+            }),
             flow.section('Avoid or check', chipListHtml(avoid, { kind: 'flavor', empty: state.enriched ? 'No avoid notes in the unified extract.' : 'Loading avoid notes...' }), { className: 'pa-answer__section' }),
           ],
           { className: 'pa-answer__grid' }
@@ -657,6 +672,45 @@
     updateDecisionPanel(name, { selectDefault: false });
     revealDecisionInMatrix(spiceHost, search, modePri, modeAll);
     return true;
+  }
+
+  function findFoodPairingById(foodId) {
+    if (!foodId || !state.foodPairings) return null;
+    for (var i = 0; i < state.foodPairings.length; i++) {
+      if (state.foodPairings[i] && state.foodPairings[i].id === foodId) return state.foodPairings[i];
+    }
+    return null;
+  }
+
+  function drillIntoFood(foodId, foodHost, foodSearch, decisionSearch) {
+    var food = findFoodPairingById(foodId);
+    if (!food) return false;
+    var name = food.name || food.id || '';
+    var body = document.getElementById('paDecisionBody');
+    clearOpenSpiceSelection();
+    state.decisionSpiceId = null;
+    state.decisionFoodId = food.id || null;
+    if (decisionSearch) decisionSearch.value = name;
+    if (body) body.innerHTML = foodDecisionAnswerHtml(food);
+    revealDecisionInFoodMatrix(foodHost, foodSearch);
+    return true;
+  }
+
+  function handleAtlasDrill(e, spiceHost, search, modePri, modeAll, decisionSearch, foodHost, foodSearch) {
+    var spice = e.target.closest('[data-pa-spice-drill-id], [data-pa-seasoning-id]');
+    if (spice) {
+      var spiceId = spice.getAttribute('data-pa-spice-drill-id') || spice.getAttribute('data-pa-seasoning-id');
+      if (drillIntoSeasoning(spiceId, spiceHost, search, modePri, modeAll, decisionSearch)) {
+        e.preventDefault();
+        return true;
+      }
+    }
+    var food = e.target.closest('[data-pa-food-drill-id]');
+    if (food && drillIntoFood(food.getAttribute('data-pa-food-drill-id'), foodHost, foodSearch, decisionSearch)) {
+      e.preventDefault();
+      return true;
+    }
+    return false;
   }
 
   function revealDecisionInFoodMatrix(foodHost, foodSearch) {
@@ -1005,12 +1059,12 @@
           [
             flow.panel(
               'Best with',
-              chipListHtml(pairItems, { kind: 'spice', empty: 'No direct pairings yet.' }),
+              chipListHtml(pairItems, { kind: 'spice', empty: 'No direct pairings yet.', attrsForItem: spiceDrillAttrs }),
               { className: 'pa-drawer-profile-panel' }
             ),
             flow.panel(
               'Use on',
-              chipListHtml(foods, { empty: state.enriched ? 'No food rows list this spice yet.' : 'Food rows loading...' }),
+              chipListHtml(foods, { kind: 'food', empty: state.enriched ? 'No food rows list this spice yet.' : 'Food rows loading...', attrsForItem: foodDrillAttrs }),
               { className: 'pa-drawer-profile-panel' }
             ),
             flow.panel(
@@ -1050,7 +1104,9 @@
           return (
             '<a href="aroma.html?spice=' +
             encodeURIComponent(hid) +
-            '" class="pa-chip">' +
+            '" class="pa-chip" data-pa-spice-drill-id="' +
+            esc(hid) +
+            '">' +
             esc(h.name || hid) +
             '</a>'
           );
@@ -1382,7 +1438,11 @@
         return (
           '<a href="aroma.html?spice=' +
           encodeURIComponent(s.id || '') +
-          '" class="pa-chip">' +
+          '" class="pa-chip" data-pa-seasoning-id="' +
+          esc(s.id || '') +
+          '" data-pa-spice-drill-id="' +
+          esc(s.id || '') +
+          '">' +
           esc(s.name || s.id) +
           '</a>'
         );
@@ -1474,13 +1534,14 @@
     }
   }
 
-  function onSpiceMatrixClick(e, spiceHost) {
+  function onSpiceMatrixClick(e, spiceHost, search, modePri, modeAll, decisionSearch, foodHost, foodSearch) {
     var selectedClose = e.target.closest('[data-pa-selected-profile] .pa-drawer-close');
     if (selectedClose) {
       e.preventDefault();
       clearOpenSpiceSelection();
       return;
     }
+    if (handleAtlasDrill(e, spiceHost, search, modePri, modeAll, decisionSearch, foodHost, foodSearch)) return;
     if (!e.target.closest('#paSpiceMatrix')) return;
     if (e.target.closest('a')) return;
     var closeBtn = e.target.closest('.pa-drawer-close');
@@ -1561,7 +1622,8 @@
     return null;
   }
 
-  function onFoodMatrixClick(e, foodHost, foods) {
+  function onFoodMatrixClick(e, foodHost, foods, spiceHost, search, modePri, modeAll, decisionSearch, foodSearch) {
+    if (handleAtlasDrill(e, spiceHost, search, modePri, modeAll, decisionSearch, foodHost, foodSearch)) return;
     if (!e.target.closest('#paFoodMatrix')) return;
     if (e.target.closest('a')) return;
     var closeBtn = e.target.closest('.pa-drawer-close');
@@ -1940,14 +2002,14 @@
         }
 
         spiceHost.addEventListener('click', function (e) {
-          onSpiceMatrixClick(e, spiceHost);
+          onSpiceMatrixClick(e, spiceHost, search, modePri, modeAll, decisionSearch, foodHost, foodSearch);
         });
         spiceHost.addEventListener('keydown', function (e) {
           onSpiceMatrixKeydown(e, spiceHost);
         });
         if (foodHost) {
           foodHost.addEventListener('click', function (e) {
-            onFoodMatrixClick(e, foodHost, getFoodsSorted());
+            onFoodMatrixClick(e, foodHost, getFoodsSorted(), spiceHost, search, modePri, modeAll, decisionSearch, foodSearch);
           });
           foodHost.addEventListener('keydown', function (e) {
             onFoodMatrixKeydown(e, foodHost, getFoodsSorted());
@@ -2052,11 +2114,7 @@
         }
         if (decisionBody) {
           decisionBody.addEventListener('click', function (e) {
-            var seasoning = e.target.closest('[data-pa-seasoning-id]');
-            if (seasoning && drillIntoSeasoning(seasoning.getAttribute('data-pa-seasoning-id'), spiceHost, search, modePri, modeAll, decisionSearch)) {
-              e.preventDefault();
-              return;
-            }
+            if (handleAtlasDrill(e, spiceHost, search, modePri, modeAll, decisionSearch, foodHost, foodSearch)) return;
             var action = e.target.closest('[data-pa-decision-action]');
             if (!action) return;
             if (action.getAttribute('data-pa-decision-action') === 'matrix') {

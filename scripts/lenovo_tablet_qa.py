@@ -935,6 +935,29 @@ def run_pairing_decision_smoke(
             ("Show row", "Aroma", "Flavor"),
         )
     )
+    cumin_food_chip = page.locator('#paDecisionBody .pa-answer[data-decision-spice-id="cumin"] [data-pa-food-drill-id="chicken"]').first
+    if cumin_food_chip.count() != 1:
+        problems.append("Pairing Atlas Cumin answer missing same-page Chicken food chip")
+    else:
+        timed_interaction(
+            page,
+            "Pairing Atlas Cumin food chip",
+            lambda: cumin_food_chip.click(),
+            "() => !!document.querySelector('#paDecisionBody .pa-answer[data-decision-food-id=\"chicken\"]') && !!document.querySelector('tr.pa-fx-data[data-food-id=\"chicken\"].pa-row-open')",
+            problems,
+            ACTION_RESPONSE_MS_BUDGET,
+            timing_sink=timing_sink,
+        )
+        if "Chicken" not in page.locator("#paDecisionBody").inner_text(timeout=5_000):
+            problems.append("Pairing Atlas Cumin food chip did not render the Chicken answer")
+        timed_interaction(
+            page,
+            "Pairing Atlas restore Cumin after food chip",
+            lambda: (search.fill("pair cumin with lamb"), page.locator("#paDecisionSubmit").click()),
+            "() => !!document.querySelector('#paDecisionBody .pa-answer[data-decision-spice-id=\"cumin\"]')",
+            problems,
+            timing_sink=timing_sink,
+        )
     timed_interaction(
         page,
         "Pairing Atlas decision Show row",
@@ -1011,6 +1034,21 @@ def run_pairing_decision_smoke(
             problems.append("Cumin row source detail still duplicates the quick kitchen answer")
     if capture_state:
         capture_state("pairing-cumin-row-open")
+    profile_pair_chip = page.locator('#paMatrixHost [data-pa-selected-profile][data-selected-spice-id="cumin"] [data-pa-spice-drill-id="fenugreek"]').first
+    if profile_pair_chip.count() != 1:
+        problems.append("Cumin selected profile missing same-page Fenugreek pairing chip")
+    else:
+        timed_interaction(
+            page,
+            "Pairing Atlas profile Fenugreek chip",
+            lambda: profile_pair_chip.click(),
+            "() => !!document.querySelector('#paDecisionBody .pa-answer[data-decision-spice-id=\"fenugreek\"]') && !!document.querySelector('#paMatrixHost [data-pa-selected-profile][data-selected-spice-id=\"fenugreek\"]')",
+            problems,
+            ACTION_RESPONSE_MS_BUDGET,
+            timing_sink=timing_sink,
+        )
+        if "Fenugreek" not in page.locator("#paDecisionBody").inner_text(timeout=5_000):
+            problems.append("Pairing Atlas profile Fenugreek chip did not render the Fenugreek answer")
     timed_interaction(
         page,
         "Pairing Atlas food phrase answer",
