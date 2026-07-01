@@ -99,6 +99,28 @@ def start_server() -> tuple[ThreadingHTTPServer, str]:
     return server, f"http://{host}:{port}/"
 
 
+def normalize_base_url(value: str) -> str:
+    return value if value.endswith("/") else value + "/"
+
+
+def local_site_path_for_url(url_path: str, current_url: str) -> str:
+    path = unquote(url_path.lstrip("/"))
+    if not path or (ROOT / path).exists():
+        return path
+
+    current_parts = [part for part in unquote(urlparse(current_url).path).strip("/").split("/") if part]
+    current_dir_parts = current_parts[:-1] if current_parts and "." in current_parts[-1] else current_parts
+    for index in range(len(current_dir_parts), 0, -1):
+        prefix = "/".join(current_dir_parts[:index])
+        if path == prefix:
+            return ""
+        if path.startswith(prefix + "/"):
+            candidate = path[len(prefix) + 1 :]
+            if (ROOT / candidate).exists():
+                return candidate
+    return path
+
+
 def artifact_slug(value: str, max_len: int = 120) -> str:
     decoded = unquote(value)
     slug = re.sub(r"[^A-Za-z0-9._-]+", "-", decoded).strip("-._")
@@ -732,7 +754,7 @@ def ingredient_flow_control_problems(
         if parsed.netloc and parsed.netloc != current_origin:
             problems.append(f"{label} link action {text} points off-site: {href}")
             continue
-        path = unquote(parsed.path.lstrip("/"))
+        path = local_site_path_for_url(parsed.path, page.url)
         if path and not (ROOT / path).exists():
             problems.append(f"{label} link action {text} points to missing local page: {path}")
 
@@ -2484,6 +2506,10 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         help="Comma-separated page paths. Defaults to the core kitchen pages.",
     )
     parser.add_argument(
+        "--base-url",
+        help="Optional site root to test instead of serving the local checkout, e.g. https://kuschikuschbert.github.io/recipelibrary/.",
+    )
+    parser.add_argument(
         "--task-first-only",
         action="store_true",
         help="Only run the task-first ingredient decision pages.",
@@ -2550,7 +2576,10 @@ def main(argv: list[str] | None = None) -> int:
     action_timings: list[dict[str, Any]] = []
     long_task_metrics: list[dict[str, Any]] = []
     browser_event_metrics: list[dict[str, Any]] = []
-    server, base = start_server()
+    server = None
+    base = normalize_base_url(args.base_url) if args.base_url else ""
+    if not base:
+        server, base = start_server()
     all_issues: list[Issue] = []
     try:
         with sync_playwright() as p:
@@ -2586,8 +2615,9 @@ def main(argv: list[str] | None = None) -> int:
             finally:
                 browser.close()
     finally:
-        server.shutdown()
-        server.server_close()
+        if server:
+            server.shutdown()
+            server.server_close()
 
     if artifacts_dir:
         manifest_path = write_artifact_manifest(
