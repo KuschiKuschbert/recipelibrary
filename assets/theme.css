@@ -13293,7 +13293,43 @@ html.lenovo-tab-one-profile .tablet-mode-tabs > a {
   text-align: center;
   white-space: normal;
 }
+html.lenovo-tab-one-profile .ingredient-tool-status {
+  min-height: var(--ingredient-tool-status-min-height, 16px);
+  margin-top: var(--ingredient-tool-status-margin-top, 6px);
+  margin-bottom: var(--ingredient-tool-status-margin-bottom, 6px);
+  font-size: var(--ingredient-tool-status-font-size, 13px);
+  line-height: var(--ingredient-tool-status-line-height, 1.4);
+}
+@media (min-width: 721px) and (max-width: 900px) {
+  html.lenovo-tab-one-profile .ingredient-tool-body::before {
+    display: none;
+  }
+  html.lenovo-tab-one-profile .ingredient-tool-shell {
+    max-width: none;
+    padding: var(--ingredient-tool-portrait-padding, 12px 16px max(84px, calc(var(--nav-tabbar-height, 0px) + 24px)));
+  }
+  html.lenovo-tab-one-profile .ingredient-tool-about {
+    margin-top: 6px;
+    padding-inline: 12px;
+  }
+}
 @media (min-width: 901px) and (max-height: 900px) and (orientation: landscape) {
+  html.lenovo-tab-one-profile .ingredient-tool-body::before {
+    display: none;
+  }
+  html.lenovo-tab-one-profile .ingredient-tool-shell {
+    max-width: var(--ingredient-tool-landscape-max, min(1216px, 100vw));
+    padding: var(--ingredient-tool-landscape-padding, 10px 16px max(72px, calc(var(--nav-tabbar-height, 0px) + 18px)));
+  }
+  html.lenovo-tab-one-profile .ingredient-tool-about {
+    margin-top: 2px;
+    padding-inline: 10px;
+  }
+  html.lenovo-tab-one-profile .ingredient-tool-status {
+    min-height: var(--ingredient-tool-status-landscape-min-height, var(--ingredient-tool-status-min-height, 15px));
+    margin-top: var(--ingredient-tool-status-landscape-margin-top, var(--ingredient-tool-status-margin-top, 5px));
+    font-size: var(--ingredient-tool-status-landscape-font-size, var(--ingredient-tool-status-font-size, 12px));
+  }
   html.lenovo-tab-one-profile .ingredient-flow-card {
     margin-bottom: 12px;
   }

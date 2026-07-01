@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=171">
+<link rel="stylesheet" href="assets/theme.css?v=172">
 <style>
   :root { --app-header-h: 65px; }
   .pa-skip {
@@ -63,6 +63,7 @@
       radial-gradient(ellipse 60% 40% at 100% 30%, rgba(110, 154, 190, 0.06), transparent 50%);
   }
   .pa-shell {
+    --ingredient-tool-landscape-max: min(1216px, 100vw);
     position: relative;
     z-index: 1;
     max-width: 1280px;
@@ -951,19 +952,6 @@
   }
 
   @media (min-width: 721px) and (max-width: 900px) {
-    html.lenovo-tab-one-profile body.pa-page::before {
-      display: none;
-    }
-
-    html.lenovo-tab-one-profile .pa-shell {
-      padding: 12px 16px max(84px, calc(var(--nav-tabbar-height, 0px) + 24px));
-    }
-
-    html.lenovo-tab-one-profile .page-about {
-      margin-top: 6px;
-      padding-inline: 12px;
-    }
-
     html.lenovo-tab-one-profile .pa-decision {
       margin: 8px 0 10px;
     }
@@ -1024,12 +1012,6 @@
 
     html.lenovo-tab-one-profile .pa-toolbar-hint {
       display: none;
-    }
-
-    html.lenovo-tab-one-profile .pa-status {
-      margin-bottom: 6px;
-      font-size: 13px;
-      line-height: 1.4;
     }
 
     html.lenovo-tab-one-profile .pa-matrix-legend {
@@ -1131,20 +1113,6 @@
   }
 
   @media (min-width: 901px) and (max-height: 900px) and (orientation: landscape) {
-    html.lenovo-tab-one-profile body.pa-page::before {
-      display: none;
-    }
-
-    html.lenovo-tab-one-profile .pa-shell {
-      max-width: min(1216px, 100vw);
-      padding: 10px 16px max(72px, calc(var(--nav-tabbar-height, 0px) + 18px));
-    }
-
-    html.lenovo-tab-one-profile .page-about {
-      margin-top: 2px;
-      padding-inline: 10px;
-    }
-
     html.lenovo-tab-one-profile .pa-decision {
       margin: 8px 0;
     }
@@ -1201,12 +1169,6 @@
 
     html.lenovo-tab-one-profile .pa-toolbar-hint {
       display: none;
-    }
-
-    html.lenovo-tab-one-profile .pa-status {
-      margin-bottom: 6px;
-      font-size: 13px;
-      line-height: 1.4;
     }
 
     html.lenovo-tab-one-profile .pa-matrix-legend {
@@ -1367,9 +1329,9 @@
   }
 </style>
 </head>
-<body class="pa-page has-app-nav">
+<body class="pa-page has-app-nav ingredient-tool-body">
 <a class="pa-skip" href="#paMain">Skip to matrix</a>
-<div class="pa-shell">
+<div class="pa-shell ingredient-tool-shell">
   <nav class="pa-nav" aria-label="Site" style="display:none" aria-hidden="true"></nav>
 
   <header class="app-header">
@@ -1388,7 +1350,7 @@
     </div>
   </header>
 
-  <details class="page-about">
+  <details class="page-about ingredient-tool-about">
     <summary>About this page</summary>
     <div class="page-about__body">
       <p>Two reference grids from the kitchen extracts. The <strong>spice matrix</strong> lists herbs and spices in rows; each column is one of eight <strong>aroma families</strong> (G1–G8). After data loads you also see a <strong>Harmony</strong> count and <strong>Books A·F·T</strong> cross-reference. <strong>Tap any spice row</strong> to open a detail drawer.</p>
@@ -1442,9 +1404,9 @@
   </div>
 
   <main id="paMain">
-    <p class="pa-status" id="paStatus" aria-live="polite">Loading…</p>
-    <p class="pa-status pa-enrich-status" id="paEnrichStatus" aria-live="polite"></p>
-    <p class="pa-status pa-search-status" id="paSearchStatus" aria-live="polite"></p>
+    <p class="pa-status ingredient-tool-status" id="paStatus" aria-live="polite">Loading…</p>
+    <p class="pa-status pa-enrich-status ingredient-tool-status" id="paEnrichStatus" aria-live="polite"></p>
+    <p class="pa-status pa-search-status ingredient-tool-status" id="paSearchStatus" aria-live="polite"></p>
     <details class="pa-matrix-legend" id="paSpiceLegend" aria-label="How to read the spice matrix" open>
       <summary><span class="pa-legend-title">How to read the spice matrix</span><span class="pa-legend-kicker">Guide</span></summary>
       <div class="pa-legend-body">
