@@ -49,6 +49,7 @@ DOM_NODE_BUDGET = 12_000
 RESOURCE_BYTE_BUDGET = 28_000_000
 HEAP_BYTE_BUDGET = 220_000_000
 DECISION_RESPONSE_MS_BUDGET = 1_200
+ACTION_RESPONSE_MS_BUDGET = 900
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -522,8 +523,14 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
             ("Show row", "Aroma", "Flavor"),
         )
     )
-    page.locator('[data-pa-decision-action="matrix"]').click()
-    page.wait_for_timeout(250)
+    timed_interaction(
+        page,
+        "Pairing Atlas decision Show row",
+        lambda: page.locator('[data-pa-decision-action="matrix"]').click(),
+        "() => !!document.querySelector('tr.pa-data-row[data-spice-id=\"cumin\"].pa-row-open')",
+        problems,
+        ACTION_RESPONSE_MS_BUDGET,
+    )
     row_open = page.evaluate(
         "() => !!document.querySelector('tr.pa-data-row[data-spice-id=\"cumin\"].pa-row-open')"
     )
@@ -586,14 +593,14 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
             ("Open row", "Aroma", "Flavor"),
         )
     )
-    page.locator('[data-pa-decision-action="food"]').click()
-    try:
-        page.wait_for_function(
-            "() => !!document.querySelector('tr.pa-fx-data[data-food-id=\"roasted-lamb\"].pa-row-open')",
-            timeout=5_000,
-        )
-    except PlaywrightTimeoutError:
-        problems.append("food decision Open row did not open the Roasted Lamb food matrix row")
+    timed_interaction(
+        page,
+        "Pairing Atlas food decision Open row",
+        lambda: page.locator('[data-pa-decision-action="food"]').click(),
+        "() => !!document.querySelector('tr.pa-fx-data[data-food-id=\"roasted-lamb\"].pa-row-open')",
+        problems,
+        ACTION_RESPONSE_MS_BUDGET,
+    )
     food_drawer = page.locator('tr.pa-drawer-row[data-food-drawer="roasted-lamb"]')
     if food_drawer.count() != 1:
         problems.append("Roasted Lamb food drawer is missing after food decision Open row")
@@ -695,8 +702,14 @@ def run_flavor_decision_smoke(page: Any) -> list[str]:
     if detail_action.count() != 1:
         problems.append("Flavor answer Full detail action is missing")
     else:
-        detail_action.click()
-        page.wait_for_timeout(250)
+        timed_interaction(
+            page,
+            "Flavor answer Full detail",
+            lambda: detail_action.click(),
+            "() => /CUMIN/.test(document.querySelector('#flavorDetail')?.textContent?.toUpperCase() || '')",
+            problems,
+            ACTION_RESPONSE_MS_BUDGET,
+        )
         detail_text = page.locator("#flavorDetail").inner_text(timeout=5_000)
         if "CUMIN" not in detail_text.upper():
             problems.append("Flavor answer Full detail did not open Cumin detail")
@@ -739,8 +752,14 @@ def run_aroma_answer_smoke(page: Any) -> list[str]:
     if matrix_action.count() != 1:
         problems.append("Aroma answer Matrix action is missing")
     else:
-        matrix_action.click()
-        page.wait_for_timeout(250)
+        timed_interaction(
+            page,
+            "Aroma answer Matrix action",
+            lambda: matrix_action.click(),
+            "() => document.querySelector('#tabMatrix')?.getAttribute('aria-selected') === 'true' && document.querySelector('#matrixFocus')?.value === 'cumin'",
+            problems,
+            ACTION_RESPONSE_MS_BUDGET,
+        )
         matrix_selected = page.locator("#tabMatrix").get_attribute("aria-selected", timeout=5_000)
         matrix_focus = page.locator("#matrixFocus").input_value(timeout=5_000)
         if matrix_selected != "true" or matrix_focus != "cumin":
@@ -749,8 +768,14 @@ def run_aroma_answer_smoke(page: Any) -> list[str]:
     if profile_action.count() != 1:
         problems.append("Aroma answer Profile action is missing")
     else:
-        profile_action.click()
-        page.wait_for_timeout(250)
+        timed_interaction(
+            page,
+            "Aroma answer Profile action",
+            lambda: profile_action.click(),
+            "() => /Cumin/.test(document.querySelector('#spiceProfile')?.textContent || '')",
+            problems,
+            ACTION_RESPONSE_MS_BUDGET,
+        )
         profile_text = page.locator("#spiceProfile").inner_text(timeout=5_000)
         if "Cumin" not in profile_text:
             problems.append("Aroma answer Profile action did not open Cumin profile")
@@ -776,11 +801,24 @@ def run_aroma_answer_smoke(page: Any) -> list[str]:
     if food_action.count() != 1:
         problems.append("Aroma food answer Open row action is missing")
     else:
-        food_action.click()
-        page.wait_for_timeout(250)
-        food_selected = page.locator("#tabFood").get_attribute("aria-selected", timeout=5_000)
-        food_results = page.locator("#foodResults").inner_text(timeout=5_000)
-        if food_selected != "true" or "Cumin" not in food_results:
+        timed_interaction(
+            page,
+            "Aroma food answer Open row",
+            lambda: food_action.click(),
+            "() => { const p = new URLSearchParams(location.search); return p.get('tab') === 'food' && p.get('food') === 'roasted-lamb' && document.querySelector('#tabFood')?.getAttribute('aria-selected') === 'true' && !!document.querySelector('#foodResults [data-spice-id=\"cumin\"]'); }",
+            problems,
+            ACTION_RESPONSE_MS_BUDGET,
+        )
+        food_open = page.evaluate(
+            """() => {
+              const p = new URLSearchParams(location.search);
+              return p.get('tab') === 'food' &&
+                p.get('food') === 'roasted-lamb' &&
+                document.querySelector('#tabFood')?.getAttribute('aria-selected') === 'true' &&
+                !!document.querySelector('#foodResults [data-spice-id="cumin"]');
+            }"""
+        )
+        if not food_open:
             problems.append("Aroma food answer Open row action did not render Roasted Lamb seasonings")
     return problems
 
