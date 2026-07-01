@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=172">
+<link rel="stylesheet" href="assets/theme.css?v=173">
 <style>
   :root { --app-header-h: 65px; }
   .pa-skip {
@@ -972,46 +972,8 @@
       margin-bottom: 10px;
     }
 
-    html.lenovo-tab-one-profile .pa-toolbar {
-      gap: 7px;
-      margin: 8px 0;
-      padding: 9px;
-      border-radius: 12px;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-    }
-
-    html.lenovo-tab-one-profile .pa-toolbar-label {
-      width: auto;
-      min-height: 48px;
-      display: inline-flex;
-      align-items: center;
-      margin: 0;
-      padding: 0 2px;
-      font-size: 11px;
-      line-height: 1.2;
-      letter-spacing: 0.04em;
-    }
-
-    html.lenovo-tab-one-profile .pa-mode {
-      flex: 1 1 170px;
-      --tablet-mode-columns: 2;
-      --tablet-mode-gap: 6px;
-      --tablet-mode-tab-padding: 9px 10px;
-      --tablet-mode-tab-font-size: 13.25px;
-      --tablet-mode-tab-line-height: 1.18;
-    }
-
     html.lenovo-tab-one-profile .pa-search {
       flex: 1 1 220px;
-      min-height: 48px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-size: 15px;
-    }
-
-    html.lenovo-tab-one-profile .pa-toolbar-hint {
-      display: none;
     }
 
     html.lenovo-tab-one-profile .pa-matrix-legend {
@@ -1129,46 +1091,8 @@
       margin-bottom: 10px;
     }
 
-    html.lenovo-tab-one-profile .pa-toolbar {
-      gap: 7px;
-      margin: 8px 0;
-      padding: 9px;
-      border-radius: 12px;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-    }
-
-    html.lenovo-tab-one-profile .pa-toolbar-label {
-      width: auto;
-      min-height: 48px;
-      display: inline-flex;
-      align-items: center;
-      margin: 0;
-      padding: 0 2px;
-      font-size: 11px;
-      line-height: 1.2;
-      letter-spacing: 0.04em;
-    }
-
-    html.lenovo-tab-one-profile .pa-mode {
-      flex: 0 1 196px;
-      --tablet-mode-columns: 2;
-      --tablet-mode-gap: 6px;
-      --tablet-mode-tab-padding: 9px 10px;
-      --tablet-mode-tab-font-size: 13.25px;
-      --tablet-mode-tab-line-height: 1.18;
-    }
-
     html.lenovo-tab-one-profile .pa-search {
       flex: 1 1 280px;
-      min-height: 48px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-size: 15px;
-    }
-
-    html.lenovo-tab-one-profile .pa-toolbar-hint {
-      display: none;
     }
 
     html.lenovo-tab-one-profile .pa-matrix-legend {
@@ -1299,11 +1223,6 @@
     }
   }
 
-  html.lenovo-tab-one-profile .pa-toolbar-label {
-    font-size: 12.5px;
-    letter-spacing: 0;
-  }
-
   html.lenovo-tab-one-profile .pa-th-main {
     font-size: 12.5px;
   }
@@ -1384,20 +1303,20 @@
   </section>
 
 
-  <div class="pa-toolbar" role="region" aria-label="Spice matrix controls">
-    <span class="pa-toolbar-label">Spice rows</span>
-    <div class="pa-mode tablet-mode-tabs" role="group" aria-label="Row set">
+  <div class="pa-toolbar ingredient-tool-toolbar" role="region" aria-label="Spice matrix controls">
+    <span class="pa-toolbar-label ingredient-tool-toolbar-label">Spice rows</span>
+    <div class="pa-mode tablet-mode-tabs ingredient-tool-segmented" role="group" aria-label="Row set">
       <button type="button" id="paModePriority" aria-pressed="true" title="Show only the curated priority spices from aroma_matrix_meta.json (printable-style short list).">Priority 25</button>
       <button type="button" id="paModeAll" aria-pressed="false" title="Show every spice in aroma_data/ingredients.json, sorted by name.">All spices</button>
     </div>
-    <span class="pa-toolbar-label">Column layer</span>
-    <div class="pa-mode tablet-mode-tabs" role="group" aria-label="Column layer">
+    <span class="pa-toolbar-label ingredient-tool-toolbar-label">Column layer</span>
+    <div class="pa-mode tablet-mode-tabs ingredient-tool-segmented" role="group" aria-label="Column layer">
       <button type="button" id="paLayerAroma" aria-pressed="true" title="Eight aroma-family columns: ● if this spice is tagged in that group, · if not.">Aroma groups</button>
       <button type="button" id="paLayerHarmony" aria-pressed="false" disabled aria-disabled="true" title="Same eight columns, but each cell shows how many harmony partners sit in that aroma group. Enabled after data loads.">Harmony heatmap</button>
     </div>
     <label class="visually-hidden" for="paMatrixSearch">Filter spice rows</label>
-    <input type="search" id="paMatrixSearch" class="pa-search" placeholder="Filter spices…" autocomplete="off" spellcheck="false" enterkeyhint="search" />
-    <p class="pa-toolbar-hint">
+    <input type="search" id="paMatrixSearch" class="pa-search ingredient-tool-toolbar-search" placeholder="Filter spices…" autocomplete="off" spellcheck="false" enterkeyhint="search" />
+    <p class="pa-toolbar-hint ingredient-tool-toolbar-hint">
       <strong>Priority 25</strong> = the curated “sheet” list from meta. <strong>All spices</strong> = every row in <code>aroma_data/ingredients.json</code>.
       <strong>Aroma groups</strong> = classic ●/· grid. <strong>Harmony heatmap</strong> = same eight columns, but cells show counts (needs loaded data).
     </p>
@@ -1467,15 +1386,15 @@
         Each row is one food (or dish category); each column is one spice or herb. Data comes from <code>aroma_data/food_pairings.json</code>.
         <strong>Priority 25</strong> limits columns to the same curated spice set as the sheet; <strong>All spices</strong> uses every indexed spice (very wide on small screens — scroll horizontally).
       </p>
-      <div class="pa-toolbar" role="region" aria-label="Food matrix controls">
-        <span class="pa-toolbar-label">Spice columns</span>
-        <div class="pa-mode tablet-mode-tabs" role="group" aria-label="Food matrix spice columns">
+      <div class="pa-toolbar ingredient-tool-toolbar" role="region" aria-label="Food matrix controls">
+        <span class="pa-toolbar-label ingredient-tool-toolbar-label">Spice columns</span>
+        <div class="pa-mode tablet-mode-tabs ingredient-tool-segmented" role="group" aria-label="Food matrix spice columns">
           <button type="button" id="paFoodModePriority" aria-pressed="true" title="Spice columns = same priority list as the spice matrix sheet.">Priority 25</button>
           <button type="button" id="paFoodModeAll" aria-pressed="false" title="Spice columns = all indexed spices (wide table).">All spices</button>
         </div>
         <label class="visually-hidden" for="paFoodSearch">Filter foods</label>
-        <input type="search" id="paFoodSearch" class="pa-search" placeholder="Filter foods…" autocomplete="off" spellcheck="false" enterkeyhint="search" />
-        <p class="pa-toolbar-hint">
+        <input type="search" id="paFoodSearch" class="pa-search ingredient-tool-toolbar-search" placeholder="Filter foods…" autocomplete="off" spellcheck="false" enterkeyhint="search" />
+        <p class="pa-toolbar-hint ingredient-tool-toolbar-hint">
           <strong>Priority 25</strong> = spice columns match the sheet’s priority list. <strong>All spices</strong> = one column per spice in <code>ingredients.json</code> (can be 100+ columns).
         </p>
       </div>

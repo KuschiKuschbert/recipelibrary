@@ -343,11 +343,19 @@ def page_metric_script() -> str:
   const toolBody = document.body && document.body.classList.contains('ingredient-tool-body');
   const toolStatusCount = document.querySelectorAll('.ingredient-tool-status').length;
   const toolAboutCount = document.querySelectorAll('.ingredient-tool-about').length;
+  const toolTabsCount = document.querySelectorAll('.ingredient-tool-tabs').length;
+  const toolToolbarCount = document.querySelectorAll('.ingredient-tool-toolbar').length;
+  const toolSegmentedCount = document.querySelectorAll('.ingredient-tool-segmented').length;
+  const toolToolbarSearchCount = document.querySelectorAll('.ingredient-tool-toolbar-search').length;
   const ingredientTool = {
     hasShell: !!toolShell,
     bodyClass: !!toolBody,
     statusCount: toolStatusCount,
     aboutCount: toolAboutCount,
+    tabsCount: toolTabsCount,
+    toolbarCount: toolToolbarCount,
+    segmentedCount: toolSegmentedCount,
+    toolbarSearchCount: toolToolbarSearchCount,
     shellLeft: toolShellRect ? Math.round(toolShellRect.left) : null,
     shellRight: toolShellRect ? Math.round(toolShellRect.right) : null,
     shellPaddingBottom: toolShellStyle ? Math.round(parseFloat(toolShellStyle.paddingBottom || '0') || 0) : null,
@@ -420,6 +428,14 @@ def describe_long_task(task: dict[str, Any]) -> str:
 
 def expects_ingredient_tool_shell(page_path: str) -> bool:
     return "flavor.html" in page_path or "pairing-atlas.html" in page_path
+
+
+def expects_ingredient_tool_tabs(page_path: str) -> bool:
+    return "flavor.html" in page_path
+
+
+def expects_ingredient_tool_toolbar(page_path: str) -> bool:
+    return "pairing-atlas.html" in page_path
 
 
 def timed_interaction(
@@ -834,6 +850,15 @@ def issues_from_metrics(page_path: str, viewport_name: str, metric: dict[str, An
                 issues.append(Issue(page_path, viewport_name, f"{prefix}: ingredient tool body hook is missing"))
             if expects_ingredient_tool_shell(page_path) and int(tool.get("statusCount") or 0) <= 0:
                 issues.append(Issue(page_path, viewport_name, f"{prefix}: ingredient tool status hook is missing"))
+            if expects_ingredient_tool_tabs(page_path) and int(tool.get("tabsCount") or 0) <= 0:
+                issues.append(Issue(page_path, viewport_name, f"{prefix}: ingredient tool tabs hook is missing"))
+            if expects_ingredient_tool_toolbar(page_path):
+                if int(tool.get("toolbarCount") or 0) <= 0:
+                    issues.append(Issue(page_path, viewport_name, f"{prefix}: ingredient tool toolbar hook is missing"))
+                if int(tool.get("segmentedCount") or 0) <= 0:
+                    issues.append(Issue(page_path, viewport_name, f"{prefix}: ingredient tool segmented control hook is missing"))
+                if int(tool.get("toolbarSearchCount") or 0) <= 0:
+                    issues.append(Issue(page_path, viewport_name, f"{prefix}: ingredient tool toolbar search hook is missing"))
             if tool.get("navIsBottom"):
                 padding_bottom = int(tool.get("shellPaddingBottom") or 0)
                 nav_height = int(tool.get("navHeight") or 0)
