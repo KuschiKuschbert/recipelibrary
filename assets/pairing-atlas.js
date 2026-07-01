@@ -471,12 +471,12 @@
       '<div class="pa-drawer-decision-summary" data-pa-drawer-decision-summary>' +
       flow.priority(
         [
-          { label: 'Pair first', value: pairText, empty: 'No direct pairing yet', className: 'pa-drawer-priority-card--pair' },
-          { label: 'Use now', value: useText, empty: 'No technique note yet', className: 'pa-drawer-priority-card--use' },
-          { label: 'Use on', value: foodText, empty: 'No food row yet', className: 'pa-drawer-priority-card--food' },
-          { label: 'Check', value: avoidText, empty: 'No avoid note yet', className: 'pa-drawer-priority-card--check' },
+          { label: 'Pair first', value: pairText, empty: 'No direct pairing yet' },
+          { label: 'Use now', value: useText, empty: 'No technique note yet' },
+          { label: 'Use on', value: foodText, empty: 'No food row yet', className: 'ingredient-flow-priority-item--food' },
+          { label: 'Check', value: avoidText, empty: 'No avoid note yet', className: 'ingredient-flow-priority-item--check' },
         ],
-        { className: 'pa-drawer-priority', attrs: { 'data-pa-drawer-priority': true } }
+        { className: 'ingredient-flow-priority--strip', attrs: { 'data-pa-drawer-priority': true } }
       ) +
       '</div>'
     );

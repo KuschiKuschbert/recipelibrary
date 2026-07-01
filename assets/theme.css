@@ -13127,6 +13127,42 @@ button.ingredient-flow-action {
   font-weight: 600;
   line-height: 1.38;
 }
+.ingredient-flow-priority.ingredient-flow-priority--strip {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 0;
+}
+.ingredient-flow-priority--strip .ingredient-flow-priority-item {
+  padding: 10px;
+}
+.ingredient-flow-priority--strip .ingredient-flow-priority-label {
+  margin-bottom: 5px;
+  font-size: 10.5px;
+}
+.ingredient-flow-priority--strip .ingredient-flow-priority-value {
+  font-size: 13px;
+  line-height: 1.32;
+  overflow-wrap: anywhere;
+}
+.ingredient-flow-priority-item--food {
+  border-color: rgba(0, 188, 212, 0.22);
+  background:
+    linear-gradient(135deg, rgba(0, 188, 212, 0.09), rgba(201, 169, 110, 0.045)),
+    rgba(255, 255, 255, 0.032);
+}
+.ingredient-flow-priority-item--check {
+  border-color: rgba(220, 90, 90, 0.24);
+  background:
+    linear-gradient(135deg, rgba(220, 90, 90, 0.08), rgba(201, 169, 110, 0.04)),
+    rgba(255, 255, 255, 0.03);
+}
+.ingredient-flow-profile--compact .ingredient-flow-priority--strip .ingredient-flow-priority-item {
+  padding: 8px;
+}
+.ingredient-flow-profile--compact .ingredient-flow-priority--strip .ingredient-flow-priority-value {
+  font-size: 12.5px;
+  line-height: 1.28;
+}
 .ingredient-flow-section h3,
 .ingredient-flow-panel h5 {
   margin: 0 0 8px;
@@ -13264,6 +13300,21 @@ html.lenovo-tab-one-profile .ingredient-flow-priority-item {
 }
 html.lenovo-tab-one-profile .ingredient-flow-priority-value {
   font-size: 13.5px;
+}
+html.lenovo-tab-one-profile .ingredient-flow-priority.ingredient-flow-priority--strip {
+  gap: 6px;
+}
+html.lenovo-tab-one-profile .ingredient-flow-priority--strip .ingredient-flow-priority-item {
+  padding: 8px;
+}
+html.lenovo-tab-one-profile .ingredient-flow-priority--strip .ingredient-flow-priority-label {
+  margin-bottom: 4px;
+  font-size: 10px;
+  line-height: 1.15;
+}
+html.lenovo-tab-one-profile .ingredient-flow-priority--strip .ingredient-flow-priority-value {
+  font-size: 12.25px;
+  line-height: 1.26;
 }
 html.lenovo-tab-one-profile .ingredient-flow-chip {
   min-height: 44px;
@@ -13412,6 +13463,18 @@ html.lenovo-tab-one-profile .ingredient-tool-status {
     font-size: 13px;
     line-height: 1.34;
   }
+  html.lenovo-tab-one-profile .ingredient-flow-priority--strip .ingredient-flow-priority-item {
+    padding: 7px 8px;
+  }
+  html.lenovo-tab-one-profile .ingredient-flow-priority--strip .ingredient-flow-priority-label {
+    margin-bottom: 4px;
+    font-size: 9.75px;
+    line-height: 1.12;
+  }
+  html.lenovo-tab-one-profile .ingredient-flow-priority--strip .ingredient-flow-priority-value {
+    font-size: 12px;
+    line-height: 1.24;
+  }
   html.lenovo-tab-one-profile .ingredient-flow-use-list {
     font-size: 12.75px;
     line-height: 1.4;
@@ -13430,6 +13493,9 @@ html.lenovo-tab-one-profile .ingredient-tool-status {
   }
   .ingredient-flow-priority {
     grid-template-columns: 1fr;
+  }
+  .ingredient-flow-priority.ingredient-flow-priority--strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .ingredient-flow-profile-head {
     align-items: flex-start;
