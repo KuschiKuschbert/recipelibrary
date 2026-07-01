@@ -215,6 +215,34 @@
     return '<div class="ingredient-flow-grid' + (options.className ? ' ' + options.className : '') + '">' + (sections || []).join('') + '</div>';
   }
 
+  function priorityItem(item) {
+    item = item || {};
+    var value = item.html || item.value || item.text || item.empty || 'No direct note yet';
+    return (
+      '<div class="ingredient-flow-priority-item' +
+      (item.className ? ' ' + item.className : '') +
+      '">' +
+      '<span class="ingredient-flow-priority-label">' +
+      esc(item.label || '') +
+      '</span><strong class="ingredient-flow-priority-value">' +
+      (item.raw ? String(value || '') : esc(value || '')) +
+      '</strong></div>'
+    );
+  }
+
+  function priority(items, options) {
+    options = options || {};
+    return (
+      '<div class="ingredient-flow-priority' +
+      (options.className ? ' ' + options.className : '') +
+      '"' +
+      attrs(options.attrs) +
+      '>' +
+      (items || []).map(priorityItem).join('') +
+      '</div>'
+    );
+  }
+
   function note(html, options) {
     options = options || {};
     return '<p class="ingredient-flow-note' + (options.className ? ' ' + options.className : '') + '">' + (options.raw ? String(html || '') : esc(html || '')) + '</p>';
@@ -270,6 +298,7 @@
     head: head,
     section: section,
     grid: grid,
+    priority: priority,
     note: note,
     panel: panel,
     profileHead: profileHead,

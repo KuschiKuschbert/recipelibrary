@@ -398,6 +398,17 @@
     return item && item.name ? item.name : String(item || '');
   }
 
+  function flavorAnswerSummaryText(items, limit) {
+    var out = [];
+    for (var i = 0; i < (items || []).length; i++) {
+      var text = flavorAnswerChipText(items[i]);
+      if (!text) continue;
+      out.push(text);
+      if (limit && out.length >= limit) break;
+    }
+    return out.join(', ');
+  }
+
   function flavorAnswerChipHref(item, opts) {
     var text = flavorAnswerChipText(item);
     var id = item && item.id ? item.id : '';
@@ -500,6 +511,21 @@
         }),
         actionsHtml: flow.actions(actions, { className: 'flavor-answer-actions' }),
       }) +
+      flow.priority(
+        [
+          {
+            label: foodSeasonings.length ? 'Season first' : 'Pair first',
+            value: flavorAnswerSummaryText(foodSeasonings.length ? foodSeasonings : best.length ? best : aroma, 4),
+            empty: 'No direct pairing yet',
+          },
+          {
+            label: 'Use now',
+            value: flavorAnswerSummaryText(useTips.length ? useTips : aff, 1),
+            empty: 'No technique note yet',
+          },
+        ],
+        { className: 'flavor-answer-priority', attrs: { 'data-flavor-answer-priority': true } }
+      ) +
       flow.grid(
         []
           .concat(
@@ -568,6 +594,13 @@
           { className: 'flavor-answer-actions' }
         ),
       }) +
+      flow.priority(
+        [
+          { label: 'Season first', value: flavorAnswerSummaryText(seasonings, 4), empty: 'No listed seasonings yet' },
+          { label: 'Next check', value: flavorAnswerSummaryText(more, 3), empty: 'Open the Aroma food row' },
+        ],
+        { className: 'flavor-answer-priority', attrs: { 'data-flavor-answer-priority': true } }
+      ) +
       flow.grid(
         [
           flow.section('Seasonings', flavorAnswerChipList(seasonings, { kind: 'spice', empty: 'No listed seasonings for this food row.' }), {

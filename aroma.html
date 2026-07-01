@@ -807,7 +807,7 @@
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/aroma-hints.js"></script>
 <script src="assets/kuschi-recipe-ui.js?v=4"></script>
-<script src="assets/ingredient-flow-ui.js?v=2"></script>
+<script src="assets/ingredient-flow-ui.js?v=3"></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
 <script>
 (function () {
@@ -969,6 +969,18 @@
     return out;
   }
 
+  function answerSummaryText(items, limit) {
+    var out = [];
+    for (var i = 0; i < (items || []).length; i++) {
+      var item = items[i];
+      var text = item && item.name ? item.name : String(item || '');
+      if (!text) continue;
+      out.push(text);
+      if (limit && out.length >= limit) break;
+    }
+    return out.join(', ');
+  }
+
   function answerChipListHtml(items, empty, hrefForItem) {
     return window.KuschiIngredientFlow.chips(items, {
       empty: empty || 'No direct row in this extract yet.',
@@ -1094,6 +1106,13 @@
           { text: 'Flavor', href: 'flavor.html?q=' + encodeURIComponent(ing.name || ing.id) },
         ]),
       }) +
+      flow.priority(
+        [
+          { label: 'Pair first', value: answerSummaryText(harmony, 4), empty: 'No harmony partners yet' },
+          { label: 'Use now', value: answerSummaryText(notes, 1), empty: 'No use note yet' },
+        ],
+        { className: 'aroma-answer-priority', attrs: { 'data-aroma-answer-priority': true } }
+      ) +
       flow.grid([
         flow.section(
           'Harmony partners',
@@ -1131,6 +1150,13 @@
           { text: 'Pantry', href: 'pantry.html?q=' + encodeURIComponent(fp.name || fp.id) },
         ]),
       }) +
+      flow.priority(
+        [
+          { label: 'Season first', value: answerSummaryText(primary, 4), empty: 'No listed seasonings yet' },
+          { label: 'Next check', value: answerSummaryText(secondary.length ? secondary : primary.slice(0, 4), 3), empty: 'Open a seasoning profile' },
+        ],
+        { className: 'aroma-answer-priority', attrs: { 'data-aroma-answer-priority': true } }
+      ) +
       flow.grid([
         flow.section(
           'Seasonings',

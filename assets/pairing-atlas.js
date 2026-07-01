@@ -407,19 +407,6 @@
     return out.join(', ');
   }
 
-  function drawerDecisionHighlight(label, text, emptyText, className) {
-    return (
-      '<div class="ingredient-flow-priority-item' +
-      (className ? ' ' + className : '') +
-      '">' +
-      '<span class="ingredient-flow-priority-label">' +
-      esc(label) +
-      '</span><strong class="ingredient-flow-priority-value">' +
-      esc(text || emptyText || 'No direct note yet') +
-      '</strong></div>'
-    );
-  }
-
   function drawerDecisionLine(label, text, emptyText) {
     return (
       '<li><span class="pa-drawer-decision-label">' +
@@ -433,11 +420,15 @@
   function drawerDecisionSummaryHtml(harmony, flavorPairs, foods, avoid, useTips) {
     var pairText = drawerSummaryText(harmony.length ? harmony : flavorPairs, 3);
     var useText = drawerSummaryText(useTips, 1);
+    var flow = window.KuschiIngredientFlow;
     return (
-      '<div class="ingredient-flow-priority pa-drawer-priority" data-pa-drawer-priority>' +
-      drawerDecisionHighlight('Pair first', pairText, 'No direct pairing yet', 'pa-drawer-priority-card--pair') +
-      drawerDecisionHighlight('Use now', useText, 'No technique note yet', 'pa-drawer-priority-card--use') +
-      '</div>' +
+      flow.priority(
+        [
+          { label: 'Pair first', value: pairText, empty: 'No direct pairing yet', className: 'pa-drawer-priority-card--pair' },
+          { label: 'Use now', value: useText, empty: 'No technique note yet', className: 'pa-drawer-priority-card--use' },
+        ],
+        { className: 'pa-drawer-priority', attrs: { 'data-pa-drawer-priority': true } }
+      ) +
       '<ul class="pa-drawer-decision-list">' +
       drawerDecisionLine('Flavor adds', drawerSummaryText(flavorPairs, 3), 'No Flavor Bible row yet') +
       drawerDecisionLine('Foods', drawerSummaryText(foods, 2), 'No food rows yet') +
@@ -456,6 +447,7 @@
     var flavorPairs = flavorPairingNames(ing, 8);
     var foods = foodMatchesForSpice(ing.id, 8);
     var avoid = flavorAvoidNames(ing, 8);
+    var useTips = flavorUseTips(ing, 4);
     var partnerCount = harmonyPartnerCount(ing.id);
     var source = sourceBadges(u);
     var enrichedNote = state.enriched
@@ -486,6 +478,13 @@
             { className: 'pa-answer__actions' }
           ),
         }) +
+        flow.priority(
+          [
+            { label: 'Pair first', value: drawerSummaryText(harmony.length ? harmony : flavorPairs, 3), empty: 'No direct pairing yet' },
+            { label: 'Use now', value: drawerSummaryText(useTips, 1), empty: 'No technique note yet' },
+          ],
+          { className: 'pa-answer__priority', attrs: { 'data-pa-answer-priority': true } }
+        ) +
         flow.grid(
           [
             flow.section('Best fast matches', chipListHtml(harmony, { kind: 'spice', empty: 'No spice harmony links in the Aroma extract.' }), { className: 'pa-answer__section' }),
@@ -532,6 +531,13 @@
             { className: 'pa-answer__actions' }
           ),
         }) +
+        flow.priority(
+          [
+            { label: 'Season first', value: drawerSummaryText(seasonings, 4), empty: 'No listed seasonings yet' },
+            { label: 'Next check', value: drawerSummaryText(more, 3), empty: 'Open the full food row' },
+          ],
+          { className: 'pa-answer__priority', attrs: { 'data-pa-answer-priority': true } }
+        ) +
         flow.grid(
           [
             flow.section('Seasonings', chipListHtml(seasonings, { kind: 'spice', empty: 'No listed seasonings for this food row.' }), {

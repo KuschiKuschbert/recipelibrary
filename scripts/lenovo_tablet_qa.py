@@ -330,6 +330,23 @@ def ingredient_flow_control_problems(
     return problems
 
 
+def ingredient_flow_priority_problems(
+    page: Any,
+    selector: str,
+    label: str,
+    expected_texts: tuple[str, ...],
+) -> list[str]:
+    priority = page.locator(selector)
+    if priority.count() != 1:
+        return [f"{label} priority summary is missing"]
+    text = priority.inner_text(timeout=5_000).lower()
+    problems: list[str] = []
+    for expected in expected_texts:
+        if expected.lower() not in text:
+            problems.append(f"{label} priority summary missing: {expected}")
+    return problems
+
+
 def task_first_surface_spec(page_path: str) -> dict[str, Any] | None:
     if "pairing-atlas.html" in page_path:
         return {
@@ -510,6 +527,14 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
     body_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
     if "Cumin" not in body_text:
         problems.append("decision panel did not keep the first ingredient from 'pair cumin with lamb'")
+    problems.extend(
+        ingredient_flow_priority_problems(
+            page,
+            '#paDecisionBody .pa-answer[data-decision-spice-id="cumin"] [data-pa-answer-priority]',
+            "Pairing Atlas Cumin answer",
+            ("pair first", "use now", "fenugreek"),
+        )
+    )
     shared_answer = page.evaluate(
         "() => !!document.querySelector('#paDecisionBody .pa-answer.ingredient-flow .ingredient-flow-grid')"
     )
@@ -620,6 +645,14 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
     if "Roasted Lamb" not in body_text or "Cumin" not in body_text:
         problems.append("Pairing Atlas herbs-for-lamb phrase did not render the Roasted Lamb seasoning answer")
     problems.extend(
+        ingredient_flow_priority_problems(
+            page,
+            '#paDecisionBody .pa-answer[data-decision-food-id="roasted-lamb"] [data-pa-answer-priority]',
+            "Pairing Atlas Roasted Lamb answer",
+            ("season first", "next check"),
+        )
+    )
+    problems.extend(
         ingredient_flow_control_problems(
             page,
             "#paDecisionBody .pa-answer.ingredient-flow",
@@ -705,6 +738,14 @@ def run_flavor_decision_smoke(page: Any) -> list[str]:
     body_text = answer.inner_text(timeout=5_000)
     if "Cumin" not in body_text:
         problems.append("Flavor answer card did not render Cumin from a kitchen phrase")
+    problems.extend(
+        ingredient_flow_priority_problems(
+            page,
+            "#flavorAnswer [data-flavor-answer-priority]",
+            "Flavor Cumin answer",
+            ("pair first", "use now"),
+        )
+    )
     timed_interaction(
         page,
         "Flavor first-ingredient phrase answer",
@@ -795,6 +836,14 @@ def run_aroma_answer_smoke(page: Any) -> list[str]:
     if "Cumin" not in body_text:
         problems.append("Aroma answer card did not render Cumin from a kitchen phrase")
     problems.extend(
+        ingredient_flow_priority_problems(
+            page,
+            "#aromaAnswer [data-aroma-answer-priority]",
+            "Aroma Cumin answer",
+            ("pair first", "use now", "fenugreek"),
+        )
+    )
+    problems.extend(
         ingredient_flow_control_problems(
             page,
             "#aromaAnswer",
@@ -843,6 +892,14 @@ def run_aroma_answer_smoke(page: Any) -> list[str]:
     food_text = answer.inner_text(timeout=5_000)
     if "Roasted Lamb" not in food_text:
         problems.append("Aroma answer card did not render Roasted Lamb food answer from a kitchen phrase")
+    problems.extend(
+        ingredient_flow_priority_problems(
+            page,
+            "#aromaAnswer [data-aroma-answer-priority]",
+            "Aroma Roasted Lamb answer",
+            ("season first", "next check"),
+        )
+    )
     food_lower = food_text.lower()
     for expected in ("seasonings", "more options", "next check"):
         if expected not in food_lower:
