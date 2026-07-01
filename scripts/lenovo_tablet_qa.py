@@ -335,6 +335,7 @@ def ingredient_flow_priority_problems(
     selector: str,
     label: str,
     expected_texts: tuple[str, ...],
+    before_selector: str | None = None,
 ) -> list[str]:
     priority = page.locator(selector)
     if priority.count() != 1:
@@ -344,6 +345,18 @@ def ingredient_flow_priority_problems(
     for expected in expected_texts:
         if expected.lower() not in text:
             problems.append(f"{label} priority summary missing: {expected}")
+    if before_selector:
+        priority_before_detail = page.evaluate(
+            """([prioritySelector, beforeSelector]) => {
+              const priority = document.querySelector(prioritySelector);
+              const detail = document.querySelector(beforeSelector);
+              return !!(priority && detail &&
+                (priority.compareDocumentPosition(detail) & Node.DOCUMENT_POSITION_FOLLOWING));
+            }""",
+            [selector, before_selector],
+        )
+        if not priority_before_detail:
+            problems.append(f"{label} priority summary is not before supporting detail")
     return problems
 
 
@@ -533,6 +546,7 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
             '#paDecisionBody .pa-answer[data-decision-spice-id="cumin"] [data-pa-answer-priority]',
             "Pairing Atlas Cumin answer",
             ("pair first", "use now", "fenugreek"),
+            '#paDecisionBody .pa-answer[data-decision-spice-id="cumin"] .pa-answer__grid',
         )
     )
     shared_answer = page.evaluate(
@@ -650,6 +664,7 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
             '#paDecisionBody .pa-answer[data-decision-food-id="roasted-lamb"] [data-pa-answer-priority]',
             "Pairing Atlas Roasted Lamb answer",
             ("season first", "next check"),
+            '#paDecisionBody .pa-answer[data-decision-food-id="roasted-lamb"] .pa-answer__grid',
         )
     )
     problems.extend(
@@ -744,6 +759,7 @@ def run_flavor_decision_smoke(page: Any) -> list[str]:
             "#flavorAnswer [data-flavor-answer-priority]",
             "Flavor Cumin answer",
             ("pair first", "use now"),
+            "#flavorAnswer .flavor-answer-grid",
         )
     )
     timed_interaction(
@@ -841,6 +857,7 @@ def run_aroma_answer_smoke(page: Any) -> list[str]:
             "#aromaAnswer [data-aroma-answer-priority]",
             "Aroma Cumin answer",
             ("pair first", "use now", "fenugreek"),
+            "#aromaAnswer .ingredient-flow-grid",
         )
     )
     problems.extend(
@@ -898,6 +915,7 @@ def run_aroma_answer_smoke(page: Any) -> list[str]:
             "#aromaAnswer [data-aroma-answer-priority]",
             "Aroma Roasted Lamb answer",
             ("season first", "next check"),
+            "#aromaAnswer .ingredient-flow-grid",
         )
     )
     food_lower = food_text.lower()

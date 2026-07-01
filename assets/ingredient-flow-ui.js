@@ -109,6 +109,20 @@
     );
   }
 
+  function summaryText(items, options) {
+    options = options || {};
+    var out = [];
+    for (var i = 0; i < (items || []).length; i++) {
+      var item = items[i];
+      var text = options.textForItem ? options.textForItem(item) : item && item.name ? item.name : String(item || '');
+      text = String(text || '').trim();
+      if (!text) continue;
+      out.push(text);
+      if (options.limit && out.length >= options.limit) break;
+    }
+    return out.join(options.separator || ', ');
+  }
+
   function useList(items, options) {
     options = options || {};
     if (!items || !items.length) return empty(options.empty || 'No use note in this extract yet.', options.emptyClassName);
@@ -290,6 +304,7 @@
     empty: empty,
     chip: chip,
     chips: chips,
+    summaryText: summaryText,
     useList: useList,
     pill: pill,
     meta: meta,

@@ -399,14 +399,10 @@
   }
 
   function flavorAnswerSummaryText(items, limit) {
-    var out = [];
-    for (var i = 0; i < (items || []).length; i++) {
-      var text = flavorAnswerChipText(items[i]);
-      if (!text) continue;
-      out.push(text);
-      if (limit && out.length >= limit) break;
-    }
-    return out.join(', ');
+    return global.KuschiIngredientFlow.summaryText(items, {
+      limit: limit,
+      textForItem: flavorAnswerChipText,
+    });
   }
 
   function flavorAnswerChipHref(item, opts) {

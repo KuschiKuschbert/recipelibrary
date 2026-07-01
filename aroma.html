@@ -807,7 +807,7 @@
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/aroma-hints.js"></script>
 <script src="assets/kuschi-recipe-ui.js?v=4"></script>
-<script src="assets/ingredient-flow-ui.js?v=3"></script>
+<script src="assets/ingredient-flow-ui.js?v=4"></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
 <script>
 (function () {
@@ -970,15 +970,7 @@
   }
 
   function answerSummaryText(items, limit) {
-    var out = [];
-    for (var i = 0; i < (items || []).length; i++) {
-      var item = items[i];
-      var text = item && item.name ? item.name : String(item || '');
-      if (!text) continue;
-      out.push(text);
-      if (limit && out.length >= limit) break;
-    }
-    return out.join(', ');
+    return window.KuschiIngredientFlow.summaryText(items, { limit: limit });
   }
 
   function answerChipListHtml(items, empty, hrefForItem) {
