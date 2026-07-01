@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import sys
 import threading
+import time
 from dataclasses import dataclass
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -47,6 +48,7 @@ LOAD_MS_BUDGET = 10_000
 DOM_NODE_BUDGET = 12_000
 RESOURCE_BYTE_BUDGET = 28_000_000
 HEAP_BYTE_BUDGET = 220_000_000
+DECISION_RESPONSE_MS_BUDGET = 1_200
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -225,6 +227,27 @@ def describe_target(target: dict[str, Any]) -> str:
     return f"{text}{size}"
 
 
+def timed_interaction(
+    page: Any,
+    label: str,
+    trigger: Any,
+    ready_script: str,
+    problems: list[str],
+    budget_ms: int = DECISION_RESPONSE_MS_BUDGET,
+) -> int | None:
+    start = time.perf_counter()
+    trigger()
+    try:
+        page.wait_for_function(ready_script, timeout=budget_ms + 1_500)
+    except PlaywrightTimeoutError:
+        problems.append(f"{label} did not answer within {budget_ms}ms budget")
+        return None
+    elapsed = int((time.perf_counter() - start) * 1000)
+    if elapsed > budget_ms:
+        problems.append(f"{label} answered in {elapsed}ms, over {budget_ms}ms budget")
+    return elapsed
+
+
 def ingredient_flow_control_problems(
     page: Any,
     scope: str,
@@ -353,15 +376,33 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
         )
     except PlaywrightTimeoutError:
         problems.append("Pairing Atlas enrichment did not finish before drawer smoke")
-    search.fill("what goes with cumin?")
-    page.locator("#paDecisionSubmit").click()
-    page.wait_for_timeout(250)
+    timed_interaction(
+        page,
+        "Pairing Atlas phrase answer",
+        lambda: (search.fill("what goes with cumin?"), page.locator("#paDecisionSubmit").click()),
+        "() => !!document.querySelector('#paDecisionBody .pa-answer[data-decision-spice-id=\"cumin\"]')",
+        problems,
+    )
     body_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
     if "Cumin" not in body_text:
         problems.append("decision panel did not render Cumin answer from a kitchen phrase")
-    search.fill("pair cumin with lamb")
-    page.locator("#paDecisionSubmit").click()
-    page.wait_for_timeout(250)
+    timed_interaction(
+        page,
+        "Pairing Atlas first-ingredient phrase answer",
+        lambda: (search.fill("pair basil with lamb"), page.locator("#paDecisionSubmit").click()),
+        "() => !!document.querySelector('#paDecisionBody .pa-answer[data-decision-spice-id=\"basil\"]')",
+        problems,
+    )
+    body_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
+    if "Basil" not in body_text:
+        problems.append("decision panel did not keep the first ingredient from 'pair basil with lamb'")
+    timed_interaction(
+        page,
+        "Pairing Atlas return-to-cumin answer",
+        lambda: (search.fill("pair cumin with lamb"), page.locator("#paDecisionSubmit").click()),
+        "() => !!document.querySelector('#paDecisionBody .pa-answer[data-decision-spice-id=\"cumin\"]')",
+        problems,
+    )
     body_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
     if "Cumin" not in body_text:
         problems.append("decision panel did not keep the first ingredient from 'pair cumin with lamb'")
@@ -429,13 +470,43 @@ def run_flavor_decision_smoke(page: Any) -> list[str]:
     answer = page.locator("#flavorAnswer")
     if answer.count() != 1:
         return ["Flavor answer card is missing"]
-    search.fill("what goes with cumin?")
-    page.wait_for_timeout(500)
+    timed_interaction(
+        page,
+        "Flavor warmup phrase answer",
+        lambda: search.fill("what goes with lamb?"),
+        "() => /\\bLamb\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '')",
+        problems,
+    )
+    body_text = answer.inner_text(timeout=5_000)
+    if "Lamb" not in body_text:
+        problems.append("Flavor answer card did not render Lamb from a kitchen phrase")
+    timed_interaction(
+        page,
+        "Flavor phrase answer",
+        lambda: search.fill("what goes with cumin?"),
+        "() => /\\bCumin\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '')",
+        problems,
+    )
     body_text = answer.inner_text(timeout=5_000)
     if "Cumin" not in body_text:
         problems.append("Flavor answer card did not render Cumin from a kitchen phrase")
-    search.fill("pair cumin with lamb")
-    page.wait_for_timeout(500)
+    timed_interaction(
+        page,
+        "Flavor first-ingredient phrase answer",
+        lambda: search.fill("pair lamb with cumin"),
+        "() => /\\bLamb\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '')",
+        problems,
+    )
+    body_text = answer.inner_text(timeout=5_000)
+    if "Lamb" not in body_text:
+        problems.append("Flavor answer card did not keep the first ingredient from 'pair lamb with cumin'")
+    timed_interaction(
+        page,
+        "Flavor return-to-cumin phrase answer",
+        lambda: search.fill("pair cumin with lamb"),
+        "() => /\\bCumin\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '')",
+        problems,
+    )
     body_text = answer.inner_text(timeout=5_000)
     if "Cumin" not in body_text:
         problems.append("Flavor answer card did not keep the first ingredient from 'pair cumin with lamb'")

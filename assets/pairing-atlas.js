@@ -48,9 +48,14 @@
   }
 
   function ingredientQueryCandidates(query) {
-    var q = norm(query);
-    if (!q) return [];
-    var variants = [q];
+    var original = norm(query);
+    if (!original) return [];
+    var q = original;
+    var variants = [];
+    function addVariant(text) {
+      text = String(text || '').trim();
+      if (text && variants.indexOf(text) < 0) variants.push(text);
+    }
     [
       /^(what|which)\s+(goes|pairs|works)\s+(with|well\s+with)\s+/,
       /^(goes|pairs|works)\s+(with|well\s+with)\s+/,
@@ -62,18 +67,19 @@
       /\s+(pairings?|matches|ideas|please)$/,
     ].forEach(function (pattern) {
       q = q.replace(pattern, '').trim();
-      if (q && variants.indexOf(q) < 0) variants.push(q);
     });
     var words = q.split(' ');
     ['with', 'for', 'to'].forEach(function (marker) {
       var idx = words.indexOf(marker);
       if (idx >= 0 && idx < words.length - 1) {
         var head = words.slice(0, idx).join(' ').trim();
-        if (head && variants.indexOf(head) < 0) variants.push(head);
+        addVariant(head);
         var tail = words.slice(idx + 1).join(' ').trim();
-        if (tail && variants.indexOf(tail) < 0) variants.push(tail);
+        addVariant(tail);
       }
     });
+    addVariant(q);
+    addVariant(original);
     return variants;
   }
 
