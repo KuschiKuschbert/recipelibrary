@@ -71,6 +71,58 @@
     );
   }
 
+  function likelyLowMemoryStartup() {
+    var root = global.document && global.document.documentElement;
+    if (
+      root &&
+      root.classList &&
+      (root.classList.contains('low-memory-device') || root.classList.contains('lenovo-tab-one-profile'))
+    ) {
+      return true;
+    }
+    var nav = global.navigator || {};
+    var memory = Number(nav.deviceMemory || 0);
+    if (memory > 0 && memory <= 4) return true;
+
+    var docEl = root || {};
+    var w = Math.round(global.innerWidth || docEl.clientWidth || 0);
+    var h = Math.round(global.innerHeight || docEl.clientHeight || 0);
+    var sw = Math.round((global.screen && global.screen.width) || 0);
+    var sh = Math.round((global.screen && global.screen.height) || 0);
+    var shortEdge = Math.min(w, h);
+    var longEdge = Math.max(w, h);
+    var screenShortEdge = sw && sh ? Math.min(sw, sh) : 0;
+    var screenLongEdge = sw && sh ? Math.max(sw, sh) : 0;
+    var viewportTablet = shortEdge >= 640 && shortEdge <= 930 && longEdge >= 900 && longEdge <= 1500;
+    var screenTablet = screenShortEdge >= 700 && screenShortEdge <= 930 && screenLongEdge >= 1000 && screenLongEdge <= 1500;
+    return viewportTablet || screenTablet;
+  }
+
+  function shouldAutoPrime() {
+    var nav = global.navigator || {};
+    var conn = nav.connection || nav.mozConnection || nav.webkitConnection || {};
+    if (conn && conn.saveData) return false;
+    return !likelyLowMemoryStartup();
+  }
+
+  function primeWhenAppropriate() {
+    if (!shouldAutoPrime()) return Promise.resolve(false);
+    return ensureLoaded().then(function () {
+      return true;
+    });
+  }
+
+  function scheduleAutoPrime() {
+    var run = function () {
+      primeWhenAppropriate().catch(function () {});
+    };
+    if (typeof global.requestIdleCallback === 'function') {
+      global.requestIdleCallback(run, { timeout: 3500 });
+    } else {
+      global.setTimeout(run, 350);
+    }
+  }
+
   function normKey(s) {
     if (window.KuschiUserRecipes && typeof KuschiUserRecipes.canonicalOrderMergeKey === 'function') {
       return KuschiUserRecipes.canonicalOrderMergeKey(s);
@@ -1584,9 +1636,12 @@
     fillAddRecipePanel: fillAddRecipePanel,
     debounce: debounce,
     aromaPageHrefForSpice: aromaPageHrefForSpice,
+    likelyLowMemoryStartup: likelyLowMemoryStartup,
+    shouldAutoPrime: shouldAutoPrime,
+    primeWhenAppropriate: primeWhenAppropriate,
     escHtml: escHtml,
   };
 
-  /* Start aroma index fetches as soon as this script runs so the first recipe modal is less often blocked on network (~200KB). */
-  ensureLoaded().catch(function () {});
+  /* Warm aroma data only on devices that can spare the memory; tablet paths stay lazy. */
+  scheduleAutoPrime();
 })(typeof window !== 'undefined' ? window : this);
