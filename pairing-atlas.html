@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=166">
+<link rel="stylesheet" href="assets/theme.css?v=168">
 <style>
   :root { --app-header-h: 65px; }
   .pa-skip {
@@ -137,53 +137,8 @@
     line-height: 1.45;
     max-width: 680px;
   }
-  .pa-decision__form {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px;
-    margin: 0 0 14px;
-  }
-  .pa-decision__search {
-    flex: 1 1 220px;
-    min-height: 48px;
-    min-width: 0;
-    padding: 12px 14px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: var(--bg2);
-    color: var(--text);
-    font: inherit;
-    font-size: 16px;
-  }
-  .pa-decision__search:focus {
-    outline: none;
-    border-color: var(--border-hover);
-    box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.12);
-  }
-  .pa-decision__button {
-    min-height: 48px;
-    padding: 0 14px;
-    border: 1px solid rgba(201, 169, 110, 0.4);
-    border-radius: 12px;
-    background: rgba(201, 169, 110, 0.13);
-    color: var(--gold);
-    font: inherit;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    touch-action: manipulation;
-  }
-  .pa-decision__button:disabled {
-    opacity: 0.45;
-    cursor: not-allowed;
-  }
   .pa-decision__body {
     min-height: 132px;
-  }
-  .pa-decision__button:hover {
-    border-color: var(--gold);
-    color: var(--text);
   }
 
   .pa-toolbar-label {
@@ -967,11 +922,6 @@
       margin-bottom: 10px;
     }
 
-    html.lenovo-tab-one-profile .pa-decision__button {
-      min-height: 48px;
-      font-size: 13px;
-    }
-
     html.lenovo-tab-one-profile .pa-toolbar {
       gap: 7px;
       margin: 8px 0;
@@ -1142,11 +1092,6 @@
 
     html.lenovo-tab-one-profile .pa-decision__form {
       margin-bottom: 10px;
-    }
-
-    html.lenovo-tab-one-profile .pa-decision__button {
-      min-height: 48px;
-      font-size: 13px;
     }
 
     html.lenovo-tab-one-profile .pa-toolbar {
@@ -1384,10 +1329,10 @@
         <p class="pa-decision__sub">Search a spice, herb, food, or dish to get quick matches, avoid notes, food uses, and links into the deeper reference tables.</p>
       </div>
     </div>
-    <form class="pa-decision__form" id="paDecisionForm">
+    <form class="pa-decision__form ingredient-flow-query-form" id="paDecisionForm">
       <label class="visually-hidden" for="paDecisionSearch">Ingredient to check</label>
-      <input type="search" id="paDecisionSearch" class="pa-decision__search" placeholder="Ask: what goes with lamb?" autocomplete="off" spellcheck="false" enterkeyhint="search" />
-      <button type="submit" class="pa-decision__button" id="paDecisionSubmit">Answer</button>
+      <input type="search" id="paDecisionSearch" class="pa-decision__search ingredient-flow-query-input" placeholder="Ask: what goes with lamb?" autocomplete="off" spellcheck="false" enterkeyhint="search" />
+      <button type="submit" class="pa-decision__button ingredient-flow-query-button" id="paDecisionSubmit">Answer</button>
     </form>
     <div class="pa-decision__body" id="paDecisionBody" aria-live="polite">
       <p class="pa-answer__empty ingredient-flow-empty">Loading ingredient decision data…</p>

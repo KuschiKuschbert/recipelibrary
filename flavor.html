@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=166">
+<link rel="stylesheet" href="assets/theme.css?v=168">
 <style>
   :root { --app-header-h: 65px; }
   .hero { text-align: center; padding: 48px 24px 24px; position: relative; display: none; }
@@ -32,10 +32,6 @@
   .flavor-pantry-link { margin-left: auto; border-radius: 12px; color: var(--gold-light); }
   .flavor-pantry-link:hover { border-color: var(--gold); background: var(--gold-dim); }
   .flavor-search-wrap { margin-bottom: 20px; }
-  .flavor-search-wrap input {
-    width: 100%; max-width: 520px; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--border);
-    background: var(--bg2); color: var(--text); font: inherit; font-size: 15px;
-  }
   .flavor-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; align-items: start; }
   @media (max-width: 860px) { .flavor-layout { grid-template-columns: 1fr; } }
   .flavor-results { display: flex; flex-direction: column; gap: 6px; max-height: min(60vh, 520px); overflow-y: auto; }
@@ -195,7 +191,6 @@
       margin-bottom: 14px;
     }
 
-    html.lenovo-tab-one-profile .flavor-search-wrap input,
     html.lenovo-tab-one-profile .flavor-toolkit-filter {
       max-width: none;
       min-height: 52px;
@@ -333,7 +328,6 @@
       margin-bottom: 12px;
     }
 
-    html.lenovo-tab-one-profile .flavor-search-wrap input,
     html.lenovo-tab-one-profile .flavor-toolkit-filter {
       max-width: none;
       min-height: 48px;
@@ -464,7 +458,7 @@
 
   <section class="flavor-tab-panel" data-panel="explore">
     <div class="flavor-search-wrap">
-      <input type="search" id="flavorSearch" placeholder="Ask: what goes with roasted lamb?" autocomplete="off" />
+      <input type="search" id="flavorSearch" class="ingredient-flow-query-input" placeholder="Ask: what goes with roasted lamb?" autocomplete="off" />
       <div id="flavorLoadStatus"></div>
     </div>
     <div id="flavorAnswer" class="flavor-answer-card ingredient-flow-card ingredient-flow" aria-live="polite">

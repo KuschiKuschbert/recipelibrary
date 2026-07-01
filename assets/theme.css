@@ -12917,6 +12917,62 @@ html.lenovo-tab-one-profile #plannerListOverlay .planner-list__print-opt input {
   display: grid;
   gap: 12px;
 }
+.ingredient-flow-query-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+}
+.ingredient-flow-query-input {
+  width: 100%;
+  max-width: 520px;
+  min-width: 0;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg2);
+  color: var(--text);
+  box-sizing: border-box;
+  font: inherit;
+  font-size: 16px;
+}
+.ingredient-flow-query-form .ingredient-flow-query-input {
+  flex: 1 1 220px;
+  width: auto;
+  max-width: none;
+}
+.ingredient-flow-query-input:focus {
+  outline: none;
+  border-color: var(--border-hover);
+  box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.12);
+}
+.ingredient-flow-query-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid rgba(201, 169, 110, 0.4);
+  border-radius: 12px;
+  background: rgba(201, 169, 110, 0.13);
+  color: var(--gold);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.ingredient-flow-query-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.ingredient-flow-query-button:hover {
+  border-color: var(--gold);
+  color: var(--text);
+}
 .ingredient-flow-empty {
   margin: 0;
   color: var(--text3);
@@ -13114,6 +13170,16 @@ html.lenovo-tab-one-profile .ingredient-flow-action {
   min-height: 48px;
   font-size: 13px;
 }
+html.lenovo-tab-one-profile .ingredient-flow-query-input {
+  max-width: none;
+  min-height: 52px;
+  padding: 12px 15px;
+  font-size: 16px;
+}
+html.lenovo-tab-one-profile .ingredient-flow-query-button {
+  min-height: 48px;
+  font-size: 13px;
+}
 html.lenovo-tab-one-profile .ingredient-flow-grid,
 html.lenovo-tab-one-profile .ingredient-flow-profile-grid {
   gap: 8px;
@@ -13146,6 +13212,11 @@ html.lenovo-tab-one-profile .ingredient-flow-profile-head p {
   }
   html.lenovo-tab-one-profile .ingredient-flow-title {
     font-size: 21px;
+  }
+  html.lenovo-tab-one-profile .ingredient-flow-query-input {
+    min-height: 48px;
+    padding: 10px 14px;
+    font-size: 15px;
   }
   html.lenovo-tab-one-profile .ingredient-flow-use-list {
     font-size: 12.75px;
