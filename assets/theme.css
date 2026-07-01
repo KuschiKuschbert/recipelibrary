@@ -7236,21 +7236,21 @@ html.lenovo-tab-one-profile .order-zone-block:not(.stkt-zone-block) .order-zone-
   position: sticky;
   top: 0;
   z-index: 3;
-  min-height: 34px;
-  margin-bottom: 6px;
-  padding: 0 9px;
+  min-height: 38px;
+  margin-bottom: 7px;
+  padding: 0 10px;
   background:
     linear-gradient(90deg, rgba(201, 169, 110, 0.11), rgba(255, 255, 255, 0.025));
   border: 1px solid rgba(201, 169, 110, 0.15);
   border-left: 4px solid rgba(201, 169, 110, 0.44);
   border-radius: 10px;
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0.08em;
 }
 
 html.lenovo-tab-one-profile .order-line-name {
-  font-size: 14.5px;
-  line-height: 1.3;
+  font-size: 15.5px;
+  line-height: 1.32;
   overflow: hidden;
   overflow-wrap: anywhere;
 }
@@ -7457,9 +7457,9 @@ html.lenovo-tab-one-profile .ord-unit-suffix {
 
 html.lenovo-tab-one-profile .order-line-need {
   max-width: 100%;
-  margin-top: 2px;
-  font-size: 12px;
-  line-height: 1.28;
+  margin-top: 3px;
+  font-size: 13px;
+  line-height: 1.25;
 }
 
 html.lenovo-tab-one-profile .order-line-need span {
@@ -7470,9 +7470,9 @@ html.lenovo-tab-one-profile .order-line-need span {
 html.lenovo-tab-one-profile #orderListOverlay .order-list-intro,
 html.lenovo-tab-one-profile #kbOrderListOverlay .order-list-intro {
   display: -webkit-box;
-  margin: -2px 52px 12px 0;
-  font-size: 12px;
-  line-height: 1.38;
+  margin: -2px 52px 14px 0;
+  font-size: 13px;
+  line-height: 1.36;
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -7609,9 +7609,9 @@ html.lenovo-tab-one-profile #kbOrderListOverlay .order-actions--order-list {
 html.lenovo-tab-one-profile #orderListOverlay .order-actions--order-list .btn-secondary,
 html.lenovo-tab-one-profile #kbOrderListOverlay .order-actions--order-list .btn-secondary {
   min-width: 0;
-  min-height: 48px;
-  padding: 8px 7px;
-  font-size: 12.5px;
+  min-height: 50px;
+  padding: 9px 8px;
+  font-size: 13.5px;
   line-height: 1.15;
 }
 
@@ -8145,19 +8145,20 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
     position: relative;
     grid-template-columns: minmax(0, 1fr) minmax(164px, 0.46fr) 44px;
     grid-template-rows: auto;
-    gap: 5px 7px;
-    margin-bottom: 4px;
-    padding: 5px 7px;
+    gap: 6px 8px;
+    min-height: 64px;
+    margin-bottom: 5px;
+    padding: 7px 8px;
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.038), rgba(255, 255, 255, 0.022));
     border: 1px solid rgba(255, 255, 255, 0.11);
-    border-radius: 10px;
+    border-radius: 11px;
     content-visibility: auto;
-    contain-intrinsic-size: auto 56px;
+    contain-intrinsic-size: auto 68px;
   }
 
   html.lenovo-tab-one-profile .order-line-row[data-kind='recipe'] {
-    grid-template-columns: minmax(0, 1fr) minmax(164px, 0.46fr);
+    grid-template-columns: minmax(0, 1fr) minmax(176px, 0.46fr);
   }
 
   html.lenovo-tab-one-profile .order-line-row .order-line-name {
@@ -8173,8 +8174,14 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
 
   html.lenovo-tab-one-profile .order-line-row .ord-qty-with-unit,
   html.lenovo-tab-one-profile .order-line-sub .ord-qty-with-unit {
-    grid-template-columns: minmax(0, 1fr) 2.45rem;
-    gap: 3px 5px;
+    grid-template-columns: minmax(0, 1fr) 2.6rem;
+    gap: 3px 6px;
+  }
+
+  html.lenovo-tab-one-profile .order-line-row .ord-unit-suffix,
+  html.lenovo-tab-one-profile .order-line-sub .ord-unit-suffix {
+    font-size: 13px;
+    line-height: 1.15;
   }
 
   html.lenovo-tab-one-profile .order-line-row .ord-field-label,
@@ -8212,8 +8219,8 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
   html.lenovo-tab-one-profile .order-line-row:has(.ord-zone-control--select) {
     grid-template-columns: minmax(0, 1fr) minmax(158px, 0.68fr) 44px;
     grid-template-rows: auto auto;
-    gap: 6px 7px;
-    padding: 6px 7px;
+    gap: 7px 8px;
+    padding: 8px;
   }
 
   html.lenovo-tab-one-profile .order-line-row:has(.ord-zone-control--select) .order-line-name {
@@ -8236,10 +8243,10 @@ html.lenovo-tab-one-profile .sheet-book-item__sub {
   html.lenovo-tab-one-profile .order-line-row select,
   html.lenovo-tab-one-profile .order-line-sub .ord-extra-qty {
     min-width: 0;
-    min-height: 44px;
-    padding: 7px 8px;
-    border-radius: 9px;
-    font-size: 14px;
+    min-height: 46px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-size: 15px;
     overflow: hidden;
     text-overflow: ellipsis;
   }
