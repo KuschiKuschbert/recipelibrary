@@ -958,6 +958,17 @@ def run_pairing_decision_smoke(
     body_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
     if "Roasted Lamb" not in body_text or "Cumin" not in body_text:
         problems.append("Pairing Atlas herbs-for-lamb phrase did not render the Roasted Lamb seasoning answer")
+    timed_interaction(
+        page,
+        "Pairing Atlas season-lamb phrase answer",
+        lambda: (search.fill("what should I season lamb with?"), page.locator("#paDecisionSubmit").click()),
+        "() => !!document.querySelector('#paDecisionBody .pa-answer[data-decision-food-id=\"roasted-lamb\"]')",
+        problems,
+        timing_sink=timing_sink,
+    )
+    body_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
+    if "Roasted Lamb" not in body_text or "Cumin" not in body_text:
+        problems.append("Pairing Atlas season-lamb phrase did not render the Roasted Lamb seasoning answer")
     if capture_state:
         capture_state("pairing-roasted-lamb-answer")
     problems.extend(
@@ -1035,6 +1046,18 @@ def run_flavor_decision_smoke(
     body_text = answer.inner_text(timeout=5_000)
     if "Lamb" not in body_text or "Cumin" not in body_text:
         problems.append("Flavor herbs-for-lamb phrase did not keep the Lamb answer with Cumin context")
+    timed_interaction(
+        page,
+        "Flavor season-lamb phrase answer",
+        lambda: search.fill("what should I season lamb with?"),
+        "() => /\\bLamb\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '')",
+        problems,
+        FLAVOR_QUICK_ANSWER_MS_BUDGET,
+        timing_sink=timing_sink,
+    )
+    body_text = answer.inner_text(timeout=5_000)
+    if "Lamb" not in body_text or "Cumin" not in body_text:
+        problems.append("Flavor season-lamb phrase did not keep the Lamb answer with Cumin context")
     timed_interaction(
         page,
         "Flavor food phrase answer",
@@ -1259,6 +1282,17 @@ def run_aroma_answer_smoke(
     food_text = answer.inner_text(timeout=5_000)
     if "Roasted Lamb" not in food_text:
         problems.append("Aroma answer card did not render Roasted Lamb food answer from a kitchen phrase")
+    timed_interaction(
+        page,
+        "Aroma season-lamb phrase answer",
+        lambda: (search.fill("what should I season lamb with?"), search.press("Enter")),
+        "() => /\\bRoasted Lamb\\b/.test(document.querySelector('#aromaAnswer .ingredient-flow-title')?.textContent || '')",
+        problems,
+        timing_sink=timing_sink,
+    )
+    food_text = answer.inner_text(timeout=5_000)
+    if "Roasted Lamb" not in food_text or "Cumin" not in food_text:
+        problems.append("Aroma season-lamb phrase did not render the Roasted Lamb food answer")
     problems.extend(
         ingredient_flow_priority_problems(
             page,

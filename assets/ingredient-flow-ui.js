@@ -26,9 +26,24 @@
       if (text && variants.indexOf(text) < 0) variants.push(text);
     }
     [
+      /^(?:what|which)\s+(?:should|would|can)\s+i\s+(?:season|flavour|flavor|cook|use|add|put|pair)\s+(.+?)\s+(?:with|for|on|in|to)$/,
+      /^(?:what|which)\s+(?:should|would|can)\s+i\s+(?:season|flavour|flavor|cook|use|add|put|pair)\s+(?:with|for|on|in|to)\s+(.+)$/,
+      /^(?:how)\s+(?:should|would|can|do)\s+i\s+(?:season|flavour|flavor|cook|use|add|put|pair)\s+(.+)$/,
+      /^(?:what|which)\s+(?:spices?|herbs?|seasonings?|flavours|flavors)\s+(?:should|would|can)\s+i\s+(?:use|add|put)\s+(.+?)\s+(?:with|for|on|in|to)$/,
+      /^(?:what|which)\s+(?:spices?|herbs?|seasonings?|flavours|flavors)\s+(?:should|would|can)\s+i\s+(?:use|add|put)\s+(?:with|for|on|in|to)\s+(.+)$/,
+      /^(?:what|which)\s+(?:can|should|would)\s+i\s+(?:use|add|put)\s+instead\s+of\s+(.+)$/,
+      /^(?:what|which)\s+(?:can|should|would)\s+i\s+(?:substitute|swap|replace)\s+(?:for\s+)?(.+)$/,
+      /^(?:substitute|swap|replace)\s+(?:for\s+)?(.+)$/,
+      /^(?:instead\s+of|without)\s+(.+)$/,
+    ].forEach(function (pattern) {
+      var match = original.match(pattern);
+      if (match && match[1]) addVariant(match[1]);
+    });
+    [
       /^(what|which)\s+(goes|pairs|works)\s+(with|well\s+with)\s+/,
       /^(goes|pairs|works)\s+(with|well\s+with)\s+/,
-      /^(what|which)\s+can\s+i\s+(pair|use|cook)\s+(with\s+)?/,
+      /^(what|which)\s+(can|should|would)\s+i\s+(pair|use|cook|season|flavour|flavor|add|put)\s+(with\s+|for\s+|on\s+|in\s+|to\s+)?/,
+      /^how\s+(do|should|can|would)\s+i\s+(season|flavour|flavor|cook|use|add|put|pair)\s+/,
       /^(pair|match|use|cook|season|flavour|flavor)\s+(this\s+with\s+|with\s+|for\s+)?/,
       /^(best|good|quick)\s+(pairings?|matches|flavours|flavors)\s+(for|with)\s+/,
       /^(pairings?|matches|flavours|flavors)\s+(for|with)\s+/,
@@ -36,6 +51,7 @@
       /^(what|which)\s+(spices?|herbs?|seasonings?|flavours|flavors)\s+(for|with)\s+/,
       /^(spices?|herbs?|seasonings?|flavours|flavors)\s+(for|with)\s+/,
       /\s+(pairings?|matches|ideas|please)$/,
+      /\s+(with|for|on|in|to)$/,
     ].forEach(function (pattern) {
       q = q.replace(pattern, '').trim();
     });
