@@ -440,7 +440,7 @@
     if (fl && fl.volume) parts.push(drawerPillHtml('Volume: ' + String(fl.volume)));
     if (fl && Array.isArray(fl.taste) && fl.taste.length) parts.push(drawerPillHtml('Taste: ' + fl.taste.join(', ')));
     if (unifiedRow) parts.push(drawerPillHtml(sourceBadges(unifiedRow), 'Source coverage', true));
-    return parts.length ? '<div class="pa-drawer-meta">' + parts.join('') + '</div>' : '';
+    return parts.length ? '<div class="pa-drawer-meta ingredient-flow-meta">' + parts.join('') + '</div>' : '';
   }
 
   function answerChipText(item) {
@@ -1331,18 +1331,18 @@
 
     var parts = [];
     var sourceParts = spiceDrawerSourceSections(ing, u, ar, labels);
-    parts.push('<div class="pa-drawer-head">');
+    parts.push('<div class="pa-drawer-head ingredient-flow-head">');
     parts.push('<div class="pa-drawer-title-wrap">');
     if (sourceOnly) {
       parts.push('<p class="pa-drawer-kicker">Source detail</p>');
-      parts.push('<h3 class="pa-drawer-title">' + esc(name) + '</h3>');
+      parts.push('<h3 class="pa-drawer-title ingredient-flow-title">' + esc(name) + '</h3>');
       parts.push(drawerMetaHtml(ing, u));
       parts.push(
         '<p class="pa-drawer-source-intro pa-muted">Deeper reference rows from Aroma, Flavor, Thesaurus, toolkit, and kitchen-context extracts.</p>'
       );
     } else {
       parts.push('<p class="pa-drawer-kicker">Ingredient profile</p>');
-      parts.push('<h3 class="pa-drawer-title">' + esc(name) + '</h3>');
+      parts.push('<h3 class="pa-drawer-title ingredient-flow-title">' + esc(name) + '</h3>');
       parts.push(drawerMetaHtml(ing, u));
       parts.push(
         window.KuschiIngredientFlow.actions(
@@ -1417,10 +1417,10 @@
       esc(name) +
       '">' +
         '<div class="pa-drawer-card pa-drawer-card--selected ingredient-flow-dock-card">' +
-          '<div class="pa-drawer-head">' +
+          '<div class="pa-drawer-head ingredient-flow-head">' +
             '<div class="pa-drawer-title-wrap">' +
               '<p class="pa-drawer-kicker">Ingredient profile</p>' +
-              '<h3 class="pa-drawer-title">' + esc(name) + '</h3>' +
+              '<h3 class="pa-drawer-title ingredient-flow-title">' + esc(name) + '</h3>' +
               drawerMetaHtml(ing, u) +
               window.KuschiIngredientFlow.actions(
                 [
@@ -1580,8 +1580,8 @@
       attrsForItem: seasoningDrillAttrs,
     });
     return (
-      '<div class="pa-drawer-head">' +
-      '<h3 class="pa-drawer-title">' +
+      '<div class="pa-drawer-head ingredient-flow-head">' +
+      '<h3 class="pa-drawer-title ingredient-flow-title">' +
       esc(food.name || food.id) +
       '</h3>' +
       '<button type="button" class="pa-drawer-close" aria-label="Close details">×</button>' +

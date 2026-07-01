@@ -1411,6 +1411,9 @@ def run_pairing_decision_smoke(
                 compactProfile: profile ? !!profile.querySelector('.ingredient-flow-profile--compact') : false,
                 dockPrimitive: profile ? profile.classList.contains('ingredient-flow-dock') : false,
                 dockCardPrimitive: card ? card.classList.contains('ingredient-flow-dock-card') : false,
+                sharedHead: profile ? !!profile.querySelector('.pa-drawer-head.ingredient-flow-head') : false,
+                sharedTitle: profile ? !!profile.querySelector('.pa-drawer-title.ingredient-flow-title') : false,
+                sharedMeta: profile ? !!profile.querySelector('.pa-drawer-meta.ingredient-flow-meta') : false,
                 priorityItems: profile ? profile.querySelectorAll('[data-pa-drawer-priority] .ingredient-flow-priority-item').length : 0,
                 headerActions: profile ? profile.querySelectorAll('.pa-drawer-actions .ingredient-flow-action').length : 0,
                 footerActions: profile ? profile.querySelectorAll('.pa-drawer-foot .ingredient-flow-action').length : 0,
@@ -1431,6 +1434,12 @@ def run_pairing_decision_smoke(
             problems.append("Cumin selected profile dock is not using the shared ingredient-flow dock primitive")
         if not selected_layout.get("dockCardPrimitive"):
             problems.append("Cumin selected profile card is not using the shared ingredient-flow dock-card primitive")
+        if not selected_layout.get("sharedHead"):
+            problems.append("Cumin selected profile header is not using the shared ingredient-flow head primitive")
+        if not selected_layout.get("sharedTitle"):
+            problems.append("Cumin selected profile title is not using the shared ingredient-flow title primitive")
+        if not selected_layout.get("sharedMeta"):
+            problems.append("Cumin selected profile meta row is not using the shared ingredient-flow meta primitive")
         if int(selected_layout.get("priorityItems") or 0) < 4:
             problems.append("Cumin selected profile dock does not expose the four-part decision strip")
         if int(selected_layout.get("headerActions") or 0) < 3:
@@ -1485,6 +1494,12 @@ def run_pairing_decision_smoke(
     drawer_title = page.locator('tr.pa-drawer-row[data-drawer-for="cumin"] .pa-drawer-title')
     if drawer_title.count() != 1 or "Cumin" not in drawer_title.inner_text(timeout=5_000):
         problems.append("Cumin row drawer source detail does not show the ingredient title")
+    if page.locator('tr.pa-drawer-row[data-drawer-for="cumin"] .pa-drawer-head.ingredient-flow-head').count() != 1:
+        problems.append("Cumin row drawer header is not using the shared ingredient-flow head primitive")
+    if page.locator('tr.pa-drawer-row[data-drawer-for="cumin"] .pa-drawer-title.ingredient-flow-title').count() != 1:
+        problems.append("Cumin row drawer title is not using the shared ingredient-flow title primitive")
+    if page.locator('tr.pa-drawer-row[data-drawer-for="cumin"] .pa-drawer-meta.ingredient-flow-meta').count() != 1:
+        problems.append("Cumin row drawer meta row is not using the shared ingredient-flow meta primitive")
     source_map = page.locator('tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-source-map]')
     if source_map.count() != 1:
         problems.append("Cumin row drawer source map is missing")
