@@ -9,4 +9,20 @@ Expected service variant files: 5
 - riviera_data/service_variant_source_overrides.json
 Service variant records visible to frontend audit: 99
 
-Frontend service variant file coverage: OK
+ERRORS
+------
+- Frontend does not load riviera_data/service_variants.json
+- Frontend does not load riviera_data/service_variants_canapes.json
+- Frontend does not load riviera_data/service_variants_corporate.json
+- Frontend does not load riviera_data/service_variants_mains_sides.json
+- Frontend does not load riviera_data/service_variant_source_overrides.json
+- Frontend missing service variant marker: const VARIANT_URLS = [
+- Frontend missing service variant marker: mergeVariantPayloads
+- Frontend missing service variant marker: deepMergeOverride
+- Frontend missing service variant marker: override_existing_fields
+- Frontend missing service variant marker: Service Sizes
+- Frontend missing service variant marker: rivieraServiceVariantsBlock
+- Frontend missing service variant marker: Brochure count
+- Frontend missing service variant marker: Kitchen production
+- Frontend missing service variant marker: Source note
+
