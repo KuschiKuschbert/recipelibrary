@@ -10,7 +10,7 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
-from urllib.parse import urljoin
+from urllib.parse import unquote, urljoin, urlparse
 
 try:
     from playwright.sync_api import Error as PlaywrightError
@@ -31,8 +31,10 @@ CORE_PAGES = (
     "pantry.html?qa=lenovo",
     "aroma.html?tab=browse&qa=lenovo",
     "aroma.html?tab=matrix&qa=lenovo",
+    "aroma.html?food=roasted-lamb&qa=lenovo",
     "flavor.html?q=cumin&qa=lenovo",
     "pairing-atlas.html?qa=lenovo",
+    "pairing-atlas.html?ingredient=cumin&qa=lenovo",
     "notebooklm-gallery.html?qa=lenovo",
 )
 
@@ -223,6 +225,87 @@ def describe_target(target: dict[str, Any]) -> str:
     return f"{text}{size}"
 
 
+def ingredient_flow_control_problems(
+    page: Any,
+    scope: str,
+    label: str,
+    expected_labels: tuple[str, ...] = (),
+) -> list[str]:
+    data = page.evaluate(
+        r"""
+(scope) => {
+  const root = document.querySelector(scope);
+  if (!root) return { missing: true, controls: [] };
+  const controls = Array.from(root.querySelectorAll('.ingredient-flow-action')).filter((el) => {
+    const style = getComputedStyle(el);
+    const rect = el.getBoundingClientRect();
+    return style.display !== 'none' &&
+      style.visibility !== 'hidden' &&
+      Number(style.opacity || 1) !== 0 &&
+      rect.width > 0 &&
+      rect.height > 0;
+  }).map((el) => ({
+    tag: el.tagName.toLowerCase(),
+    text: (el.innerText || el.getAttribute('aria-label') || '').trim().replace(/\s+/g, ' '),
+    href: el.getAttribute('href') || '',
+    absoluteHref: el.href || '',
+    type: el.getAttribute('type') || '',
+    dataAction: Array.from(el.attributes)
+      .filter((attr) => /^data-.*action$/.test(attr.name))
+      .map((attr) => attr.name + '=' + attr.value)
+      .join(','),
+  }));
+  return { missing: false, controls };
+}
+""",
+        scope,
+    )
+    if data.get("missing"):
+        return [f"{label} scope is missing: {scope}"]
+
+    controls = data.get("controls") or []
+    problems: list[str] = []
+    current_origin = urlparse(page.url).netloc
+    visible_labels = [str(control.get("text") or "").strip() for control in controls]
+    lower_labels = [text.lower() for text in visible_labels]
+    for expected in expected_labels:
+        if expected.lower() not in lower_labels:
+            problems.append(f"{label} missing ingredient-flow action: {expected}")
+
+    for control in controls:
+        text = str(control.get("text") or "").strip() or "<unlabelled>"
+        tag = control.get("tag")
+        if tag == "button":
+            if control.get("type") != "button":
+                problems.append(f"{label} button action {text} is not type=button")
+            if not control.get("dataAction"):
+                problems.append(f"{label} button action {text} has no data action hook")
+            continue
+
+        if tag != "a":
+            problems.append(f"{label} action {text} is a {tag}, expected button or link")
+            continue
+
+        href = str(control.get("href") or "").strip()
+        absolute_href = str(control.get("absoluteHref") or "").strip()
+        if not href or href == "#" or href.lower().startswith("javascript:"):
+            problems.append(f"{label} link action {text} has an unsafe or empty href")
+            continue
+
+        parsed = urlparse(absolute_href)
+        if parsed.scheme not in {"http", "https"}:
+            problems.append(f"{label} link action {text} has unsupported href: {href}")
+            continue
+        if parsed.netloc and parsed.netloc != current_origin:
+            problems.append(f"{label} link action {text} points off-site: {href}")
+            continue
+        path = unquote(parsed.path.lstrip("/"))
+        if path and not (ROOT / path).exists():
+            problems.append(f"{label} link action {text} points to missing local page: {path}")
+
+    return problems
+
+
 def issues_from_metrics(page_path: str, viewport_name: str, metric: dict[str, Any], reduced_motion: bool) -> list[Issue]:
     issues: list[Issue] = []
     prefix = f"scrollY={metric.get('scrollY')}"
@@ -281,6 +364,14 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
     )
     if not shared_answer:
         problems.append("Pairing Atlas decision answer is not using shared ingredient-flow styles")
+    problems.extend(
+        ingredient_flow_control_problems(
+            page,
+            "#paDecisionBody .pa-answer.ingredient-flow",
+            "Pairing Atlas decision answer",
+            ("Show row", "Aroma", "Flavor"),
+        )
+    )
     page.locator('[data-pa-decision-action="matrix"]').click()
     page.wait_for_timeout(250)
     row_open = page.evaluate(
@@ -306,6 +397,14 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
                 problems.append(f"Cumin drawer profile missing section: {expected}")
         if "toast cumin seeds" not in drawer_lower:
             problems.append("Cumin drawer profile did not surface the toast/use note")
+        problems.extend(
+            ingredient_flow_control_problems(
+                page,
+                'tr.pa-drawer-row[data-drawer-for="cumin"]',
+                "Pairing Atlas cumin drawer",
+                ("Aroma", "Flavor", "Toolkit"),
+            )
+        )
         instruction_chip = page.evaluate(
             """() => Array.from(document.querySelectorAll(
               'tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-profile] .pa-answer__chip'
@@ -338,6 +437,14 @@ def run_flavor_decision_smoke(page: Any) -> list[str]:
     for expected in ("best pairings", "use it like this", "aroma links"):
         if expected not in body_lower:
             problems.append(f"Flavor answer card missing section: {expected}")
+    problems.extend(
+        ingredient_flow_control_problems(
+            page,
+            "#flavorAnswer",
+            "Flavor answer card",
+            ("Full detail", "Matrix", "Aroma"),
+        )
+    )
     detail_action = page.locator('[data-flavor-answer-action="detail"]')
     if detail_action.count() != 1:
         problems.append("Flavor answer Full detail action is missing")
@@ -374,6 +481,24 @@ def run_aroma_answer_smoke(page: Any) -> list[str]:
     for expected in ("harmony partners", "foods that use it", "use it"):
         if expected not in body_lower:
             problems.append(f"Aroma answer card missing section: {expected}")
+    problems.extend(
+        ingredient_flow_control_problems(
+            page,
+            "#aromaAnswer",
+            "Aroma spice answer card",
+            ("Profile", "Matrix", "Atlas", "Flavor"),
+        )
+    )
+    matrix_action = page.locator('[data-aroma-answer-action="matrix"]')
+    if matrix_action.count() != 1:
+        problems.append("Aroma answer Matrix action is missing")
+    else:
+        matrix_action.click()
+        page.wait_for_timeout(250)
+        matrix_selected = page.locator("#tabMatrix").get_attribute("aria-selected", timeout=5_000)
+        matrix_focus = page.locator("#matrixFocus").input_value(timeout=5_000)
+        if matrix_selected != "true" or matrix_focus != "cumin":
+            problems.append("Aroma answer Matrix action did not focus Cumin in the matrix")
     profile_action = page.locator('[data-aroma-answer-action="profile"]')
     if profile_action.count() != 1:
         problems.append("Aroma answer Profile action is missing")
@@ -383,6 +508,34 @@ def run_aroma_answer_smoke(page: Any) -> list[str]:
         profile_text = page.locator("#spiceProfile").inner_text(timeout=5_000)
         if "Cumin" not in profile_text:
             problems.append("Aroma answer Profile action did not open Cumin profile")
+    search.fill("roasted lamb")
+    search.press("Enter")
+    page.wait_for_timeout(600)
+    food_text = answer.inner_text(timeout=5_000)
+    if "Roasted Lamb" not in food_text:
+        problems.append("Aroma answer card did not render Roasted Lamb food answer")
+    food_lower = food_text.lower()
+    for expected in ("seasonings", "more options", "next check"):
+        if expected not in food_lower:
+            problems.append(f"Aroma food answer card missing section: {expected}")
+    problems.extend(
+        ingredient_flow_control_problems(
+            page,
+            "#aromaAnswer",
+            "Aroma food answer card",
+            ("Open row", "Flavor", "Pantry"),
+        )
+    )
+    food_action = page.locator('[data-aroma-answer-action="food"]')
+    if food_action.count() != 1:
+        problems.append("Aroma food answer Open row action is missing")
+    else:
+        food_action.click()
+        page.wait_for_timeout(250)
+        food_selected = page.locator("#tabFood").get_attribute("aria-selected", timeout=5_000)
+        food_results = page.locator("#foodResults").inner_text(timeout=5_000)
+        if food_selected != "true" or "Cumin" not in food_results:
+            problems.append("Aroma food answer Open row action did not render Roasted Lamb seasonings")
     return problems
 
 

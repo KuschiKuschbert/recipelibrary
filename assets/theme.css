@@ -12903,7 +12903,7 @@ html.lenovo-tab-one-profile #plannerListOverlay .planner-list__print-opt input {
   }
 }
 
-/* Shared ingredient decision / profile primitives used by Flavor and Pairing Atlas. */
+/* Shared ingredient decision / profile primitives used by Flavor, Aroma, and Pairing Atlas. */
 .ingredient-flow-card {
   margin: 0 0 20px;
   padding: 16px;
@@ -13045,6 +13045,8 @@ button.ingredient-flow-action {
 .ingredient-flow-chip {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  min-width: 44px;
   min-height: 38px;
   padding: 0 10px;
   border: 1px solid var(--border);
