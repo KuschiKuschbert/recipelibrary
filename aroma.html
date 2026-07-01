@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=167">
+<link rel="stylesheet" href="assets/theme.css?v=169">
 <link rel="preload" href="aroma_data/ingredients.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
@@ -305,18 +305,13 @@
     line-height: 1.25;
   }
   html.lenovo-tab-one-profile .aroma-modes {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 7px;
+    --tablet-mode-columns: 4;
+    --tablet-mode-gap: 7px;
+    --tablet-mode-tab-padding: 8px 10px;
+    --tablet-mode-tab-line-height: 1.2;
     margin: 14px 0 16px;
   }
   html.lenovo-tab-one-profile .aroma-mode-btn {
-    width: 100%;
-    min-height: 48px;
-    padding: 8px 10px;
-    border-radius: 12px;
-    font-size: 13.5px;
-    line-height: 1.2;
     transition-duration: 0.08s;
   }
   html.lenovo-tab-one-profile .aroma-panel-lead {
@@ -737,7 +732,7 @@
     </div>
   </details>
 
-  <div class="aroma-modes" role="tablist" aria-label="Lookup mode">
+  <div class="aroma-modes tablet-mode-tabs" role="tablist" aria-label="Lookup mode">
     <button type="button" class="aroma-mode-btn" role="tab" id="tabFood" aria-pressed="true" aria-selected="true" data-mode="food" title="Find herbs and spices that pair with an ingredient or dish name" aria-label="Food lookup: what goes with this food?">Food → seasonings</button>
     <button type="button" class="aroma-mode-btn" role="tab" id="tabSpice" aria-pressed="false" data-mode="spice" title="Harmony partners, foods, aroma groups, and Flavour toolkit layering when available" aria-label="Spice profile">Spice profile</button>
     <button type="button" class="aroma-mode-btn" role="tab" id="tabBrowse" aria-pressed="false" data-mode="browse" title="All spices in the extract, filter by aroma group G1–G8" aria-label="Browse all spices">Browse all</button>

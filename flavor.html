@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=168">
+<link rel="stylesheet" href="assets/theme.css?v=169">
 <style>
   :root { --app-header-h: 65px; }
   .hero { text-align: center; padding: 48px 24px 24px; position: relative; display: none; }
@@ -161,11 +161,11 @@
 
     html.lenovo-tab-one-profile .flavor-tabs {
       order: 2;
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 7px;
+      --tablet-mode-columns: 5;
+      --tablet-mode-gap: 7px;
+      --tablet-mode-tab-padding: 9px 10px;
+      --tablet-mode-tab-line-height: 1.2;
       margin: 10px 0 14px;
-      align-items: stretch;
     }
 
     html.lenovo-tab-one-profile .flavor-tab-panel[data-panel="explore"] {
@@ -178,18 +178,6 @@
 
     html.lenovo-tab-one-profile .footer {
       order: 4;
-    }
-
-    html.lenovo-tab-one-profile .flavor-tabs button,
-    html.lenovo-tab-one-profile .flavor-pantry-link {
-      min-width: 0;
-      min-height: 48px;
-      padding: 9px 10px;
-      border-radius: 12px;
-      font-size: 13.5px;
-      line-height: 1.2;
-      text-align: center;
-      white-space: normal;
     }
 
     html.lenovo-tab-one-profile .flavor-pantry-link {
@@ -313,11 +301,11 @@
 
     html.lenovo-tab-one-profile .flavor-tabs {
       order: 2;
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 6px;
+      --tablet-mode-columns: 5;
+      --tablet-mode-gap: 6px;
+      --tablet-mode-tab-padding: 8px 10px;
+      --tablet-mode-tab-line-height: 1.18;
       margin: 8px 0 12px;
-      align-items: stretch;
     }
 
     html.lenovo-tab-one-profile .flavor-tab-panel[data-panel="explore"] {
@@ -330,18 +318,6 @@
 
     html.lenovo-tab-one-profile .footer {
       order: 4;
-    }
-
-    html.lenovo-tab-one-profile .flavor-tabs button,
-    html.lenovo-tab-one-profile .flavor-pantry-link {
-      min-width: 0;
-      min-height: 48px;
-      padding: 8px 10px;
-      border-radius: 12px;
-      font-size: 13.5px;
-      line-height: 1.18;
-      text-align: center;
-      white-space: normal;
     }
 
     html.lenovo-tab-one-profile .flavor-pantry-link {
@@ -478,7 +454,7 @@
 </header>
 
 <div class="flavor-page">
-  <div class="flavor-tabs" role="tablist">
+  <div class="flavor-tabs tablet-mode-tabs" role="tablist">
     <button type="button" role="tab" data-flavor-tab="explore" aria-selected="true">Explore</button>
     <button type="button" role="tab" data-flavor-tab="wheel" aria-selected="false">Thesaurus wheel</button>
     <button type="button" role="tab" data-flavor-tab="science" aria-selected="false">Science snippets</button>
