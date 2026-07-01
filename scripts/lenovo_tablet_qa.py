@@ -365,9 +365,27 @@ def task_first_surface_spec(page_path: str) -> dict[str, Any] | None:
         return {
             "label": "Pairing Atlas answer surface",
             "items": [
-                {"name": "decision search", "selector": "#paDecisionSearch", "role": "control"},
-                {"name": "answer button", "selector": "#paDecisionSubmit", "role": "control"},
-                {"name": "decision answer", "selector": "#paDecisionBody", "role": "answer"},
+                {
+                    "name": "decision search",
+                    "selector": "#paDecisionSearch",
+                    "role": "control",
+                    "beforeSelector": ".pa-toolbar",
+                    "beforeName": "matrix controls",
+                },
+                {
+                    "name": "answer button",
+                    "selector": "#paDecisionSubmit",
+                    "role": "control",
+                    "beforeSelector": ".pa-toolbar",
+                    "beforeName": "matrix controls",
+                },
+                {
+                    "name": "decision answer",
+                    "selector": "#paDecisionBody",
+                    "role": "answer",
+                    "beforeSelector": ".pa-toolbar",
+                    "beforeName": "matrix controls",
+                },
             ],
         }
     if "flavor.html" in page_path:
@@ -381,15 +399,33 @@ def task_first_surface_spec(page_path: str) -> dict[str, Any] | None:
                     "beforeSelector": ".flavor-tabs",
                     "beforeName": "secondary tabs",
                 },
-                {"name": "quick answer", "selector": "#flavorAnswer", "role": "answer"},
+                {
+                    "name": "quick answer",
+                    "selector": "#flavorAnswer",
+                    "role": "answer",
+                    "beforeSelector": ".flavor-tabs",
+                    "beforeName": "secondary tabs",
+                },
             ],
         }
     if "aroma.html" in page_path:
         return {
             "label": "Aroma answer surface",
             "items": [
-                {"name": "answer search", "selector": "#aromaSearch", "role": "control"},
-                {"name": "quick answer", "selector": "#aromaAnswer", "role": "answer"},
+                {
+                    "name": "answer search",
+                    "selector": "#aromaSearch",
+                    "role": "control",
+                    "beforeSelector": ".aroma-modes",
+                    "beforeName": "mode tabs",
+                },
+                {
+                    "name": "quick answer",
+                    "selector": "#aromaAnswer",
+                    "role": "answer",
+                    "beforeSelector": ".aroma-modes",
+                    "beforeName": "mode tabs",
+                },
             ],
         }
     return None
