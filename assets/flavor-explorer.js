@@ -621,6 +621,7 @@
     var foodMatch = query ? findFoodMatch(query) : null;
     var row = rowMatch && rowMatch.item ? rowMatch.item : findBestRow(query);
     if (foodMatch && (!rowMatch || foodMatch.strength > rowMatch.strength)) {
+      syncDetailForAnswer(row, opts);
       renderFlavorAnswerForFood(foodMatch.item, row);
       return;
     }
@@ -637,6 +638,7 @@
       return;
     }
     if (!row && opts && opts.selectDefault) row = findBestRow('');
+    syncDetailForAnswer(row, opts);
     renderFlavorAnswerForRow(row, lookupFlavourIngredient(row), foodMatch);
   }
 
@@ -755,6 +757,7 @@
   function renderDetailCore(u, fk) {
     var el = document.getElementById('flavorDetail');
     if (!el) return;
+    el.setAttribute('data-flavor-detail-id', u.id || '');
     var f = u.flavor || {};
     var a = u.aroma;
     var th = u.thesaurus;
@@ -851,6 +854,12 @@
       if (lastDetailId !== (u && u.id)) return;
       renderDetailCore(u, lookupFlavourIngredient(u));
     });
+  }
+
+  function syncDetailForAnswer(row, opts) {
+    if (!opts || !opts.syncDetail || !row || !row.id) return;
+    if (lastDetailId === row.id) return;
+    renderDetail(row);
   }
 
   function toolkitFilterNorm(s) {
@@ -1167,7 +1176,7 @@
     var list = document.getElementById('flavorResults');
     if (!list) return;
     if (!rows.length) {
-      updateFlavorAnswer(q.value, { selectDefault: false });
+      updateFlavorAnswer(q.value, { selectDefault: false, syncDetail: true });
       list.innerHTML =
         '<div class="empty empty-search-state">' +
         '<div class="empty-kicker">No match</div>' +
@@ -1177,7 +1186,7 @@
         '</div>';
       return;
     }
-    updateFlavorAnswer(q.value, { selectDefault: false });
+    updateFlavorAnswer(q.value, { selectDefault: false, syncDetail: true });
     list.innerHTML = rows
       .map(function (u) {
         return (

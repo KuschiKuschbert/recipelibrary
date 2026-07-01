@@ -795,12 +795,15 @@ def run_flavor_decision_smoke(page: Any) -> list[str]:
         page,
         "Flavor phrase answer",
         lambda: search.fill("what goes with cumin?"),
-        "() => /\\bCumin\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '')",
+        "() => /\\bCumin\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '') && document.querySelector('#flavorDetail')?.getAttribute('data-flavor-detail-id') === 'cumin'",
         problems,
     )
     body_text = answer.inner_text(timeout=5_000)
     if "Cumin" not in body_text:
         problems.append("Flavor answer card did not render Cumin from a kitchen phrase")
+    synced_detail_id = page.locator("#flavorDetail").get_attribute("data-flavor-detail-id", timeout=5_000)
+    if synced_detail_id != "cumin":
+        problems.append("Flavor answer did not auto-sync Cumin into the detail pane")
     problems.extend(
         ingredient_flow_priority_problems(
             page,
