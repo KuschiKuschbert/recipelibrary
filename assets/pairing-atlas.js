@@ -22,6 +22,10 @@
     foodPairings: null,
     foodById: null,
     foodsBySpice: null,
+    foodsSorted: null,
+    ingredientsSorted: null,
+    spiceColumnIds: null,
+    prioritySpiceIds: null,
     priorityRankById: null,
     spiceMatcher: null,
     foodMatcher: null,
@@ -149,17 +153,35 @@
     }
     state.foodById = foodById;
     state.foodsBySpice = foodsBySpice;
+    state.foodsSorted = rows.slice().sort(function (a, b) {
+      return (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' });
+    });
   }
 
   function rebuildPriorityRank() {
     var rankById = Object.create(null);
+    var prioritySpiceIds = [];
     var order = state.meta.priority_row_ids || [];
-    for (var i = 0; i < order.length; i++) rankById[order[i]] = i;
+    for (var i = 0; i < order.length; i++) {
+      rankById[order[i]] = i;
+      if (state.byId[order[i]]) prioritySpiceIds.push(order[i]);
+    }
     state.priorityRankById = rankById;
+    state.prioritySpiceIds = prioritySpiceIds;
   }
 
   function isPrioritySpiceId(id) {
     return !!(state.priorityRankById && state.priorityRankById[id] != null);
+  }
+
+  function rebuildIngredientSorts() {
+    var sorted = (state.ingredients || []).slice().sort(function (a, b) {
+      return (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' });
+    });
+    state.ingredientsSorted = sorted;
+    state.spiceColumnIds = sorted.map(function (x) {
+      return x.id;
+    });
   }
 
   function matchRowsByCandidate(rows, q, nameForRow) {
@@ -1573,21 +1595,9 @@
 
   function getSpiceColumnIds() {
     if (state.foodSpiceMode === 'priority') {
-      var order = state.meta.priority_row_ids || [];
-      var out = [];
-      for (var i = 0; i < order.length; i++) {
-        if (state.byId[order[i]]) out.push(order[i]);
-      }
-      return out;
+      return (state.prioritySpiceIds || []).slice();
     }
-    return state.ingredients
-      .slice()
-      .sort(function (a, b) {
-        return (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' });
-      })
-      .map(function (x) {
-        return x.id;
-      });
+    return (state.spiceColumnIds || []).slice();
   }
 
   function paintSpiceMatrix(host) {
@@ -1597,15 +1607,13 @@
 
     var rows = [];
     if (state.currentMode === 'priority') {
-      var order = meta.priority_row_ids || [];
+      var order = state.prioritySpiceIds || [];
       for (var o = 0; o < order.length; o++) {
         var id = order[o];
         if (state.byId[id]) rows.push(state.byId[id]);
       }
     } else {
-      rows = state.ingredients.slice().sort(function (a, b) {
-        return (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' });
-      });
+      rows = state.ingredientsSorted || [];
     }
 
     host.innerHTML = selectedSpiceProfileHtml() + buildSpiceTableBody(meta, rows, labels);
@@ -1681,9 +1689,7 @@
         '<p class="pa-food-placeholder">Food × spice matrix appears when cross-book data finishes loading.</p>';
       return;
     }
-    var foods = state.foodPairings.slice().sort(function (a, b) {
-      return (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' });
-    });
+    var foods = getFoodsSorted();
     var spiceCols = getSpiceColumnIds();
     host.innerHTML = buildFoodTable(state.meta, foods, spiceCols);
     host.removeAttribute('aria-busy');
@@ -1846,6 +1852,7 @@
 
   function getFoodsSorted() {
     if (!state.foodPairings) return [];
+    if (state.foodsSorted) return state.foodsSorted;
     return state.foodPairings.slice().sort(function (a, b) {
       return (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' });
     });
@@ -1855,9 +1862,7 @@
     if (!el) return;
     var n =
       state.currentMode === 'priority'
-        ? (state.meta.priority_row_ids || []).filter(function (id) {
-            return state.byId[id];
-          }).length
+        ? (state.prioritySpiceIds || []).length
         : state.ingredients.length;
     var base =
       (state.currentMode === 'priority' ? 'Priority sheet: ' : 'All indexed: ') +
@@ -2066,6 +2071,7 @@
         state.ingredients = Array.isArray(pair[0]) ? pair[0] : [];
         state.meta = pair[1] && typeof pair[1] === 'object' ? pair[1] : {};
         state.byId = buildIngredientById(state.ingredients);
+        rebuildIngredientSorts();
         rebuildPriorityRank();
         rebuildDecisionMatchers();
         if (decisionSearch) {
