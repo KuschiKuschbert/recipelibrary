@@ -20,6 +20,8 @@
     kitchenContext: null,
     pairingMatrix: null,
     foodPairings: null,
+    foodById: null,
+    foodsBySpice: null,
     spiceMatcher: null,
     foodMatcher: null,
     enriched: false,
@@ -124,6 +126,28 @@
     state.foodMatcher = createRowMatcher(state.foodPairings || [], function (food) {
       return food.name || food.id || '';
     });
+  }
+
+  function rebuildFoodPairingIndexes() {
+    var foodById = Object.create(null);
+    var foodsBySpice = Object.create(null);
+    var rows = state.foodPairings || [];
+    for (var i = 0; i < rows.length; i++) {
+      var food = rows[i];
+      if (!food) continue;
+      var foodId = food.id || '';
+      var foodName = food.name || foodId || '';
+      if (foodId) foodById[foodId] = food;
+      var seas = food.seasonings || [];
+      for (var j = 0; j < seas.length; j++) {
+        var spiceId = seas[j] && seas[j].id ? seas[j].id : '';
+        if (!spiceId) continue;
+        if (!foodsBySpice[spiceId]) foodsBySpice[spiceId] = [];
+        foodsBySpice[spiceId].push({ id: foodId, name: foodName });
+      }
+    }
+    state.foodById = foodById;
+    state.foodsBySpice = foodsBySpice;
   }
 
   function matchRowsByCandidate(rows, q, nameForRow) {
@@ -255,6 +279,9 @@
 
   function foodMatchesForSpice(spiceId, limit) {
     if (!state.foodPairings || !spiceId) return [];
+    if (state.foodsBySpice && state.foodsBySpice[spiceId]) {
+      return uniqueNames(state.foodsBySpice[spiceId], limit);
+    }
     var out = [];
     for (var i = 0; i < state.foodPairings.length; i++) {
       var food = state.foodPairings[i];
@@ -717,6 +744,7 @@
 
   function findFoodPairingById(foodId) {
     if (!foodId || !state.foodPairings) return null;
+    if (state.foodById && state.foodById[foodId]) return state.foodById[foodId];
     for (var i = 0; i < state.foodPairings.length; i++) {
       if (state.foodPairings[i] && state.foodPairings[i].id === foodId) return state.foodPairings[i];
     }
@@ -1962,6 +1990,7 @@
         state.pairingMatrix = pm;
         state.foodPairings = fp;
         state.flavourHints = fh;
+        rebuildFoodPairingIndexes();
         rebuildDecisionMatchers();
         state.enriched = true;
 

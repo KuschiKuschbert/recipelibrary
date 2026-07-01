@@ -18,6 +18,7 @@
   var aromaMeta = null;
   var foodPairings = null;
   var byName = Object.create(null);
+  var rowLookup = Object.create(null);
   var unifiedMatcher = null;
   var foodMatcher = null;
   var loadP = null;
@@ -52,6 +53,14 @@
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
+  }
+
+  function addRowLookup(row, key) {
+    var raw = String(key || '').trim();
+    var n = norm(raw);
+    if (!row || !raw || !n) return;
+    rowLookup[raw] = row;
+    rowLookup[n] = row;
   }
 
   function rebuildMatchers() {
@@ -145,9 +154,14 @@
       .then(function () {
         if (!temps) temps = [];
         byName = Object.create(null);
+        rowLookup = Object.create(null);
         for (var i = 0; i < unified.length; i++) {
           var u = unified[i];
-          if (u && u.name) byName[norm(u.name)] = u;
+          if (!u) continue;
+          if (u.name) byName[norm(u.name)] = u;
+          addRowLookup(u, u.id);
+          addRowLookup(u, u.name);
+          if (u.aroma && u.aroma.id) addRowLookup(u, u.aroma.id);
         }
         rebuildMatchers();
       });
@@ -644,6 +658,8 @@
     var id = String(spiceId || '').trim();
     if (!id || !unified) return null;
     var idNorm = norm(id);
+    if (rowLookup[id]) return rowLookup[id];
+    if (rowLookup[idNorm]) return rowLookup[idNorm];
     for (var i = 0; i < unified.length; i++) {
       var row = unified[i];
       if (!row) continue;
@@ -1411,13 +1427,7 @@
         if (!action) return;
         if (action.getAttribute('data-flavor-answer-action') === 'detail') {
           e.preventDefault();
-          var row = null;
-          for (var i = 0; i < (unified || []).length; i++) {
-            if (unified[i].id === lastAnswerId) {
-              row = unified[i];
-              break;
-            }
-          }
+          var row = lastAnswerId ? rowLookup[lastAnswerId] || rowLookup[norm(lastAnswerId)] : null;
           if (row) {
             renderDetail(row);
             var detail = document.getElementById('flavorDetail');
