@@ -54,6 +54,7 @@ DECISION_RESPONSE_MS_BUDGET = 1_200
 ACTION_RESPONSE_MS_BUDGET = 900
 
 CaptureState = Callable[[str], None]
+TimingSink = Callable[[dict[str, Any]], None]
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -142,6 +143,7 @@ def write_artifact_manifest(
     artifacts_dir: Path,
     pages: tuple[str, ...],
     artifacts: list[dict[str, Any]],
+    action_timings: list[dict[str, Any]],
     issues: list[Issue],
 ) -> Path:
     artifacts_dir.mkdir(parents=True, exist_ok=True)
@@ -154,6 +156,7 @@ def write_artifact_manifest(
             for name, width, height in VIEWPORTS
         ],
         "artifacts": artifacts,
+        "actionTimings": action_timings,
         "issues": [issue.__dict__ for issue in issues],
     }
     manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
@@ -314,15 +317,36 @@ def timed_interaction(
     ready_script: str,
     problems: list[str],
     budget_ms: int = DECISION_RESPONSE_MS_BUDGET,
+    timing_sink: TimingSink | None = None,
 ) -> int | None:
     start = time.perf_counter()
     trigger()
     try:
         page.wait_for_function(ready_script, timeout=budget_ms + 1_500)
     except PlaywrightTimeoutError:
+        elapsed = int((time.perf_counter() - start) * 1000)
+        if timing_sink:
+            timing_sink(
+                {
+                    "label": label,
+                    "elapsedMs": elapsed,
+                    "budgetMs": budget_ms,
+                    "status": "timeout",
+                }
+            )
         problems.append(f"{label} did not answer within {budget_ms}ms budget")
         return None
     elapsed = int((time.perf_counter() - start) * 1000)
+    status = "over-budget" if elapsed > budget_ms else "ok"
+    if timing_sink:
+        timing_sink(
+            {
+                "label": label,
+                "elapsedMs": elapsed,
+                "budgetMs": budget_ms,
+                "status": status,
+            }
+        )
     if elapsed > budget_ms:
         problems.append(f"{label} answered in {elapsed}ms, over {budget_ms}ms budget")
     return elapsed
@@ -640,7 +664,11 @@ def issues_from_metrics(page_path: str, viewport_name: str, metric: dict[str, An
     return issues
 
 
-def run_pairing_decision_smoke(page: Any, capture_state: CaptureState | None = None) -> list[str]:
+def run_pairing_decision_smoke(
+    page: Any,
+    capture_state: CaptureState | None = None,
+    timing_sink: TimingSink | None = None,
+) -> list[str]:
     problems: list[str] = []
     search = page.locator("#paDecisionSearch")
     if search.count() != 1:
@@ -658,6 +686,7 @@ def run_pairing_decision_smoke(page: Any, capture_state: CaptureState | None = N
         lambda: (search.fill("what goes with cumin?"), page.locator("#paDecisionSubmit").click()),
         "() => !!document.querySelector('#paDecisionBody .pa-answer[data-decision-spice-id=\"cumin\"]')",
         problems,
+        timing_sink=timing_sink,
     )
     body_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
     if "Cumin" not in body_text:
@@ -668,6 +697,7 @@ def run_pairing_decision_smoke(page: Any, capture_state: CaptureState | None = N
         lambda: (search.fill("pair basil with lamb"), page.locator("#paDecisionSubmit").click()),
         "() => !!document.querySelector('#paDecisionBody .pa-answer[data-decision-spice-id=\"basil\"]')",
         problems,
+        timing_sink=timing_sink,
     )
     body_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
     if "Basil" not in body_text:
@@ -678,6 +708,7 @@ def run_pairing_decision_smoke(page: Any, capture_state: CaptureState | None = N
         lambda: (search.fill("pair cumin with lamb"), page.locator("#paDecisionSubmit").click()),
         "() => !!document.querySelector('#paDecisionBody .pa-answer[data-decision-spice-id=\"cumin\"]')",
         problems,
+        timing_sink=timing_sink,
     )
     body_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
     if "Cumin" not in body_text:
@@ -713,6 +744,7 @@ def run_pairing_decision_smoke(page: Any, capture_state: CaptureState | None = N
         "() => !!document.querySelector('tr.pa-data-row[data-spice-id=\"cumin\"].pa-row-open')",
         problems,
         ACTION_RESPONSE_MS_BUDGET,
+        timing_sink=timing_sink,
     )
     row_open = page.evaluate(
         "() => !!document.querySelector('tr.pa-data-row[data-spice-id=\"cumin\"].pa-row-open')"
@@ -774,6 +806,7 @@ def run_pairing_decision_smoke(page: Any, capture_state: CaptureState | None = N
         lambda: (search.fill("what goes with lamb?"), page.locator("#paDecisionSubmit").click()),
         "() => !!document.querySelector('#paDecisionBody .pa-answer[data-decision-food-id=\"roasted-lamb\"]')",
         problems,
+        timing_sink=timing_sink,
     )
     body_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
     if "Roasted Lamb" not in body_text:
@@ -790,6 +823,7 @@ def run_pairing_decision_smoke(page: Any, capture_state: CaptureState | None = N
         lambda: (search.fill("what herbs for lamb?"), page.locator("#paDecisionSubmit").click()),
         "() => !!document.querySelector('#paDecisionBody .pa-answer[data-decision-food-id=\"roasted-lamb\"]')",
         problems,
+        timing_sink=timing_sink,
     )
     body_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
     if "Roasted Lamb" not in body_text or "Cumin" not in body_text:
@@ -820,6 +854,7 @@ def run_pairing_decision_smoke(page: Any, capture_state: CaptureState | None = N
         "() => !!document.querySelector('tr.pa-fx-data[data-food-id=\"roasted-lamb\"].pa-row-open')",
         problems,
         ACTION_RESPONSE_MS_BUDGET,
+        timing_sink=timing_sink,
     )
     food_drawer = page.locator('tr.pa-drawer-row[data-food-drawer="roasted-lamb"]')
     if food_drawer.count() != 1:
@@ -832,7 +867,11 @@ def run_pairing_decision_smoke(page: Any, capture_state: CaptureState | None = N
     return problems
 
 
-def run_flavor_decision_smoke(page: Any, capture_state: CaptureState | None = None) -> list[str]:
+def run_flavor_decision_smoke(
+    page: Any,
+    capture_state: CaptureState | None = None,
+    timing_sink: TimingSink | None = None,
+) -> list[str]:
     problems: list[str] = []
     search = page.locator("#flavorSearch")
     if search.count() != 1:
@@ -846,6 +885,7 @@ def run_flavor_decision_smoke(page: Any, capture_state: CaptureState | None = No
         lambda: search.fill("what goes with lamb?"),
         "() => /\\bLamb\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '')",
         problems,
+        timing_sink=timing_sink,
     )
     body_text = answer.inner_text(timeout=5_000)
     if "Lamb" not in body_text:
@@ -858,6 +898,7 @@ def run_flavor_decision_smoke(page: Any, capture_state: CaptureState | None = No
         lambda: search.fill("what herbs for lamb?"),
         "() => /\\bLamb\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '')",
         problems,
+        timing_sink=timing_sink,
     )
     body_text = answer.inner_text(timeout=5_000)
     if "Lamb" not in body_text or "Cumin" not in body_text:
@@ -868,6 +909,7 @@ def run_flavor_decision_smoke(page: Any, capture_state: CaptureState | None = No
         lambda: search.fill("what goes with roasted lamb?"),
         "() => !!document.querySelector('#flavorAnswer [data-decision-food-id=\"roasted-lamb\"]')",
         problems,
+        timing_sink=timing_sink,
     )
     body_text = answer.inner_text(timeout=5_000)
     if "Roasted Lamb" not in body_text:
@@ -894,6 +936,7 @@ def run_flavor_decision_smoke(page: Any, capture_state: CaptureState | None = No
         lambda: search.fill("what goes with cumin?"),
         "() => /\\bCumin\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '') && document.querySelector('#flavorDetail')?.getAttribute('data-flavor-detail-id') === 'cumin'",
         problems,
+        timing_sink=timing_sink,
     )
     body_text = answer.inner_text(timeout=5_000)
     if "Cumin" not in body_text:
@@ -918,6 +961,7 @@ def run_flavor_decision_smoke(page: Any, capture_state: CaptureState | None = No
         lambda: search.fill("pair lamb with cumin"),
         "() => /\\bLamb\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '')",
         problems,
+        timing_sink=timing_sink,
     )
     body_text = answer.inner_text(timeout=5_000)
     if "Lamb" not in body_text:
@@ -928,6 +972,7 @@ def run_flavor_decision_smoke(page: Any, capture_state: CaptureState | None = No
         lambda: search.fill("pair cumin with lamb"),
         "() => /\\bCumin\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '')",
         problems,
+        timing_sink=timing_sink,
     )
     body_text = answer.inner_text(timeout=5_000)
     if "Cumin" not in body_text:
@@ -960,6 +1005,7 @@ def run_flavor_decision_smoke(page: Any, capture_state: CaptureState | None = No
             "() => /CUMIN/.test(document.querySelector('#flavorDetail')?.textContent?.toUpperCase() || '')",
             problems,
             ACTION_RESPONSE_MS_BUDGET,
+            timing_sink=timing_sink,
         )
         detail_text = page.locator("#flavorDetail").inner_text(timeout=5_000)
         if "CUMIN" not in detail_text.upper():
@@ -969,7 +1015,11 @@ def run_flavor_decision_smoke(page: Any, capture_state: CaptureState | None = No
     return problems
 
 
-def run_aroma_answer_smoke(page: Any, capture_state: CaptureState | None = None) -> list[str]:
+def run_aroma_answer_smoke(
+    page: Any,
+    capture_state: CaptureState | None = None,
+    timing_sink: TimingSink | None = None,
+) -> list[str]:
     problems: list[str] = []
     search = page.locator("#aromaSearch")
     if search.count() != 1:
@@ -999,6 +1049,7 @@ def run_aroma_answer_smoke(page: Any, capture_state: CaptureState | None = None)
         lambda: (search.fill("what goes with cumin?"), search.press("Enter")),
         "() => /\\bCumin\\b/.test(document.querySelector('#aromaAnswer .ingredient-flow-title')?.textContent || '')",
         problems,
+        timing_sink=timing_sink,
     )
     body_text = answer.inner_text(timeout=5_000)
     if "Cumin" not in body_text:
@@ -1031,6 +1082,7 @@ def run_aroma_answer_smoke(page: Any, capture_state: CaptureState | None = None)
             "() => document.querySelector('#tabMatrix')?.getAttribute('aria-selected') === 'true' && document.querySelector('#matrixFocus')?.value === 'cumin'",
             problems,
             ACTION_RESPONSE_MS_BUDGET,
+            timing_sink=timing_sink,
         )
         matrix_selected = page.locator("#tabMatrix").get_attribute("aria-selected", timeout=5_000)
         matrix_focus = page.locator("#matrixFocus").input_value(timeout=5_000)
@@ -1049,6 +1101,7 @@ def run_aroma_answer_smoke(page: Any, capture_state: CaptureState | None = None)
             "() => /Cumin/.test(document.querySelector('#spiceProfile')?.textContent || '')",
             problems,
             ACTION_RESPONSE_MS_BUDGET,
+            timing_sink=timing_sink,
         )
         profile_text = page.locator("#spiceProfile").inner_text(timeout=5_000)
         if "Cumin" not in profile_text:
@@ -1061,6 +1114,7 @@ def run_aroma_answer_smoke(page: Any, capture_state: CaptureState | None = None)
         lambda: (search.fill("what herbs for lamb?"), search.press("Enter")),
         "() => /\\bRoasted Lamb\\b/.test(document.querySelector('#aromaAnswer .ingredient-flow-title')?.textContent || '')",
         problems,
+        timing_sink=timing_sink,
     )
     food_text = answer.inner_text(timeout=5_000)
     if "Roasted Lamb" not in food_text:
@@ -1097,6 +1151,7 @@ def run_aroma_answer_smoke(page: Any, capture_state: CaptureState | None = None)
             "() => { const p = new URLSearchParams(location.search); return p.get('tab') === 'food' && p.get('food') === 'roasted-lamb' && document.querySelector('#tabFood')?.getAttribute('aria-selected') === 'true' && !!document.querySelector('#foodResults [data-spice-id=\"cumin\"]'); }",
             problems,
             ACTION_RESPONSE_MS_BUDGET,
+            timing_sink=timing_sink,
         )
         food_open = page.evaluate(
             """() => {
@@ -1124,6 +1179,7 @@ def run_page(
     reduced_motion: bool,
     artifacts_dir: Path | None = None,
     artifacts: list[dict[str, Any]] | None = None,
+    action_timings: list[dict[str, Any]] | None = None,
 ) -> list[Issue]:
     context = browser.new_context(
         viewport={"width": width, "height": height},
@@ -1156,6 +1212,22 @@ def run_page(
         if problem:
             issues.append(Issue(page_path, viewport_name, problem))
 
+    def record_timing(entry: dict[str, Any]) -> None:
+        if action_timings is None:
+            return
+        motion_name = "reduced-motion" if reduced_motion else "normal-motion"
+        action_timings.append(
+            {
+                "page": page_path,
+                "viewport": viewport_name,
+                "width": width,
+                "height": height,
+                "motion": motion_name,
+                "url": page.url,
+                **entry,
+            }
+        )
+
     try:
         page.goto(urljoin(base, page_path), wait_until="networkidle", timeout=25_000)
         page.wait_for_timeout(600)
@@ -1163,13 +1235,13 @@ def run_page(
         for problem in task_first_surface_problems(page, page_path):
             issues.append(Issue(page_path, viewport_name, problem))
         if "pairing-atlas.html" in page_path and not reduced_motion and viewport_name == "portrait":
-            for problem in run_pairing_decision_smoke(page, capture_state):
+            for problem in run_pairing_decision_smoke(page, capture_state, record_timing):
                 issues.append(Issue(page_path, viewport_name, problem))
         if "flavor.html" in page_path and not reduced_motion and viewport_name == "portrait":
-            for problem in run_flavor_decision_smoke(page, capture_state):
+            for problem in run_flavor_decision_smoke(page, capture_state, record_timing):
                 issues.append(Issue(page_path, viewport_name, problem))
         if "aroma.html" in page_path and "tab=browse" in page_path and not reduced_motion and viewport_name == "portrait":
-            for problem in run_aroma_answer_smoke(page, capture_state):
+            for problem in run_aroma_answer_smoke(page, capture_state, record_timing):
                 issues.append(Issue(page_path, viewport_name, problem))
         for metric in collect_metrics(page):
             issues.extend(issues_from_metrics(page_path, viewport_name, metric, reduced_motion))
@@ -1207,6 +1279,7 @@ def main(argv: list[str] | None = None) -> int:
     pages = tuple(p.strip() for p in args.pages.split(",")) if args.pages else CORE_PAGES
     artifacts_dir = resolve_artifacts_dir(args.artifacts_dir) if args.artifacts_dir else None
     artifacts: list[dict[str, Any]] = []
+    action_timings: list[dict[str, Any]] = []
     server, base = start_server()
     all_issues: list[Issue] = []
     try:
@@ -1229,6 +1302,7 @@ def main(argv: list[str] | None = None) -> int:
                                 reduced_motion,
                                 artifacts_dir,
                                 artifacts,
+                                action_timings if artifacts_dir else None,
                             )
                             if issues:
                                 all_issues.extend(issues)
@@ -1241,7 +1315,7 @@ def main(argv: list[str] | None = None) -> int:
         server.server_close()
 
     if artifacts_dir:
-        manifest_path = write_artifact_manifest(artifacts_dir, pages, artifacts, all_issues)
+        manifest_path = write_artifact_manifest(artifacts_dir, pages, artifacts, action_timings, all_issues)
         ok(f"Lenovo tablet QA artifacts written to {manifest_path}")
 
     if all_issues:
