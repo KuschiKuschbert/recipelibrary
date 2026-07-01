@@ -1352,12 +1352,12 @@
     var name = displayNameForIngredient(ing) || ing.name || ing.id;
     var u = state.unifiedById ? state.unifiedById[ing.id] : null;
     return (
-      '<section class="pa-selected-profile" data-pa-selected-profile data-selected-spice-id="' +
+      '<section class="pa-selected-profile ingredient-flow-dock" data-pa-selected-profile data-selected-spice-id="' +
       esc(ing.id) +
       '" aria-label="Selected ingredient profile: ' +
       esc(name) +
       '">' +
-        '<div class="pa-drawer-card pa-drawer-card--selected">' +
+        '<div class="pa-drawer-card pa-drawer-card--selected ingredient-flow-dock-card">' +
           '<div class="pa-drawer-head">' +
             '<div class="pa-drawer-title-wrap">' +
               '<p class="pa-drawer-kicker">Ingredient profile</p>' +

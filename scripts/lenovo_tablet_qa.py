@@ -1358,6 +1358,8 @@ def run_pairing_decision_smoke(
                 missing: !profile || !card,
                 sourceDetails: profile ? profile.querySelectorAll('.pa-drawer-source-details').length : 0,
                 compactProfile: profile ? !!profile.querySelector('.ingredient-flow-profile--compact') : false,
+                dockPrimitive: profile ? profile.classList.contains('ingredient-flow-dock') : false,
+                dockCardPrimitive: card ? card.classList.contains('ingredient-flow-dock-card') : false,
                 priorityItems: profile ? profile.querySelectorAll('[data-pa-drawer-priority] .ingredient-flow-priority-item').length : 0,
                 headerActions: profile ? profile.querySelectorAll('.pa-drawer-actions .ingredient-flow-action').length : 0,
                 footerActions: profile ? profile.querySelectorAll('.pa-drawer-foot .ingredient-flow-action').length : 0,
@@ -1374,6 +1376,10 @@ def run_pairing_decision_smoke(
             problems.append("Cumin selected profile dock duplicates source detail instead of staying compact")
         if not selected_layout.get("compactProfile"):
             problems.append("Cumin selected profile dock is not using the shared compact profile modifier")
+        if not selected_layout.get("dockPrimitive"):
+            problems.append("Cumin selected profile dock is not using the shared ingredient-flow dock primitive")
+        if not selected_layout.get("dockCardPrimitive"):
+            problems.append("Cumin selected profile card is not using the shared ingredient-flow dock-card primitive")
         if int(selected_layout.get("priorityItems") or 0) < 4:
             problems.append("Cumin selected profile dock does not expose the four-part decision strip")
         if int(selected_layout.get("headerActions") or 0) < 3:

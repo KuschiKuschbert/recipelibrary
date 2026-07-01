@@ -13226,6 +13226,26 @@ a.ingredient-flow-chip:hover {
   display: grid;
   gap: 10px;
 }
+.ingredient-flow-dock {
+  position: sticky;
+  top: var(--ingredient-flow-dock-top, 0);
+  left: var(--ingredient-flow-dock-left, 0);
+  z-index: var(--ingredient-flow-dock-z, 5);
+  padding: var(--ingredient-flow-dock-padding, 10px);
+  border-bottom: 1px solid var(--border);
+  background:
+    linear-gradient(180deg, rgba(18, 18, 18, 0.98), rgba(18, 18, 18, 0.9)),
+    var(--bg2);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.28);
+}
+.ingredient-flow-dock-card {
+  --ingredient-flow-dock-card-max-height: none;
+  --ingredient-flow-dock-card-overflow: visible;
+  --ingredient-flow-dock-card-padding: 12px;
+  border: 1px solid rgba(201, 169, 110, 0.22);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.035);
+}
 .ingredient-flow-profile-head {
   display: flex;
   align-items: baseline;
@@ -13319,6 +13339,12 @@ html.lenovo-tab-one-profile .ingredient-flow-priority--strip .ingredient-flow-pr
 html.lenovo-tab-one-profile .ingredient-flow-chip {
   min-height: 44px;
   font-size: 12.5px;
+}
+html.lenovo-tab-one-profile .ingredient-flow-dock {
+  --ingredient-flow-dock-padding: 8px;
+}
+html.lenovo-tab-one-profile .ingredient-flow-dock-card {
+  --ingredient-flow-dock-card-padding: 10px;
 }
 html.lenovo-tab-one-profile .ingredient-flow-profile-head {
   align-items: flex-start;
@@ -13450,6 +13476,12 @@ html.lenovo-tab-one-profile .ingredient-tool-status {
   }
   html.lenovo-tab-one-profile .ingredient-flow-profile--compact .ingredient-flow-panel {
     padding: 9px;
+  }
+  html.lenovo-tab-one-profile .ingredient-flow-dock {
+    --ingredient-flow-dock-padding: 7px;
+  }
+  html.lenovo-tab-one-profile .ingredient-flow-dock-card {
+    --ingredient-flow-dock-card-padding: 9px;
   }
   html.lenovo-tab-one-profile .ingredient-flow-title {
     font-size: 21px;

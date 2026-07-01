@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=177">
+<link rel="stylesheet" href="assets/theme.css?v=178">
 <style>
   :root { --app-header-h: 65px; }
   .pa-skip {
@@ -509,30 +509,13 @@
     background: rgba(12, 12, 12, 0.65);
   }
   .pa-drawer-card {
-    padding: 16px 18px 20px;
-    max-height: min(55vh, 480px);
-    overflow: auto;
+    padding: var(--ingredient-flow-dock-card-padding, 16px 18px 20px);
+    max-height: var(--ingredient-flow-dock-card-max-height, min(55vh, 480px));
+    overflow: var(--ingredient-flow-dock-card-overflow, auto);
     -webkit-overflow-scrolling: touch;
   }
   .pa-selected-profile {
-    position: sticky;
-    top: 0;
-    left: 0;
-    z-index: 5;
-    padding: 10px;
-    border-bottom: 1px solid var(--border);
-    background:
-      linear-gradient(180deg, rgba(18, 18, 18, 0.98), rgba(18, 18, 18, 0.9)),
-      var(--bg2);
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.28);
-  }
-  .pa-selected-profile .pa-drawer-card {
-    max-height: none;
-    overflow: visible;
-    padding: 12px;
-    border: 1px solid rgba(201, 169, 110, 0.22);
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.035);
+    --ingredient-flow-dock-z: 5;
   }
   .pa-selected-profile .pa-drawer-head {
     margin-bottom: 10px;
@@ -980,16 +963,6 @@
       padding: 12px 14px 14px;
     }
 
-    html.lenovo-tab-one-profile .pa-selected-profile {
-      padding: 8px;
-    }
-
-    html.lenovo-tab-one-profile .pa-selected-profile .pa-drawer-card {
-      max-height: none;
-      overflow: visible;
-      padding: 10px;
-    }
-
     html.lenovo-tab-one-profile .pa-drawer-title {
       font-size: 18px;
     }
@@ -1100,16 +1073,6 @@
     html.lenovo-tab-one-profile .pa-drawer-card {
       max-height: min(42dvh, 320px);
       padding: 12px 14px 14px;
-    }
-
-    html.lenovo-tab-one-profile .pa-selected-profile {
-      padding: 7px;
-    }
-
-    html.lenovo-tab-one-profile .pa-selected-profile .pa-drawer-card {
-      max-height: none;
-      overflow: visible;
-      padding: 9px;
     }
 
     html.lenovo-tab-one-profile .pa-drawer-title {
@@ -1356,7 +1319,7 @@
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/kuschi-recipe-ui.js?v=4"></script>
 <script src="assets/ingredient-flow-ui.js?v=6"></script>
-<script src="assets/pairing-atlas.js?v=29"></script>
+<script src="assets/pairing-atlas.js?v=30"></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
 <script src="assets/app-nav.js?v=2"></script>
 <style>
