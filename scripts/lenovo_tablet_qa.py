@@ -233,6 +233,7 @@ def page_metric_script() -> str:
   const navRect = nav ? nav.getBoundingClientRect() : null;
   const navVisible = !!(navRect && navRect.width > 0 && navRect.height > 0 && navRect.bottom > 0 && navRect.top < vh);
   const navIsBottom = !!(navVisible && navRect.top > vh * 0.55 && navRect.height < vh * 0.35);
+  const navIsSideRail = !!(navVisible && !navIsBottom && navRect.left <= 2 && navRect.right < vw * 0.35 && navRect.height > vh * 0.5);
 
   function visible(el) {
     const style = getComputedStyle(el);
@@ -336,6 +337,27 @@ def page_metric_script() -> str:
       startTime: Math.round(Number(task.startTime) || 0),
       duration: Math.round(Number(task.duration) || 0)
     }));
+  const toolShell = document.querySelector('.ingredient-tool-shell');
+  const toolShellRect = toolShell ? toolShell.getBoundingClientRect() : null;
+  const toolShellStyle = toolShell ? getComputedStyle(toolShell) : null;
+  const toolBody = document.body && document.body.classList.contains('ingredient-tool-body');
+  const toolStatusCount = document.querySelectorAll('.ingredient-tool-status').length;
+  const toolAboutCount = document.querySelectorAll('.ingredient-tool-about').length;
+  const ingredientTool = {
+    hasShell: !!toolShell,
+    bodyClass: !!toolBody,
+    statusCount: toolStatusCount,
+    aboutCount: toolAboutCount,
+    shellLeft: toolShellRect ? Math.round(toolShellRect.left) : null,
+    shellRight: toolShellRect ? Math.round(toolShellRect.right) : null,
+    shellPaddingBottom: toolShellStyle ? Math.round(parseFloat(toolShellStyle.paddingBottom || '0') || 0) : null,
+    navVisible,
+    navIsBottom,
+    navIsSideRail,
+    navHeight: navRect ? Math.round(navRect.height) : null,
+    navTop: navRect ? Math.round(navRect.top) : null,
+    navRight: navRect ? Math.round(navRect.right) : null
+  };
 
   return {
     url: location.href,
@@ -359,7 +381,8 @@ def page_metric_script() -> str:
     longTaskCount: longTasks.length,
     longTaskTotalMs: Math.round(longTaskTotalMs),
     longTaskMaxMs: Math.round(longTaskMaxMs),
-    longTaskSample
+    longTaskSample,
+    ingredientTool
   };
 }
 """
@@ -393,6 +416,10 @@ def describe_long_task(task: dict[str, Any]) -> str:
     duration = int(task.get("duration") or 0)
     start_time = int(task.get("startTime") or 0)
     return f"{duration}ms at {start_time}ms"
+
+
+def expects_ingredient_tool_shell(page_path: str) -> bool:
+    return "flavor.html" in page_path or "pairing-atlas.html" in page_path
 
 
 def timed_interaction(
@@ -798,6 +825,37 @@ def issues_from_metrics(page_path: str, viewport_name: str, metric: dict[str, An
     if metric.get("atBottom") and metric.get("navOverlap"):
         sample = "; ".join(describe_target(t) for t in metric["navOverlap"][:5])
         issues.append(Issue(page_path, viewport_name, f"{prefix}: bottom nav overlaps interactives: {sample}"))
+    if int(metric.get("scrollY") or 0) == 0:
+        tool = metric.get("ingredientTool") or {}
+        if expects_ingredient_tool_shell(page_path) and not tool.get("hasShell"):
+            issues.append(Issue(page_path, viewport_name, f"{prefix}: ingredient tool shell hook is missing"))
+        if tool.get("hasShell"):
+            if not tool.get("bodyClass"):
+                issues.append(Issue(page_path, viewport_name, f"{prefix}: ingredient tool body hook is missing"))
+            if expects_ingredient_tool_shell(page_path) and int(tool.get("statusCount") or 0) <= 0:
+                issues.append(Issue(page_path, viewport_name, f"{prefix}: ingredient tool status hook is missing"))
+            if tool.get("navIsBottom"):
+                padding_bottom = int(tool.get("shellPaddingBottom") or 0)
+                nav_height = int(tool.get("navHeight") or 0)
+                if padding_bottom < nav_height + 8:
+                    issues.append(
+                        Issue(
+                            page_path,
+                            viewport_name,
+                            f"{prefix}: ingredient tool shell bottom clearance {padding_bottom}px < nav {nav_height}px + 8px",
+                        )
+                    )
+            if tool.get("navIsSideRail"):
+                shell_left = int(tool.get("shellLeft") or 0)
+                nav_right = int(tool.get("navRight") or 0)
+                if shell_left < nav_right:
+                    issues.append(
+                        Issue(
+                            page_path,
+                            viewport_name,
+                            f"{prefix}: ingredient tool shell starts under side nav ({shell_left}px < {nav_right}px)",
+                        )
+                    )
     if reduced_motion and metric.get("runningAnimations"):
         sample = "; ".join((a.get("cls") or a.get("tag") or "animation") for a in metric["runningAnimations"][:5])
         issues.append(Issue(page_path, viewport_name, f"{prefix}: animations still running under reduced motion: {sample}"))
