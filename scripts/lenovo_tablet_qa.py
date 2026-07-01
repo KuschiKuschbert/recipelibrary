@@ -427,6 +427,22 @@ def describe_long_task(task: dict[str, Any]) -> str:
     return f"{duration}ms at {start_time}ms"
 
 
+def browser_resource_label(url: str) -> str:
+    parsed = urlparse(url)
+    path = unquote(parsed.path or "/")
+    label = path + (f"?{parsed.query}" if parsed.query else "")
+    return label[:220]
+
+
+def is_same_origin_resource(base: str, url: str) -> bool:
+    parsed = urlparse(url)
+    if parsed.scheme not in {"http", "https"}:
+        return False
+    if parsed.path.endswith("/favicon.ico"):
+        return False
+    return parsed.netloc == urlparse(base).netloc
+
+
 def expects_ingredient_tool_shell(page_path: str) -> bool:
     return "flavor.html" in page_path or "pairing-atlas.html" in page_path
 
@@ -1937,8 +1953,32 @@ def run_page(
     page.add_init_script(long_task_observer_script())
     console_errors: list[str] = []
     page_errors: list[str] = []
+    failed_requests: list[str] = []
+    bad_responses: list[str] = []
+
+    def record_failed_request(request: Any) -> None:
+        url = getattr(request, "url", "")
+        if not is_same_origin_resource(base, url):
+            return
+        failure = getattr(request, "failure", "")
+        if callable(failure):
+            try:
+                failure = failure()
+            except PlaywrightError:
+                failure = ""
+        failed_requests.append(f"{browser_resource_label(url)} {str(failure or '').strip()}"[:240])
+
+    def record_response(response: Any) -> None:
+        status = int(getattr(response, "status", 0) or 0)
+        url = getattr(response, "url", "")
+        if status < 400 or not is_same_origin_resource(base, url):
+            return
+        bad_responses.append(f"{status} {browser_resource_label(url)}"[:240])
+
     page.on("console", lambda msg: console_errors.append(msg.text) if msg.type == "error" else None)
     page.on("pageerror", lambda exc: page_errors.append(str(exc)) if exc else None)
+    page.on("requestfailed", record_failed_request)
+    page.on("response", record_response)
     issues: list[Issue] = []
 
     def capture_state(state: str) -> None:
@@ -2038,6 +2078,10 @@ def run_page(
             issues.append(Issue(page_path, viewport_name, f"console error: {msg[:220]}"))
         for msg in page_errors[:5]:
             issues.append(Issue(page_path, viewport_name, f"page error: {msg[:220]}"))
+        for msg in failed_requests[:5]:
+            issues.append(Issue(page_path, viewport_name, f"request failed: {msg[:220]}"))
+        for msg in bad_responses[:5]:
+            issues.append(Issue(page_path, viewport_name, f"bad response: {msg[:220]}"))
     except (PlaywrightTimeoutError, PlaywrightError) as exc:
         issues.append(Issue(page_path, viewport_name, f"browser QA failed: {exc}"))
     finally:
