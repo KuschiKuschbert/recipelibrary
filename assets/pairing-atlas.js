@@ -589,6 +589,7 @@
       return;
     }
     if (food) {
+      clearOpenSpiceSelection();
       state.decisionSpiceId = null;
       state.decisionFoodId = food.id || null;
       body.innerHTML = foodDecisionAnswerHtml(food);
@@ -631,6 +632,7 @@
 
   function revealDecisionInFoodMatrix(foodHost, foodSearch) {
     if (!state.decisionFoodId || !foodHost || !state.enriched) return;
+    clearOpenSpiceSelection();
     var foods = getFoodsSorted();
     var food = null;
     for (var i = 0; i < foods.length; i++) {
@@ -1175,6 +1177,40 @@
     return parts.join('');
   }
 
+  function selectedSpiceProfileHtml() {
+    if (!state.openDrawerSpiceId) return '';
+    var ing = state.byId[state.openDrawerSpiceId];
+    if (!ing) return '';
+    var name = displayNameForIngredient(ing) || ing.name || ing.id;
+    return (
+      '<section class="pa-selected-profile" data-pa-selected-profile data-selected-spice-id="' +
+      esc(ing.id) +
+      '" aria-label="Selected ingredient profile: ' +
+      esc(name) +
+      '">' +
+        '<div class="pa-drawer-card pa-drawer-card--selected">' +
+          spiceDrawerHtml(ing) +
+        '</div>' +
+      '</section>'
+    );
+  }
+
+  function removeSelectedSpiceProfile(host) {
+    if (!host) return;
+    var prev = host.querySelector('[data-pa-selected-profile]');
+    if (prev) prev.remove();
+  }
+
+  function clearOpenSpiceSelection() {
+    if (!state.openDrawerSpiceId) return;
+    state.openDrawerSpiceId = null;
+    var host = document.getElementById('paMatrixHost');
+    if (!host) return;
+    paintSpiceMatrix(host);
+    var search = document.getElementById('paMatrixSearch');
+    if (search && search.value) applySpiceFilter(search.value);
+  }
+
   function removeSpiceDrawer(host) {
     if (!host) return;
     var prev = host.querySelector('tr.pa-drawer-row[data-drawer-for]');
@@ -1350,7 +1386,7 @@
       });
     }
 
-    host.innerHTML = buildSpiceTableBody(meta, rows, labels);
+    host.innerHTML = selectedSpiceProfileHtml() + buildSpiceTableBody(meta, rows, labels);
     if (state.openDrawerSpiceId) {
       var ingOpen = state.byId[state.openDrawerSpiceId];
       if (ingOpen) {
@@ -1366,6 +1402,12 @@
   }
 
   function onSpiceMatrixClick(e, spiceHost) {
+    var selectedClose = e.target.closest('[data-pa-selected-profile] .pa-drawer-close');
+    if (selectedClose) {
+      e.preventDefault();
+      clearOpenSpiceSelection();
+      return;
+    }
     if (!e.target.closest('#paSpiceMatrix')) return;
     if (e.target.closest('a')) return;
     var closeBtn = e.target.closest('.pa-drawer-close');
@@ -1512,6 +1554,7 @@
         state.openDrawerSpiceId = null;
         var mh = document.getElementById('paMatrixHost');
         removeSpiceDrawer(mh);
+        removeSelectedSpiceProfile(mh);
       }
     }
   }

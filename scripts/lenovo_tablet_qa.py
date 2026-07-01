@@ -575,6 +575,32 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
     )
     if not row_open:
         problems.append("decision panel Show row did not open the cumin matrix row")
+    selected_profile = page.locator('#paMatrixHost [data-pa-selected-profile][data-selected-spice-id="cumin"]')
+    if selected_profile.count() != 1:
+        problems.append("Cumin selected profile dock is missing after Show row")
+    else:
+        selected_text = selected_profile.inner_text(timeout=5_000).lower()
+        for expected in ("cumin", "kitchen profile", "pair first", "use now"):
+            if expected not in selected_text:
+                problems.append(f"Cumin selected profile dock missing: {expected}")
+        selected_is_sticky = page.evaluate(
+            """() => {
+              const profile = document.querySelector('#paMatrixHost [data-pa-selected-profile]');
+              return !!profile && getComputedStyle(profile).position === 'sticky';
+            }"""
+        )
+        if not selected_is_sticky:
+            problems.append("Cumin selected profile dock is not sticky inside the matrix")
+        selected_before_table = page.evaluate(
+            """() => {
+              const profile = document.querySelector('#paMatrixHost [data-pa-selected-profile]');
+              const table = document.querySelector('#paSpiceMatrix');
+              return !!(profile && table &&
+                (profile.compareDocumentPosition(table) & Node.DOCUMENT_POSITION_FOLLOWING));
+            }"""
+        )
+        if not selected_before_table:
+            problems.append("Cumin selected profile dock is not before the spice table")
     drawer_profile = page.locator('tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-profile]')
     if drawer_profile.count() != 1:
         problems.append("Cumin drawer profile is missing")
@@ -705,6 +731,9 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
     food_drawer = page.locator('tr.pa-drawer-row[data-food-drawer="roasted-lamb"]')
     if food_drawer.count() != 1:
         problems.append("Roasted Lamb food drawer is missing after food decision Open row")
+    stale_spice_profile = page.locator("#paMatrixHost [data-pa-selected-profile]")
+    if stale_spice_profile.count() != 0:
+        problems.append("Spice selected profile stayed open after switching to the food matrix")
     return problems
 
 

@@ -513,6 +513,28 @@
     overflow: auto;
     -webkit-overflow-scrolling: touch;
   }
+  .pa-selected-profile {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    padding: 10px;
+    border-bottom: 1px solid var(--border);
+    background:
+      linear-gradient(180deg, rgba(18, 18, 18, 0.98), rgba(18, 18, 18, 0.9)),
+      var(--bg2);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.28);
+  }
+  .pa-selected-profile .pa-drawer-card {
+    max-height: min(46vh, 420px);
+    padding: 12px;
+    border: 1px solid rgba(201, 169, 110, 0.22);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.035);
+  }
+  .pa-selected-profile .pa-drawer-head {
+    margin-bottom: 10px;
+  }
   .pa-drawer-head {
     display: flex;
     align-items: flex-start;
@@ -1046,6 +1068,15 @@
       padding: 12px 14px 14px;
     }
 
+    html.lenovo-tab-one-profile .pa-selected-profile {
+      padding: 8px;
+    }
+
+    html.lenovo-tab-one-profile .pa-selected-profile .pa-drawer-card {
+      max-height: min(44dvh, 440px);
+      padding: 10px;
+    }
+
     html.lenovo-tab-one-profile .pa-drawer-title {
       font-size: 18px;
     }
@@ -1232,6 +1263,15 @@
       padding: 12px 14px 14px;
     }
 
+    html.lenovo-tab-one-profile .pa-selected-profile {
+      padding: 7px;
+    }
+
+    html.lenovo-tab-one-profile .pa-selected-profile .pa-drawer-card {
+      max-height: min(36dvh, 280px);
+      padding: 9px;
+    }
+
     html.lenovo-tab-one-profile .pa-drawer-title {
       font-size: 17px;
     }
@@ -1405,7 +1445,7 @@
           Switch back to <strong>Aroma groups</strong> for the original ●/· view.
         </li>
         <li>
-          <strong>Row tap</strong> — Opens an inline panel with harmonizes-with links, Flavor Bible tiers (if any), Thesaurus family, and a short “bundled library context” blurb when present in the unified file.
+          <strong>Row tap</strong> — Pins a selected ingredient profile at the top of the matrix and opens an inline source panel for deeper cross-book detail.
         </li>
       </ul>
       <details>
@@ -1477,7 +1517,7 @@
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/kuschi-recipe-ui.js?v=4"></script>
 <script src="assets/ingredient-flow-ui.js?v=4"></script>
-<script src="assets/pairing-atlas.js?v=16"></script>
+<script src="assets/pairing-atlas.js?v=17"></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
 <script src="assets/app-nav.js?v=2"></script>
 <style>
