@@ -398,7 +398,7 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
             problems.append("Cumin drawer profile is not using shared ingredient-flow styles")
         drawer_text = drawer_profile.inner_text(timeout=5_000)
         drawer_lower = drawer_text.lower()
-        for expected in ("kitchen profile", "pair now", "use it", "foods"):
+        for expected in ("kitchen profile", "at a glance", "pair first", "pair now", "use it", "foods"):
             if expected not in drawer_lower:
                 problems.append(f"Cumin drawer profile missing section: {expected}")
         if "toast cumin seeds" not in drawer_lower:

@@ -349,6 +349,39 @@
     });
   }
 
+  function drawerSummaryText(items, limit) {
+    var out = [];
+    for (var i = 0; i < (items || []).length; i++) {
+      var text = answerChipText(items[i]);
+      if (!text) continue;
+      out.push(text);
+      if (limit && out.length >= limit) break;
+    }
+    return out.join(', ');
+  }
+
+  function drawerDecisionLine(label, text, emptyText) {
+    return (
+      '<li><span class="pa-drawer-decision-label">' +
+      esc(label) +
+      '</span><span class="pa-drawer-decision-value">' +
+      esc(text || emptyText || 'No direct note yet') +
+      '</span></li>'
+    );
+  }
+
+  function drawerDecisionSummaryHtml(harmony, flavorPairs, foods, avoid, useTips) {
+    return (
+      '<ul class="pa-drawer-decision-list">' +
+      drawerDecisionLine('Pair first', drawerSummaryText(harmony.length ? harmony : flavorPairs, 3), 'No direct pairing yet') +
+      drawerDecisionLine('Flavor adds', drawerSummaryText(flavorPairs, 3), 'No Flavor Bible row yet') +
+      drawerDecisionLine('Use', drawerSummaryText(useTips, 1), 'No technique note yet') +
+      drawerDecisionLine('Foods', drawerSummaryText(foods, 2), 'No food rows yet') +
+      drawerDecisionLine('Check', drawerSummaryText(avoid, 2), 'No avoid note found') +
+      '</ul>'
+    );
+  }
+
   function decisionAnswerHtml(ing) {
     if (!ing) {
       return '<p class="pa-answer__empty ingredient-flow-empty">Type a spice or herb name to get a quick pairing answer.</p>';
@@ -777,6 +810,10 @@
         flow.profileHead('Kitchen profile', note, { className: 'pa-drawer-profile-head' }) +
         flow.profileGrid(
           [
+            flow.panel('At a glance', drawerDecisionSummaryHtml(harmony, flavorPairs, foods, avoid, useTips), {
+              wide: true,
+              className: 'pa-drawer-panel pa-drawer-panel--wide pa-drawer-decision-panel',
+            }),
             flow.panel('Pair now', chipListHtml(harmony, { kind: 'spice', empty: 'No direct harmony links.' }), { className: 'pa-drawer-panel' }),
             flow.panel('Flavor adds', chipListHtml(flavorPairs, { kind: 'flavor', empty: state.enriched ? 'No Flavor Bible row.' : 'Loading...' }), { className: 'pa-drawer-panel' }),
             flow.panel('Use it', useTipsListHtml(useTips, state.enriched ? 'No technique note in the unified extract.' : 'Loading technique notes...'), {
