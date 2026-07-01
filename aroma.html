@@ -1580,6 +1580,7 @@
   });
 
   searchEl.addEventListener('input', function () {
+    updateAromaAnswer(searchEl.value, { selectDefault: false });
     aromaSearchScheduler.schedule();
   });
   searchEl.addEventListener('keydown', function (e) {

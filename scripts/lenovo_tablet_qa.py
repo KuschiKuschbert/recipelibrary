@@ -1517,6 +1517,18 @@ def run_aroma_answer_smoke(
     for expected in ("harmony partners", "foods that use it", "use it"):
         if expected not in body_lower:
             problems.append(f"Aroma answer card missing section: {expected}")
+    timed_interaction(
+        page,
+        "Aroma input-only lamb answer",
+        lambda: search.fill("what should I season lamb with?"),
+        "() => /\\bRoasted Lamb\\b/.test(document.querySelector('#aromaAnswer .ingredient-flow-title')?.textContent || '')",
+        problems,
+        FLAVOR_QUICK_ANSWER_MS_BUDGET,
+        timing_sink=timing_sink,
+    )
+    input_only_text = answer.inner_text(timeout=5_000)
+    if "Roasted Lamb" not in input_only_text or "Cumin" not in input_only_text:
+        problems.append("Aroma input-only lamb answer did not render Roasted Lamb with Cumin before submit")
     lamb_preset = page.locator('.search-wrap [data-ingredient-flow-preset-id="lamb"]')
     if lamb_preset.count() != 1:
         problems.append("Aroma Lamb quick preset is missing")
