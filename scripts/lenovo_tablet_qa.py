@@ -554,6 +554,30 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
                 problems.append(f"Cumin drawer profile missing section: {expected}")
         if "toast cumin seeds" not in drawer_lower:
             problems.append("Cumin drawer profile did not surface the toast/use note")
+        priority = page.locator(
+            'tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-priority]'
+        )
+        if priority.count() != 1:
+            problems.append("Cumin drawer priority summary is missing")
+        else:
+            priority_text = priority.inner_text(timeout=5_000).lower()
+            for expected in ("pair first", "use now", "fenugreek", "toast cumin seeds"):
+                if expected not in priority_text:
+                    problems.append(f"Cumin drawer priority summary missing: {expected}")
+            priority_before_support = page.evaluate(
+                """() => {
+                  const priority = document.querySelector(
+                    'tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-priority]'
+                  );
+                  const support = document.querySelector(
+                    'tr.pa-drawer-row[data-drawer-for="cumin"] .pa-drawer-decision-list'
+                  );
+                  return !!(priority && support &&
+                    (priority.compareDocumentPosition(support) & Node.DOCUMENT_POSITION_FOLLOWING));
+                }"""
+            )
+            if not priority_before_support:
+                problems.append("Cumin drawer priority summary is not before supporting detail")
         problems.extend(
             ingredient_flow_control_problems(
                 page,

@@ -13072,6 +13072,38 @@ button.ingredient-flow-action {
 .ingredient-flow-panel--wide {
   grid-column: 1 / -1;
 }
+.ingredient-flow-priority {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0 0 10px;
+}
+.ingredient-flow-priority-item {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid rgba(201, 169, 110, 0.2);
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg, rgba(201, 169, 110, 0.12), rgba(0, 188, 212, 0.05)),
+    rgba(255, 255, 255, 0.035);
+}
+.ingredient-flow-priority-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+.ingredient-flow-priority-value {
+  display: block;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.38;
+}
 .ingredient-flow-section h3,
 .ingredient-flow-panel h5 {
   margin: 0 0 8px;
@@ -13188,6 +13220,16 @@ html.lenovo-tab-one-profile .ingredient-flow-section,
 html.lenovo-tab-one-profile .ingredient-flow-panel {
   padding: 10px;
 }
+html.lenovo-tab-one-profile .ingredient-flow-priority {
+  gap: 8px;
+  margin-bottom: 8px;
+}
+html.lenovo-tab-one-profile .ingredient-flow-priority-item {
+  padding: 10px;
+}
+html.lenovo-tab-one-profile .ingredient-flow-priority-value {
+  font-size: 13.5px;
+}
 html.lenovo-tab-one-profile .ingredient-flow-chip {
   min-height: 44px;
   font-size: 12.5px;
@@ -13218,6 +13260,10 @@ html.lenovo-tab-one-profile .ingredient-flow-profile-head p {
     padding: 10px 14px;
     font-size: 15px;
   }
+  html.lenovo-tab-one-profile .ingredient-flow-priority-value {
+    font-size: 13px;
+    line-height: 1.34;
+  }
   html.lenovo-tab-one-profile .ingredient-flow-use-list {
     font-size: 12.75px;
     line-height: 1.4;
@@ -13232,6 +13278,9 @@ html.lenovo-tab-one-profile .ingredient-flow-profile-head p {
   }
   .ingredient-flow-grid,
   .ingredient-flow-profile-grid {
+    grid-template-columns: 1fr;
+  }
+  .ingredient-flow-priority {
     grid-template-columns: 1fr;
   }
   .ingredient-flow-profile-head {

@@ -436,6 +436,19 @@
     return out.join(', ');
   }
 
+  function drawerDecisionHighlight(label, text, emptyText, className) {
+    return (
+      '<div class="ingredient-flow-priority-item' +
+      (className ? ' ' + className : '') +
+      '">' +
+      '<span class="ingredient-flow-priority-label">' +
+      esc(label) +
+      '</span><strong class="ingredient-flow-priority-value">' +
+      esc(text || emptyText || 'No direct note yet') +
+      '</strong></div>'
+    );
+  }
+
   function drawerDecisionLine(label, text, emptyText) {
     return (
       '<li><span class="pa-drawer-decision-label">' +
@@ -447,11 +460,15 @@
   }
 
   function drawerDecisionSummaryHtml(harmony, flavorPairs, foods, avoid, useTips) {
+    var pairText = drawerSummaryText(harmony.length ? harmony : flavorPairs, 3);
+    var useText = drawerSummaryText(useTips, 1);
     return (
+      '<div class="ingredient-flow-priority pa-drawer-priority" data-pa-drawer-priority>' +
+      drawerDecisionHighlight('Pair first', pairText, 'No direct pairing yet', 'pa-drawer-priority-card--pair') +
+      drawerDecisionHighlight('Use now', useText, 'No technique note yet', 'pa-drawer-priority-card--use') +
+      '</div>' +
       '<ul class="pa-drawer-decision-list">' +
-      drawerDecisionLine('Pair first', drawerSummaryText(harmony.length ? harmony : flavorPairs, 3), 'No direct pairing yet') +
       drawerDecisionLine('Flavor adds', drawerSummaryText(flavorPairs, 3), 'No Flavor Bible row yet') +
-      drawerDecisionLine('Use', drawerSummaryText(useTips, 1), 'No technique note yet') +
       drawerDecisionLine('Foods', drawerSummaryText(foods, 2), 'No food rows yet') +
       drawerDecisionLine('Check', drawerSummaryText(avoid, 2), 'No avoid note found') +
       '</ul>'

@@ -1,5 +1,5 @@
 'use strict';
-const CACHE_NAME = 'kuschi-kitchen-v207';
+const CACHE_NAME = 'kuschi-kitchen-v208';
 
 // Install shell: keep first-load precache focused on the main catalog.
 const SHELL_URLS = [
