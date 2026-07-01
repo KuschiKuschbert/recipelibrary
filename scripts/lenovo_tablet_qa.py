@@ -1669,6 +1669,166 @@ def run_aroma_answer_smoke(
     return problems
 
 
+def run_pairing_landscape_smoke(
+    page: Any,
+    capture_state: CaptureState | None = None,
+    timing_sink: TimingSink | None = None,
+) -> list[str]:
+    problems: list[str] = []
+    search = page.locator("#paDecisionSearch")
+    if search.count() != 1:
+        return ["Pairing Atlas landscape decision search is missing"]
+    timed_interaction(
+        page,
+        "Pairing Atlas landscape phrase answer",
+        lambda: (search.fill("what goes with cumin?"), page.locator("#paDecisionSubmit").click()),
+        "() => !!document.querySelector('#paDecisionBody .pa-answer[data-decision-spice-id=\"cumin\"]')",
+        problems,
+        timing_sink=timing_sink,
+    )
+    body_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
+    body_lower = body_text.lower()
+    if "cumin" not in body_lower or "pair first" not in body_lower:
+        problems.append("Pairing Atlas landscape phrase answer did not render the Cumin priority answer")
+    problems.extend(
+        ingredient_flow_priority_problems(
+            page,
+            '#paDecisionBody .pa-answer[data-decision-spice-id="cumin"] [data-pa-answer-priority]',
+            "Pairing Atlas landscape Cumin answer",
+            ("pair first", "use now"),
+            '#paDecisionBody .pa-answer[data-decision-spice-id="cumin"] .pa-answer__grid',
+        )
+    )
+    timed_interaction(
+        page,
+        "Pairing Atlas landscape Show row",
+        lambda: page.locator('[data-pa-decision-action="matrix"]').click(),
+        "() => !!document.querySelector('tr.pa-data-row[data-spice-id=\"cumin\"].pa-row-open')",
+        problems,
+        ACTION_RESPONSE_MS_BUDGET,
+        timing_sink=timing_sink,
+    )
+    if page.locator('#paMatrixHost [data-pa-selected-profile][data-selected-spice-id="cumin"]').count() != 1:
+        problems.append("Pairing Atlas landscape Show row did not pin the Cumin selected profile")
+    elif capture_state:
+        capture_state("pairing-landscape-cumin-row-open")
+    return problems
+
+
+def run_flavor_landscape_smoke(
+    page: Any,
+    capture_state: CaptureState | None = None,
+    timing_sink: TimingSink | None = None,
+) -> list[str]:
+    problems: list[str] = []
+    search = page.locator("#flavorSearch")
+    answer = page.locator("#flavorAnswer")
+    if search.count() != 1 or answer.count() != 1:
+        return ["Flavor landscape answer search/card is missing"]
+    timed_interaction(
+        page,
+        "Flavor landscape phrase answer",
+        lambda: search.fill("what goes with cumin?"),
+        "() => /\\bCumin\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '')",
+        problems,
+        FLAVOR_QUICK_ANSWER_MS_BUDGET,
+        timing_sink=timing_sink,
+    )
+    body_text = answer.inner_text(timeout=5_000)
+    body_lower = body_text.lower()
+    if "cumin" not in body_lower or "pair first" not in body_lower:
+        problems.append("Flavor landscape phrase answer did not render the Cumin priority answer")
+    problems.extend(
+        ingredient_flow_priority_problems(
+            page,
+            "#flavorAnswer [data-flavor-answer-priority]",
+            "Flavor landscape Cumin answer",
+            ("pair first", "use now"),
+            "#flavorAnswer .flavor-answer-grid",
+        )
+    )
+    detail_action = page.locator('[data-flavor-answer-action="detail"]')
+    if detail_action.count() != 1:
+        problems.append("Flavor landscape Full detail action is missing")
+    else:
+        timed_interaction(
+            page,
+            "Flavor landscape Full detail",
+            lambda: detail_action.click(),
+            "() => /CUMIN/.test(document.querySelector('#flavorDetail')?.textContent?.toUpperCase() || '')",
+            problems,
+            ACTION_RESPONSE_MS_BUDGET,
+            timing_sink=timing_sink,
+        )
+        if capture_state:
+            capture_state("flavor-landscape-cumin-detail")
+    return problems
+
+
+def run_aroma_landscape_smoke(
+    page: Any,
+    capture_state: CaptureState | None = None,
+    timing_sink: TimingSink | None = None,
+) -> list[str]:
+    problems: list[str] = []
+    search = page.locator("#aromaSearch")
+    answer = page.locator("#aromaAnswer")
+    if search.count() != 1 or answer.count() != 1:
+        return ["Aroma landscape answer search/card is missing"]
+    timed_interaction(
+        page,
+        "Aroma landscape phrase answer",
+        lambda: (search.fill("what goes with cumin?"), search.press("Enter")),
+        "() => /\\bCumin\\b/.test(document.querySelector('#aromaAnswer .ingredient-flow-title')?.textContent || '')",
+        problems,
+        timing_sink=timing_sink,
+    )
+    body_text = answer.inner_text(timeout=5_000)
+    body_lower = body_text.lower()
+    if "cumin" not in body_lower or "pair first" not in body_lower:
+        problems.append("Aroma landscape phrase answer did not render the Cumin priority answer")
+    problems.extend(
+        ingredient_flow_priority_problems(
+            page,
+            "#aromaAnswer [data-aroma-answer-priority]",
+            "Aroma landscape Cumin answer",
+            ("pair first", "use now"),
+            "#aromaAnswer .ingredient-flow-grid",
+        )
+    )
+    matrix_action = page.locator('[data-aroma-answer-action="matrix"]')
+    if matrix_action.count() != 1:
+        problems.append("Aroma landscape Matrix action is missing")
+    else:
+        timed_interaction(
+            page,
+            "Aroma landscape Matrix action",
+            lambda: matrix_action.click(),
+            "() => document.querySelector('#tabMatrix')?.getAttribute('aria-selected') === 'true' && document.querySelector('#matrixFocus')?.value === 'cumin'",
+            problems,
+            ACTION_RESPONSE_MS_BUDGET,
+            timing_sink=timing_sink,
+        )
+        if capture_state:
+            capture_state("aroma-landscape-cumin-matrix")
+    return problems
+
+
+def run_landscape_decision_smoke(
+    page: Any,
+    page_path: str,
+    capture_state: CaptureState | None = None,
+    timing_sink: TimingSink | None = None,
+) -> list[str]:
+    if "pairing-atlas.html" in page_path:
+        return run_pairing_landscape_smoke(page, capture_state, timing_sink)
+    if "flavor.html" in page_path:
+        return run_flavor_landscape_smoke(page, capture_state, timing_sink)
+    if "aroma.html" in page_path and "tab=browse" in page_path:
+        return run_aroma_landscape_smoke(page, capture_state, timing_sink)
+    return []
+
+
 def run_page(
     browser: Any,
     base: str,
@@ -1784,6 +1944,9 @@ def run_page(
                 issues.append(Issue(page_path, viewport_name, problem))
         if "aroma.html" in page_path and "tab=browse" in page_path and not reduced_motion and viewport_name == "portrait":
             for problem in run_aroma_answer_smoke(page, capture_state, record_timing):
+                issues.append(Issue(page_path, viewport_name, problem))
+        if page_path in TASK_FIRST_PAGES and not reduced_motion and viewport_name == "landscape":
+            for problem in run_landscape_decision_smoke(page, page_path, capture_state, record_timing):
                 issues.append(Issue(page_path, viewport_name, problem))
         for metric in collect_metrics(page):
             record_long_task_metric(metric)
