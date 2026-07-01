@@ -10,7 +10,27 @@ ROOT = Path(__file__).resolve().parents[1]
 SW_PATH = ROOT / "sw.js"
 
 CRITICAL_SHELL = {
+    "./",
     "./index.html",
+    "./manifest.webmanifest",
+    "./assets/theme.css",
+    "./assets/app-nav.js",
+    "./assets/user-recipes.js",
+    "./assets/aroma-hints.js",
+    "./assets/kuschi-recipe-ui.js",
+    "./assets/kuschi-kitchen-mode.js",
+    "./assets/kuschi-filter-chips.js",
+    "./assets/kuschi-cook-mode.js",
+    "./assets/screen-wake.js",
+    "./assets/riviera-canonical-ingredient.js",
+    "./assets/recipe-metric-normalize.js",
+    "./assets/flavour-toolkit-lookup.js",
+    "./icon-192.png",
+    "./icon-512.png",
+    "./apple-touch-icon-180.png",
+}
+
+CRITICAL_RUNTIME = {
     "./riviera.html",
     "./kitchen-book.html",
     "./pantry.html",
@@ -18,18 +38,25 @@ CRITICAL_SHELL = {
     "./flavor.html",
     "./pairing-atlas.html",
     "./notebooklm-gallery.html",
-    "./manifest.webmanifest",
-    "./assets/theme.css",
-    "./assets/app-nav.js",
-    "./assets/user-recipes.js",
     "./assets/order-list.js",
-    "./assets/aroma-hints.js",
+    "./assets/flavor-explorer.js",
+    "./assets/pairing-atlas.js",
+    "./assets/prep-list.js",
+    "./assets/overlay-stack.js",
+    "./assets/planner-scale.js",
+    "./assets/planner-extras.js",
     "./assets/package-planner.js",
     "./assets/package-prep-sheet.js",
-    "./assets/planner-scale.js",
     "./assets/stocktake-list.js",
-    "./assets/riviera-canonical-ingredient.js",
     "./assets/riviera-ingredient-merge.js",
+    "./assets/riviera-init-stocktake.js",
+    "./assets/riviera-order-override-remap-v2.js",
+    "./assets/riviera-event-context.js",
+    "./assets/riviera-service-variants.js",
+    "./assets/notebooklm-gallery.js",
+    "./assets/recipe-gemini-format.js",
+    "./assets/recipe-import-helpers.js",
+    "./assets/qrcodejs-1.0.0.min.js",
 }
 
 REQUIRED_CACHEABLE_FRAGMENTS = (
@@ -62,8 +89,8 @@ def parse_cache_name(source: str) -> str | None:
     return m.group(1) if m else None
 
 
-def parse_shell_urls(source: str) -> list[str]:
-    m = re.search(r"const\s+SHELL_URLS\s*=\s*\[(.*?)\];", source, re.DOTALL)
+def parse_url_array(source: str, const_name: str) -> list[str]:
+    m = re.search(rf"const\s+{re.escape(const_name)}\s*=\s*\[(.*?)\];", source, re.DOTALL)
     if not m:
         return []
     body = m.group(1)
@@ -94,20 +121,30 @@ def main() -> int:
         errors += 1
         fail("CACHE_NAME missing")
 
-    shell_urls = parse_shell_urls(source)
+    shell_urls = parse_url_array(source, "SHELL_URLS")
+    runtime_urls = parse_url_array(source, "RUNTIME_URLS")
     if shell_urls:
         ok(f"SHELL_URLS entries: {len(shell_urls)}")
     else:
         errors += 1
         fail("SHELL_URLS missing or unparsable")
+    if runtime_urls:
+        ok(f"RUNTIME_URLS entries: {len(runtime_urls)}")
+    else:
+        errors += 1
+        fail("RUNTIME_URLS missing or unparsable")
 
     shell_set = set(shell_urls)
     for url in sorted(CRITICAL_SHELL - shell_set):
         errors += 1
         fail(f"SHELL_URLS missing critical URL {url}")
+    runtime_set = set(runtime_urls)
+    for url in sorted(CRITICAL_RUNTIME - runtime_set):
+        errors += 1
+        fail(f"RUNTIME_URLS missing critical URL {url}")
 
     missing_files: list[str] = []
-    for url in shell_urls:
+    for url in shell_urls + runtime_urls:
         p = path_for_shell_url(url)
         if p is not None and not p.is_file():
             missing_files.append(f"{url} -> {rel(p)}")
@@ -116,7 +153,7 @@ def main() -> int:
         for item in missing_files:
             fail(f"SHELL_URLS file missing: {item}")
     elif shell_urls:
-        ok("all SHELL_URLS files exist")
+        ok("all service-worker URL files exist")
 
     missing_cacheable = [frag for frag in REQUIRED_CACHEABLE_FRAGMENTS if frag not in source]
     if missing_cacheable:

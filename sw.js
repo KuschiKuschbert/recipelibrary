@@ -1,17 +1,10 @@
 'use strict';
-const CACHE_NAME = 'kuschi-kitchen-v187';
+const CACHE_NAME = 'kuschi-kitchen-v188';
 
-// App shell: HTML pages + core assets (precache on install)
+// Install shell: keep first-load precache focused on the main catalog.
 const SHELL_URLS = [
   './',
   './index.html',
-  './riviera.html',
-  './kitchen-book.html',
-  './pantry.html',
-  './aroma.html',
-  './flavor.html',
-  './pairing-atlas.html',
-  './notebooklm-gallery.html',
   './manifest.webmanifest',
   './assets/theme.css',
   './assets/app-nav.js',
@@ -19,33 +12,42 @@ const SHELL_URLS = [
   './assets/kuschi-filter-chips.js',
   './assets/kuschi-cook-mode.js',
   './assets/user-recipes.js',
-  './assets/order-list.js',
   './assets/aroma-hints.js',
   './assets/screen-wake.js',
   './assets/kuschi-recipe-ui.js',
-  './assets/flavor-explorer.js',
-  './assets/pairing-atlas.js',
-  './assets/prep-list.js',
-  './assets/overlay-stack.js',
-  './assets/planner-scale.js',
-  './assets/package-planner.js',
-  './assets/package-prep-sheet.js',
-  './assets/stocktake-list.js',
   './assets/riviera-canonical-ingredient.js',
-  './assets/riviera-ingredient-merge.js',
-  './assets/riviera-init-stocktake.js',
-  './assets/riviera-order-override-remap-v2.js',
-  './assets/riviera-event-context.js',
   './assets/recipe-metric-normalize.js',
   './assets/flavour-toolkit-lookup.js',
-  './assets/notebooklm-gallery.js',
   './icon-192.png',
   './icon-512.png',
   './apple-touch-icon-180.png',
 ];
 
-// Optional UI helpers: cache on first use, but do not precache during startup.
-const LAZY_ASSET_URLS = [
+// Secondary pages and feature helpers: cache on first use, but do not precache during startup.
+const RUNTIME_URLS = [
+  './riviera.html',
+  './kitchen-book.html',
+  './pantry.html',
+  './aroma.html',
+  './flavor.html',
+  './pairing-atlas.html',
+  './notebooklm-gallery.html',
+  './assets/order-list.js',
+  './assets/flavor-explorer.js',
+  './assets/pairing-atlas.js',
+  './assets/prep-list.js',
+  './assets/overlay-stack.js',
+  './assets/planner-scale.js',
+  './assets/planner-extras.js',
+  './assets/package-planner.js',
+  './assets/package-prep-sheet.js',
+  './assets/stocktake-list.js',
+  './assets/riviera-ingredient-merge.js',
+  './assets/riviera-init-stocktake.js',
+  './assets/riviera-order-override-remap-v2.js',
+  './assets/riviera-event-context.js',
+  './assets/riviera-service-variants.js',
+  './assets/notebooklm-gallery.js',
   './assets/recipe-gemini-format.js',
   './assets/recipe-import-helpers.js',
   './assets/qrcodejs-1.0.0.min.js',
@@ -111,8 +113,8 @@ self.addEventListener('fetch', (e) => {
 
   // Shell assets (CSS, JS, icons): stale-while-revalidate
   const isShell = SHELL_URLS.some((u) => url.pathname.endsWith(u.replace(/^\./, '')));
-  const isLazyAsset = LAZY_ASSET_URLS.some((u) => url.pathname.endsWith(u.replace(/^\./, '')));
-  if (isShell || isLazyAsset) {
+  const isRuntime = RUNTIME_URLS.some((u) => url.pathname.endsWith(u.replace(/^\./, '')));
+  if (isShell || isRuntime) {
     e.respondWith(
       caches.open(CACHE_NAME).then((cache) =>
         cache.match(e.request).then((cached) => {
