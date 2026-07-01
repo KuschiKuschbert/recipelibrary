@@ -19,6 +19,7 @@
   var foodPairings = null;
   var byName = Object.create(null);
   var rowLookup = Object.create(null);
+  var priorityRankById = Object.create(null);
   var unifiedMatcher = null;
   var foodMatcher = null;
   var loadP = null;
@@ -72,6 +73,13 @@
     }
     unifiedMatcher = flow.createRowMatcher(unified || [], { nameForRow: rowName });
     foodMatcher = flow.createRowMatcher(foodPairings || [], { nameForRow: rowName });
+  }
+
+  function rebuildPriorityRank() {
+    var nextRank = Object.create(null);
+    var priority = (aromaMeta && aromaMeta.priority_row_ids) || [];
+    for (var i = 0; i < priority.length; i++) nextRank[priority[i]] = i;
+    priorityRankById = nextRank;
   }
 
   /** schema v2 object { ingredients, kitchen_context } or legacy flat array */
@@ -155,6 +163,7 @@
         if (!temps) temps = [];
         byName = Object.create(null);
         rowLookup = Object.create(null);
+        rebuildPriorityRank();
         for (var i = 0; i < unified.length; i++) {
           var u = unified[i];
           if (!u) continue;
@@ -284,9 +293,6 @@
 
   function orderedFoodSeasonings(food) {
     var seas = (food && food.seasonings) || [];
-    var priority = (aromaMeta && aromaMeta.priority_row_ids) || [];
-    var rankById = Object.create(null);
-    for (var i = 0; i < priority.length; i++) rankById[priority[i]] = i;
     return seas
       .map(function (s, idx) {
         var id = s && s.id ? s.id : '';
@@ -294,7 +300,7 @@
           id: id,
           name: (s && (s.name || s.id)) || '',
           _idx: idx,
-          _rank: rankById[id] != null ? rankById[id] : 999 + idx,
+          _rank: priorityRankById[id] != null ? priorityRankById[id] : 999 + idx,
         };
       })
       .filter(function (item) {

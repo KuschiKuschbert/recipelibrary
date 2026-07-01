@@ -22,6 +22,7 @@
     foodPairings: null,
     foodById: null,
     foodsBySpice: null,
+    priorityRankById: null,
     spiceMatcher: null,
     foodMatcher: null,
     enriched: false,
@@ -148,6 +149,17 @@
     }
     state.foodById = foodById;
     state.foodsBySpice = foodsBySpice;
+  }
+
+  function rebuildPriorityRank() {
+    var rankById = Object.create(null);
+    var order = state.meta.priority_row_ids || [];
+    for (var i = 0; i < order.length; i++) rankById[order[i]] = i;
+    state.priorityRankById = rankById;
+  }
+
+  function isPrioritySpiceId(id) {
+    return !!(state.priorityRankById && state.priorityRankById[id] != null);
   }
 
   function matchRowsByCandidate(rows, q, nameForRow) {
@@ -299,9 +311,7 @@
 
   function orderedFoodSeasonings(food) {
     var seas = (food && food.seasonings) || [];
-    var priority = state.meta.priority_row_ids || [];
-    var rankById = Object.create(null);
-    for (var i = 0; i < priority.length; i++) rankById[priority[i]] = i;
+    var rankById = state.priorityRankById || Object.create(null);
     return seas
       .map(function (s, idx) {
         var id = s && s.id ? s.id : '';
@@ -703,8 +713,7 @@
   function revealDecisionInMatrix(spiceHost, search, modePri, modeAll) {
     if (!state.decisionSpiceId || !state.byId[state.decisionSpiceId]) return;
     var ing = state.byId[state.decisionSpiceId];
-    var order = state.meta.priority_row_ids || [];
-    var inPriority = order.indexOf(ing.id) >= 0;
+    var inPriority = isPrioritySpiceId(ing.id);
     if (!inPriority) {
       state.currentMode = 'all';
       if (modeAll) modeAll.setAttribute('aria-pressed', 'true');
@@ -2057,6 +2066,7 @@
         state.ingredients = Array.isArray(pair[0]) ? pair[0] : [];
         state.meta = pair[1] && typeof pair[1] === 'object' ? pair[1] : {};
         state.byId = buildIngredientById(state.ingredients);
+        rebuildPriorityRank();
         rebuildDecisionMatchers();
         if (decisionSearch) {
           var params = new URLSearchParams(window.location.search || '');
