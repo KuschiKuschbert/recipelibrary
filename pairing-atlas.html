@@ -604,9 +604,6 @@
   .pa-drawer-profile-panel .ingredient-flow-chips {
     gap: 5px;
   }
-  .pa-drawer-profile-panel .ingredient-flow-chip {
-    min-height: 36px;
-  }
   .pa-drawer-profile-panel .ingredient-flow-use-list {
     font-size: 12.5px;
   }
@@ -707,56 +704,16 @@
     color: var(--text3) !important;
     font-size: 13px !important;
   }
-  .pa-chips {
-    line-height: 1.8 !important;
-  }
-  .pa-chip {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 44px;
-    min-height: 44px;
-    margin: 2px 6px 2px 0;
-    padding: 0 10px;
-    border-radius: 100px;
-    border: 1px solid var(--border);
-    font-size: 12px;
-    line-height: 1.2;
-    color: var(--text2);
-    text-decoration: none;
-    touch-action: manipulation;
-  }
-  .pa-chip:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-  }
   .pa-chip-contrast {
-    border-color: rgba(0, 188, 212, 0.45) !important;
-    color: #7fd8e8 !important;
+    border-color: rgba(0, 188, 212, 0.45);
+    color: #7fd8e8;
     font-style: italic;
   }
   .pa-drawer-foot {
-    margin-top: 16px !important;
+    justify-content: flex-start;
+    margin-top: 16px;
     padding-top: 12px;
     border-top: 1px solid var(--border);
-    font-size: 13px !important;
-  }
-  .pa-drawer-foot a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    padding: 0 10px;
-    border-radius: 10px;
-    line-height: 1.2;
-    color: var(--gold);
-    touch-action: manipulation;
-  }
-  html.lenovo-tab-one-profile .pa-chip,
-  html.lenovo-tab-one-profile .pa-drawer-foot a {
-    font-size: 12.5px;
-  }
-  html.lenovo-tab-one-profile .pa-drawer-foot {
-    line-height: 1.9 !important;
   }
 
   .pa-food-section {
@@ -1195,12 +1152,6 @@
     html.lenovo-tab-one-profile .pa-sec p {
       font-size: 13px;
       line-height: 1.45;
-    }
-
-    html.lenovo-tab-one-profile .pa-chip {
-      min-height: 44px;
-      padding: 0 10px;
-      font-size: 12.5px;
     }
 
     html.lenovo-tab-one-profile .pa-legend {
