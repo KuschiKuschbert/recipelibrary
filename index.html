@@ -1288,11 +1288,20 @@ function kuschiDetailPrefetchBudget() {
   return { cards: 28, slices: 16, totalSlices: 24 };
 }
 
-/** After grid render: prefetch a small set of detail sub-shards while idle. Helps touch devices without flooding low-memory tablets. */
+/** Optional dev opt-in: prefetch visible detail sub-shards while idle. Disabled by default so tablet startup only loads the catalog. */
 let kuschiVisibleShardPrefetchGen = 0;
 let kuschiVisibleShardPrefetchTotal = 0;
 const kuschiVisibleShardPrefetchKeys = Object.create(null);
+function kuschiAutoDetailPrefetchEnabled() {
+  try {
+    if (typeof localStorage === 'undefined') return false;
+    return localStorage.getItem('kuschiAutoDetailPrefetch') === '1';
+  } catch (_) {
+    return false;
+  }
+}
 function schedulePrefetchVisibleDetailShards() {
+  if (!kuschiAutoDetailPrefetchEnabled()) return;
   const gen = ++kuschiVisibleShardPrefetchGen;
   const run = () => {
     if (gen !== kuschiVisibleShardPrefetchGen) return;
