@@ -264,7 +264,7 @@
   function drawerPillHtml(text, label) {
     if (!text) return '';
     return (
-      '<span class="pa-drawer-pill"' +
+      '<span class="pa-drawer-pill ingredient-flow-pill"' +
       (label ? ' aria-label="' + esc(label) + '"' : '') +
       '>' +
       text +
@@ -293,19 +293,19 @@
     var href = options && options.href;
     if (!href && id && options && options.kind === 'spice') href = 'aroma.html?spice=' + encodeURIComponent(id);
     if (!href && options && options.kind === 'flavor') href = 'flavor.html?q=' + encodeURIComponent(text);
-    if (href) return '<a class="pa-answer__chip" href="' + href + '">' + esc(text) + '</a>';
-    return '<span class="pa-answer__chip">' + esc(text) + '</span>';
+    if (href) return '<a class="pa-answer__chip ingredient-flow-chip" href="' + href + '">' + esc(text) + '</a>';
+    return '<span class="pa-answer__chip ingredient-flow-chip">' + esc(text) + '</span>';
   }
 
   function chipListHtml(items, options) {
-    if (!items || !items.length) return '<p class="pa-answer__empty">' + esc((options && options.empty) || 'No direct match in this extract yet.') + '</p>';
-    return '<div class="pa-answer__chips">' + items.map(function (item) { return answerChipHtml(item, options); }).join('') + '</div>';
+    if (!items || !items.length) return '<p class="pa-answer__empty ingredient-flow-empty">' + esc((options && options.empty) || 'No direct match in this extract yet.') + '</p>';
+    return '<div class="pa-answer__chips ingredient-flow-chips">' + items.map(function (item) { return answerChipHtml(item, options); }).join('') + '</div>';
   }
 
   function useTipsListHtml(items, emptyText) {
-    if (!items || !items.length) return '<p class="pa-answer__empty">' + esc(emptyText || 'No technique note in this extract yet.') + '</p>';
+    if (!items || !items.length) return '<p class="pa-answer__empty ingredient-flow-empty">' + esc(emptyText || 'No technique note in this extract yet.') + '</p>';
     return (
-      '<ul class="pa-use-list">' +
+      '<ul class="pa-use-list ingredient-flow-use-list">' +
       items
         .map(function (item) {
           return '<li>' + esc(item) + '</li>';
@@ -317,7 +317,7 @@
 
   function decisionAnswerHtml(ing) {
     if (!ing) {
-      return '<p class="pa-answer__empty">Type a spice or herb name to get a quick pairing answer.</p>';
+      return '<p class="pa-answer__empty ingredient-flow-empty">Type a spice or herb name to get a quick pairing answer.</p>';
     }
     var name = displayNameForIngredient(ing);
     var u = state.unifiedById ? state.unifiedById[ing.id] : null;
@@ -332,37 +332,37 @@
       : 'Aroma data is ready; richer Flavor and food-pairing data is still loading.';
 
     return (
-      '<div class="pa-answer" data-decision-spice-id="' + esc(ing.id) + '">' +
-        '<div class="pa-answer__top">' +
+      '<div class="pa-answer ingredient-flow" data-decision-spice-id="' + esc(ing.id) + '">' +
+        '<div class="pa-answer__top ingredient-flow-head">' +
           '<div>' +
-            '<h2 class="pa-answer__name">' + esc(name) + '</h2>' +
-            '<div class="pa-answer__meta">' +
-              '<span class="pa-answer__pill">' + esc(aromaGroupText(ing)) + '</span>' +
-              '<span class="pa-answer__pill">' + (partnerCount != null ? esc(partnerCount + ' harmony links') : 'Harmony loading') + '</span>' +
-              '<span class="pa-answer__pill" aria-label="Source coverage">' + source + '</span>' +
+            '<h2 class="pa-answer__name ingredient-flow-title">' + esc(name) + '</h2>' +
+            '<div class="pa-answer__meta ingredient-flow-meta">' +
+              '<span class="pa-answer__pill ingredient-flow-pill">' + esc(aromaGroupText(ing)) + '</span>' +
+              '<span class="pa-answer__pill ingredient-flow-pill">' + (partnerCount != null ? esc(partnerCount + ' harmony links') : 'Harmony loading') + '</span>' +
+              '<span class="pa-answer__pill ingredient-flow-pill" aria-label="Source coverage">' + source + '</span>' +
             '</div>' +
           '</div>' +
-          '<div class="pa-answer__actions">' +
-            '<button type="button" class="pa-answer__action" data-pa-decision-action="matrix">Show row</button>' +
-            '<a class="pa-answer__action" href="aroma.html?spice=' + encodeURIComponent(ing.id) + '">Aroma</a>' +
-            '<a class="pa-answer__action" href="flavor.html?q=' + encodeURIComponent(name) + '">Flavor</a>' +
+          '<div class="pa-answer__actions ingredient-flow-actions">' +
+            '<button type="button" class="pa-answer__action ingredient-flow-action" data-pa-decision-action="matrix">Show row</button>' +
+            '<a class="pa-answer__action ingredient-flow-action" href="aroma.html?spice=' + encodeURIComponent(ing.id) + '">Aroma</a>' +
+            '<a class="pa-answer__action ingredient-flow-action" href="flavor.html?q=' + encodeURIComponent(name) + '">Flavor</a>' +
           '</div>' +
         '</div>' +
-        '<div class="pa-answer__grid">' +
-          '<section class="pa-answer__section"><h3>Best fast matches</h3>' +
+        '<div class="pa-answer__grid ingredient-flow-grid">' +
+          '<section class="pa-answer__section ingredient-flow-section"><h3>Best fast matches</h3>' +
             chipListHtml(harmony, { kind: 'spice', empty: 'No spice harmony links in the Aroma extract.' }) +
           '</section>' +
-          '<section class="pa-answer__section"><h3>Flavor Bible adds</h3>' +
+          '<section class="pa-answer__section ingredient-flow-section"><h3>Flavor Bible adds</h3>' +
             chipListHtml(flavorPairs, { kind: 'flavor', empty: state.enriched ? 'No Flavor Bible pairings for this ingredient id.' : 'Loading Flavor Bible rows...' }) +
           '</section>' +
-          '<section class="pa-answer__section"><h3>Foods that use it</h3>' +
+          '<section class="pa-answer__section ingredient-flow-section"><h3>Foods that use it</h3>' +
             chipListHtml(foods, { empty: state.enriched ? 'No food-pairing rows list this spice yet.' : 'Loading food rows...' }) +
           '</section>' +
-          '<section class="pa-answer__section"><h3>Avoid or check</h3>' +
+          '<section class="pa-answer__section ingredient-flow-section"><h3>Avoid or check</h3>' +
             chipListHtml(avoid, { kind: 'flavor', empty: state.enriched ? 'No avoid notes in the unified extract.' : 'Loading avoid notes...' }) +
           '</section>' +
         '</div>' +
-        '<p class="pa-answer__note">' + esc(enrichedNote) + '</p>' +
+        '<p class="pa-answer__note ingredient-flow-note">' + esc(enrichedNote) + '</p>' +
       '</div>'
     );
   }
@@ -378,7 +378,7 @@
     }
     if (!ing && query) {
       body.innerHTML =
-        '<p class="pa-answer__empty">No spice row matched <strong>' +
+        '<p class="pa-answer__empty ingredient-flow-empty">No spice row matched <strong>' +
         esc(query) +
         '</strong>. Try a spice or herb from the matrix, like basil, cumin, coriander, fennel, or pepper.</p>';
       state.decisionSpiceId = null;
@@ -734,27 +734,27 @@
       ? 'Fastest kitchen answer from Aroma harmony, Flavor Bible rows, and food-pairing data.'
       : 'Aroma data is ready; richer Flavor and food rows are still loading.';
     return (
-      '<section class="pa-drawer-profile" data-pa-drawer-profile aria-label="Kitchen profile for ' +
+      '<section class="pa-drawer-profile ingredient-flow-profile" data-pa-drawer-profile aria-label="Kitchen profile for ' +
       esc(name) +
       '">' +
-        '<div class="pa-drawer-profile-head">' +
+        '<div class="pa-drawer-profile-head ingredient-flow-profile-head">' +
           '<h4>Kitchen profile</h4>' +
           '<p>' + esc(note) + '</p>' +
         '</div>' +
-        '<div class="pa-drawer-profile-grid">' +
-          '<div class="pa-drawer-panel"><h5>Pair now</h5>' +
+        '<div class="pa-drawer-profile-grid ingredient-flow-profile-grid">' +
+          '<div class="pa-drawer-panel ingredient-flow-panel"><h5>Pair now</h5>' +
             chipListHtml(harmony, { kind: 'spice', empty: 'No direct harmony links.' }) +
           '</div>' +
-          '<div class="pa-drawer-panel"><h5>Flavor adds</h5>' +
+          '<div class="pa-drawer-panel ingredient-flow-panel"><h5>Flavor adds</h5>' +
             chipListHtml(flavorPairs, { kind: 'flavor', empty: state.enriched ? 'No Flavor Bible row.' : 'Loading...' }) +
           '</div>' +
-          '<div class="pa-drawer-panel pa-drawer-panel--wide"><h5>Use it</h5>' +
+          '<div class="pa-drawer-panel pa-drawer-panel--wide ingredient-flow-panel ingredient-flow-panel--wide"><h5>Use it</h5>' +
             useTipsListHtml(useTips, state.enriched ? 'No technique note in the unified extract.' : 'Loading technique notes...') +
           '</div>' +
-          '<div class="pa-drawer-panel"><h5>Foods</h5>' +
+          '<div class="pa-drawer-panel ingredient-flow-panel"><h5>Foods</h5>' +
             chipListHtml(foods, { empty: state.enriched ? 'No food rows yet.' : 'Loading...' }) +
           '</div>' +
-          '<div class="pa-drawer-panel"><h5>Check / avoid</h5>' +
+          '<div class="pa-drawer-panel ingredient-flow-panel"><h5>Check / avoid</h5>' +
             chipListHtml(avoid, { kind: 'flavor', empty: state.enriched ? 'No avoid notes.' : 'Loading...' }) +
           '</div>' +
         '</div>' +
@@ -777,14 +777,14 @@
     parts.push('<h3 class="pa-drawer-title">' + esc(name) + '</h3>');
     parts.push(drawerMetaHtml(ing, u));
     parts.push(
-      '<div class="pa-drawer-actions">' +
-        '<a class="pa-drawer-action" href="aroma.html?spice=' +
+      '<div class="pa-drawer-actions ingredient-flow-actions">' +
+        '<a class="pa-drawer-action ingredient-flow-action" href="aroma.html?spice=' +
         encodeURIComponent(ing.id) +
         '">Aroma</a>' +
-        '<a class="pa-drawer-action" href="flavor.html?q=' +
+        '<a class="pa-drawer-action ingredient-flow-action" href="flavor.html?q=' +
         encodeURIComponent(name) +
         '">Flavor</a>' +
-        '<a class="pa-drawer-action" href="flavor.html?toolkit=1">Toolkit</a>' +
+        '<a class="pa-drawer-action ingredient-flow-action" href="flavor.html?toolkit=1">Toolkit</a>' +
       '</div>'
     );
     parts.push('</div>');

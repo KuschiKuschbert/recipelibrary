@@ -276,6 +276,11 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
     body_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
     if "Cumin" not in body_text:
         problems.append("decision panel did not render Cumin answer")
+    shared_answer = page.evaluate(
+        "() => !!document.querySelector('#paDecisionBody .pa-answer.ingredient-flow .ingredient-flow-grid')"
+    )
+    if not shared_answer:
+        problems.append("Pairing Atlas decision answer is not using shared ingredient-flow styles")
     page.locator('[data-pa-decision-action="matrix"]').click()
     page.wait_for_timeout(250)
     row_open = page.evaluate(
@@ -287,6 +292,13 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
     if drawer_profile.count() != 1:
         problems.append("Cumin drawer profile is missing")
     else:
+        shared_profile = page.evaluate(
+            """() => !!document.querySelector(
+              'tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-profile].ingredient-flow-profile'
+            )"""
+        )
+        if not shared_profile:
+            problems.append("Cumin drawer profile is not using shared ingredient-flow styles")
         drawer_text = drawer_profile.inner_text(timeout=5_000)
         drawer_lower = drawer_text.lower()
         for expected in ("kitchen profile", "pair now", "use it", "foods"):
@@ -317,6 +329,11 @@ def run_flavor_decision_smoke(page: Any) -> list[str]:
     body_text = answer.inner_text(timeout=5_000)
     if "Cumin" not in body_text:
         problems.append("Flavor answer card did not render Cumin")
+    shared_answer = page.evaluate(
+        "() => !!document.querySelector('#flavorAnswer.ingredient-flow-card .ingredient-flow-grid')"
+    )
+    if not shared_answer:
+        problems.append("Flavor answer card is not using shared ingredient-flow styles")
     body_lower = body_text.lower()
     for expected in ("best pairings", "use it like this", "aroma links"):
         if expected not in body_lower:

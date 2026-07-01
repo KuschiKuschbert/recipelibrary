@@ -279,7 +279,9 @@
   }
 
   function flavorAnswerChipHtml(text, opts) {
-    var cls = 'flavor-answer-chip' + (opts && opts.avoid ? ' flavor-answer-chip--avoid' : '');
+    var cls =
+      'flavor-answer-chip ingredient-flow-chip' +
+      (opts && opts.avoid ? ' flavor-answer-chip--avoid ingredient-flow-chip--avoid' : '');
     if (opts && opts.link) {
       return '<a class="' + cls + '" href="' + opts.link + '">' + esc(text) + '</a>';
     }
@@ -288,10 +290,10 @@
 
   function flavorAnswerChipList(items, opts) {
     if (!items || !items.length) {
-      return '<p class="flavor-answer-empty">' + esc((opts && opts.empty) || 'No direct note in this extract yet.') + '</p>';
+      return '<p class="flavor-answer-empty ingredient-flow-empty">' + esc((opts && opts.empty) || 'No direct note in this extract yet.') + '</p>';
     }
     return (
-      '<div class="flavor-answer-chips">' +
+      '<div class="flavor-answer-chips ingredient-flow-chips">' +
       items
         .map(function (text) {
           return flavorAnswerChipHtml(text, opts);
@@ -302,9 +304,9 @@
   }
 
   function flavorAnswerTipList(items, empty) {
-    if (!items || !items.length) return '<p class="flavor-answer-empty">' + esc(empty || 'No use notes yet.') + '</p>';
+    if (!items || !items.length) return '<p class="flavor-answer-empty ingredient-flow-empty">' + esc(empty || 'No use notes yet.') + '</p>';
     return (
-      '<ul class="flavor-answer-tip-list">' +
+      '<ul class="flavor-answer-tip-list ingredient-flow-use-list">' +
       items
         .slice(0, 4)
         .map(function (tip) {
@@ -320,7 +322,7 @@
     if (!host) return;
     if (!u) {
       host.innerHTML =
-        '<p class="flavor-answer-empty">Search an ingredient to get a quick kitchen answer. Example: cumin, tomatoes, lamb, lemon.</p>';
+        '<p class="flavor-answer-empty ingredient-flow-empty">Search an ingredient to get a quick kitchen answer. Example: cumin, tomatoes, lamb, lemon.</p>';
       lastAnswerId = null;
       return;
     }
@@ -349,37 +351,37 @@
     if (fk && fk.primary_family) meta.push('Toolkit: ' + String(fk.primary_family).replace(/_/g, ' '));
     lastAnswerId = u.id;
     host.innerHTML =
-      '<div class="flavor-answer-head">' +
+      '<div class="flavor-answer-head ingredient-flow-head">' +
         '<div>' +
-          '<p class="flavor-answer-kicker">Flavor answer</p>' +
-          '<h2 class="flavor-answer-title">' + esc(titleish(u.name || u.id)) + '</h2>' +
-          '<div class="flavor-answer-meta">' +
-            meta.slice(0, 5).map(function (m) { return '<span class="flavor-answer-pill">' + esc(m) + '</span>'; }).join('') +
+          '<p class="flavor-answer-kicker ingredient-flow-kicker">Flavor answer</p>' +
+          '<h2 class="flavor-answer-title ingredient-flow-title">' + esc(titleish(u.name || u.id)) + '</h2>' +
+          '<div class="flavor-answer-meta ingredient-flow-meta">' +
+            meta.slice(0, 5).map(function (m) { return '<span class="flavor-answer-pill ingredient-flow-pill">' + esc(m) + '</span>'; }).join('') +
           '</div>' +
         '</div>' +
-        '<div class="flavor-answer-actions">' +
-          '<button type="button" class="flavor-answer-action" data-flavor-answer-action="detail">Full detail</button>' +
-          '<a class="flavor-answer-action" href="pairing-atlas.html?ingredient=' + encodeURIComponent(u.name || u.id) + '">Matrix</a>' +
-          (u.aroma ? '<a class="flavor-answer-action" href="aroma.html?spice=' + encodeURIComponent(u.aroma.id || u.id) + '">Aroma</a>' : '') +
+        '<div class="flavor-answer-actions ingredient-flow-actions">' +
+          '<button type="button" class="flavor-answer-action ingredient-flow-action" data-flavor-answer-action="detail">Full detail</button>' +
+          '<a class="flavor-answer-action ingredient-flow-action" href="pairing-atlas.html?ingredient=' + encodeURIComponent(u.name || u.id) + '">Matrix</a>' +
+          (u.aroma ? '<a class="flavor-answer-action ingredient-flow-action" href="aroma.html?spice=' + encodeURIComponent(u.aroma.id || u.id) + '">Aroma</a>' : '') +
         '</div>' +
       '</div>' +
-      '<div class="flavor-answer-grid">' +
-        '<section class="flavor-answer-section"><h3>Best pairings</h3>' +
+      '<div class="flavor-answer-grid ingredient-flow-grid">' +
+        '<section class="flavor-answer-section ingredient-flow-section"><h3>Best pairings</h3>' +
           flavorAnswerChipList(best, { empty: 'No Flavor Bible pairings for this row.' }) +
         '</section>' +
-        '<section class="flavor-answer-section"><h3>Avoid or check</h3>' +
+        '<section class="flavor-answer-section ingredient-flow-section"><h3>Avoid or check</h3>' +
           flavorAnswerChipList(avoids, { avoid: true, empty: 'No avoid notes in the unified extract.' }) +
         '</section>' +
-        '<section class="flavor-answer-section"><h3>Use it like this</h3>' +
+        '<section class="flavor-answer-section ingredient-flow-section"><h3>Use it like this</h3>' +
           flavorAnswerTipList(useTips, 'No technique notes yet.') +
         '</section>' +
-        '<section class="flavor-answer-section"><h3>Aroma links</h3>' +
+        '<section class="flavor-answer-section ingredient-flow-section"><h3>Aroma links</h3>' +
           flavorAnswerChipList(aroma, { empty: 'No Aroma harmony row yet.' }) +
         '</section>' +
       '</div>' +
       (aff.length
-        ? '<p class="flavor-answer-note"><strong>Affinity idea:</strong> ' + esc(aff[0]) + '</p>'
-        : '<p class="flavor-answer-note">Answer uses the unified Flavor, Aroma, Thesaurus, and toolkit extracts.</p>');
+        ? '<p class="flavor-answer-note ingredient-flow-note"><strong>Affinity idea:</strong> ' + esc(aff[0]) + '</p>'
+        : '<p class="flavor-answer-note ingredient-flow-note">Answer uses the unified Flavor, Aroma, Thesaurus, and toolkit extracts.</p>');
   }
 
   function updateFlavorAnswer(query, opts) {
@@ -388,7 +390,7 @@
     var row = findBestRow(query);
     if (!row && query) {
       host.innerHTML =
-        '<p class="flavor-answer-empty">No quick Flavor answer matched <strong>' +
+        '<p class="flavor-answer-empty ingredient-flow-empty">No quick Flavor answer matched <strong>' +
         esc(query) +
         '</strong>. Try a broader ingredient name or use Aroma for spice-led lookup.</p>';
       lastAnswerId = null;

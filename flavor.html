@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=165">
+<link rel="stylesheet" href="assets/theme.css?v=166">
 <style>
   :root { --app-header-h: 65px; }
   .hero { text-align: center; padding: 48px 24px 24px; position: relative; display: none; }
@@ -35,143 +35,6 @@
   .flavor-search-wrap input {
     width: 100%; max-width: 520px; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--border);
     background: var(--bg2); color: var(--text); font: inherit; font-size: 15px;
-  }
-  .flavor-answer-card {
-    margin: 0 0 20px;
-    padding: 16px;
-    border: 1px solid rgba(201, 169, 110, 0.22);
-    border-radius: var(--radius-md);
-    background:
-      linear-gradient(135deg, rgba(201, 169, 110, 0.12), rgba(0, 188, 212, 0.045)),
-      rgba(255, 255, 255, 0.035);
-  }
-  .flavor-answer-empty {
-    margin: 0;
-    color: var(--text3);
-    font-size: 14px;
-    line-height: 1.5;
-  }
-  .flavor-answer-head {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 14px;
-    align-items: start;
-    margin-bottom: 12px;
-  }
-  .flavor-answer-kicker {
-    margin: 0 0 4px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .flavor-answer-title {
-    margin: 0;
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: 24px;
-    line-height: 1.12;
-    color: var(--text);
-  }
-  .flavor-answer-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 8px;
-  }
-  .flavor-answer-pill {
-    display: inline-flex;
-    align-items: center;
-    min-height: 34px;
-    padding: 0 10px;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    color: var(--text2);
-    font-size: 12px;
-    line-height: 1.2;
-  }
-  .flavor-answer-actions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 8px;
-  }
-  .flavor-answer-action {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 44px;
-    padding: 0 12px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.035);
-    color: var(--gold);
-    font: inherit;
-    font-size: 12.5px;
-    font-weight: 700;
-    text-decoration: none;
-    cursor: pointer;
-    touch-action: manipulation;
-  }
-  .flavor-answer-action:hover { border-color: var(--gold); color: var(--text); }
-  .flavor-answer-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-  }
-  .flavor-answer-section {
-    padding: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 12px;
-    background: rgba(12, 12, 12, 0.28);
-  }
-  .flavor-answer-section h3 {
-    margin: 0 0 8px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .flavor-answer-section p,
-  .flavor-answer-note {
-    margin: 0;
-    color: var(--text2);
-    font-size: 13px;
-    line-height: 1.45;
-  }
-  .flavor-answer-note {
-    margin-top: 10px;
-    color: var(--text3);
-    font-size: 12.5px;
-  }
-  .flavor-answer-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .flavor-answer-chip {
-    display: inline-flex;
-    align-items: center;
-    min-height: 38px;
-    padding: 0 10px;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    color: var(--text2);
-    font-size: 12px;
-    line-height: 1.2;
-    text-decoration: none;
-  }
-  .flavor-answer-chip--avoid {
-    border-color: rgba(220, 90, 90, 0.4);
-    color: #e6a0a0;
-  }
-  .flavor-answer-tip-list {
-    margin: 0;
-    padding-left: 18px;
-    color: var(--text2);
-    font-size: 13px;
-    line-height: 1.45;
   }
   .flavor-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; align-items: start; }
   @media (max-width: 860px) { .flavor-layout { grid-template-columns: 1fr; } }
@@ -327,34 +190,6 @@
       margin-bottom: 12px;
     }
 
-    html.lenovo-tab-one-profile .flavor-answer-card {
-      margin-bottom: 14px;
-      padding: 12px;
-      border-radius: 14px;
-    }
-
-    html.lenovo-tab-one-profile .flavor-answer-title {
-      font-size: 22px;
-    }
-
-    html.lenovo-tab-one-profile .flavor-answer-action {
-      min-height: 48px;
-      font-size: 13px;
-    }
-
-    html.lenovo-tab-one-profile .flavor-answer-grid {
-      gap: 8px;
-    }
-
-    html.lenovo-tab-one-profile .flavor-answer-section {
-      padding: 10px;
-    }
-
-    html.lenovo-tab-one-profile .flavor-answer-chip {
-      min-height: 44px;
-      font-size: 12.5px;
-    }
-
     html.lenovo-tab-one-profile .flavor-toolkit-filter-wrap {
       max-width: none;
       margin-bottom: 14px;
@@ -493,37 +328,8 @@
       margin-bottom: 10px;
     }
 
-    html.lenovo-tab-one-profile .flavor-answer-card {
-      margin-bottom: 12px;
-      padding: 12px;
-      border-radius: 14px;
-    }
-
-    html.lenovo-tab-one-profile .flavor-answer-head {
-      margin-bottom: 10px;
-    }
-
-    html.lenovo-tab-one-profile .flavor-answer-title {
-      font-size: 21px;
-    }
-
-    html.lenovo-tab-one-profile .flavor-answer-action {
-      min-height: 48px;
-      font-size: 13px;
-    }
-
     html.lenovo-tab-one-profile .flavor-answer-grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 8px;
-    }
-
-    html.lenovo-tab-one-profile .flavor-answer-section {
-      padding: 10px;
-    }
-
-    html.lenovo-tab-one-profile .flavor-answer-chip {
-      min-height: 44px;
-      font-size: 12.5px;
     }
 
     html.lenovo-tab-one-profile .flavor-toolkit-filter-wrap {
@@ -632,15 +438,6 @@
       line-height: 1.28;
     }
   }
-  @media (max-width: 640px) {
-    .flavor-answer-head,
-    .flavor-answer-grid {
-      grid-template-columns: 1fr;
-    }
-    .flavor-answer-actions {
-      justify-content: flex-start;
-    }
-  }
 </style>
 </head>
 <body class="has-app-nav">
@@ -674,8 +471,8 @@
       <input type="search" id="flavorSearch" placeholder="Ingredient (e.g. tomatoes, cumin, lamb)…" autocomplete="off" />
       <div id="flavorLoadStatus"></div>
     </div>
-    <div id="flavorAnswer" class="flavor-answer-card" aria-live="polite">
-      <p class="flavor-answer-empty">Loading quick flavor answer…</p>
+    <div id="flavorAnswer" class="flavor-answer-card ingredient-flow-card ingredient-flow" aria-live="polite">
+      <p class="flavor-answer-empty ingredient-flow-empty">Loading quick flavor answer…</p>
     </div>
     <div class="flavor-layout">
       <div id="flavorResults" class="flavor-results"></div>
@@ -706,7 +503,7 @@
 </div>
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/kuschi-recipe-ui.js?v=4"></script>
-<script src="assets/flavor-explorer.js?v=2"></script>
+<script src="assets/flavor-explorer.js?v=3"></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
 <script src="assets/app-nav.js?v=2"></script>
 </body>
