@@ -347,6 +347,14 @@ def task_first_surface_spec(page_path: str) -> dict[str, Any] | None:
                 {"name": "quick answer", "selector": "#flavorAnswer", "role": "answer"},
             ],
         }
+    if "aroma.html" in page_path:
+        return {
+            "label": "Aroma answer surface",
+            "items": [
+                {"name": "answer search", "selector": "#aromaSearch", "role": "control"},
+                {"name": "quick answer", "selector": "#aromaAnswer", "role": "answer"},
+            ],
+        }
     return None
 
 
