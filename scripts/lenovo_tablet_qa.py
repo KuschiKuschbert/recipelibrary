@@ -374,7 +374,13 @@ def task_first_surface_spec(page_path: str) -> dict[str, Any] | None:
         return {
             "label": "Flavor answer surface",
             "items": [
-                {"name": "answer search", "selector": "#flavorSearch", "role": "control"},
+                {
+                    "name": "answer search",
+                    "selector": "#flavorSearch",
+                    "role": "control",
+                    "beforeSelector": ".flavor-tabs",
+                    "beforeName": "secondary tabs",
+                },
                 {"name": "quick answer", "selector": "#flavorAnswer", "role": "answer"},
             ],
         }
@@ -403,6 +409,9 @@ def task_first_surface_problems(page: Any, page_path: str) -> list[str]:
     if (!el) return Object.assign({}, item, { missing: true });
     const style = getComputedStyle(el);
     const rect = el.getBoundingClientRect();
+    const before = item.beforeSelector ? document.querySelector(item.beforeSelector) : null;
+    const beforeStyle = before ? getComputedStyle(before) : null;
+    const beforeRect = before ? before.getBoundingClientRect() : null;
     const hidden = style.display === 'none' ||
       style.visibility === 'hidden' ||
       Number(style.opacity || 1) === 0 ||
@@ -417,6 +426,15 @@ def task_first_surface_problems(page: Any, page_path: str) -> list[str]:
       right: Math.round(rect.right),
       width: Math.round(rect.width),
       height: Math.round(rect.height),
+      beforeMissing: !!item.beforeSelector && !before,
+      beforeHidden: !!(before && (
+        beforeStyle.display === 'none' ||
+        beforeStyle.visibility === 'hidden' ||
+        Number(beforeStyle.opacity || 1) === 0 ||
+        beforeRect.width <= 0 ||
+        beforeRect.height <= 0
+      )),
+      beforeTop: beforeRect ? Math.round(beforeRect.top) : null,
     });
   }
   return {
@@ -460,6 +478,15 @@ def task_first_surface_problems(page: Any, page_path: str) -> list[str]:
             )
         if vw and (left < -1 or right > vw + 1):
             problems.append(f"{label} {name} overflows horizontally ({int(left)}..{int(right)} of {int(vw)}px)")
+        before_selector = item.get("beforeSelector")
+        if before_selector:
+            before_name = str(item.get("beforeName") or before_selector)
+            if item.get("beforeMissing"):
+                problems.append(f"{label} cannot compare {name} before {before_name}: {before_selector} missing")
+            elif not item.get("beforeHidden"):
+                before_top = float(item.get("beforeTop") or 0)
+                if top > before_top + 1:
+                    problems.append(f"{label} {name} appears below {before_name}")
     return problems
 
 
