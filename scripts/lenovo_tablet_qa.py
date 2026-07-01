@@ -50,6 +50,9 @@ LOAD_MS_BUDGET = 10_000
 DOM_NODE_BUDGET = 12_000
 RESOURCE_BYTE_BUDGET = 28_000_000
 HEAP_BYTE_BUDGET = 220_000_000
+LONG_TASK_MAX_MS_BUDGET = 250
+LONG_TASK_TOTAL_MS_BUDGET = 1_200
+LONG_TASK_COUNT_BUDGET = 12
 DECISION_RESPONSE_MS_BUDGET = 1_200
 ACTION_RESPONSE_MS_BUDGET = 900
 
@@ -144,6 +147,7 @@ def write_artifact_manifest(
     pages: tuple[str, ...],
     artifacts: list[dict[str, Any]],
     action_timings: list[dict[str, Any]],
+    long_task_metrics: list[dict[str, Any]],
     issues: list[Issue],
 ) -> Path:
     artifacts_dir.mkdir(parents=True, exist_ok=True)
@@ -157,10 +161,39 @@ def write_artifact_manifest(
         ],
         "artifacts": artifacts,
         "actionTimings": action_timings,
+        "longTaskMetrics": long_task_metrics,
         "issues": [issue.__dict__ for issue in issues],
     }
     manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     return manifest_path
+
+
+def long_task_observer_script() -> str:
+    return r"""
+(() => {
+  window.__lenovoLongTasks = [];
+  window.__lenovoLongTaskObserverError = '';
+  window.__lenovoLongTaskSupported = false;
+  if (!('PerformanceObserver' in window)) return;
+  try {
+    const supported = PerformanceObserver.supportedEntryTypes || [];
+    window.__lenovoLongTaskSupported = Array.isArray(supported) ? supported.includes('longtask') : true;
+    const observer = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        window.__lenovoLongTasks.push({
+          name: entry.name || 'longtask',
+          startTime: Math.round(Number(entry.startTime) || 0),
+          duration: Math.round(Number(entry.duration) || 0)
+        });
+      }
+    });
+    observer.observe({ type: 'longtask', buffered: true });
+    window.__lenovoLongTaskSupported = true;
+  } catch (err) {
+    window.__lenovoLongTaskObserverError = String((err && err.message) || err);
+  }
+})();
+"""
 
 
 def page_metric_script() -> str:
@@ -263,6 +296,19 @@ def page_metric_script() -> str:
       duration: effect && effect.getTiming ? effect.getTiming().duration : null
     };
   }) : [];
+  const longTasks = Array.isArray(window.__lenovoLongTasks) ? window.__lenovoLongTasks : [];
+  const longTaskDurations = longTasks.map((task) => Number(task.duration) || 0);
+  const longTaskTotalMs = longTaskDurations.reduce((sum, duration) => sum + duration, 0);
+  const longTaskMaxMs = longTaskDurations.reduce((max, duration) => Math.max(max, duration), 0);
+  const longTaskSample = longTasks
+    .slice()
+    .sort((a, b) => (Number(b.duration) || 0) - (Number(a.duration) || 0))
+    .slice(0, 5)
+    .map((task) => ({
+      name: String(task.name || 'longtask').slice(0, 80),
+      startTime: Math.round(Number(task.startTime) || 0),
+      duration: Math.round(Number(task.duration) || 0)
+    }));
 
   return {
     url: location.href,
@@ -280,7 +326,13 @@ def page_metric_script() -> str:
     domNodes: document.querySelectorAll('*').length,
     resourceBytes,
     heapUsed: performance.memory && performance.memory.usedJSHeapSize ? performance.memory.usedJSHeapSize : null,
-    runningAnimations: runningAnimations.slice(0, 12)
+    runningAnimations: runningAnimations.slice(0, 12),
+    longTaskSupported: !!window.__lenovoLongTaskSupported,
+    longTaskObserverError: window.__lenovoLongTaskObserverError || '',
+    longTaskCount: longTasks.length,
+    longTaskTotalMs: Math.round(longTaskTotalMs),
+    longTaskMaxMs: Math.round(longTaskMaxMs),
+    longTaskSample
   };
 }
 """
@@ -308,6 +360,12 @@ def describe_target(target: dict[str, Any]) -> str:
     if "fontSize" in target:
         size = f" ({target['fontSize']}px)"
     return f"{text}{size}"
+
+
+def describe_long_task(task: dict[str, Any]) -> str:
+    duration = int(task.get("duration") or 0)
+    start_time = int(task.get("startTime") or 0)
+    return f"{duration}ms at {start_time}ms"
 
 
 def timed_interaction(
@@ -661,6 +719,37 @@ def issues_from_metrics(page_path: str, viewport_name: str, metric: dict[str, An
     heap_used = metric.get("heapUsed")
     if heap_used is not None and heap_used > HEAP_BYTE_BUDGET:
         issues.append(Issue(page_path, viewport_name, f"{prefix}: JS heap budget exceeded {heap_used} > {HEAP_BYTE_BUDGET} bytes"))
+    long_task_max = int(metric.get("longTaskMaxMs") or 0)
+    long_task_total = int(metric.get("longTaskTotalMs") or 0)
+    long_task_count = int(metric.get("longTaskCount") or 0)
+    long_task_sample = metric.get("longTaskSample") or []
+    if long_task_max > LONG_TASK_MAX_MS_BUDGET:
+        sample = "; ".join(describe_long_task(t) for t in long_task_sample[:5])
+        issues.append(
+            Issue(
+                page_path,
+                viewport_name,
+                f"{prefix}: long task max budget exceeded {long_task_max}ms > {LONG_TASK_MAX_MS_BUDGET}ms: {sample}",
+            )
+        )
+    if long_task_total > LONG_TASK_TOTAL_MS_BUDGET:
+        sample = "; ".join(describe_long_task(t) for t in long_task_sample[:5])
+        issues.append(
+            Issue(
+                page_path,
+                viewport_name,
+                f"{prefix}: long task total budget exceeded {long_task_total}ms > {LONG_TASK_TOTAL_MS_BUDGET}ms: {sample}",
+            )
+        )
+    if long_task_count > LONG_TASK_COUNT_BUDGET:
+        sample = "; ".join(describe_long_task(t) for t in long_task_sample[:5])
+        issues.append(
+            Issue(
+                page_path,
+                viewport_name,
+                f"{prefix}: long task count budget exceeded {long_task_count} > {LONG_TASK_COUNT_BUDGET}: {sample}",
+            )
+        )
     return issues
 
 
@@ -1180,6 +1269,7 @@ def run_page(
     artifacts_dir: Path | None = None,
     artifacts: list[dict[str, Any]] | None = None,
     action_timings: list[dict[str, Any]] | None = None,
+    long_task_metrics: list[dict[str, Any]] | None = None,
 ) -> list[Issue]:
     context = browser.new_context(
         viewport={"width": width, "height": height},
@@ -1189,6 +1279,7 @@ def run_page(
         reduced_motion="reduce" if reduced_motion else "no-preference",
     )
     page = context.new_page()
+    page.add_init_script(long_task_observer_script())
     console_errors: list[str] = []
     page_errors: list[str] = []
     page.on("console", lambda msg: console_errors.append(msg.text) if msg.type == "error" else None)
@@ -1228,6 +1319,28 @@ def run_page(
             }
         )
 
+    def record_long_task_metric(metric: dict[str, Any]) -> None:
+        if long_task_metrics is None:
+            return
+        motion_name = "reduced-motion" if reduced_motion else "normal-motion"
+        long_task_metrics.append(
+            {
+                "page": page_path,
+                "viewport": viewport_name,
+                "width": width,
+                "height": height,
+                "motion": motion_name,
+                "url": metric.get("url"),
+                "scrollY": metric.get("scrollY"),
+                "supported": bool(metric.get("longTaskSupported")),
+                "observerError": metric.get("longTaskObserverError") or "",
+                "count": int(metric.get("longTaskCount") or 0),
+                "totalMs": int(metric.get("longTaskTotalMs") or 0),
+                "maxMs": int(metric.get("longTaskMaxMs") or 0),
+                "sample": metric.get("longTaskSample") or [],
+            }
+        )
+
     try:
         page.goto(urljoin(base, page_path), wait_until="networkidle", timeout=25_000)
         page.wait_for_timeout(600)
@@ -1244,6 +1357,7 @@ def run_page(
             for problem in run_aroma_answer_smoke(page, capture_state, record_timing):
                 issues.append(Issue(page_path, viewport_name, problem))
         for metric in collect_metrics(page):
+            record_long_task_metric(metric)
             issues.extend(issues_from_metrics(page_path, viewport_name, metric, reduced_motion))
         for msg in console_errors[:5]:
             issues.append(Issue(page_path, viewport_name, f"console error: {msg[:220]}"))
@@ -1280,6 +1394,7 @@ def main(argv: list[str] | None = None) -> int:
     artifacts_dir = resolve_artifacts_dir(args.artifacts_dir) if args.artifacts_dir else None
     artifacts: list[dict[str, Any]] = []
     action_timings: list[dict[str, Any]] = []
+    long_task_metrics: list[dict[str, Any]] = []
     server, base = start_server()
     all_issues: list[Issue] = []
     try:
@@ -1303,6 +1418,7 @@ def main(argv: list[str] | None = None) -> int:
                                 artifacts_dir,
                                 artifacts,
                                 action_timings if artifacts_dir else None,
+                                long_task_metrics if artifacts_dir else None,
                             )
                             if issues:
                                 all_issues.extend(issues)
@@ -1315,7 +1431,14 @@ def main(argv: list[str] | None = None) -> int:
         server.server_close()
 
     if artifacts_dir:
-        manifest_path = write_artifact_manifest(artifacts_dir, pages, artifacts, action_timings, all_issues)
+        manifest_path = write_artifact_manifest(
+            artifacts_dir,
+            pages,
+            artifacts,
+            action_timings,
+            long_task_metrics,
+            all_issues,
+        )
         ok(f"Lenovo tablet QA artifacts written to {manifest_path}")
 
     if all_issues:
