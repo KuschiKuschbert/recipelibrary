@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=173">
+<link rel="stylesheet" href="assets/theme.css?v=179">
 <link rel="preload" href="aroma_data/ingredients.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
@@ -711,12 +711,15 @@
 </header>
 
 <div class="search-wrap">
-  <div class="search-glass">
-    <div class="search-inner">
-      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="search" class="search-input" id="aromaSearch" placeholder="Try a food or spice — lamb, cumin, lemongrass…" autocomplete="off" spellcheck="false" aria-label="Search foods and spices" />
+  <form class="ingredient-flow-query-form" id="aromaSearchForm">
+    <div class="search-glass ingredient-flow-search-glass">
+      <div class="search-inner">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="search" class="search-input" id="aromaSearch" placeholder="Try a food or spice — lamb, cumin, lemongrass…" autocomplete="off" spellcheck="false" aria-label="Search foods and spices" />
+      </div>
     </div>
-  </div>
+    <button type="submit" class="ingredient-flow-query-button" id="aromaSearchSubmit">Answer</button>
+  </form>
   <div class="ingredient-flow-suggestions" aria-label="Quick aroma answers">
     <button type="button" class="ingredient-flow-suggestion" data-ingredient-flow-preset-id="lamb" data-ingredient-flow-preset="what should I season lamb with?">Lamb</button>
     <button type="button" class="ingredient-flow-suggestion" data-ingredient-flow-preset-id="cumin" data-ingredient-flow-preset="what goes with cumin?">Cumin</button>
@@ -819,6 +822,7 @@
   var flavourHintsMap = null;
   var lastSpiceProfileId = null;
   var searchEl = document.getElementById('aromaSearch');
+  var searchForm = document.getElementById('aromaSearchForm');
   var panels = {
     food: document.getElementById('panelFood'),
     spice: document.getElementById('panelSpice'),
@@ -1583,9 +1587,17 @@
     updateAromaAnswer(searchEl.value, { selectDefault: false });
     aromaSearchScheduler.schedule();
   });
+  if (searchForm) {
+    searchForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      updateAromaAnswer(searchEl.value, { selectDefault: true });
+      aromaSearchScheduler.schedule({ immediate: true });
+    });
+  }
   searchEl.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
       e.preventDefault();
+      updateAromaAnswer(searchEl.value, { selectDefault: true });
       aromaSearchScheduler.schedule({ immediate: true });
     }
   });

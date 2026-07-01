@@ -1391,6 +1391,7 @@
     }
     initTabs();
     var inp = document.getElementById('flavorSearch');
+    var form = document.getElementById('flavorSearchForm');
     if (inp) {
       searchScheduler =
         global.KuschiRecipeUi && typeof global.KuschiRecipeUi.createFilterScheduler === 'function'
@@ -1411,6 +1412,13 @@
         updateFlavorAnswerLive(inp);
         scheduleFlavorSearch();
       });
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          updateFlavorAnswer(inp.value, { selectDefault: true, syncDetail: true });
+          scheduleFlavorSearch({ immediate: true });
+        });
+      }
       if (global.KuschiIngredientFlow && typeof global.KuschiIngredientFlow.wirePresetButtons === 'function') {
         global.KuschiIngredientFlow.wirePresetButtons(document.querySelector('.flavor-search-wrap'), {
           input: inp,

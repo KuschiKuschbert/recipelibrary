@@ -825,6 +825,13 @@ def task_first_surface_spec(page_path: str) -> dict[str, Any] | None:
                     "beforeName": "secondary tabs",
                 },
                 {
+                    "name": "answer button",
+                    "selector": "#flavorSearchSubmit",
+                    "role": "control",
+                    "beforeSelector": ".flavor-tabs",
+                    "beforeName": "secondary tabs",
+                },
+                {
                     "name": "lamb preset",
                     "selector": '.flavor-search-wrap [data-ingredient-flow-preset-id="lamb"]',
                     "role": "control",
@@ -853,6 +860,13 @@ def task_first_surface_spec(page_path: str) -> dict[str, Any] | None:
                 {
                     "name": "answer search",
                     "selector": "#aromaSearch",
+                    "role": "control",
+                    "beforeSelector": ".aroma-modes",
+                    "beforeName": "mode tabs",
+                },
+                {
+                    "name": "answer button",
+                    "selector": "#aromaSearchSubmit",
                     "role": "control",
                     "beforeSelector": ".aroma-modes",
                     "beforeName": "mode tabs",
@@ -1654,6 +1668,16 @@ def run_flavor_decision_smoke(
     answer = page.locator("#flavorAnswer")
     if answer.count() != 1:
         return ["Flavor answer card is missing"]
+    shared_search = page.evaluate(
+        """() => ({
+          form: !!document.querySelector('#flavorSearchForm.ingredient-flow-query-form'),
+          button: !!document.querySelector('#flavorSearchSubmit.ingredient-flow-query-button'),
+        })"""
+    )
+    if not shared_search.get("form"):
+        problems.append("Flavor answer search is not using the shared ingredient-flow query form")
+    if not shared_search.get("button"):
+        problems.append("Flavor answer submit is not using the shared ingredient-flow query button")
     lamb_preset = page.locator('.flavor-search-wrap [data-ingredient-flow-preset-id="lamb"]')
     if lamb_preset.count() != 1:
         problems.append("Flavor Lamb quick preset is missing")
@@ -1753,8 +1777,8 @@ def run_flavor_decision_smoke(
             problems.append("Flavor Cumin seasoning chip did not render the Cumin answer")
     timed_interaction(
         page,
-        "Flavor phrase answer",
-        lambda: search.fill("what goes with cumin?"),
+        "Flavor submit phrase answer",
+        lambda: (search.fill("what goes with cumin?"), page.locator("#flavorSearchSubmit").click()),
         "() => /\\bCumin\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '')",
         problems,
         FLAVOR_QUICK_ANSWER_MS_BUDGET,
@@ -1855,6 +1879,19 @@ def run_aroma_answer_smoke(
     answer = page.locator("#aromaAnswer")
     if answer.count() != 1:
         return ["Aroma answer card is missing"]
+    shared_search = page.evaluate(
+        """() => ({
+          form: !!document.querySelector('#aromaSearchForm.ingredient-flow-query-form'),
+          glass: !!document.querySelector('#aromaSearchForm .ingredient-flow-search-glass'),
+          button: !!document.querySelector('#aromaSearchSubmit.ingredient-flow-query-button'),
+        })"""
+    )
+    if not shared_search.get("form"):
+        problems.append("Aroma answer search is not using the shared ingredient-flow query form")
+    if not shared_search.get("glass"):
+        problems.append("Aroma answer search glass is not using the shared search-glass flex primitive")
+    if not shared_search.get("button"):
+        problems.append("Aroma answer submit is not using the shared ingredient-flow query button")
     try:
         page.wait_for_selector("#aromaAnswer .ingredient-flow-grid", timeout=5_000)
     except PlaywrightTimeoutError:
@@ -1900,8 +1937,8 @@ def run_aroma_answer_smoke(
             problems.append("Aroma Lamb quick preset did not render the Roasted Lamb seasoning answer")
     timed_interaction(
         page,
-        "Aroma spice phrase answer",
-        lambda: (search.fill("what goes with cumin?"), search.press("Enter")),
+        "Aroma submit spice phrase answer",
+        lambda: (search.fill("what goes with cumin?"), page.locator("#aromaSearchSubmit").click()),
         "() => /\\bCumin\\b/.test(document.querySelector('#aromaAnswer .ingredient-flow-title')?.textContent || '')",
         problems,
         timing_sink=timing_sink,

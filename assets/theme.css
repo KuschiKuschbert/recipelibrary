@@ -12937,6 +12937,14 @@ html.lenovo-tab-one-profile #plannerListOverlay .planner-list__print-opt input {
   width: auto;
   max-width: none;
 }
+.ingredient-flow-search-glass {
+  flex: 1 1 260px;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.ingredient-flow-search-glass .search-input {
+  width: 100%;
+}
 .ingredient-flow-query-input:focus {
   outline: none;
   border-color: var(--border-hover);
