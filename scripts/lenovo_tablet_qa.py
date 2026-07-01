@@ -263,6 +263,13 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
     search = page.locator("#paDecisionSearch")
     if search.count() != 1:
         return ["Pairing Atlas decision search is missing"]
+    try:
+        page.wait_for_function(
+            "() => { const btn = document.querySelector('#paLayerHarmony'); return btn && !btn.disabled; }",
+            timeout=5_000,
+        )
+    except PlaywrightTimeoutError:
+        problems.append("Pairing Atlas enrichment did not finish before drawer smoke")
     search.fill("cumin")
     page.locator("#paDecisionSubmit").click()
     page.wait_for_timeout(250)
@@ -276,6 +283,24 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
     )
     if not row_open:
         problems.append("decision panel Show row did not open the cumin matrix row")
+    drawer_profile = page.locator('tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-profile]')
+    if drawer_profile.count() != 1:
+        problems.append("Cumin drawer profile is missing")
+    else:
+        drawer_text = drawer_profile.inner_text(timeout=5_000)
+        drawer_lower = drawer_text.lower()
+        for expected in ("kitchen profile", "pair now", "use it", "foods"):
+            if expected not in drawer_lower:
+                problems.append(f"Cumin drawer profile missing section: {expected}")
+        if "toast cumin seeds" not in drawer_lower:
+            problems.append("Cumin drawer profile did not surface the toast/use note")
+        instruction_chip = page.evaluate(
+            """() => Array.from(document.querySelectorAll(
+              'tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-profile] .pa-answer__chip'
+            )).some((el) => /toast cumin/i.test(el.textContent || ''))"""
+        )
+        if instruction_chip:
+            problems.append("Cumin drawer put an instruction into a pairing chip")
     return problems
 
 

@@ -686,11 +686,67 @@
     gap: 12px;
     margin-bottom: 12px;
   }
+  .pa-drawer-title-wrap {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+  .pa-drawer-kicker {
+    margin: 0 0 4px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
   .pa-drawer-title {
     margin: 0;
     font-size: 18px;
     font-family: 'Playfair Display', Georgia, serif;
     font-weight: 600;
+    color: var(--text);
+  }
+  .pa-drawer-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .pa-drawer-pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 0 9px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    color: var(--text2);
+    background: rgba(255, 255, 255, 0.035);
+    font-size: 11.5px;
+    line-height: 1.2;
+  }
+  .pa-drawer-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .pa-drawer-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 11px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--gold);
+    background: rgba(201, 169, 110, 0.08);
+    font-size: 12.5px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    touch-action: manipulation;
+  }
+  .pa-drawer-action:hover {
+    border-color: var(--gold);
     color: var(--text);
   }
   .pa-drawer-close {
@@ -708,6 +764,91 @@
   .pa-drawer-close:hover {
     color: var(--gold);
     border-color: var(--gold);
+  }
+  .pa-drawer-body {
+    display: grid;
+    gap: 14px;
+  }
+  .pa-drawer-profile {
+    display: grid;
+    gap: 10px;
+  }
+  .pa-drawer-profile-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .pa-drawer-profile-head h4 {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .pa-drawer-profile-head p {
+    margin: 0;
+    color: var(--text3);
+    font-size: 12.5px;
+    line-height: 1.35;
+    text-align: right;
+  }
+  .pa-drawer-profile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 10px;
+  }
+  .pa-drawer-panel {
+    min-width: 0;
+    padding: 11px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.032);
+  }
+  .pa-drawer-panel--wide {
+    grid-column: 1 / -1;
+  }
+  .pa-drawer-panel h5 {
+    margin: 0 0 8px;
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+  .pa-use-list {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--text2);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .pa-use-list li {
+    margin: 4px 0;
+  }
+  .pa-drawer-source-details {
+    border-top: 1px solid var(--border);
+    padding-top: 4px;
+  }
+  .pa-drawer-source-details > summary {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--gold);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .pa-drawer-source-details > summary:hover {
+    color: var(--text);
+  }
+  .pa-drawer-source-body {
+    padding-top: 8px;
   }
   .pa-sec {
     margin-bottom: 14px;
@@ -1144,6 +1285,39 @@
       padding-right: 4px;
     }
 
+    html.lenovo-tab-one-profile .pa-drawer-card {
+      max-height: min(50dvh, 520px);
+      padding: 12px 14px 14px;
+    }
+
+    html.lenovo-tab-one-profile .pa-drawer-title {
+      font-size: 18px;
+    }
+
+    html.lenovo-tab-one-profile .pa-drawer-profile-head {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    html.lenovo-tab-one-profile .pa-drawer-profile-head p {
+      text-align: left;
+      font-size: 12.5px;
+    }
+
+    html.lenovo-tab-one-profile .pa-drawer-profile-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    html.lenovo-tab-one-profile .pa-drawer-panel {
+      padding: 10px;
+    }
+
+    html.lenovo-tab-one-profile .pa-use-list {
+      font-size: 13px;
+    }
+
     html.lenovo-tab-one-profile .pa-legend {
       display: none;
     }
@@ -1348,6 +1522,31 @@
       font-size: 17px;
     }
 
+    html.lenovo-tab-one-profile .pa-drawer-profile-head {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    html.lenovo-tab-one-profile .pa-drawer-profile-head p {
+      text-align: left;
+      font-size: 12.25px;
+    }
+
+    html.lenovo-tab-one-profile .pa-drawer-profile-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    html.lenovo-tab-one-profile .pa-drawer-panel {
+      padding: 10px;
+    }
+
+    html.lenovo-tab-one-profile .pa-use-list {
+      font-size: 12.75px;
+      line-height: 1.4;
+    }
+
     html.lenovo-tab-one-profile .pa-sec {
       margin-bottom: 12px;
     }
@@ -1413,6 +1612,20 @@
     }
 
     .pa-answer__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .pa-drawer-profile-head {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .pa-drawer-profile-head p {
+      text-align: left;
+    }
+
+    .pa-drawer-profile-grid {
       grid-template-columns: 1fr;
     }
   }
@@ -1593,7 +1806,7 @@
 
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/kuschi-recipe-ui.js?v=4"></script>
-<script src="assets/pairing-atlas.js?v=5"></script>
+<script src="assets/pairing-atlas.js?v=6"></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
 <script src="assets/app-nav.js?v=2"></script>
 <style>
