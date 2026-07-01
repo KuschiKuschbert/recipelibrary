@@ -329,6 +329,101 @@ def ingredient_flow_control_problems(
     return problems
 
 
+def task_first_surface_spec(page_path: str) -> dict[str, Any] | None:
+    if "pairing-atlas.html" in page_path:
+        return {
+            "label": "Pairing Atlas answer surface",
+            "items": [
+                {"name": "decision search", "selector": "#paDecisionSearch", "role": "control"},
+                {"name": "answer button", "selector": "#paDecisionSubmit", "role": "control"},
+                {"name": "decision answer", "selector": "#paDecisionBody", "role": "answer"},
+            ],
+        }
+    if "flavor.html" in page_path:
+        return {
+            "label": "Flavor answer surface",
+            "items": [
+                {"name": "answer search", "selector": "#flavorSearch", "role": "control"},
+                {"name": "quick answer", "selector": "#flavorAnswer", "role": "answer"},
+            ],
+        }
+    return None
+
+
+def task_first_surface_problems(page: Any, page_path: str) -> list[str]:
+    spec = task_first_surface_spec(page_path)
+    if not spec:
+        return []
+    data = page.evaluate(
+        r"""
+(spec) => {
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  function readItem(item) {
+    const el = document.querySelector(item.selector);
+    if (!el) return Object.assign({}, item, { missing: true });
+    const style = getComputedStyle(el);
+    const rect = el.getBoundingClientRect();
+    const hidden = style.display === 'none' ||
+      style.visibility === 'hidden' ||
+      Number(style.opacity || 1) === 0 ||
+      rect.width <= 0 ||
+      rect.height <= 0;
+    return Object.assign({}, item, {
+      missing: false,
+      hidden,
+      top: Math.round(rect.top),
+      bottom: Math.round(rect.bottom),
+      left: Math.round(rect.left),
+      right: Math.round(rect.right),
+      width: Math.round(rect.width),
+      height: Math.round(rect.height),
+    });
+  }
+  return {
+    label: spec.label,
+    viewportWidth: vw,
+    viewportHeight: vh,
+    scrollY: Math.round(window.scrollY),
+    items: (spec.items || []).map(readItem),
+  };
+}
+""",
+        spec,
+    )
+    problems: list[str] = []
+    vh = float(data.get("viewportHeight") or 0)
+    vw = float(data.get("viewportWidth") or 0)
+    label = str(data.get("label") or "task-first surface")
+    for item in data.get("items") or []:
+        name = str(item.get("name") or item.get("selector") or "surface item")
+        if item.get("missing"):
+            problems.append(f"{label} missing {name}: {item.get('selector')}")
+            continue
+        if item.get("hidden"):
+            problems.append(f"{label} hidden {name}: {item.get('selector')}")
+            continue
+        width = int(item.get("width") or 0)
+        height = int(item.get("height") or 0)
+        role = str(item.get("role") or "")
+        if role == "control" and (width < 44 or height < 44):
+            problems.append(f"{label} {name} is below 44px tap target ({width}x{height})")
+        top = float(item.get("top") or 0)
+        bottom = float(item.get("bottom") or 0)
+        left = float(item.get("left") or 0)
+        right = float(item.get("right") or 0)
+        if bottom <= 0:
+            problems.append(f"{label} {name} sits above the initial viewport")
+        first_view_limit = 0.86 if role == "answer" else 0.72
+        if vh and top > vh * first_view_limit:
+            problems.append(
+                f"{label} {name} starts too low in the initial viewport ({int(top)}px of {int(vh)}px)"
+            )
+        if vw and (left < -1 or right > vw + 1):
+            problems.append(f"{label} {name} overflows horizontally ({int(left)}..{int(right)} of {int(vw)}px)")
+    return problems
+
+
 def issues_from_metrics(page_path: str, viewport_name: str, metric: dict[str, Any], reduced_motion: bool) -> list[Issue]:
     issues: list[Issue] = []
     prefix = f"scrollY={metric.get('scrollY')}"
@@ -699,6 +794,8 @@ def run_page(browser: Any, base: str, page_path: str, viewport_name: str, width:
     try:
         page.goto(urljoin(base, page_path), wait_until="networkidle", timeout=25_000)
         page.wait_for_timeout(600)
+        for problem in task_first_surface_problems(page, page_path):
+            issues.append(Issue(page_path, viewport_name, problem))
         if "pairing-atlas.html" in page_path and not reduced_motion and viewport_name == "portrait":
             for problem in run_pairing_decision_smoke(page):
                 issues.append(Issue(page_path, viewport_name, problem))
