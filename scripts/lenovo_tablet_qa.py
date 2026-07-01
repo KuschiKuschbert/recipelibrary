@@ -59,6 +59,7 @@ HEAP_BYTE_BUDGET = 220_000_000
 LONG_TASK_MAX_MS_BUDGET = 250
 LONG_TASK_TOTAL_MS_BUDGET = 1_200
 LONG_TASK_COUNT_BUDGET = 12
+MOTION_DURATION_MS_BUDGET = 350
 DECISION_RESPONSE_MS_BUDGET = 1_200
 ACTION_RESPONSE_MS_BUDGET = 900
 FLAVOR_QUICK_ANSWER_MS_BUDGET = 240
@@ -230,6 +231,7 @@ def page_metric_script() -> str:
   const vw = window.innerWidth;
   const vh = window.innerHeight;
   const doc = document.documentElement;
+  const motionBudgetMs = Number('__MOTION_DURATION_MS_BUDGET__');
   const nav = document.querySelector('#appNav');
   const navRect = nav ? nav.getBoundingClientRect() : null;
   const navVisible = !!(navRect && navRect.width > 0 && navRect.height > 0 && navRect.bottom > 0 && navRect.top < vh);
@@ -272,6 +274,20 @@ def page_metric_script() -> str:
     return true;
   }
 
+  function timeToMs(value) {
+    value = String(value || '').trim();
+    if (!value) return 0;
+    if (value.endsWith('ms')) return parseFloat(value) || 0;
+    if (value.endsWith('s')) return (parseFloat(value) || 0) * 1000;
+    return parseFloat(value) || 0;
+  }
+
+  function maxTimeListMs(value) {
+    return String(value || '')
+      .split(',')
+      .reduce((max, item) => Math.max(max, timeToMs(item)), 0);
+  }
+
   const interactiveSelector = [
     'a[href]',
     'button',
@@ -287,6 +303,7 @@ def page_metric_script() -> str:
   const tinyInteractiveText = [];
   const clippedInteractiveText = [];
   const navOverlap = [];
+  const slowMotionDurations = [];
 
   for (const el of interactives) {
     const rect = el.getBoundingClientRect();
@@ -333,6 +350,39 @@ def page_metric_script() -> str:
         text: label(el),
         bottom: Math.round(rect.bottom),
         navTop: Math.round(navRect.top)
+      });
+    }
+  }
+
+  const motionSelector = [
+    interactiveSelector,
+    '.ingredient-flow-card',
+    '.ingredient-flow-profile',
+    '.ingredient-flow-panel',
+    '.ingredient-tool-toolbar',
+    '.app-nav',
+    '.nav-sheet__panel',
+    '.modal',
+    '.page-about'
+  ].join(',');
+  const motionElements = Array.from(document.querySelectorAll(motionSelector)).filter(visible);
+  for (const el of motionElements) {
+    if (el.closest('[data-allow-slow-motion], .spinner, .loading, .skeleton, [aria-busy="true"]')) continue;
+    const style = getComputedStyle(el);
+    const transitionMs = maxTimeListMs(style.transitionDuration);
+    const animationMs = style.animationName === 'none' || String(style.animationIterationCount || '').includes('infinite')
+      ? 0
+      : maxTimeListMs(style.animationDuration);
+    const motionMs = Math.max(transitionMs, animationMs);
+    if (motionMs > motionBudgetMs) {
+      const rect = el.getBoundingClientRect();
+      slowMotionDurations.push({
+        tag: el.tagName.toLowerCase(),
+        cls: String(el.className || '').slice(0, 80),
+        text: label(el),
+        width: Math.round(rect.width),
+        height: Math.round(rect.height),
+        durationMs: Math.round(motionMs)
       });
     }
   }
@@ -411,6 +461,7 @@ def page_metric_script() -> str:
     tinyInteractiveText: tinyInteractiveText.slice(0, 12),
     clippedInteractiveText: clippedInteractiveText.slice(0, 12),
     navOverlap: navOverlap.slice(0, 12),
+    slowMotionDurations: slowMotionDurations.slice(0, 12),
     loadMs: navEntry ? Math.round(navEntry.loadEventEnd - navEntry.startTime) : null,
     domNodes: document.querySelectorAll('*').length,
     resourceBytes,
@@ -425,7 +476,7 @@ def page_metric_script() -> str:
     ingredientTool
   };
 }
-"""
+""".replace("__MOTION_DURATION_MS_BUDGET__", str(MOTION_DURATION_MS_BUDGET))
 
 
 def collect_metrics(page: Any) -> list[dict[str, Any]]:
@@ -456,6 +507,12 @@ def describe_long_task(task: dict[str, Any]) -> str:
     duration = int(task.get("duration") or 0)
     start_time = int(task.get("startTime") or 0)
     return f"{duration}ms at {start_time}ms"
+
+
+def describe_motion_target(target: dict[str, Any]) -> str:
+    text = target.get("text") or target.get("cls") or target.get("tag") or "element"
+    duration = int(target.get("durationMs") or 0)
+    return f"{text} ({duration}ms)"
 
 
 def browser_resource_label(url: str) -> str:
@@ -981,6 +1038,15 @@ def issues_from_metrics(page_path: str, viewport_name: str, metric: dict[str, An
     if reduced_motion and metric.get("runningAnimations"):
         sample = "; ".join((a.get("cls") or a.get("tag") or "animation") for a in metric["runningAnimations"][:5])
         issues.append(Issue(page_path, viewport_name, f"{prefix}: animations still running under reduced motion: {sample}"))
+    if not reduced_motion and metric.get("slowMotionDurations"):
+        sample = "; ".join(describe_motion_target(t) for t in metric["slowMotionDurations"][:5])
+        issues.append(
+            Issue(
+                page_path,
+                viewport_name,
+                f"{prefix}: visible motion exceeds {MOTION_DURATION_MS_BUDGET}ms tablet budget: {sample}",
+            )
+        )
     load_ms = metric.get("loadMs")
     if load_ms is not None and load_ms > LOAD_MS_BUDGET:
         issues.append(Issue(page_path, viewport_name, f"{prefix}: load budget exceeded {load_ms}ms > {LOAD_MS_BUDGET}ms"))
