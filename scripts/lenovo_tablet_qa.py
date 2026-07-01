@@ -279,6 +279,35 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
     return problems
 
 
+def run_flavor_decision_smoke(page: Any) -> list[str]:
+    problems: list[str] = []
+    search = page.locator("#flavorSearch")
+    if search.count() != 1:
+        return ["Flavor answer search is missing"]
+    answer = page.locator("#flavorAnswer")
+    if answer.count() != 1:
+        return ["Flavor answer card is missing"]
+    search.fill("cumin")
+    page.wait_for_timeout(500)
+    body_text = answer.inner_text(timeout=5_000)
+    if "Cumin" not in body_text:
+        problems.append("Flavor answer card did not render Cumin")
+    body_lower = body_text.lower()
+    for expected in ("best pairings", "use it like this", "aroma links"):
+        if expected not in body_lower:
+            problems.append(f"Flavor answer card missing section: {expected}")
+    detail_action = page.locator('[data-flavor-answer-action="detail"]')
+    if detail_action.count() != 1:
+        problems.append("Flavor answer Full detail action is missing")
+    else:
+        detail_action.click()
+        page.wait_for_timeout(250)
+        detail_text = page.locator("#flavorDetail").inner_text(timeout=5_000)
+        if "CUMIN" not in detail_text.upper():
+            problems.append("Flavor answer Full detail did not open Cumin detail")
+    return problems
+
+
 def run_page(browser: Any, base: str, page_path: str, viewport_name: str, width: int, height: int, reduced_motion: bool) -> list[Issue]:
     context = browser.new_context(
         viewport={"width": width, "height": height},
@@ -298,6 +327,9 @@ def run_page(browser: Any, base: str, page_path: str, viewport_name: str, width:
         page.wait_for_timeout(600)
         if "pairing-atlas.html" in page_path and not reduced_motion and viewport_name == "portrait":
             for problem in run_pairing_decision_smoke(page):
+                issues.append(Issue(page_path, viewport_name, problem))
+        if "flavor.html" in page_path and not reduced_motion and viewport_name == "portrait":
+            for problem in run_flavor_decision_smoke(page):
                 issues.append(Issue(page_path, viewport_name, problem))
         for metric in collect_metrics(page):
             issues.extend(issues_from_metrics(page_path, viewport_name, metric, reduced_motion))

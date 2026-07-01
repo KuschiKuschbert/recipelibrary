@@ -23,6 +23,7 @@
   var searchScheduler = null;
   var toolkitFilterScheduler = null;
   var loadStatusText = '';
+  var lastAnswerId = null;
 
   function norm(s) {
     return String(s || '')
@@ -173,6 +174,228 @@
       if (out.length > 80) break;
     }
     return out.slice(0, 40);
+  }
+
+  function titleish(s) {
+    return String(s || '')
+      .toLowerCase()
+      .replace(/\b([a-z])/g, function (m) {
+        return m.toUpperCase();
+      });
+  }
+
+  function isLikelyInstruction(s) {
+    var text = String(s || '').trim();
+    return /^(tips?:|add |toast |use |with lighter|bloom |cook |grind |crush )/i.test(text);
+  }
+
+  function cleanPairingName(s) {
+    return String(s || '')
+      .replace(/^tips?:\s*/i, '')
+      .trim();
+  }
+
+  function uniqueText(items, limit) {
+    var seen = Object.create(null);
+    var out = [];
+    for (var i = 0; i < (items || []).length; i++) {
+      var raw = cleanPairingName(items[i]);
+      if (!raw) continue;
+      var key = norm(raw);
+      if (!key || seen[key]) continue;
+      seen[key] = true;
+      out.push(raw);
+      if (limit && out.length >= limit) break;
+    }
+    return out;
+  }
+
+  function bestFlavorPairings(f, limit) {
+    var pairingsObj = f && f.pairings ? f.pairings : {};
+    var tiers = ['holy_grail', 'very_highly_recommended', 'highly_recommended', 'recommended'];
+    var items = [];
+    for (var i = 0; i < tiers.length; i++) {
+      var arr = pairingsObj[tiers[i]] || [];
+      for (var j = 0; j < arr.length; j++) {
+        if (!isLikelyInstruction(arr[j])) items.push(arr[j]);
+      }
+      if (limit && items.length >= limit * 2) break;
+    }
+    return uniqueText(items, limit);
+  }
+
+  function flavorUseTips(f, fk, limit) {
+    var tips = [];
+    var pairingsObj = f && f.pairings ? f.pairings : {};
+    Object.keys(pairingsObj).forEach(function (tier) {
+      var arr = pairingsObj[tier] || [];
+      for (var i = 0; i < arr.length; i++) {
+        if (isLikelyInstruction(arr[i])) tips.push(cleanPairingName(arr[i]));
+      }
+    });
+    if (fk && Array.isArray(fk.tips)) {
+      for (var ti = 0; ti < fk.tips.length; ti++) {
+        if (isLikelyInstruction(fk.tips[ti])) tips.push(fk.tips[ti]);
+      }
+    }
+    if (f && f.function) tips.push('Function: ' + f.function);
+    if (f && f.flavor_notes) tips.push(f.flavor_notes);
+    return uniqueText(tips, limit);
+  }
+
+  function affinityText(f, limit) {
+    var aff = (f && f.affinities) || [];
+    var out = [];
+    for (var i = 0; i < aff.length; i++) {
+      var combo = aff[i];
+      if (Array.isArray(combo)) out.push(combo.join(' + '));
+      else out.push(String(combo || ''));
+    }
+    return uniqueText(out, limit);
+  }
+
+  function aromaHarmonyText(u, limit) {
+    var a = u && u.aroma;
+    var hw = (a && a.harmonizes_with) || [];
+    var out = [];
+    for (var i = 0; i < hw.length; i++) {
+      out.push(hw[i] && (hw[i].name || hw[i].id));
+    }
+    return uniqueText(out, limit);
+  }
+
+  function findBestRow(query) {
+    var q = norm(query);
+    if (!q) {
+      return byName.cumin || (unified && unified[0]) || null;
+    }
+    var rows = findRows(query);
+    if (!rows.length) return null;
+    for (var i = 0; i < rows.length; i++) {
+      var n = norm(rows[i].name || '');
+      if (n === q || norm(rows[i].id || '') === q) return rows[i];
+    }
+    return rows[0];
+  }
+
+  function flavorAnswerChipHtml(text, opts) {
+    var cls = 'flavor-answer-chip' + (opts && opts.avoid ? ' flavor-answer-chip--avoid' : '');
+    if (opts && opts.link) {
+      return '<a class="' + cls + '" href="' + opts.link + '">' + esc(text) + '</a>';
+    }
+    return '<span class="' + cls + '">' + esc(text) + '</span>';
+  }
+
+  function flavorAnswerChipList(items, opts) {
+    if (!items || !items.length) {
+      return '<p class="flavor-answer-empty">' + esc((opts && opts.empty) || 'No direct note in this extract yet.') + '</p>';
+    }
+    return (
+      '<div class="flavor-answer-chips">' +
+      items
+        .map(function (text) {
+          return flavorAnswerChipHtml(text, opts);
+        })
+        .join('') +
+      '</div>'
+    );
+  }
+
+  function flavorAnswerTipList(items, empty) {
+    if (!items || !items.length) return '<p class="flavor-answer-empty">' + esc(empty || 'No use notes yet.') + '</p>';
+    return (
+      '<ul class="flavor-answer-tip-list">' +
+      items
+        .slice(0, 4)
+        .map(function (tip) {
+          return '<li>' + esc(tip) + '</li>';
+        })
+        .join('') +
+      '</ul>'
+    );
+  }
+
+  function renderFlavorAnswerForRow(u, fk) {
+    var host = document.getElementById('flavorAnswer');
+    if (!host) return;
+    if (!u) {
+      host.innerHTML =
+        '<p class="flavor-answer-empty">Search an ingredient to get a quick kitchen answer. Example: cumin, tomatoes, lamb, lemon.</p>';
+      lastAnswerId = null;
+      return;
+    }
+    var f = u.flavor || {};
+    var th = u.thesaurus;
+    var best = bestFlavorPairings(f, 8);
+    if (!best.length && fk && fk.pairings) {
+      best = uniqueText(
+        []
+          .concat(fk.pairings.holy_grail || [])
+          .concat(fk.pairings.highly_recommended || [])
+          .concat(fk.pairings.recommended || []),
+        8
+      );
+    }
+    var avoids = uniqueText(f.avoid || (fk && fk.avoid) || [], 8);
+    var useTips = flavorUseTips(f, fk, 4);
+    var aroma = aromaHarmonyText(u, 8);
+    if (!aroma.length && fk && fk.spice_harmony_partners) aroma = uniqueText(fk.spice_harmony_partners, 8);
+    var aff = affinityText(f, 4);
+    var meta = [];
+    if (f.weight) meta.push('Weight: ' + f.weight);
+    if (f.volume) meta.push('Volume: ' + f.volume);
+    if (f.taste && f.taste.length) meta.push('Taste: ' + f.taste.join(', '));
+    if (th && th.family) meta.push('Family: ' + th.family);
+    if (fk && fk.primary_family) meta.push('Toolkit: ' + String(fk.primary_family).replace(/_/g, ' '));
+    lastAnswerId = u.id;
+    host.innerHTML =
+      '<div class="flavor-answer-head">' +
+        '<div>' +
+          '<p class="flavor-answer-kicker">Flavor answer</p>' +
+          '<h2 class="flavor-answer-title">' + esc(titleish(u.name || u.id)) + '</h2>' +
+          '<div class="flavor-answer-meta">' +
+            meta.slice(0, 5).map(function (m) { return '<span class="flavor-answer-pill">' + esc(m) + '</span>'; }).join('') +
+          '</div>' +
+        '</div>' +
+        '<div class="flavor-answer-actions">' +
+          '<button type="button" class="flavor-answer-action" data-flavor-answer-action="detail">Full detail</button>' +
+          '<a class="flavor-answer-action" href="pairing-atlas.html?ingredient=' + encodeURIComponent(u.name || u.id) + '">Matrix</a>' +
+          (u.aroma ? '<a class="flavor-answer-action" href="aroma.html?spice=' + encodeURIComponent(u.aroma.id || u.id) + '">Aroma</a>' : '') +
+        '</div>' +
+      '</div>' +
+      '<div class="flavor-answer-grid">' +
+        '<section class="flavor-answer-section"><h3>Best pairings</h3>' +
+          flavorAnswerChipList(best, { empty: 'No Flavor Bible pairings for this row.' }) +
+        '</section>' +
+        '<section class="flavor-answer-section"><h3>Avoid or check</h3>' +
+          flavorAnswerChipList(avoids, { avoid: true, empty: 'No avoid notes in the unified extract.' }) +
+        '</section>' +
+        '<section class="flavor-answer-section"><h3>Use it like this</h3>' +
+          flavorAnswerTipList(useTips, 'No technique notes yet.') +
+        '</section>' +
+        '<section class="flavor-answer-section"><h3>Aroma links</h3>' +
+          flavorAnswerChipList(aroma, { empty: 'No Aroma harmony row yet.' }) +
+        '</section>' +
+      '</div>' +
+      (aff.length
+        ? '<p class="flavor-answer-note"><strong>Affinity idea:</strong> ' + esc(aff[0]) + '</p>'
+        : '<p class="flavor-answer-note">Answer uses the unified Flavor, Aroma, Thesaurus, and toolkit extracts.</p>');
+  }
+
+  function updateFlavorAnswer(query, opts) {
+    var host = document.getElementById('flavorAnswer');
+    if (!host || !unified) return;
+    var row = findBestRow(query);
+    if (!row && query) {
+      host.innerHTML =
+        '<p class="flavor-answer-empty">No quick Flavor answer matched <strong>' +
+        esc(query) +
+        '</strong>. Try a broader ingredient name or use Aroma for spice-led lookup.</p>';
+      lastAnswerId = null;
+      return;
+    }
+    if (!row && opts && opts.selectDefault) row = findBestRow('');
+    renderFlavorAnswerForRow(row, lookupFlavourIngredient(row));
   }
 
   function tierListHtml(pairingsObj) {
@@ -685,10 +908,24 @@
   function runSearch() {
     var q = document.getElementById('flavorSearch');
     if (!q) return;
+    if (!norm(q.value)) {
+      updateFlavorAnswer('', { selectDefault: true });
+      var emptyList = document.getElementById('flavorResults');
+      if (emptyList) {
+        emptyList.innerHTML =
+          '<div class="empty empty-search-state">' +
+          '<div class="empty-kicker">Search</div>' +
+          '<h2 class="empty-title">Ask an ingredient</h2>' +
+          '<p class="empty-body">Type an ingredient above for results. The quick answer card shows a Cumin example until you search.</p>' +
+          '</div>';
+      }
+      return;
+    }
     var rows = findRows(q.value);
     var list = document.getElementById('flavorResults');
     if (!list) return;
     if (!rows.length) {
+      updateFlavorAnswer(q.value, { selectDefault: false });
       list.innerHTML =
         '<div class="empty empty-search-state">' +
         '<div class="empty-kicker">No match</div>' +
@@ -698,6 +935,7 @@
         '</div>';
       return;
     }
+    updateFlavorAnswer(q.value, { selectDefault: false });
     list.innerHTML = rows
       .map(function (u) {
         return (
@@ -719,6 +957,7 @@
           return x.id === id;
         })[0];
         if (u) renderDetail(u);
+        if (u) renderFlavorAnswerForRow(u, lookupFlavourIngredient(u));
       });
     });
   }
@@ -778,6 +1017,8 @@
                 ' · Toolkit v' + (kb.stats.version || '1.1') + ' (' + (kb.stats.total_ingredients || '') + ' ingredients)';
               st.textContent = loadStatusText;
             }
+            var inpAfterToolkit = document.getElementById('flavorSearch');
+            updateFlavorAnswer(inpAfterToolkit ? inpAfterToolkit.value : deepQ, { selectDefault: true });
           });
           var inp = document.getElementById('flavorSearch');
           if (deepQ && inp) inp.value = deepQ;
@@ -786,6 +1027,7 @@
             var rows = findRows(deepQ);
             if (rows.length) renderDetail(rows[0]);
           }
+          updateFlavorAnswer(deepQ, { selectDefault: true });
           if (openToolkit) {
             var tt = document.querySelector('[data-flavor-tab="toolkit"]');
             if (tt) tt.click();
@@ -827,6 +1069,30 @@
           : null;
       inp.addEventListener('input', function () {
         scheduleFlavorSearch();
+      });
+    }
+    var answer = document.getElementById('flavorAnswer');
+    if (answer) {
+      answer.addEventListener('click', function (e) {
+        var action = e.target.closest('[data-flavor-answer-action]');
+        if (!action) return;
+        if (action.getAttribute('data-flavor-answer-action') === 'detail') {
+          e.preventDefault();
+          var row = null;
+          for (var i = 0; i < (unified || []).length; i++) {
+            if (unified[i].id === lastAnswerId) {
+              row = unified[i];
+              break;
+            }
+          }
+          if (row) {
+            renderDetail(row);
+            var detail = document.getElementById('flavorDetail');
+            if (detail && typeof detail.scrollIntoView === 'function') {
+              detail.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+            }
+          }
+        }
       });
     }
   }
