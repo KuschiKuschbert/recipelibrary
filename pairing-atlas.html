@@ -599,6 +599,41 @@
   .pa-drawer-decision-summary .ingredient-flow-priority {
     margin-bottom: 0;
   }
+  .pa-drawer-priority {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .pa-drawer-priority .ingredient-flow-priority-item {
+    padding: 10px;
+  }
+  .pa-drawer-priority .ingredient-flow-priority-label {
+    margin-bottom: 5px;
+    font-size: 10.5px;
+  }
+  .pa-drawer-priority .ingredient-flow-priority-value {
+    font-size: 13px;
+    line-height: 1.32;
+    overflow-wrap: anywhere;
+  }
+  .pa-drawer-priority-card--food {
+    border-color: rgba(0, 188, 212, 0.22);
+    background:
+      linear-gradient(135deg, rgba(0, 188, 212, 0.09), rgba(201, 169, 110, 0.045)),
+      rgba(255, 255, 255, 0.032);
+  }
+  .pa-drawer-priority-card--check {
+    border-color: rgba(220, 90, 90, 0.24);
+    background:
+      linear-gradient(135deg, rgba(220, 90, 90, 0.08), rgba(201, 169, 110, 0.04)),
+      rgba(255, 255, 255, 0.03);
+  }
+  .pa-selected-profile .pa-drawer-priority .ingredient-flow-priority-item {
+    padding: 8px;
+  }
+  .pa-selected-profile .pa-drawer-priority .ingredient-flow-priority-value {
+    font-size: 12.5px;
+    line-height: 1.28;
+  }
   .pa-drawer-profile-grid {
     gap: 8px;
   }
@@ -1001,6 +1036,25 @@
       gap: 6px;
     }
 
+    html.lenovo-tab-one-profile .pa-drawer-priority {
+      gap: 6px;
+    }
+
+    html.lenovo-tab-one-profile .pa-drawer-priority .ingredient-flow-priority-item {
+      padding: 8px;
+    }
+
+    html.lenovo-tab-one-profile .pa-drawer-priority .ingredient-flow-priority-label {
+      margin-bottom: 4px;
+      font-size: 10px;
+      line-height: 1.15;
+    }
+
+    html.lenovo-tab-one-profile .pa-drawer-priority .ingredient-flow-priority-value {
+      font-size: 12.25px;
+      line-height: 1.26;
+    }
+
     html.lenovo-tab-one-profile .pa-legend {
       display: none;
     }
@@ -1123,6 +1177,25 @@
       gap: 6px;
     }
 
+    html.lenovo-tab-one-profile .pa-drawer-priority {
+      gap: 6px;
+    }
+
+    html.lenovo-tab-one-profile .pa-drawer-priority .ingredient-flow-priority-item {
+      padding: 7px 8px;
+    }
+
+    html.lenovo-tab-one-profile .pa-drawer-priority .ingredient-flow-priority-label {
+      margin-bottom: 4px;
+      font-size: 9.75px;
+      line-height: 1.12;
+    }
+
+    html.lenovo-tab-one-profile .pa-drawer-priority .ingredient-flow-priority-value {
+      font-size: 12px;
+      line-height: 1.24;
+    }
+
     html.lenovo-tab-one-profile .pa-sec {
       margin-bottom: 12px;
     }
@@ -1174,6 +1247,9 @@
     .pa-decision__head {
       grid-template-columns: 1fr;
       display: grid;
+    }
+    .pa-drawer-priority {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
@@ -1359,7 +1435,7 @@
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/kuschi-recipe-ui.js?v=4"></script>
 <script src="assets/ingredient-flow-ui.js?v=5"></script>
-<script src="assets/pairing-atlas.js?v=26"></script>
+<script src="assets/pairing-atlas.js?v=27"></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
 <script src="assets/app-nav.js?v=2"></script>
 <style>

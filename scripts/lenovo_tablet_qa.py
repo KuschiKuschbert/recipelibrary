@@ -1248,9 +1248,29 @@ def run_pairing_decision_smoke(
         problems.append("Cumin selected profile dock is missing after Show row")
     else:
         selected_text = selected_profile.inner_text(timeout=5_000).lower()
-        for expected in ("cumin", "kitchen profile", "pair first", "use now", "best with", "use on", "technique", "check"):
+        for expected in (
+            "cumin",
+            "kitchen profile",
+            "pair first",
+            "use now",
+            "use on",
+            "check",
+            "pair with",
+            "foods / dishes",
+            "cook move",
+            "avoid / check",
+        ):
             if expected not in selected_text:
                 problems.append(f"Cumin selected profile dock missing: {expected}")
+        problems.extend(
+            ingredient_flow_priority_problems(
+                page,
+                '#paMatrixHost [data-pa-selected-profile][data-selected-spice-id="cumin"] [data-pa-drawer-priority]',
+                "Pairing Atlas cumin selected profile dock",
+                ("pair first", "use now", "use on", "check", "fenugreek"),
+                '#paMatrixHost [data-pa-selected-profile][data-selected-spice-id="cumin"] .pa-drawer-profile-grid',
+            )
+        )
         selected_is_sticky = page.evaluate(
             """() => {
               const profile = document.querySelector('#paMatrixHost [data-pa-selected-profile]');
@@ -1296,6 +1316,7 @@ def run_pairing_decision_smoke(
                 missing: !profile || !card,
                 sourceDetails: profile ? profile.querySelectorAll('.pa-drawer-source-details').length : 0,
                 compactProfile: profile ? !!profile.querySelector('.ingredient-flow-profile--compact') : false,
+                priorityItems: profile ? profile.querySelectorAll('[data-pa-drawer-priority] .ingredient-flow-priority-item').length : 0,
                 headerActions: profile ? profile.querySelectorAll('.pa-drawer-actions .ingredient-flow-action').length : 0,
                 footerActions: profile ? profile.querySelectorAll('.pa-drawer-foot .ingredient-flow-action').length : 0,
                 clientHeight: card ? Math.round(card.clientHeight) : 0,
@@ -1311,6 +1332,8 @@ def run_pairing_decision_smoke(
             problems.append("Cumin selected profile dock duplicates source detail instead of staying compact")
         if not selected_layout.get("compactProfile"):
             problems.append("Cumin selected profile dock is not using the shared compact profile modifier")
+        if int(selected_layout.get("priorityItems") or 0) < 4:
+            problems.append("Cumin selected profile dock does not expose the four-part decision strip")
         if int(selected_layout.get("headerActions") or 0) < 3:
             problems.append("Cumin selected profile header actions are not using shared ingredient-flow actions")
         if int(selected_layout.get("footerActions") or 0) > 0:

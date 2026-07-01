@@ -464,6 +464,8 @@
   function drawerDecisionSummaryHtml(harmony, flavorPairs, foods, avoid, useTips) {
     var pairText = drawerSummaryText(harmony.length ? harmony : flavorPairs, 3);
     var useText = drawerSummaryText(useTips, 1);
+    var foodText = drawerSummaryText(foods, 2);
+    var avoidText = drawerSummaryText(avoid, 2);
     var flow = window.KuschiIngredientFlow;
     return (
       '<div class="pa-drawer-decision-summary" data-pa-drawer-decision-summary>' +
@@ -471,6 +473,8 @@
         [
           { label: 'Pair first', value: pairText, empty: 'No direct pairing yet', className: 'pa-drawer-priority-card--pair' },
           { label: 'Use now', value: useText, empty: 'No technique note yet', className: 'pa-drawer-priority-card--use' },
+          { label: 'Use on', value: foodText, empty: 'No food row yet', className: 'pa-drawer-priority-card--food' },
+          { label: 'Check', value: avoidText, empty: 'No avoid note yet', className: 'pa-drawer-priority-card--check' },
         ],
         { className: 'pa-drawer-priority', attrs: { 'data-pa-drawer-priority': true } }
       ) +
@@ -1055,7 +1059,7 @@
     var pairItems = harmony.length ? harmony : flavorPairs;
     var name = displayNameForIngredient(ing) || ing.name || ing.id;
     var note = state.enriched
-      ? (compact ? 'Fast answer from Aroma, Flavor, and food data.' : 'Fastest kitchen answer from Aroma harmony, Flavor Bible rows, and food-pairing data.')
+      ? (compact ? 'Pair, use, serve, check.' : 'Fastest kitchen answer from Aroma harmony, Flavor Bible rows, and food-pairing data.')
       : 'Aroma data is ready; richer Flavor and food rows are still loading.';
     var flow = window.KuschiIngredientFlow;
     return (
@@ -1069,22 +1073,22 @@
         flow.profileGrid(
           [
             flow.panel(
-              'Best with',
+              'Pair with',
               drawerChipListHtml(pairItems, { kind: 'spice', empty: 'No direct pairings yet.', attrsForItem: spiceDrillAttrs }),
               { className: 'pa-drawer-profile-panel' }
             ),
             flow.panel(
-              'Use on',
+              'Foods / dishes',
               drawerChipListHtml(foods, { kind: 'food', empty: state.enriched ? 'No food rows list this spice yet.' : 'Food rows loading...', attrsForItem: foodDrillAttrs }),
               { className: 'pa-drawer-profile-panel' }
             ),
             flow.panel(
-              'Technique',
+              'Cook move',
               flow.useList(useTips, { limit: 2, empty: 'No technique note yet.' }),
               { className: 'pa-drawer-profile-panel' }
             ),
             flow.panel(
-              'Check',
+              'Avoid / check',
               drawerChipListHtml(avoid, { kind: 'flavor', empty: 'No avoid notes found.' }),
               { className: 'pa-drawer-profile-panel' }
             ),
