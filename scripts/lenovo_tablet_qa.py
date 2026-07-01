@@ -1755,7 +1755,7 @@ def run_flavor_decision_smoke(
     problems.extend(
         ingredient_flow_control_problems(
             page,
-            "#flavorAnswer .flavor-answer-food",
+            '#flavorAnswer [data-decision-food-id="roasted-lamb"]',
             "Flavor food answer card",
             ("Matrix", "Aroma"),
         )
@@ -1802,7 +1802,7 @@ def run_flavor_decision_smoke(
             "#flavorAnswer [data-flavor-answer-priority]",
             "Flavor Cumin answer",
             ("pair first", "use now"),
-            "#flavorAnswer .flavor-answer-grid",
+            "#flavorAnswer .ingredient-flow-grid",
         )
     )
     timed_interaction(
@@ -1830,10 +1830,16 @@ def run_flavor_decision_smoke(
     if "Cumin" not in body_text:
         problems.append("Flavor answer card did not keep the first ingredient from 'pair cumin with lamb'")
     shared_answer = page.evaluate(
-        "() => !!document.querySelector('#flavorAnswer.ingredient-flow-card .ingredient-flow-grid')"
+        """() => !!(
+          document.querySelector('#flavorAnswer.ingredient-flow-card .ingredient-flow-head') &&
+          document.querySelector('#flavorAnswer.ingredient-flow-card .ingredient-flow-title') &&
+          document.querySelector('#flavorAnswer.ingredient-flow-card .ingredient-flow-meta') &&
+          document.querySelector('#flavorAnswer.ingredient-flow-card .ingredient-flow-actions') &&
+          document.querySelector('#flavorAnswer.ingredient-flow-card .ingredient-flow-grid')
+        )"""
     )
     if not shared_answer:
-        problems.append("Flavor answer card is not using shared ingredient-flow styles")
+        problems.append("Flavor answer card is not using shared ingredient-flow answer primitives")
     body_lower = body_text.lower()
     for expected in ("best pairings", "use it like this", "aroma links"):
         if expected not in body_lower:
@@ -2147,7 +2153,7 @@ def run_flavor_landscape_smoke(
             "#flavorAnswer [data-flavor-answer-priority]",
             "Flavor landscape Cumin answer",
             ("pair first", "use now"),
-            "#flavorAnswer .flavor-answer-grid",
+            "#flavorAnswer .ingredient-flow-grid",
         )
     )
     detail_action = page.locator('[data-flavor-answer-action="detail"]')

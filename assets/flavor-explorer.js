@@ -457,9 +457,6 @@
     return global.KuschiIngredientFlow.chips(items, {
       avoid: opts.avoid,
       empty: opts.empty || 'No direct note in this extract yet.',
-      emptyClassName: 'flavor-answer-empty',
-      className: 'flavor-answer-chips',
-      chipClassName: 'flavor-answer-chip' + (opts.avoid ? ' flavor-answer-chip--avoid' : ''),
       textForItem: flavorAnswerChipText,
       hrefForItem: function (item) {
         return flavorAnswerChipHref(item, opts);
@@ -476,8 +473,6 @@
   function flavorAnswerTipList(items, empty) {
     return global.KuschiIngredientFlow.useList(items, {
       empty: empty || 'No use notes yet.',
-      emptyClassName: 'flavor-answer-empty',
-      className: 'flavor-answer-tip-list',
       limit: 4,
     });
   }
@@ -487,8 +482,7 @@
     if (!host) return;
     if (!u) {
       host.innerHTML = global.KuschiIngredientFlow.empty(
-        'Search an ingredient to get a quick kitchen answer. Example: cumin, tomatoes, lamb, lemon.',
-        'flavor-answer-empty'
+        'Search an ingredient to get a quick kitchen answer. Example: cumin, tomatoes, lamb, lemon.'
       );
       lastAnswerId = null;
       return;
@@ -523,35 +517,27 @@
     var actions = [
       {
         text: 'Full detail',
-        className: 'flavor-answer-action',
         attrs: { 'data-flavor-answer-action': 'detail' },
       },
       {
         text: 'Matrix',
         href: 'pairing-atlas.html?ingredient=' + encodeURIComponent(u.name || u.id),
-        className: 'flavor-answer-action',
       },
     ];
     if (u.aroma) {
       actions.push({
         text: 'Aroma',
         href: 'aroma.html?spice=' + encodeURIComponent(u.aroma.id || u.id),
-        className: 'flavor-answer-action',
       });
     }
     host.innerHTML =
       flow.head({
         kicker: 'Flavor answer',
         title: titleish(u.name || u.id),
-        className: 'flavor-answer-head',
-        kickerClassName: 'flavor-answer-kicker',
-        titleClassName: 'flavor-answer-title',
         metaHtml: flow.meta(meta, {
           limit: 5,
-          className: 'flavor-answer-meta',
-          itemOptions: { className: 'flavor-answer-pill' },
         }),
-        actionsHtml: flow.actions(actions, { className: 'flavor-answer-actions' }),
+        actionsHtml: flow.actions(actions),
       }) +
       flow.priority(
         [
@@ -566,7 +552,7 @@
             empty: 'No technique note yet',
           },
         ],
-        { className: 'flavor-answer-priority', attrs: { 'data-flavor-answer-priority': true } }
+        { attrs: { 'data-flavor-answer-priority': true } }
       ) +
       flow.grid(
         []
@@ -575,23 +561,21 @@
               ? [
                   flow.section(
                     'Food seasoning row',
-                    flavorAnswerChipList(foodSeasonings, { kind: 'spice', empty: 'No Aroma food seasonings for this match.' }),
-                    { className: 'flavor-answer-section' }
+                    flavorAnswerChipList(foodSeasonings, { kind: 'spice', empty: 'No Aroma food seasonings for this match.' })
                   ),
                 ]
               : []
           )
           .concat([
-            flow.section('Best pairings', flavorAnswerChipList(best, { empty: 'No Flavor Bible pairings for this row.' }), { className: 'flavor-answer-section' }),
-            flow.section('Avoid or check', flavorAnswerChipList(avoids, { avoid: true, empty: 'No avoid notes in the unified extract.' }), { className: 'flavor-answer-section' }),
-            flow.section('Use it like this', flavorAnswerTipList(useTips, 'No technique notes yet.'), { className: 'flavor-answer-section' }),
-            flow.section('Aroma links', flavorAnswerChipList(aroma, { empty: 'No Aroma harmony row yet.' }), { className: 'flavor-answer-section' }),
-          ]),
-        { className: 'flavor-answer-grid' }
+            flow.section('Best pairings', flavorAnswerChipList(best, { empty: 'No Flavor Bible pairings for this row.' })),
+            flow.section('Avoid or check', flavorAnswerChipList(avoids, { avoid: true, empty: 'No avoid notes in the unified extract.' })),
+            flow.section('Use it like this', flavorAnswerTipList(useTips, 'No technique notes yet.')),
+            flow.section('Aroma links', flavorAnswerChipList(aroma, { empty: 'No Aroma harmony row yet.' })),
+          ])
       ) +
       (aff.length
-        ? flow.note('<strong>Affinity idea:</strong> ' + esc(aff[0]), { raw: true, className: 'flavor-answer-note' })
-        : flow.note('Answer uses the unified Flavor, Aroma, Thesaurus, and toolkit extracts.', { className: 'flavor-answer-note' }));
+        ? flow.note('<strong>Affinity idea:</strong> ' + esc(aff[0]), { raw: true })
+        : flow.note('Answer uses the unified Flavor, Aroma, Thesaurus, and toolkit extracts.'));
   }
 
   function renderFlavorAnswerForFood(food, row) {
@@ -604,36 +588,29 @@
     var flow = global.KuschiIngredientFlow;
     lastAnswerId = row && row.id ? row.id : null;
     host.innerHTML =
-      '<div class="flavor-answer-food ingredient-flow" data-decision-food-id="' +
+      '<div class="ingredient-flow" data-decision-food-id="' +
       esc(food.id || '') +
       '">' +
       flow.head({
         kicker: 'Food answer',
         title: titleish(name),
-        className: 'flavor-answer-head',
-        kickerClassName: 'flavor-answer-kicker',
-        titleClassName: 'flavor-answer-title',
         metaHtml: flow.meta(
           [
-            { text: 'Aroma food row', className: 'flavor-answer-pill' },
-            { text: total + ' seasonings', className: 'flavor-answer-pill' },
-          ],
-          { className: 'flavor-answer-meta' }
+            { text: 'Aroma food row' },
+            { text: total + ' seasonings' },
+          ]
         ),
         actionsHtml: flow.actions(
           [
             {
               text: 'Matrix',
               href: 'pairing-atlas.html?ingredient=' + encodeURIComponent(name),
-              className: 'flavor-answer-action',
             },
             {
               text: 'Aroma',
               href: 'aroma.html?food=' + encodeURIComponent(food.id || ''),
-              className: 'flavor-answer-action',
             },
-          ],
-          { className: 'flavor-answer-actions' }
+          ]
         ),
       }) +
       flow.priority(
@@ -641,22 +618,15 @@
           { label: 'Season first', value: flavorAnswerSummaryText(seasonings, 4), empty: 'No listed seasonings yet' },
           { label: 'Next check', value: flavorAnswerSummaryText(more, 3), empty: 'Open the Aroma food row' },
         ],
-        { className: 'flavor-answer-priority', attrs: { 'data-flavor-answer-priority': true } }
+        { attrs: { 'data-flavor-answer-priority': true } }
       ) +
       flow.grid(
         [
-          flow.section('Seasonings', flavorAnswerChipList(seasonings, { kind: 'spice', empty: 'No listed seasonings for this food row.', attrsForItem: flavorSeasoningDrillAttrs }), {
-            className: 'flavor-answer-section',
-          }),
-          flow.section('More options', flavorAnswerChipList(more, { kind: 'spice', empty: 'No extra seasonings beyond the first picks.', attrsForItem: flavorSeasoningDrillAttrs }), {
-            className: 'flavor-answer-section',
-          }),
-        ],
-        { className: 'flavor-answer-grid' }
+          flow.section('Seasonings', flavorAnswerChipList(seasonings, { kind: 'spice', empty: 'No listed seasonings for this food row.', attrsForItem: flavorSeasoningDrillAttrs })),
+          flow.section('More options', flavorAnswerChipList(more, { kind: 'spice', empty: 'No extra seasonings beyond the first picks.', attrsForItem: flavorSeasoningDrillAttrs })),
+        ]
       ) +
-      flow.note('Food-pairing row from the Aroma extract. Use Matrix for the full row, or tap a seasoning for its Aroma profile.', {
-        className: 'flavor-answer-note',
-      }) +
+      flow.note('Food-pairing row from the Aroma extract. Use Matrix for the full row, or tap a seasoning for its Aroma profile.') +
       '</div>';
   }
 
@@ -705,7 +675,7 @@
     }
     if (!row && query) {
       host.innerHTML =
-        '<p class="flavor-answer-empty ingredient-flow-empty">No quick Flavor answer matched <strong>' +
+        '<p class="ingredient-flow-empty">No quick Flavor answer matched <strong>' +
         esc(query) +
         '</strong>. Try a broader ingredient, food, or dish name, or use Aroma for spice-led lookup.</p>';
       lastAnswerId = null;
