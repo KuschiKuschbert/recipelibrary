@@ -4482,9 +4482,8 @@ html.lenovo-tab-one-profile .empty-action-btn,
 html.lenovo-tab-one-profile .hero-nav-link,
 html.lenovo-tab-one-profile .hero-actions button,
 html.lenovo-tab-one-profile .hero-actions .hero-nav-cluster a,
-html.lenovo-tab-one-profile .aroma-mode-btn,
-html.lenovo-tab-one-profile .flavor-tabs button,
-html.lenovo-tab-one-profile .flavor-pantry-link,
+html.lenovo-tab-one-profile .tablet-mode-tabs > button,
+html.lenovo-tab-one-profile .tablet-mode-tabs > a,
 html.lenovo-tab-one-profile .flavor-wheel-item,
 html.lenovo-tab-one-profile .sheet-book-item,
 html.lenovo-tab-one-profile .modal-copy-btn,
@@ -9666,9 +9665,8 @@ html.low-memory-device.lenovo-tab-one-profile .stocktake-add-jump,
 html.low-memory-device.lenovo-tab-one-profile .nb-card,
 html.low-memory-device.lenovo-tab-one-profile .nb-chip,
 html.low-memory-device.lenovo-tab-one-profile .flavor-result-row,
-html.low-memory-device.lenovo-tab-one-profile .flavor-tabs button,
-html.low-memory-device.lenovo-tab-one-profile .flavor-pantry-link,
-html.low-memory-device.lenovo-tab-one-profile .aroma-mode-btn,
+html.low-memory-device.lenovo-tab-one-profile .tablet-mode-tabs > button,
+html.low-memory-device.lenovo-tab-one-profile .tablet-mode-tabs > a,
 html.low-memory-device.lenovo-tab-one-profile .aroma-result-row,
 html.low-memory-device.lenovo-tab-one-profile .aroma-browse-card,
 html.low-memory-device.lenovo-tab-one-profile .aroma-neighbor-card,
@@ -9787,16 +9785,16 @@ body.has-app-nav .page-action-btn,
 body.has-app-nav .hero-nav-link,
 body.has-app-nav .hero-actions button,
 body.has-app-nav .hero-actions .hero-nav-cluster a,
-body.has-app-nav .aroma-mode-btn,
-body.has-app-nav .flavor-tabs button,
-body.has-app-nav .flavor-pantry-link {
+body.has-app-nav .tablet-mode-tabs > button,
+body.has-app-nav .tablet-mode-tabs > a {
   background: rgba(255, 255, 255, 0.065);
   border-color: rgba(255, 255, 255, 0.13);
 }
 
 body.has-app-nav .filter-chip--active,
-body.has-app-nav .flavor-tabs button[aria-selected="true"],
-body.has-app-nav .aroma-mode-btn[aria-pressed="true"] {
+body.has-app-nav .tablet-mode-tabs > button[aria-selected="true"],
+body.has-app-nav .tablet-mode-tabs > button[aria-pressed="true"],
+body.has-app-nav .tablet-mode-tabs > a[aria-selected="true"] {
   background: rgba(201, 169, 110, 0.18);
   border-color: rgba(201, 169, 110, 0.55);
 }
@@ -10231,12 +10229,10 @@ html.lenovo-tab-one-profile body.has-app-nav :where(
   .nav-item,
   .sheet-item,
   .sheet-book-item,
-  .flavor-tabs button,
-  .flavor-pantry-link,
-  .aroma-mode-btn,
+  .tablet-mode-tabs > button,
+  .tablet-mode-tabs > a,
   .nb-chip,
   .nb-card-hit,
-  .pa-mode button,
   .prep-priority-pill,
   .planner-list-tab
 ):active {
@@ -10274,12 +10270,10 @@ html.low-memory-device.lenovo-tab-one-profile body.has-app-nav :where(
   .nav-item,
   .sheet-item,
   .sheet-book-item,
-  .flavor-tabs button,
-  .flavor-pantry-link,
-  .aroma-mode-btn,
+  .tablet-mode-tabs > button,
+  .tablet-mode-tabs > a,
   .nb-chip,
   .nb-card-hit,
-  .pa-mode button,
   .prep-priority-pill,
   .planner-list-tab
 ):active {
