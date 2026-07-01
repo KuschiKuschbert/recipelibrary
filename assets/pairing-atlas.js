@@ -428,27 +428,10 @@
     );
   }
 
-  function drawerDecisionLine(label, text, emptyText) {
-    return (
-      '<li><span class="pa-drawer-decision-label">' +
-      esc(label) +
-      '</span><span class="pa-drawer-decision-value">' +
-      esc(text || emptyText || 'No direct note yet') +
-      '</span></li>'
-    );
-  }
-
   function drawerDecisionSummaryHtml(harmony, flavorPairs, foods, avoid, useTips) {
     var pairText = drawerSummaryText(harmony.length ? harmony : flavorPairs, 3);
     var useText = drawerSummaryText(useTips, 1);
     var flow = window.KuschiIngredientFlow;
-    var supportLines = [
-      drawerDecisionLine('Flavor adds', drawerSummaryText(flavorPairs, 3), 'No Flavor Bible row yet'),
-      drawerDecisionLine('Foods', drawerSummaryText(foods, 2), 'No food rows yet'),
-    ];
-    if (avoid.length) {
-      supportLines.push(drawerDecisionLine('Check', drawerSummaryText(avoid, 2), 'No avoid note found'));
-    }
     return (
       '<div class="pa-drawer-decision-summary" data-pa-drawer-decision-summary>' +
       flow.priority(
@@ -458,9 +441,6 @@
         ],
         { className: 'pa-drawer-priority', attrs: { 'data-pa-drawer-priority': true } }
       ) +
-      '<ul class="pa-drawer-decision-list">' +
-      supportLines.join('') +
-      '</ul>' +
       '</div>'
     );
   }
@@ -990,6 +970,7 @@
     var foods = foodMatchesForSpice(ing.id, 6);
     var avoid = flavorAvoidNames(ing, 6);
     var useTips = flavorUseTips(ing, 5);
+    var pairItems = harmony.length ? harmony : flavorPairs;
     var name = displayNameForIngredient(ing) || ing.name || ing.id;
     var note = state.enriched
       ? 'Fastest kitchen answer from Aroma harmony, Flavor Bible rows, and food-pairing data.'
@@ -1001,6 +982,31 @@
       '">' +
         flow.profileHead('Kitchen profile', note, { className: 'pa-drawer-profile-head' }) +
         drawerDecisionSummaryHtml(harmony, flavorPairs, foods, avoid, useTips) +
+        flow.profileGrid(
+          [
+            flow.panel(
+              'Best with',
+              chipListHtml(pairItems, { kind: 'spice', empty: 'No direct pairings yet.' }),
+              { className: 'pa-drawer-profile-panel' }
+            ),
+            flow.panel(
+              'Use on',
+              chipListHtml(foods, { empty: state.enriched ? 'No food rows list this spice yet.' : 'Food rows loading...' }),
+              { className: 'pa-drawer-profile-panel' }
+            ),
+            flow.panel(
+              'Technique',
+              flow.useList(useTips, { limit: 2, empty: 'No technique note yet.' }),
+              { className: 'pa-drawer-profile-panel' }
+            ),
+            flow.panel(
+              'Check',
+              chipListHtml(avoid, { kind: 'flavor', empty: 'No avoid notes found.' }),
+              { className: 'pa-drawer-profile-panel' }
+            ),
+          ],
+          { className: 'pa-drawer-profile-grid' }
+        ) +
       '</section>'
     );
   }

@@ -954,7 +954,7 @@ def run_pairing_decision_smoke(
         problems.append("Cumin selected profile dock is missing after Show row")
     else:
         selected_text = selected_profile.inner_text(timeout=5_000).lower()
-        for expected in ("cumin", "kitchen profile", "pair first", "use now"):
+        for expected in ("cumin", "kitchen profile", "pair first", "use now", "best with", "use on", "technique", "check"):
             if expected not in selected_text:
                 problems.append(f"Cumin selected profile dock missing: {expected}")
         selected_is_sticky = page.evaluate(
