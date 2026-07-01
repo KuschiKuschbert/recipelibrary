@@ -593,6 +593,9 @@ def ingredient_flow_priority_problems(
 
 def task_first_surface_spec(page_path: str) -> dict[str, Any] | None:
     if "pairing-atlas.html" in page_path:
+        expected_text = ("pair first", "use now")
+        if any(token in page_path for token in ("ingredient=cumin", "spice=cumin", "q=cumin")):
+            expected_text = ("cumin", "pair first", "use now")
         return {
             "label": "Pairing Atlas answer surface",
             "items": [
@@ -622,10 +625,17 @@ def task_first_surface_spec(page_path: str) -> dict[str, Any] | None:
                     "beforeSelector": ".pa-toolbar",
                     "beforeName": "matrix controls",
                     "readabilitySelector": ".ingredient-flow-priority-value, .ingredient-flow-chip, .ingredient-flow-use-list, .ingredient-flow-section p, .ingredient-flow-note, .ingredient-flow-empty",
+                    "titleSelector": ".ingredient-flow-title",
+                    "prioritySelector": "[data-pa-answer-priority]",
+                    "minTextLength": 90,
+                    "expectedText": expected_text,
                 },
             ],
         }
     if "flavor.html" in page_path:
+        expected_text = ("pair first", "use now")
+        if "q=cumin" in page_path:
+            expected_text = ("cumin", "pair first", "use now", "best pairings")
         return {
             "label": "Flavor answer surface",
             "items": [
@@ -648,10 +658,17 @@ def task_first_surface_spec(page_path: str) -> dict[str, Any] | None:
                     "beforeSelector": ".flavor-tabs",
                     "beforeName": "secondary tabs",
                     "readabilitySelector": ".ingredient-flow-priority-value, .ingredient-flow-chip, .ingredient-flow-use-list, .ingredient-flow-section p, .ingredient-flow-note, .ingredient-flow-empty",
+                    "titleSelector": ".ingredient-flow-title",
+                    "prioritySelector": "[data-flavor-answer-priority]",
+                    "minTextLength": 90,
+                    "expectedText": expected_text,
                 },
             ],
         }
     if "aroma.html" in page_path:
+        expected_text = ("cumin", "pair first", "use now")
+        if "food=roasted-lamb" in page_path:
+            expected_text = ("roasted lamb", "season first", "next check")
         return {
             "label": "Aroma answer surface",
             "items": [
@@ -674,6 +691,10 @@ def task_first_surface_spec(page_path: str) -> dict[str, Any] | None:
                     "beforeSelector": ".aroma-modes",
                     "beforeName": "mode tabs",
                     "readabilitySelector": ".ingredient-flow-priority-value, .ingredient-flow-chip, .ingredient-flow-use-list, .ingredient-flow-section p, .ingredient-flow-note, .ingredient-flow-empty",
+                    "titleSelector": ".ingredient-flow-title",
+                    "prioritySelector": "[data-aroma-answer-priority]",
+                    "minTextLength": 90,
+                    "expectedText": expected_text,
                 },
             ],
         }
@@ -694,6 +715,11 @@ def task_first_surface_problems(page: Any, page_path: str) -> list[str]:
       .trim()
       .replace(/\s+/g, ' ')
       .slice(0, 80);
+  }
+  function fullText(el) {
+    return (el.innerText || el.textContent || '')
+      .trim()
+      .replace(/\s+/g, ' ');
   }
   function isVisible(el) {
     const style = getComputedStyle(el);
@@ -735,6 +761,8 @@ def task_first_surface_problems(page: Any, page_path: str) -> list[str]:
     const before = item.beforeSelector ? document.querySelector(item.beforeSelector) : null;
     const beforeStyle = before ? getComputedStyle(before) : null;
     const beforeRect = before ? before.getBoundingClientRect() : null;
+    const title = item.titleSelector ? el.querySelector(item.titleSelector) : null;
+    const priorities = item.prioritySelector ? Array.from(el.querySelectorAll(item.prioritySelector)).filter(isVisible) : [];
     const hidden = style.display === 'none' ||
       style.visibility === 'hidden' ||
       Number(style.opacity || 1) === 0 ||
@@ -758,6 +786,10 @@ def task_first_surface_problems(page: Any, page_path: str) -> list[str]:
         beforeRect.height <= 0
       )),
       beforeTop: beforeRect ? Math.round(beforeRect.top) : null,
+      text: fullText(el).slice(0, 600),
+      textLength: fullText(el).length,
+      titleMissing: !!item.titleSelector && !(title && isVisible(title) && label(title)),
+      priorityMissing: !!item.prioritySelector && priorities.length <= 0,
       tinyReadableText: readableTextIssues(el, item),
     });
   }
@@ -789,6 +821,20 @@ def task_first_surface_problems(page: Any, page_path: str) -> list[str]:
         role = str(item.get("role") or "")
         if role == "control" and (width < 44 or height < 44):
             problems.append(f"{label} {name} is below 44px tap target ({width}x{height})")
+        if role == "answer":
+            min_text_length = int(item.get("minTextLength") or 0)
+            text_length = int(item.get("textLength") or 0)
+            if min_text_length and text_length < min_text_length:
+                problems.append(f"{label} {name} has too little answer content ({text_length} chars < {min_text_length})")
+            if item.get("titleMissing"):
+                problems.append(f"{label} {name} missing visible title: {item.get('titleSelector')}")
+            if item.get("priorityMissing"):
+                problems.append(f"{label} {name} missing visible priority summary: {item.get('prioritySelector')}")
+            answer_text = str(item.get("text") or "").lower()
+            for expected in item.get("expectedText") or ():
+                expected_text = str(expected).strip().lower()
+                if expected_text and expected_text not in answer_text:
+                    problems.append(f"{label} {name} missing answer text: {expected}")
         top = float(item.get("top") or 0)
         bottom = float(item.get("bottom") or 0)
         left = float(item.get("left") or 0)
