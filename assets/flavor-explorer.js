@@ -642,6 +642,14 @@
     renderFlavorAnswerForRow(row, lookupFlavourIngredient(row), foodMatch);
   }
 
+  function updateFlavorAnswerLive(input) {
+    if (!unified || !input) return;
+    updateFlavorAnswer(input.value, {
+      selectDefault: !norm(input.value),
+      syncDetail: false,
+    });
+  }
+
   function tierListHtml(pairingsObj) {
     if (!pairingsObj) return '';
     var tiers = [
@@ -1326,6 +1334,7 @@
             })
           : null;
       inp.addEventListener('input', function () {
+        updateFlavorAnswerLive(inp);
         scheduleFlavorSearch();
       });
     }

@@ -61,6 +61,7 @@ LONG_TASK_TOTAL_MS_BUDGET = 1_200
 LONG_TASK_COUNT_BUDGET = 12
 DECISION_RESPONSE_MS_BUDGET = 1_200
 ACTION_RESPONSE_MS_BUDGET = 900
+FLAVOR_QUICK_ANSWER_MS_BUDGET = 240
 
 CaptureState = Callable[[str], None]
 TimingSink = Callable[[dict[str, Any]], None]
@@ -999,6 +1000,7 @@ def run_flavor_decision_smoke(
         lambda: search.fill("what goes with lamb?"),
         "() => /\\bLamb\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '')",
         problems,
+        FLAVOR_QUICK_ANSWER_MS_BUDGET,
         timing_sink=timing_sink,
     )
     body_text = answer.inner_text(timeout=5_000)
@@ -1012,6 +1014,7 @@ def run_flavor_decision_smoke(
         lambda: search.fill("what herbs for lamb?"),
         "() => /\\bLamb\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '')",
         problems,
+        FLAVOR_QUICK_ANSWER_MS_BUDGET,
         timing_sink=timing_sink,
     )
     body_text = answer.inner_text(timeout=5_000)
@@ -1023,6 +1026,7 @@ def run_flavor_decision_smoke(
         lambda: search.fill("what goes with roasted lamb?"),
         "() => !!document.querySelector('#flavorAnswer [data-decision-food-id=\"roasted-lamb\"]')",
         problems,
+        FLAVOR_QUICK_ANSWER_MS_BUDGET,
         timing_sink=timing_sink,
     )
     body_text = answer.inner_text(timeout=5_000)
@@ -1048,15 +1052,20 @@ def run_flavor_decision_smoke(
         page,
         "Flavor phrase answer",
         lambda: search.fill("what goes with cumin?"),
-        "() => /\\bCumin\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '') && document.querySelector('#flavorDetail')?.getAttribute('data-flavor-detail-id') === 'cumin'",
+        "() => /\\bCumin\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '')",
         problems,
+        FLAVOR_QUICK_ANSWER_MS_BUDGET,
         timing_sink=timing_sink,
     )
     body_text = answer.inner_text(timeout=5_000)
     if "Cumin" not in body_text:
         problems.append("Flavor answer card did not render Cumin from a kitchen phrase")
-    synced_detail_id = page.locator("#flavorDetail").get_attribute("data-flavor-detail-id", timeout=5_000)
-    if synced_detail_id != "cumin":
+    try:
+        page.wait_for_function(
+            "() => document.querySelector('#flavorDetail')?.getAttribute('data-flavor-detail-id') === 'cumin'",
+            timeout=DECISION_RESPONSE_MS_BUDGET,
+        )
+    except PlaywrightTimeoutError:
         problems.append("Flavor answer did not auto-sync Cumin into the detail pane")
     if capture_state:
         capture_state("flavor-cumin-answer")
@@ -1075,6 +1084,7 @@ def run_flavor_decision_smoke(
         lambda: search.fill("pair lamb with cumin"),
         "() => /\\bLamb\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '')",
         problems,
+        FLAVOR_QUICK_ANSWER_MS_BUDGET,
         timing_sink=timing_sink,
     )
     body_text = answer.inner_text(timeout=5_000)
@@ -1086,6 +1096,7 @@ def run_flavor_decision_smoke(
         lambda: search.fill("pair cumin with lamb"),
         "() => /\\bCumin\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '')",
         problems,
+        FLAVOR_QUICK_ANSWER_MS_BUDGET,
         timing_sink=timing_sink,
     )
     body_text = answer.inner_text(timeout=5_000)
