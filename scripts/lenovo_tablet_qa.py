@@ -1206,6 +1206,21 @@ def run_flavor_decision_smoke(
             ("Matrix", "Aroma"),
         )
     )
+    flavor_cumin_chip = page.locator('#flavorAnswer [data-decision-food-id="roasted-lamb"] [data-flavor-seasoning-id="cumin"]').first
+    if flavor_cumin_chip.count() != 1:
+        problems.append("Flavor Roasted Lamb answer missing same-page Cumin seasoning chip")
+    else:
+        timed_interaction(
+            page,
+            "Flavor Cumin seasoning chip",
+            lambda: flavor_cumin_chip.click(),
+            "() => /\\bCumin\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '') && document.querySelector('#flavorDetail')?.getAttribute('data-flavor-detail-id') === 'cumin'",
+            problems,
+            FLAVOR_QUICK_ANSWER_MS_BUDGET,
+            timing_sink=timing_sink,
+        )
+        if "Cumin" not in answer.inner_text(timeout=5_000):
+            problems.append("Flavor Cumin seasoning chip did not render the Cumin answer")
     timed_interaction(
         page,
         "Flavor phrase answer",

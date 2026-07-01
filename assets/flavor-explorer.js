@@ -414,17 +414,24 @@
   }
 
   function flavorAnswerChipList(items, opts) {
+    opts = opts || {};
     return global.KuschiIngredientFlow.chips(items, {
-      avoid: opts && opts.avoid,
-      empty: (opts && opts.empty) || 'No direct note in this extract yet.',
+      avoid: opts.avoid,
+      empty: opts.empty || 'No direct note in this extract yet.',
       emptyClassName: 'flavor-answer-empty',
       className: 'flavor-answer-chips',
-      chipClassName: 'flavor-answer-chip' + (opts && opts.avoid ? ' flavor-answer-chip--avoid' : ''),
+      chipClassName: 'flavor-answer-chip' + (opts.avoid ? ' flavor-answer-chip--avoid' : ''),
       textForItem: flavorAnswerChipText,
       hrefForItem: function (item) {
-        return flavorAnswerChipHref(item, opts || {});
+        return flavorAnswerChipHref(item, opts);
       },
+      attrsForItem: opts.attrsForItem || null,
     });
+  }
+
+  function flavorSeasoningDrillAttrs(item) {
+    var id = item && item.id ? item.id : '';
+    return id ? { 'data-flavor-seasoning-id': id } : null;
   }
 
   function flavorAnswerTipList(items, empty) {
@@ -599,10 +606,10 @@
       ) +
       flow.grid(
         [
-          flow.section('Seasonings', flavorAnswerChipList(seasonings, { kind: 'spice', empty: 'No listed seasonings for this food row.' }), {
+          flow.section('Seasonings', flavorAnswerChipList(seasonings, { kind: 'spice', empty: 'No listed seasonings for this food row.', attrsForItem: flavorSeasoningDrillAttrs }), {
             className: 'flavor-answer-section',
           }),
-          flow.section('More options', flavorAnswerChipList(more, { kind: 'spice', empty: 'No extra seasonings beyond the first picks.' }), {
+          flow.section('More options', flavorAnswerChipList(more, { kind: 'spice', empty: 'No extra seasonings beyond the first picks.', attrsForItem: flavorSeasoningDrillAttrs }), {
             className: 'flavor-answer-section',
           }),
         ],
@@ -612,6 +619,32 @@
         className: 'flavor-answer-note',
       }) +
       '</div>';
+  }
+
+  function findFlavorRowForSeasoningId(spiceId) {
+    var id = String(spiceId || '').trim();
+    if (!id || !unified) return null;
+    var idNorm = norm(id);
+    for (var i = 0; i < unified.length; i++) {
+      var row = unified[i];
+      if (!row) continue;
+      var rowId = String(row.id || '');
+      var aromaId = row.aroma && row.aroma.id ? String(row.aroma.id) : '';
+      var rowName = String(row.name || '');
+      if (rowId === id || aromaId === id || norm(rowId) === idNorm || norm(aromaId) === idNorm || norm(rowName) === idNorm) {
+        return row;
+      }
+    }
+    return null;
+  }
+
+  function drillIntoFlavorSeasoning(spiceId, input) {
+    var row = findFlavorRowForSeasoningId(spiceId);
+    if (!row) return false;
+    var name = row.name || row.id || spiceId;
+    if (input) input.value = name;
+    updateFlavorAnswer(name, { selectDefault: false, syncDetail: true });
+    return true;
   }
 
   function updateFlavorAnswer(query, opts) {
@@ -1350,6 +1383,11 @@
     var answer = document.getElementById('flavorAnswer');
     if (answer) {
       answer.addEventListener('click', function (e) {
+        var seasoning = e.target.closest('[data-flavor-seasoning-id]');
+        if (seasoning && drillIntoFlavorSeasoning(seasoning.getAttribute('data-flavor-seasoning-id'), inp)) {
+          e.preventDefault();
+          return;
+        }
         var action = e.target.closest('[data-flavor-answer-action]');
         if (!action) return;
         if (action.getAttribute('data-flavor-answer-action') === 'detail') {
