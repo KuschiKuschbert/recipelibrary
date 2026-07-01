@@ -8,6 +8,50 @@
       .replace(/>/g, '&gt;');
   }
 
+  function normalizeQuery(value) {
+    return String(value || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function queryCandidates(query) {
+    var original = normalizeQuery(query);
+    if (!original) return [];
+    var q = original;
+    var variants = [];
+    function addVariant(text) {
+      text = String(text || '').trim();
+      if (text && variants.indexOf(text) < 0) variants.push(text);
+    }
+    [
+      /^(what|which)\s+(goes|pairs|works)\s+(with|well\s+with)\s+/,
+      /^(goes|pairs|works)\s+(with|well\s+with)\s+/,
+      /^(what|which)\s+can\s+i\s+(pair|use|cook)\s+(with\s+)?/,
+      /^(pair|match|use|cook|season|flavour|flavor)\s+(this\s+with\s+|with\s+|for\s+)?/,
+      /^(best|good|quick)\s+(pairings?|matches|flavours|flavors)\s+(for|with)\s+/,
+      /^(pairings?|matches|flavours|flavors)\s+(for|with)\s+/,
+      /^(what|which)\s+(spices?|herbs?|seasonings?|flavours|flavors)\s+(go|work|pair)\s+(with|for)\s+/,
+      /^(what|which)\s+(spices?|herbs?|seasonings?|flavours|flavors)\s+(for|with)\s+/,
+      /^(spices?|herbs?|seasonings?|flavours|flavors)\s+(for|with)\s+/,
+      /\s+(pairings?|matches|ideas|please)$/,
+    ].forEach(function (pattern) {
+      q = q.replace(pattern, '').trim();
+    });
+    var words = q.split(' ');
+    ['with', 'for', 'to'].forEach(function (marker) {
+      var idx = words.indexOf(marker);
+      if (idx >= 0 && idx < words.length - 1) {
+        addVariant(words.slice(0, idx).join(' ').trim());
+        addVariant(words.slice(idx + 1).join(' ').trim());
+      }
+    });
+    addVariant(q);
+    addVariant(original);
+    return variants;
+  }
+
   function attr(value) {
     return esc(value).replace(/"/g, '&quot;');
   }
@@ -211,6 +255,8 @@
 
   window.KuschiIngredientFlow = {
     esc: esc,
+    normalizeQuery: normalizeQuery,
+    queryCandidates: queryCandidates,
     attr: attr,
     attrs: attrs,
     empty: empty,

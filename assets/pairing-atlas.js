@@ -49,39 +49,10 @@
   }
 
   function ingredientQueryCandidates(query) {
-    var original = norm(query);
-    if (!original) return [];
-    var q = original;
-    var variants = [];
-    function addVariant(text) {
-      text = String(text || '').trim();
-      if (text && variants.indexOf(text) < 0) variants.push(text);
-    }
-    [
-      /^(what|which)\s+(goes|pairs|works)\s+(with|well\s+with)\s+/,
-      /^(goes|pairs|works)\s+(with|well\s+with)\s+/,
-      /^(what|which)\s+can\s+i\s+(pair|use|cook)\s+(with\s+)?/,
-      /^(pair|match|use|cook|season|flavour|flavor)\s+(this\s+with\s+|with\s+|for\s+)?/,
-      /^(best|good|quick)\s+(pairings?|matches|flavours|flavors)\s+(for|with)\s+/,
-      /^(pairings?|matches|flavours|flavors)\s+(for|with)\s+/,
-      /^(what|which)\s+(spices?|herbs?|flavours|flavors)\s+(go|work|pair)\s+(with|for)\s+/,
-      /\s+(pairings?|matches|ideas|please)$/,
-    ].forEach(function (pattern) {
-      q = q.replace(pattern, '').trim();
-    });
-    var words = q.split(' ');
-    ['with', 'for', 'to'].forEach(function (marker) {
-      var idx = words.indexOf(marker);
-      if (idx >= 0 && idx < words.length - 1) {
-        var head = words.slice(0, idx).join(' ').trim();
-        addVariant(head);
-        var tail = words.slice(idx + 1).join(' ').trim();
-        addVariant(tail);
-      }
-    });
-    addVariant(q);
-    addVariant(original);
-    return variants;
+    var flow = window.KuschiIngredientFlow;
+    if (flow && typeof flow.queryCandidates === 'function') return flow.queryCandidates(query);
+    var q = norm(query);
+    return q ? [q] : [];
   }
 
   function isLikelyInstruction(s) {

@@ -609,6 +609,16 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
     for expected in ("Seasonings", "More options"):
         if expected.lower() not in body_lower:
             problems.append(f"Roasted Lamb food answer missing section: {expected}")
+    timed_interaction(
+        page,
+        "Pairing Atlas herbs-for-lamb phrase answer",
+        lambda: (search.fill("what herbs for lamb?"), page.locator("#paDecisionSubmit").click()),
+        "() => !!document.querySelector('#paDecisionBody .pa-answer[data-decision-food-id=\"roasted-lamb\"]')",
+        problems,
+    )
+    body_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
+    if "Roasted Lamb" not in body_text or "Cumin" not in body_text:
+        problems.append("Pairing Atlas herbs-for-lamb phrase did not render the Roasted Lamb seasoning answer")
     problems.extend(
         ingredient_flow_control_problems(
             page,
@@ -651,6 +661,16 @@ def run_flavor_decision_smoke(page: Any) -> list[str]:
         problems.append("Flavor answer card did not render Lamb from a kitchen phrase")
     if "Cumin" not in body_text:
         problems.append("Flavor Lamb answer did not surface Cumin from the Aroma food-seasoning row")
+    timed_interaction(
+        page,
+        "Flavor herbs-for-lamb phrase answer",
+        lambda: search.fill("what herbs for lamb?"),
+        "() => /\\bLamb\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '')",
+        problems,
+    )
+    body_text = answer.inner_text(timeout=5_000)
+    if "Lamb" not in body_text or "Cumin" not in body_text:
+        problems.append("Flavor herbs-for-lamb phrase did not keep the Lamb answer with Cumin context")
     timed_interaction(
         page,
         "Flavor food phrase answer",
@@ -764,6 +784,16 @@ def run_aroma_answer_smoke(page: Any) -> list[str]:
     for expected in ("harmony partners", "foods that use it", "use it"):
         if expected not in body_lower:
             problems.append(f"Aroma answer card missing section: {expected}")
+    timed_interaction(
+        page,
+        "Aroma spice phrase answer",
+        lambda: (search.fill("what goes with cumin?"), search.press("Enter")),
+        "() => /\\bCumin\\b/.test(document.querySelector('#aromaAnswer .ingredient-flow-title')?.textContent || '')",
+        problems,
+    )
+    body_text = answer.inner_text(timeout=5_000)
+    if "Cumin" not in body_text:
+        problems.append("Aroma answer card did not render Cumin from a kitchen phrase")
     problems.extend(
         ingredient_flow_control_problems(
             page,
@@ -803,12 +833,16 @@ def run_aroma_answer_smoke(page: Any) -> list[str]:
         profile_text = page.locator("#spiceProfile").inner_text(timeout=5_000)
         if "Cumin" not in profile_text:
             problems.append("Aroma answer Profile action did not open Cumin profile")
-    search.fill("roasted lamb")
-    search.press("Enter")
-    page.wait_for_timeout(600)
+    timed_interaction(
+        page,
+        "Aroma herbs-for-lamb phrase answer",
+        lambda: (search.fill("what herbs for lamb?"), search.press("Enter")),
+        "() => /\\bRoasted Lamb\\b/.test(document.querySelector('#aromaAnswer .ingredient-flow-title')?.textContent || '')",
+        problems,
+    )
     food_text = answer.inner_text(timeout=5_000)
     if "Roasted Lamb" not in food_text:
-        problems.append("Aroma answer card did not render Roasted Lamb food answer")
+        problems.append("Aroma answer card did not render Roasted Lamb food answer from a kitchen phrase")
     food_lower = food_text.lower()
     for expected in ("seasonings", "more options", "next check"):
         if expected not in food_lower:
