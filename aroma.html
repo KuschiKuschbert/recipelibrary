@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=161">
+<link rel="stylesheet" href="assets/theme.css?v=165">
 <link rel="preload" href="aroma_data/ingredients.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
@@ -272,25 +272,46 @@
   .aroma-neighbor-card.complement { border-left: 3px solid rgba(110, 154, 190, 0.9); }
   .aroma-neighbor-card .nm { font-weight: 600; font-size: 14px; display: block; }
   .aroma-neighbor-card .hint { font-size: 12px; color: var(--text3); margin-top: 4px; }
+  html.lenovo-tab-one-profile .aroma-page {
+    max-width: none;
+    padding: 0 24px max(88px, calc(var(--nav-tabbar-height, 0px) + 24px));
+  }
+  html.lenovo-tab-one-profile .aroma-quick-pass {
+    max-width: 760px;
+    margin-bottom: 18px;
+    border-radius: 14px;
+  }
+  html.lenovo-tab-one-profile .aroma-quick-pass-summary {
+    min-height: 48px;
+    padding: 14px 16px;
+    font-size: 14.5px;
+    line-height: 1.25;
+  }
+  html.lenovo-tab-one-profile .aroma-quick-pass-csum {
+    min-height: 44px;
+    padding: 11px 12px;
+    font-size: 13.5px;
+    line-height: 1.25;
+  }
   html.lenovo-tab-one-profile .aroma-modes {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 6px;
+    gap: 7px;
     margin: 14px 0 16px;
   }
   html.lenovo-tab-one-profile .aroma-mode-btn {
     width: 100%;
-    min-height: 44px;
-    padding: 6px 8px;
+    min-height: 48px;
+    padding: 8px 10px;
     border-radius: 12px;
-    font-size: 12.5px;
-    line-height: 1.15;
+    font-size: 13.5px;
+    line-height: 1.2;
     transition-duration: 0.08s;
   }
   html.lenovo-tab-one-profile .aroma-panel-lead {
-    max-width: 720px;
-    font-size: 14px;
-    line-height: 1.55;
+    max-width: 760px;
+    font-size: 14.5px;
+    line-height: 1.62;
   }
   html.lenovo-tab-one-profile .aroma-panel-actions {
     display: flex;
@@ -314,50 +335,83 @@
   html.lenovo-tab-one-profile .aroma-ftk-links a {
     margin-right: 0;
   }
-  html.lenovo-tab-one-profile .aroma-browse-grid {
-    grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+  html.lenovo-tab-one-profile .aroma-results {
+    gap: 9px;
+    margin-top: 18px;
+  }
+  html.lenovo-tab-one-profile .aroma-result-row {
+    min-height: 52px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.32;
+  }
+  html.lenovo-tab-one-profile .aroma-profile {
+    padding: 18px;
+    border-radius: 14px;
+  }
+  html.lenovo-tab-one-profile .aroma-profile h2 {
+    font-size: 24px;
+    line-height: 1.15;
+  }
+  html.lenovo-tab-one-profile .aroma-profile .bot {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  html.lenovo-tab-one-profile .aroma-chip-row {
     gap: 7px;
-    margin-top: 12px;
+  }
+  html.lenovo-tab-one-profile .aroma-chip {
+    min-height: 36px;
+    padding: 6px 11px;
+    font-size: 13px;
+    line-height: 1.2;
+  }
+  html.lenovo-tab-one-profile .aroma-browse-grid {
+    grid-template-columns: repeat(auto-fill, minmax(144px, 1fr));
+    gap: 8px;
+    margin-top: 14px;
   }
   html.lenovo-tab-one-profile .aroma-browse-card {
-    min-height: 44px;
-    padding: 8px 10px;
-    border-radius: 10px;
-    font-size: 12.5px;
-    line-height: 1.2;
+    min-height: 56px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-size: 13.25px;
+    line-height: 1.25;
   }
   html.lenovo-tab-one-profile .aroma-matrix-toolbar {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 6px;
+    gap: 7px;
     align-items: stretch;
   }
   html.lenovo-tab-one-profile .aroma-matrix-toolbar label {
     min-width: 0;
-    min-height: 42px;
+    min-height: 56px;
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: fit-content(118px) minmax(0, 1fr);
     align-items: center;
-    gap: 5px;
-    padding: 4px 6px;
+    gap: 7px;
+    padding: 6px 8px;
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 12px;
     background: rgba(255, 255, 255, 0.035);
-    font-size: 11.5px;
-    line-height: 1.15;
+    font-size: 12.5px;
+    line-height: 1.2;
   }
   html.lenovo-tab-one-profile .aroma-matrix-toolbar select {
     width: 100%;
     min-width: 0;
-    min-height: 34px;
-    padding: 5px 7px;
-    font-size: 12px;
+    min-height: 42px;
+    padding: 7px 9px;
+    border-radius: 10px;
+    font-size: 13px;
   }
   html.lenovo-tab-one-profile .aroma-matrix-toolbar input[type="checkbox"] {
     appearance: none;
     -webkit-appearance: none;
-    width: 44px;
-    height: 44px;
+    width: 46px;
+    height: 46px;
     margin: 0;
     border: 1px solid var(--border);
     border-radius: 12px;
@@ -374,12 +428,60 @@
     outline: 2px solid var(--gold);
     outline-offset: 2px;
   }
+  html.lenovo-tab-one-profile #matrixScroll {
+    --mat-cell: 24px;
+    --mat-row-label-w: 78px;
+    --mat-header-h: 56px;
+    --mat-th-font: 8.5px;
+    --mat-row-th-font: 10.5px;
+  }
+  html.lenovo-tab-one-profile #matrixScroll.aroma-density-comfortable {
+    --mat-cell: 34px;
+    --mat-row-label-w: 112px;
+    --mat-header-h: 84px;
+    --mat-th-font: 9.5px;
+    --mat-row-th-font: 11.5px;
+  }
+  html.lenovo-tab-one-profile #matrixScroll.aroma-density-large {
+    --mat-cell: 46px;
+    --mat-row-label-w: 136px;
+    --mat-header-h: 100px;
+    --mat-th-font: 10.5px;
+    --mat-row-th-font: 12.5px;
+  }
+  html.lenovo-tab-one-profile .aroma-matrix-stats,
+  html.lenovo-tab-one-profile .aroma-matrix-hover-legend,
+  html.lenovo-tab-one-profile .aroma-matrix-legend {
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  html.lenovo-tab-one-profile .aroma-neighbor-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 9px;
+  }
+  html.lenovo-tab-one-profile .aroma-neighbor-card {
+    min-height: 58px;
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+  html.lenovo-tab-one-profile .aroma-neighbor-card .nm {
+    font-size: 14.5px;
+  }
+  html.lenovo-tab-one-profile .aroma-neighbor-card .hint {
+    font-size: 12.5px;
+    line-height: 1.3;
+  }
   @media (orientation: landscape) {
     html.lenovo-tab-one-profile .aroma-matrix-toolbar {
       grid-template-columns: repeat(5, minmax(0, 1fr));
     }
     html.lenovo-tab-one-profile .aroma-matrix-scroll {
-      max-height: max(320px, calc(100dvh - 430px));
+      max-height: max(280px, calc(100dvh - 500px));
+    }
+    html.lenovo-tab-one-profile .aroma-matrix-toolbar label {
+      grid-template-columns: 1fr;
+      align-content: center;
+      gap: 5px;
     }
   }
   #matrixScroll {

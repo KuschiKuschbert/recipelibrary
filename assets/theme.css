@@ -9376,10 +9376,14 @@ html.lenovo-tab-one-profile .nb-modal-cap {
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .flavor-result-row,
-html.lenovo-tab-one-profile body.has-app-nav .aroma-result-row,
+html.lenovo-tab-one-profile body.has-app-nav .aroma-result-row {
+  min-height: 52px;
+  touch-action: manipulation;
+}
+
 html.lenovo-tab-one-profile body.has-app-nav .aroma-browse-card,
 html.lenovo-tab-one-profile body.has-app-nav .aroma-neighbor-card {
-  min-height: 44px;
+  min-height: 56px;
   touch-action: manipulation;
 }
 
@@ -9391,7 +9395,7 @@ html.lenovo-tab-one-profile body.has-app-nav .flavor-pair-chip {
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .aroma-matrix-toolbar label {
-  min-height: 44px;
+  min-height: 56px;
 }
 
 html.lenovo-tab-one-profile body.has-app-nav .aroma-matrix-toolbar select {
