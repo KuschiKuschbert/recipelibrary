@@ -18,6 +18,8 @@
   var aromaMeta = null;
   var foodPairings = null;
   var byName = Object.create(null);
+  var unifiedMatcher = null;
+  var foodMatcher = null;
   var loadP = null;
   var flavourKb = null;
   var flavourKbP = null;
@@ -50,6 +52,17 @@
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
+  }
+
+  function rebuildMatchers() {
+    var flow = global.KuschiIngredientFlow;
+    if (!flow || typeof flow.createRowMatcher !== 'function') {
+      unifiedMatcher = null;
+      foodMatcher = null;
+      return;
+    }
+    unifiedMatcher = flow.createRowMatcher(unified || [], { nameForRow: rowName });
+    foodMatcher = flow.createRowMatcher(foodPairings || [], { nameForRow: rowName });
   }
 
   /** schema v2 object { ingredients, kitchen_context } or legacy flat array */
@@ -136,6 +149,7 @@
           var u = unified[i];
           if (u && u.name) byName[norm(u.name)] = u;
         }
+        rebuildMatchers();
       });
     return loadP;
   }
@@ -190,6 +204,9 @@
   }
 
   function findRows(query) {
+    if (unifiedMatcher) {
+      return unifiedMatcher.search(query, { limit: 40, scanLimit: 80, reverseContains: true });
+    }
     var candidates = ingredientQueryCandidates(query);
     if (!candidates.length || !unified) return [];
     for (var ci = 0; ci < candidates.length; ci++) {
@@ -242,10 +259,12 @@
   }
 
   function findFoodMatch(query) {
+    if (foodMatcher) return foodMatcher.best(query, { reverseContains: true });
     return bestMatchForQuery(foodPairings || [], query, rowName);
   }
 
   function findFlavorRowMatch(query) {
+    if (unifiedMatcher) return unifiedMatcher.best(query, { reverseContains: true });
     return bestMatchForQuery(unified || [], query, rowName);
   }
 

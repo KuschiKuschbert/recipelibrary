@@ -20,6 +20,8 @@
     kitchenContext: null,
     pairingMatrix: null,
     foodPairings: null,
+    spiceMatcher: null,
+    foodMatcher: null,
     enriched: false,
     currentMode: 'priority',
     foodSpiceMode: 'priority',
@@ -106,6 +108,24 @@
     return displayNames[ing.id] || ing.name || ing.id || '';
   }
 
+  function createRowMatcher(rows, nameForRow, options) {
+    var flow = window.KuschiIngredientFlow;
+    if (flow && typeof flow.createRowMatcher === 'function') {
+      return flow.createRowMatcher(rows || [], {
+        nameForRow: nameForRow,
+        reverseContains: options && options.reverseContains,
+      });
+    }
+    return null;
+  }
+
+  function rebuildDecisionMatchers() {
+    state.spiceMatcher = createRowMatcher(state.ingredients || [], displayNameForIngredient);
+    state.foodMatcher = createRowMatcher(state.foodPairings || [], function (food) {
+      return food.name || food.id || '';
+    });
+  }
+
   function matchRowsByCandidate(rows, q, nameForRow) {
     if (!q || q.length < 2) return null;
     var prefix = null;
@@ -127,10 +147,12 @@
   }
 
   function matchIngredientCandidate(q) {
+    if (state.spiceMatcher) return state.spiceMatcher.matchCandidate(q);
     return matchRowsByCandidate(state.ingredients || [], q, displayNameForIngredient);
   }
 
   function matchFoodCandidate(q) {
+    if (state.foodMatcher) return state.foodMatcher.matchCandidate(q);
     return matchRowsByCandidate(state.foodPairings || [], q, function (food) {
       return food.name || food.id || '';
     });
@@ -1940,6 +1962,7 @@
         state.pairingMatrix = pm;
         state.foodPairings = fp;
         state.flavourHints = fh;
+        rebuildDecisionMatchers();
         state.enriched = true;
 
         var lh = document.getElementById('paLayerHarmony');
@@ -2005,6 +2028,7 @@
         state.ingredients = Array.isArray(pair[0]) ? pair[0] : [];
         state.meta = pair[1] && typeof pair[1] === 'object' ? pair[1] : {};
         state.byId = buildIngredientById(state.ingredients);
+        rebuildDecisionMatchers();
         if (decisionSearch) {
           var params = new URLSearchParams(window.location.search || '');
           var direct = params.get('spice') || params.get('ingredient') || params.get('q');

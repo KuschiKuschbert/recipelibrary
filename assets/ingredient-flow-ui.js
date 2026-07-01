@@ -68,6 +68,102 @@
     return variants;
   }
 
+  function createRowMatcher(rows, options) {
+    options = options || {};
+    rows = rows || [];
+    var nameForRow =
+      typeof options.nameForRow === 'function'
+        ? options.nameForRow
+        : function (row) {
+            return row && (row.name || row.id) ? row.name || row.id : '';
+          };
+    var idForRow =
+      typeof options.idForRow === 'function'
+        ? options.idForRow
+        : function (row) {
+            return row && row.id ? row.id : '';
+          };
+    var entries = [];
+    var exact = Object.create(null);
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      if (!row) continue;
+      var idn = normalizeQuery(idForRow(row));
+      var nn = normalizeQuery(nameForRow(row));
+      if (!idn && !nn) continue;
+      var entry = { row: row, idn: idn, nn: nn };
+      entries.push(entry);
+      if (idn && !exact[idn]) exact[idn] = entry;
+      if (nn && !exact[nn]) exact[nn] = entry;
+    }
+
+    function matchCandidate(candidate, matchOptions) {
+      var q = normalizeQuery(candidate);
+      if (!q || q.length < 2) return null;
+      if (exact[q]) return { item: exact[q].row, strength: 3 };
+      matchOptions = matchOptions || {};
+      var reverseContains = !!matchOptions.reverseContains;
+      var prefix = null;
+      var contains = null;
+      for (var ei = 0; ei < entries.length; ei++) {
+        var current = entries[ei];
+        if (!prefix && ((current.idn && current.idn.indexOf(q) === 0) || (current.nn && current.nn.indexOf(q) === 0))) {
+          prefix = { item: current.row, strength: 2 };
+        }
+        if (
+          !contains &&
+          q.length >= 3 &&
+          ((current.idn && current.idn.indexOf(q) >= 0) ||
+            (current.nn && current.nn.indexOf(q) >= 0) ||
+            (reverseContains && current.nn && q.indexOf(current.nn) >= 0))
+        ) {
+          contains = { item: current.row, strength: 1 };
+        }
+        if (prefix && contains) break;
+      }
+      return prefix || contains;
+    }
+
+    function best(query, matchOptions) {
+      var candidates = queryCandidates(query);
+      for (var ci = 0; ci < candidates.length; ci++) {
+        var match = matchCandidate(candidates[ci], matchOptions);
+        if (match) return match;
+      }
+      return null;
+    }
+
+    function search(query, searchOptions) {
+      searchOptions = searchOptions || {};
+      var candidates = queryCandidates(query);
+      var limit = searchOptions.limit || 40;
+      var scanLimit = searchOptions.scanLimit || limit * 2;
+      var reverseContains = searchOptions.reverseContains !== false;
+      var includeId = !!searchOptions.includeId;
+      for (var ci = 0; ci < candidates.length; ci++) {
+        var q = normalizeQuery(candidates[ci]);
+        if (!q) continue;
+        var out = [];
+        for (var ei = 0; ei < entries.length; ei++) {
+          var current = entries[ei];
+          var nameHit = current.nn && (current.nn === q || current.nn.indexOf(q) >= 0 || (reverseContains && q.indexOf(current.nn) >= 0));
+          var idHit = includeId && current.idn && (current.idn === q || current.idn.indexOf(q) >= 0);
+          if (nameHit || idHit) out.push(current.row);
+          if (out.length > scanLimit) break;
+        }
+        if (out.length) return out.slice(0, limit);
+      }
+      return [];
+    }
+
+    return {
+      entries: entries,
+      matchCandidate: matchCandidate,
+      best: best,
+      search: search,
+    };
+  }
+
   function attr(value) {
     return esc(value).replace(/"/g, '&quot;');
   }
@@ -340,6 +436,7 @@
     esc: esc,
     normalizeQuery: normalizeQuery,
     queryCandidates: queryCandidates,
+    createRowMatcher: createRowMatcher,
     attr: attr,
     attrs: attrs,
     empty: empty,
