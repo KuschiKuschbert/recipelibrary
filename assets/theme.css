@@ -9864,6 +9864,10 @@ html.lenovo-tab-one-profile body.catalog-page.has-app-nav .search-glass {
   border-radius: 12px;
 }
 
+html.lenovo-tab-one-profile body.catalog-page.has-app-nav .search-input {
+  font-size: 17px;
+}
+
 html.lenovo-tab-one-profile body.catalog-page.has-app-nav .filters-wrap {
   gap: 5px;
   margin-top: 4px;
@@ -9892,10 +9896,10 @@ html.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid {
 }
 
 html.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card {
-  min-height: 186px;
-  padding: 10px;
-  padding-right: 44px;
-  border-radius: 10px;
+  min-height: 204px;
+  padding: 12px;
+  padding-right: 48px;
+  border-radius: 8px;
   cursor: pointer;
   touch-action: manipulation;
 }
@@ -9906,14 +9910,14 @@ html.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card .card-head
 }
 
 html.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card .card-name {
-  font-size: 17px;
-  line-height: 1.16;
+  font-size: 18px;
+  line-height: 1.18;
 }
 
 html.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card .card-cuisine {
   min-height: 15px;
   margin-bottom: 6px;
-  font-size: 12px;
+  font-size: 12.5px;
   letter-spacing: 0.045em;
   line-height: 1.2;
 }
@@ -9929,7 +9933,7 @@ html.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card .badge {
   max-width: 100%;
   padding: 4px 8px;
   overflow: hidden;
-  font-size: 12px;
+  font-size: 12.5px;
   line-height: 1.05;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -9937,8 +9941,9 @@ html.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card .badge {
 
 html.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card .card-ings {
   padding-top: 6px;
-  font-size: 12.5px;
-  line-height: 1.34;
+  font-size: 14px;
+  line-height: 1.4;
+  -webkit-line-clamp: 3;
 }
 
 html.lenovo-tab-one-profile body.catalog-page.has-app-nav .grid .card .card-footer {
