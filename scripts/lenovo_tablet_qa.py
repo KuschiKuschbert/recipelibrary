@@ -459,6 +459,41 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
         )
         if instruction_chip:
             problems.append("Cumin drawer put an instruction into a pairing chip")
+    timed_interaction(
+        page,
+        "Pairing Atlas food phrase answer",
+        lambda: (search.fill("what goes with lamb?"), page.locator("#paDecisionSubmit").click()),
+        "() => !!document.querySelector('#paDecisionBody .pa-answer[data-decision-food-id=\"roasted-lamb\"]')",
+        problems,
+    )
+    body_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
+    if "Roasted Lamb" not in body_text:
+        problems.append("decision panel did not render Roasted Lamb from a food phrase")
+    if "Cumin" not in body_text:
+        problems.append("Roasted Lamb food answer did not surface Cumin as a seasoning")
+    body_lower = body_text.lower()
+    for expected in ("Seasonings", "More options"):
+        if expected.lower() not in body_lower:
+            problems.append(f"Roasted Lamb food answer missing section: {expected}")
+    problems.extend(
+        ingredient_flow_control_problems(
+            page,
+            "#paDecisionBody .pa-answer.ingredient-flow",
+            "Pairing Atlas food decision answer",
+            ("Open row", "Aroma", "Flavor"),
+        )
+    )
+    page.locator('[data-pa-decision-action="food"]').click()
+    try:
+        page.wait_for_function(
+            "() => !!document.querySelector('tr.pa-fx-data[data-food-id=\"roasted-lamb\"].pa-row-open')",
+            timeout=5_000,
+        )
+    except PlaywrightTimeoutError:
+        problems.append("food decision Open row did not open the Roasted Lamb food matrix row")
+    food_drawer = page.locator('tr.pa-drawer-row[data-food-drawer="roasted-lamb"]')
+    if food_drawer.count() != 1:
+        problems.append("Roasted Lamb food drawer is missing after food decision Open row")
     return problems
 
 

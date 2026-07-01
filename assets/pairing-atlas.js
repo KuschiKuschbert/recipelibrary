@@ -27,6 +27,7 @@
     openDrawerSpiceId: null,
     openDrawerFoodId: null,
     decisionSpiceId: null,
+    decisionFoodId: null,
   };
   var foodMatrixPainted = false;
   var foodMatrixObserver = null;
@@ -134,24 +135,50 @@
     return displayNames[ing.id] || ing.name || ing.id || '';
   }
 
-  function findIngredientByQuery(query) {
+  function matchRowsByCandidate(rows, q, nameForRow) {
+    if (!q || q.length < 2) return null;
+    var prefix = null;
+    var contains = null;
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      if (!row) continue;
+      var idn = norm(row.id || '');
+      var nn = norm(nameForRow(row));
+      if (idn === q || nn === q) return { item: row, strength: 3 };
+      if (!prefix && (idn.indexOf(q) === 0 || nn.indexOf(q) === 0)) {
+        prefix = { item: row, strength: 2 };
+      }
+      if (!contains && q.length >= 3 && (idn.indexOf(q) >= 0 || nn.indexOf(q) >= 0)) {
+        contains = { item: row, strength: 1 };
+      }
+    }
+    return prefix || contains;
+  }
+
+  function matchIngredientCandidate(q) {
+    return matchRowsByCandidate(state.ingredients || [], q, displayNameForIngredient);
+  }
+
+  function matchFoodCandidate(q) {
+    return matchRowsByCandidate(state.foodPairings || [], q, function (food) {
+      return food.name || food.id || '';
+    });
+  }
+
+  function findDecisionTarget(query) {
     var candidates = ingredientQueryCandidates(query);
     if (!candidates.length) return null;
-    var rows = state.ingredients || [];
     for (var ci = 0; ci < candidates.length; ci++) {
       var q = candidates[ci];
-      var prefix = null;
-      var contains = null;
-      for (var i = 0; i < rows.length; i++) {
-        var ing = rows[i];
-        if (!ing) continue;
-        var idn = norm(ing.id || '');
-        var nn = norm(displayNameForIngredient(ing));
-        if (idn === q || nn === q) return ing;
-        if (!prefix && (idn.indexOf(q) === 0 || nn.indexOf(q) === 0)) prefix = ing;
-        if (!contains && (idn.indexOf(q) >= 0 || nn.indexOf(q) >= 0)) contains = ing;
+      var spiceMatch = matchIngredientCandidate(q);
+      var foodMatch = matchFoodCandidate(q);
+      if (spiceMatch && foodMatch) {
+        return foodMatch.strength > spiceMatch.strength
+          ? { kind: 'food', item: foodMatch.item }
+          : { kind: 'spice', item: spiceMatch.item };
       }
-      if (prefix || contains) return prefix || contains;
+      if (spiceMatch) return { kind: 'spice', item: spiceMatch.item };
+      if (foodMatch) return { kind: 'food', item: foodMatch.item };
     }
     return null;
   }
@@ -248,6 +275,49 @@
       if (limit && out.length >= limit) break;
     }
     return uniqueNames(out, limit);
+  }
+
+  function orderedFoodSeasonings(food) {
+    var seas = (food && food.seasonings) || [];
+    var priority = state.meta.priority_row_ids || [];
+    var rankById = Object.create(null);
+    for (var i = 0; i < priority.length; i++) rankById[priority[i]] = i;
+    return seas
+      .map(function (s, idx) {
+        var id = s && s.id ? s.id : '';
+        return {
+          id: id,
+          name: (s && (s.name || s.id)) || '',
+          _idx: idx,
+          _rank: rankById[id] != null ? rankById[id] : 999 + idx,
+        };
+      })
+      .filter(function (item) {
+        return !!item.name;
+      })
+      .sort(function (a, b) {
+        if (a._rank !== b._rank) return a._rank - b._rank;
+        return a._idx - b._idx;
+      });
+  }
+
+  function foodSeasoningItems(food, limit, skipItems) {
+    var skip = Object.create(null);
+    for (var si = 0; si < (skipItems || []).length; si++) {
+      skip[norm(skipItems[si].name || skipItems[si].id || '')] = true;
+    }
+    var seen = Object.create(null);
+    var out = [];
+    var items = orderedFoodSeasonings(food);
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i];
+      var k = norm(item.name);
+      if (!k || seen[k] || skip[k]) continue;
+      seen[k] = true;
+      out.push({ id: item.id, name: item.name });
+      if (limit && out.length >= limit) break;
+    }
+    return out;
   }
 
   function flavorPairingNames(ing, limit) {
@@ -390,7 +460,7 @@
 
   function decisionAnswerHtml(ing) {
     if (!ing) {
-      return '<p class="pa-answer__empty ingredient-flow-empty">Type a spice or herb name to get a quick pairing answer.</p>';
+      return '<p class="pa-answer__empty ingredient-flow-empty">Type a spice, herb, food, or dish name to get a quick pairing answer.</p>';
     }
     var name = displayNameForIngredient(ing);
     var u = state.unifiedById ? state.unifiedById[ing.id] : null;
@@ -442,29 +512,98 @@
     );
   }
 
+  function foodDecisionAnswerHtml(food) {
+    var name = food && (food.name || food.id) ? food.name || food.id : '';
+    var seasonings = foodSeasoningItems(food, 8);
+    var more = foodSeasoningItems(food, 8, seasonings);
+    var total = ((food && food.seasonings) || []).length;
+    var sourceNote = total
+      ? 'Food-pairing row from the Aroma extract: ' + total + ' listed seasonings.'
+      : 'Food-pairing row from the Aroma extract.';
+    var flow = window.KuschiIngredientFlow;
+
+    return (
+      '<div class="pa-answer ingredient-flow" data-decision-food-id="' + esc(food.id || '') + '">' +
+        flow.head({
+          title: name,
+          className: 'pa-answer__top',
+          titleClassName: 'pa-answer__name',
+          metaHtml: flow.meta(
+            [
+              { text: 'Food pairing row', className: 'pa-answer__pill' },
+              { text: total + ' seasonings', className: 'pa-answer__pill' },
+            ],
+            { className: 'pa-answer__meta' }
+          ),
+          actionsHtml: flow.actions(
+            [
+              { text: 'Open row', className: 'pa-answer__action', attrs: { 'data-pa-decision-action': 'food' } },
+              { text: 'Aroma', href: 'aroma.html?food=' + encodeURIComponent(food.id || ''), className: 'pa-answer__action' },
+              { text: 'Flavor', href: 'flavor.html?q=' + encodeURIComponent(name), className: 'pa-answer__action' },
+            ],
+            { className: 'pa-answer__actions' }
+          ),
+        }) +
+        flow.grid(
+          [
+            flow.section('Seasonings', chipListHtml(seasonings, { kind: 'spice', empty: 'No listed seasonings for this food row.' }), {
+              className: 'pa-answer__section',
+            }),
+            flow.section('More options', chipListHtml(more, { kind: 'spice', empty: 'No extra seasonings beyond the first picks.' }), {
+              className: 'pa-answer__section',
+            }),
+          ],
+          { className: 'pa-answer__grid' }
+        ) +
+        flow.note(sourceNote, { className: 'pa-answer__note' }) +
+      '</div>'
+    );
+  }
+
   function updateDecisionPanel(query, options) {
     var body = document.getElementById('paDecisionBody');
     if (!body) return;
     var search = document.getElementById('paDecisionSearch');
-    var ing = query ? findIngredientByQuery(query) : null;
-    if (!ing && options && options.selectDefault) {
+    var target = query ? findDecisionTarget(query) : null;
+    var ing = target && target.kind === 'spice' ? target.item : null;
+    var food = target && target.kind === 'food' ? target.item : null;
+    if (!target && options && options.selectDefault) {
       ing = defaultDecisionIngredient();
+      target = ing ? { kind: 'spice', item: ing } : null;
       if (ing && search && !search.value) search.value = displayNameForIngredient(ing);
     }
-    if (!ing && query) {
+    if (!target && query && !state.enriched) {
       body.innerHTML =
-        '<p class="pa-answer__empty ingredient-flow-empty">No spice row matched <strong>' +
+        '<p class="pa-answer__empty ingredient-flow-empty">Checking the food-pairing rows for <strong>' +
         esc(query) +
-        '</strong>. Try a spice or herb from the matrix, like basil, cumin, coriander, fennel, or pepper.</p>';
+        '</strong>…</p>';
       state.decisionSpiceId = null;
+      state.decisionFoodId = null;
       return;
     }
-    if (!ing) {
+    if (!target && query) {
+      body.innerHTML =
+        '<p class="pa-answer__empty ingredient-flow-empty">No spice, herb, food, or dish row matched <strong>' +
+        esc(query) +
+        '</strong>. Try basil, cumin, roasted lamb, chicken, potatoes, or cheese.</p>';
+      state.decisionSpiceId = null;
+      state.decisionFoodId = null;
+      return;
+    }
+    if (!target) {
       body.innerHTML = decisionAnswerHtml(null);
       state.decisionSpiceId = null;
+      state.decisionFoodId = null;
+      return;
+    }
+    if (food) {
+      state.decisionSpiceId = null;
+      state.decisionFoodId = food.id || null;
+      body.innerHTML = foodDecisionAnswerHtml(food);
       return;
     }
     state.decisionSpiceId = ing.id;
+    state.decisionFoodId = null;
     body.innerHTML = decisionAnswerHtml(ing);
   }
 
@@ -493,6 +632,29 @@
         break;
       }
     }
+    if (row && typeof row.scrollIntoView === 'function') {
+      row.scrollIntoView({ block: 'center', inline: 'nearest' });
+    }
+  }
+
+  function revealDecisionInFoodMatrix(foodHost, foodSearch) {
+    if (!state.decisionFoodId || !foodHost || !state.enriched) return;
+    var foods = getFoodsSorted();
+    var food = null;
+    for (var i = 0; i < foods.length; i++) {
+      if (foods[i].id === state.decisionFoodId) {
+        food = foods[i];
+        break;
+      }
+    }
+    if (!food) return;
+    state.openDrawerFoodId = food.id;
+    paintFoodMatrixNow(foodHost);
+    if (foodSearch) {
+      foodSearch.value = food.name || food.id || '';
+      applyFoodFilter(foodSearch.value);
+    }
+    var row = findFoodDataRow(foodHost, food.id);
     if (row && typeof row.scrollIntoView === 'function') {
       row.scrollIntoView({ block: 'center', inline: 'nearest' });
     }
@@ -1781,6 +1943,9 @@
             if (action.getAttribute('data-pa-decision-action') === 'matrix') {
               e.preventDefault();
               revealDecisionInMatrix(spiceHost, search, modePri, modeAll);
+            } else if (action.getAttribute('data-pa-decision-action') === 'food') {
+              e.preventDefault();
+              revealDecisionInFoodMatrix(foodHost, foodSearch);
             }
           });
         }

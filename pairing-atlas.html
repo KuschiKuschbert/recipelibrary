@@ -695,6 +695,8 @@
   .pa-chip {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    min-width: 44px;
     min-height: 44px;
     margin: 2px 6px 2px 0;
     padding: 0 10px;
@@ -1379,12 +1381,12 @@
       <div>
         <p class="pa-decision__eyebrow">Ingredient answer</p>
         <h1 class="pa-decision__title" id="paDecisionTitle">What should I pair this with?</h1>
-        <p class="pa-decision__sub">Search a spice or herb to get quick matches, avoid notes, food uses, and links into the deeper reference tables.</p>
+        <p class="pa-decision__sub">Search a spice, herb, food, or dish to get quick matches, avoid notes, food uses, and links into the deeper reference tables.</p>
       </div>
     </div>
     <form class="pa-decision__form" id="paDecisionForm">
       <label class="visually-hidden" for="paDecisionSearch">Ingredient to check</label>
-      <input type="search" id="paDecisionSearch" class="pa-decision__search" placeholder="Ask: what goes with cumin?" autocomplete="off" spellcheck="false" enterkeyhint="search" />
+      <input type="search" id="paDecisionSearch" class="pa-decision__search" placeholder="Ask: what goes with lamb?" autocomplete="off" spellcheck="false" enterkeyhint="search" />
       <button type="submit" class="pa-decision__button" id="paDecisionSubmit">Answer</button>
     </form>
     <div class="pa-decision__body" id="paDecisionBody" aria-live="polite">
@@ -1515,7 +1517,7 @@
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/kuschi-recipe-ui.js?v=4"></script>
 <script src="assets/ingredient-flow-ui.js?v=1"></script>
-<script src="assets/pairing-atlas.js?v=10"></script>
+<script src="assets/pairing-atlas.js?v=11"></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
 <script src="assets/app-nav.js?v=2"></script>
 <style>
