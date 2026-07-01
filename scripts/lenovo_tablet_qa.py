@@ -515,6 +515,32 @@ def run_flavor_decision_smoke(page: Any) -> list[str]:
     body_text = answer.inner_text(timeout=5_000)
     if "Lamb" not in body_text:
         problems.append("Flavor answer card did not render Lamb from a kitchen phrase")
+    if "Cumin" not in body_text:
+        problems.append("Flavor Lamb answer did not surface Cumin from the Aroma food-seasoning row")
+    timed_interaction(
+        page,
+        "Flavor food phrase answer",
+        lambda: search.fill("what goes with roasted lamb?"),
+        "() => !!document.querySelector('#flavorAnswer [data-decision-food-id=\"roasted-lamb\"]')",
+        problems,
+    )
+    body_text = answer.inner_text(timeout=5_000)
+    if "Roasted Lamb" not in body_text:
+        problems.append("Flavor answer card did not render Roasted Lamb from a food phrase")
+    if "Cumin" not in body_text:
+        problems.append("Flavor Roasted Lamb answer did not surface Cumin as a seasoning")
+    body_lower = body_text.lower()
+    for expected in ("seasonings", "more options"):
+        if expected not in body_lower:
+            problems.append(f"Flavor food answer card missing section: {expected}")
+    problems.extend(
+        ingredient_flow_control_problems(
+            page,
+            "#flavorAnswer .flavor-answer-food",
+            "Flavor food answer card",
+            ("Matrix", "Aroma"),
+        )
+    )
     timed_interaction(
         page,
         "Flavor phrase answer",

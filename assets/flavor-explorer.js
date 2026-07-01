@@ -8,11 +8,15 @@
   var PAIRINGS = 'thesaurus_data/pairings.json';
   var SCIENCE_TEMPS = 'science_data/temperatures.json';
   var FLAVOUR_KB = 'flavour_data/flavour_knowledge_db_v1.1.json';
+  var AROMA_META = 'aroma_data/aroma_matrix_meta.json';
+  var FOOD_PAIRINGS = 'aroma_data/food_pairings.json';
 
   var unified = null;
   var wheel = null;
   var pairings = null;
   var temps = null;
+  var aromaMeta = null;
+  var foodPairings = null;
   var byName = Object.create(null);
   var loadP = null;
   var flavourKb = null;
@@ -113,12 +117,28 @@
         .catch(function () {
           return [];
         }),
+      fetch(AROMA_META)
+        .then(function (r) {
+          return r.ok ? r.json() : {};
+        })
+        .catch(function () {
+          return {};
+        }),
+      fetch(FOOD_PAIRINGS)
+        .then(function (r) {
+          return r.ok ? r.json() : [];
+        })
+        .catch(function () {
+          return [];
+        }),
     ])
       .then(function (arr) {
         var parsed = parseUnifiedPayload(arr[0]);
         unified = parsed.ingredients;
         wheel = arr[1];
         pairings = arr[2];
+        aromaMeta = arr[3] && typeof arr[3] === 'object' && !Array.isArray(arr[3]) ? arr[3] : {};
+        foodPairings = Array.isArray(arr[4]) ? arr[4] : [];
         var emb =
           parsed.kitchen_context &&
           parsed.kitchen_context.science &&
@@ -214,6 +234,91 @@
       if (out.length) return out.slice(0, 40);
     }
     return [];
+  }
+
+  function rowName(row) {
+    return row && (row.name || row.id) ? row.name || row.id : '';
+  }
+
+  function matchRowsByCandidate(rows, q, nameForRow) {
+    if (!q || q.length < 2) return null;
+    var prefix = null;
+    var contains = null;
+    for (var i = 0; i < (rows || []).length; i++) {
+      var row = rows[i];
+      if (!row) continue;
+      var idn = norm(row.id || '');
+      var nn = norm(nameForRow(row));
+      if (idn === q || nn === q) return { item: row, strength: 3 };
+      if (!prefix && (idn.indexOf(q) === 0 || nn.indexOf(q) === 0)) {
+        prefix = { item: row, strength: 2 };
+      }
+      if (!contains && q.length >= 3 && (idn.indexOf(q) >= 0 || nn.indexOf(q) >= 0 || q.indexOf(nn) >= 0)) {
+        contains = { item: row, strength: 1 };
+      }
+    }
+    return prefix || contains;
+  }
+
+  function bestMatchForQuery(rows, query, nameForRow) {
+    var candidates = ingredientQueryCandidates(query);
+    if (!candidates.length) return null;
+    for (var ci = 0; ci < candidates.length; ci++) {
+      var match = matchRowsByCandidate(rows, candidates[ci], nameForRow);
+      if (match) return match;
+    }
+    return null;
+  }
+
+  function findFoodMatch(query) {
+    return bestMatchForQuery(foodPairings || [], query, rowName);
+  }
+
+  function findFlavorRowMatch(query) {
+    return bestMatchForQuery(unified || [], query, rowName);
+  }
+
+  function orderedFoodSeasonings(food) {
+    var seas = (food && food.seasonings) || [];
+    var priority = (aromaMeta && aromaMeta.priority_row_ids) || [];
+    var rankById = Object.create(null);
+    for (var i = 0; i < priority.length; i++) rankById[priority[i]] = i;
+    return seas
+      .map(function (s, idx) {
+        var id = s && s.id ? s.id : '';
+        return {
+          id: id,
+          name: (s && (s.name || s.id)) || '',
+          _idx: idx,
+          _rank: rankById[id] != null ? rankById[id] : 999 + idx,
+        };
+      })
+      .filter(function (item) {
+        return !!item.name;
+      })
+      .sort(function (a, b) {
+        if (a._rank !== b._rank) return a._rank - b._rank;
+        return a._idx - b._idx;
+      });
+  }
+
+  function foodSeasoningItems(food, limit, skipItems) {
+    var skip = Object.create(null);
+    for (var si = 0; si < (skipItems || []).length; si++) {
+      skip[norm(skipItems[si].name || skipItems[si].id || '')] = true;
+    }
+    var seen = Object.create(null);
+    var out = [];
+    var items = orderedFoodSeasonings(food);
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i];
+      var k = norm(item.name);
+      if (!k || seen[k] || skip[k]) continue;
+      seen[k] = true;
+      out.push({ id: item.id, name: item.name });
+      if (limit && out.length >= limit) break;
+    }
+    return out;
   }
 
   function titleish(s) {
@@ -318,6 +423,18 @@
     return rows[0];
   }
 
+  function flavorAnswerChipText(item) {
+    return item && item.name ? item.name : String(item || '');
+  }
+
+  function flavorAnswerChipHref(item, opts) {
+    var text = flavorAnswerChipText(item);
+    var id = item && item.id ? item.id : '';
+    if (opts && opts.kind === 'spice' && id) return 'aroma.html?spice=' + encodeURIComponent(id);
+    if (opts && opts.kind === 'flavor' && text) return 'flavor.html?q=' + encodeURIComponent(text);
+    return '';
+  }
+
   function flavorAnswerChipList(items, opts) {
     return global.KuschiIngredientFlow.chips(items, {
       avoid: opts && opts.avoid,
@@ -325,6 +442,10 @@
       emptyClassName: 'flavor-answer-empty',
       className: 'flavor-answer-chips',
       chipClassName: 'flavor-answer-chip' + (opts && opts.avoid ? ' flavor-answer-chip--avoid' : ''),
+      textForItem: flavorAnswerChipText,
+      hrefForItem: function (item) {
+        return flavorAnswerChipHref(item, opts || {});
+      },
     });
   }
 
@@ -337,7 +458,7 @@
     });
   }
 
-  function renderFlavorAnswerForRow(u, fk) {
+  function renderFlavorAnswerForRow(u, fk, foodMatch) {
     var host = document.getElementById('flavorAnswer');
     if (!host) return;
     if (!u) {
@@ -365,6 +486,8 @@
     var aroma = aromaHarmonyText(u, 8);
     if (!aroma.length && fk && fk.spice_harmony_partners) aroma = uniqueText(fk.spice_harmony_partners, 8);
     var aff = affinityText(f, 4);
+    var food = foodMatch && foodMatch.item ? foodMatch.item : null;
+    var foodSeasonings = food ? foodSeasoningItems(food, 8) : [];
     var meta = [];
     if (f.weight) meta.push('Weight: ' + f.weight);
     if (f.volume) meta.push('Volume: ' + f.volume);
@@ -407,12 +530,24 @@
         actionsHtml: flow.actions(actions, { className: 'flavor-answer-actions' }),
       }) +
       flow.grid(
-        [
-          flow.section('Best pairings', flavorAnswerChipList(best, { empty: 'No Flavor Bible pairings for this row.' }), { className: 'flavor-answer-section' }),
-          flow.section('Avoid or check', flavorAnswerChipList(avoids, { avoid: true, empty: 'No avoid notes in the unified extract.' }), { className: 'flavor-answer-section' }),
-          flow.section('Use it like this', flavorAnswerTipList(useTips, 'No technique notes yet.'), { className: 'flavor-answer-section' }),
-          flow.section('Aroma links', flavorAnswerChipList(aroma, { empty: 'No Aroma harmony row yet.' }), { className: 'flavor-answer-section' }),
-        ],
+        []
+          .concat(
+            foodSeasonings.length
+              ? [
+                  flow.section(
+                    'Food seasoning row',
+                    flavorAnswerChipList(foodSeasonings, { kind: 'spice', empty: 'No Aroma food seasonings for this match.' }),
+                    { className: 'flavor-answer-section' }
+                  ),
+                ]
+              : []
+          )
+          .concat([
+            flow.section('Best pairings', flavorAnswerChipList(best, { empty: 'No Flavor Bible pairings for this row.' }), { className: 'flavor-answer-section' }),
+            flow.section('Avoid or check', flavorAnswerChipList(avoids, { avoid: true, empty: 'No avoid notes in the unified extract.' }), { className: 'flavor-answer-section' }),
+            flow.section('Use it like this', flavorAnswerTipList(useTips, 'No technique notes yet.'), { className: 'flavor-answer-section' }),
+            flow.section('Aroma links', flavorAnswerChipList(aroma, { empty: 'No Aroma harmony row yet.' }), { className: 'flavor-answer-section' }),
+          ]),
         { className: 'flavor-answer-grid' }
       ) +
       (aff.length
@@ -420,20 +555,89 @@
         : flow.note('Answer uses the unified Flavor, Aroma, Thesaurus, and toolkit extracts.', { className: 'flavor-answer-note' }));
   }
 
+  function renderFlavorAnswerForFood(food, row) {
+    var host = document.getElementById('flavorAnswer');
+    if (!host || !food) return;
+    var name = food.name || food.id || '';
+    var seasonings = foodSeasoningItems(food, 8);
+    var more = foodSeasoningItems(food, 8, seasonings);
+    var total = ((food && food.seasonings) || []).length;
+    var flow = global.KuschiIngredientFlow;
+    lastAnswerId = row && row.id ? row.id : null;
+    host.innerHTML =
+      '<div class="flavor-answer-food ingredient-flow" data-decision-food-id="' +
+      esc(food.id || '') +
+      '">' +
+      flow.head({
+        kicker: 'Food answer',
+        title: titleish(name),
+        className: 'flavor-answer-head',
+        kickerClassName: 'flavor-answer-kicker',
+        titleClassName: 'flavor-answer-title',
+        metaHtml: flow.meta(
+          [
+            { text: 'Aroma food row', className: 'flavor-answer-pill' },
+            { text: total + ' seasonings', className: 'flavor-answer-pill' },
+          ],
+          { className: 'flavor-answer-meta' }
+        ),
+        actionsHtml: flow.actions(
+          [
+            {
+              text: 'Matrix',
+              href: 'pairing-atlas.html?ingredient=' + encodeURIComponent(name),
+              className: 'flavor-answer-action',
+            },
+            {
+              text: 'Aroma',
+              href: 'aroma.html?food=' + encodeURIComponent(food.id || ''),
+              className: 'flavor-answer-action',
+            },
+          ],
+          { className: 'flavor-answer-actions' }
+        ),
+      }) +
+      flow.grid(
+        [
+          flow.section('Seasonings', flavorAnswerChipList(seasonings, { kind: 'spice', empty: 'No listed seasonings for this food row.' }), {
+            className: 'flavor-answer-section',
+          }),
+          flow.section('More options', flavorAnswerChipList(more, { kind: 'spice', empty: 'No extra seasonings beyond the first picks.' }), {
+            className: 'flavor-answer-section',
+          }),
+        ],
+        { className: 'flavor-answer-grid' }
+      ) +
+      flow.note('Food-pairing row from the Aroma extract. Use Matrix for the full row, or tap a seasoning for its Aroma profile.', {
+        className: 'flavor-answer-note',
+      }) +
+      '</div>';
+  }
+
   function updateFlavorAnswer(query, opts) {
     var host = document.getElementById('flavorAnswer');
     if (!host || !unified) return;
-    var row = findBestRow(query);
+    var rowMatch = query ? findFlavorRowMatch(query) : null;
+    var foodMatch = query ? findFoodMatch(query) : null;
+    var row = rowMatch && rowMatch.item ? rowMatch.item : findBestRow(query);
+    if (foodMatch && (!rowMatch || foodMatch.strength > rowMatch.strength)) {
+      renderFlavorAnswerForFood(foodMatch.item, row);
+      return;
+    }
+    if (!row && foodMatch) {
+      renderFlavorAnswerForFood(foodMatch.item, null);
+      return;
+    }
     if (!row && query) {
       host.innerHTML =
         '<p class="flavor-answer-empty ingredient-flow-empty">No quick Flavor answer matched <strong>' +
         esc(query) +
-        '</strong>. Try a broader ingredient name or use Aroma for spice-led lookup.</p>';
+        '</strong>. Try a broader ingredient, food, or dish name, or use Aroma for spice-led lookup.</p>';
       lastAnswerId = null;
       return;
     }
     if (!row && opts && opts.selectDefault) row = findBestRow('');
-    renderFlavorAnswerForRow(row, lookupFlavourIngredient(row));
+    renderFlavorAnswerForRow(row, lookupFlavourIngredient(row), foodMatch);
   }
 
   function tierListHtml(pairingsObj) {
@@ -1046,7 +1250,14 @@
       ensureLoaded()
         .then(function () {
           var el = document.getElementById('flavorLoadStatus');
-          loadStatusText = unified.length + ' unified rows · Thesaurus ' + wheel.length + ' · Links ' + pairings.length;
+          loadStatusText =
+            unified.length +
+            ' unified rows · Thesaurus ' +
+            wheel.length +
+            ' · Links ' +
+            pairings.length +
+            ' · Foods ' +
+            foodPairings.length;
           if (el) el.textContent = loadStatusText;
           ensureFlavourKb().then(function (kb) {
             var st = document.getElementById('flavorLoadStatus');
