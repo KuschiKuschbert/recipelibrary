@@ -418,6 +418,7 @@
     var useText = drawerSummaryText(useTips, 1);
     var flow = window.KuschiIngredientFlow;
     return (
+      '<div class="pa-drawer-decision-summary" data-pa-drawer-decision-summary>' +
       flow.priority(
         [
           { label: 'Pair first', value: pairText, empty: 'No direct pairing yet', className: 'pa-drawer-priority-card--pair' },
@@ -429,7 +430,8 @@
       drawerDecisionLine('Flavor adds', drawerSummaryText(flavorPairs, 3), 'No Flavor Bible row yet') +
       drawerDecisionLine('Foods', drawerSummaryText(foods, 2), 'No food rows yet') +
       drawerDecisionLine('Check', drawerSummaryText(avoid, 2), 'No avoid note found') +
-      '</ul>'
+      '</ul>' +
+      '</div>'
     );
   }
 
@@ -966,12 +968,9 @@
       esc(name) +
       '">' +
         flow.profileHead('Kitchen profile', note, { className: 'pa-drawer-profile-head' }) +
+        drawerDecisionSummaryHtml(harmony, flavorPairs, foods, avoid, useTips) +
         flow.profileGrid(
           [
-            flow.panel('At a glance', drawerDecisionSummaryHtml(harmony, flavorPairs, foods, avoid, useTips), {
-              wide: true,
-              className: 'pa-drawer-panel pa-drawer-panel--wide pa-drawer-decision-panel',
-            }),
             flow.panel('Pair now', chipListHtml(harmony, { kind: 'spice', empty: 'No direct harmony links.' }), { className: 'pa-drawer-panel' }),
             flow.panel('Flavor adds', chipListHtml(flavorPairs, { kind: 'flavor', empty: state.enriched ? 'No Flavor Bible row.' : 'Loading...' }), { className: 'pa-drawer-panel' }),
             flow.panel('Use it', useTipsListHtml(useTips, state.enriched ? 'No technique note in the unified extract.' : 'Loading technique notes...'), {

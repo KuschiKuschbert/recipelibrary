@@ -588,11 +588,16 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
             problems.append("Cumin drawer profile is not using shared ingredient-flow styles")
         drawer_text = drawer_profile.inner_text(timeout=5_000)
         drawer_lower = drawer_text.lower()
-        for expected in ("kitchen profile", "at a glance", "pair first", "pair now", "use it", "foods"):
+        for expected in ("kitchen profile", "pair first", "pair now", "use it", "foods"):
             if expected not in drawer_lower:
                 problems.append(f"Cumin drawer profile missing section: {expected}")
         if "toast cumin seeds" not in drawer_lower:
             problems.append("Cumin drawer profile did not surface the toast/use note")
+        summary = page.locator(
+            'tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-decision-summary]'
+        )
+        if summary.count() != 1:
+            problems.append("Cumin drawer decision summary is missing")
         priority = page.locator(
             'tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-priority]'
         )
@@ -617,6 +622,20 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
             )
             if not priority_before_support:
                 problems.append("Cumin drawer priority summary is not before supporting detail")
+            priority_before_grid = page.evaluate(
+                """() => {
+                  const priority = document.querySelector(
+                    'tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-priority]'
+                  );
+                  const grid = document.querySelector(
+                    'tr.pa-drawer-row[data-drawer-for="cumin"] .pa-drawer-profile-grid'
+                  );
+                  return !!(priority && grid &&
+                    (priority.compareDocumentPosition(grid) & Node.DOCUMENT_POSITION_FOLLOWING));
+                }"""
+            )
+            if not priority_before_grid:
+                problems.append("Cumin drawer priority summary is not before deeper profile detail")
         problems.extend(
             ingredient_flow_control_problems(
                 page,
