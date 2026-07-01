@@ -370,7 +370,61 @@
     }
   }
 
+  function dedupePayloadCourses(payload) {
+    if (!payload || !Array.isArray(payload.courses)) return payload;
+    var seen = {};
+    var recipeIds = [];
+    var courses = [];
+    (payload.courses || []).forEach(function (course) {
+      var items = [];
+      (course.items || []).forEach(function (item) {
+        if (!item) return;
+        var recipe = item.recipe;
+        var rid = String((recipe && recipe.id) || item.recipeId || '').trim();
+        if (rid) {
+          if (seen[rid]) return;
+          seen[rid] = true;
+          recipeIds.push(rid);
+        }
+        items.push(item);
+      });
+      if (items.length) {
+        courses.push(Object.assign({}, course, { items: items }));
+      }
+    });
+    return Object.assign({}, payload, {
+      courses: courses,
+      recipeIds: recipeIds.length ? recipeIds : payload.recipeIds || [],
+    });
+  }
+
+  function pickDisplayZoneForMerged(zoneTally) {
+    if (!zoneTally || !zoneTally.length) return 'other';
+    var counts = { freezer: 0, coldroom: 0, drystore: 0, other: 0 };
+    zoneTally.forEach(function (zone) {
+      var z = ZONE_ORDER.indexOf(zone) >= 0 ? zone : 'other';
+      counts[z]++;
+    });
+    var best = 'other';
+    var bestCount = -1;
+    ZONE_ORDER.forEach(function (zone) {
+      if (counts[zone] > bestCount) {
+        best = zone;
+        bestCount = counts[zone];
+      }
+    });
+    return best;
+  }
+
+  function sortedMergeBaseKinds(bases) {
+    var order = { g: 0, ml: 1, pc: 2 };
+    return Object.keys(bases || {}).sort(function (a, b) {
+      return (order[a] == null ? 99 : order[a]) - (order[b] == null ? 99 : order[b]) || a.localeCompare(b);
+    });
+  }
+
   function mergeIngredients(payload) {
+    payload = dedupePayloadCourses(payload);
     var C = window.KuschiRivieraCanonical;
     var M = window.KuschiRecipeMetric;
     var Kr = window.KuschiUserRecipes;
@@ -388,28 +442,30 @@
           var scaledQty = scaleQtyStr(ing.qty, factor);
           var mergeBase =
             M && typeof M.rivieraQtyToMergeBase === 'function' ? M.rivieraQtyToMergeBase(scaledQty) : null;
-          var gkey = mergeBase ? canon + '\0' + mergeBase.kind : canon + '\0' + scaledQty;
           var zone = 'other';
           if (Kr && typeof Kr.resolveDefaultZone === 'function') {
             zone = Kr.resolveDefaultZone(ing.item);
           } else if (ing.zone) {
             zone = ing.zone;
           }
+          var gkey = canon || String(ing.item).trim().toLowerCase();
+          var mergeBases = {};
+          if (mergeBase) mergeBases[mergeBase.kind] = mergeBase.n;
           if (!map.has(gkey)) {
             map.set(gkey, {
               item: ing.item,
               zone: zone,
+              zoneTally: [zone],
               prep: ing.prep ? [ing.prep] : [],
-              mergeBase: mergeBase ? { kind: mergeBase.kind, n: mergeBase.n } : null,
+              mergeBases: mergeBases,
               qtyParts: mergeBase ? [] : scaledQty ? [scaledQty] : [],
             });
           } else {
             var ex = map.get(gkey);
-            if (mergeBase && ex.mergeBase && ex.mergeBase.kind === mergeBase.kind) {
-              ex.mergeBase.n += mergeBase.n;
-            } else if (scaledQty) {
-              ex.qtyParts.push(scaledQty);
-            }
+            ex.zoneTally.push(zone);
+            ex.zone = pickDisplayZoneForMerged(ex.zoneTally);
+            if (mergeBase) ex.mergeBases[mergeBase.kind] = (ex.mergeBases[mergeBase.kind] || 0) + mergeBase.n;
+            else if (scaledQty && ex.qtyParts.indexOf(scaledQty) < 0) ex.qtyParts.push(scaledQty);
             if (ing.prep && ex.prep.indexOf(ing.prep) < 0) ex.prep.push(ing.prep);
             if (String(ing.item).length > String(ex.item).length) ex.item = ing.item;
           }
@@ -419,12 +475,17 @@
 
     map.forEach(function (entry) {
       var z = ['freezer', 'coldroom', 'drystore', 'other'].indexOf(entry.zone) >= 0 ? entry.zone : 'other';
-      var qtyDisplay = '—';
-      if (entry.mergeBase && M && typeof M.rivieraMergeBaseToQtyString === 'function') {
-        qtyDisplay = M.rivieraMergeBaseToQtyString(entry.mergeBase) || '—';
-      } else if (entry.qtyParts.length) {
-        qtyDisplay = entry.qtyParts.join(' + ');
+      var qtyParts = [];
+      if (M && typeof M.rivieraMergeBaseToQtyString === 'function') {
+        sortedMergeBaseKinds(entry.mergeBases).forEach(function (kind) {
+          var q = M.rivieraMergeBaseToQtyString(kind, entry.mergeBases[kind], entry.item);
+          if (q && qtyParts.indexOf(q) < 0) qtyParts.push(q);
+        });
       }
+      (entry.qtyParts || []).forEach(function (q) {
+        if (q && qtyParts.indexOf(q) < 0) qtyParts.push(q);
+      });
+      var qtyDisplay = qtyParts.length ? qtyParts.join(' + ') : '—';
       var prep = entry.prep.length ? ' — ' + entry.prep.join('; ') : '';
       byZone[z].push({ item: entry.item, qty: qtyDisplay + prep });
     });
@@ -1032,18 +1093,18 @@
   }
 
   function buildFromPayload(payload) {
-    _payload = payload;
-    _payload.planId = planIdFromPayload(payload);
+    _payload = dedupePayloadCourses(payload);
+    _payload.planId = planIdFromPayload(_payload);
     loadTimelineChecks(_payload.planId);
     _activeTab = 'timeline';
-    var timeline = buildPrepTimeline(payload);
-    var merged = mergeIngredients(payload);
-    var manifest = buildManifest(payload);
+    var timeline = buildPrepTimeline(_payload);
+    var merged = mergeIngredients(_payload);
+    var manifest = buildManifest(_payload);
     _built = {
       timeline: timeline,
       merged: merged,
       manifest: manifest,
-      fullText: buildFullDocument(payload, timeline, merged),
+      fullText: buildFullDocument(_payload, timeline, merged),
       timelineText: buildTimelineText(timeline),
     };
     populatePrintRoot();
@@ -1235,6 +1296,7 @@
     buildPrepTimeline: buildPrepTimeline,
     buildManifest: buildManifest,
     mergeIngredients: mergeIngredients,
+    dedupePayloadCourses: dedupePayloadCourses,
   };
 
   if (document.readyState === 'loading') {

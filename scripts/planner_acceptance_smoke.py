@@ -129,6 +129,13 @@ def main() -> int:
         errors += 1
         fail("planner_spotcheck.py failed")
 
+    r = subprocess.run(["node", str(ROOT / "scripts/planner_duplicate_guard.mjs")], cwd=ROOT)
+    if r.returncode == 0:
+        ok("planner_duplicate_guard.mjs")
+    else:
+        errors += 1
+        fail("planner_duplicate_guard.mjs failed")
+
     if errors:
         fail(f"{errors} check(s) failed")
         return 1

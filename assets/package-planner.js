@@ -531,6 +531,7 @@
     });
     var coursesOut = [];
     var recipeIds = [];
+    var seenRecipeIds = {};
     (sec.courses || []).forEach(function (course, ci) {
       var itemsOut = [];
       (course.items || []).forEach(function (item, ii) {
@@ -540,6 +541,8 @@
         var recipe = recipeMap[resolvedId] || recipeMap[item.recipeId];
         if (!recipe) return;
         var useId = recipe.id;
+        if (seenRecipeIds[useId]) return;
+        seenRecipeIds[useId] = true;
         itemsOut.push({
           name: item.name,
           recipeId: useId,

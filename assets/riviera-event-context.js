@@ -20,7 +20,12 @@
 
   function normalizePayload(payload) {
     if (!payload || typeof payload !== 'object') return null;
-    var recipeIds = Array.isArray(payload.recipeIds) ? payload.recipeIds.slice() : [];
+    var recipeIds = [];
+    if (Array.isArray(payload.recipeIds)) {
+      payload.recipeIds.forEach(function (id) {
+        if (id && recipeIds.indexOf(id) < 0) recipeIds.push(id);
+      });
+    }
     if (!recipeIds.length) {
       (payload.courses || []).forEach(function (course) {
         (course.items || []).forEach(function (item) {
