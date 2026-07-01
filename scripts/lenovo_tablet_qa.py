@@ -353,12 +353,18 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
         )
     except PlaywrightTimeoutError:
         problems.append("Pairing Atlas enrichment did not finish before drawer smoke")
-    search.fill("cumin")
+    search.fill("what goes with cumin?")
     page.locator("#paDecisionSubmit").click()
     page.wait_for_timeout(250)
     body_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
     if "Cumin" not in body_text:
-        problems.append("decision panel did not render Cumin answer")
+        problems.append("decision panel did not render Cumin answer from a kitchen phrase")
+    search.fill("pair cumin with lamb")
+    page.locator("#paDecisionSubmit").click()
+    page.wait_for_timeout(250)
+    body_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
+    if "Cumin" not in body_text:
+        problems.append("decision panel did not keep the first ingredient from 'pair cumin with lamb'")
     shared_answer = page.evaluate(
         "() => !!document.querySelector('#paDecisionBody .pa-answer.ingredient-flow .ingredient-flow-grid')"
     )
@@ -423,11 +429,16 @@ def run_flavor_decision_smoke(page: Any) -> list[str]:
     answer = page.locator("#flavorAnswer")
     if answer.count() != 1:
         return ["Flavor answer card is missing"]
-    search.fill("cumin")
+    search.fill("what goes with cumin?")
     page.wait_for_timeout(500)
     body_text = answer.inner_text(timeout=5_000)
     if "Cumin" not in body_text:
-        problems.append("Flavor answer card did not render Cumin")
+        problems.append("Flavor answer card did not render Cumin from a kitchen phrase")
+    search.fill("pair cumin with lamb")
+    page.wait_for_timeout(500)
+    body_text = answer.inner_text(timeout=5_000)
+    if "Cumin" not in body_text:
+        problems.append("Flavor answer card did not keep the first ingredient from 'pair cumin with lamb'")
     shared_answer = page.evaluate(
         "() => !!document.querySelector('#flavorAnswer.ingredient-flow-card .ingredient-flow-grid')"
     )

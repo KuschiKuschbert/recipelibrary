@@ -33,6 +33,36 @@
       .trim();
   }
 
+  function ingredientQueryCandidates(query) {
+    var q = norm(query);
+    if (!q) return [];
+    var variants = [q];
+    [
+      /^(what|which)\s+(goes|pairs|works)\s+(with|well\s+with)\s+/,
+      /^(goes|pairs|works)\s+(with|well\s+with)\s+/,
+      /^(what|which)\s+can\s+i\s+(pair|use|cook)\s+(with\s+)?/,
+      /^(pair|match|use|cook|season|flavour|flavor)\s+(this\s+with\s+|with\s+|for\s+)?/,
+      /^(best|good|quick)\s+(pairings?|matches|flavours|flavors)\s+(for|with)\s+/,
+      /^(pairings?|matches|flavours|flavors)\s+(for|with)\s+/,
+      /^(what|which)\s+(spices?|herbs?|flavours|flavors)\s+(go|work|pair)\s+(with|for)\s+/,
+      /\s+(pairings?|matches|ideas|please)$/,
+    ].forEach(function (pattern) {
+      q = q.replace(pattern, '').trim();
+      if (q && variants.indexOf(q) < 0) variants.push(q);
+    });
+    var words = q.split(' ');
+    ['with', 'for', 'to'].forEach(function (marker) {
+      var idx = words.indexOf(marker);
+      if (idx >= 0 && idx < words.length - 1) {
+        var head = words.slice(0, idx).join(' ').trim();
+        if (head && variants.indexOf(head) < 0) variants.push(head);
+        var tail = words.slice(idx + 1).join(' ').trim();
+        if (tail && variants.indexOf(tail) < 0) variants.push(tail);
+      }
+    });
+    return variants;
+  }
+
   function esc(s) {
     return String(s)
       .replace(/&/g, '&amp;')
@@ -163,17 +193,21 @@
   }
 
   function findRows(query) {
-    var q = norm(query);
-    if (!q || !unified) return [];
-    var out = [];
-    for (var i = 0; i < unified.length; i++) {
-      var u = unified[i];
-      var n = norm(u.name || '');
-      if (!n) continue;
-      if (n === q || n.indexOf(q) >= 0 || q.indexOf(n) >= 0) out.push(u);
-      if (out.length > 80) break;
+    var candidates = ingredientQueryCandidates(query);
+    if (!candidates.length || !unified) return [];
+    for (var ci = 0; ci < candidates.length; ci++) {
+      var q = candidates[ci];
+      var out = [];
+      for (var i = 0; i < unified.length; i++) {
+        var u = unified[i];
+        var n = norm(u.name || '');
+        if (!n) continue;
+        if (n === q || n.indexOf(q) >= 0 || q.indexOf(n) >= 0) out.push(u);
+        if (out.length > 80) break;
+      }
+      if (out.length) return out.slice(0, 40);
     }
-    return out.slice(0, 40);
+    return [];
   }
 
   function titleish(s) {

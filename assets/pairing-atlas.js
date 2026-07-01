@@ -47,6 +47,36 @@
       .trim();
   }
 
+  function ingredientQueryCandidates(query) {
+    var q = norm(query);
+    if (!q) return [];
+    var variants = [q];
+    [
+      /^(what|which)\s+(goes|pairs|works)\s+(with|well\s+with)\s+/,
+      /^(goes|pairs|works)\s+(with|well\s+with)\s+/,
+      /^(what|which)\s+can\s+i\s+(pair|use|cook)\s+(with\s+)?/,
+      /^(pair|match|use|cook|season|flavour|flavor)\s+(this\s+with\s+|with\s+|for\s+)?/,
+      /^(best|good|quick)\s+(pairings?|matches|flavours|flavors)\s+(for|with)\s+/,
+      /^(pairings?|matches|flavours|flavors)\s+(for|with)\s+/,
+      /^(what|which)\s+(spices?|herbs?|flavours|flavors)\s+(go|work|pair)\s+(with|for)\s+/,
+      /\s+(pairings?|matches|ideas|please)$/,
+    ].forEach(function (pattern) {
+      q = q.replace(pattern, '').trim();
+      if (q && variants.indexOf(q) < 0) variants.push(q);
+    });
+    var words = q.split(' ');
+    ['with', 'for', 'to'].forEach(function (marker) {
+      var idx = words.indexOf(marker);
+      if (idx >= 0 && idx < words.length - 1) {
+        var head = words.slice(0, idx).join(' ').trim();
+        if (head && variants.indexOf(head) < 0) variants.push(head);
+        var tail = words.slice(idx + 1).join(' ').trim();
+        if (tail && variants.indexOf(tail) < 0) variants.push(tail);
+      }
+    });
+    return variants;
+  }
+
   function isLikelyInstruction(s) {
     var text = String(s || '').trim();
     return /^(tips?:|add |toast |use |with lighter|bloom |cook |grind |crush )/i.test(text);
@@ -99,21 +129,25 @@
   }
 
   function findIngredientByQuery(query) {
-    var q = norm(query);
-    if (!q) return null;
+    var candidates = ingredientQueryCandidates(query);
+    if (!candidates.length) return null;
     var rows = state.ingredients || [];
-    var prefix = null;
-    var contains = null;
-    for (var i = 0; i < rows.length; i++) {
-      var ing = rows[i];
-      if (!ing) continue;
-      var idn = norm(ing.id || '');
-      var nn = norm(displayNameForIngredient(ing));
-      if (idn === q || nn === q) return ing;
-      if (!prefix && (idn.indexOf(q) === 0 || nn.indexOf(q) === 0)) prefix = ing;
-      if (!contains && (idn.indexOf(q) >= 0 || nn.indexOf(q) >= 0)) contains = ing;
+    for (var ci = 0; ci < candidates.length; ci++) {
+      var q = candidates[ci];
+      var prefix = null;
+      var contains = null;
+      for (var i = 0; i < rows.length; i++) {
+        var ing = rows[i];
+        if (!ing) continue;
+        var idn = norm(ing.id || '');
+        var nn = norm(displayNameForIngredient(ing));
+        if (idn === q || nn === q) return ing;
+        if (!prefix && (idn.indexOf(q) === 0 || nn.indexOf(q) === 0)) prefix = ing;
+        if (!contains && (idn.indexOf(q) >= 0 || nn.indexOf(q) >= 0)) contains = ing;
+      }
+      if (prefix || contains) return prefix || contains;
     }
-    return prefix || contains;
+    return null;
   }
 
   function defaultDecisionIngredient() {
