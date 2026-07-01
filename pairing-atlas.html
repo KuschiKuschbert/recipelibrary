@@ -106,6 +106,207 @@
     margin: 0 0 20px;
   }
 
+  .pa-decision {
+    margin: 12px 0 16px;
+    padding: 16px;
+    border: 1px solid rgba(201, 169, 110, 0.22);
+    border-radius: var(--radius);
+    background:
+      linear-gradient(135deg, rgba(201, 169, 110, 0.12), rgba(0, 188, 212, 0.045)),
+      rgba(255, 255, 255, 0.035);
+  }
+  .pa-decision__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+  .pa-decision__eyebrow {
+    margin: 0 0 4px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .pa-decision__title {
+    margin: 0;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 24px;
+    line-height: 1.12;
+  }
+  .pa-decision__sub {
+    margin: 6px 0 0;
+    color: var(--text2);
+    font-size: 13px;
+    line-height: 1.45;
+    max-width: 680px;
+  }
+  .pa-decision__form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 14px;
+  }
+  .pa-decision__search {
+    flex: 1 1 220px;
+    min-height: 48px;
+    min-width: 0;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg2);
+    color: var(--text);
+    font: inherit;
+    font-size: 16px;
+  }
+  .pa-decision__search:focus {
+    outline: none;
+    border-color: var(--border-hover);
+    box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.12);
+  }
+  .pa-decision__button {
+    min-height: 48px;
+    padding: 0 14px;
+    border: 1px solid rgba(201, 169, 110, 0.4);
+    border-radius: 12px;
+    background: rgba(201, 169, 110, 0.13);
+    color: var(--gold);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+  .pa-decision__button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .pa-decision__body {
+    min-height: 132px;
+  }
+  .pa-answer {
+    display: grid;
+    gap: 12px;
+  }
+  .pa-answer__top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+    align-items: start;
+  }
+  .pa-answer__name {
+    margin: 0;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 22px;
+    line-height: 1.1;
+  }
+  .pa-answer__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .pa-answer__pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text2);
+    font-size: 12px;
+    line-height: 1.2;
+  }
+  .pa-answer__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  .pa-answer__action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--gold);
+    background: rgba(255, 255, 255, 0.035);
+    font-size: 12.5px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+  .pa-answer__action:hover,
+  .pa-decision__button:hover {
+    border-color: var(--gold);
+    color: var(--text);
+  }
+  .pa-answer__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .pa-answer__section {
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 12px;
+    background: rgba(12, 12, 12, 0.28);
+  }
+  .pa-answer__section h3 {
+    margin: 0 0 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .pa-answer__section p {
+    margin: 0;
+    color: var(--text2);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .pa-answer__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .pa-answer__chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 0 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text2);
+    font-size: 12px;
+    line-height: 1.2;
+    text-decoration: none;
+    touch-action: manipulation;
+  }
+  a.pa-answer__chip:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .pa-answer__empty {
+    margin: 0;
+    color: var(--text3);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .pa-answer__note {
+    margin: 0;
+    color: var(--text3);
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
   .pa-toolbar-label {
     width: 100%;
     font-size: 11px;
@@ -789,6 +990,48 @@
       padding-inline: 12px;
     }
 
+    html.lenovo-tab-one-profile .pa-decision {
+      margin: 8px 0 10px;
+      padding: 12px;
+      border-radius: 12px;
+    }
+
+    html.lenovo-tab-one-profile .pa-decision__head {
+      margin-bottom: 10px;
+    }
+
+    html.lenovo-tab-one-profile .pa-decision__title {
+      font-size: 22px;
+    }
+
+    html.lenovo-tab-one-profile .pa-decision__sub {
+      font-size: 13px;
+    }
+
+    html.lenovo-tab-one-profile .pa-decision__form {
+      margin-bottom: 10px;
+    }
+
+    html.lenovo-tab-one-profile .pa-decision__button,
+    html.lenovo-tab-one-profile .pa-answer__action {
+      min-height: 48px;
+      font-size: 13px;
+    }
+
+    html.lenovo-tab-one-profile .pa-answer__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    html.lenovo-tab-one-profile .pa-answer__section {
+      padding: 10px;
+    }
+
+    html.lenovo-tab-one-profile .pa-answer__chip {
+      min-height: 44px;
+      font-size: 12.5px;
+    }
+
     html.lenovo-tab-one-profile .pa-toolbar {
       gap: 7px;
       margin: 8px 0;
@@ -934,6 +1177,44 @@
     html.lenovo-tab-one-profile .page-about {
       margin-top: 2px;
       padding-inline: 10px;
+    }
+
+    html.lenovo-tab-one-profile .pa-decision {
+      margin: 8px 0;
+      padding: 12px;
+      border-radius: 12px;
+    }
+
+    html.lenovo-tab-one-profile .pa-decision__head {
+      margin-bottom: 10px;
+    }
+
+    html.lenovo-tab-one-profile .pa-decision__title {
+      font-size: 21px;
+    }
+
+    html.lenovo-tab-one-profile .pa-decision__form {
+      margin-bottom: 10px;
+    }
+
+    html.lenovo-tab-one-profile .pa-decision__button,
+    html.lenovo-tab-one-profile .pa-answer__action {
+      min-height: 48px;
+      font-size: 13px;
+    }
+
+    html.lenovo-tab-one-profile .pa-answer__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    html.lenovo-tab-one-profile .pa-answer__section {
+      padding: 10px;
+    }
+
+    html.lenovo-tab-one-profile .pa-answer__chip {
+      min-height: 44px;
+      font-size: 12.5px;
     }
 
     html.lenovo-tab-one-profile .pa-toolbar {
@@ -1120,6 +1401,22 @@
     line-height: 1.15;
   }
 
+  @media (max-width: 640px) {
+    .pa-decision__head,
+    .pa-answer__top {
+      grid-template-columns: 1fr;
+      display: grid;
+    }
+
+    .pa-answer__actions {
+      justify-content: flex-start;
+    }
+
+    .pa-answer__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     body.pa-page::before { display: none; }
   }
@@ -1155,6 +1452,24 @@
   </details>
   <!-- app-header above replaces the old .pa-hero-sub block
   -->
+
+  <section class="pa-decision" aria-labelledby="paDecisionTitle">
+    <div class="pa-decision__head">
+      <div>
+        <p class="pa-decision__eyebrow">Ingredient answer</p>
+        <h1 class="pa-decision__title" id="paDecisionTitle">What should I pair this with?</h1>
+        <p class="pa-decision__sub">Search a spice or herb to get quick matches, avoid notes, food uses, and links into the deeper reference tables.</p>
+      </div>
+    </div>
+    <form class="pa-decision__form" id="paDecisionForm">
+      <label class="visually-hidden" for="paDecisionSearch">Ingredient to check</label>
+      <input type="search" id="paDecisionSearch" class="pa-decision__search" placeholder="Try basil, cumin, coriander…" autocomplete="off" spellcheck="false" enterkeyhint="search" />
+      <button type="submit" class="pa-decision__button" id="paDecisionSubmit">Answer</button>
+    </form>
+    <div class="pa-decision__body" id="paDecisionBody" aria-live="polite">
+      <p class="pa-answer__empty">Loading ingredient decision data…</p>
+    </div>
+  </section>
 
 
   <div class="pa-toolbar" role="region" aria-label="Spice matrix controls">
@@ -1278,7 +1593,7 @@
 
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/kuschi-recipe-ui.js?v=4"></script>
-<script src="assets/pairing-atlas.js?v=4"></script>
+<script src="assets/pairing-atlas.js?v=5"></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
 <script src="assets/app-nav.js?v=2"></script>
 <style>

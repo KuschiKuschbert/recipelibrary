@@ -60,6 +60,7 @@ def main() -> int:
         ("planner acceptance smoke", [sys.executable, "scripts/planner_acceptance_smoke.py"]),
         ("service-worker validation", [sys.executable, "scripts/validate_sw.py"]),
         ("static smoke", [sys.executable, "scripts/static_smoke.py"]),
+        ("Lenovo tablet browser QA", [sys.executable, "scripts/lenovo_tablet_qa.py"]),
         ("copy fluff warnings", [sys.executable, "scripts/check_copy_fluff.py", "--warn-only"]),
     )
     for label, cmd in checks:
