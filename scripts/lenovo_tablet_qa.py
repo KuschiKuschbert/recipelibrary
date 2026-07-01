@@ -986,6 +986,19 @@ def run_pairing_decision_smoke(
     search = page.locator("#paDecisionSearch")
     if search.count() != 1:
         return ["Pairing Atlas decision search is missing"]
+    shared_header = page.evaluate(
+        """() => ({
+          title: !!document.querySelector('#paDecisionTitle.ingredient-flow-title'),
+          subtitle: !!document.querySelector('.pa-decision__sub.ingredient-flow-note'),
+          form: !!document.querySelector('#paDecisionForm.ingredient-flow-query-form'),
+        })"""
+    )
+    if not shared_header.get("title"):
+        problems.append("Pairing Atlas decision title is not using the shared ingredient-flow title primitive")
+    if not shared_header.get("subtitle"):
+        problems.append("Pairing Atlas decision subtitle is not using the shared ingredient-flow note primitive")
+    if not shared_header.get("form"):
+        problems.append("Pairing Atlas decision form is not using the shared ingredient-flow query primitive")
     try:
         page.wait_for_function(
             "() => { const btn = document.querySelector('#paLayerHarmony'); return btn && !btn.disabled; }",

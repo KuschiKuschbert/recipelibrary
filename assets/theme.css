@@ -13231,6 +13231,9 @@ html.lenovo-tab-one-profile .ingredient-flow-query-input {
   padding: 12px 15px;
   font-size: 16px;
 }
+html.lenovo-tab-one-profile .ingredient-flow-query-form {
+  margin-bottom: 10px;
+}
 html.lenovo-tab-one-profile .ingredient-flow-query-button {
   min-height: 48px;
   font-size: 13px;
