@@ -1,5 +1,5 @@
 'use strict';
-const CACHE_NAME = 'kuschi-kitchen-v200';
+const CACHE_NAME = 'kuschi-kitchen-v201';
 
 // Install shell: keep first-load precache focused on the main catalog.
 const SHELL_URLS = [
@@ -33,6 +33,7 @@ const RUNTIME_URLS = [
   './pairing-atlas.html',
   './notebooklm-gallery.html',
   './assets/order-list.js',
+  './assets/ingredient-flow-ui.js',
   './assets/flavor-explorer.js',
   './assets/pairing-atlas.js',
   './assets/prep-list.js',

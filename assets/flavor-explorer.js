@@ -278,51 +278,33 @@
     return rows[0];
   }
 
-  function flavorAnswerChipHtml(text, opts) {
-    var cls =
-      'flavor-answer-chip ingredient-flow-chip' +
-      (opts && opts.avoid ? ' flavor-answer-chip--avoid ingredient-flow-chip--avoid' : '');
-    if (opts && opts.link) {
-      return '<a class="' + cls + '" href="' + opts.link + '">' + esc(text) + '</a>';
-    }
-    return '<span class="' + cls + '">' + esc(text) + '</span>';
-  }
-
   function flavorAnswerChipList(items, opts) {
-    if (!items || !items.length) {
-      return '<p class="flavor-answer-empty ingredient-flow-empty">' + esc((opts && opts.empty) || 'No direct note in this extract yet.') + '</p>';
-    }
-    return (
-      '<div class="flavor-answer-chips ingredient-flow-chips">' +
-      items
-        .map(function (text) {
-          return flavorAnswerChipHtml(text, opts);
-        })
-        .join('') +
-      '</div>'
-    );
+    return global.KuschiIngredientFlow.chips(items, {
+      avoid: opts && opts.avoid,
+      empty: (opts && opts.empty) || 'No direct note in this extract yet.',
+      emptyClassName: 'flavor-answer-empty',
+      className: 'flavor-answer-chips',
+      chipClassName: 'flavor-answer-chip' + (opts && opts.avoid ? ' flavor-answer-chip--avoid' : ''),
+    });
   }
 
   function flavorAnswerTipList(items, empty) {
-    if (!items || !items.length) return '<p class="flavor-answer-empty ingredient-flow-empty">' + esc(empty || 'No use notes yet.') + '</p>';
-    return (
-      '<ul class="flavor-answer-tip-list ingredient-flow-use-list">' +
-      items
-        .slice(0, 4)
-        .map(function (tip) {
-          return '<li>' + esc(tip) + '</li>';
-        })
-        .join('') +
-      '</ul>'
-    );
+    return global.KuschiIngredientFlow.useList(items, {
+      empty: empty || 'No use notes yet.',
+      emptyClassName: 'flavor-answer-empty',
+      className: 'flavor-answer-tip-list',
+      limit: 4,
+    });
   }
 
   function renderFlavorAnswerForRow(u, fk) {
     var host = document.getElementById('flavorAnswer');
     if (!host) return;
     if (!u) {
-      host.innerHTML =
-        '<p class="flavor-answer-empty ingredient-flow-empty">Search an ingredient to get a quick kitchen answer. Example: cumin, tomatoes, lamb, lemon.</p>';
+      host.innerHTML = global.KuschiIngredientFlow.empty(
+        'Search an ingredient to get a quick kitchen answer. Example: cumin, tomatoes, lamb, lemon.',
+        'flavor-answer-empty'
+      );
       lastAnswerId = null;
       return;
     }
@@ -350,38 +332,52 @@
     if (th && th.family) meta.push('Family: ' + th.family);
     if (fk && fk.primary_family) meta.push('Toolkit: ' + String(fk.primary_family).replace(/_/g, ' '));
     lastAnswerId = u.id;
+    var flow = global.KuschiIngredientFlow;
+    var actions = [
+      {
+        text: 'Full detail',
+        className: 'flavor-answer-action',
+        attrs: { 'data-flavor-answer-action': 'detail' },
+      },
+      {
+        text: 'Matrix',
+        href: 'pairing-atlas.html?ingredient=' + encodeURIComponent(u.name || u.id),
+        className: 'flavor-answer-action',
+      },
+    ];
+    if (u.aroma) {
+      actions.push({
+        text: 'Aroma',
+        href: 'aroma.html?spice=' + encodeURIComponent(u.aroma.id || u.id),
+        className: 'flavor-answer-action',
+      });
+    }
     host.innerHTML =
-      '<div class="flavor-answer-head ingredient-flow-head">' +
-        '<div>' +
-          '<p class="flavor-answer-kicker ingredient-flow-kicker">Flavor answer</p>' +
-          '<h2 class="flavor-answer-title ingredient-flow-title">' + esc(titleish(u.name || u.id)) + '</h2>' +
-          '<div class="flavor-answer-meta ingredient-flow-meta">' +
-            meta.slice(0, 5).map(function (m) { return '<span class="flavor-answer-pill ingredient-flow-pill">' + esc(m) + '</span>'; }).join('') +
-          '</div>' +
-        '</div>' +
-        '<div class="flavor-answer-actions ingredient-flow-actions">' +
-          '<button type="button" class="flavor-answer-action ingredient-flow-action" data-flavor-answer-action="detail">Full detail</button>' +
-          '<a class="flavor-answer-action ingredient-flow-action" href="pairing-atlas.html?ingredient=' + encodeURIComponent(u.name || u.id) + '">Matrix</a>' +
-          (u.aroma ? '<a class="flavor-answer-action ingredient-flow-action" href="aroma.html?spice=' + encodeURIComponent(u.aroma.id || u.id) + '">Aroma</a>' : '') +
-        '</div>' +
-      '</div>' +
-      '<div class="flavor-answer-grid ingredient-flow-grid">' +
-        '<section class="flavor-answer-section ingredient-flow-section"><h3>Best pairings</h3>' +
-          flavorAnswerChipList(best, { empty: 'No Flavor Bible pairings for this row.' }) +
-        '</section>' +
-        '<section class="flavor-answer-section ingredient-flow-section"><h3>Avoid or check</h3>' +
-          flavorAnswerChipList(avoids, { avoid: true, empty: 'No avoid notes in the unified extract.' }) +
-        '</section>' +
-        '<section class="flavor-answer-section ingredient-flow-section"><h3>Use it like this</h3>' +
-          flavorAnswerTipList(useTips, 'No technique notes yet.') +
-        '</section>' +
-        '<section class="flavor-answer-section ingredient-flow-section"><h3>Aroma links</h3>' +
-          flavorAnswerChipList(aroma, { empty: 'No Aroma harmony row yet.' }) +
-        '</section>' +
-      '</div>' +
+      flow.head({
+        kicker: 'Flavor answer',
+        title: titleish(u.name || u.id),
+        className: 'flavor-answer-head',
+        kickerClassName: 'flavor-answer-kicker',
+        titleClassName: 'flavor-answer-title',
+        metaHtml: flow.meta(meta, {
+          limit: 5,
+          className: 'flavor-answer-meta',
+          itemOptions: { className: 'flavor-answer-pill' },
+        }),
+        actionsHtml: flow.actions(actions, { className: 'flavor-answer-actions' }),
+      }) +
+      flow.grid(
+        [
+          flow.section('Best pairings', flavorAnswerChipList(best, { empty: 'No Flavor Bible pairings for this row.' }), { className: 'flavor-answer-section' }),
+          flow.section('Avoid or check', flavorAnswerChipList(avoids, { avoid: true, empty: 'No avoid notes in the unified extract.' }), { className: 'flavor-answer-section' }),
+          flow.section('Use it like this', flavorAnswerTipList(useTips, 'No technique notes yet.'), { className: 'flavor-answer-section' }),
+          flow.section('Aroma links', flavorAnswerChipList(aroma, { empty: 'No Aroma harmony row yet.' }), { className: 'flavor-answer-section' }),
+        ],
+        { className: 'flavor-answer-grid' }
+      ) +
       (aff.length
-        ? '<p class="flavor-answer-note ingredient-flow-note"><strong>Affinity idea:</strong> ' + esc(aff[0]) + '</p>'
-        : '<p class="flavor-answer-note ingredient-flow-note">Answer uses the unified Flavor, Aroma, Thesaurus, and toolkit extracts.</p>');
+        ? flow.note('<strong>Affinity idea:</strong> ' + esc(aff[0]), { raw: true, className: 'flavor-answer-note' })
+        : flow.note('Answer uses the unified Flavor, Aroma, Thesaurus, and toolkit extracts.', { className: 'flavor-answer-note' }));
   }
 
   function updateFlavorAnswer(query, opts) {

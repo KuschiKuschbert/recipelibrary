@@ -810,6 +810,7 @@
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/aroma-hints.js"></script>
 <script src="assets/kuschi-recipe-ui.js?v=4"></script>
+<script src="assets/ingredient-flow-ui.js?v=1"></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
 <script>
 (function () {
@@ -835,10 +836,6 @@
 
   function esc(s) {
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  }
-
-  function escAttr(s) {
-    return esc(s).replace(/"/g, '&quot;');
   }
 
   function buildQuickPassHtml(data) {
@@ -967,39 +964,23 @@
     return out;
   }
 
-  function answerChipHtml(item, href) {
-    var text = item && item.name ? item.name : String(item || '');
-    if (!text) return '';
-    if (href) {
-      return '<a class="ingredient-flow-chip" href="' + href + '">' + esc(text) + '</a>';
-    }
-    return '<span class="ingredient-flow-chip">' + esc(text) + '</span>';
-  }
-
   function answerChipListHtml(items, empty, hrefForItem) {
-    if (!items || !items.length) {
-      return '<p class="ingredient-flow-empty">' + esc(empty || 'No direct row in this extract yet.') + '</p>';
-    }
-    return (
-      '<div class="ingredient-flow-chips">' +
-      items.map(function (item) {
-        return answerChipHtml(item, hrefForItem ? hrefForItem(item) : '');
-      }).join('') +
-      '</div>'
-    );
+    return window.KuschiIngredientFlow.chips(items, {
+      empty: empty || 'No direct row in this extract yet.',
+      textForItem: function (item) {
+        return item && item.name ? item.name : String(item || '');
+      },
+      hrefForItem: function (item) {
+        return hrefForItem ? hrefForItem(item) : '';
+      },
+    });
   }
 
   function answerUseListHtml(items, empty) {
-    if (!items || !items.length) {
-      return '<p class="ingredient-flow-empty">' + esc(empty || 'No use note in this extract yet.') + '</p>';
-    }
-    return (
-      '<ul class="ingredient-flow-use-list">' +
-      items.slice(0, 5).map(function (item) {
-        return '<li>' + esc(item) + '</li>';
-      }).join('') +
-      '</ul>'
-    );
+    return window.KuschiIngredientFlow.useList(items, {
+      empty: empty || 'No use note in this extract yet.',
+      limit: 5,
+    });
   }
 
   function foodRowsUsingSpice(spiceId, limit) {
@@ -1087,43 +1068,36 @@
       return { id: '', name: 'G' + g };
     });
     var partnerCount = matrix[ing.id] && matrix[ing.id].length ? matrix[ing.id].length : harmony.length;
+    var flow = window.KuschiIngredientFlow;
     host.innerHTML =
-      '<div class="ingredient-flow-head">' +
-        '<div>' +
-          '<p class="ingredient-flow-kicker">Aroma answer</p>' +
-          '<h2 class="ingredient-flow-title">' + esc(ing.name || ing.id) + '</h2>' +
-          '<div class="ingredient-flow-meta">' +
-            '<span class="ingredient-flow-pill">' + esc(aromaGroupText(ing)) + '</span>' +
-            '<span class="ingredient-flow-pill">' + esc(partnerCount + ' harmony links') + '</span>' +
-            '<span class="ingredient-flow-pill">' + esc(foods.length + ' food rows') + '</span>' +
-          '</div>' +
-        '</div>' +
-        '<div class="ingredient-flow-actions">' +
-          '<button type="button" class="ingredient-flow-action" data-aroma-answer-action="profile" data-spice-id="' + escAttr(ing.id) + '">Profile</button>' +
-          '<button type="button" class="ingredient-flow-action" data-aroma-answer-action="matrix" data-spice-id="' + escAttr(ing.id) + '">Matrix</button>' +
-          '<a class="ingredient-flow-action" href="pairing-atlas.html?ingredient=' + encodeURIComponent(ing.name || ing.id) + '">Atlas</a>' +
-          '<a class="ingredient-flow-action" href="flavor.html?q=' + encodeURIComponent(ing.name || ing.id) + '">Flavor</a>' +
-        '</div>' +
-      '</div>' +
-      '<div class="ingredient-flow-grid">' +
-        '<section class="ingredient-flow-section"><h3>Harmony partners</h3>' +
+      flow.head({
+        kicker: 'Aroma answer',
+        title: ing.name || ing.id,
+        metaHtml: flow.meta([aromaGroupText(ing), partnerCount + ' harmony links', foods.length + ' food rows']),
+        actionsHtml: flow.actions([
+          { text: 'Profile', attrs: { 'data-aroma-answer-action': 'profile', 'data-spice-id': ing.id } },
+          { text: 'Matrix', attrs: { 'data-aroma-answer-action': 'matrix', 'data-spice-id': ing.id } },
+          { text: 'Atlas', href: 'pairing-atlas.html?ingredient=' + encodeURIComponent(ing.name || ing.id) },
+          { text: 'Flavor', href: 'flavor.html?q=' + encodeURIComponent(ing.name || ing.id) },
+        ]),
+      }) +
+      flow.grid([
+        flow.section(
+          'Harmony partners',
           answerChipListHtml(harmony, 'No harmony partners in this extract.', function (item) {
             return item.id ? 'aroma.html?spice=' + encodeURIComponent(item.id) : '';
-          }) +
-        '</section>' +
-        '<section class="ingredient-flow-section"><h3>Foods that use it</h3>' +
+          })
+        ),
+        flow.section(
+          'Foods that use it',
           answerChipListHtml(foods, 'No food appendix rows list this spice yet.', function (item) {
             return item.id ? 'aroma.html?food=' + encodeURIComponent(item.id) : '';
-          }) +
-        '</section>' +
-        '<section class="ingredient-flow-section"><h3>Use it</h3>' +
-          answerUseListHtml(notes, 'No heat, blend, or regional note in this Aroma row.') +
-        '</section>' +
-        '<section class="ingredient-flow-section"><h3>Aroma groups</h3>' +
-          answerChipListHtml(groupItems, 'No aroma group tags in this row.') +
-        '</section>' +
-      '</div>' +
-      '<p class="ingredient-flow-note">Aroma answer uses the spice harmony, food appendix, and G1–G8 aroma group extracts.</p>';
+          })
+        ),
+        flow.section('Use it', answerUseListHtml(notes, 'No heat, blend, or regional note in this Aroma row.')),
+        flow.section('Aroma groups', answerChipListHtml(groupItems, 'No aroma group tags in this row.')),
+      ]) +
+      flow.note('Aroma answer uses the spice harmony, food appendix, and G1-G8 aroma group extracts.');
   }
 
   function renderAromaFoodAnswer(fp) {
@@ -1132,43 +1106,40 @@
     var seas = uniqueAnswerItems(fp.seasonings || [], 12);
     var primary = seas.slice(0, 8);
     var secondary = seas.slice(8, 12);
+    var flow = window.KuschiIngredientFlow;
     host.innerHTML =
-      '<div class="ingredient-flow-head">' +
-        '<div>' +
-          '<p class="ingredient-flow-kicker">Aroma answer</p>' +
-          '<h2 class="ingredient-flow-title">' + esc(fp.name || fp.id) + '</h2>' +
-          '<div class="ingredient-flow-meta">' +
-            '<span class="ingredient-flow-pill">' + esc(seas.length + ' seasonings') + '</span>' +
-            '<span class="ingredient-flow-pill">Food appendix row</span>' +
-          '</div>' +
-        '</div>' +
-        '<div class="ingredient-flow-actions">' +
-          '<button type="button" class="ingredient-flow-action" data-aroma-answer-action="food" data-food-id="' + escAttr(fp.id || '') + '">Open row</button>' +
-          '<a class="ingredient-flow-action" href="flavor.html?q=' + encodeURIComponent(fp.name || fp.id) + '">Flavor</a>' +
-          '<a class="ingredient-flow-action" href="pantry.html?q=' + encodeURIComponent(fp.name || fp.id) + '">Pantry</a>' +
-        '</div>' +
-      '</div>' +
-      '<div class="ingredient-flow-grid">' +
-        '<section class="ingredient-flow-section"><h3>Seasonings</h3>' +
+      flow.head({
+        kicker: 'Aroma answer',
+        title: fp.name || fp.id,
+        metaHtml: flow.meta([seas.length + ' seasonings', 'Food appendix row']),
+        actionsHtml: flow.actions([
+          { text: 'Open row', attrs: { 'data-aroma-answer-action': 'food', 'data-food-id': fp.id || '' } },
+          { text: 'Flavor', href: 'flavor.html?q=' + encodeURIComponent(fp.name || fp.id) },
+          { text: 'Pantry', href: 'pantry.html?q=' + encodeURIComponent(fp.name || fp.id) },
+        ]),
+      }) +
+      flow.grid([
+        flow.section(
+          'Seasonings',
           answerChipListHtml(primary, 'No seasonings listed for this food.', function (item) {
             return item.id ? 'aroma.html?spice=' + encodeURIComponent(item.id) : '';
-          }) +
-        '</section>' +
-        '<section class="ingredient-flow-section"><h3>More options</h3>' +
+          })
+        ),
+        flow.section(
+          'More options',
           answerChipListHtml(secondary, primary.length ? 'Only the primary seasonings are listed.' : 'No secondary seasonings listed.', function (item) {
             return item.id ? 'aroma.html?spice=' + encodeURIComponent(item.id) : '';
-          }) +
-        '</section>' +
-        '<section class="ingredient-flow-section"><h3>Use it</h3>' +
-          answerUseListHtml(['Tap any seasoning for its spice profile.', 'Use the Matrix tab when you want spice-to-spice partners.']) +
-        '</section>' +
-        '<section class="ingredient-flow-section"><h3>Next check</h3>' +
+          })
+        ),
+        flow.section('Use it', answerUseListHtml(['Tap any seasoning for its spice profile.', 'Use the Matrix tab when you want spice-to-spice partners.'])),
+        flow.section(
+          'Next check',
           answerChipListHtml(primary.slice(0, 4), 'No seasoning profiles to open.', function (item) {
             return item.id ? 'aroma.html?spice=' + encodeURIComponent(item.id) : '';
-          }) +
-        '</section>' +
-      '</div>' +
-      '<p class="ingredient-flow-note">Food answer uses the Aroma food-to-seasonings appendix.</p>';
+          })
+        ),
+      ]) +
+      flow.note('Food answer uses the Aroma food-to-seasonings appendix.');
   }
 
   function updateAromaAnswer(rawQ, opts) {
