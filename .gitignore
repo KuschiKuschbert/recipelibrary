@@ -10,6 +10,7 @@ Thumbs.db
 reports/translation_candidates.jsonl
 reports/cleanup_affected_ids.jsonl
 reports/translate_full.log
+reports/lenovo_tablet_qa/
 
 # Workbook extract dumps (local pipeline input — regenerate with parse_menu_builder.py)
 reports/reference_sheet_extract.json

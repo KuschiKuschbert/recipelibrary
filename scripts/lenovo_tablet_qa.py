@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import argparse
+import json
+import re
 import sys
 import threading
 import time
@@ -10,7 +12,7 @@ from dataclasses import dataclass
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 from urllib.parse import unquote, urljoin, urlparse
 
 try:
@@ -51,6 +53,8 @@ HEAP_BYTE_BUDGET = 220_000_000
 DECISION_RESPONSE_MS_BUDGET = 1_200
 ACTION_RESPONSE_MS_BUDGET = 900
 
+CaptureState = Callable[[str], None]
+
 
 class QuietHandler(SimpleHTTPRequestHandler):
     def log_message(self, fmt: str, *args: object) -> None:
@@ -79,6 +83,81 @@ def start_server() -> tuple[ThreadingHTTPServer, str]:
     thread.start()
     host, port = server.server_address
     return server, f"http://{host}:{port}/"
+
+
+def artifact_slug(value: str, max_len: int = 120) -> str:
+    decoded = unquote(value)
+    slug = re.sub(r"[^A-Za-z0-9._-]+", "-", decoded).strip("-._")
+    if len(slug) > max_len:
+        slug = slug[:max_len].rstrip("-._")
+    return slug or "item"
+
+
+def resolve_artifacts_dir(value: str) -> Path:
+    path = Path(value).expanduser()
+    if not path.is_absolute():
+        path = ROOT / path
+    return path
+
+
+def capture_page_artifact(
+    page: Any,
+    artifacts_dir: Path,
+    page_path: str,
+    viewport_name: str,
+    width: int,
+    height: int,
+    reduced_motion: bool,
+    state: str,
+    artifacts: list[dict[str, Any]],
+) -> str | None:
+    motion_name = "reduced-motion" if reduced_motion else "normal-motion"
+    page_slug = artifact_slug(page_path)
+    state_slug = artifact_slug(state, max_len=56)
+    filename = f"{page_slug}__{viewport_name}-{width}x{height}__{motion_name}__{state_slug}.png"
+    artifact_path = artifacts_dir / filename
+    try:
+        artifacts_dir.mkdir(parents=True, exist_ok=True)
+        page.screenshot(path=str(artifact_path), full_page=False)
+        scroll_y = page.evaluate("() => Math.round(window.scrollY)")
+    except (OSError, PlaywrightError) as exc:
+        return f"screenshot artifact failed for {state}: {exc}"
+    artifacts.append(
+        {
+            "page": page_path,
+            "viewport": viewport_name,
+            "width": width,
+            "height": height,
+            "motion": motion_name,
+            "state": state,
+            "scrollY": scroll_y,
+            "url": page.url,
+            "file": artifact_path.name,
+        }
+    )
+    return None
+
+
+def write_artifact_manifest(
+    artifacts_dir: Path,
+    pages: tuple[str, ...],
+    artifacts: list[dict[str, Any]],
+    issues: list[Issue],
+) -> Path:
+    artifacts_dir.mkdir(parents=True, exist_ok=True)
+    manifest_path = artifacts_dir / "manifest.json"
+    manifest = {
+        "generatedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "pages": list(pages),
+        "viewports": [
+            {"name": name, "width": width, "height": height}
+            for name, width, height in VIEWPORTS
+        ],
+        "artifacts": artifacts,
+        "issues": [issue.__dict__ for issue in issues],
+    }
+    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+    return manifest_path
 
 
 def page_metric_script() -> str:
@@ -561,7 +640,7 @@ def issues_from_metrics(page_path: str, viewport_name: str, metric: dict[str, An
     return issues
 
 
-def run_pairing_decision_smoke(page: Any) -> list[str]:
+def run_pairing_decision_smoke(page: Any, capture_state: CaptureState | None = None) -> list[str]:
     problems: list[str] = []
     search = page.locator("#paDecisionSearch")
     if search.count() != 1:
@@ -603,6 +682,8 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
     body_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
     if "Cumin" not in body_text:
         problems.append("decision panel did not keep the first ingredient from 'pair cumin with lamb'")
+    if capture_state:
+        capture_state("pairing-cumin-answer")
     problems.extend(
         ingredient_flow_priority_problems(
             page,
@@ -685,6 +766,8 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
                 problems.append(f"Cumin row source detail missing section: {expected}")
         if "kitchen profile" in source_text or "pair first" in source_text:
             problems.append("Cumin row source detail still duplicates the quick kitchen answer")
+    if capture_state:
+        capture_state("pairing-cumin-row-open")
     timed_interaction(
         page,
         "Pairing Atlas food phrase answer",
@@ -711,6 +794,8 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
     body_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
     if "Roasted Lamb" not in body_text or "Cumin" not in body_text:
         problems.append("Pairing Atlas herbs-for-lamb phrase did not render the Roasted Lamb seasoning answer")
+    if capture_state:
+        capture_state("pairing-roasted-lamb-answer")
     problems.extend(
         ingredient_flow_priority_problems(
             page,
@@ -739,13 +824,15 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
     food_drawer = page.locator('tr.pa-drawer-row[data-food-drawer="roasted-lamb"]')
     if food_drawer.count() != 1:
         problems.append("Roasted Lamb food drawer is missing after food decision Open row")
+    elif capture_state:
+        capture_state("pairing-roasted-lamb-row-open")
     stale_spice_profile = page.locator("#paMatrixHost [data-pa-selected-profile]")
     if stale_spice_profile.count() != 0:
         problems.append("Spice selected profile stayed open after switching to the food matrix")
     return problems
 
 
-def run_flavor_decision_smoke(page: Any) -> list[str]:
+def run_flavor_decision_smoke(page: Any, capture_state: CaptureState | None = None) -> list[str]:
     problems: list[str] = []
     search = page.locator("#flavorSearch")
     if search.count() != 1:
@@ -791,6 +878,8 @@ def run_flavor_decision_smoke(page: Any) -> list[str]:
     for expected in ("seasonings", "more options"):
         if expected not in body_lower:
             problems.append(f"Flavor food answer card missing section: {expected}")
+    if capture_state:
+        capture_state("flavor-roasted-lamb-answer")
     problems.extend(
         ingredient_flow_control_problems(
             page,
@@ -812,6 +901,8 @@ def run_flavor_decision_smoke(page: Any) -> list[str]:
     synced_detail_id = page.locator("#flavorDetail").get_attribute("data-flavor-detail-id", timeout=5_000)
     if synced_detail_id != "cumin":
         problems.append("Flavor answer did not auto-sync Cumin into the detail pane")
+    if capture_state:
+        capture_state("flavor-cumin-answer")
     problems.extend(
         ingredient_flow_priority_problems(
             page,
@@ -873,10 +964,12 @@ def run_flavor_decision_smoke(page: Any) -> list[str]:
         detail_text = page.locator("#flavorDetail").inner_text(timeout=5_000)
         if "CUMIN" not in detail_text.upper():
             problems.append("Flavor answer Full detail did not open Cumin detail")
+        elif capture_state:
+            capture_state("flavor-cumin-detail")
     return problems
 
 
-def run_aroma_answer_smoke(page: Any) -> list[str]:
+def run_aroma_answer_smoke(page: Any, capture_state: CaptureState | None = None) -> list[str]:
     problems: list[str] = []
     search = page.locator("#aromaSearch")
     if search.count() != 1:
@@ -943,6 +1036,8 @@ def run_aroma_answer_smoke(page: Any) -> list[str]:
         matrix_focus = page.locator("#matrixFocus").input_value(timeout=5_000)
         if matrix_selected != "true" or matrix_focus != "cumin":
             problems.append("Aroma answer Matrix action did not focus Cumin in the matrix")
+        elif capture_state:
+            capture_state("aroma-cumin-matrix")
     profile_action = page.locator('[data-aroma-answer-action="profile"]')
     if profile_action.count() != 1:
         problems.append("Aroma answer Profile action is missing")
@@ -958,6 +1053,8 @@ def run_aroma_answer_smoke(page: Any) -> list[str]:
         profile_text = page.locator("#spiceProfile").inner_text(timeout=5_000)
         if "Cumin" not in profile_text:
             problems.append("Aroma answer Profile action did not open Cumin profile")
+        elif capture_state:
+            capture_state("aroma-cumin-profile")
     timed_interaction(
         page,
         "Aroma herbs-for-lamb phrase answer",
@@ -1012,10 +1109,22 @@ def run_aroma_answer_smoke(page: Any) -> list[str]:
         )
         if not food_open:
             problems.append("Aroma food answer Open row action did not render Roasted Lamb seasonings")
+        elif capture_state:
+            capture_state("aroma-roasted-lamb-row-open")
     return problems
 
 
-def run_page(browser: Any, base: str, page_path: str, viewport_name: str, width: int, height: int, reduced_motion: bool) -> list[Issue]:
+def run_page(
+    browser: Any,
+    base: str,
+    page_path: str,
+    viewport_name: str,
+    width: int,
+    height: int,
+    reduced_motion: bool,
+    artifacts_dir: Path | None = None,
+    artifacts: list[dict[str, Any]] | None = None,
+) -> list[Issue]:
     context = browser.new_context(
         viewport={"width": width, "height": height},
         device_scale_factor=1,
@@ -1029,19 +1138,38 @@ def run_page(browser: Any, base: str, page_path: str, viewport_name: str, width:
     page.on("console", lambda msg: console_errors.append(msg.text) if msg.type == "error" else None)
     page.on("pageerror", lambda exc: page_errors.append(str(exc)) if exc else None)
     issues: list[Issue] = []
+
+    def capture_state(state: str) -> None:
+        if artifacts_dir is None or artifacts is None:
+            return
+        problem = capture_page_artifact(
+            page,
+            artifacts_dir,
+            page_path,
+            viewport_name,
+            width,
+            height,
+            reduced_motion,
+            state,
+            artifacts,
+        )
+        if problem:
+            issues.append(Issue(page_path, viewport_name, problem))
+
     try:
         page.goto(urljoin(base, page_path), wait_until="networkidle", timeout=25_000)
         page.wait_for_timeout(600)
+        capture_state("loaded")
         for problem in task_first_surface_problems(page, page_path):
             issues.append(Issue(page_path, viewport_name, problem))
         if "pairing-atlas.html" in page_path and not reduced_motion and viewport_name == "portrait":
-            for problem in run_pairing_decision_smoke(page):
+            for problem in run_pairing_decision_smoke(page, capture_state):
                 issues.append(Issue(page_path, viewport_name, problem))
         if "flavor.html" in page_path and not reduced_motion and viewport_name == "portrait":
-            for problem in run_flavor_decision_smoke(page):
+            for problem in run_flavor_decision_smoke(page, capture_state):
                 issues.append(Issue(page_path, viewport_name, problem))
         if "aroma.html" in page_path and "tab=browse" in page_path and not reduced_motion and viewport_name == "portrait":
-            for problem in run_aroma_answer_smoke(page):
+            for problem in run_aroma_answer_smoke(page, capture_state):
                 issues.append(Issue(page_path, viewport_name, problem))
         for metric in collect_metrics(page):
             issues.extend(issues_from_metrics(page_path, viewport_name, metric, reduced_motion))
@@ -1067,12 +1195,18 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         action="store_true",
         help="Only run the reduced-motion profile.",
     )
+    parser.add_argument(
+        "--artifacts-dir",
+        help="Optional directory for viewport screenshots and manifest.json, e.g. reports/lenovo_tablet_qa/latest.",
+    )
     return parser.parse_args(argv)
 
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv or sys.argv[1:])
     pages = tuple(p.strip() for p in args.pages.split(",")) if args.pages else CORE_PAGES
+    artifacts_dir = resolve_artifacts_dir(args.artifacts_dir) if args.artifacts_dir else None
+    artifacts: list[dict[str, Any]] = []
     server, base = start_server()
     all_issues: list[Issue] = []
     try:
@@ -1085,7 +1219,17 @@ def main(argv: list[str] | None = None) -> int:
                     for viewport_name, width, height in VIEWPORTS:
                         label = f"{viewport_name} {width}x{height}, {motion_label}"
                         for page_path in pages:
-                            issues = run_page(browser, base, page_path, viewport_name, width, height, reduced_motion)
+                            issues = run_page(
+                                browser,
+                                base,
+                                page_path,
+                                viewport_name,
+                                width,
+                                height,
+                                reduced_motion,
+                                artifacts_dir,
+                                artifacts,
+                            )
                             if issues:
                                 all_issues.extend(issues)
                             else:
@@ -1095,6 +1239,10 @@ def main(argv: list[str] | None = None) -> int:
     finally:
         server.shutdown()
         server.server_close()
+
+    if artifacts_dir:
+        manifest_path = write_artifact_manifest(artifacts_dir, pages, artifacts, all_issues)
+        ok(f"Lenovo tablet QA artifacts written to {manifest_path}")
 
     if all_issues:
         for issue in all_issues:
