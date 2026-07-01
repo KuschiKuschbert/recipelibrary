@@ -192,6 +192,12 @@
     });
   }
 
+  window.KuschiRivieraServiceSummary = {
+    scheduleApply,
+    loadAliases,
+    loadVariants,
+  };
+
   function patchOpenRecipe() {
     if (typeof window.openRecipe !== 'function' || window.openRecipe.__rivieraServiceSummaryPatched) return;
     const original = window.openRecipe;
@@ -205,8 +211,7 @@
   }
 
   function boot() {
-    loadVariants();
-    loadAliases();
+    if (!document.body || !document.body.classList || !document.body.classList.contains('riviera-page')) return;
     patchOpenRecipe();
     setTimeout(patchOpenRecipe, 500);
     setTimeout(patchOpenRecipe, 1500);

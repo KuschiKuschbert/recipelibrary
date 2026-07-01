@@ -268,6 +268,11 @@
     });
   }
   function scheduleInject(recipeId) { [60, 160, 350, 900].forEach((delay) => setTimeout(() => injectForRecipeId(recipeId), delay)); }
+  window.KuschiRivieraServiceVariants = {
+    scheduleInject,
+    loadAliases,
+    loadVariants,
+  };
   function patchOpenRecipe() {
     if (typeof window.openRecipe !== 'function' || window.openRecipe.__rivieraServiceVariantsPatched) return;
     const original = window.openRecipe;
@@ -279,7 +284,12 @@
     };
     window.openRecipe.__rivieraServiceVariantsPatched = true;
   }
-  function boot() { loadVariants(); loadAliases(); patchOpenRecipe(); setTimeout(patchOpenRecipe, 500); setTimeout(patchOpenRecipe, 1500); }
+  function boot() {
+    if (!document.body || !document.body.classList || !document.body.classList.contains('riviera-page')) return;
+    patchOpenRecipe();
+    setTimeout(patchOpenRecipe, 500);
+    setTimeout(patchOpenRecipe, 1500);
+  }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
 })();
