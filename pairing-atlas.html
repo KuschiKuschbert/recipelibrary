@@ -648,6 +648,23 @@
   .pa-drawer-source-body {
     padding-top: 8px;
   }
+  .pa-drawer-source-intro {
+    margin: 0;
+    line-height: 1.45;
+  }
+  .pa-drawer-source-details--open {
+    padding-top: 12px;
+  }
+  .pa-drawer-source-details--open .pa-drawer-source-body {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 18px;
+    padding-top: 0;
+  }
+  .pa-drawer-source-details--open .pa-sec {
+    min-width: 0;
+    margin-bottom: 0;
+  }
   .pa-sec {
     margin-bottom: 14px;
   }
@@ -1284,6 +1301,11 @@
       margin-bottom: 12px;
     }
 
+    html.lenovo-tab-one-profile .pa-drawer-source-details--open .pa-drawer-source-body {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+    }
+
     html.lenovo-tab-one-profile .pa-sec p {
       font-size: 13px;
       line-height: 1.45;
@@ -1517,7 +1539,7 @@
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/kuschi-recipe-ui.js?v=4"></script>
 <script src="assets/ingredient-flow-ui.js?v=4"></script>
-<script src="assets/pairing-atlas.js?v=17"></script>
+<script src="assets/pairing-atlas.js?v=18"></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
 <script src="assets/app-nav.js?v=2"></script>
 <style>

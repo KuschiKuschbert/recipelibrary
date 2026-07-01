@@ -388,14 +388,6 @@
     });
   }
 
-  function useTipsListHtml(items, emptyText) {
-    return window.KuschiIngredientFlow.useList(items, {
-      empty: emptyText || 'No technique note in this extract yet.',
-      emptyClassName: 'pa-answer__empty',
-      className: 'pa-use-list',
-    });
-  }
-
   function drawerSummaryText(items, limit) {
     return window.KuschiIngredientFlow.summaryText(items, {
       limit: limit,
@@ -417,6 +409,13 @@
     var pairText = drawerSummaryText(harmony.length ? harmony : flavorPairs, 3);
     var useText = drawerSummaryText(useTips, 1);
     var flow = window.KuschiIngredientFlow;
+    var supportLines = [
+      drawerDecisionLine('Flavor adds', drawerSummaryText(flavorPairs, 3), 'No Flavor Bible row yet'),
+      drawerDecisionLine('Foods', drawerSummaryText(foods, 2), 'No food rows yet'),
+    ];
+    if (avoid.length) {
+      supportLines.push(drawerDecisionLine('Check', drawerSummaryText(avoid, 2), 'No avoid note found'));
+    }
     return (
       '<div class="pa-drawer-decision-summary" data-pa-drawer-decision-summary>' +
       flow.priority(
@@ -427,9 +426,7 @@
         { className: 'pa-drawer-priority', attrs: { 'data-pa-drawer-priority': true } }
       ) +
       '<ul class="pa-drawer-decision-list">' +
-      drawerDecisionLine('Flavor adds', drawerSummaryText(flavorPairs, 3), 'No Flavor Bible row yet') +
-      drawerDecisionLine('Foods', drawerSummaryText(foods, 2), 'No food rows yet') +
-      drawerDecisionLine('Check', drawerSummaryText(avoid, 2), 'No avoid note found') +
+      supportLines.join('') +
       '</ul>' +
       '</div>'
     );
@@ -971,56 +968,12 @@
       '">' +
         flow.profileHead('Kitchen profile', note, { className: 'pa-drawer-profile-head' }) +
         drawerDecisionSummaryHtml(harmony, flavorPairs, foods, avoid, useTips) +
-        flow.profileGrid(
-          [
-            flow.panel('Pair now', chipListHtml(harmony, { kind: 'spice', empty: 'No direct harmony links.' }), { className: 'pa-drawer-panel' }),
-            flow.panel('Flavor adds', chipListHtml(flavorPairs, { kind: 'flavor', empty: state.enriched ? 'No Flavor Bible row.' : 'Loading...' }), { className: 'pa-drawer-panel' }),
-            flow.panel('Use it', useTipsListHtml(useTips, state.enriched ? 'No technique note in the unified extract.' : 'Loading technique notes...'), {
-              wide: true,
-              className: 'pa-drawer-panel pa-drawer-panel--wide',
-            }),
-            flow.panel('Foods', chipListHtml(foods, { empty: state.enriched ? 'No food rows yet.' : 'Loading...' }), { className: 'pa-drawer-panel' }),
-            flow.panel('Check / avoid', chipListHtml(avoid, { kind: 'flavor', empty: state.enriched ? 'No avoid notes.' : 'Loading...' }), { className: 'pa-drawer-panel' }),
-          ],
-          { className: 'pa-drawer-profile-grid' }
-        ) +
       '</section>'
     );
   }
 
-  function spiceDrawerHtml(ing) {
-    var u = state.unifiedById ? state.unifiedById[ing.id] : null;
-    var ar = u && u.aroma ? u.aroma : ing;
-    var labels = state.meta.group_labels || [];
-    while (labels.length < 8) labels.push('G' + (labels.length + 1));
-    var name = displayNameForIngredient(ing) || ing.name || ing.id;
-
-    var parts = [];
+  function spiceDrawerSourceSections(ing, u, ar, labels) {
     var sourceParts = [];
-    parts.push('<div class="pa-drawer-head">');
-    parts.push('<div class="pa-drawer-title-wrap">');
-    parts.push('<p class="pa-drawer-kicker">Ingredient profile</p>');
-    parts.push('<h3 class="pa-drawer-title">' + esc(name) + '</h3>');
-    parts.push(drawerMetaHtml(ing, u));
-    parts.push(
-      '<div class="pa-drawer-actions ingredient-flow-actions">' +
-        '<a class="pa-drawer-action ingredient-flow-action" href="aroma.html?spice=' +
-        encodeURIComponent(ing.id) +
-        '">Aroma</a>' +
-        '<a class="pa-drawer-action ingredient-flow-action" href="flavor.html?q=' +
-        encodeURIComponent(name) +
-        '">Flavor</a>' +
-        '<a class="pa-drawer-action ingredient-flow-action" href="flavor.html?toolkit=1">Toolkit</a>' +
-      '</div>'
-    );
-    parts.push('</div>');
-    parts.push(
-      '<button type="button" class="pa-drawer-close" aria-label="Close details">×</button>'
-    );
-    parts.push('</div><div class="pa-drawer-body">');
-
-    parts.push(spiceDrawerQuickAnswerSection(ing));
-
     var ag = (ar && ar.aroma_groups) || ing.aroma_groups || [];
     if (ag.length) {
       var gtxt = ag
@@ -1155,24 +1108,82 @@
     var tkSec = spiceDrawerToolkitSection(ing);
     if (tkSec) sourceParts.push(tkSec);
 
-    if (sourceParts.length) {
+    return sourceParts;
+  }
+
+  function spiceDrawerHtml(ing, options) {
+    var sourceOnly = !!(options && options.sourceOnly);
+    var u = state.unifiedById ? state.unifiedById[ing.id] : null;
+    var ar = u && u.aroma ? u.aroma : ing;
+    var labels = state.meta.group_labels || [];
+    while (labels.length < 8) labels.push('G' + (labels.length + 1));
+    var name = displayNameForIngredient(ing) || ing.name || ing.id;
+
+    var parts = [];
+    var sourceParts = spiceDrawerSourceSections(ing, u, ar, labels);
+    parts.push('<div class="pa-drawer-head">');
+    parts.push('<div class="pa-drawer-title-wrap">');
+    if (sourceOnly) {
+      parts.push('<p class="pa-drawer-kicker">Source detail</p>');
       parts.push(
-        '<details class="pa-drawer-source-details">' +
-          '<summary>Source detail</summary>' +
-          '<div class="pa-drawer-source-body">' +
-            sourceParts.join('') +
-          '</div>' +
-        '</details>'
+        '<p class="pa-drawer-source-intro pa-muted">Deeper reference rows from Aroma, Flavor, Thesaurus, toolkit, and kitchen-context extracts.</p>'
+      );
+    } else {
+      parts.push('<p class="pa-drawer-kicker">Ingredient profile</p>');
+      parts.push('<h3 class="pa-drawer-title">' + esc(name) + '</h3>');
+      parts.push(drawerMetaHtml(ing, u));
+      parts.push(
+        '<div class="pa-drawer-actions ingredient-flow-actions">' +
+          '<a class="pa-drawer-action ingredient-flow-action" href="aroma.html?spice=' +
+          encodeURIComponent(ing.id) +
+          '">Aroma</a>' +
+          '<a class="pa-drawer-action ingredient-flow-action" href="flavor.html?q=' +
+          encodeURIComponent(name) +
+          '">Flavor</a>' +
+          '<a class="pa-drawer-action ingredient-flow-action" href="flavor.html?toolkit=1">Toolkit</a>' +
+        '</div>'
       );
     }
-
+    parts.push('</div>');
     parts.push(
-      '<p class="pa-drawer-foot"><a href="aroma.html?spice=' +
-        encodeURIComponent(ing.id) +
-        '">Open full Aroma profile →</a> · <a href="flavor.html?q=' +
-        encodeURIComponent(name) +
-        '">Flavor explorer →</a> · <a href="flavor.html?toolkit=1">Flavor toolkit →</a></p>'
+      '<button type="button" class="pa-drawer-close" aria-label="Close details">×</button>'
     );
+    parts.push('</div><div class="pa-drawer-body">');
+
+    if (!sourceOnly) {
+      parts.push(spiceDrawerQuickAnswerSection(ing));
+    }
+
+    if (sourceParts.length) {
+      if (sourceOnly) {
+        parts.push(
+          '<section class="pa-drawer-source-details pa-drawer-source-details--open" data-pa-source-detail>' +
+            '<div class="pa-drawer-source-body">' +
+              sourceParts.join('') +
+            '</div>' +
+          '</section>'
+        );
+      } else {
+        parts.push(
+          '<details class="pa-drawer-source-details">' +
+            '<summary>Source detail</summary>' +
+            '<div class="pa-drawer-source-body">' +
+              sourceParts.join('') +
+            '</div>' +
+          '</details>'
+        );
+      }
+    }
+
+    if (!sourceOnly) {
+      parts.push(
+        '<p class="pa-drawer-foot"><a href="aroma.html?spice=' +
+          encodeURIComponent(ing.id) +
+          '">Open full Aroma profile →</a> · <a href="flavor.html?q=' +
+          encodeURIComponent(name) +
+          '">Flavor explorer →</a> · <a href="flavor.html?toolkit=1">Flavor toolkit →</a></p>'
+      );
+    }
     parts.push('</div>');
     return parts.join('');
   }
@@ -1226,7 +1237,7 @@
     var td = document.createElement('td');
     td.colSpan = colspan;
     td.className = 'pa-drawer-td';
-    td.innerHTML = '<div class="pa-drawer-card">' + spiceDrawerHtml(ing) + '</div>';
+    td.innerHTML = '<div class="pa-drawer-card pa-drawer-card--source">' + spiceDrawerHtml(ing, { sourceOnly: true }) + '</div>';
     tr.appendChild(td);
     row.parentNode.insertBefore(tr, row.nextSibling);
   }

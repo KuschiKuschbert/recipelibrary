@@ -664,82 +664,27 @@ def run_pairing_decision_smoke(page: Any) -> list[str]:
         )
         if not selected_before_table:
             problems.append("Cumin selected profile dock is not before the spice table")
-    drawer_profile = page.locator('tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-profile]')
-    if drawer_profile.count() != 1:
-        problems.append("Cumin drawer profile is missing")
-    else:
-        shared_profile = page.evaluate(
-            """() => !!document.querySelector(
-              'tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-profile].ingredient-flow-profile'
-            )"""
-        )
-        if not shared_profile:
-            problems.append("Cumin drawer profile is not using shared ingredient-flow styles")
-        drawer_text = drawer_profile.inner_text(timeout=5_000)
-        drawer_lower = drawer_text.lower()
-        for expected in ("kitchen profile", "pair first", "pair now", "use it", "foods"):
-            if expected not in drawer_lower:
-                problems.append(f"Cumin drawer profile missing section: {expected}")
-        if "toast cumin seeds" not in drawer_lower:
-            problems.append("Cumin drawer profile did not surface the toast/use note")
-        summary = page.locator(
-            'tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-decision-summary]'
-        )
-        if summary.count() != 1:
-            problems.append("Cumin drawer decision summary is missing")
-        priority = page.locator(
-            'tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-priority]'
-        )
-        if priority.count() != 1:
-            problems.append("Cumin drawer priority summary is missing")
-        else:
-            priority_text = priority.inner_text(timeout=5_000).lower()
-            for expected in ("pair first", "use now", "fenugreek", "toast cumin seeds"):
-                if expected not in priority_text:
-                    problems.append(f"Cumin drawer priority summary missing: {expected}")
-            priority_before_support = page.evaluate(
-                """() => {
-                  const priority = document.querySelector(
-                    'tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-priority]'
-                  );
-                  const support = document.querySelector(
-                    'tr.pa-drawer-row[data-drawer-for="cumin"] .pa-drawer-decision-list'
-                  );
-                  return !!(priority && support &&
-                    (priority.compareDocumentPosition(support) & Node.DOCUMENT_POSITION_FOLLOWING));
-                }"""
-            )
-            if not priority_before_support:
-                problems.append("Cumin drawer priority summary is not before supporting detail")
-            priority_before_grid = page.evaluate(
-                """() => {
-                  const priority = document.querySelector(
-                    'tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-priority]'
-                  );
-                  const grid = document.querySelector(
-                    'tr.pa-drawer-row[data-drawer-for="cumin"] .pa-drawer-profile-grid'
-                  );
-                  return !!(priority && grid &&
-                    (priority.compareDocumentPosition(grid) & Node.DOCUMENT_POSITION_FOLLOWING));
-                }"""
-            )
-            if not priority_before_grid:
-                problems.append("Cumin drawer priority summary is not before deeper profile detail")
         problems.extend(
             ingredient_flow_control_problems(
                 page,
-                'tr.pa-drawer-row[data-drawer-for="cumin"]',
-                "Pairing Atlas cumin drawer",
+                '#paMatrixHost [data-pa-selected-profile][data-selected-spice-id="cumin"]',
+                "Pairing Atlas cumin selected profile dock",
                 ("Aroma", "Flavor", "Toolkit"),
             )
         )
-        instruction_chip = page.evaluate(
-            """() => Array.from(document.querySelectorAll(
-              'tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-profile] .pa-answer__chip'
-            )).some((el) => /toast cumin/i.test(el.textContent || ''))"""
-        )
-        if instruction_chip:
-            problems.append("Cumin drawer put an instruction into a pairing chip")
+    drawer_profile = page.locator('tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-profile]')
+    if drawer_profile.count() != 0:
+        problems.append("Cumin row drawer repeats the selected quick-answer profile")
+    source_detail = page.locator('tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-source-detail]')
+    if source_detail.count() != 1:
+        problems.append("Cumin row source detail is missing")
+    else:
+        source_text = source_detail.inner_text(timeout=5_000).lower()
+        for expected in ("aroma groups", "harmonizes with", "flavor thesaurus", "flavor bible"):
+            if expected not in source_text:
+                problems.append(f"Cumin row source detail missing section: {expected}")
+        if "kitchen profile" in source_text or "pair first" in source_text:
+            problems.append("Cumin row source detail still duplicates the quick kitchen answer")
     timed_interaction(
         page,
         "Pairing Atlas food phrase answer",
