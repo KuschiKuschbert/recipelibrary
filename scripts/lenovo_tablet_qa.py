@@ -257,6 +257,21 @@ def page_metric_script() -> str:
       .slice(0, 80);
   }
 
+  function visibleLabel(el) {
+    return (el.innerText || '')
+      .trim()
+      .replace(/\s+/g, ' ')
+      .slice(0, 80);
+  }
+
+  function shouldCheckControlTextFit(el) {
+    if (!visibleLabel(el)) return false;
+    if (el.matches('input, select, textarea')) return false;
+    if (el.closest('.visually-hidden, table, .grid, .pa-matrix-wrap, .pa-food-matrix-wrap, .matrix-wrap, .flavor-results')) return false;
+    if (el.hasAttribute('data-allow-clipped-text') || el.closest('[data-allow-clipped-text]')) return false;
+    return true;
+  }
+
   const interactiveSelector = [
     'a[href]',
     'button',
@@ -270,6 +285,7 @@ def page_metric_script() -> str:
   const interactives = Array.from(document.querySelectorAll(interactiveSelector)).filter(visible);
   const smallTargets = [];
   const tinyInteractiveText = [];
+  const clippedInteractiveText = [];
   const navOverlap = [];
 
   for (const el of interactives) {
@@ -294,6 +310,20 @@ def page_metric_script() -> str:
         cls: String(el.className || '').slice(0, 80),
         text: label(el),
         fontSize: Number(fontSize.toFixed(1))
+      });
+    }
+    if (
+      shouldCheckControlTextFit(el) &&
+      (el.scrollWidth > el.clientWidth + 2 || el.scrollHeight > el.clientHeight + 2)
+    ) {
+      clippedInteractiveText.push({
+        tag: el.tagName.toLowerCase(),
+        cls: String(el.className || '').slice(0, 80),
+        text: visibleLabel(el),
+        width: Math.round(rect.width),
+        height: Math.round(rect.height),
+        scrollWidth: Math.round(el.scrollWidth),
+        scrollHeight: Math.round(el.scrollHeight)
       });
     }
     if (navIsBottom && !isNav && rect.bottom > navRect.top + 1 && rect.top < navRect.bottom - 1) {
@@ -379,6 +409,7 @@ def page_metric_script() -> str:
     docOverflow: doc.scrollWidth > vw + 1 ? { scrollWidth: doc.scrollWidth, viewportWidth: vw } : null,
     smallTargets: smallTargets.slice(0, 12),
     tinyInteractiveText: tinyInteractiveText.slice(0, 12),
+    clippedInteractiveText: clippedInteractiveText.slice(0, 12),
     navOverlap: navOverlap.slice(0, 12),
     loadMs: navEntry ? Math.round(navEntry.loadEventEnd - navEntry.startTime) : null,
     domNodes: document.querySelectorAll('*').length,
@@ -901,6 +932,9 @@ def issues_from_metrics(page_path: str, viewport_name: str, metric: dict[str, An
     if metric.get("tinyInteractiveText"):
         sample = "; ".join(describe_target(t) for t in metric["tinyInteractiveText"][:5])
         issues.append(Issue(page_path, viewport_name, f"{prefix}: interactive text below 12px: {sample}"))
+    if metric.get("clippedInteractiveText"):
+        sample = "; ".join(describe_target(t) for t in metric["clippedInteractiveText"][:5])
+        issues.append(Issue(page_path, viewport_name, f"{prefix}: visible control text is clipped: {sample}"))
     if metric.get("atBottom") and metric.get("navOverlap"):
         sample = "; ".join(describe_target(t) for t in metric["navOverlap"][:5])
         issues.append(Issue(page_path, viewport_name, f"{prefix}: bottom nav overlaps interactives: {sample}"))
