@@ -62,6 +62,7 @@ LONG_TASK_COUNT_BUDGET = 12
 DECISION_RESPONSE_MS_BUDGET = 1_200
 ACTION_RESPONSE_MS_BUDGET = 900
 FLAVOR_QUICK_ANSWER_MS_BUDGET = 240
+TASK_FIRST_READABLE_TEXT_MIN_PX = 12
 
 CaptureState = Callable[[str], None]
 TimingSink = Callable[[dict[str, Any]], None]
@@ -572,6 +573,7 @@ def task_first_surface_spec(page_path: str) -> dict[str, Any] | None:
                     "role": "answer",
                     "beforeSelector": ".pa-toolbar",
                     "beforeName": "matrix controls",
+                    "readabilitySelector": ".ingredient-flow-priority-value, .ingredient-flow-chip, .ingredient-flow-use-list, .ingredient-flow-section p, .ingredient-flow-note, .ingredient-flow-empty",
                 },
             ],
         }
@@ -592,6 +594,7 @@ def task_first_surface_spec(page_path: str) -> dict[str, Any] | None:
                     "role": "answer",
                     "beforeSelector": ".flavor-tabs",
                     "beforeName": "secondary tabs",
+                    "readabilitySelector": ".ingredient-flow-priority-value, .ingredient-flow-chip, .ingredient-flow-use-list, .ingredient-flow-section p, .ingredient-flow-note, .ingredient-flow-empty",
                 },
             ],
         }
@@ -612,6 +615,7 @@ def task_first_surface_spec(page_path: str) -> dict[str, Any] | None:
                     "role": "answer",
                     "beforeSelector": ".aroma-modes",
                     "beforeName": "mode tabs",
+                    "readabilitySelector": ".ingredient-flow-priority-value, .ingredient-flow-chip, .ingredient-flow-use-list, .ingredient-flow-section p, .ingredient-flow-note, .ingredient-flow-empty",
                 },
             ],
         }
@@ -627,6 +631,44 @@ def task_first_surface_problems(page: Any, page_path: str) -> list[str]:
 (spec) => {
   const vw = window.innerWidth;
   const vh = window.innerHeight;
+  function label(el) {
+    return (el.innerText || el.textContent || el.getAttribute('aria-label') || '')
+      .trim()
+      .replace(/\s+/g, ' ')
+      .slice(0, 80);
+  }
+  function isVisible(el) {
+    const style = getComputedStyle(el);
+    const rect = el.getBoundingClientRect();
+    return style.display !== 'none' &&
+      style.visibility !== 'hidden' &&
+      Number(style.opacity || 1) !== 0 &&
+      rect.width > 0 &&
+      rect.height > 0 &&
+      rect.bottom > 0 &&
+      rect.top < vh &&
+      rect.right > 0 &&
+      rect.left < vw;
+  }
+  function readableTextIssues(el, item) {
+    const minPx = Number(item.minReadableTextPx || 12);
+    const selector = item.readabilitySelector;
+    if (!selector) return [];
+    return Array.from(el.querySelectorAll(selector))
+      .filter(isVisible)
+      .map((node) => {
+        const fontSize = parseFloat(getComputedStyle(node).fontSize || '16');
+        return {
+          tag: node.tagName.toLowerCase(),
+          cls: String(node.className || '').slice(0, 80),
+          text: label(node),
+          fontSize: Number(fontSize.toFixed(1)),
+          minPx,
+        };
+      })
+      .filter((entry) => entry.text && entry.fontSize < minPx)
+      .slice(0, 8);
+  }
   function readItem(item) {
     const el = document.querySelector(item.selector);
     if (!el) return Object.assign({}, item, { missing: true });
@@ -658,6 +700,7 @@ def task_first_surface_problems(page: Any, page_path: str) -> list[str]:
         beforeRect.height <= 0
       )),
       beforeTop: beforeRect ? Math.round(beforeRect.top) : null,
+      tinyReadableText: readableTextIssues(el, item),
     });
   }
   return {
@@ -701,6 +744,14 @@ def task_first_surface_problems(page: Any, page_path: str) -> list[str]:
             )
         if vw and (left < -1 or right > vw + 1):
             problems.append(f"{label} {name} overflows horizontally ({int(left)}..{int(right)} of {int(vw)}px)")
+        tiny_text = item.get("tinyReadableText") or []
+        if role == "answer" and tiny_text:
+            sample = "; ".join(
+                f"{str(t.get('text') or t.get('cls') or t.get('tag') or 'text')} {t.get('fontSize')}px"
+                for t in tiny_text[:5]
+            )
+            min_px = tiny_text[0].get("minPx", TASK_FIRST_READABLE_TEXT_MIN_PX)
+            problems.append(f"{label} {name} has answer text below {min_px}px: {sample}")
         before_selector = item.get("beforeSelector")
         if before_selector:
             before_name = str(item.get("beforeName") or before_selector)
