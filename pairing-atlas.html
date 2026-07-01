@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=170">
+<link rel="stylesheet" href="assets/theme.css?v=171">
 <style>
   :root { --app-header-h: 65px; }
   .pa-skip {
@@ -1430,6 +1430,11 @@
       <input type="search" id="paDecisionSearch" class="pa-decision__search ingredient-flow-query-input" placeholder="Ask: what goes with lamb?" autocomplete="off" spellcheck="false" enterkeyhint="search" />
       <button type="submit" class="pa-decision__button ingredient-flow-query-button" id="paDecisionSubmit">Answer</button>
     </form>
+    <div class="ingredient-flow-suggestions" aria-label="Quick ingredient answers">
+      <button type="button" class="ingredient-flow-suggestion" data-ingredient-flow-preset-id="lamb" data-ingredient-flow-preset="what should I season lamb with?">Lamb</button>
+      <button type="button" class="ingredient-flow-suggestion" data-ingredient-flow-preset-id="cumin" data-ingredient-flow-preset="what goes with cumin?">Cumin</button>
+      <button type="button" class="ingredient-flow-suggestion" data-ingredient-flow-preset-id="basil-lamb" data-ingredient-flow-preset="pair basil with lamb">Basil + lamb</button>
+    </div>
     <div class="pa-decision__body" id="paDecisionBody" aria-live="polite">
       <p class="pa-answer__empty ingredient-flow-empty">Loading ingredient decision data…</p>
     </div>
@@ -1557,8 +1562,8 @@
 
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/kuschi-recipe-ui.js?v=4"></script>
-<script src="assets/ingredient-flow-ui.js?v=4"></script>
-<script src="assets/pairing-atlas.js?v=19"></script>
+<script src="assets/ingredient-flow-ui.js?v=5"></script>
+<script src="assets/pairing-atlas.js?v=20"></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
 <script src="assets/app-nav.js?v=2"></script>
 <style>

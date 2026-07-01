@@ -12967,6 +12967,35 @@ html.lenovo-tab-one-profile #plannerListOverlay .planner-list__print-opt input {
   border-color: var(--gold);
   color: var(--text);
 }
+.ingredient-flow-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: -6px 0 14px;
+}
+.ingredient-flow-suggestion {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid rgba(201, 169, 110, 0.28);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.032);
+  color: var(--text2);
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.ingredient-flow-suggestion:hover,
+.ingredient-flow-suggestion:focus-visible {
+  border-color: var(--gold);
+  color: var(--gold);
+}
 .ingredient-flow-empty {
   margin: 0;
   color: var(--text3);
@@ -13204,6 +13233,15 @@ html.lenovo-tab-one-profile .ingredient-flow-query-input {
 }
 html.lenovo-tab-one-profile .ingredient-flow-query-button {
   min-height: 48px;
+  font-size: 13px;
+}
+html.lenovo-tab-one-profile .ingredient-flow-suggestions {
+  gap: 8px;
+  margin: -2px 0 12px;
+}
+html.lenovo-tab-one-profile .ingredient-flow-suggestion {
+  min-height: 48px;
+  padding: 0 13px;
   font-size: 13px;
 }
 html.lenovo-tab-one-profile .ingredient-flow-grid,

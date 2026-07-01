@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=170">
+<link rel="stylesheet" href="assets/theme.css?v=171">
 <link rel="preload" href="aroma_data/ingredients.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
@@ -717,6 +717,11 @@
       <input type="search" class="search-input" id="aromaSearch" placeholder="Try a food or spice — lamb, cumin, lemongrass…" autocomplete="off" spellcheck="false" aria-label="Search foods and spices" />
     </div>
   </div>
+  <div class="ingredient-flow-suggestions" aria-label="Quick aroma answers">
+    <button type="button" class="ingredient-flow-suggestion" data-ingredient-flow-preset-id="lamb" data-ingredient-flow-preset="what should I season lamb with?">Lamb</button>
+    <button type="button" class="ingredient-flow-suggestion" data-ingredient-flow-preset-id="cumin" data-ingredient-flow-preset="what goes with cumin?">Cumin</button>
+    <button type="button" class="ingredient-flow-suggestion" data-ingredient-flow-preset-id="fennel" data-ingredient-flow-preset="what goes with fennel?">Fennel</button>
+  </div>
   <div class="search-status" id="aromaSearchStatus" aria-live="polite"></div>
 </div>
 
@@ -802,7 +807,7 @@
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/aroma-hints.js"></script>
 <script src="assets/kuschi-recipe-ui.js?v=4"></script>
-<script src="assets/ingredient-flow-ui.js?v=4"></script>
+<script src="assets/ingredient-flow-ui.js?v=5"></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
 <script>
 (function () {
@@ -1449,7 +1454,9 @@
     var q = norm(rawQ);
     if (q.length < 2) return false;
     if (mode !== 'browse' && mode !== 'matrix') return false;
-    if (foodAppendixHits(rawQ).length) {
+    var foodHits = foodAppendixHits(rawQ);
+    if (foodHits.length) {
+      renderAromaFoodAnswer(bestFoodByQuery(rawQ) || foodHits[0]);
       showMode('food');
       runFoodSearchFromQuery(rawQ);
       pushAromaUrl();
@@ -1581,6 +1588,14 @@
       aromaSearchScheduler.schedule({ immediate: true });
     }
   });
+  if (window.KuschiIngredientFlow && typeof KuschiIngredientFlow.wirePresetButtons === 'function') {
+    KuschiIngredientFlow.wirePresetButtons(document.querySelector('.search-wrap'), {
+      input: searchEl,
+      onSelect: function () {
+        aromaSearchScheduler.schedule({ immediate: true });
+      }
+    });
+  }
 
   var aromaAnswerEl = document.getElementById('aromaAnswer');
   if (aromaAnswerEl) {

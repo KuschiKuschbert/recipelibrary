@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=170">
+<link rel="stylesheet" href="assets/theme.css?v=171">
 <style>
   :root { --app-header-h: 65px; }
   .hero { text-align: center; padding: 48px 24px 24px; position: relative; display: none; }
@@ -465,6 +465,11 @@
   <section class="flavor-tab-panel" data-panel="explore">
     <div class="flavor-search-wrap">
       <input type="search" id="flavorSearch" class="ingredient-flow-query-input" placeholder="Ask: what goes with roasted lamb?" autocomplete="off" />
+      <div class="ingredient-flow-suggestions" aria-label="Quick flavor answers">
+        <button type="button" class="ingredient-flow-suggestion" data-ingredient-flow-preset-id="lamb" data-ingredient-flow-preset="what should I season lamb with?">Lamb</button>
+        <button type="button" class="ingredient-flow-suggestion" data-ingredient-flow-preset-id="roasted-lamb" data-ingredient-flow-preset="what goes with roasted lamb?">Roasted lamb</button>
+        <button type="button" class="ingredient-flow-suggestion" data-ingredient-flow-preset-id="cumin" data-ingredient-flow-preset="what goes with cumin?">Cumin</button>
+      </div>
       <div id="flavorLoadStatus"></div>
     </div>
     <div id="flavorAnswer" class="flavor-answer-card ingredient-flow-card ingredient-flow" aria-live="polite">
@@ -499,8 +504,8 @@
 </div>
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/kuschi-recipe-ui.js?v=4"></script>
-<script src="assets/ingredient-flow-ui.js?v=4"></script>
-<script src="assets/flavor-explorer.js?v=11"></script>
+<script src="assets/ingredient-flow-ui.js?v=5"></script>
+<script src="assets/flavor-explorer.js?v=12"></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
 <script src="assets/app-nav.js?v=2"></script>
 </body>

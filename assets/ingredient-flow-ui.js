@@ -311,6 +311,31 @@
     return '<div class="ingredient-flow-profile-grid' + (options.className ? ' ' + options.className : '') + '">' + (panels || []).join('') + '</div>';
   }
 
+  function wirePresetButtons(root, options) {
+    options = options || {};
+    root = root || document;
+    root.addEventListener('click', function (event) {
+      var btn = event.target.closest('[data-ingredient-flow-preset]');
+      if (!btn || (root !== document && !root.contains(btn))) return;
+      var input = options.input;
+      if (!input && options.inputSelector) input = document.querySelector(options.inputSelector);
+      var value = btn.getAttribute('data-ingredient-flow-preset') || btn.textContent || '';
+      value = String(value || '').trim();
+      if (!input || !value) return;
+      event.preventDefault();
+      input.value = value;
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      if (typeof options.onSelect === 'function') options.onSelect(value, btn);
+      if (options.focus !== false && typeof input.focus === 'function') {
+        try {
+          input.focus({ preventScroll: true });
+        } catch (err) {
+          input.focus();
+        }
+      }
+    });
+  }
+
   window.KuschiIngredientFlow = {
     esc: esc,
     normalizeQuery: normalizeQuery,
@@ -334,5 +359,6 @@
     panel: panel,
     profileHead: profileHead,
     profileGrid: profileGrid,
+    wirePresetButtons: wirePresetButtons,
   };
 })();

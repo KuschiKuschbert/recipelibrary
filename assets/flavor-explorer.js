@@ -1337,6 +1337,15 @@
         updateFlavorAnswerLive(inp);
         scheduleFlavorSearch();
       });
+      if (global.KuschiIngredientFlow && typeof global.KuschiIngredientFlow.wirePresetButtons === 'function') {
+        global.KuschiIngredientFlow.wirePresetButtons(document.querySelector('.flavor-search-wrap'), {
+          input: inp,
+          onSelect: function () {
+            updateFlavorAnswer(inp.value, { selectDefault: false, syncDetail: true });
+            scheduleFlavorSearch({ immediate: true });
+          },
+        });
+      }
     }
     var answer = document.getElementById('flavorAnswer');
     if (answer) {

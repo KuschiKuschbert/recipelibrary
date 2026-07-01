@@ -568,6 +568,11 @@ def task_first_surface_spec(page_path: str) -> dict[str, Any] | None:
                     "beforeName": "matrix controls",
                 },
                 {
+                    "name": "lamb preset",
+                    "selector": '.pa-decision [data-ingredient-flow-preset-id="lamb"]',
+                    "role": "control",
+                },
+                {
                     "name": "decision answer",
                     "selector": "#paDecisionBody",
                     "role": "answer",
@@ -589,6 +594,11 @@ def task_first_surface_spec(page_path: str) -> dict[str, Any] | None:
                     "beforeName": "secondary tabs",
                 },
                 {
+                    "name": "lamb preset",
+                    "selector": '.flavor-search-wrap [data-ingredient-flow-preset-id="lamb"]',
+                    "role": "control",
+                },
+                {
                     "name": "quick answer",
                     "selector": "#flavorAnswer",
                     "role": "answer",
@@ -608,6 +618,11 @@ def task_first_surface_spec(page_path: str) -> dict[str, Any] | None:
                     "role": "control",
                     "beforeSelector": ".aroma-modes",
                     "beforeName": "mode tabs",
+                },
+                {
+                    "name": "lamb preset",
+                    "selector": '.search-wrap [data-ingredient-flow-preset-id="lamb"]',
+                    "role": "control",
                 },
                 {
                     "name": "quick answer",
@@ -848,6 +863,21 @@ def run_pairing_decision_smoke(
         )
     except PlaywrightTimeoutError:
         problems.append("Pairing Atlas enrichment did not finish before drawer smoke")
+    lamb_preset = page.locator('.pa-decision [data-ingredient-flow-preset-id="lamb"]')
+    if lamb_preset.count() != 1:
+        problems.append("Pairing Atlas Lamb quick preset is missing")
+    else:
+        timed_interaction(
+            page,
+            "Pairing Atlas Lamb quick preset",
+            lambda: lamb_preset.click(),
+            "() => !!document.querySelector('#paDecisionBody .pa-answer[data-decision-food-id=\"roasted-lamb\"]')",
+            problems,
+            timing_sink=timing_sink,
+        )
+        preset_text = page.locator("#paDecisionBody").inner_text(timeout=5_000)
+        if "Roasted Lamb" not in preset_text or "Cumin" not in preset_text:
+            problems.append("Pairing Atlas Lamb quick preset did not render the Roasted Lamb seasoning answer")
     timed_interaction(
         page,
         "Pairing Atlas phrase answer",
@@ -1071,6 +1101,22 @@ def run_flavor_decision_smoke(
     answer = page.locator("#flavorAnswer")
     if answer.count() != 1:
         return ["Flavor answer card is missing"]
+    lamb_preset = page.locator('.flavor-search-wrap [data-ingredient-flow-preset-id="lamb"]')
+    if lamb_preset.count() != 1:
+        problems.append("Flavor Lamb quick preset is missing")
+    else:
+        timed_interaction(
+            page,
+            "Flavor Lamb quick preset",
+            lambda: lamb_preset.click(),
+            "() => /\\bLamb\\b/.test(document.querySelector('#flavorAnswer .ingredient-flow-title')?.textContent || '')",
+            problems,
+            FLAVOR_QUICK_ANSWER_MS_BUDGET,
+            timing_sink=timing_sink,
+        )
+        preset_text = answer.inner_text(timeout=5_000)
+        if "Lamb" not in preset_text or "Cumin" not in preset_text:
+            problems.append("Flavor Lamb quick preset did not render the Lamb seasoning answer")
     timed_interaction(
         page,
         "Flavor warmup phrase answer",
@@ -1257,6 +1303,21 @@ def run_aroma_answer_smoke(
     for expected in ("harmony partners", "foods that use it", "use it"):
         if expected not in body_lower:
             problems.append(f"Aroma answer card missing section: {expected}")
+    lamb_preset = page.locator('.search-wrap [data-ingredient-flow-preset-id="lamb"]')
+    if lamb_preset.count() != 1:
+        problems.append("Aroma Lamb quick preset is missing")
+    else:
+        timed_interaction(
+            page,
+            "Aroma Lamb quick preset",
+            lambda: lamb_preset.click(),
+            "() => /\\bRoasted Lamb\\b/.test(document.querySelector('#aromaAnswer .ingredient-flow-title')?.textContent || '')",
+            problems,
+            timing_sink=timing_sink,
+        )
+        preset_text = answer.inner_text(timeout=5_000)
+        if "Roasted Lamb" not in preset_text or "Cumin" not in preset_text:
+            problems.append("Aroma Lamb quick preset did not render the Roasted Lamb seasoning answer")
     timed_interaction(
         page,
         "Aroma spice phrase answer",

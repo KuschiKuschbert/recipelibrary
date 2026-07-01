@@ -2015,6 +2015,15 @@
               updateDecisionPanel(decisionSearch.value, { selectDefault: false });
             }, 120);
           });
+          if (window.KuschiIngredientFlow && typeof window.KuschiIngredientFlow.wirePresetButtons === 'function') {
+            window.KuschiIngredientFlow.wirePresetButtons(document.querySelector('.pa-decision'), {
+              input: decisionSearch,
+              onSelect: function () {
+                clearTimeout(decisionTimer);
+                updateDecisionPanel(decisionSearch.value, { selectDefault: true });
+              },
+            });
+          }
         }
         if (decisionBody) {
           decisionBody.addEventListener('click', function (e) {
