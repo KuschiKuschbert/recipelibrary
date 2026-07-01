@@ -1179,6 +1179,7 @@ def run_pairing_decision_smoke(
               return {
                 missing: !profile || !card,
                 sourceDetails: profile ? profile.querySelectorAll('.pa-drawer-source-details').length : 0,
+                compactProfile: profile ? !!profile.querySelector('.ingredient-flow-profile--compact') : false,
                 headerActions: profile ? profile.querySelectorAll('.pa-drawer-actions .ingredient-flow-action').length : 0,
                 footerActions: profile ? profile.querySelectorAll('.pa-drawer-foot .ingredient-flow-action').length : 0,
                 clientHeight: card ? Math.round(card.clientHeight) : 0,
@@ -1192,6 +1193,8 @@ def run_pairing_decision_smoke(
         )
         if selected_layout.get("sourceDetails"):
             problems.append("Cumin selected profile dock duplicates source detail instead of staying compact")
+        if not selected_layout.get("compactProfile"):
+            problems.append("Cumin selected profile dock is not using the shared compact profile modifier")
         if int(selected_layout.get("headerActions") or 0) < 3:
             problems.append("Cumin selected profile header actions are not using shared ingredient-flow actions")
         if int(selected_layout.get("footerActions") or 0) > 0:

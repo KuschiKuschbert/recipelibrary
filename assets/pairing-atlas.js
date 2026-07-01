@@ -1059,7 +1059,9 @@
       : 'Aroma data is ready; richer Flavor and food rows are still loading.';
     var flow = window.KuschiIngredientFlow;
     return (
-      '<section class="pa-drawer-profile ingredient-flow-profile" data-pa-drawer-profile aria-label="Kitchen profile for ' +
+      '<section class="pa-drawer-profile ingredient-flow-profile' +
+      (compact ? ' ingredient-flow-profile--compact' : '') +
+      '" data-pa-drawer-profile aria-label="Kitchen profile for ' +
       esc(name) +
       '">' +
         flow.profileHead('Kitchen profile', note, { className: 'pa-drawer-profile-head' }) +

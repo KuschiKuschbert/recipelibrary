@@ -13394,6 +13394,12 @@ html.lenovo-tab-one-profile .ingredient-tool-status {
   html.lenovo-tab-one-profile .ingredient-flow-profile-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+  html.lenovo-tab-one-profile .ingredient-flow-profile--compact .ingredient-flow-profile-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  html.lenovo-tab-one-profile .ingredient-flow-profile--compact .ingredient-flow-panel {
+    padding: 9px;
+  }
   html.lenovo-tab-one-profile .ingredient-flow-title {
     font-size: 21px;
   }
