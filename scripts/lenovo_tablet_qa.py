@@ -718,6 +718,8 @@ def issues_from_metrics(page_path: str, viewport_name: str, metric: dict[str, An
     prefix = f"scrollY={metric.get('scrollY')}"
     if not metric.get("lenovoProfile"):
         issues.append(Issue(page_path, viewport_name, f"{prefix}: lenovo tablet profile class did not apply"))
+    elif not metric.get("lowMemoryProfile"):
+        issues.append(Issue(page_path, viewport_name, f"{prefix}: low-memory tablet profile class did not apply"))
     if metric.get("docOverflow"):
         overflow = metric["docOverflow"]
         issues.append(Issue(page_path, viewport_name, f"{prefix}: document overflows horizontally {overflow['scrollWidth']} > {overflow['viewportWidth']}"))
@@ -1385,6 +1387,8 @@ def run_page(
                 "cpuThrottleRate": cpu_throttle_rate_value,
                 "url": metric.get("url"),
                 "scrollY": metric.get("scrollY"),
+                "lenovoProfile": bool(metric.get("lenovoProfile")),
+                "lowMemoryProfile": bool(metric.get("lowMemoryProfile")),
                 "supported": bool(metric.get("longTaskSupported")),
                 "observerError": metric.get("longTaskObserverError") or "",
                 "count": int(metric.get("longTaskCount") or 0),
