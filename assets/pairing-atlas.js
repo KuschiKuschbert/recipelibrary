@@ -376,8 +376,9 @@
   }
 
   function chipListHtml(items, options) {
+    options = options || {};
     return window.KuschiIngredientFlow.chips(items, {
-      empty: (options && options.empty) || 'No direct match in this extract yet.',
+      empty: options.empty || 'No direct match in this extract yet.',
       emptyClassName: 'pa-answer__empty',
       className: 'pa-answer__chips',
       chipClassName: 'pa-answer__chip',
@@ -385,7 +386,13 @@
       hrefForItem: function (item) {
         return answerChipHref(item, options);
       },
+      attrsForItem: options.attrsForItem || null,
     });
+  }
+
+  function seasoningDrillAttrs(item) {
+    var id = item && item.id ? item.id : '';
+    return id ? { 'data-pa-seasoning-id': id } : null;
   }
 
   function drawerSummaryText(items, limit) {
@@ -548,10 +555,10 @@
         ) +
         flow.grid(
           [
-            flow.section('Seasonings', chipListHtml(seasonings, { kind: 'spice', empty: 'No listed seasonings for this food row.' }), {
+            flow.section('Seasonings', chipListHtml(seasonings, { kind: 'spice', empty: 'No listed seasonings for this food row.', attrsForItem: seasoningDrillAttrs }), {
               className: 'pa-answer__section',
             }),
-            flow.section('More options', chipListHtml(more, { kind: 'spice', empty: 'No extra seasonings beyond the first picks.' }), {
+            flow.section('More options', chipListHtml(more, { kind: 'spice', empty: 'No extra seasonings beyond the first picks.', attrsForItem: seasoningDrillAttrs }), {
               className: 'pa-answer__section',
             }),
           ],
@@ -638,6 +645,18 @@
     if (row && typeof row.scrollIntoView === 'function') {
       row.scrollIntoView({ block: 'center', inline: 'nearest' });
     }
+  }
+
+  function drillIntoSeasoning(spiceId, spiceHost, search, modePri, modeAll, decisionSearch) {
+    var ing = spiceId && state.byId ? state.byId[spiceId] : null;
+    if (!ing) return false;
+    var name = displayNameForIngredient(ing);
+    state.decisionFoodId = null;
+    state.decisionSpiceId = ing.id;
+    if (decisionSearch) decisionSearch.value = name;
+    updateDecisionPanel(name, { selectDefault: false });
+    revealDecisionInMatrix(spiceHost, search, modePri, modeAll);
+    return true;
   }
 
   function revealDecisionInFoodMatrix(foodHost, foodSearch) {
@@ -2033,6 +2052,11 @@
         }
         if (decisionBody) {
           decisionBody.addEventListener('click', function (e) {
+            var seasoning = e.target.closest('[data-pa-seasoning-id]');
+            if (seasoning && drillIntoSeasoning(seasoning.getAttribute('data-pa-seasoning-id'), spiceHost, search, modePri, modeAll, decisionSearch)) {
+              e.preventDefault();
+              return;
+            }
             var action = e.target.closest('[data-pa-decision-action]');
             if (!action) return;
             if (action.getAttribute('data-pa-decision-action') === 'matrix') {

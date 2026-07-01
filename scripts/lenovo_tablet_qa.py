@@ -1069,6 +1069,29 @@ def run_pairing_decision_smoke(
             ("Open row", "Aroma", "Flavor"),
         )
     )
+    cumin_chip = page.locator('#paDecisionBody .pa-answer[data-decision-food-id="roasted-lamb"] [data-pa-seasoning-id="cumin"]').first
+    if cumin_chip.count() != 1:
+        problems.append("Pairing Atlas Roasted Lamb answer missing same-page Cumin seasoning chip")
+    else:
+        timed_interaction(
+            page,
+            "Pairing Atlas Cumin seasoning chip",
+            lambda: cumin_chip.click(),
+            "() => !!document.querySelector('#paDecisionBody .pa-answer[data-decision-spice-id=\"cumin\"]') && !!document.querySelector('#paMatrixHost [data-pa-selected-profile][data-selected-spice-id=\"cumin\"]')",
+            problems,
+            ACTION_RESPONSE_MS_BUDGET,
+            timing_sink=timing_sink,
+        )
+        if "Cumin" not in page.locator("#paDecisionBody").inner_text(timeout=5_000):
+            problems.append("Pairing Atlas Cumin seasoning chip did not render the Cumin answer")
+        timed_interaction(
+            page,
+            "Pairing Atlas restore food answer after seasoning chip",
+            lambda: (search.fill("what should I season lamb with?"), page.locator("#paDecisionSubmit").click()),
+            "() => !!document.querySelector('#paDecisionBody .pa-answer[data-decision-food-id=\"roasted-lamb\"]')",
+            problems,
+            timing_sink=timing_sink,
+        )
     timed_interaction(
         page,
         "Pairing Atlas food decision Open row",
