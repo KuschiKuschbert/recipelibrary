@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=165">
+<link rel="stylesheet" href="assets/theme.css?v=167">
 <link rel="preload" href="aroma_data/ingredients.json" as="fetch" type="application/json" crossorigin="anonymous">
 <link rel="preload" href="aroma_data/food_pairings.json" as="fetch" type="application/json" crossorigin="anonymous">
 <style>
@@ -209,6 +209,17 @@
     border-color: var(--gold);
     color: var(--gold-light);
   }
+  .aroma-answer {
+    max-width: 920px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .aroma-answer .ingredient-flow-note {
+    margin-top: 0;
+  }
+  .aroma-answer .ingredient-flow-chip {
+    background: transparent;
+  }
   .aroma-matrix-legend {
     margin-top: 14px;
     font-size: 13px;
@@ -312,6 +323,9 @@
     max-width: 760px;
     font-size: 14.5px;
     line-height: 1.62;
+  }
+  html.lenovo-tab-one-profile .aroma-answer {
+    max-width: 760px;
   }
   html.lenovo-tab-one-profile .aroma-panel-actions {
     display: flex;
@@ -472,6 +486,12 @@
     line-height: 1.3;
   }
   @media (orientation: landscape) {
+    html.lenovo-tab-one-profile .aroma-answer {
+      max-width: min(1120px, 100%);
+    }
+    html.lenovo-tab-one-profile .aroma-answer .ingredient-flow-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
     html.lenovo-tab-one-profile .aroma-matrix-toolbar {
       grid-template-columns: repeat(5, minmax(0, 1fr));
     }
@@ -709,6 +729,10 @@
 </div>
 
 <div class="aroma-page">
+  <section id="aromaAnswer" class="aroma-answer ingredient-flow-card ingredient-flow" aria-live="polite">
+    <p class="ingredient-flow-empty">Loading aroma answer…</p>
+  </section>
+
   <details class="aroma-quick-pass" id="aromaQuickPass">
     <summary class="aroma-quick-pass-summary">Quick fixes at the pass · balance reminders</summary>
     <div class="aroma-quick-pass-body" id="aromaQuickPassBody">
@@ -813,6 +837,10 @@
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
 
+  function escAttr(s) {
+    return esc(s).replace(/"/g, '&quot;');
+  }
+
   function buildQuickPassHtml(data) {
     if (!data || typeof data !== 'object') return '<p class="aroma-empty">Nothing to show.</p>';
     var br = data.balance_rules;
@@ -908,6 +936,278 @@
     return groups.slice(0, 4).map(function (g) {
       return '<span class="aroma-group-badge aroma-g' + g + '">G' + g + '</span>';
     }).join('');
+  }
+
+  function aromaGroupText(ing) {
+    var groups = ing && ing.aroma_groups ? ing.aroma_groups : [];
+    return groups.length ? groups.map(function (g) { return 'G' + g; }).join(', ') : 'No aroma group';
+  }
+
+  function uniqueAnswerItems(items, limit) {
+    var seen = {};
+    var out = [];
+    for (var i = 0; i < (items || []).length; i++) {
+      var item = items[i];
+      var id = '';
+      var name = '';
+      if (typeof item === 'string') {
+        name = item;
+      } else if (item) {
+        id = item.id || '';
+        name = item.name || item.label || item.id || '';
+      }
+      name = String(name || '').trim();
+      if (!name) continue;
+      var key = id || norm(name);
+      if (!key || seen[key]) continue;
+      seen[key] = true;
+      out.push({ id: id, name: name });
+      if (limit && out.length >= limit) break;
+    }
+    return out;
+  }
+
+  function answerChipHtml(item, href) {
+    var text = item && item.name ? item.name : String(item || '');
+    if (!text) return '';
+    if (href) {
+      return '<a class="ingredient-flow-chip" href="' + href + '">' + esc(text) + '</a>';
+    }
+    return '<span class="ingredient-flow-chip">' + esc(text) + '</span>';
+  }
+
+  function answerChipListHtml(items, empty, hrefForItem) {
+    if (!items || !items.length) {
+      return '<p class="ingredient-flow-empty">' + esc(empty || 'No direct row in this extract yet.') + '</p>';
+    }
+    return (
+      '<div class="ingredient-flow-chips">' +
+      items.map(function (item) {
+        return answerChipHtml(item, hrefForItem ? hrefForItem(item) : '');
+      }).join('') +
+      '</div>'
+    );
+  }
+
+  function answerUseListHtml(items, empty) {
+    if (!items || !items.length) {
+      return '<p class="ingredient-flow-empty">' + esc(empty || 'No use note in this extract yet.') + '</p>';
+    }
+    return (
+      '<ul class="ingredient-flow-use-list">' +
+      items.slice(0, 5).map(function (item) {
+        return '<li>' + esc(item) + '</li>';
+      }).join('') +
+      '</ul>'
+    );
+  }
+
+  function foodRowsUsingSpice(spiceId, limit) {
+    var rows = [];
+    for (var i = 0; i < foodPairings.length; i++) {
+      var fp = foodPairings[i];
+      var seas = fp && fp.seasonings ? fp.seasonings : [];
+      for (var j = 0; j < seas.length; j++) {
+        var sid = typeof seas[j] === 'string' ? seas[j] : seas[j].id;
+        if (sid === spiceId) {
+          rows.push({ id: fp.id || '', name: fp.name || fp.id || '' });
+          break;
+        }
+      }
+      if (limit && rows.length >= limit) break;
+    }
+    return uniqueAnswerItems(rows, limit);
+  }
+
+  function harmonyItemsForSpice(ing, limit) {
+    if (!ing) return [];
+    var items = uniqueAnswerItems(ing.harmonizes_with || [], limit);
+    if (items.length >= limit) return items;
+    var matrixIds = matrix[ing.id] || [];
+    var extra = matrixIds.map(function (id) {
+      var row = byId[id];
+      return { id: id, name: row ? row.name : String(id || '').replace(/-/g, ' ') };
+    });
+    return uniqueAnswerItems(items.concat(extra), limit);
+  }
+
+  function useNotesForSpice(ing) {
+    var notes = [];
+    if (heatBehaviorHasAny(ing && ing.heat_behavior)) {
+      ['a', 'b', 'c'].forEach(function (k) {
+        if (ing.heat_behavior[k]) notes.push('Stage ' + k.toUpperCase() + ': ' + ing.heat_behavior[k]);
+      });
+    }
+    if (ing && ing.spice_blends && ing.spice_blends.length) {
+      notes.push('Blends: ' + ing.spice_blends.slice(0, 3).join(', '));
+    }
+    if (ing && ing.cuisines && ing.cuisines.length) {
+      notes.push('Regional use: ' + ing.cuisines.slice(0, 2).join(', '));
+    }
+    if (ing && ing.pairs_with_foods && ing.pairs_with_foods.length) {
+      notes.push('Book food note: ' + ing.pairs_with_foods.slice(0, 3).join(', '));
+    }
+    return notes;
+  }
+
+  function findSpiceByQuery(rawQ) {
+    var q = norm(rawQ);
+    if (!q) return null;
+    var dashed = q.replace(/\s/g, '-');
+    var prefix = null;
+    var contains = null;
+    for (var i = 0; i < ingredients.length; i++) {
+      var ing = ingredients[i];
+      var idn = norm(ing.id || '');
+      var name = norm(ing.name || '');
+      if (idn === q || ing.id === dashed || name === q) return ing;
+      if (!prefix && (idn.indexOf(q) === 0 || name.indexOf(q) === 0)) prefix = ing;
+      if (!contains && (idn.indexOf(q) >= 0 || name.indexOf(q) >= 0)) contains = ing;
+    }
+    return prefix || contains;
+  }
+
+  function bestFoodByQuery(rawQ) {
+    var hits = foodAppendixHits(rawQ);
+    if (!hits.length) return null;
+    var q = norm(rawQ);
+    for (var i = 0; i < hits.length; i++) {
+      if (norm(hits[i].name) === q || norm(hits[i].id) === q) return hits[i];
+    }
+    return hits[0];
+  }
+
+  function renderAromaSpiceAnswer(ing) {
+    var host = document.getElementById('aromaAnswer');
+    if (!host || !ing) return;
+    var harmony = harmonyItemsForSpice(ing, 8);
+    var foods = foodRowsUsingSpice(ing.id, 8);
+    var notes = useNotesForSpice(ing);
+    var groupItems = (ing.aroma_groups || []).map(function (g) {
+      return { id: '', name: 'G' + g };
+    });
+    var partnerCount = matrix[ing.id] && matrix[ing.id].length ? matrix[ing.id].length : harmony.length;
+    host.innerHTML =
+      '<div class="ingredient-flow-head">' +
+        '<div>' +
+          '<p class="ingredient-flow-kicker">Aroma answer</p>' +
+          '<h2 class="ingredient-flow-title">' + esc(ing.name || ing.id) + '</h2>' +
+          '<div class="ingredient-flow-meta">' +
+            '<span class="ingredient-flow-pill">' + esc(aromaGroupText(ing)) + '</span>' +
+            '<span class="ingredient-flow-pill">' + esc(partnerCount + ' harmony links') + '</span>' +
+            '<span class="ingredient-flow-pill">' + esc(foods.length + ' food rows') + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="ingredient-flow-actions">' +
+          '<button type="button" class="ingredient-flow-action" data-aroma-answer-action="profile" data-spice-id="' + escAttr(ing.id) + '">Profile</button>' +
+          '<button type="button" class="ingredient-flow-action" data-aroma-answer-action="matrix" data-spice-id="' + escAttr(ing.id) + '">Matrix</button>' +
+          '<a class="ingredient-flow-action" href="pairing-atlas.html?ingredient=' + encodeURIComponent(ing.name || ing.id) + '">Atlas</a>' +
+          '<a class="ingredient-flow-action" href="flavor.html?q=' + encodeURIComponent(ing.name || ing.id) + '">Flavor</a>' +
+        '</div>' +
+      '</div>' +
+      '<div class="ingredient-flow-grid">' +
+        '<section class="ingredient-flow-section"><h3>Harmony partners</h3>' +
+          answerChipListHtml(harmony, 'No harmony partners in this extract.', function (item) {
+            return item.id ? 'aroma.html?spice=' + encodeURIComponent(item.id) : '';
+          }) +
+        '</section>' +
+        '<section class="ingredient-flow-section"><h3>Foods that use it</h3>' +
+          answerChipListHtml(foods, 'No food appendix rows list this spice yet.', function (item) {
+            return item.id ? 'aroma.html?food=' + encodeURIComponent(item.id) : '';
+          }) +
+        '</section>' +
+        '<section class="ingredient-flow-section"><h3>Use it</h3>' +
+          answerUseListHtml(notes, 'No heat, blend, or regional note in this Aroma row.') +
+        '</section>' +
+        '<section class="ingredient-flow-section"><h3>Aroma groups</h3>' +
+          answerChipListHtml(groupItems, 'No aroma group tags in this row.') +
+        '</section>' +
+      '</div>' +
+      '<p class="ingredient-flow-note">Aroma answer uses the spice harmony, food appendix, and G1–G8 aroma group extracts.</p>';
+  }
+
+  function renderAromaFoodAnswer(fp) {
+    var host = document.getElementById('aromaAnswer');
+    if (!host || !fp) return;
+    var seas = uniqueAnswerItems(fp.seasonings || [], 12);
+    var primary = seas.slice(0, 8);
+    var secondary = seas.slice(8, 12);
+    host.innerHTML =
+      '<div class="ingredient-flow-head">' +
+        '<div>' +
+          '<p class="ingredient-flow-kicker">Aroma answer</p>' +
+          '<h2 class="ingredient-flow-title">' + esc(fp.name || fp.id) + '</h2>' +
+          '<div class="ingredient-flow-meta">' +
+            '<span class="ingredient-flow-pill">' + esc(seas.length + ' seasonings') + '</span>' +
+            '<span class="ingredient-flow-pill">Food appendix row</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="ingredient-flow-actions">' +
+          '<button type="button" class="ingredient-flow-action" data-aroma-answer-action="food" data-food-id="' + escAttr(fp.id || '') + '">Open row</button>' +
+          '<a class="ingredient-flow-action" href="flavor.html?q=' + encodeURIComponent(fp.name || fp.id) + '">Flavor</a>' +
+          '<a class="ingredient-flow-action" href="pantry.html?q=' + encodeURIComponent(fp.name || fp.id) + '">Pantry</a>' +
+        '</div>' +
+      '</div>' +
+      '<div class="ingredient-flow-grid">' +
+        '<section class="ingredient-flow-section"><h3>Seasonings</h3>' +
+          answerChipListHtml(primary, 'No seasonings listed for this food.', function (item) {
+            return item.id ? 'aroma.html?spice=' + encodeURIComponent(item.id) : '';
+          }) +
+        '</section>' +
+        '<section class="ingredient-flow-section"><h3>More options</h3>' +
+          answerChipListHtml(secondary, primary.length ? 'Only the primary seasonings are listed.' : 'No secondary seasonings listed.', function (item) {
+            return item.id ? 'aroma.html?spice=' + encodeURIComponent(item.id) : '';
+          }) +
+        '</section>' +
+        '<section class="ingredient-flow-section"><h3>Use it</h3>' +
+          answerUseListHtml(['Tap any seasoning for its spice profile.', 'Use the Matrix tab when you want spice-to-spice partners.']) +
+        '</section>' +
+        '<section class="ingredient-flow-section"><h3>Next check</h3>' +
+          answerChipListHtml(primary.slice(0, 4), 'No seasoning profiles to open.', function (item) {
+            return item.id ? 'aroma.html?spice=' + encodeURIComponent(item.id) : '';
+          }) +
+        '</section>' +
+      '</div>' +
+      '<p class="ingredient-flow-note">Food answer uses the Aroma food-to-seasonings appendix.</p>';
+  }
+
+  function updateAromaAnswer(rawQ, opts) {
+    var host = document.getElementById('aromaAnswer');
+    if (!host || !ingredients.length) return;
+    var q = String(rawQ || '').trim();
+    if (!q && opts && opts.selectDefault && byId.cumin) {
+      renderAromaSpiceAnswer(byId.cumin);
+      return;
+    }
+    var spice = findSpiceByQuery(q);
+    if (spice) {
+      renderAromaSpiceAnswer(spice);
+      return;
+    }
+    var food = bestFoodByQuery(q);
+    if (food) {
+      renderAromaFoodAnswer(food);
+      return;
+    }
+    if (!q) {
+      host.innerHTML = '<p class="ingredient-flow-empty">Type a food or spice to get a quick Aroma answer.</p>';
+      return;
+    }
+    host.innerHTML =
+      '<p class="ingredient-flow-empty">No quick Aroma answer matched <strong>' +
+      esc(q) +
+      '</strong>. Try cumin, lamb, rice, fennel, or lemon.</p>';
+  }
+
+  function openAromaAnswerMatrix(spiceId) {
+    if (!spiceId || !byId[spiceId]) return;
+    searchEl.value = byId[spiceId].name || spiceId;
+    showMode('matrix');
+    var focus = document.getElementById('matrixFocus');
+    if (focus) focus.value = spiceId;
+    applyMatrixDensity();
+    renderMatrix();
+    pushAromaUrl();
   }
 
   function heatBehaviorHasAny(heat) {
@@ -1046,6 +1346,7 @@
     var ing = byId[id];
     showMode('spice');
     searchEl.value = ing ? ing.name : id;
+    if (ing) renderAromaSpiceAnswer(ing);
     document.getElementById('spiceResults').innerHTML = '';
     renderSpiceProfile(ing);
     var p = new URLSearchParams(location.search);
@@ -1197,6 +1498,7 @@
   function openFood(fp) {
     showMode('food');
     searchEl.value = fp.name || '';
+    renderAromaFoodAnswer(fp);
     var seas = fp.seasonings || [];
     var html = seas.map(function (s) {
       var id = typeof s === 'string' ? s : s.id;
@@ -1222,7 +1524,11 @@
   function runSearch() {
     var rawQ = String(searchEl.value || '').trim();
     var q = norm(rawQ);
-    if (!q) return;
+    if (!q) {
+      updateAromaAnswer('', { selectDefault: true });
+      return;
+    }
+    updateAromaAnswer(rawQ, { selectDefault: false });
     if (mode === 'browse' || mode === 'matrix') return;
     if (mode === 'food') {
       runFoodSearchFromQuery(rawQ);
@@ -1278,6 +1584,27 @@
       aromaSearchScheduler.schedule({ immediate: true });
     }
   });
+
+  var aromaAnswerEl = document.getElementById('aromaAnswer');
+  if (aromaAnswerEl) {
+    aromaAnswerEl.addEventListener('click', function (e) {
+      var action = e.target.closest('[data-aroma-answer-action]');
+      if (!action) return;
+      var kind = action.getAttribute('data-aroma-answer-action');
+      if (kind === 'profile') {
+        e.preventDefault();
+        openSpice(action.getAttribute('data-spice-id'));
+      } else if (kind === 'matrix') {
+        e.preventDefault();
+        openAromaAnswerMatrix(action.getAttribute('data-spice-id'));
+      } else if (kind === 'food') {
+        e.preventDefault();
+        var fid = action.getAttribute('data-food-id');
+        var fp = foodPairings.find(function (f) { return f.id === fid; });
+        if (fp) openFood(fp);
+      }
+    });
+  }
 
   function sharedGroups(a, b) {
     var ga = a && a.aroma_groups ? a.aroma_groups : [];
@@ -1865,11 +2192,23 @@
     var params = new URLSearchParams(location.search);
     var sp = params.get('spice');
     var fd = params.get('food');
+    var q = params.get('q');
     if (sp && byId[sp]) {
       openSpice(sp);
     } else if (fd) {
       var fp = foodPairings.find(function (f) { return f.id === fd; });
       if (fp) openFood(fp);
+    } else if (q) {
+      searchEl.value = q;
+      updateAromaAnswer(q, { selectDefault: false });
+      var directSpice = findSpiceByQuery(q);
+      if (directSpice) {
+        openSpice(directSpice.id);
+      } else {
+        var directFood = bestFoodByQuery(q);
+        if (directFood) openFood(directFood);
+        else runSearch();
+      }
     } else {
       var tab = params.get('tab');
       if (tab === 'matrix' || tab === 'browse' || tab === 'spice' || tab === 'food') {
@@ -1877,9 +2216,11 @@
       }
       applyMatrixDensity();
       renderMatrix();
+      updateAromaAnswer('', { selectDefault: true });
     }
   }).catch(function () {
     document.getElementById('foodResults').innerHTML = '<p class="aroma-empty">Could not load aroma JSON files.</p>';
+    document.getElementById('aromaAnswer').innerHTML = '<p class="ingredient-flow-empty">Could not load aroma answer data.</p>';
   });
 })();
 </script>

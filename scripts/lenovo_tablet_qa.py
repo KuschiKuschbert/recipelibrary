@@ -350,6 +350,42 @@ def run_flavor_decision_smoke(page: Any) -> list[str]:
     return problems
 
 
+def run_aroma_answer_smoke(page: Any) -> list[str]:
+    problems: list[str] = []
+    search = page.locator("#aromaSearch")
+    if search.count() != 1:
+        return ["Aroma answer search is missing"]
+    answer = page.locator("#aromaAnswer")
+    if answer.count() != 1:
+        return ["Aroma answer card is missing"]
+    try:
+        page.wait_for_selector("#aromaAnswer .ingredient-flow-grid", timeout=5_000)
+    except PlaywrightTimeoutError:
+        problems.append("Aroma answer card did not render shared grid")
+    body_text = answer.inner_text(timeout=5_000)
+    if "Cumin" not in body_text:
+        problems.append("Aroma answer card did not render default Cumin")
+    shared_answer = page.evaluate(
+        "() => !!document.querySelector('#aromaAnswer.ingredient-flow-card .ingredient-flow-grid')"
+    )
+    if not shared_answer:
+        problems.append("Aroma answer card is not using shared ingredient-flow styles")
+    body_lower = body_text.lower()
+    for expected in ("harmony partners", "foods that use it", "use it"):
+        if expected not in body_lower:
+            problems.append(f"Aroma answer card missing section: {expected}")
+    profile_action = page.locator('[data-aroma-answer-action="profile"]')
+    if profile_action.count() != 1:
+        problems.append("Aroma answer Profile action is missing")
+    else:
+        profile_action.click()
+        page.wait_for_timeout(250)
+        profile_text = page.locator("#spiceProfile").inner_text(timeout=5_000)
+        if "Cumin" not in profile_text:
+            problems.append("Aroma answer Profile action did not open Cumin profile")
+    return problems
+
+
 def run_page(browser: Any, base: str, page_path: str, viewport_name: str, width: int, height: int, reduced_motion: bool) -> list[Issue]:
     context = browser.new_context(
         viewport={"width": width, "height": height},
@@ -372,6 +408,9 @@ def run_page(browser: Any, base: str, page_path: str, viewport_name: str, width:
                 issues.append(Issue(page_path, viewport_name, problem))
         if "flavor.html" in page_path and not reduced_motion and viewport_name == "portrait":
             for problem in run_flavor_decision_smoke(page):
+                issues.append(Issue(page_path, viewport_name, problem))
+        if "aroma.html" in page_path and "tab=browse" in page_path and not reduced_motion and viewport_name == "portrait":
+            for problem in run_aroma_answer_smoke(page):
                 issues.append(Issue(page_path, viewport_name, problem))
         for metric in collect_metrics(page):
             issues.extend(issues_from_metrics(page_path, viewport_name, metric, reduced_motion))
