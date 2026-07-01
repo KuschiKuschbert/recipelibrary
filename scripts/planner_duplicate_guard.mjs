@@ -79,7 +79,7 @@ for (const pkg of packages.packages || []) {
     const payload = buildWorstCasePayload(pkg, section);
     if (!payload.courses.length) continue;
 
-    const cleaned = planner.dedupePayloadCourses(payload);
+    const cleaned = planner.uniqueRecipePayloadForLists(payload);
     const cleanedIds = cleaned.courses.flatMap((course) => course.items.map((item) => item.recipeId));
     const duplicateRecipeIds = [...cleanedIds.reduce((map, id) => map.set(id, (map.get(id) || 0) + 1), new Map())]
       .filter(([, count]) => count > 1)
@@ -101,6 +101,11 @@ for (const pkg of packages.packages || []) {
     }
 
     if (pkg.id === 'weddings' && section.id === 'portofino') {
+      const manifest = planner.buildManifest(payload);
+      const seafoodMentions = (manifest.match(/3-Tier Seafood Fountain/g) || []).length;
+      if (seafoodMentions !== 3) {
+        failures.push(`weddings/portofino: menu choices were collapsed (${seafoodMentions}/3 seafood choices visible)`);
+      }
       const arborio = rows.find((row) => canonical.canonicalOrderMergeKey(row.item) === 'arborio rice');
       if (!arborio || /^—(?:\s|$)/.test(String(arborio.qty || ''))) {
         failures.push('weddings/portofino: Arborio Rice did not keep its merged quantity display');

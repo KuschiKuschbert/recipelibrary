@@ -370,7 +370,7 @@
     }
   }
 
-  function dedupePayloadCourses(payload) {
+  function uniqueRecipePayloadForLists(payload) {
     if (!payload || !Array.isArray(payload.courses)) return payload;
     var seen = {};
     var recipeIds = [];
@@ -424,7 +424,7 @@
   }
 
   function mergeIngredients(payload) {
-    payload = dedupePayloadCourses(payload);
+    payload = uniqueRecipePayloadForLists(payload);
     var C = window.KuschiRivieraCanonical;
     var M = window.KuschiRecipeMetric;
     var Kr = window.KuschiUserRecipes;
@@ -1093,7 +1093,7 @@
   }
 
   function buildFromPayload(payload) {
-    _payload = dedupePayloadCourses(payload);
+    _payload = payload;
     _payload.planId = planIdFromPayload(_payload);
     loadTimelineChecks(_payload.planId);
     _activeTab = 'timeline';
@@ -1296,7 +1296,7 @@
     buildPrepTimeline: buildPrepTimeline,
     buildManifest: buildManifest,
     mergeIngredients: mergeIngredients,
-    dedupePayloadCourses: dedupePayloadCourses,
+    uniqueRecipePayloadForLists: uniqueRecipePayloadForLists,
   };
 
   if (document.readyState === 'loading') {
