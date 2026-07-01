@@ -1009,9 +1009,15 @@ def task_first_surface_problems(page: Any, page_path: str) -> list[str]:
     return problems
 
 
-def issues_from_metrics(page_path: str, viewport_name: str, metric: dict[str, Any], reduced_motion: bool) -> list[Issue]:
+def issues_from_metrics(
+    page_path: str,
+    viewport_name: str,
+    metric: dict[str, Any],
+    reduced_motion: bool,
+    state: str | None = None,
+) -> list[Issue]:
     issues: list[Issue] = []
-    prefix = f"scrollY={metric.get('scrollY')}"
+    prefix = f"state={state}, scrollY={metric.get('scrollY')}" if state else f"scrollY={metric.get('scrollY')}"
     if not metric.get("lenovoProfile"):
         issues.append(Issue(page_path, viewport_name, f"{prefix}: lenovo tablet profile class did not apply"))
     elif not metric.get("lowMemoryProfile"):
@@ -2169,22 +2175,28 @@ def run_page(
     issues: list[Issue] = []
 
     def capture_state(state: str) -> None:
-        if artifacts_dir is None or artifacts is None:
+        if artifacts_dir is not None and artifacts is not None:
+            problem = capture_page_artifact(
+                page,
+                artifacts_dir,
+                page_path,
+                viewport_name,
+                width,
+                height,
+                reduced_motion,
+                cpu_throttle_rate_value,
+                state,
+                artifacts,
+            )
+            if problem:
+                issues.append(Issue(page_path, viewport_name, problem))
+        try:
+            metric = page.evaluate(page_metric_script())
+        except PlaywrightError as exc:
+            issues.append(Issue(page_path, viewport_name, f"state={state}: metric checkpoint failed: {exc}"))
             return
-        problem = capture_page_artifact(
-            page,
-            artifacts_dir,
-            page_path,
-            viewport_name,
-            width,
-            height,
-            reduced_motion,
-            cpu_throttle_rate_value,
-            state,
-            artifacts,
-        )
-        if problem:
-            issues.append(Issue(page_path, viewport_name, problem))
+        record_long_task_metric(metric, state)
+        issues.extend(issues_from_metrics(page_path, viewport_name, metric, reduced_motion, state))
 
     def record_timing(entry: dict[str, Any]) -> None:
         if action_timings is None:
@@ -2203,7 +2215,7 @@ def run_page(
             }
         )
 
-    def record_long_task_metric(metric: dict[str, Any]) -> None:
+    def record_long_task_metric(metric: dict[str, Any], state: str | None = None) -> None:
         if long_task_metrics is None:
             return
         motion_name = "reduced-motion" if reduced_motion else "normal-motion"
@@ -2215,6 +2227,7 @@ def run_page(
                 "height": height,
                 "motion": motion_name,
                 "cpuThrottleRate": cpu_throttle_rate_value,
+                "state": state,
                 "url": metric.get("url"),
                 "scrollY": metric.get("scrollY"),
                 "lenovoProfile": bool(metric.get("lenovoProfile")),
