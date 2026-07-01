@@ -329,6 +329,59 @@
     }
   }
 
+  var scriptLoadPromises = Object.create(null);
+
+  function hasGlobalPath(path) {
+    if (!path) return false;
+    var parts = String(path).split('.');
+    var cur = w;
+    for (var i = 0; i < parts.length; i += 1) {
+      cur = cur && cur[parts[i]];
+      if (!cur) return false;
+    }
+    return true;
+  }
+
+  function loadScriptOnce(src, opts) {
+    var options = opts || {};
+    var globalName = options.globalName || '';
+    if (hasGlobalPath(globalName)) return Promise.resolve();
+    if (scriptLoadPromises[src]) return scriptLoadPromises[src];
+    scriptLoadPromises[src] = new Promise(function (resolve, reject) {
+      var doc = w.document;
+      if (!doc || !doc.head) {
+        reject(new Error('Document head unavailable.'));
+        return;
+      }
+      var s = doc.createElement('script');
+      s.src = src;
+      if (options.crossOrigin) s.crossOrigin = options.crossOrigin;
+      s.onload = function () {
+        if (globalName && !hasGlobalPath(globalName)) {
+          reject(new Error(src + ' loaded without ' + globalName + '.'));
+          return;
+        }
+        resolve();
+      };
+      s.onerror = function () {
+        reject(new Error('Could not load ' + src + '.'));
+      };
+      doc.head.appendChild(s);
+    });
+    return scriptLoadPromises[src];
+  }
+
+  function loadRecipeFormatter() {
+    return loadScriptOnce('assets/recipe-gemini-format.js?v=2', { globalName: 'KuschiRecipeGemini' })
+      .then(function () {
+        return loadScriptOnce('assets/recipe-import-helpers.js?v=2', { globalName: 'KuschiRecipeImport' });
+      });
+  }
+
+  function loadQrCode() {
+    return loadScriptOnce('assets/qrcodejs-1.0.0.min.js?v=1', { globalName: 'QRCode' });
+  }
+
   w.KuschiRecipeUi = {
     esc: esc,
     copyText: copyText,
@@ -342,6 +395,9 @@
     unlockPageScroll: unlockPageScroll,
     syncSearchClear: syncSearchClear,
     syncModalCopyDock: syncModalCopyDock,
+    loadScriptOnce: loadScriptOnce,
+    loadRecipeFormatter: loadRecipeFormatter,
+    loadQrCode: loadQrCode,
     /**
      * @param {{ idSuffix?: string, openByDefault?: boolean, modalInline?: boolean }} [opts]
      */

@@ -1,5 +1,5 @@
 'use strict';
-const CACHE_NAME = 'kuschi-kitchen-v185';
+const CACHE_NAME = 'kuschi-kitchen-v186';
 
 // App shell: HTML pages + core assets (precache on install)
 const SHELL_URLS = [
@@ -21,8 +21,6 @@ const SHELL_URLS = [
   './assets/user-recipes.js',
   './assets/order-list.js',
   './assets/aroma-hints.js',
-  './assets/recipe-gemini-format.js',
-  './assets/recipe-import-helpers.js',
   './assets/screen-wake.js',
   './assets/kuschi-recipe-ui.js',
   './assets/flavor-explorer.js',
@@ -44,6 +42,13 @@ const SHELL_URLS = [
   './icon-192.png',
   './icon-512.png',
   './apple-touch-icon-180.png',
+];
+
+// Optional UI helpers: cache on first use, but do not precache during startup.
+const LAZY_ASSET_URLS = [
+  './assets/recipe-gemini-format.js',
+  './assets/recipe-import-helpers.js',
+  './assets/qrcodejs-1.0.0.min.js',
 ];
 
 // Dynamic data: cache at runtime on first fetch, serve cache-first after
@@ -106,7 +111,8 @@ self.addEventListener('fetch', (e) => {
 
   // Shell assets (CSS, JS, icons): stale-while-revalidate
   const isShell = SHELL_URLS.some((u) => url.pathname.endsWith(u.replace(/^\./, '')));
-  if (isShell) {
+  const isLazyAsset = LAZY_ASSET_URLS.some((u) => url.pathname.endsWith(u.replace(/^\./, '')));
+  if (isShell || isLazyAsset) {
     e.respondWith(
       caches.open(CACHE_NAME).then((cache) =>
         cache.match(e.request).then((cached) => {

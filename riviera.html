@@ -1725,7 +1725,7 @@ html.lenovo-tab-one-profile .fn-planner__desc {
 <script src="assets/package-planner.js?v=3"></script>
 <script src="assets/package-prep-sheet.js"></script>
 <script src="assets/riviera-event-context.js?v=4"></script>
-<script src="assets/kuschi-recipe-ui.js?v=4"></script>
+<script src="assets/kuschi-recipe-ui.js?v=5"></script>
 <script src="assets/recipe-metric-normalize.js"></script>
 <script src="assets/flavour-toolkit-lookup.js" defer></script>
 <script src="assets/aroma-hints.js" defer></script>
@@ -1867,7 +1867,7 @@ function openRivieraAdminModal() {
   if (el) setTimeout(() => el.focus(), 50);
 }
 
-function openPageQrModal() {
+async function openPageQrModal() {
   const overlay = document.getElementById('pageQrOverlay');
   const wrap = document.getElementById('pageQrCanvasWrap');
   const urlP = document.getElementById('pageQrUrl');
@@ -1877,11 +1877,13 @@ function openPageQrModal() {
   wrap.innerHTML = '';
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
-  if (typeof QRCode === 'undefined') {
-    wrap.innerHTML = '<span style="color:#e8a0a0;font-size:13px">QR library failed to load.</span>';
-    return;
-  }
   try {
+    if (typeof QRCode === 'undefined') {
+      wrap.innerHTML = '<span style="color:#c9a96e;font-size:13px">Loading QR...</span>';
+      if (!window.KuschiRecipeUi || !KuschiRecipeUi.loadQrCode) throw new Error('QR loader unavailable.');
+      await KuschiRecipeUi.loadQrCode();
+      wrap.innerHTML = '';
+    }
     new QRCode(wrap, {
       text: url,
       width: 220,
@@ -2313,9 +2315,23 @@ function setRivieraAddTab(which) {
   tabF.classList.toggle('active', !isManual);
   tabF.setAttribute('aria-selected', !isManual);
   if (which === 'format') {
-    if (window.KuschiRecipeGemini) KuschiRecipeGemini.clearFormatReview('rvFormatReview');
-    updateRivieraGeminiKeyUi();
-    syncRivieraImportUi();
+    const refresh = function () {
+      if (window.KuschiRecipeGemini) KuschiRecipeGemini.clearFormatReview('rvFormatReview');
+      updateRivieraGeminiKeyUi();
+      syncRivieraImportUi();
+    };
+    if (window.KuschiRecipeUi && KuschiRecipeUi.loadRecipeFormatter) {
+      KuschiRecipeUi.loadRecipeFormatter().then(refresh).catch(function (err) {
+        const statusEl = document.getElementById('rvFormatStatus');
+        if (statusEl) {
+          statusEl.textContent = (err && err.message) || 'Formatter tools failed to load.';
+          statusEl.classList.add('error');
+        }
+        refresh();
+      });
+    } else {
+      refresh();
+    }
   }
 }
 
@@ -2420,7 +2436,6 @@ function applyRivieraRecipeJsonToForm(obj) {
 async function formatRivieraRecipeWithGemini() {
   const statusEl = document.getElementById('rvFormatStatus');
   const btn = document.getElementById('rvFormatBtn');
-  const apiKey = getRivieraGeminiApiKeyForRequest();
   const fileEl = document.getElementById('rvRecipeFile');
   const urlEl = document.getElementById('rvRecipeUrl');
   const file = fileEl && fileEl.files && fileEl.files[0];
@@ -2428,20 +2443,37 @@ async function formatRivieraRecipeWithGemini() {
   const raw = document.getElementById('rvPasteRaw').value.trim();
   statusEl.textContent = '';
   statusEl.classList.remove('error');
+  btn.disabled = true;
+  if (!window.KuschiRecipeGemini || !window.KuschiRecipeImport) {
+    try {
+      statusEl.textContent = 'Loading formatter...';
+      if (!window.KuschiRecipeUi || !KuschiRecipeUi.loadRecipeFormatter) throw new Error('Formatter loader unavailable.');
+      await KuschiRecipeUi.loadRecipeFormatter();
+    } catch (e) {
+      statusEl.textContent = e.message || String(e);
+      statusEl.classList.add('error');
+      btn.disabled = false;
+      return;
+    }
+  }
   if (window.KuschiRecipeGemini) KuschiRecipeGemini.clearFormatReview('rvFormatReview');
-  if (!window.KuschiRecipeGemini) {
-    statusEl.textContent = 'recipe-gemini-format.js failed to load.';
+  if (!window.KuschiRecipeGemini || !window.KuschiRecipeImport) {
+    statusEl.textContent = 'Formatter tools failed to load.';
     statusEl.classList.add('error');
+    btn.disabled = false;
     return;
   }
+  const apiKey = getRivieraGeminiApiKeyForRequest();
   if (!apiKey) {
     statusEl.textContent = 'Add a Gemini API key.';
     statusEl.classList.add('error');
+    btn.disabled = false;
     return;
   }
   if (!file && !pageUrl && !raw) {
     statusEl.textContent = 'Paste recipe text, enter a recipe URL, or choose a file.';
     statusEl.classList.add('error');
+    btn.disabled = false;
     return;
   }
   const systemText =
@@ -2455,7 +2487,6 @@ async function formatRivieraRecipeWithGemini() {
     'subtitle is for secondary line (sauces, pairings). Leave unknown optional fields empty or use empty arrays.' +
     (window.KuschiRecipeGemini && KuschiRecipeGemini.SEASONING_SYSTEM_HINT ? KuschiRecipeGemini.SEASONING_SYSTEM_HINT : '');
 
-  btn.disabled = true;
   statusEl.textContent = 'Formatting…';
 
   try {
@@ -3294,9 +3325,6 @@ KuschiFilterChips.init([
 KuschiCookMode.bindRouting(openRecipe, closeModal);
 </script>
 <script src="assets/stocktake-list.js?v=49" defer></script>
-<script src="assets/recipe-gemini-format.js" defer></script>
-<script src="assets/recipe-import-helpers.js" defer></script>
-<script src="assets/qrcodejs-1.0.0.min.js" defer></script>
 <script src="assets/riviera-init-stocktake.js" defer></script>
 <script src="assets/app-nav.js?v=2"></script>
 </body>
