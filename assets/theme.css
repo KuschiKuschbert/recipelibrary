@@ -13138,6 +13138,12 @@ html.lenovo-tab-one-profile .ingredient-flow-profile-head p {
   html.lenovo-tab-one-profile .ingredient-flow-card {
     margin-bottom: 12px;
   }
+  html.lenovo-tab-one-profile .ingredient-flow-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  html.lenovo-tab-one-profile .ingredient-flow-profile-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
   html.lenovo-tab-one-profile .ingredient-flow-title {
     font-size: 21px;
   }
