@@ -1089,6 +1089,10 @@ def run_pairing_decision_smoke(
                 ("Aroma", "Flavor", "Toolkit"),
             )
         )
+        if selected_profile.locator(".pa-drawer-profile .pa-chip.ingredient-flow-chip").count() < 1:
+            problems.append("Cumin selected profile chips are not using shared ingredient-flow chip primitives")
+        if selected_profile.locator(".pa-drawer-foot .ingredient-flow-action").count() < 3:
+            problems.append("Cumin selected profile footer actions are not using shared ingredient-flow actions")
     drawer_profile = page.locator('tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-profile]')
     if drawer_profile.count() != 0:
         problems.append("Cumin row drawer repeats the selected quick-answer profile")
@@ -1115,6 +1119,8 @@ def run_pairing_decision_smoke(
                 problems.append(f"Cumin row source detail missing section: {expected}")
         if "kitchen profile" in source_text or "pair first" in source_text:
             problems.append("Cumin row source detail still duplicates the quick kitchen answer")
+        if source_detail.locator(".pa-chip.ingredient-flow-chip").count() < 1:
+            problems.append("Cumin row source detail chips are not using shared ingredient-flow chip primitives")
     if capture_state:
         capture_state("pairing-cumin-row-open")
     profile_pair_chip = page.locator('#paMatrixHost [data-pa-selected-profile][data-selected-spice-id="cumin"] [data-pa-spice-drill-id="fenugreek"]').first
@@ -1225,8 +1231,11 @@ def run_pairing_decision_smoke(
     food_drawer = page.locator('tr.pa-drawer-row[data-food-drawer="roasted-lamb"]')
     if food_drawer.count() != 1:
         problems.append("Roasted Lamb food drawer is missing after food decision Open row")
-    elif capture_state:
-        capture_state("pairing-roasted-lamb-row-open")
+    else:
+        if food_drawer.locator(".pa-chip.ingredient-flow-chip").count() < 1:
+            problems.append("Roasted Lamb food drawer seasonings are not using shared ingredient-flow chips")
+        if capture_state:
+            capture_state("pairing-roasted-lamb-row-open")
     stale_spice_profile = page.locator("#paMatrixHost [data-pa-selected-profile]")
     if stale_spice_profile.count() != 0:
         problems.append("Spice selected profile stayed open after switching to the food matrix")

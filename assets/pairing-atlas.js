@@ -391,6 +391,21 @@
     });
   }
 
+  function drawerChipListHtml(items, options) {
+    options = options || {};
+    return window.KuschiIngredientFlow.chips(items, {
+      empty: options.empty || 'No direct row in this extract yet.',
+      emptyClassName: 'pa-answer__empty',
+      className: 'pa-chips',
+      chipClassName: 'pa-chip' + (options.chipClassName ? ' ' + options.chipClassName : ''),
+      textForItem: options.textForItem || answerChipText,
+      hrefForItem: options.hrefForItem || function (item) {
+        return answerChipHref(item, options);
+      },
+      attrsForItem: options.attrsForItem || null,
+    });
+  }
+
   function seasoningDrillAttrs(item) {
     var id = item && item.id ? item.id : '';
     return id ? { 'data-pa-seasoning-id': id, 'data-pa-spice-drill-id': id } : null;
@@ -999,38 +1014,31 @@
     }
     if (h.harmony && h.harmony.length) {
       bits.push(
-        '<p class="pa-chips">' +
-          h.harmony
-            .slice(0, 8)
-            .map(function (x) {
-              return '<span class="pa-chip">' + esc(String(x)) + '</span>';
-            })
-            .join(' ') +
-          '</p>'
+        drawerChipListHtml(h.harmony.slice(0, 8), {
+          textForItem: function (x) {
+            return String(x);
+          },
+        })
       );
     }
     if (h.contrast && h.contrast.length) {
       bits.push(
-        '<p class="pa-chips">' +
-          h.contrast
-            .slice(0, 8)
-            .map(function (x) {
-              return '<span class="pa-chip pa-chip-contrast">' + esc(String(x)) + '</span>';
-            })
-            .join(' ') +
-          '</p>'
+        drawerChipListHtml(h.contrast.slice(0, 8), {
+          chipClassName: 'pa-chip-contrast',
+          textForItem: function (x) {
+            return String(x);
+          },
+        })
       );
     }
     if (h.spice_harmony_partners && h.spice_harmony_partners.length) {
       bits.push(
-        '<p class="pa-small pa-muted">Spice harmony</p><p class="pa-chips">' +
-          h.spice_harmony_partners
-            .slice(0, 8)
-            .map(function (x) {
-              return '<span class="pa-chip">' + esc(String(x)) + '</span>';
-            })
-            .join(' ') +
-          '</p>'
+        '<p class="pa-small pa-muted">Spice harmony</p>' +
+          drawerChipListHtml(h.spice_harmony_partners.slice(0, 8), {
+            textForItem: function (x) {
+              return String(x);
+            },
+          })
       );
     }
     if (!bits.length) return '';
@@ -1059,12 +1067,12 @@
           [
             flow.panel(
               'Best with',
-              chipListHtml(pairItems, { kind: 'spice', empty: 'No direct pairings yet.', attrsForItem: spiceDrillAttrs }),
+              drawerChipListHtml(pairItems, { kind: 'spice', empty: 'No direct pairings yet.', attrsForItem: spiceDrillAttrs }),
               { className: 'pa-drawer-profile-panel' }
             ),
             flow.panel(
               'Use on',
-              chipListHtml(foods, { kind: 'food', empty: state.enriched ? 'No food rows list this spice yet.' : 'Food rows loading...', attrsForItem: foodDrillAttrs }),
+              drawerChipListHtml(foods, { kind: 'food', empty: state.enriched ? 'No food rows list this spice yet.' : 'Food rows loading...', attrsForItem: foodDrillAttrs }),
               { className: 'pa-drawer-profile-panel' }
             ),
             flow.panel(
@@ -1074,7 +1082,7 @@
             ),
             flow.panel(
               'Check',
-              chipListHtml(avoid, { kind: 'flavor', empty: 'No avoid notes found.' }),
+              drawerChipListHtml(avoid, { kind: 'flavor', empty: 'No avoid notes found.' }),
               { className: 'pa-drawer-profile-panel' }
             ),
           ],
@@ -1098,21 +1106,21 @@
 
     var hw = (ar && ar.harmonizes_with) || ing.harmonizes_with || [];
     if (hw.length) {
-      var links = hw
-        .map(function (h) {
-          var hid = h.id || '';
-          return (
-            '<a href="aroma.html?spice=' +
-            encodeURIComponent(hid) +
-            '" class="pa-chip" data-pa-spice-drill-id="' +
-            esc(hid) +
-            '">' +
-            esc(h.name || hid) +
-            '</a>'
-          );
-        })
-        .join(' ');
-      sourceParts.push('<section class="pa-sec"><h4>Harmonizes with</h4><p class="pa-chips">' + links + '</p></section>');
+      sourceParts.push(
+        '<section class="pa-sec"><h4>Harmonizes with</h4>' +
+          drawerChipListHtml(hw, {
+            textForItem: function (h) {
+              return h && (h.name || h.id) ? h.name || h.id : String(h || '');
+            },
+            hrefForItem: function (h) {
+              return h && h.id ? 'aroma.html?spice=' + encodeURIComponent(h.id) : '';
+            },
+            attrsForItem: function (h) {
+              return h && h.id ? { 'data-pa-spice-drill-id': h.id } : null;
+            },
+          }) +
+        '</section>'
+      );
     }
 
     var pfoods = (ar && ar.pairs_with_foods) || ing.pairs_with_foods || [];
@@ -1249,15 +1257,14 @@
       parts.push('<h3 class="pa-drawer-title">' + esc(name) + '</h3>');
       parts.push(drawerMetaHtml(ing, u));
       parts.push(
-        '<div class="pa-drawer-actions ingredient-flow-actions">' +
-          '<a class="pa-drawer-action ingredient-flow-action" href="aroma.html?spice=' +
-          encodeURIComponent(ing.id) +
-          '">Aroma</a>' +
-          '<a class="pa-drawer-action ingredient-flow-action" href="flavor.html?q=' +
-          encodeURIComponent(name) +
-          '">Flavor</a>' +
-          '<a class="pa-drawer-action ingredient-flow-action" href="flavor.html?toolkit=1">Toolkit</a>' +
-        '</div>'
+        window.KuschiIngredientFlow.actions(
+          [
+            { text: 'Aroma', href: 'aroma.html?spice=' + encodeURIComponent(ing.id), className: 'pa-drawer-action' },
+            { text: 'Flavor', href: 'flavor.html?q=' + encodeURIComponent(name), className: 'pa-drawer-action' },
+            { text: 'Toolkit', href: 'flavor.html?toolkit=1', className: 'pa-drawer-action' },
+          ],
+          { className: 'pa-drawer-actions' }
+        )
       );
     }
     parts.push('</div>');
@@ -1295,11 +1302,14 @@
 
     if (!sourceOnly) {
       parts.push(
-        '<p class="pa-drawer-foot"><a href="aroma.html?spice=' +
-          encodeURIComponent(ing.id) +
-          '">Open full Aroma profile →</a> · <a href="flavor.html?q=' +
-          encodeURIComponent(name) +
-          '">Flavor explorer →</a> · <a href="flavor.html?toolkit=1">Flavor toolkit →</a></p>'
+        window.KuschiIngredientFlow.actions(
+          [
+            { text: 'Full Aroma profile', href: 'aroma.html?spice=' + encodeURIComponent(ing.id), className: 'pa-drawer-foot-action' },
+            { text: 'Flavor explorer', href: 'flavor.html?q=' + encodeURIComponent(name), className: 'pa-drawer-foot-action' },
+            { text: 'Flavor toolkit', href: 'flavor.html?toolkit=1', className: 'pa-drawer-foot-action' },
+          ],
+          { className: 'pa-drawer-foot' }
+        )
       );
     }
     parts.push('</div>');
@@ -1433,21 +1443,15 @@
 
   function foodDrawerHtml(food) {
     var seas = food.seasonings || [];
-    var names = seas
-      .map(function (s) {
-        return (
-          '<a href="aroma.html?spice=' +
-          encodeURIComponent(s.id || '') +
-          '" class="pa-chip" data-pa-seasoning-id="' +
-          esc(s.id || '') +
-          '" data-pa-spice-drill-id="' +
-          esc(s.id || '') +
-          '">' +
-          esc(s.name || s.id) +
-          '</a>'
-        );
-      })
-      .join(' ');
+    var names = drawerChipListHtml(seas, {
+      textForItem: function (s) {
+        return s && (s.name || s.id) ? s.name || s.id : String(s || '');
+      },
+      hrefForItem: function (s) {
+        return s && s.id ? 'aroma.html?spice=' + encodeURIComponent(s.id) : '';
+      },
+      attrsForItem: seasoningDrillAttrs,
+    });
     return (
       '<div class="pa-drawer-head">' +
       '<h3 class="pa-drawer-title">' +
@@ -1457,9 +1461,9 @@
       '</div><div class="pa-drawer-body">' +
       '<section class="pa-sec"><h4>Seasonings (' +
       seas.length +
-      ')</h4><p class="pa-chips">' +
+      ')</h4>' +
       names +
-      '</p></section></div>'
+      '</section></div>'
     );
   }
 
