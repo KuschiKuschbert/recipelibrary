@@ -395,6 +395,39 @@
     });
   }
 
+  function drawerSourceMapCard(label, value, emptyText) {
+    return (
+      '<article class="pa-source-map-card">' +
+        '<span class="pa-source-map-label">' + esc(label) + '</span>' +
+        '<strong class="pa-source-map-value">' + esc(value || emptyText || 'No source row yet') + '</strong>' +
+      '</article>'
+    );
+  }
+
+  function spiceDrawerSourceMapHtml(ing, u) {
+    var groups = aromaGroupText(ing);
+    var harmony = drawerSummaryText(aromaHarmonyNames(ing, 3), 3);
+    var partnerCount = harmonyPartnerCount(ing.id);
+    var flavorPairs = drawerSummaryText(flavorPairingNames(ing, 3), 3);
+    var th = u && u.thesaurus ? u.thesaurus : null;
+    var tk = atlasLookupToolkitHint(ing.id);
+    var context = [];
+    if (th && (th.family || th.family_slug)) context.push('Thesaurus: ' + String(th.family || th.family_slug));
+    if (tk && tk.primary_family) context.push('Toolkit: ' + String(tk.primary_family).replace(/_/g, ' '));
+    if (!context.length && u) context.push('Coverage: Aroma' + (u.flavor ? ', Flavor' : '') + (u.thesaurus ? ', Thesaurus' : ''));
+    var harmonyText = partnerCount != null ? partnerCount + ' links' + (harmony ? ' · ' + harmony : '') : harmony;
+    return (
+      '<section class="pa-source-map" data-pa-source-map aria-label="Source map">' +
+        '<div class="pa-source-map-grid">' +
+          drawerSourceMapCard('Aroma groups', groups, 'No aroma group tag') +
+          drawerSourceMapCard('Harmony network', harmonyText, 'No harmony links yet') +
+          drawerSourceMapCard('Flavor row', flavorPairs, state.enriched ? 'No Flavor Bible row yet' : 'Flavor rows loading') +
+          drawerSourceMapCard('Library context', context.join(' · '), 'No extra context row yet') +
+        '</div>' +
+      '</section>'
+    );
+  }
+
   function drawerDecisionLine(label, text, emptyText) {
     return (
       '<li><span class="pa-drawer-decision-label">' +
@@ -1125,6 +1158,8 @@
     parts.push('<div class="pa-drawer-title-wrap">');
     if (sourceOnly) {
       parts.push('<p class="pa-drawer-kicker">Source detail</p>');
+      parts.push('<h3 class="pa-drawer-title">' + esc(name) + '</h3>');
+      parts.push(drawerMetaHtml(ing, u));
       parts.push(
         '<p class="pa-drawer-source-intro pa-muted">Deeper reference rows from Aroma, Flavor, Thesaurus, toolkit, and kitchen-context extracts.</p>'
       );
@@ -1152,6 +1187,8 @@
 
     if (!sourceOnly) {
       parts.push(spiceDrawerQuickAnswerSection(ing));
+    } else {
+      parts.push(spiceDrawerSourceMapHtml(ing, u));
     }
 
     if (sourceParts.length) {

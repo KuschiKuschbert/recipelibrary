@@ -903,6 +903,19 @@ def run_pairing_decision_smoke(
     drawer_profile = page.locator('tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-profile]')
     if drawer_profile.count() != 0:
         problems.append("Cumin row drawer repeats the selected quick-answer profile")
+    drawer_title = page.locator('tr.pa-drawer-row[data-drawer-for="cumin"] .pa-drawer-title')
+    if drawer_title.count() != 1 or "Cumin" not in drawer_title.inner_text(timeout=5_000):
+        problems.append("Cumin row drawer source detail does not show the ingredient title")
+    source_map = page.locator('tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-source-map]')
+    if source_map.count() != 1:
+        problems.append("Cumin row drawer source map is missing")
+    else:
+        source_map_text = source_map.inner_text(timeout=5_000).lower()
+        for expected in ("aroma groups", "harmony network", "flavor row", "library context"):
+            if expected not in source_map_text:
+                problems.append(f"Cumin row source map missing: {expected}")
+        if "kitchen profile" in source_map_text or "pair first" in source_map_text:
+            problems.append("Cumin row source map duplicates the quick kitchen answer")
     source_detail = page.locator('tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-source-detail]')
     if source_detail.count() != 1:
         problems.append("Cumin row source detail is missing")

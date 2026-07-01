@@ -649,8 +649,43 @@
     padding-top: 8px;
   }
   .pa-drawer-source-intro {
-    margin: 0;
+    margin: 6px 0 0;
     line-height: 1.45;
+  }
+  .pa-source-map {
+    padding: 10px;
+    border: 1px solid rgba(201, 169, 110, 0.18);
+    border-radius: 12px;
+    background: rgba(201, 169, 110, 0.055);
+  }
+  .pa-source-map-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 8px;
+  }
+  .pa-source-map-card {
+    min-width: 0;
+    padding: 9px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.16);
+  }
+  .pa-source-map-label {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--gold);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+  .pa-source-map-value {
+    display: block;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.35;
   }
   .pa-drawer-source-details--open {
     padding-top: 12px;
@@ -1523,7 +1558,7 @@
 <script src="assets/flavour-toolkit-lookup.js"></script>
 <script src="assets/kuschi-recipe-ui.js?v=4"></script>
 <script src="assets/ingredient-flow-ui.js?v=4"></script>
-<script src="assets/pairing-atlas.js?v=18"></script>
+<script src="assets/pairing-atlas.js?v=19"></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
 <script src="assets/app-nav.js?v=2"></script>
 <style>
