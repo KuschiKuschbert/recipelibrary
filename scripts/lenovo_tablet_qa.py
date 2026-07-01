@@ -243,15 +243,51 @@ def page_metric_script() -> str:
   function visible(el) {
     const style = getComputedStyle(el);
     const rect = el.getBoundingClientRect();
+    const clipped = clippedRect(el, rect);
     return style.display !== 'none' &&
       style.visibility !== 'hidden' &&
       Number(style.opacity || 1) !== 0 &&
       rect.width > 0 &&
       rect.height > 0 &&
-      rect.bottom > 0 &&
-      rect.top < vh &&
-      rect.right > 0 &&
-      rect.left < vw;
+      clipped.width > 0 &&
+      clipped.height > 0 &&
+      clipped.bottom > 0 &&
+      clipped.top < vh &&
+      clipped.right > 0 &&
+      clipped.left < vw;
+  }
+
+  function clipsOverflow(style) {
+    return /(auto|scroll|hidden|clip)/.test(String(style.overflowX || '')) ||
+      /(auto|scroll|hidden|clip)/.test(String(style.overflowY || ''));
+  }
+
+  function clippedRect(el, rect) {
+    let left = rect.left;
+    let top = rect.top;
+    let right = rect.right;
+    let bottom = rect.bottom;
+    let parent = el.parentElement;
+    while (parent && parent !== document.body && parent !== document.documentElement) {
+      const style = getComputedStyle(parent);
+      if (clipsOverflow(style)) {
+        const parentRect = parent.getBoundingClientRect();
+        left = Math.max(left, parentRect.left);
+        top = Math.max(top, parentRect.top);
+        right = Math.min(right, parentRect.right);
+        bottom = Math.min(bottom, parentRect.bottom);
+        if (right <= left || bottom <= top) break;
+      }
+      parent = parent.parentElement;
+    }
+    return {
+      left,
+      top,
+      right,
+      bottom,
+      width: Math.max(0, right - left),
+      height: Math.max(0, bottom - top)
+    };
   }
 
   function label(el) {
@@ -345,12 +381,13 @@ def page_metric_script() -> str:
         scrollHeight: Math.round(el.scrollHeight)
       });
     }
-    if (navIsBottom && !isNav && rect.bottom > navRect.top + 1 && rect.top < navRect.bottom - 1) {
+    const visibleRect = clippedRect(el, rect);
+    if (navIsBottom && !isNav && visibleRect.bottom > navRect.top + 1 && visibleRect.top < navRect.bottom - 1) {
       navOverlap.push({
         tag: el.tagName.toLowerCase(),
         cls: String(el.className || '').slice(0, 80),
         text: label(el),
-        bottom: Math.round(rect.bottom),
+        bottom: Math.round(visibleRect.bottom),
         navTop: Math.round(navRect.top)
       });
     }
@@ -1397,6 +1434,37 @@ def run_pairing_decision_smoke(
         if selected_layout.get("clippedPanels"):
             panels = ", ".join(selected_layout.get("clippedPanels")[:4])
             problems.append(f"Cumin selected profile panels are clipped by the matrix viewport: {panels}")
+    keyboard_spice_row = page.locator('tr.pa-data-row[data-spice-id="cumin"]').first
+    if keyboard_spice_row.count() != 1:
+        problems.append("Cumin matrix row is missing for keyboard focus smoke")
+    else:
+        timed_interaction(
+            page,
+            "Pairing Atlas keyboard closes Cumin row",
+            lambda: (keyboard_spice_row.focus(), keyboard_spice_row.press("Enter")),
+            """() => {
+              const row = document.querySelector('tr.pa-data-row[data-spice-id="cumin"]');
+              return !!(row && row.getAttribute('aria-expanded') === 'false' && document.activeElement === row);
+            }""",
+            problems,
+            ACTION_RESPONSE_MS_BUDGET,
+            timing_sink=timing_sink,
+        )
+        timed_interaction(
+            page,
+            "Pairing Atlas keyboard reopens Cumin row",
+            lambda: (page.locator('tr.pa-data-row[data-spice-id="cumin"]').first.focus(), page.locator('tr.pa-data-row[data-spice-id="cumin"]').first.press("Enter")),
+            """() => {
+              const row = document.querySelector('tr.pa-data-row[data-spice-id="cumin"]');
+              return !!(row &&
+                row.getAttribute('aria-expanded') === 'true' &&
+                document.activeElement === row &&
+                document.querySelector('#paMatrixHost [data-pa-selected-profile][data-selected-spice-id="cumin"]'));
+            }""",
+            problems,
+            ACTION_RESPONSE_MS_BUDGET,
+            timing_sink=timing_sink,
+        )
     drawer_profile = page.locator('tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-profile]')
     if drawer_profile.count() != 0:
         problems.append("Cumin row drawer repeats the selected quick-answer profile")
@@ -1540,6 +1608,34 @@ def run_pairing_decision_smoke(
             problems.append("Roasted Lamb food drawer seasonings are not using shared ingredient-flow chips")
         if capture_state:
             capture_state("pairing-roasted-lamb-row-open")
+        keyboard_food_row = page.locator('tr.pa-fx-data[data-food-id="roasted-lamb"]').first
+        timed_interaction(
+            page,
+            "Pairing Atlas keyboard closes Roasted Lamb food row",
+            lambda: (keyboard_food_row.focus(), keyboard_food_row.press("Enter")),
+            """() => {
+              const row = document.querySelector('tr.pa-fx-data[data-food-id="roasted-lamb"]');
+              return !!(row && row.getAttribute('aria-expanded') === 'false' && document.activeElement === row);
+            }""",
+            problems,
+            ACTION_RESPONSE_MS_BUDGET,
+            timing_sink=timing_sink,
+        )
+        timed_interaction(
+            page,
+            "Pairing Atlas keyboard reopens Roasted Lamb food row",
+            lambda: (page.locator('tr.pa-fx-data[data-food-id="roasted-lamb"]').first.focus(), page.locator('tr.pa-fx-data[data-food-id="roasted-lamb"]').first.press("Enter")),
+            """() => {
+              const row = document.querySelector('tr.pa-fx-data[data-food-id="roasted-lamb"]');
+              return !!(row &&
+                row.getAttribute('aria-expanded') === 'true' &&
+                document.activeElement === row &&
+                document.querySelector('tr.pa-drawer-row[data-food-drawer="roasted-lamb"]'));
+            }""",
+            problems,
+            ACTION_RESPONSE_MS_BUDGET,
+            timing_sink=timing_sink,
+        )
     stale_spice_profile = page.locator("#paMatrixHost [data-pa-selected-profile]")
     if stale_spice_profile.count() != 0:
         problems.append("Spice selected profile stayed open after switching to the food matrix")

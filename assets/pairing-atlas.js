@@ -1447,6 +1447,26 @@
     if (prev) prev.remove();
   }
 
+  function focusRowByAttr(host, attr, id) {
+    if (!host || !id) return;
+    var safeId = String(id).replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+    var row = host.querySelector('tr[' + attr + '="' + safeId + '"]');
+    if (!row || row.hidden || typeof row.focus !== 'function') return;
+    try {
+      row.focus({ preventScroll: true });
+    } catch (err) {
+      row.focus();
+    }
+  }
+
+  function focusSpiceRow(host, id) {
+    focusRowByAttr(host, 'data-spice-id', id);
+  }
+
+  function focusFoodRow(host, id) {
+    focusRowByAttr(host, 'data-food-id', id);
+  }
+
   function clearOpenSpiceSelection() {
     if (!state.openDrawerSpiceId) return;
     state.openDrawerSpiceId = null;
@@ -1635,7 +1655,9 @@
     var selectedClose = e.target.closest('[data-pa-selected-profile] .pa-drawer-close');
     if (selectedClose) {
       e.preventDefault();
+      var selectedId = state.openDrawerSpiceId;
       clearOpenSpiceSelection();
+      focusSpiceRow(spiceHost, selectedId);
       return;
     }
     if (handleAtlasDrill(e, spiceHost, search, modePri, modeAll, decisionSearch, foodHost, foodSearch)) return;
@@ -1644,8 +1666,10 @@
     var closeBtn = e.target.closest('.pa-drawer-close');
     if (closeBtn) {
       e.preventDefault();
+      var closeId = state.openDrawerSpiceId;
       state.openDrawerSpiceId = null;
       paintSpiceMatrix(spiceHost);
+      focusSpiceRow(spiceHost, closeId);
       return;
     }
     var tr = e.target.closest('tr.pa-data-row');
@@ -1660,6 +1684,7 @@
       state.openDrawerSpiceId = id;
     }
     paintSpiceMatrix(spiceHost);
+    focusSpiceRow(spiceHost, id);
   }
 
   function onSpiceMatrixKeydown(e, spiceHost) {
@@ -1678,6 +1703,7 @@
       state.openDrawerSpiceId = id;
     }
     paintSpiceMatrix(spiceHost);
+    focusSpiceRow(spiceHost, id);
   }
 
   function paintFoodMatrix(host) {
@@ -1724,8 +1750,10 @@
     var closeBtn = e.target.closest('.pa-drawer-close');
     if (closeBtn) {
       e.preventDefault();
+      var closeId = state.openDrawerFoodId;
       state.openDrawerFoodId = null;
       paintFoodMatrix(foodHost);
+      focusFoodRow(foodHost, closeId);
       return;
     }
     var tr = e.target.closest('tr.pa-fx-data');
@@ -1745,6 +1773,7 @@
       state.openDrawerFoodId = id;
     }
     paintFoodMatrix(foodHost);
+    focusFoodRow(foodHost, id);
   }
 
   function onFoodMatrixKeydown(e, foodHost, foods) {
@@ -1768,6 +1797,7 @@
       state.openDrawerFoodId = id;
     }
     paintFoodMatrix(foodHost);
+    focusFoodRow(foodHost, id);
   }
 
   function applySpiceFilter(query) {
