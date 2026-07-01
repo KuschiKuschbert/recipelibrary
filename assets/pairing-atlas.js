@@ -1045,16 +1045,17 @@
     return '<section class="pa-sec"><h4>Toolkit matrix</h4>' + bits.join('') + '</section>';
   }
 
-  function spiceDrawerQuickAnswerSection(ing) {
-    var harmony = aromaHarmonyNames(ing, 6);
-    var flavorPairs = flavorPairingNames(ing, 6);
-    var foods = foodMatchesForSpice(ing.id, 6);
-    var avoid = flavorAvoidNames(ing, 6);
-    var useTips = flavorUseTips(ing, 5);
+  function spiceDrawerQuickAnswerSection(ing, options) {
+    var compact = !!(options && options.compact);
+    var harmony = aromaHarmonyNames(ing, compact ? 4 : 6);
+    var flavorPairs = flavorPairingNames(ing, compact ? 4 : 6);
+    var foods = foodMatchesForSpice(ing.id, compact ? 4 : 6);
+    var avoid = flavorAvoidNames(ing, compact ? 4 : 6);
+    var useTips = flavorUseTips(ing, compact ? 2 : 5);
     var pairItems = harmony.length ? harmony : flavorPairs;
     var name = displayNameForIngredient(ing) || ing.name || ing.id;
     var note = state.enriched
-      ? 'Fastest kitchen answer from Aroma harmony, Flavor Bible rows, and food-pairing data.'
+      ? (compact ? 'Fast answer from Aroma, Flavor, and food data.' : 'Fastest kitchen answer from Aroma harmony, Flavor Bible rows, and food-pairing data.')
       : 'Aroma data is ready; richer Flavor and food rows are still loading.';
     var flow = window.KuschiIngredientFlow;
     return (
@@ -1321,6 +1322,7 @@
     var ing = state.byId[state.openDrawerSpiceId];
     if (!ing) return '';
     var name = displayNameForIngredient(ing) || ing.name || ing.id;
+    var u = state.unifiedById ? state.unifiedById[ing.id] : null;
     return (
       '<section class="pa-selected-profile" data-pa-selected-profile data-selected-spice-id="' +
       esc(ing.id) +
@@ -1328,7 +1330,25 @@
       esc(name) +
       '">' +
         '<div class="pa-drawer-card pa-drawer-card--selected">' +
-          spiceDrawerHtml(ing) +
+          '<div class="pa-drawer-head">' +
+            '<div class="pa-drawer-title-wrap">' +
+              '<p class="pa-drawer-kicker">Ingredient profile</p>' +
+              '<h3 class="pa-drawer-title">' + esc(name) + '</h3>' +
+              drawerMetaHtml(ing, u) +
+              window.KuschiIngredientFlow.actions(
+                [
+                  { text: 'Aroma', href: 'aroma.html?spice=' + encodeURIComponent(ing.id), className: 'pa-drawer-action' },
+                  { text: 'Flavor', href: 'flavor.html?q=' + encodeURIComponent(name), className: 'pa-drawer-action' },
+                  { text: 'Toolkit', href: 'flavor.html?toolkit=1', className: 'pa-drawer-action' },
+                ],
+                { className: 'pa-drawer-actions' }
+              ) +
+            '</div>' +
+            '<button type="button" class="pa-drawer-close" aria-label="Close details">×</button>' +
+          '</div>' +
+          '<div class="pa-drawer-body">' +
+            spiceDrawerQuickAnswerSection(ing, { compact: true }) +
+          '</div>' +
         '</div>' +
       '</section>'
     );

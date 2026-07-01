@@ -1163,8 +1163,50 @@ def run_pairing_decision_smoke(
         )
         if selected_profile.locator(".pa-drawer-profile .pa-chip.ingredient-flow-chip").count() < 1:
             problems.append("Cumin selected profile chips are not using shared ingredient-flow chip primitives")
-        if selected_profile.locator(".pa-drawer-foot .ingredient-flow-action").count() < 3:
-            problems.append("Cumin selected profile footer actions are not using shared ingredient-flow actions")
+        selected_layout = page.evaluate(
+            """() => {
+              const profile = document.querySelector('#paMatrixHost [data-pa-selected-profile][data-selected-spice-id="cumin"]');
+              const card = profile ? profile.querySelector('.pa-drawer-card--selected') : null;
+              const rect = profile ? profile.getBoundingClientRect() : null;
+              const style = card ? getComputedStyle(card) : null;
+              const wrap = profile ? profile.closest('.pa-matrix-wrap') : null;
+              const wrapRect = wrap ? wrap.getBoundingClientRect() : null;
+              const visibleBottom = Math.min(window.innerHeight, wrapRect ? wrapRect.bottom : window.innerHeight);
+              const clippedPanels = profile ? Array.from(profile.querySelectorAll('.pa-drawer-profile-panel')).filter((panel) => {
+                const panelRect = panel.getBoundingClientRect();
+                return panelRect.bottom > visibleBottom + 1;
+              }).map((panel) => (panel.querySelector('h5')?.textContent || 'profile panel').trim()) : [];
+              return {
+                missing: !profile || !card,
+                sourceDetails: profile ? profile.querySelectorAll('.pa-drawer-source-details').length : 0,
+                headerActions: profile ? profile.querySelectorAll('.pa-drawer-actions .ingredient-flow-action').length : 0,
+                footerActions: profile ? profile.querySelectorAll('.pa-drawer-foot .ingredient-flow-action').length : 0,
+                clientHeight: card ? Math.round(card.clientHeight) : 0,
+                scrollHeight: card ? Math.round(card.scrollHeight) : 0,
+                overflowY: style ? style.overflowY : '',
+                profileBottom: rect ? Math.round(rect.bottom) : 0,
+                viewportHeight: window.innerHeight,
+                clippedPanels,
+              };
+            }"""
+        )
+        if selected_layout.get("sourceDetails"):
+            problems.append("Cumin selected profile dock duplicates source detail instead of staying compact")
+        if int(selected_layout.get("headerActions") or 0) < 3:
+            problems.append("Cumin selected profile header actions are not using shared ingredient-flow actions")
+        if int(selected_layout.get("footerActions") or 0) > 0:
+            problems.append("Cumin selected profile dock still carries duplicate footer actions")
+        has_hidden_scroll = (
+            int(selected_layout.get("scrollHeight") or 0) > int(selected_layout.get("clientHeight") or 0) + 2
+            and selected_layout.get("overflowY") != "visible"
+        )
+        if has_hidden_scroll:
+            problems.append("Cumin selected profile dock has hidden internal scroll")
+        if int(selected_layout.get("profileBottom") or 0) > int(selected_layout.get("viewportHeight") or 0) + 1:
+            problems.append("Cumin selected profile dock does not fit in the Lenovo viewport")
+        if selected_layout.get("clippedPanels"):
+            panels = ", ".join(selected_layout.get("clippedPanels")[:4])
+            problems.append(f"Cumin selected profile panels are clipped by the matrix viewport: {panels}")
     drawer_profile = page.locator('tr.pa-drawer-row[data-drawer-for="cumin"] [data-pa-drawer-profile]')
     if drawer_profile.count() != 0:
         problems.append("Cumin row drawer repeats the selected quick-answer profile")
