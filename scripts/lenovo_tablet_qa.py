@@ -41,6 +41,12 @@ CORE_PAGES = (
     "notebooklm-gallery.html?qa=lenovo",
 )
 
+TASK_FIRST_PAGES = (
+    "pairing-atlas.html?ingredient=cumin&qa=lenovo",
+    "flavor.html?q=cumin&qa=lenovo",
+    "aroma.html?tab=browse&qa=lenovo",
+)
+
 VIEWPORTS = (
     ("portrait", 800, 1280),
     ("landscape", 1280, 800),
@@ -104,6 +110,20 @@ def resolve_artifacts_dir(value: str) -> Path:
     return path
 
 
+def cpu_throttle_label(rate: float) -> str:
+    return f"cpu-{rate:g}x".replace(".", "_")
+
+
+def cpu_throttle_rate(value: str) -> float:
+    try:
+        rate = float(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError("must be a number") from exc
+    if rate < 1:
+        raise argparse.ArgumentTypeError("must be 1 or greater")
+    return rate
+
+
 def capture_page_artifact(
     page: Any,
     artifacts_dir: Path,
@@ -112,13 +132,15 @@ def capture_page_artifact(
     width: int,
     height: int,
     reduced_motion: bool,
+    cpu_throttle_rate_value: float,
     state: str,
     artifacts: list[dict[str, Any]],
 ) -> str | None:
     motion_name = "reduced-motion" if reduced_motion else "normal-motion"
+    cpu_name = cpu_throttle_label(cpu_throttle_rate_value)
     page_slug = artifact_slug(page_path)
     state_slug = artifact_slug(state, max_len=56)
-    filename = f"{page_slug}__{viewport_name}-{width}x{height}__{motion_name}__{state_slug}.png"
+    filename = f"{page_slug}__{viewport_name}-{width}x{height}__{motion_name}__{cpu_name}__{state_slug}.png"
     artifact_path = artifacts_dir / filename
     try:
         artifacts_dir.mkdir(parents=True, exist_ok=True)
@@ -133,6 +155,7 @@ def capture_page_artifact(
             "width": width,
             "height": height,
             "motion": motion_name,
+            "cpuThrottleRate": cpu_throttle_rate_value,
             "state": state,
             "scrollY": scroll_y,
             "url": page.url,
@@ -148,6 +171,7 @@ def write_artifact_manifest(
     artifacts: list[dict[str, Any]],
     action_timings: list[dict[str, Any]],
     long_task_metrics: list[dict[str, Any]],
+    cpu_throttle_rate_value: float,
     issues: list[Issue],
 ) -> Path:
     artifacts_dir.mkdir(parents=True, exist_ok=True)
@@ -159,6 +183,7 @@ def write_artifact_manifest(
             {"name": name, "width": width, "height": height}
             for name, width, height in VIEWPORTS
         ],
+        "cpuThrottleRate": cpu_throttle_rate_value,
         "artifacts": artifacts,
         "actionTimings": action_timings,
         "longTaskMetrics": long_task_metrics,
@@ -1270,6 +1295,7 @@ def run_page(
     artifacts: list[dict[str, Any]] | None = None,
     action_timings: list[dict[str, Any]] | None = None,
     long_task_metrics: list[dict[str, Any]] | None = None,
+    cpu_throttle_rate_value: float = 1.0,
 ) -> list[Issue]:
     context = browser.new_context(
         viewport={"width": width, "height": height},
@@ -1297,6 +1323,7 @@ def run_page(
             width,
             height,
             reduced_motion,
+            cpu_throttle_rate_value,
             state,
             artifacts,
         )
@@ -1314,6 +1341,7 @@ def run_page(
                 "width": width,
                 "height": height,
                 "motion": motion_name,
+                "cpuThrottleRate": cpu_throttle_rate_value,
                 "url": page.url,
                 **entry,
             }
@@ -1330,6 +1358,7 @@ def run_page(
                 "width": width,
                 "height": height,
                 "motion": motion_name,
+                "cpuThrottleRate": cpu_throttle_rate_value,
                 "url": metric.get("url"),
                 "scrollY": metric.get("scrollY"),
                 "supported": bool(metric.get("longTaskSupported")),
@@ -1342,6 +1371,18 @@ def run_page(
         )
 
     try:
+        if cpu_throttle_rate_value > 1:
+            try:
+                cdp = context.new_cdp_session(page)
+                cdp.send("Emulation.setCPUThrottlingRate", {"rate": cpu_throttle_rate_value})
+            except PlaywrightError as exc:
+                issues.append(
+                    Issue(
+                        page_path,
+                        viewport_name,
+                        f"CPU throttling unavailable at {cpu_throttle_rate_value:g}x: {exc}",
+                    )
+                )
         page.goto(urljoin(base, page_path), wait_until="networkidle", timeout=25_000)
         page.wait_for_timeout(600)
         capture_state("loaded")
@@ -1377,9 +1418,32 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         help="Comma-separated page paths. Defaults to the core kitchen pages.",
     )
     parser.add_argument(
+        "--task-first-only",
+        action="store_true",
+        help="Only run the task-first ingredient decision pages.",
+    )
+    parser.add_argument(
+        "--viewport",
+        choices=("all", "portrait", "landscape"),
+        default="all",
+        help="Viewport subset to run. Defaults to all.",
+    )
+    parser.add_argument(
+        "--motion",
+        choices=("all", "normal", "reduced"),
+        default="all",
+        help="Motion profile subset to run. Defaults to all.",
+    )
+    parser.add_argument(
         "--reduced-motion",
         action="store_true",
-        help="Only run the reduced-motion profile.",
+        help="Only run the reduced-motion profile. Equivalent to --motion reduced.",
+    )
+    parser.add_argument(
+        "--cpu-throttle-rate",
+        type=cpu_throttle_rate,
+        default=1.0,
+        help="Optional Chromium CPU throttling rate. Use 1 for no throttling, 2+ for tablet stress.",
     )
     parser.add_argument(
         "--artifacts-dir",
@@ -1388,9 +1452,33 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
+def selected_pages(args: argparse.Namespace) -> tuple[str, ...]:
+    if args.pages:
+        return tuple(p.strip() for p in args.pages.split(",") if p.strip())
+    if args.task_first_only:
+        return TASK_FIRST_PAGES
+    return CORE_PAGES
+
+
+def selected_motion_modes(args: argparse.Namespace) -> tuple[bool, ...]:
+    if args.reduced_motion or args.motion == "reduced":
+        return (True,)
+    if args.motion == "normal":
+        return (False,)
+    return (False, True)
+
+
+def selected_viewports(args: argparse.Namespace) -> tuple[tuple[str, int, int], ...]:
+    if args.viewport == "all":
+        return VIEWPORTS
+    return tuple(viewport for viewport in VIEWPORTS if viewport[0] == args.viewport)
+
+
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv or sys.argv[1:])
-    pages = tuple(p.strip() for p in args.pages.split(",")) if args.pages else CORE_PAGES
+    pages = selected_pages(args)
+    viewports = selected_viewports(args)
+    cpu_throttle_rate_value = float(args.cpu_throttle_rate)
     artifacts_dir = resolve_artifacts_dir(args.artifacts_dir) if args.artifacts_dir else None
     artifacts: list[dict[str, Any]] = []
     action_timings: list[dict[str, Any]] = []
@@ -1401,11 +1489,13 @@ def main(argv: list[str] | None = None) -> int:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             try:
-                motion_modes = (True,) if args.reduced_motion else (False, True)
+                motion_modes = selected_motion_modes(args)
                 for reduced_motion in motion_modes:
                     motion_label = "reduced motion" if reduced_motion else "normal motion"
-                    for viewport_name, width, height in VIEWPORTS:
+                    for viewport_name, width, height in viewports:
                         label = f"{viewport_name} {width}x{height}, {motion_label}"
+                        if cpu_throttle_rate_value > 1:
+                            label = f"{label}, {cpu_throttle_rate_value:g}x CPU"
                         for page_path in pages:
                             issues = run_page(
                                 browser,
@@ -1419,6 +1509,7 @@ def main(argv: list[str] | None = None) -> int:
                                 artifacts,
                                 action_timings if artifacts_dir else None,
                                 long_task_metrics if artifacts_dir else None,
+                                cpu_throttle_rate_value,
                             )
                             if issues:
                                 all_issues.extend(issues)
@@ -1437,6 +1528,7 @@ def main(argv: list[str] | None = None) -> int:
             artifacts,
             action_timings,
             long_task_metrics,
+            cpu_throttle_rate_value,
             all_issues,
         )
         ok(f"Lenovo tablet QA artifacts written to {manifest_path}")

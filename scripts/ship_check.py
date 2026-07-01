@@ -61,6 +61,20 @@ def main() -> int:
         ("service-worker validation", [sys.executable, "scripts/validate_sw.py"]),
         ("static smoke", [sys.executable, "scripts/static_smoke.py"]),
         ("Lenovo tablet browser QA", [sys.executable, "scripts/lenovo_tablet_qa.py"]),
+        (
+            "Lenovo tablet decision stress QA",
+            [
+                sys.executable,
+                "scripts/lenovo_tablet_qa.py",
+                "--task-first-only",
+                "--viewport",
+                "portrait",
+                "--motion",
+                "normal",
+                "--cpu-throttle-rate",
+                "2",
+            ],
+        ),
         ("copy fluff warnings", [sys.executable, "scripts/check_copy_fluff.py", "--warn-only"]),
     )
     for label, cmd in checks:
