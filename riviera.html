@@ -245,6 +245,11 @@
   color: var(--gold-light);
   border: 1px solid rgba(201,169,110,0.28);
 }
+.badge-standard {
+  background: rgba(98, 188, 150, 0.18);
+  color: #9de7c6;
+  border: 1px solid rgba(98, 188, 150, 0.34);
+}
 .riv-event-strip {
   max-width: 1200px;
   margin: 4px auto 8px;
@@ -669,6 +674,29 @@ html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid {
   color: var(--text2);
   border: 1px solid rgba(255, 255, 255, 0.14);
 }
+.grid .card.riv-card--standard {
+  border-color: rgba(98, 188, 150, 0.48);
+  background:
+    linear-gradient(135deg, rgba(98, 188, 150, 0.16), rgba(98, 188, 150, 0.03) 46%, transparent 72%),
+    var(--surface);
+  box-shadow: inset 3px 0 0 rgba(98, 188, 150, 0.78);
+}
+.grid .card.riv-card--standard::before {
+  height: 3px;
+  background: linear-gradient(90deg, rgba(98, 188, 150, 0), rgba(98, 188, 150, 0.92), rgba(201, 169, 110, 0.78));
+  opacity: 1;
+}
+.grid .card.riv-card--standard:hover {
+  border-color: rgba(129, 221, 181, 0.68);
+  background:
+    linear-gradient(135deg, rgba(98, 188, 150, 0.2), rgba(98, 188, 150, 0.05) 46%, transparent 72%),
+    var(--surface-hover);
+}
+.riv-card--standard .riv-card-yield {
+  border-color: rgba(98, 188, 150, 0.34);
+  color: #aeeed1;
+  background: rgba(98, 188, 150, 0.1);
+}
 
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card {
   min-height: 166px;
@@ -677,6 +705,12 @@ html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card {
   border-color: rgba(255, 255, 255, 0.12);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.038), rgba(255, 255, 255, 0.018)),
+    var(--surface);
+}
+html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card.riv-card--standard {
+  border-color: rgba(98, 188, 150, 0.54);
+  background:
+    linear-gradient(135deg, rgba(98, 188, 150, 0.16), rgba(98, 188, 150, 0.035) 52%, transparent 78%),
     var(--surface);
 }
 html.lenovo-tab-one-profile body.riviera-page.has-app-nav .grid .card .riv-card-top {
@@ -1737,6 +1771,27 @@ html.lenovo-tab-one-profile .fn-planner__desc {
 <script>
 /** Static JSON (same-origin) — keeps initial HTML/JS parse small; merged after fetch. */
 const RIVIERA_BUILTINS_URL = 'riviera_data/builtins.json';
+const RIVIERA_HOUSE_STANDARD_IDS = [
+  'arancini',
+  'calamari',
+  'oysters-kilpatrick',
+  'veal-meatballs',
+  'chicken-skewer',
+  'chorizo-potatoes',
+  'lamb-cutlet',
+  'fish-slider',
+  'romesco',
+  'lemon-dill-aioli',
+  'lemon-thyme-aioli',
+  'vodka-sauce',
+  'riviera-emulsion',
+  'whipped-butter',
+  'camembert-cigars',
+  'beef-kofta',
+];
+const RIVIERA_HOUSE_STANDARD_ORDER = new Map(
+  RIVIERA_HOUSE_STANDARD_IDS.map((id, index) => [id, index])
+);
 
 function siteBaseUrl() {
   const { origin, pathname: path } = window.location;
@@ -1959,7 +2014,7 @@ function mergeRivieraRecipes() {
   const hiddenRaw = Kr && Kr.loadRivieraHiddenBuiltinIds ? Kr.loadRivieraHiddenBuiltinIds() : [];
   const hidden = new Set(Array.isArray(hiddenRaw) ? hiddenRaw : []);
   const builtins = BUILTIN_RECIPES_METRIC.filter((r) => !hidden.has(r.id));
-  return u.concat(builtins);
+  return sortRivieraRecipesForDisplay(u.concat(builtins));
 }
 let RECIPES = mergeRivieraRecipes();
 let filtered = [...RECIPES];
@@ -1978,6 +2033,32 @@ function rivieraText(value) {
   return String(value || '').toLowerCase();
 }
 
+function isRivieraHouseStandard(recipe) {
+  if (!recipe) return false;
+  return recipe.houseStandard === true || RIVIERA_HOUSE_STANDARD_ORDER.has(recipe.id);
+}
+
+function sortRivieraRecipesForDisplay(recipes) {
+  return recipes
+    .map((recipe, index) => ({ recipe, index }))
+    .sort((a, b) => {
+      const aStandard = isRivieraHouseStandard(a.recipe);
+      const bStandard = isRivieraHouseStandard(b.recipe);
+      if (aStandard !== bStandard) return aStandard ? -1 : 1;
+      if (aStandard && bStandard) {
+        const aRank = RIVIERA_HOUSE_STANDARD_ORDER.has(a.recipe.id)
+          ? RIVIERA_HOUSE_STANDARD_ORDER.get(a.recipe.id)
+          : RIVIERA_HOUSE_STANDARD_IDS.length;
+        const bRank = RIVIERA_HOUSE_STANDARD_ORDER.has(b.recipe.id)
+          ? RIVIERA_HOUSE_STANDARD_ORDER.get(b.recipe.id)
+          : RIVIERA_HOUSE_STANDARD_IDS.length;
+        if (aRank !== bRank) return aRank - bRank;
+      }
+      return a.index - b.index;
+    })
+    .map((entry) => entry.recipe);
+}
+
 function rivieraRecipeSearchHay(recipe) {
   const parts = [
     recipe.name,
@@ -1988,6 +2069,7 @@ function rivieraRecipeSearchHay(recipe) {
     recipe.yield,
     recipe.label,
   ];
+  if (isRivieraHouseStandard(recipe)) parts.push('house standard standard recipe riviera standard');
   (recipe.protein || []).forEach((p) => parts.push(p));
   (recipe.diet || []).forEach((d) => parts.push(d));
   (recipe.elements || []).forEach((e) => parts.push(e));
@@ -2861,10 +2943,12 @@ function cardHTML(r) {
   const name = KuschiRecipeUi.esc(rawName);
   const rawYield = r.yield || 'Yield';
   const cardYield = rivieraCardYieldText(rawYield);
+  const isStandard = isRivieraHouseStandard(r);
   const protein = Array.isArray(r.protein) ? r.protein : [];
   const diet = Array.isArray(r.diet) ? r.diet : [];
   const badgeItems = [
     window.KuschiRivieraEventContext ? KuschiRivieraEventContext.cardBadge(r.id) : '',
+    isStandard ? '<span class="badge badge-standard">House Standard</span>' : '',
     ...protein.map(p => `<span class="badge badge-course">${KuschiRecipeUi.esc(p)}</span>`),
     ...diet.map(d => `<span class="badge badge-diet">${KuschiRecipeUi.esc(d)}</span>`),
     r.method ? `<span class="badge badge-method">${KuschiRecipeUi.esc(r.method)}</span>` : ''
@@ -2880,10 +2964,10 @@ function cardHTML(r) {
     ? `<div class="card-elements riv-card-elements"><span class="riv-card-elements-label">Elements</span><span class="riv-card-elements-text">${KuschiRecipeUi.esc(elements)}</span></div>`
     : '';
   const ariaLabel = KuschiRecipeUi.esc(
-    `Open recipe: ${rawName}. ${ingredientsCount} ingredients, ${prepCount} prep steps, ${serviceCount} service steps.`
+    `Open recipe: ${rawName}. ${isStandard ? 'House standard. ' : ''}${ingredientsCount} ingredients, ${prepCount} prep steps, ${serviceCount} service steps.`
   );
 
-  return `<div class="card riv-card" data-recipe-id="${rid}" role="button" tabindex="0" aria-label="${ariaLabel}" onclick="openRecipe('${rid}')" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();openRecipe('${rid}')}">
+  return `<div class="card riv-card${isStandard ? ' riv-card--standard' : ''}" data-recipe-id="${rid}" role="button" tabindex="0" aria-label="${ariaLabel}" onclick="openRecipe('${rid}')" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();openRecipe('${rid}')}">
     <div class="riv-card-top">
       <div class="riv-card-title-wrap">
         <div class="card-name">${name}</div>
@@ -2992,6 +3076,7 @@ function openRecipe(id, options) {
 
   const badges = [
     window.KuschiRivieraEventContext ? KuschiRivieraEventContext.cardBadge(r.id) : '',
+    isRivieraHouseStandard(r) ? '<span class="badge badge-standard">House Standard</span>' : '',
     ...r.protein.map(p => `<span class="badge badge-course">${KuschiRecipeUi.esc(p)}</span>`),
     ...r.diet.map(d => `<span class="badge badge-diet">${KuschiRecipeUi.esc(d)}</span>`),
     r.method ? `<span class="badge badge-method">${KuschiRecipeUi.esc(r.method)}</span>` : ''

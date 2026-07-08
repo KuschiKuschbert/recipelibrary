@@ -121,7 +121,8 @@
       "Dot Lemon Thyme Aioli on top of each arancini and finish with freshly cut microherbs."
     ],
     "note": "New house spec from Tapas Canape Recipe Cards.docx. Large format is 100 g per arancini, 3 per serve. Seal frozen arancini bags only; do not vacuum.",
-    "prepPhase": "day_before"
+    "prepPhase": "day_before",
+    "houseStandard": true
   },
   {
     "id": "calamari",
@@ -197,7 +198,8 @@
       "CANAPE: Place a small dot of Lemon Dill Aioli in a bamboo boat, add calamari, and finish with crispy capers."
     ],
     "note": "Keep capers very dry before frying. Wet capers spit badly and do not crisp.",
-    "prepPhase": "day_before"
+    "prepPhase": "day_before",
+    "houseStandard": true
   },
   {
     "id": "oysters-kilpatrick",
@@ -283,7 +285,8 @@
       "Spread rock salt 2 cm thick on the serving tray. Nestle oysters into the salt and garnish with parsley, rocket or microgreens and lemon slices."
     ],
     "note": "Bake hot and fast enough to render the speck without shrinking the oysters.",
-    "prepPhase": "day_before"
+    "prepPhase": "day_before",
+    "houseStandard": true
   },
   {
     "id": "veal-meatballs",
@@ -411,7 +414,8 @@
       "Finish meatballs with finely grated Manchego and gremolata. Serve focaccia alongside."
     ],
     "note": "New DOCX spec returns this recipe to veal mince and 80 g balls. Prep time guideline: about 45 minutes per 90 balls once mise is ready.",
-    "prepPhase": "day_before"
+    "prepPhase": "day_before",
+    "houseStandard": true
   },
   {
     "id": "chicken-skewer",
@@ -520,7 +524,8 @@
       "Finish with crumbled feta, microherbs and a chargrilled lemon cheek if required."
     ],
     "note": "Use the new limoncello marinade and tzatziki labneh spec. Keep raw chicken fully submerged/coated in marinade before storage.",
-    "prepPhase": "day_before"
+    "prepPhase": "day_before",
+    "houseStandard": true
   },
   {
     "id": "chorizo-potatoes",
@@ -594,7 +599,8 @@
       "Serve 4–5 pieces in bamboo boats with a bamboo fork."
     ],
     "note": "Aioli amount is kitchen-rounded for the batch because the DOCX lists it as an element without a quantity.",
-    "prepPhase": "day_before"
+    "prepPhase": "day_before",
+    "houseStandard": true
   },
   {
     "id": "lamb-cutlet",
@@ -656,7 +662,8 @@
       "Drizzle Riviera House Emulsion generously over the cutlets so each one is coated."
     ],
     "note": "DOCX source has no batch quantity for lamb cutlets; quantity is kept service-based at 3 cutlets per plate.",
-    "prepPhase": "day_before"
+    "prepPhase": "day_before",
+    "houseStandard": true
   },
   {
     "id": "fish-slider",
@@ -757,7 +764,8 @@
       "Add bun tops and secure each slider with a skewer. Send immediately."
     ],
     "note": "DOCX table gives 50 g fish portions; method allows 70 g. Use 50 g for 50-slider yield, 70 g for more substantial sliders.",
-    "prepPhase": "day_before"
+    "prepPhase": "day_before",
+    "houseStandard": true
   },
   {
     "id": "beef-kofta",
@@ -864,7 +872,8 @@
       "Arrange neatly on a platter and serve hot."
     ],
     "note": "New DOCX spec uses 50 g koftas and keeps the sauce as spicy capsicum dip rather than a cooked sauce.",
-    "prepPhase": "day_before"
+    "prepPhase": "day_before",
+    "houseStandard": true
   },
   {
     "id": "camembert-cigars",
@@ -963,7 +972,8 @@
       "Garnish with chopped pecans, cranberries, microherbs and edible flowers if available."
     ],
     "note": "DOCX spec includes crushed garlic in the cigar filling; keep it light so it does not dominate the honey/camembert profile.",
-    "prepPhase": "day_before"
+    "prepPhase": "day_before",
+    "houseStandard": true
   },
   {
     "id": "romesco",
@@ -1043,7 +1053,8 @@
       "Heat on the stove or in the microwave until hot, minimum 75°C. Use as sauce base or accompaniment."
     ],
     "note": "Large-tin quantities are standardised to 2.5 kg / 2.5 L foodservice tins for ordering clarity.",
-    "prepPhase": "day_before"
+    "prepPhase": "day_before",
+    "houseStandard": true
   },
   {
     "id": "lemon-dill-aioli",
@@ -1095,7 +1106,8 @@
     "service": [
       "Serve chilled. Stir before portioning if held overnight."
     ],
-    "note": "Use as the Calamari Fritti aioli and wherever lemon-dill sauce is specified."
+    "note": "Use as the Calamari Fritti aioli and wherever lemon-dill sauce is specified.",
+    "houseStandard": true
   },
   {
     "id": "lemon-thyme-aioli",
@@ -1147,7 +1159,8 @@
     "service": [
       "Serve chilled with arancini, chorizo potatoes or as required. Stir before portioning if held overnight."
     ],
-    "note": "Fresh thyme quantity is kitchen-rounded from one bunch."
+    "note": "Fresh thyme quantity is kitchen-rounded from one bunch.",
+    "houseStandard": true
   },
   {
     "id": "vodka-sauce",
@@ -1216,7 +1229,8 @@
     "service": [
       "Reheat gently to 75°C minimum, stirring regularly. Thin with a little cream or water only if needed."
     ],
-    "note": "Sugar and chilli converted from cup/tsp to rounded metric amounts."
+    "note": "Sugar and chilli converted from cup/tsp to rounded metric amounts.",
+    "houseStandard": true
   },
   {
     "id": "whipped-butter",
@@ -1257,7 +1271,8 @@
     "service": [
       "Serve with breads. Remove from the coldroom briefly before service so the butter is spreadable."
     ],
-    "note": "New DOCX spec is a simple salted whipped butter: 500 g butter to 20 g salt."
+    "note": "New DOCX spec is a simple salted whipped butter: 500 g butter to 20 g salt.",
+    "houseStandard": true
   },
   {
     "id": "riviera-emulsion",
@@ -1345,7 +1360,8 @@
     "service": [
       "Serve cold or at room temperature. Stir or shake well before drizzling over lamb cutlets or other proteins."
     ],
-    "note": "Herb bunches converted to rounded gram equivalents for ordering, with bunch counts retained in prep notes."
+    "note": "Herb bunches converted to rounded gram equivalents for ordering, with bunch counts retained in prep notes.",
+    "houseStandard": true
   },
   {
     "id": "labneh-tzatziki",
