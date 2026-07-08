@@ -19,6 +19,15 @@ Personal **Kuschi Kitchen Library** (GitHub Pages, public repo).
 
 **Primary working copy:** this repo (`recipelibrary-1` on disk). Other paths such as `~/recipelibrary` or `~/Desktop/recipelibrary` may be older duplicates—confirm `git remote -v` and path before large edits or agent-wide search so work is not applied to the wrong tree.
 
+## Riviera source of truth
+
+**Active Riviera SSOT:** [riviera_sources/current/Riviera_Source_Of_Truth_2026-07-08.md](riviera_sources/current/Riviera_Source_Of_Truth_2026-07-08.md).
+
+- Use the ChatGPT Riviera project sources in [riviera_sources/chatgpt_project_sources_2026-07-08/](riviera_sources/chatgpt_project_sources_2026-07-08/) as the latest baseline.
+- Apply [riviera_sources/current/Riviera_Tapas_House_Standards_Overlay_2026-07-08.md](riviera_sources/current/Riviera_Tapas_House_Standards_Overlay_2026-07-08.md) as the only July 8 overlay; it supersedes older ChatGPT recipe-bank content for those 16 tapas/canape house standards only.
+- Treat `riviera_data/builtins.json`, `riviera_data/function_packages.json`, and generated PDFs as operational representations. For non-overlay conflicts, reconcile them back to the Riviera SSOT before treating them as final.
+- Rebuild the merged Riviera SSOT with `python3 scripts/build_riviera_source_of_truth.py`.
+
 ## Browser verification (agents)
 
 When using **Cursor’s browser MCP** or similar automation to smoke-test pages:

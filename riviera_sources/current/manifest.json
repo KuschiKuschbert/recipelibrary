@@ -1,0 +1,124 @@
+{
+  "status": "active",
+  "date": "2026-07-08",
+  "mergeDirection": "ChatGPT Riviera project sources are baseline; July 8 tapas/canape house standards overlay only.",
+  "sourceOfTruth": "riviera_sources/current/Riviera_Source_Of_Truth_2026-07-08.md",
+  "overlay": "riviera_sources/current/Riviera_Tapas_House_Standards_Overlay_2026-07-08.md",
+  "chatgptSourceDir": "riviera_sources/chatgpt_project_sources_2026-07-08",
+  "houseStandardOverlayRecipeIds": [
+    "arancini",
+    "calamari",
+    "oysters-kilpatrick",
+    "veal-meatballs",
+    "chicken-skewer",
+    "chorizo-potatoes",
+    "lamb-cutlet",
+    "fish-slider",
+    "romesco",
+    "lemon-dill-aioli",
+    "lemon-thyme-aioli",
+    "vodka-sauce",
+    "riviera-emulsion",
+    "whipped-butter",
+    "camembert-cigars",
+    "beef-kofta"
+  ],
+  "chatgptSources": [
+    {
+      "file": "Updated_Riviera_instructions_2026-06-09_extracted.md",
+      "bytes": 19539,
+      "lines": 782,
+      "sha256": "f9fb26019a3c87ca3b6219b71bcf9af681571aad3ae56a5d833a6b5026d67a3f"
+    },
+    {
+      "file": "Riviera_Kitchen_Production_Harness_Index_v5_2026-06-16.md",
+      "bytes": 2001,
+      "lines": 69,
+      "sha256": "4639ee869ab32fbefe60519e3cb9f6fd14f4ce887087efef53ab8693be973611"
+    },
+    {
+      "file": "Riviera_SOP_Master_Index_v10_2026-06-16.md",
+      "bytes": 75971,
+      "lines": 2636,
+      "sha256": "fc273686497540e0700e91b05f303c6da7a917ff9027f1fd13bfd61a6076dc03"
+    },
+    {
+      "file": "Riviera_Component_Module_Library_v3_2026-06-16.md",
+      "bytes": 22385,
+      "lines": 927,
+      "sha256": "9ba97ed1c74ab9807ed752e2dcae1ad4c022f5947d0377e8cff587aa72890a6d"
+    },
+    {
+      "file": "Riviera_Count_Ordering_Harness_v3_2026-06-16.md",
+      "bytes": 10940,
+      "lines": 489,
+      "sha256": "c8e35a9bc10b2b03f04f13f88b02368ab6bd3c7a43bb0a8070c44cbf41f57aea"
+    },
+    {
+      "file": "Riviera_Production_Sheet_Template_Library_v2_2026-06-16.md",
+      "bytes": 13533,
+      "lines": 569,
+      "sha256": "b78a4efe7985bc28ec9150486724fee2e6e58bc56b03eebb3b772025c5b6ba81"
+    },
+    {
+      "file": "Riviera_Real_Event_Test_Pack_v2_2026-06-16.md",
+      "bytes": 8308,
+      "lines": 362,
+      "sha256": "4c78dbaf9480e4f6b8f0160a4fe2032e66764e6f5e29163dbd3a13c48100c1da"
+    },
+    {
+      "file": "Riviera_Package_Source_Digest_v1_2026-06-09.md",
+      "bytes": 21966,
+      "lines": 670,
+      "sha256": "45b21d3c2d12abb222c256c6c8e49e3e8f2ff0b5482d42ea42713c9c8d02a7d4"
+    },
+    {
+      "file": "Riviera_Canonical_Recipe_Bank_v1_2026-06-08.md",
+      "bytes": 14911,
+      "lines": 588,
+      "sha256": "41451a16898a8046213f27c8f30e8943cce82217d014a5ecd4e3ed03b1de0b47"
+    },
+    {
+      "file": "Riviera_Sunday_Tapas_Pull_Matrix_SOP_Addendum_v1_2026-06-16.md",
+      "bytes": 6042,
+      "lines": 230,
+      "sha256": "03e22abeb27df3bb51ed658e35da688388f17be70cbd180f4afdd510ea2b4fc9"
+    },
+    {
+      "file": "Riviera_Sunday_Tapas_Pull_Matrix_A4_Kitchen_Sheet_v1_2026-06-16.txt",
+      "bytes": 243,
+      "lines": 5,
+      "sha256": "ef740aeef45b55dbdfeb033a8b0a5fe029b766970065c7fa084a4940be69b25d"
+    },
+    {
+      "file": "Riviera_Order_Template_v1_2026-06-09.md",
+      "bytes": 5418,
+      "lines": 228,
+      "sha256": "57879e25b39706bedb70f4bf6b7148773e26309b78193df28c1d7cd70169dbf9"
+    },
+    {
+      "file": "Riviera_Supplier_Ordering_Translator_v1_2026-06-08.md",
+      "bytes": 7957,
+      "lines": 356,
+      "sha256": "12e098937261075e20a781cf53d3612f5ac13c7af8519feb295af47cf5f60cfe"
+    },
+    {
+      "file": "Riviera_Seasoning_Palette_v2_2026-06-08.md",
+      "bytes": 19705,
+      "lines": 628,
+      "sha256": "3be02a7db7e4147f8fe697c37015b3a233893eae122ca586cf14c2d04904de8c"
+    },
+    {
+      "file": "foodpairing_condensed_riviera_reference.md",
+      "bytes": 28395,
+      "lines": 1612,
+      "sha256": "d38b4a86dc649969b39d8466a161c084b80477716fdc397b68a9ff8e56a24a38"
+    },
+    {
+      "file": "Baclava-Cheesecake.txt",
+      "bytes": 3104,
+      "lines": 94,
+      "sha256": "86c97ff240b01100ec828b3c748cc39e8622e31d65ad1a7df08b74703870db64"
+    }
+  ]
+}

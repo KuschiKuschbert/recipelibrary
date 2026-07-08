@@ -1,0 +1,5 @@
+Active Sunday tapas service-fridge pull matrix.
+Use booked-cover tier, rounded up to next tier.
+Pull units are serves / PCs / trays / meals.
+Do not use individual skewers/pieces in the main matrix.
+Pull service fridge only. Keep backup frozen.
