@@ -768,214 +768,6 @@
     "houseStandard": true
   },
   {
-    "id": "beef-kofta",
-    "name": "Beef Kofta",
-    "subtitle": "Spicy Capsicum · Pita · Rocket",
-    "type": "Canape",
-    "course": "Canape",
-    "protein": [
-      "beef"
-    ],
-    "diet": [
-      "Dairy-Free"
-    ],
-    "method": "Oven Bake",
-    "yield": "50 koftas",
-    "label": "Beef Kofta",
-    "elements": [
-      "Beef Kofta",
-      "Spicy Capsicum Sauce",
-      "Rocket",
-      "Pita Bread"
-    ],
-    "ingredients": [
-      {
-        "qty": "4 kg",
-        "item": "Beef Mince"
-      },
-      {
-        "qty": "300 g",
-        "item": "Brown Onion"
-      },
-      {
-        "qty": "1.5 kg",
-        "item": "Spicy Capsicum Dip"
-      },
-      {
-        "qty": "50",
-        "item": "Mini Pita Breads"
-      },
-      {
-        "qty": "100 g",
-        "item": "Flat Leaf Parsley",
-        "prep": "approx. 2 bunches, chopped"
-      },
-      {
-        "qty": "100 g",
-        "item": "Garlic — Crushed"
-      },
-      {
-        "qty": "60 g",
-        "item": "Fresh Mint",
-        "prep": "approx. 2 bunches, chopped"
-      },
-      {
-        "qty": "10 g",
-        "item": "Ground Cumin"
-      },
-      {
-        "qty": "10 g",
-        "item": "Ground Coriander"
-      },
-      {
-        "qty": "10 g",
-        "item": "Ground Cinnamon"
-      },
-      {
-        "qty": "50 g",
-        "item": "Salt Flakes"
-      },
-      {
-        "qty": "30 g",
-        "item": "Cracked Pepper"
-      },
-      {
-        "qty": "10 g",
-        "item": "Paprika"
-      },
-      {
-        "qty": "500 g",
-        "item": "Rocket",
-        "prep": "approx. 4 bags"
-      },
-      {
-        "qty": "50",
-        "item": "Large Bamboo Boats"
-      }
-    ],
-    "method_steps": [
-      "AROMATICS: Finely dice and sauté brown onion and crushed garlic until translucent. Cool before mixing with mince.",
-      "MIX: Combine beef mince, browned onion and garlic, chopped mint, ground cumin, ground coriander, ground cinnamon, pepper, paprika and salt. Mix until fully combined.",
-      "TEST: Cook about 1 tablespoon of mixture and taste. Adjust seasoning before shaping.",
-      "SHAPE: Roll into 50 g balls, then shape each into a football/oval shape.",
-      "FREEZE: Lay koftas in a bain lined with baking paper. Cover and freeze until solid.",
-      "PACK: Once frozen, vacuum seal 40 koftas per bag. Label and return to freezer.",
-      "DEFROST: Remove from freezer at least 24 hours before use.",
-      "PITA: Defrost pita at least 24 hours before the event. Cut in half, line in a bain, cover, label and refrigerate.",
-      "GARNISH: Finely chop parsley and mint. Store in a labelled PC."
-    ],
-    "service": [
-      "Cook koftas in a bain tray at 180°C for about 20 minutes, or until 75°C internal.",
-      "Warm pita bread at 170°C for about 10 minutes.",
-      "Open each pita and place into a large bamboo boat. Add rocket, then one kofta.",
-      "Top with spicy capsicum sauce and chopped herbs.",
-      "Arrange neatly on a platter and serve hot."
-    ],
-    "note": "New DOCX spec uses 50 g koftas and keeps the sauce as spicy capsicum dip rather than a cooked sauce.",
-    "prepPhase": "day_before",
-    "houseStandard": true
-  },
-  {
-    "id": "camembert-cigars",
-    "name": "Camembert, Pecan & Cranberry Cigars",
-    "subtitle": "Thyme Infused Honey · Microherbs",
-    "type": "Canape",
-    "course": "Canape",
-    "protein": [
-      "dairy"
-    ],
-    "diet": [
-      "Vegetarian"
-    ],
-    "method": "Deep Fry",
-    "yield": "50 cigars",
-    "label": "Camembert Cigars",
-    "elements": [
-      "Cigars",
-      "Thyme Infused Honey",
-      "Microherbs"
-    ],
-    "ingredients": [
-      {
-        "qty": "620 g",
-        "item": "Camembert"
-      },
-      {
-        "qty": "300 g",
-        "item": "Pecans"
-      },
-      {
-        "qty": "300 g",
-        "item": "Dried Cranberries"
-      },
-      {
-        "qty": "25 g",
-        "item": "Fresh Thyme",
-        "prep": "approx. 1 bunch"
-      },
-      {
-        "qty": "300 g",
-        "item": "Honey"
-      },
-      {
-        "qty": "2",
-        "item": "Cinnamon Sticks"
-      },
-      {
-        "qty": "30 g",
-        "item": "Salt Flakes"
-      },
-      {
-        "qty": "20 g",
-        "item": "Cracked Pepper"
-      },
-      {
-        "qty": "750 g",
-        "item": "Filo Pastry",
-        "prep": "approx. 2 packets"
-      },
-      {
-        "qty": "150 g",
-        "item": "Butter",
-        "prep": "melted, for brushing filo"
-      },
-      {
-        "qty": "50 g",
-        "item": "Crushed Garlic"
-      },
-      {
-        "qty": "60 g",
-        "item": "Microherbs",
-        "prep": "approx. 2 punnets"
-      },
-      {
-        "qty": "50",
-        "item": "Small Bamboo Boats"
-      }
-    ],
-    "method_steps": [
-      "MELT BUTTER: Melt butter in a small pan if using butter to brush filo sheets.",
-      "CHEESE: Cut camembert into 10 cm long sticks, about 1 cm thick. Keep cold.",
-      "FILLING: Finely chop pecans and dried cranberries.",
-      "FILO: Place two sheets of filo on a clean surface. Brush the top sheet with melted butter if using. Cut into long strips.",
-      "ASSEMBLE: Place camembert on the narrow end of each filo strip. Add a teaspoon of pecan-cranberry mixture and a small amount of crushed garlic if using the DOCX spec.",
-      "ROLL: Fold sides in and roll tightly like a spring roll. Repeat with all cigars.",
-      "FREEZE & PACK: Freeze cigars on lined trays until solid. Transfer to bags and seal for storage.",
-      "DEFROST: Defrost in the coldroom at least 24 hours before service.",
-      "THYME HONEY: Warm honey, thyme, salt and cinnamon stick over low heat for 10 minutes. Transfer to a PC and allow thyme and cinnamon to infuse.",
-      "GARNISH: Trim microherbs with scissors, label and refrigerate."
-    ],
-    "service": [
-      "Deep fry cigars at 175–180°C for about 2 minutes, or until golden and hot through.",
-      "Arrange fried cigars on a platter or in bamboo boats.",
-      "Drizzle with thyme-infused honey.",
-      "Garnish with chopped pecans, cranberries, microherbs and edible flowers if available."
-    ],
-    "note": "DOCX spec includes crushed garlic in the cigar filling; keep it light so it does not dominate the honey/camembert profile.",
-    "prepPhase": "day_before",
-    "houseStandard": true
-  },
-  {
     "id": "romesco",
     "name": "Romesco",
     "subtitle": "Capsicum · Passata · Basil · Cream",
@@ -1233,48 +1025,6 @@
     "houseStandard": true
   },
   {
-    "id": "whipped-butter",
-    "name": "Whipped Butter",
-    "subtitle": "Salted · Piped for Bread Service",
-    "type": "Component",
-    "course": "Other",
-    "protein": [
-      "dairy"
-    ],
-    "diet": [
-      "Vegetarian",
-      "Gluten-Free"
-    ],
-    "method": "Whip",
-    "yield": "500 g batch",
-    "label": "Whipped Butter",
-    "elements": [
-      "Whipped Butter"
-    ],
-    "ingredients": [
-      {
-        "qty": "500 g",
-        "item": "Butter",
-        "prep": "softened"
-      },
-      {
-        "qty": "20 g",
-        "item": "Salt"
-      }
-    ],
-    "method_steps": [
-      "Whip softened butter until light, white and fluffy.",
-      "Add salt and whip again until evenly incorporated.",
-      "Transfer to a piping bag fitted with a large star nozzle.",
-      "Pipe onto small plates or into ramekins and refrigerate until set."
-    ],
-    "service": [
-      "Serve with breads. Remove from the coldroom briefly before service so the butter is spreadable."
-    ],
-    "note": "New DOCX spec is a simple salted whipped butter: 500 g butter to 20 g salt.",
-    "houseStandard": true
-  },
-  {
     "id": "riviera-emulsion",
     "name": "Riviera House Emulsion",
     "subtitle": "Stone Fruit · Herbs · Jalapeño · Lemon",
@@ -1361,6 +1111,256 @@
       "Serve cold or at room temperature. Stir or shake well before drizzling over lamb cutlets or other proteins."
     ],
     "note": "Herb bunches converted to rounded gram equivalents for ordering, with bunch counts retained in prep notes.",
+    "houseStandard": true
+  },
+  {
+    "id": "whipped-butter",
+    "name": "Whipped Butter",
+    "subtitle": "Salted · Piped for Bread Service",
+    "type": "Component",
+    "course": "Other",
+    "protein": [
+      "dairy"
+    ],
+    "diet": [
+      "Vegetarian",
+      "Gluten-Free"
+    ],
+    "method": "Whip",
+    "yield": "500 g batch",
+    "label": "Whipped Butter",
+    "elements": [
+      "Whipped Butter"
+    ],
+    "ingredients": [
+      {
+        "qty": "500 g",
+        "item": "Butter",
+        "prep": "softened"
+      },
+      {
+        "qty": "20 g",
+        "item": "Salt"
+      }
+    ],
+    "method_steps": [
+      "Whip softened butter until light, white and fluffy.",
+      "Add salt and whip again until evenly incorporated.",
+      "Transfer to a piping bag fitted with a large star nozzle.",
+      "Pipe onto small plates or into ramekins and refrigerate until set."
+    ],
+    "service": [
+      "Serve with breads. Remove from the coldroom briefly before service so the butter is spreadable."
+    ],
+    "note": "New DOCX spec is a simple salted whipped butter: 500 g butter to 20 g salt.",
+    "houseStandard": true
+  },
+  {
+    "id": "camembert-cigars",
+    "name": "Camembert, Pecan & Cranberry Cigars",
+    "subtitle": "Thyme Infused Honey · Microherbs",
+    "type": "Canape",
+    "course": "Canape",
+    "protein": [
+      "dairy"
+    ],
+    "diet": [
+      "Vegetarian"
+    ],
+    "method": "Deep Fry",
+    "yield": "50 cigars",
+    "label": "Camembert Cigars",
+    "elements": [
+      "Cigars",
+      "Thyme Infused Honey",
+      "Microherbs"
+    ],
+    "ingredients": [
+      {
+        "qty": "620 g",
+        "item": "Camembert"
+      },
+      {
+        "qty": "300 g",
+        "item": "Pecans"
+      },
+      {
+        "qty": "300 g",
+        "item": "Dried Cranberries"
+      },
+      {
+        "qty": "25 g",
+        "item": "Fresh Thyme",
+        "prep": "approx. 1 bunch"
+      },
+      {
+        "qty": "300 g",
+        "item": "Honey"
+      },
+      {
+        "qty": "2",
+        "item": "Cinnamon Sticks"
+      },
+      {
+        "qty": "30 g",
+        "item": "Salt Flakes"
+      },
+      {
+        "qty": "20 g",
+        "item": "Cracked Pepper"
+      },
+      {
+        "qty": "750 g",
+        "item": "Filo Pastry",
+        "prep": "approx. 2 packets"
+      },
+      {
+        "qty": "150 g",
+        "item": "Butter",
+        "prep": "melted, for brushing filo"
+      },
+      {
+        "qty": "50 g",
+        "item": "Crushed Garlic"
+      },
+      {
+        "qty": "60 g",
+        "item": "Microherbs",
+        "prep": "approx. 2 punnets"
+      },
+      {
+        "qty": "50",
+        "item": "Small Bamboo Boats"
+      }
+    ],
+    "method_steps": [
+      "MELT BUTTER: Melt butter in a small pan if using butter to brush filo sheets.",
+      "CHEESE: Cut camembert into 10 cm long sticks, about 1 cm thick. Keep cold.",
+      "FILLING: Finely chop pecans and dried cranberries.",
+      "FILO: Place two sheets of filo on a clean surface. Brush the top sheet with melted butter if using. Cut into long strips.",
+      "ASSEMBLE: Place camembert on the narrow end of each filo strip. Add a teaspoon of pecan-cranberry mixture and a small amount of crushed garlic if using the DOCX spec.",
+      "ROLL: Fold sides in and roll tightly like a spring roll. Repeat with all cigars.",
+      "FREEZE & PACK: Freeze cigars on lined trays until solid. Transfer to bags and seal for storage.",
+      "DEFROST: Defrost in the coldroom at least 24 hours before service.",
+      "THYME HONEY: Warm honey, thyme, salt and cinnamon stick over low heat for 10 minutes. Transfer to a PC and allow thyme and cinnamon to infuse.",
+      "GARNISH: Trim microherbs with scissors, label and refrigerate."
+    ],
+    "service": [
+      "Deep fry cigars at 175–180°C for about 2 minutes, or until golden and hot through.",
+      "Arrange fried cigars on a platter or in bamboo boats.",
+      "Drizzle with thyme-infused honey.",
+      "Garnish with chopped pecans, cranberries, microherbs and edible flowers if available."
+    ],
+    "note": "DOCX spec includes crushed garlic in the cigar filling; keep it light so it does not dominate the honey/camembert profile.",
+    "prepPhase": "day_before",
+    "houseStandard": true
+  },
+  {
+    "id": "beef-kofta",
+    "name": "Beef Kofta",
+    "subtitle": "Spicy Capsicum · Pita · Rocket",
+    "type": "Canape",
+    "course": "Canape",
+    "protein": [
+      "beef"
+    ],
+    "diet": [
+      "Dairy-Free"
+    ],
+    "method": "Oven Bake",
+    "yield": "50 koftas",
+    "label": "Beef Kofta",
+    "elements": [
+      "Beef Kofta",
+      "Spicy Capsicum Sauce",
+      "Rocket",
+      "Pita Bread"
+    ],
+    "ingredients": [
+      {
+        "qty": "4 kg",
+        "item": "Beef Mince"
+      },
+      {
+        "qty": "300 g",
+        "item": "Brown Onion"
+      },
+      {
+        "qty": "1.5 kg",
+        "item": "Spicy Capsicum Dip"
+      },
+      {
+        "qty": "50",
+        "item": "Mini Pita Breads"
+      },
+      {
+        "qty": "100 g",
+        "item": "Flat Leaf Parsley",
+        "prep": "approx. 2 bunches, chopped"
+      },
+      {
+        "qty": "100 g",
+        "item": "Garlic — Crushed"
+      },
+      {
+        "qty": "60 g",
+        "item": "Fresh Mint",
+        "prep": "approx. 2 bunches, chopped"
+      },
+      {
+        "qty": "10 g",
+        "item": "Ground Cumin"
+      },
+      {
+        "qty": "10 g",
+        "item": "Ground Coriander"
+      },
+      {
+        "qty": "10 g",
+        "item": "Ground Cinnamon"
+      },
+      {
+        "qty": "50 g",
+        "item": "Salt Flakes"
+      },
+      {
+        "qty": "30 g",
+        "item": "Cracked Pepper"
+      },
+      {
+        "qty": "10 g",
+        "item": "Paprika"
+      },
+      {
+        "qty": "500 g",
+        "item": "Rocket",
+        "prep": "approx. 4 bags"
+      },
+      {
+        "qty": "50",
+        "item": "Large Bamboo Boats"
+      }
+    ],
+    "method_steps": [
+      "AROMATICS: Finely dice and sauté brown onion and crushed garlic until translucent. Cool before mixing with mince.",
+      "MIX: Combine beef mince, browned onion and garlic, chopped mint, ground cumin, ground coriander, ground cinnamon, pepper, paprika and salt. Mix until fully combined.",
+      "TEST: Cook about 1 tablespoon of mixture and taste. Adjust seasoning before shaping.",
+      "SHAPE: Roll into 50 g balls, then shape each into a football/oval shape.",
+      "FREEZE: Lay koftas in a bain lined with baking paper. Cover and freeze until solid.",
+      "PACK: Once frozen, vacuum seal 40 koftas per bag. Label and return to freezer.",
+      "DEFROST: Remove from freezer at least 24 hours before use.",
+      "PITA: Defrost pita at least 24 hours before the event. Cut in half, line in a bain, cover, label and refrigerate.",
+      "GARNISH: Finely chop parsley and mint. Store in a labelled PC."
+    ],
+    "service": [
+      "Cook koftas in a bain tray at 180°C for about 20 minutes, or until 75°C internal.",
+      "Warm pita bread at 170°C for about 10 minutes.",
+      "Open each pita and place into a large bamboo boat. Add rocket, then one kofta.",
+      "Top with spicy capsicum sauce and chopped herbs.",
+      "Arrange neatly on a platter and serve hot."
+    ],
+    "note": "New DOCX spec uses 50 g koftas and keeps the sauce as spicy capsicum dip rather than a cooked sauce.",
+    "prepPhase": "day_before",
     "houseStandard": true
   },
   {

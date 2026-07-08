@@ -1,9 +1,9 @@
 {
   "version": "2026-06-04-v22",
   "status": "active_service_standard",
-  "source_of_truth": "Kuschi service-size corrections. Base recipes remain riviera_data/builtins.json unless explicitly superseded.",
+  "source_of_truth": "Kuschi service-size corrections. Base recipes remain riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json unless explicitly superseded.",
   "rules": {
-    "base_recipe_source": "Use GitHub website recipes as current active recipe base.",
+    "base_recipe_source": "Use the structured Riviera recipe catalog as the current active recipe base; riviera_data/builtins.json is the synced website copy.",
     "older_docx_sources": "Reference only unless explicitly restored.",
     "portion_locking": "Do not invent missing service sizes. Ask Kuschi before locking tapas, canape, plated, buffet or corporate portions unless a clear repeated Kuschi-approved pattern already exists.",
     "pattern_inference_rule": "Pattern-inferred quantities may be confirmed only when they follow repeated Kuschi-approved logic: buffet uses service target plus production buffer, sauce and garnish are given per guest, premium garnish is called out, and fragile formats are marked not_recommended rather than forced.",

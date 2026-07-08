@@ -3,7 +3,7 @@
 
 The ChatGPT Riviera project sources are treated as the authoritative baseline.
 The only overlay applied here is the July 8 tapas/canape house-standard recipe
-update already represented in riviera_data/builtins.json.
+update represented in the structured Riviera recipe catalog.
 """
 
 from __future__ import annotations
@@ -22,7 +22,7 @@ from xml.etree import ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_DIR = ROOT / "riviera_sources" / "chatgpt_project_sources_2026-07-08"
 OUTPUT_DIR = ROOT / "riviera_sources" / "current"
-BUILTINS_PATH = ROOT / "riviera_data" / "builtins.json"
+RECIPE_CATALOG_PATH = OUTPUT_DIR / "Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json"
 PACKAGES_PATH = ROOT / "riviera_data" / "function_packages.json"
 
 SOURCE_OF_TRUTH_PATH = OUTPUT_DIR / "Riviera_Source_Of_Truth_2026-07-08.md"
@@ -90,6 +90,15 @@ SOURCE_FILES: list[dict[str, str]] = [
 
 def load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_recipe_catalog() -> list[dict[str, Any]]:
+    if not RECIPE_CATALOG_PATH.exists():
+        raise SystemExit(f"Missing structured Riviera recipe catalog: {RECIPE_CATALOG_PATH.relative_to(ROOT)}")
+    payload = load_json(RECIPE_CATALOG_PATH)
+    if not isinstance(payload, dict) or not isinstance(payload.get("recipes"), list):
+        raise SystemExit(f"{RECIPE_CATALOG_PATH.relative_to(ROOT)} must be an object with a recipes list")
+    return payload["recipes"]
 
 
 def clean(value: Any) -> str:
@@ -297,7 +306,7 @@ def build_tapas_overlay(recipes: list[dict[str, Any]], packages: dict[str, Any])
         "# Riviera Tapas House Standards Overlay 2026-07-08",
         "",
         "**Status:** Active overlay on top of the ChatGPT Riviera source pack.",
-        "**Source:** `Tapas Canape Recipe Cards.docx`, standardised into `riviera_data/builtins.json` on 2026-07-08.",
+        "**Source:** `Tapas Canape Recipe Cards.docx`, standardised into the structured Riviera recipe catalog on 2026-07-08.",
         "**Use for:** House-standard tapas/canape recipe cards, kitchen PDFs, prep sheets, Sunday tapas planning, and package-linked canape/tapas pulls.",
         "",
         "## Authority",
@@ -363,8 +372,9 @@ def build_source_of_truth(overlay: str, inventory: list[dict[str, Any]]) -> str:
         "1. Direct user corrections in a current event or recipe task outrank this file.",
         "2. The July 8 Tapas House Standards Overlay in this file outranks older ChatGPT recipe-bank content for the same 16 dishes.",
         "3. The ChatGPT Riviera project source pack downloaded on 2026-07-08 is the baseline for all other Riviera operations, production sheets, package logic, ordering, supplier translation, formatting, and source-routing decisions.",
-        "4. `riviera_data/builtins.json`, `riviera_data/function_packages.json`, and generated PDFs are operational representations. For non-overlay conflicts, reconcile them back to this merged source before treating them as final.",
-        "5. Do not silently invent missing recipe, package, dietary, ordering, or service rules. Mark `NEEDS CONFIRMATION` when sources conflict or a required detail is absent.",
+        "4. `riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json` is the canonical structured recipe payload derived from this source stack and the July 8 overlay.",
+        "5. `riviera_data/builtins.json`, `riviera_data/function_packages.json`, and generated PDFs are operational representations. For non-overlay conflicts, reconcile them back to this merged source and structured catalog before treating them as final.",
+        "6. Do not silently invent missing recipe, package, dietary, ordering, or service rules. Mark `NEEDS CONFIRMATION` when sources conflict or a required detail is absent.",
         "",
         "## Active Source Stack",
         "",
@@ -423,7 +433,7 @@ def build_source_of_truth(overlay: str, inventory: list[dict[str, Any]]) -> str:
 
 
 def main() -> int:
-    recipes = load_json(BUILTINS_PATH)
+    recipes = load_recipe_catalog()
     packages = load_json(PACKAGES_PATH)
     inventory = source_inventory()
     overlay = build_tapas_overlay(recipes, packages)
@@ -437,6 +447,7 @@ def main() -> int:
         "date": "2026-07-08",
         "mergeDirection": "ChatGPT Riviera project sources are baseline; July 8 tapas/canape house standards overlay only.",
         "sourceOfTruth": str(SOURCE_OF_TRUTH_PATH.relative_to(ROOT)),
+        "structuredRecipeCatalog": str(RECIPE_CATALOG_PATH.relative_to(ROOT)),
         "overlay": str(TAPAS_OVERLAY_PATH.relative_to(ROOT)),
         "chatgptSourceDir": str(SOURCE_DIR.relative_to(ROOT)),
         "houseStandardOverlayRecipeIds": HOUSE_STANDARD_IDS,

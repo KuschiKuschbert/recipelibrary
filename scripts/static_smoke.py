@@ -28,6 +28,7 @@ CORE_PAGES = (
 
 CRITICAL_JSON = (
     "alpha_catalog/manifest.json",
+    "riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json",
     "riviera_data/builtins.json",
     "riviera_data/function_packages.json",
     "riviera_data/planner_pairing_hints.json",

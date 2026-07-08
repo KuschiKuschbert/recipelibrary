@@ -9,8 +9,9 @@
 1. Direct user corrections in a current event or recipe task outrank this file.
 2. The July 8 Tapas House Standards Overlay in this file outranks older ChatGPT recipe-bank content for the same 16 dishes.
 3. The ChatGPT Riviera project source pack downloaded on 2026-07-08 is the baseline for all other Riviera operations, production sheets, package logic, ordering, supplier translation, formatting, and source-routing decisions.
-4. `riviera_data/builtins.json`, `riviera_data/function_packages.json`, and generated PDFs are operational representations. For non-overlay conflicts, reconcile them back to this merged source before treating them as final.
-5. Do not silently invent missing recipe, package, dietary, ordering, or service rules. Mark `NEEDS CONFIRMATION` when sources conflict or a required detail is absent.
+4. `riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json` is the canonical structured recipe payload derived from this source stack and the July 8 overlay.
+5. `riviera_data/builtins.json`, `riviera_data/function_packages.json`, and generated PDFs are operational representations. For non-overlay conflicts, reconcile them back to this merged source and structured catalog before treating them as final.
+6. Do not silently invent missing recipe, package, dietary, ordering, or service rules. Mark `NEEDS CONFIRMATION` when sources conflict or a required detail is absent.
 
 ## Active Source Stack
 
@@ -47,7 +48,7 @@ The following section is embedded from `Riviera_Tapas_House_Standards_Overlay_20
 # Riviera Tapas House Standards Overlay 2026-07-08
 
 **Status:** Active overlay on top of the ChatGPT Riviera source pack.
-**Source:** `Tapas Canape Recipe Cards.docx`, standardised into `riviera_data/builtins.json` on 2026-07-08.
+**Source:** `Tapas Canape Recipe Cards.docx`, standardised into the structured Riviera recipe catalog on 2026-07-08.
 **Use for:** House-standard tapas/canape recipe cards, kitchen PDFs, prep sheets, Sunday tapas planning, and package-linked canape/tapas pulls.
 
 ## Authority

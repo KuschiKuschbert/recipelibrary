@@ -14,6 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BUILTINS_PATH = ROOT / "riviera_data" / "builtins.json"
+CATALOG_PATH = ROOT / "riviera_sources" / "current" / "Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json"
 
 ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,62}$")
 
@@ -106,6 +107,16 @@ def main() -> None:
         note = r.get("note")
         if note is not None and not isinstance(note, str):
             die(f"Recipe {rid!r}: note must be string or null")
+
+    if CATALOG_PATH.exists():
+        catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
+        catalog_recipes = catalog.get("recipes") if isinstance(catalog, dict) else None
+        if catalog_recipes != raw:
+            die(
+                f"{BUILTINS_PATH.relative_to(ROOT)} is not synced from "
+                f"{CATALOG_PATH.relative_to(ROOT)}. Run: "
+                "python3 scripts/sync_riviera_recipe_catalog.py --write"
+            )
 
     print(f"OK — {len(raw)} Riviera built-in recipes in {BUILTINS_PATH.relative_to(ROOT)}")
 

@@ -3,6 +3,7 @@
   "date": "2026-07-08",
   "mergeDirection": "ChatGPT Riviera project sources are baseline; July 8 tapas/canape house standards overlay only.",
   "sourceOfTruth": "riviera_sources/current/Riviera_Source_Of_Truth_2026-07-08.md",
+  "structuredRecipeCatalog": "riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json",
   "overlay": "riviera_sources/current/Riviera_Tapas_House_Standards_Overlay_2026-07-08.md",
   "chatgptSourceDir": "riviera_sources/chatgpt_project_sources_2026-07-08",
   "houseStandardOverlayRecipeIds": [

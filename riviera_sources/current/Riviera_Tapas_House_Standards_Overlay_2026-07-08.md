@@ -1,7 +1,7 @@
 # Riviera Tapas House Standards Overlay 2026-07-08
 
 **Status:** Active overlay on top of the ChatGPT Riviera source pack.
-**Source:** `Tapas Canape Recipe Cards.docx`, standardised into `riviera_data/builtins.json` on 2026-07-08.
+**Source:** `Tapas Canape Recipe Cards.docx`, standardised into the structured Riviera recipe catalog on 2026-07-08.
 **Use for:** House-standard tapas/canape recipe cards, kitchen PDFs, prep sheets, Sunday tapas planning, and package-linked canape/tapas pulls.
 
 ## Authority

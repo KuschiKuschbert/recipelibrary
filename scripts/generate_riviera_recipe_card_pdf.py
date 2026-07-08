@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Generate the Riviera internal kitchen recipe-card PDF.
 
-Source data stays untouched. This script normalises display text for the PDF
-only, builds package/category indexes, and writes a print-friendly A4 book.
+Recipe data is loaded from the structured Riviera catalog. This script
+normalises display text for the PDF only, builds package/category indexes, and
+writes a print-friendly A4 book.
 """
 
 from __future__ import annotations
@@ -40,6 +41,7 @@ from reportlab.platypus import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
+RECIPE_CATALOG_PATH = ROOT / "riviera_sources" / "current" / "Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json"
 BUILTINS_PATH = ROOT / "riviera_data" / "builtins.json"
 PACKAGES_PATH = ROOT / "riviera_data" / "function_packages.json"
 SSOT_MANIFEST_PATH = ROOT / "riviera_sources" / "current" / "manifest.json"
@@ -105,6 +107,7 @@ class RecipeMeta:
 class SourceInfo:
     date: str
     source_of_truth: str
+    structured_recipe_catalog: str
     overlay: str
     chatgpt_source_dir: str
     chatgpt_source_count: int
@@ -418,6 +421,7 @@ def load_source_info() -> SourceInfo:
 
     required_paths = [
         manifest.get("sourceOfTruth"),
+        manifest.get("structuredRecipeCatalog"),
         manifest.get("overlay"),
         manifest.get("chatgptSourceDir"),
     ]
@@ -428,12 +432,31 @@ def load_source_info() -> SourceInfo:
     return SourceInfo(
         date=str(manifest.get("date") or "2026-07-08"),
         source_of_truth=str(manifest["sourceOfTruth"]),
+        structured_recipe_catalog=str(manifest["structuredRecipeCatalog"]),
         overlay=str(manifest["overlay"]),
         chatgpt_source_dir=str(manifest["chatgptSourceDir"]),
         chatgpt_source_count=len(manifest.get("chatgptSources", [])),
         overlay_recipe_ids=overlay_ids,
         merge_direction=str(manifest.get("mergeDirection") or "ChatGPT baseline plus July 8 tapas overlay."),
     )
+
+
+def load_recipes_from_catalog(source_info: SourceInfo) -> list[dict[str, Any]]:
+    catalog_path = ROOT / source_info.structured_recipe_catalog
+    payload = load_json(catalog_path)
+    recipes = payload.get("recipes") if isinstance(payload, dict) else None
+    if not isinstance(recipes, list):
+        raise SystemExit(f"Structured recipe catalog must contain a recipes list: {source_info.structured_recipe_catalog}")
+    if (ROOT / source_info.structured_recipe_catalog) != RECIPE_CATALOG_PATH:
+        raise SystemExit(f"Unexpected structured recipe catalog path: {source_info.structured_recipe_catalog}")
+
+    builtins = load_json(BUILTINS_PATH)
+    if builtins != recipes:
+        raise SystemExit(
+            "riviera_data/builtins.json is not synced from the structured recipe catalog. "
+            "Run: python3 scripts/sync_riviera_recipe_catalog.py --write"
+        )
+    return recipes
 
 
 def recipe_ref_from_item(item: dict[str, Any]) -> str | None:
@@ -753,7 +776,8 @@ def build_cover(recipes: list[dict[str, Any]], source_info: SourceInfo) -> list[
         ["Layout", "A4 portrait, compact kitchen cards"],
         ["Recipe baseline", "ChatGPT Riviera project sources"],
         ["Latest overlay", f"{len(source_info.overlay_recipe_ids)} July 8 tapas/canape standards"],
-        ["Operational data", "riviera_data/builtins.json + function_packages.json"],
+        ["Recipe authority", source_info.structured_recipe_catalog],
+        ["Operational copy", "riviera_data/builtins.json"],
     ]
     t = Table(
         [[table_cell(a, "table_header"), table_cell(b, "small")] for a, b in summary],
@@ -799,10 +823,11 @@ def build_source_stack(source_info: SourceInfo) -> list[Any]:
     rows = [
         [table_cell("Authority", "table_header"), table_cell("Current file", "table_header")],
         [table_cell("Riviera Source Of Truth", "small"), table_cell(source_info.source_of_truth, "small")],
+        [table_cell("Structured recipe catalog", "small"), table_cell(source_info.structured_recipe_catalog, "small")],
         [table_cell("ChatGPT baseline", "small"), table_cell(f"{source_info.chatgpt_source_count} source files in {source_info.chatgpt_source_dir}", "small")],
         [table_cell("Latest overlay", "small"), table_cell(source_info.overlay, "small")],
         [table_cell("Overlay scope", "small"), table_cell(f"{len(source_info.overlay_recipe_ids)} tapas/canape house standards only", "small")],
-        [table_cell("Card data", "small"), table_cell("riviera_data/builtins.json and riviera_data/function_packages.json", "small")],
+        [table_cell("Card data", "small"), table_cell("structured recipe catalog plus riviera_data/function_packages.json", "small")],
     ]
     table = Table(rows, colWidths=[42 * mm, 124 * mm], repeatRows=1)
     table.setStyle(index_table_style())
@@ -812,7 +837,7 @@ def build_source_stack(source_info: SourceInfo) -> list[Any]:
     story.append(
         Paragraph(
             source_info.merge_direction
-            + " For non-overlay conflicts, reconcile recipe cards and package logic back to the merged SSOT before treating them as final.",
+            + " For non-overlay conflicts, reconcile recipe cards back to the structured catalog and package logic back to the merged SSOT before treating them as final.",
             STYLES["body"],
         )
     )
@@ -1141,11 +1166,11 @@ def main() -> int:
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     args = parser.parse_args()
 
-    recipes = load_json(BUILTINS_PATH)
-    packages = load_json(PACKAGES_PATH)
     source_info = load_source_info()
+    recipes = load_recipes_from_catalog(source_info)
+    packages = load_json(PACKAGES_PATH)
     if not isinstance(recipes, list):
-        raise SystemExit("builtins.json must be a list")
+        raise SystemExit("structured recipe catalog recipes must be a list")
     meta = build_recipe_meta(recipes, packages)
     ordered = sorted_recipes(recipes, meta)
     grouped = group_recipes(ordered, meta)

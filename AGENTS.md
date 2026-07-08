@@ -22,10 +22,12 @@ Personal **Kuschi Kitchen Library** (GitHub Pages, public repo).
 ## Riviera source of truth
 
 **Active Riviera SSOT:** [riviera_sources/current/Riviera_Source_Of_Truth_2026-07-08.md](riviera_sources/current/Riviera_Source_Of_Truth_2026-07-08.md).
+**Structured Riviera recipe catalog:** [riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json](riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json).
 
 - Use the 23 live ChatGPT Riviera project sources in [riviera_sources/chatgpt_project_sources_2026-07-08/](riviera_sources/chatgpt_project_sources_2026-07-08/) as the latest baseline.
 - Apply [riviera_sources/current/Riviera_Tapas_House_Standards_Overlay_2026-07-08.md](riviera_sources/current/Riviera_Tapas_House_Standards_Overlay_2026-07-08.md) as the only July 8 overlay; it supersedes older ChatGPT recipe-bank content for those 16 tapas/canape house standards only.
-- Treat `riviera_data/builtins.json`, `riviera_data/function_packages.json`, and generated PDFs as operational representations. For non-overlay conflicts, reconcile them back to the Riviera SSOT before treating them as final.
+- Edit the structured recipe catalog first for Riviera built-in recipe changes, then run `python3 scripts/sync_riviera_recipe_catalog.py --write`; `python3 scripts/sync_riviera_recipe_catalog.py --check` must pass before PDF generation or shipping.
+- Treat `riviera_data/builtins.json`, `riviera_data/function_packages.json`, and generated PDFs as operational representations. For non-overlay conflicts, reconcile them back to the Riviera SSOT/structured catalog before treating them as final.
 - Rebuild the merged Riviera SSOT with `python3 scripts/build_riviera_source_of_truth.py`.
 
 ## Browser verification (agents)
