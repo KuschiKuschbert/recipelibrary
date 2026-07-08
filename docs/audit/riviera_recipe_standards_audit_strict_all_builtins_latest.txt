@@ -13,7 +13,7 @@ Strict missing variant scope: all builtins
 
 MEATBALL / POLPETTE CONTROL
 -------------------------------
-canonical        veal-meatballs — Polpette — Approx. 190–210 balls @ 60g (pre-crumb weight)
+canonical        veal-meatballs — Slow Cooked Veal Meatballs — Approx. 90 balls @ 80 g; 50 tapas serves
 legacy/duplicate beef-polpette-canape — Beef Polpette — 60 pieces
 legacy/duplicate slow-cooked-beef-albondigas-buffet — Slow Cooked Beef Albondigas — 20 portions
 
