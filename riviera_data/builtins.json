@@ -1,8 +1,8 @@
 [
   {
     "id": "arancini",
-    "name": "Chorizo & Mozzarella Arancini",
-    "subtitle": "Lemon & Thyme Aioli · Romesco",
+    "name": "Chorizo and Mozzarella Arancini",
+    "subtitle": "Lemon & Thyme Aioli · Romesco · Microherbs",
     "type": "Canape / Tapas",
     "course": "Canape",
     "protein": [
@@ -13,7 +13,7 @@
       "Gluten-Free"
     ],
     "method": "Deep Fry",
-    "yield": "Approx. 200 @ 40g (pre-coat rice ball)",
+    "yield": "80 large arancini @ 100 g",
     "label": "Arancini",
     "elements": [
       "Arancini (3 per serve)",
@@ -29,7 +29,7 @@
       {
         "qty": "1 kg",
         "item": "Chorizo",
-        "prep": "finely diced 5mm"
+        "prep": "finely diced"
       },
       {
         "qty": "600 g",
@@ -57,7 +57,7 @@
       {
         "qty": "150 g",
         "item": "Parmesan — Grana Padano",
-        "prep": "finely grated"
+        "prep": "grated"
       },
       {
         "qty": "800 g",
@@ -66,7 +66,7 @@
       {
         "qty": "1 kg",
         "item": "Roasted Capsicum",
-        "prep": "drained, blitzed to rough paste"
+        "prep": "drained and blitzed"
       },
       {
         "qty": "750 ml",
@@ -79,7 +79,7 @@
       {
         "qty": "50 g",
         "item": "Salt Flakes",
-        "prep": "plus extra for seasoning at fry"
+        "prep": "plus extra to finish"
       },
       {
         "qty": "30 g",
@@ -87,41 +87,40 @@
       },
       {
         "qty": "300 g",
-        "item": "Flour GF",
+        "item": "GF Flour",
         "prep": "for coating"
       },
       {
         "qty": "800 g",
-        "item": "Breadcrumbs GF",
+        "item": "GF Breadcrumbs",
         "prep": "for coating"
       },
       {
         "qty": "10",
         "item": "Eggs",
-        "prep": "beaten, for coating"
+        "prep": "beaten for coating"
       }
     ],
     "method_steps": [
-      "Heat a splash of oil in a large rondeau over medium heat on the 6-burner. Sauté blitzed brown onion, stirring frequently, for 8–10 minutes until golden and soft. Add crushed garlic and cook 1 minute until fragrant. Add finely diced chorizo and cook a further 3–4 minutes until beginning to colour and fat has rendered.",
-      "Deglaze with white wine and reduce by half, approximately 3–4 minutes.",
-      "Add Arborio rice and stir to coat in the chorizo fat for 1–2 minutes. Add spicy capsicum dip, water and chicken stock concentrate. Season with salt and cracked pepper. Stir to combine thoroughly.",
-      "Transfer mixture to a deep gastronorm bain. Cover tightly with foil or lid. Bake in conventional oven at 160°C for 20 minutes. Remove, stir thoroughly, re-cover and bake a further 20–25 minutes until all liquid is absorbed and rice is fully cooked but not mushy.",
-      "Spread cooked rice evenly across two shallow bains to a depth of no more than 5cm. Cool uncovered for 15 minutes, then refrigerate until core temperature reaches 5°C or below. Do not skip this step — rolling warm rice produces soft balls that won't hold structure.",
-      "Once fully chilled, fold in all three grated cheeses and the blitzed roasted capsicum. Mix until evenly incorporated. Taste and adjust seasoning.",
-      "Weigh rice mixture into 40g portions — yield is approx. 200 × 40g from this recipe as written. Roll firmly into tight balls, compressing well so there are no air pockets.",
-      "Set up a three-stage coating station: (1) GF flour, (2) beaten egg whisked with cold water (no milk), (3) GF breadcrumbs. Roll each ball in flour first — shake off excess. Dip in egg wash ensuring full coverage. Roll firmly in breadcrumbs, pressing to adhere. Double-crumb if any bald patches appear.",
-      "Arrange coated balls on parchment-lined trays without touching. Freeze until completely solid, minimum 4 hours or overnight.",
-      "Once frozen solid, portion into labelled vacuum bags. SEAL ONLY — do not apply vacuum pressure as this will crush the balls. Store in freezer crate labelled ARANCINI. Defrost in coldroom for minimum 24 hours before service."
+      "PREP AROMATICS: Finely dice or blitz the brown onion. Sauté in a large pot over medium heat until golden and soft.",
+      "CHORIZO BASE: Add crushed garlic and finely diced chorizo. Cook 1–2 minutes until the chorizo browns and releases its fat. Deglaze with white wine and reduce briefly.",
+      "RICE MIX: Add Arborio rice, spicy capsicum dip, onion, garlic and chorizo to a deep bain. Add water, chicken stock concentrate, salt and pepper. Stir until evenly mixed.",
+      "COOK: Cover the bain with a lid or foil. Bake at 160°C for 20 minutes, stir, then bake another 20 minutes or until the liquid is absorbed and the rice is cooked.",
+      "COOL: Transfer the rice mixture to shallow bains and chill completely. Use the freezer briefly if needed, but do not roll warm rice.",
+      "FINISH MIX: Grate the cheeses. Fold mozzarella, cheddar, parmesan and blitzed roasted capsicum through the cold rice until evenly incorporated. Taste and adjust seasoning.",
+      "PORTION: Weigh rice mix into 100 g portions and roll into tight balls.",
+      "CRUMB: Set up GF flour, beaten egg and GF breadcrumbs. Flour each ball, dip in egg, then coat thoroughly in breadcrumbs.",
+      "FREEZE & PACK: Freeze on lined trays until solid. Transfer to vacuum bags and SEAL ONLY — do not vacuum, or the arancini will squash.",
+      "DEFROST: Defrost in the coldroom for at least 24 hours before frying."
     ],
     "service": [
-      "Preheat fryer oil to 180°C. Do not fry from frozen — ensure arancini are fully defrosted and at fridge temperature before frying.",
-      "Fry in small batches of 6–8, do not overcrowd. Fry 3–5 minutes, turning once, until deep golden brown and heated through — smaller balls colour faster; verify centre heat. Check with a metal skewer — hold against your wrist, it should feel hot after 3 seconds.",
-      "Drain on chux-lined tray. Season immediately with salt flakes while hot.",
-      "Warm Romesco in a small saucepan over low heat, stirring, or microwave in 30-second bursts until hot through.",
-      "Spoon 60–80ml warm Romesco as a base on each plate or slate. Arrange 3 arancini on top.",
-      "Dot a small amount of Lemon Thyme Aioli on each arancini. Garnish with freshly picked microherbs. Serve immediately."
+      "Preheat fryer to 180°C. Fry defrosted arancini until deep golden and hot through; check one with a skewer for centre heat.",
+      "Drain and season immediately with salt flakes.",
+      "Warm Romesco in a pot or microwave until hot.",
+      "Plate 60–80 ml warm Romesco as the base. Add 3 arancini per serve.",
+      "Dot Lemon Thyme Aioli on top of each arancini and finish with freshly cut microherbs."
     ],
-    "note": "DO NOT vacuum seal — seal only. Defrost minimum 24 hours in coldroom before frying. Frying from frozen will result in a cold centre and over-coloured crust. Double-crumbing is recommended for canapé service durability.",
+    "note": "New house spec from Tapas Canape Recipe Cards.docx. Large format is 100 g per arancini, 3 per serve. Seal frozen arancini bags only; do not vacuum.",
     "prepPhase": "day_before"
   },
   {
@@ -137,10 +136,10 @@
       "Gluten-Free"
     ],
     "method": "Deep Fry",
-    "yield": "Approx. 20 portions (2 kg squid + 1 kg octopus batch)",
+    "yield": "Batch: 2 kg squid strips + 1 kg baby octopus",
     "label": "Calamari",
     "elements": [
-      "Calamari & Baby Octopus",
+      "Calamari",
       "Flour Mix",
       "Lemon Dill Aioli",
       "Crispy Capers"
@@ -148,13 +147,12 @@
     "ingredients": [
       {
         "qty": "2 kg",
-        "item": "Pineapple Cut Squid Strips",
-        "prep": "tenderised, fully defrosted, patted dry"
+        "item": "Pineapple Cut Squid Strips — Tenderised",
+        "prep": "defrosted"
       },
       {
         "qty": "1 kg",
-        "item": "Baby Octopus",
-        "prep": "fully defrosted, patted dry"
+        "item": "Baby Octopus"
       },
       {
         "qty": "500 g",
@@ -166,12 +164,13 @@
       },
       {
         "qty": "20 g",
-        "item": "Fine Salt",
-        "prep": "plus extra for seasoning at service"
+        "item": "Salt",
+        "prep": "plus extra for finishing"
       },
       {
         "qty": "10 g",
-        "item": "Cracked Pepper"
+        "item": "Cracked Pepper",
+        "prep": "for flour mix"
       },
       {
         "qty": "100 g",
@@ -180,30 +179,30 @@
       {
         "qty": "500 g",
         "item": "Baby Capers",
-        "prep": "drained, thoroughly patted dry"
+        "prep": "drained thoroughly"
       }
     ],
     "method_steps": [
-      "STORAGE: When calamari and octopus arrive, ensure fully defrosted before portioning. Portion into 500ml PCs — 15 pieces calamari + 3 baby octopus per PC. Pat dry before storing to minimise excess moisture. Label with date and item name, store in freezer crate labelled CALAMARI.",
-      "FLOUR MIX: Combine rice flour, GF corn flour, fine salt, cracked pepper and lemon pepper seasoning in a large bowl. Whisk thoroughly to distribute seasoning evenly. Transfer to labelled PCs or a sealed container. Store in coldroom — keeping it cold prevents moisture uptake and keeps the coating crisp.",
-      "CAPERS: Drain thoroughly in a sieve. Spread onto chux and press firmly to remove as much moisture as possible — wet capers will spit aggressively in hot oil and won't crisp. Store in a PC lined with fresh chux, refrigerate. Do not season until after frying."
+      "PORTION SEAFOOD: When calamari and octopus come into stock, break them down straight away. Portion 15 calamari pieces and 3 baby octopus into each 500 ml PC, label and freeze in crates.",
+      "FLOUR MIX: Combine rice flour, GF corn flour, salt, cracked pepper and lemon pepper seasoning. Mix thoroughly and transfer to labelled PCs. Keep chilled for service.",
+      "CAPERS: Drain capers thoroughly and pat dry with chux or paper towel. Store in a PC lined with clean chux, label and refrigerate."
     ],
     "service": [
-      "Preheat fryer oil to 190°C. A higher temperature ensures capers and calamari crisp quickly without absorbing excess oil.",
-      "Fry capers in a dry basket (no coating) for 45–60 seconds until they open out and turn deep golden. Remove immediately and drain on chux-lined bowl. They will crisp further as they cool. Do not cover.",
-      "Working in batches, toss calamari strips and baby octopus in flour mix — coat evenly and shake off all excess flour before frying. Excess flour drops into the oil and burns.",
-      "Fry immediately in batches — do not crowd the basket. Calamari: 60–90 seconds until golden and just cooked through. Baby octopus: 90 seconds to 2 minutes. Drain on chux-lined tray.",
-      "Season with a pinch of fine salt immediately while hot.",
-      "TAPAS: Spoon 30–40ml lemon dill aioli as a base on the plate. Arrange calamari and baby octopus on top. Scatter crispy capers and finish with microgreens.",
-      "CANAPE: Small dot of aioli in bamboo boat. Calamari on top, 2–3 crispy capers to finish."
+      "Preheat fryer to 190°C.",
+      "Fry capers for 30–60 seconds until crisp. Drain on chux and keep uncovered.",
+      "Coat calamari strips and baby octopus evenly in flour mix. Shake off excess flour.",
+      "Fry immediately in small batches until crisp and cooked through, about 1 minute for calamari and 1–2 minutes for baby octopus.",
+      "Season hot seafood with a pinch of salt.",
+      "TAPAS: Spoon 30–40 ml Lemon Dill Aioli onto the plate. Arrange fried calamari and baby octopus on top. Scatter crispy capers and microgreens.",
+      "CANAPE: Place a small dot of Lemon Dill Aioli in a bamboo boat, add calamari, and finish with crispy capers."
     ],
-    "note": "Calamari and octopus must be completely dry before coating — surface moisture creates steam in the fryer, producing a soggy crust. Pat dry before storing and again before coating at service. Oil temperature is critical: below 180°C the coating absorbs oil and goes limp.",
+    "note": "Keep capers very dry before frying. Wet capers spit badly and do not crisp.",
     "prepPhase": "day_before"
   },
   {
     "id": "oysters-kilpatrick",
-    "name": "Kilpatrick Oysters",
-    "subtitle": "Crispy Speck · Lea & Perrins · Rock Salt",
+    "name": "Kilpatrick Oyster",
+    "subtitle": "Crispy Speck · Parsley · Lemon",
     "type": "Canape",
     "course": "Canape",
     "protein": [
@@ -214,92 +213,94 @@
       "Gluten-Free"
     ],
     "method": "Bake",
-    "yield": "Approx. 48 oysters (Kilpatrick batch)",
+    "yield": "Kilpatrick sauce batch for approx. 40–50 oysters",
     "label": "Oysters Kilpatrick",
     "elements": [
       "Oysters",
       "Diced Speck",
       "Kilpatrick Sauce",
       "Rock Salt",
-      "Lemon"
+      "Lemon",
+      "Parsley"
     ],
     "ingredients": [
       {
-        "qty": "",
+        "qty": "as needed",
         "item": "Oysters",
-        "prep": "defrost 24 hrs in coldroom, drain and pat dry"
+        "prep": "1 per guest; defrost 24 hours in coldroom"
       },
       {
         "qty": "500 g",
         "item": "Speck",
-        "prep": "finely diced 3–4mm"
+        "prep": "finely diced"
       },
       {
         "qty": "250 ml",
         "item": "GF Worcestershire Sauce"
       },
       {
-        "qty": "80 ml",
-        "item": "GF BBQ Sauce"
+        "qty": "60 ml",
+        "item": "BBQ Sauce",
+        "prep": "converted from 1/4 cup"
       },
       {
         "qty": "5 ml",
         "item": "Tabasco",
-        "prep": "adjust to taste"
+        "prep": "converted from 1 tsp; adjust to taste"
       },
       {
-        "qty": "10 g",
-        "item": "Dried Parsley"
+        "qty": "5 g",
+        "item": "Dried Parsley",
+        "prep": "converted from 2 tbsp"
       },
       {
         "qty": "2 kg",
         "item": "Rock Salt",
-        "prep": "for serving"
+        "prep": "for serving tray"
       },
       {
-        "qty": "4",
+        "qty": "600 g",
         "item": "Lemons",
-        "prep": "sliced into rounds"
+        "prep": "approx. 4 lemons, sliced"
+      },
+      {
+        "qty": "30 g",
+        "item": "Fresh Parsley",
+        "prep": "chopped for garnish"
       }
     ],
     "method_steps": [
-      "OYSTERS: Remove from freezer 24 hours before the event and defrost in the coldroom. Once defrosted, drain any liquid and pat the oyster meat gently dry with chux. Keep refrigerated until service.",
-      "SPECK: Finely dice speck to 3–4mm. Store in a labelled PC in the coldroom. The smaller dice renders quickly under oven heat and distributes evenly across the oyster.",
-      "KILPATRICK SAUCE: Combine GF Worcestershire sauce, BBQ sauce, Tabasco and dried parsley. Whisk to combine. Taste — sauce should be savoury, slightly smoky and have a clean chilli back-note. Adjust Tabasco if required. Decant into a labelled squeezy bottle. Refrigerate.",
-      "GARNISH: Slice lemons into 5mm rounds. Store in a labelled PC in the coldroom."
+      "OYSTERS: Remove oysters from freezer at least 24 hours before the event. Defrost in the coldroom, drain and keep chilled.",
+      "SPECK: Finely dice speck, place in a labelled PC and refrigerate.",
+      "KILPATRICK SAUCE: Mix GF Worcestershire, BBQ sauce, Tabasco and dried parsley. Transfer to a labelled squeeze bottle.",
+      "GARNISH: Slice lemons and chop parsley. Store separately in labelled PCs in the coldroom."
     ],
     "service": [
-      "Preheat conventional oven to 200°C fan-forced (or 210°C conventional). A high heat ensures the speck renders and caramelises quickly without overcooking the oyster.",
-      "Scrunch aluminium foil into a deep bain tray, creating an uneven surface that holds oyster shells stable and level. This prevents the sauce from running off during baking.",
-      "Arrange oysters on the foil-lined tray. Spoon 5–8ml Kilpatrick sauce directly onto each oyster. Top with 1 heaped teaspoon diced speck per oyster.",
-      "Bake at 200°C for 6–8 minutes until the speck is golden and beginning to caramelise at the edges and the oyster is just warmed through. Do not overbake — the oyster should still be plump and just set, not shrunken.",
-      "Spread rock salt 2cm thick on the serving tray or plate to stabilise shells. Nestle baked oysters into the salt. Garnish with rocket or microgreens and lemon rounds. Serve immediately."
+      "Preheat oven to 180°C.",
+      "Scrunch aluminium foil into a bain tray so oyster shells sit level and stable.",
+      "Arrange oysters on the foil. Add 5–8 ml Kilpatrick sauce to each oyster and top with 1 teaspoon diced speck.",
+      "Bake for about 10 minutes, until the speck is golden and the oyster is just warmed through.",
+      "Spread rock salt 2 cm thick on the serving tray. Nestle oysters into the salt and garnish with parsley, rocket or microgreens and lemon slices."
     ],
-    "note": "Do not overbake. Oysters continue to carry-cook after leaving the oven. Target internal temperature of 65°C — the meat should be just opaque and plump. Shrunken, tight oyster meat means they are overcooked. Kilpatrick sauce can be made 3 days in advance and stored refrigerated in squeezy bottles.",
-    "prepPhases": [
-      "day_before",
-      "day_before",
-      "day_before",
-      "day_before"
-    ]
+    "note": "Bake hot and fast enough to render the speck without shrinking the oysters.",
+    "prepPhase": "day_before"
   },
   {
     "id": "veal-meatballs",
-    "name": "Polpette",
-    "subtitle": "Beef & Pork · Romesco Sugo · Focaccia · Gremolata",
+    "name": "Slow Cooked Veal Meatballs",
+    "subtitle": "Romesco Sugo · Toasted Focaccia · Gremolata",
     "type": "Tapas",
     "course": "Tapas",
     "protein": [
-      "beef",
-      "pork",
+      "veal",
       "dairy"
     ],
     "diet": [
       "Gluten-Free"
     ],
     "method": "Slow Bake",
-    "yield": "Approx. 190–210 balls @ 60g (pre-crumb weight)",
-    "label": "Polpette",
+    "yield": "Approx. 90 balls @ 80 g; 50 tapas serves",
+    "label": "Meatballs",
     "elements": [
       "Meatballs",
       "Romesco Sugo",
@@ -309,91 +310,113 @@
     ],
     "ingredients": [
       {
-        "qty": "4.5 kg",
-        "item": "Beef Mince",
-        "prep": "minimum 20% fat"
+        "qty": "5 kg",
+        "item": "Veal Mince"
       },
       {
-        "qty": "3.5 kg",
-        "item": "Pork Mince",
-        "prep": "minimum 20% fat"
+        "qty": "600 g",
+        "item": "GF Breadcrumbs"
       },
       {
-        "qty": "1.25 kg",
-        "item": "Breadcrumbs GF",
-        "prep": "for panade; for crumbing coat — keep separate from panade crumbs"
+        "qty": "450 g",
+        "item": "GF Bread Loaf",
+        "prep": "approx. 3/4 loaf, blitzed into small chunks"
       },
       {
-        "qty": "2.5 kg",
-        "item": "Full Cream Milk",
-        "prep": "for soaking breadcrumbs"
-      },
-      {
-        "qty": "18",
-        "item": "Eggs"
-      },
-      {
-        "qty": "500 g",
+        "qty": "600 g",
         "item": "Brown Onion",
-        "prep": "finely diced or blitzed"
+        "prep": "approx. 4 medium onions, blitzed"
       },
       {
-        "qty": "200 g",
-        "item": "Garlic",
-        "prep": "crushed or blitzed"
+        "qty": "100 g",
+        "item": "Garlic Cloves",
+        "prep": "approx. 20 cloves, blitzed"
       },
       {
-        "qty": "1 bunch",
-        "item": "Fresh Thyme",
-        "prep": "leaves stripped from stems"
-      },
-      {
-        "qty": "1 kg",
-        "item": "Parmesan — Grana Padano",
+        "qty": "400 g",
+        "item": "Parmesan Cheese",
         "prep": "blitzed"
       },
       {
-        "qty": "250 g",
-        "item": "Salt Flakes"
+        "qty": "500 ml",
+        "item": "Thickened Cream"
       },
       {
-        "qty": "125 g",
-        "item": "Cracked Black Pepper"
+        "qty": "20 g",
+        "item": "Flat Leaf Italian Parsley",
+        "prep": "finely chopped; converted from 1/2 cup"
       },
       {
-        "qty": "6",
-        "item": "Eggs",
-        "prep": "whisked with a splash of cold water, for egg wash — crumbing station"
+        "qty": "15 g",
+        "item": "Basil",
+        "prep": "finely chopped; converted from 1/2 cup"
+      },
+      {
+        "qty": "15 g",
+        "item": "Oregano",
+        "prep": "finely chopped; converted from 1/2 cup"
+      },
+      {
+        "qty": "5 g",
+        "item": "Mixed Italian Herbs — Dried",
+        "prep": "converted from 1 tbsp"
+      },
+      {
+        "qty": "30 g",
+        "item": "Salt",
+        "prep": "converted from 2 tbsp; adjust after test cook"
+      },
+      {
+        "qty": "30 g",
+        "item": "Cracked Pepper",
+        "prep": "adjust after test cook"
+      },
+      {
+        "qty": "5",
+        "item": "Eggs"
       },
       {
         "qty": "as needed",
         "item": "Romesco Sugo",
-        "prep": "house-made — needed for baking; have ready before cook stage"
+        "prep": "enough to cover meatballs in baking bain"
+      },
+      {
+        "qty": "as needed",
+        "item": "Focaccia",
+        "prep": "3 slices per serve, 2 cm thick"
+      },
+      {
+        "qty": "as needed",
+        "item": "Basic Gremolata",
+        "prep": "parsley, lemon zest and garlic"
+      },
+      {
+        "qty": "as needed",
+        "item": "Manchego",
+        "prep": "finely grated to finish"
       }
     ],
     "method_steps": [
-      "PANADE: Place 800 g GF breadcrumbs in a large deep container. Pour all 2.5 kg full-cream milk over the breadcrumbs. Press down to submerge and rest for 15–20 minutes until the breadcrumbs have fully absorbed the milk and become a thick, wet paste. Do not squeeze out the milk — the full soak is intentional and gives the polpette their moisture and tenderness.",
-      "ONION & GARLIC: Sweat 500 g finely diced onion and 200 g crushed garlic in a splash of oil over medium heat on the 6-burner for 8–10 minutes until fully soft and translucent. Do not colour. Cool completely before adding to the mix.",
-      "COMBINE: In a large mixing bin, combine 4.5 kg beef mince, 3.5 kg pork mince, the full soaked panade, cooled onion and garlic, stripped thyme leaves, 1 kg blitzed parmesan, 18 eggs, 250 g salt and 125 g cracked pepper. Mix by hand until just combined — do not overwork. The mix should feel moist, cohesive and slightly tacky. Overworking develops the proteins and produces a tight, rubbery texture.",
-      "TASTE TEST: Roll a 20 g test ball, flatten into a patty and pan-fry until cooked through. Taste for salt, pepper and herb balance. Adjust the full batch before rolling.",
-      "ROLL: Wet hands to prevent sticking. Weigh and roll into 60 g balls. Press firmly so there are no surface cracks or air pockets. Place on lined trays as you go — do not stack. Rest in fridge for 15 minutes before crumbing.",
-      "CRUMB: Set up a crumbing station with a tray of 500 g GF breadcrumbs and 6 whisked eggs for egg wash. Working in batches, dip each 60 g ball in egg wash — eggs whisked with cold water, no milk (let excess drip off), then roll in GF breadcrumbs to coat evenly. Press lightly to ensure the crumb adheres with no bare patches. Return crumbed balls to lined trays in a single layer. Keep cold between batches.",
-      "BAKE: Ladle enough romesco sugo into deep gastronorm bains to cover the base generously. Arrange crumbed polpette in a single layer — do not stack. Ladle more romesco over the top so each ball is at least half submerged. Cover bains tightly with foil. Steam-bake at 160°C (steam setting) for 30 minutes total — remove foil at 15 minutes, carefully flip each ball, re-cover and return for the remaining 15 minutes. Internal temperature must reach 72°C at the centre. The crumb will absorb romesco and become tender — this is correct.",
-      "COOL & STORE: Allow to cool in the sauce. Once below 20°C, portion into PCs in serves of 3 with sauce distributed evenly. Label with name and date. Freeze in crate labelled POLPETTE."
+      "GREMOLATA: Prepare basic gremolata with parsley, lemon zest and garlic. Hold chilled and use same day.",
+      "MIX: Blitz onion and garlic in a food processor. Mix through the breadcrumbs so the onion juices wet the crumbs. Add this breadcrumb mix to the veal mince with blitzed GF bread, parmesan, cream, herbs, salt, pepper and eggs.",
+      "TEST: Cook a small patty and adjust salt, pepper and herb balance before rolling the full batch.",
+      "SHAPE: Wet hands to prevent sticking. Weigh into 80 g balls and roll firmly.",
+      "BAKE: Place meatballs in a deep bain and cover generously with Romesco Sugo. Bake covered at 150°C for 1 hour, or until cooked through and tender.",
+      "COOL & STORE: Cool meatballs in the sauce. Portion into PCs in serves of 3, distributing sauce evenly. Label and freeze in the meatballs crate."
     ],
     "service": [
-      "Reheat portioned polpette and sauce in the microwave in 60-second bursts until steaming throughout. Check internal temperature — minimum 75°C before service.",
-      "Transfer to a medium serving bowl. Add extra warmed romesco if portions look dry.",
-      "Toast 3 slices of focaccia (2 cm thick) on the kick oven or flat grill until golden on both sides.",
-      "Top polpette with a generous pinch of freshly made gremolata and fine-grated Manchego. Arrange focaccia alongside. Serve immediately."
+      "Reheat meatballs and sauce in the microwave or oven until steaming hot throughout, minimum 75°C internal.",
+      "Serve 3 meatballs with sauce in a medium serving bowl.",
+      "Toast 3 slices of focaccia, 2 cm thick, until golden on both sides.",
+      "Finish meatballs with finely grated Manchego and gremolata. Serve focaccia alongside."
     ],
-    "note": "Beef and pork mince replaces the original veal — the 56/44 split gives depth from the beef and fat/sweetness from the pork. Panade is the full 2.5 kg milk — do not reduce or squeeze out. The wet panade is what gives these polpette their moisture and tenderness. Do not overwork the mix after combining. Balls are rolled at 60 g (pre-crumb weight) then crumbed in GF breadcrumbs for a crisp exterior. Keep mix cold throughout. Prep time approximately 75–90 minutes per full batch.",
+    "note": "New DOCX spec returns this recipe to veal mince and 80 g balls. Prep time guideline: about 45 minutes per 90 balls once mise is ready.",
     "prepPhase": "day_before"
   },
   {
     "id": "chicken-skewer",
-    "name": "Lemon Pepper Chicken Skewer",
-    "subtitle": "Herbed Labneh · Crumbled Feta · Microherbs",
+    "name": "Limoncello Chicken Skewer",
+    "subtitle": "Tzatziki Labneh · Crumbled Feta · Chargrilled Lemon",
     "type": "Tapas",
     "course": "Tapas",
     "protein": [
@@ -404,19 +427,20 @@
       "Gluten-Free"
     ],
     "method": "Oven Roast",
-    "yield": "Approx. 65 skewers (5 kg chicken batch)",
+    "yield": "Approx. 60–65 skewers from 5 kg chicken",
     "label": "Chicken Skewers",
     "elements": [
       "Chicken Skewers",
-      "Herbed Labneh",
+      "Tzatziki Labneh",
       "Crumbled Feta",
-      "Microherbs"
+      "Microherbs",
+      "Chargrilled Lemon Cheek"
     ],
     "ingredients": [
       {
         "qty": "5 kg",
         "item": "Chicken Thigh",
-        "prep": "diced 3cm pieces"
+        "prep": "diced into 2.5 cm pieces"
       },
       {
         "qty": "200 ml",
@@ -431,64 +455,71 @@
         "item": "Limoncello"
       },
       {
-        "qty": "6",
+        "qty": "900 g",
         "item": "Lemons",
-        "prep": "juice and zest"
+        "prep": "approx. 6 lemons, juice and zest"
       },
       {
         "qty": "100 g",
         "item": "Honey or Castor Sugar"
       },
       {
-        "qty": "1 bunch",
+        "qty": "25 g",
         "item": "Fresh Thyme",
-        "prep": "leaves picked"
+        "prep": "approx. 1 bunch, leaves picked"
+      },
+      {
+        "qty": "500 g",
+        "item": "Crumbled Feta",
+        "prep": "adjust to event size"
       },
       {
         "qty": "2 kg",
-        "item": "Greek Style Yogurt",
-        "prep": "for labneh"
+        "item": "Greek Yogurt",
+        "prep": "hung overnight for labneh"
       },
       {
-        "qty": "1 bunch",
+        "qty": "600 g",
+        "item": "Cucumber",
+        "prep": "approx. 2 large; deseeded and finely diced"
+      },
+      {
+        "qty": "30 g",
         "item": "Dill",
-        "prep": "finely chopped"
+        "prep": "approx. 1 bunch, finely chopped"
       },
       {
-        "qty": "1 bunch",
+        "qty": "30 g",
         "item": "Mint",
-        "prep": "finely chopped"
+        "prep": "approx. 1 bunch, finely chopped"
       },
       {
-        "qty": "1 bunch",
+        "qty": "50 g",
         "item": "Parsley",
-        "prep": "finely chopped"
+        "prep": "approx. 1 bunch, finely chopped"
       },
       {
-        "qty": "30 ml",
-        "item": "Pickled Cucumber Brine",
-        "prep": "for labneh — adds brightness in place of raw cucumber"
-      },
-      {
-        "qty": "2 punnets",
-        "item": "Microherbs — Garnish"
+        "qty": "60 g",
+        "item": "Microherbs",
+        "prep": "approx. 2 punnets"
       }
     ],
     "method_steps": [
-      "MARINADE: Combine olive oil, lemon pepper seasoning, limoncello, lemon juice and zest, honey or castor sugar, and picked thyme leaves. Whisk to combine. Taste — marinade should be bright, aromatic and well-seasoned.",
-      "Dice chicken thigh into 3cm pieces. Add to marinade and toss to coat evenly. Cover and refrigerate for a minimum of 4 hours, ideally overnight in the coldroom.",
-      "Thread 3 pieces of chicken per 12cm wooden skewer, leaving a small gap between pieces for even heat penetration. Store in 500ml PCs (3 skewers per serve). Label and freeze in crate labelled CHICKEN SKEWERS.",
-      "LABNEH: Line a perforated gastronorm or colander with 3 layers of chux (or a clean muslin cloth). Pour yogurt in and fold the cloth over the top. Hang over a deep bain to collect whey. Refrigerate overnight — minimum 12 hours. The labneh is ready when it is thick, creamy and holds its shape.",
-      "KUSCHI EXCLUSION — RAW CUCUMBER: Raw cucumber is not used at Kuschi's Kitchen. Instead, fold 30ml pickled cucumber brine into the hung labneh — this adds the same brightness and acidity without raw cucumber. Alternatively, simply increase the quantity of fresh dill for herbaceous freshness.",
-      "Mix hung labneh with finely chopped parsley, dill, mint, lemon zest and pickled cucumber brine. Season with a squeeze of lemon juice, salt and cracked pepper. Taste and adjust. Refrigerate in a labelled PC."
+      "MARINADE: Combine olive oil, lemon pepper seasoning, limoncello, lemon juice and zest, honey or castor sugar and thyme in a large bowl.",
+      "CHICKEN: Dice chicken thigh into 2.5 cm pieces. Add to marinade and mix until fully coated. Refrigerate overnight if time allows.",
+      "SKEWER: Use 12 cm wooden skewers. Thread 3 pieces of chicken per skewer. Store skewers in 500 ml PCs, 3 skewers per serve. Label and freeze or refrigerate for service.",
+      "LABNEH: Line a perforated bain with 3 layers of chux, set inside a deep bain, add Greek yogurt, cover with more chux and leave overnight in the coldroom to hang.",
+      "TZATZIKI LABNEH: Finely chop parsley, dill and mint. Deseed and finely dice cucumber. Fold herbs, cucumber, lemon zest and lemon juice through the hung labneh. Season with salt and pepper to taste.",
+      "GARNISH: Trim microherbs with scissors, place in a labelled PC and refrigerate."
     ],
     "service": [
-      "Defrost skewers in coldroom for minimum 24 hours before service.",
-      "Preheat conventional oven to 200°C fan-forced. Line trays with baking paper.",
-      "Lay defrosted skewers flat on trays in a single layer — do not overlap. Roast for 12–15 minutes, turning once at the halfway point, until golden with some caramelisation on the edges and internal temperature reaches 75°C. Do not undercook — chicken thigh at service must be fully cooked through.",
-      "Spoon a heaped 40–50ml of herbed labneh onto the centre of each plate. Arrange 3 skewers on top. Crumble feta generously over and finish with green microherbs. Serve immediately."
+      "Defrost skewers in the coldroom for at least 24 hours if frozen.",
+      "Preheat oven to 180°C.",
+      "Lay skewers flat on trays without overlapping. Roast for about 10 minutes, or until golden and 75°C internal.",
+      "Plate a heaped tablespoon of tzatziki labneh in the centre of the plate. Place 3 skewers on top.",
+      "Finish with crumbled feta, microherbs and a chargrilled lemon cheek if required."
     ],
-    "note": "RAW CUCUMBER IS A KUSCHI EXCLUSION — do not use in labneh or anywhere on this dish. Use pickled cucumber brine (30ml per 2kg yogurt batch) for brightness, or increase fresh dill. Chicken skewers must reach an internal temperature of 75°C before service. Do not roast from frozen.",
+    "note": "Use the new limoncello marinade and tzatziki labneh spec. Keep raw chicken fully submerged/coated in marinade before storage.",
     "prepPhase": "day_before"
   },
   {
@@ -501,14 +532,13 @@
       "pork"
     ],
     "diet": [
-      "Gluten-Free",
-      "Dairy-Free"
+      "Gluten-Free"
     ],
     "method": "Deep Fry",
-    "yield": "Approx. 65 portions (10 kg potato + 2 kg chorizo batch)",
+    "yield": "Approx. 60–65 canape portions",
     "label": "Chorizo Potatoes",
     "elements": [
-      "Smashed Potatoes",
+      "Potatoes",
       "Chorizo",
       "Lemon Thyme Aioli",
       "Shallots"
@@ -521,44 +551,49 @@
       {
         "qty": "2 kg",
         "item": "Chorizo",
-        "prep": "sliced lengthwise then cut diagonally at 45° into 5mm pieces"
+        "prep": "halved lengthwise, then sliced diagonally"
       },
       {
-        "qty": "1 bunch",
+        "qty": "100 g",
         "item": "Shallots",
-        "prep": "thinly sliced at 45°"
+        "prep": "approx. 1 bunch, thinly sliced"
       },
       {
-        "qty": "200 g",
+        "qty": "600 g",
         "item": "Lemon Thyme Aioli",
-        "prep": "to dress and for service"
+        "prep": "for tossing and finishing"
       },
       {
-        "qty": "10 g",
+        "qty": "as needed",
         "item": "Salt Flakes",
-        "prep": "for seasoning at service"
+        "prep": "to season after frying"
       },
       {
-        "qty": "5 g",
-        "item": "Cracked Pepper"
+        "qty": "as needed",
+        "item": "Cracked Pepper",
+        "prep": "to finish"
+      },
+      {
+        "qty": "50",
+        "item": "Small Bamboo Boats",
+        "prep": "or as required"
       }
     ],
     "method_steps": [
-      "Wash potatoes. Bake whole, unpeeled, on oven trays at 200°C for 35–45 minutes until a skewer passes through with no resistance. Baking time will vary with potato size — check at 35 minutes. Do not underbake; a firm centre will result in dense, unpleasant smashed pieces.",
-      "Allow potatoes to cool until handleable, approximately 20–30 minutes at room temperature. Do not refrigerate before smashing — cold potatoes break unevenly and the skin does not smash cleanly.",
-      "Place each potato on a flat surface and press firmly with the heel of your hand or a flat-bottomed pan until it breaks into rough, uneven pieces. Aim for 6–8 jagged pieces per large potato — the irregular edges create maximum surface area for crispiness. Do not press into a flat disc.",
-      "Store smashed potato pieces in a single layer in labelled PCs in the coldroom. Do not stack — stacking causes the pieces to steam and go soggy. They must be cold and dry before frying.",
-      "Slice chorizo lengthwise down the centre, then cut each half diagonally at 45° into 5mm pieces. Store in a labelled PC in the coldroom.",
-      "Slice shallots thinly at 45°. Store separately in a labelled PC in the coldroom."
+      "POTATOES: Bake washed potatoes at 180°C for 35–40 minutes, or until soft all the way through. Cool.",
+      "SMASH: Pull cooled potatoes into uneven pieces, aiming for 6–8 pieces per large potato.",
+      "STORE: Place potato pieces in PCs, label and refrigerate.",
+      "CHORIZO: Slice chorizo lengthwise, then cut into 5 mm diagonal slices at a 45-degree angle.",
+      "SHALLOTS: Thinly slice shallots at a 45-degree angle. Store separately in a labelled PC."
     ],
     "service": [
-      "Preheat fryer oil to 185°C.",
-      "Fry chilled potato pieces in batches — do not overcrowd. Fry 3–4 minutes until deep golden brown and very crispy. The exterior should be crunchy and the inside fluffy. Drain on chux-lined tray.",
-      "In the final 30 seconds of the potato fry, add the chorizo slices to the basket. Fry 20–30 seconds until the edges begin to caramelise. Do not over-fry chorizo — it will tighten and become hard.",
-      "Transfer hot potato pieces and chorizo to a large metal bowl. Add a generous spoon of Lemon Thyme Aioli and sliced shallots. Season with salt flakes and cracked pepper. Toss to coat — the aioli should lightly dress everything, not pool at the bottom.",
-      "Serve 4–5 pieces in bamboo boats with a bamboo fork. Finish with an extra small dot of Lemon Thyme Aioli on top if desired."
+      "Deep fry cooled potato pieces until crispy and golden.",
+      "Add chorizo slices to the fryer basket for the final 20–30 seconds.",
+      "Transfer fried potatoes and chorizo to a large metal bowl. Add Lemon Thyme Aioli and sliced shallots, then season to taste.",
+      "Toss so the aioli lightly coats the potatoes rather than pooling.",
+      "Serve 4–5 pieces in bamboo boats with a bamboo fork."
     ],
-    "note": "Potato pieces must be fully chilled and dry before frying for maximum crispiness. Frying warm or damp potato produces a soft, oily crust. Aioli dressing should be light — toss and serve immediately, do not allow dressed potatoes to sit or they will go limp.",
+    "note": "Aioli amount is kitchen-rounded for the batch because the DOCX lists it as an element without a quantity.",
     "prepPhase": "day_before"
   },
   {
@@ -575,7 +610,7 @@
       "Dairy-Free"
     ],
     "method": "Chargrill + Oven",
-    "yield": "3 per plate",
+    "yield": "3 cutlets per plate",
     "label": "Lamb Cutlets",
     "elements": [
       "Lamb Cutlets (3 per plate)",
@@ -584,89 +619,49 @@
     ],
     "ingredients": [
       {
-        "qty": "",
+        "qty": "3 per serve",
         "item": "Lamb Cutlets",
         "prep": "frenched"
       },
       {
-        "qty": "5 L",
-        "item": "Water",
-        "prep": "for brine"
+        "qty": "as needed",
+        "item": "Salt Flakes"
       },
       {
-        "qty": "180 g",
-        "item": "Salt",
-        "prep": "for brine"
+        "qty": "as needed",
+        "item": "Cracked Pepper"
       },
       {
-        "qty": "120 g",
-        "item": "Sugar",
-        "prep": "for brine"
-      },
-      {
-        "qty": "6",
-        "item": "Garlic Cloves",
-        "prep": "smashed, for brine"
-      },
-      {
-        "qty": "4 sprigs",
-        "item": "Rosemary",
-        "prep": "for brine"
-      },
-      {
-        "qty": "6 sprigs",
-        "item": "Thyme",
-        "prep": "for brine"
-      },
-      {
-        "qty": "2",
-        "item": "Lemons",
-        "prep": "halved, for brine"
-      },
-      {
-        "qty": "",
-        "item": "Salt Flakes",
-        "prep": "for seasoning at service"
-      },
-      {
-        "qty": "",
-        "item": "Cracked Pepper",
-        "prep": "for seasoning at service"
-      },
-      {
-        "qty": "",
+        "qty": "as needed",
         "item": "Rocket",
-        "prep": "fresh, for garnish"
+        "prep": "for garnish"
+      },
+      {
+        "qty": "as needed",
+        "item": "Riviera House Emulsion",
+        "prep": "generous drizzle per plate"
       }
     ],
     "method_steps": [
-      "HOUSE LAMB CITRUS HERB BRINE: Combine 5L water, 180g salt and 120g sugar in a large pot. Heat over medium heat on the 6-burner, stirring until salt and sugar are fully dissolved. Remove from heat. Add smashed garlic cloves, rosemary sprigs, thyme sprigs and halved lemons. Allow brine to cool completely to below 5°C before use — never add meat to a warm brine.",
-      "French the cutlets, ensuring bones are clean. Place cutlets in a deep bain or suitable container in a single layer where possible.",
-      "Pour cooled brine over the cutlets — ensure all meat is fully submerged. Weigh down with a clean bain or plate if needed. Cover, label clearly with LAMB CUTLETS — BRINE DATE and the event date, and refrigerate in the coldroom for 24 hours. Do not exceed 24 hours as the lemon acidity will begin to break down the surface texture.",
-      "After 24 hours, remove cutlets from brine. Discard brine. Pat cutlets thoroughly dry with chux on all surfaces — dry meat is essential for a proper sear. Store uncovered or loosely covered on a rack in the coldroom until service to allow the surface to dry further.",
-      "Bring cutlets to room temperature for 20–30 minutes before cooking."
+      "PREP CUTLETS: French the cutlets and season generously with salt flakes and cracked pepper.",
+      "STORE: Two days before the event, place cutlets in a bain lined with clean chux. Cover, label and refrigerate.",
+      "GARNISH: Ensure fresh rocket is washed, dried and available for service."
     ],
     "service": [
-      "Preheat chargrill or a heavy cast iron pan on the 6-burner until very hot — a drop of water should evaporate immediately on contact.",
-      "Season brined cutlets lightly with salt flakes and cracked pepper — the brine has already seasoned the meat internally, so be restrained with surface salt.",
-      "Sear cutlets for 2 minutes per side on the chargrill or in the pan until deeply coloured with visible caramelisation. Work in batches — do not crowd the pan or the meat will steam rather than sear.",
-      "Transfer seared cutlets to a bain tray. Finish in the conventional oven or kick oven at 180°C for 6–8 minutes for medium (internal temperature 60–62°C). Adjust time for volume of covers.",
-      "Rest cutlets for 3–4 minutes before plating. This is non-negotiable at 80 covers — resting ensures the juices redistribute and the cutlet holds on the plate.",
-      "Lay a small bed of fresh rocket on the plate. Arrange 3 cutlets neatly on top, bones pointing upward. Drizzle Riviera House Emulsion generously over the cutlets, ensuring each is well-coated. Serve immediately."
+      "Heat a large frying pan, cast iron plate or chargrill until very hot.",
+      "Sear lamb cutlets on both sides until well coloured.",
+      "Transfer cutlets to a bain and finish in a 180°C oven for about 10 minutes, adjusting for thickness and event volume.",
+      "Rest briefly before plating.",
+      "Lay rocket along the base of the plate. Arrange 3 cutlets neatly on top.",
+      "Drizzle Riviera House Emulsion generously over the cutlets so each one is coated."
     ],
-    "note": "Lamb cutlets are brined for 24 hours in the house Lamb Citrus Herb Brine (180g salt, 120g sugar, garlic, rosemary, thyme, lemon, 5L water) before cooking. Do NOT use the old 'season two days before' method — brine protocol replaces this entirely. Brine must be fully cold before meat is added. Pat cutlets completely dry after brining for an effective sear. Season lightly at service — the brine seasons from within.",
-    "prepPhases": [
-      "day_before",
-      "day_before",
-      "day_before",
-      "day_before",
-      "morning_of"
-    ]
+    "note": "DOCX source has no batch quantity for lamb cutlets; quantity is kept service-based at 3 cutlets per plate.",
+    "prepPhase": "day_before"
   },
   {
     "id": "fish-slider",
     "name": "Crispy Reef Fish Slider",
-    "subtitle": "Lemon Caper Aioli · Rocket · Brioche",
+    "subtitle": "Lemon Caper Aioli · Roquette",
     "type": "Canape",
     "course": "Canape",
     "protein": [
@@ -677,26 +672,60 @@
     "yield": "50 sliders",
     "label": "Fish Slider",
     "elements": [
-      "Battered Reef Fish",
+      "Reef Fish",
       "Lemon Caper Aioli",
       "Rocket",
-      "Brioche Bun"
+      "Slider Buns"
     ],
     "ingredients": [
       {
         "qty": "2.5 kg",
-        "item": "Reef Fish (firm white — snapper or coral trout)",
-        "prep": "portioned into 70 g pieces, patted dry, seasoned lightly with salt"
+        "item": "Reef Fish",
+        "prep": "cut into 50 g pieces"
       },
       {
-        "qty": "750 g",
-        "item": "Plain Flour",
-        "prep": "for batter"
+        "qty": "200 g",
+        "item": "Lemon",
+        "prep": "juice and zest"
       },
       {
-        "qty": "250 g",
-        "item": "Cornflour",
-        "prep": "for batter — improves crunch and reduces gluten snap"
+        "qty": "1 kg",
+        "item": "Kewpie Mayo"
+      },
+      {
+        "qty": "15 g",
+        "item": "Dill — Fresh",
+        "prep": "approx. 1/2 bunch, finely chopped"
+      },
+      {
+        "qty": "500 g",
+        "item": "Rocket"
+      },
+      {
+        "qty": "500 g",
+        "item": "Baby Capers",
+        "prep": "drained"
+      },
+      {
+        "qty": "1 kg",
+        "item": "Self Raising Flour"
+      },
+      {
+        "qty": "1 L",
+        "item": "Sparkling Water",
+        "prep": "cold"
+      },
+      {
+        "qty": "50",
+        "item": "Brioche Slider Buns"
+      },
+      {
+        "qty": "50 g",
+        "item": "Salt Flakes"
+      },
+      {
+        "qty": "30 g",
+        "item": "Cracked Pepper"
       },
       {
         "qty": "20 g",
@@ -707,92 +736,33 @@
         "item": "Onion Powder"
       },
       {
-        "qty": "70 g",
-        "item": "Salt Flakes",
-        "prep": "for batter seasoning; for aioli seasoning; for fish seasoning and finishing"
-      },
-      {
-        "qty": "15 g",
-        "item": "Cracked White Pepper",
-        "prep": "for aioli seasoning"
-      },
-      {
-        "qty": "900 ml",
-        "item": "Sparkling Water",
-        "prep": "ice cold — keep on ice during service prep"
-      },
-      {
         "qty": "30 ml",
         "item": "Vodka",
-        "prep": "adds crispness — fold in last"
-      },
-      {
-        "qty": "1 kg",
-        "item": "Kewpie Mayo"
-      },
-      {
-        "qty": "150 g",
-        "item": "Baby Capers",
-        "prep": "drained, patted dry, roughly chopped"
-      },
-      {
-        "qty": "3",
-        "item": "Lemons",
-        "prep": "zest all 3, juice 2 (approx. 80 ml juice)"
-      },
-      {
-        "qty": "20 g",
-        "item": "Dill — Fresh",
-        "prep": "finely chopped"
-      },
-      {
-        "qty": "150 g",
-        "item": "Rocket",
-        "prep": "picked, washed, dried — 3 g per slider"
-      },
-      {
-        "qty": "50",
-        "item": "Brioche Slider Buns",
-        "prep": "halved, stored wrapped in fridge"
-      },
-      {
-        "qty": "canola or rice bran oil",
-        "item": "Frying Oil",
-        "prep": "sufficient to fill fryer to fill line — approx. 15 L per fryer"
+        "prep": "optional crisping addition from method"
       }
     ],
     "method_steps": [
-      "FISH PREP (2 days before): Transfer frozen fish to fridge for full 48-hour thaw. Do not thaw under running water — moisture ruins batter adhesion.",
-      "PORTION (day before): Pat fish completely dry with paper towel. Cut into 70 g portions. Season lightly with salt flakes. Place on wire rack over tray, uncovered, in coldroom for 1 hour to form a light pellicle — this is critical for batter adhesion.",
-      "BATTER (day before — prep base dry mix only): Combine 750 g plain flour, 250 g cornflour, 20 g garlic powder, 20 g onion powder, 15 g salt flakes and 10 g cracked white pepper in a large mixing bowl. Whisk dry to distribute evenly. Store sealed in a labelled container.",
-      "BATTER (day of — activate): Whisk 900 ml ice-cold sparkling water into dry mix in a slow stream. Mix until just combined — lumps are fine. Do not overwork. Fold in 30 ml vodka last. Batter should coat the back of a spoon cleanly. Keep bowl over ice throughout service prep.",
-      "PART-COOK (day before, fryer at 170°C): Dip each fish piece in batter, allow excess to drip 2 seconds, lower gently into fryer. Fry in batches of 6 maximum — do not crowd. Part-cook for 90 seconds until batter is just set and pale gold but fish is still raw in centre. Remove to wire rack. Cool fully before storing.",
-      "STORAGE: Lay part-cooked fish single layer on baking paper in bain-marie trays. Cover tightly with cling film, label with date and time. Refrigerate at or below 4°C. Use within 18 hours.",
-      "LEMON CAPER AIOLI: Combine 1 kg Kewpie mayo, 150 g chopped capers, zest of 3 lemons, 80 ml lemon juice, 20 g fresh dill. Season with 5 g salt flakes and 5 g white pepper. Mix well. Taste — should be bright, briny and rich. Refrigerate in labelled PC container. Yield approx. 1.1 kg — sufficient for 22 g per slider.",
-      "BUNS: Remove brioche buns from freezer 24 hours before service. Separate tops and bottoms. Store wrapped in cling film in fridge."
+      "FISH: Defrost fish in the coldroom 2 days before the event. The day before, cut into pieces approx. 50–70 g each and pat dry.",
+      "BATTER: Mix self raising flour, garlic powder, onion powder, salt and pepper. Add cold sparkling water and whisk to pancake-batter consistency. Add vodka last if using.",
+      "PART COOK: Preheat fryer. Dip fish into batter, shake off excess and fry in batches for about 1 minute, just long enough to seal the batter.",
+      "DRAIN & STORE: Drain part-cooked fish on a rack over paper towel. Place in a single layer in bains lined with baking paper. Wrap, label and refrigerate.",
+      "AIOLI: Drain capers and pat dry. Zest and juice lemon. Combine capers, lemon zest, lemon juice, Kewpie mayo, dill, salt and pepper. Label and refrigerate.",
+      "BUNS: Defrost brioche buns. Separate tops and bottoms into bains, wrap and store in fridge."
     ],
     "service": [
-      "Preheat kick oven to 180°C. Place brioche buns cut-side up on wire rack tray. Bake 5–6 minutes until lightly toasted and warmed through. Do not over-toast — brioche burns fast. Hold wrapped in a clean tea towel.",
-      "Bring fryers to 180°C. Fry part-cooked fish in batches of 8 for 2–2.5 minutes until deep golden and internal temperature reaches 70°C. Season immediately with a pinch of salt flakes on exit from fryer. Hold on wire rack — never on paper towel, which steams and softens the crust. Service window: 4 minutes maximum from fryer to pass.",
-      "ASSEMBLY (two-person flow): Person 1 — place brioche base on platter, add 3 g rocket (small pinch), pipe or spoon 22 g lemon caper aioli onto rocket. Person 2 — place fish on aioli, top with brioche lid, press gently, secure with bamboo skewer at an angle.",
-      "Arrange 10 per platter, skewer-side up. Send immediately — do not hold assembled sliders."
+      "Warm brioche buns at 170°C for about 10 minutes.",
+      "Fry part-cooked fish until golden, crisp and hot through.",
+      "Place bun bases on a platter. Add a small handful of rocket to each base.",
+      "Place fried fish on rocket and spoon or pipe Lemon Caper Aioli on top.",
+      "Add bun tops and secure each slider with a skewer. Send immediately."
     ],
-    "note": "Batter must be kept ice-cold throughout service — split into two bowls and rotate from fridge. Vodka in batter inhibits gluten development and flash-evaporates in the fryer, producing a lighter, crisper shell. Self-raising flour replaced with plain flour + cornflour for controlled leavening and superior texture. Aioli yield calculated at 22 g per slider with 10% buffer. Confirm reef fish species with supplier — coral trout preferred for firmness under high-heat fry.",
-    "prepPhases": [
-      "day_before",
-      "day_before",
-      "day_before",
-      "morning_of",
-      "day_before",
-      "day_before",
-      "day_before",
-      "day_before"
-    ]
+    "note": "DOCX table gives 50 g fish portions; method allows 70 g. Use 50 g for 50-slider yield, 70 g for more substantial sliders.",
+    "prepPhase": "day_before"
   },
   {
     "id": "beef-kofta",
     "name": "Beef Kofta",
-    "subtitle": "Spicy Capsicum Sauce · Pita · Rocket",
+    "subtitle": "Spicy Capsicum · Pita · Rocket",
     "type": "Canape",
     "course": "Canape",
     "protein": [
@@ -808,36 +778,45 @@
       "Beef Kofta",
       "Spicy Capsicum Sauce",
       "Rocket",
-      "Mini Pita",
-      "Fresh Herbs"
+      "Pita Bread"
     ],
     "ingredients": [
       {
         "qty": "4 kg",
-        "item": "Beef Mince",
-        "prep": "minimum 20% fat — lean mince will produce dry, crumbling koftas"
+        "item": "Beef Mince"
       },
       {
         "qty": "300 g",
-        "item": "Brown Onion",
-        "prep": "finely diced — approx. 3 medium onions"
+        "item": "Brown Onion"
       },
       {
-        "qty": "80 g",
-        "item": "Garlic — Crushed",
-        "prep": "approx. 16 cloves"
+        "qty": "1.5 kg",
+        "item": "Spicy Capsicum Dip"
       },
       {
-        "qty": "30 ml",
-        "item": "Olive Oil",
-        "prep": "for sautéing onion and garlic"
+        "qty": "50",
+        "item": "Mini Pita Breads"
       },
       {
-        "qty": "20 g",
+        "qty": "100 g",
+        "item": "Flat Leaf Parsley",
+        "prep": "approx. 2 bunches, chopped"
+      },
+      {
+        "qty": "100 g",
+        "item": "Garlic — Crushed"
+      },
+      {
+        "qty": "60 g",
+        "item": "Fresh Mint",
+        "prep": "approx. 2 bunches, chopped"
+      },
+      {
+        "qty": "10 g",
         "item": "Ground Cumin"
       },
       {
-        "qty": "20 g",
+        "qty": "10 g",
         "item": "Ground Coriander"
       },
       {
@@ -845,86 +824,52 @@
         "item": "Ground Cinnamon"
       },
       {
-        "qty": "15 g",
-        "item": "Smoked Paprika"
-      },
-      {
-        "qty": "5 g",
-        "item": "Cayenne Pepper",
-        "prep": "adjust to heat preference"
-      },
-      {
-        "qty": "40 g",
+        "qty": "50 g",
         "item": "Salt Flakes"
       },
       {
-        "qty": "15 g",
-        "item": "Cracked Black Pepper"
+        "qty": "30 g",
+        "item": "Cracked Pepper"
       },
       {
-        "qty": "1 bunch",
-        "item": "Flat Leaf Parsley",
-        "prep": "leaves only, finely chopped — approx. 40 g picked"
+        "qty": "10 g",
+        "item": "Paprika"
       },
       {
-        "qty": "1 bunch",
-        "item": "Mint — Fresh",
-        "prep": "leaves only, finely chopped — approx. 30 g picked"
-      },
-      {
-        "qty": "2",
-        "item": "Eggs",
-        "prep": "lightly beaten — binder to prevent koftas splitting on reheat"
-      },
-      {
-        "qty": "1.5 kg",
-        "item": "Spicy Capsicum Dip",
-        "prep": "ready-made or house-made — room temperature for service"
+        "qty": "500 g",
+        "item": "Rocket",
+        "prep": "approx. 4 bags"
       },
       {
         "qty": "50",
-        "item": "Mini Pita Breads"
-      },
-      {
-        "qty": "150 g",
-        "item": "Rocket",
-        "prep": "picked, washed, dried — 3 g per serve"
-      },
-      {
-        "qty": "1 bunch",
-        "item": "Flat Leaf Parsley",
-        "prep": "extra — finely chopped for garnish"
-      },
-      {
-        "qty": "1 bunch",
-        "item": "Mint — Fresh",
-        "prep": "extra — finely chopped for garnish"
+        "item": "Large Bamboo Boats"
       }
     ],
     "method_steps": [
-      "ONION & GARLIC: Heat 30 ml olive oil in a pan over medium heat on 6-burner. Sauté 300 g finely diced brown onion and 80 g crushed garlic until fully translucent and beginning to caramelise — approx. 8–10 minutes. Do not rush — raw onion in the mix will release moisture during baking and cause koftas to split. Cool completely before adding to mince.",
-      "SPICE MIX: Combine 20 g cumin, 20 g coriander, 10 g cinnamon, 15 g smoked paprika, 5 g cayenne, 40 g salt flakes, 15 g cracked pepper in a small bowl. Toast spice mix dry in a small pan for 60 seconds until fragrant. Cool before adding to mince.",
-      "MIX: In a large bowl combine 4 kg beef mince, cooled onion and garlic, toasted spice mix, 40 g chopped parsley, 30 g chopped mint and 2 beaten eggs. Mix by hand for 3–4 minutes until fully incorporated and the mixture becomes slightly sticky. This activates the myosin proteins and binds the kofta.",
-      "TASTE TEST: Fry a 15 g patty in a dry pan until cooked through. Taste for salt, heat and spice balance. Adjust before shaping all 50.",
-      "SHAPE: Using a 80 g portion scoop (yields 50 koftas from 4 kg mix), shape each portion into a finger-oval approximately 8 cm × 3 cm. Place on baking paper-lined bain-marie trays, single layer. Do not stack.",
-      "FREEZE: Open-freeze koftas on trays for 2 hours until firm. Vacuum seal in bags of 25. Label with name, date, yield. Return to freezer. Use within 6 weeks.",
-      "DEFROST: Transfer from freezer to coldroom 24 hours before service. Do not defrost at room temperature.",
-      "PITA: Defrost 50 mini pita breads in coldroom 24 hours before service. Store covered in bain-marie trays in fridge.",
-      "GARNISH HERBS: Finely chop additional parsley and mint. Combine 50/50. Store in a labelled PC container in coldroom. Use same day."
+      "AROMATICS: Finely dice and sauté brown onion and crushed garlic until translucent. Cool before mixing with mince.",
+      "MIX: Combine beef mince, browned onion and garlic, chopped mint, ground cumin, ground coriander, ground cinnamon, pepper, paprika and salt. Mix until fully combined.",
+      "TEST: Cook about 1 tablespoon of mixture and taste. Adjust seasoning before shaping.",
+      "SHAPE: Roll into 50 g balls, then shape each into a football/oval shape.",
+      "FREEZE: Lay koftas in a bain lined with baking paper. Cover and freeze until solid.",
+      "PACK: Once frozen, vacuum seal 40 koftas per bag. Label and return to freezer.",
+      "DEFROST: Remove from freezer at least 24 hours before use.",
+      "PITA: Defrost pita at least 24 hours before the event. Cut in half, line in a bain, cover, label and refrigerate.",
+      "GARNISH: Finely chop parsley and mint. Store in a labelled PC."
     ],
     "service": [
-      "Preheat kick oven to 200°C (top and bottom heat, no fan). Place koftas on wire rack over bain-marie tray — this allows hot air circulation and prevents steaming on the base. Bake for 14–16 minutes until internal temperature reaches 75°C. Rest 3 minutes before service. Do not bake in a solid-base bain — the bottom will stew and lose texture.",
-      "Warm pita in kick oven at 180°C for 4 minutes, wrapped loosely in foil in batches. Hold wrapped in a clean towel — they dry out fast uncovered.",
-      "ASSEMBLY: Open pita at one end to create a pocket. Place 3 g rocket inside base. Add one kofta. Spoon 30 g spicy capsicum sauce over kofta. Finish with a pinch of fresh herb mix. Serve open-faced or pocket-style per event brief.",
-      "Arrange 10 per platter, alternating angles. Garnish platter edge with remaining herb mix. Send immediately — koftas lose texture if held more than 8 minutes post-oven."
+      "Cook koftas in a bain tray at 180°C for about 20 minutes, or until 75°C internal.",
+      "Warm pita bread at 170°C for about 10 minutes.",
+      "Open each pita and place into a large bamboo boat. Add rocket, then one kofta.",
+      "Top with spicy capsicum sauce and chopped herbs.",
+      "Arrange neatly on a platter and serve hot."
     ],
-    "note": "Egg added as binder — critical for preventing split on reheating from frozen. Fat percentage in mince is non-negotiable at 20% minimum; extra-lean mince will produce dry, chalk-textured koftas. Spice quantities doubled from original spec — the original 10 g per spice across 4 kg mince was significantly under-seasoned. Taste test step is mandatory before shaping full batch.",
+    "note": "New DOCX spec uses 50 g koftas and keeps the sauce as spicy capsicum dip rather than a cooked sauce.",
     "prepPhase": "day_before"
   },
   {
     "id": "camembert-cigars",
     "name": "Camembert, Pecan & Cranberry Cigars",
-    "subtitle": "Thyme Honey · Microherbs",
+    "subtitle": "Thyme Infused Honey · Microherbs",
     "type": "Canape",
     "course": "Canape",
     "protein": [
@@ -934,179 +879,176 @@
       "Vegetarian"
     ],
     "method": "Deep Fry",
-    "yield": "~50 cigars",
+    "yield": "50 cigars",
     "label": "Camembert Cigars",
     "elements": [
-      "Filo Cigars",
+      "Cigars",
       "Thyme Infused Honey",
       "Microherbs"
     ],
     "ingredients": [
       {
-        "qty": "700 g",
-        "item": "Camembert",
-        "prep": "cold from fridge — cut into 1 cm × 8 cm sticks, 14 g each. Must be cold to cut cleanly and hold shape during rolling."
-      },
-      {
-        "qty": "200 g",
-        "item": "Pecans",
-        "prep": "blitzed to a rough crumb — no pieces larger than 4 mm"
-      },
-      {
-        "qty": "200 g",
-        "item": "Dried Cranberries",
-        "prep": "finely chopped by hand or in food processor"
-      },
-      {
-        "qty": "150 g",
-        "item": "Unsalted Butter",
-        "prep": "melted and kept warm"
-      },
-      {
-        "qty": "3 packets",
-        "item": "Filo Pastry",
-        "prep": "thawed in fridge overnight — do not thaw at room temperature, sheets crack"
-      },
-      {
-        "qty": "10 g",
-        "item": "Salt Flakes",
-        "prep": "light seasoning for filling"
-      },
-      {
-        "qty": "5 g",
-        "item": "Cracked Black Pepper"
+        "qty": "620 g",
+        "item": "Camembert"
       },
       {
         "qty": "300 g",
-        "item": "Honey",
-        "prep": "mild-flavoured — leatherwood or orange blossom recommended"
+        "item": "Pecans"
       },
       {
-        "qty": "4 sprigs",
+        "qty": "300 g",
+        "item": "Dried Cranberries"
+      },
+      {
+        "qty": "25 g",
         "item": "Fresh Thyme",
-        "prep": "leaves stripped from 2 sprigs for infusion; reserve 2 sprigs whole"
+        "prep": "approx. 1 bunch"
+      },
+      {
+        "qty": "300 g",
+        "item": "Honey"
       },
       {
         "qty": "2",
         "item": "Cinnamon Sticks"
       },
       {
-        "qty": "2 punnets",
+        "qty": "30 g",
+        "item": "Salt Flakes"
+      },
+      {
+        "qty": "20 g",
+        "item": "Cracked Pepper"
+      },
+      {
+        "qty": "750 g",
+        "item": "Filo Pastry",
+        "prep": "approx. 2 packets"
+      },
+      {
+        "qty": "150 g",
+        "item": "Butter",
+        "prep": "melted, for brushing filo"
+      },
+      {
+        "qty": "50 g",
+        "item": "Crushed Garlic"
+      },
+      {
+        "qty": "60 g",
         "item": "Microherbs",
-        "prep": "for garnish — pick just before service"
+        "prep": "approx. 2 punnets"
       },
       {
         "qty": "50",
-        "item": "Small Bamboo Boats",
-        "prep": "for plating"
-      },
-      {
-        "qty": "canola or rice bran oil",
-        "item": "Frying Oil",
-        "prep": "sufficient for fryer fill line — approx. 15 L per fryer"
+        "item": "Small Bamboo Boats"
       }
     ],
     "method_steps": [
-      "CAMEMBERT PREP: Refrigerate camembert until firm — minimum 1 hour at 4°C. Cut into 1 cm × 8 cm sticks while cold. Season lightly with salt flakes and pepper. Lay on a tray lined with baking paper and return to fridge while preparing filo.",
-      "NOTE — GARLIC REMOVED: Crushed garlic has been removed from the original spec. Garlic does not belong in this flavour profile and competes directly with the thyme-honey finish. If a savoury note is needed, a pinch of smoked paprika on the filling is a better choice.",
-      "FILLING MIX: Combine 200 g pecan crumb and 200 g chopped cranberries. Season with a pinch of salt and pepper. Mix to combine. This is the filling spread — approx. 8 g per cigar.",
-      "FILO ROLLING: Work with one sheet of filo at a time. Keep remaining sheets under a lightly damp tea towel to prevent drying. Lay one sheet flat, brush lightly but evenly with melted butter. Lay a second sheet directly on top, butter again. Cut the double layer into strips approximately 10 cm wide × 20 cm long — each double-buttered strip makes one cigar.",
-      "ASSEMBLY: Place one camembert stick at the narrow end of a filo strip, 2 cm from the edge. Add 8 g pecan-cranberry mix alongside the cheese. Fold the two long sides inward over the filling (like a spring roll), then roll tightly from the cheese end toward the open end. Seal the final edge with a small brush of melted butter. Place seam-side down on baking paper-lined tray.",
-      "FREEZE: Open-freeze cigars on tray uncovered for 2 hours until fully solid. Vacuum seal in bags of 25. Label with name, date, yield. Freeze for up to 4 weeks.",
-      "DEFROST: Transfer from freezer to coldroom 24 hours before service. Do not defrost at room temperature — filo will go soggy from condensation.",
-      "THYME HONEY: Combine 300 g honey, 2 cinnamon sticks and stripped thyme leaves in a small saucepan. Warm over the lowest burner setting — honey should reach 60–65°C maximum. Do not boil — boiling destroys the volatile aromatic compounds in thyme and caramelises the honey. Hold at 60°C for 10 minutes, then remove from heat. Strain through a fine sieve. Cool, transfer to squeeze bottle or PC. Label. Store at room temperature — honey crystallises in the fridge."
+      "MELT BUTTER: Melt butter in a small pan if using butter to brush filo sheets.",
+      "CHEESE: Cut camembert into 10 cm long sticks, about 1 cm thick. Keep cold.",
+      "FILLING: Finely chop pecans and dried cranberries.",
+      "FILO: Place two sheets of filo on a clean surface. Brush the top sheet with melted butter if using. Cut into long strips.",
+      "ASSEMBLE: Place camembert on the narrow end of each filo strip. Add a teaspoon of pecan-cranberry mixture and a small amount of crushed garlic if using the DOCX spec.",
+      "ROLL: Fold sides in and roll tightly like a spring roll. Repeat with all cigars.",
+      "FREEZE & PACK: Freeze cigars on lined trays until solid. Transfer to bags and seal for storage.",
+      "DEFROST: Defrost in the coldroom at least 24 hours before service.",
+      "THYME HONEY: Warm honey, thyme, salt and cinnamon stick over low heat for 10 minutes. Transfer to a PC and allow thyme and cinnamon to infuse.",
+      "GARNISH: Trim microherbs with scissors, label and refrigerate."
     ],
     "service": [
-      "Bring fryers to 175°C. Do not fry at higher temperature — filo browns faster than the cheese melts, resulting in a cold centre and burst seam. Fry cigars in batches of 8 maximum for 2.5–3 minutes, turning gently at the 90-second mark for even colour. Target colour: deep amber gold. Remove to wire rack.",
-      "Service window: 5 minutes maximum from fryer. Camembert sets again as it cools and loses the molten interior that defines this canape.",
-      "PLATE: Place one cigar in each bamboo boat. Drizzle 5 ml thyme honey directly over cigar using a squeeze bottle — do not pool honey in the boat base. Finish with a small pinch of microherbs on top.",
-      "Arrange 10 boats per platter. Garnish platter with a light scatter of remaining pecan crumb and a few whole cranberries for colour cues. Send immediately."
+      "Deep fry cigars at 175–180°C for about 2 minutes, or until golden and hot through.",
+      "Arrange fried cigars on a platter or in bamboo boats.",
+      "Drizzle with thyme-infused honey.",
+      "Garnish with chopped pecans, cranberries, microherbs and edible flowers if available."
     ],
-    "note": "Garlic removed entirely — it was in the original spec but conflicts with the thyme-honey profile and the delicate lactic flavour of camembert. Butter was listed in method steps but absent from the original ingredient list — added at 150 g, calculated at 3 g per double-buttered strip with buffer. Filo packet quantities increased from 2 to 3 — 2 packets do not yield sufficient strips for 50 cigars when accounting for tears and trim waste. Fry temperature reduced to 175°C from implied high heat to prevent blowout.",
+    "note": "DOCX spec includes crushed garlic in the cigar filling; keep it light so it does not dominate the honey/camembert profile.",
     "prepPhase": "day_before"
   },
   {
     "id": "romesco",
     "name": "Romesco",
-    "subtitle": "House Sauce",
+    "subtitle": "Capsicum · Passata · Basil · Cream",
     "type": "Sauce / Base",
     "course": "Sauce",
     "protein": [],
     "diet": [
       "Vegetarian",
-      "Gluten-Free",
-      "Dairy-Free"
+      "Gluten-Free"
     ],
     "method": "Simmer",
-    "yield": "Batch",
+    "yield": "Large batch",
     "label": "Romesco",
     "elements": [
-      "Romesco Sauce"
+      "Romesco"
     ],
     "ingredients": [
       {
-        "qty": "800 g",
-        "item": "Grilled Capsicum (tinned)",
-        "prep": "drained, blitzed smooth"
+        "qty": "2.5 kg",
+        "item": "Grilled Capsicum",
+        "prep": "approx. 1 large tin, drained and blitzed"
       },
       {
-        "qty": "800 g",
-        "item": "Tomato Sugo",
-        "prep": "in-house or quality tinned"
+        "qty": "2.5 L",
+        "item": "Passata",
+        "prep": "approx. 1 large tin"
       },
       {
         "qty": "500 g",
         "item": "Brown Onion",
-        "prep": "roughly chopped, blitzed"
+        "prep": "blitzed"
       },
       {
-        "qty": "80 g",
-        "item": "Garlic",
-        "prep": "crushed"
+        "qty": "250 g",
+        "item": "Crushed Garlic",
+        "prep": "converted from 1 cup"
       },
       {
-        "qty": "2 bunches",
+        "qty": "100 g",
         "item": "Basil",
-        "prep": "leaves picked, roughly chopped"
+        "prep": "approx. 2 bunches, chopped"
       },
       {
-        "qty": "10 g",
-        "item": "Caster Sugar"
-      },
-      {
-        "qty": "40 g",
+        "qty": "50 g",
         "item": "Salt"
       },
       {
-        "qty": "10 g",
-        "item": "Cracked Black Pepper"
-      },
-      {
-        "qty": "30 ml",
-        "item": "Olive Oil"
+        "qty": "30 g",
+        "item": "Cracked Pepper"
       },
       {
         "qty": "250 ml",
-        "item": "Thickened Cream"
+        "item": "Thickened Cream",
+        "prep": "converted from 1 cup"
+      },
+      {
+        "qty": "30 ml",
+        "item": "Olive Oil",
+        "prep": "for sautéing"
+      },
+      {
+        "qty": "10 g",
+        "item": "Sugar",
+        "prep": "pinch; adjust only if needed"
       }
     ],
     "method_steps": [
-      "Heat 30 ml olive oil in a wide heavy-based pot over medium heat. Sauté onion and garlic, stirring regularly, for 10–12 minutes until fully softened and lightly golden.",
-      "Transfer sautéed onion and garlic to a blender. Add blitzed capsicum, passata, basil, sugar, salt and pepper. Blend on high until completely smooth.",
-      "Return blended mixture to the pot. Bring to a gentle simmer over medium-low heat, then reduce heat to low. Simmer uncovered for 90 minutes, stirring every 15–20 minutes, until sauce is thick, rich and reduced by roughly one-quarter.",
-      "Stir in thickened cream. Simmer a further 10 minutes. Taste and adjust salt, pepper and sugar.",
-      "Cool to below 21°C before portioning. Transfer to labelled PCs, date and freeze."
+      "SAUTE: Heat olive oil in a pan and sauté onions and garlic until translucent and sweet.",
+      "BLEND: In a blender, combine sautéed onions and garlic with grilled capsicum, passata, basil, salt, pepper and sugar. Blend until smooth.",
+      "SIMMER: Pour into a large pot and simmer for 90–120 minutes to develop flavour and reduce slightly. Stir regularly.",
+      "FINISH: Add thickened cream, simmer 10 minutes and taste. Adjust seasoning as needed.",
+      "STORE: Portion into labelled PCs and freeze. Remove from freezer as needed."
     ],
     "service": [
-      "Reheat from frozen in a saucepan over medium heat, stirring, until reaching 75°C minimum. Alternatively reheat in microwave in 60-second bursts, stirring between. Use as sauce base or accompaniment as required."
+      "Heat on the stove or in the microwave until hot, minimum 75°C. Use as sauce base or accompaniment."
     ],
-    "note": "Made in-house using house tomato sugo. Freezes well — portion into PCs, label and freeze. Defrost overnight in coldroom. Also the base for Vodka Sauce.",
+    "note": "Large-tin quantities are standardised to 2.5 kg / 2.5 L foodservice tins for ordering clarity.",
     "prepPhase": "day_before"
   },
   {
     "id": "lemon-dill-aioli",
-    "name": "Lemon Dill Aioli",
-    "subtitle": "House component",
+    "name": "Lemon & Dill Aioli",
+    "subtitle": "Kewpie Mayo · Lemon · Dill",
     "type": "Sauce / Base",
     "course": "Sauce",
     "protein": [],
@@ -1114,7 +1056,7 @@
       "Gluten-Free"
     ],
     "method": "Mix",
-    "yield": "Batch",
+    "yield": "Approx. 1.1 L batch",
     "label": "Lemon Dill Aioli",
     "elements": [
       "Lemon Dill Aioli"
@@ -1125,40 +1067,40 @@
         "item": "Kewpie Mayo"
       },
       {
-        "qty": "3",
+        "qty": "450 g",
         "item": "Lemons",
-        "prep": "zest finely microplaned, juiced — approx. 90 ml juice"
+        "prep": "approx. 3 lemons, juice and zest"
       },
       {
-        "qty": "1 bunch",
+        "qty": "30 g",
         "item": "Dill",
-        "prep": "fronds only, finely chopped — approx. 20 g picked"
+        "prep": "approx. 1 bunch, finely chopped"
       },
       {
         "qty": "20 g",
         "item": "Salt"
       },
       {
-        "qty": "5 g",
-        "item": "White Pepper"
+        "qty": "10 g",
+        "item": "Cracked Pepper"
       }
     ],
     "method_steps": [
-      "Pick dill fronds and finely chop. Set aside.",
-      "Microplane lemon zest directly into a large bowl to capture oils. Juice lemons, strain seeds.",
-      "Add Kewpie mayonnaise, chopped dill, lemon juice, salt and white pepper to the bowl with the zest. Mix thoroughly until uniform.",
-      "Taste and adjust — add more lemon juice for brightness or salt as needed.",
-      "Transfer to a labelled PC, press cling film to surface and refrigerate. Use within 4 days."
+      "Finely chop dill and place in a bowl.",
+      "Microplane lemon zest and juice lemons, removing seeds.",
+      "Combine dill, lemon zest, lemon juice, Kewpie mayo, salt and pepper.",
+      "Mix well, taste and adjust seasoning.",
+      "Transfer to a labelled PC or squeeze bottle and refrigerate."
     ],
     "service": [
-      "Serve chilled alongside Calamari Fritti (tapas and canapé formats). Portion into ramekins or squeeze bottle for service. Stir before portioning if held overnight."
+      "Serve chilled. Stir before portioning if held overnight."
     ],
-    "note": "Pepper updated to white pepper for cleaner colour in the finished aioli. Adjust lemon quantity to season — acid level of lemons varies."
+    "note": "Use as the Calamari Fritti aioli and wherever lemon-dill sauce is specified."
   },
   {
     "id": "lemon-thyme-aioli",
-    "name": "Lemon Thyme Aioli",
-    "subtitle": "House component",
+    "name": "Lemon & Thyme Aioli",
+    "subtitle": "Kewpie Mayo · Lemon · Fresh Thyme",
     "type": "Sauce / Base",
     "course": "Sauce",
     "protein": [],
@@ -1166,7 +1108,7 @@
       "Gluten-Free"
     ],
     "method": "Mix",
-    "yield": "Batch",
+    "yield": "Approx. 1.1 L batch",
     "label": "Lemon Thyme Aioli",
     "elements": [
       "Lemon Thyme Aioli"
@@ -1174,42 +1116,43 @@
     "ingredients": [
       {
         "qty": "1 kg",
-        "item": "Kewpie Mayo"
+        "item": "Kewpie Mayonnaise"
       },
       {
-        "qty": "3",
+        "qty": "450 g",
         "item": "Lemons",
-        "prep": "zest finely microplaned, juiced — approx. 90 ml juice"
+        "prep": "approx. 3 lemons, juice and zest"
       },
       {
-        "qty": "1 bunch",
+        "qty": "25 g",
         "item": "Fresh Thyme",
-        "prep": "leaves stripped from stems — approx. 15 g picked"
+        "prep": "approx. 1 bunch, leaves picked"
       },
       {
         "qty": "20 g",
         "item": "Salt"
       },
       {
-        "qty": "5 g",
-        "item": "White Pepper"
+        "qty": "10 g",
+        "item": "Cracked Pepper"
       }
     ],
     "method_steps": [
-      "Strip thyme leaves from stems. Discard woody stems.",
-      "Microplane lemon zest into a large bowl. Juice lemons, strain seeds.",
-      "Add Kewpie mayonnaise, thyme leaves, lemon juice, salt and white pepper to the zest bowl. Mix thoroughly until uniform.",
-      "Taste and adjust seasoning. Transfer to a labelled PC, press cling film to surface and refrigerate. Use within 4 days."
+      "Pick thyme leaves from stems and place in a bowl.",
+      "Microplane lemon zest and juice lemons, removing seeds.",
+      "Combine thyme, lemon zest, lemon juice, Kewpie mayonnaise, salt and pepper.",
+      "Mix well, taste and adjust seasoning.",
+      "Transfer to a labelled PC or squeeze bottle and refrigerate."
     ],
     "service": [
-      "Serve chilled alongside arancini, chorizo potatoes or as required. Portion into ramekins or squeeze bottle for service. Stir before portioning if held overnight."
+      "Serve chilled with arancini, chorizo potatoes or as required. Stir before portioning if held overnight."
     ],
-    "note": "Thyme leaves are more assertive than dill — taste carefully before finalising acid and salt balance. Avoid over-picking; leaves should be small and tender."
+    "note": "Fresh thyme quantity is kitchen-rounded from one bunch."
   },
   {
     "id": "vodka-sauce",
     "name": "Vodka Sauce",
-    "subtitle": "Uses Romesco",
+    "subtitle": "Romesco · Cream · Tomato Paste",
     "type": "Sauce / Base",
     "course": "Sauce",
     "protein": [],
@@ -1218,37 +1161,33 @@
       "Gluten-Free"
     ],
     "method": "Simmer",
-    "yield": "Batch",
+    "yield": "Approx. 2.8 L batch",
     "label": "Vodka Sauce",
     "elements": [
       "Vodka Sauce"
     ],
     "ingredients": [
       {
-        "qty": "30 ml",
-        "item": "Olive Oil"
-      },
-      {
         "qty": "50 g",
-        "item": "Garlic",
-        "prep": "crushed"
+        "item": "Crushed Garlic"
       },
       {
         "qty": "200 g",
         "item": "Tomato Paste"
       },
       {
-        "qty": "5 g",
-        "item": "Chilli Flakes"
+        "qty": "3 g",
+        "item": "Chilli Flakes",
+        "prep": "converted from 1 tsp"
       },
       {
         "qty": "2 L",
-        "item": "Romesco",
-        "prep": "defrosted and warmed"
+        "item": "Romesco"
       },
       {
         "qty": "50 g",
-        "item": "Caster Sugar"
+        "item": "Sugar",
+        "prep": "converted from 1/4 cup"
       },
       {
         "qty": "250 ml",
@@ -1259,32 +1198,30 @@
         "item": "Thickened Cream"
       },
       {
-        "qty": "30 g",
+        "qty": "50 g",
         "item": "Salt"
       },
       {
-        "qty": "10 g",
-        "item": "Cracked Black Pepper"
+        "qty": "30 g",
+        "item": "Cracked Pepper"
       }
     ],
     "method_steps": [
-      "Heat olive oil in a wide heavy-based pot over medium heat. Sauté garlic and chilli flakes for 2–3 minutes until fragrant, stirring constantly — do not colour.",
-      "Add tomato paste and cook out for 3–4 minutes, stirring, until it deepens to a brick-red colour.",
-      "Carefully add vodka and allow to reduce by half over medium heat, approximately 3–4 minutes.",
-      "Add warmed romesco and sugar. Stir to combine and bring to a gentle simmer.",
-      "Simmer uncovered over low heat for 25–30 minutes, stirring regularly, until sauce is thick and rich.",
-      "Stir in thickened cream. Simmer a further 10 minutes. Taste and adjust salt, pepper and sugar.",
-      "Cool to below 21°C before portioning. Transfer to labelled PCs, date and refrigerate or freeze."
+      "Add all ingredients to a heavy-based pot.",
+      "Bring to a gentle simmer, stirring regularly so the tomato paste does not catch.",
+      "Simmer until thick, glossy and rich.",
+      "Taste and adjust seasoning, sugar or cream as needed.",
+      "Cool, label and refrigerate or freeze."
     ],
     "service": [
-      "Reheat from cold in a saucepan over medium heat to 75°C minimum, stirring regularly. Thin with a small amount of pasta water or cream if needed. Use as a pasta sauce base or accompaniment."
+      "Reheat gently to 75°C minimum, stirring regularly. Thin with a little cream or water only if needed."
     ],
-    "note": "Built on house romesco which uses in-house sugo. Sugar quantity approx. 50 g — taste and adjust as romesco batch acidity varies."
+    "note": "Sugar and chilli converted from cup/tsp to rounded metric amounts."
   },
   {
     "id": "whipped-butter",
     "name": "Whipped Butter",
-    "subtitle": "Bread service",
+    "subtitle": "Salted · Piped for Bread Service",
     "type": "Component",
     "course": "Other",
     "protein": [
@@ -1295,7 +1232,7 @@
       "Gluten-Free"
     ],
     "method": "Whip",
-    "yield": "Batch",
+    "yield": "500 g batch",
     "label": "Whipped Butter",
     "elements": [
       "Whipped Butter"
@@ -1303,54 +1240,29 @@
     "ingredients": [
       {
         "qty": "500 g",
-        "item": "Unsalted Butter",
-        "prep": "cut into cubes, softened to room temperature (approx. 20°C)"
+        "item": "Butter",
+        "prep": "softened"
       },
       {
-        "qty": "8 g",
-        "item": "Salt Flakes",
-        "prep": "plus extra to finish — Murray River pink salt or Maldon recommended"
-      },
-      {
-        "qty": "",
-        "item": "Optional flavour additions — choose one per batch:"
-      },
-      {
-        "qty": "10 g",
-        "item": "Finely chopped rosemary or thyme",
-        "prep": "optional herb variant"
-      },
-      {
-        "qty": "5 g",
-        "item": "Lemon zest (microplaned)",
-        "prep": "optional citrus variant"
-      },
-      {
-        "qty": "10 g",
-        "item": "Roasted garlic paste",
-        "prep": "optional roasted garlic variant"
+        "qty": "20 g",
+        "item": "Salt"
       }
     ],
     "method_steps": [
-      "Cube butter and allow to soften fully at room temperature until pliable — approximately 30–45 minutes depending on ambient temperature. Do not melt.",
-      "Place softened butter in the bowl of a stand mixer fitted with the whisk attachment. Whip on medium speed for 3 minutes, then increase to high speed.",
-      "Whip on high for a further 5–8 minutes until the butter is very pale, light and fluffy. Scrape down the bowl halfway through.",
-      "Add salt flakes and any optional flavour addition. Whip a further 60 seconds to incorporate evenly.",
-      "Taste and adjust salt.",
-      "Transfer to a piping bag fitted with a large open star nozzle (1.5–2 cm). Pipe into small service dishes or ramekins in generous rosettes. Finish with a pinch of flake salt on top.",
-      "Refrigerate immediately on a flat tray. Cover with cling film once set. Hold refrigerated at 2–4°C."
+      "Whip softened butter until light, white and fluffy.",
+      "Add salt and whip again until evenly incorporated.",
+      "Transfer to a piping bag fitted with a large star nozzle.",
+      "Pipe onto small plates or into ramekins and refrigerate until set."
     ],
     "service": [
-      "Remove from refrigerator 10–15 minutes before service so butter softens slightly and is spreadable.",
-      "Serve with house bread. Present one ramekin per table at bread drop.",
-      "Do not re-pipe returned butter. Discard after service."
+      "Serve with breads. Remove from the coldroom briefly before service so the butter is spreadable."
     ],
-    "note": "Flavour variants: plain salt flake is the house default. Rosemary-lemon and roasted garlic are suitable seasonal alternatives — confirm with head chef before switching. Hold time: piped and refrigerated, use within 3 days. Do not freeze piped portions — texture deteriorates. Bulk unwhipped butter can be frozen prior to whipping."
+    "note": "New DOCX spec is a simple salted whipped butter: 500 g butter to 20 g salt."
   },
   {
     "id": "riviera-emulsion",
     "name": "Riviera House Emulsion",
-    "subtitle": "House Sauce",
+    "subtitle": "Stone Fruit · Herbs · Jalapeño · Lemon",
     "type": "Sauce / Base",
     "course": "Sauce",
     "protein": [],
@@ -1360,36 +1272,45 @@
       "Dairy-Free"
     ],
     "method": "Blend",
-    "yield": "Batch",
+    "yield": "Approx. 3 L batch",
     "label": "Emulsion",
     "elements": [
-      "Riviera Emulsion"
+      "Riviera House Emulsion"
     ],
     "ingredients": [
       {
-        "qty": "1 kg",
-        "item": "Fresh or Canned Apricots",
-        "prep": "canned: drained; fresh: stones removed"
+        "qty": "as needed",
+        "item": "Salt Flakes",
+        "prep": "season to taste"
       },
       {
-        "qty": "2 bunches",
+        "qty": "as needed",
+        "item": "Cracked Pepper",
+        "prep": "season to taste"
+      },
+      {
+        "qty": "1 kg",
+        "item": "Apricots, Peaches or Nectarines",
+        "prep": "fresh or canned; stones removed or drained"
+      },
+      {
+        "qty": "60 g",
         "item": "Dill",
-        "prep": "fronds and tender stems only"
+        "prep": "approx. 2 bunches"
       },
       {
-        "qty": "4 bunches",
+        "qty": "240 g",
         "item": "Coriander",
-        "prep": "roots trimmed and discarded, leaves and stems used"
+        "prep": "approx. 4 bunches; roots removed"
       },
       {
-        "qty": "4 bunches",
+        "qty": "240 g",
         "item": "Flat Leaf Parsley",
-        "prep": "leaves and tender stems only"
+        "prep": "approx. 4 bunches"
       },
       {
         "qty": "1 kg",
-        "item": "Lemons",
-        "prep": "zest finely microplaned, juiced — approx. 400–450 ml juice"
+        "item": "Lemon — Juice and Zest"
       },
       {
         "qty": "200 ml",
@@ -1397,45 +1318,34 @@
       },
       {
         "qty": "600 ml",
-        "item": "Extra Virgin Olive Oil"
+        "item": "Olive Oil or Lemon Olive Oil"
       },
       {
         "qty": "200 g",
-        "item": "Caster Sugar"
+        "item": "Castor Sugar"
       },
       {
         "qty": "300 g",
-        "item": "Fresh Jalapeños",
-        "prep": "stems removed; seeds retained for heat or removed for mild"
+        "item": "Fresh Jalapeños"
       },
       {
         "qty": "100 g",
         "item": "Garlic Cloves",
         "prep": "peeled"
-      },
-      {
-        "qty": "20 g",
-        "item": "Salt Flakes",
-        "prep": "plus more to taste"
-      },
-      {
-        "qty": "5 g",
-        "item": "Cracked Black Pepper",
-        "prep": "to taste"
       }
     ],
     "method_steps": [
-      "Microplane lemon zest directly into the blender jug to capture oils. Juice lemons and add juice to the jug.",
-      "Trim coriander roots and discard. Roughly chop all herbs — no need for precision as they will be blended.",
-      "Add apricots, all herbs, red wine vinegar, olive oil, jalapeños, garlic, caster sugar, salt and pepper to the blender.",
-      "Blend on high speed for 60–90 seconds until completely smooth. If using a bar blender, blend in two batches.",
-      "Taste carefully and adjust: add salt for seasoning, sugar to balance acidity, extra vinegar for brightness, or extra jalapeño for heat.",
-      "Transfer to a labelled PC and refrigerate. For bulk storage or freezing: pour a thin layer of olive oil (approx. 20 ml) over the surface before sealing to prevent oxidation and freezer burn."
+      "LEMONS: Peel rind from lemons with a peeler or microplane, then juice lemons.",
+      "HERBS: Cut roots from coriander and roughly chop herbs.",
+      "BLEND: Combine fruit, dill, coriander, parsley, lemon juice and zest, red wine vinegar, olive oil, jalapeños, garlic, castor sugar, salt and pepper. Blend until smooth.",
+      "SEASON: Taste and adjust with salt, sugar or vinegar until balanced.",
+      "STORE: Transfer to a labelled PC and refrigerate.",
+      "BULK STORAGE: If freezing, add a thin layer of olive oil over the top before sealing to reduce freezer burn and oxidation."
     ],
     "service": [
-      "Serve cold or at room temperature. Drizzle generously over protein — chicken skewers, grilled lamb, seafood platters. Stir or shake well before service as the emulsion may separate on standing."
+      "Serve cold or at room temperature. Stir or shake well before drizzling over lamb cutlets or other proteins."
     ],
-    "note": "Olive oil cap before freezing is essential to prevent surface oxidation — do not skip. The oil layer stirs back through on defrosting. Defrost overnight in the coldroom. Jalapeño heat varies significantly by season — taste and adjust seed inclusion accordingly."
+    "note": "Herb bunches converted to rounded gram equivalents for ordering, with bunch counts retained in prep notes."
   },
   {
     "id": "labneh-tzatziki",
