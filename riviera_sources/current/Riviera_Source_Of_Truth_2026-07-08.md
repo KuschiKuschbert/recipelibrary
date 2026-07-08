@@ -14,24 +14,31 @@
 
 ## Active Source Stack
 
-| Order | Source file | Lines | SHA-256 |
-| ---: | --- | ---: | --- |
-| 1 | `Updated_Riviera_instructions_2026-06-09_extracted.md` | 782 | `f9fb26019a3c87ca` |
-| 2 | `Riviera_Kitchen_Production_Harness_Index_v5_2026-06-16.md` | 69 | `4639ee869ab32fbe` |
-| 3 | `Riviera_SOP_Master_Index_v10_2026-06-16.md` | 2636 | `fc273686497540e0` |
-| 4 | `Riviera_Component_Module_Library_v3_2026-06-16.md` | 927 | `9ba97ed1c74ab980` |
-| 5 | `Riviera_Count_Ordering_Harness_v3_2026-06-16.md` | 489 | `c8e35a9bc10b2b03` |
-| 6 | `Riviera_Production_Sheet_Template_Library_v2_2026-06-16.md` | 569 | `b78a4efe7985bc28` |
-| 7 | `Riviera_Real_Event_Test_Pack_v2_2026-06-16.md` | 362 | `4c78dbaf9480e4f6` |
-| 8 | `Riviera_Package_Source_Digest_v1_2026-06-09.md` | 670 | `45b21d3c2d12abb2` |
-| 9 | `Riviera_Canonical_Recipe_Bank_v1_2026-06-08.md` | 588 | `41451a16898a8046` |
-| 10 | `Riviera_Sunday_Tapas_Pull_Matrix_SOP_Addendum_v1_2026-06-16.md` | 230 | `03e22abeb27df3bb` |
-| 11 | `Riviera_Sunday_Tapas_Pull_Matrix_A4_Kitchen_Sheet_v1_2026-06-16.txt` | 5 | `ef740aeef45b55db` |
-| 12 | `Riviera_Order_Template_v1_2026-06-09.md` | 228 | `57879e25b39706be` |
-| 13 | `Riviera_Supplier_Ordering_Translator_v1_2026-06-08.md` | 356 | `12e098937261075e` |
-| 14 | `Riviera_Seasoning_Palette_v2_2026-06-08.md` | 628 | `3be02a7db7e4147f` |
-| 15 | `foodpairing_condensed_riviera_reference.md` | 1612 | `d38b4a86dc649969` |
-| 16 | `Baclava-Cheesecake.txt` | 94 | `86c97ff240b01100` |
+| Order | Live project source | Stored file | Kind | Lines | SHA-256 |
+| ---: | --- | --- | --- | ---: | --- |
+| 1 | Baclava-Cheesecake.txt | `Baclava-Cheesecake.txt` | text | 94 | `86c97ff240b01100` |
+| 2 | Riviera_Sunday_Tapas_Pull_Matrix_SOP_Addendum_v1_2026-06-16.md | `Riviera_Sunday_Tapas_Pull_Matrix_SOP_Addendum_v1_2026-06-16.md` | text | 230 | `03e22abeb27df3bb` |
+| 3 | Riviera-Sunday-Tapas-Pull-Matrix-—-A4-Kitchen-Sheet-v1.txt | `Riviera_Sunday_Tapas_Pull_Matrix_A4_Kitchen_Sheet_v1_2026-06-16.txt` | text | 5 | `ef740aeef45b55db` |
+| 4 | kitchen_pull_matrix.pdf | `kitchen_pull_matrix.pdf` | pdf | 151 | `717bc55f3abcd253` |
+| 5 | Riviera_SOP_Master_Index_v10_2026-06-16.md | `Riviera_SOP_Master_Index_v10_2026-06-16.md` | text | 2636 | `fc273686497540e0` |
+| 6 | Riviera_Kitchen_Production_Harness_Index_v5_2026-06-16.md | `Riviera_Kitchen_Production_Harness_Index_v5_2026-06-16.md` | text | 69 | `4639ee869ab32fbe` |
+| 7 | Riviera_Count_Ordering_Harness_v3_2026-06-16.md | `Riviera_Count_Ordering_Harness_v3_2026-06-16.md` | text | 489 | `c8e35a9bc10b2b03` |
+| 8 | Riviera_Component_Module_Library_v3_2026-06-16.md | `Riviera_Component_Module_Library_v3_2026-06-16.md` | text | 927 | `9ba97ed1c74ab980` |
+| 9 | Riviera_Real_Event_Test_Pack_v2_2026-06-16.md | `Riviera_Real_Event_Test_Pack_v2_2026-06-16.md` | text | 362 | `4c78dbaf9480e4f6` |
+| 10 | Riviera_Production_Sheet_Template_Library_v2_2026-06-16.md | `Riviera_Production_Sheet_Template_Library_v2_2026-06-16.md` | text | 569 | `b78a4efe7985bc28` |
+| 11 | MYO bars and Buffets.pdf | `MYO bars and Buffets.pdf` | pdf | 235 | `946e1bf041f94ba1` |
+| 12 | Updated Riviera instructions | `Updated_Riviera_instructions_2026-06-09_extracted.md` | text | 782 | `f9fb26019a3c87ca` |
+| 13 | foodpairing_condensed_riviera_reference.md | `foodpairing_condensed_riviera_reference.md` | text | 1612 | `d38b4a86dc649969` |
+| 14 | Riviera_Weekly_Order_Workflow_v1_2026-06-09.md | `Riviera_Weekly_Order_Workflow_v1_2026-06-09.md` | text | 344 | `0215d9c6665f038a` |
+| 15 | Riviera_Package_Source_Digest_v1_2026-06-09.md | `Riviera_Package_Source_Digest_v1_2026-06-09.md` | text | 670 | `45b21d3c2d12abb2` |
+| 16 | Riviera_Order_Template_v1_2026-06-09.md | `Riviera_Order_Template_v1_2026-06-09.md` | text | 228 | `57879e25b39706be` |
+| 17 | Riviera_Canonical_Recipe_Bank_v1_2026-06-08.md | `Riviera_Canonical_Recipe_Bank_v1_2026-06-08.md` | text | 588 | `41451a16898a8046` |
+| 18 | Riviera_Supplier_Ordering_Translator_v1_2026-06-08.md | `Riviera_Supplier_Ordering_Translator_v1_2026-06-08.md` | text | 356 | `12e098937261075e` |
+| 19 | Riviera_Seasoning_Palette_v2_2026-06-08.md | `Riviera_Seasoning_Palette_v2_2026-06-08.md` | text | 628 | `3be02a7db7e4147f` |
+| 20 | Recipes for Prep Chef.docx | `Recipes for Prep Chef.docx` | docx | 1477 | `45e78b1298881603` |
+| 21 | Olive+Green+on+White+Background.webp | `Olive+Green+on+White+Background.webp.source-record.md` | image-source-record | 15 | `26aa4bd7fd0a8db7` |
+| 22 | Bidfood_Item_List.pdf | `Bidfood_Item_List.pdf` | pdf | 606 | `25328cacc06ae07d` |
+| 23 | OrderForm11579311 - 1098368202605251257349179710.xlsx | `OrderForm11579311 - 1098368202605251257349179710.xlsx` | xlsx | 226 | `5a02af13403836e5` |
 
 ## July 8 Tapas Overlay
 
@@ -782,877 +789,538 @@ New DOCX spec uses 50 g koftas and keeps the sauce as spicy capsicum dip rather 
 
 The appendices below preserve the ChatGPT Riviera project sources used as the baseline for this merge.
 
-### Source: Updated_Riviera_instructions_2026-06-09_extracted.md
+### Source: Baclava-Cheesecake.txt
 
-- Lines: 782
-- SHA-256: `f9fb26019a3c87ca3b6219b71bcf9af681571aad3ae56a5d833a6b5026d67a3f`
+- Stored file: `Baclava-Cheesecake.txt`
+- Kind: text
+- Lines: 94
+- SHA-256: `86c97ff240b01100ec828b3c748cc39e8622e31d65ad1a7df08b74703870db64`
+
 
 ````markdown
-# Updated Riviera instructions - extracted from ChatGPT source
+Kuschi,
 
-Source URL: https://chatgpt.com/g/g-p-6a0b96d47e4c8191a87f79189b94c5e3/c/6a27339d-2bf0-83ec-ad8d-63a836c85bf3?messageId=4e3fe8e9-4d44-4c1b-91a7-105b189814df
+# Baklava Cheesecake
 
-Riviera Project Instructions — Lean Control Version
+**Yield:** 1 × 20 cm cheesecake / 10 portions
+**Tin:** 20 cm springform, deep
+**Oven:** 160°C
+**Bake time:** 60–75 min
+**Chill:** Overnight
+**Source:** Cleaned metric version from uploaded recipe. 
 
-Act as the Riviera Yeppoon kitchen operations, event-prep, catering, ordering, menu, supplier, recipe and document assistant.
+## Ingredients
 
-Purpose: turn messy notes, emails, PDFs, menus, order lists, supplier info, event details, prep needs, dietaries, delivery times and kitchen realities into clear outputs a chef can use immediately.
+### Cheesecake Filling
 
-Core Priorities
+| Ingredient             |             Quantity |
+| ---------------------- | -------------------: |
+| Cream cheese, softened |                600 g |
+| Caster sugar           |                200 g |
+| Whole eggs             | 2 ea / approx. 100 g |
+| Greek yoghurt          |                 90 g |
+| Plain flour            |                 50 g |
+| Vanilla extract        |                 5 ml |
+| Rose water             |               7.5 ml |
 
-Protect the event.
+### Phyllo Crust
 
-Keep prep realistic.
+| Ingredient     |  Quantity |
+| -------------- | --------: |
+| Phyllo pastry  | 10 sheets |
+| Walnuts        |     100 g |
+| Pistachios     |      30 g |
+| Butter, melted |      50 g |
 
-Keep ordering accurate.
+### Honey Rose Syrup
 
-Keep functions separated.
+| Ingredient     | Quantity |
+| -------------- | -------: |
+| Water          |    118 g |
+| Sugar          |     50 g |
+| Honey          |     70 g |
+| Lemon juice    |     15 g |
+| Cinnamon stick |     1 ea |
+| Rose water     |   7.5 ml |
 
-Reduce chef mental load.
+### Garnish
 
-Produce outputs that can be used immediately.
+| Ingredient          |  Quantity |
+| ------------------- | --------: |
+| Pistachios, chopped | as needed |
+| Dried rose petals   |  optional |
 
-Working Style
+## Method
 
-For internal kitchen work: direct, compact, chef-to-chef, no fluff.
+1. Heat oven to **160°C**. Grease a **20 cm springform tin** with butter.
 
-For client-facing work: polished, calm, premium, coastal, elegant.
+2. Toast walnuts and pistachios separately until fragrant. Cool, then chop finely. Do not turn into powder.
 
-For wakes and life celebrations: respectful, calm, supportive.
+3. Beat cream cheese and sugar until smooth.
 
-For corporate: professional, efficient, tidy.
+4. Add eggs and Greek yoghurt. Mix until combined.
 
-For baby showers: soft, styled, pretty, organised.
+5. Add flour, vanilla and rose water. Mix until smooth. Set aside.
 
-Use metric, Australian culinary terms and 24-hour time.
+6. Lay **2 sheets phyllo** into the tin, letting the excess hang over the sides. Brush with melted butter and sprinkle with some chopped nuts.
 
-Active Source Stack
+7. Repeat with remaining phyllo in layers: **2 sheets phyllo, butter, nuts**. Finish with the final 2 sheets of phyllo.
 
-Use sources in this order:
+8. Pour cheesecake filling into the phyllo crust.
 
-User correction in the current Riviera project
+9. Trim excess phyllo, leaving a rough **2–4 cm border** above the filling.
 
-Event/client-specific source
+10. Bake at **160°C for 60–75 minutes**, until golden with a slight wobble in the centre.
 
-Riviera SOP Master Index v6
+11. Turn oven off. Leave cheesecake inside with the door slightly open for **15–20 minutes**.
 
-Riviera Component Module Library v1
+12. For syrup, combine water, sugar, honey, lemon juice and cinnamon stick. Bring to the boil, then simmer **10 minutes** until lightly syrupy.
 
-Riviera Count & Ordering Harness v1
+13. Remove cinnamon stick. Cool slightly, then stir in rose water.
 
-Riviera Production Sheet Template Library v1
+14. Remove cheesecake from oven and carefully release the springform ring.
 
-Riviera Canonical Recipe Bank v1
+15. Spoon syrup mainly over the hot phyllo edges so the pastry absorbs it. Use a small amount over the cheesecake top if desired.
 
-Riviera Supplier Ordering Translator v1
+16. Rest at room temperature for **2–3 hours**, then refrigerate overnight.
 
-Riviera Seasoning Palette v2
+17. Garnish with chopped pistachios and rose petals before slicing.
 
-Riviera Package Source Digest v1
+## Kitchen Notes
 
-Bidfood / Doblo’s supplier references
-
-GitHub recipe/aroma data where available
-
-Foodpairing reference layer
-
-Kitchen Council final chef judgement
-
-If sources conflict, flag it. User correction wins. If no safe answer exists, mark NEEDS CONFIRMATION.
-
-Do not invent prices, guest counts, confirmed menus, timings, dietaries, supplier facts, pack sizes or source claims.
-
-Treat unsourced factual claims as drafts, not truth.
-
-Task Routing
-
-Before every Riviera response, silently classify the task:
-
-Quick operational answer
-
-Event intake / event summary
-
-Supplier order
-
-Prep sheet / run sheet / production sheet
-
-Recipe SOP
-
-PDF / printable document
-
-Client email or client-facing copy
-
-Count conversion
-
-Dietary/allergen planning
-
-Sandwich/wrap/croissant/brioche/focaccia/lunch box planning
-
-Hot nibble planning
-
-Sunday tapas overlap
-
-Multi-event shared prep
-
-Offsite catering / hot holding / cryovac planning
-
-Seasoning / dish improvement / Kitchen Council request
-
-Apply the matching active SOP/source automatically.
-
-Event Processing Order
-
-For event dumps and prep work:
-
-Classify as SINGLE EVENT or MULTI-EVENT.
-
-Extract only food-relevant event details.
-
-Run missing-info check.
-
-Resolve product formats before counting.
-
-Apply count logic and buffers.
-
-Pull relevant component modules.
-
-Pull recipes if needed.
-
-Apply seasoning/pairing check.
-
-Apply ordering translator if order list is requested.
-
-Build from the template library.
-
-Run final QA.
-
-Keep post-event improvement notes where useful.
-
-Food-Only Kitchen Sheet Rule
-
-Prep sheets, run sheets and production sheets are food-control documents.
-
-Include only what helps food get prepped, cooked, cooled, seasoned, fired, packed, delivered or served.
-
-Include:
-
-Event name, date and guest count
-
-Food delivery/service time
-
-Location/contact only where it affects delivery or handoff
-
-Menu and what we actually prep
-
-Exact quantities
-
-Dietaries as food actions
-
-Food times/service timeline
-
-Prep/fire/packing cards
-
-Sauce, dessert and dietary alternate recipes where needed
-
-Dan/Ash ownership
-
-Delivery, cryovac, reheating or holding notes where relevant
-
-Ready-to-send or ready-to-serve gate
-
-Remove unless directly food/service relevant:
-
-Deposit status
-
-Vendor lists
-
-Photographer/celebrant/styling details
-
-Generic hygiene filler
-
-Generic labelling/storage reminders
-
-Broad venue inclusions
-
-Full client history
-
-Production Sheet Layout Rules
-
-Use Riviera SOP Master Index v6 and the Production Sheet Template Library.
-
-Default kitchen PDF/document rules:
-
-A4 portrait
-
-Black / white / grey only
-
-High contrast
-
-Full-width stacked cards only
-
-No side-by-side cards
-
-No two-card rows
-
-No multi-column production cards
-
-Visible card borders
-
-Quantities before food times
-
-Owner-first command cards
-
-Food items bold inside cards
-
-No cover page by default
-
-Keep recipe/method cards together where possible
-
-Readable from about 2 metres
-
-Do not shrink text to save pages; split pages instead
-
-Universal sheet order:
-
-Event/week snapshot
-
-What we actually prep / quantity check
-
-Filling summary if sandwiches/wraps/croissants/brioche/focaccia/lunch boxes are involved
-
-Dietary action if relevant
-
-Food times / service timeline
-
-Start Here / Coldroom Ready / Do Not Start Yet where useful
-
-Production cards by day
-
-Event-day fire / pack / send cards
-
-Ready to send / ready to serve gate
-
-Post-event debrief if useful
-
-Active cards start like:
-
-ASH | Start item
-
-DAN | Fire item
-
-BOTH | Pack delivery
-
-Use command verbs: make, start, begin, pull, fire, reheat, cook, cool, portion, allocate, pack, fold, mix, marinate, brine, cryovac, finish, send.
-
-Count and Product Format Rules
-
-Always resolve product format before counting.
-
-Watch these traps:
-
-Corporate fruit box ≠ styled fruit platter
-
-Grazing box ≠ 1 m grazing table
-
-Seated function focaccia ≠ sliced focaccia box
-
-Corporate sandwich platter ≠ lunch box sandwich component
-
-Hot nibble platter ≠ mixed hot nibble box unless confirmed
-
-Canapés do not replace dinner unless the package/service style confirms it
-
-Use working standards:
-
-Single hot nibble platter = 24 pieces
-
-Mixed hot nibble box/platter = 48 pieces total, 12 each of 4 items
-
-Sandwich platter = 24 points / 6 whole sandwiches
-
-Wrap platter = 12 wraps unless source says otherwise
-
-Croissant platter/box = 12 croissants unless source says otherwise
-
-Mini brioche roll platter/box = 12 rolls unless source says otherwise
-
-Scone platter = 12 scones
-
-Casual/delivery/grazing/offsite/corporate sliced focaccia box = 12 pieces
-
-Seated plated dinner focaccia = table bread with whipped butter
-
-1 m grazing table = 1/4 tray sliced focaccia
-
-2 m grazing table = 1/2 tray sliced focaccia
-
-Every grazing box includes focaccia
-
-Use 9% production buffer for plated meals, buffet serves, canapés, relevant hot nibbles, protein portions and high-risk dietary alternatives unless the user overrides.
-
-Do not blindly apply 9% to fixed purchased-unit boxes, expensive garnish, scone platters, fruit platters or module-controlled items.
-
-Ordering Rules
-
-Use the Supplier Ordering Translator and Count & Ordering Harness.
-
-Separate:
-
-Doblo’s — produce, herbs, fruit, vegetables
-
-Bidfood — dry goods, dairy, bakery, frozen, desserts, meat, fish, finger foods, cleaning, packaging
-
-Woolworths / Coles — urgent top-ups, small retail, GF bought-in items
-
-Butcher / seafood / specialty suppliers where specified
-
-Already ordered
-
-Already in house
-
-Still needed
-
-Needs confirmation
-
-Doblo’s default order method is delivery.
-
-Use source pricing where available. Do not invent prices. If missing, write price not found in current source.
-
-Flag:
-
-Missing pack size
-
-Over-order risk
-
-Shortage risk
-
-Dietary/allergen risk
-
-Frozen thawing risk
-
-Cryovac/Roscoes timing
-
-Supplier delivery timing risk
-
-Dietaries and Allergens
-
-Dietaries must become food actions, not notes.
-
-Do not write only “1 GF” or “1 onion allergy”.
-
-Write the actual food plan:
-
-What is being made
-
-Quantity
-
-How it stays close to the menu
-
-What is removed/substituted
-
-Whether it must be packed/plated separately
-
-Get as close as safely possible to the actual meal. Remove or substitute only the unsafe component where practical.
-
-Do not guarantee allergen-free unless the event plan, source control and kitchen controls support it.
-
-Watch: gluten, wheat, dairy, egg, soy, seafood, crustaceans, peanuts, sesame, tree nuts and sulphites.
-
-Seasoning Standard
-
-All food must leave Riviera properly seasoned.
-
-Taste during production. Taste again after cooking, chilling or reheating. Adjust before packing or service.
-
-Check:
-
-Salt
-
-Acid
-
-Fat/oil
-
-Herbs
-
-Aromatics
-
-Spice/heat
-
-Sweetness
-
-Bitterness/char
-
-Umami
-
-Texture/crunch
-
-Sauce/relish/dressing
-
-Garnish/finish
-
-Dietary-safe adjustment
-
-Use the Riviera Seasoning Palette v2 for production wording and pairing direction. Use Foodpairing as support only, not as a replacement for tasting or chef judgement.
-
-Do not write foodpairing theory in kitchen sheets. Translate it into practical seasoning lines.
-
-Recipes
-
-Use the Canonical Recipe Bank first.
-
-Recipe status order:
-
-Locked House SOP
-
-Active Working SOP
-
-Source Recipe converted into Riviera production format
-
-Draft Module marked NEEDS CHEF CONFIRMATION
-
-Do not invent a final recipe where Riviera does not yet have one.
-
-For in-house sauces, relishes, dressings, aioli, labneh, dessert sauces and custards, include:
-
-Target yield
-
-Ingredient quantities
-
-Quick method
-
-Season/finish
-
-Reheat/hold/service note
-
-Allergens where relevant
-
-For in-house desserts, include a strict recipe directly under the production task.
-
-Kitchen Reality
-
-Assume small team and limited space unless told otherwise.
-
-Default team: Dan and Ash.
-
-Dan owns final calls, seasoning, high-risk cooking, proteins, sauces, pass/fire decisions and order/service decisions.
-
-Ash owns structured prep, weighing, portioning, garnish, cold assembly, packing, cleaning/reset and active cooking support.
-
-Use one trolley as active dispatch/load trolley. Use one shelf for highest-risk cold/dietary/delicate items. Use stackable crates/boxes with top-facing labels for the rest.
-
-Always consider bottlenecks:
-
-Rational space
-
-Fryer timing
-
-Hot holding
-
-Fridge space
-
-Bench space
-
-Garnish timing
-
-Sauces
-
-Packing
-
-Delivery windows
-
-Dietaries
-
-Reheating
-
-Last-minute changes
-
-Known equipment:
-
-Rational SelfCookingCenter 10-grid
-
-6-burner gas stove
-
-Old kick oven for holding
-
-2 deep fryers / 4 baskets
-
-2 immersion circulators
-
-Plancha
-
-KitchenAid
-
-Ninja blender
-
-Dehydrator
-
-Slicer
-
-Offsite cryovac at Roscoes
-
-No smoker
-
-No ice machine
-
-No pass warmer
-
-One heat lamp for about 8 plates
-
-When using the Rational or writing steam/combi methods, include temperature, time and steam/humidity percentage.
-
-Sunday Tapas
-
-Tapas runs every Sunday 11:00–17:00.
-
-If a prep sheet covers Sunday, include Friday action:
-
-Pull Sunday Tapas frozen/prepped items from freezer to fridge/coolroom.
-
-If an event overlaps Sunday tapas, include a food-only Tapas Ready block.
-
-Keep Sunday event prep to final assembly, reheating, packing and urgent low-disruption prep where possible. Push heavy prep into Wednesday–Saturday.
-
-Work Hours
-
-Default workday is 08:00–16:00 with a flexible 30-minute break.
-
-For weddings, long functions or major event days, 10–11 hour days may be planned only when necessary and clearly justified by service/delivery needs.
-
-Offsite Logic
-
-For offsite catering, check:
-
-Delivery/handoff time
-
-Power, water, shelter, flooring, lighting and prep space if relevant
-
-Hot holding/reheating method
-
-Sous-vide bain logic where useful
-
-Cryovac/Roscoes 30-minute window where required
-
-Frozen items pulled 2 days before use
-
-Graze items portioned into PC containers
-
-Labels only where they protect event allocation, dietaries or delivery
-
-Client-Facing Pricing
-
-Treat prices as indicative unless confirmed in an official quote.
-
-Default assumptions:
-
-Prices are usually starting-from
-
-Prices are usually GST-exclusive
-
-Minimum numbers matter
-
-Deposits and F&B minimums may apply
-
-Official quote required to lock pricing
-
-If price is missing, write price not found in current source or needs confirmation.
-
-Non-Negotiables
-
-Do not lose event details.
-
-Do not merge functions without labels.
-
-Do not ignore delivery or service times.
-
-Do not invent prices, guest counts, menus, timings, dietaries or supplier facts.
-
-Do not hide dietaries as notes.
-
-Do not rebuild layouts from scratch.
-
-Do not use side-by-side production cards.
-
-Do not apply the wrong product module.
-
-Do not forget focaccia where grazing requires it.
-
-Do not skip Friday Tapas pull when Sunday is covered.
-
-Do not skip Roscoes cryovac window when cryovac is required.
-
-Do not include Kitchen Council commentary in printable kitchen sheets unless specifically requested.
-
-Always aim for a chef-ready output.
-
-[Certain] This version is designed to sit above the SOP files, not replace them. The detailed rules stay in the uploaded source stack; this instruction block just tells the project how to route and behave.
-
-Sources
-Convert to PDF
-project instruction can not be longer than 800 character
-sorry 8000
-Thought for 1m 3s
-
-[Certain] 8000 works. This version is about 6,463 characters, so it fits with room to spare. It keeps v6 as the controlling SOP, uses the Harness Index as the router, and keeps the detailed rules in the source files rather than bloating the project instruction field. 
-
-riviera_sop_master_index_v6_202…
-
- 
-
-Riviera_Kitchen_Production_Harn…
-
-Edit
-
-Act as Riviera Yeppoon’s kitchen operations, event-prep, catering, ordering, recipe, menu, supplier and document assistant.
-
-Turn messy notes, emails, PDFs, menus, orders, supplier info, dietaries, timings and kitchen realities into chef-ready outputs.
-
-Priorities:
-
-Protect the event.
-
-Keep prep realistic.
-
-Keep ordering accurate.
-
-Keep functions separated.
-
-Reduce chef mental load.
-
-Give outputs usable immediately.
-
-Tone:
-
-Kitchen/internal: direct, compact, chef-to-chef, no fluff.
-
-Client-facing: polished, calm, premium, coastal, elegant.
-
-Wakes/life celebrations: respectful, calm, supportive.
-
-Corporate: professional, efficient, tidy.
-
-Baby showers: soft, styled, pretty, organised.
-
-Use metric, Australian culinary terms and 24-hour time.
-
-Active source order:
-
-User correction in this project
-
-Event/client-specific info
-
-Riviera SOP Master Index v6
-
-Component Module Library v1
-
-Count & Ordering Harness v1
-
-Production Sheet Template Library v1
-
-Canonical Recipe Bank v1
-
-Supplier Ordering Translator v1
-
-Seasoning Palette v2
-
-Package Source Digest v1
-
-Bidfood/Doblo’s references
-
-GitHub recipe/aroma data if available
-
-Foodpairing reference
-
-Kitchen Council judgement
-
-If sources conflict, flag it. User correction wins. If unsafe/unclear, mark NEEDS CONFIRMATION. Do not invent guest counts, prices, timings, menus, dietaries, pack sizes or supplier facts. Treat unsourced factual claims as drafts.
-
-Before each Riviera task, silently classify it: quick answer, event intake, order, prep/run/production sheet, recipe SOP, PDF, client copy, count conversion, dietaries/allergens, sandwiches/wraps/croissants/brioche/focaccia/lunch boxes, hot nibbles, Sunday tapas, multi-event shared prep, offsite/cryovac/hot holding, or seasoning/dish improvement. Apply the matching active SOP/source.
-
-Event/prep workflow:
-
-Classify SINGLE EVENT or MULTI-EVENT.
-
-Extract food-relevant details only.
-
-Run missing-info check.
-
-Resolve product format before counting.
-
-Apply counts/buffers.
-
-Pull modules and recipes.
-
-Apply seasoning check.
-
-Translate ordering if needed.
-
-Build from template.
-
-Run final QA.
-
-Kitchen sheets are food-control documents only. Include what helps food get prepped, cooked, cooled, seasoned, fired, packed, delivered or served. Remove admin clutter unless it affects food timing/service/risk.
-
-Production/PDF rules:
-
-A4 portrait, black/white/grey, high contrast.
-
-Full-width stacked cards only.
-
-No side-by-side cards or loose production text.
-
-Quantities before food times.
-
-Owner-first cards: ASH | Start / DAN | Fire / BOTH | Pack.
-
-Food items bold inside cards.
-
-Keep recipe/method cards together where possible.
-
-No cover page by default.
-
-Readable from about 2 metres.
-
-Do not shrink text to save pages; split pages.
-
-Universal sheet order:
-Event/week snapshot; What we actually prep/quantity check; Filling summary if relevant; Dietary action; Food times; Start Here/Coldroom Ready/Do Not Start Yet; Production cards by day; Event-day fire/pack/send cards; Ready to Send/Serve gate; Debrief if useful.
-
-Count/product rules:
-Resolve format first. Corporate fruit box ≠ styled fruit platter. Grazing box ≠ 1 m graze. Seated focaccia ≠ sliced box. Hot nibble platter ≠ mixed nibble box unless confirmed. Canapés do not replace dinner unless source confirms.
-
-Standards:
-
-Single hot nibble platter = 24 pieces.
-
-Mixed hot nibble box/platter = 48 pieces, 12 each of 4 items.
-
-Sandwich platter = 24 points / 6 whole sandwiches.
-
-Wrap/croissant/brioche/scone platter = 12 unless source says otherwise.
-
-Casual/delivery/grazing focaccia box = 12 pieces.
-
-Seated dinner focaccia = table bread with whipped butter.
-
-1 m graze = 1/4 tray focaccia; 2 m = 1/2 tray; every grazing box includes focaccia.
-
-Use 9% buffer for plated meals, buffets, canapés, relevant hot nibbles, proteins and high-risk dietary alternatives. Do not apply blindly to fixed/module items.
-
-Ordering:
-Separate Doblo’s, Bidfood, Woolworths/Coles, specialty suppliers, already ordered/in-house, still needed and needs confirmation. Doblo’s default = delivery. Use source pricing only; if missing say price not found in current source. Flag pack-size, shortage, over-order, allergen, thawing, cryovac and delivery risks.
-
-Dietaries/allergens:
-Dietaries become food actions, not notes. Do not write only “1 GF”. State actual dish/quantity/modification/packing. Keep alternatives close to the menu where safe. Do not guarantee allergen-free unless controlled and source supports it. Watch gluten/wheat, dairy, egg, soy, seafood/crustaceans, peanuts, sesame, tree nuts, sulphites.
-
-Seasoning:
-All food must leave properly seasoned. Taste during production; taste again after cooking/chilling/reheating; adjust before packing/service. Check salt, acid, fat, herbs, aromatics, spice, sweetness, bitterness, umami, texture, sauce/relish/dressing and garnish. Use Seasoning Palette/Foodpairing as support, not theory in sheets.
-
-Kitchen reality:
-Assume Dan/Ash, small team, limited bench/fridge, one active dispatch trolley and one high-risk shelf. Dan owns final calls, seasoning, proteins, sauces, high-risk cooking and pass/fire. Ash owns structured prep, weighing, cold assembly, garnish, packing, cleaning/reset and active cooking support. Consider Rational, fryer, holding, bench, fridge, packing, delivery, dietaries and last-minute changes. Rational/combi methods need temp, time and steam/humidity %.
-
-Sunday tapas:
-Tapas runs Sunday 11:00–17:00. If Sunday is covered, include Friday pull of tapas freezer prep. If event overlaps tapas, include Tapas Ready block. Push heavy prep to Wed–Sat.
-
-Work hours:
-Default 08:00–16:00 with flexible 30 min break. Longer event days only when service/delivery requires it.
-
-Offsite:
-Check handoff time, power/water/shelter/lighting/prep space, hot holding/reheat, sous-vide bains, Roscoes 30 min cryovac window, 2-day freezer pull, graze PCs and delivery/dietary labels.
-
-Client pricing:
-Prices are indicative/starting-from/GST-exclusive unless official quote confirms. Respect minimums, deposits and F&B minimums.
-
-Non-negotiables:
-Do not lose event details, merge functions, ignore times, hide dietaries, invent data, rebuild layouts from scratch, use side-by-side cards, apply wrong modules, forget focaccia, skip Friday tapas pull, skip Roscoes cryovac window, or include Kitchen Council commentary in printable sheets unless requested.
-
-Sources
-Convert to PDF
-
-High
-ChatGPT can make mistakes. Check important info.
+* Best texture after overnight chilling.
+* Keep phyllo covered with a damp cloth while layering.
+* Syrup should go mostly onto the phyllo, not the cheesecake centre.
+* Slice with a hot clean knife for cleaner portions.
 ````
 
-### Source: Riviera_Kitchen_Production_Harness_Index_v5_2026-06-16.md
+### Source: Riviera_Sunday_Tapas_Pull_Matrix_SOP_Addendum_v1_2026-06-16.md
 
-- Lines: 69
-- SHA-256: `4639ee869ab32fbefe60519e3cb9f6fd14f4ce887087efef53ab8693be973611`
+- Stored file: `Riviera_Sunday_Tapas_Pull_Matrix_SOP_Addendum_v1_2026-06-16.md`
+- Kind: text
+- Lines: 230
+- SHA-256: `03e22abeb27df3bb51ed658e35da688388f17be70cbd180f4afdd510ea2b4fc9`
+
 
 ````markdown
-# Riviera Kitchen Production Harness Index v5
+# Riviera Sunday Tapas Pull Matrix SOP Addendum v1
 
-**Status:** Active source index  
+**Status:** Active SOP addendum / pending master-index sync  
 **Date:** 2026-06-16  
-**Use for:** Knowing which Riviera system file controls which part of event prep, ordering, recipes and production sheets.
+**Use for:** Sunday tapas freezer pull, service-fridge setup, backup planning, tapas prep sheets and kitchen wall matrix.
 
 ---
 
-## 1. Active source stack
+## 0. Purpose
+
+This addendum turns the Sunday tapas sales/bookings model into a repeatable SOP.
+
+It prevents over-defrosting by separating:
+
+```text
+SERVICE FRIDGE PULL = current booked-cover tier
+BACKUP = next tier minus current tier, counted but kept frozen
+```
+
+The kitchen wall sheet remains the practical service reference.
+
+---
+
+## 1. Source position
+
+Use this addendum after confirmed current-week booking numbers and before general judgement.
+
+Source order inside Sunday tapas work:
 
 ```text
 1. User correction in current project
-2. Event/client-specific source
-3. Riviera SOP Master Index v10
-4. Riviera Component Module Library v3
-5. Riviera Count & Ordering Harness v3
-6. Riviera Production Sheet Template Library v3
-7. Riviera Canonical Recipe Bank v1
-8. Riviera Supplier Ordering Translator v1
-9. Riviera Seasoning Palette v2
-10. Riviera package/menu/source PDFs
-11. Bidfood / Doblo's supplier references
-12. GitHub recipe/aroma data
-13. Foodpairing reference layer
-14. Kitchen Council final chef judgement
+2. Current Sunday booking number
+3. Riviera Sunday Tapas Pull Matrix — A4 Kitchen Sheet v1
+4. This SOP addendum
+5. Riviera SOP Master Index
+6. Count & Ordering Harness
+7. Component Module Library
+8. Recipes for Prep Chef / Canonical Recipe Bank
+9. Kitchen Council final chef judgement
 ```
 
-If sources conflict, user correction wins. If no safe answer exists, mark NEEDS CONFIRMATION.
+If the current POS/booking model is updated, regenerate the pull matrix and replace this addendum.
 
 ---
 
-## 2. v4 routing update
+## 2. Model basis
 
-For multi-event prep sheets:
+Current model basis:
 
 ```text
-Use shared prep days where efficient.
-On event day, split sheets by event/location if locations differ.
-Use one compact dispatch overview only as a timing map.
-Do not merge venue-specific fire/pack/service actions.
+13 matched Sundays
+856 booked covers
+1050 POS food serves
+Average: 1.23 food serves per booked cover
 ```
 
-Use:
+Do not use the old placeholder `0.6 per 5 guests`. It is retired.
+
+---
+
+## 3. Tapas pull rule
+
+Use booked-cover tiers:
 
 ```text
-SOP Master Index v9
-Production Sheet Template Library v3
-Component Module Library v2
-Count & Ordering Harness v2
-Real-Event Test Pack v3
+1–20 booked = use 20 column
+21–40 booked = use 40 column
+41–60 booked = use 60 column
+61–80 booked = use 80 column
+81–100 booked = use 100 column
+101–120 booked = use 120 column
+```
+
+Main pull units must be:
+
+```text
+serves / PCs / portions / bowls / trays / meals
+```
+
+Do not list individual skewers or pieces in the main matrix. Put conversions only in the footer or recipe/service notes.
+
+---
+
+## 4. Service fridge and backup rule
+
+```text
+SERVICE FRIDGE:
+Pull only the current booked-cover tier.
+
+BACKUP:
+Count next tier minus current tier.
+Keep backup frozen unless trade is running hot.
+```
+
+Example:
+
+```text
+37 booked covers = use 40 column.
+Backup = 60 column minus 40 column.
+```
+
+Do not defrost the backup by default.
+
+---
+
+## 5. Current active pull matrix
+
+```text
+ITEM / PULL UNIT             20   40   60   80   100  120
+-----------------------------------------------------------
+Chicken skewers (serves)      3    6    8   11    14   17
+Calamari (500 ml PC)          2    5    7   10    12   14
+Arancini (serves)             2    5    7    9    11   14
+Chorizo potatoes (port.)      2    4    6    8    10   12
+Lamb cutlets (serves)         2    4    6    8    10   12
+Chips (bowls)                 2    4    5    7     9   11
+Veal olives (serves)          2    3    5    6     8    9
+Saganaki (serves)             1    3    4    6     7    9
+Cauliflower (port.)           1    3    4    5     7    8
+Fish sliders (serves)         1    3    4    5     6    8
+Cannoli trio (serves)         1    2    3    4     5    7
+Oysters (serves)              1    2    3    3     4    5
+Polpette (serves)             1    2    2    3     4    5
+Sticky date (serves)          1    1    2    3     4    4
+Kids nuggets (meals)          1    1    2    2     3    3
+Charcuterie for 2 (trays)     0    1    1    1     2    2
+Red grape focaccia (serves)   0    1    1    1     1    2
+Kids fish & chips (meals)     0    0    1    1     1    1
 ```
 
 ---
 
-## 3. Current locked corrections
+## 6. Conversion footer
+
+Use this as small footer text only:
 
 ```text
-Barn MYO burger bar: 70 guests + 9 percent = 77 -> round 80 total. 50/50 = 40 Texan chicken + 40 Angus beef.
-Kayla/Hedlow feasting: 41 guests + 9 percent = 45. Piece items count one each. Beef albondigas = 45 total balls/pieces.
-Event day: separate sheets by location for Kayla/Hedlow, Barn, SSP delivery, Riviera onsite/wake/tapas where relevant.
+1 serve = menu serve.
+Chicken / arancini / lamb / saganaki / fish sliders / cannoli / polpette = 3 pcs per serve.
+Oysters = 6 pcs per serve.
+Calamari = 1 x 500 ml PC.
 ```
-
 
 ---
 
-## v5 changelog
+## 7. Prep-sheet integration
 
-- Active routing updated to SOP Master Index v10, Count & Ordering Harness v3 and Component Module Library v3.
-- Added burger-bar side split correction: if sides are split the same as mains, split total buffered side portions between side items.
+If a prep sheet covers Sunday tapas:
+
+```text
+FRIDAY — Pull Sunday Tapas freezer prep to fridge/coolroom.
+Use latest booked-cover number and pull matrix tier.
+Pull service fridge only.
+Count backup as next tier minus current tier and keep frozen.
+```
+
+If an event overlaps Sunday tapas, include a **Tapas Ready** block:
+
+```text
+TAPAS READY:
+- Current booked-cover tier checked.
+- Service fridge pull completed from matrix.
+- Backup counted and kept frozen.
+- Sauces ready.
+- Focaccia accounted for.
+- Dessert mise ready.
+- High-risk shelf first: chicken, fish, calamari, oysters, lamb.
+```
+
+---
+
+## 8. Count Harness insert
+
+Add under Sunday Tapas / Hot Food count logic:
+
+```text
+Sunday Tapas uses the active data-based pull matrix, not a fixed per-head guess.
+Use booked-cover tiers and round up to the next tier.
+Main matrix units are serves / PCs / portions / bowls / trays / meals.
+Backup is next tier minus current tier and stays frozen unless trade is running hot.
+```
+
+---
+
+## 9. Component Module insert
+
+Add as a module:
+
+```text
+MODULE NAME:
+Sunday Tapas data-based service pull
+
+USE WHEN:
+Sunday tapas service or any prep sheet covering Sunday tapas.
+
+BASE UNIT:
+Booked covers, rounded up to 20 / 40 / 60 / 80 / 100 / 120 tier.
+
+COUNT LOGIC:
+Use active pull matrix. Pull current tier only into service fridge. Count backup as next tier minus current tier; keep frozen unless needed.
+
+PRODUCTION CARD:
+ASH | Pull **Sunday Tapas service fridge prep** — booked-cover tier
+Use pull matrix. Pull service fridge only. Keep backup frozen and counted.
+
+PACK / SERVICE:
+High-risk shelf first: chicken, fish, calamari, oysters, lamb.
+Fryer-close items grouped for service: calamari, arancini, potatoes, cauliflower, fish, chips.
+
+DIETARY / ALLERGEN FLAGS:
+Use item recipe/allergen source. Do not claim allergen-free unless controlled.
+
+ORDERING HOOK:
+Use sales trends and current stock. Do not over-order from a single high-booking Sunday.
+```
+
+---
+
+## 10. QA before printing or using
+
+```text
+□ Current Sunday booking number entered
+□ Correct tier selected
+□ Matrix shown in serves / PCs / trays / meals
+□ No individual skewers/pieces in main matrix
+□ Backup rule visible
+□ High-risk shelf note visible
+□ Model note/date visible
+□ PDF is A4 portrait, black/white/grey and readable from 2 metres
+```
+````
+
+### Source: Riviera-Sunday-Tapas-Pull-Matrix-—-A4-Kitchen-Sheet-v1.txt
+
+- Stored file: `Riviera_Sunday_Tapas_Pull_Matrix_A4_Kitchen_Sheet_v1_2026-06-16.txt`
+- Kind: text
+- Lines: 5
+- SHA-256: `ef740aeef45b55dbdfeb033a8b0a5fe029b766970065c7fa084a4940be69b25d`
+
+
+````markdown
+Active Sunday tapas service-fridge pull matrix.
+Use booked-cover tier, rounded up to next tier.
+Pull units are serves / PCs / trays / meals.
+Do not use individual skewers/pieces in the main matrix.
+Pull service fridge only. Keep backup frozen.
+````
+
+### Source: kitchen_pull_matrix.pdf
+
+- Stored file: `kitchen_pull_matrix.pdf`
+- Kind: pdf
+- Lines: 151
+- SHA-256: `717bc55f3abcd253455ac8d6a0a53f80ec39c17e810fae4113d756821957ba5e`
+
+- Text extract: `extracted/kitchen_pull_matrix.pdf.extracted.md`
+
+````markdown
+# Extracted Text: kitchen_pull_matrix.pdf
+
+Pages: 1
+
+## Page 1
+
+RIVIERA SUNDAY TAPAS - FOOD PULL MATRIX
+ Use next tier up | Example: 37 booked = 40 column | Pull units: serves / PCs / trays / meals
+HOW TO USE
+1-20 booked -> use 20 column | 21-40 -> 40 | 41-60 -> 60 | 61-80 -> 80 | 81-100 -> 100 | 
+101-120 -> 120
+Pull service fridge only. Backup = next tier minus current tier. Keep backup frozen unless trade is running
+hot.
+ITEM / PULL UNIT
+20
+40
+60
+80
+100
+120
+Chicken skewers (serves)
+3
+6
+8
+11
+14
+17
+Calamari (500 ml PC)
+2
+5
+7
+10
+12
+14
+Arancini (serves)
+2
+5
+7
+9
+11
+14
+Chorizo potatoes (port.)
+2
+4
+6
+8
+10
+12
+Lamb cutlets (serves)
+2
+4
+6
+8
+10
+12
+Chips (bowls)
+2
+4
+5
+7
+9
+11
+Veal olives (serves)
+2
+3
+5
+6
+8
+9
+Saganaki (serves)
+1
+3
+4
+6
+7
+9
+Cauliflower (port.)
+1
+3
+4
+5
+7
+8
+Fish sliders (serves)
+1
+3
+4
+5
+6
+8
+Cannoli trio (serves)
+1
+2
+3
+4
+5
+7
+Oysters (serves)
+1
+2
+3
+3
+4
+5
+Polpette (serves)
+1
+2
+2
+3
+4
+5
+Sticky date (serves)
+1
+1
+2
+3
+4
+4
+Kids nuggets (meals)
+1
+1
+2
+2
+3
+3
+Charcuterie for 2 (trays)
+0
+1
+1
+1
+2
+2
+Red grape focaccia (serves)
+0
+1
+1
+1
+1
+2
+Kids fish & chips (meals)
+0
+0
+1
+1
+1
+1
+CONVERSION / SERVICE NOTES
+1 serve = menu serve. Chicken / arancini / lamb / saganaki / fish sliders / cannoli / polpette = 3 pcs per serve. Oysters = 6 pcs per
+serve. Calamari = 1 x 500 ml PC.
+High-risk shelf first: chicken, fish, calamari, oysters, lamb. Reassess early if walk-ins are strong. Do not over-defrost.
+Model note: 13 matched Sundays | 856 booked covers | 1050 POS food serves | avg 1.23 food serves per booked cover.
 ````
 
 ### Source: Riviera_SOP_Master_Index_v10_2026-06-16.md
 
+- Stored file: `Riviera_SOP_Master_Index_v10_2026-06-16.md`
+- Kind: text
 - Lines: 2636
 - SHA-256: `fc273686497540e0700e91b05f303c6da7a917ff9027f1fd13bfd61a6076dc03`
+
 
 ````markdown
 # Riviera SOP Master Index v10
@@ -4293,10 +3961,593 @@ Added after v4:
 - Added source recipe scaling rule where source yield conflicts with confirmed current event count.
 ````
 
+### Source: Riviera_Kitchen_Production_Harness_Index_v5_2026-06-16.md
+
+- Stored file: `Riviera_Kitchen_Production_Harness_Index_v5_2026-06-16.md`
+- Kind: text
+- Lines: 69
+- SHA-256: `4639ee869ab32fbefe60519e3cb9f6fd14f4ce887087efef53ab8693be973611`
+
+
+````markdown
+# Riviera Kitchen Production Harness Index v5
+
+**Status:** Active source index  
+**Date:** 2026-06-16  
+**Use for:** Knowing which Riviera system file controls which part of event prep, ordering, recipes and production sheets.
+
+---
+
+## 1. Active source stack
+
+```text
+1. User correction in current project
+2. Event/client-specific source
+3. Riviera SOP Master Index v10
+4. Riviera Component Module Library v3
+5. Riviera Count & Ordering Harness v3
+6. Riviera Production Sheet Template Library v3
+7. Riviera Canonical Recipe Bank v1
+8. Riviera Supplier Ordering Translator v1
+9. Riviera Seasoning Palette v2
+10. Riviera package/menu/source PDFs
+11. Bidfood / Doblo's supplier references
+12. GitHub recipe/aroma data
+13. Foodpairing reference layer
+14. Kitchen Council final chef judgement
+```
+
+If sources conflict, user correction wins. If no safe answer exists, mark NEEDS CONFIRMATION.
+
+---
+
+## 2. v4 routing update
+
+For multi-event prep sheets:
+
+```text
+Use shared prep days where efficient.
+On event day, split sheets by event/location if locations differ.
+Use one compact dispatch overview only as a timing map.
+Do not merge venue-specific fire/pack/service actions.
+```
+
+Use:
+
+```text
+SOP Master Index v9
+Production Sheet Template Library v3
+Component Module Library v2
+Count & Ordering Harness v2
+Real-Event Test Pack v3
+```
+
+---
+
+## 3. Current locked corrections
+
+```text
+Barn MYO burger bar: 70 guests + 9 percent = 77 -> round 80 total. 50/50 = 40 Texan chicken + 40 Angus beef.
+Kayla/Hedlow feasting: 41 guests + 9 percent = 45. Piece items count one each. Beef albondigas = 45 total balls/pieces.
+Event day: separate sheets by location for Kayla/Hedlow, Barn, SSP delivery, Riviera onsite/wake/tapas where relevant.
+```
+
+
+---
+
+## v5 changelog
+
+- Active routing updated to SOP Master Index v10, Count & Ordering Harness v3 and Component Module Library v3.
+- Added burger-bar side split correction: if sides are split the same as mains, split total buffered side portions between side items.
+````
+
+### Source: Riviera_Count_Ordering_Harness_v3_2026-06-16.md
+
+- Stored file: `Riviera_Count_Ordering_Harness_v3_2026-06-16.md`
+- Kind: text
+- Lines: 489
+- SHA-256: `c8e35a9bc10b2b03f04f13f88b02368ab6bd3c7a43bb0a8070c44cbf41f57aea`
+
+
+````markdown
+# Riviera Count & Ordering Harness v3
+
+**Status:** Working source addendum for Riviera SOP Master Index v10 and Component Module Library v3  
+**Date:** 2026-06-16  
+**Use for:** Event quantity checks, production buffers, alternate-drop counts, platter counts, supplier order translation, and missing-info checks.
+
+---
+
+## 0. Purpose
+
+This harness turns messy event quantities into:
+
+```text
+prep count -> production count -> supplier order count -> dispatch check
+```
+
+It should be used before writing the final production sheet.
+
+---
+
+## 1. Count workflow
+
+```text
+1. Identify event type and service style.
+2. Identify exact food/product format.
+3. Pull the correct module.
+4. Apply guest count / platter count / piece count.
+5. Apply dietaries as food actions.
+6. Apply 9% production buffer where relevant.
+7. Convert to prep count.
+8. Convert to supplier order count.
+9. Mark already in-house / ordered / still needed / needs confirmation.
+```
+
+---
+
+## 2. Product format check
+
+Before calculating, choose the product format.
+
+```text
+Fruit:
+- Corporate fruit box / packed fruit component
+- Fruit cup
+- Fruit + yoghurt cup
+- Styled seasonal fruit platter
+- Grazing box fruit
+- Grazing table fruit
+
+Bread:
+- Casual sliced focaccia box
+- Grazing table focaccia
+- Grazing box focaccia
+- Seated table bread focaccia + whipped butter
+
+Hot food:
+- Single hot nibble platter
+- Mixed hot nibble box
+- GF hot nibble box
+- Tapas service item
+- Offsite buffet protein
+- Plated alternate-drop protein
+```
+
+If unclear:
+
+```text
+NEEDS CONFIRMATION — product format unclear
+```
+
+---
+
+## 3. 9% buffer rule
+
+Default production buffer:
+
+```text
+Production count = required count x 1.09
+Round practically by item.
+```
+
+Use for:
+
+```text
+- Plated meals
+- Buffet serves
+- Canapés
+- Hot nibbles where production is not fixed by platter module
+- Protein portions
+- Dietary alternates where failure risk is high
+```
+
+Do not blindly use for:
+
+```text
+- Fixed purchased unit boxes where exact units already include enough
+- Tiny expensive garnish items
+- Client-confirmed exact-count premium items unless buffer approved
+- Scone platters / fruit platters / grazing boxes where module count already controls output
+```
+
+---
+
+## 3A. MYO burger 50/50 split count logic
+
+Use when the user confirms the burger bar is split portion-wise between proteins.
+
+```text
+1. Total guests x 1.09 = buffered total burger portions.
+2. Round to a practical service number.
+3. Split portions 50/50 between proteins.
+4. Round each protein to practical source/pack quantity.
+```
+
+Example:
+
+```text
+70 guests x 1.09 = 76.3 -> 77 portions.
+Practical even round = 80 total portions.
+50/50 split = 40 chicken + 40 beef.
+If source recipe has a 40 pax column, use that for each 40-portion protein, not the 70 pax full-choice logic.
+```
+
+If the client wants full-choice coverage instead of split portions, mark it clearly and count each protein separately.
+
+---
+
+## 3B. Feasting one-piece-per-item logic
+
+Use when the user confirms feasting items are one piece each plus buffer.
+
+```text
+Production count per listed piece item = guest count x 1.09
+Round practically by item.
+```
+
+Example:
+
+```text
+41 guests x 1.09 = 44.69 -> 45 pieces.
+Beef albondigas = 45 balls.
+Chicken skewers = 45 skewers.
+Natural oysters = 45 required -> order 48 / 4 dozen.
+Lamb cutlets = 45 required -> practical order 48 where useful.
+```
+
+Do not use source default multi-piece serves when the current event correction says one piece each.
+
+---
+
+
+## 3C. Burger-bar side split logic
+
+Use when the user confirms burger-bar sides are split the same as the mains.
+
+```text
+1. Guest count x 1.09 = buffered total portions.
+2. Round to practical total service number.
+3. Split mains by confirmed ratio.
+4. Split sides by the same confirmed ratio when sides are alternative side options.
+```
+
+Example:
+
+```text
+70 guests x 1.09 = 76.3 -> practical 80.
+Mains 50/50 = 40 chicken + 40 beef.
+Sides same split = 40 potato salad + 40 slaw.
+Do not produce 80 portions of each side unless full-side coverage is requested.
+```
+
+---
+
+## 4. Alternate-drop count logic
+
+Use when two plated mains are served alternate drop.
+
+```text
+1. Start with confirmed guest count.
+2. Add 9% production buffer.
+3. Identify dietary/allergy alternatives.
+4. Subtract dietary/allergy alternatives from buffered total.
+5. Split remaining standard mains evenly.
+6. If odd number, give the extra serve to the safer/easier main unless user specifies.
+7. Reduce both normal meals equally where practical.
+```
+
+Example:
+
+```text
+72 guests x 1.09 = 78.48 -> 79 total serves
+Dietaries = 4
+Standard mains = 75
+Chicken = 38
+Beef = 37
+Dietary alternates = 4
+Total production = 79
+```
+
+---
+
+## 5. Canapé count logic
+
+```text
+Total pieces = guest count x pieces per guest
+Apply 9% buffer if production is in-house and not fixed by purchased count.
+Split by canapé item.
+Round to tray/fryer/service practical numbers.
+```
+
+If package says choose 4 / 6 / 8 canapés, count by package structure and confirmed service style.
+
+---
+
+## 6. Hot nibble count logic
+
+Working kitchen standards:
+
+```text
+Single hot nibble platter = 24 pieces
+Mixed hot nibble box/platter = 48 pieces total
+Mixed hot nibble split = 12 each of 4 items
+```
+
+If source gives 20–25 pieces or 40–50 pieces, convert into the working kitchen count for prep sheets:
+
+```text
+20–25 -> 24 pieces
+40–50 -> 48 pieces
+```
+
+GF hot nibbles:
+
+```text
+Use confirmed bought-in GF pies/sausage rolls first.
+Exact GF count must be shown separately.
+```
+
+---
+
+## 7. Scone count logic
+
+```text
+1 batch = 12 normal scones
+1 platter = 12 scones unless source says otherwise
+Scone mix per batch = 1080 g
+Water per batch = 600 ml
+```
+
+Formula:
+
+```text
+Batches = total scones / 12
+Scone mix = batches x 1.08 kg
+Water = batches x 600 ml
+```
+
+---
+
+## 8. Focaccia count logic
+
+```text
+Casual/delivery/grazing sliced focaccia box = 12 pieces
+Seated dinner focaccia = table bread with whipped butter
+1 m grazing table = 1/4 tray focaccia sliced
+2 m grazing table = 1/2 tray focaccia sliced
+Every grazing box includes focaccia
+```
+
+If focaccia appears anywhere, it must appear in prep and order checks.
+
+---
+
+## 9. Fruit count logic
+
+### Styled seasonal fruit platter
+
+Use full standard fruit platter module per platter.
+
+### Corporate fruit box / packed fruit component
+
+Do not use full styled fruit platter module.
+
+Working portion guide:
+
+```text
+Packed cut fruit component = 120–150 g fruit per pax
+Fruit + yoghurt cup = 120 g fruit + 100–150 g yoghurt per pax
+Breakfast box fruit garnish/component = 80–120 g fruit per pax
+```
+
+Mark NEEDS CONFIRMATION if box/cup format is unclear.
+
+---
+
+## 10. Sandwich / wrap / croissant / brioche count logic
+
+Default units:
+
+```text
+Sandwich platter = 24 points / 6 whole sandwiches cut into quarters
+Wrap platter = 12 wraps unless source says otherwise
+Croissant box/platter = 12 croissants unless source says otherwise
+Mini brioche roll box/platter = 12 rolls unless source says otherwise
+```
+
+When fillings are not specified:
+
+```text
+Use Riviera/tapas-based balanced fillings.
+Show compact filling summary near top.
+Include exact filling recipes/methods in production cards where needed.
+```
+
+Dietary substitution:
+
+```text
+GF guest + croissants = specify GF sandwich/wrap substitute unless GF croissant confirmed.
+GF guest + sandwiches/wraps = make separate GF sandwich/wrap count.
+DF guest = remove dairy component and use safe sauce/relish/herb oil.
+```
+
+---
+
+## 11. Grazing count logic
+
+### 30 x 40 cm grazing box
+
+Use grazing box module. Every grazing box includes focaccia.
+
+### 1 m grazing table
+
+Use 1 m standard.
+
+### 2 m grazing table
+
+Use 2 m standard.
+
+Offsite graze rule:
+
+```text
+All graze items must be portioned into PC containers for the event.
+Do not build from bulk stock onsite.
+```
+
+---
+
+## 12. Frozen thawing rule
+
+```text
+Frozen items that need thawing must be pulled from freezer to fridge/coolroom 2 days before use.
+```
+
+Use wording:
+
+```text
+Pull from freezer to fridge/coolroom 2 days before use.
+```
+
+Do not write:
+
+```text
+Thaw in freezer
+Thaw day before
+```
+
+---
+
+## 13. Cryovac / offsite hot food logic
+
+```text
+Steaks = marinate and cryovac. Do not pre-cook unless event plan says so.
+Roast chicken/lamb/large proteins = brine or marinate.
+Offsite suitable proteins = cryovac where practical.
+Non-steak cryovac items = pre-cook one day in advance where suitable.
+Cryovac happens at Roscoes.
+Allow 30 minutes for Dan or Ash to leave Riviera, seal bags at Roscoes and return.
+Offsite cryovacced items = sous-vide cooked/reheated and held/reheated in sous-vide bains.
+```
+
+If exact sous-vide temperature/time is missing:
+
+```text
+NEEDS CONFIRMATION — sous-vide time/temp not locked for this item
+```
+
+---
+
+## 14. Supplier ordering translator
+
+After count logic, split into supplier buckets.
+
+```text
+DOBLO'S:
+Fresh produce, herbs, fruit, vegetables, edible flowers, potatoes, greens.
+
+BIDFOOD:
+Dry goods, dairy, bakery, frozen, desserts, meat/fish/finger foods where listed, cleaning/packaging where listed.
+
+WOOLWORTHS / RETAIL:
+Backup GF products, urgent small packs, fresh bread loaves, retail-only items.
+
+ALREADY IN HOUSE:
+Items confirmed in stock or already prepped.
+
+NEEDS CONFIRMATION:
+Pack sizes, allergens, supplier availability, exact product format, missing guest count/menu/dietary.
+```
+
+---
+
+## 15. Order list format
+
+Use this order for production documents:
+
+```text
+ORDER LIST
+
+DOBLO'S — DELIVERY
+- Item — quantity — event/use note
+
+BIDFOOD
+- Item — quantity — event/use note
+
+WOOLWORTHS / RETAIL
+- Item — quantity — event/use note
+
+ALREADY ORDERED / IN HOUSE
+- Item — status
+
+NEEDS CONFIRMATION
+- Item — what needs confirming
+```
+
+Default Doblo's method: delivery.
+
+---
+
+## 16. Missing-info detector
+
+Run this before finalising any event sheet.
+
+```text
+CRITICAL MISSING INFO:
+- Date?
+- Delivery/service time?
+- Guest count?
+- Event location?
+- Menu/product format?
+- Dietaries/allergies?
+- Hot holding/reheat needed?
+- Offsite power/water/prep space if relevant?
+- Driver/delivery handoff if delivery?
+- Supplier order status?
+```
+
+Only include missing info in the sheet if it affects food, delivery or service.
+
+---
+
+## 17. Sheet QA gate
+
+Before exporting a prep sheet/PDF:
+
+```text
+- Quantities before Food Times?
+- Correct module used?
+- No fruit-format confusion?
+- Dietaries turned into food actions?
+- Focaccia counted where required?
+- Sauce/dessert recipes included where needed?
+- Dan/Ash owner-first cards present?
+- Shared prep has allocation line?
+- Coldroom/allocation block included for multi-event week?
+- Order list split by supplier?
+- Ready-to-send gate included?
+- No admin clutter?
+- Card frames consistent?
+```
+
+
+
+---
+
+## v2 changelog
+
+- Added MYO burger 50/50 split count logic with 9% buffer applied before split.
+- Added feasting one-piece-per-item logic with Kayla/Hedlow example.
+- Clarified that source recipe yields must be scaled to confirmed event piece counts.
+````
+
 ### Source: Riviera_Component_Module_Library_v3_2026-06-16.md
 
+- Stored file: `Riviera_Component_Module_Library_v3_2026-06-16.md`
+- Kind: text
 - Lines: 927
 - SHA-256: `9ba97ed1c74ab9807ed752e2dcae1ad4c022f5947d0377e8cff587aa72890a6d`
+
 
 ````markdown
 # Riviera Component Module Library v3
@@ -5228,507 +5479,386 @@ POST-EVENT 2-MINUTE DEBRIEF:
 - Clarified recipe scaling when event count overrides source recipe serve logic.
 ````
 
-### Source: Riviera_Count_Ordering_Harness_v3_2026-06-16.md
+### Source: Riviera_Real_Event_Test_Pack_v2_2026-06-16.md
 
-- Lines: 489
-- SHA-256: `c8e35a9bc10b2b03f04f13f88b02368ab6bd3c7a43bb0a8070c44cbf41f57aea`
+- Stored file: `Riviera_Real_Event_Test_Pack_v2_2026-06-16.md`
+- Kind: text
+- Lines: 362
+- SHA-256: `4c78dbaf9480e4f6b8f0160a4fe2032e66764e6f5e29163dbd3a13c48100c1da`
+
 
 ````markdown
-# Riviera Count & Ordering Harness v3
+# Riviera Real-Event Test Pack v2
 
-**Status:** Working source addendum for Riviera SOP Master Index v10 and Component Module Library v3  
+**Status:** Active test and QA pack for Riviera production harness  
 **Date:** 2026-06-16  
-**Use for:** Event quantity checks, production buffers, alternate-drop counts, platter counts, supplier order translation, and missing-info checks.
+**Use for:** Testing real event dumps against SOP v6, Component Module Library v1, Count & Ordering Harness v1, Template Library v1 and Recipe Bank v1.
 
 ---
 
 ## 0. Purpose
 
-This harness turns messy event quantities into:
+This pack turns every real event dump into a repeatable workflow.
 
-```text
-prep count -> production count -> supplier order count -> dispatch check
-```
-
-It should be used before writing the final production sheet.
+The goal is not to add more sheet clutter. The goal is to catch missing food details before the kitchen is under pressure.
 
 ---
 
-## 1. Count workflow
+## 0A. v2 prep-list baseline
 
-```text
-1. Identify event type and service style.
-2. Identify exact food/product format.
-3. Pull the correct module.
-4. Apply guest count / platter count / piece count.
-5. Apply dietaries as food actions.
-6. Apply 9% production buffer where relevant.
-7. Convert to prep count.
-8. Convert to supplier order count.
-9. Mark already in-house / ordered / still needed / needs confirmation.
-```
+For prep-list / production-sheet testing, assume orders are complete and stock has arrived unless the user asks for ordering.
+
+The missing-info detector should not add ordering tasks to a prep list by default. If stock, supplier timing or order status is not part of the user request, leave it out.
+
+Use only a short **Sort delivered stock by event/use** action where it protects multi-event separation or dietaries.
+
+If the user requests a sheet from a specific day, test and build only from that day onward.
 
 ---
 
-## 2. Product format check
+## 1. Event intake pass
 
-Before calculating, choose the product format.
-
-```text
-Fruit:
-- Corporate fruit box / packed fruit component
-- Fruit cup
-- Fruit + yoghurt cup
-- Styled seasonal fruit platter
-- Grazing box fruit
-- Grazing table fruit
-
-Bread:
-- Casual sliced focaccia box
-- Grazing table focaccia
-- Grazing box focaccia
-- Seated table bread focaccia + whipped butter
-
-Hot food:
-- Single hot nibble platter
-- Mixed hot nibble box
-- GF hot nibble box
-- Tapas service item
-- Offsite buffet protein
-- Plated alternate-drop protein
-```
-
-If unclear:
+When the user gives an event dump, extract only food-relevant data first.
 
 ```text
-NEEDS CONFIRMATION — product format unclear
+EVENT:
+DATE:
+DELIVERY / SERVICE TIME:
+LOCATION:
+GUEST COUNT:
+EVENT TYPE:
+SERVICE STYLE:
+MENU:
+DIETARIES:
+HOT FOOD:
+COLD FOOD:
+BREAD / FOCACCIA:
+SAUCES / DRESSINGS:
+DESSERTS:
+OFFSITE REQUIREMENTS:
+SUNDAY TAPAS OVERLAP:
+SOURCE / PACKAGE:
 ```
+
+If details are missing, use NEEDS CONFIRMATION only where it changes food, count, prep, delivery or risk.
 
 ---
 
-## 3. 9% buffer rule
+## 2. Missing-info detector
 
-Default production buffer:
+Run this before building any production sheet.
 
 ```text
-Production count = required count x 1.09
-Round practically by item.
+CRITICAL MISSING INFO
+- Event date missing?
+- Delivery/service time missing?
+- Guest count missing?
+- Menu missing?
+- Dietaries missing or unclear?
+- Location/delivery handoff missing?
+- Hot vs cold service unclear?
+- Offsite power/water/prep/hot holding unclear, if offsite?
+- Food times missing for run sheet?
+- Source/package conflict?
 ```
 
-Use for:
+Do not ask ten questions if only one missing item matters. Mark non-critical items as NEEDS CONFIRMATION inside the sheet.
+
+---
+
+## 3. Product-format pass
+
+Before counting, resolve format.
 
 ```text
-- Plated meals
-- Buffet serves
-- Canapés
-- Hot nibbles where production is not fixed by platter module
-- Protein portions
-- Dietary alternates where failure risk is high
-```
-
-Do not blindly use for:
-
-```text
-- Fixed purchased unit boxes where exact units already include enough
-- Tiny expensive garnish items
-- Client-confirmed exact-count premium items unless buffer approved
-- Scone platters / fruit platters / grazing boxes where module count already controls output
+Fruit: corporate fruit box / fruit cup / fruit bowl / styled platter / grazing fruit
+Bread: sliced focaccia / seated focaccia with butter / croissant / brioche / wrap / sandwich
+Hot nibbles: single 24 piece platter / mixed 48 piece box / GF box
+Graze: grazing box / 1 m table / 2 m table / 3 m table
+Dessert: bought-in / in-house / strict recipe needed
+Dietary: close-to-menu modification / full substitute / NEEDS CONFIRMATION
 ```
 
 ---
 
-## 3A. MYO burger 50/50 split count logic
+## 4. Count pass
 
-Use when the user confirms the burger bar is split portion-wise between proteins.
-
-```text
-1. Total guests x 1.09 = buffered total burger portions.
-2. Round to a practical service number.
-3. Split portions 50/50 between proteins.
-4. Round each protein to practical source/pack quantity.
-```
-
-Example:
+Use Count & Ordering Harness v1.
 
 ```text
-70 guests x 1.09 = 76.3 -> 77 portions.
-Practical even round = 80 total portions.
-50/50 split = 40 chicken + 40 beef.
-If source recipe has a 40 pax column, use that for each 40-portion protein, not the 70 pax full-choice logic.
-```
-
-If the client wants full-choice coverage instead of split portions, mark it clearly and count each protein separately.
-
----
-
-## 3B. Feasting one-piece-per-item logic
-
-Use when the user confirms feasting items are one piece each plus buffer.
-
-```text
-Production count per listed piece item = guest count x 1.09
-Round practically by item.
-```
-
-Example:
-
-```text
-41 guests x 1.09 = 44.69 -> 45 pieces.
-Beef albondigas = 45 balls.
-Chicken skewers = 45 skewers.
-Natural oysters = 45 required -> order 48 / 4 dozen.
-Lamb cutlets = 45 required -> practical order 48 where useful.
-```
-
-Do not use source default multi-piece serves when the current event correction says one piece each.
-
----
-
-
-## 3C. Burger-bar side split logic
-
-Use when the user confirms burger-bar sides are split the same as the mains.
-
-```text
-1. Guest count x 1.09 = buffered total portions.
-2. Round to practical total service number.
-3. Split mains by confirmed ratio.
-4. Split sides by the same confirmed ratio when sides are alternative side options.
-```
-
-Example:
-
-```text
-70 guests x 1.09 = 76.3 -> practical 80.
-Mains 50/50 = 40 chicken + 40 beef.
-Sides same split = 40 potato salad + 40 slaw.
-Do not produce 80 portions of each side unless full-side coverage is requested.
+- Apply guest count.
+- Add 9% production buffer where relevant.
+- Convert platter/box counts to actual pieces.
+- Include dietaries inside total production.
+- Reduce alternate-drop mains evenly when dietary alternatives are added.
+- Add focaccia where required.
+- Add sauce/dressing/relish quantities.
+- Add garnish/finish only where it improves presentation without overcomplicating service.
 ```
 
 ---
 
-## 4. Alternate-drop count logic
+## 5. Module pass
 
-Use when two plated mains are served alternate drop.
+Pull modules before writing freehand tasks.
 
 ```text
-1. Start with confirmed guest count.
-2. Add 9% production buffer.
-3. Identify dietary/allergy alternatives.
-4. Subtract dietary/allergy alternatives from buffered total.
-5. Split remaining standard mains evenly.
-6. If odd number, give the extra serve to the safer/easier main unless user specifies.
-7. Reduce both normal meals equally where practical.
+Scones
+Focaccia
+Fruit format
+Grazing box/table
+Sandwich/wrap/croissant/brioche
+Hot nibbles / GF hot nibbles
+Labneh
+Sauces/dressings
+Desserts
+Dietary alternatives
+Friday Tapas pull
+Roscoes cryovac
+Offsite sous-vide bain
+Ready-to-send gate
 ```
 
-Example:
+If no module exists, create a temporary DRAFT MODULE and add it to the post-event debrief.
+
+---
+
+## 6. Sheet-build pass
+
+Choose one template.
 
 ```text
-72 guests x 1.09 = 78.48 -> 79 total serves
-Dietaries = 4
-Standard mains = 75
-Chicken = 38
-Beef = 37
-Dietary alternates = 4
-Total production = 79
+SINGLE EVENT — delivery catering
+SINGLE EVENT — onsite plated dinner
+SINGLE EVENT — onsite buffet
+SINGLE EVENT — offsite buffet/carvery
+SINGLE EVENT — wake/memorial delivery
+SINGLE EVENT — corporate breakfast/lunch
+SINGLE EVENT — grazing table/offsite graze
+MULTI-EVENT — delivery-heavy week
+MULTI-EVENT — wedding + Sunday Tapas
+MULTI-EVENT — cold assembly week
+MULTI-EVENT — offsite hot holding week
+MULTI-EVENT — mixed nightmare week
+```
+
+Do not build layout from scratch unless no template fits.
+
+---
+
+## 7. Production sequencing pass
+
+Cards must follow real production order.
+
+```text
+1. Longest lead-time tasks first
+2. Thawing / overnight cold proof / yoghurt hanging / brines / marinades
+3. Batch cooking and cooling
+4. Sauces / fillings / dressings
+5. Cold assembly
+6. Hot firing / reheating
+7. Garnish / finish
+8. Packing / delivery / service
+9. Reset / debrief
+```
+
+Dependency logic:
+
+```text
+If stuffing is done → stuffing/rolling can start.
+If sauce is cooked/chilled → final seasoning/check can happen.
+If hot nibbles are thawed → firing plan can start.
+If all components are ready → assembly/packing can start.
 ```
 
 ---
 
-## 5. Canapé count logic
+## 8. Owner pass
+
+Every active production/fire/pack card starts with owner.
 
 ```text
-Total pieces = guest count x pieces per guest
-Apply 9% buffer if production is in-house and not fixed by purchased count.
-Split by canapé item.
-Round to tray/fryer/service practical numbers.
+ASH | Start **fruit boxes**
+DAN | Finish **sauce**
+BOTH | Pack **delivery order**
 ```
 
-If package says choose 4 / 6 / 8 canapés, count by package structure and confirmed service style.
+Use Dan for:
+
+```text
+Final calls
+Seasoning balance
+Proteins
+High-risk cooking
+Sauces
+Pass/fire decisions
+Ordering/service decisions
+```
+
+Use Ash for:
+
+```text
+Structured prep
+Weighing/portioning
+Cold assembly
+Filling prep
+Packing support
+Garnish prep
+Cleaning/reset
+Active cooking support
+```
+
+Crockery/smallware only appears if it affects food service or delivery.
 
 ---
 
-## 6. Hot nibble count logic
+## 9. Dietary pass
 
-Working kitchen standards:
+Dietary notes must become food actions.
 
 ```text
-Single hot nibble platter = 24 pieces
-Mixed hot nibble box/platter = 48 pieces total
-Mixed hot nibble split = 12 each of 4 items
+BAD:
+- 1 GF
+
+GOOD:
+- GF guest x 1 — make 1 GF sandwich box instead of croissant. Use GF bread, safe filling, separate packing.
 ```
 
-If source gives 20–25 pieces or 40–50 pieces, convert into the working kitchen count for prep sheets:
+Closeness rule:
 
 ```text
-20–25 -> 24 pieces
-40–50 -> 48 pieces
-```
-
-GF hot nibbles:
-
-```text
-Use confirmed bought-in GF pies/sausage rolls first.
-Exact GF count must be shown separately.
-```
-
----
-
-## 7. Scone count logic
-
-```text
-1 batch = 12 normal scones
-1 platter = 12 scones unless source says otherwise
-Scone mix per batch = 1080 g
-Water per batch = 600 ml
-```
-
-Formula:
-
-```text
-Batches = total scones / 12
-Scone mix = batches x 1.08 kg
-Water = batches x 600 ml
-```
-
----
-
-## 8. Focaccia count logic
-
-```text
-Casual/delivery/grazing sliced focaccia box = 12 pieces
-Seated dinner focaccia = table bread with whipped butter
-1 m grazing table = 1/4 tray focaccia sliced
-2 m grazing table = 1/2 tray focaccia sliced
-Every grazing box includes focaccia
-```
-
-If focaccia appears anywhere, it must appear in prep and order checks.
-
----
-
-## 9. Fruit count logic
-
-### Styled seasonal fruit platter
-
-Use full standard fruit platter module per platter.
-
-### Corporate fruit box / packed fruit component
-
-Do not use full styled fruit platter module.
-
-Working portion guide:
-
-```text
-Packed cut fruit component = 120–150 g fruit per pax
-Fruit + yoghurt cup = 120 g fruit + 100–150 g yoghurt per pax
-Breakfast box fruit garnish/component = 80–120 g fruit per pax
-```
-
-Mark NEEDS CONFIRMATION if box/cup format is unclear.
-
----
-
-## 10. Sandwich / wrap / croissant / brioche count logic
-
-Default units:
-
-```text
-Sandwich platter = 24 points / 6 whole sandwiches cut into quarters
-Wrap platter = 12 wraps unless source says otherwise
-Croissant box/platter = 12 croissants unless source says otherwise
-Mini brioche roll box/platter = 12 rolls unless source says otherwise
-```
-
-When fillings are not specified:
-
-```text
-Use Riviera/tapas-based balanced fillings.
-Show compact filling summary near top.
-Include exact filling recipes/methods in production cards where needed.
-```
-
-Dietary substitution:
-
-```text
-GF guest + croissants = specify GF sandwich/wrap substitute unless GF croissant confirmed.
-GF guest + sandwiches/wraps = make separate GF sandwich/wrap count.
-DF guest = remove dairy component and use safe sauce/relish/herb oil.
+Keep dietary/allergy alternatives as close as possible to the actual meal.
+Remove or replace only the unsafe component where practical.
+Garlic/onion allergy = one extra same-style portion without garlic/onion.
 ```
 
 ---
 
-## 11. Grazing count logic
+## 10. Offsite pass
 
-### 30 x 40 cm grazing box
-
-Use grazing box module. Every grazing box includes focaccia.
-
-### 1 m grazing table
-
-Use 1 m standard.
-
-### 2 m grazing table
-
-Use 2 m standard.
-
-Offsite graze rule:
+For offsite catering, check:
 
 ```text
-All graze items must be portioned into PC containers for the event.
-Do not build from bulk stock onsite.
+- Suitable proteins brined/marinated?
+- Suitable proteins cryovacced?
+- Roscoes 30-minute cryovac window included?
+- Non-steak cryovac items cooked one day in advance where suitable?
+- Sous-vide bain reheat/hold plan included?
+- 2-day thaw plan included for frozen items?
+- Graze portioned into PC containers?
+- Delivery/handoff time clear?
 ```
 
 ---
 
-## 12. Frozen thawing rule
+## 11. Sunday Tapas pass
+
+If the sheet covers Sunday, include:
 
 ```text
-Frozen items that need thawing must be pulled from freezer to fridge/coolroom 2 days before use.
+FRIDAY:
+- Pull Sunday Tapas frozen/prepped items from freezer to fridge/coolroom.
+
+SUNDAY:
+- Tapas ready block if event overlaps with tapas service.
 ```
 
-Use wording:
+Do not over-explain policy. Put the action where it belongs.
+
+---
+
+## 12. Final QA gate before sending PDF / sheet
+
+Check every sheet:
 
 ```text
-Pull from freezer to fridge/coolroom 2 days before use.
-```
-
-Do not write:
-
-```text
-Thaw in freezer
-Thaw day before
+- Food-only: no admin clutter
+- Quantity check appears before food times
+- Bullet list quantity section
+- Food items bold in cards
+- Owner-first command cards
+- Full-width stacked cards only
+- Card frames visible
+- Font readable from 2 metres
+- No side-by-side cards
+- Dietaries are actual food actions
+- Sauce/dessert recipes included where needed
+- Focaccia counted where required
+- Shared prep has allocation line
+- Day-of allocation warnings where shared prep exists
+- Optional delivered-stock sort line for multi-event weeks where useful
+- Friday Tapas pull if Sunday included
+- Ready-to-send gate included
 ```
 
 ---
 
-## 13. Cryovac / offsite hot food logic
+## 13. Post-event debrief pass
+
+After real events, capture:
 
 ```text
-Steaks = marinate and cryovac. Do not pre-cook unless event plan says so.
-Roast chicken/lamb/large proteins = brine or marinate.
-Offsite suitable proteins = cryovac where practical.
-Non-steak cryovac items = pre-cook one day in advance where suitable.
-Cryovac happens at Roscoes.
-Allow 30 minutes for Dan or Ash to leave Riviera, seal bags at Roscoes and return.
-Offsite cryovacced items = sous-vide cooked/reheated and held/reheated in sous-vide bains.
+WHAT RAN SHORT:
+WHAT WAS OVERPRODUCED:
+WHAT TOOK TOO LONG:
+WHAT WAS UNCLEAR:
+WHAT NEEDS A MODULE:
+WHAT SHOULD BE LOCKED INTO SOP:
 ```
 
-If exact sous-vide temperature/time is missing:
+Use this to update modules, not to rewrite the whole SOP every time.
+
+---
+
+## 14. Real-event test routine
+
+For the next real event week:
 
 ```text
-NEEDS CONFIRMATION — sous-vide time/temp not locked for this item
+1. Build sheet using this pack.
+2. Mark any guessed/draft modules.
+3. Use the sheet in kitchen.
+4. Debrief after event.
+5. Update only the module that failed.
+6. Sync SOP only when changes are stable.
 ```
 
 ---
 
-## 14. Supplier ordering translator
+## 15. Failure triggers
 
-After count logic, split into supplier buckets.
-
-```text
-DOBLO'S:
-Fresh produce, herbs, fruit, vegetables, edible flowers, potatoes, greens.
-
-BIDFOOD:
-Dry goods, dairy, bakery, frozen, desserts, meat/fish/finger foods where listed, cleaning/packaging where listed.
-
-WOOLWORTHS / RETAIL:
-Backup GF products, urgent small packs, fresh bread loaves, retail-only items.
-
-ALREADY IN HOUSE:
-Items confirmed in stock or already prepped.
-
-NEEDS CONFIRMATION:
-Pack sizes, allergens, supplier availability, exact product format, missing guest count/menu/dietary.
-```
-
----
-
-## 15. Order list format
-
-Use this order for production documents:
+If any of these happen, update the module/harness:
 
 ```text
-ORDER LIST
-
-DOBLO'S — DELIVERY
-- Item — quantity — event/use note
-
-BIDFOOD
-- Item — quantity — event/use note
-
-WOOLWORTHS / RETAIL
-- Item — quantity — event/use note
-
-ALREADY ORDERED / IN HOUSE
-- Item — status
-
-NEEDS CONFIRMATION
-- Item — what needs confirming
+- Same missing info appears twice
+- Same item over/under ordered twice
+- Same recipe lacks quantity twice
+- Same dietary type needs custom thinking twice
+- Same page layout issue happens twice
+- Same prep task starts too late twice
+- Same item gets forgotten twice
 ```
 
-Default Doblo's method: delivery.
-
----
-
-## 16. Missing-info detector
-
-Run this before finalising any event sheet.
-
-```text
-CRITICAL MISSING INFO:
-- Date?
-- Delivery/service time?
-- Guest count?
-- Event location?
-- Menu/product format?
-- Dietaries/allergies?
-- Hot holding/reheat needed?
-- Offsite power/water/prep space if relevant?
-- Driver/delivery handoff if delivery?
-- Supplier order status?
-```
-
-Only include missing info in the sheet if it affects food, delivery or service.
-
----
-
-## 17. Sheet QA gate
-
-Before exporting a prep sheet/PDF:
-
-```text
-- Quantities before Food Times?
-- Correct module used?
-- No fruit-format confusion?
-- Dietaries turned into food actions?
-- Focaccia counted where required?
-- Sauce/dessert recipes included where needed?
-- Dan/Ash owner-first cards present?
-- Shared prep has allocation line?
-- Coldroom/allocation block included for multi-event week?
-- Order list split by supplier?
-- Ready-to-send gate included?
-- No admin clutter?
-- Card frames consistent?
-```
-
+The system improves by locking repeated fixes into modules.
 
 
 ---
 
 ## v2 changelog
 
-- Added MYO burger 50/50 split count logic with 9% buffer applied before split.
-- Added feasting one-piece-per-item logic with Kayla/Hedlow example.
-- Clarified that source recipe yields must be scaled to confirmed event piece counts.
+- Prep-list tests now assume ordering is complete and stock has arrived unless order mode is requested.
+- Coldroom/rack allocation checks are removed from final QA.
+- Added optional delivered-stock sort check.
+- Start-from-requested-day logic added.
 ````
 
 ### Source: Riviera_Production_Sheet_Template_Library_v2_2026-06-16.md
 
+- Stored file: `Riviera_Production_Sheet_Template_Library_v2_2026-06-16.md`
+- Kind: text
 - Lines: 569
 - SHA-256: `b78a4efe7985bc28ec9150486724fee2e6e58bc56b03eebb3b772025c5b6ba81`
+
 
 ````markdown
 # Riviera Production Sheet Template Library v2
@@ -6302,3141 +6432,1053 @@ Keep it to 2 minutes. The goal is to stop repeat mistakes.
 - Sheets start from the user-requested day when specified.
 ````
 
-### Source: Riviera_Real_Event_Test_Pack_v2_2026-06-16.md
+### Source: MYO bars and Buffets.pdf
 
-- Lines: 362
-- SHA-256: `4c78dbaf9480e4f6b8f0160a4fe2032e66764e6f5e29163dbd3a13c48100c1da`
+- Stored file: `MYO bars and Buffets.pdf`
+- Kind: pdf
+- Lines: 235
+- SHA-256: `946e1bf041f94ba171cfa548725feb69c60ab962372d49c3692bde60a879f58e`
+
+- Text extract: `extracted/MYO bars and Buffets.pdf.extracted.md`
 
 ````markdown
-# Riviera Real-Event Test Pack v2
-
-**Status:** Active test and QA pack for Riviera production harness  
-**Date:** 2026-06-16  
-**Use for:** Testing real event dumps against SOP v6, Component Module Library v1, Count & Ordering Harness v1, Template Library v1 and Recipe Bank v1.
-
----
-
-## 0. Purpose
-
-This pack turns every real event dump into a repeatable workflow.
-
-The goal is not to add more sheet clutter. The goal is to catch missing food details before the kitchen is under pressure.
-
----
-
-## 0A. v2 prep-list baseline
-
-For prep-list / production-sheet testing, assume orders are complete and stock has arrived unless the user asks for ordering.
-
-The missing-info detector should not add ordering tasks to a prep list by default. If stock, supplier timing or order status is not part of the user request, leave it out.
-
-Use only a short **Sort delivered stock by event/use** action where it protects multi-event separation or dietaries.
-
-If the user requests a sheet from a specific day, test and build only from that day onward.
-
----
-
-## 1. Event intake pass
-
-When the user gives an event dump, extract only food-relevant data first.
-
-```text
-EVENT:
-DATE:
-DELIVERY / SERVICE TIME:
-LOCATION:
-GUEST COUNT:
-EVENT TYPE:
-SERVICE STYLE:
-MENU:
-DIETARIES:
-HOT FOOD:
-COLD FOOD:
-BREAD / FOCACCIA:
-SAUCES / DRESSINGS:
-DESSERTS:
-OFFSITE REQUIREMENTS:
-SUNDAY TAPAS OVERLAP:
-SOURCE / PACKAGE:
-```
-
-If details are missing, use NEEDS CONFIRMATION only where it changes food, count, prep, delivery or risk.
-
----
-
-## 2. Missing-info detector
-
-Run this before building any production sheet.
-
-```text
-CRITICAL MISSING INFO
-- Event date missing?
-- Delivery/service time missing?
-- Guest count missing?
-- Menu missing?
-- Dietaries missing or unclear?
-- Location/delivery handoff missing?
-- Hot vs cold service unclear?
-- Offsite power/water/prep/hot holding unclear, if offsite?
-- Food times missing for run sheet?
-- Source/package conflict?
-```
-
-Do not ask ten questions if only one missing item matters. Mark non-critical items as NEEDS CONFIRMATION inside the sheet.
-
----
-
-## 3. Product-format pass
-
-Before counting, resolve format.
-
-```text
-Fruit: corporate fruit box / fruit cup / fruit bowl / styled platter / grazing fruit
-Bread: sliced focaccia / seated focaccia with butter / croissant / brioche / wrap / sandwich
-Hot nibbles: single 24 piece platter / mixed 48 piece box / GF box
-Graze: grazing box / 1 m table / 2 m table / 3 m table
-Dessert: bought-in / in-house / strict recipe needed
-Dietary: close-to-menu modification / full substitute / NEEDS CONFIRMATION
-```
-
----
-
-## 4. Count pass
-
-Use Count & Ordering Harness v1.
-
-```text
-- Apply guest count.
-- Add 9% production buffer where relevant.
-- Convert platter/box counts to actual pieces.
-- Include dietaries inside total production.
-- Reduce alternate-drop mains evenly when dietary alternatives are added.
-- Add focaccia where required.
-- Add sauce/dressing/relish quantities.
-- Add garnish/finish only where it improves presentation without overcomplicating service.
-```
-
----
-
-## 5. Module pass
-
-Pull modules before writing freehand tasks.
-
-```text
-Scones
-Focaccia
-Fruit format
-Grazing box/table
-Sandwich/wrap/croissant/brioche
-Hot nibbles / GF hot nibbles
-Labneh
-Sauces/dressings
-Desserts
-Dietary alternatives
-Friday Tapas pull
-Roscoes cryovac
-Offsite sous-vide bain
-Ready-to-send gate
-```
-
-If no module exists, create a temporary DRAFT MODULE and add it to the post-event debrief.
-
----
-
-## 6. Sheet-build pass
-
-Choose one template.
-
-```text
-SINGLE EVENT — delivery catering
-SINGLE EVENT — onsite plated dinner
-SINGLE EVENT — onsite buffet
-SINGLE EVENT — offsite buffet/carvery
-SINGLE EVENT — wake/memorial delivery
-SINGLE EVENT — corporate breakfast/lunch
-SINGLE EVENT — grazing table/offsite graze
-MULTI-EVENT — delivery-heavy week
-MULTI-EVENT — wedding + Sunday Tapas
-MULTI-EVENT — cold assembly week
-MULTI-EVENT — offsite hot holding week
-MULTI-EVENT — mixed nightmare week
-```
-
-Do not build layout from scratch unless no template fits.
-
----
-
-## 7. Production sequencing pass
-
-Cards must follow real production order.
-
-```text
-1. Longest lead-time tasks first
-2. Thawing / overnight cold proof / yoghurt hanging / brines / marinades
-3. Batch cooking and cooling
-4. Sauces / fillings / dressings
-5. Cold assembly
-6. Hot firing / reheating
-7. Garnish / finish
-8. Packing / delivery / service
-9. Reset / debrief
-```
-
-Dependency logic:
-
-```text
-If stuffing is done → stuffing/rolling can start.
-If sauce is cooked/chilled → final seasoning/check can happen.
-If hot nibbles are thawed → firing plan can start.
-If all components are ready → assembly/packing can start.
-```
-
----
-
-## 8. Owner pass
-
-Every active production/fire/pack card starts with owner.
-
-```text
-ASH | Start **fruit boxes**
-DAN | Finish **sauce**
-BOTH | Pack **delivery order**
-```
-
-Use Dan for:
-
-```text
-Final calls
-Seasoning balance
-Proteins
-High-risk cooking
-Sauces
-Pass/fire decisions
-Ordering/service decisions
-```
-
-Use Ash for:
-
-```text
-Structured prep
-Weighing/portioning
-Cold assembly
-Filling prep
-Packing support
-Garnish prep
-Cleaning/reset
-Active cooking support
-```
-
-Crockery/smallware only appears if it affects food service or delivery.
-
----
-
-## 9. Dietary pass
-
-Dietary notes must become food actions.
-
-```text
-BAD:
-- 1 GF
-
-GOOD:
-- GF guest x 1 — make 1 GF sandwich box instead of croissant. Use GF bread, safe filling, separate packing.
-```
-
-Closeness rule:
-
-```text
-Keep dietary/allergy alternatives as close as possible to the actual meal.
-Remove or replace only the unsafe component where practical.
-Garlic/onion allergy = one extra same-style portion without garlic/onion.
-```
-
----
-
-## 10. Offsite pass
-
-For offsite catering, check:
-
-```text
-- Suitable proteins brined/marinated?
-- Suitable proteins cryovacced?
-- Roscoes 30-minute cryovac window included?
-- Non-steak cryovac items cooked one day in advance where suitable?
-- Sous-vide bain reheat/hold plan included?
-- 2-day thaw plan included for frozen items?
-- Graze portioned into PC containers?
-- Delivery/handoff time clear?
-```
-
----
-
-## 11. Sunday Tapas pass
-
-If the sheet covers Sunday, include:
-
-```text
-FRIDAY:
-- Pull Sunday Tapas frozen/prepped items from freezer to fridge/coolroom.
-
-SUNDAY:
-- Tapas ready block if event overlaps with tapas service.
-```
-
-Do not over-explain policy. Put the action where it belongs.
-
----
-
-## 12. Final QA gate before sending PDF / sheet
-
-Check every sheet:
-
-```text
-- Food-only: no admin clutter
-- Quantity check appears before food times
-- Bullet list quantity section
-- Food items bold in cards
-- Owner-first command cards
-- Full-width stacked cards only
-- Card frames visible
-- Font readable from 2 metres
-- No side-by-side cards
-- Dietaries are actual food actions
-- Sauce/dessert recipes included where needed
-- Focaccia counted where required
-- Shared prep has allocation line
-- Day-of allocation warnings where shared prep exists
-- Optional delivered-stock sort line for multi-event weeks where useful
-- Friday Tapas pull if Sunday included
-- Ready-to-send gate included
-```
-
----
-
-## 13. Post-event debrief pass
-
-After real events, capture:
-
-```text
-WHAT RAN SHORT:
-WHAT WAS OVERPRODUCED:
-WHAT TOOK TOO LONG:
-WHAT WAS UNCLEAR:
-WHAT NEEDS A MODULE:
-WHAT SHOULD BE LOCKED INTO SOP:
-```
-
-Use this to update modules, not to rewrite the whole SOP every time.
-
----
-
-## 14. Real-event test routine
-
-For the next real event week:
-
-```text
-1. Build sheet using this pack.
-2. Mark any guessed/draft modules.
-3. Use the sheet in kitchen.
-4. Debrief after event.
-5. Update only the module that failed.
-6. Sync SOP only when changes are stable.
-```
-
----
-
-## 15. Failure triggers
-
-If any of these happen, update the module/harness:
-
-```text
-- Same missing info appears twice
-- Same item over/under ordered twice
-- Same recipe lacks quantity twice
-- Same dietary type needs custom thinking twice
-- Same page layout issue happens twice
-- Same prep task starts too late twice
-- Same item gets forgotten twice
-```
-
-The system improves by locking repeated fixes into modules.
-
-
----
-
-## v2 changelog
-
-- Prep-list tests now assume ordering is complete and stock has arrived unless order mode is requested.
-- Coldroom/rack allocation checks are removed from final QA.
-- Added optional delivered-stock sort check.
-- Start-from-requested-day logic added.
+# Extracted Text: MYO bars and Buffets.pdf
+
+Pages: 7
+
+## Page 1
+
+Burger Bar 
+20 Pax 40 Pax 60 Pax 
+Slow Cooked & Pulled Texan Chicken 
+3kg chicken thigh 6kg chicken thigh 9kg chicken thigh 
+4 tbsp Tennessee 
+smokehouse seasoning 
+8 tbsp Tennessee 
+smokehouse seasoning 
+12 tbsp Tennessee 
+smokehouse seasoning 
+2 onions 4 onions 6 onions 
+1 cup BBQ sauce 1.5 cups BBQ sauce 2 cups BBQ sauce 
+½ cup sweet chilli sauce 1 cup sweet chilli sauce 1 ½ cups sweet chilli 
+sauce 
+Premium Ground Angus Beef Patties 
+25 Angel Bay Beef burger 
+patties 
+45 Angel Bay Beef burger 
+patties 
+65 Angel Bay Beef burger 
+patties 
+Smoked BBQ Beef Brisket with Golden Carolina BBQ Sauce 
+3kg Smoked Beef Brisket 5kg smoked beef brisket 7kg smoked beef brisket 
+¾ cup American mustard 1 ½ cup American mustard 1 ½ cup American mustard 
+½ cup honey 1 cup honey 1 cup honey 
+¼ cup brown sugar ½ cup brown sugar ½ cup brown sugar 
+½ cup apple cider vinegar ½ cup apple cider vinegar ½ cup apple cider vinegar 
+2tbsp tomato sauce 4tbsp tomato sauce 4tbsp tomato sauce 
+2tsp Worcestershire sauce 4tsp Worcestershire sauce 4tsp Worcestershire sauce 
+1 tsp garlic powder 2 tsp garlic powder 2 tsp garlic powder 
+½ tsp salt 1 tsp salt 1 tsp salt 
+Succulent NZ Lamb Patties 
+25 Angel Bay Lamb burger 
+patties 
+45 Angel Bay Lamb burger 
+patties 
+65 Angel Bay Lamb burger 
+patties 
+Chargrilled Portuguese Chicken 
+15 Chicken Breast 50 Chicken Breast 70 Chicken Breast 
+½ bottle Peri Peri sauce 1 bottle Peri Peri sauce 1 bottle Peri Peri sauce 
+300ml Orange Juice 600ml Orange Juice 600ml Orange Juice 
+½ cup honey 1 cup honey 1 cup honey 
+½ bunch coriander 1 bunch coriander 1 bunch coriander 
+½ bunch parsley 1 bunch parsley 1 bunch parsley 
+Salt Flakes Salt Flakes Salt Flakes 
+Smoked Pulled Pork with Golden Carolina BBQ Sauce 
+3kg Pork Collar 6kg Pork Collar 9kg Pork Collar 
+4 tbsp Tennessee 
+smokehouse seasoning 
+8 tbsp Tennessee 
+smokehouse seasoning 
+12 tbsp Tennessee 
+smokehouse seasoning 
+2 onions 4 onions 6 onions 
+1 cup BBQ sauce 1.5 cups BBQ sauce 2 cups BBQ sauce 
+½ cup sweet chilli sauce 1 cup sweet chilli sauce 1 ½ cups sweet chilli 
+sauce 
+½ cup brown sugar 1 cup brown sugar 1 cup brown sugar 
+¾ cup American mustard 1 ½ cup American mustard 1 ½ cup American mustard 
+½ cup honey 1 cup honey 1 cup honey
+
+## Page 2
+
+¼ cup brown sugar ½ cup brown sugar ½ cup brown sugar 
+½ cup apple cider vinegar ½ cup apple cider vinegar ½ cup apple cider vinegar 
+2tbsp tomato sauce 4tbsp tomato sauce 4tbsp tomato sauce 
+2tsp Worcestershire sauce 4tsp Worcestershire sauce 4tsp Worcestershire sauce 
+1 tsp garlic powder 2 tsp garlic powder 2 tsp garlic powder 
+½ tsp salt 1 tsp salt 1 tsp salt 
+Roasted Portobello Mushroom with Garlic Butter 
+25 portobello mushrooms 25 portobello mushrooms 25 portobello mushrooms 
+250g butter 250g butter 250g butter 
+½ cup crushed garlic ½ cup crushed garlic ½ cup crushed garlic 
+1tbsp parsley 1tbsp parsley 1tbsp parsley 
+Salt flakes Salt flakes Salt flakes 
+Cracked Pepper Cracked Pepper Cracked Pepper 
+Burger Fillings 
+25 Freshly Baked Seeded 
+Roll 
+50 Freshly Baked Seeded 
+Roll 
+70 Freshly Baked Seeded 
+Roll 
+1 large Cos lettuce 2 large Cos lettuce 2 large Cos lettuce 
+1kg Tomatoes 1kg Tomatoes 1kg Tomatoes 
+½ pkt Cheddar Cheese 
+Slices 
+½ pkt Cheddar Cheese 
+Slices 
+½ pkt Cheddar Cheese 
+Slices 
+3 red onions 3 red onions 3 red onions 
+1 A10 tin Pineapple Slices 1 A10 tin Pineapple Slices 1 A10 tin Pineapple Slices 
+1 bottle Pickles 1 bottle Pickles 1 bottle Pickles 
+½ bottle House made 
+burger sauce 
+½ bottle House made 
+burger sauce 
+½ bottle House made 
+burger sauce 
+½ Roasted Garlic Aioli ½ Roasted Garlic Aioli ½ Roasted Garlic Aioli 
+1PC Tomato Sauce 1PC Tomato Sauce 1PC Tomato Sauce 
+1PC BBQ Sauce 1PC BBQ Sauce 1PC BBQ Sauce 
+Potato Salad 
+3kg Washed potatoes 
+Diced bacon 
+Dill 
+Spring onion 
+Flat leaf parsley 
+Mayonnaise 
+Sour Cream 
+Salt 
+Pepper 
+Garlic Powder 
+Coleslaw 
+White Cabbage 
+Purple Cabbage 
+Carrot 
+Shallots 
+Packaging 
+Paper plates
+
+## Page 3
+
+Napkins 
+Disposable cutlery 
+Event Day Equipment 
+ 
+ 
+ 
+ 
+ 
+ 
+Prep 
+ Two days 
+before event 
+• 
+ One-Two 
+days before 
+event 
+• 
+ One- Two 
+days before 
+event 
+• 
+ One day 
+before event 
+• 
+ 
+Reheating for Service 
+ 1 hour before 
+service 
+• 
+ 20mins before 
+service 
+• 
+ 30mins before 
+service 
+• 
+ 
+Plating 
+ •
+
+## Page 5
+
+TITLE 
+40 Pax 60 Pax 80 Pax 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Packaging 
+ 
+ 
+ 
+Event Day Equipment 
+ 
+ 
+ 
+ 
+ 
+ 
+Prep 
+ Two days 
+before event 
+• 
+ One-Two 
+days before 
+event 
+• 
+ One- Two 
+days before 
+event 
+• 
+ One day 
+before event 
+•
+
+## Page 6
+
+Reheating for Service 
+ 1 hour before 
+service 
+• 
+ 20mins before 
+service 
+• 
+ 30mins before 
+service 
+• 
+ 
+Plating 
+ •
 ````
 
-### Source: Riviera_Package_Source_Digest_v1_2026-06-09.md
+### Source: Updated Riviera instructions
 
-- Lines: 670
-- SHA-256: `45b21d3c2d12abb222c256c6c8e49e3e8f2ff0b5482d42ea42713c9c8d02a7d4`
+- Stored file: `Updated_Riviera_instructions_2026-06-09_extracted.md`
+- Kind: text
+- Lines: 782
+- SHA-256: `f9fb26019a3c87ca3b6219b71bcf9af681571aad3ae56a5d833a6b5026d67a3f`
+
 
 ````markdown
-# Riviera Package Source Digest v1
+# Updated Riviera instructions - extracted from ChatGPT source
 
-**Status:** Source compaction draft  
-**Date:** 2026-06-09  
-**Use for:** Replacing heavy Riviera brochure/package PDFs as day-to-day project sources once verified.  
-**Does not replace:** Supplier item/allergen databases, live quotes, final event contracts, or visual brand files.
+Source URL: https://chatgpt.com/g/g-p-6a0b96d47e4c8191a87f79189b94c5e3/c/6a27339d-2bf0-83ec-ad8d-63a836c85bf3?messageId=4e3fe8e9-4d44-4c1b-91a7-105b189814df
 
----
+Riviera Project Instructions — Lean Control Version
 
-## 0. Purpose
+Act as the Riviera Yeppoon kitchen operations, event-prep, catering, ordering, menu, supplier, recipe and document assistant.
 
-This digest compresses the uploaded Riviera package PDFs into a project-readable text source.
+Purpose: turn messy notes, emails, PDFs, menus, order lists, supplier info, event details, prep needs, dietaries, delivery times and kitchen realities into clear outputs a chef can use immediately.
 
-Use it for:
+Core Priorities
 
-- event classification,
-- package/menu lookup,
-- starting-from price lookup,
-- minimum number checks,
-- product-format checks,
-- prep/order planning,
-- client-facing draft wording,
-- source conflict checks.
+Protect the event.
 
-Do not use it as a final quote. Prices remain indicative unless an official quote says otherwise.
+Keep prep realistic.
 
----
+Keep ordering accurate.
 
-## 1. Source replacement rule
+Keep functions separated.
 
-### Safe to replace with this digest for normal project use
+Reduce chef mental load.
 
-These PDF brochures can be removed from active project sources after this digest is uploaded and checked:
+Produce outputs that can be used immediately.
 
-```text
-Riviera.pdf
-optimized_riviera_wedding_packages_25_+(3).pdf
-optimized_riviera_party_packages_8_+(2).pdf
-Riviera Tapas Menu (9).pdf
-The+Riviera+Table+Menu+-+December+2025+(4).pdf
-Corporate+Catering+Brochure+(7).pdf
-Funeral+Catering+Brochure+(4).pdf
-Offsite+Platter+Brochure+(3).pdf
-Life+Celebration+Packages+(5).pdf
-Baby+Shower+Packages+(4).pdf
-Riviera+-+Corporate+(2).pdf
-```
+Working Style
 
-### Keep until separately converted
+For internal kitchen work: direct, compact, chef-to-chef, no fluff.
 
-Keep or separately convert these data-heavy sources:
+For client-facing work: polished, calm, premium, coastal, elegant.
 
-```text
-Bidfood_Item_List.pdf — supplier items, pack sizes, prices, allergens
-Doblo's PLU Price List — produce availability/pricing
-Order forms / spreadsheets — event-specific or supplier-specific order evidence
-Recipes for Prep Chef.docx — recipe source until every recipe is canonicalised
-The Art & Science of Foodpairing.pdf — reference layer, not a normal event package source
-```
+For wakes and life celebrations: respectful, calm, supportive.
 
-### Archive PDFs outside the active project
+For corporate: professional, efficient, tidy.
 
-Keep the original PDFs somewhere accessible for:
+For baby showers: soft, styled, pretty, organised.
 
-```text
-visual design / brochure layout
-client-facing brochure wording
-source dispute checks
-new staff training / non-kitchen context
-```
+Use metric, Australian culinary terms and 24-hour time.
 
----
+Active Source Stack
 
-## 2. Source hierarchy
+Use sources in this order:
 
-Use this priority:
+User correction in the current Riviera project
 
-```text
-1. User correction in current project
-2. Event/client-specific source
-3. Riviera SOP Master Index v6
-4. Riviera Component Module Library v1
-5. Riviera Count & Ordering Harness v1
-6. Riviera Production Sheet Template Library v1
-7. Riviera Canonical Recipe Bank v1
-8. Riviera Supplier Ordering Translator v1
-9. Riviera Seasoning Palette v2
-10. Riviera package/menu/source digest
-11. Bidfood / Doblo's supplier references
-12. GitHub recipe/aroma data
-13. Foodpairing reference layer
-14. Kitchen Council final chef judgement
-```
+Event/client-specific source
 
-If sources conflict, user correction wins. If no safe answer exists, mark **NEEDS CONFIRMATION**.
+Riviera SOP Master Index v6
 
----
+Riviera Component Module Library v1
 
-## 3. General Riviera rules from package PDFs
+Riviera Count & Ordering Harness v1
 
-### Brand / venue
+Riviera Production Sheet Template Library v1
 
-Riviera Yeppoon is a premium coastal venue on Cooee Bay Beach. Brand language: Mediterranean Riviera influence, modern-vintage character, old-money elegance, ocean views, polished coastal events.
+Riviera Canonical Recipe Bank v1
 
-### Operational venue facts
-
-```text
-Location: Cooee Bay Beach, Yeppoon
-Venue style: coastal, Mediterranean-inspired, modern vintage, premium
-Onsite kitchen: full commercial kitchen capability
-Indoor capacity reference: up to 100 seated / up to 250 cocktail-style
-Ceremony options: Fig Tree Lawn, beachside, indoor wet-weather options
-Corporate/life celebration capacity references vary by package and must be confirmed per event
-```
+Riviera Supplier Ordering Translator v1
 
-### Pricing / quote rules
+Riviera Seasoning Palette v2
 
-```text
-Prices are generally starting-from / indicative.
-Pricing is generally GST-exclusive.
-Official quote required to lock pricing.
-$1500 + GST non-refundable deposit appears in wedding/general event terms.
-Minimum guest numbers apply and may still be charged if final count drops below minimum.
-```
+Riviera Package Source Digest v1
 
-### Allergen / dietary rules
+Bidfood / Doblo’s supplier references
 
-Riviera kitchen handles common allergens including milk/dairy, egg, soy, seafood including crustaceans, peanuts, sesame, tree nuts and gluten/wheat. Dietary requirements must be advised in advance. Do not guarantee allergen-free unless the event plan and source control supports it.
+GitHub recipe/aroma data where available
 
----
+Foodpairing reference layer
 
-# 4. Riviera Wedding Packages — operational digest
+Kitchen Council final chef judgement
 
-**Source:** optimized_riviera_wedding_packages_25_+(3).pdf / Riviera.pdf
+If sources conflict, flag it. User correction wins. If no safe answer exists, mark NEEDS CONFIRMATION.
 
-## Ceremony / venue notes
+Do not invent prices, guest counts, confirmed menus, timings, dietaries, supplier facts, pack sizes or source claims.
 
-```text
-Fig Tree Lawn: ocean backdrop, grass setting under Grand Fig Tree.
-Beachside ceremony: ocean backdrop, semi-circle podium, white aisle runner, French oak chairs.
-Indoor wet-weather options: Ballroom / Lookout depending setup.
-```
-
-## Ceremony-only / elopement style packages
+Treat unsourced factual claims as drafts, not truth.
 
-### Kiss & Commit Package
+Task Routing
 
-```text
-Price: $2,000 + GST
-Capacity: up to 40 people
-Availability: Monday-Friday; Saturday additional $1,000 + GST
-Includes: on-the-day wedding coordination, white round signage table, 2 white chairs, up to 40 French oak style chairs, speaker for background music, vendor access prior to ceremony.
-Important: hire begins 30 minutes before ceremony; latest ceremony start 15:00; payment in full at booking; non-refundable; time allowance cannot be extended; $500 bond referenced.
-```
-
-### Vows & Vino
-
-```text
-Price: $4,000 + GST
-Capacity: up to 40 people
-Availability: Monday-Friday; Saturday additional $1,000 + GST
-Includes: 2.5 hour venue hire, coordination, ceremony chairs/table, speaker, dry bar/stool furniture, cake/signing/gift tables, small grazing table feeds 20, 3-tier champagne tower with 1 premium bottle champagne.
-Important: hire begins 30 minutes before ceremony; latest ceremony start 15:00; payment in full; non-refundable; $500 bond referenced.
-```
+Before every Riviera response, silently classify the task:
 
-## Wedding / party food notes from packages
+Quick operational answer
 
-### Crowd Pleaser Platters
+Event intake / event summary
 
-```text
-Style: grazing boxes set out on a table; no wait service included.
-Grazing table: serves 40-60, $820 + GST in party/wedding source.
-Nibble platters: feed 8-12 people.
-Hot nibble platters: 20-25 pieces per platter in source; kitchen working standard converts to 24 pieces.
-Mixed hot nibble box: 40-50 pieces in source; kitchen working standard converts to 48 pieces.
-Substantial platter: 20 pieces per platter.
-Substantial meal example for liquor compliance: 1 nibble piece pp + 4 hot pieces pp + 1 substantial piece pp.
-```
+Supplier order
 
-### Make Your Own Gyros Bar
+Prep sheet / run sheet / production sheet
 
-```text
-Price: $32 pp + GST
-Minimum: 40 people
-Choose 2 proteins/options from: slow cooked Greek beef, chargrilled lemon & thyme chicken, Moroccan spiced pulled lamb, grilled halloumi.
-Fillings: souvlaki breads, lettuce, tomato, red onion, feta, tabouli, tzatziki, creamy capsicum sauce, garlic aioli, tomato & BBQ sauce.
-Served with herbed fries.
-Disposable plates standard; crockery/cutlery upgrade $4 pp.
-```
+Recipe SOP
 
-### Grazing table
+PDF / printable document
 
-```text
-1 m grazing table: feeds 40-50, $820 + GST
-2 m grazing table: feeds 60-80, $1,485 + GST
-3 m grazing table: feeds 100+, $2,178 + GST
-```
-
-### Seafood fountain
+Client email or client-facing copy
 
-```text
-Options: prawns, oyster bar, mixed prawns & oysters.
-Starting from $25 pp + GST.
-Set-up fee appears as $100 in wedding/party package and $150 in offsite table source; treat as source conflict / needs confirmation.
-Bond may apply.
-Minimum 40 people in offsite table source.
-```
-
----
-
-# 5. Party Packages — operational digest
-
-**Source:** optimized_riviera_party_packages_8_+(2).pdf
-
-```text
-Purpose: birthdays, private parties, milestone celebrations.
-Room hire / inclusions depend on package and quote.
-Common inclusions: venue hire, tables/chairs, bar staff/wait staff, music system access, reverse cycle air-conditioning.
-Food options overlap with grazing, platters, gyros, seafood fountain, and buffet-style packages.
-Use latest event-specific quote if available.
-```
-
----
-
-# 6. Riviera Tapas Menu — operational digest
-
-**Source:** Riviera Tapas Menu (9).pdf
-
-## Tapas items
-
-```text
-Calamari Fritti — $22 — Riviera house aioli, crispy capers — gf, DF
-Chargrilled Lamb Cutlets (3) — $26 — Riviera house emulsion — gf, DF
-Chorizo & Mozzarella Arancini (3) — $22 — romesco, lemon & thyme aioli — gf
-Kilpatrick Oysters 1/2 dozen — $32 — crispy speck, Worcestershire — gf, DF
-Crispy Fried Chorizo Potatoes — $22 — lemon thyme aioli — gf, DF
-Zesty Limoncello Chicken Skewers (3) — $22 — herbed labneh — gf
-Crispy Reef Fish Sliders (3) — $30 — lemon caper aioli, roquette
-Spiced Popcorn Cauliflower — $22 — spicy capsicum & feta cream — veg
-Hot Honey Saganaki (3) — $22 — grilled halloumi, hot honey, roasted red grapes
-Veal & Prosciutto Crumbed Olives — $24 — zesty lemon & thyme aioli
-```
-
-## Antipasto / bread / kids / dessert
-
-```text
-Charcuterie for 4 — $79
-Charcuterie for 2 — $41
-Red Grape Focaccia — $18 — baked in house with whipped butter and sea salt
-Bowl of Chips — $12
-Kids Nuggets & Chips — $14
-Kids Fish & Chips — $14
-Kids Vanilla Ice Cream with Chocolate Topping — $10
-Housemade Cannoli Trio — $18
-Sticky Date Madeleines — $22 — warm toffee sauce, vanilla gelato
-Pistachio Affogato — $16 — espresso, pistachio gelato, Mrs Cardorin's crostoli
-```
-
-## Standing Sunday rule
-
-Tapas runs every Sunday 11:00-17:00. Friday prep sheets covering Sunday must include the food action to pull required prepped tapas items from freezer to fridge/coolroom.
-
----
-
-# 7. The Riviera Table Offsite Catering — operational digest
-
-**Source:** The+Riviera+Table+Menu+-+December+2025+(4).pdf
-
-## Grazing tables
-
-```text
-Sold by the metre; white plinths included; client supplies table.
-1 m — $820 + GST
-2 m — $1,485 + GST
-3 m — $2,178 + GST
-```
-
-Add-ons:
-
-```text
-Gourmet Pizza Scrolls (40) — $190
-Mini Quiches with House Relish (40) — $190
-Smoked Chicken & Bacon Sliders (40) — $340
-Ham, Cheese & Dijon Croissants (40) — $340
-Seasonal Cut Fruit Bowl — $50
-```
-
-## Seafood fountain
-
-```text
-Options: prawns, oysters, mixed selection.
-From $25 pp + GST.
-$150 fountain set-up fee in offsite source.
-$500 bond held for potential damages.
-Minimum 40 people.
-```
-
-## Canape packages
-
-Canape examples:
-
-```text
-Bruschetta of Rare Roast Beef — whipped blue cheese, caramelised onion jam, fresh herbs
-Spanner Crab Cannoli — lemon, Dijon, Riviera flavours
-Prawn Brioche Slider — cocktail sauce, lettuce, potato crisps
-Smoked Chicken & Bacon Brioche Slider — rocket, fresh herbs
-Vintage Beef Brioche Slider — beef burger, aged cheddar, herbed aioli, tomato relish, rocket
-Beef Polpette — romesco, Manchego, Turkish bread
-Chargrilled Lamb Cutlet — Riviera house emulsion
-Zesty Limoncello Chicken Skewer — herbed labneh, feta, pita
-Slow Cooked Lamb Shoulder Provencale — cous cous, spiced yoghurt
-Beef Bourguignon — red wine sauce, carrots, bacon, mushroom, pomme puree
-Creamy Lemon Caper Chicken — apricot and almond rice pilaf
-```
-
-Packages:
-
-```text
-Choose 4 canapes — $54 pp + GST — pre-dinner cocktail hour — minimum 40
-Choose 6 canapes — $72 pp + GST — can replace entree — minimum 40
-Choose 8 canapes — $89 pp + GST — full dining experience — minimum 40
-```
-
-Offsite requirements:
-
-```text
-Canapes are hand-served by waitstaff.
-Napkins and disposable cutlery included.
-Venue needs suitable cooking/prep space, roof/enclosed walls, flooring, lighting, running potable water, and power.
-Client supplies marquee with walls/lighting if unavailable.
-```
-
-## Roving dessert
-
-```text
-Roving dessert experience: cannoli or tiramisu.
-Available for canape packages only.
-$16 + GST.
-Minimum 40 people.
-```
-
-## Carvery buffet
-
-Main options include:
-
-```text
-Greek spiced roast lamb
-Lemon, thyme & garlic roast chicken
-Thyme & garlic roast beef with Tempranillo reduction and gremolata
-Sicilian citrus & herb roast pork with apricot compote
-Grilled haloumi with roasted red grapes and hot honey
-```
-
-Sides include:
-
-```text
-Creamy potato gratin
-Garlic & herb baked chat potatoes with feta cream
-Honey-thyme roasted carrots with pistachios
-Provencal vegetable ratatouille
-Broccoli & cauliflower gratin
-Mediterranean rice pilaf
-Moroccan cous cous salad
-Roast root vegetable salad with cinnamon-maple nuts
-Greek green bean salad
-Roast pumpkin & pepita salad
-```
-
-Buffet packages:
-
-```text
-Luncheon Luxe — select 2 mains, 3 sides — $55 pp + GST
-Indulgent Dinner — select 3 mains, 3 sides — $69 pp + GST
-The Riviera Spread — select 4 mains, 4 sides — $85 pp + GST
-Minimum 40 people.
-Staff serve buffet.
-Disposable plates/cutlery/napkins included.
-Client provides buffet tables.
-Minimum 3 trestle tables required for all buffets.
-Pricing indicative and GST-exclusive.
-```
-
-All buffets served with Riviera Table housemade sourdough focaccia and whipped herb butter.
-
----
-
-# 8. Corporate Catering — operational digest
-
-**Source:** Corporate+Catering+Brochure+(7).pdf
-
-Corporate catering is available for meetings, workshops, conferences and office events, with vegetarian, vegan and gluten-free options referenced. Delivery or pickup available in brochure; Riviera project default is delivery unless user asks otherwise.
-
-## Breakfast & brunch — minimum 12
-
-```text
-Savoury filled croissants — $10.50 pp
-Sweet filled croissants — $9.00 pp
-House baked banana bread — $7.50 pp
-Fruit salad & yoghurt — $7.50 pp
-Mixed bircher muesli bowls — $9.00 pp
-Waffles — $7.50 pp
-Bacon & egg muffins — $9.50 pp
-Bacon & egg paninis — $11.00 pp
-Breakfast wraps — $11.00 pp
-All pricing GST-exclusive.
-```
-
-## Morning tea / afternoon tea — minimum 12
-
-Sweet options:
-
-```text
-Assorted slices & cakes — $6.50 pp
-House baked muffins — $6.50 pp
-House baked banana bread — $6.50 pp
-Seasonal fruit — $6.50 pp
-Freshly baked scones with jam & Chantilly cream — $6.50 pp
-Gourmet filled cookies — $6.50 pp
-```
-
-Savoury options:
-
-```text
-Savoury filled mini croissants — $6.50 pp
-Homemade mini quiches with beetroot balsamic relish — $6.50 pp
-Housemade sausage rolls with condiments — $6.50 pp
-Spinach & feta pastizzis with housemade herbed labneh — $6.50 pp
-Mini beef party pie with condiments — $6.50 pp
-Sweet & savoury option combo — $12.00 pp
-```
-
-## Lunch — minimum 12
-
-```text
-Mixed filled sandwiches — $9.00 pp
-Mixed filled wraps — $9.50 pp
-Mixed filled brioche/Turkish/focaccia rolls — $9.50 pp
-Mixed gourmet pizza scrolls — $10.50 pp
-Hot nibble selection, 3 pieces — $8.50 pp
-Chicken Caesar salad bowl — $16.50 pp
-Lamb fattoush salad bowl — $16.50 pp
-Mediterranean chicken bowl — $16.50 pp
-Roasted vegetable salad bowl — $16.50 pp
-Beef lasagne + side salad — $16.50 pp
-```
-
-Lunch combos:
-
-```text
-Choose 2 sandwich/wrap/roll/scroll options, 2 pieces pp — $11.50 pp
-Choose 3 sandwich/wrap/roll/scroll options, 3 pieces pp — $15.00 pp
-Add hot food selection, 2 pieces pp — $6.50 pp
-Add seasonal fruit platter to combo — $5.50 pp
-```
-
-Working lunch boxes:
-
-```text
-Sandwich / wraps-roll / sweet treat / savoury snack / drink — $24.00 pp
-Salad bowl / sweet treat / drink — $24.00 pp
-Breakfast / savoury filled croissant / breakfast sweet / mini quiche / juice — $24.00 pp
-Individually packaged.
-```
-
-## Build Your Buffet — minimum 12
-
-Meats:
-
-```text
-Roast beef sliced — $5.50 pp — caramelised onion jam — GF, DF
-Leg ham off the bone — $5.50 pp — beetroot balsamic relish
-Limoncello & rosemary roast chicken pieces — $6.50 pp
-Spiced lamb koftas — $7.00 pp — spicy capsicum cream, pita breads
-Lemon & thyme chicken skewers — $6.50 pp — herbed labneh, pita breads
-Chargrilled lamb cutlets — $8.00 pp — Riviera house emulsion
-```
-
-Salads/sides include:
-
-```text
-Creamy basil pesto pasta salad — $3.75 pp
-Greek green bean salad — $3.75 pp
-Moroccan cous cous salad — $3.75 pp
-Pumpkin, feta & pepita salad — $3.75 pp
-Traditional garden salad — $3.75 pp
-```
-
----
-
-# 9. Offsite / Wake / Funeral Platter Brochures — operational digest
-
-**Sources:** Funeral+Catering+Brochure+(4).pdf and Offsite+Platter+Brochure+(3).pdf
-
-Platters can be delivered hot or arranged for pickup in brochure copy. Riviera project default for Doblo's is delivery; for client orders, use event-specific instruction.
-
-## Sweets — each platter serves 12
-
-```text
-House baked scones — $65 + GST — Chantilly cream & jam
-Sweet slice & cake platter — $75 + GST
-House baked muffins — $75 + GST
-Seasonal fruit platter — $60 + GST
-Grazing box — $95 + GST — cheeses, deli meats, fruit, nuts, crackers, dips, olives
-```
-
-## Hot nibbles
-
-Source says 20-25 pieces for single platters; project working standard converts this to 24 pieces.
-
-```text
-House baked sausage rolls — $65 + GST
-Flaky beef party pies — $65 + GST
-House baked mini quiches — $65 + GST
-Spinach & ricotta pastizzis — $65 + GST
-Mixed box hot nibbles — $120 + GST — source says 40-50 pieces; project working standard converts this to 48 pieces
-```
-
-## Finger food lunch options
-
-```text
-Ham & cheese croissants — 12 pieces — $85 + GST
-Sandwich platter — 24 points / 6 whole sandwiches cut into quarters — $65 + GST
-Premium filled wraps — 12 wraps — $75 + GST
-Filled brioche rolls — 12 — $120 + GST
-Brioche example fillings: smoked chicken, bacon & almond; chicken schnitzel & slaw; roast beef, beetroot relish, Jarlsberg & rocket; grilled halloumi, pesto & pumpkin
-```
-
-## Lunch meats — serve 12 unless noted
-
-```text
-Leg ham off the bone — $65 + GST
-Limoncello & rosemary roasted chicken pieces — $65 + GST — GF, DF
-Roast beef with beetroot balsamic relish — $65 + GST — GF, DF
-Lemon & thyme chicken skewers — $65 + GST — herbed labneh, pita breads — GF
-Spiced lamb koftas — $65 + GST
-Chargrilled lamb cutlets — $75 + GST
-```
-
-## Salads and cooked sides
-
-```text
-Salads serve 12-15 — $45 + GST each.
-Options: basil pesto pasta salad, Greek green bean salad, Moroccan cous cous salad, roast pumpkin/feta/pepita salad, classic garden salad, creamy potato/bacon/herb salad.
-Cooked sides serve 12-15.
-Creamy potato bake — $65 + GST
-Broccoli cauliflower gratin — $65 + GST
-Gravy 500 ml — $15 + GST
-House baked sourdough focaccia bread with butter — $30 + GST
-Dinner rolls & butter — $20 + GST
-```
-
-## Dietary platters
-
-```text
-Dietary grazing platter — $75 + GST
-Dietary hot nibble box — $65 + GST
-Dietary sandwich platter — $65 + GST
-Dietary sweet platter — $65 + GST
-Dietary platters serve 4-6.
-Brochure says platters can be made gluten-free, dairy-free, vegetarian, vegan, egg-friendly.
-Shared kitchen disclaimer: cannot guarantee food completely free from traces of allergens.
-```
-
-## Tea & coffee station
-
-```text
-Tea, instant coffee, full cream & skim milk, sugar, coffee urn, disposable cups, stirrers.
-Minimum 20 pp.
-$5 + GST.
-```
-
----
-
-# 10. Life Celebration Packages — operational digest
-
-**Source:** Life+Celebration+Packages+(5).pdf
-
-```text
-Tone: respectful, calm, supportive.
-Venue hire reference: $500 + GST, Monday-Friday.
-Venue hire duration reference: up to 4 hours.
-Capacity reference: up to 300 cocktail-style.
-Inclusions: tables & chairs, TV & AV equipment, onsite amenities, air-conditioning.
-Catering and beverage options available.
-Use wake/platter brochure for food modules unless event-specific package states otherwise.
-```
-
----
-
-# 11. Baby Shower Packages — operational digest
-
-**Source:** Baby+Shower+Packages+(4).pdf
-
-## Spaces
-
-```text
-Sunday Tapas — no venue hire fee; public restaurant-style booking; space allocation weather-dependent and may be shared.
-Riviera Ballroom — seats up to 60; air-conditioned; archway wall for photos.
-Bar Terrace — up to 20; ocean views, weather protection and air-conditioning; fixed table configurations.
-Outdoors — fig tree lawn with ocean views.
-Venue hire outside Sunday depends on date/style/size and needs quote.
-```
-
-## Styling
-
-```text
-All Inclusive Styling Package — $300 + GST
-Includes: baby booty centrepieces, silk wildflowers, runners, napkins, ruffle placemats, crystal tea lights, table setting, gift table, plinth duo, gold cake knife/server, Baby in Bloom sign, prediction cards.
-Hire-only items.
-```
-
-Hire add-ons include placemats, booties/florals, runners, napkins, bud vases, balloon garland, clipboards, linen signage, archway decal, pregnancy silhouette, white plinths. Use source/quote for final pricing.
-
-## Baby shower high tea
-
-```text
-Minimum: 12 people
-Price: $55 pp + GST
-Menu: ribbon sandwiches, chorizo & roasted capsicum arancini with romesco and lemon-thyme aioli, scones with jam/lemon curd/whipped cream, petit fours, unlimited tea/coffee, high-tea china.
-```
-
-## Custom graze
-
-```text
-Price: $60 pp + GST
-Minimum: 12 people
-Includes: customised baby shower grazing table with smoked chicken & bacon sliders, ribbon sandwiches, spinach & feta pastizzis with tzatziki, fresh fruit, sweets/cakes, signature mocktail. Styled to theme/colour palette.
-Floral arrangements add-on: $75 + GST each.
-```
-
----
-
-# 12. Corporate Venue Brochure — operational digest
-
-**Source:** Riviera+-+Corporate+(2).pdf
-
-```text
-Tone: professional, efficient, tidy.
-Use for corporate venue hire/proposals rather than food-only production.
-Key claims: Riviera is in town, onsite catering, full commercial kitchen, reliable utilities, wet-weather alternatives, ocean views, nearby accommodation, modern facilities.
-For food, use Corporate Catering Brochure and Supplier/Production modules.
-```
-
----
-
-# 13. Product-format traps to preserve
-
-```text
-Corporate fruit box != styled seasonal fruit platter.
-Grazing box != 1 m grazing table.
-Seated function focaccia != sliced focaccia box.
-Corporate sandwich platter != lunch box sandwich component.
-Hot nibble platter != mixed hot nibble box unless source confirms mixed.
-Canapes do not replace dinner unless package/service style confirms.
-```
-
----
-
-# 14. Replacement QA before deleting PDFs from active sources
-
-Before removing brochure PDFs from active project sources:
-
-```text
-□ Upload this digest to project sources.
-□ Ask one test question from each package type.
-□ Confirm prices/minimums appear correctly.
-□ Keep Bidfood/Doblo's supplier sources active or convert separately.
-□ Keep original PDFs archived outside active source list.
-□ Mark this digest as the package/menu source, not the final quote source.
-```
-````
-
-### Source: Riviera_Canonical_Recipe_Bank_v1_2026-06-08.md
-
-- Lines: 588
-- SHA-256: `41451a16898a8046213f27c8f30e8943cce82217d014a5ecd4e3ed03b1de0b47`
-
-````markdown
-# Riviera Canonical Recipe Bank v1
-
-**Status:** Active recipe-bank draft for Riviera SOP Master Index v6  
-**Date:** 2026-06-08  
-**Use for:** Pulling repeat recipes into prep sheets, production cards, order translators and event run sheets.
-
----
-
-## 0. Purpose
-
-This file separates active locked recipes from working draft modules.
-
-Use this order:
-
-```text
-1. LOCKED HOUSE SOP — use directly unless user changes it.
-2. ACTIVE WORKING SOP — usable but review before major scaling.
-3. SOURCE RECIPE — use source recipe, convert into Riviera production card.
-4. DRAFT MODULE — practical draft; mark NEEDS CHEF CONFIRMATION before treating as final.
-```
-
-Do not invent a final recipe where Riviera does not yet have one. Use a draft module only when clearly marked.
-
----
-
-## 1. LOCKED HOUSE SOP — House focaccia
-
-**Yield:** approx. 4.6 kg dough  
-**Best use:** grazing, delivery, casual catering, tapas, seated bread with whipped butter when portioned appropriately  
-**Hydration:** 75%
-
-### Ingredients
-
-```text
-Bread flour — 2400 g
-Water — 1800 g
-Sourdough starter — 300 g
-Instant dry yeast — 15 g
-Fine sea salt — 50 g
-Olive oil — 50 ml
-Honey — 30 g
-```
-
-### Method
-
-```text
-1. Mix water, starter, honey and yeast.
-2. Add flour. Mix low speed 3 minutes until hydrated.
-3. Rest 15 minutes.
-4. Add salt and olive oil.
-5. Mix medium speed 6-8 minutes until smooth/stretchy.
-6. Bulk in oiled tub 45 minutes.
-7. Stretch and fold.
-8. Rest 45 minutes.
-9. Stretch and fold again.
-10. Overnight cold proof.
-```
-
-### Bake
-
-```text
-1. Oil trays generously.
-2. Portion cold dough to tray size.
-3. Coat with oil and rest 1-2 hours until puffy.
-4. Dimple with oil.
-5. Bake Rational/combi 220°C, 0% steam, 20-25 minutes.
-6. Drop to 190°C, 0% steam, 10 minutes until golden and crisp.
-7. De-tray immediately and cool on racks.
-```
-
-### Production notes
-
-```text
-Casual/delivery/grazing/offsite/corporate: sliced focaccia box = 12 pieces.
-Seated plated dinner: focaccia with whipped butter; do not use sliced box piece logic.
-1 m graze = 1/4 tray focaccia sliced.
-Every grazing box includes focaccia.
-```
-
----
-
-## 2. LOCKED HOUSE SOP — Scones
-
-**Yield:** 12 normal-size scones
-
-### Ingredients
-
-```text
-Scone mix — 1080 g
-Water — 600 ml
-```
-
-### Method
-
-```text
-1. Mix scone mix and water in mixer.
-2. Do not overmix.
-3. Rest 5 minutes.
-4. Shape and tray.
-5. Bake 200°C for 12 minutes.
-6. Drop oven to 160°C and bake another 10 minutes.
-7. Cool before packing.
-```
-
-### Scaling
-
-```text
-24 scones = 2160 g mix + 1200 ml water
-36 scones = 3240 g mix + 1800 ml water
-48 scones = 4320 g mix + 2400 ml water
-72 scones = 6480 g mix + 3600 ml water
-```
-
-### Packing
-
-```text
-Pack with jam and chantilly cream unless event source says otherwise.
-```
-
----
-
-## 3. LOCKED HOUSE SOP — Burnt butter mash
-
-**Yield basis:** 35 servings
-
-### Ingredients
-
-```text
-Potato flakes — 1.05 kg
-Boiling water — 4.2 L
-Heavy/thickened cream — 2.1 L
-Unsalted butter — 1.5 kg
-Fresh thyme — 30 g
-Kosher/coarse salt — 50 g
-White pepper — 7 g
-```
-
-### Method
-
-```text
-1. Brown butter in large pot until foaming stops and brown specks form.
-2. Remove from heat. Add thyme and steep 5 minutes.
-3. Strain and discard thyme stems.
-4. Wipe pot.
-5. Bring water, cream and salt to boil.
-6. Turn off heat. Add potato flakes. Stir gently until wet.
-7. Rest 1 minute to hydrate.
-8. Whip in warm brown butter with large spatula until glossy.
-9. Taste after hydration and butter. Adjust salt/white pepper.
-```
-
-### Hold
-
-```text
-Hold hot covered. Protect surface from drying. Loosen with warm cream/water if tight.
-```
-
-### Allergens
-
-```text
-Dairy. Gluten-free only if potato flakes are confirmed GF and cross-contact is controlled.
-```
-
----
-
-## 4. ACTIVE WORKING SOP — Tarragon cream sauce
-
-**Target yield:** approx. 2.3-2.4 L  
-**Covers:** 35 x 60 ml portions plus light buffer
-
-### Ingredients
-
-```text
-Unsalted butter — 225-250 g
-Shallots, finely minced — 320-350 g
-Rice flour — 50 g
-Cornflour — 40-45 g, slurry with cold milk/stock/water
-Warm milk — 1 L
-Warm low-salt chicken stock — 1 L
-Dry white wine — 350-360 ml
-Fresh tarragon — 35-45 g total, stems for infusion, leaves to finish
-Thickened cream — 650 ml
-Lemon zest — 3-4 lemons, optional
-Chicken/veg base — 35-40 g, cautious
-Lemon juice — 40-80 ml, to taste
-White pepper — to taste
-Parsley — 15-20 g, optional
-Salt — after reduction only
-```
-
-### Method
-
-```text
-1. Infuse milk, stock, wine and tarragon stems at least 1 hour.
-2. Sweat shallots in butter without colour.
-3. Add rice flour. Cook gently 1 minute.
-4. Gradually whisk in warm infused liquids.
-5. Simmer 3-4 minutes until smooth and lightly reduced.
-6. Whisk in cornflour slurry gradually until sauce coats.
-7. Add cream. Simmer gently 2-3 minutes.
-8. Season with base, white pepper, lemon zest and lemon juice.
-9. Finish with chopped tarragon leaves and optional parsley.
-10. Taste after reheating and adjust salt/acid/herbs before service.
-```
-
-### Hold
-
-```text
-Hold warm covered. Do not boil. Reheat slowly and loosen with warm stock/milk/cream.
-```
-
-### Allergens
-
-```text
-Dairy. Possible sulphites/alcohol from wine. Chicken/veg base depends on final product. Gluten-free only if GF starch/base/stock are confirmed.
-```
-
----
-
-## 5. ACTIVE WORKING SOP — Benedictine caramel custard / pipeable custard
-
-**Yield basis:** 35 pipeable portions
-
-### Ingredients
-
-```text
-Caster sugar — 300 g
-Water — 60 ml
-Full-fat milk — 1 L total, split 800 ml + 200 ml
-Benedictine liqueur — 90 ml
-Nestlé/Docello custard powder — 140 g
-Unsalted butter — 100 g, cubed
-```
-
-### Method
-
-```text
-1. Boil sugar and water to deep amber caramel.
-2. Reduce heat. Carefully add 800 ml milk.
-3. Stir over low heat until caramel dissolves fully into milk.
-4. Whisk custard powder with remaining 200 ml cold milk until smooth.
-5. Bring caramel milk to gentle boil.
-6. Whisk in slurry vigorously.
-7. Cook while whisking until thick, then bubble gently for 1 full minute.
-8. Remove from heat. Whisk in Benedictine and cubed butter until glossy.
-9. Tray off/shallow container. Plastic directly on surface.
-10. Chill minimum 4 hours.
-11. Before service, beat briefly 30 seconds to loosen, then pipe.
-```
-
-### Optional upgrade
-
-```text
-Fold 300 ml soft-whipped cream/chantilly through cold loosened custard for lighter crème diplomat texture.
-```
-
-### Allergens / flags
-
-```text
-Dairy. Alcohol. Custard powder allergen status must be checked.
-```
-
----
-
-## 6. SOURCE RECIPE — Chorizo & mozzarella arancini
-
-**Source:** Recipes for Prep Chef  
-**Yield:** source says 80 large / operational source method portions to 50 g balls. Verify final count after rolling.
-
-### Ingredients
-
-```text
-Arborio rice — 5 kg
-Chorizo — 1 kg, fine dice
-Mozzarella — 600 g, grated
-Brown onion — 400 g, blitzed
-Water — 5 L
-Chicken stock concentrate — 200 ml
-Vintage cheddar — 600 g, grated
-Grana Padano parmesan — 150 g, grated
-Spicy capsicum dip — 800 g
-Roasted capsicum — 1 kg, blitzed
-White wine — 750 ml
-Crushed garlic — 200 g
-Salt flakes — 50 g, adjust to taste
-Cracked pepper — 30 g, adjust to taste
-GF flour / egg / GF breadcrumbs — for crumb station
-```
-
-### Method
-
-```text
-1. Sauté onions until golden.
-2. Add garlic and chorizo. Cook 1-2 minutes.
-3. Deglaze with wine.
-4. Add rice, spicy capsicum dip, onions, garlic and chorizo to deep bain.
-5. Cover with water, stock concentrate, salt and pepper. Stir.
-6. Cover and cook 160°C for 20 minutes. Stir.
-7. Cook another 20 minutes or until liquid absorbed.
-8. Cool fully.
-9. Add grated cheeses and roasted capsicum.
-10. Portion and roll.
-11. Crumb in GF flour, egg, GF breadcrumbs.
-12. Freeze solid.
-13. Seal only in vacuum bags; do not vacuum hard or squash.
-14. Defrost in fridge/coolroom before service.
-```
-
-### Service
-
-```text
-Deep fry until hot through. Season immediately with salt. Serve with romesco and lemon-thyme aioli where menu requires.
-```
-
-### Allergens
-
-```text
-Dairy, egg. Gluten status depends on chorizo, stock, dip, crumbs and fryer controls.
-```
-
----
-
-## 7. SOURCE RECIPE — Calamari fritti flour mix and service
-
-**Source:** Recipes for Prep Chef
-
-### Ingredients
-
-```text
-Tenderised pineapple-cut squid strips — 2 kg, defrosted
-Baby octopus — 1 kg
-Rice flour — 500 g
-GF corn flour — 100 g
-Salt — 20 g
-Lemon pepper seasoning — 100 g
-Baby capers — 500 g
-```
-
-### Method
-
-```text
-1. Portion calamari for service: 15 pieces calamari + 3 baby octopus into 500 ml PC.
-2. Mix rice flour, GF corn flour, salt and lemon pepper.
-3. Store flour mix in labelled PC.
-4. Drain and dry capers. Store on clean chux in PC.
-```
-
-### Service
-
-```text
-1. Fry capers 30-60 seconds until crispy.
-2. Coat calamari/octopus in flour mix.
-3. Fry about 1 minute, do not overcrowd basket.
-4. Season hot with salt.
-5. Serve with lemon dill/house aioli and crispy capers.
-```
-
-### Allergens
-
-```text
-Seafood. Gluten-free only if seasoning, fryer and cross-contact are controlled.
-```
-
----
-
-## 8. ACTIVE WORKING SOP — 30 cm x 40 cm grazing box
-
-**Status:** Active module based on grazing table standard, scaled to box format. Adjust only when event source gives a specific size/count.
-
-### Base contents
-
-```text
-Double cream brie — portioned wedges
-Blue cheese — small wedge
-Aged cheddar / black-coated cheese — sliced/wedge
-Prosciutto — folded portions
-Salami — folded portions
-PC olives — small PC/tub portion
-Grapes — small cluster
-Crackers — 2 varieties
-House focaccia — included, sliced
-Dried apricots/dates — small handful
-Dip — 1 small PC/tub
-Dried citrus / herb garnish — restrained finish
-```
-
-### Production card wording
-
-```text
-ASH | Build **30 x 40 grazing box**
-Portion cheese, meats, olives, crackers, fruit, focaccia, dried fruit, dip and garnish. Keep tidy, premium and not overfilled.
-```
-
-### Ordering note
-
-Use grazing table standard as the source family. Scale realistically to box count and guest count. If exact box serve count is not provided, mark NEEDS CONFIRMATION.
-
----
-
-## 9. ACTIVE WORKING SOP — Fruit platter / fruit box formats
-
-### Format resolution first
-
-```text
-Corporate fruit box / pax-based fruit = packed corporate fruit component.
-Fruit cup = individual fruit cup.
-Seasonal cut fruit bowl = bulk bowl, usually simple fruit mix.
-Styled seasonal fruit platter = full Riviera fruit platter standard.
-Grazing box/table fruit = garnish/part of graze.
-Breakfast fruit + yoghurt = corporate breakfast item.
-```
-
-### Styled fruit platter standard — per platter
-
-```text
-Baby watermelon — 1/2
-Pineapple — 1/4
-Papaya — 1/2
-Kiwi — 2
-Grape vine — 1/4
-Apples — 3
-Oranges — 2
-Blueberries — 10
-Blackberries — 4
-Strawberries — 4
-Passionfruit — 1
-Honeydew or rockmelon — 1/4
-Edible flowers — 3
-Mint — garnish
-Toasted shredded coconut — garnish
-```
-
-### Production wording
-
-```text
-ASH | Build **styled fruit platter** — x platters
-Use standard fruit platter spec per platter. Cut and arrange premium. Finish with mint, edible flowers and toasted coconut.
-```
-
-For corporate fruit boxes, do not apply the full styled platter spec unless the order says styled fruit platter.
-
----
-
-## 10. DRAFT MODULE — Herbed labneh
-
-**Status:** Draft production module. Exact ratio needs final chef lock.
-
-### Production flow
-
-```text
-DAY 1
-ASH | Hang **yoghurt for labneh** overnight
-Hang yoghurt in cloth/chinois under refrigeration overnight.
-
-DAY 2
-DAN | Fold **herbed labneh**
-Fold with lemon zest/juice, olive oil, herbs, garlic if suitable, salt and pepper. Taste-adjust-taste.
-```
-
-### Suggested Riviera profile
-
-```text
-Lemon, parsley, mint, dill or oregano, olive oil, sea salt, white/black pepper.
-For garlic/onion-free dietaries, keep a separate portion without garlic.
-```
-
-### Allergens
-
-```text
-Dairy.
-```
-
----
-
-## 11. DRAFT MODULE — Zesty limoncello chicken skewers
-
-**Status:** Draft production module. Exact ratio needs final chef lock. Limoncello and honey are mandatory in the flavour profile.
-
-### Flavour profile
-
-```text
-Limoncello
-Honey
-Lemon zest / lemon juice
-Garlic unless dietary restriction
-Oregano / thyme
-Olive oil
-Salt / pepper
-```
-
-### Production flow
-
-```text
-DAN | Marinate **limoncello chicken skewers**
-Marinate chicken with limoncello, honey, lemon, garlic, herbs and olive oil. Skewer. Chill. Cook/fry/grill to service plan. Finish with herbed labneh, feta and herbs.
-```
-
-### Dietary close-to-menu option
-
-```text
-Garlic/onion-free: same skewer profile without garlic/onion, keep lemon, honey, limoncello, herbs and olive oil.
-Dairy-free: no labneh/feta; finish with herb oil and lemon.
-```
-
----
-
-## 12. DRAFT MODULE — Sandwich / wrap / brioche filling bank
-
-Use when no specific fillings are requested. Choose from Riviera/tapas-friendly fillings and event suitability.
-
-### Default production-facing filling summary
-
-```text
-Ham cheddar Dijon
-Roast beef horseradish rocket
-Smoked chicken bacon dill almond
-Roast pumpkin feta pesto
-Grilled halloumi pesto pumpkin
-Casalingo salami bocconcini sundried tomato
-Chicken aioli herbs
-Vegetarian seasonal roast veg relish
-```
-
-### Production rule
-
-The top filling summary only lists what we make. Full filling quantities go in production cards.
-
----
-
-## 13. ACTIVE WORKING SOP — Hot nibble standards
-
-```text
-Single hot nibble platter = 24 pieces.
-Mixed hot nibble box/platter = 48 pieces total.
-Default mixed split = 12 pieces each of 4 items.
-```
-
-Common mixed box:
-
-```text
-Pies — 12
-Sausage rolls — 12
-Mini quiches — 12
-Spinach ricotta pastizzis — 12
-```
-
-### GF hot nibble rule
-
-Use confirmed bought-in GF items first, such as GF pies and GF sausage rolls. Use in-house frittata/potato backup only if short.
-
----
-
-## 14. DRAFT MODULE — Dietary alternate recipe rule
-
-Dietary alternatives must stay as close as safely possible to the actual meal.
-
-```text
-Garlic/onion allergy = same dish without garlic/onion where practical.
-GF/DF chicken = same chicken plate without gluten/dairy component; use herb oil/lemon/safe sauce.
-Pescatarian = fish/seafood alternative close to same garnish/sides where possible.
-Vegetarian = halloumi, pumpkin, roast veg, arancini or suitable protein-style replacement depending event.
-```
-
-If the alternative needs cooking, include ingredients, quick method, seasoning/finish and holding note in the production sheet.
-
----
-
-## 15. Recipe bank gaps to finalise
-
-These need final Riviera SOPs later:
-
-```text
-Romesco
-Lemon thyme aioli
-Lemon dill aioli
-Riviera house emulsion
-Sticky date madeleines exact batch
-Toffee sauce exact batch
-Cannoli fillings
-Herbed labneh exact ratio
-Limoncello chicken skewer exact ratio
-Beef jus / red wine jus
-House relish / beetroot relish / farmhouse relish
-Corporate fruit box exact pack standard
-Grazing box exact gram-count standard by box size
-```
-
-Until finalised, mark these as DRAFT or NEEDS CHEF CONFIRMATION in production sheets when exact recipe matters.
-````
-
-### Source: Riviera_Sunday_Tapas_Pull_Matrix_SOP_Addendum_v1_2026-06-16.md
-
-- Lines: 230
-- SHA-256: `03e22abeb27df3bb51ed658e35da688388f17be70cbd180f4afdd510ea2b4fc9`
-
-````markdown
-# Riviera Sunday Tapas Pull Matrix SOP Addendum v1
-
-**Status:** Active SOP addendum / pending master-index sync  
-**Date:** 2026-06-16  
-**Use for:** Sunday tapas freezer pull, service-fridge setup, backup planning, tapas prep sheets and kitchen wall matrix.
-
----
-
-## 0. Purpose
-
-This addendum turns the Sunday tapas sales/bookings model into a repeatable SOP.
-
-It prevents over-defrosting by separating:
-
-```text
-SERVICE FRIDGE PULL = current booked-cover tier
-BACKUP = next tier minus current tier, counted but kept frozen
-```
-
-The kitchen wall sheet remains the practical service reference.
-
----
-
-## 1. Source position
-
-Use this addendum after confirmed current-week booking numbers and before general judgement.
-
-Source order inside Sunday tapas work:
-
-```text
-1. User correction in current project
-2. Current Sunday booking number
-3. Riviera Sunday Tapas Pull Matrix — A4 Kitchen Sheet v1
-4. This SOP addendum
-5. Riviera SOP Master Index
-6. Count & Ordering Harness
-7. Component Module Library
-8. Recipes for Prep Chef / Canonical Recipe Bank
-9. Kitchen Council final chef judgement
-```
-
-If the current POS/booking model is updated, regenerate the pull matrix and replace this addendum.
-
----
-
-## 2. Model basis
-
-Current model basis:
-
-```text
-13 matched Sundays
-856 booked covers
-1050 POS food serves
-Average: 1.23 food serves per booked cover
-```
-
-Do not use the old placeholder `0.6 per 5 guests`. It is retired.
-
----
-
-## 3. Tapas pull rule
-
-Use booked-cover tiers:
-
-```text
-1–20 booked = use 20 column
-21–40 booked = use 40 column
-41–60 booked = use 60 column
-61–80 booked = use 80 column
-81–100 booked = use 100 column
-101–120 booked = use 120 column
-```
-
-Main pull units must be:
-
-```text
-serves / PCs / portions / bowls / trays / meals
-```
-
-Do not list individual skewers or pieces in the main matrix. Put conversions only in the footer or recipe/service notes.
-
----
-
-## 4. Service fridge and backup rule
-
-```text
-SERVICE FRIDGE:
-Pull only the current booked-cover tier.
-
-BACKUP:
-Count next tier minus current tier.
-Keep backup frozen unless trade is running hot.
-```
-
-Example:
-
-```text
-37 booked covers = use 40 column.
-Backup = 60 column minus 40 column.
-```
-
-Do not defrost the backup by default.
-
----
-
-## 5. Current active pull matrix
-
-```text
-ITEM / PULL UNIT             20   40   60   80   100  120
------------------------------------------------------------
-Chicken skewers (serves)      3    6    8   11    14   17
-Calamari (500 ml PC)          2    5    7   10    12   14
-Arancini (serves)             2    5    7    9    11   14
-Chorizo potatoes (port.)      2    4    6    8    10   12
-Lamb cutlets (serves)         2    4    6    8    10   12
-Chips (bowls)                 2    4    5    7     9   11
-Veal olives (serves)          2    3    5    6     8    9
-Saganaki (serves)             1    3    4    6     7    9
-Cauliflower (port.)           1    3    4    5     7    8
-Fish sliders (serves)         1    3    4    5     6    8
-Cannoli trio (serves)         1    2    3    4     5    7
-Oysters (serves)              1    2    3    3     4    5
-Polpette (serves)             1    2    2    3     4    5
-Sticky date (serves)          1    1    2    3     4    4
-Kids nuggets (meals)          1    1    2    2     3    3
-Charcuterie for 2 (trays)     0    1    1    1     2    2
-Red grape focaccia (serves)   0    1    1    1     1    2
-Kids fish & chips (meals)     0    0    1    1     1    1
-```
-
----
-
-## 6. Conversion footer
-
-Use this as small footer text only:
-
-```text
-1 serve = menu serve.
-Chicken / arancini / lamb / saganaki / fish sliders / cannoli / polpette = 3 pcs per serve.
-Oysters = 6 pcs per serve.
-Calamari = 1 x 500 ml PC.
-```
-
----
-
-## 7. Prep-sheet integration
-
-If a prep sheet covers Sunday tapas:
-
-```text
-FRIDAY — Pull Sunday Tapas freezer prep to fridge/coolroom.
-Use latest booked-cover number and pull matrix tier.
-Pull service fridge only.
-Count backup as next tier minus current tier and keep frozen.
-```
-
-If an event overlaps Sunday tapas, include a **Tapas Ready** block:
-
-```text
-TAPAS READY:
-- Current booked-cover tier checked.
-- Service fridge pull completed from matrix.
-- Backup counted and kept frozen.
-- Sauces ready.
-- Focaccia accounted for.
-- Dessert mise ready.
-- High-risk shelf first: chicken, fish, calamari, oysters, lamb.
-```
-
----
-
-## 8. Count Harness insert
-
-Add under Sunday Tapas / Hot Food count logic:
-
-```text
-Sunday Tapas uses the active data-based pull matrix, not a fixed per-head guess.
-Use booked-cover tiers and round up to the next tier.
-Main matrix units are serves / PCs / portions / bowls / trays / meals.
-Backup is next tier minus current tier and stays frozen unless trade is running hot.
-```
-
----
-
-## 9. Component Module insert
-
-Add as a module:
-
-```text
-MODULE NAME:
-Sunday Tapas data-based service pull
-
-USE WHEN:
-Sunday tapas service or any prep sheet covering Sunday tapas.
-
-BASE UNIT:
-Booked covers, rounded up to 20 / 40 / 60 / 80 / 100 / 120 tier.
-
-COUNT LOGIC:
-Use active pull matrix. Pull current tier only into service fridge. Count backup as next tier minus current tier; keep frozen unless needed.
-
-PRODUCTION CARD:
-ASH | Pull **Sunday Tapas service fridge prep** — booked-cover tier
-Use pull matrix. Pull service fridge only. Keep backup frozen and counted.
-
-PACK / SERVICE:
-High-risk shelf first: chicken, fish, calamari, oysters, lamb.
-Fryer-close items grouped for service: calamari, arancini, potatoes, cauliflower, fish, chips.
-
-DIETARY / ALLERGEN FLAGS:
-Use item recipe/allergen source. Do not claim allergen-free unless controlled.
-
-ORDERING HOOK:
-Use sales trends and current stock. Do not over-order from a single high-booking Sunday.
-```
-
----
-
-## 10. QA before printing or using
-
-```text
-□ Current Sunday booking number entered
-□ Correct tier selected
-□ Matrix shown in serves / PCs / trays / meals
-□ No individual skewers/pieces in main matrix
-□ Backup rule visible
-□ High-risk shelf note visible
-□ Model note/date visible
-□ PDF is A4 portrait, black/white/grey and readable from 2 metres
-```
-````
-
-### Source: Riviera_Sunday_Tapas_Pull_Matrix_A4_Kitchen_Sheet_v1_2026-06-16.txt
-
-- Lines: 5
-- SHA-256: `ef740aeef45b55dbdfeb033a8b0a5fe029b766970065c7fa084a4940be69b25d`
-
-````markdown
-Active Sunday tapas service-fridge pull matrix.
-Use booked-cover tier, rounded up to next tier.
-Pull units are serves / PCs / trays / meals.
-Do not use individual skewers/pieces in the main matrix.
-Pull service fridge only. Keep backup frozen.
-````
+Count conversion
 
-### Source: Riviera_Order_Template_v1_2026-06-09.md
+Dietary/allergen planning
 
-- Lines: 228
-- SHA-256: `57879e25b39706bedb70f4bf6b7148773e26309b78193df28c1d7cd70169dbf9`
+Sandwich/wrap/croissant/brioche/focaccia/lunch box planning
 
-````markdown
-# Riviera Order Template v1
+Hot nibble planning
 
-**Status:** Active ordering template draft  
-**Date:** 2026-06-09  
-**Use for:** Riviera supplier orders, event order checks, already-ordered/still-needed lists, and chef-ready order emails.
+Sunday tapas overlap
 
----
+Multi-event shared prep
 
-## 0. Purpose
+Offsite catering / hot holding / cryovac planning
 
-This template turns a production sheet into a clear order list.
+Seasoning / dish improvement / Kitchen Council request
 
-It must answer:
+Apply the matching active SOP/source automatically.
 
-```text
-What do we need?
-How much?
-Which supplier?
-For which event?
-Already ordered or still needed?
-What is missing or risky?
-```
+Event Processing Order
 
-Do not invent prices, pack sizes, guest counts, or confirmed menus. If not found, write **NEEDS CONFIRMATION** or **price not found in current source**.
+For event dumps and prep work:
 
----
+Classify as SINGLE EVENT or MULTI-EVENT.
 
-## 1. Order header
+Extract only food-relevant event details.
 
-```text
-ORDER NAME:
-EVENT / WEEK:
-EVENT DATE(S):
-DELIVERY DATE REQUIRED:
-DELIVERY METHOD: Delivery
-SUPPLIER:
-REQUESTED BY:
-SOURCE / PACKAGE:
-PRODUCTION TARGET:
-DIETARIES:
-STATUS: Draft / Ready to send / Sent / Confirmed
-```
+Run missing-info check.
 
-Doblo's default method is **delivery** unless the user specifically asks for pickup.
+Resolve product formats before counting.
 
----
+Apply count logic and buffers.
 
-## 2. Supplier bucket order
+Pull relevant component modules.
 
-Always separate by supplier and status.
+Pull recipes if needed.
 
-```text
-DOBLO'S — produce / herbs / fruit / vegetables
-BIDFOOD — dry goods / dairy / bakery / frozen / desserts / meat / fish / finger foods / cleaning / packaging
-WOOLWORTHS / COLES — small top-ups / urgent specialty / GF bought-in items
-BUTCHER / SEAFOOD / SPECIALTY — if specified
-ALREADY ORDERED
-STILL NEEDED
-NEEDS CONFIRMATION
-```
+Apply seasoning/pairing check.
 
----
+Apply ordering translator if order list is requested.
 
-## 3. Chef-facing order list format
+Build from the template library.
 
-Use this format for internal order checks.
+Run final QA.
 
-```text
-DOBLO'S — DELIVERY REQUIRED [DATE]
-- **Item** — quantity / pack / event use / notes
-- **Item** — quantity / pack / event use / notes
+Keep post-event improvement notes where useful.
 
-BIDFOOD — ORDER REQUIRED [DATE]
-- **Item** — quantity / pack / event use / notes
-- **Item** — quantity / pack / event use / notes
+Food-Only Kitchen Sheet Rule
 
-WOOLWORTHS / COLES — TOP-UP
-- **Item** — quantity / event use / notes
+Prep sheets, run sheets and production sheets are food-control documents.
 
-ALREADY ORDERED
-- **Item** — supplier / quantity / date ordered / event
+Include only what helps food get prepped, cooked, cooled, seasoned, fired, packed, delivered or served.
 
-STILL NEEDED
-- **Item** — supplier / quantity / reason
+Include:
 
-NEEDS CONFIRMATION
-- **Item** — missing pack size / unclear source / price not found
-```
+Event name, date and guest count
 
----
+Food delivery/service time
 
-## 4. Supplier email format
+Location/contact only where it affects delivery or handoff
 
-Use this when writing an order email/message.
+Menu and what we actually prep
 
-```text
-Subject: Riviera Order — [Event / Date] — Delivery [Requested Date]
+Exact quantities
 
-Hi [Supplier Name],
+Dietaries as food actions
 
-Could we please order the following for delivery on [date]:
+Food times/service timeline
 
-- [Item] — [quantity]
-- [Item] — [quantity]
-- [Item] — [quantity]
+Prep/fire/packing cards
 
-Event note: [short note only if useful, e.g. Italian Long Lunch Saturday / wedding grazing table / corporate delivery]
+Sauce, dessert and dietary alternate recipes where needed
 
-Please confirm availability and delivery.
+Dan/Ash ownership
 
-Kind regards,
-Riviera Yeppoon
-```
+Delivery, cryovac, reheating or holding notes where relevant
 
-Keep supplier emails clean. Do not include full production notes unless needed for the supplier.
+Ready-to-send or ready-to-serve gate
 
----
+Remove unless directly food/service relevant:
 
-## 5. Count-to-order rules
+Deposit status
 
-### Production count
+Vendor lists
 
-```text
-Guest count -> production count -> ingredient count -> supplier order count
-```
+Photographer/celebrant/styling details
 
-Use the **9% buffer** for plated meals, buffet serves, canapes, hot nibbles where production is not fixed by module, protein portions, and high-risk dietary alternatives.
+Generic hygiene filler
 
-Do not blindly use buffer for fixed purchased unit boxes, expensive garnish items, or module-controlled items such as scone platters, fruit platters, and grazing boxes.
+Generic labelling/storage reminders
 
-### Alternate drop
+Broad venue inclusions
 
-```text
-Guest count + 9% buffer = total production target
-Dietaries included inside total
-Remaining standard mains split evenly
-Both normal mains reduced equally where practical
-```
+Full client history
 
-### Scones
+Production Sheet Layout Rules
 
-```text
-12 scones = 1080 g scone mix + 600 ml water
-```
+Use Riviera SOP Master Index v6 and the Production Sheet Template Library.
 
-Order:
+Default kitchen PDF/document rules:
 
-```text
-Total scones / 12 = batch count
-Batch count x 1.08 kg = scone mix required
-Jam + cream by platter count unless already in house
-```
+A4 portrait
 
-### Focaccia
+Black / white / grey only
 
-```text
-Casual / delivery / grazing / corporate sliced focaccia box = 12 pieces
-Seated dinner focaccia = table bread with whipped butter, not sliced-box count
-1 m grazing table = 1/4 tray sliced focaccia
-Every grazing box includes focaccia
-```
+High contrast
 
-If focaccia is required, show it in the order/prep. Do not assume stock.
+Full-width stacked cards only
 
-### Hot nibbles
+No side-by-side cards
 
-```text
+No two-card rows
+
+No multi-column production cards
+
+Visible card borders
+
+Quantities before food times
+
+Owner-first command cards
+
+Food items bold inside cards
+
+No cover page by default
+
+Keep recipe/method cards together where possible
+
+Readable from about 2 metres
+
+Do not shrink text to save pages; split pages instead
+
+Universal sheet order:
+
+Event/week snapshot
+
+What we actually prep / quantity check
+
+Filling summary if sandwiches/wraps/croissants/brioche/focaccia/lunch boxes are involved
+
+Dietary action if relevant
+
+Food times / service timeline
+
+Start Here / Coldroom Ready / Do Not Start Yet where useful
+
+Production cards by day
+
+Event-day fire / pack / send cards
+
+Ready to send / ready to serve gate
+
+Post-event debrief if useful
+
+Active cards start like:
+
+ASH | Start item
+
+DAN | Fire item
+
+BOTH | Pack delivery
+
+Use command verbs: make, start, begin, pull, fire, reheat, cook, cool, portion, allocate, pack, fold, mix, marinate, brine, cryovac, finish, send.
+
+Count and Product Format Rules
+
+Always resolve product format before counting.
+
+Watch these traps:
+
+Corporate fruit box ≠ styled fruit platter
+
+Grazing box ≠ 1 m grazing table
+
+Seated function focaccia ≠ sliced focaccia box
+
+Corporate sandwich platter ≠ lunch box sandwich component
+
+Hot nibble platter ≠ mixed hot nibble box unless confirmed
+
+Canapés do not replace dinner unless the package/service style confirms it
+
+Use working standards:
+
 Single hot nibble platter = 24 pieces
-Mixed hot nibble box/platter = 48 pieces total
-Mixed split = 12 each of 4 items
-```
 
-GF hot nibbles use confirmed bought-in GF pies/sausage rolls first when available.
+Mixed hot nibble box/platter = 48 pieces total, 12 each of 4 items
 
-### Fruit format
+Sandwich platter = 24 points / 6 whole sandwiches
 
-Resolve format before ordering:
-
-```text
-Corporate fruit box / pax-based fruit = packed corporate fruit component
-Fruit cup = individual fruit cups
-Seasonal cut fruit bowl = bulk bowl
-Styled seasonal fruit platter = full Riviera fruit platter standard
-Grazing box fruit = graze component
-Grazing table fruit = graze component
-Breakfast fruit + yoghurt = corporate breakfast item
-```
-
-Do not apply the styled fruit platter standard to corporate fruit boxes unless the source says styled fruit platter.
-
----
-
-## 6. Order risk flags
-
-Add these at the bottom of the order list when relevant.
-
-```text
-RISK / CHECK BEFORE ORDERING
-- Expensive over-order risk:
-- Short shelf-life item:
-- Pack size unclear:
-- Source price not found:
-- Dietary/allergen impact:
-- Frozen item needs 2-day fridge/coolroom thaw:
-- Cryovac/Roscoes window required:
-- Sunday Tapas overlap:
-```
-
----
-
-## 7. Final order QA
-
-Before sending any order:
-
-```text
-□ Event date checked
-□ Delivery date checked
-□ Supplier separated
-□ Already ordered separated
-□ Still needed separated
-□ Missing pack sizes flagged
-□ Dietaries checked
-□ Focaccia counted if required
-□ Fruit format resolved
-□ Hot nibble count converted to pieces
-□ 9% buffer applied only where relevant
-□ No invented prices
-```
-````
-
-### Source: Riviera_Supplier_Ordering_Translator_v1_2026-06-08.md
-
-- Lines: 356
-- SHA-256: `12e098937261075e20a781cf53d3612f5ac13c7af8519feb295af47cf5f60cfe`
-
-````markdown
-# Riviera Supplier Ordering Translator v1
-
-**Status:** Active source addendum for Riviera SOP Master Index v6  
-**Date:** 2026-06-08  
-**Use for:** Turning prep quantities into supplier orders, purchase checks, already-ordered lists and missing-item flags.
-
----
-
-## 0. Purpose
-
-This translator turns event prep into orderable supplier buckets.
-
-It should answer:
-
-```text
-What do we need?
-How much?
-Which supplier?
-What pack size?
-Already ordered or still needed?
-What is missing or unclear?
-What is over-order risk?
-```
-
-Do not invent prices. Use source pricing where available. Mark missing pricing as price not found in current source.
-
----
-
-## 1. Supplier bucket order
-
-Every order list should separate:
-
-```text
-DOBLO'S — produce / herbs / fruit / vegetables
-BIDFOOD — dry goods / dairy / bakery / frozen / desserts / meat / fish / finger foods / cleaning / packaging
-WOOLWORTHS / COLES — small retail top-ups / urgent specialty / GF bought-in items when already used as standard
-BUTCHER / SEAFOOD / SPECIALTY — if source or user specifies
-ALREADY ORDERED
-STILL NEEDED
-NEEDS CONFIRMATION
-```
-
-Doblo's default order method is delivery.
-
----
-
-## 2. Ordering workflow
-
-```text
-1. Identify event and menu.
-2. Resolve product format before applying module.
-3. Calculate prep count.
-4. Add 9% production buffer where relevant.
-5. Add dietary alternates inside production count.
-6. Convert to ingredient requirement.
-7. Convert ingredient requirement to supplier pack/order size.
-8. Split by supplier.
-9. Flag already ordered / still needed / missing.
-10. Check allergens where supplier data exists.
-```
-
----
-
-## 3. Count-to-order rules
-
-### Scones
-
-```text
-12 scones = 1080 g scone mix + 600 ml water
-```
-
-Order logic:
-
-```text
-Total scones / 12 = batch count
-Batch count x 1080 g = scone mix required
-Round scone mix to available pack size
-Add jam + cream unless already in house or event says otherwise
-```
-
-### Focaccia
-
-```text
-Casual/delivery/grazing/offsite/corporate: sliced focaccia box = 12 pieces
-Seated plated dinner: focaccia with whipped butter, not sliced-box logic
-1 m graze = 1/4 tray sliced focaccia
-Every grazing box includes focaccia
-```
-
-Order/prep logic:
-
-```text
-If focaccia is required, show it in prep and ordering.
-Do not assume stock.
-If baking in-house, order flour/yeast/oil/honey/salt if short.
-```
-
-### Hot nibbles
-
-```text
-Single hot nibble platter = 24 pieces
-Mixed hot nibble box/platter = 48 pieces
-Mixed split = 12 pieces each of 4 items
-```
-
-Order logic:
-
-```text
-Total boxes x 12 = pieces per item for mixed box
-Check frozen item pack size
-Round up to pack size
-GF hot nibbles: use confirmed GF bought-in pies/sausage rolls first
-```
-
-### Alternate-drop plated mains
-
-```text
-Guest count + 9% buffer = total production target
-Dietaries included in total
-Normal mains reduced evenly to account for dietary alternates
-```
-
-Example:
-
-```text
-72 guests + 9% = 79 serves
-4 dietary serves
-75 normal serves remaining
-Chicken 38 / Beef 37
-```
-
-### Canapés
-
-```text
-Confirm pieces per person or package count.
-If unclear, NEEDS CONFIRMATION.
-Do not assume canapés replace dinner unless source says so.
-```
-
----
-
-## 4. Product-format detector
-
-Before ordering, identify the exact product type.
-
-### Fruit
-
-```text
-Corporate fruit box / pax-based fruit = packed corporate fruit component
-Fruit cup = individual fruit cups
-Seasonal cut fruit bowl = bulk bowl
-Styled seasonal fruit platter = full Riviera fruit platter standard
-Grazing box fruit = graze garnish/component
-Grazing table fruit = graze garnish/component
-Breakfast fruit + yoghurt = corporate breakfast item
-```
-
-Do not apply styled fruit platter ordering to corporate fruit boxes unless the source says styled fruit platter.
-
-### Bread / bakery
-
-```text
-Sliced focaccia boxes = casual/delivery/grazing/corporate
-Focaccia with whipped butter = seated/plated formal
-Croissants = breakfast/morning tea/lunch package item
-Mini croissants = morning/afternoon tea item
-Brioche rolls = finger-food/lunch option
-Sandwich platter = 6 whole sandwiches cut into 24 points unless source says otherwise
 Wrap platter = 12 wraps unless source says otherwise
-```
 
----
+Croissant platter/box = 12 croissants unless source says otherwise
 
-## 5. Doblo's produce bucket
+Mini brioche roll platter/box = 12 rolls unless source says otherwise
 
-Use Doblo's for produce where available and practical.
+Scone platter = 12 scones
 
-Typical Doblo's items:
+Casual/delivery/grazing/offsite/corporate sliced focaccia box = 12 pieces
 
-```text
-Fruit for fruit platters/boxes
-Grapes for graze
-Lemons / limes / oranges
-Herbs: dill, parsley, mint, oregano, thyme, tarragon if available
-Leaf: rocket, lettuce, spinach
-Vegetables: pumpkin, potatoes, broccolini/baby broccoli, tomatoes, onions
-Edible flowers
-```
+Seated plated dinner focaccia = table bread with whipped butter
 
-Order format:
+1 m grazing table = 1/4 tray sliced focaccia
 
-```text
-DOBLO'S — DELIVERY — [DATE]
-- Item — quantity — event/use note
-```
+2 m grazing table = 1/2 tray sliced focaccia
 
-Example:
+Every grazing box includes focaccia
 
-```text
-DOBLO'S — DELIVERY — Wednesday
-- Lemons — 2 kg — sauces, aioli, garnish
-- Grapes — 2 vines / qty to match availability — 2 m graze
-- Edible flowers — 3 punnets — fruit/graze garnish
-```
+Use 9% production buffer for plated meals, buffet serves, canapés, relevant hot nibbles, protein portions and high-risk dietary alternatives unless the user overrides.
 
----
+Do not blindly apply 9% to fixed purchased-unit boxes, expensive garnish, scone platters, fruit platters or module-controlled items.
 
-## 6. Bidfood bucket
+Ordering Rules
 
-Use Bidfood for dry goods, dairy, bakery, frozen, desserts, meat/fish/finger foods, cleaning and packaging where available.
+Use the Supplier Ordering Translator and Count & Ordering Harness.
 
-Common categories:
+Separate:
 
-```text
-Scone mix
-Flour / rice flour / cornflour / GF breadcrumbs
-Sugar / custard powder / chocolate / nuts
-Cream / dairy / butter / cheeses where available
-Frozen hot nibbles
-Brioche buns / bakery items
-Seafood/meat items where listed
-Packaging / PC containers if supplied
-Cleaning items
-```
+Doblo’s — produce, herbs, fruit, vegetables
 
-Order format:
+Bidfood — dry goods, dairy, bakery, frozen, desserts, meat, fish, finger foods, cleaning, packaging
 
-```text
-BIDFOOD
-- Product — required qty — pack size if known — event/use note — allergen flag if relevant
-```
+Woolworths / Coles — urgent top-ups, small retail, GF bought-in items
 
-Allergen checks must use Bidfood item/allergen list where available.
+Butcher / seafood / specialty suppliers where specified
 
----
+Already ordered
 
-## 7. Woolworths / Coles bucket
+Already in house
 
-Use for:
+Still needed
 
-```text
-Urgent top-ups
-GF bought-in pies/sausage rolls where already accepted
-Retail items not worth supplier order
-Small garnish/fresh items unavailable from Doblo's
-Savoiardi/lady fingers when supplier availability is uncertain
-```
+Needs confirmation
 
-Order format:
+Doblo’s default order method is delivery.
 
-```text
-WOOLWORTHS / COLES
-- Product — qty — reason/event note
-```
+Use source pricing where available. Do not invent prices. If missing, write price not found in current source.
 
----
+Flag:
 
-## 8. Already ordered / still needed ledger
+Missing pack size
 
-Every order sheet should include:
+Over-order risk
 
-```text
-ALREADY ORDERED
-- Supplier — item — qty — event
+Shortage risk
 
-STILL NEEDED
-- Supplier — item — qty — event
+Dietary/allergen risk
 
-NEEDS CONFIRMATION
-- Item — why unclear — decision needed
-```
+Frozen thawing risk
 
-Do not hide missing items inside prose.
+Cryovac/Roscoes timing
 
----
+Supplier delivery timing risk
 
-## 9. Allergen ordering check
+Dietaries and Allergens
 
-For every dietary-sensitive item:
+Dietaries must become food actions, not notes.
 
-```text
-Check supplier allergen line.
-Check may contain where relevant.
-Check cross-contact risk.
-Do not call allergen-free unless controlled and source supports it.
-```
+Do not write only “1 GF” or “1 onion allergy”.
 
-High-watch allergens:
+Write the actual food plan:
 
-```text
-gluten / wheat / dairy / egg / soy / seafood / crustaceans / peanuts / sesame / tree nuts / sulphites
-```
+What is being made
 
----
+Quantity
 
-## 10. Over-order and shortage flags
+How it stays close to the menu
 
-Add flags when useful:
+What is removed/substituted
 
-```text
-SHORTAGE RISK — exact pack/count unclear
-OVER-ORDER RISK — supplier pack much larger than event need
-DIETARY RISK — allergen status unclear
-TIMING RISK — thawing/cryovac/overnight proof/hanging needed
-DELIVERY RISK — supplier delivery date close to event
-```
+Whether it must be packed/plated separately
 
----
+Get as close as safely possible to the actual meal. Remove or substitute only the unsafe component where practical.
 
-## 11. Ordering output template
+Do not guarantee allergen-free unless the event plan, source control and kitchen controls support it.
 
-```text
-ORDERING REQUIRED
+Watch: gluten, wheat, dairy, egg, soy, seafood, crustaceans, peanuts, sesame, tree nuts and sulphites.
 
-DOBLO'S — DELIVERY — [DATE]
-- **Item** — qty — event/use note
-
-BIDFOOD
-- **Item** — qty / pack — event/use note — allergen flag
-
-WOOLWORTHS / COLES
-- **Item** — qty — event/use note
-
-ALREADY ORDERED
-- **Item** — qty — supplier — event
-
-STILL NEEDED
-- **Item** — qty — supplier — event
-
-NEEDS CONFIRMATION
-- **Item** — missing pack size / source / count / dietary status
-
-RISKS
-- Shortage / over-order / allergen / timing / delivery flags
-```
-
----
-
-## 12. Final order QA gate
-
-Before giving the order list, check:
-
-```text
-- Guest count applied
-- Buffer applied where relevant
-- Dietaries accounted for as food
-- Fruit format resolved
-- Focaccia counted if required
-- Hot nibble counts converted to pieces
-- Frozen items have 2-day thaw plan if needed
-- Cryovac/Roscoes window included if needed
-- Supplier buckets separated
-- Already ordered separated
-- Missing info flagged
-- Allergen-sensitive items checked where source exists
-```
-````
-
-### Source: Riviera_Seasoning_Palette_v2_2026-06-08.md
-
-- Lines: 628
-- SHA-256: `3be02a7db7e4147f8fe697c37015b3a233893eae122ca586cf14c2d04904de8c`
-
-````markdown
-# Riviera Seasoning Palette v2
-
-**Status:** Active source addendum for Riviera SOP Master Index v6  
-**Date:** 2026-06-08  
-**Supersedes:** Riviera Seasoning Palette v1  
-**Use for:** Seasoning checks, pairing decisions, recipe SOPs, production cards, prep sheets, event food, buffet/catering items, sandwich/wrap/roll fillings, sauces, dietaries, garnish decisions and dispatch checks.
-
----
-
-## 0. v2 purpose
-
-This palette is the practical kitchen translation layer between:
-
-1. confirmed Riviera recipes and event menus,
-2. Riviera's operating style,
-3. supplier/allergen reality,
-4. *The Art & Science of Foodpairing*,
-5. GitHub aroma/flavour data, and
-6. Kitchen Council judgement.
-
-The goal is not to make prep sheets longer. The goal is to make every dish leave Riviera properly seasoned, balanced, event-appropriate and easy to execute.
-
----
-
-## 1. Non-negotiable seasoning standard
+Seasoning Standard
 
 All food must leave Riviera properly seasoned.
 
-“Salt, pepper, olive oil” is a base layer only. It is not a complete seasoning direction unless the dish genuinely requires restraint.
-
-Every seasoning decision should check:
-
-- Salt / salinity
-- Acid
-- Fat / oil
-- Herbs
-- Spices
-- Aromatics
-- Heat / chilli / pepper
-- Sweetness
-- Bitterness / char
-- Umami
-- Texture / crunch
-- Sauce / relish / dressing
-- Garnish / finish
-- Dietary-safe adjustments
-
-Production rule:
-
-```text
-Taste during production.
-Taste again after cooking/chilling/reheating.
-Adjust before packing/service.
-Do not compromise dietaries.
-```
+Taste during production. Taste again after cooking, chilling or reheating. Adjust before packing or service.
 
----
-
-## 2. Source workflow for seasoning and pairings
-
-Use this order:
-
-1. Confirmed Riviera source recipe or event-specific recipe
-2. User correction / active house standard
-3. Riviera Seasoning Palette v2
-4. Riviera uploaded recipe SOPs / Recipes for Prep Chef
-5. GitHub recipelibrary aroma/flavour data
-6. *The Art & Science of Foodpairing* as pairing reference layer
-7. Kitchen Council final balance check
-8. **NEEDS CONFIRMATION** if safety, allergens, guest expectation or menu integrity is unclear
+Check:
 
-GitHub recipelibrary files to use when available:
+Salt
 
-```text
-.cursor/skills/aroma-bible/SKILL.md
-aroma_data/ingredients.json
-aroma_data/food_pairings.json
-aroma_data/pairing_matrix.json
-flavor_data/affinities.json
-riviera_data/builtins.json
-assets/aroma-hints.js
-```
+Acid
 
----
+Fat/oil
 
-## 3. Foodpairing reference layer
+Herbs
 
-### Core rule
+Aromatics
 
-Use *The Art & Science of Foodpairing* to support aroma pairing, not to override chef judgement.
+Spice/heat
 
-Useful principle:
+Sweetness
 
-```text
-Ingredients can pair well when they share key aromas, but shared aroma alone does not guarantee a good dish.
-```
+Bitterness/char
 
-Final dish still needs:
+Umami
 
-- taste balance,
-- texture,
-- temperature logic,
-- event suitability,
-- dietary safety,
-- Riviera style,
-- prep practicality,
-- and actual tasting.
+Texture/crunch
 
-### Use Foodpairing for
+Sauce/relish/dressing
 
-- New canapé ideas
-- Sauce/garnish development
-- Dessert pairings
-- Seasonal fillings
-- Native ingredient pairing checks
-- Vegetarian/dietary alternatives that still feel premium
-- “This dish feels flat, what is missing?” decisions
-- Elevating tapas items
-- Building bridges between ingredients already on the menu
+Garnish/finish
 
-### Do not use Foodpairing for
+Dietary-safe adjustment
 
-- Replacing confirmed client menus
-- Random creative additions to conservative corporate or wake catering
-- Allergen substitutions without safety checks
-- Making production sheets longer
-- Adding theory into kitchen-facing documents
-- Justifying weird pairings that fail taste or service logic
+Use the Riviera Seasoning Palette v2 for production wording and pairing direction. Use Foodpairing as support only, not as a replacement for tasting or chef judgement.
 
-### Foodpairing gate before using a new idea
+Do not write foodpairing theory in kitchen sheets. Translate it into practical seasoning lines.
 
-Every new pairing must pass these checks:
+Recipes
 
-```text
-1. Riviera style check — coastal, Mediterranean, elegant, restrained.
-2. Event suitability check — wedding/corporate/wake/baby shower/offsite/tapas.
-3. Allergen/dietary check — no unsafe sauce/garnish/crumb/nut/dairy/gluten/soy/egg/sesame/seafood/sulphite.
-4. Prep practicality check — small team, limited bench, limited coldroom, service timing.
-5. Taste-adjust-taste check — taste before it goes on a prep sheet or out the door.
-```
+Use the Canonical Recipe Bank first.
 
----
+Recipe status order:
 
-## 4. Pairing translation rule
+Locked House SOP
 
-Do not write theory in prep sheets.
+Active Working SOP
 
-Bad kitchen-sheet wording:
+Source Recipe converted into Riviera production format
 
-```text
-Shared volatile aroma compounds suggest fennel, citrus and dill.
-```
+Draft Module marked NEEDS CHEF CONFIRMATION
 
-Good kitchen-sheet wording:
+Do not invent a final recipe where Riviera does not yet have one.
 
-```text
-SEASON / FINISH:
-Lemon zest, dill, parsley, capers, olive oil. Taste after chilling. Adjust acid and salt before packing.
-```
+For in-house sauces, relishes, dressings, aioli, labneh, dessert sauces and custards, include:
 
-### Production-card wording
+Target yield
 
-Use this in cards where seasoning matters:
+Ingredient quantities
 
-```text
-SEASON / FINISH:
-Taste after cooking/chilling/reheating. Adjust with salt, acid, herbs, spice, aromatics, fat/oil, sauce/relish, garnish or crunch. Keep dietary-safe.
-```
+Quick method
 
-Short version for busy cards:
+Season/finish
 
-```text
-Taste after chilling/reheat. Lift with lemon, herbs, salt and oil before packing.
-```
+Reheat/hold/service note
 
----
+Allergens where relevant
 
-## 5. Riviera pairing method
+For in-house desserts, include a strict recipe directly under the production task.
 
-Use a three-layer build:
+Kitchen Reality
 
-```text
-PRIMARY INGREDIENT
-What is the dish built around?
+Assume small team and limited space unless told otherwise.
 
-BRIDGE
-What connects the main flavour to the Riviera style?
-Usually herbs, spice, dairy/yoghurt, nuts/seeds, cured meat, garlic/onion, wine, citrus, honey, tomato, capsicum, olive, caper.
+Default team: Dan and Ash.
 
-LIFT / FINISH
-What makes it bright, fresh and finished?
-Usually acid, fresh herbs, zest, herb oil, relish, aioli, crunch, finishing salt, garnish.
-```
+Dan owns final calls, seasoning, high-risk cooking, proteins, sauces, pass/fire decisions and order/service decisions.
 
-Example:
+Ash owns structured prep, weighing, portioning, garnish, cold assembly, packing, cleaning/reset and active cooking support.
 
-```text
-PRIMARY: Chicken skewer
-BRIDGE: limoncello, honey, garlic, oregano, olive oil
-LIFT / FINISH: lemon, herbed labneh, feta, parsley/mint
-PRODUCTION WORDING: Marinate chicken with limoncello, honey, lemon, garlic, oregano and oil. Grill. Finish with herbed labneh, feta and herbs.
-```
+Use one trolley as active dispatch/load trolley. Use one shelf for highest-risk cold/dietary/delicate items. Use stackable crates/boxes with top-facing labels for the rest.
 
----
+Always consider bottlenecks:
 
-## 6. Riviera default palettes
+Rational space
 
-### Chicken
+Fryer timing
 
-**Mediterranean lemon-herb:** lemon zest, lemon juice, garlic, thyme, oregano, parsley, olive oil. Finish with herb oil, labneh or lemon-thyme aioli.
+Hot holding
 
-**Tarragon cream:** tarragon, shallot, white wine, lemon zest, cream, white pepper. Good for plated chicken, ballotine, fish and pork.
+Fridge space
 
-**Moroccan warm spice:** cumin, coriander seed, smoked paprika, cinnamon pinch, lemon, mint, parsley, yoghurt/labneh.
+Bench space
 
-**Smoked chicken roll / sandwich:** smoked chicken, bacon, dill sour cream, toasted almonds, rocket, lemon zest. Check salt after bacon is mixed in.
+Garnish timing
 
-**Zesty limoncello chicken skewer:** limoncello, honey, lemon zest, garlic, oregano/thyme, olive oil. Finish with herbed labneh, feta and parsley/mint.
+Sauces
 
-**Close-to-menu dietary alternative:** remove unsafe dairy/gluten/garlic/onion component only where possible. Keep the same chicken profile using lemon, herbs, olive oil, capers, safe relish or herb oil.
+Packing
 
----
+Delivery windows
 
-### Beef
+Dietaries
 
-**Classic Riviera beef:** rosemary, thyme, garlic, black pepper, red wine jus, gremolata. Lift heavy beef with lemon zest and parsley.
+Reheating
 
-**Cold roast beef platter:** beetroot relish, horseradish cream, rocket, cracked pepper, olive oil. Needs acid from relish or pickled onion.
+Last-minute changes
 
-**Beef slider / brioche:** aged cheddar, herbed aioli, tomato relish, rocket, pickles. Taste relish and aioli together before assembly.
+Known equipment:
 
-**Beef with romesco:** romesco, manchego/parmesan, parsley, lemon, smoked paprika. Good for meatballs, canapés and warm bowls.
+Rational SelfCookingCenter 10-grid
 
-**Garlic/onion-free beef:** keep beef close to the main dish with rosemary, thyme, pepper, red wine-safe jus if suitable, lemon parsley finish. Do not use garlic/onion in marinade, sauce or garnish.
+6-burner gas stove
 
----
+Old kick oven for holding
 
-### Lamb
+2 deep fryers / 4 baskets
 
-**Greek lamb:** oregano, rosemary, garlic, lemon, parsley, olive oil. Finish with tzatziki or labneh.
+2 immersion circulators
 
-**Spiced lamb:** cumin, coriander, smoked paprika, cinnamon pinch, mint, parsley, lemon. Use yoghurt/labneh or capsicum cream to soften spice.
+Plancha
 
-**Coastal lamb cutlet:** garlic, rosemary, thyme, lemon, sea salt, house emulsion. Finish with micro herbs, lemon cheek or herb oil.
+KitchenAid
 
-**Slow lamb Provençale:** rosemary, thyme, garlic, tomato, olive, white wine/red wine depending dish, parsley, lemon zest. Needs fresh herb lift after reheating.
+Ninja blender
 
----
+Dehydrator
 
-### Seafood / fish / calamari / prawns / oysters
+Slicer
 
-**Lemon-caper:** lemon, capers, parsley, dill, olive oil, aioli.
+Offsite cryovac at Roscoes
 
-**Dill aioli:** dill, lemon zest, garlic, aioli, cracked pepper. Clean and restrained.
+No smoker
 
-**Mediterranean seafood:** fennel seed, parsley, lemon, chilli, olive oil, garlic.
+No ice machine
 
-**Kilpatrick direction:** Worcestershire, crispy speck, lemon, parsley. Check salt carefully because speck and sauce carry salinity.
+No pass warmer
 
-**Prawn/cocktail direction:** cocktail sauce, lemon, crisp lettuce, potato crisps/crunch, parsley/chives. Keep cold, bright and clean.
+One heat lamp for about 8 plates
 
-**Reef fish slider:** lemon-caper aioli, rocket, pickled or crisp element, soft bun. Needs acid and salt check before assembly.
+When using the Rational or writing steam/combi methods, include temperature, time and steam/humidity percentage.
 
----
+Sunday Tapas
 
-### Pumpkin / root vegetables
+Tapas runs every Sunday 11:00–17:00.
 
-**Roast pumpkin base:** garlic, thyme, rosemary, olive oil, salt, pepper. After roasting, finish according to use with lemon, balsamic, honey, feta, pepitas, pesto or herb oil.
+If a prep sheet covers Sunday, include Friday action:
 
-**Pumpkin, feta and pepita salad:** balsamic glaze, feta, toasted pepitas, parsley/mint, olive oil. Needs acid after chilling.
+Pull Sunday Tapas frozen/prepped items from freezer to fridge/coolroom.
 
-**Moroccan root vegetable:** cumin, coriander, cinnamon, maple/honey, lemon, mint, parsley. Works with cous cous.
+If an event overlaps Sunday tapas, include a food-only Tapas Ready block.
 
-**Pumpkin sandwich/wrap filling:** roast pumpkin must be seasoned before mixing. Use feta, pesto, rocket/spinach and lemon. Avoid bland pumpkin.
+Keep Sunday event prep to final assembly, reheating, packing and urgent low-disruption prep where possible. Push heavy prep into Wednesday–Saturday.
 
----
+Work Hours
 
-### Greens / salads / grains
+Default workday is 08:00–16:00 with a flexible 30-minute break.
 
-**Greek green bean:** oregano, parsley, mint, lemon, red wine vinegar, feta, olives, shallot. Taste after chilling.
+For weddings, long functions or major event days, 10–11 hour days may be planned only when necessary and clearly justified by service/delivery needs.
 
-**Pesto pasta:** basil pesto, spinach, feta/parmesan, tomato, olives, lemon. Needs acid and salt after chilling.
+Offsite Logic
 
-**Cous cous / grain salad:** preserved lemon or lemon zest, cumin, coriander, mint, parsley, olive oil, dried fruit, toasted nuts. Do not leave dry.
+For offsite catering, check:
 
-**Simple green salad:** Dijon, lemon or vinegar, olive oil, herbs, sea salt. Dress close to service.
+Delivery/handoff time
 
-**Apricot almond rice pilaf:** apricot, toasted almond, parsley/mint, lemon zest, mild spice, olive oil/butter depending dietary. Check salt and acid after holding.
+Power, water, shelter, flooring, lighting and prep space if relevant
 
----
+Hot holding/reheating method
 
-### Potatoes / mash / gratin
+Sous-vide bain logic where useful
 
-**Burnt butter mash:** brown butter, thyme, salt, white pepper. Taste after holding and adjust with salt and warm cream/butter.
+Cryovac/Roscoes 30-minute window where required
 
-**Chorizo potatoes:** smoked paprika, garlic, chorizo fat, parsley, lemon aioli. Needs acid to cut fat.
+Frozen items pulled 2 days before use
 
-**Herb chats:** garlic, rosemary, thyme, olive oil, sea salt, feta cream. Finish after reheating.
+Graze items portioned into PC containers
 
-**Gratin:** garlic, thyme, nutmeg, cream, cheese, white pepper. Taste cream mix before baking.
+Labels only where they protect event allocation, dietaries or delivery
 
-**Fondant / roast potato direction:** thyme, rosemary, garlic if allowed, butter/stock, sea salt. Finish with parsley, lemon zest or herb oil if dish is heavy.
+Client-Facing Pricing
 
----
+Treat prices as indicative unless confirmed in an official quote.
 
-### Sandwiches / wraps / rolls / scrolls / croissants
+Default assumptions:
 
-**Roast pumpkin / feta / pesto:** season pumpkin before mixing. Use pesto, feta, rocket/spinach, lemon. Avoid bland pumpkin.
+Prices are usually starting-from
 
-**Salami / bocconcini / sundried tomato:** basil, olive oil, cracked pepper, rocket, balsamic or tomato relish. Watch salt.
+Prices are usually GST-exclusive
 
-**Smoked chicken / bacon / almond:** dill sour cream, lemon zest, rocket, toasted almonds. Check acid and salt.
+Minimum numbers matter
 
-**Roast beef / relish / Jarlsberg:** beetroot or farmhouse relish, rocket, horseradish cream, cracked pepper. Needs bite from relish/horseradish.
+Deposits and F&B minimums may apply
 
-**Ham / cheese / Dijon:** Dijon emulsion, cheddar, ham, pickles optional. Keep tidy and not dry.
+Official quote required to lock pricing
 
-**Halloumi / pesto / pumpkin:** grilled halloumi, pesto, pumpkin, rocket, lemon. Watch salt from halloumi.
+If price is missing, write price not found in current source or needs confirmation.
 
-**Chicken aioli/herb:** chicken, herb aioli, lemon zest, parsley/chive, rocket. Needs enough sauce to avoid dry filling.
+Non-Negotiables
 
----
+Do not lose event details.
 
-### Hot nibbles / fried items
+Do not merge functions without labels.
 
-Season fried and reheated items immediately while hot. Taste one piece where possible.
+Do not ignore delivery or service times.
 
-**Arancini:** romesco, lemon-thyme aioli, parmesan/manchego, micro herbs. Needs acid and salt after frying.
+Do not invent prices, guest counts, menus, timings, dietaries or supplier facts.
 
-**Pastizzis:** tzatziki or labneh, lemon, dill/mint. Do not send dry.
+Do not hide dietaries as notes.
 
-**Sausage rolls / pies:** house relish, tomato chutney, mustard, cracked pepper. Taste the sauce, not just the pastry.
+Do not rebuild layouts from scratch.
 
-**Quiches:** beetroot balsamic relish, herbs, cracked pepper. Warm properly; bland egg is not acceptable.
+Do not use side-by-side production cards.
 
-**Fried calamari/fish:** season while hot; finish with lemon, capers, herbs and aioli. No soggy garnish.
+Do not apply the wrong product module.
 
----
+Do not forget focaccia where grazing requires it.
 
-### Sauces / dips / finishes
+Do not skip Friday Tapas pull when Sunday is covered.
 
-**Aioli family:** base aioli plus lemon, dill, thyme, caper, roasted garlic or chilli.
+Do not skip Roscoes cryovac window when cryovac is required.
 
-**Labneh / yoghurt family:** hang yoghurt overnight; fold next day with herbs, lemon, garlic if allowed, olive oil and seasoning.
+Do not include Kitchen Council commentary in printable kitchen sheets unless specifically requested.
 
-**Romesco:** roasted capsicum, tomato, garlic, almond/nut if used, smoked paprika, vinegar/lemon and olive oil.
+Always aim for a chef-ready output.
 
-**Gremolata:** parsley, lemon zest and garlic. Use to lift beef, lamb, rich braises and potatoes.
+[Certain] This version is designed to sit above the SOP files, not replace them. The detailed rules stay in the uploaded source stack; this instruction block just tells the project how to route and behave.
 
-**Salsa verde:** parsley, capers, anchovy optional, garlic, lemon/vinegar and olive oil.
+Sources
+Convert to PDF
+project instruction can not be longer than 800 character
+sorry 8000
+Thought for 1m 3s
 
-**Herb oil:** parsley, basil or chive oil. Use restraint; it should finish, not drown.
+[Certain] 8000 works. This version is about 6,463 characters, so it fits with room to spare. It keeps v6 as the controlling SOP, uses the Harness Index as the router, and keeps the detailed rules in the source files rather than bloating the project instruction field. 
 
-**House emulsion direction:** lemon, herbs, garlic if suitable, mustard/egg if used, olive oil, salt. Check allergen status before using for dietaries.
+riviera_sop_master_index_v6_202…
 
----
+ 
 
-### Cheese / grazing / antipasto
+Riviera_Kitchen_Production_Harn…
 
-**Cheese board balance:** creamy cheese + sharp/hard cheese + blue cheese needs sweet, acid and crunch.
+Edit
 
-**Good supports:** quince paste, fig, honey, grapes, dried apricot/date, olives, crackers, focaccia, fresh bread, dried citrus, nuts where safe.
+Act as Riviera Yeppoon’s kitchen operations, event-prep, catering, ordering, recipe, menu, supplier and document assistant.
 
-**Mediterranean finish:** good olive oil, sea salt, grapes/figs, dried citrus, rosemary/thyme, edible flowers only where presentation benefits.
+Turn messy notes, emails, PDFs, menus, orders, supplier info, dietaries, timings and kitchen realities into chef-ready outputs.
 
-**Service check:** cheese must not be fridge-cold and dead if service timing allows tempering. Keep food safety/weather in mind.
+Priorities:
 
----
+Protect the event.
 
-### Fruit / breakfast fruit / fruit platters
+Keep prep realistic.
 
-**Fruit platter finish:** mint, toasted coconut, passionfruit, citrus zest, lime/lemon where suitable.
+Keep ordering accurate.
 
-**Corporate fruit component:** keep clean, packed, easy to eat. Do not over-style unless ordered as styled fruit platter.
+Keep functions separated.
 
-**Fruit with yoghurt/bircher:** honey, cinnamon, vanilla, toasted coconut, berries, citrus zest. Keep sweetness restrained.
+Reduce chef mental load.
 
-**Tropical Riviera direction:** pineapple, watermelon, papaya, passionfruit, lime, mint, coconut. Good for baby showers, breakfast, corporate morning tea.
+Give outputs usable immediately.
 
----
+Tone:
 
-### Desserts
+Kitchen/internal: direct, compact, chef-to-chef, no fluff.
 
-**Sticky date / toffee:** salt in toffee, vanilla, orange zest, optional wattleseed. Balance sweetness with salt.
+Client-facing: polished, calm, premium, coastal, elegant.
 
-**Sticky date madeleines:** date, brown sugar, vanilla, orange zest, salt, toffee sauce, vanilla gelato, optional Benedictine custard. Serve warm if possible.
+Wakes/life celebrations: respectful, calm, supportive.
 
-**Cannoli:** citrus zest, vanilla, pistachio, espresso, chocolate, toasted nuts. Do not leave filling flat.
+Corporate: professional, efficient, tidy.
 
-**Rhubarb / fruit:** citrus zest, vanilla, light spice and syrup acidity. Taste fruit after poaching/chilling.
+Baby showers: soft, styled, pretty, organised.
 
-**Chocolate:** salt, espresso, vanilla, orange, hazelnut/pistachio where suitable.
+Use metric, Australian culinary terms and 24-hour time.
 
-**Tiramisu direction:** espresso, cocoa, mascarpone, marsala/liqueur if approved, vanilla, salt pinch. Keep alcohol clearly noted if used.
+Active source order:
 
----
+User correction in this project
 
-### Native / coastal Australian accents
+Event/client-specific info
 
-Use native ingredients only when they fit the dish. Do not add token native ingredients.
+Riviera SOP Master Index v6
 
-**Finger lime:** seafood, oysters, prawns, fish, avocado, yoghurt/labneh, fruit desserts. Use as fresh acid burst.
+Component Module Library v1
 
-**Lemon myrtle:** chicken, seafood, cream, custard, madeleines, shortbread, yoghurt. Use lightly; it can dominate.
+Count & Ordering Harness v1
 
-**Davidson plum:** desserts, chocolate, duck/pork/lamb glaze, fruit sauces. Strong acid/tannin.
+Production Sheet Template Library v1
 
-**Wattleseed:** sticky date, chocolate, custard, cream, coffee, tiramisu-style desserts.
+Canonical Recipe Bank v1
 
-**Saltbush:** lamb, beef, potatoes, focaccia, herb oil. Watch salinity.
+Supplier Ordering Translator v1
 
-**Native pepperberry:** beef, lamb, chocolate, berry desserts. Use with restraint.
+Seasoning Palette v2
 
----
+Package Source Digest v1
 
-## 7. Event suitability filter
+Bidfood/Doblo’s references
 
-### Corporate
+GitHub recipe/aroma data if available
 
-Clean, tidy, practical, not weird. Use familiar flavour families with good seasoning.
+Foodpairing reference
 
-Best finishes:
+Kitchen Council judgement
 
-- lemon/herb,
-- Dijon,
-- tomato relish,
-- pesto,
-- dill sour cream,
-- horseradish/beetroot,
-- fruit/mint/coconut.
+If sources conflict, flag it. User correction wins. If unsafe/unclear, mark NEEDS CONFIRMATION. Do not invent guest counts, prices, timings, menus, dietaries, pack sizes or supplier facts. Treat unsourced factual claims as drafts.
 
-### Wake / memorial / life celebration
+Before each Riviera task, silently classify it: quick answer, event intake, order, prep/run/production sheet, recipe SOP, PDF, client copy, count conversion, dietaries/allergens, sandwiches/wraps/croissants/brioche/focaccia/lunch boxes, hot nibbles, Sunday tapas, multi-event shared prep, offsite/cryovac/hot holding, or seasoning/dish improvement. Apply the matching active SOP/source.
 
-Comforting, calm, easy to serve. Do not overcomplicate. Keep flavours familiar and well-seasoned.
+Event/prep workflow:
 
-Best finishes:
+Classify SINGLE EVENT or MULTI-EVENT.
 
-- good relish,
-- herbed aioli,
-- lemon/dill,
-- scones with jam/cream,
-- clean fruit,
-- gentle grazing.
+Extract food-relevant details only.
 
-### Baby shower
+Run missing-info check.
 
-Soft, pretty, styled, fresh. Avoid heavy/ugly food. Keep fruit, grazing and fillings elegant.
+Resolve product format before counting.
 
-Best finishes:
+Apply counts/buffers.
 
-- edible flowers where useful,
-- mint,
-- citrus,
-- berries,
-- soft herbs,
-- whipped/honey butter,
-- light labneh or feta cream.
+Pull modules and recipes.
 
-### Wedding / plated
+Apply seasoning check.
 
-Premium, restrained, clean finish. Every sauce must be seasoned and every garnish must have purpose.
+Translate ordering if needed.
 
-Best finishes:
+Build from template.
 
-- herb oil,
-- gremolata,
-- lemon zest,
-- micro herbs,
-- sauce shine,
-- sea salt,
-- high-quality olive oil.
+Run final QA.
 
-### Offsite
+Kitchen sheets are food-control documents only. Include what helps food get prepped, cooked, cooled, seasoned, fired, packed, delivered or served. Remove admin clutter unless it affects food timing/service/risk.
 
-Robust enough to travel and reheat. Sauces/finishes must survive holding.
+Production/PDF rules:
 
-Best finishes:
+A4 portrait, black/white/grey, high contrast.
 
-- sauces packed separately,
-- herb oils in squeeze bottles,
-- relishes/chutneys,
-- yoghurt/labneh if cold-safe,
-- fresh herbs packed dry.
+Full-width stacked cards only.
 
-### Tapas
+No side-by-side cards or loose production text.
 
-Bolder and more Riviera. Can handle more acid, texture and garnish.
+Quantities before food times.
 
-Best finishes:
+Owner-first cards: ASH | Start / DAN | Fire / BOTH | Pack.
 
-- aioli,
-- labneh,
-- romesco,
-- crispy capers,
-- lemon,
-- hot honey,
-- herbs,
-- feta,
-- roasted grapes.
+Food items bold inside cards.
 
----
+Keep recipe/method cards together where possible.
 
-## 8. Dietary and allergy pairing rules
+No cover page by default.
 
-Dietary alternatives must stay as close as possible to the actual meal.
+Readable from about 2 metres.
 
-### GF
+Do not shrink text to save pages; split pages.
 
-Keep the same flavour profile. Replace unsafe bread/crumb/flour only.
+Universal sheet order:
+Event/week snapshot; What we actually prep/quantity check; Filling summary if relevant; Dietary action; Food times; Start Here/Coldroom Ready/Do Not Start Yet; Production cards by day; Event-day fire/pack/send cards; Ready to Send/Serve gate; Debrief if useful.
 
-Examples:
+Count/product rules:
+Resolve format first. Corporate fruit box ≠ styled fruit platter. Grazing box ≠ 1 m graze. Seated focaccia ≠ sliced box. Hot nibble platter ≠ mixed nibble box unless confirmed. Canapés do not replace dinner unless source confirms.
 
-- GF crumb with same seasoning.
-- GF sandwich bread with same filling if safe.
-- Rice/cornflour dusting with same lemon/herb/fried finish.
+Standards:
 
-### DF
+Single hot nibble platter = 24 pieces.
 
-Remove dairy but keep the same acid/herb/aromatic direction.
+Mixed hot nibble box/platter = 48 pieces, 12 each of 4 items.
 
-Examples:
+Sandwich platter = 24 points / 6 whole sandwiches.
 
-- Cream sauce → herb oil / lemon-caper oil / tomato-capsicum sauce.
-- Labneh → herb oil or dairy-free yoghurt only if safe and suitable.
-- Butter mash → olive oil potato or confirmed DF mash.
+Wrap/croissant/brioche/scone platter = 12 unless source says otherwise.
 
-### Garlic/onion allergy
+Casual/delivery/grazing focaccia box = 12 pieces.
 
-Make the same dish without garlic/onion where practical.
+Seated dinner focaccia = table bread with whipped butter.
 
-Use safe flavour support:
+1 m graze = 1/4 tray focaccia; 2 m = 1/2 tray; every grazing box includes focaccia.
 
-- lemon zest/juice,
-- herbs,
-- capers,
-- mustard if safe,
-- wine reduction if safe,
-- roasted capsicum/tomato where suitable,
-- spice,
-- olive oil,
-- finishing salt.
+Use 9% buffer for plated meals, buffets, canapés, relevant hot nibbles, proteins and high-risk dietary alternatives. Do not apply blindly to fixed/module items.
 
-### Nut allergy
+Ordering:
+Separate Doblo’s, Bidfood, Woolworths/Coles, specialty suppliers, already ordered/in-house, still needed and needs confirmation. Doblo’s default = delivery. Use source pricing only; if missing say price not found in current source. Flag pack-size, shortage, over-order, allergen, thawing, cryovac and delivery risks.
 
-Remove nuts and nut-containing sauces. Replace crunch with safe seed/crisp element only if safe.
+Dietaries/allergens:
+Dietaries become food actions, not notes. Do not write only “1 GF”. State actual dish/quantity/modification/packing. Keep alternatives close to the menu where safe. Do not guarantee allergen-free unless controlled and source supports it. Watch gluten/wheat, dairy, egg, soy, seafood/crustaceans, peanuts, sesame, tree nuts, sulphites.
 
-Examples:
+Seasoning:
+All food must leave properly seasoned. Taste during production; taste again after cooking/chilling/reheating; adjust before packing/service. Check salt, acid, fat, herbs, aromatics, spice, sweetness, bitterness, umami, texture, sauce/relish/dressing and garnish. Use Seasoning Palette/Foodpairing as support, not theory in sheets.
 
-- Almond in romesco → nut-free capsicum/tomato sauce.
-- Toasted almonds in sandwich → omit or use safe seed/crunch if approved.
+Kitchen reality:
+Assume Dan/Ash, small team, limited bench/fridge, one active dispatch trolley and one high-risk shelf. Dan owns final calls, seasoning, proteins, sauces, high-risk cooking and pass/fire. Ash owns structured prep, weighing, cold assembly, garnish, packing, cleaning/reset and active cooking support. Consider Rational, fryer, holding, bench, fridge, packing, delivery, dietaries and last-minute changes. Rational/combi methods need temp, time and steam/humidity %.
 
-### Vegan / vegetarian
+Sunday tapas:
+Tapas runs Sunday 11:00–17:00. If Sunday is covered, include Friday pull of tapas freezer prep. If event overlaps tapas, include Tapas Ready block. Push heavy prep to Wed–Sat.
 
-Keep Riviera style and seasoning depth. Do not send bland vegetables.
+Work hours:
+Default 08:00–16:00 with flexible 30 min break. Longer event days only when service/delivery requires it.
 
-Useful supports:
+Offsite:
+Check handoff time, power/water/shelter/lighting/prep space, hot holding/reheat, sous-vide bains, Roscoes 30 min cryovac window, 2-day freezer pull, graze PCs and delivery/dietary labels.
 
-- roast pumpkin/feta for vegetarian,
-- roast pumpkin/pesto/rocket if dairy safe,
-- grilled halloumi if vegetarian dairy allowed,
-- roasted capsicum/tomato/olive/caper/herb oil for vegan,
-- mushrooms/eggplant/lentils where appropriate.
+Client pricing:
+Prices are indicative/starting-from/GST-exclusive unless official quote confirms. Respect minimums, deposits and F&B minimums.
 
----
+Non-negotiables:
+Do not lose event details, merge functions, ignore times, hide dietaries, invent data, rebuild layouts from scratch, use side-by-side cards, apply wrong modules, forget focaccia, skip Friday tapas pull, skip Roscoes cryovac window, or include Kitchen Council commentary in printable sheets unless requested.
 
-## 9. Fast production-card phrases
+Sources
+Convert to PDF
 
-Use these to keep sheets short:
-
-```text
-Taste after chilling. Lift with lemon, herbs, salt and oil.
-```
-
-```text
-Season hot out of fryer. Finish with lemon and sauce.
-```
-
-```text
-Check salt after bacon/cheese/relish is mixed in.
-```
-
-```text
-Needs acid after holding. Adjust before packing.
-```
-
-```text
-Keep same profile for dietary portion. Remove only unsafe component.
-```
-
-```text
-Sauce separate. Finish with herbs/oil after reheating.
-```
-
-```text
-Do not send dry. Sauce/relish must be packed.
-```
-
-```text
-Use restraint. Garnish must help flavour or presentation.
-```
-
----
-
-## 10. Safety guardrail
-
-Do not fix bland dietary food with unsafe sauces, dairy, nuts, gluten, soy, seafood, sesame, egg, alcohol or sulphites unless confirmed suitable for that guest/event.
-
-If seasoning direction is unclear:
-
-1. Check confirmed source recipe.
-2. Check this palette.
-3. Check GitHub flavour/aroma data.
-4. Use *The Art & Science of Foodpairing* as a pairing reference.
-5. Use Kitchen Council judgement.
-6. Mark **NEEDS CONFIRMATION** if safety or menu integrity is unclear.
-
----
-
-## 11. SOP note for future production sheets
-
-In production/prep sheets, do not cite this palette or the foodpairing book unless requested.
-
-Translate all pairing decisions into direct chef language:
-
-```text
-ASH | Finish **pumpkin feta filling**
-Taste after chilling. Adjust with lemon, pesto, salt and herbs. Filling must not be sweet/bland.
-```
+High
+ChatGPT can make mistakes. Check important info.
 ````
 
 ### Source: foodpairing_condensed_riviera_reference.md
 
+- Stored file: `foodpairing_condensed_riviera_reference.md`
+- Kind: text
 - Lines: 1612
 - SHA-256: `d38b4a86dc649969b39d8466a161c084b80477716fdc397b68a9ff8e56a24a38`
+
 
 ````markdown
 # The Art & Science of Foodpairing — Condensed Chef Reference
@@ -11053,104 +9095,5252 @@ The palate gives permission to serve.
 Use the book for ideas, bridges and aroma direction. Use chef judgement to remove clutter, season properly and protect the event.
 ````
 
-### Source: Baclava-Cheesecake.txt
+### Source: Riviera_Weekly_Order_Workflow_v1_2026-06-09.md
 
-- Lines: 94
-- SHA-256: `86c97ff240b01100ec828b3c748cc39e8622e31d65ad1a7df08b74703870db64`
+- Stored file: `Riviera_Weekly_Order_Workflow_v1_2026-06-09.md`
+- Kind: text
+- Lines: 344
+- SHA-256: `0215d9c6665f038a0f7d79abeb32e61910191f8c3f973fa762615604801ecf33`
+
 
 ````markdown
-Kuschi,
+# Riviera Weekly Order Workflow v1
 
-# Baklava Cheesecake
+**Status:** SOP addendum / ordering workflow  
+**Date:** 2026-06-09  
+**Use for:** Creating one supplier-ready order list for all Riviera events in an active prep week.
 
-**Yield:** 1 × 20 cm cheesecake / 10 portions
-**Tin:** 20 cm springform, deep
-**Oven:** 160°C
-**Bake time:** 60–75 min
-**Chill:** Overnight
-**Source:** Cleaned metric version from uploaded recipe. 
+---
 
-## Ingredients
+## 0. Purpose
 
-### Cheesecake Filling
+This workflow turns all events in a prep week into one controlled ordering ledger.
 
-| Ingredient             |             Quantity |
-| ---------------------- | -------------------: |
-| Cream cheese, softened |                600 g |
-| Caster sugar           |                200 g |
-| Whole eggs             | 2 ea / approx. 100 g |
-| Greek yoghurt          |                 90 g |
-| Plain flour            |                 50 g |
-| Vanilla extract        |                 5 ml |
-| Rose water             |               7.5 ml |
+It must answer:
 
-### Phyllo Crust
+```text
+What events are on this week?
+What does each event need?
+What is shared across events?
+What do we already have?
+What has already been ordered?
+What still needs ordering?
+Which supplier does it come from?
+When does it need to arrive?
+What is missing or risky?
+```
 
-| Ingredient     |  Quantity |
-| -------------- | --------: |
-| Phyllo pastry  | 10 sheets |
-| Walnuts        |     100 g |
-| Pistachios     |      30 g |
-| Butter, melted |      50 g |
+Do not merge event requirements without showing allocation. Combined orders are useful only if the event split remains visible.
 
-### Honey Rose Syrup
+---
 
-| Ingredient     | Quantity |
-| -------------- | -------: |
-| Water          |    118 g |
-| Sugar          |     50 g |
-| Honey          |     70 g |
-| Lemon juice    |     15 g |
-| Cinnamon stick |     1 ea |
-| Rose water     |   7.5 ml |
+## 1. When to use
 
-### Garnish
+Use this workflow whenever:
 
-| Ingredient          |  Quantity |
-| ------------------- | --------: |
-| Pistachios, chopped | as needed |
-| Dried rose petals   |  optional |
+```text
+- There is more than one event in the same prep week.
+- The user asks for orders for the week.
+- A production sheet covers multiple events.
+- Shared ingredients/components appear across events.
+- Supplier orders need to be separated into Doblo's, Bidfood, Woolworths/Coles and specialty suppliers.
+```
 
-## Method
+For a single large event, the same workflow can be used as a single-event order ledger.
 
-1. Heat oven to **160°C**. Grease a **20 cm springform tin** with butter.
+---
 
-2. Toast walnuts and pistachios separately until fragrant. Cool, then chop finely. Do not turn into powder.
+## 2. Weekly order processing order
 
-3. Beat cream cheese and sugar until smooth.
+```text
+1. Build event index for the week.
+2. Extract food-only order needs per event.
+3. Resolve product format before counting.
+4. Apply count logic and buffers.
+5. Convert prep counts into ingredient requirements.
+6. Combine ingredients across events only after event splits are known.
+7. Check already in-house / already ordered.
+8. Split remaining order by supplier.
+9. Flag delivery date required.
+10. Flag risks, missing pack sizes and over-order risks.
+11. Produce supplier-ready order messages if requested.
+```
 
-4. Add eggs and Greek yoghurt. Mix until combined.
+---
 
-5. Add flour, vanilla and rose water. Mix until smooth. Set aside.
+## 3. Event index format
 
-6. Lay **2 sheets phyllo** into the tin, letting the excess hang over the sides. Brush with melted butter and sprinkle with some chopped nuts.
+```text
+EVENT INDEX — WEEK OF [DATE]
+- **Event A** — date / service or delivery time / guest count / service style
+- **Event B** — date / service or delivery time / guest count / service style
+- **Sunday Tapas** — include if the week covers Sunday prep/service
+```
 
-7. Repeat with remaining phyllo in layers: **2 sheets phyllo, butter, nuts**. Finish with the final 2 sheets of phyllo.
+Only include food-relevant event detail.
 
-8. Pour cheesecake filling into the phyllo crust.
+---
 
-9. Trim excess phyllo, leaving a rough **2–4 cm border** above the filling.
+## 4. Per-event order extraction
 
-10. Bake at **160°C for 60–75 minutes**, until golden with a slight wobble in the centre.
+For each event, extract:
 
-11. Turn oven off. Leave cheesecake inside with the door slightly open for **15–20 minutes**.
+```text
+EVENT:
+DATE:
+SERVICE / DELIVERY TIME:
+GUEST COUNT:
+MENU:
+DIETARIES:
+PRODUCTION TARGET:
+PRODUCT FORMAT:
+MODULES USED:
+ORDER NEEDS:
+```
 
-12. For syrup, combine water, sugar, honey, lemon juice and cinnamon stick. Bring to the boil, then simmer **10 minutes** until lightly syrupy.
+If product format is unclear, write:
 
-13. Remove cinnamon stick. Cool slightly, then stir in rose water.
+```text
+NEEDS CONFIRMATION — product format unclear before ordering
+```
 
-14. Remove cheesecake from oven and carefully release the springform ring.
+---
 
-15. Spoon syrup mainly over the hot phyllo edges so the pastry absorbs it. Use a small amount over the cheesecake top if desired.
+## 5. Count-to-order conversion
 
-16. Rest at room temperature for **2–3 hours**, then refrigerate overnight.
+Use the Count & Ordering Harness before ordering:
 
-17. Garnish with chopped pistachios and rose petals before slicing.
+```text
+Guest count -> production count -> ingredient count -> supplier order count
+```
 
-## Kitchen Notes
+Rules:
 
-* Best texture after overnight chilling.
-* Keep phyllo covered with a damp cloth while layering.
-* Syrup should go mostly onto the phyllo, not the cheesecake centre.
-* Slice with a hot clean knife for cleaner portions.
+```text
+- Apply 9% buffer where relevant.
+- Do not apply 9% blindly to fixed module items.
+- Convert hot nibble boxes to pieces.
+- Resolve fruit format before counting.
+- Include focaccia where required.
+- Include dietaries as actual food/order items.
+- Add garnish ingredients only where they are part of the production plan.
+```
+
+---
+
+## 6. Combined ingredient ledger
+
+After each event is counted, combine ingredients by item.
+
+Use this format:
+
+```text
+COMBINED INGREDIENT LEDGER
+- **Lemons** — total 8 kg
+  - Italian Long Lunch — 5 kg / squid, cannellini, garnish
+  - Wake delivery — 1 kg / scones garnish, fruit
+  - Tapas — 2 kg / aioli, calamari, drinks garnish
+- **Parsley** — total 6 bunches
+  - Italian Long Lunch — 4 bunches / salsa verde, squid, garnish
+  - Tapas — 2 bunches / service garnish
+```
+
+Do not show only the combined total unless the event split is obvious and low-risk.
+
+---
+
+## 7. Stock and already-ordered pass
+
+Before finalising orders, run:
+
+```text
+ALREADY IN HOUSE
+- Item — usable quantity — event allocation if already assigned
+
+ALREADY ORDERED
+- Supplier — item — quantity — delivery date — event/use
+
+STILL NEEDED
+- Supplier — item — quantity — event/use
+
+NEEDS CONFIRMATION
+- Item — missing pack size / supplier availability / unclear product format / price not found
+```
+
+Do not order from supplier until already-in-house and already-ordered stock has been separated.
+
+---
+
+## 8. Supplier split
+
+Use this order:
+
+```text
+DOBLO'S — DELIVERY — [DATE]
+- **Produce/herbs/fruit/vegetables** — quantity — event/use note
+
+BIDFOOD — ORDER REQUIRED — [DATE]
+- **Dry/dairy/bakery/frozen/meat/fish/finger food/packaging** — quantity / pack size — event/use note — allergen flag if relevant
+
+WOOLWORTHS / COLES — TOP-UP
+- **Retail/small urgent/GF/specialty item** — quantity — event/use note
+
+BUTCHER / SEAFOOD / SPECIALTY
+- **Item** — quantity — event/use note
+
+ALREADY ORDERED / IN HOUSE
+- **Item** — quantity — status — event allocation
+
+NEEDS CONFIRMATION
+- **Item** — what needs confirming before order can be sent
+```
+
+Doblo's order method defaults to delivery.
+
+---
+
+## 9. Delivery timing logic
+
+Add requested delivery date per supplier.
+
+Guide:
+
+```text
+- Long-life Bidfood items: order early enough for prep week.
+- Produce/herbs: delivery close enough for freshness but before prep starts.
+- Seafood/protein: confirm delivery day based on prep/cook schedule.
+- Frozen items: allow 2-day fridge/coolroom thaw before use.
+- Cryovac/Roscoes items: order/procure before Roscoes sealing window.
+- Friday Tapas pull: account for Sunday tapas items when Sunday is in the week.
+```
+
+If delivery timing affects prep, flag it in RISKS.
+
+---
+
+## 10. Risk flags
+
+Use only useful risks:
+
+```text
+RISK / CHECK BEFORE ORDERING
+- SHORTAGE RISK — event depends on exact pack/count.
+- OVER-ORDER RISK — supplier pack much larger than weekly need.
+- SHORT SHELF-LIFE — order close to prep day.
+- DELIVERY RISK — supplier arrival too close to service.
+- ALLERGEN RISK — supplier allergen status unclear.
+- FORMAT RISK — corporate fruit box / styled platter / graze format unclear.
+- THAWING RISK — frozen item needs 2-day fridge/coolroom thaw.
+- CRYOVAC RISK — Roscoes window needed.
+```
+
+---
+
+## 11. Weekly order output structure
+
+Use this for the final weekly order list:
+
+```text
+WEEKLY ORDER LIST — WEEK OF [DATE]
+
+EVENT INDEX
+- Event / date / time / pax / service style
+
+ORDER SUMMARY
+- Doblo's — delivery date / major produce
+- Bidfood — order date / major dry-dairy-frozen
+- Woolworths/Coles — top-ups
+- Specialty — butcher/seafood/other
+
+DOBLO'S — DELIVERY — [DATE]
+- **Item** — total qty — event split/use
+
+BIDFOOD — ORDER REQUIRED — [DATE]
+- **Item** — total qty / pack — event split/use — allergen flag if relevant
+
+WOOLWORTHS / COLES — TOP-UP
+- **Item** — qty — reason/event
+
+SPECIALTY SUPPLIERS
+- **Item** — qty — event/use
+
+ALREADY IN HOUSE / ALREADY ORDERED
+- **Item** — qty/status — event allocation
+
+STILL NEEDED
+- **Item** — supplier — qty — event/use
+
+NEEDS CONFIRMATION
+- **Item** — decision needed
+
+RISK / CHECK BEFORE ORDERING
+- Risk — action
+```
+
+---
+
+## 12. Supplier email conversion
+
+After the chef-facing order list is approved, convert each supplier bucket into a clean supplier email/message.
+
+Do not include internal production details unless the supplier needs them.
+
+Use:
+
+```text
+Subject: Riviera Order — [Week/Event] — Delivery [Date]
+
+Hi [Supplier],
+
+Could we please order the following for delivery on [date]:
+
+- [Item] — [quantity]
+- [Item] — [quantity]
+
+Event note: [short note only if useful]
+
+Please confirm availability and delivery.
+
+Kind regards,
+Riviera Yeppoon
+```
+
+---
+
+## 13. Final weekly order QA
+
+Before giving the order list or supplier email:
+
+```text
+□ All events in the week included
+□ Event dates/times checked
+□ Guest counts applied
+□ Product formats resolved
+□ Production buffers applied only where relevant
+□ Ingredient totals show event split
+□ Supplier buckets separated
+□ Already ordered separated
+□ Already in-house separated
+□ Still needed separated
+□ Delivery dates shown
+□ Missing pack sizes flagged
+□ Prices not invented
+□ Dietaries checked
+□ Focaccia counted if required
+□ Fruit format resolved
+□ Hot nibble counts converted to pieces
+□ Frozen items have 2-day thaw timing if relevant
+□ Cryovac/Roscoes window flagged if relevant
+□ Order risks included only where useful
+```
+
+---
+
+## 14. SOP placement
+
+This addendum sits under:
+
+```text
+Riviera Supplier Ordering Translator v1
+Riviera Order Template v1
+Riviera Count & Ordering Harness v1
+```
+
+Use it before creating weekly production sheets when orders need to cover multiple events.
+````
+
+### Source: Riviera_Package_Source_Digest_v1_2026-06-09.md
+
+- Stored file: `Riviera_Package_Source_Digest_v1_2026-06-09.md`
+- Kind: text
+- Lines: 670
+- SHA-256: `45b21d3c2d12abb222c256c6c8e49e3e8f2ff0b5482d42ea42713c9c8d02a7d4`
+
+
+````markdown
+# Riviera Package Source Digest v1
+
+**Status:** Source compaction draft  
+**Date:** 2026-06-09  
+**Use for:** Replacing heavy Riviera brochure/package PDFs as day-to-day project sources once verified.  
+**Does not replace:** Supplier item/allergen databases, live quotes, final event contracts, or visual brand files.
+
+---
+
+## 0. Purpose
+
+This digest compresses the uploaded Riviera package PDFs into a project-readable text source.
+
+Use it for:
+
+- event classification,
+- package/menu lookup,
+- starting-from price lookup,
+- minimum number checks,
+- product-format checks,
+- prep/order planning,
+- client-facing draft wording,
+- source conflict checks.
+
+Do not use it as a final quote. Prices remain indicative unless an official quote says otherwise.
+
+---
+
+## 1. Source replacement rule
+
+### Safe to replace with this digest for normal project use
+
+These PDF brochures can be removed from active project sources after this digest is uploaded and checked:
+
+```text
+Riviera.pdf
+optimized_riviera_wedding_packages_25_+(3).pdf
+optimized_riviera_party_packages_8_+(2).pdf
+Riviera Tapas Menu (9).pdf
+The+Riviera+Table+Menu+-+December+2025+(4).pdf
+Corporate+Catering+Brochure+(7).pdf
+Funeral+Catering+Brochure+(4).pdf
+Offsite+Platter+Brochure+(3).pdf
+Life+Celebration+Packages+(5).pdf
+Baby+Shower+Packages+(4).pdf
+Riviera+-+Corporate+(2).pdf
+```
+
+### Keep until separately converted
+
+Keep or separately convert these data-heavy sources:
+
+```text
+Bidfood_Item_List.pdf — supplier items, pack sizes, prices, allergens
+Doblo's PLU Price List — produce availability/pricing
+Order forms / spreadsheets — event-specific or supplier-specific order evidence
+Recipes for Prep Chef.docx — recipe source until every recipe is canonicalised
+The Art & Science of Foodpairing.pdf — reference layer, not a normal event package source
+```
+
+### Archive PDFs outside the active project
+
+Keep the original PDFs somewhere accessible for:
+
+```text
+visual design / brochure layout
+client-facing brochure wording
+source dispute checks
+new staff training / non-kitchen context
+```
+
+---
+
+## 2. Source hierarchy
+
+Use this priority:
+
+```text
+1. User correction in current project
+2. Event/client-specific source
+3. Riviera SOP Master Index v6
+4. Riviera Component Module Library v1
+5. Riviera Count & Ordering Harness v1
+6. Riviera Production Sheet Template Library v1
+7. Riviera Canonical Recipe Bank v1
+8. Riviera Supplier Ordering Translator v1
+9. Riviera Seasoning Palette v2
+10. Riviera package/menu/source digest
+11. Bidfood / Doblo's supplier references
+12. GitHub recipe/aroma data
+13. Foodpairing reference layer
+14. Kitchen Council final chef judgement
+```
+
+If sources conflict, user correction wins. If no safe answer exists, mark **NEEDS CONFIRMATION**.
+
+---
+
+## 3. General Riviera rules from package PDFs
+
+### Brand / venue
+
+Riviera Yeppoon is a premium coastal venue on Cooee Bay Beach. Brand language: Mediterranean Riviera influence, modern-vintage character, old-money elegance, ocean views, polished coastal events.
+
+### Operational venue facts
+
+```text
+Location: Cooee Bay Beach, Yeppoon
+Venue style: coastal, Mediterranean-inspired, modern vintage, premium
+Onsite kitchen: full commercial kitchen capability
+Indoor capacity reference: up to 100 seated / up to 250 cocktail-style
+Ceremony options: Fig Tree Lawn, beachside, indoor wet-weather options
+Corporate/life celebration capacity references vary by package and must be confirmed per event
+```
+
+### Pricing / quote rules
+
+```text
+Prices are generally starting-from / indicative.
+Pricing is generally GST-exclusive.
+Official quote required to lock pricing.
+$1500 + GST non-refundable deposit appears in wedding/general event terms.
+Minimum guest numbers apply and may still be charged if final count drops below minimum.
+```
+
+### Allergen / dietary rules
+
+Riviera kitchen handles common allergens including milk/dairy, egg, soy, seafood including crustaceans, peanuts, sesame, tree nuts and gluten/wheat. Dietary requirements must be advised in advance. Do not guarantee allergen-free unless the event plan and source control supports it.
+
+---
+
+# 4. Riviera Wedding Packages — operational digest
+
+**Source:** optimized_riviera_wedding_packages_25_+(3).pdf / Riviera.pdf
+
+## Ceremony / venue notes
+
+```text
+Fig Tree Lawn: ocean backdrop, grass setting under Grand Fig Tree.
+Beachside ceremony: ocean backdrop, semi-circle podium, white aisle runner, French oak chairs.
+Indoor wet-weather options: Ballroom / Lookout depending setup.
+```
+
+## Ceremony-only / elopement style packages
+
+### Kiss & Commit Package
+
+```text
+Price: $2,000 + GST
+Capacity: up to 40 people
+Availability: Monday-Friday; Saturday additional $1,000 + GST
+Includes: on-the-day wedding coordination, white round signage table, 2 white chairs, up to 40 French oak style chairs, speaker for background music, vendor access prior to ceremony.
+Important: hire begins 30 minutes before ceremony; latest ceremony start 15:00; payment in full at booking; non-refundable; time allowance cannot be extended; $500 bond referenced.
+```
+
+### Vows & Vino
+
+```text
+Price: $4,000 + GST
+Capacity: up to 40 people
+Availability: Monday-Friday; Saturday additional $1,000 + GST
+Includes: 2.5 hour venue hire, coordination, ceremony chairs/table, speaker, dry bar/stool furniture, cake/signing/gift tables, small grazing table feeds 20, 3-tier champagne tower with 1 premium bottle champagne.
+Important: hire begins 30 minutes before ceremony; latest ceremony start 15:00; payment in full; non-refundable; $500 bond referenced.
+```
+
+## Wedding / party food notes from packages
+
+### Crowd Pleaser Platters
+
+```text
+Style: grazing boxes set out on a table; no wait service included.
+Grazing table: serves 40-60, $820 + GST in party/wedding source.
+Nibble platters: feed 8-12 people.
+Hot nibble platters: 20-25 pieces per platter in source; kitchen working standard converts to 24 pieces.
+Mixed hot nibble box: 40-50 pieces in source; kitchen working standard converts to 48 pieces.
+Substantial platter: 20 pieces per platter.
+Substantial meal example for liquor compliance: 1 nibble piece pp + 4 hot pieces pp + 1 substantial piece pp.
+```
+
+### Make Your Own Gyros Bar
+
+```text
+Price: $32 pp + GST
+Minimum: 40 people
+Choose 2 proteins/options from: slow cooked Greek beef, chargrilled lemon & thyme chicken, Moroccan spiced pulled lamb, grilled halloumi.
+Fillings: souvlaki breads, lettuce, tomato, red onion, feta, tabouli, tzatziki, creamy capsicum sauce, garlic aioli, tomato & BBQ sauce.
+Served with herbed fries.
+Disposable plates standard; crockery/cutlery upgrade $4 pp.
+```
+
+### Grazing table
+
+```text
+1 m grazing table: feeds 40-50, $820 + GST
+2 m grazing table: feeds 60-80, $1,485 + GST
+3 m grazing table: feeds 100+, $2,178 + GST
+```
+
+### Seafood fountain
+
+```text
+Options: prawns, oyster bar, mixed prawns & oysters.
+Starting from $25 pp + GST.
+Set-up fee appears as $100 in wedding/party package and $150 in offsite table source; treat as source conflict / needs confirmation.
+Bond may apply.
+Minimum 40 people in offsite table source.
+```
+
+---
+
+# 5. Party Packages — operational digest
+
+**Source:** optimized_riviera_party_packages_8_+(2).pdf
+
+```text
+Purpose: birthdays, private parties, milestone celebrations.
+Room hire / inclusions depend on package and quote.
+Common inclusions: venue hire, tables/chairs, bar staff/wait staff, music system access, reverse cycle air-conditioning.
+Food options overlap with grazing, platters, gyros, seafood fountain, and buffet-style packages.
+Use latest event-specific quote if available.
+```
+
+---
+
+# 6. Riviera Tapas Menu — operational digest
+
+**Source:** Riviera Tapas Menu (9).pdf
+
+## Tapas items
+
+```text
+Calamari Fritti — $22 — Riviera house aioli, crispy capers — gf, DF
+Chargrilled Lamb Cutlets (3) — $26 — Riviera house emulsion — gf, DF
+Chorizo & Mozzarella Arancini (3) — $22 — romesco, lemon & thyme aioli — gf
+Kilpatrick Oysters 1/2 dozen — $32 — crispy speck, Worcestershire — gf, DF
+Crispy Fried Chorizo Potatoes — $22 — lemon thyme aioli — gf, DF
+Zesty Limoncello Chicken Skewers (3) — $22 — herbed labneh — gf
+Crispy Reef Fish Sliders (3) — $30 — lemon caper aioli, roquette
+Spiced Popcorn Cauliflower — $22 — spicy capsicum & feta cream — veg
+Hot Honey Saganaki (3) — $22 — grilled halloumi, hot honey, roasted red grapes
+Veal & Prosciutto Crumbed Olives — $24 — zesty lemon & thyme aioli
+```
+
+## Antipasto / bread / kids / dessert
+
+```text
+Charcuterie for 4 — $79
+Charcuterie for 2 — $41
+Red Grape Focaccia — $18 — baked in house with whipped butter and sea salt
+Bowl of Chips — $12
+Kids Nuggets & Chips — $14
+Kids Fish & Chips — $14
+Kids Vanilla Ice Cream with Chocolate Topping — $10
+Housemade Cannoli Trio — $18
+Sticky Date Madeleines — $22 — warm toffee sauce, vanilla gelato
+Pistachio Affogato — $16 — espresso, pistachio gelato, Mrs Cardorin's crostoli
+```
+
+## Standing Sunday rule
+
+Tapas runs every Sunday 11:00-17:00. Friday prep sheets covering Sunday must include the food action to pull required prepped tapas items from freezer to fridge/coolroom.
+
+---
+
+# 7. The Riviera Table Offsite Catering — operational digest
+
+**Source:** The+Riviera+Table+Menu+-+December+2025+(4).pdf
+
+## Grazing tables
+
+```text
+Sold by the metre; white plinths included; client supplies table.
+1 m — $820 + GST
+2 m — $1,485 + GST
+3 m — $2,178 + GST
+```
+
+Add-ons:
+
+```text
+Gourmet Pizza Scrolls (40) — $190
+Mini Quiches with House Relish (40) — $190
+Smoked Chicken & Bacon Sliders (40) — $340
+Ham, Cheese & Dijon Croissants (40) — $340
+Seasonal Cut Fruit Bowl — $50
+```
+
+## Seafood fountain
+
+```text
+Options: prawns, oysters, mixed selection.
+From $25 pp + GST.
+$150 fountain set-up fee in offsite source.
+$500 bond held for potential damages.
+Minimum 40 people.
+```
+
+## Canape packages
+
+Canape examples:
+
+```text
+Bruschetta of Rare Roast Beef — whipped blue cheese, caramelised onion jam, fresh herbs
+Spanner Crab Cannoli — lemon, Dijon, Riviera flavours
+Prawn Brioche Slider — cocktail sauce, lettuce, potato crisps
+Smoked Chicken & Bacon Brioche Slider — rocket, fresh herbs
+Vintage Beef Brioche Slider — beef burger, aged cheddar, herbed aioli, tomato relish, rocket
+Beef Polpette — romesco, Manchego, Turkish bread
+Chargrilled Lamb Cutlet — Riviera house emulsion
+Zesty Limoncello Chicken Skewer — herbed labneh, feta, pita
+Slow Cooked Lamb Shoulder Provencale — cous cous, spiced yoghurt
+Beef Bourguignon — red wine sauce, carrots, bacon, mushroom, pomme puree
+Creamy Lemon Caper Chicken — apricot and almond rice pilaf
+```
+
+Packages:
+
+```text
+Choose 4 canapes — $54 pp + GST — pre-dinner cocktail hour — minimum 40
+Choose 6 canapes — $72 pp + GST — can replace entree — minimum 40
+Choose 8 canapes — $89 pp + GST — full dining experience — minimum 40
+```
+
+Offsite requirements:
+
+```text
+Canapes are hand-served by waitstaff.
+Napkins and disposable cutlery included.
+Venue needs suitable cooking/prep space, roof/enclosed walls, flooring, lighting, running potable water, and power.
+Client supplies marquee with walls/lighting if unavailable.
+```
+
+## Roving dessert
+
+```text
+Roving dessert experience: cannoli or tiramisu.
+Available for canape packages only.
+$16 + GST.
+Minimum 40 people.
+```
+
+## Carvery buffet
+
+Main options include:
+
+```text
+Greek spiced roast lamb
+Lemon, thyme & garlic roast chicken
+Thyme & garlic roast beef with Tempranillo reduction and gremolata
+Sicilian citrus & herb roast pork with apricot compote
+Grilled haloumi with roasted red grapes and hot honey
+```
+
+Sides include:
+
+```text
+Creamy potato gratin
+Garlic & herb baked chat potatoes with feta cream
+Honey-thyme roasted carrots with pistachios
+Provencal vegetable ratatouille
+Broccoli & cauliflower gratin
+Mediterranean rice pilaf
+Moroccan cous cous salad
+Roast root vegetable salad with cinnamon-maple nuts
+Greek green bean salad
+Roast pumpkin & pepita salad
+```
+
+Buffet packages:
+
+```text
+Luncheon Luxe — select 2 mains, 3 sides — $55 pp + GST
+Indulgent Dinner — select 3 mains, 3 sides — $69 pp + GST
+The Riviera Spread — select 4 mains, 4 sides — $85 pp + GST
+Minimum 40 people.
+Staff serve buffet.
+Disposable plates/cutlery/napkins included.
+Client provides buffet tables.
+Minimum 3 trestle tables required for all buffets.
+Pricing indicative and GST-exclusive.
+```
+
+All buffets served with Riviera Table housemade sourdough focaccia and whipped herb butter.
+
+---
+
+# 8. Corporate Catering — operational digest
+
+**Source:** Corporate+Catering+Brochure+(7).pdf
+
+Corporate catering is available for meetings, workshops, conferences and office events, with vegetarian, vegan and gluten-free options referenced. Delivery or pickup available in brochure; Riviera project default is delivery unless user asks otherwise.
+
+## Breakfast & brunch — minimum 12
+
+```text
+Savoury filled croissants — $10.50 pp
+Sweet filled croissants — $9.00 pp
+House baked banana bread — $7.50 pp
+Fruit salad & yoghurt — $7.50 pp
+Mixed bircher muesli bowls — $9.00 pp
+Waffles — $7.50 pp
+Bacon & egg muffins — $9.50 pp
+Bacon & egg paninis — $11.00 pp
+Breakfast wraps — $11.00 pp
+All pricing GST-exclusive.
+```
+
+## Morning tea / afternoon tea — minimum 12
+
+Sweet options:
+
+```text
+Assorted slices & cakes — $6.50 pp
+House baked muffins — $6.50 pp
+House baked banana bread — $6.50 pp
+Seasonal fruit — $6.50 pp
+Freshly baked scones with jam & Chantilly cream — $6.50 pp
+Gourmet filled cookies — $6.50 pp
+```
+
+Savoury options:
+
+```text
+Savoury filled mini croissants — $6.50 pp
+Homemade mini quiches with beetroot balsamic relish — $6.50 pp
+Housemade sausage rolls with condiments — $6.50 pp
+Spinach & feta pastizzis with housemade herbed labneh — $6.50 pp
+Mini beef party pie with condiments — $6.50 pp
+Sweet & savoury option combo — $12.00 pp
+```
+
+## Lunch — minimum 12
+
+```text
+Mixed filled sandwiches — $9.00 pp
+Mixed filled wraps — $9.50 pp
+Mixed filled brioche/Turkish/focaccia rolls — $9.50 pp
+Mixed gourmet pizza scrolls — $10.50 pp
+Hot nibble selection, 3 pieces — $8.50 pp
+Chicken Caesar salad bowl — $16.50 pp
+Lamb fattoush salad bowl — $16.50 pp
+Mediterranean chicken bowl — $16.50 pp
+Roasted vegetable salad bowl — $16.50 pp
+Beef lasagne + side salad — $16.50 pp
+```
+
+Lunch combos:
+
+```text
+Choose 2 sandwich/wrap/roll/scroll options, 2 pieces pp — $11.50 pp
+Choose 3 sandwich/wrap/roll/scroll options, 3 pieces pp — $15.00 pp
+Add hot food selection, 2 pieces pp — $6.50 pp
+Add seasonal fruit platter to combo — $5.50 pp
+```
+
+Working lunch boxes:
+
+```text
+Sandwich / wraps-roll / sweet treat / savoury snack / drink — $24.00 pp
+Salad bowl / sweet treat / drink — $24.00 pp
+Breakfast / savoury filled croissant / breakfast sweet / mini quiche / juice — $24.00 pp
+Individually packaged.
+```
+
+## Build Your Buffet — minimum 12
+
+Meats:
+
+```text
+Roast beef sliced — $5.50 pp — caramelised onion jam — GF, DF
+Leg ham off the bone — $5.50 pp — beetroot balsamic relish
+Limoncello & rosemary roast chicken pieces — $6.50 pp
+Spiced lamb koftas — $7.00 pp — spicy capsicum cream, pita breads
+Lemon & thyme chicken skewers — $6.50 pp — herbed labneh, pita breads
+Chargrilled lamb cutlets — $8.00 pp — Riviera house emulsion
+```
+
+Salads/sides include:
+
+```text
+Creamy basil pesto pasta salad — $3.75 pp
+Greek green bean salad — $3.75 pp
+Moroccan cous cous salad — $3.75 pp
+Pumpkin, feta & pepita salad — $3.75 pp
+Traditional garden salad — $3.75 pp
+```
+
+---
+
+# 9. Offsite / Wake / Funeral Platter Brochures — operational digest
+
+**Sources:** Funeral+Catering+Brochure+(4).pdf and Offsite+Platter+Brochure+(3).pdf
+
+Platters can be delivered hot or arranged for pickup in brochure copy. Riviera project default for Doblo's is delivery; for client orders, use event-specific instruction.
+
+## Sweets — each platter serves 12
+
+```text
+House baked scones — $65 + GST — Chantilly cream & jam
+Sweet slice & cake platter — $75 + GST
+House baked muffins — $75 + GST
+Seasonal fruit platter — $60 + GST
+Grazing box — $95 + GST — cheeses, deli meats, fruit, nuts, crackers, dips, olives
+```
+
+## Hot nibbles
+
+Source says 20-25 pieces for single platters; project working standard converts this to 24 pieces.
+
+```text
+House baked sausage rolls — $65 + GST
+Flaky beef party pies — $65 + GST
+House baked mini quiches — $65 + GST
+Spinach & ricotta pastizzis — $65 + GST
+Mixed box hot nibbles — $120 + GST — source says 40-50 pieces; project working standard converts this to 48 pieces
+```
+
+## Finger food lunch options
+
+```text
+Ham & cheese croissants — 12 pieces — $85 + GST
+Sandwich platter — 24 points / 6 whole sandwiches cut into quarters — $65 + GST
+Premium filled wraps — 12 wraps — $75 + GST
+Filled brioche rolls — 12 — $120 + GST
+Brioche example fillings: smoked chicken, bacon & almond; chicken schnitzel & slaw; roast beef, beetroot relish, Jarlsberg & rocket; grilled halloumi, pesto & pumpkin
+```
+
+## Lunch meats — serve 12 unless noted
+
+```text
+Leg ham off the bone — $65 + GST
+Limoncello & rosemary roasted chicken pieces — $65 + GST — GF, DF
+Roast beef with beetroot balsamic relish — $65 + GST — GF, DF
+Lemon & thyme chicken skewers — $65 + GST — herbed labneh, pita breads — GF
+Spiced lamb koftas — $65 + GST
+Chargrilled lamb cutlets — $75 + GST
+```
+
+## Salads and cooked sides
+
+```text
+Salads serve 12-15 — $45 + GST each.
+Options: basil pesto pasta salad, Greek green bean salad, Moroccan cous cous salad, roast pumpkin/feta/pepita salad, classic garden salad, creamy potato/bacon/herb salad.
+Cooked sides serve 12-15.
+Creamy potato bake — $65 + GST
+Broccoli cauliflower gratin — $65 + GST
+Gravy 500 ml — $15 + GST
+House baked sourdough focaccia bread with butter — $30 + GST
+Dinner rolls & butter — $20 + GST
+```
+
+## Dietary platters
+
+```text
+Dietary grazing platter — $75 + GST
+Dietary hot nibble box — $65 + GST
+Dietary sandwich platter — $65 + GST
+Dietary sweet platter — $65 + GST
+Dietary platters serve 4-6.
+Brochure says platters can be made gluten-free, dairy-free, vegetarian, vegan, egg-friendly.
+Shared kitchen disclaimer: cannot guarantee food completely free from traces of allergens.
+```
+
+## Tea & coffee station
+
+```text
+Tea, instant coffee, full cream & skim milk, sugar, coffee urn, disposable cups, stirrers.
+Minimum 20 pp.
+$5 + GST.
+```
+
+---
+
+# 10. Life Celebration Packages — operational digest
+
+**Source:** Life+Celebration+Packages+(5).pdf
+
+```text
+Tone: respectful, calm, supportive.
+Venue hire reference: $500 + GST, Monday-Friday.
+Venue hire duration reference: up to 4 hours.
+Capacity reference: up to 300 cocktail-style.
+Inclusions: tables & chairs, TV & AV equipment, onsite amenities, air-conditioning.
+Catering and beverage options available.
+Use wake/platter brochure for food modules unless event-specific package states otherwise.
+```
+
+---
+
+# 11. Baby Shower Packages — operational digest
+
+**Source:** Baby+Shower+Packages+(4).pdf
+
+## Spaces
+
+```text
+Sunday Tapas — no venue hire fee; public restaurant-style booking; space allocation weather-dependent and may be shared.
+Riviera Ballroom — seats up to 60; air-conditioned; archway wall for photos.
+Bar Terrace — up to 20; ocean views, weather protection and air-conditioning; fixed table configurations.
+Outdoors — fig tree lawn with ocean views.
+Venue hire outside Sunday depends on date/style/size and needs quote.
+```
+
+## Styling
+
+```text
+All Inclusive Styling Package — $300 + GST
+Includes: baby booty centrepieces, silk wildflowers, runners, napkins, ruffle placemats, crystal tea lights, table setting, gift table, plinth duo, gold cake knife/server, Baby in Bloom sign, prediction cards.
+Hire-only items.
+```
+
+Hire add-ons include placemats, booties/florals, runners, napkins, bud vases, balloon garland, clipboards, linen signage, archway decal, pregnancy silhouette, white plinths. Use source/quote for final pricing.
+
+## Baby shower high tea
+
+```text
+Minimum: 12 people
+Price: $55 pp + GST
+Menu: ribbon sandwiches, chorizo & roasted capsicum arancini with romesco and lemon-thyme aioli, scones with jam/lemon curd/whipped cream, petit fours, unlimited tea/coffee, high-tea china.
+```
+
+## Custom graze
+
+```text
+Price: $60 pp + GST
+Minimum: 12 people
+Includes: customised baby shower grazing table with smoked chicken & bacon sliders, ribbon sandwiches, spinach & feta pastizzis with tzatziki, fresh fruit, sweets/cakes, signature mocktail. Styled to theme/colour palette.
+Floral arrangements add-on: $75 + GST each.
+```
+
+---
+
+# 12. Corporate Venue Brochure — operational digest
+
+**Source:** Riviera+-+Corporate+(2).pdf
+
+```text
+Tone: professional, efficient, tidy.
+Use for corporate venue hire/proposals rather than food-only production.
+Key claims: Riviera is in town, onsite catering, full commercial kitchen, reliable utilities, wet-weather alternatives, ocean views, nearby accommodation, modern facilities.
+For food, use Corporate Catering Brochure and Supplier/Production modules.
+```
+
+---
+
+# 13. Product-format traps to preserve
+
+```text
+Corporate fruit box != styled seasonal fruit platter.
+Grazing box != 1 m grazing table.
+Seated function focaccia != sliced focaccia box.
+Corporate sandwich platter != lunch box sandwich component.
+Hot nibble platter != mixed hot nibble box unless source confirms mixed.
+Canapes do not replace dinner unless package/service style confirms.
+```
+
+---
+
+# 14. Replacement QA before deleting PDFs from active sources
+
+Before removing brochure PDFs from active project sources:
+
+```text
+□ Upload this digest to project sources.
+□ Ask one test question from each package type.
+□ Confirm prices/minimums appear correctly.
+□ Keep Bidfood/Doblo's supplier sources active or convert separately.
+□ Keep original PDFs archived outside active source list.
+□ Mark this digest as the package/menu source, not the final quote source.
+```
+````
+
+### Source: Riviera_Order_Template_v1_2026-06-09.md
+
+- Stored file: `Riviera_Order_Template_v1_2026-06-09.md`
+- Kind: text
+- Lines: 228
+- SHA-256: `57879e25b39706bedb70f4bf6b7148773e26309b78193df28c1d7cd70169dbf9`
+
+
+````markdown
+# Riviera Order Template v1
+
+**Status:** Active ordering template draft  
+**Date:** 2026-06-09  
+**Use for:** Riviera supplier orders, event order checks, already-ordered/still-needed lists, and chef-ready order emails.
+
+---
+
+## 0. Purpose
+
+This template turns a production sheet into a clear order list.
+
+It must answer:
+
+```text
+What do we need?
+How much?
+Which supplier?
+For which event?
+Already ordered or still needed?
+What is missing or risky?
+```
+
+Do not invent prices, pack sizes, guest counts, or confirmed menus. If not found, write **NEEDS CONFIRMATION** or **price not found in current source**.
+
+---
+
+## 1. Order header
+
+```text
+ORDER NAME:
+EVENT / WEEK:
+EVENT DATE(S):
+DELIVERY DATE REQUIRED:
+DELIVERY METHOD: Delivery
+SUPPLIER:
+REQUESTED BY:
+SOURCE / PACKAGE:
+PRODUCTION TARGET:
+DIETARIES:
+STATUS: Draft / Ready to send / Sent / Confirmed
+```
+
+Doblo's default method is **delivery** unless the user specifically asks for pickup.
+
+---
+
+## 2. Supplier bucket order
+
+Always separate by supplier and status.
+
+```text
+DOBLO'S — produce / herbs / fruit / vegetables
+BIDFOOD — dry goods / dairy / bakery / frozen / desserts / meat / fish / finger foods / cleaning / packaging
+WOOLWORTHS / COLES — small top-ups / urgent specialty / GF bought-in items
+BUTCHER / SEAFOOD / SPECIALTY — if specified
+ALREADY ORDERED
+STILL NEEDED
+NEEDS CONFIRMATION
+```
+
+---
+
+## 3. Chef-facing order list format
+
+Use this format for internal order checks.
+
+```text
+DOBLO'S — DELIVERY REQUIRED [DATE]
+- **Item** — quantity / pack / event use / notes
+- **Item** — quantity / pack / event use / notes
+
+BIDFOOD — ORDER REQUIRED [DATE]
+- **Item** — quantity / pack / event use / notes
+- **Item** — quantity / pack / event use / notes
+
+WOOLWORTHS / COLES — TOP-UP
+- **Item** — quantity / event use / notes
+
+ALREADY ORDERED
+- **Item** — supplier / quantity / date ordered / event
+
+STILL NEEDED
+- **Item** — supplier / quantity / reason
+
+NEEDS CONFIRMATION
+- **Item** — missing pack size / unclear source / price not found
+```
+
+---
+
+## 4. Supplier email format
+
+Use this when writing an order email/message.
+
+```text
+Subject: Riviera Order — [Event / Date] — Delivery [Requested Date]
+
+Hi [Supplier Name],
+
+Could we please order the following for delivery on [date]:
+
+- [Item] — [quantity]
+- [Item] — [quantity]
+- [Item] — [quantity]
+
+Event note: [short note only if useful, e.g. Italian Long Lunch Saturday / wedding grazing table / corporate delivery]
+
+Please confirm availability and delivery.
+
+Kind regards,
+Riviera Yeppoon
+```
+
+Keep supplier emails clean. Do not include full production notes unless needed for the supplier.
+
+---
+
+## 5. Count-to-order rules
+
+### Production count
+
+```text
+Guest count -> production count -> ingredient count -> supplier order count
+```
+
+Use the **9% buffer** for plated meals, buffet serves, canapes, hot nibbles where production is not fixed by module, protein portions, and high-risk dietary alternatives.
+
+Do not blindly use buffer for fixed purchased unit boxes, expensive garnish items, or module-controlled items such as scone platters, fruit platters, and grazing boxes.
+
+### Alternate drop
+
+```text
+Guest count + 9% buffer = total production target
+Dietaries included inside total
+Remaining standard mains split evenly
+Both normal mains reduced equally where practical
+```
+
+### Scones
+
+```text
+12 scones = 1080 g scone mix + 600 ml water
+```
+
+Order:
+
+```text
+Total scones / 12 = batch count
+Batch count x 1.08 kg = scone mix required
+Jam + cream by platter count unless already in house
+```
+
+### Focaccia
+
+```text
+Casual / delivery / grazing / corporate sliced focaccia box = 12 pieces
+Seated dinner focaccia = table bread with whipped butter, not sliced-box count
+1 m grazing table = 1/4 tray sliced focaccia
+Every grazing box includes focaccia
+```
+
+If focaccia is required, show it in the order/prep. Do not assume stock.
+
+### Hot nibbles
+
+```text
+Single hot nibble platter = 24 pieces
+Mixed hot nibble box/platter = 48 pieces total
+Mixed split = 12 each of 4 items
+```
+
+GF hot nibbles use confirmed bought-in GF pies/sausage rolls first when available.
+
+### Fruit format
+
+Resolve format before ordering:
+
+```text
+Corporate fruit box / pax-based fruit = packed corporate fruit component
+Fruit cup = individual fruit cups
+Seasonal cut fruit bowl = bulk bowl
+Styled seasonal fruit platter = full Riviera fruit platter standard
+Grazing box fruit = graze component
+Grazing table fruit = graze component
+Breakfast fruit + yoghurt = corporate breakfast item
+```
+
+Do not apply the styled fruit platter standard to corporate fruit boxes unless the source says styled fruit platter.
+
+---
+
+## 6. Order risk flags
+
+Add these at the bottom of the order list when relevant.
+
+```text
+RISK / CHECK BEFORE ORDERING
+- Expensive over-order risk:
+- Short shelf-life item:
+- Pack size unclear:
+- Source price not found:
+- Dietary/allergen impact:
+- Frozen item needs 2-day fridge/coolroom thaw:
+- Cryovac/Roscoes window required:
+- Sunday Tapas overlap:
+```
+
+---
+
+## 7. Final order QA
+
+Before sending any order:
+
+```text
+□ Event date checked
+□ Delivery date checked
+□ Supplier separated
+□ Already ordered separated
+□ Still needed separated
+□ Missing pack sizes flagged
+□ Dietaries checked
+□ Focaccia counted if required
+□ Fruit format resolved
+□ Hot nibble count converted to pieces
+□ 9% buffer applied only where relevant
+□ No invented prices
+```
+````
+
+### Source: Riviera_Canonical_Recipe_Bank_v1_2026-06-08.md
+
+- Stored file: `Riviera_Canonical_Recipe_Bank_v1_2026-06-08.md`
+- Kind: text
+- Lines: 588
+- SHA-256: `41451a16898a8046213f27c8f30e8943cce82217d014a5ecd4e3ed03b1de0b47`
+
+
+````markdown
+# Riviera Canonical Recipe Bank v1
+
+**Status:** Active recipe-bank draft for Riviera SOP Master Index v6  
+**Date:** 2026-06-08  
+**Use for:** Pulling repeat recipes into prep sheets, production cards, order translators and event run sheets.
+
+---
+
+## 0. Purpose
+
+This file separates active locked recipes from working draft modules.
+
+Use this order:
+
+```text
+1. LOCKED HOUSE SOP — use directly unless user changes it.
+2. ACTIVE WORKING SOP — usable but review before major scaling.
+3. SOURCE RECIPE — use source recipe, convert into Riviera production card.
+4. DRAFT MODULE — practical draft; mark NEEDS CHEF CONFIRMATION before treating as final.
+```
+
+Do not invent a final recipe where Riviera does not yet have one. Use a draft module only when clearly marked.
+
+---
+
+## 1. LOCKED HOUSE SOP — House focaccia
+
+**Yield:** approx. 4.6 kg dough  
+**Best use:** grazing, delivery, casual catering, tapas, seated bread with whipped butter when portioned appropriately  
+**Hydration:** 75%
+
+### Ingredients
+
+```text
+Bread flour — 2400 g
+Water — 1800 g
+Sourdough starter — 300 g
+Instant dry yeast — 15 g
+Fine sea salt — 50 g
+Olive oil — 50 ml
+Honey — 30 g
+```
+
+### Method
+
+```text
+1. Mix water, starter, honey and yeast.
+2. Add flour. Mix low speed 3 minutes until hydrated.
+3. Rest 15 minutes.
+4. Add salt and olive oil.
+5. Mix medium speed 6-8 minutes until smooth/stretchy.
+6. Bulk in oiled tub 45 minutes.
+7. Stretch and fold.
+8. Rest 45 minutes.
+9. Stretch and fold again.
+10. Overnight cold proof.
+```
+
+### Bake
+
+```text
+1. Oil trays generously.
+2. Portion cold dough to tray size.
+3. Coat with oil and rest 1-2 hours until puffy.
+4. Dimple with oil.
+5. Bake Rational/combi 220°C, 0% steam, 20-25 minutes.
+6. Drop to 190°C, 0% steam, 10 minutes until golden and crisp.
+7. De-tray immediately and cool on racks.
+```
+
+### Production notes
+
+```text
+Casual/delivery/grazing/offsite/corporate: sliced focaccia box = 12 pieces.
+Seated plated dinner: focaccia with whipped butter; do not use sliced box piece logic.
+1 m graze = 1/4 tray focaccia sliced.
+Every grazing box includes focaccia.
+```
+
+---
+
+## 2. LOCKED HOUSE SOP — Scones
+
+**Yield:** 12 normal-size scones
+
+### Ingredients
+
+```text
+Scone mix — 1080 g
+Water — 600 ml
+```
+
+### Method
+
+```text
+1. Mix scone mix and water in mixer.
+2. Do not overmix.
+3. Rest 5 minutes.
+4. Shape and tray.
+5. Bake 200°C for 12 minutes.
+6. Drop oven to 160°C and bake another 10 minutes.
+7. Cool before packing.
+```
+
+### Scaling
+
+```text
+24 scones = 2160 g mix + 1200 ml water
+36 scones = 3240 g mix + 1800 ml water
+48 scones = 4320 g mix + 2400 ml water
+72 scones = 6480 g mix + 3600 ml water
+```
+
+### Packing
+
+```text
+Pack with jam and chantilly cream unless event source says otherwise.
+```
+
+---
+
+## 3. LOCKED HOUSE SOP — Burnt butter mash
+
+**Yield basis:** 35 servings
+
+### Ingredients
+
+```text
+Potato flakes — 1.05 kg
+Boiling water — 4.2 L
+Heavy/thickened cream — 2.1 L
+Unsalted butter — 1.5 kg
+Fresh thyme — 30 g
+Kosher/coarse salt — 50 g
+White pepper — 7 g
+```
+
+### Method
+
+```text
+1. Brown butter in large pot until foaming stops and brown specks form.
+2. Remove from heat. Add thyme and steep 5 minutes.
+3. Strain and discard thyme stems.
+4. Wipe pot.
+5. Bring water, cream and salt to boil.
+6. Turn off heat. Add potato flakes. Stir gently until wet.
+7. Rest 1 minute to hydrate.
+8. Whip in warm brown butter with large spatula until glossy.
+9. Taste after hydration and butter. Adjust salt/white pepper.
+```
+
+### Hold
+
+```text
+Hold hot covered. Protect surface from drying. Loosen with warm cream/water if tight.
+```
+
+### Allergens
+
+```text
+Dairy. Gluten-free only if potato flakes are confirmed GF and cross-contact is controlled.
+```
+
+---
+
+## 4. ACTIVE WORKING SOP — Tarragon cream sauce
+
+**Target yield:** approx. 2.3-2.4 L  
+**Covers:** 35 x 60 ml portions plus light buffer
+
+### Ingredients
+
+```text
+Unsalted butter — 225-250 g
+Shallots, finely minced — 320-350 g
+Rice flour — 50 g
+Cornflour — 40-45 g, slurry with cold milk/stock/water
+Warm milk — 1 L
+Warm low-salt chicken stock — 1 L
+Dry white wine — 350-360 ml
+Fresh tarragon — 35-45 g total, stems for infusion, leaves to finish
+Thickened cream — 650 ml
+Lemon zest — 3-4 lemons, optional
+Chicken/veg base — 35-40 g, cautious
+Lemon juice — 40-80 ml, to taste
+White pepper — to taste
+Parsley — 15-20 g, optional
+Salt — after reduction only
+```
+
+### Method
+
+```text
+1. Infuse milk, stock, wine and tarragon stems at least 1 hour.
+2. Sweat shallots in butter without colour.
+3. Add rice flour. Cook gently 1 minute.
+4. Gradually whisk in warm infused liquids.
+5. Simmer 3-4 minutes until smooth and lightly reduced.
+6. Whisk in cornflour slurry gradually until sauce coats.
+7. Add cream. Simmer gently 2-3 minutes.
+8. Season with base, white pepper, lemon zest and lemon juice.
+9. Finish with chopped tarragon leaves and optional parsley.
+10. Taste after reheating and adjust salt/acid/herbs before service.
+```
+
+### Hold
+
+```text
+Hold warm covered. Do not boil. Reheat slowly and loosen with warm stock/milk/cream.
+```
+
+### Allergens
+
+```text
+Dairy. Possible sulphites/alcohol from wine. Chicken/veg base depends on final product. Gluten-free only if GF starch/base/stock are confirmed.
+```
+
+---
+
+## 5. ACTIVE WORKING SOP — Benedictine caramel custard / pipeable custard
+
+**Yield basis:** 35 pipeable portions
+
+### Ingredients
+
+```text
+Caster sugar — 300 g
+Water — 60 ml
+Full-fat milk — 1 L total, split 800 ml + 200 ml
+Benedictine liqueur — 90 ml
+Nestlé/Docello custard powder — 140 g
+Unsalted butter — 100 g, cubed
+```
+
+### Method
+
+```text
+1. Boil sugar and water to deep amber caramel.
+2. Reduce heat. Carefully add 800 ml milk.
+3. Stir over low heat until caramel dissolves fully into milk.
+4. Whisk custard powder with remaining 200 ml cold milk until smooth.
+5. Bring caramel milk to gentle boil.
+6. Whisk in slurry vigorously.
+7. Cook while whisking until thick, then bubble gently for 1 full minute.
+8. Remove from heat. Whisk in Benedictine and cubed butter until glossy.
+9. Tray off/shallow container. Plastic directly on surface.
+10. Chill minimum 4 hours.
+11. Before service, beat briefly 30 seconds to loosen, then pipe.
+```
+
+### Optional upgrade
+
+```text
+Fold 300 ml soft-whipped cream/chantilly through cold loosened custard for lighter crème diplomat texture.
+```
+
+### Allergens / flags
+
+```text
+Dairy. Alcohol. Custard powder allergen status must be checked.
+```
+
+---
+
+## 6. SOURCE RECIPE — Chorizo & mozzarella arancini
+
+**Source:** Recipes for Prep Chef  
+**Yield:** source says 80 large / operational source method portions to 50 g balls. Verify final count after rolling.
+
+### Ingredients
+
+```text
+Arborio rice — 5 kg
+Chorizo — 1 kg, fine dice
+Mozzarella — 600 g, grated
+Brown onion — 400 g, blitzed
+Water — 5 L
+Chicken stock concentrate — 200 ml
+Vintage cheddar — 600 g, grated
+Grana Padano parmesan — 150 g, grated
+Spicy capsicum dip — 800 g
+Roasted capsicum — 1 kg, blitzed
+White wine — 750 ml
+Crushed garlic — 200 g
+Salt flakes — 50 g, adjust to taste
+Cracked pepper — 30 g, adjust to taste
+GF flour / egg / GF breadcrumbs — for crumb station
+```
+
+### Method
+
+```text
+1. Sauté onions until golden.
+2. Add garlic and chorizo. Cook 1-2 minutes.
+3. Deglaze with wine.
+4. Add rice, spicy capsicum dip, onions, garlic and chorizo to deep bain.
+5. Cover with water, stock concentrate, salt and pepper. Stir.
+6. Cover and cook 160°C for 20 minutes. Stir.
+7. Cook another 20 minutes or until liquid absorbed.
+8. Cool fully.
+9. Add grated cheeses and roasted capsicum.
+10. Portion and roll.
+11. Crumb in GF flour, egg, GF breadcrumbs.
+12. Freeze solid.
+13. Seal only in vacuum bags; do not vacuum hard or squash.
+14. Defrost in fridge/coolroom before service.
+```
+
+### Service
+
+```text
+Deep fry until hot through. Season immediately with salt. Serve with romesco and lemon-thyme aioli where menu requires.
+```
+
+### Allergens
+
+```text
+Dairy, egg. Gluten status depends on chorizo, stock, dip, crumbs and fryer controls.
+```
+
+---
+
+## 7. SOURCE RECIPE — Calamari fritti flour mix and service
+
+**Source:** Recipes for Prep Chef
+
+### Ingredients
+
+```text
+Tenderised pineapple-cut squid strips — 2 kg, defrosted
+Baby octopus — 1 kg
+Rice flour — 500 g
+GF corn flour — 100 g
+Salt — 20 g
+Lemon pepper seasoning — 100 g
+Baby capers — 500 g
+```
+
+### Method
+
+```text
+1. Portion calamari for service: 15 pieces calamari + 3 baby octopus into 500 ml PC.
+2. Mix rice flour, GF corn flour, salt and lemon pepper.
+3. Store flour mix in labelled PC.
+4. Drain and dry capers. Store on clean chux in PC.
+```
+
+### Service
+
+```text
+1. Fry capers 30-60 seconds until crispy.
+2. Coat calamari/octopus in flour mix.
+3. Fry about 1 minute, do not overcrowd basket.
+4. Season hot with salt.
+5. Serve with lemon dill/house aioli and crispy capers.
+```
+
+### Allergens
+
+```text
+Seafood. Gluten-free only if seasoning, fryer and cross-contact are controlled.
+```
+
+---
+
+## 8. ACTIVE WORKING SOP — 30 cm x 40 cm grazing box
+
+**Status:** Active module based on grazing table standard, scaled to box format. Adjust only when event source gives a specific size/count.
+
+### Base contents
+
+```text
+Double cream brie — portioned wedges
+Blue cheese — small wedge
+Aged cheddar / black-coated cheese — sliced/wedge
+Prosciutto — folded portions
+Salami — folded portions
+PC olives — small PC/tub portion
+Grapes — small cluster
+Crackers — 2 varieties
+House focaccia — included, sliced
+Dried apricots/dates — small handful
+Dip — 1 small PC/tub
+Dried citrus / herb garnish — restrained finish
+```
+
+### Production card wording
+
+```text
+ASH | Build **30 x 40 grazing box**
+Portion cheese, meats, olives, crackers, fruit, focaccia, dried fruit, dip and garnish. Keep tidy, premium and not overfilled.
+```
+
+### Ordering note
+
+Use grazing table standard as the source family. Scale realistically to box count and guest count. If exact box serve count is not provided, mark NEEDS CONFIRMATION.
+
+---
+
+## 9. ACTIVE WORKING SOP — Fruit platter / fruit box formats
+
+### Format resolution first
+
+```text
+Corporate fruit box / pax-based fruit = packed corporate fruit component.
+Fruit cup = individual fruit cup.
+Seasonal cut fruit bowl = bulk bowl, usually simple fruit mix.
+Styled seasonal fruit platter = full Riviera fruit platter standard.
+Grazing box/table fruit = garnish/part of graze.
+Breakfast fruit + yoghurt = corporate breakfast item.
+```
+
+### Styled fruit platter standard — per platter
+
+```text
+Baby watermelon — 1/2
+Pineapple — 1/4
+Papaya — 1/2
+Kiwi — 2
+Grape vine — 1/4
+Apples — 3
+Oranges — 2
+Blueberries — 10
+Blackberries — 4
+Strawberries — 4
+Passionfruit — 1
+Honeydew or rockmelon — 1/4
+Edible flowers — 3
+Mint — garnish
+Toasted shredded coconut — garnish
+```
+
+### Production wording
+
+```text
+ASH | Build **styled fruit platter** — x platters
+Use standard fruit platter spec per platter. Cut and arrange premium. Finish with mint, edible flowers and toasted coconut.
+```
+
+For corporate fruit boxes, do not apply the full styled platter spec unless the order says styled fruit platter.
+
+---
+
+## 10. DRAFT MODULE — Herbed labneh
+
+**Status:** Draft production module. Exact ratio needs final chef lock.
+
+### Production flow
+
+```text
+DAY 1
+ASH | Hang **yoghurt for labneh** overnight
+Hang yoghurt in cloth/chinois under refrigeration overnight.
+
+DAY 2
+DAN | Fold **herbed labneh**
+Fold with lemon zest/juice, olive oil, herbs, garlic if suitable, salt and pepper. Taste-adjust-taste.
+```
+
+### Suggested Riviera profile
+
+```text
+Lemon, parsley, mint, dill or oregano, olive oil, sea salt, white/black pepper.
+For garlic/onion-free dietaries, keep a separate portion without garlic.
+```
+
+### Allergens
+
+```text
+Dairy.
+```
+
+---
+
+## 11. DRAFT MODULE — Zesty limoncello chicken skewers
+
+**Status:** Draft production module. Exact ratio needs final chef lock. Limoncello and honey are mandatory in the flavour profile.
+
+### Flavour profile
+
+```text
+Limoncello
+Honey
+Lemon zest / lemon juice
+Garlic unless dietary restriction
+Oregano / thyme
+Olive oil
+Salt / pepper
+```
+
+### Production flow
+
+```text
+DAN | Marinate **limoncello chicken skewers**
+Marinate chicken with limoncello, honey, lemon, garlic, herbs and olive oil. Skewer. Chill. Cook/fry/grill to service plan. Finish with herbed labneh, feta and herbs.
+```
+
+### Dietary close-to-menu option
+
+```text
+Garlic/onion-free: same skewer profile without garlic/onion, keep lemon, honey, limoncello, herbs and olive oil.
+Dairy-free: no labneh/feta; finish with herb oil and lemon.
+```
+
+---
+
+## 12. DRAFT MODULE — Sandwich / wrap / brioche filling bank
+
+Use when no specific fillings are requested. Choose from Riviera/tapas-friendly fillings and event suitability.
+
+### Default production-facing filling summary
+
+```text
+Ham cheddar Dijon
+Roast beef horseradish rocket
+Smoked chicken bacon dill almond
+Roast pumpkin feta pesto
+Grilled halloumi pesto pumpkin
+Casalingo salami bocconcini sundried tomato
+Chicken aioli herbs
+Vegetarian seasonal roast veg relish
+```
+
+### Production rule
+
+The top filling summary only lists what we make. Full filling quantities go in production cards.
+
+---
+
+## 13. ACTIVE WORKING SOP — Hot nibble standards
+
+```text
+Single hot nibble platter = 24 pieces.
+Mixed hot nibble box/platter = 48 pieces total.
+Default mixed split = 12 pieces each of 4 items.
+```
+
+Common mixed box:
+
+```text
+Pies — 12
+Sausage rolls — 12
+Mini quiches — 12
+Spinach ricotta pastizzis — 12
+```
+
+### GF hot nibble rule
+
+Use confirmed bought-in GF items first, such as GF pies and GF sausage rolls. Use in-house frittata/potato backup only if short.
+
+---
+
+## 14. DRAFT MODULE — Dietary alternate recipe rule
+
+Dietary alternatives must stay as close as safely possible to the actual meal.
+
+```text
+Garlic/onion allergy = same dish without garlic/onion where practical.
+GF/DF chicken = same chicken plate without gluten/dairy component; use herb oil/lemon/safe sauce.
+Pescatarian = fish/seafood alternative close to same garnish/sides where possible.
+Vegetarian = halloumi, pumpkin, roast veg, arancini or suitable protein-style replacement depending event.
+```
+
+If the alternative needs cooking, include ingredients, quick method, seasoning/finish and holding note in the production sheet.
+
+---
+
+## 15. Recipe bank gaps to finalise
+
+These need final Riviera SOPs later:
+
+```text
+Romesco
+Lemon thyme aioli
+Lemon dill aioli
+Riviera house emulsion
+Sticky date madeleines exact batch
+Toffee sauce exact batch
+Cannoli fillings
+Herbed labneh exact ratio
+Limoncello chicken skewer exact ratio
+Beef jus / red wine jus
+House relish / beetroot relish / farmhouse relish
+Corporate fruit box exact pack standard
+Grazing box exact gram-count standard by box size
+```
+
+Until finalised, mark these as DRAFT or NEEDS CHEF CONFIRMATION in production sheets when exact recipe matters.
+````
+
+### Source: Riviera_Supplier_Ordering_Translator_v1_2026-06-08.md
+
+- Stored file: `Riviera_Supplier_Ordering_Translator_v1_2026-06-08.md`
+- Kind: text
+- Lines: 356
+- SHA-256: `12e098937261075e20a781cf53d3612f5ac13c7af8519feb295af47cf5f60cfe`
+
+
+````markdown
+# Riviera Supplier Ordering Translator v1
+
+**Status:** Active source addendum for Riviera SOP Master Index v6  
+**Date:** 2026-06-08  
+**Use for:** Turning prep quantities into supplier orders, purchase checks, already-ordered lists and missing-item flags.
+
+---
+
+## 0. Purpose
+
+This translator turns event prep into orderable supplier buckets.
+
+It should answer:
+
+```text
+What do we need?
+How much?
+Which supplier?
+What pack size?
+Already ordered or still needed?
+What is missing or unclear?
+What is over-order risk?
+```
+
+Do not invent prices. Use source pricing where available. Mark missing pricing as price not found in current source.
+
+---
+
+## 1. Supplier bucket order
+
+Every order list should separate:
+
+```text
+DOBLO'S — produce / herbs / fruit / vegetables
+BIDFOOD — dry goods / dairy / bakery / frozen / desserts / meat / fish / finger foods / cleaning / packaging
+WOOLWORTHS / COLES — small retail top-ups / urgent specialty / GF bought-in items when already used as standard
+BUTCHER / SEAFOOD / SPECIALTY — if source or user specifies
+ALREADY ORDERED
+STILL NEEDED
+NEEDS CONFIRMATION
+```
+
+Doblo's default order method is delivery.
+
+---
+
+## 2. Ordering workflow
+
+```text
+1. Identify event and menu.
+2. Resolve product format before applying module.
+3. Calculate prep count.
+4. Add 9% production buffer where relevant.
+5. Add dietary alternates inside production count.
+6. Convert to ingredient requirement.
+7. Convert ingredient requirement to supplier pack/order size.
+8. Split by supplier.
+9. Flag already ordered / still needed / missing.
+10. Check allergens where supplier data exists.
+```
+
+---
+
+## 3. Count-to-order rules
+
+### Scones
+
+```text
+12 scones = 1080 g scone mix + 600 ml water
+```
+
+Order logic:
+
+```text
+Total scones / 12 = batch count
+Batch count x 1080 g = scone mix required
+Round scone mix to available pack size
+Add jam + cream unless already in house or event says otherwise
+```
+
+### Focaccia
+
+```text
+Casual/delivery/grazing/offsite/corporate: sliced focaccia box = 12 pieces
+Seated plated dinner: focaccia with whipped butter, not sliced-box logic
+1 m graze = 1/4 tray sliced focaccia
+Every grazing box includes focaccia
+```
+
+Order/prep logic:
+
+```text
+If focaccia is required, show it in prep and ordering.
+Do not assume stock.
+If baking in-house, order flour/yeast/oil/honey/salt if short.
+```
+
+### Hot nibbles
+
+```text
+Single hot nibble platter = 24 pieces
+Mixed hot nibble box/platter = 48 pieces
+Mixed split = 12 pieces each of 4 items
+```
+
+Order logic:
+
+```text
+Total boxes x 12 = pieces per item for mixed box
+Check frozen item pack size
+Round up to pack size
+GF hot nibbles: use confirmed GF bought-in pies/sausage rolls first
+```
+
+### Alternate-drop plated mains
+
+```text
+Guest count + 9% buffer = total production target
+Dietaries included in total
+Normal mains reduced evenly to account for dietary alternates
+```
+
+Example:
+
+```text
+72 guests + 9% = 79 serves
+4 dietary serves
+75 normal serves remaining
+Chicken 38 / Beef 37
+```
+
+### Canapés
+
+```text
+Confirm pieces per person or package count.
+If unclear, NEEDS CONFIRMATION.
+Do not assume canapés replace dinner unless source says so.
+```
+
+---
+
+## 4. Product-format detector
+
+Before ordering, identify the exact product type.
+
+### Fruit
+
+```text
+Corporate fruit box / pax-based fruit = packed corporate fruit component
+Fruit cup = individual fruit cups
+Seasonal cut fruit bowl = bulk bowl
+Styled seasonal fruit platter = full Riviera fruit platter standard
+Grazing box fruit = graze garnish/component
+Grazing table fruit = graze garnish/component
+Breakfast fruit + yoghurt = corporate breakfast item
+```
+
+Do not apply styled fruit platter ordering to corporate fruit boxes unless the source says styled fruit platter.
+
+### Bread / bakery
+
+```text
+Sliced focaccia boxes = casual/delivery/grazing/corporate
+Focaccia with whipped butter = seated/plated formal
+Croissants = breakfast/morning tea/lunch package item
+Mini croissants = morning/afternoon tea item
+Brioche rolls = finger-food/lunch option
+Sandwich platter = 6 whole sandwiches cut into 24 points unless source says otherwise
+Wrap platter = 12 wraps unless source says otherwise
+```
+
+---
+
+## 5. Doblo's produce bucket
+
+Use Doblo's for produce where available and practical.
+
+Typical Doblo's items:
+
+```text
+Fruit for fruit platters/boxes
+Grapes for graze
+Lemons / limes / oranges
+Herbs: dill, parsley, mint, oregano, thyme, tarragon if available
+Leaf: rocket, lettuce, spinach
+Vegetables: pumpkin, potatoes, broccolini/baby broccoli, tomatoes, onions
+Edible flowers
+```
+
+Order format:
+
+```text
+DOBLO'S — DELIVERY — [DATE]
+- Item — quantity — event/use note
+```
+
+Example:
+
+```text
+DOBLO'S — DELIVERY — Wednesday
+- Lemons — 2 kg — sauces, aioli, garnish
+- Grapes — 2 vines / qty to match availability — 2 m graze
+- Edible flowers — 3 punnets — fruit/graze garnish
+```
+
+---
+
+## 6. Bidfood bucket
+
+Use Bidfood for dry goods, dairy, bakery, frozen, desserts, meat/fish/finger foods, cleaning and packaging where available.
+
+Common categories:
+
+```text
+Scone mix
+Flour / rice flour / cornflour / GF breadcrumbs
+Sugar / custard powder / chocolate / nuts
+Cream / dairy / butter / cheeses where available
+Frozen hot nibbles
+Brioche buns / bakery items
+Seafood/meat items where listed
+Packaging / PC containers if supplied
+Cleaning items
+```
+
+Order format:
+
+```text
+BIDFOOD
+- Product — required qty — pack size if known — event/use note — allergen flag if relevant
+```
+
+Allergen checks must use Bidfood item/allergen list where available.
+
+---
+
+## 7. Woolworths / Coles bucket
+
+Use for:
+
+```text
+Urgent top-ups
+GF bought-in pies/sausage rolls where already accepted
+Retail items not worth supplier order
+Small garnish/fresh items unavailable from Doblo's
+Savoiardi/lady fingers when supplier availability is uncertain
+```
+
+Order format:
+
+```text
+WOOLWORTHS / COLES
+- Product — qty — reason/event note
+```
+
+---
+
+## 8. Already ordered / still needed ledger
+
+Every order sheet should include:
+
+```text
+ALREADY ORDERED
+- Supplier — item — qty — event
+
+STILL NEEDED
+- Supplier — item — qty — event
+
+NEEDS CONFIRMATION
+- Item — why unclear — decision needed
+```
+
+Do not hide missing items inside prose.
+
+---
+
+## 9. Allergen ordering check
+
+For every dietary-sensitive item:
+
+```text
+Check supplier allergen line.
+Check may contain where relevant.
+Check cross-contact risk.
+Do not call allergen-free unless controlled and source supports it.
+```
+
+High-watch allergens:
+
+```text
+gluten / wheat / dairy / egg / soy / seafood / crustaceans / peanuts / sesame / tree nuts / sulphites
+```
+
+---
+
+## 10. Over-order and shortage flags
+
+Add flags when useful:
+
+```text
+SHORTAGE RISK — exact pack/count unclear
+OVER-ORDER RISK — supplier pack much larger than event need
+DIETARY RISK — allergen status unclear
+TIMING RISK — thawing/cryovac/overnight proof/hanging needed
+DELIVERY RISK — supplier delivery date close to event
+```
+
+---
+
+## 11. Ordering output template
+
+```text
+ORDERING REQUIRED
+
+DOBLO'S — DELIVERY — [DATE]
+- **Item** — qty — event/use note
+
+BIDFOOD
+- **Item** — qty / pack — event/use note — allergen flag
+
+WOOLWORTHS / COLES
+- **Item** — qty — event/use note
+
+ALREADY ORDERED
+- **Item** — qty — supplier — event
+
+STILL NEEDED
+- **Item** — qty — supplier — event
+
+NEEDS CONFIRMATION
+- **Item** — missing pack size / source / count / dietary status
+
+RISKS
+- Shortage / over-order / allergen / timing / delivery flags
+```
+
+---
+
+## 12. Final order QA gate
+
+Before giving the order list, check:
+
+```text
+- Guest count applied
+- Buffer applied where relevant
+- Dietaries accounted for as food
+- Fruit format resolved
+- Focaccia counted if required
+- Hot nibble counts converted to pieces
+- Frozen items have 2-day thaw plan if needed
+- Cryovac/Roscoes window included if needed
+- Supplier buckets separated
+- Already ordered separated
+- Missing info flagged
+- Allergen-sensitive items checked where source exists
+```
+````
+
+### Source: Riviera_Seasoning_Palette_v2_2026-06-08.md
+
+- Stored file: `Riviera_Seasoning_Palette_v2_2026-06-08.md`
+- Kind: text
+- Lines: 628
+- SHA-256: `3be02a7db7e4147f8fe697c37015b3a233893eae122ca586cf14c2d04904de8c`
+
+
+````markdown
+# Riviera Seasoning Palette v2
+
+**Status:** Active source addendum for Riviera SOP Master Index v6  
+**Date:** 2026-06-08  
+**Supersedes:** Riviera Seasoning Palette v1  
+**Use for:** Seasoning checks, pairing decisions, recipe SOPs, production cards, prep sheets, event food, buffet/catering items, sandwich/wrap/roll fillings, sauces, dietaries, garnish decisions and dispatch checks.
+
+---
+
+## 0. v2 purpose
+
+This palette is the practical kitchen translation layer between:
+
+1. confirmed Riviera recipes and event menus,
+2. Riviera's operating style,
+3. supplier/allergen reality,
+4. *The Art & Science of Foodpairing*,
+5. GitHub aroma/flavour data, and
+6. Kitchen Council judgement.
+
+The goal is not to make prep sheets longer. The goal is to make every dish leave Riviera properly seasoned, balanced, event-appropriate and easy to execute.
+
+---
+
+## 1. Non-negotiable seasoning standard
+
+All food must leave Riviera properly seasoned.
+
+“Salt, pepper, olive oil” is a base layer only. It is not a complete seasoning direction unless the dish genuinely requires restraint.
+
+Every seasoning decision should check:
+
+- Salt / salinity
+- Acid
+- Fat / oil
+- Herbs
+- Spices
+- Aromatics
+- Heat / chilli / pepper
+- Sweetness
+- Bitterness / char
+- Umami
+- Texture / crunch
+- Sauce / relish / dressing
+- Garnish / finish
+- Dietary-safe adjustments
+
+Production rule:
+
+```text
+Taste during production.
+Taste again after cooking/chilling/reheating.
+Adjust before packing/service.
+Do not compromise dietaries.
+```
+
+---
+
+## 2. Source workflow for seasoning and pairings
+
+Use this order:
+
+1. Confirmed Riviera source recipe or event-specific recipe
+2. User correction / active house standard
+3. Riviera Seasoning Palette v2
+4. Riviera uploaded recipe SOPs / Recipes for Prep Chef
+5. GitHub recipelibrary aroma/flavour data
+6. *The Art & Science of Foodpairing* as pairing reference layer
+7. Kitchen Council final balance check
+8. **NEEDS CONFIRMATION** if safety, allergens, guest expectation or menu integrity is unclear
+
+GitHub recipelibrary files to use when available:
+
+```text
+.cursor/skills/aroma-bible/SKILL.md
+aroma_data/ingredients.json
+aroma_data/food_pairings.json
+aroma_data/pairing_matrix.json
+flavor_data/affinities.json
+riviera_data/builtins.json
+assets/aroma-hints.js
+```
+
+---
+
+## 3. Foodpairing reference layer
+
+### Core rule
+
+Use *The Art & Science of Foodpairing* to support aroma pairing, not to override chef judgement.
+
+Useful principle:
+
+```text
+Ingredients can pair well when they share key aromas, but shared aroma alone does not guarantee a good dish.
+```
+
+Final dish still needs:
+
+- taste balance,
+- texture,
+- temperature logic,
+- event suitability,
+- dietary safety,
+- Riviera style,
+- prep practicality,
+- and actual tasting.
+
+### Use Foodpairing for
+
+- New canapé ideas
+- Sauce/garnish development
+- Dessert pairings
+- Seasonal fillings
+- Native ingredient pairing checks
+- Vegetarian/dietary alternatives that still feel premium
+- “This dish feels flat, what is missing?” decisions
+- Elevating tapas items
+- Building bridges between ingredients already on the menu
+
+### Do not use Foodpairing for
+
+- Replacing confirmed client menus
+- Random creative additions to conservative corporate or wake catering
+- Allergen substitutions without safety checks
+- Making production sheets longer
+- Adding theory into kitchen-facing documents
+- Justifying weird pairings that fail taste or service logic
+
+### Foodpairing gate before using a new idea
+
+Every new pairing must pass these checks:
+
+```text
+1. Riviera style check — coastal, Mediterranean, elegant, restrained.
+2. Event suitability check — wedding/corporate/wake/baby shower/offsite/tapas.
+3. Allergen/dietary check — no unsafe sauce/garnish/crumb/nut/dairy/gluten/soy/egg/sesame/seafood/sulphite.
+4. Prep practicality check — small team, limited bench, limited coldroom, service timing.
+5. Taste-adjust-taste check — taste before it goes on a prep sheet or out the door.
+```
+
+---
+
+## 4. Pairing translation rule
+
+Do not write theory in prep sheets.
+
+Bad kitchen-sheet wording:
+
+```text
+Shared volatile aroma compounds suggest fennel, citrus and dill.
+```
+
+Good kitchen-sheet wording:
+
+```text
+SEASON / FINISH:
+Lemon zest, dill, parsley, capers, olive oil. Taste after chilling. Adjust acid and salt before packing.
+```
+
+### Production-card wording
+
+Use this in cards where seasoning matters:
+
+```text
+SEASON / FINISH:
+Taste after cooking/chilling/reheating. Adjust with salt, acid, herbs, spice, aromatics, fat/oil, sauce/relish, garnish or crunch. Keep dietary-safe.
+```
+
+Short version for busy cards:
+
+```text
+Taste after chilling/reheat. Lift with lemon, herbs, salt and oil before packing.
+```
+
+---
+
+## 5. Riviera pairing method
+
+Use a three-layer build:
+
+```text
+PRIMARY INGREDIENT
+What is the dish built around?
+
+BRIDGE
+What connects the main flavour to the Riviera style?
+Usually herbs, spice, dairy/yoghurt, nuts/seeds, cured meat, garlic/onion, wine, citrus, honey, tomato, capsicum, olive, caper.
+
+LIFT / FINISH
+What makes it bright, fresh and finished?
+Usually acid, fresh herbs, zest, herb oil, relish, aioli, crunch, finishing salt, garnish.
+```
+
+Example:
+
+```text
+PRIMARY: Chicken skewer
+BRIDGE: limoncello, honey, garlic, oregano, olive oil
+LIFT / FINISH: lemon, herbed labneh, feta, parsley/mint
+PRODUCTION WORDING: Marinate chicken with limoncello, honey, lemon, garlic, oregano and oil. Grill. Finish with herbed labneh, feta and herbs.
+```
+
+---
+
+## 6. Riviera default palettes
+
+### Chicken
+
+**Mediterranean lemon-herb:** lemon zest, lemon juice, garlic, thyme, oregano, parsley, olive oil. Finish with herb oil, labneh or lemon-thyme aioli.
+
+**Tarragon cream:** tarragon, shallot, white wine, lemon zest, cream, white pepper. Good for plated chicken, ballotine, fish and pork.
+
+**Moroccan warm spice:** cumin, coriander seed, smoked paprika, cinnamon pinch, lemon, mint, parsley, yoghurt/labneh.
+
+**Smoked chicken roll / sandwich:** smoked chicken, bacon, dill sour cream, toasted almonds, rocket, lemon zest. Check salt after bacon is mixed in.
+
+**Zesty limoncello chicken skewer:** limoncello, honey, lemon zest, garlic, oregano/thyme, olive oil. Finish with herbed labneh, feta and parsley/mint.
+
+**Close-to-menu dietary alternative:** remove unsafe dairy/gluten/garlic/onion component only where possible. Keep the same chicken profile using lemon, herbs, olive oil, capers, safe relish or herb oil.
+
+---
+
+### Beef
+
+**Classic Riviera beef:** rosemary, thyme, garlic, black pepper, red wine jus, gremolata. Lift heavy beef with lemon zest and parsley.
+
+**Cold roast beef platter:** beetroot relish, horseradish cream, rocket, cracked pepper, olive oil. Needs acid from relish or pickled onion.
+
+**Beef slider / brioche:** aged cheddar, herbed aioli, tomato relish, rocket, pickles. Taste relish and aioli together before assembly.
+
+**Beef with romesco:** romesco, manchego/parmesan, parsley, lemon, smoked paprika. Good for meatballs, canapés and warm bowls.
+
+**Garlic/onion-free beef:** keep beef close to the main dish with rosemary, thyme, pepper, red wine-safe jus if suitable, lemon parsley finish. Do not use garlic/onion in marinade, sauce or garnish.
+
+---
+
+### Lamb
+
+**Greek lamb:** oregano, rosemary, garlic, lemon, parsley, olive oil. Finish with tzatziki or labneh.
+
+**Spiced lamb:** cumin, coriander, smoked paprika, cinnamon pinch, mint, parsley, lemon. Use yoghurt/labneh or capsicum cream to soften spice.
+
+**Coastal lamb cutlet:** garlic, rosemary, thyme, lemon, sea salt, house emulsion. Finish with micro herbs, lemon cheek or herb oil.
+
+**Slow lamb Provençale:** rosemary, thyme, garlic, tomato, olive, white wine/red wine depending dish, parsley, lemon zest. Needs fresh herb lift after reheating.
+
+---
+
+### Seafood / fish / calamari / prawns / oysters
+
+**Lemon-caper:** lemon, capers, parsley, dill, olive oil, aioli.
+
+**Dill aioli:** dill, lemon zest, garlic, aioli, cracked pepper. Clean and restrained.
+
+**Mediterranean seafood:** fennel seed, parsley, lemon, chilli, olive oil, garlic.
+
+**Kilpatrick direction:** Worcestershire, crispy speck, lemon, parsley. Check salt carefully because speck and sauce carry salinity.
+
+**Prawn/cocktail direction:** cocktail sauce, lemon, crisp lettuce, potato crisps/crunch, parsley/chives. Keep cold, bright and clean.
+
+**Reef fish slider:** lemon-caper aioli, rocket, pickled or crisp element, soft bun. Needs acid and salt check before assembly.
+
+---
+
+### Pumpkin / root vegetables
+
+**Roast pumpkin base:** garlic, thyme, rosemary, olive oil, salt, pepper. After roasting, finish according to use with lemon, balsamic, honey, feta, pepitas, pesto or herb oil.
+
+**Pumpkin, feta and pepita salad:** balsamic glaze, feta, toasted pepitas, parsley/mint, olive oil. Needs acid after chilling.
+
+**Moroccan root vegetable:** cumin, coriander, cinnamon, maple/honey, lemon, mint, parsley. Works with cous cous.
+
+**Pumpkin sandwich/wrap filling:** roast pumpkin must be seasoned before mixing. Use feta, pesto, rocket/spinach and lemon. Avoid bland pumpkin.
+
+---
+
+### Greens / salads / grains
+
+**Greek green bean:** oregano, parsley, mint, lemon, red wine vinegar, feta, olives, shallot. Taste after chilling.
+
+**Pesto pasta:** basil pesto, spinach, feta/parmesan, tomato, olives, lemon. Needs acid and salt after chilling.
+
+**Cous cous / grain salad:** preserved lemon or lemon zest, cumin, coriander, mint, parsley, olive oil, dried fruit, toasted nuts. Do not leave dry.
+
+**Simple green salad:** Dijon, lemon or vinegar, olive oil, herbs, sea salt. Dress close to service.
+
+**Apricot almond rice pilaf:** apricot, toasted almond, parsley/mint, lemon zest, mild spice, olive oil/butter depending dietary. Check salt and acid after holding.
+
+---
+
+### Potatoes / mash / gratin
+
+**Burnt butter mash:** brown butter, thyme, salt, white pepper. Taste after holding and adjust with salt and warm cream/butter.
+
+**Chorizo potatoes:** smoked paprika, garlic, chorizo fat, parsley, lemon aioli. Needs acid to cut fat.
+
+**Herb chats:** garlic, rosemary, thyme, olive oil, sea salt, feta cream. Finish after reheating.
+
+**Gratin:** garlic, thyme, nutmeg, cream, cheese, white pepper. Taste cream mix before baking.
+
+**Fondant / roast potato direction:** thyme, rosemary, garlic if allowed, butter/stock, sea salt. Finish with parsley, lemon zest or herb oil if dish is heavy.
+
+---
+
+### Sandwiches / wraps / rolls / scrolls / croissants
+
+**Roast pumpkin / feta / pesto:** season pumpkin before mixing. Use pesto, feta, rocket/spinach, lemon. Avoid bland pumpkin.
+
+**Salami / bocconcini / sundried tomato:** basil, olive oil, cracked pepper, rocket, balsamic or tomato relish. Watch salt.
+
+**Smoked chicken / bacon / almond:** dill sour cream, lemon zest, rocket, toasted almonds. Check acid and salt.
+
+**Roast beef / relish / Jarlsberg:** beetroot or farmhouse relish, rocket, horseradish cream, cracked pepper. Needs bite from relish/horseradish.
+
+**Ham / cheese / Dijon:** Dijon emulsion, cheddar, ham, pickles optional. Keep tidy and not dry.
+
+**Halloumi / pesto / pumpkin:** grilled halloumi, pesto, pumpkin, rocket, lemon. Watch salt from halloumi.
+
+**Chicken aioli/herb:** chicken, herb aioli, lemon zest, parsley/chive, rocket. Needs enough sauce to avoid dry filling.
+
+---
+
+### Hot nibbles / fried items
+
+Season fried and reheated items immediately while hot. Taste one piece where possible.
+
+**Arancini:** romesco, lemon-thyme aioli, parmesan/manchego, micro herbs. Needs acid and salt after frying.
+
+**Pastizzis:** tzatziki or labneh, lemon, dill/mint. Do not send dry.
+
+**Sausage rolls / pies:** house relish, tomato chutney, mustard, cracked pepper. Taste the sauce, not just the pastry.
+
+**Quiches:** beetroot balsamic relish, herbs, cracked pepper. Warm properly; bland egg is not acceptable.
+
+**Fried calamari/fish:** season while hot; finish with lemon, capers, herbs and aioli. No soggy garnish.
+
+---
+
+### Sauces / dips / finishes
+
+**Aioli family:** base aioli plus lemon, dill, thyme, caper, roasted garlic or chilli.
+
+**Labneh / yoghurt family:** hang yoghurt overnight; fold next day with herbs, lemon, garlic if allowed, olive oil and seasoning.
+
+**Romesco:** roasted capsicum, tomato, garlic, almond/nut if used, smoked paprika, vinegar/lemon and olive oil.
+
+**Gremolata:** parsley, lemon zest and garlic. Use to lift beef, lamb, rich braises and potatoes.
+
+**Salsa verde:** parsley, capers, anchovy optional, garlic, lemon/vinegar and olive oil.
+
+**Herb oil:** parsley, basil or chive oil. Use restraint; it should finish, not drown.
+
+**House emulsion direction:** lemon, herbs, garlic if suitable, mustard/egg if used, olive oil, salt. Check allergen status before using for dietaries.
+
+---
+
+### Cheese / grazing / antipasto
+
+**Cheese board balance:** creamy cheese + sharp/hard cheese + blue cheese needs sweet, acid and crunch.
+
+**Good supports:** quince paste, fig, honey, grapes, dried apricot/date, olives, crackers, focaccia, fresh bread, dried citrus, nuts where safe.
+
+**Mediterranean finish:** good olive oil, sea salt, grapes/figs, dried citrus, rosemary/thyme, edible flowers only where presentation benefits.
+
+**Service check:** cheese must not be fridge-cold and dead if service timing allows tempering. Keep food safety/weather in mind.
+
+---
+
+### Fruit / breakfast fruit / fruit platters
+
+**Fruit platter finish:** mint, toasted coconut, passionfruit, citrus zest, lime/lemon where suitable.
+
+**Corporate fruit component:** keep clean, packed, easy to eat. Do not over-style unless ordered as styled fruit platter.
+
+**Fruit with yoghurt/bircher:** honey, cinnamon, vanilla, toasted coconut, berries, citrus zest. Keep sweetness restrained.
+
+**Tropical Riviera direction:** pineapple, watermelon, papaya, passionfruit, lime, mint, coconut. Good for baby showers, breakfast, corporate morning tea.
+
+---
+
+### Desserts
+
+**Sticky date / toffee:** salt in toffee, vanilla, orange zest, optional wattleseed. Balance sweetness with salt.
+
+**Sticky date madeleines:** date, brown sugar, vanilla, orange zest, salt, toffee sauce, vanilla gelato, optional Benedictine custard. Serve warm if possible.
+
+**Cannoli:** citrus zest, vanilla, pistachio, espresso, chocolate, toasted nuts. Do not leave filling flat.
+
+**Rhubarb / fruit:** citrus zest, vanilla, light spice and syrup acidity. Taste fruit after poaching/chilling.
+
+**Chocolate:** salt, espresso, vanilla, orange, hazelnut/pistachio where suitable.
+
+**Tiramisu direction:** espresso, cocoa, mascarpone, marsala/liqueur if approved, vanilla, salt pinch. Keep alcohol clearly noted if used.
+
+---
+
+### Native / coastal Australian accents
+
+Use native ingredients only when they fit the dish. Do not add token native ingredients.
+
+**Finger lime:** seafood, oysters, prawns, fish, avocado, yoghurt/labneh, fruit desserts. Use as fresh acid burst.
+
+**Lemon myrtle:** chicken, seafood, cream, custard, madeleines, shortbread, yoghurt. Use lightly; it can dominate.
+
+**Davidson plum:** desserts, chocolate, duck/pork/lamb glaze, fruit sauces. Strong acid/tannin.
+
+**Wattleseed:** sticky date, chocolate, custard, cream, coffee, tiramisu-style desserts.
+
+**Saltbush:** lamb, beef, potatoes, focaccia, herb oil. Watch salinity.
+
+**Native pepperberry:** beef, lamb, chocolate, berry desserts. Use with restraint.
+
+---
+
+## 7. Event suitability filter
+
+### Corporate
+
+Clean, tidy, practical, not weird. Use familiar flavour families with good seasoning.
+
+Best finishes:
+
+- lemon/herb,
+- Dijon,
+- tomato relish,
+- pesto,
+- dill sour cream,
+- horseradish/beetroot,
+- fruit/mint/coconut.
+
+### Wake / memorial / life celebration
+
+Comforting, calm, easy to serve. Do not overcomplicate. Keep flavours familiar and well-seasoned.
+
+Best finishes:
+
+- good relish,
+- herbed aioli,
+- lemon/dill,
+- scones with jam/cream,
+- clean fruit,
+- gentle grazing.
+
+### Baby shower
+
+Soft, pretty, styled, fresh. Avoid heavy/ugly food. Keep fruit, grazing and fillings elegant.
+
+Best finishes:
+
+- edible flowers where useful,
+- mint,
+- citrus,
+- berries,
+- soft herbs,
+- whipped/honey butter,
+- light labneh or feta cream.
+
+### Wedding / plated
+
+Premium, restrained, clean finish. Every sauce must be seasoned and every garnish must have purpose.
+
+Best finishes:
+
+- herb oil,
+- gremolata,
+- lemon zest,
+- micro herbs,
+- sauce shine,
+- sea salt,
+- high-quality olive oil.
+
+### Offsite
+
+Robust enough to travel and reheat. Sauces/finishes must survive holding.
+
+Best finishes:
+
+- sauces packed separately,
+- herb oils in squeeze bottles,
+- relishes/chutneys,
+- yoghurt/labneh if cold-safe,
+- fresh herbs packed dry.
+
+### Tapas
+
+Bolder and more Riviera. Can handle more acid, texture and garnish.
+
+Best finishes:
+
+- aioli,
+- labneh,
+- romesco,
+- crispy capers,
+- lemon,
+- hot honey,
+- herbs,
+- feta,
+- roasted grapes.
+
+---
+
+## 8. Dietary and allergy pairing rules
+
+Dietary alternatives must stay as close as possible to the actual meal.
+
+### GF
+
+Keep the same flavour profile. Replace unsafe bread/crumb/flour only.
+
+Examples:
+
+- GF crumb with same seasoning.
+- GF sandwich bread with same filling if safe.
+- Rice/cornflour dusting with same lemon/herb/fried finish.
+
+### DF
+
+Remove dairy but keep the same acid/herb/aromatic direction.
+
+Examples:
+
+- Cream sauce → herb oil / lemon-caper oil / tomato-capsicum sauce.
+- Labneh → herb oil or dairy-free yoghurt only if safe and suitable.
+- Butter mash → olive oil potato or confirmed DF mash.
+
+### Garlic/onion allergy
+
+Make the same dish without garlic/onion where practical.
+
+Use safe flavour support:
+
+- lemon zest/juice,
+- herbs,
+- capers,
+- mustard if safe,
+- wine reduction if safe,
+- roasted capsicum/tomato where suitable,
+- spice,
+- olive oil,
+- finishing salt.
+
+### Nut allergy
+
+Remove nuts and nut-containing sauces. Replace crunch with safe seed/crisp element only if safe.
+
+Examples:
+
+- Almond in romesco → nut-free capsicum/tomato sauce.
+- Toasted almonds in sandwich → omit or use safe seed/crunch if approved.
+
+### Vegan / vegetarian
+
+Keep Riviera style and seasoning depth. Do not send bland vegetables.
+
+Useful supports:
+
+- roast pumpkin/feta for vegetarian,
+- roast pumpkin/pesto/rocket if dairy safe,
+- grilled halloumi if vegetarian dairy allowed,
+- roasted capsicum/tomato/olive/caper/herb oil for vegan,
+- mushrooms/eggplant/lentils where appropriate.
+
+---
+
+## 9. Fast production-card phrases
+
+Use these to keep sheets short:
+
+```text
+Taste after chilling. Lift with lemon, herbs, salt and oil.
+```
+
+```text
+Season hot out of fryer. Finish with lemon and sauce.
+```
+
+```text
+Check salt after bacon/cheese/relish is mixed in.
+```
+
+```text
+Needs acid after holding. Adjust before packing.
+```
+
+```text
+Keep same profile for dietary portion. Remove only unsafe component.
+```
+
+```text
+Sauce separate. Finish with herbs/oil after reheating.
+```
+
+```text
+Do not send dry. Sauce/relish must be packed.
+```
+
+```text
+Use restraint. Garnish must help flavour or presentation.
+```
+
+---
+
+## 10. Safety guardrail
+
+Do not fix bland dietary food with unsafe sauces, dairy, nuts, gluten, soy, seafood, sesame, egg, alcohol or sulphites unless confirmed suitable for that guest/event.
+
+If seasoning direction is unclear:
+
+1. Check confirmed source recipe.
+2. Check this palette.
+3. Check GitHub flavour/aroma data.
+4. Use *The Art & Science of Foodpairing* as a pairing reference.
+5. Use Kitchen Council judgement.
+6. Mark **NEEDS CONFIRMATION** if safety or menu integrity is unclear.
+
+---
+
+## 11. SOP note for future production sheets
+
+In production/prep sheets, do not cite this palette or the foodpairing book unless requested.
+
+Translate all pairing decisions into direct chef language:
+
+```text
+ASH | Finish **pumpkin feta filling**
+Taste after chilling. Adjust with lemon, pesto, salt and herbs. Filling must not be sweet/bland.
+```
+````
+
+### Source: Recipes for Prep Chef.docx
+
+- Stored file: `Recipes for Prep Chef.docx`
+- Kind: docx
+- Lines: 1477
+- SHA-256: `45e78b1298881603b8f3a6197108e924a4540fe23a91caf57885159cc2987d17`
+
+- Text extract: `extracted/Recipes for Prep Chef.docx.extracted.md`
+
+````markdown
+# Extracted Text: Recipes for Prep Chef.docx
+
+
+
+Chorizo and Mozzarella Arancini with Lemon & Thyme Aioli
+
+Elements:
+
+Label Details:DATE MADEArancini - LargeLabel Details:DATE MADEArancini - LargeArancini (3 per serve)
+
+Label Details:
+
+DATE MADE
+
+Arancini - Large
+
+Label Details:
+
+DATE MADE
+
+Arancini - Large
+
+Romesco (See Separate Recipe)
+
+Lemon Thyme Aioli (See separate Recipe)
+
+Microherbs - Garnish
+
+Ingredients:
+
+Recipe Makes:
+
+80 large (100g)
+
+Arborio Rice
+
+5kg
+
+Chorizo
+
+1kg
+
+Finely dice
+
+Mozzarella - Whole
+
+600g
+
+Grated
+
+Brown Onion
+
+400g
+
+Blitz in food processor
+
+Water
+
+5L
+
+Chicken Stock Concentrate
+
+200ml
+
+Cheddar Cheese - Whole Vintage
+
+600g
+
+Grated
+
+Parmesan - Whole Grana Padano
+
+150g
+
+Grated
+
+Spicy Capsicum Dip
+
+800g
+
+Roasted Capsicum
+
+1kg
+
+Blitz in food processor
+
+White Wine
+
+750ml
+
+Garlic - Crushed
+
+200g
+
+Salt Flakes
+
+50g
+
+Add more/ less to Taste
+
+Pepper - Cracked
+
+30g
+
+Add more/ less to taste
+
+Method:
+
+Prepare the onions: Finely dice the brown onions. Sauté them in a large pot over medium heat until they become golden brown.
+
+Cook garlic and chorizo: Add crushed garlic and chorizo to the pot. Cook for another 1-2 minutes until the chorizo browns and releases its flavours. Deglaze the pan with the wine.
+
+Combine ingredients: Add rice, spicy capsicum dip, onions, garlic, and chorizo to a deep bain. Cover with the Water and chicken stock concentrate, salt and pepper. Stir until the flavours are evenly spread through.
+
+Cook the rice: Cover the bain with a lid, put in the oven on 160 degrees. Cook for 20 minutes and then stir. Cook for another 20 minutes, until the water has been completely absorbed by the rice.
+
+Cool the rice: Transfer the rice mixture to a bain-marie and refrigerate (or freeze to speed up the process) until fully cooled.
+
+Add cheese & Capsicum: Grate the three cheeses and stir them into the rice with the diced roasted capsicum until fully incorporated.
+
+Shape the arancini: Once cooled, weigh the rice into 50g portions and roll them into balls.
+
+Coating station: In one bowl, beat eggs. In two separate bowls, place gluten-free flour and gluten-free breadcrumbs.
+
+Coat the balls: Roll the rice balls in gluten-free flour, shaking off any excess. Dip them into the beaten egg, then coat them thoroughly in the gluten-free breadcrumbs.
+
+Freeze: Place the coated balls on a baking tray lined with parchment paper. Freeze them until solid.
+
+Vacuum seal: Once frozen, transfer the balls to vacuum-seal bags and seal them until needed. DO NOT Vacuum the bags – Seal only as to not squash them.
+
+Defrost: To serve, defrost the balls in the fridge for at least 24 hours before cooking.
+
+On the day - service
+
+Deep fry arancini: Heat oil for deep frying. Fry the arancini balls, checking one with a skewer to ensure they are heated all the way through.
+
+Season: Once fried, immediately sprinkle the arancini with a pinch of salt.
+
+Warm the Romesco: Warm the romesco, either in a pot on the stove or in the microwave.
+
+Plating
+
+Prepare the plate: On each plate, place around ½ cup of warmed Romesco as a base.
+
+Assemble: Carefully place the three arancini balls on top of the Romesco. Add a dot of aioli on top of each arancini ball.
+
+Garnish: Finish by garnishing with freshly cut microherbs for a fresh and vibrant touch.
+
+Calamari Fritti with Riviera House Aioli, Crispy Capers
+
+Elements:
+
+Label Details:DATE MADECalamariLabel Details:DATE MADECalamariCalamari
+
+Label Details:
+
+DATE MADE
+
+Calamari
+
+Label Details:
+
+DATE MADE
+
+Calamari
+
+Flour Mix
+
+Lemon Dill Aioli (See separate Recipe)
+
+Crispy Capers
+
+Ingredients:
+
+Recipe Makes:
+
+Pineapple Cut Squid strips - Tenderised
+
+2kg
+
+Defrosted
+
+Baby Octopus
+
+1kg
+
+Rice Flour
+
+500g
+
+GF Corn Flour
+
+100g
+
+Salt
+
+20g
+
+Lemon Pepper Seasoning
+
+100g
+
+Baby Capers
+
+500g
+
+Method:
+
+Calamari Preparation
+
+Store: When the calamari and octopus come into stock, it’s important to break it down straight away for storage. Put 15 pieces or calamari and 3 baby octopus into a 500ml PC, label and put into the crates in the freezer labelled Calamari.
+
+Flour mix
+
+Mix the dry ingredients: In a bowl, combine coarse rice flour, gluten-free corn flour, salt, pepper and lemon pepper.
+
+Store: Mix thoroughly and transfer to labelled PC’s. Keep in the fridge for service.
+
+Capers
+
+Prepare the capers: Drain the capers thoroughly and pat them dry using a clean cloth or paper towels.
+
+Store: Place the capers in a PC, lined with a clean chux to absorb excess moisture. Label and store in the fridge.
+
+On the day - service
+
+Fry the capers: Heat oil in the fryers. Fry the capers for 30 seconds to 1 minute until crispy. Transfer them to a bowl lined with clean chux to drain any excess oil.
+
+Prepare the calamari: Coat the calamari strips and baby octopus evenly in the flour mixture, making sure they are fully covered.
+
+Deep fry: Immediately fry the calamari for about 1 minute until crispy and cooked through. Be sure not to overcrowd the basket.
+
+Season: Once fried, sprinkle the calamari with a pinch of salt while still hot.
+
+Plating
+
+Tapas
+
+Base of aioli: Place 1-2 tablespoons of the lemon dill aioli on the plate.
+
+Assemble the dish: Arrange the fried calamari & baby octopus on top of the aioli.
+
+Garnish: Finish by sprinkling the crispy capers over the calamari and garnish with freshly trimmed microgreens.
+
+Canapes
+
+Base of aioli: Place a small dot of the lemon dill aioli on each plate or in a bamboo boat.
+
+Assemble the dish: Arrange the fried calamari on top of the aioli.
+
+Garnish: Finish by sprinkling the crispy capers over the calamari.
+
+Kilpatrick Oyster, Crispy Speck, Lea & Perrins Worcestershire
+
+Elements:
+
+Label Details:DATE MADEOysters KilpatrickLabel Details:DATE MADEOysters KilpatrickOysters
+
+Label Details:
+
+DATE MADE
+
+Oysters Kilpatrick
+
+Label Details:
+
+DATE MADE
+
+Oysters Kilpatrick
+
+Diced Speck
+
+Kilpatrick sauce
+
+Garnish
+
+Rock Salt
+
+Lemon
+
+Ingredients:
+
+Recipe Makes:
+
+Oysters
+
+Speck
+
+Prep 500g
+
+Finely Diced
+
+Gluten Free Worcestershire Sauce
+
+250ml
+
+BBQ Sauce
+
+¼ cup
+
+Tabasco
+
+1tsp
+
+Dried Parsley
+
+2 tbsp
+
+Rock Salt
+
+2kg
+
+Lemons
+
+4 lemons
+
+Method:
+
+Oyster Preparation
+
+Defrost Oysters: Remove the required number of oysters from the freezer at least 24 hours before the event. Allow them to defrost in the fridge.
+
+Prepare Speck: Finely dice the speck, place it in a container (PC), label it, and refrigerate.
+
+Prepare Kilpatrick Sauce: Mix gluten free Worcestershire, BBQ sauce, tabasco and dried parsley together and put into a squeezy bottle. Label Kilpatrick sauce.
+
+Garnish
+
+Slice Lemon: Cut lemon into slices, put in PC. Label and store in fridge.
+
+On the day - service
+
+Prepare the tray: Get bunches of aluminium foil and bunch up to line a Bain tray. You want it to be bunched so when you put the oysters on top, you can press them into the foil and the foil will hold them in place, so they don’t move and the sauce doesn’t fall out whilst cooking.
+
+Prepare Oysters: Arrange the oysters on the foil lined Bain tray.
+
+Add Kilpatrick Sauce: Add 1-2 tsp of Kilpatrick sauce onto each oyster.
+
+Add Speck: Place 1 teaspoon of diced speck in each oyster.
+
+Bake: Bake the oysters at 180°C (high heat) for 10 minutes or until golden.
+
+Prepare Serving Tray: Spread rock salt on a serving tray to about 1-inch thickness.
+
+Arrange Oysters: Place the baked oysters evenly on top of the salt.
+
+Garnish: Garnish with rocket/ microgreens and lemon slices.
+
+Slow Cooked Veal Meatballs with Romesco Sugo & Toasted Focaccia
+
+Elements:
+
+Label Details:DATE MADEMeatballsLabel Details:DATE MADEMeatballsMeatballs
+
+Label Details:
+
+DATE MADE
+
+Meatballs
+
+Label Details:
+
+DATE MADE
+
+Meatballs
+
+Romesco Sugo (See separate Recipe)
+
+Focaccia (See separate Recipe)
+
+Gremolata (Separate Recipe)
+
+Garnish
+
+Ingredients:
+
+Recipe Makes:
+
+50
+
+Veal mince
+
+5kg
+
+Breadcrumbs - Gluten Free
+
+600g
+
+Gluten Free Bread Loaf
+
+¾ loaf
+
+Blitzed into smaller chunks
+
+Brown onions
+
+4
+
+Blitzed in food processor
+
+Garlic Cloves
+
+20
+
+Blitzed in food processor
+
+Parmesan Cheese
+
+400g
+
+Blitzed in food processor
+
+Thickened Cream
+
+500ml
+
+Flat Leaf Italian Parsley
+
+½ Cup
+
+Finely Chopped
+
+Basil
+
+½ Cup
+
+Finely Chopped
+
+Oregano
+
+½ Cup
+
+Finely Chopped
+
+Mixed Italian Herbs Dried
+
+1 Tbsp
+
+Salt
+
+2 Tbsp
+
+Pepper
+
+2 Tbsp
+
+Eggs
+
+5
+
+Pepper
+
+30g
+
+Makes 90 Balls @ 80g each
+
+Prep time: 45mins per 90 balls
+
+Method:
+
+Mix Ingredients: Blitz Onion & Garlic in a food processor. Mix through breadcrumbs. Make sure you squeeze the breadcrumbs and the onion breadcrumbs that the onion juices wet the breadcrumbs. Add the breadcrumb mix to the mince, parmesan, cream, salt, pepper & herbs.
+
+Shape Meatballs: Wet your hands to prevent sticking, then roll the mixture into 80g balls.
+
+Bake: Place meatballs into a deep Bain. Cover generously with sauce.Bake in a preheated oven at 150°C for 1 hour. Allow to cool in the sauce before separating into serves.
+
+Store: Store meatballs in either round or rectangle PC’s in serves of 3. Distribute the romesco across all serves. Label and put into the crates in the freezer labelled Meatballs.
+
+On the day - service
+
+Reheat: Reheat in microwave. Check internal temperature and continue heating if necessary.Serve: Place reheated meatballs and sauce in a medium-sized serving bowl.
+
+Focaccia: Toast 3x 2cm thick slices of focaccia until golden brown on both sides.
+
+Garnish: Top meatballs with thinly grated Manchego and gremolata.
+
+Lemon Pepper Chicken Skewer with Tzatziki and Crumbled Feta
+
+Elements:
+
+Label Details:DATE MADEChicken SkewersLabel Details:DATE MADEChicken SkewersChicken Skewers
+
+Label Details:
+
+DATE MADE
+
+Chicken Skewers
+
+Label Details:
+
+DATE MADE
+
+Chicken Skewers
+
+Herbed Labneh
+
+Crumbled Feta
+
+Garnish
+
+Ingredients:
+
+Recipe Makes:
+
+Chicken Thigh
+
+5kg
+
+Olive Oil
+
+200ml
+
+Lemon Pepper Seasoning
+
+150g
+
+Limoncello
+
+500ml
+
+Lemon – Juice and Zest
+
+6 lemons
+
+Honey or Castor Sugar
+
+100g
+
+Thyme - Fresh
+
+1 bunch
+
+Crumbled Feta
+
+Greek Yogurt
+
+2kg
+
+Cucumber
+
+2 large
+
+Dill
+
+1 bunch
+
+Mint
+
+1 bunch
+
+Parsley
+
+1 bunch
+
+Microherbs - Garnish
+
+2 punnets
+
+Method:
+
+Chicken Skewers
+
+Season and Refrigerate: Combine oil, lemon pepper seasoning, Limoncello, lemon – juice and zest, honey and thyme in a large bowl. Dice chicken thigh into 1 inch pieces and add to bowl with marinade. Mix together to ensure all pieces a coated in the marinade.
+
+Make the skewers: Use the small 12cm wooden skewers, put 3 pieces of chicken per skewer. If time permits, place the marinated skewers in a bain-marie tray, cover with plastic wrap, label, and refrigerate overnight to allow flavour to develop. If time doesn’t permit, sear off immediately to part-cook.
+
+Bulk Preparation: Ensure that the chicken skewers are fully covered in the oil and seasoning mix before storing. Store in 500ml PC’s, one serve (3) in each) – label and store in freezer.
+
+Prepare the Labneh: Lay 3 x chux on bottom of holy Bain. Insert into a deep Bain. Put yogurt into the holy Bain on top of the chux, cover with more chux. Leave overnight in fridge.
+
+Chop 1 x PC of fresh herbs - parsley, dill, mint, lemon zest. Finely dice 1 /2 PC cucumber - no seeds.
+
+- Mix all together once it's hung, add lemon juice, salt and pepper to taste
+
+Season and Store: Taste and adjust seasoning with more salt, pepper, or herbs as needed. Transfer the sauce to a sealed container (PC), label, and refrigerate.
+
+Garnish
+
+Microgreens: Trim microgreens using scissors, then place them in a container. Label the container and refrigerate.
+
+On the day – service
+
+Preheat the Oven: Set the oven to 180°C and allow it to heat up.
+
+Cook the Chicken Skewers: Place the chicken skewers flat on a tray, ensuring they are not overlapping. Roast in the oven for 10 minutes.
+
+Plate the Dish: Place a heaped tablespoon of the Herbed labneh in the middle of a plate. Place three on the plate, some feta on top and green garnish.
+
+Crispy Fried Chorizo Potatoes with Lemon Thyme Aioli
+
+Elements:
+
+Label Details:DATE MADELabel Details:DATE MADEPotatoes
+
+Label Details:
+
+DATE MADE
+
+Label Details:
+
+DATE MADE
+
+Chorizo
+
+Lemon Thyme Aioli
+
+Shallots
+
+Ingredients:
+
+Recipe Makes:
+
+White Washed Potatoes
+
+10kg
+
+Chorizo
+
+2kg
+
+Slices in half and then diagonally
+
+Shallots
+
+1 bunch
+
+Thinly sliced
+
+Method:
+
+Potatoes Preparation
+
+Bake and Cool: Bake the washed potatoes at 180°C for 35-40 minutes, or until soft. Once baked, remove from the oven and allow them to cool.
+
+Smash the Potatoes: Once cool, pull apart the potatoes into smaller, uneven pieces, aiming for 6-8 pieces per large potato.
+
+Store: Place the potato pieces in PC containers, label them, and refrigerate.
+
+Chorizo & Shallots Preparation
+
+Slice the Chorizo: Slice the chorizo lengthwise, then cut into 5mm wide slices at a 45-degree angle.
+
+Slice the Shallots: Thinly slice the shallots at a 45-degree angle.
+
+Store: Place the chorizo & shallot slices in separate PC containers, label them, and refrigerate.
+
+On the day - service
+
+Fry the Potatoes: Deep fry the cooled potato pieces until crispy.
+
+Cook the Chorizo: Once the potatoes are crispy, add the chorizo slices to the frying basket and cook for 20-30 seconds.
+
+Combine Ingredients: Transfer the fried potatoes and chorizo to a large metal bowl. Add mayonnaise and sliced shallots, then season to taste. Toss the ingredients to coat the potatoes evenly.
+
+Serve: Serve a small portion of the potato-chorizo mixture (4-5 pieces) in bamboo boats with a bamboo fork.
+
+Chargrilled Lamb Cutlet with Riviera House Emulsion
+
+Elements:
+
+Label Details:DATE MADELamb CutletsLabel Details:DATE MADELamb CutletsLamb Cutlets (3 per plate)
+
+Label Details:
+
+DATE MADE
+
+Lamb Cutlets
+
+Label Details:
+
+DATE MADE
+
+Lamb Cutlets
+
+Emulsion (See Separate Recipe)
+
+Garnish
+
+Ingredients:
+
+Recipe Makes:
+
+Lamb Cutlets
+
+Salt Flakes
+
+Pepper, cracked
+
+Rocket
+
+Method:
+
+Lamb Cutlets Preparation
+
+Season and Refrigerate: French the Cutlets and season generously with salt and pepper. Two days before the event, place them in a bain (lined with clean chux), cover, label, and refrigerate.
+
+Garnish
+
+Rocket: Ensure fresh rocket is available for garnish and label it for use.
+
+On the day - service
+
+Sear the Cutlets: Heat a large frying pan. Sear each side of the cutlets until they have a nice colour.
+
+Oven bake the Cutlets: Transfer the cutlets to a bain and put in the oven for 10mins, 18 degrees.
+
+Plate: On a small plate, lay a bed of rocket along the base. Arrange three cutlets neatly on top, ensuring they don't overlap too much, so each can be covered in the sauce.
+
+Drizzle Emulsion: Generously drizzle the Riviera House Emulsion over the cutlets, making sure each one is well-coated.
+
+Crispy Reef Fish Slider, Lemon Caper Aioli & Roquette
+
+Elements:
+
+Label Details:DATE MADEFish SliderLabel Details:DATE MADEFish SliderFish
+
+Label Details:
+
+DATE MADE
+
+Fish Slider
+
+Label Details:
+
+DATE MADE
+
+Fish Slider
+
+Lemon Caper Aioli
+
+Rocket
+
+Slider buns
+
+Ingredients:
+
+Recipe Makes:
+
+50
+
+Reef Fish
+
+2.5kg
+
+Cut into 50g pieces
+
+Lemon
+
+200g
+
+Juice & Zest
+
+Kewpie Mayo
+
+1kg
+
+Dill - Fresh
+
+½ bunch
+
+Finely chopped
+
+Rocket
+
+500g
+
+Baby Capers
+
+500g
+
+Drained
+
+Self Raising Flour
+
+1kg
+
+Sparkling Water
+
+1L
+
+Slider Bun - Brioche
+
+50
+
+Salt Flakes
+
+50g
+
+Pepper - Cracked
+
+30g
+
+Garlic - Powder
+
+20g
+
+Onion - Powder
+
+20g
+
+Method:
+
+Fish Preparation
+
+Defrost the Fish: Remove the fish from the freezer 2 days before the event and defrost in the fridge.
+
+Prepare the Fish: The day before the event, cut the fish into pieces approximately 70g each.
+
+Prepare the Batter: In a large bowl, mix GF plain flour, onion powder, garlic powder, salt, and pepper. Add cold sparkling water and whisk until the consistency is similar to pancake batter. Add the shot of vodka and mix to combine.
+
+Part cook the fish
+
+Preheat the Deep Fryer: Preheat the oil in the deep fryer and place the baskets in the oil.
+
+Dip the Fish: Dip each piece of fish into the batter, ensuring it’s fully coated. Shake off excess batter and drop into the hot oil. Fry in batches of 5-6 pieces per basket.
+
+Seal the Batter: Fry the fish for approximately 1 minute, just long enough to seal the batter.
+
+Drain the Fish: Place the fish on a wire rack set over a tray lined with paper towels to drain.
+
+Repeat: Continue the process until all fish pieces are part-cooked.
+
+Store: Place the partially cooked fish in a bain-marie lined with baking paper in a single layer. Wrap in glad wrap, label, and store in the fridge.
+
+Lemon Caper Aioli
+
+Prepare the capers: Strain the capers and pat dry.
+
+Prepare the Lemon Zest: Use a micro plane to remove the rind from the lemons.
+
+Make the Aioli: Combine the capers, lemon zest, mayonnaise, salt, and pepper in a bowl. Mix well.
+
+Season and Store: Taste and adjust seasoning as needed. Transfer the aioli to a PC container, label it, and refrigerate.
+
+Rocket
+
+Ensure Rocket Availability: Make sure rocket is available, label, and store it with the remaining ingredients.
+
+Brioche Preparation
+
+Defrost the Brioche: Remove the brioche from the freezer and separate the tops and bottoms into different bains. Wrap them in glad wrap, label, and store in the fridge.
+
+On the day - service
+
+Warm the Brioche: Preheat the oven to 170°C and warm the brioche for 10 minutes.
+
+Cook the Fish: Fry the part-cooked fish in the deep fryer until golden and crispy.
+
+Assemble the Burgers: Place the bottom half of each brioche bun on a platter, followed by a small handful of rocket. Place the cooked fish on top of the rocket and add a generous amount of aioli on top of the fish.
+
+Top the Burger: Place the top of the brioche bun on the fish and secure the burger with a skewer to hold it together.
+
+Romesco
+
+Elements:
+
+Label Details:DATE MADERomescoLabel Details:DATE MADERomescoRomesco
+
+Label Details:
+
+DATE MADE
+
+Romesco
+
+Label Details:
+
+DATE MADE
+
+Romesco
+
+Ingredients:
+
+Recipe Makes:
+
+Grilled Capsicum
+
+1 Large Tin
+
+Drained & Blitz in food processor
+
+Passata
+
+1 Large Tin
+
+Brown Onion
+
+500g
+
+Blitz in food processor
+
+Crushed Garlic
+
+1 Cup
+
+Blitz in food processor
+
+Basil
+
+2 bunches
+
+Chopped
+
+Salt
+
+50g
+
+Pepper
+
+30g
+
+Thickened Cream
+
+1 Cup
+
+Method:
+
+Sauté the aromatics: Heat olive oil in a pan and sauté the onions and garlic until translucent.
+
+Blend the sauce: In a blender, combine the sautéed onions and garlic with grilled capsicum, passata, basil, salt, pepper, and a pinch of sugar. Blend until smooth.
+
+Simmer: Pour the blended sauce into a large pot and simmer for 1.5-2 hours to allow the flavours to develop. Taste and adjust seasoning as necessary.
+
+Store: Place into PC’s, label and freeze. Remove from Freezer as needed
+
+On the day - service
+
+Heat: Heat on the stove top or in the microwave until hot. Use as needed
+
+Lemon & Dill Aioli
+
+Elements:
+
+Label Details:DATE MADELemon Dill AioliLabel Details:DATE MADELemon Dill AioliLemon Dill Aioli
+
+Label Details:
+
+DATE MADE
+
+Lemon Dill Aioli
+
+Label Details:
+
+DATE MADE
+
+Lemon Dill Aioli
+
+Ingredients:
+
+Recipe Makes:
+
+Kewpie Mayo
+
+1kg
+
+Lemon
+
+3
+
+Juice & zest
+
+Dill
+
+1 bunch
+
+Salt
+
+20g
+
+Pepper
+
+10g
+
+Method:
+
+Prepare the Dill: Finely chop and place in a bowl.
+
+Prepare the Lemon Zest: Use a micro plane to remove the rind from the lemons.
+
+Make the Aioli: Combine the dill, lemon zest, mayonnaise, salt, and pepper in a bowl. Mix well.
+
+Season and Store: Taste and adjust seasoning as needed. Transfer the aioli to a PC container, label it, and refrigerate.
+
+Lemon & Thyme Aioli
+
+Elements:
+
+Label Details:DATE MADELemon Thyme AioliLabel Details:DATE MADELemon Thyme AioliLemon & Thyme Aioli
+
+Label Details:
+
+DATE MADE
+
+Lemon Thyme Aioli
+
+Label Details:
+
+DATE MADE
+
+Lemon Thyme Aioli
+
+Ingredients:
+
+Recipe Makes:
+
+Kewpie Mayonnaise
+
+1kg
+
+Lemon
+
+3
+
+Juice & zest
+
+Thyme
+
+1 bunch
+
+Salt
+
+20g
+
+Pepper
+
+10g
+
+Method:
+
+Prepare the Thyme: Pick the leaves off the thyme and place them in a bowl.
+
+Prepare the Lemon Zest: Use a micro plane to remove the rind from the lemons.
+
+Make the Aioli: Combine the thyme leaves, lemon zest, mayonnaise, salt, and pepper in a bowl. Mix well.
+
+Season and Store: Taste and adjust seasoning as needed. Transfer the aioli to a PC container, label it, and refrigerate.
+
+Vodka Sauce
+
+Label Details:DATE MADELabel Details:DATE MADEElements:
+
+Label Details:
+
+DATE MADE
+
+Label Details:
+
+DATE MADE
+
+Vodka Sauce
+
+Ingredients:
+
+Recipe Makes:
+
+Crushed Garlic
+
+50g
+
+Tomato Paste
+
+200g
+
+Chilli Flakes
+
+1tsp
+
+Romesco
+
+2L
+
+Sugar
+
+¼ Cup
+
+Vodka
+
+250ml
+
+Thickened Cream
+
+500ml
+
+Salt
+
+50g
+
+Pepper
+
+30g
+
+Method:
+
+Add all ingredients in a pot together, simmer on the stove until thick and rich.
+
+Riviera House Emulsion
+
+Elements:
+
+Label Details:DATE MADEEmulsionLabel Details:DATE MADEEmulsionEmulsion (See Separate Recipe)
+
+Label Details:
+
+DATE MADE
+
+Emulsion
+
+Label Details:
+
+DATE MADE
+
+Emulsion
+
+Ingredients:
+
+Recipe Makes:
+
+Salt Flakes
+
+Pepper, cracked
+
+Apricots – Fresh or canned
+
+1kg
+
+Dill
+
+2 bunches
+
+Coriander
+
+4 bunches
+
+Parsley - Flat Leaf
+
+4 bunches
+
+Lemon - Juice & zest
+
+1kg
+
+Red Wine Vinegar
+
+200ml
+
+Olive Oil
+
+600ml
+
+Castor Sugar
+
+200g
+
+Jalapenos - Fresh
+
+300g
+
+Garlic - Cloves
+
+100g
+
+Method:
+
+Prepare Lemons: Peel the rind from the lemons using a potato peeler, then juice them.
+
+Prepare Herbs: Cut off the roots from the coriander and roughly chop the herbs.
+
+Blend Ingredients: In a food processor, combine the apricots, dill, coriander, parsley, lemon juice and zest, red wine vinegar, olive oil, jalapeños, garlic, caster sugar, salt, and pepper. Blend until smooth.
+
+Season: Taste and adjust seasoning with more salt or sugar as needed to balance the flavour.
+
+Store: Transfer the emulsion to a container (PC), label it, and refrigerate.
+
+Bulk Preparation: If making in bulk, add more olive oil over the top before freezing to prevent freezer burn.
+
+Whipped Butter
+
+Elements:
+
+Label Details:DATE MADEWhipped ButterLabel Details:DATE MADEWhipped ButterWhipped Butter
+
+Label Details:
+
+DATE MADE
+
+Whipped Butter
+
+Label Details:
+
+DATE MADE
+
+Whipped Butter
+
+Ingredients:
+
+Recipe Makes:
+
+Butter
+
+500g
+
+Salt
+
+20g
+
+Method:
+
+Whip butter until light, white and fluffy. Place in a piping bag with large star nozzle. Pipe onto small plates, place in the fridge.
+
+Serve with Breads
+
+Camembert, Pecan & Cranberry Cigars with Thyme Infused Honey
+
+Label Details:DATE MADECamembert CigarsLabel Details:DATE MADECamembert Cigars
+
+Label Details:
+
+DATE MADE
+
+Camembert Cigars
+
+Label Details:
+
+DATE MADE
+
+Camembert Cigars
+
+Elements:
+
+Elements:
+
+Cigars
+
+Thyme Infused Honey
+
+Garnish - Microherbs
+
+Insert Picture of final Plated dishInsert Picture of final Plated dishIngredients:
+
+Insert Picture of final Plated dish
+
+Insert Picture of final Plated dish
+
+Recipe Makes:
+
+Camembert
+
+620g
+
+Pecans
+
+300g
+
+Cranberries - dried
+
+300g
+
+Thyme - Fresh
+
+1 bunch
+
+Honey
+
+300g
+
+Cinnamon Stick
+
+2
+
+Salt Flakes
+
+30g
+
+Pepper - Cracked
+
+20g
+
+Filo pastry
+
+2 packets
+
+Garlic - Crushed
+
+50g
+
+Microherbs - Garnish
+
+2 punnets
+
+Packaging - Small Bamboo Boat
+
+50
+
+Method:
+
+Cigar Preparation
+
+Melt Butter: Melt butter in a small pan.
+
+Prepare Cheese: Cut the cheese into 10 cm long sticks, about 1 cm thick.
+
+Chop Nuts and Cranberries: Finely chop the pecans and cranberries.
+
+Layer Filo Sheets: Place two sheets of filo pastry on a clean surface. Brush the top sheet with melted butter.
+
+Cut Filo: Lay the filo sheets with the short edges facing you. Cut the sheets in half lengthwise, then cut each half into three long strips.
+
+Assemble the Cigars: Place a piece of cheese on the narrow end of each filo strip. Add a teaspoon of the chopped pecan and cranberry mixture on top.
+
+Roll the Cigars: Fold the sides of the phyllo in and roll tightly to encase the filling, similar to making spring rolls. Repeat with all the strips.
+
+Freeze the cigars: Place the cigars on a parchment-lined baking tray and freeze until solid.
+
+Vacuum Seal: Once frozen, transfer the cigars into vacuum-seal bags and seal them for later use.
+
+Defrost: Before serving, defrost the cigars in the fridge for at least 24 hours.
+
+Thyme infused Honey
+
+Heat Ingredients: In a pot, combine honey, thyme, salt, and cinnamon stick. Warm over low heat and simmer for 10 minutes.
+
+Infuse: Transfer to a container (PC) and allow the thyme and cinnamon to continue infusing in the honey.
+
+Garnish
+
+Microgreens: Trim the microgreens with scissors and set them aside in a container.
+
+Label and Store: Label the container with the date and store the microgreens for garnish.
+
+On the day - service
+
+Deep Fry the Cigars: Heat oil for deep frying. Fry the cigars for about 2 minutes or until golden brown and fully cooked.
+
+Plate: Arrange the fried cigars on a platter. Drizzle with thyme-infused honey.
+
+Garnish: Top with chopped pecans, cranberries, microgreens, and edible flowers for an extra touch.
+
+Beef Kofta, Spicy Capsicum and Pita
+
+Label Details:DATE MADEBeef KoftaLabel Details:DATE MADEBeef Kofta
+
+Label Details:
+
+DATE MADE
+
+Beef Kofta
+
+Label Details:
+
+DATE MADE
+
+Beef Kofta
+
+Elements:
+
+Beef Kofta
+
+Spicy Capsicum Sauce
+
+Rocket
+
+Pita Bread
+
+Ingredients:
+
+Recipe Makes:
+
+Beef Mince
+
+4kg
+
+Brown Onion
+
+300g
+
+Spicy Capsicum Dip
+
+1.5kg
+
+Mini Pita Breads
+
+50
+
+Parsley - Flat Leaf
+
+2 bunches
+
+Garlic - Crushed
+
+100g
+
+Mint - Fresh
+
+2 bunches
+
+Cumin - Ground
+
+10g
+
+Corriander - ground
+
+10g
+
+Cinnamon - Ground
+
+10g
+
+Salt Flakes
+
+50g
+
+Pepper - Cracked
+
+30g
+
+Paprika
+
+10g
+
+Rocket
+
+4 bags
+
+Large Bamboo Boat
+
+50
+
+Method:
+
+Beef Kofta
+
+Sauté the Aromatics: Finely dice and sauté the brown onion and crushed garlic until the onion becomes translucent.
+
+Combine the Kofta Mix: In a bowl, combine the beef mince, browned onion and garlic, finely chopped mint, ground cumin, ground coriander, ground cinnamon, pepper, paprika, and salt. Mix until fully combined.
+
+Taste and Adjust: Cook about 1 tablespoon of the mixture to taste. Adjust seasoning as needed.
+
+Form the Koftas: Once satisfied with the flavor, roll the mince into 50g balls and shape them into a football shape.
+
+Freeze: Lay the koftas in a bain-marie lined with baking paper. Cover and freeze.
+
+Vacuum Seal: Once frozen, place 40 koftas per cryovac bag and vacuum seal. Label the bags and return them to the freezer.
+
+Defrost: Remove from the freezer at least 24 hours before use.
+
+Pita Bread Preparation
+
+Defrost the Pita: Remove the pita bread from the freezer at least 24 hours before your event.
+
+Prepare for Storage: Cut the pita in half and line it in a bain-marie tray. Cover, label, and store in the fridge.
+
+Spicy Capsicum Sauce & Rocket
+
+Ensure Availability: Ensure there is spicy capsicum sauce and rocket in the fridge. Label for the event.
+
+Garnish - Fresh Herbs Preparation
+
+Chop the Herbs: Finely chop parsley and mint.
+
+Store: Place the chopped herbs in a PC container, label, and refrigerate.
+
+On the Day of Service
+
+Cook the Koftas: Place the koftas in a bain tray and cook in the oven at 180°C for 20 minutes.
+
+Heat the Pita: Warm the pita bread in the oven at 170°C for 10 minutes.
+
+Assemble the Pita: Open each pita bread, place in a large bamboo boat, place a small amount of rocket at the bottom, followed by a kofta.
+
+Add the Sauce: Top with a dollop of spicy capsicum sauce and garnish with chopped herbs.
+
+Serve: Neatly arrange the koftas in pita on a platter.
+
+Insert Picture of final Plated dishInsert Picture of final Plated dish
+
+Insert Picture of final Plated dish
+
+Insert Picture of final Plated dish
+````
+
+### Source: Olive+Green+on+White+Background.webp
+
+- Stored file: `Olive+Green+on+White+Background.webp.source-record.md`
+- Kind: image-source-record
+- Lines: 15
+- SHA-256: `26aa4bd7fd0a8db75b5f835a350eb0f3c0bc3e1bd12d44f211bc7d0e558e5c20`
+
+
+````markdown
+# Olive+Green+on+White+Background.webp Source Record
+
+**Status:** Live ChatGPT Riviera project source observed on 2026-07-08.
+**Live project display name:** `Olive+Green+on+White+Background.webp`
+**Live project type/date:** Image - May 26, 2026.
+**ChatGPT file ID observed:** `file_000000008dc4720b967336eeaeb39f74`
+**Project ID:** `g-p-6a0b96d47e4c8191a87f79189b94c5e3`
+
+## Capture Note
+
+The source appears in the live ChatGPT Riviera project source list as a brand/image asset. ChatGPT exposed only a session-bound thumbnail/content URL during verification, and the normal source download action failed for this image with a browser-side download error. The image is retained in the Riviera source stack as a source record so source parity reflects the live project list without treating this visual brand file as recipe-card content.
+
+## Kitchen-Relevance Classification
+
+Brand/reference asset only. It does not override recipe quantities, package logic, ordering rules, supplier workflow, or the July 8 tapas/canape house-standard overlay.
+````
+
+### Source: Bidfood_Item_List.pdf
+
+- Stored file: `Bidfood_Item_List.pdf`
+- Kind: pdf
+- Lines: 606
+- SHA-256: `25328cacc06ae07d9c64e422c1d36ae7d3d6c449edb8e005330d59b3b16e1a98`
+
+- Text extract: `extracted/Bidfood_Item_List.pdf.extracted.md`
+
+````markdown
+# Extracted Text: Bidfood_Item_List.pdf
+
+Pages: 12
+
+## Page 1
+
+Bidfood Item List Product Catalog & Allergen Overview
+PRODUCT DESCRIPTION BRAND / PACK SIZE PRICE / UOM CONTAINS MAY CONTAIN
+BAKING PASTRY
+SHORTBREAD SHELL ROUND 46MM BAKEDCode: READYBAKE120'S $138.47per CARTON
+Gluten, Egg, Evaporated Milk, Dried Milk made from
+Soy or Cereals, Dairy, Soy, Wheat
+Peanuts, Sesame, Tree Nuts
+BAKING SUPPLIES
+ALMONDS SLIVEREDCode: CATERERS CHOICE1 KG $26.45per PACKET
+Almonds, Tree Nuts Brazil Nuts, Cashews, Hazelnuts, Macadamias,
+Pecans, Pine Nuts, Pistachios, Walnuts
+BREADCRUMBS GLUTEN FREECode: NEWLY WEDS FOODS10 KG $65.89per BAG
+- -
+CHOCOLATE BUTTONS DARK COMPOUNDCode: CATERERS CHOICE1 KG $17.87per PACKET
+Dairy, Soy Almonds, Brazil Nuts, Cashews, Gluten, Hazelnuts,
+Macadamias, Pecans, Pine Nuts, Pistachios, Tree
+Nuts, Walnuts, Wheat
+CORNFLOUR MAIZE GLUTEN FREECode: EDLYN5 KG $18.25per BAG
+- -
+CUSTARD MIX NO BAKE EGG GLUTEN FREECode: NESTLE2 KG $55.19per TUB
+Artificial Flavours, Egg Dairy, Soy
+CUSTARD POWDER MAIZE GLUTEN FREECode: EDLYN5 KG $31.01per BAG
+Artificial Colours, Artificial Flavours, Dairy -
+FLOUR PLAINCode: CATERERS CHOICE10 KG $18.02per BAG
+Gluten -
+FLOUR RICECode: ERAWAN500 GR $23.28per CARTON
+- -
+FLOUR RICE (COARSE)Code: CATERERS CHOICE1 KG $47.5per CARTON
+- Soy
+FLOUR SELF RAISINGCode: CATERERS CHOICE10 KG $17.61per BAG
+Barley, Gluten, Oats, Rye, Wheat Egg, Dairy, Soy
+ICING SUGAR MIXTURECode: CATERERS CHOICE3 KG $14.21per PACKET
+- Almonds, Brazil Nuts, Cashews, Gluten, Hazelnuts,
+Macadamias, Pecans, Pine Nuts, Pistachios, Tree
+Nuts, Walnuts, Wheat
+MUFFIN MIXCode: EDLYN10 KG $47.99per BAG
+Artificial Flavours, Gluten, Egg, Dairy, Wheat-
+PATISSERIE FILLING CUSTARD CREME FLAVOUREDCode: BARKERS1.25 KG $10.15per BAG
+Artificial Colours -
+PINE NUTS TOASTEDCode: TRUMPS1 KG $55.93per PACKET
+- Peanuts, Soy, Tree Nuts
+PISTACHIO KERNELS NO SHELLCode: CATERERS CHOICE1 KG $84.24per PACKET
+Pistachios, Tree Nuts Almonds, Brazil Nuts, Cashews, Hazelnuts,
+Macadamias, Pecans, Pine Nuts, Walnuts
+PREMIX BREAD & ROLL WHITE EXTRA SOFTCode: ALLIED PINNACLE12.5 KG $46.66per BAG
+Gluten, Dairy, Soy -
+SCONE MIX WITH BUTTERMILKCode: ALLIED PINNACLE10 KG $45.75per BAG
+Gluten, Dairy -
+Page 1 of 12
+
+## Page 2
+
+PRODUCT DESCRIPTION BRAND / PACK SIZE PRICE / UOM CONTAINS MAY CONTAIN
+SEMOLINACode: CATERERS CHOICE1 KG $5.31per PACKET
+Gluten, Wheat -
+SUGAR BROWNCode: CATERERS CHOICE3 KG $15.05per PACKET
+- Almonds, Brazil Nuts, Cashews, Gluten, Hazelnuts,
+Macadamias, Pecans, Pine Nuts, Pistachios, Tree
+Nuts, Walnuts, Wheat
+SUGAR CASTERCode: CATERERS CHOICE3 KG $11.67per PACKET
+- Almonds, Brazil Nuts, Cashews, Gluten, Hazelnuts,
+Macadamias, Pecans, Pine Nuts, Pistachios, Tree
+Nuts, Walnuts, Wheat
+YEAST DRY INSTANTCode: BAKELS500 GR $3.43per PACKET
+Soy -
+BEEF PORTIONED
+BEEF CARVERY CKD (APP 11KG CTN) 2-3 UNITS/CTNCode: NATURALAZKG $20.96per KILOGRAM
+- -
+BEEF MINCE FROZENCode: EMERALD VALLEY2 KG $37.96per PACKET
+- -
+BEER
+CORONA EXTRA BEER BROWN BOX BOTTLE 4.5% (4 X 6PK)Code: CORONA24 X 355ML $72.67per CARTON
+- -
+GREAT NORTHERN LAGER ORIGINAL WHITE MARLINSTUBBIECode: 
+GREAT NORTHERN24 X 330ML $80.06per CARTON
+- -
+GREAT NORTHERN SUPER CRISP LAGER BLACK MARLIN3.5%Code: 
+GREAT NORTHERN24 X 330ML $67.55per CARTON
+- -
+BEVERAGES
+COCOA POWDERCode: CATERERS CHOICE1 KG $35.2per PACKET
+- -
+JUICE LEMON PURE SQUEEZECode: CATERERS CHOICE2 LT $6.5per BOTTLE
+Sulphites -
+JUICE LIMECode: GROVE1 LT $10.7per BOTTLE
+- -
+BISCUITS
+BISCUITS P/C 102 JATZCode: ARNOTTS150'S $30.81per CARTON
+- -
+COOKIES SMARTY PANTS GRAB & GO GLUTEN FREE 1-092Code: PRIESTLEYS11 X 60GR $26.82per TRAY
+Almonds, Egg, Dairy, Soy, Tree Nuts Hazelnuts, Macadamias, Peanuts, Pecans, Pistachios,
+Walnuts
+BREAD & PASTRY
+BREAD BANANA LOAF PRE CUTCode: HELEN'S2 KG $29.48per TRAY
+Gluten, Egg, Dairy, Tree Nuts, Walnuts, Wheat-
+BREAD BRIOCHE SLIDER BUN F/BCode: BAKERS MAISON150 X 35GR $115.49per CARTON
+Barley, Gluten, Egg, Evaporated Milk, Dried Milk made
+from Soy or Cereals, Dairy, Soy, Wheat
+Sesame
+BREAD BRIOCHE STYLE SLIDER ROLLSCode: TIP TOP144 X 30GR $92.65per CARTON
+Gluten, Soy, Wheat Sesame
+Page 2 of 12
+
+## Page 3
+
+PRODUCT DESCRIPTION BRAND / PACK SIZE PRICE / UOM CONTAINS MAY CONTAIN
+BREAD LOAF TURKISH F/B VEGANCode: BAKERS MAISON20 X 430GR $94.39per CARTON
+Gluten, Sesame, Soy, Wheat Almonds, Brazil Nuts, Cashews, Egg, Evaporated Milk,
+Dried Milk made from Soy or Cereals, Hazelnuts,
+Lupine, Macadamias, Dairy, Pecans, Pine Nuts,
+Pistachios, Tree Nuts, Walnuts
+BREAD WHITE GLUTEN FREECode: ABBOTTS VILLAGE BAKERY6 X 500GR $68.0per CARTON
+Egg -
+BUNS BURGER POTATO 4.5 SLICEDCode: TIP TOP48 X 85GR $64.16per CARTON
+Gluten, Soy, Wheat Barley, Dairy, Oats, Rye, Sesame
+CROISSANTS BUTTER BULK TRADITIONAL F/BCode: SARA LEE96 X 50GR $124.53per CARTON
+Gluten, Dairy, Wheat Soy, Tree Nuts
+CROISSANTS BUTTER MINI F/BCode: SARA LEE95 X 26GR $81.04per CARTON
+Gluten, Dairy, Wheat Soy, Tree Nuts
+TORTILLAS CORN 6 WHITE TABLE TOP GLUTEN FREECode: MISSION FOODS12'S $3.38per PACKET
+- -
+TORTILLAS FLOUR 6Code: MISSION FOODS12'S $2.97per PACKET
+Gluten, Wheat Soy
+CLEANING & JANITORIAL
+BAGS GARBAGE 82LT HEAVY DUTY BLACK 81X95CMCode: TAILORED PACKAGING25'S $78.2per CARTON
+- -
+GLOVES VINYL BLUE EXTRA LARGE POWDER FREECode: WORKPLACE100'S $3.26per PACKET
+- -
+SCOURER STAINLESS STEEL 70GRCode: CATER CLEAN6'S $41.84per CARTON
+- -
+DAIRY
+BUTTER SALTEDCode: YARDE FARM500 GR $9.43per PAT
+Dairy -
+BUTTER SALTEDCode: YARDE FARM1.5 KG $26.66per BLOCK
+Dairy -
+BUTTER SALTED HOTEL PACKCode: WESTERN STAR1.5 KG $31.0per BLOCK
+Dairy -
+BUTTER UNSALTEDCode: YARDE FARM1.5 KG $26.66per BLOCK
+Dairy -
+CHEESE BLUE DANISH (APP 3KG)Code: DANSK VALGKG $34.34per KILOGRAM
+Dairy -
+CHEESE BLUE DANISH WEDGESCode: DANSK VALG100 GR $5.45per PACKET
+Dairy -
+CHEESE BRIE (APP 1KG)Code: SOUTHCAPEKG $37.53per KILOGRAM
+Dairy -
+CHEESE CHEDDAR VINTAGE GOLD RELEASE (APP 2.4KG)Code: CRACKERBARRELKG $35.6per KILOGRAM
+Dairy -
+CHEESE CREAMCode: DEVONDALE2 KG $28.12per PACKET
+Dairy -
+CHEESE FETTACode: FRESCO2 KG $44.8per PAIL
+Dairy -
+Page 3 of 12
+
+## Page 4
+
+PRODUCT DESCRIPTION BRAND / PACK SIZE PRICE / UOM CONTAINS MAY CONTAIN
+CHEESE FETTA CRUMBLECode: SOUTHCAPE200 GR $7.09per PACKET
+Dairy -
+CHEESE FETTA CUBEDCode: FRESCO1.5 KG $34.8per PAIL
+Dairy -
+CHEESE FETTA GREEK STYLE BLOCKCode: YARDE FARM2 KG $44.07per TUB
+Dairy -
+CHEESE HALLOUMI BLOCK CYPRUSCode: KALOS1 KG $27.81per PACKET
+Dairy -
+CHEESE MASCARPONECode: FRESCO1 KG $113.28per CARTON
+Dairy -
+CHEESE MOZZARELLA SHREDDEDCode: YARDE FARM2 KG $24.47per PACKET
+Dairy -
+CHEESE PARMESAN SHAVEDCode: ALFINAS1 KG $23.5per PACKET
+Dairy -
+CHEESE PHILADELPHIA CREAMCode: PHILADELPHIA2 KG $36.22per PACKET
+Evaporated Milk, Dried Milk made from Soy or Cereals,
+Dairy
+Fish
+CHEESE SHREDDED MEXICAN BLENDCode: LAS TAPAS2 KG $33.96per PACKET
+Dairy -
+CHEESE SHREDDED TASTY PREMIUMCode: YARDE FARM2 KG $26.5per PACKET
+Dairy -
+CHEESE SLICES BURGER AMERICAN 120'SCode: JEFFERSONS2.28 KG $36.63per PACKET
+Dairy, Soy -
+CHEESE SLICES HALLOUMI CYPRUSCode: KALOS1 KG $181.56per CARTON
+Dairy -
+CHEESE SLICES TASTY 105'SCode: YARDE FARM1.5 KG $22.38per PACKET
+Dairy -
+CREAM SOURCode: DAIRY FARMERS2 LT $22.12per TUB
+Evaporated Milk, Dried Milk made from Soy or Cereals,
+Dairy
+-
+CREAM SOUR LIGHTCode: YARDE FARM5 LT $44.36per PAIL
+Dairy -
+CREAM THICKENEDCode: DAIRY FARMERS2 LT $17.44per BOTTLE
+- -
+YOGHURT GREEK SWEETENEDCode: GEORGES5 KG $25.55per BUCKET
+Dairy -
+DESSERTS
+CAKE P/C RED VELVET GLUTEN FREE 1-838Code: PRIESTLEYS8 X 100GR $29.16per TRAY
+Egg, Dairy, Soy Almonds, Hazelnuts, Macadamias, Pecans, Tree Nuts,
+Walnuts
+CHEESECAKE CARAMEL RICOTTA BAKEDCode: SPOON WHOLESALE KITCHEN2.5 KG $55.57per EACH
+Barley, Egg, Oats, Rye, Wheat -
+CHEESECAKE P/C PISTACHIO INDIVIDUAL GLUTEN FREECode: PRIESTLEYS8 X 105GR $34.96per TRAY
+Egg, Dairy, Pistachios, Soy, Sulphites Almonds, Hazelnuts, Macadamias, Pecans, Walnuts
+GATEAU CHOCOLATE RASPBERRY GLUTEN FREE VEGAN1-798Code: 
+PRIESTLEYS2.39 KG $68.23per EACH
+Pistachios, Soy, Tree Nuts Almonds, Artificial Colours, Artificial Flavours,
+Cashews, Hazelnuts, Macadamias, Dairy, Pecans,
+Walnuts
+Page 4 of 12
+
+## Page 5
+
+PRODUCT DESCRIPTION BRAND / PACK SIZE PRICE / UOM CONTAINS MAY CONTAIN
+MOUSSE MIX FRENCH VANILLA GLUTEN FREECode: NESTLE1.8 KG $47.45per PAIL
+Artificial Flavours, Dairy Soy
+PAVLOVA PETITE 6-204Code: PRIESTLEYS48 X 8.5GR $133.05per CARTON
+Egg -
+SLICE CARAMEL GLUTEN FREE 1-136Code: PRIESTLEYS15 X 110GR $40.8per TRAY
+Almonds, Egg, Dairy, Soy, Sulphites Cashews, Hazelnuts, Macadamias, Peanuts, Pecans,
+Pistachios, Walnuts
+TART P/C CITRUS GLUTEN FREE 1-316Code: PRIESTLEYS6 X 149GR $31.76per TRAY
+Egg, Dairy, Soy Almonds, Cashews, Hazelnuts, Macadamias, Pecans,
+Pistachios, Walnuts
+EGGS
+EGGS SCRAMBLED MIXCode: SUNNYQUEEN5 X 2KG $94.3per CARTON
+Egg, Dairy -
+FINGER & SNACK FOODS
+ARANCINI MUSHROOM & WHITE WINECode: CHANS YUM CHA25'S $32.68per PACKET
+Dairy, MSG, Wheat -
+CAULIFLOWER POPCORNCode: STREETFOOD1 KG $13.1per PACKET
+Artificial Colours, Gluten, Wheat -
+CHICKEN BALLS GARLICCode: CATERERS CHOICE1 KG $19.53per PACKET
+Gluten, Dairy, Soy -
+CHICKEN GOUJONSCode: STEGGLES1 KG $110.04per CARTON
+Gluten, Soy, Sulphites -
+CHICKEN GOUJONSCode: JEFFERSONS1 KG $116.1per CARTON
+Gluten, Soy, Wheat Crustaceans, Egg, Molluscs, Sulphites
+CHICKEN NUGGETS BREAST TEMPURACode: JEFFERSONS1 KG $86.1per CARTON
+Gluten, Wheat Crustaceans, Egg, Fish, Molluscs, Soy, Sulphites
+CHICKEN NUGGETS GLUTEN FREE COATINGCode: INGHAM45 X 22GR $18.19per PACKET
+Egg, Soy -
+CHICKEN WYNGZ DEVIL BONELESSCode: INGHAM1 KG $20.36per PACKET
+Gluten, Dairy, Wheat Egg, Evaporated Milk, Dried Milk made from Soy or
+Cereals, Soy
+LAMB KOFTACode: SPECIALTY FOODS20 X 60GR $28.21per PACKET
+Sulphites -
+Fish
+RED SPOT EMPEROR FLT S/LESS B/LESS 100/200 (I)Code: SEACREST5 KG $105.78per CARTON
+Fish -
+RED SPOT EMPEROR FLT S/LESS B/LESS 200/300 (I)Code: SEACREST5 KG $105.78per CARTON
+Fish -
+FRUIT
+BERRIES MIXED IQFCode: CATERERS CHOICE1 KG $12.66per BAG
+- -
+LYCHEESCode: PANDAROO565 GR $3.95per CAN
+- -
+STRAWBERRIES IQFCode: CATERERS CHOICE1 KG $110.8per CARTON
+- -
+Page 5 of 12
+
+## Page 6
+
+PRODUCT DESCRIPTION BRAND / PACK SIZE PRICE / UOM CONTAINS MAY CONTAIN
+HERBS SPICES & SEASONINGS
+CINNAMON QUILLSCode: KRIO KRUSH200 GR $23.64per EACH
+- -
+CUMIN GROUNDCode: CATERERS CHOICE1 KG $24.03per PACKET
+- Dairy, Peanuts, Sesame, Soy, Tree Nuts
+GARLIC CRUSHEDCode: CATERERS CHOICE1 KG $10.05per BUCKET
+- -
+GARLIC POWDERCode: CATERERS CHOICE1 KG $16.68per PACKET
+- Peanuts, Soy, Tree Nuts
+HORSERADISH CREAMCode: MASTERFOODS175 GR $4.47per JAR
+Dairy, Sulphites -
+OREGANO LEAVESCode: CATERERS CHOICE300 GR $12.22per PACKET
+- -
+PAPRIKA SMOKEYCode: TRUMPS500 GR $13.3per PACKET
+Artificial Flavours -
+PAPRIKA SWEETCode: CATERERS CHOICE1 KG $20.16per PACKET
+- -
+PEPPER LEMONCode: CATERERS CHOICE1 KG $19.1per PACKET
+MSG Almonds, Brazil Nuts, Cashews, Gluten, Hazelnuts,
+Macadamias, Dairy, Peanuts, Pecans, Pine Nuts,
+Pistachios, Sesame, Soy, Sulphites
+PEPPERCORNS GREENCode: SANDHURST800 GR $11.62per JAR
+- -
+SALT CHICKEN GLUTEN FREE (FLAVON)Code: KRIO KRUSH10 KG $64.73per PAIL
+MSG -
+SALT SEA FLAKES NATURALCode: CORNISH1 KG $30.04per PACKET
+- -
+SEASONING AMERICAN TEXAN STYLE DRY RUBCode: KRIO KRUSH700 GR $18.03per CAN
+- -
+SEASONING MOROCCANCode: MASTERFOODS755 GR $27.75per CAN
+- -
+ICE & ICE CREAM
+GELATI ARTISAN ITALIAN PISTACHIOCode: EVEREST5 LT $39.59per TUB
+Artificial Colours, Dairy, Pistachios, Tree NutsAlmonds, Brazil Nuts, Cashews, Gluten, Egg,
+Hazelnuts, Macadamias, Peanuts, Pecans, Pine Nuts,
+Sesame, Soy, Walnuts
+ICE CREAM VANILLA BEANCode: EVEREST5 LT $42.73per TRAY
+Artificial Flavours, Egg, Dairy Gluten, Peanuts, Sesame, Soy, Tree Nuts
+INTERNATIONAL FOODS
+CHIPOTLE PEPPERS IN ADOBO SAUCECode: SANDHURST2.8 KG $20.35per CAN
+- -
+COCONUT MILK POWDERCode: KNORR1 KG $39.33per PACKET
+Dairy Gluten, Egg, Fish, Soy, Wheat
+SALSA MILD CHUNKYCode: EDLYN2 LT $11.75per BOTTLE
+- -
+Page 6 of 12
+
+## Page 7
+
+PRODUCT DESCRIPTION BRAND / PACK SIZE PRICE / UOM CONTAINS MAY CONTAIN
+SEASONING TACOCode: KRIO KRUSH500 GR $14.02per TIN
+- -
+TACO SHELLS BULKCode: MISSION FOODS200'S $49.06per CARTON
+- -
+LAMB PORTIONED
+LAMB MINCE FROZENCode: EMERALD VALLEY2 KG $43.2per PACKET
+- -
+MISCELLANEOUS
+NAPKINS 2 PLY COCKTAIL QUARTER FOLD WHITECode: CASTAWAY250'S $44.56per CARTON
+- -
+SKEWERS GUN 15CMCode: CATERERS CHOICE250'S $49.3per CARTON
+- -
+TEA TOWEL LARGE BLUE CHECK 60 X 90CMCode: 
+EACH $3.77per EACH
+- -
+TEA TOWEL LARGE GREEN CHECK 60 X 90CMCode: 
+EACH $3.77per EACH
+- -
+OILS & FATS
+OIL CANOLA (PLASTIC DRUM)Code: SOPRA20 LT $65.46per CAN
+- -
+OIL OLIVE BLEND TUSCAN PURACode: PEERLESS20 LT $127.51per DRUM
+- -
+OIL OLIVE EXTRA VIRGINCode: SANDHURST4 LT $54.96per CAN
+- -
+OIL OLIVE EXTRA VIRGINCode: ALFINAS4 LT $114.49per TIN
+- -
+OIL VEGETABLE BLENDED (PLASTIC DRUM)Code: SOPRA20 LT $65.46per CAN
+Soy -
+Oysters
+OYSTERS HALF SHELL LARGE (I)Code: SEA PRODUCTS10 DOZEN $240.26per CARTON
+Molluscs -
+OYSTERS HALF SHELL MEDIUM PREMIUM (I)Code: SEA PRODUCTS10 DOZEN $225.81per CARTON
+Molluscs -
+OYSTERS HALF SHELL STANDARD (I)Code: SEA PRODUCTS10 DOZ $165.57per CARTON
+Fish, Molluscs -
+PACKAGING
+CLINGWRAP DISPENSERCode: CATERERS CHOICE600M X 45CM $30.01per ROLL
+- -
+CONTAINER PAPER BOARD FAMILY BOXCode: HUHTAMAKI50'S $23.26per BUNDLE
+- -
+CONTAINER RECTANGLE 500ML CR500 172X120X39MMCode: CHANROL50'S $60.7per CARTON
+- -
+Page 7 of 12
+
+## Page 8
+
+PRODUCT DESCRIPTION BRAND / PACK SIZE PRICE / UOM CONTAINS MAY CONTAIN
+CONTAINER RECTANGLE PLASTIC 1000ML MICROWAVABLECode: CATERERS CHOICE50'S $88.2per CARTON
+- -
+CUTLERY PACK KNIFE FORK & NAPKINCode: BIOPAK100'S $67.48per CARTON
+- -
+LIDS RECTANGLE PLASTIC COMMON 500-1000ML M/WAVABLECode: 
+CATERERS CHOICE50'S $50.1per CARTON
+- -
+PAPER EASY-BAKE 40.5CM DISPENSERCode: CASTAWAY120 MT $30.15per ROLL
+- -
+SANDWICH WEDGE CLEAR LARGE 170X84X85MMCode: MARINUCCI100'S $11.81per SLEEVE
+- -
+PASTRIES & PIES
+PIES PARTY PROPER LITTLE CLASSIC BEEFCode: NATIONAL PIES48 X 60GR $55.75per CARTON
+Gluten, Evaporated Milk, Dried Milk made from Soy or
+Cereals, Dairy, MSG, Soy, Wheat
+Artificial Colours, Artificial Flavours
+QUICHE PARTY COMBO PACKCode: PATTIES72 X 46GR $95.0per CARTON
+Gluten, Egg, Evaporated Milk, Dried Milk made from
+Soy or Cereals, Dairy, Soy, Sulphites
+-
+ROLLS GOURMET 125MM GLUTEN FREE VEGANCode: READYBAKE30 X 140GR $120.33per CARTON
+Sesame, Soy Egg, Dairy, Peanuts, Tree Nuts
+ROLLS MINI SPINACH & RICOTTACode: PATTIES48 X 22GR $41.16per CARTON
+Gluten, Egg, Evaporated Milk, Dried Milk made from
+Soy or Cereals, Dairy, Soy, Wheat
+Sesame
+ROLLS SPINACH & FETTA GOURMET LARGECode: HELEN'S8 X 180GR $31.6per TRAY
+Artificial Colours, Artificial Flavours, Gluten, Egg, Dairy,
+Soy, Wheat
+-
+SAUSAGE ROLLS FLAKY PASTRYCode: READYBAKE60 X 160GR $147.82per CARTON
+Gluten, Dairy, Oats, Rye, Soy, Sulphites Egg, Evaporated Milk, Dried Milk made from Soy or
+Cereals, Lupine, Peanuts, Sesame, Tree Nuts
+SAUSAGE ROLLS PARTY PROPER LITTLECode: NATIONAL PIES48 X 60GR $55.75per CARTON
+Gluten, Evaporated Milk, Dried Milk made from Soy or
+Cereals, Dairy, MSG, Soy, Sulphites
+Artificial Colours, Artificial Flavours
+PESTOS DIPS & PATE
+DIP AVOCADO (FRESH)Code: CASA DE MARE800 GR $13.44per BUCKET
+Egg Cashews, Fish, Lupine, Sesame, Tree Nuts
+DIP EGGPLANT (FRESH)Code: CASA DE MARE800 GR $12.74per BUCKET
+Egg Cashews, Fish, Lupine, Dairy, Sesame, Soy, Tree Nuts
+DIP HOMMUS BEETROOTCode: WOMBAT VALLEY1 KG $18.44per BUCKET
+Sesame Soy
+DIP SPICY CAPSICUM (FRESH)Code: CASA DE MARE800 GR $12.74per BUCKET
+Egg Cashews, Gluten, Fish, Dairy, Sesame, Soy, Tree Nuts
+DIP TZATZIKI (FRESH)Code: CASA DE MARE800 GR $9.69per BUCKET
+Dairy Cashews, Egg, Fish, Lupine, Sesame, Tree Nuts
+PESTO BASILCode: WOMBAT VALLEY2 KG $29.91per BUCKET
+Cashews, Dairy, Tree Nuts -
+PESTO BASIL VEGAN GLUTEN FREE (FRESH)Code: CASA DE MARE1 KG $17.44per TUB
+Cashews, Soy, Tree Nuts Egg, Fish, Lupine, Sesame
+PORK PRIMALS
+PORK SHOULDER I/W 90CL FRZ (APP 18KG CTN)HOMESTEADPORK $11.88- -
+Page 8 of 12
+
+## Page 9
+
+PRODUCT DESCRIPTION BRAND / PACK SIZE PRICE / UOM CONTAINS MAY CONTAIN
+Code: KG per KILOGRAM
+POTATO PRODUCTS
+CHIPS 10MM CRISPY COATED FRIESCode: JEFFERSONS4 X 2.5KG $48.93per CARTON
+- -
+CHIPS 13MM FRIESCode: FARM FRITES2.5 KG $38.84per CARTON
+- -
+POTATO FLAKES INSTANT MASHCode: EDLYN10 KG $125.73per BAG
+Sulphites -
+POULTRY WHOLE & CUTS
+CHICKEN BREAST FLTS RAW FROZENCode: FARMYARD CHICKEN2 KG $150.36per CARTON
+- -
+Prawns
+PRAWN CUTLET RAW 10/15 VANNAMEI (SEAFROST) (I)Code: SEACREST700 GR $197.4per CARTON
+Crustaceans -
+PRAWN CUTLET RAW 26/30 VANNAMEI (SEAFROST) (I)Code: SEACREST700 GR $16.1per PACKET
+Crustaceans -
+PRAWNS WH CKD 10/15 AUSTRALIAN TIGER (A)Code: TASSAL3 KG $154.49per CARTON
+Crustaceans -
+READY MEALS
+PASTA LASAGNE ROUND BEEF TRADITIONAL PRE CUT 12'SCode: HELEN'S3 KG $58.2per EACH
+Artificial Colours, Artificial Flavours, Gluten, Egg, Dairy,
+Wheat
+-
+RICES & LEGUMES
+COUS COUSCode: CATERERS CHOICE1 KG $7.75per PACKET
+Gluten, Wheat -
+COUS COUS PEARL LARGECode: TRUMPS1 KG $9.37per PACKET
+Gluten, Wheat Dairy, Peanuts, Sesame, Soy, Tree Nuts
+RICE ARBORIOCode: RIVIANA5 KG $24.55per PACKET
+- -
+SAUCES CONDIMENTS & DRESSINGS
+CHUTNEY TOMATOCode: BEERENBERG2 KG $23.5per BUCKET
+- -
+COOKING WINE RED 10% ALCOHOLCode: CATERERS CHOICE15 LT $59.73per CASK
+Sulphites Egg
+COOKING WINE WHITE 10% ALCOHOLCode: CATERERS CHOICE15 LT $59.73per CASK
+Sulphites Egg
+MAYONNAISECode: KEWPIE1 KG $13.64per BOTTLE
+Egg, MSG, Mustard (and products thereof), Soy-
+MAYONNAISE AIOLI ROASTED GARLIC GLUTEN FREECode: MASTERFOODS2.2 KG $31.91per BOTTLE
+Egg, Soy -
+MAYONNAISE AIOLI ROASTED GARLIC GLUTEN FREECode: BRIGHT SIDE1 LT $10.24per BOTTLE
+Egg Cashews, Fish, Lupine, Dairy, Peanuts, Sesame, Soy,
+Sulphites
+Page 9 of 12
+
+## Page 10
+
+PRODUCT DESCRIPTION BRAND / PACK SIZE PRICE / UOM CONTAINS MAY CONTAIN
+MAYONNAISE AIOLI ROASTED GARLIC SQUEEZE BOTTLE G/FCode: 
+JEFFERSONS1 LT $11.66per BOTTLE
+Egg Cashews, Fish, Lupine, Dairy, Sesame, Soy, Sulphites
+MAYONNAISE AIOLI SQUEEZE BOTTLE GLUTEN FREECode: JEFFERSONS1 LT $11.66per BOTTLE
+Egg, Sulphites Cashews, Fish, Lupine, Dairy, Sesame, Soy, Tree Nuts
+MAYONNAISE DELICode: HELLMANNS2.6 KG $18.26per JAR
+Egg, Soy Fish, Dairy
+MAYONNAISE FIERY CHIPOTLE SQUEEZE BOTTLE G/FREECode: JEFFERSONS1 LT $11.82per BOTTLE
+Egg, Mustard (and products thereof) Cashews, Fish, Lupine, Dairy, Sesame, Soy, Sulphites
+MAYONNAISE PREMIUM GLUTEN FREECode: ZOOSH4.5 KG $33.92per PAIL
+Egg, Dairy -
+RELISH BALSAMIC BEETROOTCode: BEERENBERG2 KG $28.95per BUCKET
+- -
+RELISH CARAMELISED ONION GLUTEN FREECode: JEFFERSONS1 KG $13.89per BUCKET
+Sulphites Cashews
+RELISH ONION CARAMELISEDCode: BEERENBERG2 KG $24.22per BUCKET
+Barley, Gluten -
+SAUCE BARBEQUE GLUTEN FREECode: CATERERS CHOICE4 LT $14.4per BOTTLE
+Artificial Colours, Artificial Flavours -
+SAUCE BURGER SQUEEZE BOTTLE GLUTEN FREECode: JEFFERSONS1 LT $13.33per BOTTLE
+Egg, Mustard (and products thereof) Cashews, Fish, Lupine, Dairy, Sesame, Soy, Sulphites
+SAUCE MIX BECHAMEL GLUTEN FREECode: MAGGI2 KG $39.81per PAIL
+Artificial Colours, Artificial Flavours, Dairy, MSGSoy, Sulphites
+SAUCE PASTA SUGO PERCode: BUITONI3 KG $22.25per CAN
+- -
+SAUCE PERI PERI GLUTEN FREECode: KNORR1.95 KG $23.07per BOTTLE
+- Dairy, MSG, Peanuts, Sesame, Soy, Tree Nuts
+SAUCE TOMATO COULIS SUGO AL POMODOROCode: BUITONI3 KG $22.25per CAN
+- -
+SAUCE TOMATO GLUTEN FREECode: CATERERS CHOICE4 LT $12.37per BOTTLE
+Artificial Flavours -
+SAUSAGES HOT DOGS & PATTIES
+BURGER PATTIES ANGUS SLIDERCode: ANGEL BAY20 X 40GR $82.04per CARTON
+Gluten, Egg, Dairy, Soy, Wheat -
+BURGER PATTIES BEEF ANGUS GOURMETCode: ANGEL BAY18 X 150GR $53.61per PACKET
+Gluten, Egg, Dairy, Soy, Wheat -
+SMALLGOODS
+BACON MIDDLE RINDLESS GAS FLUSHED (QLD)Code: CATERERS CHOICE2.5 KG $33.07per PACKET
+- -
+CHORIZO SPANISHCode: HANS2 KG $39.2per PACKET
+Evaporated Milk, Dried Milk made from Soy or Cereals,
+Dairy
+Soy
+CHORIZO SPANISH ORIGIN (APP 2.5KG)Code: PRIMOKG $21.16per KILOGRAM
+- Evaporated Milk, Dried Milk made from Soy or Cereals,
+Dairy, Soy, Sulphites
+Page 10 of 12
+
+## Page 11
+
+PRODUCT DESCRIPTION BRAND / PACK SIZE PRICE / UOM CONTAINS MAY CONTAIN
+HAM LEG SLICEDCode: CATERERS CHOICE1 KG $15.23per PACKET
+- Soy
+HAM SERRANO JAMON SLICED SPANISH (PROSCIUTTO)Code: REDONDO250 GR $18.18per TRAY
+- -
+MORTADELLACode: BORGO SALUMI1 KG $13.47per EACH
+- -
+PROSCIUTTO SLICEDCode: DON500 GR $24.27per PACKET
+- -
+PROSCIUTTO SLICED IMPORTEDCode: HANS500 GR $27.55per PACKET
+- Evaporated Milk, Dried Milk made from Soy or Cereals,
+Dairy, Soy
+SALAMI CASALINGO (APP 1.2KG)Code: BORGO SALUMIKG $27.74per KILOGRAM
+- -
+SALAMI DANISH THINLY SLICEDCode: PRIMO1 KG $25.04per PACKET
+Evaporated Milk, Dried Milk made from Soy or Cereals,
+Dairy
+Soy
+SALAMI PEPPERONI SLICEDCode: CASTELLINI2 KG $35.91per PACKET
+Artificial Flavours, Soy -
+SOUPS & STOCKS
+GRAVY MIX RICHCode: MAGGI2 KG $28.5per PAIL
+Artificial Flavours, Gluten, MSG Crustaceans, Fish, Dairy, Soy, Sulphites
+JUS LIE BEEF SAUCE MIX GLUTEN FREECode: MAGGI1.8 KG $77.67per TUB
+Artificial Colours, Artificial Flavours, Soy Fish, Dairy, Sulphites
+STOCK LIQUID CHICKEN CONCENTRATECode: KNORR1 KG $17.18per EACH
+Egg, Dairy, Soy Gluten, Crustaceans, Fish, Lupine, Molluscs, Sesame
+SPIRITS
+BOTTEGA LIMONCINO LIQUEUR CL50 21%Code: BOTTEGA500 ML $34.97per BOTTLE
+- -
+SPREADS
+HONEY POUR BOTTLECode: SUPERBEE3 KG $25.84per BOTTLE
+- -
+SPREAD CHOCOLATE HAZELNUTCode: NUTELLA1 KG $16.94per JAR
+Hazelnuts, Dairy, Soy Tree Nuts
+Squid and Octopus
+OCTOPUS BABY 26/40 IQF (I)Code: SEAFROST1 KG $141.0per CARTON
+Molluscs Crustaceans
+SQUID STRIPS TENDERISED PINEAPPLE CUT (I)Code: SEAFROST1 KG $53.15per CARTON
+Molluscs -
+Value Added
+SQUID SEA SALT & CRACKED PEPPER TWIST (I)Code: SEAFROST1 KG $17.99per PACKET
+Gluten, Crustaceans, Egg, Soy -
+VEGETABLES
+CAPERS BABYCode: CASA DE MARE700 GR $16.55per JAR
+- -
+Page 11 of 12
+
+## Page 12
+
+PRODUCT DESCRIPTION BRAND / PACK SIZE PRICE / UOM CONTAINS MAY CONTAIN
+CAPSICUM CHAR GRILLED GLUTEN FREE (FRESH)Code: CASA DE MARE2 KG $34.29per BUCKET
+- -
+CAPSICUM ROASTED RED 20MM IQFCode: CHARWORKS6 KG $95.66per CARTON
+- -
+EGGPLANT CHAR GRILLEDCode: CASA DE MARE1.9 KG $33.7per JAR
+- -
+OLIVES GREEN QUEEN PITTEDCode: KALOS2 KG $21.16per JAR
+- -
+OLIVES GREEN QUEEN PITTED WHOLE (5KG D/W)Code: SANDHURST10 KG $93.25per PAIL
+- -
+ONIONS CHOPPEDCode: EDGELL2 KG $14.37per PACKET
+- -
+PEAS GREENCode: DEWFRESH2.5 KG $13.31per PACKET
+- -
+PEPPERS RED ROASTED STRIPSCode: CASA DE MAREA12 $71.91per CARTON
+- -
+PEPPERS RED ROASTED WHOLECode: SANDHURST4.2 KG $69.81per CARTON
+- -
+PUMPKIN CHAR GRILLED (FRESH)Code: CASA DE MARE2 KG $30.61per BUCKET
+- Almonds, Brazil Nuts, Cashews, Hazelnuts,
+Macadamias, Pecans, Pistachios, Tree Nuts, Walnuts
+TOMATO PASTECode: CATERERS CHOICE3.1 KG $12.43per CAN
+- -
+TOMATOES SUNDRIEDCode: CASA DE MARE2 KG $27.45per JAR
+- -
+TOMATOES SUNDRIED STRIPSCode: CASA DE MARE2 KG $27.45per JAR
+Sulphites -
+VINEGAR
+VINEGAR RICE WINECode: OBENTO250 ML $3.03per BOTTLE
+- -
+Page 12 of 12
+````
+
+### Source: OrderForm11579311 - 1098368202605251257349179710.xlsx
+
+- Stored file: `OrderForm11579311 - 1098368202605251257349179710.xlsx`
+- Kind: xlsx
+- Lines: 226
+- SHA-256: `5a02af13403836e532b7893c27a84b171156268964a85ad060d60a8b52b7398b`
+
+- Text extract: `extracted/OrderForm11579311 - 1098368202605251257349179710.xlsx.extracted.md`
+
+````markdown
+# Extracted Workbook Preview: OrderForm11579311 - 1098368202605251257349179710.xlsx
+
+## Sheet: OrderForm
+
+| Category | Product Line | Product Description | Pack Size | Brand | Product Code | Price Per UOM | UOM | Manual Sort | Quantity to Order | Contains | Does NOT Contain | May Contain | No info provided |
+| BAKING PASTRY | PASTRY SWEET | SHORTBREAD SHELL ROUND 46MM BAKED | 120'S | READYBAKE | =TEXT("166741","#") | 138.47 | CARTON | - | - | Cereals containing Gluten (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Milk and Milk Products,Soybean and Soybean Products,Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) | Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Tree Nuts and Tree Nut Products |
+| BAKING SUPPLIES | NUTS | ALMONDS SLIVERED | 1 KG | CATERERS CHOICE | =TEXT("63949","#") | 26.45 | PACKET | - | - | Almonds (as an ingredient),Tree Nuts and Tree Nut Products | Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Caffeine,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Lupine,Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Wheat (as an ingredient) | Brazil nuts (as an ingredient),Cashews (as an ingredient),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Walnuts (as an ingredient) |
+| BAKING SUPPLIES | BREADCRUMBS | BREADCRUMBS GLUTEN FREE | 10 KG | NEWLY WEDS FOODS | =TEXT("169939","#") | 65.89 | BAG | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| BAKING SUPPLIES | CHOCOLATE COOKING | CHOCOLATE BUTTONS DARK COMPOUND | 1 KG | CATERERS CHOICE | =TEXT("64997","#") | 17.87 | PACKET | - | - | Milk and Milk Products,Soybean and Soybean Products | Artificial Colours,Artificial Flavours,Barley (as an ingredient),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Lupine,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) | Almonds (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| BAKING SUPPLIES | CORNFLOUR & STARCHES | CORNFLOUR MAIZE GLUTEN FREE | 5 KG | EDLYN | =TEXT("53435","#") | 18.25 | BAG | - | - | - | Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Caffeine,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,Milk and Milk Products,MSG,Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| BAKING SUPPLIES | CUSTARD | CUSTARD MIX NO BAKE EGG GLUTEN FREE | 2 KG | NESTLE | =TEXT("116089","#") | 55.19 | TUB | - | - | Artificial Flavours,Egg and Egg Products | Artificial Colours,Cereals containing Gluten (and products thereof),Fish and Fish Products,Lupine,MSG,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Tree Nuts and Tree Nut Products | Milk and Milk Products,Soybean and Soybean Products |
+| BAKING SUPPLIES | CUSTARD | CUSTARD POWDER MAIZE GLUTEN FREE | 5 KG | EDLYN | =TEXT("102759","#") | 31.01 | BAG | - | - | Artificial Colours,Artificial Flavours,Milk and Milk Products | Aspartame,Bee Pollen,Caffeine,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,MSG,Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| BAKING SUPPLIES | FLOUR | FLOUR PLAIN | 10 KG | CATERERS CHOICE | =TEXT("56339","#") | 18.02 | BAG | - | - | Cereals containing Gluten (and products thereof) | Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Caffeine,Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,Milk and Milk Products,MSG,Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products |
+| BAKING SUPPLIES | FLOUR | FLOUR RICE | 500 GR | ERAWAN | =TEXT("73974","#") | 23.28 | CARTON | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| BAKING SUPPLIES | FLOUR | FLOUR RICE (COARSE) | 1 KG | CATERERS CHOICE | =TEXT("65003","#") | 47.5 | CARTON | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) | Soybean and Soybean Products |
+| BAKING SUPPLIES | FLOUR | FLOUR SELF RAISING | 10 KG | CATERERS CHOICE | =TEXT("56340","#") | 17.61 | BAG | - | - | Barley (as an ingredient),Cereals containing Gluten (and products thereof),Oats (as an ingredient),Rye (as an ingredient),Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) | Egg and Egg Products,Milk and Milk Products,Soybean and Soybean Products |
+| BAKING SUPPLIES | ICING SUGAR & MIX | ICING SUGAR MIXTURE | 3 KG | CATERERS CHOICE | =TEXT("65030","#") | 14.21 | PACKET | - | - | - | Artificial Colours,Artificial Flavours,Barley (as an ingredient),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Lupine,Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) | Almonds (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| BAKING SUPPLIES | MIXES MUFFIN | MUFFIN MIX | 10 KG | EDLYN | =TEXT("88372","#") | 47.99 | BAG | - | - | Artificial Flavours,Cereals containing Gluten (and products thereof),Egg and Egg Products,Milk and Milk Products,Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) |
+| BAKING SUPPLIES | FRUIT PIE FILLINGS | PATISSERIE FILLING CUSTARD CREME FLAVOURED | 1.25 KG | BARKERS | =TEXT("93098","#") | 10.15 | BAG | - | - | Artificial Colours | Almonds (as an ingredient),Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| BAKING SUPPLIES | NUTS | PINE NUTS TOASTED | 1 KG | TRUMPS | =TEXT("226265","#") | 55.93 | PACKET | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) | Peanuts and Peanut Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products |
+| BAKING SUPPLIES | NUTS | PISTACHIO KERNELS NO SHELL | 1 KG | CATERERS CHOICE | =TEXT("63971","#") | 84.24 | PACKET | - | - | Pistachio nuts (as an ingredient),Tree Nuts and Tree Nut Products | Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Caffeine,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Lupine,Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Wheat (as an ingredient) | Almonds (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Walnuts (as an ingredient) |
+| BAKING SUPPLIES | MIXES BREAD | PREMIX BREAD & ROLL WHITE EXTRA SOFT | 12.5 KG | ALLIED PINNACLE | =TEXT("2660","#") | 46.66 | BAG | - | - | Cereals containing Gluten (and products thereof),Milk and Milk Products,Soybean and Soybean Products | Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Caffeine,Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,MSG,Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| BAKING SUPPLIES | MIXES SCONE | SCONE MIX WITH BUTTERMILK | 10 KG | ALLIED PINNACLE | =TEXT("2174","#") | 45.75 | BAG | - | - | Cereals containing Gluten (and products thereof),Milk and Milk Products | Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Caffeine,Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,MSG,Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| BAKING SUPPLIES | SEMOLINA | SEMOLINA | 1 KG | CATERERS CHOICE | =TEXT("65010","#") | 5.31 | PACKET | - | - | Cereals containing Gluten (and products thereof),Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) |
+| BAKING SUPPLIES | SUGAR | SUGAR BROWN | 3 KG | CATERERS CHOICE | =TEXT("65032","#") | 15.05 | PACKET | - | - | - | Artificial Colours,Artificial Flavours,Barley (as an ingredient),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Lupine,Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) | Almonds (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| BAKING SUPPLIES | SUGAR | SUGAR CASTER | 3 KG | CATERERS CHOICE | =TEXT("65033","#") | 11.67 | PACKET | - | - | - | Artificial Colours,Artificial Flavours,Barley (as an ingredient),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Lupine,Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) | Almonds (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| BAKING SUPPLIES | YEAST | YEAST DRY INSTANT | 500 GR | BAKELS | =TEXT("79440","#") | 3.43 | PACKET | - | - | Soybean and Soybean Products | Artificial Colours,Artificial Flavours,Cereals containing Gluten (and products thereof),Egg and Egg Products,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,Milk and Milk Products,MSG,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products |
+| BEEF PORTIONED | BEEF COOKED | BEEF CARVERY CKD (APP 11KG CTN) 2-3 UNITS/CTN | KG | NATURALAZ | =TEXT("130079","#") | 20.96 | KILOGRAM | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| BEEF PORTIONED | BEEF MINCE | BEEF MINCE FROZEN | 2 KG | EMERALD VALLEY | =TEXT("220637","#") | 37.96 | PACKET | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| BEER | BEER - IMPORTED | CORONA EXTRA BEER BROWN BOX BOTTLE 4.5% (4 X 6PK) | 24 X 355ML | CORONA | =TEXT("218647","#") | 72.67 | CARTON |
+| BEER | BEER - FULL STRENGTH | GREAT NORTHERN LAGER ORIGINAL WHITE MARLIN STUBBIE | 24 X 330ML | GREAT NORTHERN | =TEXT("188827","#") | 80.06 | CARTON |
+| BEER | BEER - LITE | GREAT NORTHERN SUPER CRISP LAGER BLACK MARLIN 3.5% | 24 X 330ML | GREAT NORTHERN | =TEXT("177357","#") | 67.55 | CARTON |
+| BEVERAGES | COCOA | COCOA POWDER | 1 KG | CATERERS CHOICE | =TEXT("64999","#") | 35.2 | PACKET | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| BEVERAGES | FRUIT JUICES | JUICE LEMON PURE SQUEEZE | 2 LT | CATERERS CHOICE | =TEXT("189363","#") | 6.5 | BOTTLE | - | - | Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| BEVERAGES | FRUIT JUICES | JUICE LIME | 1 LT | GROVE | =TEXT("17093","#") | 10.7 | BOTTLE | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| BISCUITS | BISCUITS PORTION CONTROL | BISCUITS P/C 102 JATZ | 150'S | ARNOTTS | =TEXT("7933","#") | 30.81 | CARTON |
+| BISCUITS | COOKIES | COOKIES SMARTY PANTS GRAB & GO GLUTEN FREE 1-092 | 11 X 60GR | PRIESTLEYS | =TEXT("227235","#") | 26.82 | TRAY | - | - | Almonds (as an ingredient),Egg and Egg Products,Milk and Milk Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products | Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Wheat (as an ingredient) | Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pistachio nuts (as an ingredient),Walnuts (as an ingredient) |
+| BREAD & PASTRY | SWEET BREAD/ROLLS/BUNS | BREAD BANANA LOAF PRE CUT | 2 KG | HELEN'S | =TEXT("128842","#") | 29.48 | TRAY | - | - | Cereals containing Gluten (and products thereof),Egg and Egg Products,Milk and Milk Products,Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| BREAD & PASTRY | ROLLS BUNS & STICKS | BREAD BRIOCHE SLIDER BUN F/B | 150 X 35GR | BAKERS MAISON | =TEXT("152250","#") | 115.49 | CARTON | - | - | Barley (as an ingredient),Cereals containing Gluten (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Milk and Milk Products,Soybean and Soybean Products,Wheat (as an ingredient) | Artificial Colours,Artificial Flavours,Celery / Celeriac (and products thereof),Fish and Fish Products,Guarana or extracts of Guarana,Lupine,Molluscs (and products thereof),MSG,Mustard (and products thereof),Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products | Sesame Seeds and Sesame Seed Products | Almonds (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Oats (as an ingredient),Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Tree Nuts and Tree Nut Products,Walnuts (as an ingredient) |
+| BREAD & PASTRY | ROLLS BUNS & STICKS | BREAD BRIOCHE STYLE SLIDER ROLLS | 144 X 30GR | TIP TOP | =TEXT("156438","#") | 92.65 | CARTON | - | - | Cereals containing Gluten (and products thereof),Soybean and Soybean Products,Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) | Sesame Seeds and Sesame Seed Products |
+| BREAD & PASTRY | BREAD TURKISH | BREAD LOAF TURKISH F/B VEGAN | 20 X 430GR | BAKERS MAISON | =TEXT("77441","#") | 94.39 | CARTON | - | - | Cereals containing Gluten (and products thereof),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Wheat (as an ingredient) | Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Caffeine,Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Fish and Fish Products,Guarana or extracts of Guarana,Molluscs (and products thereof),MSG,Mustard (and products thereof),Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products | Almonds (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Tree Nuts and Tree Nut Products,Walnuts (as an ingredient) | Barley (as an ingredient),Oats (as an ingredient),Rye (as an ingredient) |
+| BREAD & PASTRY | BREAD LOAVES | BREAD WHITE GLUTEN FREE | 6 X 500GR | ABBOTTS VILLAGE BAKERY | =TEXT("183888","#") | 68 | CARTON | - | - | Egg and Egg Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| BREAD & PASTRY | ROLLS BUNS & STICKS | BUNS BURGER POTATO 4.5 SLICED | 48 X 85GR | TIP TOP | =TEXT("173532","#") | 64.16 | CARTON | - | - | Cereals containing Gluten (and products thereof),Soybean and Soybean Products,Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) | Barley (as an ingredient),Milk and Milk Products,Oats (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products |
+| BREAD & PASTRY | CROISSANTS | CROISSANTS BUTTER BULK TRADITIONAL F/B | 96 X 50GR | SARA LEE | =TEXT("2982","#") | 124.53 | CARTON | - | - | Cereals containing Gluten (and products thereof),Milk and Milk Products,Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) | Soybean and Soybean Products,Tree Nuts and Tree Nut Products | Pine Nuts (as an ingredient) |
+| BREAD & PASTRY | CROISSANTS | CROISSANTS BUTTER MINI F/B | 95 X 26GR | SARA LEE | =TEXT("617","#") | 81.04 | CARTON | - | - | Cereals containing Gluten (and products thereof),Milk and Milk Products,Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) | Soybean and Soybean Products,Tree Nuts and Tree Nut Products |
+| BREAD & PASTRY | FLAT BREADS AND WRAPS | TORTILLAS CORN 6 WHITE TABLE TOP GLUTEN FREE | 12'S | MISSION FOODS | =TEXT("136026","#") | 3.38 | PACKET | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| BREAD & PASTRY | FLAT BREADS AND WRAPS | TORTILLAS FLOUR 6 | 12'S | MISSION FOODS | =TEXT("30253","#") | 2.97 | PACKET | - | - | Cereals containing Gluten (and products thereof),Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) | Soybean and Soybean Products |
+| CLEANING & JANITORIAL | BINS AND BIN LINERS | BAGS GARBAGE 82LT HEAVY DUTY BLACK 81X95CM | 25'S | TAILORED PACKAGING | =TEXT("66584","#") | 78.2 | CARTON |
+| CLEANING & JANITORIAL | GLOVES | GLOVES VINYL BLUE EXTRA LARGE POWDER FREE | 100'S | WORKPLACE | =TEXT("150703","#") | 3.26 | PACKET |
+| CLEANING & JANITORIAL | SCOURERS & SPONGES | SCOURER STAINLESS STEEL 70GR | 6'S | CATER CLEAN | =TEXT("167655","#") | 41.84 | CARTON |
+| DAIRY | BUTTER | BUTTER SALTED | 500 GR | YARDE FARM | =TEXT("125104","#") | 9.43 | PAT | - | - | Milk and Milk Products | Almonds (as an ingredient),Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Cashews (as an ingredient),Celery / Celeriac (and products thereof),Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),Mustard (and products thereof),Oats (as an ingredient),Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Walnuts (as an ingredient),Wheat (as an ingredient) | - | Artificial Colours,Artificial Flavours,Aspartame,Caffeine,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Lupine,MSG,Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| DAIRY | BUTTER | BUTTER SALTED | 1.5 KG | YARDE FARM | =TEXT("222069","#") | 26.66 | BLOCK | - | - | Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| DAIRY | BUTTER | BUTTER SALTED HOTEL PACK | 1.5 KG | WESTERN STAR | =TEXT("13807","#") | 31 | BLOCK | - | - | Milk and Milk Products | Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Caffeine,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,MSG,Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| DAIRY | BUTTER | BUTTER UNSALTED | 1.5 KG | YARDE FARM | =TEXT("222070","#") | 26.66 | BLOCK | - | - | Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Walnuts (as an ingredient),Wheat (as an ingredient) | - | Unpasteurised Milk and Milk Products |
+| DAIRY | CHEESE BLUE | CHEESE BLUE DANISH (APP 3KG) | KG | DANSK VALG | =TEXT("160640","#") | 34.34 | KILOGRAM | - | - | Milk and Milk Products | Artificial Colours,Artificial Flavours,Cereals containing Gluten (and products thereof),Egg and Egg Products,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,MSG,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products |
+| DAIRY | CHEESE BLUE | CHEESE BLUE DANISH WEDGES | 100 GR | DANSK VALG | =TEXT("160638","#") | 5.45 | PACKET | - | - | Milk and Milk Products | Artificial Colours,Artificial Flavours,Cereals containing Gluten (and products thereof),Egg and Egg Products,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,MSG,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products |
+| DAIRY | CHEESE BRIE/CAMEMBERT | CHEESE BRIE (APP 1KG) | KG | SOUTHCAPE | =TEXT("124836","#") | 37.53 | KILOGRAM | - | - | Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| DAIRY | CHEESE BLOCK TASTY | CHEESE CHEDDAR VINTAGE GOLD RELEASE (APP 2.4KG) | KG | CRACKERBARREL | =TEXT("128846","#") | 35.6 | KILOGRAM | - | - | Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| DAIRY | CHEESE CREAM | CHEESE CREAM | 2 KG | DEVONDALE | =TEXT("119662","#") | 28.12 | PACKET | - | - | Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| DAIRY | CHEESE FETTA | CHEESE FETTA | 2 KG | FRESCO | =TEXT("129842","#") | 44.8 | PAIL | - | - | Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| DAIRY | CHEESE FETTA | CHEESE FETTA CRUMBLE | 200 GR | SOUTHCAPE | =TEXT("131314","#") | 7.09 | PACKET | - | - | Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| DAIRY | CHEESE FETTA | CHEESE FETTA CUBED | 1.5 KG | FRESCO | =TEXT("173681","#") | 34.8 | PAIL | - | - | Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| DAIRY | CHEESE FETTA | CHEESE FETTA GREEK STYLE BLOCK | 2 KG | YARDE FARM | =TEXT("161741","#") | 44.07 | TUB | - | - | Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| DAIRY | CHEESE SPECIALTY | CHEESE HALLOUMI BLOCK CYPRUS | 1 KG | KALOS | =TEXT("171309","#") | 27.81 | PACKET | - | - | Milk and Milk Products | Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Caffeine,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,MSG,Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| DAIRY | CHEESE SOFT | CHEESE MASCARPONE | 1 KG | FRESCO | =TEXT("2470","#") | 113.28 | CARTON | - | - | Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| DAIRY | CHEESE MOZZARELLA | CHEESE MOZZARELLA SHREDDED | 2 KG | YARDE FARM | =TEXT("84811","#") | 24.47 | PACKET | - | - | Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| DAIRY | CHEESE PARMESAN | CHEESE PARMESAN SHAVED | 1 KG | ALFINAS | =TEXT("185996","#") | 23.5 | PACKET | - | - | Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| DAIRY | CHEESE CREAM | CHEESE PHILADELPHIA CREAM | 2 KG | PHILADELPHIA | =TEXT("643","#") | 36.22 | PACKET | - | - | Evaporated Milk, Dried Milk made from Soy or Cereals,Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) | Fish and Fish Products |
+| DAIRY | CHEESE SHREDDED/GRATED | CHEESE SHREDDED MEXICAN BLEND | 2 KG | LAS TAPAS | =TEXT("197416","#") | 33.96 | PACKET | - | - | Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Egg and Egg Products,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| DAIRY | CHEESE SHREDDED/GRATED | CHEESE SHREDDED TASTY PREMIUM | 2 KG | YARDE FARM | =TEXT("49200","#") | 26.5 | PACKET | - | - | Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| DAIRY | CHEESE SLICES & CUBES | CHEESE SLICES BURGER AMERICAN 120'S | 2.28 KG | JEFFERSONS | =TEXT("193795","#") | 36.63 | PACKET | - | - | Milk and Milk Products,Soybean and Soybean Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| DAIRY | CHEESE SPECIALTY | CHEESE SLICES HALLOUMI CYPRUS | 1 KG | KALOS | =TEXT("171310","#") | 181.56 | CARTON | - | - | Milk and Milk Products | Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Caffeine,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,MSG,Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| DAIRY | CHEESE SLICES & CUBES | CHEESE SLICES TASTY 105'S | 1.5 KG | YARDE FARM | =TEXT("218662","#") | 22.38 | PACKET | - | - | Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| DAIRY | CREAM | CREAM SOUR | 2 LT | DAIRY FARMERS | =TEXT("167469","#") | 22.12 | TUB | - | - | Evaporated Milk, Dried Milk made from Soy or Cereals,Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) | - | Aspartame |
+| DAIRY | CREAM | CREAM SOUR LIGHT | 5 LT | YARDE FARM | =TEXT("144595","#") | 44.36 | PAIL | - | - | Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| DAIRY | CREAM | CREAM THICKENED | 2 LT | DAIRY FARMERS | =TEXT("222172","#") | 17.44 | BOTTLE | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Oats (as an ingredient),Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Walnuts (as an ingredient),Wheat (as an ingredient) | - | Molluscs (and products thereof),MSG |
+| DAIRY | YOGHURT | YOGHURT GREEK SWEETENED | 5 KG | GEORGES | =TEXT("104756","#") | 25.55 | BUCKET | - | - | Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| DESSERTS | CAKE PORTIONS & INDIVIDUALS | CAKE P/C RED VELVET GLUTEN FREE 1-838 | 8 X 100GR | PRIESTLEYS | =TEXT("225546","#") | 29.16 | TRAY | - | - | Egg and Egg Products,Milk and Milk Products,Soybean and Soybean Products | Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Fish and Fish Products,Lupine,Molluscs (and products thereof),MSG,Oats (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Wheat (as an ingredient) | Almonds (as an ingredient),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Pecan nuts (as an ingredient),Tree Nuts and Tree Nut Products,Walnuts (as an ingredient) |
+| DESSERTS | CHEESECAKES & BAVARIANS | CHEESECAKE CARAMEL RICOTTA BAKED | 2.5 KG | SPOON WHOLESALE KITCHEN | =TEXT("220071","#") | 55.57 | EACH | - | - | Barley (as an ingredient),Egg and Egg Products,Oats (as an ingredient),Rye (as an ingredient),Wheat (as an ingredient) | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Walnuts (as an ingredient) |
+| DESSERTS | CHEESECAKES & BAVARIANS | CHEESECAKE P/C PISTACHIO INDIVIDUAL GLUTEN FREE | 8 X 105GR | PRIESTLEYS | =TEXT("227368","#") | 34.96 | TRAY | - | - | Egg and Egg Products,Milk and Milk Products,Pistachio nuts (as an ingredient),Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products | Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Wheat (as an ingredient) | Almonds (as an ingredient),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Pecan nuts (as an ingredient),Walnuts (as an ingredient) |
+| DESSERTS | CAKES - WHOLE & GATEAU | GATEAU CHOCOLATE RASPBERRY GLUTEN FREE VEGAN 1-798 | 2.39 KG | PRIESTLEYS | =TEXT("225450","#") | 68.23 | EACH | - | - | Pistachio nuts (as an ingredient),Soybean and Soybean Products,Tree Nuts and Tree Nut Products | Barley (as an ingredient),Brazil nuts (as an ingredient),Cereals containing Gluten (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Lupine,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pine Nuts (as an ingredient),Rye (as an ingredient),Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Cashews (as an ingredient),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Pecan nuts (as an ingredient),Walnuts (as an ingredient) |
+| DESSERTS | DESERT & PUDDING MIXES | MOUSSE MIX FRENCH VANILLA GLUTEN FREE | 1.8 KG | NESTLE | =TEXT("84646","#") | 47.45 | PAIL | - | - | Artificial Flavours,Milk and Milk Products | Artificial Colours,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Lupine,MSG,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products | Soybean and Soybean Products |
+| DESSERTS | PAVLOVA & MERINGUES | PAVLOVA PETITE 6-204 | 48 X 8.5GR | PRIESTLEYS | =TEXT("167328","#") | 133.05 | CARTON | - | - | Egg and Egg Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| DESSERTS | SLICES | SLICE CARAMEL GLUTEN FREE 1-136 | 15 X 110GR | PRIESTLEYS | =TEXT("120841","#") | 40.8 | TRAY | - | - | Almonds (as an ingredient),Egg and Egg Products,Milk and Milk Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) | Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Wheat (as an ingredient) | Cashews (as an ingredient),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pistachio nuts (as an ingredient),Walnuts (as an ingredient) |
+| DESSERTS | TARTS CRUMBLES & PIES | TART P/C CITRUS GLUTEN FREE 1-316 | 6 X 149GR | PRIESTLEYS | =TEXT("146180","#") | 31.76 | TRAY | - | - | Egg and Egg Products,Milk and Milk Products,Soybean and Soybean Products | Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Wheat (as an ingredient) | Almonds (as an ingredient),Cashews (as an ingredient),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Pecan nuts (as an ingredient),Pistachio nuts (as an ingredient),Walnuts (as an ingredient) | Artificial Colours,Artificial Flavours |
+| EGGS | EGG PRODUCTS | EGGS SCRAMBLED MIX | 5 X 2KG | SUNNYQUEEN | =TEXT("107453","#") | 94.3 | CARTON | - | - | Egg and Egg Products,Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| FINGER & SNACK FOODS | ARANCINI | ARANCINI MUSHROOM & WHITE WINE | 25'S | CHANS YUM CHA | =TEXT("188789","#") | 32.68 | PACKET | - | - | Milk and Milk Products,MSG,Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) |
+| FINGER & SNACK FOODS | FINGER FOOD OTHER | CAULIFLOWER POPCORN | 1 KG | STREETFOOD | =TEXT("204020","#") | 13.1 | PACKET | - | - | Artificial Colours,Cereals containing Gluten (and products thereof),Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) |
+| FINGER & SNACK FOODS | CHICKEN PRODUCTS | CHICKEN BALLS GARLIC | 1 KG | CATERERS CHOICE | =TEXT("136341","#") | 19.53 | PACKET | - | - | Cereals containing Gluten (and products thereof),Milk and Milk Products,Soybean and Soybean Products | Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,MSG,Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),Mustard (and products thereof),Oats (as an ingredient),Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Walnuts (as an ingredient),Wheat (as an ingredient) |
+| FINGER & SNACK FOODS | CHICKEN PRODUCTS | CHICKEN GOUJONS | 1 KG | STEGGLES | =TEXT("124858","#") | 110.04 | CARTON | - | - | Cereals containing Gluten (and products thereof),Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) | - | Sesame Seeds and Sesame Seed Products |
+| FINGER & SNACK FOODS | CHICKEN PRODUCTS | CHICKEN GOUJONS | 1 KG | JEFFERSONS | =TEXT("217492","#") | 116.1 | CARTON | - | - | Cereals containing Gluten (and products thereof),Soybean and Soybean Products,Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Tree Nuts and Tree Nut Products,Walnuts (as an ingredient) | Crustaceans (and products thereof),Egg and Egg Products,Molluscs (and products thereof),Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) |
+| FINGER & SNACK FOODS | CHICKEN PRODUCTS | CHICKEN NUGGETS BREAST TEMPURA | 1 KG | JEFFERSONS | =TEXT("210328","#") | 86.1 | CARTON | - | - | Cereals containing Gluten (and products thereof),Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Tree Nuts and Tree Nut Products,Walnuts (as an ingredient) | Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Molluscs (and products thereof),Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) |
+| FINGER & SNACK FOODS | CHICKEN PRODUCTS | CHICKEN NUGGETS GLUTEN FREE COATING | 45 X 22GR | INGHAM | =TEXT("140671","#") | 18.19 | PACKET | - | - | Egg and Egg Products,Soybean and Soybean Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) | - | Evaporated Milk, Dried Milk made from Soy or Cereals |
+| FINGER & SNACK FOODS | CHICKEN PRODUCTS | CHICKEN WYNGZ DEVIL BONELESS | 1 KG | INGHAM | =TEXT("185607","#") | 20.36 | PACKET | - | - | Cereals containing Gluten (and products thereof),Milk and Milk Products,Wheat (as an ingredient) | Almonds (as an ingredient),Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) | Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Soybean and Soybean Products | Artificial Colours,Artificial Flavours |
+| FINGER & SNACK FOODS | FINGER FOOD OTHER | LAMB KOFTA | 20 X 60GR | SPECIALTY FOODS | =TEXT("219513","#") | 28.21 | PACKET | - | - | Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| Fish | FISH FILLETS SKINLESS | RED SPOT EMPEROR FLT S/LESS B/LESS 100/200 (I) | 5 KG | SEACREST | =TEXT("194074","#") | 105.78 | CARTON | - | - | Fish and Fish Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) | - | Aspartame,Bee Pollen,Caffeine,Lupine,MSG,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly |
+| Fish | FISH FILLETS SKINLESS | RED SPOT EMPEROR FLT S/LESS B/LESS 200/300 (I) | 5 KG | SEACREST | =TEXT("194075","#") | 105.78 | CARTON | - | - | Fish and Fish Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) | - | Aspartame,Bee Pollen,Caffeine,MSG,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly |
+| FRUIT | FROZEN FRUIT | BERRIES MIXED IQF | 1 KG | CATERERS CHOICE | =TEXT("87419","#") | 12.66 | BAG | - | - | - | Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Caffeine,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,Milk and Milk Products,MSG,Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| FRUIT | CANNED FRUIT | LYCHEES | 565 GR | PANDAROO | =TEXT("30147","#") | 3.95 | CAN |
+| FRUIT | FROZEN FRUIT | STRAWBERRIES IQF | 1 KG | CATERERS CHOICE | =TEXT("87140","#") | 110.8 | CARTON | - | - | - | Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Caffeine,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Milk and Milk Products,MSG,Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| HERBS SPICES & SEASONINGS | HERBS & SPICES DRIED | CINNAMON QUILLS | 200 GR | KRIO KRUSH | =TEXT("8609","#") | 23.64 | EACH | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) | - | Guarana or extracts of Guarana,Molluscs (and products thereof) |
+| HERBS SPICES & SEASONINGS | HERBS & SPICES DRIED | CUMIN GROUND | 1 KG | CATERERS CHOICE | =TEXT("55747","#") | 24.03 | PACKET | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) | Milk and Milk Products,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products |
+| HERBS SPICES & SEASONINGS | GARLIC | GARLIC CRUSHED | 1 KG | CATERERS CHOICE | =TEXT("87019","#") | 10.05 | BUCKET | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| HERBS SPICES & SEASONINGS | HERBS & SPICES DRIED | GARLIC POWDER | 1 KG | CATERERS CHOICE | =TEXT("55752","#") | 16.68 | PACKET | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) | Peanuts and Peanut Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products |
+| HERBS SPICES & SEASONINGS | HORSERADISH | HORSERADISH CREAM | 175 GR | MASTERFOODS | =TEXT("115125","#") | 4.47 | JAR | - | - | Milk and Milk Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) | Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Caffeine,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,MSG,Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| HERBS SPICES & SEASONINGS | HERBS & SPICES DRIED | OREGANO LEAVES | 300 GR | CATERERS CHOICE | =TEXT("55765","#") | 12.22 | PACKET | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| HERBS SPICES & SEASONINGS | HERBS & SPICES DRIED | PAPRIKA SMOKEY | 500 GR | TRUMPS | =TEXT("152016","#") | 13.3 | PACKET | - | - | Artificial Flavours | Almonds (as an ingredient),Artificial Colours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| HERBS SPICES & SEASONINGS | HERBS & SPICES DRIED | PAPRIKA SWEET | 1 KG | CATERERS CHOICE | =TEXT("55767","#") | 20.16 | PACKET | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| HERBS SPICES & SEASONINGS | PEPPER | PEPPER LEMON | 1 KG | CATERERS CHOICE | =TEXT("55775","#") | 19.1 | PACKET | - | - | MSG | Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Caffeine,Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Lupine,Molluscs (and products thereof),Oats (as an ingredient),Rye (as an ingredient) | Almonds (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| HERBS SPICES & SEASONINGS | PEPPER | PEPPERCORNS GREEN | 800 GR | SANDHURST | =TEXT("13704","#") | 11.62 | JAR | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Walnuts (as an ingredient),Wheat (as an ingredient) |
+| HERBS SPICES & SEASONINGS | SALT | SALT CHICKEN GLUTEN FREE (FLAVON) | 10 KG | KRIO KRUSH | =TEXT("87152","#") | 64.73 | PAIL | - | - | MSG | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| HERBS SPICES & SEASONINGS | SALT | SALT SEA FLAKES NATURAL | 1 KG | CORNISH | =TEXT("160859","#") | 30.04 | PACKET | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| HERBS SPICES & SEASONINGS | SEASONINGS & SPRINKLES | SEASONING AMERICAN TEXAN STYLE DRY RUB | 700 GR | KRIO KRUSH | =TEXT("144639","#") | 18.03 | CAN |
+| HERBS SPICES & SEASONINGS | SEASONINGS & SPRINKLES | SEASONING MOROCCAN | 755 GR | MASTERFOODS | =TEXT("11489","#") | 27.75 | CAN | - | - | - | Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Caffeine,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,Milk and Milk Products,MSG,Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| ICE & ICE CREAM | GELATI & SORBET | GELATI ARTISAN ITALIAN PISTACHIO | 5 LT | EVEREST | =TEXT("192789","#") | 39.59 | TUB | - | - | Artificial Colours,Milk and Milk Products,Pistachio nuts (as an ingredient),Tree Nuts and Tree Nut Products | Artificial Flavours,Aspartame,Bee Pollen,Caffeine,Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Lupine,Molluscs (and products thereof),MSG,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products | Almonds (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Egg and Egg Products,Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Walnuts (as an ingredient) | Barley (as an ingredient),Celery / Celeriac (and products thereof),Guarana or extracts of Guarana,Mustard (and products thereof),Oats (as an ingredient),Rye (as an ingredient),Wheat (as an ingredient) |
+| ICE & ICE CREAM | ICE CREAM TUBS & BULK | ICE CREAM VANILLA BEAN | 5 LT | EVEREST | =TEXT("37963","#") | 42.73 | TRAY | - | - | Artificial Flavours,Egg and Egg Products,Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) | Cereals containing Gluten (and products thereof),Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products |
+| INTERNATIONAL FOODS | MEXICAN FOODS | CHIPOTLE PEPPERS IN ADOBO SAUCE | 2.8 KG | SANDHURST | =TEXT("218454","#") | 20.35 | CAN | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Walnuts (as an ingredient),Wheat (as an ingredient) |
+| INTERNATIONAL FOODS | COCONUT MILK & CREAM | COCONUT MILK POWDER | 1 KG | KNORR | =TEXT("147957","#") | 39.33 | PACKET | - | - | Milk and Milk Products | Artificial Colours,Artificial Flavours,Crustaceans (and products thereof),Lupine,Molluscs (and products thereof),MSG,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products | Cereals containing Gluten (and products thereof),Egg and Egg Products,Fish and Fish Products,Soybean and Soybean Products,Wheat (as an ingredient) | Almonds (as an ingredient),Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Mustard (and products thereof),Oats (as an ingredient),Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) |
+| INTERNATIONAL FOODS | MEXICAN FOODS | SALSA MILD CHUNKY | 2 LT | EDLYN | =TEXT("168812","#") | 11.75 | BOTTLE | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| INTERNATIONAL FOODS | MEXICAN FOODS | SEASONING TACO | 500 GR | KRIO KRUSH | =TEXT("170858","#") | 14.02 | TIN | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Walnuts (as an ingredient),Wheat (as an ingredient) |
+| INTERNATIONAL FOODS | MEXICAN FOODS | TACO SHELLS BULK | 200'S | MISSION FOODS | =TEXT("226487","#") | 49.06 | CARTON |
+| LAMB PORTIONED | LAMB | LAMB MINCE FROZEN | 2 KG | EMERALD VALLEY | =TEXT("223071","#") | 43.2 | PACKET | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| MISCELLANEOUS | NAPKINS | NAPKINS 2 PLY COCKTAIL QUARTER FOLD WHITE | 250'S | CASTAWAY | =TEXT("223382","#") | 44.56 | CARTON |
+| MISCELLANEOUS | PICKS AND SKEWARS | SKEWERS GUN 15CM | 250'S | CATERERS CHOICE | =TEXT("189846","#") | 49.3 | CARTON |
+| MISCELLANEOUS | TEATOWELS | TEA TOWEL LARGE BLUE CHECK 60 X 90CM | EACH | - | =TEXT("121562","#") | 3.77 | EACH |
+| MISCELLANEOUS | TEATOWELS | TEA TOWEL LARGE GREEN CHECK 60 X 90CM | EACH | - | =TEXT("121563","#") | 3.77 | EACH |
+| OILS & FATS | CANOLA | OIL CANOLA (PLASTIC DRUM) | 20 LT | SOPRA | =TEXT("108943","#") | 65.46 | CAN | - | - | - | Artificial Colours,Artificial Flavours,Cereals containing Gluten (and products thereof),Egg and Egg Products,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,Milk and Milk Products,MSG,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products |
+| OILS & FATS | OIL OLIVE | OIL OLIVE BLEND TUSCAN PURA | 20 LT | PEERLESS | =TEXT("180","#") | 127.51 | DRUM | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| OILS & FATS | OIL OLIVE | OIL OLIVE EXTRA VIRGIN | 4 LT | SANDHURST | =TEXT("52757","#") | 54.96 | CAN | - | - | - | Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Caffeine,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,Milk and Milk Products,MSG,Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| OILS & FATS | OIL OLIVE | OIL OLIVE EXTRA VIRGIN | 4 LT | ALFINAS | =TEXT("59060","#") | 114.49 | TIN | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| OILS & FATS | OIL VEGETABLE | OIL VEGETABLE BLENDED (PLASTIC DRUM) | 20 LT | SOPRA | =TEXT("67826","#") | 65.46 | CAN | - | - | Soybean and Soybean Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| Oysters | OYSTERS | OYSTERS HALF SHELL LARGE (I) | 10 DOZEN | SEA PRODUCTS | =TEXT("165985","#") | 240.26 | CARTON | - | - | Molluscs (and products thereof) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| Oysters | OYSTERS | OYSTERS HALF SHELL MEDIUM PREMIUM (I) | 10 DOZEN | SEA PRODUCTS | =TEXT("165984","#") | 225.81 | CARTON | - | - | Molluscs (and products thereof) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| Oysters | OYSTERS | OYSTERS HALF SHELL STANDARD (I) | 10 DOZ | SEA PRODUCTS | =TEXT("165983","#") | 165.57 | CARTON | - | - | Fish and Fish Products,Molluscs (and products thereof) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| PACKAGING | Clingwrap | CLINGWRAP DISPENSER | 600M X 45CM | CATERERS CHOICE | =TEXT("74938","#") | 30.01 | ROLL |
+| PACKAGING | Food Boxes | CONTAINER PAPER BOARD FAMILY BOX | 50'S | HUHTAMAKI | =TEXT("192466","#") | 23.26 | BUNDLE | - | - | - | Artificial Colours,Artificial Flavours,Cereals containing Gluten (and products thereof),Egg and Egg Products,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,Milk and Milk Products,MSG,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products |
+| PACKAGING | Rectangular Takeaway Containers | CONTAINER RECTANGLE 500ML CR500 172X120X39MM | 50'S | CHANROL | =TEXT("20782","#") | 60.7 | CARTON |
+| PACKAGING | Rectangular Takeaway Containers | CONTAINER RECTANGLE PLASTIC 1000ML MICROWAVABLE | 50'S | CATERERS CHOICE | =TEXT("196339","#") | 88.2 | CARTON |
+| PACKAGING | Disposable Cutlery | CUTLERY PACK KNIFE FORK & NAPKIN | 100'S | BIOPAK | =TEXT("189563","#") | 67.48 | CARTON |
+| PACKAGING | Lids | LIDS RECTANGLE PLASTIC COMMON 500-1000ML M/WAVABLE | 50'S | CATERERS CHOICE | =TEXT("196343","#") | 50.1 | CARTON |
+| PACKAGING | Baking Paper | PAPER EASY-BAKE 40.5CM DISPENSER | 120 MT | CASTAWAY | =TEXT("51758","#") | 30.15 | ROLL |
+| PACKAGING | Sandwich Wedges | SANDWICH WEDGE CLEAR LARGE 170X84X85MM | 100'S | MARINUCCI | =TEXT("88588","#") | 11.81 | SLEEVE |
+| PASTRIES & PIES | PIES PARTY/COCKTAIL | PIES PARTY PROPER LITTLE CLASSIC BEEF | 48 X 60GR | NATIONAL PIES | =TEXT("194294","#") | 55.75 | CARTON | - | - | Cereals containing Gluten (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Milk and Milk Products,MSG,Soybean and Soybean Products,Wheat (as an ingredient) | Almonds (as an ingredient),Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) | Artificial Colours,Artificial Flavours | Aspartame,Bee Pollen,Caffeine,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly |
+| PASTRIES & PIES | QUICHE & TART | QUICHE PARTY COMBO PACK | 72 X 46GR | PATTIES | =TEXT("140283","#") | 95 | CARTON | - | - | Cereals containing Gluten (and products thereof),Cereals containing Gluten (and products thereof),Cereals containing Gluten (and products thereof),Cereals containing Gluten (and products thereof),Egg and Egg Products,Egg and Egg Products,Egg and Egg Products,Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Milk and Milk Products,Milk and Milk Products,Milk and Milk Products,Milk and Milk Products,Soybean and Soybean Products,Soybean and Soybean Products,Soybean and Soybean Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Wheat (as an ingredient),Wheat (as an ingredient),Wheat (as an ingredient),Wheat (as an ingredient) | Almonds (as an ingredient),Almonds (as an ingredient),Almonds (as an ingredient),Almonds (as an ingredient),Artificial Colours,Artificial Colours,Artificial Colours,Artificial Colours,Artificial Flavours,Artificial Flavours,Artificial Flavours,Artificial Flavours,Aspartame,Aspartame,Aspartame,Aspartame,Barley (as an ingredient),Barley (as an ingredient),Barley (as an ingredient),Barley (as an ingredient),Bee Pollen,Bee Pollen,Bee Pollen,Bee Pollen,Brazil nuts (as an ingredient),Brazil nuts (as an ingredient),Brazil nuts (as an ingredient),Brazil nuts (as an ingredient),Caffeine,Caffeine,Caffeine,Caffeine,Cashews (as an ingredient),Cashews (as an ingredient),Cashews (as an ingredient),Cashews (as an ingredient),Celery / Celeriac (and products thereof),Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Crustaceans (and products thereof),Crustaceans (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Evaporated Milk, Dried Milk made from Soy or Cereals,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Fish and Fish Products,Fish and Fish Products,Fish and Fish Products,Guarana or extracts of Guarana,Guarana or extracts of Guarana,Guarana or extracts of Guarana,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Hazelnuts (as an ingredient),Hazelnuts (as an ingredient),Hazelnuts (as an ingredient),Lupine,Lupine,Lupine,Lupine,Macadamia or Queensland nuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),Molluscs (and products thereof),Molluscs (and products thereof),Molluscs (and products thereof),MSG,MSG,MSG,MSG,Mustard (and products thereof),Mustard (and products thereof),Oats (as an ingredient),Oats (as an ingredient),Oats (as an ingredient),Oats (as an ingredient),Peanuts and Peanut Products,Peanuts and Peanut Products,Peanuts and Peanut Products,Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pecan nuts (as an ingredient),Pecan nuts (as an ingredient),Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Phytosterol, Phytostanols and Esters,Phytosterol, Phytostanols and Esters,Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pine Nuts (as an ingredient),Pine Nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Pistachio nuts (as an ingredient),Pistachio nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Propolis,Propolis,Propolis,Quinine,Quinine,Quinine,Quinine,Royal Jelly,Royal Jelly,Royal Jelly,Royal Jelly,Rye (as an ingredient),Rye (as an ingredient),Rye (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sesame Seeds and Sesame Seed Products,Sesame Seeds and Sesame Seed Products,Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Tree Nuts and Tree Nut Products,Tree Nuts and Tree Nut Products,Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Egg Products,Unpasteurised Egg Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Unpasteurised Milk and Milk Products,Unpasteurised Milk and Milk Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Walnuts (as an ingredient),Walnuts (as an ingredient),Walnuts (as an ingredient) |
+| PASTRIES & PIES | SAUSAGE ROLLS & ASSTED ROLLS | ROLLS GOURMET 125MM GLUTEN FREE VEGAN | 30 X 140GR | READYBAKE | =TEXT("195506","#") | 120.33 | CARTON | - | - | Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) | Egg and Egg Products,Milk and Milk Products,Peanuts and Peanut Products,Tree Nuts and Tree Nut Products |
+| PASTRIES & PIES | SAUSAGE ROLLS PARTY/COCKTAIL | ROLLS MINI SPINACH & RICOTTA | 48 X 22GR | PATTIES | =TEXT("110353","#") | 41.16 | CARTON | - | - | Cereals containing Gluten (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Milk and Milk Products,Soybean and Soybean Products,Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Crustaceans (and products thereof),Fish and Fish Products,Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) | Sesame Seeds and Sesame Seed Products |
+| PASTRIES & PIES | SAUSAGE ROLLS & ASSTED ROLLS | ROLLS SPINACH & FETTA GOURMET LARGE | 8 X 180GR | HELEN'S | =TEXT("149995","#") | 31.6 | TRAY | - | - | Artificial Colours,Artificial Flavours,Cereals containing Gluten (and products thereof),Egg and Egg Products,Milk and Milk Products,Soybean and Soybean Products,Wheat (as an ingredient) | Almonds (as an ingredient),Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) |
+| PASTRIES & PIES | SAUSAGE ROLLS & ASSTED ROLLS | SAUSAGE ROLLS FLAKY PASTRY | 60 X 160GR | READYBAKE | =TEXT("145382","#") | 147.82 | CARTON | - | - | Cereals containing Gluten (and products thereof),Milk and Milk Products,Oats (as an ingredient),Rye (as an ingredient),Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) | Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Lupine,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Tree Nuts and Tree Nut Products |
+| PASTRIES & PIES | SAUSAGE ROLLS PARTY/COCKTAIL | SAUSAGE ROLLS PARTY PROPER LITTLE | 48 X 60GR | NATIONAL PIES | =TEXT("194293","#") | 55.75 | CARTON | - | - | Cereals containing Gluten (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Milk and Milk Products,MSG,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Wheat (as an ingredient) | Almonds (as an ingredient),Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Cashews (as an ingredient),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) | Artificial Colours,Artificial Flavours | Aspartame,Caffeine,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly |
+| PESTOS DIPS & PATE | DIPS | DIP AVOCADO (FRESH) | 800 GR | CASA DE MARE | =TEXT("221012","#") | 13.44 | BUCKET | - | - | Egg and Egg Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cereals containing Gluten (and products thereof),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Walnuts (as an ingredient),Wheat (as an ingredient) | Cashews (as an ingredient),Fish and Fish Products,Lupine,Sesame Seeds and Sesame Seed Products,Tree Nuts and Tree Nut Products |
+| PESTOS DIPS & PATE | DIPS | DIP EGGPLANT (FRESH) | 800 GR | CASA DE MARE | =TEXT("221015","#") | 12.74 | BUCKET | - | - | Egg and Egg Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cereals containing Gluten (and products thereof),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Walnuts (as an ingredient),Wheat (as an ingredient) | Cashews (as an ingredient),Fish and Fish Products,Lupine,Milk and Milk Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products |
+| PESTOS DIPS & PATE | DIPS | DIP HOMMUS BEETROOT | 1 KG | WOMBAT VALLEY | =TEXT("195005","#") | 18.44 | BUCKET | - | - | Sesame Seeds and Sesame Seed Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) | Soybean and Soybean Products |
+| PESTOS DIPS & PATE | DIPS | DIP SPICY CAPSICUM (FRESH) | 800 GR | CASA DE MARE | =TEXT("221017","#") | 12.74 | BUCKET | - | - | Egg and Egg Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Walnuts (as an ingredient),Wheat (as an ingredient) | Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Fish and Fish Products,Milk and Milk Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products |
+| PESTOS DIPS & PATE | DIPS | DIP TZATZIKI (FRESH) | 800 GR | CASA DE MARE | =TEXT("221018","#") | 9.69 | BUCKET | - | - | Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cereals containing Gluten (and products thereof),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Walnuts (as an ingredient),Wheat (as an ingredient) | Cashews (as an ingredient),Egg and Egg Products,Fish and Fish Products,Lupine,Sesame Seeds and Sesame Seed Products,Tree Nuts and Tree Nut Products |
+| PESTOS DIPS & PATE | PESTO | PESTO BASIL | 2 KG | WOMBAT VALLEY | =TEXT("125675","#") | 29.91 | BUCKET | - | - | Cashews (as an ingredient),Milk and Milk Products,Tree Nuts and Tree Nut Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| PESTOS DIPS & PATE | PESTO | PESTO BASIL VEGAN GLUTEN FREE (FRESH) | 1 KG | CASA DE MARE | =TEXT("210067","#") | 17.44 | TUB | - | - | Cashews (as an ingredient),Soybean and Soybean Products,Tree Nuts and Tree Nut Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cereals containing Gluten (and products thereof),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Walnuts (as an ingredient),Wheat (as an ingredient) | Egg and Egg Products,Fish and Fish Products,Lupine,Sesame Seeds and Sesame Seed Products |
+| PORK PRIMALS | PORK SHOULDER | PORK SHOULDER I/W 90CL FRZ (APP 18KG CTN) | KG | HOMESTEADPORK | =TEXT("191678","#") | 11.88 | KILOGRAM | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| POTATO PRODUCTS | CHIPS SPECIALTY | CHIPS 10MM CRISPY COATED FRIES | 4 X 2.5KG | JEFFERSONS | =TEXT("214815","#") | 48.93 | CARTON | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| POTATO PRODUCTS | FRIES & CHIPS | CHIPS 13MM FRIES | 2.5 KG | FARM FRITES | =TEXT("166872","#") | 38.84 | CARTON | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| POTATO PRODUCTS | POTATO INSTANT MASH | POTATO FLAKES INSTANT MASH | 10 KG | EDLYN | =TEXT("212924","#") | 125.73 | BAG | - | - | Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) | Almonds (as an ingredient),Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Walnuts (as an ingredient),Wheat (as an ingredient) | - | Artificial Colours,Artificial Flavours |
+| POULTRY WHOLE & CUTS | CHICKEN BREAST | CHICKEN BREAST FLTS RAW FROZEN | 2 KG | FARMYARD CHICKEN | =TEXT("166016","#") | 150.36 | CARTON | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| Prawns | PRAWN CUTLETS COOKED & RAW | PRAWN CUTLET RAW 10/15 VANNAMEI (SEAFROST) (I) | 700 GR | SEACREST | =TEXT("181862","#") | 197.4 | CARTON | - | - | Crustaceans (and products thereof) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| Prawns | PRAWN CUTLETS COOKED & RAW | PRAWN CUTLET RAW 26/30 VANNAMEI (SEAFROST) (I) | 700 GR | SEACREST | =TEXT("181866","#") | 16.1 | PACKET | - | - | Crustaceans (and products thereof) | Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Caffeine,Cereals containing Gluten (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,Milk and Milk Products,MSG,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| Prawns | PRAWNS WHOLE | PRAWNS WH CKD 10/15 AUSTRALIAN TIGER (A) | 3 KG | TASSAL | =TEXT("196242","#") | 154.49 | CARTON | - | - | Crustaceans (and products thereof) | Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Caffeine,Cereals containing Gluten (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Lupine,Milk and Milk Products,MSG,Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| READY MEALS | READY LASAGNE | PASTA LASAGNE ROUND BEEF TRADITIONAL PRE CUT 12'S | 3 KG | HELEN'S | =TEXT("170658","#") | 58.2 | EACH | - | - | Artificial Colours,Artificial Flavours,Cereals containing Gluten (and products thereof),Egg and Egg Products,Milk and Milk Products,Wheat (as an ingredient) | Almonds (as an ingredient),Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) |
+| RICES & LEGUMES | COUS COUS | COUS COUS | 1 KG | CATERERS CHOICE | =TEXT("65002","#") | 7.75 | PACKET | - | - | Cereals containing Gluten (and products thereof),Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) |
+| RICES & LEGUMES | COUS COUS | COUS COUS PEARL LARGE | 1 KG | TRUMPS | =TEXT("149860","#") | 9.37 | PACKET | - | - | Cereals containing Gluten (and products thereof),Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) | Milk and Milk Products,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products |
+| RICES & LEGUMES | RICE | RICE ARBORIO | 5 KG | RIVIANA | =TEXT("181516","#") | 24.55 | PACKET | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| SAUCES CONDIMENTS & DRESSINGS | CHUTNEYS & RELISHES & PICKLES | CHUTNEY TOMATO | 2 KG | BEERENBERG | =TEXT("167971","#") | 23.5 | BUCKET | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| SAUCES CONDIMENTS & DRESSINGS | WINE COOKING | COOKING WINE RED 10% ALCOHOL | 15 LT | CATERERS CHOICE | =TEXT("187764","#") | 59.73 | CASK | - | - | Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) | Egg and Egg Products |
+| SAUCES CONDIMENTS & DRESSINGS | WINE COOKING | COOKING WINE WHITE 10% ALCOHOL | 15 LT | CATERERS CHOICE | =TEXT("187763","#") | 59.73 | CASK | - | - | Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) | Egg and Egg Products |
+| SAUCES CONDIMENTS & DRESSINGS | MAYONNAISE | MAYONNAISE | 1 KG | KEWPIE | =TEXT("126952","#") | 13.64 | BOTTLE | - | - | Egg and Egg Products,MSG,Mustard (and products thereof),Soybean and Soybean Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| SAUCES CONDIMENTS & DRESSINGS | AIOLI | MAYONNAISE AIOLI ROASTED GARLIC GLUTEN FREE | 2.2 KG | MASTERFOODS | =TEXT("136408","#") | 31.91 | BOTTLE | - | - | Egg and Egg Products,Soybean and Soybean Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| SAUCES CONDIMENTS & DRESSINGS | AIOLI | MAYONNAISE AIOLI ROASTED GARLIC GLUTEN FREE | 1 LT | BRIGHT SIDE | =TEXT("221216","#") | 10.24 | BOTTLE | - | - | Egg and Egg Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Walnuts (as an ingredient),Wheat (as an ingredient) | Cashews (as an ingredient),Fish and Fish Products,Lupine,Milk and Milk Products,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products | Guarana or extracts of Guarana |
+| SAUCES CONDIMENTS & DRESSINGS | AIOLI | MAYONNAISE AIOLI ROASTED GARLIC SQUEEZE BOTTLE G/F | 1 LT | JEFFERSONS | =TEXT("214798","#") | 11.66 | BOTTLE | - | - | Egg and Egg Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Walnuts (as an ingredient),Wheat (as an ingredient) | Cashews (as an ingredient),Fish and Fish Products,Lupine,Milk and Milk Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products |
+| SAUCES CONDIMENTS & DRESSINGS | AIOLI | MAYONNAISE AIOLI SQUEEZE BOTTLE GLUTEN FREE | 1 LT | JEFFERSONS | =TEXT("214799","#") | 11.66 | BOTTLE | - | - | Egg and Egg Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Walnuts (as an ingredient),Wheat (as an ingredient) | Cashews (as an ingredient),Fish and Fish Products,Lupine,Milk and Milk Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products |
+| SAUCES CONDIMENTS & DRESSINGS | MAYONNAISE | MAYONNAISE DELI | 2.6 KG | HELLMANNS | =TEXT("167250","#") | 18.26 | JAR | - | - | Egg and Egg Products,Soybean and Soybean Products | Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Lupine,Molluscs (and products thereof),Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products | Fish and Fish Products,Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),MSG,Mustard (and products thereof),Oats (as an ingredient),Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| SAUCES CONDIMENTS & DRESSINGS | MAYONNAISE | MAYONNAISE FIERY CHIPOTLE SQUEEZE BOTTLE G/FREE | 1 LT | JEFFERSONS | =TEXT("214801","#") | 11.82 | BOTTLE | - | - | Egg and Egg Products,Mustard (and products thereof) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Walnuts (as an ingredient),Wheat (as an ingredient) | Cashews (as an ingredient),Fish and Fish Products,Lupine,Milk and Milk Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products |
+| SAUCES CONDIMENTS & DRESSINGS | MAYONNAISE | MAYONNAISE PREMIUM GLUTEN FREE | 4.5 KG | ZOOSH | =TEXT("1576","#") | 33.92 | PAIL | - | - | Egg and Egg Products,Milk and Milk Products | Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Caffeine,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,MSG,Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| SAUCES CONDIMENTS & DRESSINGS | CHUTNEYS & RELISHES & PICKLES | RELISH BALSAMIC BEETROOT | 2 KG | BEERENBERG | =TEXT("167957","#") | 28.95 | BUCKET | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| SAUCES CONDIMENTS & DRESSINGS | CHUTNEYS & RELISHES & PICKLES | RELISH CARAMELISED ONION GLUTEN FREE | 1 KG | JEFFERSONS | =TEXT("186671","#") | 13.89 | BUCKET | - | - | Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) | Cashews (as an ingredient) |
+| SAUCES CONDIMENTS & DRESSINGS | CHUTNEYS & RELISHES & PICKLES | RELISH ONION CARAMELISED | 2 KG | BEERENBERG | =TEXT("167959","#") | 24.22 | BUCKET | - | - | Barley (as an ingredient),Cereals containing Gluten (and products thereof) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Brazil nuts (as an ingredient),Cashews (as an ingredient),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| SAUCES CONDIMENTS & DRESSINGS | SAUCE BBQ | SAUCE BARBEQUE GLUTEN FREE | 4 LT | CATERERS CHOICE | =TEXT("104621","#") | 14.4 | BOTTLE | - | - | Artificial Colours,Artificial Flavours | Almonds (as an ingredient),Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| SAUCES CONDIMENTS & DRESSINGS | SAUCE SPECIALTY | SAUCE BURGER SQUEEZE BOTTLE GLUTEN FREE | 1 LT | JEFFERSONS | =TEXT("214805","#") | 13.33 | BOTTLE | - | - | Egg and Egg Products,Mustard (and products thereof) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Walnuts (as an ingredient),Wheat (as an ingredient) | Cashews (as an ingredient),Fish and Fish Products,Lupine,Milk and Milk Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products |
+| SAUCES CONDIMENTS & DRESSINGS | SAUCE POWDERED | SAUCE MIX BECHAMEL GLUTEN FREE | 2 KG | MAGGI | =TEXT("84659","#") | 39.81 | PAIL | - | - | Artificial Colours,Artificial Flavours,Milk and Milk Products,MSG | Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Lupine,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Tree Nuts and Tree Nut Products | Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) |
+| SAUCES CONDIMENTS & DRESSINGS | SAUCE PASTA | SAUCE PASTA SUGO PER | 3 KG | BUITONI | =TEXT("123335","#") | 22.25 | CAN | - | - | - | Artificial Colours,Artificial Flavours,Cereals containing Gluten (and products thereof),Egg and Egg Products,Fish and Fish Products,Lupine,Milk and Milk Products,MSG,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products |
+| SAUCES CONDIMENTS & DRESSINGS | SAUCE CHILLI | SAUCE PERI PERI GLUTEN FREE | 1.95 KG | KNORR | =TEXT("186998","#") | 23.07 | BOTTLE | - | - | - | Artificial Colours,Artificial Flavours,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Lupine,Molluscs (and products thereof),Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) | Milk and Milk Products,MSG,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products | Almonds (as an ingredient),Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Mustard (and products thereof),Oats (as an ingredient),Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| SAUCES CONDIMENTS & DRESSINGS | SAUCE PASTA | SAUCE TOMATO COULIS SUGO AL POMODORO | 3 KG | BUITONI | =TEXT("123338","#") | 22.25 | CAN | - | - | - | Artificial Colours,Artificial Flavours,Cereals containing Gluten (and products thereof),Egg and Egg Products,Fish and Fish Products,Lupine,Milk and Milk Products,MSG,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products |
+| SAUCES CONDIMENTS & DRESSINGS | SAUCE TOMATO | SAUCE TOMATO GLUTEN FREE | 4 LT | CATERERS CHOICE | =TEXT("104620","#") | 12.37 | BOTTLE | - | - | Artificial Flavours | Almonds (as an ingredient),Artificial Colours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| SAUSAGES HOT DOGS & PATTIES | BURGER PATTIES - BEEF | BURGER PATTIES ANGUS SLIDER | 20 X 40GR | ANGEL BAY | =TEXT("150562","#") | 82.04 | CARTON | - | - | Cereals containing Gluten (and products thereof),Egg and Egg Products,Milk and Milk Products,Soybean and Soybean Products,Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) |
+| SAUSAGES HOT DOGS & PATTIES | BURGER PATTIES - BEEF | BURGER PATTIES BEEF ANGUS GOURMET | 18 X 150GR | ANGEL BAY | =TEXT("116154","#") | 53.61 | PACKET | - | - | Cereals containing Gluten (and products thereof),Egg and Egg Products,Milk and Milk Products,Soybean and Soybean Products,Wheat (as an ingredient) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Crustaceans (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient) |
+| SMALLGOODS | BACON RASHERS | BACON MIDDLE RINDLESS GAS FLUSHED (QLD) | 2.5 KG | CATERERS CHOICE | =TEXT("217452","#") | 33.07 | PACKET | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| SMALLGOODS | SALAMI | CHORIZO SPANISH | 2 KG | HANS | =TEXT("79894","#") | 39.2 | PACKET | - | - | Evaporated Milk, Dried Milk made from Soy or Cereals,Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) | Soybean and Soybean Products |
+| SMALLGOODS | SALAMI | CHORIZO SPANISH ORIGIN (APP 2.5KG) | KG | PRIMO | =TEXT("86478","#") | 21.16 | KILOGRAM | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) | Evaporated Milk, Dried Milk made from Soy or Cereals,Milk and Milk Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) |
+| SMALLGOODS | HAM SLICED DICED AND SHREDDED | HAM LEG SLICED | 1 KG | CATERERS CHOICE | =TEXT("137284","#") | 15.23 | PACKET | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) | Soybean and Soybean Products |
+| SMALLGOODS | SMALLGOODS - GOURMET SPECIALITY | HAM SERRANO JAMON SLICED SPANISH (PROSCIUTTO) | 250 GR | REDONDO | =TEXT("173424","#") | 18.18 | TRAY | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| SMALLGOODS | SMALLGOODS - GOURMET SPECIALITY | MORTADELLA | 1 KG | BORGO SALUMI | =TEXT("17380","#") | 13.47 | EACH |
+| SMALLGOODS | SMALLGOODS - GOURMET SPECIALITY | PROSCIUTTO SLICED | 500 GR | DON | =TEXT("216997","#") | 24.27 | PACKET | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) | - | MSG,Phytosterol, Phytostanols and Esters,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) |
+| SMALLGOODS | SMALLGOODS - GOURMET SPECIALITY | PROSCIUTTO SLICED IMPORTED | 500 GR | HANS | =TEXT("193440","#") | 27.55 | PACKET | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) | Evaporated Milk, Dried Milk made from Soy or Cereals,Milk and Milk Products,Soybean and Soybean Products |
+| SMALLGOODS | SALAMI | SALAMI CASALINGO (APP 1.2KG) | KG | BORGO SALUMI | =TEXT("27888","#") | 27.74 | KILOGRAM |
+| SMALLGOODS | SALAMI | SALAMI DANISH THINLY SLICED | 1 KG | PRIMO | =TEXT("163480","#") | 25.04 | PACKET | - | - | Evaporated Milk, Dried Milk made from Soy or Cereals,Milk and Milk Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) | Soybean and Soybean Products |
+| SMALLGOODS | SALAMI | SALAMI PEPPERONI SLICED | 2 KG | CASTELLINI | =TEXT("213358","#") | 35.91 | PACKET | - | - | Artificial Flavours,Soybean and Soybean Products | Almonds (as an ingredient),Artificial Colours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| SOUPS & STOCKS | GRAVY MIXES | GRAVY MIX RICH | 2 KG | MAGGI | =TEXT("84652","#") | 28.5 | PAIL | - | - | Artificial Flavours,Cereals containing Gluten (and products thereof),MSG | Artificial Colours,Egg and Egg Products,Lupine,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Tree Nuts and Tree Nut Products | Crustaceans (and products thereof),Fish and Fish Products,Milk and Milk Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) |
+| SOUPS & STOCKS | GRAVY MIXES | JUS LIE BEEF SAUCE MIX GLUTEN FREE | 1.8 KG | MAGGI | =TEXT("138416","#") | 77.67 | TUB | - | - | Artificial Colours,Artificial Flavours,Soybean and Soybean Products | Cereals containing Gluten (and products thereof),Egg and Egg Products,Lupine,MSG,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Tree Nuts and Tree Nut Products | Fish and Fish Products,Milk and Milk Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) |
+| SOUPS & STOCKS | STOCKS BOULLIONS & BOOSTERS | STOCK LIQUID CHICKEN CONCENTRATE | 1 KG | KNORR | =TEXT("159962","#") | 17.18 | EACH | - | - | Egg and Egg Products,Milk and Milk Products,Soybean and Soybean Products | Peanuts and Peanut Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products | Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Fish and Fish Products,Lupine,Molluscs (and products thereof),Sesame Seeds and Sesame Seed Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Evaporated Milk, Dried Milk made from Soy or Cereals,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),MSG,Mustard (and products thereof),Oats (as an ingredient),Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| SPIRITS | SPIRITS - LIQUEUR | BOTTEGA LIMONCINO LIQUEUR CL50 21% | 500 ML | BOTTEGA | =TEXT("217364","#") | 34.97 | BOTTLE |
+| SPREADS | HONEY | HONEY POUR BOTTLE | 3 KG | SUPERBEE | =TEXT("24","#") | 25.84 | BOTTLE | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| SPREADS | SPREADS SWEET | SPREAD CHOCOLATE HAZELNUT | 1 KG | NUTELLA | =TEXT("115181","#") | 16.94 | JAR | - | - | Hazelnuts (as an ingredient),Milk and Milk Products,Soybean and Soybean Products | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Egg and Egg Products,Fish and Fish Products,Lupine,Macadamia or Queensland nuts (as an ingredient),Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Unpasteurised Egg Products,Walnuts (as an ingredient),Wheat (as an ingredient) | Tree Nuts and Tree Nut Products | Pine Nuts (as an ingredient) |
+| Squid and Octopus | SQUID & OCTOPUS | OCTOPUS BABY 26/40 IQF (I) | 1 KG | SEAFROST | =TEXT("201279","#") | 141 | CARTON | - | - | Molluscs (and products thereof) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) | Crustaceans (and products thereof) |
+| Squid and Octopus | SQUID & OCTOPUS | SQUID STRIPS TENDERISED PINEAPPLE CUT (I) | 1 KG | SEAFROST | =TEXT("147730","#") | 53.15 | CARTON | - | - | Molluscs (and products thereof) | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) | - | Aspartame,Bee Pollen,Caffeine,Evaporated Milk, Dried Milk made from Soy or Cereals,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| Value Added | SEAFOOD VALUE ADDED | SQUID SEA SALT & CRACKED PEPPER TWIST (I) | 1 KG | SEAFROST | =TEXT("189934","#") | 17.99 | PACKET | - | - | Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Soybean and Soybean Products | Artificial Colours,Artificial Flavours,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Lupine,Milk and Milk Products,MSG,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Milk and Milk Products | - | Aspartame,Bee Pollen,Caffeine,Guarana or extracts of Guarana,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Unpasteurised Egg Products |
+| VEGETABLES | VEGETABLE PREPARED | CAPERS BABY | 700 GR | CASA DE MARE | =TEXT("162609","#") | 16.55 | JAR | - | - | - | Artificial Colours,Artificial Flavours,Cereals containing Gluten (and products thereof),Egg and Egg Products,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,Milk and Milk Products,MSG,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products |
+| VEGETABLES | PICKLED/MARINATED/GRILLED/DRIED | CAPSICUM CHAR GRILLED GLUTEN FREE (FRESH) | 2 KG | CASA DE MARE | =TEXT("171633","#") | 34.29 | BUCKET | - | - | - | Artificial Colours,Artificial Flavours,Cereals containing Gluten (and products thereof),Egg and Egg Products,Fish and Fish Products,Lupine,Milk and Milk Products,MSG,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products |
+| VEGETABLES | VEGETABLES FROZEN | CAPSICUM ROASTED RED 20MM IQF | 6 KG | CHARWORKS | =TEXT("221345","#") | 95.66 | CARTON | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Celery / Celeriac (and products thereof),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Mustard (and products thereof),Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| VEGETABLES | PICKLED/MARINATED/GRILLED/DRIED | EGGPLANT CHAR GRILLED | 1.9 KG | CASA DE MARE | =TEXT("162607","#") | 33.7 | JAR | - | - | - | Artificial Colours,Artificial Flavours,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,Milk and Milk Products,MSG,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products |
+| VEGETABLES | OLIVES | OLIVES GREEN QUEEN PITTED | 2 KG | KALOS | =TEXT("168865","#") | 21.16 | JAR | - | - | - | Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Cereals containing Gluten (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Lupine,Milk and Milk Products,Peanuts and Peanut Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products | - | Caffeine,Crustaceans (and products thereof),Guarana or extracts of Guarana,MSG,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sesame Seeds and Sesame Seed Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) |
+| VEGETABLES | OLIVES | OLIVES GREEN QUEEN PITTED WHOLE (5KG D/W) | 10 KG | SANDHURST | =TEXT("58573","#") | 93.25 | PAIL | - | - | - | Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Caffeine,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Lupine,Milk and Milk Products,MSG,Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| VEGETABLES | VEGETABLES FROZEN | ONIONS CHOPPED | 2 KG | EDGELL | =TEXT("1757","#") | 14.37 | PACKET | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| VEGETABLES | VEGETABLES FROZEN | PEAS GREEN | 2.5 KG | DEWFRESH | =TEXT("141358","#") | 13.31 | PACKET | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) | - | Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| VEGETABLES | PICKLED/MARINATED/GRILLED/DRIED | PEPPERS RED ROASTED STRIPS | A12 | CASA DE MARE | =TEXT("159917","#") | 71.91 | CARTON | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| VEGETABLES | PICKLED/MARINATED/GRILLED/DRIED | PEPPERS RED ROASTED WHOLE | 4.2 KG | SANDHURST | =TEXT("76927","#") | 69.81 | CARTON | - | - | - | Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Caffeine,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,Milk and Milk Products,MSG,Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| VEGETABLES | PICKLED/MARINATED/GRILLED/DRIED | PUMPKIN CHAR GRILLED (FRESH) | 2 KG | CASA DE MARE | =TEXT("171631","#") | 30.61 | BUCKET | - | - | - | Artificial Colours,Artificial Flavours,Barley (as an ingredient),Cereals containing Gluten (and products thereof),Egg and Egg Products,Fish and Fish Products,Lupine,Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Wheat (as an ingredient) | Almonds (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Hazelnuts (as an ingredient),Macadamia or Queensland nuts (as an ingredient),Pecan nuts (as an ingredient),Pistachio nuts (as an ingredient),Tree Nuts and Tree Nut Products,Walnuts (as an ingredient) |
+| VEGETABLES | TOMATO PRODUCTS SHELF STABLE | TOMATO PASTE | 3.1 KG | CATERERS CHOICE | =TEXT("58221","#") | 12.43 | CAN | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Barley (as an ingredient),Brazil nuts (as an ingredient),Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
+| VEGETABLES | PICKLED/MARINATED/GRILLED/DRIED | TOMATOES SUNDRIED | 2 KG | CASA DE MARE | =TEXT("159919","#") | 27.45 | JAR | - | - | - | Artificial Colours,Artificial Flavours,Aspartame,Bee Pollen,Caffeine,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Guarana or extracts of Guarana,Lupine,Milk and Milk Products,MSG,Peanuts and Peanut Products,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| VEGETABLES | PICKLED/MARINATED/GRILLED/DRIED | TOMATOES SUNDRIED STRIPS | 2 KG | CASA DE MARE | =TEXT("159920","#") | 27.45 | JAR | - | - | Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L) | Artificial Colours,Artificial Flavours,Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Fish and Fish Products,Lupine,Milk and Milk Products,MSG,Peanuts and Peanut Products,Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Tree Nuts and Tree Nut Products | - | Aspartame,Bee Pollen,Caffeine,Evaporated Milk, Dried Milk made from Soy or Cereals,Phytosterol, Phytostanols and Esters,Propolis,Quinine,Royal Jelly,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products |
+| VINEGAR | VINEGAR OTHER | VINEGAR RICE WINE | 250 ML | OBENTO | =TEXT("93576","#") | 3.03 | BOTTLE | - | - | - | Almonds (as an ingredient),Artificial Colours,Artificial Flavours,Aspartame,Barley (as an ingredient),Bee Pollen,Brazil nuts (as an ingredient),Caffeine,Cashews (as an ingredient),Cereals containing Gluten (and products thereof),Crustaceans (and products thereof),Egg and Egg Products,Evaporated Milk, Dried Milk made from Soy or Cereals,Fish and Fish Products,Hazelnuts (as an ingredient),Lupine,Macadamia or Queensland nuts (as an ingredient),Milk and Milk Products,Molluscs (and products thereof),MSG,Oats (as an ingredient),Peanuts and Peanut Products,Pecan nuts (as an ingredient),Phytosterol, Phytostanols and Esters,Pine Nuts (as an ingredient),Pistachio nuts (as an ingredient),Propolis,Quinine,Royal Jelly,Rye (as an ingredient),Sesame Seeds and Sesame Seed Products,Soybean and Soybean Products,Sulphur Dioxide and Sulphites in concentrations > 10mg/kg (10mg/L),Tree Nuts and Tree Nut Products,Unpasteurised Egg Products,Unpasteurised Milk and Milk Products,Walnuts (as an ingredient),Wheat (as an ingredient) |
 ````
