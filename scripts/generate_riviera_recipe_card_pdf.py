@@ -42,6 +42,7 @@ from reportlab.platypus import (
 ROOT = Path(__file__).resolve().parents[1]
 BUILTINS_PATH = ROOT / "riviera_data" / "builtins.json"
 PACKAGES_PATH = ROOT / "riviera_data" / "function_packages.json"
+SSOT_MANIFEST_PATH = ROOT / "riviera_sources" / "current" / "manifest.json"
 DEFAULT_OUTPUT = ROOT / "output" / "pdf" / "Riviera_Kitchen_Recipe_Card_Book_2026-07-08.pdf"
 PROBE_OUTPUT = ROOT / "tmp" / "pdfs" / "_riviera_recipe_card_book_probe.pdf"
 EXPECTED_RECIPE_COUNT = 146
@@ -98,6 +99,17 @@ class RecipeMeta:
     package_labels: list[str]
     section_labels: list[str]
     group_sort: tuple[Any, ...]
+
+
+@dataclass
+class SourceInfo:
+    date: str
+    source_of_truth: str
+    overlay: str
+    chatgpt_source_dir: str
+    chatgpt_source_count: int
+    overlay_recipe_ids: list[str]
+    merge_direction: str
 
 
 class RecipeAnchor(Flowable):
@@ -398,6 +410,32 @@ def load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def load_source_info() -> SourceInfo:
+    manifest = load_json(SSOT_MANIFEST_PATH)
+    overlay_ids = [str(x) for x in manifest.get("houseStandardOverlayRecipeIds", [])]
+    if overlay_ids != HOUSE_STANDARD_IDS:
+        raise SystemExit("Riviera SSOT overlay recipe IDs do not match PDF house-standard order")
+
+    required_paths = [
+        manifest.get("sourceOfTruth"),
+        manifest.get("overlay"),
+        manifest.get("chatgptSourceDir"),
+    ]
+    for rel_path in required_paths:
+        if not rel_path or not (ROOT / str(rel_path)).exists():
+            raise SystemExit(f"Riviera SSOT manifest path missing: {rel_path}")
+
+    return SourceInfo(
+        date=str(manifest.get("date") or "2026-07-08"),
+        source_of_truth=str(manifest["sourceOfTruth"]),
+        overlay=str(manifest["overlay"]),
+        chatgpt_source_dir=str(manifest["chatgptSourceDir"]),
+        chatgpt_source_count=len(manifest.get("chatgptSources", [])),
+        overlay_recipe_ids=overlay_ids,
+        merge_direction=str(manifest.get("mergeDirection") or "ChatGPT baseline plus July 8 tapas overlay."),
+    )
+
+
 def recipe_ref_from_item(item: dict[str, Any]) -> str | None:
     for key in ("recipeId", "recipe_id", "id", "builtin_id"):
         rid = item.get(key)
@@ -693,7 +731,7 @@ def draw_page_background(canvas: Any, doc: BaseDocTemplate) -> None:
     canvas.line(doc.leftMargin, 13 * mm, width - doc.rightMargin, 13 * mm)
     canvas.setFillColor(BRAND_MUTED)
     canvas.setFont(FONTS["body"], 6.5)
-    canvas.drawString(doc.leftMargin, 8.5 * mm, "Riviera Kitchen - internal recipe cards")
+    canvas.drawString(doc.leftMargin, 8.5 * mm, "Riviera Kitchen - SSOT 2026-07-08 internal recipe cards")
     canvas.drawRightString(width - doc.rightMargin, 8.5 * mm, f"Page {canvas.getPageNumber()}")
     canvas.restoreState()
 
@@ -702,9 +740,9 @@ def table_cell(text: Any, style_name: str = "small") -> Paragraph:
     return para(text, STYLES[style_name])
 
 
-def build_cover(recipes: list[dict[str, Any]]) -> list[Any]:
+def build_cover(recipes: list[dict[str, Any]], source_info: SourceInfo) -> list[Any]:
     house_count = sum(1 for r in recipes if is_house_standard(r))
-    story: list[Any] = [Spacer(1, 62 * mm)]
+    story: list[Any] = [Spacer(1, 55 * mm)]
     story.append(Paragraph("Riviera Kitchen", STYLES["cover_title"]))
     story.append(Paragraph("Recipe Card Book", STYLES["cover_title"]))
     story.append(HRFlowable(width="62%", thickness=1.2, color=BRAND_GOLD, spaceBefore=5, spaceAfter=12))
@@ -713,7 +751,9 @@ def build_cover(recipes: list[dict[str, Any]]) -> list[Any]:
         ["Recipes", str(len(recipes))],
         ["House standards", str(house_count)],
         ["Layout", "A4 portrait, compact kitchen cards"],
-        ["Source", "riviera_data/builtins.json"],
+        ["Recipe baseline", "ChatGPT Riviera project sources"],
+        ["Latest overlay", f"{len(source_info.overlay_recipe_ids)} July 8 tapas/canape standards"],
+        ["Operational data", "riviera_data/builtins.json + function_packages.json"],
     ]
     t = Table(
         [[table_cell(a, "table_header"), table_cell(b, "small")] for a, b in summary],
@@ -739,7 +779,48 @@ def build_cover(recipes: list[dict[str, Any]]) -> list[Any]:
     story.append(Spacer(1, 16 * mm))
     story.append(
         Paragraph(
+            "This PDF follows the merged Riviera source of truth: ChatGPT Riviera project sources as the baseline, with the July 8 tapas/canape house-standard recipes as the only overlay.",
+            STYLES["body"],
+        )
+    )
+    story.append(Spacer(1, 3 * mm))
+    story.append(
+        Paragraph(
             "Use the index first: house standards and tapas/canapes lead the book, followed by Corporate, Riviera Table / Offsite, Weddings, Parties, Baby Shower, Funeral & Wake, then standalone core components.",
+            STYLES["body"],
+        )
+    )
+    story.append(PageBreak())
+    return story
+
+
+def build_source_stack(source_info: SourceInfo) -> list[Any]:
+    story: list[Any] = [Paragraph("Source stack", STYLES["h1"])]
+    rows = [
+        [table_cell("Authority", "table_header"), table_cell("Current file", "table_header")],
+        [table_cell("Riviera Source Of Truth", "small"), table_cell(source_info.source_of_truth, "small")],
+        [table_cell("ChatGPT baseline", "small"), table_cell(f"{source_info.chatgpt_source_count} source files in {source_info.chatgpt_source_dir}", "small")],
+        [table_cell("Latest overlay", "small"), table_cell(source_info.overlay, "small")],
+        [table_cell("Overlay scope", "small"), table_cell(f"{len(source_info.overlay_recipe_ids)} tapas/canape house standards only", "small")],
+        [table_cell("Card data", "small"), table_cell("riviera_data/builtins.json and riviera_data/function_packages.json", "small")],
+    ]
+    table = Table(rows, colWidths=[42 * mm, 124 * mm], repeatRows=1)
+    table.setStyle(index_table_style())
+    story.append(table)
+    story.append(Spacer(1, 5 * mm))
+    story.append(Paragraph("Merge rule", STYLES["h2"]))
+    story.append(
+        Paragraph(
+            source_info.merge_direction
+            + " For non-overlay conflicts, reconcile recipe cards and package logic back to the merged SSOT before treating them as final.",
+            STYLES["body"],
+        )
+    )
+    story.append(Spacer(1, 5 * mm))
+    story.append(Paragraph("Kitchen use", STYLES["h2"]))
+    story.append(
+        Paragraph(
+            "Each recipe appears once. Package, course, and house-standard tags are shown on the card and in the master index so kitchens can pull from the same card across weddings, corporate, offsite, parties, baby showers, wakes, and standalone prep.",
             STYLES["body"],
         )
     )
@@ -989,9 +1070,11 @@ def build_story(
     grouped: list[tuple[str, list[dict[str, Any]]]],
     meta: dict[str, RecipeMeta],
     recipe_pages: dict[str, int],
+    source_info: SourceInfo,
 ) -> list[Any]:
     story: list[Any] = []
-    story.extend(build_cover(recipes))
+    story.extend(build_cover(recipes, source_info))
+    story.extend(build_source_stack(source_info))
     story.extend(build_quick_index(grouped, recipe_pages))
     story.extend(build_master_index(grouped, meta, recipe_pages))
     for _, group_recipes_ in grouped:
@@ -1000,7 +1083,13 @@ def build_story(
     return story
 
 
-def build_pdf(output: Path, recipes: list[dict[str, Any]], grouped: list[tuple[str, list[dict[str, Any]]]], meta: dict[str, RecipeMeta]) -> dict[str, int]:
+def build_pdf(
+    output: Path,
+    recipes: list[dict[str, Any]],
+    grouped: list[tuple[str, list[dict[str, Any]]]],
+    meta: dict[str, RecipeMeta],
+    source_info: SourceInfo,
+) -> dict[str, int]:
     output.parent.mkdir(parents=True, exist_ok=True)
     PROBE_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     page_map: dict[str, int] = {}
@@ -1018,9 +1107,9 @@ def build_pdf(output: Path, recipes: list[dict[str, Any]], grouped: list[tuple[s
             bottomMargin=17 * mm,
             title="Riviera Kitchen Recipe Card Book",
             author="Riviera Yeppoon",
-            subject="Internal kitchen recipe cards",
+            subject="Internal kitchen recipe cards from ChatGPT baseline plus July 8 tapas overlay",
         )
-        story = build_story(recipes, grouped, meta, page_map)
+        story = build_story(recipes, grouped, meta, page_map, source_info)
         doc.build(story)
         if pass_idx > 0 and recorded == page_map:
             if target != output:
@@ -1054,13 +1143,14 @@ def main() -> int:
 
     recipes = load_json(BUILTINS_PATH)
     packages = load_json(PACKAGES_PATH)
+    source_info = load_source_info()
     if not isinstance(recipes, list):
         raise SystemExit("builtins.json must be a list")
     meta = build_recipe_meta(recipes, packages)
     ordered = sorted_recipes(recipes, meta)
     grouped = group_recipes(ordered, meta)
     validate_inputs(recipes, grouped)
-    page_map = build_pdf(args.output, ordered, grouped, meta)
+    page_map = build_pdf(args.output, ordered, grouped, meta, source_info)
     if len(page_map) != len(recipes):
         raise SystemExit(f"Expected page markers for {len(recipes)} recipes, got {len(page_map)}")
 
@@ -1073,6 +1163,8 @@ def main() -> int:
                 "output": str(args.output),
                 "recipes": len(recipes),
                 "houseStandards": len(HOUSE_STANDARD_IDS),
+                "sourceOfTruth": source_info.source_of_truth,
+                "chatgptSources": source_info.chatgpt_source_count,
                 "groups": {group: len(items) for group, items in grouped},
                 "firstRecipePages": {rid: page_map.get(rid) for rid in HOUSE_STANDARD_IDS[:5]},
             },
