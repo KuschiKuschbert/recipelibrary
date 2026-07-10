@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
 """Build Riviera's merged source-of-truth bundle.
 
-The ChatGPT Riviera project sources are treated as the authoritative baseline.
-The only overlay applied here is the July 8 tapas/canape house-standard recipe
-update represented in the structured Riviera recipe catalog.
+The verified ChatGPT Riviera Project snapshot is the legacy baseline. GitHub is
+the mutable authority. The only overlay applied here is the July 8
+tapas/canape house-standard recipe update represented in the structured Riviera
+recipe catalog.
 """
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import re
+import sys
 import zipfile
 from collections import defaultdict
 from html import unescape
@@ -170,11 +173,15 @@ def extract_xlsx(path: Path) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
-def ensure_extract(source: dict[str, str], source_path: Path) -> str | None:
+def ensure_extract(source: dict[str, str], source_path: Path, *, write: bool) -> str | None:
     extract_rel = source.get("extract")
     if not extract_rel:
         return None
     extract_path = SOURCE_DIR / extract_rel
+    if not write:
+        if not extract_path.is_file():
+            raise SystemExit(f"Missing source extract: {extract_path.relative_to(ROOT)}")
+        return extract_rel
     kind = source["kind"]
     if kind == "pdf":
         content = extract_pdf(source_path)
@@ -330,14 +337,14 @@ def build_tapas_overlay(recipes: list[dict[str, Any]], packages: dict[str, Any])
     return "\n".join(lines).rstrip() + "\n"
 
 
-def source_inventory() -> list[dict[str, Any]]:
+def source_inventory(*, write_extracts: bool) -> list[dict[str, Any]]:
     rows = []
     for source in SOURCE_FILES:
         filename = source["file"]
         path = SOURCE_DIR / filename
         if not path.exists():
             raise SystemExit(f"Missing ChatGPT source file: {path}")
-        extract_rel = ensure_extract(source, path)
+        extract_rel = ensure_extract(source, path, write=write_extracts)
         text_path = SOURCE_DIR / (extract_rel or filename)
         text: str | None = None
         lines: int | None = None
@@ -432,17 +439,8 @@ def build_source_of_truth(overlay: str, inventory: list[dict[str, Any]]) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
-def main() -> int:
-    recipes = load_recipe_catalog()
-    packages = load_json(PACKAGES_PATH)
-    inventory = source_inventory()
-    overlay = build_tapas_overlay(recipes, packages)
-    source_of_truth = build_source_of_truth(overlay, inventory)
-
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    TAPAS_OVERLAY_PATH.write_text(overlay, encoding="utf-8")
-    SOURCE_OF_TRUTH_PATH.write_text(source_of_truth, encoding="utf-8")
-    manifest = {
+def expected_manifest(inventory: list[dict[str, Any]]) -> dict[str, Any]:
+    return {
         "status": "active",
         "date": "2026-07-08",
         "mergeDirection": "ChatGPT Riviera project sources are baseline; July 8 tapas/canape house standards overlay only.",
@@ -453,8 +451,74 @@ def main() -> int:
         "houseStandardOverlayRecipeIds": HOUSE_STANDARD_IDS,
         "chatgptSources": inventory,
     }
-    MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps({"sourceOfTruth": str(SOURCE_OF_TRUTH_PATH), "sources": len(inventory), "overlayRecipes": len(HOUSE_STANDARD_IDS)}, indent=2))
+
+
+def check_generated_file(path: Path, expected: str, errors: list[str]) -> None:
+    if not path.is_file():
+        errors.append(f"missing generated file: {path.relative_to(ROOT)}")
+        return
+    actual = path.read_text(encoding="utf-8")
+    if actual != expected:
+        errors.append(
+            f"generated drift: {path.relative_to(ROOT)}; "
+            "run python3 scripts/build_riviera_source_of_truth.py --write"
+        )
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--check", action="store_true", help="verify generated SSOT files without writing")
+    mode.add_argument("--write", action="store_true", help="rebuild generated SSOT files")
+    args = parser.parse_args()
+
+    write = not args.check
+    recipes = load_recipe_catalog()
+    packages = load_json(PACKAGES_PATH)
+    inventory = source_inventory(write_extracts=write)
+    overlay = build_tapas_overlay(recipes, packages)
+    source_of_truth = build_source_of_truth(overlay, inventory)
+    manifest_text = json.dumps(expected_manifest(inventory), indent=2) + "\n"
+
+    if args.check:
+        errors: list[str] = []
+        check_generated_file(TAPAS_OVERLAY_PATH, overlay, errors)
+        check_generated_file(SOURCE_OF_TRUTH_PATH, source_of_truth, errors)
+        check_generated_file(MANIFEST_PATH, manifest_text, errors)
+        if errors:
+            for error in errors:
+                print(f"ERROR: {error}", file=sys.stderr)
+            return 1
+        print(
+            json.dumps(
+                {
+                    "status": "ok",
+                    "mode": "check",
+                    "sourceOfTruth": str(SOURCE_OF_TRUTH_PATH.relative_to(ROOT)),
+                    "sources": len(inventory),
+                    "overlayRecipes": len(HOUSE_STANDARD_IDS),
+                },
+                indent=2,
+            )
+        )
+        return 0
+
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    write_if_changed(TAPAS_OVERLAY_PATH, overlay)
+    write_if_changed(SOURCE_OF_TRUTH_PATH, source_of_truth)
+    write_if_changed(MANIFEST_PATH, manifest_text)
+    print(
+        json.dumps(
+            {
+                "status": "ok",
+                "mode": "write",
+                "sourceOfTruth": str(SOURCE_OF_TRUTH_PATH.relative_to(ROOT)),
+                "sources": len(inventory),
+                "overlayRecipes": len(HOUSE_STANDARD_IDS),
+            },
+            indent=2,
+        )
+    )
     return 0
 
 

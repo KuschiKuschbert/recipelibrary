@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "status": "verified",
+  "auditedAt": "2026-07-10T23:26:04+10:00",
+  "projectName": "Riviera",
+  "projectId": "g-p-6a0b96d47e4c8191a87f79189b94c5e3",
+  "method": "Authenticated read-only inspection of the live ChatGPT Project plus local SHA-256 comparison.",
+  "liveProjectInventory": {
+    "count": 28,
+    "inventorySha256": "cf7b6ad4c7c1e91d4f030f7fddc6a6631abcc6c1c27167acbcf5c6d12d661857",
+    "rows": [
+      ["Riviera_Kitchen_Recipe_Card_Book_2026-07-08.pdf", "PDF · Jul 9, 2026"],
+      ["Riviera_Source_Of_Truth_2026-07-08.md", "File · Jul 9, 2026"],
+      ["Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json", "File · Jul 9, 2026"],
+      ["Riviera_Tapas_House_Standards_Overlay_2026-07-08.md", "File · Jul 9, 2026"],
+      ["manifest.json", "File · Jul 9, 2026"],
+      ["Baclava-Cheesecake.txt", "Document · Jun 24, 2026"],
+      ["Riviera_Sunday_Tapas_Pull_Matrix_SOP_Addendum_v1_2026-06-16.md", "File · Jun 16, 2026"],
+      ["Riviera-Sunday-Tapas-Pull-Matrix-—-A4-Kitchen-Sheet-v1.txt", "Document · Jun 16, 2026"],
+      ["kitchen_pull_matrix.pdf", "PDF · Jun 16, 2026"],
+      ["Riviera_SOP_Master_Index_v10_2026-06-16.md", "File · Jun 16, 2026"],
+      ["Riviera_Kitchen_Production_Harness_Index_v5_2026-06-16.md", "File · Jun 16, 2026"],
+      ["Riviera_Count_Ordering_Harness_v3_2026-06-16.md", "File · Jun 16, 2026"],
+      ["Riviera_Component_Module_Library_v3_2026-06-16.md", "File · Jun 16, 2026"],
+      ["Riviera_Real_Event_Test_Pack_v2_2026-06-16.md", "File · Jun 16, 2026"],
+      ["Riviera_Production_Sheet_Template_Library_v2_2026-06-16.md", "File · Jun 16, 2026"],
+      ["MYO bars and Buffets.pdf", "PDF · Jun 12, 2026"],
+      ["Updated Riviera instructions", "Jun 9, 2026"],
+      ["foodpairing_condensed_riviera_reference.md", "File · Jun 9, 2026"],
+      ["Riviera_Weekly_Order_Workflow_v1_2026-06-09.md", "File · Jun 9, 2026"],
+      ["Riviera_Package_Source_Digest_v1_2026-06-09.md", "File · Jun 9, 2026"],
+      ["Riviera_Order_Template_v1_2026-06-09.md", "File · Jun 9, 2026"],
+      ["Riviera_Canonical_Recipe_Bank_v1_2026-06-08.md", "File · Jun 8, 2026"],
+      ["Riviera_Supplier_Ordering_Translator_v1_2026-06-08.md", "File · Jun 8, 2026"],
+      ["Riviera_Seasoning_Palette_v2_2026-06-08.md", "File · Jun 8, 2026"],
+      ["Recipes for Prep Chef.docx", "Document · Jun 4, 2026"],
+      ["Olive+Green+on+White+Background.webp", "Image · May 26, 2026"],
+      ["Bidfood_Item_List.pdf", "PDF · May 25, 2026"],
+      ["OrderForm11579311 - 1098368202605251257349179710.xlsx", "Spreadsheet · May 25, 2026"]
+    ]
+  },
+  "baselineSources": {
+    "count": 23,
+    "downloadableByteIdenticalCount": 21,
+    "nonDownloadableVerifiedCount": 2,
+    "manifest": "riviera_sources/current/manifest.json"
+  },
+  "mirrorArtifacts": [
+    {
+      "path": "output/pdf/Riviera_Kitchen_Recipe_Card_Book_2026-07-08.pdf",
+      "sha256": "95647bc41728146d881bd8e9a0f5278fa7eb7dece08004ef8f3e49955c7823bb"
+    },
+    {
+      "path": "riviera_sources/current/Riviera_Source_Of_Truth_2026-07-08.md",
+      "sha256": "e874b139a54e275d3f14e3b28bde0820fd6ec27f391b6aa3aa267c5cc9299605"
+    },
+    {
+      "path": "riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json",
+      "sha256": "79a1f0ee3b008afff923022507fb87c54934b872a6b7ec26ce97277c3143c732"
+    },
+    {
+      "path": "riviera_sources/current/Riviera_Tapas_House_Standards_Overlay_2026-07-08.md",
+      "sha256": "1bf381a790edebed865d14fb6ea323adad74f8e97bb93f44a694225f0a4f4906"
+    },
+    {
+      "path": "riviera_sources/current/manifest.json",
+      "sha256": "89d718c8ccab08939fe22f9af3866a34de32f63ade4c11921490714153a4375a"
+    }
+  ],
+  "nonDownloadableSources": {
+    "updatedInstructions": {
+      "localPath": "riviera_sources/chatgpt_project_sources_2026-07-08/Updated_Riviera_instructions_2026-06-09_extracted.md",
+      "startMarker": "Riviera Project Instructions — Lean Control Version",
+      "endMarker": "Always aim for a chef-ready output.",
+      "normalizedCharacters": 11828,
+      "normalizedSha256": "3190f45e74c04b6a979d4e3dba746da797b8ad3ce3b97745b844bd4378f5f61e"
+    },
+    "brandImage": {
+      "liveName": "Olive+Green+on+White+Background.webp",
+      "fileId": "file_000000008dc4720b967336eeaeb39f74",
+      "encodedPath": "riviera_sources/chatgpt_project_sources_2026-07-08/Olive+Green+on+White+Background.webp.base64",
+      "decodedBytes": 3808,
+      "decodedSha256": "c0635019ca839e6dff4ac2aebfabe1969b781d28e8ff13621c197001d760081f"
+    }
+  },
+  "conclusion": "The live Project contained the exact 23-source baseline plus five byte-identical GitHub mirror artifacts at audit time. Future active work uses the GitHub/local-project authority model."
+}

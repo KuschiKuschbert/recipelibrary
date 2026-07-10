@@ -30,11 +30,13 @@ Personal **Kuschi Kitchen Library** (GitHub Pages, public repo).
 **Active Riviera SSOT:** [riviera_sources/current/Riviera_Source_Of_Truth_2026-07-08.md](riviera_sources/current/Riviera_Source_Of_Truth_2026-07-08.md).
 **Structured Riviera recipe catalog:** [riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json](riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json).
 
-- Use the 23 live ChatGPT Riviera project sources in [riviera_sources/chatgpt_project_sources_2026-07-08/](riviera_sources/chatgpt_project_sources_2026-07-08/) as the latest baseline.
+- **GitHub is the only mutable Riviera authority.** Use the ChatGPT local project pointed at this repository for active work. Treat the old ChatGPT Riviera Project as a read-only historical snapshot/mirror; never maintain two independently editable copies.
+- The 23 files in [riviera_sources/chatgpt_project_sources_2026-07-08/](riviera_sources/chatgpt_project_sources_2026-07-08/) are the verified legacy ChatGPT Project baseline snapshot.
 - Apply [riviera_sources/current/Riviera_Tapas_House_Standards_Overlay_2026-07-08.md](riviera_sources/current/Riviera_Tapas_House_Standards_Overlay_2026-07-08.md) as the only July 8 overlay; it supersedes older ChatGPT recipe-bank content for those 16 tapas/canape house standards only.
 - Edit the structured recipe catalog first for Riviera built-in recipe changes, then run `python3 scripts/sync_riviera_recipe_catalog.py --write`; `python3 scripts/sync_riviera_recipe_catalog.py --check` must pass before PDF generation or shipping.
 - Treat `riviera_data/builtins.json`, `riviera_data/function_packages.json`, and generated PDFs as operational representations. For non-overlay conflicts, reconcile them back to the Riviera SSOT/structured catalog before treating them as final.
-- Rebuild the merged Riviera SSOT with `python3 scripts/build_riviera_source_of_truth.py`.
+- Use `python3 scripts/riviera_sync.py verify --remote` for full source, generated-data, legacy-mirror, and GitHub parity checks. Rebuild the deterministic chain with `python3 scripts/riviera_sync.py rebuild`.
+- Follow [docs/riviera/RIVIERA_SYNC_RUNBOOK.md](docs/riviera/RIVIERA_SYNC_RUNBOOK.md) for legacy Project imports or mirror replacement. Browser-driven Project uploads are never the primary sync mechanism.
 
 ## Browser verification (agents)
 
