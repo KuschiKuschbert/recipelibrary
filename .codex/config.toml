@@ -1,0 +1,24 @@
+#:schema https://developers.openai.com/codex/config-schema.json
+
+[mcp_servers.epicure]
+url = "https://epicure-mcp.kaikaku.ai/mcp"
+enabled = true
+required = false
+startup_timeout_sec = 15
+tool_timeout_sec = 60
+default_tools_approval_mode = "auto"
+enabled_tools = [
+  "compare_on_axis",
+  "pairing_score",
+  "find_pairings",
+  "flavour_correlations",
+  "cultural_profile",
+  "neighbors",
+  "morph",
+  "list_targets",
+  "list_factors",
+  "ingredient_on_factor",
+  "pareto_navigate",
+  "closest_mode",
+  "where_on_atlas",
+]

@@ -15,6 +15,12 @@ Personal **Kuschi Kitchen Library** (GitHub Pages, public repo).
 - Use the skill's tiering/output rules as the response contract for culinary questions.
 - Only skip `kitchen-council` when the user clearly requests non-culinary technical work (code/data/site operations) with no food decision involved.
 
+## Epicure MCP pairing evidence
+
+- The project-scoped `epicure` MCP is configured in [`.codex/config.toml`](.codex/config.toml). When it is available, call `find_pairings` on the primary ingredient(s) before designing, creating, suggesting, or substantially reworking a recipe or dish, then use the result as evidence within the `kitchen-council` workflow.
+- Use Epicure for ingredient co-occurrence, pairing, cuisine-direction, and flavour-space exploration. Do not treat embedding similarity as authority for food safety, allergen safety, nutrition, authenticity, or service feasibility.
+- If the remote MCP is unavailable, continue with `kitchen-council`; Epicure is an enhancement, not a blocker.
+
 ## Canonical clone (kitchen library)
 
 **Primary working copy:** this repo (`recipelibrary-1` on disk). Other paths such as `~/recipelibrary` or `~/Desktop/recipelibrary` may be older duplicates—confirm `git remote -v` and path before large edits or agent-wide search so work is not applied to the wrong tree.
