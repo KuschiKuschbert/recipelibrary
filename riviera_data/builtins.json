@@ -246,6 +246,11 @@
         "prep": "converted from 1/4 cup"
       },
       {
+        "qty": "30 g",
+        "item": "Brown Sugar",
+        "prep": "approx. 2 tbsp, packed"
+      },
+      {
         "qty": "5 ml",
         "item": "Tabasco",
         "prep": "converted from 1 tsp; adjust to taste"
@@ -274,7 +279,7 @@
     "method_steps": [
       "OYSTERS: Remove oysters from freezer at least 24 hours before the event. Defrost in the coldroom, drain and keep chilled.",
       "SPECK: Finely dice speck, place in a labelled PC and refrigerate.",
-      "KILPATRICK SAUCE: Mix GF Worcestershire, BBQ sauce, Tabasco and dried parsley. Transfer to a labelled squeeze bottle.",
+      "KILPATRICK SAUCE: Whisk the brown sugar into the GF Worcestershire until fully dissolved, then mix in BBQ sauce, Tabasco and dried parsley. Transfer to a labelled squeeze bottle.",
       "GARNISH: Slice lemons and chop parsley. Store separately in labelled PCs in the coldroom."
     ],
     "service": [

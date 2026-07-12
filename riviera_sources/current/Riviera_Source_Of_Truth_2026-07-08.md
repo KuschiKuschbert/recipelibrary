@@ -196,6 +196,7 @@ Keep capers very dry before frying. Wet capers spit badly and do not crisp.
 | 500 g | Speck - finely diced |
 | 250 ml | GF Worcestershire Sauce |
 | 60 ml | BBQ Sauce - converted from 1/4 cup |
+| 30 g | Brown Sugar - approx. 2 tbsp, packed |
 | 5 ml | Tabasco - converted from 1 tsp; adjust to taste |
 | 5 g | Dried Parsley - converted from 2 tbsp |
 | 2 kg | Rock Salt - for serving tray |
@@ -206,7 +207,7 @@ Keep capers very dry before frying. Wet capers spit badly and do not crisp.
 
 1. OYSTERS: Remove oysters from freezer at least 24 hours before the event. Defrost in the coldroom, drain and keep chilled.
 2. SPECK: Finely dice speck, place in a labelled PC and refrigerate.
-3. KILPATRICK SAUCE: Mix GF Worcestershire, BBQ sauce, Tabasco and dried parsley. Transfer to a labelled squeeze bottle.
+3. KILPATRICK SAUCE: Whisk the brown sugar into the GF Worcestershire until fully dissolved, then mix in BBQ sauce, Tabasco and dried parsley. Transfer to a labelled squeeze bottle.
 4. GARNISH: Slice lemons and chop parsley. Store separately in labelled PCs in the coldroom.
 
 #### On the day / service
