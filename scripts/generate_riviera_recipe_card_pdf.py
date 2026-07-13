@@ -46,6 +46,7 @@ BUILTINS_PATH = ROOT / "riviera_data" / "builtins.json"
 PACKAGES_PATH = ROOT / "riviera_data" / "function_packages.json"
 SSOT_MANIFEST_PATH = ROOT / "riviera_sources" / "current" / "manifest.json"
 DEFAULT_OUTPUT = ROOT / "output" / "pdf" / "Riviera_Kitchen_Recipe_Card_Book_2026-07-08.pdf"
+HOUSE_STANDARDS_OUTPUT = ROOT / "output" / "pdf" / "Riviera_House_Standards_Recipe_Manual_2026-07-08.pdf"
 PROBE_OUTPUT = ROOT / "tmp" / "pdfs" / "_riviera_recipe_card_book_probe.pdf"
 EXPECTED_RECIPE_COUNT = 146
 
@@ -763,13 +764,14 @@ def table_cell(text: Any, style_name: str = "small") -> Paragraph:
     return para(text, STYLES[style_name])
 
 
-def build_cover(recipes: list[dict[str, Any]], source_info: SourceInfo) -> list[Any]:
+def build_cover(recipes: list[dict[str, Any]], source_info: SourceInfo, house_standards_only: bool) -> list[Any]:
     house_count = sum(1 for r in recipes if is_house_standard(r))
     story: list[Any] = [Spacer(1, 55 * mm)]
     story.append(Paragraph("Riviera Kitchen", STYLES["cover_title"]))
-    story.append(Paragraph("Recipe Card Book", STYLES["cover_title"]))
+    story.append(Paragraph("House Standards Recipe Manual" if house_standards_only else "Recipe Card Book", STYLES["cover_title"]))
     story.append(HRFlowable(width="62%", thickness=1.2, color=BRAND_GOLD, spaceBefore=5, spaceAfter=12))
-    story.append(Paragraph("Internal kitchen reference - metric, package-tagged, tapas first", STYLES["cover_subtitle"]))
+    subtitle = "Internal kitchen reference - 16 current standards, metric and service-ready" if house_standards_only else "Internal kitchen reference - metric, package-tagged, tapas first"
+    story.append(Paragraph(subtitle, STYLES["cover_subtitle"]))
     summary = [
         ["Recipes", str(len(recipes))],
         ["House standards", str(house_count)],
@@ -810,7 +812,9 @@ def build_cover(recipes: list[dict[str, Any]], source_info: SourceInfo) -> list[
     story.append(Spacer(1, 3 * mm))
     story.append(
         Paragraph(
-            "Use the index first: house standards and tapas/canapes lead the book, followed by Corporate, Riviera Table / Offsite, Weddings, Parties, Baby Shower, Funeral & Wake, then standalone core components.",
+            "Use the index first. Recipes follow the approved house-standard order, with savoury service items first and core sauces and accompaniments alongside the dishes they support."
+            if house_standards_only
+            else "Use the index first: house standards and tapas/canapes lead the book, followed by Corporate, Riviera Table / Offsite, Weddings, Parties, Baby Shower, Funeral & Wake, then standalone core components.",
             STYLES["body"],
         )
     )
@@ -849,7 +853,6 @@ def build_source_stack(source_info: SourceInfo) -> list[Any]:
             STYLES["body"],
         )
     )
-    story.append(PageBreak())
     return story
 
 
@@ -922,7 +925,6 @@ def build_master_index(
         table.setStyle(index_table_style())
         story.append(table)
         story.append(Spacer(1, 2 * mm))
-    story.append(PageBreak())
     return story
 
 
@@ -1096,9 +1098,10 @@ def build_story(
     meta: dict[str, RecipeMeta],
     recipe_pages: dict[str, int],
     source_info: SourceInfo,
+    house_standards_only: bool,
 ) -> list[Any]:
     story: list[Any] = []
-    story.extend(build_cover(recipes, source_info))
+    story.extend(build_cover(recipes, source_info, house_standards_only))
     story.extend(build_source_stack(source_info))
     story.extend(build_quick_index(grouped, recipe_pages))
     story.extend(build_master_index(grouped, meta, recipe_pages))
@@ -1114,6 +1117,7 @@ def build_pdf(
     grouped: list[tuple[str, list[dict[str, Any]]]],
     meta: dict[str, RecipeMeta],
     source_info: SourceInfo,
+    house_standards_only: bool,
 ) -> dict[str, int]:
     output.parent.mkdir(parents=True, exist_ok=True)
     PROBE_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
@@ -1130,11 +1134,11 @@ def build_pdf(
             rightMargin=13 * mm,
             topMargin=13 * mm,
             bottomMargin=17 * mm,
-            title="Riviera Kitchen Recipe Card Book",
+            title="Riviera House Standards Recipe Manual" if house_standards_only else "Riviera Kitchen Recipe Card Book",
             author="Riviera Yeppoon",
             subject="Internal kitchen recipe cards from ChatGPT baseline plus July 8 tapas overlay",
         )
-        story = build_story(recipes, grouped, meta, page_map, source_info)
+        story = build_story(recipes, grouped, meta, page_map, source_info, house_standards_only)
         doc.build(story)
         if pass_idx > 0 and recorded == page_map:
             if target != output:
@@ -1144,9 +1148,9 @@ def build_pdf(
     return page_map
 
 
-def validate_inputs(recipes: list[dict[str, Any]], grouped: list[tuple[str, list[dict[str, Any]]]]) -> None:
-    if len(recipes) != EXPECTED_RECIPE_COUNT:
-        raise SystemExit(f"Expected {EXPECTED_RECIPE_COUNT} recipes, found {len(recipes)}")
+def validate_inputs(recipes: list[dict[str, Any]], grouped: list[tuple[str, list[dict[str, Any]]]], expected_count: int) -> None:
+    if len(recipes) != expected_count:
+        raise SystemExit(f"Expected {expected_count} recipes, found {len(recipes)}")
     seen = [str(recipe.get("id")) for _, group_items in grouped for recipe in group_items]
     if len(seen) != len(set(seen)):
         duplicates = sorted({rid for rid in seen if seen.count(rid) > 1})
@@ -1163,7 +1167,8 @@ def validate_inputs(recipes: list[dict[str, Any]], grouped: list[tuple[str, list
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--output", type=Path)
+    parser.add_argument("--house-standards-only", action="store_true", help="Generate the concise 16-recipe house standards manual")
     args = parser.parse_args()
 
     source_info = load_source_info()
@@ -1171,11 +1176,16 @@ def main() -> int:
     packages = load_json(PACKAGES_PATH)
     if not isinstance(recipes, list):
         raise SystemExit("structured recipe catalog recipes must be a list")
+    expected_count = EXPECTED_RECIPE_COUNT
+    if args.house_standards_only:
+        recipes = [recipe for recipe in recipes if str(recipe.get("id")) in HOUSE_STANDARD_ORDER]
+        expected_count = len(HOUSE_STANDARD_IDS)
     meta = build_recipe_meta(recipes, packages)
     ordered = sorted_recipes(recipes, meta)
     grouped = group_recipes(ordered, meta)
-    validate_inputs(recipes, grouped)
-    page_map = build_pdf(args.output, ordered, grouped, meta, source_info)
+    validate_inputs(recipes, grouped, expected_count)
+    output = args.output or (HOUSE_STANDARDS_OUTPUT if args.house_standards_only else DEFAULT_OUTPUT)
+    page_map = build_pdf(output, ordered, grouped, meta, source_info, args.house_standards_only)
     if len(page_map) != len(recipes):
         raise SystemExit(f"Expected page markers for {len(recipes)} recipes, got {len(page_map)}")
 
@@ -1185,7 +1195,7 @@ def main() -> int:
     print(
         json.dumps(
             {
-                "output": str(args.output),
+                "output": str(output),
                 "recipes": len(recipes),
                 "houseStandards": len(HOUSE_STANDARD_IDS),
                 "sourceOfTruth": source_info.source_of_truth,
