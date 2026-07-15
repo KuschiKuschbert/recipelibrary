@@ -220,26 +220,42 @@
   // ── Routing ───────────────────────────────────────────────────────────────
   var _openFn  = null;
   var _closeFn = null;
+  var _routeOwner = 'route-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
 
   function _pushOpen(id) {
     try {
       var p = new URLSearchParams(window.location.search);
+      if (p.get('open') === String(id)) return;
       p.set('open', id);
       var qs = p.toString();
       var url = window.location.pathname + (qs ? '?' + qs : '') + window.location.hash;
-      history.pushState({ kuschiOpen: id }, '', url);
+      var nextState = Object.assign({}, history.state || {});
+      nextState.kuschiOpen = id;
+      nextState.kuschiRouteOwner = _routeOwner;
+      history.pushState(nextState, '', url);
     } catch (_) {}
   }
 
   function _popOpen() {
     try {
       var p = new URLSearchParams(window.location.search);
-      if ((history.state && history.state.kuschiOpen) || p.has('open')) {
-        p.delete('open');
-        var qs = p.toString();
-        var url = window.location.pathname + (qs ? '?' + qs : '') + window.location.hash;
-        history.pushState({}, '', url);
+      if (!p.has('open')) return;
+
+      // A modal opened from this page owns one history entry, so X should
+      // consume it just like Android Back. Direct ?open= links have no local
+      // entry to consume and are cleaned in place instead.
+      if (history.state && history.state.kuschiOpen && history.state.kuschiRouteOwner === _routeOwner) {
+        history.back();
+        return;
       }
+
+      p.delete('open');
+      var qs = p.toString();
+      var url = window.location.pathname + (qs ? '?' + qs : '') + window.location.hash;
+      var nextState = Object.assign({}, history.state || {});
+      delete nextState.kuschiOpen;
+      delete nextState.kuschiRouteOwner;
+      history.replaceState(nextState, '', url);
     } catch (_) {}
   }
 
@@ -248,7 +264,13 @@
       var p = new URLSearchParams(window.location.search);
       var id = p.get('open');
       if (id && typeof _openFn === 'function') {
-        setTimeout(function () { _openFn(id); }, 120);
+        setTimeout(function () {
+          var currentId = '';
+          try {
+            currentId = new URLSearchParams(window.location.search).get('open') || '';
+          } catch (_) {}
+          if (currentId === id) _openFn(id, { skipUrl: true });
+        }, 120);
       }
     } catch (_) {}
   }
@@ -257,11 +279,19 @@
     _openFn  = openFn;
     _closeFn = closeFn;
 
-    window.addEventListener('popstate', function (e) {
-      // Back button: if a recipe is open, close it instead of navigating.
+    window.addEventListener('popstate', function () {
       var overlay = document.getElementById(_overlayId);
-      if (overlay && overlay.classList.contains('open')) {
-        if (typeof _closeFn === 'function') _closeFn();
+      var id = '';
+      try {
+        id = new URLSearchParams(window.location.search).get('open') || '';
+      } catch (_) {}
+
+      // Derive the overlay from the URL in both directions: Back closes it,
+      // while Forward (or a prior modal history entry) reopens it.
+      if (id && typeof _openFn === 'function') {
+        _openFn(id, { skipUrl: true });
+      } else if (overlay && overlay.classList.contains('open') && typeof _closeFn === 'function') {
+        _closeFn();
       }
     });
 

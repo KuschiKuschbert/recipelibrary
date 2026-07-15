@@ -25,6 +25,7 @@
   var _activeSelectId = '';
   var _activeLabel = '';
   var _sheetLocked = false;
+  var _searchRenderTimer = null;
 
   var _CHECK_ICON = '<svg class="filter-sheet__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
 
@@ -54,11 +55,19 @@
     '</div>';
     document.body.appendChild(div.firstChild);
     var search = document.getElementById('filterSheetSearch');
-    if (search) search.addEventListener('input', _renderFilterOptions);
+    if (search) search.addEventListener('input', _scheduleFilterOptionRender);
   }
 
   function _normalizeSearch(s) {
     return String(s || '').trim().toLowerCase();
+  }
+
+  function _scheduleFilterOptionRender() {
+    if (_searchRenderTimer) window.clearTimeout(_searchRenderTimer);
+    _searchRenderTimer = window.setTimeout(function () {
+      _searchRenderTimer = null;
+      _renderFilterOptions();
+    }, 70);
   }
 
   function _lockSheetScroll() {
@@ -210,6 +219,10 @@
   function closeFilterSheet() {
     var sheet = document.getElementById('filterSheet');
     var wasOpen = sheet && !sheet.hidden;
+    if (_searchRenderTimer) {
+      window.clearTimeout(_searchRenderTimer);
+      _searchRenderTimer = null;
+    }
     if (sheet) sheet.setAttribute('hidden', '');
     if (wasOpen) _unlockSheetScroll();
   }

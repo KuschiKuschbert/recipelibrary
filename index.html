@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Kitchen">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/theme.css?v=173">
+<link rel="stylesheet" href="assets/theme.css?v=174">
 <style>
   /* Page-level layout tokens */
   :root { --app-header-h: 65px; }
@@ -199,7 +199,11 @@
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 20px;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition:
+      border-color 0.22s ease,
+      background 0.22s ease,
+      transform 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      box-shadow 0.22s ease;
     position: relative;
     overflow: hidden;
   }
@@ -211,13 +215,15 @@
     opacity: 0;
     transition: opacity 0.3s;
   }
-  .card:hover {
-    border-color: var(--border-hover);
-    background: var(--surface-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+  @media (hover: hover) and (pointer: fine) {
+    .card:hover {
+      border-color: var(--border-hover);
+      background: var(--surface-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    }
+    .card:hover::before { opacity: 1; }
   }
-  .card:hover::before { opacity: 1; }
 
   .card-header {
     display: flex;
@@ -335,8 +341,67 @@
   .page-dots { color: var(--text3); font-size: 14px; padding: 0 4px; }
 
   @media (max-width: 680px) {
+    :root { --app-header-h: 0px; }
+
+    /* Keep the existing header at the top, then let it leave naturally while
+       search + filters become a compact mobile control dock. */
+    .app-header {
+      position: relative;
+      top: auto;
+    }
+    .app-header__btn { min-height: 44px; }
+    .search-wrap {
+      top: 0;
+      min-height: 64px;
+      padding-top: 4px;
+      padding-bottom: 4px;
+      background: var(--bg);
+    }
+    .search-glass { padding: 3px; }
+    .search-inner {
+      min-height: 44px;
+      padding: 2px 10px;
+    }
+    .search-clear {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+    }
+    .filters-wrap {
+      top: 64px;
+      max-width: 100%;
+      margin-top: 10px;
+      padding: 0 16px 4px;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-padding-inline: 16px;
+      scroll-snap-type: x proximity;
+      scrollbar-width: none;
+    }
+    .filters-wrap::-webkit-scrollbar { display: none; }
+    .filter-chip,
+    .filters-wrap .clear-btn {
+      flex: 0 0 auto;
+      min-width: 104px;
+      max-width: min(64vw, 220px);
+      scroll-snap-align: start;
+    }
+    .filters-wrap .clear-btn {
+      order: -1;
+      min-width: 92px;
+    }
     .hero { padding: 40px 20px 16px; }
     .card { padding: 16px; }
+    .card-ings {
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+    }
+    .modal-wake-pill,
+    .cook-mode-btn { min-height: 44px; }
   }
 
   /* ── Animations ──────────────────────────────────── */
@@ -351,7 +416,12 @@
   .grid .card:nth-child(4) { animation-delay: 0.09s; }
   .grid .card:nth-child(5) { animation-delay: 0.12s; }
   .grid .card:nth-child(6) { animation-delay: 0.15s; }
-  .grid .card:nth-child(n+7) { animation-delay: 0.18s; }
+  .grid .card:nth-child(n+7),
+  #content.cards-settled .card { animation: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card { animation: none; }
+  }
 
   .hero-nav {
     --hero-pill-fs: 13px;
@@ -572,7 +642,7 @@
   <div class="search-glass">
     <div class="search-inner">
       <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" class="search-input" id="search" placeholder="Search recipes, ingredients, cuisines..." autocomplete="off" spellcheck="false">
+      <input type="text" class="search-input" id="search" placeholder="Search recipes, ingredients, cuisines..." autocomplete="off" spellcheck="false" inputmode="search" enterkeyhint="search" aria-label="Search recipes">
       <button type="button" class="search-clear" id="searchClear" hidden aria-label="Clear search" title="Clear search">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
@@ -592,7 +662,7 @@
   <button type="button" class="filter-chip" id="chipProtein" onclick="openFilterSheet('Protein','filterProtein')">Protein</button>
   <button type="button" class="filter-chip" id="chipTag" onclick="openFilterSheet('Dietary','filterTag')">Dietary</button>
   <button type="button" class="filter-chip" id="chipCat" onclick="openFilterSheet('Category','filterCat')">Category</button>
-  <button class="clear-btn" id="clearBtn">Clear all</button>
+  <button class="clear-btn" id="clearBtn" hidden>Clear all</button>
 </div>
 
 
@@ -710,24 +780,30 @@
 <script src="assets/recipe-metric-normalize.js"></script>
 <script src="assets/screen-wake.js?v=3" defer></script>
 <script src="assets/kuschi-kitchen-mode.js"></script>
-<script src="assets/kuschi-filter-chips.js?v=4"></script>
-<script src="assets/kuschi-cook-mode.js?v=4"></script>
+<script src="assets/kuschi-filter-chips.js?v=5"></script>
+<script src="assets/kuschi-cook-mode.js?v=5"></script>
 <script>
 const IS_LOW_MEMORY_DEVICE = document.documentElement.classList.contains('low-memory-device');
-const PAGE_SIZE = IS_LOW_MEMORY_DEVICE ? 24 : 48;
-const CATALOG_RERENDER_DELAY_MS = IS_LOW_MEMORY_DEVICE ? 140 : 0;
+const IS_NARROW_CATALOG = !!(window.matchMedia &&
+  window.matchMedia('(max-width: 680px), (max-width: 900px) and (pointer: coarse)').matches);
+const PAGE_SIZE = (IS_LOW_MEMORY_DEVICE || IS_NARROW_CATALOG) ? 24 : 48;
+const CATALOG_RERENDER_DELAY_MS = IS_LOW_MEMORY_DEVICE ? 140 : (IS_NARROW_CATALOG ? 90 : 0);
 let allRecipes = [];
 let filtered = [];
 let currentPage = 1;
 /** How many recipes are currently displayed (load-more accumulator). */
 let kuschiDisplayCount = PAGE_SIZE;
 let currentRecipe = null;
+let catalogBootstrapDone = false;
+let pendingOpenRecipeId = '';
+let hasRenderedRecipeGrid = false;
+let showingFuzzyMatches = false;
 /** Last applyFilters timing so pagination re-renders can keep showing ms when enabled. */
 let lastFilterMs = '';
 const filterScheduler = KuschiRecipeUi.createFilterScheduler({
   run: applyFilters,
   lowMemoryDelay: 240,
-  defaultDelay: 160,
+  defaultDelay: IS_NARROW_CATALOG ? 120 : 160,
   shouldShowPending: ({ bar }) => {
     const showFilterMs =
       typeof localStorage !== 'undefined' && localStorage.getItem('kuschiShowFilterMs') === '1';
@@ -929,12 +1005,24 @@ function haystackMatchesTerm(hay, t) {
   if (!t) return true;
   if (hay.includes(t)) return true;
   if (t.length < 4) return false;
-  const words = hay.split(/[^a-z0-9]+/).filter(w => w.length >= 4);
-  const capped = words.length > MAX_FUZZY_WORDS ? words.slice(0, MAX_FUZZY_WORDS) : words;
-  for (let i = 0; i < capped.length; i++) {
-    if (levenshteinMemo(capped[i], t) <= 1) return true;
+  const wordPattern = /[a-z0-9]+/g;
+  let match;
+  let checked = 0;
+  while ((match = wordPattern.exec(hay)) && checked < MAX_FUZZY_WORDS) {
+    const word = match[0];
+    if (word.length < 4 || Math.abs(word.length - t.length) > 1) continue;
+    checked++;
+    if (levenshteinMemo(word, t) <= 1) return true;
   }
   return false;
+}
+
+function recipeMatchesFacets(r, cuisine, protein, tag, cat) {
+  if (cuisine && r.cui !== cuisine) return false;
+  if (protein && !toArr(r.protein).includes(protein)) return false;
+  if (tag && !toArr(r.tags).includes(tag)) return false;
+  if (cat && r.cat !== cat) return false;
+  return true;
 }
 
 function clearScheduledFilter() { filterScheduler.clear(); }
@@ -960,23 +1048,31 @@ function applyFilters() {
     const cached = filterMemo.get(mkey);
     filterMemo.delete(mkey);
     filterMemo.set(mkey, cached);
-    filtered = cached;
+    filtered = cached.recipes;
+    showingFuzzyMatches = cached.fuzzy;
   } else {
+    // Normal searches stay on the allocation-light substring path. The more
+    // expensive typo-tolerant pass is only needed when there are no exact hits.
     filtered = allRecipes.filter(r => {
-      if (terms.length) {
-        const hay = r._searchHay;
-        if (!hay || !terms.every(t => haystackMatchesTerm(hay, t))) return false;
-      }
-      if (cuisine && r.cui !== cuisine) return false;
-      if (protein && !toArr(r.protein).includes(protein)) return false;
-      if (tag && !toArr(r.tags).includes(tag)) return false;
-      if (cat && r.cat !== cat) return false;
-      return true;
+      if (!recipeMatchesFacets(r, cuisine, protein, tag, cat)) return false;
+      if (!terms.length) return true;
+      const hay = r._searchHay;
+      return !!hay && terms.every(t => hay.includes(t));
     });
+    showingFuzzyMatches = false;
+
+    if (!filtered.length && terms.some(t => t.length >= 4)) {
+      filtered = allRecipes.filter(r => {
+        if (!recipeMatchesFacets(r, cuisine, protein, tag, cat)) return false;
+        const hay = r._searchHay;
+        return !!hay && terms.every(t => haystackMatchesTerm(hay, t));
+      });
+      showingFuzzyMatches = filtered.length > 0;
+    }
     if (filterMemo.size >= FILTER_MEMO_MAX) {
       filterMemo.delete(filterMemo.keys().next().value);
     }
-    filterMemo.set(mkey, filtered);
+    filterMemo.set(mkey, { recipes: filtered, fuzzy: showingFuzzyMatches });
   }
 
   const dt = (performance.now() - t0).toFixed(1);
@@ -988,6 +1084,7 @@ function applyFilters() {
   kuschiDisplayCount = PAGE_SIZE;
   render(dt);
   if (typeof updateFilterChips === 'function') updateFilterChips();
+  syncClearAllButton();
 }
 
 // ── Rendering ─────────────────────────────────────────
@@ -1000,9 +1097,11 @@ function render(dt) {
   const showFilterMs =
     typeof localStorage !== 'undefined' && localStorage.getItem('kuschiShowFilterMs') === '1';
   const ms = dt !== undefined && dt !== '' ? dt : lastFilterMs;
-  document.getElementById('resultsMeta').textContent = showFilterMs && ms ? `${ms}ms` : '';
+  document.getElementById('resultsMeta').textContent =
+    showFilterMs && ms ? `${ms}ms` : (showingFuzzyMatches ? 'Close matches' : '');
 
   const content = document.getElementById('content');
+  content.classList.toggle('cards-settled', hasRenderedRecipeGrid);
   if (!filtered.length) {
     content.innerHTML = `<div class="empty empty-search-state">
       <div class="empty-kicker">No match</div>
@@ -1018,6 +1117,7 @@ function render(dt) {
 
   const page = filtered.slice(0, kuschiDisplayCount);
   content.innerHTML = '<div class="grid">' + page.map(cardHTML).join('') + '</div>';
+  hasRenderedRecipeGrid = true;
   renderLoadMore();
   schedulePrefetchVisibleDetailShards();
 }
@@ -1131,12 +1231,26 @@ KuschiRecipeUi.bindSearchClear({ inputId: 'search', buttonId: 'searchClear', onC
   document.getElementById(id).addEventListener('change', () => scheduleApplyFilters({ immediate: true }))
 );
 
+function syncClearAllButton() {
+  const active = ['filterCuisine','filterProtein','filterTag','filterCat']
+    .some(id => document.getElementById(id).value !== '');
+  const btn = document.getElementById('clearBtn');
+  const wasHidden = btn.hidden;
+  btn.hidden = !active;
+  if (wasHidden !== btn.hidden && IS_NARROW_CATALOG) {
+    requestAnimationFrame(() => {
+      document.getElementById('filtersWrap').scrollLeft = 0;
+    });
+  }
+}
+
 function resetSearchAndFilters() {
   document.getElementById('search').value = '';
   ['filterCuisine','filterProtein','filterTag','filterCat'].forEach(id =>
     document.getElementById(id).value = ''
   );
   KuschiRecipeUi.syncSearchClear('search');
+  syncClearAllButton();
   scheduleApplyFilters({ immediate: true });
 }
 
@@ -1398,12 +1512,31 @@ function renderModalShell(title) {
     </div>`;
 }
 
-async function openRecipe(id) {
+function showRecipeOverlay(overlay) {
+  const wasOpen = overlay.classList.contains('open');
+  overlay.classList.add('open');
+  if (wasOpen) return;
+  if (window.KuschiRecipeUi && KuschiRecipeUi.lockPageScroll) {
+    KuschiRecipeUi.lockPageScroll();
+  } else {
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function flushPendingRecipeOpen() {
+  if (!pendingOpenRecipeId) return;
+  const id = pendingOpenRecipeId;
+  if (!recipeIndex[id] && !catalogBootstrapDone) return;
+  pendingOpenRecipeId = '';
+  openRecipe(id, { skipUrl: true });
+}
+
+async function openRecipe(id, options) {
   const overlay = document.getElementById('modalOverlay');
   const modal = document.getElementById('modal');
 
   // Routing: push ?open=<id> so the back button closes the modal.
-  if (window.KuschiCookMode) KuschiCookMode.pushOpen(id);
+  if ((!options || !options.skipUrl) && window.KuschiCookMode) KuschiCookMode.pushOpen(id);
 
   if (window.KuschiUserRecipes && id && String(id).startsWith('user-')) {
     const full = KuschiUserRecipes.getKitchenById(id);
@@ -1413,10 +1546,7 @@ async function openRecipe(id) {
       const rid = recUser.id;
       modal.innerHTML = renderKitchenModalShell(recUser);
       modal.scrollTop = 0;
-      overlay.classList.add('open');
-      setTimeout(() => {
-        document.body.style.overflow = 'hidden';
-      }, 0);
+      showRecipeOverlay(overlay);
       setTimeout(() => {
         if (window.KuschiScreenWake) KuschiScreenWake.sync();
       }, 0);
@@ -1426,13 +1556,17 @@ async function openRecipe(id) {
   }
 
   const info = recipeIndex[id];
+  if (!info && !catalogBootstrapDone && !String(id || '').startsWith('user-')) {
+    pendingOpenRecipeId = String(id || '');
+    modal.innerHTML = renderModalShell('Loading recipe…');
+    modal.scrollTop = 0;
+    showRecipeOverlay(overlay);
+    return;
+  }
   const shellTitle = (info && info.name) || 'Loading recipe…';
   modal.innerHTML = renderModalShell(shellTitle);
   modal.scrollTop = 0;
-  overlay.classList.add('open');
-  setTimeout(() => {
-    document.body.style.overflow = 'hidden';
-  }, 0);
+  showRecipeOverlay(overlay);
 
   const modalPerf = kuschiModalPerfEnabled();
   const tModal0 = modalPerf ? performance.now() : 0;
@@ -1474,13 +1608,18 @@ function closeModal() {
   const overlay = document.getElementById('modalOverlay');
   overlay.classList.remove('open', 'cook-mode');
   currentRecipe = null;
+  pendingOpenRecipeId = '';
   // Routing: remove ?open= from history.
   if (window.KuschiCookMode) KuschiCookMode.popOpen();
   // Clean up Cook Mode step nav so it rebuilds fresh next open.
   if (window.KuschiCookMode) KuschiCookMode.cleanup();
   if (!document.getElementById('pageQrOverlay').classList.contains('open') &&
       !(document.getElementById('addKitchenBookOverlay') && document.getElementById('addKitchenBookOverlay').classList.contains('open'))) {
-    document.body.style.overflow = '';
+    if (window.KuschiRecipeUi && KuschiRecipeUi.unlockPageScroll) {
+      KuschiRecipeUi.unlockPageScroll();
+    } else {
+      document.body.style.overflow = '';
+    }
   }
 }
 
@@ -2422,9 +2561,13 @@ async function _bootstrapRecipes() {
         allRecipes.push(...fresh);
         indexRecipeSlice(fresh);
         loadedShards++;
+        flushPendingRecipeOpen();
         if (loadingText) loadingText.textContent = `Loading recipes… (${loadedShards}/${files.length})`;
 
         if (!firstShardRendered) {
+          // Avoid a misleading first paint from one of the tiny tail shards.
+          // A full mobile batch is still small enough to feel immediate.
+          if (allRecipes.length < PAGE_SIZE && loadedShards < files.length) return;
           firstShardRendered = true;
           filterMemo.clear();
           levMemo.clear();
@@ -2454,8 +2597,10 @@ async function _bootstrapRecipes() {
     document.getElementById('footer').style.display = 'block';
     document.getElementById('totalCount').textContent = allRecipes.length.toLocaleString();
 
-    await buildRecipeSearchIndexAsync(allRecipes);
-    await buildRecipeIndexAsync();
+    // Every streamed row is indexed as it arrives; avoid two redundant 38k-row
+    // completion passes on the mobile main thread.
+    catalogBootstrapDone = true;
+    flushPendingRecipeOpen();
 
     filtered = [...allRecipes];
     applyFilters();
@@ -2468,6 +2613,8 @@ async function _bootstrapRecipes() {
       }
     }
   } catch(e) {
+    catalogBootstrapDone = true;
+    flushPendingRecipeOpen();
     const msg = window.KuschiRecipeUi ? KuschiRecipeUi.esc(e.message || String(e)) : 'Unknown error';
     document.getElementById('loading').innerHTML =
       `<div class="empty empty--error" role="alert">
