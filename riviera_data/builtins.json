@@ -295,22 +295,23 @@
   },
   {
     "id": "veal-meatballs",
-    "name": "Slow Cooked Veal Meatballs",
+    "name": "Beef & Pork Polpette",
     "subtitle": "Romesco Sugo · Toasted Focaccia · Gremolata",
     "type": "Tapas",
     "course": "Tapas",
     "protein": [
-      "veal",
+      "beef",
+      "pork",
       "dairy"
     ],
     "diet": [
       "Gluten-Free"
     ],
-    "method": "Slow Bake",
-    "yield": "Approx. 90 balls @ 80 g; 50 tapas serves",
-    "label": "Meatballs",
+    "method": "Set + Slow Bake",
+    "yield": "90 balls @ 80 g; 30 tapas serves of 3",
+    "label": "Polpette",
     "elements": [
-      "Meatballs",
+      "Beef & Pork Polpette",
       "Romesco Sugo",
       "Focaccia",
       "Gremolata",
@@ -318,75 +319,79 @@
     ],
     "ingredients": [
       {
-        "qty": "5 kg",
-        "item": "Veal Mince"
+        "qty": "3 kg",
+        "item": "Beef Mince",
+        "prep": "medium grind; keep refrigerated"
       },
       {
-        "qty": "600 g",
-        "item": "GF Breadcrumbs"
+        "qty": "2 kg",
+        "item": "Pork Mince",
+        "prep": "not lean; keep refrigerated"
       },
       {
-        "qty": "450 g",
-        "item": "GF Bread Loaf",
-        "prep": "approx. 3/4 loaf, blitzed into small chunks"
+        "qty": "500 g",
+        "item": "GF Breadcrumbs",
+        "prep": "single breadcrumb addition only"
+      },
+      {
+        "qty": "650 ml",
+        "item": "Full-Cream Milk",
+        "prep": "for panade"
       },
       {
         "qty": "600 g",
         "item": "Brown Onion",
-        "prep": "approx. 4 medium onions, blitzed"
+        "prep": "prepared weight; finely diced, sweated, drained and cooled"
+      },
+      {
+        "qty": "50 g",
+        "item": "Garlic",
+        "prep": "finely minced; sweat with onion"
+      },
+      {
+        "qty": "500 g",
+        "item": "Parmesan",
+        "prep": "finely grated"
+      },
+      {
+        "qty": "10 large",
+        "item": "Eggs",
+        "prep": "approx. 500 g without shell"
       },
       {
         "qty": "100 g",
-        "item": "Garlic Cloves",
-        "prep": "approx. 20 cloves, blitzed"
+        "item": "Flat-Leaf Parsley",
+        "prep": "finely chopped"
       },
       {
-        "qty": "400 g",
-        "item": "Parmesan Cheese",
-        "prep": "blitzed"
-      },
-      {
-        "qty": "500 ml",
-        "item": "Thickened Cream"
+        "qty": "50 g",
+        "item": "Basil",
+        "prep": "finely chopped"
       },
       {
         "qty": "20 g",
-        "item": "Flat Leaf Italian Parsley",
-        "prep": "finely chopped; converted from 1/2 cup"
+        "item": "Fresh Oregano",
+        "prep": "finely chopped; or 7 g dried oregano"
+      },
+      {
+        "qty": "60 g",
+        "item": "Fine Salt",
+        "prep": "confirm by cook-test before rolling"
       },
       {
         "qty": "15 g",
-        "item": "Basil",
-        "prep": "finely chopped; converted from 1/2 cup"
+        "item": "Black Pepper",
+        "prep": "finely ground"
       },
       {
-        "qty": "15 g",
-        "item": "Oregano",
-        "prep": "finely chopped; converted from 1/2 cup"
-      },
-      {
-        "qty": "5 g",
-        "item": "Mixed Italian Herbs — Dried",
-        "prep": "converted from 1 tbsp"
-      },
-      {
-        "qty": "30 g",
-        "item": "Salt",
-        "prep": "converted from 2 tbsp; adjust after test cook"
-      },
-      {
-        "qty": "30 g",
-        "item": "Cracked Pepper",
-        "prep": "adjust after test cook"
-      },
-      {
-        "qty": "5",
-        "item": "Eggs"
+        "qty": "60 ml",
+        "item": "Olive Oil",
+        "prep": "for sweating aromatics and tray oiling"
       },
       {
         "qty": "as needed",
         "item": "Romesco Sugo",
-        "prep": "enough to cover meatballs in baking bain"
+        "prep": "hot for finishing and portioning"
       },
       {
         "qty": "as needed",
@@ -396,7 +401,7 @@
       {
         "qty": "as needed",
         "item": "Basic Gremolata",
-        "prep": "parsley, lemon zest and garlic"
+        "prep": "parsley, lemon zest and garlic; make fresh"
       },
       {
         "qty": "as needed",
@@ -405,20 +410,23 @@
       }
     ],
     "method_steps": [
-      "GREMOLATA: Prepare basic gremolata with parsley, lemon zest and garlic. Hold chilled and use same day.",
-      "MIX: Blitz onion and garlic in a food processor. Mix through the breadcrumbs so the onion juices wet the crumbs. Add this breadcrumb mix to the veal mince with blitzed GF bread, parmesan, cream, herbs, salt, pepper and eggs.",
-      "TEST: Cook a small patty and adjust salt, pepper and herb balance before rolling the full batch.",
-      "SHAPE: Wet hands to prevent sticking. Weigh into 80 g balls and roll firmly.",
-      "BAKE: Place meatballs in a deep bain and cover generously with Romesco Sugo. Bake covered at 150°C for 1 hour, or until cooked through and tender.",
-      "COOL & STORE: Cool meatballs in the sauce. Portion into PCs in serves of 3, distributing sauce evenly. Label and freeze in the meatballs crate."
+      "AROMATICS: Sweat finely diced onion and garlic in olive oil until soft without colour. Drain any free liquid and cool completely.",
+      "PANADE: Combine GF breadcrumbs and milk. Rest 10 minutes until evenly hydrated.",
+      "BIND: Combine cold beef mince, pork mince and salt for 60–90 seconds until lightly tacky.",
+      "MIX: Add cooled aromatics, panade, eggs, Parmesan, herbs and pepper. Mix only until uniform and cohesive.",
+      "TEST: Cook a 30 g test patty. Correct seasoning before rolling the batch.",
+      "REST & SHAPE: Refrigerate mix 30 minutes. Portion into 80 g balls; roll firmly without compressing hard. Place on lightly oiled lined trays and chill 30–60 minutes.",
+      "SET: Rational hot air 210°C, 0% humidity, fan medium. Bake chilled polpette uncovered for 10–14 minutes until lightly browned and structurally set; do not crowd.",
+      "SAUCE & FINISH: Transfer carefully to hot romesco in a deep bain. Finish at 160°C, 30% humidity for 20–30 minutes, until the centre reaches at least 75°C. Do not boil or stir aggressively.",
+      "COOL & STORE: Cool in sauce under the Riviera cooling SOP. Portion 3 polpette per PC with sauce, chill fully, seal, label and freeze."
     ],
     "service": [
-      "Reheat meatballs and sauce in the microwave or oven until steaming hot throughout, minimum 75°C internal.",
-      "Serve 3 meatballs with sauce in a medium serving bowl.",
-      "Toast 3 slices of focaccia, 2 cm thick, until golden on both sides.",
-      "Finish meatballs with finely grated Manchego and gremolata. Serve focaccia alongside."
+      "Defrost under refrigeration. Reheat gently in sauce until the centre reaches at least 75°C; avoid hard boiling and repeated stirring.",
+      "Serve 3 polpette with romesco in a medium serving bowl.",
+      "Toast 3 focaccia slices, 2 cm thick, until golden on both sides.",
+      "Finish with finely grated Manchego and fresh gremolata. Serve focaccia alongside."
     ],
-    "note": "New DOCX spec returns this recipe to veal mince and 80 g balls. Prep time guideline: about 45 minutes per 90 balls once mise is ready.",
+    "note": "Locked Riviera house standard revised 19 July 2026. Beef-to-pork ratio 60:40. Recipe ID retained for package-link and saved-reference compatibility. Use one measured panade only; cook and drain aromatics; set the exterior before saucing.",
     "prepPhase": "day_before",
     "houseStandard": true
   },

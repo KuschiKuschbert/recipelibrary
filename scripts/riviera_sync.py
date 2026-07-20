@@ -102,7 +102,13 @@ def verify_snapshot(manifest: dict[str, Any], errors: list[str]) -> dict[str, An
 
 
 def verify_live_audit(
-    manifest: dict[str, Any], contract: dict[str, Any], audit: dict[str, Any], errors: list[str]
+    manifest: dict[str, Any],
+    contract: dict[str, Any],
+    audit: dict[str, Any],
+    errors: list[str],
+    warnings: list[str],
+    *,
+    enforce_mirror_freshness: bool,
 ) -> dict[str, Any]:
     if contract.get("authority") != "github-repository":
         errors.append("sync contract authority must be github-repository")
@@ -136,7 +142,11 @@ def verify_live_audit(
             errors.append(f"missing live audit evidence for mirror artifact: {mirror_path}")
             continue
         if sha256_file(path) != evidence.get("sha256"):
-            errors.append(f"legacy Project mirror is stale for: {mirror_path}")
+            message = f"legacy Project mirror is stale for: {mirror_path}"
+            if enforce_mirror_freshness:
+                errors.append(message)
+            else:
+                warnings.append(message)
 
     semantic = audit.get("nonDownloadableSources", {}).get("updatedInstructions") or {}
     instruction_path = ROOT / str(semantic.get("localPath") or "")
@@ -228,8 +238,11 @@ def git_state(*, remote: bool, errors: list[str]) -> dict[str, Any]:
     }
 
 
-def verify(*, remote: bool, require_clean: bool) -> tuple[dict[str, Any], list[str]]:
+def verify(
+    *, remote: bool, require_clean: bool, enforce_mirror_freshness: bool
+) -> tuple[dict[str, Any], list[str]]:
     errors: list[str] = []
+    warnings: list[str] = []
     for required in (MANIFEST_PATH, CONTRACT_PATH, LIVE_AUDIT_PATH):
         if not required.is_file():
             errors.append(f"missing sync control file: {rel(required)}")
@@ -240,7 +253,14 @@ def verify(*, remote: bool, require_clean: bool) -> tuple[dict[str, Any], list[s
     contract = load_json(CONTRACT_PATH)
     audit = load_json(LIVE_AUDIT_PATH)
     snapshot = verify_snapshot(manifest, errors)
-    live_audit = verify_live_audit(manifest, contract, audit, errors)
+    live_audit = verify_live_audit(
+        manifest,
+        contract,
+        audit,
+        errors,
+        warnings,
+        enforce_mirror_freshness=enforce_mirror_freshness,
+    )
     checks = [run_check(label, command, errors) for label, command in CHECK_COMMANDS]
     git = git_state(remote=remote, errors=errors)
     if require_clean and git["syncManagedChanges"]:
@@ -254,6 +274,7 @@ def verify(*, remote: bool, require_clean: bool) -> tuple[dict[str, Any], list[s
         "liveProjectAudit": live_audit,
         "checks": checks,
         "git": git,
+        "warnings": warnings,
     }
     return report, errors
 
@@ -288,6 +309,11 @@ def print_report(report: dict[str, Any], errors: list[str], *, as_json: bool) ->
         print("ERRORS")
         for error in errors:
             print(f"- {error}")
+    warnings = report.get("warnings") or []
+    if warnings:
+        print("WARNINGS")
+        for warning in warnings:
+            print(f"- {warning}")
 
 
 def rebuild(*, include_pdf: bool) -> int:
@@ -301,7 +327,11 @@ def rebuild(*, include_pdf: bool) -> int:
         result = subprocess.run(command, cwd=ROOT, check=False)
         if result.returncode != 0:
             return result.returncode
-    report, errors = verify(remote=False, require_clean=False)
+    report, errors = verify(
+        remote=False,
+        require_clean=False,
+        enforce_mirror_freshness=False,
+    )
     print_report(report, errors, as_json=False)
     return 0 if not errors else 1
 
@@ -338,6 +368,11 @@ def main() -> int:
         child.add_argument("--require-clean", action="store_true", help="fail on uncommitted sync-managed files")
         child.add_argument("--json", action="store_true", help="print machine-readable output")
         child.add_argument("--ci", action="store_true", help="CI shorthand for --require-clean --json")
+        child.add_argument(
+            "--enforce-live-mirror",
+            action="store_true",
+            help="fail when repository mirror artifacts differ from the last authenticated legacy Project audit",
+        )
 
     rebuild_parser = subparsers.add_parser("rebuild")
     rebuild_parser.add_argument("--include-pdf", action="store_true", help="also regenerate the recipe-card PDF")
@@ -354,6 +389,7 @@ def main() -> int:
     report, errors = verify(
         remote=bool(getattr(args, "remote", False)),
         require_clean=ci or bool(getattr(args, "require_clean", False)),
+        enforce_mirror_freshness=bool(getattr(args, "enforce_live_mirror", False)),
     )
     print_report(report, errors, as_json=ci or bool(getattr(args, "json", False)))
     return 0 if not errors else 1

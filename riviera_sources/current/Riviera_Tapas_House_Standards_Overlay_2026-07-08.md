@@ -15,7 +15,7 @@ These 16 recipes override older ChatGPT project recipe-bank versions for the sam
 | `arancini` | Chorizo and Mozzarella Arancini | 80 large arancini @ 100 g | Weddings: Portofino Package; Weddings: Taormina Package; Weddings: Late Night Snacks; Baby Shower: High Tea |
 | `calamari` | Calamari Fritti | Batch: 2 kg squid strips + 1 kg baby octopus | Weddings: Portofino Package; Weddings: Taormina Package; Weddings: Late Night Snacks; Parties: Crowd Pleaser Platters |
 | `oysters-kilpatrick` | Kilpatrick Oyster | Kilpatrick sauce batch for approx. 40–50 oysters | Weddings: Portofino Package; Weddings: Taormina Package |
-| `veal-meatballs` | Slow Cooked Veal Meatballs | Approx. 90 balls @ 80 g; 50 tapas serves | Weddings: Portofino Package; Weddings: Taormina Package; Weddings: Amalfi Package; Weddings: La Tavola Package; Riviera Table / Offsite: Canape Packages; Riviera Table / Offsite: Plated Meals; Riviera Table / Offsite: Feasting — Shared to Table |
+| `veal-meatballs` | Beef & Pork Polpette | 90 balls @ 80 g; 30 tapas serves of 3 | Weddings: Portofino Package; Weddings: Taormina Package; Weddings: Amalfi Package; Weddings: La Tavola Package; Riviera Table / Offsite: Canape Packages; Riviera Table / Offsite: Plated Meals; Riviera Table / Offsite: Feasting — Shared to Table |
 | `chicken-skewer` | Limoncello Chicken Skewer | Approx. 60–65 skewers from 5 kg chicken | Weddings: Portofino Package; Weddings: Taormina Package; Weddings: Amalfi Package; Weddings: La Tavola Package; Parties: Crowd Pleaser Platters; Corporate: Build-Your-Own Buffet; Funeral & Wake: Wake Platters; Riviera Table / Offsite: Canape Packages; Riviera Table / Offsite: BBQ Buffet; Riviera Table / Offsite: Plated Meals; Riviera Table / Offsite: Feasting — Shared to Table |
 | `chorizo-potatoes` | Crispy Fried Chorizo Potatoes | Approx. 60–65 canape portions | Weddings: Portofino Package; Weddings: Taormina Package |
 | `lamb-cutlet` | Chargrilled Lamb Cutlet | 3 cutlets per plate | Weddings: Portofino Package; Weddings: Taormina Package; Weddings: Amalfi Package; Weddings: La Tavola Package; Parties: Crowd Pleaser Platters; Corporate: Build-Your-Own Buffet; Funeral & Wake: Wake Platters; Riviera Table / Offsite: Canape Packages; Riviera Table / Offsite: BBQ Buffet; Riviera Table / Offsite: Plated Meals; Riviera Table / Offsite: Feasting — Shared to Table |
@@ -175,58 +175,61 @@ Keep capers very dry before frying. Wet capers spit badly and do not crisp.
 
 Bake hot and fast enough to render the speck without shrinking the oysters.
 
-### Slow Cooked Veal Meatballs
+### Beef & Pork Polpette
 
 - Recipe ID: `veal-meatballs`
-- Yield: Approx. 90 balls @ 80 g; 50 tapas serves
-- Label: Meatballs
-- Tags: House Standard \| Tapas \| Slow Bake \| Gluten-Free \| veal \| dairy \| Weddings \| Riviera Table / Offsite
+- Yield: 90 balls @ 80 g; 30 tapas serves of 3
+- Label: Polpette
+- Tags: House Standard \| Tapas \| Set + Slow Bake \| Gluten-Free \| beef \| pork \| dairy \| Weddings \| Riviera Table / Offsite
 - Package / section refs: Weddings: Portofino Package; Weddings: Taormina Package; Weddings: Amalfi Package; Weddings: La Tavola Package; Riviera Table / Offsite: Canape Packages; Riviera Table / Offsite: Plated Meals; Riviera Table / Offsite: Feasting — Shared to Table
 - Menu description: Romesco Sugo · Toasted Focaccia · Gremolata
-- Elements: Meatballs \| Romesco Sugo \| Focaccia \| Gremolata \| Manchego
+- Elements: Beef & Pork Polpette \| Romesco Sugo \| Focaccia \| Gremolata \| Manchego
 
 #### Ingredients
 
 | Qty | Ingredient / prep |
 | --- | --- |
-| 5 kg | Veal Mince |
-| 600 g | GF Breadcrumbs |
-| 450 g | GF Bread Loaf - approx. 3/4 loaf, blitzed into small chunks |
-| 600 g | Brown Onion - approx. 4 medium onions, blitzed |
-| 100 g | Garlic Cloves - approx. 20 cloves, blitzed |
-| 400 g | Parmesan Cheese - blitzed |
-| 500 ml | Thickened Cream |
-| 20 g | Flat Leaf Italian Parsley - finely chopped; converted from 1/2 cup |
-| 15 g | Basil - finely chopped; converted from 1/2 cup |
-| 15 g | Oregano - finely chopped; converted from 1/2 cup |
-| 5 g | Mixed Italian Herbs — Dried - converted from 1 tbsp |
-| 30 g | Salt - converted from 2 tbsp; adjust after test cook |
-| 30 g | Cracked Pepper - adjust after test cook |
-| 5 | Eggs |
-| as needed | Romesco Sugo - enough to cover meatballs in baking bain |
+| 3 kg | Beef Mince - medium grind; keep refrigerated |
+| 2 kg | Pork Mince - not lean; keep refrigerated |
+| 500 g | GF Breadcrumbs - single breadcrumb addition only |
+| 650 ml | Full-Cream Milk - for panade |
+| 600 g | Brown Onion - prepared weight; finely diced, sweated, drained and cooled |
+| 50 g | Garlic - finely minced; sweat with onion |
+| 500 g | Parmesan - finely grated |
+| 10 large | Eggs - approx. 500 g without shell |
+| 100 g | Flat-Leaf Parsley - finely chopped |
+| 50 g | Basil - finely chopped |
+| 20 g | Fresh Oregano - finely chopped; or 7 g dried oregano |
+| 60 g | Fine Salt - confirm by cook-test before rolling |
+| 15 g | Black Pepper - finely ground |
+| 60 ml | Olive Oil - for sweating aromatics and tray oiling |
+| as needed | Romesco Sugo - hot for finishing and portioning |
 | as needed | Focaccia - 3 slices per serve, 2 cm thick |
-| as needed | Basic Gremolata - parsley, lemon zest and garlic |
+| as needed | Basic Gremolata - parsley, lemon zest and garlic; make fresh |
 | as needed | Manchego - finely grated to finish |
 
 #### Prep method
 
-1. GREMOLATA: Prepare basic gremolata with parsley, lemon zest and garlic. Hold chilled and use same day.
-2. MIX: Blitz onion and garlic in a food processor. Mix through the breadcrumbs so the onion juices wet the crumbs. Add this breadcrumb mix to the veal mince with blitzed GF bread, parmesan, cream, herbs, salt, pepper and eggs.
-3. TEST: Cook a small patty and adjust salt, pepper and herb balance before rolling the full batch.
-4. SHAPE: Wet hands to prevent sticking. Weigh into 80 g balls and roll firmly.
-5. BAKE: Place meatballs in a deep bain and cover generously with Romesco Sugo. Bake covered at 150°C for 1 hour, or until cooked through and tender.
-6. COOL & STORE: Cool meatballs in the sauce. Portion into PCs in serves of 3, distributing sauce evenly. Label and freeze in the meatballs crate.
+1. AROMATICS: Sweat finely diced onion and garlic in olive oil until soft without colour. Drain any free liquid and cool completely.
+2. PANADE: Combine GF breadcrumbs and milk. Rest 10 minutes until evenly hydrated.
+3. BIND: Combine cold beef mince, pork mince and salt for 60–90 seconds until lightly tacky.
+4. MIX: Add cooled aromatics, panade, eggs, Parmesan, herbs and pepper. Mix only until uniform and cohesive.
+5. TEST: Cook a 30 g test patty. Correct seasoning before rolling the batch.
+6. REST & SHAPE: Refrigerate mix 30 minutes. Portion into 80 g balls; roll firmly without compressing hard. Place on lightly oiled lined trays and chill 30–60 minutes.
+7. SET: Rational hot air 210°C, 0% humidity, fan medium. Bake chilled polpette uncovered for 10–14 minutes until lightly browned and structurally set; do not crowd.
+8. SAUCE & FINISH: Transfer carefully to hot romesco in a deep bain. Finish at 160°C, 30% humidity for 20–30 minutes, until the centre reaches at least 75°C. Do not boil or stir aggressively.
+9. COOL & STORE: Cool in sauce under the Riviera cooling SOP. Portion 3 polpette per PC with sauce, chill fully, seal, label and freeze.
 
 #### On the day / service
 
-1. Reheat meatballs and sauce in the microwave or oven until steaming hot throughout, minimum 75°C internal.
-2. Serve 3 meatballs with sauce in a medium serving bowl.
-3. Toast 3 slices of focaccia, 2 cm thick, until golden on both sides.
-4. Finish meatballs with finely grated Manchego and gremolata. Serve focaccia alongside.
+1. Defrost under refrigeration. Reheat gently in sauce until the centre reaches at least 75°C; avoid hard boiling and repeated stirring.
+2. Serve 3 polpette with romesco in a medium serving bowl.
+3. Toast 3 focaccia slices, 2 cm thick, until golden on both sides.
+4. Finish with finely grated Manchego and fresh gremolata. Serve focaccia alongside.
 
 #### Notes
 
-New DOCX spec returns this recipe to veal mince and 80 g balls. Prep time guideline: about 45 minutes per 90 balls once mise is ready.
+Locked Riviera house standard revised 19 July 2026. Beef-to-pork ratio 60:40. Recipe ID retained for package-link and saved-reference compatibility. Use one measured panade only; cook and drain aromatics; set the exterior before saucing.
 
 ### Limoncello Chicken Skewer
 
