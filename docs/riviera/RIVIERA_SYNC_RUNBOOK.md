@@ -40,7 +40,13 @@ python3 scripts/riviera_sync.py rebuild
 python3 scripts/riviera_sync.py verify --remote
 ```
 
-Use `python3 scripts/riviera_sync.py rebuild --include-pdf` only when the recipe-card PDF must be regenerated. A changed mirror artifact intentionally makes verification fail until the legacy Project audit is refreshed.
+Use `python3 scripts/riviera_sync.py rebuild --include-pdf` only when the recipe-card PDF must be regenerated. A changed mirror artifact remains visible as a warning until the legacy Project audit is refreshed.
+
+Repository and CI verification report a stale legacy Project mirror as a warning because GitHub is the mutable authority and the old Project can only be updated manually. During an authenticated legacy Project audit, enforce byte-for-byte mirror freshness explicitly:
+
+```bash
+python3 scripts/riviera_sync.py verify --enforce-live-mirror
+```
 
 ## Legacy Project import boundary
 
@@ -67,7 +73,7 @@ If the old Project must remain usable, replace its five mirror artifacts with th
 
 ## CI and failure recovery
 
-`.github/workflows/riviera-sync.yml` runs the non-mutating verification command on relevant pushes and pull requests.
+`.github/workflows/riviera-sync.yml` runs the non-mutating verification command on relevant pushes and pull requests. CI blocks source, generated-data, schema, alignment, standards, and audit-record integrity failures. It does not block authoritative Git changes merely because the read-only legacy Project has not yet received a manual mirror refresh.
 
 | Failure | Recovery |
 |---|---|
