@@ -6,8 +6,8 @@ Keep every Riviera fact traceable to one Git commit and make drift fail visibly 
 
 1. GitHub is the only mutable authority.
 2. The 23-source legacy ChatGPT Project snapshot is checksum-verifiable.
-3. The July 8 overlay remains limited to its 16 house-standard recipes.
-4. The merged SSOT, structured catalog, site built-ins, source-alignment rules, recipe standards, and legacy mirror artifacts pass one command.
+3. The July 8 overlay remains limited to its 16 historical house-standard recipes; later direct user-approved standards are recorded separately in the structured catalog and current-standards additions file.
+4. The merged SSOT, structured catalog, current house standards, site built-ins, source-alignment rules, recipe standards, and legacy mirror artifacts pass one command.
 5. `main` matches `origin/main`.
 6. Active ChatGPT work uses the local project folder instead of editing a second Project copy.
 
@@ -17,6 +17,7 @@ Keep every Riviera fact traceable to one Git commit and make drift fail visibly 
 |---|---|---|---|
 | Legacy Project snapshot | Git | `riviera_sources/chatgpt_project_sources_2026-07-08/` | Manifest bytes and SHA-256 |
 | Tapas house overlay | Git | `riviera_sources/current/Riviera_Tapas_House_Standards_Overlay_2026-07-08.md` | Deterministic builder check |
+| Later house standards | Git | Structured recipe catalog + `riviera_sources/current/Riviera_Current_House_Standards_Additions_2026-07-22.md` | Current-standard ID/order validation |
 | Built-in recipe authority | Git | Structured recipe catalog | Catalog-to-built-ins equality |
 | Site/runtime data | Generator | `riviera_data/` | Schema and source-alignment audits |
 | Recipe-card PDF | Generator | `output/pdf/` | Legacy mirror audit hash |
@@ -40,7 +41,9 @@ python3 scripts/riviera_sync.py rebuild
 python3 scripts/riviera_sync.py verify --remote
 ```
 
-Use `python3 scripts/riviera_sync.py rebuild --include-pdf` only when the recipe-card PDF must be regenerated. A changed mirror artifact remains visible as a warning until the legacy Project audit is refreshed.
+When adding a house standard after 2026-07-08, keep the fixed July 8 overlay list unchanged. Add the recipe to the structured catalog with `houseStandard: true`, extend the current house-standard order used by the sync/PDF generators, and rebuild. The additions file and merged SSOT are generated from that catalog state.
+
+Use `python3 scripts/riviera_sync.py rebuild --include-pdf` when the full recipe-card book and house-standards manual must be regenerated. A changed mirror artifact remains visible as a warning until the legacy Project audit is refreshed.
 
 Repository and CI verification report a stale legacy Project mirror as a warning because GitHub is the mutable authority and the old Project can only be updated manually. During an authenticated legacy Project audit, enforce byte-for-byte mirror freshness explicitly:
 

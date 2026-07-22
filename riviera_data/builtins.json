@@ -1377,6 +1377,86 @@
     "houseStandard": true
   },
   {
+    "id": "peach-tartare",
+    "name": "Peach Tartare",
+    "subtitle": "Peach · Seeded Mustard · Caper · Kaffir Lime",
+    "type": "Sauce / Base",
+    "course": "Sauce",
+    "protein": [],
+    "diet": [
+      "Vegetarian",
+      "Vegan",
+      "Gluten-Free"
+    ],
+    "method": "Drain + Fold",
+    "yield": "Approx. 580 g",
+    "label": "Peach Tartare",
+    "elements": [
+      "Peach Tartare"
+    ],
+    "ingredients": [
+      {
+        "qty": "500 g",
+        "item": "Canned Peaches",
+        "prep": "drained weight; drain 15 min, pat dry and cut to an even 5 mm dice"
+      },
+      {
+        "qty": "10 ml",
+        "item": "Wholegrain Seeded Mustard"
+      },
+      {
+        "qty": "10 g",
+        "item": "Capers",
+        "prep": "drained, rinsed and finely chopped"
+      },
+      {
+        "qty": "15 g",
+        "item": "Pickled Cucumber",
+        "prep": "drained and finely diced"
+      },
+      {
+        "qty": "5 ml",
+        "item": "Tabasco Sauce"
+      },
+      {
+        "qty": "1 g",
+        "item": "MSG"
+      },
+      {
+        "qty": "1 g",
+        "item": "Dried Oregano",
+        "prep": "rubbed between the fingers"
+      },
+      {
+        "qty": "20 ml",
+        "item": "Kaffir Lime Oil"
+      },
+      {
+        "qty": "20 ml",
+        "item": "Fresh Lemon Juice"
+      },
+      {
+        "qty": "1 g",
+        "item": "Cracked Black Pepper"
+      }
+    ],
+    "method_steps": [
+      "DRAIN: Drain the peaches thoroughly for 15 min. Pat dry and cut into an even 5 mm dice. Keep chilled.",
+      "DRESSING: Whisk the seeded mustard, Tabasco, MSG, oregano, kaffir lime oil, lemon juice and black pepper until evenly combined. Fold through the capers and pickled cucumber.",
+      "FOLD: Fold the dressing gently through the peaches without crushing the dice.",
+      "REST: Rest for 5 min, stir once, then drain any excess liquor before service.",
+      "HOLD: Transfer to a labelled PC, cover and hold at 0–5°C. Use on the day of preparation. Do not add salt unless the final taste requires it; capers, pickle, mustard and MSG provide the standard seasoning."
+    ],
+    "service": [
+      "Serve chilled as a cold condiment and portion to the relevant dish specification.",
+      "Before plating, stir once and drain any free liquid so the tartare holds a clean dice on the plate.",
+      "Keep covered at 0–5°C during service and use on the day of preparation."
+    ],
+    "note": "Direct user-approved Riviera house standard added 2026-07-22. The 500 g quantity is drained peach weight; net can weight is not equivalent.",
+    "prepPhase": "on_day",
+    "houseStandard": true
+  },
+  {
     "id": "labneh-tzatziki",
     "name": "Labneh Tzatziki",
     "subtitle": "Pickled Cucumber · Pickled Cucumber Brine · Lemon",

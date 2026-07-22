@@ -24,10 +24,14 @@ BUILTINS_PATH = ROOT / "riviera_data" / "builtins.json"
 MANIFEST_PATH = ROOT / "riviera_sources" / "current" / "manifest.json"
 SOURCE_OF_TRUTH_PATH = ROOT / "riviera_sources" / "current" / "Riviera_Source_Of_Truth_2026-07-08.md"
 OVERLAY_PATH = ROOT / "riviera_sources" / "current" / "Riviera_Tapas_House_Standards_Overlay_2026-07-08.md"
+CURRENT_STANDARDS_ADDITIONS_PATH = (
+    ROOT / "riviera_sources" / "current" / "Riviera_Current_House_Standards_Additions_2026-07-22.md"
+)
 PDF_PATH = ROOT / "output" / "pdf" / "Riviera_Kitchen_Recipe_Card_Book_2026-07-08.pdf"
+HOUSE_STANDARDS_PDF_PATH = ROOT / "output" / "pdf" / "Riviera_House_Standards_Recipe_Manual_2026-07-08.pdf"
 
-EXPECTED_RECIPE_COUNT = 146
-HOUSE_STANDARD_IDS = [
+EXPECTED_RECIPE_COUNT = 147
+JULY_8_OVERLAY_IDS = [
     "arancini",
     "calamari",
     "oysters-kilpatrick",
@@ -45,7 +49,10 @@ HOUSE_STANDARD_IDS = [
     "camembert-cigars",
     "beef-kofta",
 ]
-HOUSE_STANDARD_ORDER = {recipe_id: idx for idx, recipe_id in enumerate(HOUSE_STANDARD_IDS)}
+CURRENT_HOUSE_STANDARD_IDS = [*JULY_8_OVERLAY_IDS, "peach-tartare"]
+CURRENT_HOUSE_STANDARD_ORDER = {
+    recipe_id: idx for idx, recipe_id in enumerate(CURRENT_HOUSE_STANDARD_IDS)
+}
 
 REQUIRED_TOP = (
     "id",
@@ -101,8 +108,8 @@ def sort_recipes_for_catalog(recipes: list[dict[str, Any]]) -> list[dict[str, An
 
     def sort_key(recipe: dict[str, Any]) -> tuple[int, int]:
         recipe_id = str(recipe.get("id") or "")
-        if recipe_id in HOUSE_STANDARD_ORDER:
-            return (0, HOUSE_STANDARD_ORDER[recipe_id])
+        if recipe_id in CURRENT_HOUSE_STANDARD_ORDER:
+            return (0, CURRENT_HOUSE_STANDARD_ORDER[recipe_id])
         return (1, original_order.get(recipe_id, 999999))
 
     return sorted(recipes, key=sort_key)
@@ -139,19 +146,29 @@ def validate_recipes(recipes: Any, *, require_house_order: bool = True) -> list[
             elif not str(ingredient.get("item") or "").strip():
                 errors.append(f"recipe {rid!r}: ingredients[{ing_idx}] missing item")
 
-    first_ids = [str(recipe.get("id")) for recipe in recipes[: len(HOUSE_STANDARD_IDS)] if isinstance(recipe, dict)]
+    first_ids = [
+        str(recipe.get("id"))
+        for recipe in recipes[: len(CURRENT_HOUSE_STANDARD_IDS)]
+        if isinstance(recipe, dict)
+    ]
     if require_house_order:
-        if first_ids != HOUSE_STANDARD_IDS:
-            errors.append(f"first {len(HOUSE_STANDARD_IDS)} recipes must be the July 8 overlay order; found {first_ids}")
-    elif set(first_ids) != set(HOUSE_STANDARD_IDS):
-        errors.append(f"first {len(HOUSE_STANDARD_IDS)} recipes must be the July 8 overlay set; found {first_ids}")
+        if first_ids != CURRENT_HOUSE_STANDARD_IDS:
+            errors.append(
+                f"first {len(CURRENT_HOUSE_STANDARD_IDS)} recipes must be the current house-standard order; "
+                f"found {first_ids}"
+            )
+    elif set(first_ids) != set(CURRENT_HOUSE_STANDARD_IDS):
+        errors.append(
+            f"first {len(CURRENT_HOUSE_STANDARD_IDS)} recipes must be the current house-standard set; "
+            f"found {first_ids}"
+        )
 
     marked_house = [str(recipe.get("id")) for recipe in recipes if isinstance(recipe, dict) and recipe.get("houseStandard") is True]
     if require_house_order:
-        if marked_house != HOUSE_STANDARD_IDS:
-            errors.append(f"houseStandard recipe IDs must match July 8 overlay order; found {marked_house}")
-    elif set(marked_house) != set(HOUSE_STANDARD_IDS):
-        errors.append(f"houseStandard recipe IDs must match the July 8 overlay set; found {marked_house}")
+        if marked_house != CURRENT_HOUSE_STANDARD_IDS:
+            errors.append(f"houseStandard recipe IDs must match the current house-standard order; found {marked_house}")
+    elif set(marked_house) != set(CURRENT_HOUSE_STANDARD_IDS):
+        errors.append(f"houseStandard recipe IDs must match the current house-standard set; found {marked_house}")
 
     return errors
 
@@ -172,17 +189,20 @@ def build_catalog_from_builtins() -> dict[str, Any]:
         "date": "2026-07-08",
         "description": "Structured Riviera recipe catalog source of truth. Edit this file first, then sync riviera_data/builtins.json from it.",
         "authority": {
-            "mergeDirection": "ChatGPT Riviera project sources are the baseline; July 8 tapas/canape house standards overlay only.",
+            "mergeDirection": "ChatGPT Riviera project sources are the baseline; July 8 remains the only overlay, while later direct user-approved house standards are structured-catalog additions rather than overlay changes.",
             "sourceOfTruth": rel(SOURCE_OF_TRUTH_PATH),
             "manifest": rel(MANIFEST_PATH),
             "overlay": rel(OVERLAY_PATH),
-            "houseStandardOverlayRecipeIds": HOUSE_STANDARD_IDS,
+            "currentHouseStandardsAdditions": rel(CURRENT_STANDARDS_ADDITIONS_PATH),
+            "houseStandardOverlayRecipeIds": JULY_8_OVERLAY_IDS,
+            "currentHouseStandardRecipeIds": CURRENT_HOUSE_STANDARD_IDS,
             "initialisedFrom": rel(BUILTINS_PATH),
             "initialisationNote": "Seeded from the verified operational built-ins after ChatGPT source-stack parity was established. From this point forward this catalog is the canonical editable recipe payload.",
         },
         "operationalOutputs": {
             "siteBuiltins": rel(BUILTINS_PATH),
             "recipeCardPdf": rel(PDF_PATH),
+            "houseStandardsPdf": rel(HOUSE_STANDARDS_PDF_PATH),
         },
         "recipes": recipes,
     }
@@ -202,8 +222,11 @@ def load_catalog() -> dict[str, Any]:
         errors.append("authority must be an object")
     else:
         overlay_ids = authority.get("houseStandardOverlayRecipeIds")
-        if overlay_ids != HOUSE_STANDARD_IDS:
+        if overlay_ids != JULY_8_OVERLAY_IDS:
             errors.append("authority.houseStandardOverlayRecipeIds must match the July 8 overlay order")
+        current_ids = authority.get("currentHouseStandardRecipeIds")
+        if current_ids != CURRENT_HOUSE_STANDARD_IDS:
+            errors.append("authority.currentHouseStandardRecipeIds must match the current house-standard order")
     if errors:
         fail(errors)
     return payload

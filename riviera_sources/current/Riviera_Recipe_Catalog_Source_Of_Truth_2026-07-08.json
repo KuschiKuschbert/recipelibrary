@@ -4,10 +4,11 @@
   "date": "2026-07-08",
   "description": "Structured Riviera recipe catalog source of truth. Edit this file first, then sync riviera_data/builtins.json from it.",
   "authority": {
-    "mergeDirection": "ChatGPT Riviera project sources are the baseline; July 8 tapas/canape house standards overlay only.",
+    "mergeDirection": "ChatGPT Riviera project sources are the baseline; July 8 remains the only overlay, while later direct user-approved house standards are structured-catalog additions rather than overlay changes.",
     "sourceOfTruth": "riviera_sources/current/Riviera_Source_Of_Truth_2026-07-08.md",
     "manifest": "riviera_sources/current/manifest.json",
     "overlay": "riviera_sources/current/Riviera_Tapas_House_Standards_Overlay_2026-07-08.md",
+    "currentHouseStandardsAdditions": "riviera_sources/current/Riviera_Current_House_Standards_Additions_2026-07-22.md",
     "houseStandardOverlayRecipeIds": [
       "arancini",
       "calamari",
@@ -26,12 +27,32 @@
       "camembert-cigars",
       "beef-kofta"
     ],
+    "currentHouseStandardRecipeIds": [
+      "arancini",
+      "calamari",
+      "oysters-kilpatrick",
+      "veal-meatballs",
+      "chicken-skewer",
+      "chorizo-potatoes",
+      "lamb-cutlet",
+      "fish-slider",
+      "romesco",
+      "lemon-dill-aioli",
+      "lemon-thyme-aioli",
+      "vodka-sauce",
+      "riviera-emulsion",
+      "whipped-butter",
+      "camembert-cigars",
+      "beef-kofta",
+      "peach-tartare"
+    ],
     "initialisedFrom": "riviera_data/builtins.json",
     "initialisationNote": "Seeded from the verified operational built-ins after ChatGPT source-stack parity was established. From this point forward this catalog is the canonical editable recipe payload."
   },
   "operationalOutputs": {
     "siteBuiltins": "riviera_data/builtins.json",
-    "recipeCardPdf": "output/pdf/Riviera_Kitchen_Recipe_Card_Book_2026-07-08.pdf"
+    "recipeCardPdf": "output/pdf/Riviera_Kitchen_Recipe_Card_Book_2026-07-08.pdf",
+    "houseStandardsPdf": "output/pdf/Riviera_House_Standards_Recipe_Manual_2026-07-08.pdf"
   },
   "recipes": [
     {
@@ -1409,6 +1430,86 @@
       ],
       "note": "New DOCX spec uses 50 g koftas and keeps the sauce as spicy capsicum dip rather than a cooked sauce.",
       "prepPhase": "day_before",
+      "houseStandard": true
+    },
+    {
+      "id": "peach-tartare",
+      "name": "Peach Tartare",
+      "subtitle": "Peach · Seeded Mustard · Caper · Kaffir Lime",
+      "type": "Sauce / Base",
+      "course": "Sauce",
+      "protein": [],
+      "diet": [
+        "Vegetarian",
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "method": "Drain + Fold",
+      "yield": "Approx. 580 g",
+      "label": "Peach Tartare",
+      "elements": [
+        "Peach Tartare"
+      ],
+      "ingredients": [
+        {
+          "qty": "500 g",
+          "item": "Canned Peaches",
+          "prep": "drained weight; drain 15 min, pat dry and cut to an even 5 mm dice"
+        },
+        {
+          "qty": "10 ml",
+          "item": "Wholegrain Seeded Mustard"
+        },
+        {
+          "qty": "10 g",
+          "item": "Capers",
+          "prep": "drained, rinsed and finely chopped"
+        },
+        {
+          "qty": "15 g",
+          "item": "Pickled Cucumber",
+          "prep": "drained and finely diced"
+        },
+        {
+          "qty": "5 ml",
+          "item": "Tabasco Sauce"
+        },
+        {
+          "qty": "1 g",
+          "item": "MSG"
+        },
+        {
+          "qty": "1 g",
+          "item": "Dried Oregano",
+          "prep": "rubbed between the fingers"
+        },
+        {
+          "qty": "20 ml",
+          "item": "Kaffir Lime Oil"
+        },
+        {
+          "qty": "20 ml",
+          "item": "Fresh Lemon Juice"
+        },
+        {
+          "qty": "1 g",
+          "item": "Cracked Black Pepper"
+        }
+      ],
+      "method_steps": [
+        "DRAIN: Drain the peaches thoroughly for 15 min. Pat dry and cut into an even 5 mm dice. Keep chilled.",
+        "DRESSING: Whisk the seeded mustard, Tabasco, MSG, oregano, kaffir lime oil, lemon juice and black pepper until evenly combined. Fold through the capers and pickled cucumber.",
+        "FOLD: Fold the dressing gently through the peaches without crushing the dice.",
+        "REST: Rest for 5 min, stir once, then drain any excess liquor before service.",
+        "HOLD: Transfer to a labelled PC, cover and hold at 0–5°C. Use on the day of preparation. Do not add salt unless the final taste requires it; capers, pickle, mustard and MSG provide the standard seasoning."
+      ],
+      "service": [
+        "Serve chilled as a cold condiment and portion to the relevant dish specification.",
+        "Before plating, stir once and drain any free liquid so the tartare holds a clean dice on the plate.",
+        "Keep covered at 0–5°C during service and use on the day of preparation."
+      ],
+      "note": "Direct user-approved Riviera house standard added 2026-07-22. The 500 g quantity is drained peach weight; net can weight is not equivalent.",
+      "prepPhase": "on_day",
       "houseStandard": true
     },
     {

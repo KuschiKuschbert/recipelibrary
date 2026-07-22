@@ -48,7 +48,7 @@ SSOT_MANIFEST_PATH = ROOT / "riviera_sources" / "current" / "manifest.json"
 DEFAULT_OUTPUT = ROOT / "output" / "pdf" / "Riviera_Kitchen_Recipe_Card_Book_2026-07-08.pdf"
 HOUSE_STANDARDS_OUTPUT = ROOT / "output" / "pdf" / "Riviera_House_Standards_Recipe_Manual_2026-07-08.pdf"
 PROBE_OUTPUT = ROOT / "tmp" / "pdfs" / "_riviera_recipe_card_book_probe.pdf"
-EXPECTED_RECIPE_COUNT = 146
+EXPECTED_RECIPE_COUNT = 147
 
 BRAND_OLIVE = colors.HexColor("#5C6B3A")
 BRAND_GOLD = colors.HexColor("#C8A96E")
@@ -60,7 +60,7 @@ BRAND_GREEN_PALE = colors.HexColor("#EAF0DF")
 BRAND_GOLD_PALE = colors.HexColor("#F3E8CB")
 WARM_WHITE = colors.HexColor("#FFFDF8")
 
-HOUSE_STANDARD_IDS = [
+JULY_8_OVERLAY_IDS = [
     "arancini",
     "calamari",
     "oysters-kilpatrick",
@@ -78,7 +78,10 @@ HOUSE_STANDARD_IDS = [
     "camembert-cigars",
     "beef-kofta",
 ]
-HOUSE_STANDARD_ORDER = {recipe_id: idx for idx, recipe_id in enumerate(HOUSE_STANDARD_IDS)}
+CURRENT_HOUSE_STANDARD_IDS = [*JULY_8_OVERLAY_IDS, "peach-tartare"]
+CURRENT_HOUSE_STANDARD_ORDER = {
+    recipe_id: idx for idx, recipe_id in enumerate(CURRENT_HOUSE_STANDARD_IDS)
+}
 
 PACKAGE_LABEL_OVERRIDES = {
     "offsite": "Riviera Table / Offsite",
@@ -110,9 +113,11 @@ class SourceInfo:
     source_of_truth: str
     structured_recipe_catalog: str
     overlay: str
+    current_house_standards_additions: str
     chatgpt_source_dir: str
     chatgpt_source_count: int
     overlay_recipe_ids: list[str]
+    current_house_standard_ids: list[str]
     merge_direction: str
 
 
@@ -417,13 +422,17 @@ def load_json(path: Path) -> Any:
 def load_source_info() -> SourceInfo:
     manifest = load_json(SSOT_MANIFEST_PATH)
     overlay_ids = [str(x) for x in manifest.get("houseStandardOverlayRecipeIds", [])]
-    if overlay_ids != HOUSE_STANDARD_IDS:
-        raise SystemExit("Riviera SSOT overlay recipe IDs do not match PDF house-standard order")
+    if overlay_ids != JULY_8_OVERLAY_IDS:
+        raise SystemExit("Riviera SSOT overlay recipe IDs do not match the fixed July 8 overlay order")
+    current_house_standard_ids = [str(x) for x in manifest.get("currentHouseStandardRecipeIds", [])]
+    if current_house_standard_ids != CURRENT_HOUSE_STANDARD_IDS:
+        raise SystemExit("Riviera SSOT current house-standard IDs do not match PDF order")
 
     required_paths = [
         manifest.get("sourceOfTruth"),
         manifest.get("structuredRecipeCatalog"),
         manifest.get("overlay"),
+        manifest.get("currentHouseStandardsAdditions"),
         manifest.get("chatgptSourceDir"),
     ]
     for rel_path in required_paths:
@@ -435,9 +444,11 @@ def load_source_info() -> SourceInfo:
         source_of_truth=str(manifest["sourceOfTruth"]),
         structured_recipe_catalog=str(manifest["structuredRecipeCatalog"]),
         overlay=str(manifest["overlay"]),
+        current_house_standards_additions=str(manifest["currentHouseStandardsAdditions"]),
         chatgpt_source_dir=str(manifest["chatgptSourceDir"]),
         chatgpt_source_count=len(manifest.get("chatgptSources", [])),
         overlay_recipe_ids=overlay_ids,
+        current_house_standard_ids=current_house_standard_ids,
         merge_direction=str(manifest.get("mergeDirection") or "ChatGPT baseline plus July 8 tapas overlay."),
     )
 
@@ -505,7 +516,7 @@ def build_package_membership(packages: dict[str, Any], recipe_ids: set[str]) -> 
 
 
 def is_house_standard(recipe: dict[str, Any]) -> bool:
-    return bool(recipe.get("houseStandard")) or str(recipe.get("id")) in HOUSE_STANDARD_ORDER
+    return bool(recipe.get("houseStandard")) or str(recipe.get("id")) in CURRENT_HOUSE_STANDARD_ORDER
 
 
 def is_tapas_or_canape(recipe: dict[str, Any]) -> bool:
@@ -571,7 +582,7 @@ def build_recipe_meta(
         package_labels = package_map.get(rid, [])
         group = group_for_recipe(recipe, package_labels)
         if group == "House Standards + Tapas / Canapes":
-            house_rank = HOUSE_STANDARD_ORDER.get(rid, len(HOUSE_STANDARD_ORDER) + index)
+            house_rank = CURRENT_HOUSE_STANDARD_ORDER.get(rid, len(CURRENT_HOUSE_STANDARD_ORDER) + index)
             group_sort = (0 if is_house_standard(recipe) else 1, house_rank, *course_rank(recipe))
         elif group in package_labels:
             group_sort = (first_occurrence.get((group, rid), 99999), *course_rank(recipe))
@@ -770,7 +781,11 @@ def build_cover(recipes: list[dict[str, Any]], source_info: SourceInfo, house_st
     story.append(Paragraph("Riviera Kitchen", STYLES["cover_title"]))
     story.append(Paragraph("House Standards Recipe Manual" if house_standards_only else "Recipe Card Book", STYLES["cover_title"]))
     story.append(HRFlowable(width="62%", thickness=1.2, color=BRAND_GOLD, spaceBefore=5, spaceAfter=12))
-    subtitle = "Internal kitchen reference - 16 current standards, metric and service-ready" if house_standards_only else "Internal kitchen reference - metric, package-tagged, tapas first"
+    subtitle = (
+        f"Internal kitchen reference - {house_count} current standards, metric and service-ready"
+        if house_standards_only
+        else "Internal kitchen reference - metric, package-tagged, tapas first"
+    )
     story.append(Paragraph(subtitle, STYLES["cover_subtitle"]))
     summary = [
         ["Recipes", str(len(recipes))],
@@ -805,7 +820,7 @@ def build_cover(recipes: list[dict[str, Any]], source_info: SourceInfo, house_st
     story.append(Spacer(1, 16 * mm))
     story.append(
         Paragraph(
-            "This PDF follows the merged Riviera source of truth: ChatGPT Riviera project sources as the baseline, with the July 8 tapas/canape house-standard recipes as the only overlay.",
+            "This PDF follows the merged Riviera source of truth: ChatGPT Riviera project sources as the baseline, the fixed July 8 tapas/canape overlay, and later direct user-approved house standards recorded in the structured catalog.",
             STYLES["body"],
         )
     )
@@ -831,6 +846,8 @@ def build_source_stack(source_info: SourceInfo) -> list[Any]:
         [table_cell("ChatGPT baseline", "small"), table_cell(f"{source_info.chatgpt_source_count} source files in {source_info.chatgpt_source_dir}", "small")],
         [table_cell("Latest overlay", "small"), table_cell(source_info.overlay, "small")],
         [table_cell("Overlay scope", "small"), table_cell(f"{len(source_info.overlay_recipe_ids)} tapas/canape house standards only", "small")],
+        [table_cell("Later standards", "small"), table_cell(source_info.current_house_standards_additions, "small")],
+        [table_cell("Current standards", "small"), table_cell(str(len(source_info.current_house_standard_ids)), "small")],
         [table_cell("Card data", "small"), table_cell("structured recipe catalog plus riviera_data/function_packages.json", "small")],
     ]
     table = Table(rows, colWidths=[42 * mm, 124 * mm], repeatRows=1)
@@ -1136,7 +1153,7 @@ def build_pdf(
             bottomMargin=17 * mm,
             title="Riviera House Standards Recipe Manual" if house_standards_only else "Riviera Kitchen Recipe Card Book",
             author="Riviera Yeppoon",
-            subject="Internal kitchen recipe cards from ChatGPT baseline plus July 8 tapas overlay",
+            subject="Internal kitchen recipe cards from the ChatGPT baseline, July 8 overlay and later direct house standards",
         )
         story = build_story(recipes, grouped, meta, page_map, source_info, house_standards_only)
         doc.build(story)
@@ -1160,15 +1177,15 @@ def validate_inputs(recipes: list[dict[str, Any]], grouped: list[tuple[str, list
         missing = sorted(expected - set(seen))
         extra = sorted(set(seen) - expected)
         raise SystemExit(f"Recipe ordering mismatch. Missing={missing[:10]} extra={extra[:10]}")
-    first_ids = seen[: len(HOUSE_STANDARD_IDS)]
-    if first_ids != HOUSE_STANDARD_IDS:
+    first_ids = seen[: len(CURRENT_HOUSE_STANDARD_IDS)]
+    if first_ids != CURRENT_HOUSE_STANDARD_IDS:
         raise SystemExit(f"House standards are not first in expected order: {first_ids}")
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path)
-    parser.add_argument("--house-standards-only", action="store_true", help="Generate the concise 16-recipe house standards manual")
+    parser.add_argument("--house-standards-only", action="store_true", help="Generate the concise current house standards manual")
     args = parser.parse_args()
 
     source_info = load_source_info()
@@ -1178,8 +1195,8 @@ def main() -> int:
         raise SystemExit("structured recipe catalog recipes must be a list")
     expected_count = EXPECTED_RECIPE_COUNT
     if args.house_standards_only:
-        recipes = [recipe for recipe in recipes if str(recipe.get("id")) in HOUSE_STANDARD_ORDER]
-        expected_count = len(HOUSE_STANDARD_IDS)
+        recipes = [recipe for recipe in recipes if str(recipe.get("id")) in CURRENT_HOUSE_STANDARD_ORDER]
+        expected_count = len(CURRENT_HOUSE_STANDARD_IDS)
     meta = build_recipe_meta(recipes, packages)
     ordered = sorted_recipes(recipes, meta)
     grouped = group_recipes(ordered, meta)
@@ -1197,11 +1214,11 @@ def main() -> int:
             {
                 "output": str(output),
                 "recipes": len(recipes),
-                "houseStandards": len(HOUSE_STANDARD_IDS),
+                "houseStandards": len(CURRENT_HOUSE_STANDARD_IDS),
                 "sourceOfTruth": source_info.source_of_truth,
                 "chatgptSources": source_info.chatgpt_source_count,
                 "groups": {group: len(items) for group, items in grouped},
-                "firstRecipePages": {rid: page_map.get(rid) for rid in HOUSE_STANDARD_IDS[:5]},
+                "firstRecipePages": {rid: page_map.get(rid) for rid in CURRENT_HOUSE_STANDARD_IDS[:5]},
             },
             indent=2,
         )

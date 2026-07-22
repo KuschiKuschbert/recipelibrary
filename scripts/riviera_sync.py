@@ -27,8 +27,11 @@ SYNC_MANAGED_PREFIXES = (
     ".github/workflows/riviera-sync.yml",
     "AGENTS.md",
     "docs/riviera/RIVIERA_SYNC_RUNBOOK.md",
+    "output/pdf/Riviera_House_Standards_Recipe_Manual_2026-07-08.pdf",
+    "output/pdf/Riviera_Kitchen_Recipe_Card_Book_2026-07-08.pdf",
     "riviera_sources/",
     "scripts/build_riviera_source_of_truth.py",
+    "scripts/generate_riviera_recipe_card_pdf.py",
     "scripts/riviera_sync.py",
     "scripts/sync_riviera_recipe_catalog.py",
 )
@@ -323,6 +326,9 @@ def rebuild(*, include_pdf: bool) -> int:
     ]
     if include_pdf:
         commands.append([sys.executable, "scripts/generate_riviera_recipe_card_pdf.py"])
+        commands.append(
+            [sys.executable, "scripts/generate_riviera_recipe_card_pdf.py", "--house-standards-only"]
+        )
     for command in commands:
         result = subprocess.run(command, cwd=ROOT, check=False)
         if result.returncode != 0:
