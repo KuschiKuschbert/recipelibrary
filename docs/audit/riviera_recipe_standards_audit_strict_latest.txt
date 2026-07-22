@@ -1,6 +1,6 @@
 RIVIERA RECIPE STANDARDS AUDIT
 ====================================
-Built-in recipes: 146
+Built-in recipes: 147
 Service variant files: 4
 - riviera_data/service_variants.json
 - riviera_data/service_variants_canapes.json
