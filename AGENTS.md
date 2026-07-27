@@ -14,6 +14,8 @@ Personal **Kuschi Kitchen Library** (GitHub Pages, public repo).
 - Auto-activate the skill even when the user does **not** explicitly write `@kitchen-council`.
 - Use the skill's tiering/output rules as the response contract for culinary questions.
 - Only skip `kitchen-council` when the user clearly requests non-culinary technical work (code/data/site operations) with no food decision involved.
+- **Riviera locked-recipe qualifier:** retrieval or scaling of an existing `LOCKED` Riviera recipe must search the canonical Riviera/GitHub record and use it as written. Do not redesign it through Epicure or Kitchen Council unless the user explicitly requests an improvement.
+- For a new Riviera recipe or material improvement, search Riviera/GitHub first, then use Epicure pairing evidence, then Kitchen Council practicality review. Publish the result as `TRIAL ONLY`; promotion to `ACTIVE WORKING` requires a kitchen trial and promotion to `LOCKED` requires explicit approval.
 
 ## Epicure MCP pairing evidence
 
@@ -25,18 +27,24 @@ Personal **Kuschi Kitchen Library** (GitHub Pages, public repo).
 
 **Primary working copy:** this repo (`recipelibrary-1` on disk). Other paths such as `~/recipelibrary` or `~/Desktop/recipelibrary` may be older duplicates—confirm `git remote -v` and path before large edits or agent-wide search so work is not applied to the wrong tree.
 
-## Riviera source of truth
+## Riviera authority and publishing
 
-**Active Riviera SSOT:** [riviera_sources/current/Riviera_Source_Of_Truth_2026-07-08.md](riviera_sources/current/Riviera_Source_Of_Truth_2026-07-08.md).
-**Structured Riviera recipe catalog:** [riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json](riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json).
+**GitHub recipe-data bundle:** [riviera_sources/current/Riviera_Source_Of_Truth_2026-07-08.md](riviera_sources/current/Riviera_Source_Of_Truth_2026-07-08.md).
+**Canonical structured Riviera recipe catalog:** [riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json](riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json).
 
-- **GitHub is the only mutable Riviera authority.** Use the ChatGPT local project pointed at this repository for active work. Treat the old ChatGPT Riviera Project as a read-only historical snapshot/mirror; never maintain two independently editable copies.
-- The 23 files in [riviera_sources/chatgpt_project_sources_2026-07-08/](riviera_sources/chatgpt_project_sources_2026-07-08/) are the verified legacy ChatGPT Project baseline snapshot.
-- Apply [riviera_sources/current/Riviera_Tapas_House_Standards_Overlay_2026-07-08.md](riviera_sources/current/Riviera_Tapas_House_Standards_Overlay_2026-07-08.md) as the only July 8 overlay; it supersedes older ChatGPT recipe-bank content for those 16 tapas/canape house standards only.
-- Edit the structured recipe catalog first for Riviera built-in recipe changes, then run `python3 scripts/sync_riviera_recipe_catalog.py --write`; `python3 scripts/sync_riviera_recipe_catalog.py --check` must pass before PDF generation or shipping.
-- Treat `riviera_data/builtins.json`, `riviera_data/function_packages.json`, and generated PDFs as operational representations. For non-overlay conflicts, reconcile them back to the Riviera SSOT/structured catalog before treating them as final.
-- Use `python3 scripts/riviera_sync.py verify --remote` for full source, generated-data, legacy-mirror, and GitHub parity checks. Rebuild the deterministic chain with `python3 scripts/riviera_sync.py rebuild`.
-- Follow [docs/riviera/RIVIERA_SYNC_RUNBOOK.md](docs/riviera/RIVIERA_SYNC_RUNBOOK.md) for legacy Project imports or mirror replacement. Browser-driven Project uploads are never the primary sync mechanism.
+Riviera authority is split by domain:
+
+- **Google Drive** is the editable master for operational SOPs, package rules, live orders, approvals, prices, stock, delivery requirements, and archive records.
+- **GitHub** is the canonical structured recipe database and the source for the searchable Riviera recipe page. Edit the structured recipe catalog first for built-in recipe changes, then run `python3 scripts/sync_riviera_recipe_catalog.py --write`; `python3 scripts/sync_riviera_recipe_catalog.py --check` must pass before PDF generation or shipping.
+- **The ChatGPT Riviera Project** is the daily kitchen driver. Its knowledge files are read-optimised published releases, not independently edited master copies. A correction made in conversation is not a completed source update until the affected Drive/GitHub source is updated, the ChatGPT bundle is republished, and all targets are verified.
+- The 23 files in [riviera_sources/chatgpt_project_sources_2026-07-08/](riviera_sources/chatgpt_project_sources_2026-07-08/) are historical provenance from the verified 2026-07-08 ChatGPT Project snapshot. They are not the current operational master.
+- Apply [riviera_sources/current/Riviera_Tapas_House_Standards_Overlay_2026-07-08.md](riviera_sources/current/Riviera_Tapas_House_Standards_Overlay_2026-07-08.md) to the 16 recipes it names. Later approved standards live in the structured catalog and generated current-standards additions file.
+
+Before promoting a correction, classify it as `PERMANENT RIVIERA STANDARD`, `PACKAGE-SPECIFIC STANDARD`, `RECIPE-SPECIFIC STANDARD`, `EVENT-SPECIFIC INSTRUCTION`, or `WEEK-SPECIFIC INSTRUCTION`. If scope is unclear, stop and ask. Record a change receipt with the previous rule, new rule, scope, effective/expiry dates where applicable, affected records, and Drive/GitHub/ChatGPT publication status. Temporary event/week rules must never be written into a permanent supplier or kitchen SOP.
+
+Treat `riviera_data/builtins.json` and generated PDFs as recipe-data representations. Treat package JSON as a site representation that must be reconciled to the approved Drive package master before publication. Use `python3 scripts/riviera_sync.py verify --remote` for the repository recipe-data chain and historical-audit checks. Rebuild that deterministic chain with `python3 scripts/riviera_sync.py rebuild`.
+
+Follow [docs/riviera/RIVIERA_SYNC_RUNBOOK.md](docs/riviera/RIVIERA_SYNC_RUNBOOK.md) for source intake, change receipts, cross-system release order, historical Project audits, and recovery.
 
 ## Browser verification (agents)
 

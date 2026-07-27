@@ -9,10 +9,8 @@
         "base_yield_pieces": 40
       },
       "cocktail": {
-        "portion": "1 bruschetta per guest",
+        "portion": "1 bruschetta per guest · Riviera 9% event buffer applies once",
         "pieces_per_guest": 1,
-        "production_buffer_multiplier": 1.15,
-        "production_pieces_per_guest": 1.15,
         "raw_beef_g_per_piece": 20,
         "horseradish_cream_g_per_piece": 10,
         "pickled_shallot_rings_per_piece": "3-4",
@@ -20,7 +18,9 @@
         "standard_garnish": "pickled shallot and chives",
         "premium_garnish_option": "Micro herbs, 1 punnet per 80 pieces as optional premium finish.",
         "service_rule": "Assemble in 20-piece batches no more than 15 minutes before pass. Keep crostini, beef and cream separate for staggered service.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "platter": {
         "portion": "count by ordered pieces",
@@ -49,10 +49,8 @@
         "base_yield_pieces": 40
       },
       "cocktail": {
-        "portion": "1 small crab cannoli per guest",
+        "portion": "1 small crab cannoli per guest · Riviera 9% event buffer applies once",
         "pieces_per_guest": 1,
-        "production_buffer_multiplier": 1.2,
-        "production_pieces_per_guest": 1.2,
         "crab_meat_g_per_piece": 15,
         "finished_filling_g_per_piece": 22,
         "lemon_juice_ml_per_piece": 1,
@@ -60,7 +58,9 @@
         "standard_garnish": "dill frond or micro herbs",
         "premium_garnish_option": "Finger lime pearls or extra micro herbs as optional premium finish.",
         "service_rule": "Fill 5-10 minutes before service. Do not pre-fill more than 30 minutes out and never stack filled shells.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "platter": {
         "portion": "count by ordered cannoli",
@@ -87,10 +87,8 @@
         "base_yield_sliders": 40
       },
       "cocktail": {
-        "portion": "1 prawn brioche slider per guest",
+        "portion": "1 prawn brioche slider per guest · Riviera 9% event buffer applies once",
         "sliders_per_guest": 1,
-        "production_buffer_multiplier": 1.1,
-        "production_sliders_per_guest": 1.1,
         "cooked_prawn_g_per_slider": 31,
         "marie_rose_ml_per_slider": 7,
         "pickled_slaw_g_per_slider": 15,
@@ -98,7 +96,9 @@
         "standard_garnish": "cocktail pick",
         "premium_garnish_option": "Potato crisp or micro herbs as optional premium finish.",
         "service_rule": "Assemble no more than 12 minutes before pass. Keep prawns dry and slaw well drained.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "platter": {
         "portion": "count by ordered sliders",
@@ -126,10 +126,8 @@
         "base_yield_sliders": 40
       },
       "cocktail": {
-        "portion": "1 smoked chicken and bacon brioche slider per guest",
+        "portion": "1 smoked chicken and bacon brioche slider per guest · Riviera 9% event buffer applies once",
         "sliders_per_guest": 1,
-        "production_buffer_multiplier": 1.1,
-        "production_sliders_per_guest": 1.1,
         "smoked_chicken_g_per_slider": 20,
         "bacon_rashers_per_slider": 0.5,
         "dijonnaise_g_per_slider": 10,
@@ -137,7 +135,9 @@
         "standard_garnish": "cocktail pick",
         "premium_garnish_option": "Micro herbs or crisp bacon crumb as optional premium finish.",
         "service_rule": "Assemble in batches of 20 no more than 15 minutes before pass. Bacon must be crisp at assembly.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "platter": {
         "portion": "count by ordered sliders",
@@ -166,10 +166,8 @@
         "base_yield_sliders": 40
       },
       "cocktail": {
-        "portion": "1 vintage beef brioche slider per guest",
+        "portion": "1 vintage beef brioche slider per guest · Riviera 9% event buffer applies once",
         "sliders_per_guest": 1,
-        "production_buffer_multiplier": 1.1,
-        "production_sliders_per_guest": 1.1,
         "beef_patty_g_raw_per_slider": 40,
         "aged_cheddar_g_per_slider": 5,
         "cornichon_g_per_slider": 4,
@@ -177,7 +175,9 @@
         "standard_garnish": "cocktail pick",
         "premium_garnish_option": "Micro herbs or premium pickle garnish as optional finish.",
         "service_rule": "Cook in rolling batches and pass immediately. Do not hold assembled sliders.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "tapas": {
         "portion": "3 sliders per tapas serve",
@@ -213,17 +213,17 @@
         "base_yield_pieces": 40
       },
       "cocktail": {
-        "portion": "1 mini beefburger canape per guest",
+        "portion": "1 mini beefburger canape per guest · Riviera 9% event buffer applies once",
         "pieces_per_guest": 1,
-        "production_buffer_multiplier": 1.1,
-        "production_pieces_per_guest": 1.1,
         "wagyu_patty_g_raw_per_piece": 40,
         "truffle_aioli_g_per_piece": 5,
         "microgreens_punnets_per_40_pieces": 1,
         "standard_garnish": "microgreens and cocktail pick",
         "premium_garnish_option": "Extra microgreens or truffle aroma refreshed at pass as premium finish.",
         "service_rule": "Cook in batches of 8-10 and serve immediately. Wagyu fat sets quickly; do not hot-hold assembled.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "platter": {
         "portion": "count by ordered pieces",
@@ -289,28 +289,29 @@
         "base_yield_pieces": 60
       },
       "cocktail": {
-        "portion": "1 stuffed mushroom per guest",
+        "portion": "1 stuffed mushroom per guest · Riviera 9% event buffer applies once",
         "pieces_per_guest": 1,
-        "production_buffer_multiplier": 1.2,
-        "production_pieces_per_guest": 1.2,
         "romesco_g_per_piece": 17,
         "lemon_aioli_g_per_piece": 5,
         "rocket_g_per_piece": 1,
         "standard_garnish": "lemon aioli dot and rocket",
         "premium_garnish_option": "Micro herbs or beetroot powder as optional premium finish.",
         "service_rule": "Serve warm. Dot aioli and garnish at pass only.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "buffet": {
-        "portion": "1 stuffed mushroom per guest service target with 1.2 mushrooms per guest production allowance",
+        "portion": "1 stuffed mushroom per guest service target · Riviera 9% event buffer applies once",
         "piece_count": 1,
-        "production_piece_count_per_guest": 1.2,
         "romesco_g_per_piece": 17,
         "lemon_aioli_g_per_piece": 5,
         "rocket_g_per_piece": 1,
         "service_rule": "Hold warm dry, uncovered where possible. Garnish and aioli at service, not before holding.",
         "premium_garnish_option": "Micro herbs or beetroot powder as optional premium finish.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "platter": {
         "portion": "count by ordered pieces",
@@ -332,10 +333,8 @@
         "base_yield_pieces": 40
       },
       "cocktail": {
-        "portion": "1 prawn with chorizo per guest on spoon",
+        "portion": "1 prawn with chorizo per guest on spoon · Riviera 9% event buffer applies once",
         "prawns_per_guest": 1,
-        "production_buffer_multiplier": 1.15,
-        "production_prawns_per_guest": 1.15,
         "chorizo_g_per_piece": 5.5,
         "pan_sauce_ml_per_piece": 3,
         "rocket_leaves_per_piece": 1,
@@ -343,7 +342,9 @@
         "standard_garnish": "single rocket leaf and parsley",
         "premium_garnish_option": "Micro herbs or restrained green herb powder as optional premium finish.",
         "service_rule": "Fire-to-pass canape. Cook in batches of 10-12 prawns and pass immediately. No hot holding.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "platter": {
         "portion": "count by ordered spoons/pieces for immediate service only",
@@ -388,5 +389,29 @@
         "status": "not_recommended"
       }
     }
+  },
+  "buffer_policy": {
+    "releaseId": "RIV-KNOWLEDGE-2026-07-27-V13",
+    "eventMultiplier": 1.09,
+    "applyOnce": true,
+    "eventServiceKeys": [
+      "buffet",
+      "cocktail",
+      "dessert_buffet",
+      "plated_dessert",
+      "plated_entree",
+      "plated_main",
+      "roving_dessert"
+    ],
+    "fixedModuleMultiplier": 1.0,
+    "fixedModuleServiceKeys": [
+      "corporate_boxed",
+      "high_tea",
+      "platter"
+    ],
+    "excludedServiceKeys": [
+      "tapas"
+    ],
+    "note": "High Tea and Sunday Tapas have no automatic event buffer. Fixed High Tea, platter and corporate modules are not buffered unless an event-specific source says otherwise."
   }
 }

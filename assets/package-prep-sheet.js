@@ -254,6 +254,10 @@
         var factor = scaleFactorForRecipe(recipe, payload.pax, payload.style);
         var yieldHint = recipe.yield ? ' · ' + recipe.yield : '';
         var paxHint = payload.pax + ' covers';
+        var serviceTargetHint =
+          item.serviceTargetQuantity != null
+            ? ' · service target ' + item.serviceTargetQuantity + ' ' + (item.unit || 'pieces')
+            : '';
 
         (recipe.method_steps || []).forEach(function (step, si) {
           var phase = classifyPhase(recipe, step, false, si);
@@ -268,7 +272,15 @@
             recipeId: recipe.id,
             dishNames: [item.name],
             text: step,
-            hint: paxHint + yieldHint + (factor !== 1 ? ' · ×' + factor.toFixed(2) : ''),
+            hint:
+              paxHint +
+              serviceTargetHint +
+              yieldHint +
+              (factor == null
+                ? ' · ingredient scaling NEEDS CONFIRMATION'
+                : factor !== 1
+                  ? ' · ×' + factor.toFixed(2)
+                  : ''),
           };
         });
 
@@ -339,6 +351,7 @@
     );
     if (payload.eventDate) lines.push(formatEventDate(payload.eventDate));
     if (payload.style) lines.push(payload.style + (payload.price ? ' · ' + payload.price : ''));
+    if (payload.salesStatus) lines.push(payload.salesStatus);
     lines.push('');
 
     (payload.courses || []).forEach(function (course) {
@@ -352,7 +365,8 @@
       lines.push(header);
       (course.items || []).forEach(function (item) {
         var tags = (item.tags || []).length ? ' [' + item.tags.join(', ') + ']' : '';
-        lines.push('  ✓ ' + item.name + tags);
+        var linkStatus = item.recipeLinkStatus ? ' [' + item.recipeLinkStatus + ']' : '';
+        lines.push('  ✓ ' + item.name + tags + linkStatus);
       });
       lines.push('');
     });
@@ -547,7 +561,7 @@
     return parts.join('\n').trim();
   }
 
-  function recipeMetricItems(courseName, recipe, factor) {
+  function recipeMetricItems(courseName, recipe, factor, item) {
     var methodCount = (recipe.method_steps || []).length;
     var serviceCount = (recipe.service || []).length;
     var yieldLabel = String(recipe.yield || 'Batch').split(/\s+[—-]\s+/)[0].trim();
@@ -555,7 +569,16 @@
     var items = [{ label: 'Course', value: courseName || 'Recipe' }];
     if (recipe.type) items.push({ label: 'Type', value: recipe.type });
     items.push({ label: 'Yield', value: yieldLabel || 'Batch' });
-    items.push({ label: 'Scale', value: '×' + factor.toFixed(2) });
+    if (item && item.serviceTargetQuantity != null) {
+      items.push({
+        label: 'Service target',
+        value: item.serviceTargetQuantity + ' ' + (item.unit || 'pieces'),
+      });
+    }
+    items.push({
+      label: 'Ingredient scale',
+      value: factor == null ? 'NEEDS CONFIRMATION' : '×' + factor.toFixed(2),
+    });
     items.push({ label: 'Ings', value: String((recipe.ingredients || []).length) });
     items.push({ label: 'Prep', value: String(methodCount) });
     items.push({ label: 'Service', value: String(serviceCount) });
@@ -641,7 +664,10 @@
         var service = recipe.service || [];
         html += '<div class="planner-print-recipe">';
         html += '<h3>' + esc(item.name) + '</h3>';
-        html += renderMetricChips(recipeMetricItems(course.course, recipe, factor), 'planner-print-recipe');
+        html += renderMetricChips(
+          recipeMetricItems(course.course, recipe, factor, item),
+          'planner-print-recipe'
+        );
         html += renderPrintSectionTitle('Ingredients', ingredients.length);
         html += '<ul class="planner-print-recipe__ingredients">';
         ingredients.forEach(function (ing) {
@@ -802,7 +828,13 @@
 
   function planIdFromPayload(payload) {
     if (!payload) return '';
-    return [payload.eventId, payload.sectionId, payload.pax, (payload.recipeIds || []).join(',')]
+    var menuKeys = (payload.courses || []).reduce(function (keys, course) {
+      (course.items || []).forEach(function (item) {
+        keys.push(item.recipeId || item.name || '');
+      });
+      return keys;
+    }, []);
+    return [payload.eventId, payload.sectionId, payload.pax, menuKeys.join(',')]
       .join('::')
       .slice(0, 120);
   }
@@ -822,7 +854,6 @@
 
   function countPayloadRecipes(payload) {
     if (!payload) return 0;
-    if (payload.recipeIds && payload.recipeIds.length) return payload.recipeIds.length;
     return (payload.courses || []).reduce(function (sum, course) {
       return sum + ((course.items || []).length || 0);
     }, 0);
@@ -916,13 +947,26 @@
         html += '<h3 class="planner-manifest__course">' + esc(header) + '</h3><ul class="planner-manifest__list">';
         (course.items || []).forEach(function (item) {
           var tags = (item.tags || []).length ? ' <span class="planner-manifest__tags">[' + esc(item.tags.join(', ')) + ']</span>' : '';
-          html +=
-            '<li><button type="button" class="planner-manifest__item" data-recipe-id="' +
-            esc(item.recipeId || '') +
-            '">✓ ' +
-            esc(item.name) +
-            tags +
-            '</button></li>';
+          var linkStatus = item.recipeLinkStatus
+            ? ' <span class="planner-manifest__tags">[' + esc(item.recipeLinkStatus) + ']</span>'
+            : '';
+          if (item.recipeId) {
+            html +=
+              '<li><button type="button" class="planner-manifest__item" data-recipe-id="' +
+              esc(item.recipeId) +
+              '">✓ ' +
+              esc(item.name) +
+              tags +
+              linkStatus +
+              '</button></li>';
+          } else {
+            html +=
+              '<li><span class="planner-manifest__item planner-manifest__item--unlinked">✓ ' +
+              esc(item.name) +
+              tags +
+              linkStatus +
+              '</span></li>';
+          }
         });
         html += '</ul>';
       });
@@ -1016,7 +1060,10 @@
             '</span><span class="planner-recipe__head-count">' +
             esc(method.length + ' prep · ' + service.length + ' service') +
             '</span></summary>';
-          html += renderMetricChips(recipeMetricItems(course.course, recipe, factor), 'planner-recipe');
+          html += renderMetricChips(
+            recipeMetricItems(course.course, recipe, factor, item),
+            'planner-recipe'
+          );
           html += renderScreenSectionLabel('Ingredients', ingredients.length);
           html += '<div class="planner-recipe__ings">';
           ingredients.forEach(function (ing) {

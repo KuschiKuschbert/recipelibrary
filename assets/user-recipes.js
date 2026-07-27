@@ -1306,6 +1306,28 @@
       return titleCaseWords(String(d).trim());
     }).filter(Boolean);
     var rawLabel = payload.label ? String(payload.label).trim() : '';
+    var sourceDate = new Date().toISOString().slice(0, 10);
+    var provenance = payload.provenance && typeof payload.provenance === 'object'
+      ? payload.provenance
+      : {
+          source: 'Riviera page custom recipe draft',
+          sourceDate: sourceDate,
+          scope: 'recipe-specific',
+        };
+    var confirmationFlags = Array.isArray(payload.confirmationFlags)
+      ? payload.confirmationFlags.map(function (flag) { return String(flag || '').trim(); }).filter(Boolean)
+      : [
+          'Kitchen trial and explicit approval are required before promotion from TRIAL ONLY.',
+          'Epicure pairing review and Kitchen Council review are not yet recorded.',
+          'Allergen declaration requires confirmation against current product labels and cross-contact controls.',
+          'Cooling, holding and packing controls require recipe-by-recipe confirmation.',
+          'Scaling basis requires recipe-by-recipe confirmation.',
+          'Rational settings require recipe-by-recipe confirmation or an explicit NOT REQUIRED decision.',
+        ];
+    var suppliedControls = payload.controls && typeof payload.controls === 'object' ? payload.controls : {};
+    var defaultControl = function () {
+      return { status: 'NEEDS CONFIRMATION', steps: [] };
+    };
     var rec = {
       id: payload.id || slugId(rawName),
       name: displayName,
@@ -1322,6 +1344,52 @@
       method_steps: method_steps,
       service: service,
       note: payload.note ? capitalizeFirstLetter(String(payload.note).trim()) : null,
+      status: payload.status || 'TRIAL ONLY',
+      version: payload.version || sourceDate + '-draft',
+      provenance: {
+        source: String(provenance.source || 'Riviera page custom recipe draft').trim(),
+        sourceDate: String(provenance.sourceDate || sourceDate).trim(),
+        scope: String(provenance.scope || 'recipe-specific').trim(),
+      },
+      confirmationFlags: confirmationFlags,
+      aliases: Array.isArray(payload.aliases)
+        ? payload.aliases.map(function (alias) { return String(alias || '').trim(); }).filter(Boolean)
+        : [],
+      links: payload.links && typeof payload.links === 'object'
+        ? payload.links
+        : { packages: [], events: [] },
+      allergens: payload.allergens && typeof payload.allergens === 'object'
+        ? payload.allergens
+        : {
+            status: 'NEEDS CONFIRMATION',
+            contains: [],
+            mayContain: [],
+            notes: 'Review current ingredient labels and cross-contact controls before service. No allergen-free claim is made.',
+          },
+      controls: {
+        cooling: suppliedControls.cooling || defaultControl(),
+        holding: suppliedControls.holding || defaultControl(),
+        packing: suppliedControls.packing || defaultControl(),
+        service: {
+          status: service.length ? 'SOURCE RECORDED' : 'NEEDS CONFIRMATION',
+          steps: service,
+        },
+      },
+      scalingBasis: payload.scalingBasis && typeof payload.scalingBasis === 'object'
+        ? payload.scalingBasis
+        : {
+            status: 'NEEDS CONFIRMATION',
+            basis: '',
+            baseYield: payload.yield != null ? String(payload.yield).trim() : '',
+            notes: 'Yield text is preserved, but the scalable production basis has not been separately confirmed.',
+          },
+      rationalSettings: payload.rationalSettings && typeof payload.rationalSettings === 'object'
+        ? payload.rationalSettings
+        : {
+            status: 'NEEDS CONFIRMATION',
+            stages: [],
+            notes: 'No complete Rational program is confirmed in this draft.',
+          },
     };
     list.push(rec);
     saveRiviera(list);

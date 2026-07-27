@@ -379,8 +379,10 @@
 
     function scaleQtyForPlanner(recipeId, qtyStr) {
       if (!qtyStr || !plannerContext || !plannerContext.scaleMap) return qtyStr;
+      if (!Object.prototype.hasOwnProperty.call(plannerContext.scaleMap, recipeId)) return qtyStr;
       var factor = plannerContext.scaleMap[recipeId];
-      if (!factor || factor === 1) return qtyStr;
+      if (factor == null) return 'NEEDS CONFIRMATION';
+      if (factor === 1) return qtyStr;
       var S = window.KuschiPlannerScale;
       if (S && typeof S.scaleQtyStr === 'function') return S.scaleQtyStr(qtyStr, factor);
       return qtyStr;

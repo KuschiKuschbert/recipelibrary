@@ -11,6 +11,9 @@
     'plated main': 'plated_main',
     'plated entree': 'plated_entree',
     tapas: 'tapas',
+    'sunday tapas': 'tapas',
+    'afternoon tea': 'high_tea',
+    'high tea': 'high_tea',
     corporate: 'corporate_boxed',
   };
 
@@ -101,6 +104,7 @@
   }
 
   function scaleQtyStr(qtyStr, factor) {
+    if (factor == null) return 'NEEDS CONFIRMATION';
     if (!qtyStr || factor === 1) return qtyStr || '';
     var fracMap = { '½': 0.5, '¼': 0.25, '¾': 0.75, '⅓': 0.333, '⅔': 0.667 };
     var str = String(qtyStr).trim();
@@ -126,6 +130,22 @@
     return (redirects && redirects[recipeId]) || recipeId;
   }
 
+  function servicePiecesPerGuest(rec) {
+    return (
+      firstNum(rec.pieces_per_guest) ||
+      firstNum(rec.piece_count) ||
+      firstNum(rec.sliders_per_guest) ||
+      firstNum(rec.prawns_per_guest) ||
+      firstNum(rec.cutlets_per_guest) ||
+      firstNum(rec.skewers_per_guest) ||
+      firstNum(rec.madeleines_per_guest) ||
+      firstNum(rec.portion_count_per_guest) ||
+      firstNum(rec.serves_per_guest) ||
+      firstNum(rec.cookies_per_guest) ||
+      firstNum(rec.bowls_per_guest)
+    );
+  }
+
   function scaleFactorForRecipe(recipe, pax, style, variants, aliases) {
     if (!recipe) return 1;
     variants = variants || _variants;
@@ -136,12 +156,21 @@
     if (group) {
       var rec = group[svcKey];
       if (rec && rec.status !== 'not_recommended') {
-        var buffer = firstNum(rec.production_buffer_multiplier) || 1;
-        var ppg = firstNum(rec.production_pieces_per_guest) || firstNum(rec.pieces_per_guest);
-        var basePieces =
-          firstNum(group.base_prep && group.base_prep.base_yield_pieces) || parseYieldNum(recipe.yield);
+        var buffer = firstNum(rec.automatic_event_buffer_multiplier) || 1;
+        var ppg = servicePiecesPerGuest(rec);
+        var confirmedBasePieces = firstNum(group.base_prep && group.base_prep.base_yield_pieces);
+        if (
+          !confirmedBasePieces &&
+          String(rec.ingredient_scaling_status || '').toUpperCase() === 'NEEDS CONFIRMATION'
+        ) {
+          return null;
+        }
+        var basePieces = confirmedBasePieces || parseYieldNum(recipe.yield);
         if (ppg && basePieces && pax) {
           return (pax * ppg * buffer) / basePieces;
+        }
+        if (basePieces && pax) {
+          return (pax * buffer) / basePieces;
         }
       }
     }

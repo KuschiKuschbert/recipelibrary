@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "RIV-KNOWLEDGE-2026-07-27-V13",
+  "status": "active",
+  "purpose": "Supplemental package and event-use backlinks that are not represented as standalone brochure items in function_packages.json.",
+  "links": [
+    {
+      "useId": "sunday-tapas",
+      "label": "Sunday Tapas",
+      "eventTypeId": "sunday-tapas",
+      "packageId": "sunday-tapas",
+      "packageLabel": "Sunday Tapas",
+      "sectionId": "current-live-menu",
+      "sectionLabel": "Sunday Tapas",
+      "course": "Current Live Menu",
+      "recipeIds": [
+        "calamari",
+        "lamb-cutlet",
+        "riviera-emulsion",
+        "arancini",
+        "romesco",
+        "lemon-thyme-aioli",
+        "oysters-kilpatrick",
+        "chorizo-potatoes",
+        "chicken-skewer",
+        "fish-slider",
+        "house-focaccia",
+        "whipped-butter",
+        "charcuterie-board-classic",
+        "date-madeleines",
+        "house-chip-seasoning"
+      ],
+      "confirmationFlags": [
+        "Spiced popcorn cauliflower, halloumi saganaki, cannoli trio, pistachio affogato and kids-menu recipe mappings still need confirmation.",
+        "Veal & Prosciutto Crumbed Olives is deliberately excluded until the legacy Veal olives/Polpette rows are mapped."
+      ]
+    },
+    {
+      "useId": "high-tea-components",
+      "label": "High Tea",
+      "eventTypeId": "baby_shower",
+      "packageId": "baby_shower",
+      "packageLabel": "Baby Shower",
+      "sectionId": "high_tea",
+      "sectionLabel": "High Tea",
+      "course": "High Tea Menu Components",
+      "recipeIds": [
+        "romesco",
+        "lemon-thyme-aioli"
+      ],
+      "confirmationFlags": []
+    },
+    {
+      "useId": "arabian-long-lunch-2026-08-08",
+      "label": "Arabian Long Lunch — 8 Aug 2026",
+      "eventTypeId": "arabian-long-lunch-2026-08-08",
+      "packageId": "special-events",
+      "packageLabel": "Special Events",
+      "sectionId": "arabian-long-lunch-2026-08-08",
+      "sectionLabel": "Arabian Long Lunch",
+      "course": "Dessert",
+      "recipeIds": [
+        "baklava-cheesecake"
+      ],
+      "confirmationFlags": []
+    }
+  ]
+}

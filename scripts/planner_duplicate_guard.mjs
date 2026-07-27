@@ -36,15 +36,15 @@ function buildWorstCasePayload(pkg, section) {
   for (const course of section.courses || []) {
     const items = [];
     for (const item of course.items || []) {
-      const recipe = recipesById.get(item.recipeId);
-      if (!recipe) continue;
+      const recipe = item.recipeId ? recipesById.get(item.recipeId) || null : null;
       items.push({
         name: item.name,
-        recipeId: recipe.id,
+        recipeId: recipe ? recipe.id : '',
         tags: item.tags || [],
         recipe,
+        recipeLinkStatus: item.recipeLinkStatus || '',
       });
-      if (!recipeIds.includes(recipe.id)) recipeIds.push(recipe.id);
+      if (recipe && !recipeIds.includes(recipe.id)) recipeIds.push(recipe.id);
     }
     if (items.length) {
       courses.push({
@@ -80,7 +80,9 @@ for (const pkg of packages.packages || []) {
     if (!payload.courses.length) continue;
 
     const cleaned = planner.uniqueRecipePayloadForLists(payload);
-    const cleanedIds = cleaned.courses.flatMap((course) => course.items.map((item) => item.recipeId));
+    const cleanedIds = cleaned.courses
+      .flatMap((course) => course.items.map((item) => item.recipeId))
+      .filter(Boolean);
     const duplicateRecipeIds = [...cleanedIds.reduce((map, id) => map.set(id, (map.get(id) || 0) + 1), new Map())]
       .filter(([, count]) => count > 1)
       .map(([id, count]) => `${id} x${count}`);
@@ -100,8 +102,22 @@ for (const pkg of packages.packages || []) {
       failures.push(`${pkg.id}/${section.id}: duplicate shopping rows: ${duplicateItems.slice(0, 12).join(', ')}`);
     }
 
+    const manifest = planner.buildManifest(payload);
+    for (const course of section.courses || []) {
+      for (const item of course.items || []) {
+        if (!item.recipeLinkStatus) continue;
+        if (!manifest.includes(item.name)) {
+          failures.push(`${pkg.id}/${section.id}: placeholder choice missing from manifest: ${item.name}`);
+        }
+        if (!manifest.includes(item.recipeLinkStatus)) {
+          failures.push(
+            `${pkg.id}/${section.id}: placeholder choice missing confirmation status: ${item.name}`
+          );
+        }
+      }
+    }
+
     if (pkg.id === 'weddings' && section.id === 'portofino') {
-      const manifest = planner.buildManifest(payload);
       const seafoodMentions = (manifest.match(/3-Tier Seafood Fountain/g) || []).length;
       if (seafoodMentions !== 3) {
         failures.push(`weddings/portofino: menu choices were collapsed (${seafoodMentions}/3 seafood choices visible)`);

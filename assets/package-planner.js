@@ -142,14 +142,13 @@
     if (!sec || !_state.eventId || !_state.sectionId) return;
     (sec.courses || []).forEach(function (course, ci) {
       var sel = course.selection || { mode: 'optional' };
-      var linkedKeys = [];
-      (course.items || []).forEach(function (item, ii) {
-        if (!item.recipeId) return;
-        linkedKeys.push(itemKey(_state.eventId, _state.sectionId, ci, ii));
+      var selectableKeys = [];
+      (course.items || []).forEach(function (_item, ii) {
+        selectableKeys.push(itemKey(_state.eventId, _state.sectionId, ci, ii));
       });
-      if (!linkedKeys.length) return;
+      if (!selectableKeys.length) return;
       if (sel.mode === 'all') {
-        linkedKeys.forEach(function (key) {
+        selectableKeys.forEach(function (key) {
           _state.selections[key] = true;
         });
         return;
@@ -159,7 +158,7 @@
       var max = sel.max != null ? sel.max : null;
       var target = max != null ? Math.min(Math.max(min, 0), max) : Math.max(min, 0);
       if (!target) return;
-      var selected = linkedKeys.filter(function (key) {
+      var selected = selectableKeys.filter(function (key) {
         return _state.selections[key];
       });
       if (max != null && selected.length > max) {
@@ -168,7 +167,7 @@
         });
         selected = selected.slice(0, max);
       }
-      linkedKeys.forEach(function (key) {
+      selectableKeys.forEach(function (key) {
         if (selected.length >= target) return;
         if (!_state.selections[key]) {
           _state.selections[key] = true;
@@ -180,15 +179,24 @@
 
   function countSelectedInCourse(sec, courseIdx) {
     var course = sec.courses[courseIdx];
-    if (!course) return { count: 0, linked: 0 };
+    if (!course) return { count: 0, total: 0, linked: 0, selectedUnlinked: 0 };
     var count = 0;
     var linked = 0;
+    var selectedUnlinked = 0;
     (course.items || []).forEach(function (item, ii) {
-      if (!item.recipeId) return;
-      linked++;
-      if (_state.selections[itemKey(_state.eventId, _state.sectionId, courseIdx, ii)]) count++;
+      var selected = !!_state.selections[itemKey(_state.eventId, _state.sectionId, courseIdx, ii)];
+      if (item.recipeId) linked++;
+      if (selected) {
+        count++;
+        if (!item.recipeId) selectedUnlinked++;
+      }
     });
-    return { count: count, linked: linked };
+    return {
+      count: count,
+      total: (course.items || []).length,
+      linked: linked,
+      selectedUnlinked: selectedUnlinked,
+    };
   }
 
   function courseValidation(sec, courseIdx) {
@@ -197,10 +205,10 @@
     var stats = countSelectedInCourse(sec, courseIdx);
     if (sel.mode === 'all') {
       return {
-        valid: stats.count === stats.linked,
-        label: stats.count + ' of ' + stats.linked + ' (all included)',
-        min: stats.linked,
-        max: stats.linked,
+        valid: stats.count === stats.total,
+        label: stats.count + ' of ' + stats.total + ' (all included)',
+        min: stats.total,
+        max: stats.total,
         count: stats.count,
       };
     }
@@ -237,6 +245,7 @@
     var out = {
       selected: 0,
       linked: 0,
+      selectedUnlinked: 0,
       courses: 0,
       readyCourses: 0,
       needsCourses: 0,
@@ -248,6 +257,7 @@
       var val = courseValidation(sec, ci);
       out.selected += stats.count;
       out.linked += stats.linked;
+      out.selectedUnlinked += stats.selectedUnlinked;
       if (val.valid) out.readyCourses++;
       else out.needsCourses++;
     });
@@ -390,7 +400,13 @@
     html += '</div>';
     html += '<div class="fn-planner__summary-chips">';
     html += '<span class="fn-planner__summary-chip"><strong>' + stats.selected + '</strong> selected</span>';
-    html += '<span class="fn-planner__summary-chip">' + stats.linked + ' linked dishes</span>';
+    html += '<span class="fn-planner__summary-chip">' + stats.linked + ' recipe-linked dishes</span>';
+    if (stats.selectedUnlinked) {
+      html +=
+        '<span class="fn-planner__summary-status fn-planner__summary-status--needs"><strong>' +
+        stats.selectedUnlinked +
+        '</strong> selected · recipe confirmation needed</span>';
+    }
     html += '<span class="fn-planner__summary-chip"><strong>' + esc(String(_state.pax || 100)) + '</strong> covers</span>';
     if (_state.eventDate) {
       html += '<span class="fn-planner__summary-chip">' + esc(_state.eventDate) + '</span>';
@@ -398,9 +414,24 @@
     if (sec.price) {
       html += '<span class="fn-planner__summary-chip">' + esc(sec.price) + '</span>';
     }
+    if (sec.salesStatus) {
+      html += '<span class="fn-planner__summary-status fn-planner__summary-status--needs">' + esc(sec.salesStatus) + '</span>';
+    }
     html += '<span class="fn-planner__summary-status' + summaryStatusCls + '">' + esc(readyText) + '</span>';
     html += '</div>';
     if (sec.desc) html += '<p class="fn-planner__desc">' + esc(sec.desc) + '</p>';
+    var operationalLines =
+      sec.operationalRules && Array.isArray(sec.operationalRules.displayLines)
+        ? sec.operationalRules.displayLines
+        : [];
+    if (operationalLines.length) {
+      html += '<details class="fn-planner__ops" open>';
+      html += '<summary>Locked operational standard</summary><ul>';
+      operationalLines.forEach(function (line) {
+        html += '<li>' + esc(line) + '</li>';
+      });
+      html += '</ul></details>';
+    }
     html += '</div>';
 
     (sec.courses || []).forEach(function (course, ci) {
@@ -438,9 +469,7 @@
           '"' +
           ' aria-pressed="' +
           (selected ? 'true' : 'false') +
-          '"' +
-          (hasRecipe ? '' : ' disabled') +
-          '>' +
+          '">' +
           '<span class="fn-dish-chip__state" aria-hidden="true">' +
           (selected ? '✓' : '+') +
           '</span><span class="fn-dish-chip__content"><span class="fn-dish-chip__name">' +
@@ -457,7 +486,7 @@
             escAttr(item.name) +
             '">▶</button>';
         } else {
-          html += '<span class="fn-dish-chip__badge">No recipe</span>';
+          html += '<span class="fn-dish-chip__badge">Recipe confirmation</span>';
         }
         if (selected && hasRecipe && item.recipeId && window.KuschiPlannerExtras) {
           html += window.KuschiPlannerExtras.renderHintChips(item.recipeId);
@@ -469,7 +498,7 @@
 
     body.innerHTML = html;
 
-    body.querySelectorAll('.fn-dish-chip:not([disabled])').forEach(function (btn) {
+    body.querySelectorAll('.fn-dish-chip').forEach(function (btn) {
       btn.addEventListener('click', function () {
         toggleItem(parseInt(btn.getAttribute('data-ci'), 10), parseInt(btn.getAttribute('data-ii'), 10));
       });
@@ -535,18 +564,35 @@
       var itemsOut = [];
       (course.items || []).forEach(function (item, ii) {
         var key = itemKey(_state.eventId, _state.sectionId, ci, ii);
-        if (!_state.selections[key] || !item.recipeId) return;
-        var resolvedId = resolveRecipeId(item.recipeId, redirects);
-        var recipe = recipeMap[resolvedId] || recipeMap[item.recipeId];
-        if (!recipe) return;
-        var useId = recipe.id;
+        if (!_state.selections[key]) return;
+        var resolvedId = item.recipeId ? resolveRecipeId(item.recipeId, redirects) : '';
+        var recipe = item.recipeId ? recipeMap[resolvedId] || recipeMap[item.recipeId] || null : null;
+        var useId = recipe ? recipe.id : '';
+        var recipeLinkStatus =
+          item.recipeLinkStatus ||
+          (!recipe && item.recipeId ? 'RECIPE DATA UNAVAILABLE — NEEDS CONFIRMATION' : '');
         itemsOut.push({
           name: item.name,
           recipeId: useId,
           tags: item.tags || [],
           recipe: recipe,
+          recipeLinkStatus: recipeLinkStatus,
+          quantityPerGuest: item.quantityPerGuest != null ? Number(item.quantityPerGuest) : null,
+          unit: item.unit || '',
+          automaticEventBufferMultiplier:
+            item.automaticEventBufferMultiplier != null
+              ? Number(item.automaticEventBufferMultiplier)
+              : null,
+          serviceTargetQuantity:
+            item.quantityPerGuest != null
+              ? _state.pax *
+                Number(item.quantityPerGuest) *
+                (item.automaticEventBufferMultiplier != null
+                  ? Number(item.automaticEventBufferMultiplier)
+                  : 1)
+              : null,
         });
-        if (recipeIds.indexOf(useId) < 0) recipeIds.push(useId);
+        if (useId && recipeIds.indexOf(useId) < 0) recipeIds.push(useId);
       });
       if (itemsOut.length) {
         coursesOut.push({
@@ -565,6 +611,8 @@
       sectionLabel: sec.label,
       style: sec.style || '',
       price: sec.price || '',
+      salesStatus: sec.salesStatus || 'NEEDS CURRENT SALES CONFIRMATION',
+      sourceStatus: sec.sourceStatus || '',
       pax: _state.pax,
       eventDate: _state.eventDate || '',
       courses: coursesOut,

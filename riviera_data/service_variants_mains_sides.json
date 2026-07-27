@@ -6,38 +6,42 @@
     "lamb-shoulder-provencale-composed": {
       "recipe_id": "lamb-shoulder-provencale-composed",
       "plated_main": {
-        "portion": "170 g cooked lamb, 50 ml jus, 80 g Provençale veg, 5 g gremolata per guest",
-        "production_buffer_multiplier": 1.1,
+        "portion": "170 g cooked lamb, 50 ml jus, 80 g Provençale veg, 5 g gremolata per guest · Riviera 9% event buffer applies once",
         "premium_garnish_option": "Micro herbs or lemon zest.",
         "service_rule": "Hold lamb in jus at 78-80 C; veg and gremolata separate until pass.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "buffet": {
-        "portion": "170 g cooked lamb with jus per guest",
-        "production_buffer_multiplier": 1.15,
+        "portion": "170 g cooked lamb with jus per guest · Riviera 9% event buffer applies once",
         "jus_ml_per_guest": 50,
         "provencale_veg_g_per_guest": 80,
         "gremolata_g_per_guest": 5,
         "premium_garnish_option": "Micro herbs or lemon zest.",
         "service_rule": "Serve lamb covered in jus from GN; refresh jus level during service.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       }
     },
     "beef-bourguignon": {
       "recipe_id": "beef-bourguignon",
       "plated_main": {
-        "portion": "180 g bourguignon per guest; optional 100 g mash/purée base",
-        "production_buffer_multiplier": 1.1,
+        "portion": "180 g bourguignon per guest; optional 100 g mash/purée base · Riviera 9% event buffer applies once",
         "premium_garnish_option": "Micro parsley, picked thyme or crisp lardon crumb.",
         "service_rule": "Hold gently at 78-80 C; do not boil once beef is in sauce.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "buffet": {
-        "portion": "180 g bourguignon per guest",
-        "production_buffer_multiplier": 1.15,
+        "portion": "180 g bourguignon per guest · Riviera 9% event buffer applies once",
         "premium_garnish_option": "Micro parsley, picked thyme or crisp lardon crumb.",
         "service_rule": "Each scoop should include beef, sauce, mushroom, lardon and onion.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "corporate_boxed": {
         "portion": "not recommended unless sold as controlled hot boxed meal",
@@ -48,50 +52,55 @@
     "creamy-lemon-caper-chicken": {
       "recipe_id": "creamy-lemon-caper-chicken",
       "plated_main": {
-        "portion": "1 chicken portion, 45 ml lemon caper cream, 5 g capers per guest",
+        "portion": "1 chicken portion, 45 ml lemon caper cream, 5 g capers per guest · Riviera 9% event buffer applies once",
         "chicken_g_raw_per_guest": 200,
-        "production_buffer_multiplier": 1.1,
         "premium_garnish_option": "Micro herbs, fried capers or lemon zest.",
         "service_rule": "Cook to 74 C internal; sauce separately at pass.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "buffet": {
-        "portion": "1 sliced chicken portion per guest",
-        "production_buffer_multiplier": 1.15,
+        "portion": "1 sliced chicken portion per guest · Riviera 9% event buffer applies once",
         "sauce_ml_per_guest": 45,
         "premium_garnish_option": "Micro herbs, fried capers or lemon zest.",
         "service_rule": "Slice in shallow batches; hold covered with sauce protected.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       }
     },
     "greek-spiced-roast-lamb": {
       "recipe_id": "greek-spiced-roast-lamb",
       "plated_main": {
-        "portion": "120 g cooked lamb, 35 ml pan jus, oregano finish per guest",
-        "production_buffer_multiplier": 1.1,
+        "portion": "120 g cooked lamb, 35 ml pan jus, oregano finish per guest · Riviera 9% event buffer applies once",
         "premium_garnish_option": "Micro oregano, lemon zest or herb oil.",
         "service_rule": "Carve against grain and sauce immediately.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "buffet": {
-        "portion": "120 g cooked lamb per guest",
-        "production_buffer_multiplier": 1.15,
+        "portion": "120 g cooked lamb per guest · Riviera 9% event buffer applies once",
         "pan_jus_ml_per_guest": 40,
         "premium_garnish_option": "Micro oregano, lemon zest or herb oil.",
         "service_rule": "Carve tableside or hold pulled/carved lamb covered in jus.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       }
     },
     "prosciutto-chicken-lemon-caper": {
       "recipe_id": "prosciutto-chicken-lemon-caper",
       "plated_main": {
-        "portion": "1 prosciutto chicken portion, 50 ml sauce, 100 g chat potatoes, 25 g greens per guest",
+        "portion": "1 prosciutto chicken portion, 50 ml sauce, 100 g chat potatoes, 25 g greens per guest · Riviera 9% event buffer applies once",
         "chicken_g_raw_per_guest": 200,
         "prosciutto_g_per_guest": 20,
-        "production_buffer_multiplier": 1.1,
         "premium_garnish_option": "Micro herbs, fried capers or lemon zest.",
         "service_rule": "Rest and slice on bias at pass; do not bury prosciutto in sauce.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "buffet": {
         "portion": "not recommended as open buffet",
@@ -102,11 +111,12 @@
     "fillet-beef-tempranillo": {
       "recipe_id": "fillet-beef-tempranillo",
       "plated_main": {
-        "portion": "130 g raw fillet portion, 40 ml reduction, 100 g potato, 25 g greens per guest",
-        "production_buffer_multiplier": 1.1,
+        "portion": "130 g raw fillet portion, 40 ml reduction, 100 g potato, 25 g greens per guest · Riviera 9% event buffer applies once",
         "premium_garnish_option": "Micro herbs, herb oil or crisp potato garnish.",
         "service_rule": "Sear, oven finish, rest and sauce at pass only.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "buffet": {
         "portion": "not recommended as open buffet",
@@ -122,13 +132,14 @@
     "greek-style-pulled-beef-buffet": {
       "recipe_id": "greek-style-pulled-beef-buffet",
       "buffet": {
-        "portion": "150 g pulled beef and jus per guest",
-        "production_buffer_multiplier": 1.15,
+        "portion": "150 g pulled beef and jus per guest · Riviera 9% event buffer applies once",
         "tzatziki_g_per_guest": 15,
         "parsley_g_per_guest": 1,
         "premium_garnish_option": "Micro herbs, lemon zest or oregano finish.",
         "service_rule": "Hold beef covered in jus at 75 C; tzatziki separate and labelled.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "plated_main": {
         "portion": "150 g pulled beef, 45 ml jus, 15 g tzatziki per guest",
@@ -140,12 +151,13 @@
     "chargrilled-lemon-thyme-chicken-buffet": {
       "recipe_id": "chargrilled-lemon-thyme-chicken-buffet",
       "buffet": {
-        "portion": "1 chargrilled thigh fillet per guest",
-        "production_buffer_multiplier": 1.15,
+        "portion": "1 chargrilled thigh fillet per guest · Riviera 9% event buffer applies once",
         "dressing_ml_per_guest": 20,
         "premium_garnish_option": "Micro herbs, lemon zest or fried capers.",
         "service_rule": "Hold thighs whole where possible; slice at service and dress individual portions only.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "plated_main": {
         "portion": "1 sliced thigh fillet, 20 ml dressing, caper-parsley finish per guest",
@@ -157,11 +169,12 @@
     "creamy-potato-gratin": {
       "recipe_id": "creamy-potato-gratin",
       "buffet": {
-        "portion": "150 g gratin per guest",
-        "production_buffer_multiplier": 1.1,
+        "portion": "150 g gratin per guest · Riviera 9% event buffer applies once",
         "premium_garnish_option": "Micro herbs or crisp cheese crumb.",
         "service_rule": "Rest before cutting; hold covered hot max 90 min.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "platter": {
         "portion": "count by 150 g side portions",
@@ -173,11 +186,12 @@
     "garlic-herb-chat-potatoes-feta": {
       "recipe_id": "garlic-herb-chat-potatoes-feta",
       "buffet": {
-        "portion": "125 g roast chats, 20 g whipped feta, 8 ml herb oil per guest",
-        "production_buffer_multiplier": 1.15,
+        "portion": "125 g roast chats, 20 g whipped feta, 8 ml herb oil per guest · Riviera 9% event buffer applies once",
         "premium_garnish_option": "Micro herbs, parsley leaves or lemon zest.",
         "service_rule": "Re-crisp potatoes before service; feta and herb oil at service only.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "platter": {
         "portion": "portion by guest count, not individual pieces",
@@ -189,11 +203,12 @@
     "broccoli-cauliflower-gratin": {
       "recipe_id": "broccoli-cauliflower-gratin",
       "buffet": {
-        "portion": "150 g vegetable gratin per guest",
-        "production_buffer_multiplier": 1.1,
+        "portion": "150 g vegetable gratin per guest · Riviera 9% event buffer applies once",
         "premium_garnish_option": "Micro herbs or crisp herb crumb.",
         "service_rule": "Drain veg hard; rest before scooping; avoid stirring after baking.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "platter": {
         "portion": "portion by guest count, not individual pieces",
@@ -205,9 +220,10 @@
     "roast-beef-thyme-garlic-carvery": {
       "recipe_id": "roast-beef-thyme-garlic-carvery",
       "buffet": {
-        "portion": "2–3 thick slices per guest (approx. 165–200 g cooked)",
-        "production_buffer_multiplier": 1.1,
-        "status": "confirmed"
+        "portion": "2–3 thick slices per guest (approx. 165–200 g cooked) · Riviera 9% event buffer applies once",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "plated_main": {
         "portion": "2 thick slices with jus and gremolata (approx. 165–200 g cooked)",
@@ -217,9 +233,10 @@
     "lemon-thyme-garlic-roast-chicken-carvery": {
       "recipe_id": "lemon-thyme-garlic-roast-chicken-carvery",
       "buffet": {
-        "portion": "2 pieces (breast + thigh) per guest approx. 165 g cooked",
-        "production_buffer_multiplier": 1.1,
-        "status": "confirmed"
+        "portion": "2 pieces (breast + thigh) per guest approx. 165 g cooked · Riviera 9% event buffer applies once",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "plated_main": {
         "portion": "1 carved portion with jus (approx. 165 g cooked)",
@@ -229,9 +246,10 @@
     "sicilian-roast-pork-apricot": {
       "recipe_id": "sicilian-roast-pork-apricot",
       "buffet": {
-        "portion": "2–3 slices per guest approx. 165 g cooked with apricot compote",
-        "production_buffer_multiplier": 1.1,
-        "status": "confirmed"
+        "portion": "2–3 slices per guest approx. 165 g cooked with apricot compote · Riviera 9% event buffer applies once",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       }
     },
     "sous-vide-pork-loin-apricot": {
@@ -251,9 +269,10 @@
     "greek-green-bean-salad": {
       "recipe_id": "greek-green-bean-salad",
       "buffet": {
-        "portion": "90–110 g per guest",
-        "production_buffer_multiplier": 1.1,
-        "status": "confirmed"
+        "portion": "90–110 g per guest · Riviera 9% event buffer applies once",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "platter": {
         "portion": "portion by guest count at 90–110 g each",
@@ -263,17 +282,19 @@
     "caesar-salad-buffet": {
       "recipe_id": "caesar-salad-buffet",
       "buffet": {
-        "portion": "90–110 g per guest — dress in small batches to maintain crispness",
-        "production_buffer_multiplier": 1.1,
-        "status": "confirmed"
+        "portion": "90–110 g per guest — dress in small batches to maintain crispness · Riviera 9% event buffer applies once",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       }
     },
     "honey-thyme-roasted-carrots-pistachio": {
       "recipe_id": "honey-thyme-roasted-carrots-pistachio",
       "buffet": {
-        "portion": "90–110 g per guest",
-        "production_buffer_multiplier": 1.1,
-        "status": "confirmed"
+        "portion": "90–110 g per guest · Riviera 9% event buffer applies once",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "plated_main": {
         "portion": "5–6 carrot halves fanned alongside the main",
@@ -283,25 +304,28 @@
     "mediterranean-rice-pilaf": {
       "recipe_id": "mediterranean-rice-pilaf",
       "buffet": {
-        "portion": "110–130 g per guest",
-        "production_buffer_multiplier": 1.1,
-        "status": "confirmed"
+        "portion": "110–130 g per guest · Riviera 9% event buffer applies once",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       }
     },
     "roast-root-veg-salad-cinnamon-maple": {
       "recipe_id": "roast-root-veg-salad-cinnamon-maple",
       "buffet": {
-        "portion": "110 g per guest — add cinnamon-maple nuts at service",
-        "production_buffer_multiplier": 1.1,
-        "status": "confirmed"
+        "portion": "110 g per guest — add cinnamon-maple nuts at service · Riviera 9% event buffer applies once",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       }
     },
     "roast-pumpkin-pepita-salad-balsamic": {
       "recipe_id": "roast-pumpkin-pepita-salad-balsamic",
       "buffet": {
-        "portion": "90–110 g per guest",
-        "production_buffer_multiplier": 1.1,
-        "status": "confirmed"
+        "portion": "90–110 g per guest · Riviera 9% event buffer applies once",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "platter": {
         "portion": "portion by guest count at 90–110 g each",
@@ -315,9 +339,10 @@
         "status": "confirmed"
       },
       "buffet": {
-        "portion": "45–55 g per guest — dress immediately before service",
-        "production_buffer_multiplier": 1.1,
-        "status": "confirmed"
+        "portion": "45–55 g per guest — dress immediately before service · Riviera 9% event buffer applies once",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       }
     },
     "french-green-beans-shallots-mustard": {
@@ -327,17 +352,19 @@
         "status": "confirmed"
       },
       "buffet": {
-        "portion": "65–90 g per guest — scatter almonds at service",
-        "production_buffer_multiplier": 1.1,
-        "status": "confirmed"
+        "portion": "65–90 g per guest — scatter almonds at service · Riviera 9% event buffer applies once",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       }
     },
     "creamy-potato-bake": {
       "recipe_id": "creamy-potato-bake",
       "buffet": {
-        "portion": "165 g per guest — pre-portion into squares",
-        "production_buffer_multiplier": 1.1,
-        "status": "confirmed"
+        "portion": "165 g per guest — pre-portion into squares · Riviera 9% event buffer applies once",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "platter": {
         "portion": "portion by guest count at 165 g each",
@@ -347,17 +374,19 @@
     "garlic-lemon-potatoes": {
       "recipe_id": "garlic-lemon-potatoes",
       "buffet": {
-        "portion": "130 g per guest",
-        "production_buffer_multiplier": 1.1,
-        "status": "confirmed"
+        "portion": "130 g per guest · Riviera 9% event buffer applies once",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       }
     },
     "pork-italian-herb-sausages": {
       "recipe_id": "pork-italian-herb-sausages",
       "buffet": {
-        "portion": "2 sausages per guest — production 2.4 per guest",
-        "production_buffer_multiplier": 1.2,
-        "status": "confirmed"
+        "portion": "2 sausages per guest · Riviera 9% event buffer applies once",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       }
     },
     "burnt-butter-mash": {
@@ -367,23 +396,50 @@
         "status": "confirmed"
       },
       "buffet": {
-        "portion": "165–200 g per guest — hold in bain marie at 75°C",
-        "production_buffer_multiplier": 1.1,
-        "status": "confirmed"
+        "portion": "165–200 g per guest — hold in bain marie at 75°C · Riviera 9% event buffer applies once",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       }
     },
     "house-focaccia": {
       "recipe_id": "house-focaccia",
       "plated_main": {
-        "portion": "2–3 portions per guest for table bread service",
-        "production_buffer_multiplier": 1.1,
-        "status": "confirmed"
+        "portion": "2–3 portions per guest for table bread service · Riviera 9% event buffer applies once",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       },
       "buffet": {
-        "portion": "2–3 portions per guest in lined bread baskets",
-        "production_buffer_multiplier": 1.1,
-        "status": "confirmed"
+        "portion": "2–3 portions per guest in lined bread baskets · Riviera 9% event buffer applies once",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       }
     }
+  },
+  "buffer_policy": {
+    "releaseId": "RIV-KNOWLEDGE-2026-07-27-V13",
+    "eventMultiplier": 1.09,
+    "applyOnce": true,
+    "eventServiceKeys": [
+      "buffet",
+      "cocktail",
+      "dessert_buffet",
+      "plated_dessert",
+      "plated_entree",
+      "plated_main",
+      "roving_dessert"
+    ],
+    "fixedModuleMultiplier": 1.0,
+    "fixedModuleServiceKeys": [
+      "corporate_boxed",
+      "high_tea",
+      "platter"
+    ],
+    "excludedServiceKeys": [
+      "tapas"
+    ],
+    "note": "High Tea and Sunday Tapas have no automatic event buffer. Fixed High Tea, platter and corporate modules are not buffered unless an event-specific source says otherwise."
   }
 }

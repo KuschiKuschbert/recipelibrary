@@ -32,7 +32,30 @@ REQUIRED_TOP = (
     "ingredients",
     "method_steps",
     "service",
+    "status",
+    "version",
+    "provenance",
+    "confirmationFlags",
+    "aliases",
+    "links",
+    "allergens",
+    "controls",
+    "scalingBasis",
+    "rationalSettings",
 )
+
+RECIPE_STATUSES = {
+    "LOCKED",
+    "ACTIVE WORKING",
+    "TRIAL ONLY",
+    "RETIRED",
+}
+CONTROL_STATUSES = {
+    "CONFIRMED",
+    "SOURCE RECORDED",
+    "NEEDS CONFIRMATION",
+    "NOT REQUIRED",
+}
 
 
 def die(msg: str) -> None:
@@ -87,6 +110,119 @@ def main() -> None:
             for j, item in enumerate(arr):
                 if not isinstance(item, str):
                     die(f"Recipe {rid!r}: {arr_key}[{j}] must be a string")
+
+        status = r["status"]
+        if status not in RECIPE_STATUSES:
+            die(f"Recipe {rid!r}: invalid status {status!r}")
+
+        version = r["version"]
+        if not isinstance(version, str) or not version.strip():
+            die(f"Recipe {rid!r}: version must be a non-empty string")
+
+        provenance = r["provenance"]
+        if not isinstance(provenance, dict):
+            die(f"Recipe {rid!r}: provenance must be an object")
+        for key in ("source", "sourceDate", "scope"):
+            if not isinstance(provenance.get(key), str) or not provenance[key].strip():
+                die(f"Recipe {rid!r}: provenance.{key} must be a non-empty string")
+
+        confirmation_flags = r["confirmationFlags"]
+        if not isinstance(confirmation_flags, list):
+            die(f"Recipe {rid!r}: confirmationFlags must be an array")
+        for j, flag in enumerate(confirmation_flags):
+            if not isinstance(flag, str) or not flag.strip():
+                die(f"Recipe {rid!r}: confirmationFlags[{j}] must be a non-empty string")
+
+        aliases = r["aliases"]
+        if not isinstance(aliases, list) or any(
+            not isinstance(alias, str) or not alias.strip() for alias in aliases
+        ):
+            die(f"Recipe {rid!r}: aliases must be an array of non-empty strings")
+
+        links = r["links"]
+        if not isinstance(links, dict):
+            die(f"Recipe {rid!r}: links must be an object")
+        for link_kind in ("packages", "events"):
+            link_rows = links.get(link_kind) if isinstance(links, dict) else None
+            if not isinstance(link_rows, list) or any(not isinstance(row, dict) for row in link_rows):
+                die(f"Recipe {rid!r}: links.{link_kind} must be an array of objects")
+
+        allergens = r["allergens"]
+        if not isinstance(allergens, dict):
+            die(f"Recipe {rid!r}: allergens must be an object")
+        if allergens.get("status") not in CONTROL_STATUSES:
+            die(f"Recipe {rid!r}: allergens.status is invalid")
+        for allergen_key in ("contains", "mayContain"):
+            values = allergens.get(allergen_key)
+            if not isinstance(values, list) or any(
+                not isinstance(value, str) or not value.strip() for value in values
+            ):
+                die(f"Recipe {rid!r}: allergens.{allergen_key} must be an array of non-empty strings")
+        if not isinstance(allergens.get("notes"), str):
+            die(f"Recipe {rid!r}: allergens.notes must be a string")
+        if allergens.get("status") == "NEEDS CONFIRMATION" and not any(
+            "allergen" in flag.lower() for flag in confirmation_flags
+        ):
+            die(f"Recipe {rid!r}: unresolved allergens require an allergen confirmation flag")
+
+        controls = r["controls"]
+        if not isinstance(controls, dict):
+            die(f"Recipe {rid!r}: controls must be an object")
+        unresolved_controls = False
+        for control_key in ("cooling", "holding", "packing", "service"):
+            control = controls.get(control_key)
+            if not isinstance(control, dict):
+                die(f"Recipe {rid!r}: controls.{control_key} must be an object")
+            if control.get("status") not in CONTROL_STATUSES:
+                die(f"Recipe {rid!r}: controls.{control_key}.status is invalid")
+            control_steps = control.get("steps")
+            if not isinstance(control_steps, list) or any(
+                not isinstance(step, str) or not step.strip() for step in control_steps
+            ):
+                die(f"Recipe {rid!r}: controls.{control_key}.steps must be an array of non-empty strings")
+            if control.get("status") == "SOURCE RECORDED" and not control_steps:
+                die(f"Recipe {rid!r}: source-recorded {control_key} controls require steps")
+            if control.get("status") == "NEEDS CONFIRMATION":
+                unresolved_controls = True
+        if controls["service"]["steps"] != r["service"]:
+            die(f"Recipe {rid!r}: controls.service.steps must match service")
+        if unresolved_controls and not any("control" in flag.lower() for flag in confirmation_flags):
+            die(f"Recipe {rid!r}: unresolved controls require a confirmation flag")
+
+        scaling = r["scalingBasis"]
+        if not isinstance(scaling, dict):
+            die(f"Recipe {rid!r}: scalingBasis must be an object")
+        if scaling.get("status") not in CONTROL_STATUSES:
+            die(f"Recipe {rid!r}: scalingBasis.status is invalid")
+        for scaling_key in ("basis", "baseYield", "notes"):
+            if not isinstance(scaling.get(scaling_key), str):
+                die(f"Recipe {rid!r}: scalingBasis.{scaling_key} must be a string")
+        if scaling.get("status") == "SOURCE RECORDED" and not scaling.get("basis", "").strip():
+            die(f"Recipe {rid!r}: source-recorded scalingBasis requires basis")
+        if scaling.get("status") == "NEEDS CONFIRMATION" and not any(
+            "scaling" in flag.lower() for flag in confirmation_flags
+        ):
+            die(f"Recipe {rid!r}: unresolved scalingBasis requires a confirmation flag")
+
+        rational = r["rationalSettings"]
+        if not isinstance(rational, dict):
+            die(f"Recipe {rid!r}: rationalSettings must be an object")
+        if rational.get("status") not in CONTROL_STATUSES:
+            die(f"Recipe {rid!r}: rationalSettings.status is invalid")
+        stages = rational.get("stages")
+        if not isinstance(stages, list) or any(not isinstance(stage, dict) for stage in stages):
+            die(f"Recipe {rid!r}: rationalSettings.stages must be an array of objects")
+        if not isinstance(rational.get("notes"), str):
+            die(f"Recipe {rid!r}: rationalSettings.notes must be a string")
+        if rational.get("status") == "NEEDS CONFIRMATION" and not any(
+            "rational" in flag.lower() for flag in confirmation_flags
+        ):
+            die(f"Recipe {rid!r}: unresolved rationalSettings requires a confirmation flag")
+
+        if r.get("houseStandard") is True and status != "LOCKED":
+            die(f"Recipe {rid!r}: houseStandard recipes must have status 'LOCKED'")
+        if status == "RETIRED" and r.get("houseStandard") is True:
+            die(f"Recipe {rid!r}: retired recipes cannot be house standards")
 
         ings = r["ingredients"]
         if not isinstance(ings, list):

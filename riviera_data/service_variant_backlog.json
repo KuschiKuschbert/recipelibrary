@@ -1,0 +1,112 @@
+{
+  "releaseId": "RIV-KNOWLEDGE-2026-07-27-V13",
+  "version": "1.0",
+  "status": "ACTIVE WORKING",
+  "policy": "A listed recipe has no confirmed Riviera service-variant record in the active sources. Keep its recipe data available, show the gap as NEEDS CONFIRMATION, and do not invent a service quantity to satisfy coverage checks. Remove the backlog record when a sourced service variant is published.",
+  "backlog": [
+    {
+      "recipeId": "benedictine-caramel-custard",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "dinner-rolls-butter",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "house-baked-muffins",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "beef-cheeseburger-sliders",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "gourmet-pizza-scrolls",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "gourmet-brioche-sliders",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "chilli-prawn-chorizo-casarecce",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "cotoletta-pinsa",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "maple-pumpkin-ravioli-burnt-butter",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "souvlaki-gyros-assembly",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "spiced-lamb-kofta-offsite",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "grilled-halloumi-plain",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "spinach-feta-pastizzi-warm",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "fruit-salad-yoghurt",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "dessert-grazing-table-assembly",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "roving-tiramisu-cups",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "margherita-pizza",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "pumpkin-soup",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "stuffed-squid",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "cannelloni-ricotta-spinach",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "porchetta-salsa-verde",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "cannellini-beans-pancetta-asparagus",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "rib-fillet-300",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "oysters-florentine",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "poached-salmon",
+      "status": "NEEDS CONFIRMATION"
+    },
+    {
+      "recipeId": "white-bread-roll-dough",
+      "status": "NEEDS CONFIRMATION"
+    }
+  ]
+}

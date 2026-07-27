@@ -11,7 +11,7 @@
   ];
   const ALIASES_URL = 'riviera_data/canonical_recipe_aliases.json';
   const META_KEYS = new Set(['recipe_id', 'canonical_name', 'aliases', 'recipe_id_candidates', 'size_rule']);
-  const SERVICE_KEYS = ['platter', 'corporate_boxed', 'buffet', 'cocktail', 'tapas', 'plated_main', 'plated_entree', 'dessert_platter', 'dessert_buffet', 'plated_dessert', 'roving_dessert', 'kids', 'dietary_single'];
+  const SERVICE_KEYS = ['platter', 'corporate_boxed', 'buffet', 'cocktail', 'tapas', 'high_tea', 'plated_main', 'plated_entree', 'dessert_platter', 'dessert_buffet', 'plated_dessert', 'roving_dessert', 'kids', 'dietary_single'];
   let variantsPayload = null;
   let aliasesPayload = null;
   let variantPromise = null;
@@ -97,7 +97,7 @@
       bits.push('Brochure range: ' + v.brochure_range_min + '-' + v.brochure_range_max);
       used.add('brochure_range_min'); used.add('brochure_range_max');
     }
-    ['portion','brochure_count','kitchen_production_count','total_pieces','whole_sandwiches','items_per_type','production_buffer_multiplier','sauce_ml_per_guest','aioli_ml_per_guest','premium_garnish_option','standard_garnish','service_rule','hold','recommendation','reason','note','source_note'].forEach((key) => {
+    ['portion','brochure_count','kitchen_production_count','total_pieces','whole_sandwiches','items_per_type','automatic_event_buffer_multiplier','buffer_rule','sauce_ml_per_guest','aioli_ml_per_guest','premium_garnish_option','standard_garnish','service_rule','hold','recommendation','reason','note','source_note'].forEach((key) => {
       if (used.has(key) || !(key in v)) return;
       used.add(key);
       const value = v[key];
@@ -106,7 +106,8 @@
       else if (key === 'total_pieces') bits.push('Total pieces: ' + value);
       else if (key === 'whole_sandwiches') bits.push('Whole sandwiches: ' + value);
       else if (key === 'items_per_type') bits.push('Items per type: ' + value);
-      else if (key === 'production_buffer_multiplier') bits.push(value + 'x production buffer');
+      else if (key === 'automatic_event_buffer_multiplier') bits.push(value + 'x automatic event buffer');
+      else if (key === 'buffer_rule') bits.push('Buffer rule: ' + value);
       else if (key === 'sauce_ml_per_guest') bits.push(value + 'ml sauce per guest');
       else if (key === 'aioli_ml_per_guest') bits.push(value + 'ml aioli per guest');
       else if (key === 'source_note') bits.push('Source note: ' + value);
