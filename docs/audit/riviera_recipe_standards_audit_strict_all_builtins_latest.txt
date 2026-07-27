@@ -1,25 +1,25 @@
 RIVIERA RECIPE STANDARDS AUDIT
 ====================================
-Built-in recipes: 156
+Built-in recipes: 157
 Service variant files: 5
 - riviera_data/service_variants.json
 - riviera_data/service_variants_canapes.json
 - riviera_data/service_variants_corporate.json
 - riviera_data/service_variants_mains_sides.json
 - riviera_data/service_variant_source_overrides.json
-Service variant records: 97
+Service variant records: 98
 Declared NEEDS CONFIRMATION backlog: 26
-Canonical recipe groups: 19
+Canonical recipe groups: 20
 Recipe redirects: 11
 Strict missing variant scope: all builtins
 
 RECIPE LIFECYCLE
 ----------------
 locked: 22
-active working: 127
+active working: 128
 trial only: 5
 retired: 2
-recipes_with_confirmation_flags: 156
+recipes_with_confirmation_flags: 157
 - arancini: 4
 - calamari: 4
 - oysters-kilpatrick: 4
@@ -42,6 +42,7 @@ recipes_with_confirmation_flags: 156
 - baklava-cheesecake: 6
 - house-focaccia: 3
 - burnt-butter-mash: 3
+- veal-prosciutto-stuffed-olives: 6
 - labneh-tzatziki: 4
 - pickled-cucumber-brine: 4
 - sweet-thyme-chicken-marinade: 4
