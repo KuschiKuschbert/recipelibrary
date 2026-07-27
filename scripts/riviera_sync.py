@@ -57,7 +57,15 @@ CHECK_COMMANDS = (
         [sys.executable, "scripts/sync_riviera_package_policy.py", "--check"],
     ),
     ("source alignment", [sys.executable, "scripts/audit_riviera_source_alignment.py"]),
-    ("recipe standards", [sys.executable, "scripts/audit_riviera_recipe_standards.py", "--strict"]),
+    (
+        "recipe standards (all built-ins)",
+        [
+            sys.executable,
+            "scripts/audit_riviera_recipe_standards.py",
+            "--strict",
+            "--all-builtins",
+        ],
+    ),
     (
         "frontend service variants",
         [sys.executable, "scripts/audit_riviera_frontend_service_variants.py"],
