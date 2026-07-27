@@ -1,5 +1,5 @@
 {
-  "version": "2026-06-28-v4",
+  "version": "2026-07-27-v5",
   "status": "active_canonical_alias_map",
   "purpose": "Single source of truth for Riviera recipe naming where the same kitchen recipe appears under multiple menu names.",
   "canonical_recipes": {
@@ -8,7 +8,7 @@
       "canonical_name": "Polpette",
       "active_base_recipe_file": "riviera_data/builtins.json",
       "active_service_standard_file": "riviera_data/service_variants.json",
-      "standard_piece_weight_g_pre_crumb": 60,
+      "standard_piece_weight_g_pre_crumb": 80,
       "duplicate_recipe_ids": [
         "beef-polpette-canape",
         "slow-cooked-beef-albondigas-buffet"
@@ -29,10 +29,10 @@
         "beef polpette"
       ],
       "service_rule": "Use the Polpette recipe as the single kitchen base for meatballs, albondigas and polpette unless a future menu deliberately creates a separate recipe.",
-      "cocktail_size_rule": "60 g pre-crumb is the normal cocktail standard. 80 g is substantial canape only if explicitly requested.",
+      "cocktail_size_rule": "80 g is the locked Beef & Pork Polpette piece weight for current Riviera service.",
       "duplicate_rule": "Do not use beef-polpette-canape or slow-cooked-beef-albondigas-buffet as separate active recipes. They are older service-format drafts and should redirect to the canonical Polpette recipe.",
       "notes": [
-        "Do not create separate active recipes for meatballs, albondigas and polpette without a deliberate menu decision."
+        "Older 60 g and 25 g formats are retired/reference only unless deliberately reactivated."
       ]
     },
     "arancini": {
@@ -118,11 +118,96 @@
         "sweet potato topper"
       ],
       "service_rule": "Workbook Toppers tab."
+    },
+    "baklava-cheesecake": {
+      "canonical_id": "baklava-cheesecake",
+      "canonical_name": "Baklava Cheesecake",
+      "aliases": [
+        "baklava cheesecake",
+        "baclava cheesecake",
+        "baklava-cheesecake-gn-100"
+      ],
+      "service_rule": "Use the locked GN production recipe. The older 20 cm / 10-portion source is historical where it conflicts."
+    },
+    "potato-pave": {
+      "canonical_id": "potato-pave",
+      "canonical_name": "Potato Pavé",
+      "aliases": [
+        "potato pavé",
+        "potato pave",
+        "potato-pave-triangle-36"
+      ],
+      "service_rule": "One tray yields 36 triangular serves from a 3 × 6 grid cut diagonally."
+    },
+    "riviera-blondies-working": {
+      "canonical_id": "riviera-blondies-working",
+      "canonical_name": "Riviera Blondies — Working Scale",
+      "aliases": [
+        "blondie-gn-half-working"
+      ],
+      "service_rule": "Legacy V13 draft IDs redirect to the stable GitHub recipe ID; do not create a duplicate recipe."
+    },
+    "flourless-chocolate-torte-working": {
+      "canonical_id": "flourless-chocolate-torte-working",
+      "canonical_name": "Flourless Chocolate Torte — Working Scale",
+      "aliases": [
+        "flourless-chocolate-torte-gn-working"
+      ],
+      "service_rule": "Legacy V13 draft IDs redirect to the stable GitHub recipe ID; do not create a duplicate recipe."
+    },
+    "natural-oysters-prosecco-fennel-orange": {
+      "canonical_id": "natural-oysters-prosecco-fennel-orange",
+      "canonical_name": "Natural Oyster — Prosecco, Fennel & Orange Mignonette",
+      "aliases": [
+        "oyster-prosecco-fennel-orange-mignonette-rd"
+      ],
+      "service_rule": "Legacy V13 draft IDs redirect to the stable GitHub recipe ID; do not create a duplicate recipe."
+    },
+    "warm-oysters-lemon-oregano-caper": {
+      "canonical_id": "warm-oysters-lemon-oregano-caper",
+      "canonical_name": "Warm Oyster — Whole Lemon, Oregano & Caper Oil",
+      "aliases": [
+        "oyster-whole-lemon-oregano-caper-oil-rd"
+      ],
+      "service_rule": "Legacy V13 draft IDs redirect to the stable GitHub recipe ID; do not create a duplicate recipe."
+    },
+    "oyster-saganaki": {
+      "canonical_id": "oyster-saganaki",
+      "canonical_name": "Oyster Saganaki — Tomato, Caper, Oregano & Feta",
+      "aliases": [
+        "oyster-saganaki-tomato-caper-feta-rd"
+      ],
+      "service_rule": "Legacy V13 draft IDs redirect to the stable GitHub recipe ID; do not create a duplicate recipe."
+    },
+    "sicilian-gratin-oysters": {
+      "canonical_id": "sicilian-gratin-oysters",
+      "canonical_name": "Sicilian Gratin Oyster — Anchovy, Caper, Lemon & Herb Crumb",
+      "aliases": [
+        "oyster-sicilian-anchovy-caper-gratin-rd"
+      ],
+      "service_rule": "Legacy V13 draft IDs redirect to the stable GitHub recipe ID; do not create a duplicate recipe."
+    },
+    "harissa-oysters-preserved-lemon": {
+      "canonical_id": "harissa-oysters-preserved-lemon",
+      "canonical_name": "Harissa Oyster — Preserved Lemon Butter, Labneh & Mint",
+      "aliases": [
+        "oyster-harissa-preserved-lemon-labneh-rd"
+      ],
+      "service_rule": "Legacy V13 draft IDs redirect to the stable GitHub recipe ID; do not create a duplicate recipe."
     }
   },
   "recipe_id_redirects": {
     "beef-polpette-canape": "veal-meatballs",
-    "slow-cooked-beef-albondigas-buffet": "veal-meatballs"
+    "slow-cooked-beef-albondigas-buffet": "veal-meatballs",
+    "baklava-cheesecake-gn-100": "baklava-cheesecake",
+    "potato-pave-triangle-36": "potato-pave",
+    "blondie-gn-half-working": "riviera-blondies-working",
+    "flourless-chocolate-torte-gn-working": "flourless-chocolate-torte-working",
+    "oyster-prosecco-fennel-orange-mignonette-rd": "natural-oysters-prosecco-fennel-orange",
+    "oyster-whole-lemon-oregano-caper-oil-rd": "warm-oysters-lemon-oregano-caper",
+    "oyster-saganaki-tomato-caper-feta-rd": "oyster-saganaki",
+    "oyster-sicilian-anchovy-caper-gratin-rd": "sicilian-gratin-oysters",
+    "oyster-harissa-preserved-lemon-labneh-rd": "harissa-oysters-preserved-lemon"
   },
   "alias_to_canonical": {
     "polpette": "polpette",
@@ -157,6 +242,19 @@
     "cannelini beans with charred asparagud and lemon": "cannellini-beans",
     "cannellini beans with charred asparagus and lemon": "cannellini-beans",
     "the other topper": "sweet-potato-topper",
-    "sweet potato topper": "sweet-potato-topper"
+    "sweet potato topper": "sweet-potato-topper",
+    "baklava cheesecake": "baklava-cheesecake",
+    "baclava cheesecake": "baklava-cheesecake",
+    "potato pavé": "potato-pave",
+    "potato pave": "potato-pave",
+    "baklava-cheesecake-gn-100": "baklava-cheesecake",
+    "potato-pave-triangle-36": "potato-pave",
+    "blondie-gn-half-working": "riviera-blondies-working",
+    "flourless-chocolate-torte-gn-working": "flourless-chocolate-torte-working",
+    "oyster-prosecco-fennel-orange-mignonette-rd": "natural-oysters-prosecco-fennel-orange",
+    "oyster-whole-lemon-oregano-caper-oil-rd": "warm-oysters-lemon-oregano-caper",
+    "oyster-saganaki-tomato-caper-feta-rd": "oyster-saganaki",
+    "oyster-sicilian-anchovy-caper-gratin-rd": "sicilian-gratin-oysters",
+    "oyster-harissa-preserved-lemon-labneh-rd": "harissa-oysters-preserved-lemon"
   }
 }

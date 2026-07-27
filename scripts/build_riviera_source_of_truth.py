@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Build Riviera's merged source-of-truth bundle.
+"""Build Riviera's GitHub recipe-data bundle.
 
-The verified ChatGPT Riviera Project snapshot is the legacy baseline. GitHub is
-the mutable authority. The only overlay applied here is the July 8
-tapas/canape house-standard recipe update represented in the structured Riviera
-recipe catalog.
+GitHub is canonical for structured recipe data. The verified 2026-07-08
+ChatGPT Riviera Project snapshot is retained as historical provenance, while
+Google Drive remains the editable operational master and ChatGPT consumes a
+read-optimised published release. The fixed July 8 tapas/canape overlay and
+later approved house standards are represented in the structured catalog.
 """
 
 from __future__ import annotations
@@ -30,8 +31,9 @@ PACKAGES_PATH = ROOT / "riviera_data" / "function_packages.json"
 
 SOURCE_OF_TRUTH_PATH = OUTPUT_DIR / "Riviera_Source_Of_Truth_2026-07-08.md"
 TAPAS_OVERLAY_PATH = OUTPUT_DIR / "Riviera_Tapas_House_Standards_Overlay_2026-07-08.md"
-CURRENT_STANDARDS_ADDITIONS_PATH = OUTPUT_DIR / "Riviera_Current_House_Standards_Additions_2026-07-22.md"
+CURRENT_STANDARDS_ADDITIONS_PATH = OUTPUT_DIR / "Riviera_Current_House_Standards_Additions_2026-07-27.md"
 MANIFEST_PATH = OUTPUT_DIR / "manifest.json"
+ACTIVE_RELEASE_ID = "RIV-KNOWLEDGE-2026-07-27-V13"
 
 JULY_8_OVERLAY_IDS = [
     "arancini",
@@ -51,7 +53,15 @@ JULY_8_OVERLAY_IDS = [
     "camembert-cigars",
     "beef-kofta",
 ]
-CURRENT_HOUSE_STANDARD_IDS = [*JULY_8_OVERLAY_IDS, "peach-tartare"]
+CURRENT_HOUSE_STANDARD_IDS = [
+    *JULY_8_OVERLAY_IDS,
+    "peach-tartare",
+    "house-scones",
+    "potato-pave",
+    "baklava-cheesecake",
+    "house-focaccia",
+    "burnt-butter-mash",
+]
 
 SOURCE_FILES: list[dict[str, str]] = [
     {"file": "Baclava-Cheesecake.txt", "kind": "text", "liveName": "Baclava-Cheesecake.txt"},
@@ -103,6 +113,10 @@ def load_recipe_catalog() -> list[dict[str, Any]]:
     payload = load_json(RECIPE_CATALOG_PATH)
     if not isinstance(payload, dict) or not isinstance(payload.get("recipes"), list):
         raise SystemExit(f"{RECIPE_CATALOG_PATH.relative_to(ROOT)} must be an object with a recipes list")
+    if payload.get("releaseId") != ACTIVE_RELEASE_ID:
+        raise SystemExit(
+            f"{RECIPE_CATALOG_PATH.relative_to(ROOT)} releaseId must be {ACTIVE_RELEASE_ID}"
+        )
     return payload["recipes"]
 
 
@@ -253,9 +267,21 @@ def recipe_to_markdown(recipe: dict[str, Any], package_refs: list[str]) -> str:
     lines.append(f"### {md_escape(recipe.get('name'))}")
     lines.append("")
     lines.append(f"- Recipe ID: `{recipe['id']}`")
+    lines.append(f"- Status: {md_escape(recipe.get('status') or '-')}")
+    lines.append(f"- Version: {md_escape(recipe.get('version') or '-')}")
     lines.append(f"- Yield: {md_escape(recipe.get('yield') or '-')}")
     lines.append(f"- Label: {md_escape(recipe.get('label') or '-')}")
+    provenance = recipe.get("provenance") if isinstance(recipe.get("provenance"), dict) else {}
+    if provenance:
+        source = clean(provenance.get("source"))
+        source_date = clean(provenance.get("sourceDate"))
+        scope = clean(provenance.get("scope"))
+        detail = " | ".join(value for value in (source, source_date, scope) if value)
+        lines.append(f"- Provenance: {md_escape(detail)}")
     lines.append(f"- Tags: {md_escape(' | '.join(recipe_tags(recipe, package_refs)))}")
+    aliases = [clean(alias) for alias in recipe.get("aliases") or [] if clean(alias)]
+    if aliases:
+        lines.append(f"- Aliases: {md_escape(' | '.join(aliases))}")
     if package_refs:
         lines.append(f"- Package / section refs: {md_escape('; '.join(package_refs))}")
     subtitle = clean(recipe.get("subtitle"))
@@ -265,6 +291,77 @@ def recipe_to_markdown(recipe: dict[str, Any], package_refs: list[str]) -> str:
     if elements:
         lines.append(f"- Elements: {md_escape(' | '.join(elements))}")
     lines.append("")
+
+    confirmation_flags = [
+        clean(flag) for flag in recipe.get("confirmationFlags") or [] if clean(flag)
+    ]
+    if confirmation_flags:
+        lines.append("#### Needs Confirmation")
+        lines.append("")
+
+    allergens = recipe.get("allergens") if isinstance(recipe.get("allergens"), dict) else {}
+    if allergens:
+        lines.append("#### Allergens")
+        lines.append("")
+        lines.append(f"- Status: {md_escape(allergens.get('status') or '-')}")
+        lines.append(
+            f"- Contains: {md_escape(' | '.join(allergens.get('contains') or []) or 'None confirmed')}"
+        )
+        lines.append(
+            f"- May contain: {md_escape(' | '.join(allergens.get('mayContain') or []) or 'None confirmed')}"
+        )
+        if clean(allergens.get("notes")):
+            lines.append(f"- Notes: {md_escape(allergens.get('notes'))}")
+        lines.append("")
+
+    controls = recipe.get("controls") if isinstance(recipe.get("controls"), dict) else {}
+    if controls:
+        lines.append("#### Operational Controls")
+        lines.append("")
+
+    scaling = recipe.get("scalingBasis") if isinstance(recipe.get("scalingBasis"), dict) else {}
+    if scaling:
+        lines.append("#### Scaling Basis")
+        lines.append("")
+        lines.append(f"- Status: {md_escape(scaling.get('status') or '-')}")
+        lines.append(f"- Basis: {md_escape(scaling.get('basis') or 'Not confirmed')}")
+        lines.append(f"- Base yield: {md_escape(scaling.get('baseYield') or '-')}")
+        if clean(scaling.get("notes")):
+            lines.append(f"- Notes: {md_escape(scaling.get('notes'))}")
+        lines.append("")
+
+    rational = (
+        recipe.get("rationalSettings")
+        if isinstance(recipe.get("rationalSettings"), dict)
+        else {}
+    )
+    if rational:
+        lines.append("#### Rational Settings")
+        lines.append("")
+        lines.append(f"- Status: {md_escape(rational.get('status') or '-')}")
+        for stage in rational.get("stages") or []:
+            detail = " | ".join(
+                f"{key}={value}"
+                for key, value in stage.items()
+                if value not in (None, "")
+            )
+            lines.append(f"- {md_escape(detail)}")
+        if not rational.get("stages"):
+            lines.append("- No confirmed stages.")
+        if clean(rational.get("notes")):
+            lines.append(f"- Notes: {md_escape(rational.get('notes'))}")
+        lines.append("")
+        for control_key in ("cooling", "holding", "packing", "service"):
+            control = controls.get(control_key) if isinstance(controls.get(control_key), dict) else {}
+            lines.append(
+                f"- {control_key.title()}: {md_escape(control.get('status') or 'NEEDS CONFIRMATION')}"
+            )
+            for step in control.get("steps") or []:
+                lines.append(f"  - {md_escape(step)}")
+        lines.append("")
+        for flag in confirmation_flags:
+            lines.append(f"- {md_escape(flag)}")
+        lines.append("")
 
     ingredients = recipe.get("ingredients") or []
     if ingredients:
@@ -314,13 +411,13 @@ def build_tapas_overlay(recipes: list[dict[str, Any]], packages: dict[str, Any])
     lines: list[str] = [
         "# Riviera Tapas House Standards Overlay 2026-07-08",
         "",
-        "**Status:** Active overlay on top of the ChatGPT Riviera source pack.",
+        "**Status:** Active GitHub recipe-data overlay with historical ChatGPT source provenance.",
         "**Source:** `Tapas Canape Recipe Cards.docx`, standardised into the structured Riviera recipe catalog on 2026-07-08.",
         "**Use for:** House-standard tapas/canape recipe cards, kitchen PDFs, prep sheets, Sunday tapas planning, and package-linked canape/tapas pulls.",
         "",
         "## Authority",
         "",
-        "These 16 recipes override older ChatGPT project recipe-bank versions for the same dishes. For every other Riviera recipe, package rule, production rule, ordering workflow, and document format, use the ChatGPT Riviera project source pack as the baseline.",
+        "These 16 recipes override older ChatGPT project recipe-bank versions for the same dishes. The structured GitHub catalog controls current recipe data. Approved Google Drive masters control operational SOPs, packages, live orders and supplier data; ChatGPT receives those domains through a read-optimised published release.",
         "",
         "## Overlay Recipe Index",
         "",
@@ -356,10 +453,10 @@ def build_current_house_standard_additions(recipes: list[dict[str, Any]], packag
     addition_ids = [recipe_id for recipe_id in CURRENT_HOUSE_STANDARD_IDS if recipe_id not in JULY_8_OVERLAY_IDS]
     package_map = build_package_map(packages)
     lines: list[str] = [
-        "# Riviera Current House Standards Additions 2026-07-22",
+        "# Riviera Current House Standards Additions 2026-07-27",
         "",
         "**Status:** Active direct user-approved house standards added after the fixed July 8 overlay.",
-        "**Authority:** These additions are canonical in the structured Riviera recipe catalog and outrank the legacy ChatGPT baseline for the listed recipes.",
+        "**Authority:** These additions are canonical in the structured GitHub recipe catalog and outrank historical ChatGPT recipe data for the listed recipes.",
         "",
         "## Addition Index",
         "",
@@ -415,19 +512,22 @@ def build_source_of_truth(
     lines: list[str] = [
         "# Riviera Source Of Truth 2026-07-08",
         "",
-        "**Status:** Active merged source of truth.",
-        "**Merge direction:** ChatGPT Riviera project sources are the latest baseline; the fixed July 8 tapas/canape overlay is supplemented only by later direct user-approved house standards recorded in the structured catalog.",
+        "**Status:** Active GitHub recipe-data bundle with historical source appendices.",
+        f"**Active release ID:** `{ACTIVE_RELEASE_ID}`.",
+        "**Merge direction:** The structured GitHub catalog is canonical for recipe data. The fixed July 8 tapas/canape overlay and later approved standards supersede historical ChatGPT recipe versions; approved Drive masters remain canonical for operations and ChatGPT receives a read-optimised release.",
         "**Generated by:** `scripts/build_riviera_source_of_truth.py`.",
         "",
         "## Authority And Conflict Rules",
         "",
-        "1. Direct user corrections in a current event or recipe task outrank this file.",
-        "2. The July 8 Tapas House Standards Overlay in this file outranks older ChatGPT recipe-bank content for the same 16 dishes.",
-        "3. Direct user-approved house standards added after July 8 and recorded in the structured catalog outrank the ChatGPT baseline for those new recipes; they do not expand or rewrite the historical July 8 overlay.",
-        "4. The ChatGPT Riviera project source pack downloaded on 2026-07-08 is the baseline for all other Riviera operations, production sheets, package logic, ordering, supplier translation, formatting, and source-routing decisions.",
-        "5. `riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json` is the canonical structured recipe payload derived from this source stack, the July 8 overlay, and later direct user-approved house standards.",
-        "6. `riviera_data/builtins.json`, `riviera_data/function_packages.json`, and generated PDFs are operational representations. For non-overlay conflicts, reconcile them back to this merged source and structured catalog before treating them as final.",
-        "7. Do not silently invent missing recipe, package, dietary, ordering, or service rules. Mark `NEEDS CONFIRMATION` when sources conflict or a required detail is absent.",
+        "1. A direct user correction controls the current task, but is not a published source update until it is scope-classified, recorded in a change receipt, applied to the correct master, republished and verified.",
+        "2. Approved Google Drive masters control operational SOPs, package rules, live orders, approvals, prices, stock, delivery requirements and archives.",
+        "3. `riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json` is the canonical structured recipe payload.",
+        "4. The July 8 Tapas House Standards Overlay in this file outranks older ChatGPT recipe-bank content for the same 16 dishes.",
+        "5. Later approved house standards recorded in the structured catalog outrank historical ChatGPT recipe data for those recipes; they do not rewrite the fixed historical overlay.",
+        "6. The ChatGPT source pack downloaded on 2026-07-08 is historical provenance for inherited rules, not the current operational master. ChatGPT daily work uses a read-optimised published release.",
+        "7. `riviera_data/builtins.json` and generated PDFs are recipe-data representations. Package JSON must be reconciled to the approved Drive package master before cross-system publication.",
+        "8. Do not silently invent missing recipe, package, dietary, ordering, or service rules. Mark `NEEDS CONFIRMATION` when sources conflict or a required detail is absent.",
+        "9. Temporary event/week instructions require an expiry and must not be promoted into a permanent SOP.",
         "",
         "## Active Source Stack",
         "",
@@ -450,13 +550,13 @@ def build_source_of_truth(
             "",
             "## Current House Standards Added After July 8",
             "",
-            "The following section is embedded from `Riviera_Current_House_Standards_Additions_2026-07-22.md`.",
+            "The following section is embedded from `Riviera_Current_House_Standards_Additions_2026-07-27.md`.",
             "",
             current_house_standard_additions.strip(),
             "",
-            "## ChatGPT Baseline Source Appendices",
+            "## Historical ChatGPT Source Appendices",
             "",
-            "The appendices below preserve the ChatGPT Riviera project sources used as the baseline for this merge.",
+            "The appendices below preserve the 2026-07-08 ChatGPT Riviera Project snapshot as historical provenance.",
             "",
         ]
     )
@@ -494,8 +594,9 @@ def build_source_of_truth(
 def expected_manifest(inventory: list[dict[str, Any]]) -> dict[str, Any]:
     return {
         "status": "active",
-        "date": "2026-07-08",
-        "mergeDirection": "ChatGPT Riviera project sources are the baseline; July 8 remains the only overlay, while later direct user-approved house standards are structured-catalog additions rather than overlay changes.",
+        "date": "2026-07-27",
+        "releaseId": ACTIVE_RELEASE_ID,
+        "mergeDirection": "GitHub is canonical for structured recipe data; the July 8 overlay and later approved standards supersede historical ChatGPT recipe versions. Drive remains canonical for operations and ChatGPT receives a read-optimised release.",
         "sourceOfTruth": str(SOURCE_OF_TRUTH_PATH.relative_to(ROOT)),
         "structuredRecipeCatalog": str(RECIPE_CATALOG_PATH.relative_to(ROOT)),
         "overlay": str(TAPAS_OVERLAY_PATH.relative_to(ROOT)),

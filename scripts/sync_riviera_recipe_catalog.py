@@ -25,12 +25,13 @@ MANIFEST_PATH = ROOT / "riviera_sources" / "current" / "manifest.json"
 SOURCE_OF_TRUTH_PATH = ROOT / "riviera_sources" / "current" / "Riviera_Source_Of_Truth_2026-07-08.md"
 OVERLAY_PATH = ROOT / "riviera_sources" / "current" / "Riviera_Tapas_House_Standards_Overlay_2026-07-08.md"
 CURRENT_STANDARDS_ADDITIONS_PATH = (
-    ROOT / "riviera_sources" / "current" / "Riviera_Current_House_Standards_Additions_2026-07-22.md"
+    ROOT / "riviera_sources" / "current" / "Riviera_Current_House_Standards_Additions_2026-07-27.md"
 )
 PDF_PATH = ROOT / "output" / "pdf" / "Riviera_Kitchen_Recipe_Card_Book_2026-07-08.pdf"
 HOUSE_STANDARDS_PDF_PATH = ROOT / "output" / "pdf" / "Riviera_House_Standards_Recipe_Manual_2026-07-08.pdf"
 
-EXPECTED_RECIPE_COUNT = 147
+EXPECTED_RECIPE_COUNT = 156
+ACTIVE_RELEASE_ID = "RIV-KNOWLEDGE-2026-07-27-V13"
 JULY_8_OVERLAY_IDS = [
     "arancini",
     "calamari",
@@ -49,10 +50,31 @@ JULY_8_OVERLAY_IDS = [
     "camembert-cigars",
     "beef-kofta",
 ]
-CURRENT_HOUSE_STANDARD_IDS = [*JULY_8_OVERLAY_IDS, "peach-tartare"]
+CURRENT_HOUSE_STANDARD_IDS = [
+    *JULY_8_OVERLAY_IDS,
+    "peach-tartare",
+    "house-scones",
+    "potato-pave",
+    "baklava-cheesecake",
+    "house-focaccia",
+    "burnt-butter-mash",
+]
 CURRENT_HOUSE_STANDARD_ORDER = {
     recipe_id: idx for idx, recipe_id in enumerate(CURRENT_HOUSE_STANDARD_IDS)
 }
+RECIPE_STATUSES = {
+    "LOCKED",
+    "ACTIVE WORKING",
+    "TRIAL ONLY",
+    "RETIRED",
+}
+CONTROL_STATUSES = {
+    "CONFIRMED",
+    "SOURCE RECORDED",
+    "NEEDS CONFIRMATION",
+    "NOT REQUIRED",
+}
+CONTROL_KEYS = ("cooling", "holding", "packing", "service")
 
 REQUIRED_TOP = (
     "id",
@@ -68,6 +90,16 @@ REQUIRED_TOP = (
     "ingredients",
     "method_steps",
     "service",
+    "status",
+    "version",
+    "provenance",
+    "confirmationFlags",
+    "aliases",
+    "links",
+    "allergens",
+    "controls",
+    "scalingBasis",
+    "rationalSettings",
 )
 
 
@@ -140,6 +172,117 @@ def validate_recipes(recipes: Any, *, require_house_order: bool = True) -> list[
         for key in ("protein", "diet", "elements", "ingredients", "method_steps", "service"):
             if key in recipe and not isinstance(recipe[key], list):
                 errors.append(f"recipe {rid!r}: {key} must be a list")
+        status = recipe.get("status")
+        if status not in RECIPE_STATUSES:
+            errors.append(
+                f"recipe {rid!r}: status must be one of {sorted(RECIPE_STATUSES)}, found {status!r}"
+            )
+        version = recipe.get("version")
+        if not isinstance(version, str) or not version.strip():
+            errors.append(f"recipe {rid!r}: version must be a non-empty string")
+        provenance = recipe.get("provenance")
+        if not isinstance(provenance, dict):
+            errors.append(f"recipe {rid!r}: provenance must be an object")
+        else:
+            for key in ("source", "sourceDate", "scope"):
+                if not isinstance(provenance.get(key), str) or not provenance[key].strip():
+                    errors.append(f"recipe {rid!r}: provenance.{key} must be a non-empty string")
+        flags = recipe.get("confirmationFlags")
+        if not isinstance(flags, list) or any(not isinstance(flag, str) or not flag.strip() for flag in flags):
+            errors.append(f"recipe {rid!r}: confirmationFlags must be an array of non-empty strings")
+            flags = []
+        aliases = recipe.get("aliases")
+        if not isinstance(aliases, list) or any(
+            not isinstance(alias, str) or not alias.strip() for alias in aliases
+        ):
+            errors.append(f"recipe {rid!r}: aliases must be an array of non-empty strings")
+        links = recipe.get("links")
+        if not isinstance(links, dict):
+            errors.append(f"recipe {rid!r}: links must be an object")
+        else:
+            for link_kind in ("packages", "events"):
+                rows = links.get(link_kind)
+                if not isinstance(rows, list) or any(not isinstance(row, dict) for row in rows):
+                    errors.append(f"recipe {rid!r}: links.{link_kind} must be an array of objects")
+        allergens = recipe.get("allergens")
+        if not isinstance(allergens, dict):
+            errors.append(f"recipe {rid!r}: allergens must be an object")
+        else:
+            if allergens.get("status") not in CONTROL_STATUSES:
+                errors.append(f"recipe {rid!r}: allergens.status is invalid")
+            for key in ("contains", "mayContain"):
+                values = allergens.get(key)
+                if not isinstance(values, list) or any(
+                    not isinstance(value, str) or not value.strip() for value in values
+                ):
+                    errors.append(f"recipe {rid!r}: allergens.{key} must be an array of non-empty strings")
+            if not isinstance(allergens.get("notes"), str):
+                errors.append(f"recipe {rid!r}: allergens.notes must be a string")
+            if allergens.get("status") == "NEEDS CONFIRMATION" and not any(
+                "allergen" in str(flag).lower() for flag in flags
+            ):
+                errors.append(f"recipe {rid!r}: unresolved allergens require an allergen confirmation flag")
+        controls = recipe.get("controls")
+        if not isinstance(controls, dict):
+            errors.append(f"recipe {rid!r}: controls must be an object")
+        else:
+            unresolved_controls = False
+            for control_key in CONTROL_KEYS:
+                control = controls.get(control_key)
+                if not isinstance(control, dict):
+                    errors.append(f"recipe {rid!r}: controls.{control_key} must be an object")
+                    continue
+                status_value = control.get("status")
+                if status_value not in CONTROL_STATUSES:
+                    errors.append(f"recipe {rid!r}: controls.{control_key}.status is invalid")
+                steps = control.get("steps")
+                if not isinstance(steps, list) or any(
+                    not isinstance(step, str) or not step.strip() for step in steps
+                ):
+                    errors.append(
+                        f"recipe {rid!r}: controls.{control_key}.steps must be an array of non-empty strings"
+                    )
+                if status_value == "SOURCE RECORDED" and not steps:
+                    errors.append(f"recipe {rid!r}: source-recorded {control_key} controls require steps")
+                if status_value == "NEEDS CONFIRMATION":
+                    unresolved_controls = True
+            service_control = controls.get("service")
+            if isinstance(service_control, dict) and service_control.get("steps") != recipe.get("service"):
+                errors.append(f"recipe {rid!r}: controls.service.steps must match service")
+            if unresolved_controls and not any(
+                "control" in str(flag).lower() for flag in flags
+            ):
+                errors.append(f"recipe {rid!r}: unresolved controls require a confirmation flag")
+        scaling = recipe.get("scalingBasis")
+        if not isinstance(scaling, dict):
+            errors.append(f"recipe {rid!r}: scalingBasis must be an object")
+        else:
+            if scaling.get("status") not in CONTROL_STATUSES:
+                errors.append(f"recipe {rid!r}: scalingBasis.status is invalid")
+            for key in ("basis", "baseYield", "notes"):
+                if not isinstance(scaling.get(key), str):
+                    errors.append(f"recipe {rid!r}: scalingBasis.{key} must be a string")
+            if scaling.get("status") == "SOURCE RECORDED" and not scaling.get("basis", "").strip():
+                errors.append(f"recipe {rid!r}: source-recorded scalingBasis requires basis")
+            if scaling.get("status") == "NEEDS CONFIRMATION" and not any(
+                "scaling" in str(flag).lower() for flag in flags
+            ):
+                errors.append(f"recipe {rid!r}: unresolved scalingBasis requires a confirmation flag")
+        rational = recipe.get("rationalSettings")
+        if not isinstance(rational, dict):
+            errors.append(f"recipe {rid!r}: rationalSettings must be an object")
+        else:
+            if rational.get("status") not in CONTROL_STATUSES:
+                errors.append(f"recipe {rid!r}: rationalSettings.status is invalid")
+            stages = rational.get("stages")
+            if not isinstance(stages, list) or any(not isinstance(stage, dict) for stage in stages):
+                errors.append(f"recipe {rid!r}: rationalSettings.stages must be an array of objects")
+            if not isinstance(rational.get("notes"), str):
+                errors.append(f"recipe {rid!r}: rationalSettings.notes must be a string")
+            if rational.get("status") == "NEEDS CONFIRMATION" and not any(
+                "rational" in str(flag).lower() for flag in flags
+            ):
+                errors.append(f"recipe {rid!r}: unresolved rationalSettings requires a confirmation flag")
         for ing_idx, ingredient in enumerate(recipe.get("ingredients") or []):
             if not isinstance(ingredient, dict):
                 errors.append(f"recipe {rid!r}: ingredients[{ing_idx}] must be an object")
@@ -170,6 +313,16 @@ def validate_recipes(recipes: Any, *, require_house_order: bool = True) -> list[
     elif set(marked_house) != set(CURRENT_HOUSE_STANDARD_IDS):
         errors.append(f"houseStandard recipe IDs must match the current house-standard set; found {marked_house}")
 
+    for recipe in recipes:
+        if not isinstance(recipe, dict):
+            continue
+        rid = str(recipe.get("id") or "")
+        is_house_standard = recipe.get("houseStandard") is True
+        if is_house_standard and recipe.get("status") != "LOCKED":
+            errors.append(f"recipe {rid!r}: houseStandard recipes must have status 'LOCKED'")
+        if recipe.get("status") == "RETIRED" and is_house_standard:
+            errors.append(f"recipe {rid!r}: retired recipes cannot be house standards")
+
     return errors
 
 
@@ -184,12 +337,13 @@ def build_catalog_from_builtins() -> dict[str, Any]:
         fail(errors)
 
     return {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "status": "active",
-        "date": "2026-07-08",
-        "description": "Structured Riviera recipe catalog source of truth. Edit this file first, then sync riviera_data/builtins.json from it.",
+        "date": "2026-07-27",
+        "releaseId": ACTIVE_RELEASE_ID,
+        "description": "Canonical structured Riviera recipe database with lifecycle, provenance, aliases, package/event links, allergen review status, scaling basis, Rational settings and operational controls. Edit this file first, then sync riviera_data/builtins.json from it.",
         "authority": {
-            "mergeDirection": "ChatGPT Riviera project sources are the baseline; July 8 remains the only overlay, while later direct user-approved house standards are structured-catalog additions rather than overlay changes.",
+            "mergeDirection": "GitHub is canonical for structured recipe data; the July 8 overlay and later approved standards supersede historical ChatGPT recipe versions. Drive remains canonical for operations and ChatGPT receives a read-optimised release.",
             "sourceOfTruth": rel(SOURCE_OF_TRUTH_PATH),
             "manifest": rel(MANIFEST_PATH),
             "overlay": rel(OVERLAY_PATH),
@@ -215,8 +369,10 @@ def load_catalog() -> dict[str, Any]:
     if not isinstance(payload, dict):
         raise SystemExit(f"{rel(CATALOG_PATH)} must be a JSON object")
     errors = validate_recipes(payload.get("recipes"))
-    if payload.get("schemaVersion") != 1:
-        errors.append("schemaVersion must be 1")
+    if payload.get("schemaVersion") != 2:
+        errors.append("schemaVersion must be 2")
+    if payload.get("releaseId") != ACTIVE_RELEASE_ID:
+        errors.append(f"releaseId must be {ACTIVE_RELEASE_ID}")
     authority = payload.get("authority")
     if not isinstance(authority, dict):
         errors.append("authority must be an object")

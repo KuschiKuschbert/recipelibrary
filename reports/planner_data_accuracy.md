@@ -14,22 +14,17 @@ Generated at 120 covers for cocktail and buffet styles.
 
 ## Cocktail · 120 covers
 
-| Recipe | Factor | Sample scaled qty | Status |
-|--------|--------|-------------------|--------|
-| arancini | 0.600 | 3 kg · Arborio Rice | PASS |
-| calamari | 6.000 | 12 kg · Pineapple Cut Squid Strips | PASS |
-| roast-beef-thyme-garlic-carvery | 3.000 | 24 kg · Carvery Beef, Cooked | PASS |
-| oysters-kilpatrick | 2.500 |  · Oysters | PASS |
-| chicken-skewer | 1.846 | 9.23 kg · Chicken Thigh | PASS |
-| chorizo-potatoes | 1.846 | 18.46 kg · White Washed Potatoes | PASS |
-
 ## Buffet · 120 covers
 
-| Recipe | Factor | Sample scaled qty | Status |
-|--------|--------|-------------------|--------|
-| arancini | 0.600 | 3 kg · Arborio Rice | PASS |
-| calamari | 6.000 | 12 kg · Pineapple Cut Squid Strips | PASS |
-| roast-beef-thyme-garlic-carvery | 3.000 | 24 kg · Carvery Beef, Cooked | PASS |
-| oysters-kilpatrick | 2.500 |  · Oysters | PASS |
-| chicken-skewer | 1.846 | 9.23 kg · Chicken Thigh | PASS |
-| chorizo-potatoes | 1.846 | 18.46 kg · White Washed Potatoes | PASS |
+## High Tea locked service targets
+
+| Guests | Recipe | Target | Ingredient scale | Status |
+|--------|--------|--------|------------------|--------|
+| 12 | arancini | 12 pieces | NEEDS CONFIRMATION | PASS |
+| 12 | house-scones | 12 pieces | ×0.300 | PASS |
+| 12 | ribbon-sandwiches | 24 pieces | ×12.000 | PASS |
+| 12 | sweet-petit-fours | 24 pieces | ×12.000 | PASS |
+| 100 | arancini | 100 pieces | NEEDS CONFIRMATION | PASS |
+| 100 | house-scones | 100 pieces | ×2.500 | PASS |
+| 100 | ribbon-sandwiches | 200 pieces | ×100.000 | PASS |
+| 100 | sweet-petit-fours | 200 pieces | ×100.000 | PASS |

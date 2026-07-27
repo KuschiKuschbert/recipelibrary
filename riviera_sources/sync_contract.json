@@ -1,18 +1,87 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "status": "active",
-  "authority": "github-repository",
-  "activeWorkSurface": "chatgpt-local-project",
+  "authority": "domain-split",
+  "activeWorkSurface": "chatgpt-riviera-project",
+  "authorityByDomain": {
+    "operations": {
+      "owner": "google-drive",
+      "scope": [
+        "SOP masters",
+        "package rules",
+        "live orders",
+        "approvals",
+        "prices",
+        "stock",
+        "delivery requirements",
+        "archive"
+      ]
+    },
+    "structuredRecipes": {
+      "owner": "github-repository",
+      "scope": [
+        "stable recipe IDs and aliases",
+        "recipe lifecycle status and version",
+        "ingredients and methods",
+        "yield and scaling basis",
+        "allergens",
+        "Rational settings",
+        "cooling, holding, packing and service controls",
+        "recipe-page filters and package/event links"
+      ]
+    },
+    "dailyKitchenUse": {
+      "owner": "chatgpt-riviera-project",
+      "mode": "read-optimised-published-release",
+      "scope": [
+        "order checking",
+        "recipe retrieval and scaling",
+        "function and prep support",
+        "chef-ready production documents"
+      ]
+    }
+  },
   "authorityRules": [
-    "Edit Riviera sources and structured data only in the GitHub working copy.",
-    "Use the ChatGPT local project pointed at this repository for active Riviera work.",
-    "Treat the legacy ChatGPT Riviera Project as a read-only historical snapshot and optional mirror.",
-    "Never merge two independently edited copies; import a legacy Project correction as an explicit reviewed commit."
+    "Edit operational SOP, package, live-order and approval masters in Google Drive.",
+    "Edit canonical structured recipe data in the GitHub working copy and regenerate its runtime representations.",
+    "Publish read-optimised source releases into the ChatGPT Riviera Project for daily kitchen use.",
+    "A conversation correction is a proposed change until the affected master is updated and the relevant release is republished and verified.",
+    "Never merge independently edited copies by timestamp or newest-file-wins."
   ],
-  "legacyChatgptProject": {
+  "changeControl": {
+    "scopeClassifications": [
+      "PERMANENT RIVIERA STANDARD",
+      "PACKAGE-SPECIFIC STANDARD",
+      "RECIPE-SPECIFIC STANDARD",
+      "EVENT-SPECIFIC INSTRUCTION",
+      "WEEK-SPECIFIC INSTRUCTION"
+    ],
+    "askWhenScopeUnclear": true,
+    "temporaryRulesRequireExpiry": true,
+    "temporaryRulesMayEnterPermanentSop": false,
+    "receiptFields": [
+      "previousRule",
+      "newRule",
+      "scope",
+      "effectiveDate",
+      "expiryDate",
+      "affectedRecords",
+      "drivePublicationStatus",
+      "githubPublicationStatus",
+      "chatgptPublicationStatus"
+    ]
+  },
+  "chatgptProject": {
     "projectId": "g-p-6a0b96d47e4c8191a87f79189b94c5e3",
-    "mode": "read-only-snapshot-mirror",
-    "supportedSourceApi": false,
+    "role": "daily-kitchen-driver",
+    "knowledgeMode": "read-optimised-published-release",
+    "sourcePublication": "explicit-replace-and-verify",
+    "conversationChangesArePublishedSources": false
+  },
+  "legacyChatgptProjectAudit": {
+    "status": "historical-evidence",
+    "snapshotDate": "2026-07-08",
+    "supportedSourceApiAtAudit": false,
     "mirrorArtifacts": [
       "output/pdf/Riviera_Kitchen_Recipe_Card_Book_2026-07-08.pdf",
       "riviera_sources/current/Riviera_Source_Of_Truth_2026-07-08.md",
@@ -23,5 +92,5 @@
   },
   "verificationCommand": "python3 scripts/riviera_sync.py verify --remote",
   "rebuildCommand": "python3 scripts/riviera_sync.py rebuild",
-  "mirrorManifestCommand": "python3 scripts/riviera_sync.py mirror-manifest"
+  "historicalAuditManifestCommand": "python3 scripts/riviera_sync.py mirror-manifest"
 }

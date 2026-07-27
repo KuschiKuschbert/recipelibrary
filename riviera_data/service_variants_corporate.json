@@ -43,15 +43,16 @@
     "corporate-bircher-muesli-bowls": {
       "recipe_id": "corporate-bircher-muesli-bowls",
       "corporate_boxed": {
-        "portion": "1 chilled bircher bowl per guest",
+        "portion": "1 chilled bircher bowl per guest · Fixed module; no automatic event buffer",
         "bowls_per_guest": 1,
         "minimum_order_bowls": 12,
-        "production_buffer_multiplier": 1.05,
         "fruit_garnish_g_per_bowl": 80,
         "toasted_nuts_g_per_bowl": 15,
         "service_rule": "Keep chilled below 5 C. Label nut-containing bowls clearly or keep nuts separate for mixed dietaries.",
         "premium_garnish_option": "Berries, edible flowers or toasted coconut as optional premium finish.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.0,
+        "buffer_rule": "Fixed module; do not apply an automatic event buffer."
       }
     },
     "corporate-chicken-caesar-bowl": {
@@ -129,12 +130,13 @@
     "corporate-gourmet-filled-cookies": {
       "recipe_id": "corporate-gourmet-filled-cookies",
       "corporate_boxed": {
-        "portion": "1 filled cookie per guest or box",
+        "portion": "1 filled cookie per guest or box · Fixed module; no automatic event buffer",
         "cookies_per_guest": 1,
-        "production_buffer_multiplier": 1.1,
         "service_rule": "Fill day-of where possible so biscuit keeps texture. Pack flat and do not stack soft filled cookies.",
         "premium_garnish_option": "Gold dust, chocolate drizzle, edible flowers or flavour-matched crumb as optional premium finish.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.0,
+        "buffer_rule": "Fixed module; do not apply an automatic event buffer."
       },
       "dessert_platter": {
         "portion": "count by ordered cookies, base recipe yield 24 cookies",
@@ -248,41 +250,45 @@
     "corporate-pesto-pasta-salad": {
       "recipe_id": "corporate-pesto-pasta-salad",
       "corporate_boxed": {
-        "portion": "1 pasta salad serve per guest",
+        "portion": "1 pasta salad serve per guest · Fixed module; no automatic event buffer",
         "serves_per_guest": 1,
         "finished_salad_g_per_guest": 200,
-        "production_buffer_multiplier": 1.1,
         "premium_garnish_option": "Basil oil, micro basil or edible flowers as optional premium finish.",
         "service_rule": "Hold chilled below 5 C. Refresh with basil oil at send if needed.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.0,
+        "buffer_rule": "Fixed module; do not apply an automatic event buffer."
       },
       "buffet": {
-        "portion": "200 g finished salad per guest with 1.1 production allowance",
+        "portion": "200 g finished salad per guest · Riviera 9% event buffer applies once",
         "finished_salad_g_per_guest": 200,
-        "production_finished_salad_g_per_guest": 220,
         "premium_garnish_option": "Micro basil or edible flowers as optional premium finish.",
         "service_rule": "Keep chilled and refresh in small batches.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       }
     },
     "corporate-moroccan-couscous-salad": {
       "recipe_id": "corporate-moroccan-couscous-salad",
       "corporate_boxed": {
-        "portion": "1 couscous salad serve per guest",
+        "portion": "1 couscous salad serve per guest · Fixed module; no automatic event buffer",
         "serves_per_guest": 1,
         "finished_salad_g_per_guest": 180,
-        "production_buffer_multiplier": 1.1,
         "premium_garnish_option": "Toasted almonds, micro herbs or edible flowers as optional premium finish.",
         "service_rule": "Hold chilled. Keep nuts separate if nut-free dietaries are present.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.0,
+        "buffer_rule": "Fixed module; do not apply an automatic event buffer."
       },
       "buffet": {
-        "portion": "180 g finished salad per guest with 1.1 production allowance",
+        "portion": "180 g finished salad per guest · Riviera 9% event buffer applies once",
         "finished_salad_g_per_guest": 180,
-        "production_finished_salad_g_per_guest": 198,
         "premium_garnish_option": "Micro herbs or edible flowers as optional premium finish.",
         "service_rule": "Refresh in small batches and label nuts clearly.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       }
     },
     "corporate-pumpkin-feta-pepita-salad": {
@@ -299,12 +305,13 @@
         "status": "confirmed"
       },
       "buffet": {
-        "portion": "200 g finished salad per guest with 1.1 production allowance",
+        "portion": "200 g finished salad per guest · Riviera 9% event buffer applies once",
         "finished_salad_g_per_guest": 200,
-        "production_finished_salad_g_per_guest": 220,
         "premium_garnish_option": "Micro herbs or edible flowers as optional premium finish.",
         "service_rule": "Refresh in small batches and keep feta visible on top.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       }
     },
     "corporate-traditional-garden-salad": {
@@ -319,13 +326,14 @@
         "status": "confirmed"
       },
       "buffet": {
-        "portion": "120 g finished salad per guest with 1.1 production allowance",
+        "portion": "120 g finished salad per guest · Riviera 9% event buffer applies once",
         "finished_salad_g_per_guest": 120,
-        "production_finished_salad_g_per_guest": 132,
         "vinaigrette_ml_per_guest": 25,
         "premium_garnish_option": "Micro herbs or edible flowers as optional premium finish.",
         "service_rule": "Dress at service only and refresh in small batches.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       }
     },
     "corporate-creamy-potato-bacon-herb-salad": {
@@ -340,13 +348,38 @@
         "status": "confirmed"
       },
       "buffet": {
-        "portion": "200 g finished salad per guest with 1.1 production allowance",
+        "portion": "200 g finished salad per guest · Riviera 9% event buffer applies once",
         "finished_salad_g_per_guest": 200,
-        "production_finished_salad_g_per_guest": 220,
         "premium_garnish_option": "Chives, micro herbs or crisp bacon crumb as optional premium finish.",
         "service_rule": "Refresh chilled in small batches. Label pork and dairy clearly.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
       }
     }
+  },
+  "buffer_policy": {
+    "releaseId": "RIV-KNOWLEDGE-2026-07-27-V13",
+    "eventMultiplier": 1.09,
+    "applyOnce": true,
+    "eventServiceKeys": [
+      "buffet",
+      "cocktail",
+      "dessert_buffet",
+      "plated_dessert",
+      "plated_entree",
+      "plated_main",
+      "roving_dessert"
+    ],
+    "fixedModuleMultiplier": 1.0,
+    "fixedModuleServiceKeys": [
+      "corporate_boxed",
+      "high_tea",
+      "platter"
+    ],
+    "excludedServiceKeys": [
+      "tapas"
+    ],
+    "note": "High Tea and Sunday Tapas have no automatic event buffer. Fixed High Tea, platter and corporate modules are not buffered unless an event-specific source says otherwise."
   }
 }

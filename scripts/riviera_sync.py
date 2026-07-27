@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Verify and rebuild the Riviera source synchronization chain.
+"""Verify and rebuild the GitHub portion of Riviera's release chain.
 
-GitHub is the only mutable source of truth. The legacy ChatGPT Riviera Project
-is a read-only snapshot/mirror because ChatGPT Projects do not expose a
-supported source-file synchronization API.
+Riviera authority is split by domain: Google Drive owns editable operational
+masters, GitHub owns structured recipe data, and the ChatGPT Riviera Project
+uses read-optimised published releases for daily kitchen work. This command
+checks the deterministic GitHub recipe bundle and preserves the 2026-07-08
+ChatGPT inventory as historical audit evidence.
 """
 
 from __future__ import annotations
@@ -29,19 +31,42 @@ SYNC_MANAGED_PREFIXES = (
     "docs/riviera/RIVIERA_SYNC_RUNBOOK.md",
     "output/pdf/Riviera_House_Standards_Recipe_Manual_2026-07-08.pdf",
     "output/pdf/Riviera_Kitchen_Recipe_Card_Book_2026-07-08.pdf",
+    "riviera.html",
+    "assets/order-list.js",
+    "assets/package-planner.js",
+    "assets/package-prep-sheet.js",
+    "assets/planner-scale.js",
+    "assets/riviera-service-variants.js",
+    "riviera_data/",
     "riviera_sources/",
     "scripts/build_riviera_source_of_truth.py",
     "scripts/generate_riviera_recipe_card_pdf.py",
     "scripts/riviera_sync.py",
+    "scripts/static_smoke.py",
     "scripts/sync_riviera_recipe_catalog.py",
+    "scripts/sync_riviera_package_policy.py",
+    "scripts/validate_riviera_release_policy.py",
 )
 
 CHECK_COMMANDS = (
     ("generated SSOT", [sys.executable, "scripts/build_riviera_source_of_truth.py", "--check"]),
     ("catalog → built-ins", [sys.executable, "scripts/sync_riviera_recipe_catalog.py", "--check"]),
     ("built-in schema", [sys.executable, "scripts/validate_riviera_builtins.py"]),
+    (
+        "package policy",
+        [sys.executable, "scripts/sync_riviera_package_policy.py", "--check"],
+    ),
     ("source alignment", [sys.executable, "scripts/audit_riviera_source_alignment.py"]),
     ("recipe standards", [sys.executable, "scripts/audit_riviera_recipe_standards.py", "--strict"]),
+    (
+        "frontend service variants",
+        [sys.executable, "scripts/audit_riviera_frontend_service_variants.py"],
+    ),
+    (
+        "V13 release policy",
+        [sys.executable, "scripts/validate_riviera_release_policy.py"],
+    ),
+    ("static site", [sys.executable, "scripts/static_smoke.py"]),
 )
 
 
@@ -113,8 +138,18 @@ def verify_live_audit(
     *,
     enforce_mirror_freshness: bool,
 ) -> dict[str, Any]:
-    if contract.get("authority") != "github-repository":
-        errors.append("sync contract authority must be github-repository")
+    if contract.get("authority") != "domain-split":
+        errors.append("sync contract authority must be domain-split")
+    authority_by_domain = contract.get("authorityByDomain") or {}
+    expected_owners = {
+        "operations": "google-drive",
+        "structuredRecipes": "github-repository",
+        "dailyKitchenUse": "chatgpt-riviera-project",
+    }
+    for domain, owner in expected_owners.items():
+        actual = (authority_by_domain.get(domain) or {}).get("owner")
+        if actual != owner:
+            errors.append(f"sync contract {domain} owner must be {owner}")
     if audit.get("status") != "verified":
         errors.append("live Project audit is not verified")
 
@@ -125,7 +160,7 @@ def verify_live_audit(
     if sha256_bytes(inventory_payload) != live_inventory.get("inventorySha256"):
         errors.append("recorded live Project inventory fingerprint is invalid")
     baseline_names = [str(row.get("liveName")) for row in manifest.get("chatgptSources", [])]
-    mirror_paths = contract.get("legacyChatgptProject", {}).get("mirrorArtifacts") or []
+    mirror_paths = contract.get("legacyChatgptProjectAudit", {}).get("mirrorArtifacts") or []
     mirror_names = [Path(str(path)).name for path in mirror_paths]
     expected_names = mirror_names + baseline_names
     if live_inventory.get("count") != len(expected_names):
@@ -345,7 +380,7 @@ def rebuild(*, include_pdf: bool) -> int:
 def mirror_manifest() -> int:
     contract = load_json(CONTRACT_PATH)
     artifacts = []
-    for item in contract.get("legacyChatgptProject", {}).get("mirrorArtifacts") or []:
+    for item in contract.get("legacyChatgptProjectAudit", {}).get("mirrorArtifacts") or []:
         path = ROOT / str(item)
         if not path.is_file():
             raise SystemExit(f"Missing mirror artifact: {item}")
@@ -353,9 +388,9 @@ def mirror_manifest() -> int:
     print(
         json.dumps(
             {
-                "status": "ready",
-                "destination": "legacy ChatGPT Riviera Project",
-                "mode": "manual replace-only mirror boundary",
+                "status": "historical-reference",
+                "destination": "2026-07-08 ChatGPT Riviera Project audit record",
+                "mode": "checksum evidence only; not an active knowledge-release publisher",
                 "artifacts": artifacts,
             },
             indent=2,

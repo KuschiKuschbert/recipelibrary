@@ -123,10 +123,8 @@ def variant_line(record: dict[str, Any]) -> str:
         "minimum_order_serves",
         "piece_weight_g_pre_crumb",
         "piece_weight_g_raw",
-        "production_buffer_multiplier",
-        "production_piece_count_per_guest",
-        "production_pieces_per_guest",
-        "production_sliders_per_guest",
+        "automatic_event_buffer_multiplier",
+        "buffer_rule",
         "sauce_ml_per_guest",
         "aioli_ml_per_guest",
         "premium_garnish_option",
@@ -164,8 +162,10 @@ def variant_line(record: dict[str, Any]) -> str:
             bits.append(f"{value}g pre-crumb")
         elif key == "piece_weight_g_raw":
             bits.append(f"{value}g raw")
-        elif key == "production_buffer_multiplier":
-            bits.append(f"{value}x production buffer")
+        elif key == "automatic_event_buffer_multiplier":
+            bits.append(f"{value}x automatic event buffer")
+        elif key == "buffer_rule":
+            bits.append(f"Buffer rule: {value}")
         elif key == "sauce_ml_per_guest":
             bits.append(f"{value}ml sauce per guest")
         elif key == "aioli_ml_per_guest":
@@ -234,7 +234,8 @@ SAMPLES = [
         "variant_key": "buffet",
         "must_contain": [
             "4 calamari strips + 1 baby octopus per guest",
-            "1.2x production buffer",
+            "1.09x automatic event buffer",
+            "Buffer rule: Apply the Riviera 9% event buffer once",
             "Premium Garnish Option: Micro herbs",
         ],
     },
@@ -244,7 +245,8 @@ SAMPLES = [
         "variant_key": "buffet",
         "must_contain": [
             "180 g bourguignon per guest",
-            "1.15x production buffer",
+            "1.09x automatic event buffer",
+            "Buffer rule: Apply the Riviera 9% event buffer once",
             "Each scoop should include beef, sauce, mushroom, lardon and onion",
         ],
     },

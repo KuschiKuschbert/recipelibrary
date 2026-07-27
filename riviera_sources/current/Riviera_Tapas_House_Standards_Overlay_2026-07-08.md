@@ -1,18 +1,18 @@
 # Riviera Tapas House Standards Overlay 2026-07-08
 
-**Status:** Active overlay on top of the ChatGPT Riviera source pack.
+**Status:** Active GitHub recipe-data overlay with historical ChatGPT source provenance.
 **Source:** `Tapas Canape Recipe Cards.docx`, standardised into the structured Riviera recipe catalog on 2026-07-08.
 **Use for:** House-standard tapas/canape recipe cards, kitchen PDFs, prep sheets, Sunday tapas planning, and package-linked canape/tapas pulls.
 
 ## Authority
 
-These 16 recipes override older ChatGPT project recipe-bank versions for the same dishes. For every other Riviera recipe, package rule, production rule, ordering workflow, and document format, use the ChatGPT Riviera project source pack as the baseline.
+These 16 recipes override older ChatGPT project recipe-bank versions for the same dishes. The structured GitHub catalog controls current recipe data. Approved Google Drive masters control operational SOPs, packages, live orders and supplier data; ChatGPT receives those domains through a read-optimised published release.
 
 ## Overlay Recipe Index
 
 | Recipe ID | Recipe | Yield | Package refs |
 | --- | --- | --- | --- |
-| `arancini` | Chorizo and Mozzarella Arancini | 80 large arancini @ 100 g | Weddings: Portofino Package; Weddings: Taormina Package; Weddings: Late Night Snacks; Baby Shower: High Tea |
+| `arancini` | Chorizo and Mozzarella Arancini | Batch yield needs confirmation · 60 g canapé / 40 g tapas / 40 g entrée before crumbing | Weddings: Portofino Package; Weddings: Taormina Package; Weddings: Late Night Snacks; Baby Shower: High Tea |
 | `calamari` | Calamari Fritti | Batch: 2 kg squid strips + 1 kg baby octopus | Weddings: Portofino Package; Weddings: Taormina Package; Weddings: Late Night Snacks; Parties: Crowd Pleaser Platters |
 | `oysters-kilpatrick` | Kilpatrick Oyster | Kilpatrick sauce batch for approx. 40–50 oysters | Weddings: Portofino Package; Weddings: Taormina Package |
 | `veal-meatballs` | Beef & Pork Polpette | 90 balls @ 80 g; 30 tapas serves of 3 | Weddings: Portofino Package; Weddings: Taormina Package; Weddings: Amalfi Package; Weddings: La Tavola Package; Riviera Table / Offsite: Canape Packages; Riviera Table / Offsite: Plated Meals; Riviera Table / Offsite: Feasting — Shared to Table |
@@ -24,7 +24,7 @@ These 16 recipes override older ChatGPT project recipe-bank versions for the sam
 | `lemon-dill-aioli` | Lemon & Dill Aioli | Approx. 1.1 L batch | Standalone / base |
 | `lemon-thyme-aioli` | Lemon & Thyme Aioli | Approx. 1.1 L batch | Standalone / base |
 | `vodka-sauce` | Vodka Sauce | Approx. 2.8 L batch | Standalone / base |
-| `riviera-emulsion` | Riviera House Emulsion | Approx. 3 L batch | Standalone / base |
+| `riviera-emulsion` | Riviera House Emulsion | Approx. 2.4 L batch | Standalone / base |
 | `whipped-butter` | Whipped Butter | 500 g batch | Weddings: Amalfi Package; Corporate: Breakfast & Brunch; Riviera Table / Offsite: Feasting — Shared to Table |
 | `camembert-cigars` | Camembert, Pecan & Cranberry Cigars | 50 cigars | Weddings: Portofino Package; Weddings: Taormina Package |
 | `beef-kofta` | Beef Kofta | 50 koftas | Weddings: Portofino Package |
@@ -34,12 +34,57 @@ These 16 recipes override older ChatGPT project recipe-bank versions for the sam
 ### Chorizo and Mozzarella Arancini
 
 - Recipe ID: `arancini`
-- Yield: 80 large arancini @ 100 g
+- Status: LOCKED
+- Version: 2026-07-19
+- Yield: Batch yield needs confirmation · 60 g canapé / 40 g tapas / 40 g entrée before crumbing
 - Label: Arancini
+- Provenance: Direct Riviera user correction \| 2026-07-19 \| recipe-specific
 - Tags: House Standard \| Canape \| Canape / Tapas \| Deep Fry \| Gluten-Free \| pork \| dairy \| Weddings \| Baby Shower
+- Aliases: arancini \| chorizo mozzarella arancini balls \| chorizo mozzarella arancini tapas \| Arancini
 - Package / section refs: Weddings: Portofino Package; Weddings: Taormina Package; Weddings: Late Night Snacks; Baby Shower: High Tea
 - Menu description: Lemon & Thyme Aioli · Romesco · Microherbs
-- Elements: Arancini (3 per serve) \| Romesco \| Lemon Thyme Aioli \| Microherbs
+- Elements: Arancini (1 canapé / 3 tapas; follow service format) \| Romesco \| Lemon Thyme Aioli \| Microherbs
+
+#### Needs Confirmation
+
+#### Allergens
+
+- Status: SOURCE RECORDED
+- Contains: Dairy \| Egg
+- May contain: Sulphites
+- Notes: Dairy and egg are explicit in the recipe. Verify wine sulphites plus current GF flour, crumb, stock and dip labels and cross-contact controls before service.
+
+#### Operational Controls
+
+#### Scaling Basis
+
+- Status: SOURCE RECORDED
+- Basis: Scale by weighed piece before crumbing: 60 g canapé; 40 g tapas; 40 g entrée.
+- Base yield: Batch yield needs confirmation · 60 g canapé / 40 g tapas / 40 g entrée before crumbing
+- Notes: Total weighed batch yield still needs confirmation.
+
+#### Rational Settings
+
+- Status: NEEDS CONFIRMATION
+- No confirmed stages.
+- Notes: No complete Rational program is confirmed in the current structured source.
+
+- Cooling: SOURCE RECORDED
+  - Transfer cooked rice to shallow bains and chill completely before finishing and rolling.
+- Holding: NEEDS CONFIRMATION
+- Packing: SOURCE RECORDED
+  - Freeze crumbed arancini solid, then seal in vacuum bags without applying vacuum so the pieces are not crushed.
+- Service: SOURCE RECORDED
+  - Preheat fryer to 180°C. Fry defrosted arancini until deep golden and hot through; check one with a skewer for centre heat.
+  - Drain and season immediately with salt flakes.
+  - Warm Romesco in a pot or microwave until hot.
+  - Plate 60–80 ml warm Romesco as the base. Add 3 arancini per serve.
+  - Dot Lemon Thyme Aioli on top of each arancini and finish with freshly cut microherbs.
+
+- Total weighed batch yield must be confirmed after the next full batch.
+- Allergen declaration requires confirmation against current product labels and cross-contact controls.
+- Cooling, holding and packing controls require recipe-by-recipe confirmation.
+- Rational settings require recipe-by-recipe confirmation or an explicit NOT REQUIRED decision.
 
 #### Ingredients
 
@@ -71,7 +116,7 @@ These 16 recipes override older ChatGPT project recipe-bank versions for the sam
 4. COOK: Cover the bain with a lid or foil. Bake at 160°C for 20 minutes, stir, then bake another 20 minutes or until the liquid is absorbed and the rice is cooked.
 5. COOL: Transfer the rice mixture to shallow bains and chill completely. Use the freezer briefly if needed, but do not roll warm rice.
 6. FINISH MIX: Grate the cheeses. Fold mozzarella, cheddar, parmesan and blitzed roasted capsicum through the cold rice until evenly incorporated. Taste and adjust seasoning.
-7. PORTION: Weigh rice mix into 100 g portions and roll into tight balls.
+7. PORTION: Weigh the cold rice mix before crumbing: 60 g for canapé service; 40 g for tapas or normal entrée service. Roll into tight balls and keep formats labelled separately.
 8. CRUMB: Set up GF flour, beaten egg and GF breadcrumbs. Flour each ball, dip in egg, then coat thoroughly in breadcrumbs.
 9. FREEZE & PACK: Freeze on lined trays until solid. Transfer to vacuum bags and SEAL ONLY — do not vacuum, or the arancini will squash.
 10. DEFROST: Defrost in the coldroom for at least 24 hours before frying.
@@ -86,17 +131,62 @@ These 16 recipes override older ChatGPT project recipe-bank versions for the sam
 
 #### Notes
 
-New house spec from Tapas Canape Recipe Cards.docx. Large format is 100 g per arancini, 3 per serve. Seal frozen arancini bags only; do not vacuum.
+Locked Riviera size correction from 19 July 2026. Weights are before crumbing: 60 g canapé; 40 g tapas; 40 g normal entrée. The earlier 100 g standard is retired. Seal frozen bags only; do not vacuum.
 
 ### Calamari Fritti
 
 - Recipe ID: `calamari`
+- Status: LOCKED
+- Version: 2026-07-08
 - Yield: Batch: 2 kg squid strips + 1 kg baby octopus
 - Label: Calamari
+- Provenance: Riviera Tapas House Standards Overlay \| 2026-07-08 \| recipe-specific
 - Tags: House Standard \| Canape \| Canape / Tapas \| Deep Fry \| Gluten-Free \| seafood \| Weddings \| Parties
+- Aliases: Calamari
 - Package / section refs: Weddings: Portofino Package; Weddings: Taormina Package; Weddings: Late Night Snacks; Parties: Crowd Pleaser Platters
 - Menu description: Lemon Dill Aioli · Crispy Capers
 - Elements: Calamari \| Flour Mix \| Lemon Dill Aioli \| Crispy Capers
+
+#### Needs Confirmation
+
+#### Allergens
+
+- Status: NEEDS CONFIRMATION
+- Contains: None confirmed
+- May contain: None confirmed
+- Notes: Review current ingredient labels and cross-contact controls before service. No allergen-free claim is made.
+
+#### Operational Controls
+
+#### Scaling Basis
+
+- Status: NEEDS CONFIRMATION
+- Basis: Not confirmed
+- Base yield: Batch: 2 kg squid strips + 1 kg baby octopus
+- Notes: Yield text is preserved, but the scalable production basis has not been separately confirmed.
+
+#### Rational Settings
+
+- Status: NEEDS CONFIRMATION
+- No confirmed stages.
+- Notes: No complete Rational program is confirmed in the current structured source.
+
+- Cooling: NEEDS CONFIRMATION
+- Holding: NEEDS CONFIRMATION
+- Packing: NEEDS CONFIRMATION
+- Service: SOURCE RECORDED
+  - Preheat fryer to 190°C.
+  - Fry capers for 30–60 seconds until crisp. Drain on chux and keep uncovered.
+  - Coat calamari strips and baby octopus evenly in flour mix. Shake off excess flour.
+  - Fry immediately in small batches until crisp and cooked through, about 1 minute for calamari and 1–2 minutes for baby octopus.
+  - Season hot seafood with a pinch of salt.
+  - TAPAS: Spoon 30–40 ml Lemon Dill Aioli onto the plate. Arrange fried calamari and baby octopus on top. Scatter crispy capers and microgreens.
+  - CANAPE: Place a small dot of Lemon Dill Aioli in a bamboo boat, add calamari, and finish with crispy capers.
+
+- Allergen declaration requires confirmation against current product labels and cross-contact controls.
+- Cooling, holding and packing controls require recipe-by-recipe confirmation.
+- Scaling basis requires recipe-by-recipe confirmation.
+- Rational settings require recipe-by-recipe confirmation or an explicit NOT REQUIRED decision.
 
 #### Ingredients
 
@@ -134,12 +224,55 @@ Keep capers very dry before frying. Wet capers spit badly and do not crisp.
 ### Kilpatrick Oyster
 
 - Recipe ID: `oysters-kilpatrick`
+- Status: LOCKED
+- Version: 2026-07-08
 - Yield: Kilpatrick sauce batch for approx. 40–50 oysters
 - Label: Oysters Kilpatrick
+- Provenance: Riviera Tapas House Standards Overlay \| 2026-07-08 \| recipe-specific
 - Tags: House Standard \| Canape \| Bake \| Gluten-Free \| seafood \| pork \| Weddings
+- Aliases: Oysters Kilpatrick
 - Package / section refs: Weddings: Portofino Package; Weddings: Taormina Package
 - Menu description: Crispy Speck · Parsley · Lemon
 - Elements: Oysters \| Diced Speck \| Kilpatrick Sauce \| Rock Salt \| Lemon \| Parsley
+
+#### Needs Confirmation
+
+#### Allergens
+
+- Status: NEEDS CONFIRMATION
+- Contains: None confirmed
+- May contain: None confirmed
+- Notes: Review current ingredient labels and cross-contact controls before service. No allergen-free claim is made.
+
+#### Operational Controls
+
+#### Scaling Basis
+
+- Status: NEEDS CONFIRMATION
+- Basis: Not confirmed
+- Base yield: Kilpatrick sauce batch for approx. 40–50 oysters
+- Notes: Yield text is preserved, but the scalable production basis has not been separately confirmed.
+
+#### Rational Settings
+
+- Status: NEEDS CONFIRMATION
+- No confirmed stages.
+- Notes: No complete Rational program is confirmed in the current structured source.
+
+- Cooling: NEEDS CONFIRMATION
+- Holding: NEEDS CONFIRMATION
+- Packing: NEEDS CONFIRMATION
+- Service: SOURCE RECORDED
+  - Preheat oven to 180°C.
+  - Scrunch aluminium foil into a bain tray so oyster shells sit level and stable.
+  - Arrange oysters on the foil. Add 5–8 ml Kilpatrick sauce to each oyster and top with 1 teaspoon diced speck.
+  - Bake for about 10 minutes, until the speck is golden and the oyster is just warmed through.
+  - Spread rock salt 2 cm thick on the serving tray. Nestle oysters into the salt and garnish with parsley, rocket or microgreens and lemon slices.
+
+- Allergen declaration requires confirmation against current product labels and cross-contact controls.
+- Cooling, holding and packing controls require recipe-by-recipe confirmation.
+- Scaling basis requires recipe-by-recipe confirmation.
+- Rational settings require recipe-by-recipe confirmation or an explicit NOT REQUIRED decision.
 
 #### Ingredients
 
@@ -178,12 +311,56 @@ Bake hot and fast enough to render the speck without shrinking the oysters.
 ### Beef & Pork Polpette
 
 - Recipe ID: `veal-meatballs`
+- Status: LOCKED
+- Version: 2026-07-19
 - Yield: 90 balls @ 80 g; 30 tapas serves of 3
 - Label: Polpette
+- Provenance: Direct Riviera user correction \| 2026-07-19 \| recipe-specific
 - Tags: House Standard \| Tapas \| Set + Slow Bake \| Gluten-Free \| beef \| pork \| dairy \| Weddings \| Riviera Table / Offsite
+- Aliases: polpette \| polpette balls \| polpette tapas \| meatballs \| veal meatballs \| beef meatballs \| beef albondigas \| albondigas \| slow cooked veal meatballs \| slow cooked beef albondigas \| slow cooked beef albondigas buffet \| spanish meatballs \| beef polpette \| Polpette
 - Package / section refs: Weddings: Portofino Package; Weddings: Taormina Package; Weddings: Amalfi Package; Weddings: La Tavola Package; Riviera Table / Offsite: Canape Packages; Riviera Table / Offsite: Plated Meals; Riviera Table / Offsite: Feasting — Shared to Table
 - Menu description: Romesco Sugo · Toasted Focaccia · Gremolata
 - Elements: Beef & Pork Polpette \| Romesco Sugo \| Focaccia \| Gremolata \| Manchego
+
+#### Needs Confirmation
+
+#### Allergens
+
+- Status: SOURCE RECORDED
+- Contains: Dairy \| Egg
+- May contain: None confirmed
+- Notes: Milk, Parmesan and egg are explicit in the recipe. Verify the current GF breadcrumb label and all cross-contact controls before service.
+
+#### Operational Controls
+
+#### Scaling Basis
+
+- Status: SOURCE RECORDED
+- Basis: One batch = 90 balls at 80 g; three balls per tapas serve; 30 tapas serves.
+- Base yield: 90 balls @ 80 g; 30 tapas serves of 3
+- Notes: Confirmed from the current recipe yield and production standard.
+
+#### Rational Settings
+
+- Status: NEEDS CONFIRMATION
+- stage=1 \| mode=hot air \| temperatureC=210 \| timeMinutesMin=10 \| timeMinutesMax=14 \| steamPercent=0 \| fan=medium
+- stage=2 \| mode=finish in romesco \| temperatureC=160 \| timeMinutesMin=20 \| timeMinutesMax=30 \| steamPercent=30
+- Notes: Stage temperatures, times and humidity are source-recorded; confirm the second-stage fan setting.
+
+- Cooling: SOURCE RECORDED
+  - Cool in romesco under the Riviera cooling SOP and chill fully before sealing.
+- Holding: NEEDS CONFIRMATION
+- Packing: SOURCE RECORDED
+  - Portion three polpette per PC with sauce, chill fully, seal, label and freeze.
+- Service: SOURCE RECORDED
+  - Defrost under refrigeration. Reheat gently in sauce until the centre reaches at least 75°C; avoid hard boiling and repeated stirring.
+  - Serve 3 polpette with romesco in a medium serving bowl.
+  - Toast 3 focaccia slices, 2 cm thick, until golden on both sides.
+  - Finish with finely grated Manchego and fresh gremolata. Serve focaccia alongside.
+
+- Allergen declaration requires confirmation against current product labels and cross-contact controls.
+- Cooling, holding and packing controls require recipe-by-recipe confirmation.
+- Rational settings require recipe-by-recipe confirmation or an explicit NOT REQUIRED decision.
 
 #### Ingredients
 
@@ -234,12 +411,55 @@ Locked Riviera house standard revised 19 July 2026. Beef-to-pork ratio 60:40. Re
 ### Limoncello Chicken Skewer
 
 - Recipe ID: `chicken-skewer`
+- Status: LOCKED
+- Version: 2026-07-08
 - Yield: Approx. 60–65 skewers from 5 kg chicken
 - Label: Chicken Skewers
+- Provenance: Riviera Tapas House Standards Overlay \| 2026-07-08 \| recipe-specific
 - Tags: House Standard \| Tapas \| Oven Roast \| Gluten-Free \| chicken \| dairy \| Weddings \| Parties \| Corporate \| Funeral & Wake \| Riviera Table / Offsite
+- Aliases: limoncello chicken skewers \| limoncello chicken skewers tapas \| zesty chicken skewer \| Chicken Skewers
 - Package / section refs: Weddings: Portofino Package; Weddings: Taormina Package; Weddings: Amalfi Package; Weddings: La Tavola Package; Parties: Crowd Pleaser Platters; Corporate: Build-Your-Own Buffet; Funeral & Wake: Wake Platters; Riviera Table / Offsite: Canape Packages; Riviera Table / Offsite: BBQ Buffet; Riviera Table / Offsite: Plated Meals; Riviera Table / Offsite: Feasting — Shared to Table
 - Menu description: Tzatziki Labneh · Crumbled Feta · Chargrilled Lemon
 - Elements: Chicken Skewers \| Tzatziki Labneh \| Crumbled Feta \| Microherbs \| Chargrilled Lemon Cheek
+
+#### Needs Confirmation
+
+#### Allergens
+
+- Status: NEEDS CONFIRMATION
+- Contains: None confirmed
+- May contain: None confirmed
+- Notes: Review current ingredient labels and cross-contact controls before service. No allergen-free claim is made.
+
+#### Operational Controls
+
+#### Scaling Basis
+
+- Status: NEEDS CONFIRMATION
+- Basis: Not confirmed
+- Base yield: Approx. 60–65 skewers from 5 kg chicken
+- Notes: Yield text is preserved, but the scalable production basis has not been separately confirmed.
+
+#### Rational Settings
+
+- Status: NEEDS CONFIRMATION
+- No confirmed stages.
+- Notes: No complete Rational program is confirmed in the current structured source.
+
+- Cooling: NEEDS CONFIRMATION
+- Holding: NEEDS CONFIRMATION
+- Packing: NEEDS CONFIRMATION
+- Service: SOURCE RECORDED
+  - Defrost skewers in the coldroom for at least 24 hours if frozen.
+  - Preheat oven to 180°C.
+  - Lay skewers flat on trays without overlapping. Roast for about 10 minutes, or until golden and 75°C internal.
+  - Plate a heaped tablespoon of tzatziki labneh in the centre of the plate. Place 3 skewers on top.
+  - Finish with crumbled feta, microherbs and a chargrilled lemon cheek if required.
+
+- Allergen declaration requires confirmation against current product labels and cross-contact controls.
+- Cooling, holding and packing controls require recipe-by-recipe confirmation.
+- Scaling basis requires recipe-by-recipe confirmation.
+- Rational settings require recipe-by-recipe confirmation or an explicit NOT REQUIRED decision.
 
 #### Ingredients
 
@@ -284,12 +504,55 @@ Use the new limoncello marinade and tzatziki labneh spec. Keep raw chicken fully
 ### Crispy Fried Chorizo Potatoes
 
 - Recipe ID: `chorizo-potatoes`
+- Status: LOCKED
+- Version: 2026-07-08
 - Yield: Approx. 60–65 canape portions
 - Label: Chorizo Potatoes
+- Provenance: Riviera Tapas House Standards Overlay \| 2026-07-08 \| recipe-specific
 - Tags: House Standard \| Canape \| Deep Fry \| Gluten-Free \| pork \| Weddings
+- Aliases: Chorizo Potatoes
 - Package / section refs: Weddings: Portofino Package; Weddings: Taormina Package
 - Menu description: Lemon Thyme Aioli · Shallots
 - Elements: Potatoes \| Chorizo \| Lemon Thyme Aioli \| Shallots
+
+#### Needs Confirmation
+
+#### Allergens
+
+- Status: NEEDS CONFIRMATION
+- Contains: None confirmed
+- May contain: None confirmed
+- Notes: Review current ingredient labels and cross-contact controls before service. No allergen-free claim is made.
+
+#### Operational Controls
+
+#### Scaling Basis
+
+- Status: NEEDS CONFIRMATION
+- Basis: Not confirmed
+- Base yield: Approx. 60–65 canape portions
+- Notes: Yield text is preserved, but the scalable production basis has not been separately confirmed.
+
+#### Rational Settings
+
+- Status: NEEDS CONFIRMATION
+- No confirmed stages.
+- Notes: No complete Rational program is confirmed in the current structured source.
+
+- Cooling: NEEDS CONFIRMATION
+- Holding: NEEDS CONFIRMATION
+- Packing: NEEDS CONFIRMATION
+- Service: SOURCE RECORDED
+  - Deep fry cooled potato pieces until crispy and golden.
+  - Add chorizo slices to the fryer basket for the final 20–30 seconds.
+  - Transfer fried potatoes and chorizo to a large metal bowl. Add Lemon Thyme Aioli and sliced shallots, then season to taste.
+  - Toss so the aioli lightly coats the potatoes rather than pooling.
+  - Serve 4–5 pieces in bamboo boats with a bamboo fork.
+
+- Allergen declaration requires confirmation against current product labels and cross-contact controls.
+- Cooling, holding and packing controls require recipe-by-recipe confirmation.
+- Scaling basis requires recipe-by-recipe confirmation.
+- Rational settings require recipe-by-recipe confirmation or an explicit NOT REQUIRED decision.
 
 #### Ingredients
 
@@ -326,12 +589,56 @@ Aioli amount is kitchen-rounded for the batch because the DOCX lists it as an el
 ### Chargrilled Lamb Cutlet
 
 - Recipe ID: `lamb-cutlet`
+- Status: LOCKED
+- Version: 2026-07-08
 - Yield: 3 cutlets per plate
 - Label: Lamb Cutlets
+- Provenance: Riviera Tapas House Standards Overlay \| 2026-07-08 \| recipe-specific
 - Tags: House Standard \| Tapas \| Chargrill + Oven \| Gluten-Free \| Dairy-Free \| lamb \| Weddings \| Parties \| Corporate \| Funeral & Wake \| Riviera Table / Offsite
+- Aliases: Lamb Cutlets
 - Package / section refs: Weddings: Portofino Package; Weddings: Taormina Package; Weddings: Amalfi Package; Weddings: La Tavola Package; Parties: Crowd Pleaser Platters; Corporate: Build-Your-Own Buffet; Funeral & Wake: Wake Platters; Riviera Table / Offsite: Canape Packages; Riviera Table / Offsite: BBQ Buffet; Riviera Table / Offsite: Plated Meals; Riviera Table / Offsite: Feasting — Shared to Table
 - Menu description: Riviera House Emulsion · Rocket
 - Elements: Lamb Cutlets (3 per plate) \| Riviera House Emulsion \| Rocket
+
+#### Needs Confirmation
+
+#### Allergens
+
+- Status: NEEDS CONFIRMATION
+- Contains: None confirmed
+- May contain: None confirmed
+- Notes: Review current ingredient labels and cross-contact controls before service. No allergen-free claim is made.
+
+#### Operational Controls
+
+#### Scaling Basis
+
+- Status: NEEDS CONFIRMATION
+- Basis: Not confirmed
+- Base yield: 3 cutlets per plate
+- Notes: Yield text is preserved, but the scalable production basis has not been separately confirmed.
+
+#### Rational Settings
+
+- Status: NEEDS CONFIRMATION
+- No confirmed stages.
+- Notes: No complete Rational program is confirmed in the current structured source.
+
+- Cooling: NEEDS CONFIRMATION
+- Holding: NEEDS CONFIRMATION
+- Packing: NEEDS CONFIRMATION
+- Service: SOURCE RECORDED
+  - Heat a large frying pan, cast iron plate or chargrill until very hot.
+  - Sear lamb cutlets on both sides until well coloured.
+  - Transfer cutlets to a bain and finish in a 180°C oven for about 10 minutes, adjusting for thickness and event volume.
+  - Rest briefly before plating.
+  - Lay rocket along the base of the plate. Arrange 3 cutlets neatly on top.
+  - Drizzle Riviera House Emulsion generously over the cutlets so each one is coated.
+
+- Allergen declaration requires confirmation against current product labels and cross-contact controls.
+- Cooling, holding and packing controls require recipe-by-recipe confirmation.
+- Scaling basis requires recipe-by-recipe confirmation.
+- Rational settings require recipe-by-recipe confirmation or an explicit NOT REQUIRED decision.
 
 #### Ingredients
 
@@ -365,12 +672,55 @@ DOCX source has no batch quantity for lamb cutlets; quantity is kept service-bas
 ### Crispy Reef Fish Slider
 
 - Recipe ID: `fish-slider`
+- Status: LOCKED
+- Version: 2026-07-08
 - Yield: 50 sliders
 - Label: Fish Slider
+- Provenance: Riviera Tapas House Standards Overlay \| 2026-07-08 \| recipe-specific
 - Tags: House Standard \| Canape \| Deep Fry \| seafood \| Weddings
+- Aliases: Fish Slider
 - Package / section refs: Weddings: Portofino Package
 - Menu description: Lemon Caper Aioli · Roquette
 - Elements: Reef Fish \| Lemon Caper Aioli \| Rocket \| Slider Buns
+
+#### Needs Confirmation
+
+#### Allergens
+
+- Status: NEEDS CONFIRMATION
+- Contains: None confirmed
+- May contain: None confirmed
+- Notes: Review current ingredient labels and cross-contact controls before service. No allergen-free claim is made.
+
+#### Operational Controls
+
+#### Scaling Basis
+
+- Status: NEEDS CONFIRMATION
+- Basis: Not confirmed
+- Base yield: 50 sliders
+- Notes: Yield text is preserved, but the scalable production basis has not been separately confirmed.
+
+#### Rational Settings
+
+- Status: NEEDS CONFIRMATION
+- No confirmed stages.
+- Notes: No complete Rational program is confirmed in the current structured source.
+
+- Cooling: NEEDS CONFIRMATION
+- Holding: NEEDS CONFIRMATION
+- Packing: NEEDS CONFIRMATION
+- Service: SOURCE RECORDED
+  - Warm brioche buns at 170°C for about 10 minutes.
+  - Fry part-cooked fish until golden, crisp and hot through.
+  - Place bun bases on a platter. Add a small handful of rocket to each base.
+  - Place fried fish on rocket and spoon or pipe Lemon Caper Aioli on top.
+  - Add bun tops and secure each slider with a skewer. Send immediately.
+
+- Allergen declaration requires confirmation against current product labels and cross-contact controls.
+- Cooling, holding and packing controls require recipe-by-recipe confirmation.
+- Scaling basis requires recipe-by-recipe confirmation.
+- Rational settings require recipe-by-recipe confirmation or an explicit NOT REQUIRED decision.
 
 #### Ingredients
 
@@ -415,12 +765,50 @@ DOCX table gives 50 g fish portions; method allows 70 g. Use 50 g for 50-slider 
 ### Romesco
 
 - Recipe ID: `romesco`
+- Status: LOCKED
+- Version: 2026-07-08
 - Yield: Large batch
 - Label: Romesco
+- Provenance: Riviera Tapas House Standards Overlay \| 2026-07-08 \| recipe-specific
 - Tags: House Standard \| Sauce \| Sauce / Base \| Simmer \| Vegetarian \| Gluten-Free \| Weddings \| Riviera Table / Offsite
 - Package / section refs: Weddings: Taormina Package; Riviera Table / Offsite: Carvery Buffet; Riviera Table / Offsite: Plated Meals
 - Menu description: Capsicum · Passata · Basil · Cream
 - Elements: Romesco
+
+#### Needs Confirmation
+
+#### Allergens
+
+- Status: NEEDS CONFIRMATION
+- Contains: None confirmed
+- May contain: None confirmed
+- Notes: Review current ingredient labels and cross-contact controls before service. No allergen-free claim is made.
+
+#### Operational Controls
+
+#### Scaling Basis
+
+- Status: NEEDS CONFIRMATION
+- Basis: Not confirmed
+- Base yield: Large batch
+- Notes: Yield text is preserved, but the scalable production basis has not been separately confirmed.
+
+#### Rational Settings
+
+- Status: NEEDS CONFIRMATION
+- No confirmed stages.
+- Notes: No complete Rational program is confirmed in the current structured source.
+
+- Cooling: NEEDS CONFIRMATION
+- Holding: NEEDS CONFIRMATION
+- Packing: NEEDS CONFIRMATION
+- Service: SOURCE RECORDED
+  - Heat on the stove or in the microwave until hot, minimum 75°C. Use as sauce base or accompaniment.
+
+- Allergen declaration requires confirmation against current product labels and cross-contact controls.
+- Cooling, holding and packing controls require recipe-by-recipe confirmation.
+- Scaling basis requires recipe-by-recipe confirmation.
+- Rational settings require recipe-by-recipe confirmation or an explicit NOT REQUIRED decision.
 
 #### Ingredients
 
@@ -456,11 +844,50 @@ Large-tin quantities are standardised to 2.5 kg / 2.5 L foodservice tins for ord
 ### Lemon & Dill Aioli
 
 - Recipe ID: `lemon-dill-aioli`
+- Status: LOCKED
+- Version: 2026-07-08
 - Yield: Approx. 1.1 L batch
 - Label: Lemon Dill Aioli
+- Provenance: Riviera Tapas House Standards Overlay \| 2026-07-08 \| recipe-specific
 - Tags: House Standard \| Sauce \| Sauce / Base \| Mix \| Gluten-Free
+- Aliases: Lemon Dill Aioli
 - Menu description: Kewpie Mayo · Lemon · Dill
 - Elements: Lemon Dill Aioli
+
+#### Needs Confirmation
+
+#### Allergens
+
+- Status: NEEDS CONFIRMATION
+- Contains: None confirmed
+- May contain: None confirmed
+- Notes: Review current ingredient labels and cross-contact controls before service. No allergen-free claim is made.
+
+#### Operational Controls
+
+#### Scaling Basis
+
+- Status: NEEDS CONFIRMATION
+- Basis: Not confirmed
+- Base yield: Approx. 1.1 L batch
+- Notes: Yield text is preserved, but the scalable production basis has not been separately confirmed.
+
+#### Rational Settings
+
+- Status: NEEDS CONFIRMATION
+- No confirmed stages.
+- Notes: No complete Rational program is confirmed in the current structured source.
+
+- Cooling: NEEDS CONFIRMATION
+- Holding: NEEDS CONFIRMATION
+- Packing: NEEDS CONFIRMATION
+- Service: SOURCE RECORDED
+  - Serve chilled. Stir before portioning if held overnight.
+
+- Allergen declaration requires confirmation against current product labels and cross-contact controls.
+- Cooling, holding and packing controls require recipe-by-recipe confirmation.
+- Scaling basis requires recipe-by-recipe confirmation.
+- Rational settings require recipe-by-recipe confirmation or an explicit NOT REQUIRED decision.
 
 #### Ingredients
 
@@ -491,11 +918,50 @@ Use as the Calamari Fritti aioli and wherever lemon-dill sauce is specified.
 ### Lemon & Thyme Aioli
 
 - Recipe ID: `lemon-thyme-aioli`
+- Status: LOCKED
+- Version: 2026-07-08
 - Yield: Approx. 1.1 L batch
 - Label: Lemon Thyme Aioli
+- Provenance: Riviera Tapas House Standards Overlay \| 2026-07-08 \| recipe-specific
 - Tags: House Standard \| Sauce \| Sauce / Base \| Mix \| Gluten-Free
+- Aliases: Lemon Thyme Aioli
 - Menu description: Kewpie Mayo · Lemon · Fresh Thyme
 - Elements: Lemon Thyme Aioli
+
+#### Needs Confirmation
+
+#### Allergens
+
+- Status: NEEDS CONFIRMATION
+- Contains: None confirmed
+- May contain: None confirmed
+- Notes: Review current ingredient labels and cross-contact controls before service. No allergen-free claim is made.
+
+#### Operational Controls
+
+#### Scaling Basis
+
+- Status: NEEDS CONFIRMATION
+- Basis: Not confirmed
+- Base yield: Approx. 1.1 L batch
+- Notes: Yield text is preserved, but the scalable production basis has not been separately confirmed.
+
+#### Rational Settings
+
+- Status: NEEDS CONFIRMATION
+- No confirmed stages.
+- Notes: No complete Rational program is confirmed in the current structured source.
+
+- Cooling: NEEDS CONFIRMATION
+- Holding: NEEDS CONFIRMATION
+- Packing: NEEDS CONFIRMATION
+- Service: SOURCE RECORDED
+  - Serve chilled with arancini, chorizo potatoes or as required. Stir before portioning if held overnight.
+
+- Allergen declaration requires confirmation against current product labels and cross-contact controls.
+- Cooling, holding and packing controls require recipe-by-recipe confirmation.
+- Scaling basis requires recipe-by-recipe confirmation.
+- Rational settings require recipe-by-recipe confirmation or an explicit NOT REQUIRED decision.
 
 #### Ingredients
 
@@ -526,11 +992,49 @@ Fresh thyme quantity is kitchen-rounded from one bunch.
 ### Vodka Sauce
 
 - Recipe ID: `vodka-sauce`
+- Status: LOCKED
+- Version: 2026-07-08
 - Yield: Approx. 2.8 L batch
 - Label: Vodka Sauce
+- Provenance: Riviera Tapas House Standards Overlay \| 2026-07-08 \| recipe-specific
 - Tags: House Standard \| Sauce \| Sauce / Base \| Simmer \| Vegetarian \| Gluten-Free
 - Menu description: Romesco · Cream · Tomato Paste
 - Elements: Vodka Sauce
+
+#### Needs Confirmation
+
+#### Allergens
+
+- Status: NEEDS CONFIRMATION
+- Contains: None confirmed
+- May contain: None confirmed
+- Notes: Review current ingredient labels and cross-contact controls before service. No allergen-free claim is made.
+
+#### Operational Controls
+
+#### Scaling Basis
+
+- Status: NEEDS CONFIRMATION
+- Basis: Not confirmed
+- Base yield: Approx. 2.8 L batch
+- Notes: Yield text is preserved, but the scalable production basis has not been separately confirmed.
+
+#### Rational Settings
+
+- Status: NEEDS CONFIRMATION
+- No confirmed stages.
+- Notes: No complete Rational program is confirmed in the current structured source.
+
+- Cooling: NEEDS CONFIRMATION
+- Holding: NEEDS CONFIRMATION
+- Packing: NEEDS CONFIRMATION
+- Service: SOURCE RECORDED
+  - Reheat gently to 75°C minimum, stirring regularly. Thin with a little cream or water only if needed.
+
+- Allergen declaration requires confirmation against current product labels and cross-contact controls.
+- Cooling, holding and packing controls require recipe-by-recipe confirmation.
+- Scaling basis requires recipe-by-recipe confirmation.
+- Rational settings require recipe-by-recipe confirmation or an explicit NOT REQUIRED decision.
 
 #### Ingredients
 
@@ -565,11 +1069,49 @@ Sugar and chilli converted from cup/tsp to rounded metric amounts.
 ### Riviera House Emulsion
 
 - Recipe ID: `riviera-emulsion`
-- Yield: Approx. 3 L batch
+- Status: LOCKED
+- Version: 2026-07-19
+- Yield: Approx. 2.4 L batch
 - Label: Emulsion
+- Provenance: Direct Riviera user correction \| 2026-07-19 \| recipe-specific
 - Tags: House Standard \| Sauce \| Sauce / Base \| Blend \| Vegetarian \| Gluten-Free \| Dairy-Free
+- Aliases: Emulsion
 - Menu description: Stone Fruit · Herbs · Jalapeño · Lemon
 - Elements: Riviera House Emulsion
+
+#### Needs Confirmation
+
+#### Allergens
+
+- Status: NEEDS CONFIRMATION
+- Contains: None confirmed
+- May contain: None confirmed
+- Notes: Review current ingredient labels and cross-contact controls before service. No allergen-free claim is made.
+
+#### Operational Controls
+
+#### Scaling Basis
+
+- Status: SOURCE RECORDED
+- Basis: One full batch yields approximately 2.4 L.
+- Base yield: Approx. 2.4 L batch
+- Notes: Confirmed from the current recipe yield and production standard.
+
+#### Rational Settings
+
+- Status: NEEDS CONFIRMATION
+- No confirmed stages.
+- Notes: No complete Rational program is confirmed in the current structured source.
+
+- Cooling: NEEDS CONFIRMATION
+- Holding: NEEDS CONFIRMATION
+- Packing: NEEDS CONFIRMATION
+- Service: SOURCE RECORDED
+  - Serve cold or at room temperature. Stir or shake well before drizzling over lamb cutlets or other proteins.
+
+- Allergen declaration requires confirmation against current product labels and cross-contact controls.
+- Cooling, holding and packing controls require recipe-by-recipe confirmation.
+- Rational settings require recipe-by-recipe confirmation or an explicit NOT REQUIRED decision.
 
 #### Ingredients
 
@@ -603,17 +1145,55 @@ Sugar and chilli converted from cup/tsp to rounded metric amounts.
 
 #### Notes
 
-Herb bunches converted to rounded gram equivalents for ordering, with bunch counts retained in prep notes.
+Locked yield correction from 19 July 2026: approximately 2.4 L per batch. Herb bunches remain converted to rounded gram equivalents for ordering, with bunch counts retained in prep notes.
 
 ### Whipped Butter
 
 - Recipe ID: `whipped-butter`
+- Status: LOCKED
+- Version: 2026-07-08
 - Yield: 500 g batch
 - Label: Whipped Butter
+- Provenance: Riviera Tapas House Standards Overlay \| 2026-07-08 \| recipe-specific
 - Tags: House Standard \| Other \| Component \| Whip \| Vegetarian \| Gluten-Free \| dairy \| Weddings \| Corporate \| Riviera Table / Offsite
 - Package / section refs: Weddings: Amalfi Package; Corporate: Breakfast & Brunch; Riviera Table / Offsite: Feasting — Shared to Table
 - Menu description: Salted · Piped for Bread Service
 - Elements: Whipped Butter
+
+#### Needs Confirmation
+
+#### Allergens
+
+- Status: NEEDS CONFIRMATION
+- Contains: None confirmed
+- May contain: None confirmed
+- Notes: Review current ingredient labels and cross-contact controls before service. No allergen-free claim is made.
+
+#### Operational Controls
+
+#### Scaling Basis
+
+- Status: NEEDS CONFIRMATION
+- Basis: Not confirmed
+- Base yield: 500 g batch
+- Notes: Yield text is preserved, but the scalable production basis has not been separately confirmed.
+
+#### Rational Settings
+
+- Status: NEEDS CONFIRMATION
+- No confirmed stages.
+- Notes: No complete Rational program is confirmed in the current structured source.
+
+- Cooling: NEEDS CONFIRMATION
+- Holding: NEEDS CONFIRMATION
+- Packing: NEEDS CONFIRMATION
+- Service: SOURCE RECORDED
+  - Serve with breads. Remove from the coldroom briefly before service so the butter is spreadable.
+
+- Allergen declaration requires confirmation against current product labels and cross-contact controls.
+- Cooling, holding and packing controls require recipe-by-recipe confirmation.
+- Scaling basis requires recipe-by-recipe confirmation.
+- Rational settings require recipe-by-recipe confirmation or an explicit NOT REQUIRED decision.
 
 #### Ingredients
 
@@ -640,12 +1220,54 @@ New DOCX spec is a simple salted whipped butter: 500 g butter to 20 g salt.
 ### Camembert, Pecan & Cranberry Cigars
 
 - Recipe ID: `camembert-cigars`
+- Status: LOCKED
+- Version: 2026-07-08
 - Yield: 50 cigars
 - Label: Camembert Cigars
+- Provenance: Riviera Tapas House Standards Overlay \| 2026-07-08 \| recipe-specific
 - Tags: House Standard \| Canape \| Deep Fry \| Vegetarian \| dairy \| Weddings
+- Aliases: Camembert Cigars
 - Package / section refs: Weddings: Portofino Package; Weddings: Taormina Package
 - Menu description: Thyme Infused Honey · Microherbs
 - Elements: Cigars \| Thyme Infused Honey \| Microherbs
+
+#### Needs Confirmation
+
+#### Allergens
+
+- Status: NEEDS CONFIRMATION
+- Contains: None confirmed
+- May contain: None confirmed
+- Notes: Review current ingredient labels and cross-contact controls before service. No allergen-free claim is made.
+
+#### Operational Controls
+
+#### Scaling Basis
+
+- Status: NEEDS CONFIRMATION
+- Basis: Not confirmed
+- Base yield: 50 cigars
+- Notes: Yield text is preserved, but the scalable production basis has not been separately confirmed.
+
+#### Rational Settings
+
+- Status: NEEDS CONFIRMATION
+- No confirmed stages.
+- Notes: No complete Rational program is confirmed in the current structured source.
+
+- Cooling: NEEDS CONFIRMATION
+- Holding: NEEDS CONFIRMATION
+- Packing: NEEDS CONFIRMATION
+- Service: SOURCE RECORDED
+  - Deep fry cigars at 175–180°C for about 2 minutes, or until golden and hot through.
+  - Arrange fried cigars on a platter or in bamboo boats.
+  - Drizzle with thyme-infused honey.
+  - Garnish with chopped pecans, cranberries, microherbs and edible flowers if available.
+
+- Allergen declaration requires confirmation against current product labels and cross-contact controls.
+- Cooling, holding and packing controls require recipe-by-recipe confirmation.
+- Scaling basis requires recipe-by-recipe confirmation.
+- Rational settings require recipe-by-recipe confirmation or an explicit NOT REQUIRED decision.
 
 #### Ingredients
 
@@ -692,12 +1314,54 @@ DOCX spec includes crushed garlic in the cigar filling; keep it light so it does
 ### Beef Kofta
 
 - Recipe ID: `beef-kofta`
+- Status: LOCKED
+- Version: 2026-07-08
 - Yield: 50 koftas
 - Label: Beef Kofta
+- Provenance: Riviera Tapas House Standards Overlay \| 2026-07-08 \| recipe-specific
 - Tags: House Standard \| Canape \| Oven Bake \| Dairy-Free \| beef \| Weddings
 - Package / section refs: Weddings: Portofino Package
 - Menu description: Spicy Capsicum · Pita · Rocket
 - Elements: Beef Kofta \| Spicy Capsicum Sauce \| Rocket \| Pita Bread
+
+#### Needs Confirmation
+
+#### Allergens
+
+- Status: NEEDS CONFIRMATION
+- Contains: None confirmed
+- May contain: None confirmed
+- Notes: Review current ingredient labels and cross-contact controls before service. No allergen-free claim is made.
+
+#### Operational Controls
+
+#### Scaling Basis
+
+- Status: NEEDS CONFIRMATION
+- Basis: Not confirmed
+- Base yield: 50 koftas
+- Notes: Yield text is preserved, but the scalable production basis has not been separately confirmed.
+
+#### Rational Settings
+
+- Status: NEEDS CONFIRMATION
+- No confirmed stages.
+- Notes: No complete Rational program is confirmed in the current structured source.
+
+- Cooling: NEEDS CONFIRMATION
+- Holding: NEEDS CONFIRMATION
+- Packing: NEEDS CONFIRMATION
+- Service: SOURCE RECORDED
+  - Cook koftas in a bain tray at 180°C for about 20 minutes, or until 75°C internal.
+  - Warm pita bread at 170°C for about 10 minutes.
+  - Open each pita and place into a large bamboo boat. Add rocket, then one kofta.
+  - Top with spicy capsicum sauce and chopped herbs.
+  - Arrange neatly on a platter and serve hot.
+
+- Allergen declaration requires confirmation against current product labels and cross-contact controls.
+- Cooling, holding and packing controls require recipe-by-recipe confirmation.
+- Scaling basis requires recipe-by-recipe confirmation.
+- Rational settings require recipe-by-recipe confirmation or an explicit NOT REQUIRED decision.
 
 #### Ingredients
 

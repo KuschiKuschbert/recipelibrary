@@ -31,6 +31,8 @@ CRITICAL_JSON = (
     "riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json",
     "riviera_data/builtins.json",
     "riviera_data/function_packages.json",
+    "riviera_data/recipe_use_links.json",
+    "riviera_data/service_variant_backlog.json",
     "riviera_data/planner_pairing_hints.json",
     "riviera_data/planner_unit_costs.json",
     "riviera_data/stocktake_catalog.json",
@@ -141,6 +143,216 @@ def check_json(base: str, path: str) -> int:
     return 0
 
 
+def check_riviera_lifecycle(base: str) -> int:
+    errors = 0
+    release_id = "RIV-KNOWLEDGE-2026-07-27-V13"
+    allowed_statuses = {"LOCKED", "ACTIVE WORKING", "TRIAL ONLY", "RETIRED"}
+    expected_statuses = {
+        "arancini": "LOCKED",
+        "potato-pave": "LOCKED",
+        "baklava-cheesecake": "LOCKED",
+        "house-focaccia": "LOCKED",
+        "burnt-butter-mash": "LOCKED",
+        "riviera-blondies-working": "ACTIVE WORKING",
+        "flourless-chocolate-torte-working": "ACTIVE WORKING",
+        "ribbon-sandwiches": "ACTIVE WORKING",
+        "sweet-petit-fours": "ACTIVE WORKING",
+        "natural-oysters-prosecco-fennel-orange": "TRIAL ONLY",
+        "warm-oysters-lemon-oregano-caper": "TRIAL ONLY",
+        "oyster-saganaki": "TRIAL ONLY",
+        "sicilian-gratin-oysters": "TRIAL ONLY",
+        "harissa-oysters-preserved-lemon": "TRIAL ONLY",
+    }
+
+    recipes = json.loads(fetch(base, "riviera_data/builtins.json").decode("utf-8"))
+    by_id = {
+        str(recipe.get("id")): recipe
+        for recipe in recipes
+        if isinstance(recipe, dict) and recipe.get("id")
+    }
+    if len(recipes) != 156:
+        fail(f"Riviera lifecycle catalog: expected 156 recipes, found {len(recipes)}")
+        errors += 1
+    for recipe_id, recipe in by_id.items():
+        if recipe.get("status") not in allowed_statuses:
+            fail(f"Riviera lifecycle catalog: {recipe_id} has invalid status")
+            errors += 1
+        for key in (
+            "version",
+            "provenance",
+            "confirmationFlags",
+            "aliases",
+            "links",
+            "allergens",
+            "controls",
+            "scalingBasis",
+            "rationalSettings",
+        ):
+            if key not in recipe:
+                fail(f"Riviera lifecycle catalog: {recipe_id} missing {key}")
+                errors += 1
+    for recipe_id, expected_status in expected_statuses.items():
+        recipe = by_id.get(recipe_id)
+        if recipe is None:
+            fail(f"Riviera lifecycle catalog: missing {recipe_id}")
+            errors += 1
+        elif recipe.get("status") != expected_status:
+            fail(
+                f"Riviera lifecycle catalog: {recipe_id} expected "
+                f"{expected_status}, found {recipe.get('status')}"
+            )
+            errors += 1
+
+    catalog = json.loads(
+        fetch(
+            base,
+            "riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json",
+        ).decode("utf-8")
+    )
+    recipe_manifest = json.loads(
+        fetch(base, "riviera_sources/current/manifest.json").decode("utf-8")
+    )
+    if catalog.get("releaseId") != release_id:
+        fail("Riviera structured catalog releaseId drift")
+        errors += 1
+    if recipe_manifest.get("releaseId") != release_id:
+        fail("Riviera recipe manifest releaseId drift")
+        errors += 1
+
+    expected_allergens = {
+        "baklava-cheesecake": {"Wheat", "Gluten", "Dairy", "Egg", "Pecan", "Pistachio", "Walnut"},
+        "natural-oysters-prosecco-fennel-orange": {"Molluscs", "Sulphites"},
+        "oyster-saganaki": {"Molluscs", "Dairy", "Sulphites"},
+        "sicilian-gratin-oysters": {"Molluscs", "Fish", "Dairy", "Gluten"},
+        "harissa-oysters-preserved-lemon": {"Molluscs", "Dairy"},
+    }
+    for recipe_id, allergen_set in expected_allergens.items():
+        actual = set((by_id.get(recipe_id, {}).get("allergens") or {}).get("contains") or [])
+        if not allergen_set.issubset(actual):
+            fail(f"Riviera allergens: {recipe_id} lost source-recorded declarations")
+            errors += 1
+
+    if (by_id["natural-oysters-prosecco-fennel-orange"].get("rationalSettings") or {}).get(
+        "status"
+    ) != "NOT REQUIRED":
+        fail("Raw Prosecco oyster must mark Rational settings NOT REQUIRED")
+        errors += 1
+    for recipe_id in (
+        "warm-oysters-lemon-oregano-caper",
+        "oyster-saganaki",
+        "sicilian-gratin-oysters",
+        "harissa-oysters-preserved-lemon",
+        "riviera-blondies-working",
+        "baklava-cheesecake",
+        "veal-meatballs",
+    ):
+        if not (by_id[recipe_id].get("rationalSettings") or {}).get("stages"):
+            fail(f"Riviera Rational settings: {recipe_id} lost source-recorded stages")
+            errors += 1
+
+    for recipe_id in ("house-focaccia", "burnt-butter-mash"):
+        if by_id[recipe_id].get("houseStandard") is not True:
+            fail(f"Riviera house standards: {recipe_id} must be marked houseStandard")
+            errors += 1
+
+    sunday_ids = {
+        recipe_id
+        for recipe_id, recipe in by_id.items()
+        if any(
+            link.get("label") == "Sunday Tapas"
+            for link in (recipe.get("links") or {}).get("events", [])
+            if isinstance(link, dict)
+        )
+    }
+    if len(sunday_ids) < 10 or {
+        "beef-polpette-canape",
+        "slow-cooked-beef-albondigas-buffet",
+    } & sunday_ids:
+        fail("Sunday Tapas backlinks are incomplete or include quarantined duplicates")
+        errors += 1
+    for recipe_id in (
+        "arancini",
+        "house-scones",
+        "romesco",
+        "lemon-thyme-aioli",
+        "ribbon-sandwiches",
+        "sweet-petit-fours",
+    ):
+        if not any(
+            link.get("sectionLabel") == "High Tea"
+            for link in (by_id[recipe_id].get("links") or {}).get("packages", [])
+            if isinstance(link, dict)
+        ):
+            fail(f"High Tea backlinks missing {recipe_id}")
+            errors += 1
+    if not any(
+        link.get("label") == "Arabian Long Lunch — 8 Aug 2026"
+        for link in (by_id["baklava-cheesecake"].get("links") or {}).get("events", [])
+        if isinstance(link, dict)
+    ):
+        fail("Baklava Cheesecake event backlink is missing")
+        errors += 1
+
+    aliases = json.loads(
+        fetch(base, "riviera_data/canonical_recipe_aliases.json").decode("utf-8")
+    )
+    redirects = aliases.get("recipe_id_redirects") or {}
+    if redirects.get("baklava-cheesecake-gn-100") != "baklava-cheesecake":
+        fail("Legacy V13 recipe ID redirects are missing")
+        errors += 1
+
+    packages = json.loads(fetch(base, "riviera_data/function_packages.json").decode("utf-8"))
+    if packages.get("releaseId") != release_id:
+        fail("Function package data releaseId drift")
+        errors += 1
+    package_sections = [
+        section
+        for package in packages.get("packages", [])
+        for section in package.get("sections", [])
+    ]
+    if not package_sections or any(
+        section.get("salesStatus") != "NEEDS CURRENT SALES CONFIRMATION"
+        for section in package_sections
+    ):
+        fail("Function package sales confirmation flags are incomplete")
+        errors += 1
+
+    riviera_html = fetch(base, "riviera.html").decode("utf-8", errors="replace")
+    for marker in (
+        'id="filterStatus"',
+        'id="chipStatus"',
+        'id="filterType"',
+        'id="chipType"',
+        'id="filterPackage"',
+        'id="chipPackage"',
+        'id="filterEventUse"',
+        'id="chipEventUse"',
+        "rivieraStatusBadge",
+        "confirmationFlags",
+        "rivieraRecipeStructuredMetaHtml",
+        "RIVIERA_ACTIVE_RELEASE_ID",
+        "replace(/_/g, ' ')",
+        "if (!status && rivieraRecipeStatus(r) === 'RETIRED')",
+        "status: 'TRIAL ONLY'",
+    ):
+        if marker not in riviera_html:
+            fail(f"riviera.html missing lifecycle UI marker: {marker}")
+            errors += 1
+    user_recipes_js = fetch(base, "assets/user-recipes.js").decode("utf-8", errors="replace")
+    for marker in (
+        "status: payload.status || 'TRIAL ONLY'",
+        "Epicure pairing review and Kitchen Council review are not yet recorded.",
+        "rationalSettings:",
+        "scalingBasis:",
+    ):
+        if marker not in user_recipes_js:
+            fail(f"user-recipes.js missing new-draft lifecycle marker: {marker}")
+            errors += 1
+    if errors == 0:
+        ok("Riviera lifecycle data and status-filter UI")
+    return errors
+
+
 def main() -> int:
     errors = 0
     server, base = start_server()
@@ -168,6 +380,7 @@ def main() -> int:
         manifest = json.loads(fetch(base, "alpha_catalog/manifest.json").decode("utf-8"))
         for filename in manifest.get("files", []):
             errors += check_json(base, f"alpha_catalog/{filename}")
+        errors += check_riviera_lifecycle(base)
 
     finally:
         server.shutdown()

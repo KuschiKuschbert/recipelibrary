@@ -13,7 +13,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 RIVIERA_DATA = ROOT / "riviera_data"
-FRONTEND_PATH = ROOT / "assets" / "screen-wake.js"
+FRONTEND_PATH = ROOT / "assets" / "riviera-service-variants.js"
+RIVIERA_PAGE_PATH = ROOT / "riviera.html"
 BASE_VARIANTS = RIVIERA_DATA / "service_variants.json"
 ADDON_GLOB = "service_variants_*.json"
 SOURCE_OVERRIDES = RIVIERA_DATA / "service_variant_source_overrides.json"
@@ -45,6 +46,10 @@ def main() -> int:
         frontend = ""
     else:
         frontend = FRONTEND_PATH.read_text(encoding="utf-8")
+    if not RIVIERA_PAGE_PATH.is_file():
+        errors.append(f"Missing Riviera page: {rel(RIVIERA_PAGE_PATH)}")
+    elif "assets/riviera-service-variants.js" not in RIVIERA_PAGE_PATH.read_text(encoding="utf-8"):
+        errors.append("Riviera page does not load assets/riviera-service-variants.js")
 
     total_records = 0
     for path in expected_paths:

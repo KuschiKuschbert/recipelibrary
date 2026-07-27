@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 import re
 from pathlib import Path
 
@@ -18,6 +19,8 @@ STYLE_TO_SERVICE = {
     "cocktail": "cocktail",
     "buffet": "buffet",
     "plated": "plated_main",
+    "afternoon tea": "high_tea",
+    "high tea": "high_tea",
 }
 
 
@@ -48,24 +51,44 @@ def load_variants() -> dict:
     return merged
 
 
-def scale_factor(recipe: dict, pax: int, style: str, variants: dict, redirects: dict) -> float:
+def scale_factor(
+    recipe: dict,
+    pax: int,
+    style: str,
+    variants: dict,
+    redirects: dict,
+) -> float | None:
     rid = redirects.get(recipe["id"], recipe["id"])
     svc = STYLE_TO_SERVICE.get(style, "buffet")
     group = variants["service_variants"].get(rid, {})
     rec = group.get(svc) if isinstance(group, dict) else None
     if rec and rec.get("status") != "not_recommended":
-        buf = first_num(rec.get("production_buffer_multiplier")) or 1
-        ppg = first_num(rec.get("production_pieces_per_guest")) or first_num(rec.get("pieces_per_guest"))
-        base = first_num((group.get("base_prep") or {}).get("base_yield_pieces")) or parse_yield_num(
-            recipe.get("yield", "")
+        buf = first_num(rec.get("automatic_event_buffer_multiplier")) or 1
+        ppg = (
+            first_num(rec.get("pieces_per_guest"))
+            or first_num(rec.get("piece_count"))
+            or first_num(rec.get("sliders_per_guest"))
+            or first_num(rec.get("prawns_per_guest"))
+            or first_num(rec.get("cutlets_per_guest"))
+            or first_num(rec.get("skewers_per_guest"))
+            or first_num(rec.get("madeleines_per_guest"))
+            or first_num(rec.get("portion_count_per_guest"))
         )
+        confirmed_base = first_num((group.get("base_prep") or {}).get("base_yield_pieces"))
+        if not confirmed_base and str(rec.get("ingredient_scaling_status") or "").upper() == "NEEDS CONFIRMATION":
+            return None
+        base = confirmed_base or parse_yield_num(recipe.get("yield", ""))
         if ppg and base and pax:
             return (pax * ppg * buf) / base
+        if base and pax:
+            return (pax * buf) / base
     base = parse_yield_num(recipe.get("yield", ""))
     return pax / base
 
 
-def scale_qty(qty: str, factor: float) -> str:
+def scale_qty(qty: str, factor: float | None) -> str:
+    if factor is None:
+        return "NEEDS CONFIRMATION"
     if not qty or factor == 1:
         return qty or ""
     s = str(qty).strip()
@@ -89,7 +112,8 @@ def main() -> None:
         "chicken-skewer",
         "chorizo-potatoes",
     ]
-    recipes = {r["id"]: r for r in builtins if r.get("id") in ids}
+    all_recipes = {r["id"]: r for r in builtins if r.get("id")}
+    recipes = {recipe_id: all_recipes[recipe_id] for recipe_id in ids}
     variants = load_variants()
     redirects = json.loads((ROOT / "riviera_data/canonical_recipe_aliases.json").read_text()).get(
         "recipe_id_redirects", {}
@@ -114,6 +138,59 @@ def main() -> None:
     for style in ("cocktail", "buffet"):
         lines.append(f"## {style.title()} · {pax} covers")
         lines.append("")
+
+    high_tea_ids = {
+        "arancini": 1,
+        "house-scones": 1,
+        "ribbon-sandwiches": 2,
+        "sweet-petit-fours": 2,
+    }
+    lines.extend(
+        [
+            "## High Tea locked service targets",
+            "",
+            "| Guests | Recipe | Target | Ingredient scale | Status |",
+            "|--------|--------|--------|------------------|--------|",
+        ]
+    )
+    high_tea_errors = []
+    for guests in (12, 100):
+        for rid, pieces_per_guest in high_tea_ids.items():
+            recipe = all_recipes[rid]
+            record = variants["service_variants"][rid]["high_tea"]
+            actual_ppg = first_num(record.get("pieces_per_guest"))
+            target = guests * (actual_ppg or 0)
+            expected_target = guests * pieces_per_guest
+            factor = scale_factor(recipe, guests, "high tea", variants, redirects)
+            if target != expected_target:
+                high_tea_errors.append(
+                    f"{rid} @ {guests}: expected target {expected_target}, found {target}"
+                )
+            if rid == "arancini":
+                expected_scale = None
+                status = "PASS" if factor is None else "FAIL"
+                if factor is not None:
+                    high_tea_errors.append(
+                        f"arancini @ {guests}: ingredient scale must be NEEDS CONFIRMATION"
+                    )
+            else:
+                expected_scale = guests / 40 if rid == "house-scones" else float(guests)
+                status = (
+                    "PASS"
+                    if factor is not None and math.isclose(factor, expected_scale)
+                    else "FAIL"
+                )
+                if status == "FAIL":
+                    high_tea_errors.append(
+                        f"{rid} @ {guests}: expected factor {expected_scale}, found {factor}"
+                    )
+            scale_label = "NEEDS CONFIRMATION" if factor is None else f"×{factor:.3f}"
+            lines.append(
+                f"| {guests} | {rid} | {target:g} pieces | {scale_label} | {status} |"
+            )
+    lines.append("")
+    if high_tea_errors:
+        raise SystemExit("\n".join(high_tea_errors))
         lines.append("| Recipe | Factor | Sample scaled qty | Status |")
         lines.append("|--------|--------|-------------------|--------|")
         for rid in ids:

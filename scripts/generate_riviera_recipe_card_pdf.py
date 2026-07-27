@@ -48,7 +48,7 @@ SSOT_MANIFEST_PATH = ROOT / "riviera_sources" / "current" / "manifest.json"
 DEFAULT_OUTPUT = ROOT / "output" / "pdf" / "Riviera_Kitchen_Recipe_Card_Book_2026-07-08.pdf"
 HOUSE_STANDARDS_OUTPUT = ROOT / "output" / "pdf" / "Riviera_House_Standards_Recipe_Manual_2026-07-08.pdf"
 PROBE_OUTPUT = ROOT / "tmp" / "pdfs" / "_riviera_recipe_card_book_probe.pdf"
-EXPECTED_RECIPE_COUNT = 147
+EXPECTED_RECIPE_COUNT = 156
 
 BRAND_OLIVE = colors.HexColor("#5C6B3A")
 BRAND_GOLD = colors.HexColor("#C8A96E")
@@ -78,7 +78,15 @@ JULY_8_OVERLAY_IDS = [
     "camembert-cigars",
     "beef-kofta",
 ]
-CURRENT_HOUSE_STANDARD_IDS = [*JULY_8_OVERLAY_IDS, "peach-tartare"]
+CURRENT_HOUSE_STANDARD_IDS = [
+    *JULY_8_OVERLAY_IDS,
+    "peach-tartare",
+    "house-scones",
+    "potato-pave",
+    "baklava-cheesecake",
+    "house-focaccia",
+    "burnt-butter-mash",
+]
 CURRENT_HOUSE_STANDARD_ORDER = {
     recipe_id: idx for idx, recipe_id in enumerate(CURRENT_HOUSE_STANDARD_IDS)
 }
@@ -449,7 +457,7 @@ def load_source_info() -> SourceInfo:
         chatgpt_source_count=len(manifest.get("chatgptSources", [])),
         overlay_recipe_ids=overlay_ids,
         current_house_standard_ids=current_house_standard_ids,
-        merge_direction=str(manifest.get("mergeDirection") or "ChatGPT baseline plus July 8 tapas overlay."),
+        merge_direction=str(manifest.get("mergeDirection") or "GitHub structured recipe catalog with historical source provenance."),
     )
 
 
@@ -791,7 +799,7 @@ def build_cover(recipes: list[dict[str, Any]], source_info: SourceInfo, house_st
         ["Recipes", str(len(recipes))],
         ["House standards", str(house_count)],
         ["Layout", "A4 portrait, compact kitchen cards"],
-        ["Recipe baseline", "ChatGPT Riviera project sources"],
+        ["Recipe provenance", "Historical ChatGPT Riviera project sources"],
         ["Latest overlay", f"{len(source_info.overlay_recipe_ids)} July 8 tapas/canape standards"],
         ["Recipe authority", source_info.structured_recipe_catalog],
         ["Operational copy", "riviera_data/builtins.json"],
@@ -820,7 +828,7 @@ def build_cover(recipes: list[dict[str, Any]], source_info: SourceInfo, house_st
     story.append(Spacer(1, 16 * mm))
     story.append(
         Paragraph(
-            "This PDF follows the merged Riviera source of truth: ChatGPT Riviera project sources as the baseline, the fixed July 8 tapas/canape overlay, and later direct user-approved house standards recorded in the structured catalog.",
+            "This PDF is a GitHub recipe-data representation: the structured catalog is canonical for recipes, with the fixed July 8 tapas/canape overlay, later approved house standards, and historical ChatGPT sources retained as provenance. Drive remains the operational SOP/package/live-order master.",
             STYLES["body"],
         )
     )
@@ -843,7 +851,7 @@ def build_source_stack(source_info: SourceInfo) -> list[Any]:
         [table_cell("Authority", "table_header"), table_cell("Current file", "table_header")],
         [table_cell("Riviera Source Of Truth", "small"), table_cell(source_info.source_of_truth, "small")],
         [table_cell("Structured recipe catalog", "small"), table_cell(source_info.structured_recipe_catalog, "small")],
-        [table_cell("ChatGPT baseline", "small"), table_cell(f"{source_info.chatgpt_source_count} source files in {source_info.chatgpt_source_dir}", "small")],
+        [table_cell("Historical ChatGPT provenance", "small"), table_cell(f"{source_info.chatgpt_source_count} source files in {source_info.chatgpt_source_dir}", "small")],
         [table_cell("Latest overlay", "small"), table_cell(source_info.overlay, "small")],
         [table_cell("Overlay scope", "small"), table_cell(f"{len(source_info.overlay_recipe_ids)} tapas/canape house standards only", "small")],
         [table_cell("Later standards", "small"), table_cell(source_info.current_house_standards_additions, "small")],
@@ -1153,7 +1161,7 @@ def build_pdf(
             bottomMargin=17 * mm,
             title="Riviera House Standards Recipe Manual" if house_standards_only else "Riviera Kitchen Recipe Card Book",
             author="Riviera Yeppoon",
-            subject="Internal kitchen recipe cards from the ChatGPT baseline, July 8 overlay and later direct house standards",
+            subject="Internal kitchen recipe cards from the GitHub structured catalog and approved house standards",
         )
         story = build_story(recipes, grouped, meta, page_map, source_info, house_standards_only)
         doc.build(story)

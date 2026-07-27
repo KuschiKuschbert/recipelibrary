@@ -59,6 +59,18 @@ def main() -> int:
     checks = (
         ("planner acceptance smoke", [sys.executable, "scripts/planner_acceptance_smoke.py"]),
         ("service-worker validation", [sys.executable, "scripts/validate_sw.py"]),
+        (
+            "Riviera V13 release policy",
+            [sys.executable, "scripts/validate_riviera_release_policy.py"],
+        ),
+        (
+            "Riviera package policy",
+            [sys.executable, "scripts/sync_riviera_package_policy.py", "--check"],
+        ),
+        (
+            "Riviera frontend service variants",
+            [sys.executable, "scripts/audit_riviera_frontend_service_variants.py"],
+        ),
         ("static smoke", [sys.executable, "scripts/static_smoke.py"]),
         ("Lenovo tablet browser QA", [sys.executable, "scripts/lenovo_tablet_qa.py"]),
         (

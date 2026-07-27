@@ -250,6 +250,31 @@
   color: #9de7c6;
   border: 1px solid rgba(98, 188, 150, 0.34);
 }
+.badge-status {
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.badge-status--locked {
+  background: rgba(98, 188, 150, 0.18);
+  color: #9de7c6;
+  border: 1px solid rgba(98, 188, 150, 0.34);
+}
+.badge-status--active-working {
+  background: var(--blue-bg);
+  color: var(--blue);
+  border: 1px solid rgba(110,154,190,0.28);
+}
+.badge-status--trial-only {
+  background: rgba(201, 169, 110, 0.14);
+  color: var(--gold-light);
+  border: 1px solid rgba(201, 169, 110, 0.3);
+}
+.badge-status--retired {
+  background: rgba(148, 148, 148, 0.12);
+  color: var(--text3);
+  border: 1px solid rgba(148, 148, 148, 0.25);
+}
 .riv-event-strip {
   max-width: 1200px;
   margin: 4px auto 8px;
@@ -899,6 +924,61 @@ html.lenovo-tab-one-profile.low-memory-device body.riviera-page.has-app-nav .gri
   overflow-wrap: break-word;
   word-break: break-word;
 }
+.riv-recipe-release {
+  margin: -8px 0 16px;
+  color: var(--text3);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.riv-recipe-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+.riv-recipe-control {
+  padding: 11px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text3);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.riv-recipe-control strong {
+  display: block;
+  color: var(--text2);
+  margin-bottom: 3px;
+}
+.riv-recipe-control-status {
+  color: var(--gold-light);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.riv-recipe-control ul {
+  margin: 6px 0 0;
+  padding-left: 17px;
+}
+.footer-release {
+  display: inline-block;
+  margin-top: 6px;
+  color: var(--gold-light);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+.modal-confirmation {
+  border-left-color: #d99059;
+  color: var(--text2);
+}
+.modal-confirmation strong {
+  color: #efb482;
+}
+.modal-confirmation ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+}
 .label-box {
   display: inline-flex;
   align-items: center;
@@ -1531,10 +1611,18 @@ html.lenovo-tab-one-profile .fn-planner__desc {
   <select class="filter-pill filter-pill--hidden" id="filterCourse"><option value="">Course</option></select>
   <select class="filter-pill filter-pill--hidden" id="filterProtein"><option value="">Protein</option></select>
   <select class="filter-pill filter-pill--hidden" id="filterDiet"><option value="">Dietary</option></select>
+  <select class="filter-pill filter-pill--hidden" id="filterStatus"><option value="">Status</option></select>
+  <select class="filter-pill filter-pill--hidden" id="filterType"><option value="">Type</option></select>
+  <select class="filter-pill filter-pill--hidden" id="filterPackage"><option value="">Package</option></select>
+  <select class="filter-pill filter-pill--hidden" id="filterEventUse"><option value="">Event Use</option></select>
   <!-- Custom chips -->
   <button type="button" class="filter-chip" id="chipCourse" onclick="openFilterSheet('Course','filterCourse')">Course</button>
   <button type="button" class="filter-chip" id="chipRivProtein" onclick="openFilterSheet('Protein','filterProtein')">Protein</button>
   <button type="button" class="filter-chip" id="chipDiet" onclick="openFilterSheet('Dietary','filterDiet')">Dietary</button>
+  <button type="button" class="filter-chip" id="chipStatus" onclick="openFilterSheet('Status','filterStatus')">Status</button>
+  <button type="button" class="filter-chip" id="chipType" onclick="openFilterSheet('Type','filterType')">Type</button>
+  <button type="button" class="filter-chip" id="chipPackage" onclick="openFilterSheet('Package','filterPackage')">Package</button>
+  <button type="button" class="filter-chip" id="chipEventUse" onclick="openFilterSheet('Event Use','filterEventUse')">Event Use</button>
   <button type="button" class="clear-btn" id="clearBtn" disabled aria-disabled="true">Clear all</button>
 </div>
 
@@ -1719,7 +1807,10 @@ html.lenovo-tab-one-profile .fn-planner__desc {
 </div>
 
 <div class="footer">
-  <div class="footer-text"><span class="footer-note">Riviera prep set · Personal static site (GitHub Pages)</span></div>
+  <div class="footer-text">
+    <span class="footer-note">Riviera prep set · Personal static site (GitHub Pages)</span>
+    <span class="footer-release">Release RIV-KNOWLEDGE-2026-07-27-V13</span>
+  </div>
   <div class="footer-riviera-admin" id="rivieraAdminChrome">
     <button type="button" class="btn-text riv-admin-btn" id="rivieraAdminOpenBtn" onclick="openRivieraAdminModal()">Admin</button>
     <span id="rivieraAdminUnlockedStrip" class="riv-admin-unlocked" style="display:none">
@@ -1771,6 +1862,8 @@ html.lenovo-tab-one-profile .fn-planner__desc {
 <script>
 /** Static JSON (same-origin) — keeps initial HTML/JS parse small; merged after fetch. */
 const RIVIERA_BUILTINS_URL = 'riviera_data/builtins.json';
+const RIVIERA_ALIASES_URL = 'riviera_data/canonical_recipe_aliases.json';
+const RIVIERA_ACTIVE_RELEASE_ID = 'RIV-KNOWLEDGE-2026-07-27-V13';
 const RIVIERA_HOUSE_STANDARD_IDS = [
   'arancini',
   'calamari',
@@ -1788,7 +1881,14 @@ const RIVIERA_HOUSE_STANDARD_IDS = [
   'whipped-butter',
   'camembert-cigars',
   'beef-kofta',
+  'peach-tartare',
+  'house-scones',
+  'potato-pave',
+  'baklava-cheesecake',
+  'house-focaccia',
+  'burnt-butter-mash',
 ];
+const RIVIERA_RECIPE_STATUSES = ['LOCKED', 'ACTIVE WORKING', 'TRIAL ONLY', 'RETIRED'];
 const RIVIERA_HOUSE_STANDARD_ORDER = new Map(
   RIVIERA_HOUSE_STANDARD_IDS.map((id, index) => [id, index])
 );
@@ -1805,6 +1905,8 @@ function siteBaseUrl() {
 
 let BUILTIN_RECIPES = [];
 let BUILTIN_RECIPES_METRIC = [];
+let RIVIERA_RECIPE_ID_REDIRECTS = {};
+let RIVIERA_RECIPE_ALIAS_IDS = {};
 
 function computeBuiltinRecipesMetric(builtins) {
   if (!window.KuschiRecipeMetric) return builtins.slice();
@@ -1849,11 +1951,33 @@ function finishRivieraBuiltinHydrate() {
 async function loadRivieraBuiltinsFromNetwork() {
   const base = siteBaseUrl();
   const url = base + '/' + RIVIERA_BUILTINS_URL.replace(/^\/+/, '');
-  const res = await fetch(url);
+  const aliasesUrl = base + '/' + RIVIERA_ALIASES_URL.replace(/^\/+/, '');
+  const [res, aliasesRes] = await Promise.all([
+    fetch(url),
+    fetch(aliasesUrl).catch(() => null)
+  ]);
   if (!res.ok) throw new Error('Could not load ' + RIVIERA_BUILTINS_URL + ' (' + res.status + ')');
   const data = await res.json();
   if (!Array.isArray(data)) throw new Error('Invalid built-ins payload');
   BUILTIN_RECIPES = data;
+  if (aliasesRes && aliasesRes.ok) {
+    const aliases = await aliasesRes.json();
+    RIVIERA_RECIPE_ID_REDIRECTS = aliases.recipe_id_redirects || {};
+    const groups = aliases.canonical_recipes || {};
+    const aliasMap = aliases.alias_to_canonical || {};
+    RIVIERA_RECIPE_ALIAS_IDS = {};
+    Object.keys(aliasMap).forEach(function (alias) {
+      const group = groups[aliasMap[alias]];
+      const canonicalId = group && group.canonical_id;
+      if (canonicalId) RIVIERA_RECIPE_ALIAS_IDS[String(alias).trim().toLowerCase()] = canonicalId;
+    });
+  }
+}
+
+function resolveRivieraRecipeId(value) {
+  const raw = String(value || '').trim();
+  if (!raw) return raw;
+  return RIVIERA_RECIPE_ID_REDIRECTS[raw] || RIVIERA_RECIPE_ALIAS_IDS[raw.toLowerCase()] || raw;
 }
 
 async function bootstrapRivieraRecipeData() {
@@ -2038,6 +2162,96 @@ function isRivieraHouseStandard(recipe) {
   return recipe.houseStandard === true || RIVIERA_HOUSE_STANDARD_ORDER.has(recipe.id);
 }
 
+function rivieraRecipeStatus(recipe) {
+  const raw = String(recipe && recipe.status || '')
+    .trim()
+    .toUpperCase()
+    .replace(/_/g, ' ')
+    .replace(/\s+/g, ' ');
+  if (RIVIERA_RECIPE_STATUSES.includes(raw)) return raw;
+  return isRivieraHouseStandard(recipe) ? 'LOCKED' : 'TRIAL ONLY';
+}
+
+function rivieraStatusClass(status) {
+  return String(status || '').toLowerCase().replace(/\s+/g, '-');
+}
+
+function rivieraStatusBadge(recipe) {
+  const status = rivieraRecipeStatus(recipe);
+  return `<span class="badge badge-status badge-status--${rivieraStatusClass(status)}">${KuschiRecipeUi.esc(status)}</span>`;
+}
+
+function rivieraRationalStageText(stage) {
+  if (!stage || typeof stage !== 'object') return '';
+  const parts = [];
+  if (stage.stage != null) parts.push('Stage ' + stage.stage);
+  if (stage.mode) parts.push(stage.mode);
+  if (stage.temperatureC != null) parts.push(stage.temperatureC + '°C');
+  if (stage.timeMinutes != null) parts.push(stage.timeMinutes + ' min');
+  if (stage.timeMinutesMin != null || stage.timeMinutesMax != null) {
+    parts.push([stage.timeMinutesMin, stage.timeMinutesMax].filter(v => v != null).join('–') + ' min');
+  }
+  if (stage.timeSecondsMin != null || stage.timeSecondsMax != null) {
+    parts.push([stage.timeSecondsMin, stage.timeSecondsMax].filter(v => v != null).join('–') + ' sec');
+  }
+  if (stage.checkFromMinutes != null) parts.push('check from ' + stage.checkFromMinutes + ' min');
+  if (stage.steamPercent != null) parts.push(stage.steamPercent + '% steam');
+  if (stage.fan) parts.push(stage.fan + ' fan');
+  return parts.join(' · ');
+}
+
+function rivieraRecipeStructuredMetaHtml(recipe) {
+  const cards = [];
+  const allergens = recipe.allergens && typeof recipe.allergens === 'object' ? recipe.allergens : null;
+  if (allergens) {
+    const declared = []
+      .concat(allergens.contains || [])
+      .concat((allergens.mayContain || []).map(item => 'May contain ' + item));
+    const detail = declared.length ? declared.join(' · ') : 'No confirmed allergen list';
+    cards.push(
+      `<div class="riv-recipe-control"><strong>Allergens</strong><span class="riv-recipe-control-status">${KuschiRecipeUi.esc(allergens.status || 'NEEDS CONFIRMATION')}</span><div>${KuschiRecipeUi.esc(detail)}</div>${allergens.notes ? `<div>${KuschiRecipeUi.esc(allergens.notes)}</div>` : ''}</div>`
+    );
+  }
+  const controls = recipe.controls && typeof recipe.controls === 'object' ? recipe.controls : {};
+  ['cooling', 'holding', 'packing', 'service'].forEach(function (key) {
+    const control = controls[key];
+    if (!control || typeof control !== 'object') return;
+    const steps = Array.isArray(control.steps) ? control.steps : [];
+    cards.push(
+      `<div class="riv-recipe-control"><strong>${KuschiRecipeUi.esc(key.charAt(0).toUpperCase() + key.slice(1))} control</strong><span class="riv-recipe-control-status">${KuschiRecipeUi.esc(control.status || 'NEEDS CONFIRMATION')}</span>${steps.length ? `<ul>${steps.map(step => `<li>${KuschiRecipeUi.esc(step)}</li>`).join('')}</ul>` : '<div>No confirmed steps</div>'}</div>`
+    );
+  });
+  const scaling = recipe.scalingBasis && typeof recipe.scalingBasis === 'object' ? recipe.scalingBasis : null;
+  if (scaling) {
+    const detail = scaling.basis || scaling.baseYield || 'No confirmed scaling basis';
+    cards.push(
+      `<div class="riv-recipe-control"><strong>Scaling basis</strong><span class="riv-recipe-control-status">${KuschiRecipeUi.esc(scaling.status || 'NEEDS CONFIRMATION')}</span><div>${KuschiRecipeUi.esc(detail)}</div>${scaling.notes ? `<div>${KuschiRecipeUi.esc(scaling.notes)}</div>` : ''}</div>`
+    );
+  }
+  const rational = recipe.rationalSettings && typeof recipe.rationalSettings === 'object' ? recipe.rationalSettings : null;
+  if (rational) {
+    const stages = (rational.stages || []).map(rivieraRationalStageText).filter(Boolean);
+    cards.push(
+      `<div class="riv-recipe-control"><strong>Rational settings</strong><span class="riv-recipe-control-status">${KuschiRecipeUi.esc(rational.status || 'NEEDS CONFIRMATION')}</span>${stages.length ? `<ul>${stages.map(stage => `<li>${KuschiRecipeUi.esc(stage)}</li>`).join('')}</ul>` : '<div>No confirmed Rational stages</div>'}${rational.notes ? `<div>${KuschiRecipeUi.esc(rational.notes)}</div>` : ''}</div>`
+    );
+  }
+  const links = recipe.links && typeof recipe.links === 'object' ? recipe.links : {};
+  const packageLabels = [...new Set((links.packages || []).map(link => link && link.sectionLabel).filter(Boolean))];
+  const eventLabels = [...new Set((links.events || []).map(link => link && link.label).filter(Boolean))];
+  const aliases = Array.isArray(recipe.aliases) ? recipe.aliases : [];
+  if (packageLabels.length || eventLabels.length || aliases.length) {
+    const detail = [
+      aliases.length ? 'Aliases: ' + aliases.join(', ') : '',
+      packageLabels.length ? 'Packages: ' + packageLabels.join(', ') : '',
+      eventLabels.length ? 'Event use: ' + eventLabels.join(', ') : ''
+    ].filter(Boolean).join(' · ');
+    cards.push(`<div class="riv-recipe-control"><strong>Recipe links</strong><div>${KuschiRecipeUi.esc(detail)}</div></div>`);
+  }
+  return cards.length
+    ? `<div class="modal-section">Controls, allergens & links</div><div class="riv-recipe-controls">${cards.join('')}</div>`
+    : '';
+}
+
 function sortRivieraRecipesForDisplay(recipes) {
   return recipes
     .map((recipe, index) => ({ recipe, index }))
@@ -2068,6 +2282,10 @@ function rivieraRecipeSearchHay(recipe) {
     recipe.method,
     recipe.yield,
     recipe.label,
+    rivieraRecipeStatus(recipe),
+    recipe.version,
+    recipe.provenance && recipe.provenance.source,
+    recipe.provenance && recipe.provenance.sourceDate,
   ];
   if (isRivieraHouseStandard(recipe)) parts.push('house standard standard recipe riviera standard');
   (recipe.protein || []).forEach((p) => parts.push(p));
@@ -2078,6 +2296,28 @@ function rivieraRecipeSearchHay(recipe) {
   });
   (recipe.method_steps || []).forEach((s) => parts.push(s));
   (recipe.service || []).forEach((s) => parts.push(s));
+  (recipe.confirmationFlags || []).forEach((flag) => parts.push(flag));
+  (recipe.aliases || []).forEach((alias) => parts.push(alias));
+  const links = recipe.links && typeof recipe.links === 'object' ? recipe.links : {};
+  (links.packages || []).forEach((link) => {
+    parts.push(link.packageId, link.packageLabel, link.sectionId, link.sectionLabel, link.course, link.item);
+  });
+  (links.events || []).forEach((link) => parts.push(link.eventTypeId, link.label));
+  const allergens = recipe.allergens && typeof recipe.allergens === 'object' ? recipe.allergens : {};
+  parts.push(allergens.status, allergens.notes);
+  (allergens.contains || []).forEach((item) => parts.push(item));
+  (allergens.mayContain || []).forEach((item) => parts.push(item));
+  const controls = recipe.controls && typeof recipe.controls === 'object' ? recipe.controls : {};
+  ['cooling', 'holding', 'packing', 'service'].forEach((key) => {
+    const control = controls[key] && typeof controls[key] === 'object' ? controls[key] : {};
+    parts.push(control.status);
+    (control.steps || []).forEach((step) => parts.push(step));
+  });
+  const scaling = recipe.scalingBasis && typeof recipe.scalingBasis === 'object' ? recipe.scalingBasis : {};
+  parts.push(scaling.status, scaling.basis, scaling.baseYield, scaling.notes);
+  const rational = recipe.rationalSettings && typeof recipe.rationalSettings === 'object' ? recipe.rationalSettings : {};
+  parts.push(rational.status, rational.notes);
+  (rational.stages || []).forEach((stage) => parts.push(JSON.stringify(stage)));
   return rivieraText(parts.filter(Boolean).join(' '));
 }
 
@@ -2720,6 +2960,7 @@ function submitRivieraRecipe() {
   const protein = document.getElementById('rvProtein').value.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
   const diet = document.getElementById('rvDiet').value.split(',').map(s => s.trim()).filter(Boolean);
   const elements = document.getElementById('rvElements').value.split(',').map(s => s.trim()).filter(Boolean);
+  const draftDate = new Date().toISOString().slice(0, 10);
   const saved = KuschiUserRecipes.addRivieraRecipe({
     name,
     subtitle: document.getElementById('rvSub').value.trim(),
@@ -2734,7 +2975,50 @@ function submitRivieraRecipe() {
     ingredients,
     method_steps,
     service,
-    note: document.getElementById('rvNote').value.trim() || null
+    note: document.getElementById('rvNote').value.trim() || null,
+    status: 'TRIAL ONLY',
+    version: draftDate + '-draft',
+    provenance: {
+      source: 'Riviera page custom recipe draft',
+      sourceDate: draftDate,
+      scope: 'recipe-specific'
+    },
+    confirmationFlags: [
+      'Kitchen trial and explicit approval are required before promotion from TRIAL ONLY.',
+      'Epicure pairing review and Kitchen Council review are not yet recorded.',
+      'Allergen declaration requires confirmation against current product labels and cross-contact controls.',
+      'Cooling, holding and packing controls require recipe-by-recipe confirmation.',
+      'Scaling basis requires recipe-by-recipe confirmation.',
+      'Rational settings require recipe-by-recipe confirmation or an explicit NOT REQUIRED decision.'
+    ],
+    aliases: [],
+    links: { packages: [], events: [] },
+    allergens: {
+      status: 'NEEDS CONFIRMATION',
+      contains: [],
+      mayContain: [],
+      notes: 'Review current ingredient labels and cross-contact controls before service. No allergen-free claim is made.'
+    },
+    controls: {
+      cooling: { status: 'NEEDS CONFIRMATION', steps: [] },
+      holding: { status: 'NEEDS CONFIRMATION', steps: [] },
+      packing: { status: 'NEEDS CONFIRMATION', steps: [] },
+      service: {
+        status: service.length ? 'SOURCE RECORDED' : 'NEEDS CONFIRMATION',
+        steps: service
+      }
+    },
+    scalingBasis: {
+      status: 'NEEDS CONFIRMATION',
+      basis: '',
+      baseYield: document.getElementById('rvYield').value.trim(),
+      notes: 'Yield text is preserved, but the scalable production basis has not been separately confirmed.'
+    },
+    rationalSettings: {
+      status: 'NEEDS CONFIRMATION',
+      stages: [],
+      notes: 'No complete Rational program is confirmed in this draft.'
+    }
   });
   refreshRivieraRecipes();
   closeAddRivieraModal();
@@ -2754,15 +3038,28 @@ function copyRivieraBackupJson() {
 
 // ── Filter population ─────────────────────────
 function populateFilters() {
-  const courses = new Set(), proteins = new Set(), diets = new Set();
+  const courses = new Set(), proteins = new Set(), diets = new Set(), types = new Set();
+  const packages = new Set(), eventUses = new Set();
   RECIPES.forEach(r => {
     if (r.course) courses.add(r.course);
+    if (r.type) types.add(r.type);
     r.protein.forEach(p => proteins.add(p));
     r.diet.forEach(d => diets.add(d));
+    const links = r.links && typeof r.links === 'object' ? r.links : {};
+    (links.packages || []).forEach(link => {
+      if (link && link.sectionLabel) packages.add(link.sectionLabel);
+    });
+    (links.events || []).forEach(link => {
+      if (link && link.label) eventUses.add(link.label);
+    });
   });
   fillSelect('filterCourse', [...courses].sort(), 'Course');
   fillSelect('filterProtein', [...proteins].sort(), 'Protein');
   fillSelect('filterDiet', [...diets].sort(), 'Dietary');
+  fillSelect('filterStatus', RIVIERA_RECIPE_STATUSES, 'Status');
+  fillSelect('filterType', [...types].sort(), 'Type');
+  fillSelect('filterPackage', [...packages].sort(), 'Package');
+  fillSelect('filterEventUse', [...eventUses].sort(), 'Event Use');
 }
 
 function fillSelect(id, items, label) {
@@ -2783,11 +3080,19 @@ function rivieraActiveControlEntries() {
   const course = document.getElementById('filterCourse').value;
   const protein = document.getElementById('filterProtein').value;
   const diet = document.getElementById('filterDiet').value;
+  const status = document.getElementById('filterStatus').value;
+  const type = document.getElementById('filterType').value;
+  const packageUse = document.getElementById('filterPackage').value;
+  const eventUse = document.getElementById('filterEventUse').value;
   const eventFilterOn = !!(window.KuschiRivieraEventContext && KuschiRivieraEventContext.isFilterOn());
   if (q) entries.push({ label: 'Search', value: q });
   if (course) entries.push({ label: 'Course', value: course });
   if (protein) entries.push({ label: 'Protein', value: protein });
   if (diet) entries.push({ label: 'Dietary', value: diet });
+  if (status) entries.push({ label: 'Status', value: status });
+  if (type) entries.push({ label: 'Type', value: type });
+  if (packageUse) entries.push({ label: 'Package', value: packageUse });
+  if (eventUse) entries.push({ label: 'Event Use', value: eventUse });
   if (eventFilterOn) entries.push({ label: 'Event', value: 'Selected recipes' });
   return entries;
 }
@@ -2826,9 +3131,24 @@ function applyFilters() {
   const course = document.getElementById('filterCourse').value;
   const protein = document.getElementById('filterProtein').value;
   const diet = document.getElementById('filterDiet').value;
+  const status = document.getElementById('filterStatus').value;
+  const type = document.getElementById('filterType').value;
+  const packageUse = document.getElementById('filterPackage').value;
+  const eventUse = document.getElementById('filterEventUse').value;
   const terms = q ? q.split(/\s+/).filter(Boolean) : [];
   const eventFilterOn = !!(window.KuschiRivieraEventContext && KuschiRivieraEventContext.isFilterOn());
-  const memoKey = [rivieraRecipeIndex.version, q, course, protein, diet, eventFilterOn ? 'event' : 'all'].join('\u001f');
+  const memoKey = [
+    rivieraRecipeIndex.version,
+    q,
+    course,
+    protein,
+    diet,
+    status,
+    type,
+    packageUse,
+    eventUse,
+    eventFilterOn ? 'event' : 'all'
+  ].join('\u001f');
   rivieraDisplayCount = RIVIERA_RENDER_BATCH || Number.MAX_SAFE_INTEGER;
 
   if (typeof updateFilterChips === 'function') updateFilterChips();
@@ -2847,6 +3167,12 @@ function applyFilters() {
     if (course && r.course !== course) return false;
     if (protein && !r.protein.includes(protein)) return false;
     if (diet && !r.diet.includes(diet)) return false;
+    if (!status && rivieraRecipeStatus(r) === 'RETIRED') return false;
+    if (status && rivieraRecipeStatus(r) !== status) return false;
+    if (type && r.type !== type) return false;
+    const links = r.links && typeof r.links === 'object' ? r.links : {};
+    if (packageUse && !(links.packages || []).some(link => link && link.sectionLabel === packageUse)) return false;
+    if (eventUse && !(links.events || []).some(link => link && link.label === eventUse)) return false;
     if (eventFilterOn && !KuschiRivieraEventContext.hasRecipe(r.id)) return false;
     return true;
   });
@@ -2948,6 +3274,7 @@ function cardHTML(r) {
   const diet = Array.isArray(r.diet) ? r.diet : [];
   const badgeItems = [
     window.KuschiRivieraEventContext ? KuschiRivieraEventContext.cardBadge(r.id) : '',
+    rivieraStatusBadge(r),
     isStandard ? '<span class="badge badge-standard">House Standard</span>' : '',
     ...protein.map(p => `<span class="badge badge-course">${KuschiRecipeUi.esc(p)}</span>`),
     ...diet.map(d => `<span class="badge badge-diet">${KuschiRecipeUi.esc(d)}</span>`),
@@ -2964,7 +3291,7 @@ function cardHTML(r) {
     ? `<div class="card-elements riv-card-elements"><span class="riv-card-elements-label">Elements</span><span class="riv-card-elements-text">${KuschiRecipeUi.esc(elements)}</span></div>`
     : '';
   const ariaLabel = KuschiRecipeUi.esc(
-    `Open recipe: ${rawName}. ${isStandard ? 'House standard. ' : ''}${ingredientsCount} ingredients, ${prepCount} prep steps, ${serviceCount} service steps.`
+    `Open recipe: ${rawName}. ${rivieraRecipeStatus(r)}. ${isStandard ? 'House standard. ' : ''}${ingredientsCount} ingredients, ${prepCount} prep steps, ${serviceCount} service steps.`
   );
 
   return `<div class="card riv-card${isStandard ? ' riv-card--standard' : ''}" data-recipe-id="${rid}" role="button" tabindex="0" aria-label="${ariaLabel}" onclick="openRecipe('${rid}')" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();openRecipe('${rid}')}">
@@ -3012,6 +3339,18 @@ function copyRivieraRecipeText(id, btn) {
   let text = r.name + '\n';
   const meta = [r.type || '', r.yield ? 'Yield: ' + r.yield : ''].filter(Boolean).join(' · ');
   if (meta) text += meta + '\n';
+  text += 'Status: ' + rivieraRecipeStatus(r);
+  if (r.version) text += ' · Version: ' + r.version;
+  text += '\nRelease: ' + RIVIERA_ACTIVE_RELEASE_ID + '\n';
+
+  if (Array.isArray(r.aliases) && r.aliases.length) {
+    text += 'Aliases: ' + r.aliases.join(', ') + '\n';
+  }
+  const links = r.links && typeof r.links === 'object' ? r.links : {};
+  const packageLabels = [...new Set((links.packages || []).map(link => link && link.sectionLabel).filter(Boolean))];
+  const eventLabels = [...new Set((links.events || []).map(link => link && link.label).filter(Boolean))];
+  if (packageLabels.length) text += 'Package links: ' + packageLabels.join(', ') + '\n';
+  if (eventLabels.length) text += 'Event use: ' + eventLabels.join(', ') + '\n';
 
   if (Array.isArray(r.elements) && r.elements.length) {
     text += '\nElements:\n';
@@ -3040,7 +3379,46 @@ function copyRivieraRecipeText(id, btn) {
     });
   }
 
+  const allergens = r.allergens && typeof r.allergens === 'object' ? r.allergens : null;
+  if (allergens) {
+    text += '\nAllergens [' + (allergens.status || 'NEEDS CONFIRMATION') + ']:\n';
+    text += '- Contains: ' + ((allergens.contains || []).join(', ') || 'none confirmed') + '\n';
+    text += '- May contain: ' + ((allergens.mayContain || []).join(', ') || 'none confirmed') + '\n';
+    if (allergens.notes) text += '- ' + allergens.notes + '\n';
+  }
+  const controls = r.controls && typeof r.controls === 'object' ? r.controls : {};
+  text += '\nOperational Controls:\n';
+  ['cooling', 'holding', 'packing', 'service'].forEach(function (key) {
+    const control = controls[key];
+    if (!control || typeof control !== 'object') return;
+    text += '- ' + key + ': ' + (control.status || 'NEEDS CONFIRMATION') + '\n';
+    (control.steps || []).forEach(function (step) { text += '  - ' + step + '\n'; });
+  });
+  const scaling = r.scalingBasis && typeof r.scalingBasis === 'object' ? r.scalingBasis : null;
+  if (scaling) {
+    text += '\nScaling Basis [' + (scaling.status || 'NEEDS CONFIRMATION') + ']: ' + (scaling.basis || scaling.baseYield || 'not confirmed') + '\n';
+    if (scaling.notes) text += scaling.notes + '\n';
+  }
+  const rational = r.rationalSettings && typeof r.rationalSettings === 'object' ? r.rationalSettings : null;
+  if (rational) {
+    text += '\nRational Settings [' + (rational.status || 'NEEDS CONFIRMATION') + ']:\n';
+    (rational.stages || []).forEach(function (stage) { text += '- ' + rivieraRationalStageText(stage) + '\n'; });
+    if (!(rational.stages || []).length) text += '- No confirmed Rational stages\n';
+    if (rational.notes) text += '- ' + rational.notes + '\n';
+  }
+
   if (r.note) text += '\nNote:\n' + r.note + '\n';
+  if (Array.isArray(r.confirmationFlags) && r.confirmationFlags.length) {
+    text += '\nNeeds Confirmation:\n';
+    r.confirmationFlags.forEach(function (flag) {
+      text += '- ' + flag + '\n';
+    });
+  }
+  if (r.provenance && r.provenance.source) {
+    text += '\nSource: ' + r.provenance.source;
+    if (r.provenance.sourceDate) text += ' · ' + r.provenance.sourceDate;
+    text += '\n';
+  }
 
   KuschiRecipeUi.copyText(text).then(function () {
     flashRivieraCopyButton(btn, 'Copy text');
@@ -3062,13 +3440,14 @@ function rivieraModalPerfEnabled() {
 }
 
 function openRecipe(id, options) {
-  const r = rivieraRecipeIndex.byId.get(id) || RECIPES.find(x => x.id === id);
+  const resolvedId = resolveRivieraRecipeId(id);
+  const r = rivieraRecipeIndex.byId.get(resolvedId) || RECIPES.find(x => x.id === resolvedId);
   if (!r) return;
   currentRecipe = r;
 
   if (!options || !options.skipUrl) {
     var urlMode = (options && options.replaceUrl) ? 'replace' : 'push';
-    rivieraSyncUrl(function (p) { p.set('open', id); }, urlMode);
+    rivieraSyncUrl(function (p) { p.set('open', resolvedId); }, urlMode);
   }
 
   const overlay = document.getElementById('modalOverlay');
@@ -3076,6 +3455,7 @@ function openRecipe(id, options) {
 
   const badges = [
     window.KuschiRivieraEventContext ? KuschiRivieraEventContext.cardBadge(r.id) : '',
+    rivieraStatusBadge(r),
     isRivieraHouseStandard(r) ? '<span class="badge badge-standard">House Standard</span>' : '',
     ...r.protein.map(p => `<span class="badge badge-course">${KuschiRecipeUi.esc(p)}</span>`),
     ...r.diet.map(d => `<span class="badge badge-diet">${KuschiRecipeUi.esc(d)}</span>`),
@@ -3087,6 +3467,13 @@ function openRecipe(id, options) {
   const recipeId = r.id;
   const recipeIdHtml = KuschiRecipeUi.esc(recipeId);
   const recipeNameAttr = KuschiRecipeUi.esc(r.name || '').replace(/'/g,"\\'");
+  const provenance = r.provenance && typeof r.provenance === 'object' ? r.provenance : {};
+  const releaseMeta = [
+    RIVIERA_ACTIVE_RELEASE_ID,
+    r.version ? 'Version ' + r.version : '',
+    provenance.source || '',
+    provenance.sourceDate || ''
+  ].filter(Boolean).join(' · ');
 
   // Phase A — light shell so overlay can open and accept input before heavy DOM.
   modal.innerHTML = `
@@ -3098,6 +3485,7 @@ function openRecipe(id, options) {
     <div class="modal-title">${KuschiRecipeUi.esc(r.name)}</div>
     <div class="modal-type">${KuschiRecipeUi.esc(r.type)} · Yield: ${KuschiRecipeUi.esc(r.yield)}</div>
     <div class="modal-badges">${badges}</div>
+    ${releaseMeta ? `<div class="riv-recipe-release">${KuschiRecipeUi.esc(releaseMeta)}</div>` : ''}
     ${eventActions}
     <div class="modal-control-grid">
       <div class="modal-quick-actions" aria-label="Recipe actions">
@@ -3157,6 +3545,10 @@ function openRecipe(id, options) {
             ? `<div class="modal-section modal-section--service">On the Day — Service <span class="modal-section-count">${r.service.length}</span></div><ol class="modal-steps modal-steps--service">${service}</ol>`
             : '';
           const note = r.note ? `<div class="modal-note">⚠ ${KuschiRecipeUi.esc(r.note)}</div>` : '';
+          const confirmationFlags = Array.isArray(r.confirmationFlags) ? r.confirmationFlags : [];
+          const confirmation = confirmationFlags.length
+            ? `<div class="modal-note modal-confirmation"><strong>Needs confirmation</strong><ul>${confirmationFlags.map(flag => `<li>${KuschiRecipeUi.esc(flag)}</li>`).join('')}</ul></div>`
+            : '';
           const label = `<div class="label-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> Label: DATE MADE · ${KuschiRecipeUi.esc(r.label)}</div>`;
           const adminActions = isRivieraAdminUnlocked()
             ? `<div class="modal-admin-actions">${
@@ -3166,6 +3558,7 @@ function openRecipe(id, options) {
               }</div>`
             : '';
           const aromaHintHtml = KuschiRecipeUi.aromaSeasoningSectionHtml({ idSuffix: 'Rv', modalInline: true });
+          const structuredMetaHtml = rivieraRecipeStructuredMetaHtml(r);
 
           function guard() {
             return (
@@ -3207,12 +3600,12 @@ function openRecipe(id, options) {
               'beforeend',
               prepBlock + serviceBlock
             );
-            modalAfter.insertAdjacentHTML('beforeend', aromaHintHtml);
+            modalAfter.insertAdjacentHTML('beforeend', structuredMetaHtml + aromaHintHtml);
 
             setTimeout(function chunk3() {
               if (!guard()) return;
               const modalAfter = document.getElementById('rivieraModalAfter') || heavy;
-              modalAfter.insertAdjacentHTML('beforeend', `${note}${label}${adminActions}`);
+              modalAfter.insertAdjacentHTML('beforeend', `${confirmation}${note}${label}${adminActions}`);
               scaleInp = document.getElementById('scaleInput');
               if (scaleInp) rescale(scaleInp.value, { skipIfIdentity: true });
               setTimeout(function () {
@@ -3328,13 +3721,13 @@ KuschiRecipeUi.bindSearchClear({
   buttonId: 'searchClear',
   onClear: () => scheduleApplyFilters({ immediate: true }),
 });
-['filterCourse','filterProtein','filterDiet'].forEach(id =>
+['filterCourse','filterProtein','filterDiet','filterStatus','filterType','filterPackage','filterEventUse'].forEach(id =>
   document.getElementById(id).addEventListener('change', () => scheduleApplyFilters({ immediate: true }))
 );
 function resetRivieraSearchAndFilters() {
   const eventFilterWasOn = !!(window.KuschiRivieraEventContext && KuschiRivieraEventContext.isFilterOn());
   document.getElementById('search').value = '';
-  ['filterCourse','filterProtein','filterDiet'].forEach(id =>
+  ['filterCourse','filterProtein','filterDiet','filterStatus','filterType','filterPackage','filterEventUse'].forEach(id =>
     document.getElementById(id).value = ''
   );
   KuschiRecipeUi.syncSearchClear('search');
@@ -3405,6 +3798,10 @@ KuschiFilterChips.init([
   { chipId: 'chipCourse',     selectId: 'filterCourse',  label: 'Course' },
   { chipId: 'chipRivProtein', selectId: 'filterProtein', label: 'Protein' },
   { chipId: 'chipDiet',       selectId: 'filterDiet',    label: 'Dietary' },
+  { chipId: 'chipStatus',     selectId: 'filterStatus',  label: 'Status' },
+  { chipId: 'chipType',       selectId: 'filterType',    label: 'Type' },
+  { chipId: 'chipPackage',    selectId: 'filterPackage', label: 'Package' },
+  { chipId: 'chipEventUse',   selectId: 'filterEventUse', label: 'Event Use' },
 ], () => scheduleApplyFilters({ immediate: true }));
 
 KuschiCookMode.bindRouting(openRecipe, closeModal);

@@ -1,7 +1,7 @@
 {
-  "version": "2026-06-04-v22",
+  "version": "2026-07-27-v23",
   "status": "active_service_standard",
-  "source_of_truth": "Kuschi service-size corrections. Base recipes remain riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json unless explicitly superseded.",
+  "source_of_truth": "Riviera structured recipe catalog plus direct user-approved service-size corrections through 27 July 2026.",
   "rules": {
     "base_recipe_source": "Use the structured Riviera recipe catalog as the current active recipe base; riviera_data/builtins.json is the synced website copy.",
     "older_docx_sources": "Reference only unless explicitly restored.",
@@ -9,42 +9,1020 @@
     "pattern_inference_rule": "Pattern-inferred quantities may be confirmed only when they follow repeated Kuschi-approved logic: buffet uses service target plus production buffer, sauce and garnish are given per guest, premium garnish is called out, and fragile formats are marked not_recommended rather than forced.",
     "status_locking": "confirmed is locked; needs_confirmation is allowed in normal audit but blocks strict audit; not_recommended is allowed only with a clear reason or note.",
     "premium_garnish_rule": "Always call out the optional premium garnish where one exists. Keep the standard garnish practical, and list the premium garnish as an upgrade rather than silently replacing the standard.",
-    "master_variant_keys": ["cocktail", "tapas", "plated_entree", "plated_main", "buffet", "platter", "corporate_boxed", "kids", "dietary_single"],
-    "special_variant_keys": ["legacy_mini_canape", "roving_dessert", "plated_dessert", "dessert_buffet", "dessert_platter"],
+    "master_variant_keys": [
+      "cocktail",
+      "tapas",
+      "plated_entree",
+      "plated_main",
+      "buffet",
+      "platter",
+      "corporate_boxed",
+      "kids",
+      "dietary_single"
+    ],
+    "special_variant_keys": [
+      "legacy_mini_canape",
+      "roving_dessert",
+      "plated_dessert",
+      "dessert_buffet",
+      "dessert_platter",
+      "grazing_add_on_40",
+      "high_tea"
+    ],
     "dessert_variant_rule": "Use normal keys where they are clear. Use plated_dessert, roving_dessert, dessert_buffet and dessert_platter only when a normal savoury key would be confusing.",
     "naming_locking": "Use master_variant_keys for normal service variants. Special-purpose keys are allowed only when listed in special_variant_keys and documented with status, note/reason and clear service use.",
     "platter_locking": "Platter records may use count by ordered pieces when the built-in recipe already defines the platter yield. Corporate boxed variants are only confirmed where the format holds well in delivery.",
-    "meatball_naming": {"canonical_name": "Polpette", "aliases": ["meatballs", "veal meatballs", "beef albondigas", "albondigas", "polpette", "beef polpette", "slow cooked beef albondigas", "slow cooked beef albondigas buffet"], "standard_piece_weight_g_pre_crumb": 60, "note": "Use 60 g pre-crumb weight as active standard. 80 g is substantial canape only if explicitly requested. Older mini canape and buffet albondigas drafts are service variants, not separate production recipes."}
+    "meatball_naming": {
+      "canonical_name": "Polpette",
+      "aliases": [
+        "meatballs",
+        "veal meatballs",
+        "beef albondigas",
+        "albondigas",
+        "polpette",
+        "beef polpette",
+        "slow cooked beef albondigas",
+        "slow cooked beef albondigas buffet"
+      ],
+      "standard_piece_weight_g_pre_crumb": 80,
+      "note": "Use the locked 80 g piece weight for Beef & Pork Polpette. Older 60 g and 25 g formats are retired/reference only unless deliberately reactivated."
+    }
   },
   "service_variants": {
-    "arancini": {"recipe_id": "arancini", "base_prep": {"piece_weight_g_pre_crumb": 40}, "cocktail": {"portion": "1 piece", "piece_weight_g_pre_crumb": 40, "status": "confirmed"}, "tapas": {"portion": "3 pieces", "piece_weight_g_pre_crumb": 40, "status": "confirmed"}, "plated_entree": {"portion": "1 piece", "piece_weight_g_pre_crumb": 50, "note": "Make separate 50 g plated batch before crumbing.", "status": "confirmed"}, "buffet": {"portion": "1 arancini per guest service target with 1.3 arancini per guest production allowance", "piece_count": 1, "production_piece_count_per_guest": 1.3, "piece_weight_g_pre_crumb": 40, "production_weight_g_pre_crumb_per_guest": 52, "aioli_ml_per_piece": 10, "aioli_ml_per_guest_production": 13, "chives_g_per_guest": 0.5, "chives_g_per_40_guests": 20, "microherbs_punnets_per_80_guests_optional": 1, "garnish": "Aioli topping with chives as standard garnish. Micro herbs are optional premium finish and must be called out as an upgrade.", "premium_garnish_option": "Micro herbs, 1 punnet per 80 guests as optional premium finish.", "note": "Use chives as the standard buffet garnish. Raw thyme is not recommended as the main raw garnish.", "status": "confirmed"}, "platter": {"portion": "count by ordered pieces", "piece_weight_g_pre_crumb": 40, "aioli_service_rule": "Depends on hot delivery versus immediate service.", "hot_delivery_aioli": "Serve aioli separately in ramekin/container to protect texture.", "immediate_service_aioli": "Aioli can be dotted or piped on top before service.", "standard_garnish": "chives", "chives_g_per_40_pieces": 20, "premium_garnish_option": "Micro herbs, 1 punnet per 80 pieces as optional premium finish.", "status": "confirmed"}, "corporate_boxed": {"portion": "1 piece per box when part of a mixed lunch or hot box", "piece_count": 1, "piece_weight_g_pre_crumb": 40, "aioli_ml_per_box": 10, "aioli_service_rule": "Serve aioli separately for hot delivery or holding; dot or pipe on top only for immediate service.", "standard_garnish": "chives", "chives_g_per_40_boxes": 20, "premium_garnish_option": "Micro herbs, 1 punnet per 80 boxes as optional premium finish.", "status": "confirmed"}},
-    "calamari": {"recipe_id": "calamari", "cocktail": {"portion": "4 calamari strips + 1 baby octopus", "status": "confirmed"}, "tapas": {"portion": "6 calamari strips + 2 baby octopus", "status": "confirmed"}, "plated_entree": {"portion": "6 calamari strips + 2 baby octopus", "status": "confirmed"}, "buffet": {"portion": "4 calamari strips + 1 baby octopus per guest service target with 1.2 production allowance", "calamari_strips_per_guest": 4, "baby_octopus_per_guest": 1, "production_buffer_multiplier": 1.2, "production_calamari_strips_per_guest": 4.8, "production_baby_octopus_per_guest": 1.2, "aioli_ml_per_guest": 30, "caper_g_per_guest_drained_before_frying": 5, "caper_g_per_40_guests_drained_before_frying": 200, "lemon_wedges_per_guest": 1, "lemons_per_8_guests_for_wedges": 1, "green_powder_g_per_guest_optional": 0.2, "green_powder_g_per_40_guests_optional": 8, "green_powder_options": ["dill powder", "chive powder", "spring onion powder"], "microherbs_punnets_per_80_guests_optional": 1, "standard_garnish": "deep fried capers and 1 lemon wedge", "premium_garnish_option": "Micro herbs, 1 punnet per 80 guests as optional premium finish.", "green_powder_note": "Use restrained green powder only when it improves the look.", "status": "confirmed"}},
-    "oysters-kilpatrick": {"recipe_id": "oysters-kilpatrick", "cocktail": {"portion": "1 oyster", "oysters_per_guest": 1, "kilpatrick_sauce_ml_per_oyster": 6, "speck_g_per_oyster": 5, "rock_salt_g_per_oyster_for_display": 40, "lemon_rounds_per_12_oysters": 2, "standard_garnish": "rocket or microgreens", "premium_garnish_option": "Microgreens as premium finish when rocket is the standard garnish.", "status": "confirmed"}, "tapas": {"portion": "1/2 dozen oysters", "oysters_per_serve": 6, "kilpatrick_sauce_ml_per_oyster": 6, "speck_g_per_oyster": 5, "rock_salt_g_per_oyster_for_display": 40, "lemon_rounds_per_serve": 1, "standard_garnish": "rocket or microgreens", "premium_garnish_option": "Microgreens as premium finish when rocket is the standard garnish.", "status": "confirmed"}, "platter": {"portion": "count by ordered oysters", "kilpatrick_sauce_ml_per_oyster": 6, "speck_g_per_oyster": 5, "rock_salt_g_per_oyster_for_display": 40, "lemon_rounds_per_12_oysters": 2, "standard_garnish": "rocket or microgreens", "premium_garnish_option": "Microgreens as premium finish when rocket is the standard garnish.", "note": "Best for immediate service. Keep shells stable on rock salt and do not overbake.", "status": "confirmed"}, "buffet": {"portion": "not recommended unless built as a staffed oyster station or seafood fountain item", "reason": "Hot Kilpatrick oysters decline quickly on open buffet and create high seafood/allergen management risk. Use platter, cocktail pass or staffed seafood station instead.", "status": "not_recommended"}, "corporate_boxed": {"portion": "not recommended", "reason": "Not suitable for boxed corporate delivery due hot shellfish quality, shell handling and allergen risk.", "status": "not_recommended"}},
-    "lamb-cutlet": {"recipe_id": "lamb-cutlet", "tapas": {"portion": "3 cutlets", "status": "confirmed"}, "cocktail": {"portion": "1 cutlet", "status": "confirmed"}, "plated_entree": {"portion": "2 cutlets", "status": "confirmed"}, "buffet": {"portion": "1 cutlet per guest service target with 1.2 cutlets per guest production allowance", "cutlets_per_guest": 1, "production_buffer_multiplier": 1.2, "production_cutlets_per_guest": 1.2, "house_emulsion_ml_per_guest": 25, "house_emulsion_ml_per_40_guests": 1000, "lemon_wedge": false, "rocket_g_per_guest": 10, "rocket_g_per_40_guests": 400, "beetroot_powder_g_per_guest": 0.2, "beetroot_powder_g_per_40_guests": 8, "microgreens_punnets_per_80_guests_optional": 1, "standard_garnish": "rocket bed with beetroot powder", "premium_garnish_option": "Microgreens, 1 punnet per 80 guests, may replace beetroot powder or be added as premium finish.", "status": "confirmed"}},
-    "chicken-skewer": {"recipe_id": "chicken-skewer", "tapas": {"portion": "3 skewers", "status": "confirmed"}, "cocktail": {"portion": "1 skewer", "status": "confirmed"}, "plated_entree": {"portion": "2 skewers", "status": "confirmed"}, "buffet": {"portion": "1 skewer per guest service target with 1.2 skewers per guest production allowance", "skewers_per_guest": 1, "production_buffer_multiplier": 1.2, "production_skewers_per_guest": 1.2, "herbed_labneh_g_per_guest": 30, "herbed_labneh_g_per_40_guests": 1200, "feta_g_per_guest": 10, "feta_g_per_40_guests": 400, "pita_pieces_per_guest": 1, "lemon_zest_lemons_per_40_guests_optional": 1, "standard_garnish": "parsley or chives", "premium_garnish_option": "Microgreens, 1 punnet per 80 guests as optional premium finish.", "note": "Keep labneh cold/separate until service; do not hold skewers sitting in labneh.", "status": "confirmed"}, "platter": {"portion": "count by ordered skewers", "herbed_labneh_g_per_skewer": 30, "feta_g_per_skewer": 10, "pita_pieces_per_skewer": 1, "service_rule": "Labneh separate for hot delivery or holding; labneh can be piped/spooned on platter for immediate service.", "standard_garnish": "parsley or chives", "premium_garnish_option": "Microgreens, 1 punnet per 80 skewers as optional premium finish.", "status": "confirmed"}, "corporate_boxed": {"portion": "1 skewer per box when part of a mixed lunch or hot box", "skewers_per_box": 1, "herbed_labneh_g_per_box": 30, "feta_g_per_box": 10, "pita_pieces_per_box": 1, "service_rule": "Keep labneh separate for hot delivery. Do not seal hot skewer directly against labneh.", "standard_garnish": "parsley or chives", "premium_garnish_option": "Microgreens, 1 punnet per 80 boxes as optional premium finish.", "status": "confirmed"}},
-    "chorizo-potatoes": {"recipe_id": "chorizo-potatoes", "tapas": {"potato_g": 180, "chorizo_g": 60, "total_g": 240, "status": "confirmed"}, "cocktail": {"potato_g": 144, "chorizo_g": 48, "total_g": 192, "note": "80 percent of tapas serve.", "status": "confirmed"}, "plated_entree": {"total_g": 240, "status": "confirmed"}, "buffet": {"portion": "160 g finished serve per guest with 1.15 production allowance", "potato_g_per_guest": 120, "chorizo_g_per_guest": 40, "total_g_finished_serve": 160, "production_buffer_multiplier": 1.15, "production_potato_g_per_guest": 138, "production_chorizo_g_per_guest": 46, "production_total_g_per_guest": 184, "lemon_thyme_aioli_ml_per_guest": 15, "shallots_g_per_guest": 0.5, "shallots_g_per_40_guests": 20, "standard_garnish": "sliced shallots", "premium_garnish_option": "Microgreens, 1 punnet per 80 guests as optional premium finish.", "note": "Dress lightly at service only. Do not hold dressed fried potatoes; they go soft.", "status": "confirmed"}, "platter": {"portion": "portion by guest count, not individual pieces", "total_g_finished_serve_per_guest": 160, "production_buffer_multiplier": 1.15, "production_total_g_per_guest": 184, "lemon_thyme_aioli_ml_per_guest": 15, "shallots_g_per_40_guests": 20, "service_rule": "Aioli tossed through only for immediate service; for hot delivery/holding, send aioli separately or dress at handover.", "premium_garnish_option": "Microgreens, 1 punnet per 80 guest portions as optional premium finish.", "status": "confirmed"}, "corporate_boxed": {"portion": "100 g finished component per box when part of a mixed hot box", "total_g_finished_per_box": 100, "lemon_thyme_aioli_ml_per_box": 10, "service_rule": "Keep aioli separate for hot delivery when practical. Do not seal wet dressed potatoes for long holding.", "premium_garnish_option": "Microgreens, 1 punnet per 80 boxes as optional premium finish.", "status": "confirmed"}},
-    "veal-meatballs": {"recipe_id": "veal-meatballs", "canonical_name": "Polpette", "aliases": ["meatballs", "veal meatballs", "beef albondigas", "albondigas", "polpette", "beef polpette", "slow cooked beef albondigas", "slow cooked beef albondigas buffet"], "base_prep": {"piece_weight_g_pre_crumb": 60}, "tapas": {"portion": "3 meatballs with sauce", "piece_weight_g_pre_crumb": 60, "status": "confirmed"}, "cocktail": {"portion": "1 meatball with sauce", "piece_weight_g_pre_crumb": 60, "recommendation": "Use 60 g for normal canape service. Use 80 g only as substantial canape.", "status": "confirmed"}, "plated_main": {"portion": "3 meatballs with sauce", "piece_weight_g_pre_crumb": 60, "status": "confirmed"}, "plated_entree": {"portion": "2 meatballs with sauce", "piece_weight_g_pre_crumb": 60, "status": "confirmed"}, "buffet": {"service_name": "Slow Cooked Beef Albondigas", "portion": "2 meatballs per guest service target with 2.3 meatballs per guest production allowance", "piece_count": 2, "production_piece_count_per_guest": 2.3, "piece_weight_g_pre_crumb": 60, "production_weight_g_pre_crumb_per_guest": 138, "sauce_ml_per_guest": 80, "bread_slices_per_guest": 1.5, "bread_slice_thickness_cm": 1.5, "manchego_g_per_guest": 10, "parsley_g_per_guest": 2, "parsley_g_per_40_guests": 80, "lemon_zest_lemons_per_40_guests": 1, "olive_oil_ml_per_guest": 3, "olive_oil_ml_per_40_guests": 120, "sauce": "romesco sugo or smoked paprika passata sauce per menu wording", "hold": "Hold covered in sauce in bain marie at 75 C.", "status": "confirmed"}, "legacy_mini_canape": {"portion": "1 mini polpette with glaze or sugo", "piece_weight_g_pre_crumb": 25, "note": "Older mini format is archive/reference only unless deliberately reactivated.", "status": "not_recommended"}},
-    "fish-slider": {"recipe_id": "fish-slider", "cocktail": {"portion": "1 slider per guest", "fish_g_per_slider": 70, "aioli_g_per_slider": 22, "rocket_g_per_slider": 3, "status": "confirmed"}, "tapas": {"portion": "3 sliders per serve", "fish_g_per_slider": 70, "aioli_g_per_slider": 22, "rocket_g_per_slider": 3, "status": "confirmed"}, "platter": {"portion": "count by ordered sliders", "fish_g_per_slider": 70, "aioli_g_per_slider": 22, "rocket_g_per_slider": 3, "service_rule": "Immediate service only. Do not hold assembled sliders; assemble as close to handover as possible.", "premium_garnish_option": "Potato crisps or microgreens may be called out as premium finish if the event style supports it.", "status": "confirmed"}, "buffet": {"portion": "not recommended as open buffet", "reason": "Assembled fish sliders lose quality quickly and the fried fish softens. Use roving/substantial canape or ordered platter service instead.", "status": "not_recommended"}, "corporate_boxed": {"portion": "not recommended for corporate boxes unless specifically ordered", "reason": "Fish sliders are better held and served as cocktail or tapas items. Use corporate boxed only when the client specifically orders sliders and service timing supports quality.", "status": "not_recommended"}},
-    "beef-kofta": {"recipe_id": "beef-kofta", "base_prep": {"piece_weight_g_raw": 80}, "cocktail": {"portion": "1 kofta in mini pita", "piece_count": 1, "piece_weight_g_raw": 80, "spicy_capsicum_sauce_g": 30, "rocket_g": 3, "mini_pita_count": 1, "fresh_herb_mix_g": 1, "premium_garnish_option": "Microgreens, 1 punnet per 80 pieces as optional premium finish.", "status": "confirmed"}, "tapas": {"portion": "3 koftas with pita and sauce", "piece_count": 3, "piece_weight_g_raw": 80, "spicy_capsicum_sauce_g": 90, "rocket_g": 9, "mini_pita_count": 3, "fresh_herb_mix_g": 3, "premium_garnish_option": "Microgreens as optional premium finish.", "status": "confirmed"}, "buffet": {"portion": "1 kofta per guest service target with 1.2 koftas per guest production allowance", "piece_count": 1, "production_piece_count_per_guest": 1.2, "piece_weight_g_raw": 80, "production_weight_g_raw_per_guest": 96, "spicy_capsicum_sauce_g_per_guest": 30, "rocket_g_per_guest": 3, "mini_pita_count_per_guest": 1, "fresh_herb_mix_g_per_guest": 1, "premium_garnish_option": "Microgreens, 1 punnet per 80 guests as optional premium finish.", "status": "confirmed"}, "platter": {"portion": "count by ordered koftas", "piece_weight_g_raw": 80, "spicy_capsicum_sauce_g_per_piece": 30, "rocket_g_per_piece": 3, "mini_pita_count_per_piece": 1, "fresh_herb_mix_g_per_piece": 1, "service_rule": "Sauce can be spooned for immediate service or sent separate for hot delivery/holding.", "premium_garnish_option": "Microgreens, 1 punnet per 80 pieces as optional premium finish.", "status": "confirmed"}, "corporate_boxed": {"portion": "1 kofta per box when part of a mixed lunch or hot box", "piece_count": 1, "piece_weight_g_raw": 80, "spicy_capsicum_sauce_g_per_box": 30, "rocket_g_per_box": 3, "mini_pita_count_per_box": 1, "service_rule": "Keep sauce separate for hot delivery when practical.", "premium_garnish_option": "Microgreens, 1 punnet per 80 boxes as optional premium finish.", "status": "confirmed"}},
-    "camembert-cigars": {"recipe_id": "camembert-cigars", "base_prep": {"piece_count_per_batch": 50}, "cocktail": {"portion": "1 cigar", "piece_count": 1, "thyme_honey_ml_per_piece": 5, "microherbs_punnets_per_80_pieces_optional": 1, "premium_garnish_option": "Edible flower petals, 1 punnet per 80 pieces as optional premium finish.", "status": "confirmed"}, "tapas": {"portion": "3 cigars", "piece_count": 3, "thyme_honey_ml_per_serve": 15, "premium_garnish_option": "Edible flower petals as optional premium finish.", "status": "confirmed"}, "buffet": {"portion": "1 cigar per guest service target with 1.2 cigars per guest production allowance", "piece_count": 1, "production_piece_count_per_guest": 1.2, "thyme_honey_ml_per_piece": 5, "thyme_honey_ml_per_guest_production": 6, "microherbs_punnets_per_80_guests_optional": 1, "premium_garnish_option": "Edible flower petals, 1 punnet per 80 guests as optional premium finish.", "note": "Filo is fragile. Fry close to service and avoid covered hot holding.", "status": "confirmed"}, "platter": {"portion": "count by ordered pieces", "thyme_honey_ml_per_piece": 5, "service_rule": "Honey drizzled for immediate service; honey separate for delivery/holding to protect filo texture.", "microherbs_punnets_per_80_pieces_optional": 1, "premium_garnish_option": "Edible flower petals, 1 punnet per 80 pieces as optional premium finish.", "status": "confirmed"}, "corporate_boxed": {"portion": "not recommended", "reason": "Filo softens in boxed holding and camembert sets quickly. Use only for immediate canape, tapas, platter or buffet service.", "status": "not_recommended"}},
-    "cannoli": {"recipe_id_candidates": ["cannoli", "housemade-cannoli-trio", "spanner-crab-cannoli"], "size_rule": "Cannoli size stays the same across service styles.", "tapas": {"portion": "trio of 3 cannoli", "status": "confirmed"}, "roving_dessert": {"portion": "1 cannoli per guest", "note": "Special roving dessert service; used when cannoli are passed rather than plated or sold as tapas.", "status": "confirmed"}, "plated_dessert": {"portion": "trio of 3 cannoli", "note": "Special dessert service key for formal plated dessert use; not part of savoury plated entree/main service.", "status": "confirmed"}, "dessert_buffet": {"portion": "1 cannoli per guest service target with 1.2 cannoli per guest production allowance", "piece_count": 1, "production_piece_count_per_guest": 1.2, "premium_garnish_option": "Edible flowers or crushed premium garnish matching filling, 1 punnet edible flowers per 80 guests when used.", "note": "Fill as close to service as practical. For long dessert buffet windows, hold shells and filling separately and refresh in small batches.", "status": "confirmed"}, "dessert_platter": {"portion": "count by ordered cannoli", "size_rule": "same cannoli size as tapas and roving dessert", "service_rule": "Fill close to pickup/service; avoid long sealed holding after filling.", "premium_garnish_option": "Edible flowers or filling-matched garnish as premium finish.", "status": "confirmed"}},
-    "date-madeleines": {"recipe_id": "date-madeleines", "base_prep": {"approx_pieces_per_batch": 40}, "plated_dessert": {"portion": "1 warm madeleine per guest with event-menu sauce and garnish", "madeleines_per_guest": 1, "production_buffer_multiplier": 1.2, "production_madeleines_per_guest": 1.2, "toffee_sauce_ml_per_guest": 30, "gelato_g_per_guest_optional": 50, "premium_garnish_option": "Caramel shard, crushed pecan or edible flowers. Use 1 punnet edible flowers per 80 guests when selected.", "note": "Base recipe is madeleine only. Sauce, gelato, custard and garnish follow the event menu/SOP.", "status": "confirmed"}, "dessert_buffet": {"portion": "1 madeleine per guest service target with 1.2 madeleines per guest production allowance", "piece_count": 1, "production_piece_count_per_guest": 1.2, "toffee_sauce_ml_per_guest": 25, "premium_garnish_option": "Edible flowers or caramel crumb as optional premium finish.", "status": "confirmed"}, "dessert_platter": {"portion": "count by ordered madeleines", "icing_sugar_g_per_40_pieces_optional": 10, "premium_garnish_option": "Edible flowers, 1 punnet per 80 pieces as optional premium finish.", "service_rule": "Best baked same day. Hold airtight only after fully cooled; warm only when service style allows.", "status": "confirmed"}},
-    "charcuterie-board-classic": {"recipe_id": "charcuterie-board-classic", "platter": {"portion": "1 board serves 10-12 as standalone or 15-20 as part of wider spread", "service_count_standalone_min": 10, "service_count_standalone_max": 12, "service_count_wider_spread_min": 15, "service_count_wider_spread_max": 20, "standard_garnish": "grapes, dried fruit and dried citrus", "premium_garnish_option": "Edible flowers, figs or premium grapes when event style supports it.", "note": "Use platter/board format. For grazing tables use the separate grazing table standard, not this board standard.", "status": "confirmed"}},
-    "nibble-platter-40": {"recipe_id": "nibble-platter-40", "platter": {"portion": "40 pieces per platter", "total_pieces": 40, "split": "10 sausage rolls, 10 spinach pizzinis, 10 beef pies, 10 quiche Lorraine", "tomato_sauce_ml_per_platter": 80, "mustard_ml_per_platter": 60, "premium_garnish_option": "Flat parsley, micro herbs or edible flowers only if presentation needs lifting.", "service_rule": "Reheat close to delivery/service and avoid covered long holding that softens pastry.", "status": "confirmed"}},
-    "platter-scones-chantilly-jam": {"recipe_id": "platter-scones-chantilly-jam", "platter": {"portion": "40 pieces per platter", "total_pieces": 40, "jam_g_per_piece": 10, "chantilly_g_per_piece": 15, "jam_g_per_platter": 400, "chantilly_g_per_platter": 600, "premium_garnish_option": "Edible flowers, strawberry halves or citrus zest as optional premium finish.", "service_rule": "Cream and jam separate for delivery unless platter is for immediate service.", "status": "confirmed"}},
-    "platter-sweet-slices-cakes": {"recipe_id": "platter-sweet-slices-cakes", "platter": {"portion": "40 pieces per platter", "total_pieces": 40, "piece_count_per_guest_light": 1, "premium_garnish_option": "Edible flowers, dried citrus, berries or gold-dusted crumb where appropriate.", "service_rule": "Keep chilled where required; separate wet garnishes until service.", "status": "confirmed"}},
-    "grazing-box-standard": {"recipe_id": "grazing-box-standard", "platter": {"portion": "1 box serves 6-8 guests", "service_count_min": 6, "service_count_max": 8, "standard_garnish": "grapes, dried fruit, crackers and dried citrus", "premium_garnish_option": "Edible flowers, figs or premium grapes as optional premium finish.", "note": "Use same ingredient family as Riviera grazing tables but scaled to box size. Keep cheeses and cured meats protected for delivery.", "status": "confirmed"}},
-    "platter-ham-cheese-croissants": {"recipe_id": "platter-ham-cheese-croissants", "platter": {"portion": "40 pieces per platter", "total_pieces": 40, "piece_count_per_guest_light": 1, "premium_garnish_option": "Micro herbs or edible flowers as optional premium finish.", "service_rule": "Best served fresh or lightly warmed only when service timing allows. Do not seal hot croissants for long delivery.", "status": "confirmed"}, "corporate_boxed": {"portion": "1 croissant per box when sold as a breakfast or lunch item", "croissants_per_box": 1, "premium_garnish_option": "Micro herbs as optional premium finish.", "status": "confirmed"}},
-    "platter-sandwiches-standard": {"recipe_id": "platter-sandwiches-standard", "platter": {"portion": "40 pieces per platter", "total_pieces": 40, "piece_count_per_guest_light": 1, "piece_count_per_guest_lunch": 2, "standard_garnish": "neat cut faces, paper lining and restrained herbs", "premium_garnish_option": "Micro herbs, edible flowers or premium fruit garnish when event style supports it.", "service_rule": "Keep fillings defined by event prep sheet. Do not use chef's selection for kitchen-facing counts.", "status": "confirmed"}, "corporate_boxed": {"portion": "2 sandwich pieces per box when part of a mixed corporate lunch box", "pieces_per_box": 2, "premium_garnish_option": "Micro herbs only where packing allows.", "status": "confirmed"}},
-    "platter-wraps-premium": {"recipe_id": "platter-wraps-premium", "platter": {"portion": "40 pieces per platter", "total_pieces": 40, "piece_count_per_guest_light": 1, "piece_count_per_guest_lunch": 2, "premium_garnish_option": "Micro herbs or edible flowers as optional premium finish.", "service_rule": "Cut cleanly, pack tight, and keep chilled. Avoid wet fillings against wrap edges for long holding.", "status": "confirmed"}, "corporate_boxed": {"portion": "2 wrap pieces per box when part of a mixed corporate lunch box", "pieces_per_box": 2, "premium_garnish_option": "Micro herbs only where packing allows.", "status": "confirmed"}},
-    "platter-filled-brioche-rolls": {"recipe_id": "platter-filled-brioche-rolls", "platter": {"portion": "40 filled brioche rolls per platter", "total_pieces": 40, "pieces_per_guest_light": 1, "premium_garnish_option": "Micro herbs, edible flowers or premium fruit garnish as optional finish.", "service_rule": "Assemble close to delivery. Keep wet sauces controlled to protect brioche.", "status": "confirmed"}, "corporate_boxed": {"portion": "1 filled brioche roll per box when part of a mixed lunch box", "pieces_per_box": 1, "premium_garnish_option": "Micro herbs where packing allows.", "status": "confirmed"}},
-    "platter-roast-beef-beetroot-relish": {"recipe_id": "platter-roast-beef-beetroot-relish", "platter": {"portion": "40 pieces per platter", "total_pieces": 40, "piece_count_per_guest_light": 1, "premium_garnish_option": "Micro herbs, beetroot powder or edible flowers as optional premium finish.", "service_rule": "Keep roast beef chilled and protected. Add wet relish cleanly so bread/wrap does not bleed before service.", "status": "confirmed"}},
-    "platter-dietary-grazing": {"recipe_id": "platter-dietary-grazing", "platter": {"portion": "1 platter serves 6-8 guests", "service_count_min": 6, "service_count_max": 8, "standard_garnish": "dietary-safe fruit, crackers/bread and labelled dips", "premium_garnish_option": "Dietary-safe edible flowers or premium fruit garnish if confirmed suitable.", "service_rule": "Keep dietary platter physically isolated and clearly labelled. Do not share garnish/tongs with standard grazing.", "status": "confirmed"}, "dietary_single": {"portion": "scale as one isolated dietary serve only when event requires it", "service_rule": "Build from confirmed dietary-safe components only. Label guest name/dietary where supplied.", "status": "confirmed"}},
-    "roving-cannoli-tiramisu": {"recipe_id": "roving-cannoli-tiramisu", "roving_dessert": {"portion": "use built-in recipe yield: service for 40", "service_count": 40, "premium_garnish_option": "Edible flowers, cocoa dust, shaved chocolate or crushed hazelnut as suitable to the service style.", "service_rule": "Keep chilled. Pass/refresh in small batches so cannoli shells and tiramisu texture hold.", "status": "confirmed"}},
-    "duo-cannoli-pistachio-white-chocolate": {"recipe_id": "duo-cannoli-pistachio-white-chocolate", "dessert_platter": {"portion": "40 pieces per platter, 20 of each flavour", "total_pieces": 40, "pieces_per_flavour": 20, "premium_garnish_option": "Edible flowers or flavour-matched crumb/nut garnish as optional premium finish.", "service_rule": "Fill close to service/pickup and avoid long sealed holding after filling.", "status": "confirmed"}, "dessert_buffet": {"portion": "1 cannoli per guest service target with 1.2 cannoli per guest production allowance", "piece_count": 1, "production_piece_count_per_guest": 1.2, "premium_garnish_option": "Edible flowers, 1 punnet per 80 guests when used.", "status": "confirmed"}},
-    "strawberry-ricotta-cheesecake-plated": {"recipe_id": "strawberry-ricotta-cheesecake-plated", "plated_dessert": {"portion": "1 plated dessert per guest", "portion_count_per_guest": 1, "berry_garnish_g_per_guest": 20, "sauce_or_coulis_ml_per_guest_optional": 20, "premium_garnish_option": "Edible flowers, strawberry fan or crisp garnish as optional premium finish.", "status": "confirmed"}, "dessert_buffet": {"portion": "1 portion per guest only if pre-portioned for buffet", "portion_count_per_guest": 1, "production_buffer_multiplier": 1.1, "production_portions_per_guest": 1.1, "premium_garnish_option": "Edible flowers or berry garnish as optional premium finish.", "service_rule": "Use pre-portioned cups/slices for buffet. Do not serve as open whole cheesecake unless staffed.", "status": "confirmed"}},
-    "riviera-tiramisu-biscotti-hazelnut": {"recipe_id": "riviera-tiramisu-biscotti-hazelnut", "plated_dessert": {"portion": "1 plated dessert per guest", "portion_count_per_guest": 1, "cocoa_dust_g_per_guest": 1, "hazelnut_g_per_guest_optional": 5, "premium_garnish_option": "Chocolate shard, edible flower or gold-dusted hazelnut as optional premium finish.", "status": "confirmed"}, "dessert_buffet": {"portion": "1 portion per guest with 1.1 production allowance", "portion_count_per_guest": 1, "production_buffer_multiplier": 1.1, "production_portions_per_guest": 1.1, "premium_garnish_option": "Chocolate shard, edible flowers or hazelnut crumb as optional premium finish.", "service_rule": "Use cups or clean pre-portioned trays. Keep chilled and refresh in small batches.", "status": "confirmed"}},
-    "funeral-spinach-ricotta-pastizzi-platter": {"recipe_id": "funeral-spinach-ricotta-pastizzi-platter", "platter": {"portion": "40 pieces per platter", "total_pieces": 40, "piece_count_per_guest_light": 1, "premium_garnish_option": "Flat parsley, micro herbs or edible flowers only if presentation needs lifting.", "service_rule": "Reheat close to delivery/service and avoid covered long holding that softens pastry.", "status": "confirmed"}},
-    "funeral-mixed-hot-nibbles-box": {"recipe_id": "funeral-mixed-hot-nibbles-box", "platter": {"portion": "40 pieces per box/platter", "total_pieces": 40, "piece_count_per_guest_light": 1, "tomato_sauce_ml_per_box_optional": 80, "mustard_ml_per_box_optional": 60, "premium_garnish_option": "Flat parsley, micro herbs or edible flowers only if presentation needs lifting.", "service_rule": "Pack hot nibbles by type where possible. Vent briefly before closing to protect pastry texture.", "status": "confirmed"}}
+    "arancini": {
+      "recipe_id": "arancini",
+      "base_prep": {
+        "size_rule": "Weigh before crumbing: 60 g canapé; 40 g tapas; 40 g normal entrée."
+      },
+      "cocktail": {
+        "portion": "1 piece",
+        "piece_weight_g_pre_crumb": 60,
+        "status": "confirmed",
+        "note": "The pumpkin-mozzarella event was the exception that confirmed 60 g as the ongoing canapé standard."
+      },
+      "tapas": {
+        "portion": "3 pieces",
+        "piece_weight_g_pre_crumb": 40,
+        "status": "confirmed"
+      },
+      "plated_entree": {
+        "portion": "1 piece",
+        "piece_weight_g_pre_crumb": 40,
+        "note": "Normal entrée uses the same 40 g pre-crumb piece as tapas.",
+        "status": "confirmed"
+      },
+      "high_tea": {
+        "portion": "1 chorizo and roasted-capsicum arancini per confirmed guest · Fixed module; no automatic event buffer",
+        "pieces_per_guest": 1,
+        "piece_weight_g_pre_crumb": 60,
+        "automatic_event_buffer_multiplier": 1.0,
+        "buffer_rule": "Fixed module; do not apply an automatic event buffer.",
+        "ingredient_scaling_status": "NEEDS CONFIRMATION",
+        "ingredient_scaling_note": "The per-guest count and 60 g pre-crumb piece weight are locked. The total weighed batch yield is still unconfirmed, so the planner must not derive ingredient scaling from the piece weight.",
+        "source_note": "Locked package-specific High Tea count. Serve with romesco and lemon-thyme aioli.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "1 arancini per guest service target · Riviera 9% event buffer applies once",
+        "piece_count": 1,
+        "piece_weight_g_pre_crumb": 40,
+        "aioli_ml_per_piece": 10,
+        "chives_g_per_guest": 0.5,
+        "chives_g_per_40_guests": 20,
+        "microherbs_punnets_per_80_guests_optional": 1,
+        "garnish": "Aioli topping with chives as standard garnish. Micro herbs are optional premium finish and must be called out as an upgrade.",
+        "premium_garnish_option": "Micro herbs, 1 punnet per 80 guests as optional premium finish.",
+        "note": "Use chives as the standard buffet garnish. Raw thyme is not recommended as the main raw garnish.",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
+      },
+      "platter": {
+        "portion": "count by ordered pieces",
+        "piece_weight_g_pre_crumb": 40,
+        "aioli_service_rule": "Depends on hot delivery versus immediate service.",
+        "hot_delivery_aioli": "Serve aioli separately in ramekin/container to protect texture.",
+        "immediate_service_aioli": "Aioli can be dotted or piped on top before service.",
+        "standard_garnish": "chives",
+        "chives_g_per_40_pieces": 20,
+        "premium_garnish_option": "Micro herbs, 1 punnet per 80 pieces as optional premium finish.",
+        "status": "confirmed"
+      },
+      "corporate_boxed": {
+        "portion": "1 piece per box when part of a mixed lunch or hot box",
+        "piece_count": 1,
+        "piece_weight_g_pre_crumb": 40,
+        "aioli_ml_per_box": 10,
+        "aioli_service_rule": "Serve aioli separately for hot delivery or holding; dot or pipe on top only for immediate service.",
+        "standard_garnish": "chives",
+        "chives_g_per_40_boxes": 20,
+        "premium_garnish_option": "Micro herbs, 1 punnet per 80 boxes as optional premium finish.",
+        "status": "confirmed"
+      }
+    },
+    "calamari": {
+      "recipe_id": "calamari",
+      "cocktail": {
+        "portion": "4 calamari strips + 1 baby octopus",
+        "status": "confirmed"
+      },
+      "tapas": {
+        "portion": "6 calamari strips + 2 baby octopus",
+        "status": "confirmed"
+      },
+      "plated_entree": {
+        "portion": "6 calamari strips + 2 baby octopus",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "4 calamari strips + 1 baby octopus per guest service target · Riviera 9% event buffer applies once",
+        "calamari_strips_per_guest": 4,
+        "baby_octopus_per_guest": 1,
+        "aioli_ml_per_guest": 30,
+        "caper_g_per_guest_drained_before_frying": 5,
+        "caper_g_per_40_guests_drained_before_frying": 200,
+        "lemon_wedges_per_guest": 1,
+        "lemons_per_8_guests_for_wedges": 1,
+        "green_powder_g_per_guest_optional": 0.2,
+        "green_powder_g_per_40_guests_optional": 8,
+        "green_powder_options": [
+          "dill powder",
+          "chive powder",
+          "spring onion powder"
+        ],
+        "microherbs_punnets_per_80_guests_optional": 1,
+        "standard_garnish": "deep fried capers and 1 lemon wedge",
+        "premium_garnish_option": "Micro herbs, 1 punnet per 80 guests as optional premium finish.",
+        "green_powder_note": "Use restrained green powder only when it improves the look.",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
+      }
+    },
+    "oysters-kilpatrick": {
+      "recipe_id": "oysters-kilpatrick",
+      "cocktail": {
+        "portion": "1 oyster",
+        "oysters_per_guest": 1,
+        "kilpatrick_sauce_ml_per_oyster": 6,
+        "speck_g_per_oyster": 5,
+        "rock_salt_g_per_oyster_for_display": 40,
+        "lemon_rounds_per_12_oysters": 2,
+        "standard_garnish": "rocket or microgreens",
+        "premium_garnish_option": "Microgreens as premium finish when rocket is the standard garnish.",
+        "status": "confirmed"
+      },
+      "tapas": {
+        "portion": "1/2 dozen oysters",
+        "oysters_per_serve": 6,
+        "kilpatrick_sauce_ml_per_oyster": 6,
+        "speck_g_per_oyster": 5,
+        "rock_salt_g_per_oyster_for_display": 40,
+        "lemon_rounds_per_serve": 1,
+        "standard_garnish": "rocket or microgreens",
+        "premium_garnish_option": "Microgreens as premium finish when rocket is the standard garnish.",
+        "status": "confirmed"
+      },
+      "platter": {
+        "portion": "count by ordered oysters",
+        "kilpatrick_sauce_ml_per_oyster": 6,
+        "speck_g_per_oyster": 5,
+        "rock_salt_g_per_oyster_for_display": 40,
+        "lemon_rounds_per_12_oysters": 2,
+        "standard_garnish": "rocket or microgreens",
+        "premium_garnish_option": "Microgreens as premium finish when rocket is the standard garnish.",
+        "note": "Best for immediate service. Keep shells stable on rock salt and do not overbake.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "not recommended unless built as a staffed oyster station or seafood fountain item",
+        "reason": "Hot Kilpatrick oysters decline quickly on open buffet and create high seafood/allergen management risk. Use platter, cocktail pass or staffed seafood station instead.",
+        "status": "not_recommended"
+      },
+      "corporate_boxed": {
+        "portion": "not recommended",
+        "reason": "Not suitable for boxed corporate delivery due hot shellfish quality, shell handling and allergen risk.",
+        "status": "not_recommended"
+      }
+    },
+    "lamb-cutlet": {
+      "recipe_id": "lamb-cutlet",
+      "tapas": {
+        "portion": "3 cutlets",
+        "status": "confirmed"
+      },
+      "cocktail": {
+        "portion": "1 cutlet",
+        "status": "confirmed"
+      },
+      "plated_entree": {
+        "portion": "2 cutlets",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "1 cutlet per guest service target · Riviera 9% event buffer applies once",
+        "cutlets_per_guest": 1,
+        "house_emulsion_ml_per_guest": 25,
+        "house_emulsion_ml_per_40_guests": 1000,
+        "lemon_wedge": false,
+        "rocket_g_per_guest": 10,
+        "rocket_g_per_40_guests": 400,
+        "beetroot_powder_g_per_guest": 0.2,
+        "beetroot_powder_g_per_40_guests": 8,
+        "microgreens_punnets_per_80_guests_optional": 1,
+        "standard_garnish": "rocket bed with beetroot powder",
+        "premium_garnish_option": "Microgreens, 1 punnet per 80 guests, may replace beetroot powder or be added as premium finish.",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
+      }
+    },
+    "chicken-skewer": {
+      "recipe_id": "chicken-skewer",
+      "tapas": {
+        "portion": "3 skewers",
+        "status": "confirmed"
+      },
+      "cocktail": {
+        "portion": "1 skewer",
+        "status": "confirmed"
+      },
+      "plated_entree": {
+        "portion": "2 skewers",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "1 skewer per guest service target · Riviera 9% event buffer applies once",
+        "skewers_per_guest": 1,
+        "herbed_labneh_g_per_guest": 30,
+        "herbed_labneh_g_per_40_guests": 1200,
+        "feta_g_per_guest": 10,
+        "feta_g_per_40_guests": 400,
+        "pita_pieces_per_guest": 1,
+        "lemon_zest_lemons_per_40_guests_optional": 1,
+        "standard_garnish": "parsley or chives",
+        "premium_garnish_option": "Microgreens, 1 punnet per 80 guests as optional premium finish.",
+        "note": "Keep labneh cold/separate until service; do not hold skewers sitting in labneh.",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
+      },
+      "platter": {
+        "portion": "count by ordered skewers",
+        "herbed_labneh_g_per_skewer": 30,
+        "feta_g_per_skewer": 10,
+        "pita_pieces_per_skewer": 1,
+        "service_rule": "Labneh separate for hot delivery or holding; labneh can be piped/spooned on platter for immediate service.",
+        "standard_garnish": "parsley or chives",
+        "premium_garnish_option": "Microgreens, 1 punnet per 80 skewers as optional premium finish.",
+        "status": "confirmed"
+      },
+      "corporate_boxed": {
+        "portion": "1 skewer per box when part of a mixed lunch or hot box",
+        "skewers_per_box": 1,
+        "herbed_labneh_g_per_box": 30,
+        "feta_g_per_box": 10,
+        "pita_pieces_per_box": 1,
+        "service_rule": "Keep labneh separate for hot delivery. Do not seal hot skewer directly against labneh.",
+        "standard_garnish": "parsley or chives",
+        "premium_garnish_option": "Microgreens, 1 punnet per 80 boxes as optional premium finish.",
+        "status": "confirmed"
+      }
+    },
+    "chorizo-potatoes": {
+      "recipe_id": "chorizo-potatoes",
+      "tapas": {
+        "potato_g": 180,
+        "chorizo_g": 60,
+        "total_g": 240,
+        "status": "confirmed"
+      },
+      "cocktail": {
+        "potato_g": 144,
+        "chorizo_g": 48,
+        "total_g": 192,
+        "note": "80 percent of tapas serve.",
+        "status": "confirmed"
+      },
+      "plated_entree": {
+        "total_g": 240,
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "160 g finished serve per guest · Riviera 9% event buffer applies once",
+        "potato_g_per_guest": 120,
+        "chorizo_g_per_guest": 40,
+        "total_g_finished_serve": 160,
+        "lemon_thyme_aioli_ml_per_guest": 15,
+        "shallots_g_per_guest": 0.5,
+        "shallots_g_per_40_guests": 20,
+        "standard_garnish": "sliced shallots",
+        "premium_garnish_option": "Microgreens, 1 punnet per 80 guests as optional premium finish.",
+        "note": "Dress lightly at service only. Do not hold dressed fried potatoes; they go soft.",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
+      },
+      "platter": {
+        "portion": "portion by guest count, not individual pieces · Fixed module; no automatic event buffer",
+        "total_g_finished_serve_per_guest": 160,
+        "lemon_thyme_aioli_ml_per_guest": 15,
+        "shallots_g_per_40_guests": 20,
+        "service_rule": "Aioli tossed through only for immediate service; for hot delivery/holding, send aioli separately or dress at handover.",
+        "premium_garnish_option": "Microgreens, 1 punnet per 80 guest portions as optional premium finish.",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.0,
+        "buffer_rule": "Fixed module; do not apply an automatic event buffer."
+      },
+      "corporate_boxed": {
+        "portion": "100 g finished component per box when part of a mixed hot box",
+        "total_g_finished_per_box": 100,
+        "lemon_thyme_aioli_ml_per_box": 10,
+        "service_rule": "Keep aioli separate for hot delivery when practical. Do not seal wet dressed potatoes for long holding.",
+        "premium_garnish_option": "Microgreens, 1 punnet per 80 boxes as optional premium finish.",
+        "status": "confirmed"
+      }
+    },
+    "veal-meatballs": {
+      "recipe_id": "veal-meatballs",
+      "canonical_name": "Polpette",
+      "aliases": [
+        "meatballs",
+        "veal meatballs",
+        "beef albondigas",
+        "albondigas",
+        "polpette",
+        "beef polpette",
+        "slow cooked beef albondigas",
+        "slow cooked beef albondigas buffet"
+      ],
+      "base_prep": {
+        "piece_weight_g_pre_crumb": 80
+      },
+      "tapas": {
+        "portion": "3 meatballs with sauce",
+        "piece_weight_g_pre_crumb": 80,
+        "status": "confirmed"
+      },
+      "cocktail": {
+        "portion": "1 meatball with sauce",
+        "piece_weight_g_pre_crumb": 80,
+        "recommendation": "Use the locked 80 g Beef & Pork Polpette house standard.",
+        "status": "confirmed"
+      },
+      "plated_main": {
+        "portion": "3 meatballs with sauce",
+        "piece_weight_g_pre_crumb": 80,
+        "status": "confirmed"
+      },
+      "plated_entree": {
+        "portion": "2 meatballs with sauce",
+        "piece_weight_g_pre_crumb": 80,
+        "status": "confirmed"
+      },
+      "buffet": {
+        "service_name": "Slow Cooked Beef Albondigas",
+        "portion": "2 meatballs per guest service target · Riviera 9% event buffer applies once",
+        "piece_count": 2,
+        "piece_weight_g_pre_crumb": 80,
+        "sauce_ml_per_guest": 80,
+        "bread_slices_per_guest": 1.5,
+        "bread_slice_thickness_cm": 1.5,
+        "manchego_g_per_guest": 10,
+        "parsley_g_per_guest": 2,
+        "parsley_g_per_40_guests": 80,
+        "lemon_zest_lemons_per_40_guests": 1,
+        "olive_oil_ml_per_guest": 3,
+        "olive_oil_ml_per_40_guests": 120,
+        "sauce": "romesco sugo or smoked paprika passata sauce per menu wording",
+        "hold": "Hold covered in sauce in bain marie at 75 C.",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
+      },
+      "legacy_mini_canape": {
+        "portion": "1 mini polpette with glaze or sugo",
+        "piece_weight_g_pre_crumb": 25,
+        "note": "Older mini format is archive/reference only unless deliberately reactivated.",
+        "status": "not_recommended"
+      }
+    },
+    "fish-slider": {
+      "recipe_id": "fish-slider",
+      "cocktail": {
+        "portion": "1 slider per guest",
+        "fish_g_per_slider": 70,
+        "aioli_g_per_slider": 22,
+        "rocket_g_per_slider": 3,
+        "status": "confirmed"
+      },
+      "tapas": {
+        "portion": "3 sliders per serve",
+        "fish_g_per_slider": 70,
+        "aioli_g_per_slider": 22,
+        "rocket_g_per_slider": 3,
+        "status": "confirmed"
+      },
+      "platter": {
+        "portion": "count by ordered sliders",
+        "fish_g_per_slider": 70,
+        "aioli_g_per_slider": 22,
+        "rocket_g_per_slider": 3,
+        "service_rule": "Immediate service only. Do not hold assembled sliders; assemble as close to handover as possible.",
+        "premium_garnish_option": "Potato crisps or microgreens may be called out as premium finish if the event style supports it.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "not recommended as open buffet",
+        "reason": "Assembled fish sliders lose quality quickly and the fried fish softens. Use roving/substantial canape or ordered platter service instead.",
+        "status": "not_recommended"
+      },
+      "corporate_boxed": {
+        "portion": "not recommended for corporate boxes unless specifically ordered",
+        "reason": "Fish sliders are better held and served as cocktail or tapas items. Use corporate boxed only when the client specifically orders sliders and service timing supports quality.",
+        "status": "not_recommended"
+      }
+    },
+    "beef-kofta": {
+      "recipe_id": "beef-kofta",
+      "base_prep": {
+        "piece_weight_g_raw": 80
+      },
+      "cocktail": {
+        "portion": "1 kofta in mini pita",
+        "piece_count": 1,
+        "piece_weight_g_raw": 80,
+        "spicy_capsicum_sauce_g": 30,
+        "rocket_g": 3,
+        "mini_pita_count": 1,
+        "fresh_herb_mix_g": 1,
+        "premium_garnish_option": "Microgreens, 1 punnet per 80 pieces as optional premium finish.",
+        "status": "confirmed"
+      },
+      "tapas": {
+        "portion": "3 koftas with pita and sauce",
+        "piece_count": 3,
+        "piece_weight_g_raw": 80,
+        "spicy_capsicum_sauce_g": 90,
+        "rocket_g": 9,
+        "mini_pita_count": 3,
+        "fresh_herb_mix_g": 3,
+        "premium_garnish_option": "Microgreens as optional premium finish.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "1 kofta per guest service target · Riviera 9% event buffer applies once",
+        "piece_count": 1,
+        "piece_weight_g_raw": 80,
+        "spicy_capsicum_sauce_g_per_guest": 30,
+        "rocket_g_per_guest": 3,
+        "mini_pita_count_per_guest": 1,
+        "fresh_herb_mix_g_per_guest": 1,
+        "premium_garnish_option": "Microgreens, 1 punnet per 80 guests as optional premium finish.",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
+      },
+      "platter": {
+        "portion": "count by ordered koftas",
+        "piece_weight_g_raw": 80,
+        "spicy_capsicum_sauce_g_per_piece": 30,
+        "rocket_g_per_piece": 3,
+        "mini_pita_count_per_piece": 1,
+        "fresh_herb_mix_g_per_piece": 1,
+        "service_rule": "Sauce can be spooned for immediate service or sent separate for hot delivery/holding.",
+        "premium_garnish_option": "Microgreens, 1 punnet per 80 pieces as optional premium finish.",
+        "status": "confirmed"
+      },
+      "corporate_boxed": {
+        "portion": "1 kofta per box when part of a mixed lunch or hot box",
+        "piece_count": 1,
+        "piece_weight_g_raw": 80,
+        "spicy_capsicum_sauce_g_per_box": 30,
+        "rocket_g_per_box": 3,
+        "mini_pita_count_per_box": 1,
+        "service_rule": "Keep sauce separate for hot delivery when practical.",
+        "premium_garnish_option": "Microgreens, 1 punnet per 80 boxes as optional premium finish.",
+        "status": "confirmed"
+      }
+    },
+    "camembert-cigars": {
+      "recipe_id": "camembert-cigars",
+      "base_prep": {
+        "piece_count_per_batch": 50
+      },
+      "cocktail": {
+        "portion": "1 cigar",
+        "piece_count": 1,
+        "thyme_honey_ml_per_piece": 5,
+        "microherbs_punnets_per_80_pieces_optional": 1,
+        "premium_garnish_option": "Edible flower petals, 1 punnet per 80 pieces as optional premium finish.",
+        "status": "confirmed"
+      },
+      "tapas": {
+        "portion": "3 cigars",
+        "piece_count": 3,
+        "thyme_honey_ml_per_serve": 15,
+        "premium_garnish_option": "Edible flower petals as optional premium finish.",
+        "status": "confirmed"
+      },
+      "buffet": {
+        "portion": "1 cigar per guest service target · Riviera 9% event buffer applies once",
+        "piece_count": 1,
+        "thyme_honey_ml_per_piece": 5,
+        "microherbs_punnets_per_80_guests_optional": 1,
+        "premium_garnish_option": "Edible flower petals, 1 punnet per 80 guests as optional premium finish.",
+        "note": "Filo is fragile. Fry close to service and avoid covered hot holding.",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
+      },
+      "platter": {
+        "portion": "count by ordered pieces",
+        "thyme_honey_ml_per_piece": 5,
+        "service_rule": "Honey drizzled for immediate service; honey separate for delivery/holding to protect filo texture.",
+        "microherbs_punnets_per_80_pieces_optional": 1,
+        "premium_garnish_option": "Edible flower petals, 1 punnet per 80 pieces as optional premium finish.",
+        "status": "confirmed"
+      },
+      "corporate_boxed": {
+        "portion": "not recommended",
+        "reason": "Filo softens in boxed holding and camembert sets quickly. Use only for immediate canape, tapas, platter or buffet service.",
+        "status": "not_recommended"
+      }
+    },
+    "cannoli": {
+      "recipe_id_candidates": [
+        "cannoli",
+        "housemade-cannoli-trio",
+        "spanner-crab-cannoli"
+      ],
+      "size_rule": "Cannoli size stays the same across service styles.",
+      "tapas": {
+        "portion": "trio of 3 cannoli",
+        "status": "confirmed"
+      },
+      "roving_dessert": {
+        "portion": "1 cannoli per guest",
+        "note": "Special roving dessert service; used when cannoli are passed rather than plated or sold as tapas.",
+        "status": "confirmed"
+      },
+      "plated_dessert": {
+        "portion": "trio of 3 cannoli",
+        "note": "Special dessert service key for formal plated dessert use; not part of savoury plated entree/main service.",
+        "status": "confirmed"
+      },
+      "dessert_buffet": {
+        "portion": "1 cannoli per guest service target · Riviera 9% event buffer applies once",
+        "piece_count": 1,
+        "premium_garnish_option": "Edible flowers or crushed premium garnish matching filling, 1 punnet edible flowers per 80 guests when used.",
+        "note": "Fill as close to service as practical. For long dessert buffet windows, hold shells and filling separately and refresh in small batches.",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
+      },
+      "dessert_platter": {
+        "portion": "count by ordered cannoli",
+        "size_rule": "same cannoli size as tapas and roving dessert",
+        "service_rule": "Fill close to pickup/service; avoid long sealed holding after filling.",
+        "premium_garnish_option": "Edible flowers or filling-matched garnish as premium finish.",
+        "status": "confirmed"
+      }
+    },
+    "date-madeleines": {
+      "recipe_id": "date-madeleines",
+      "base_prep": {
+        "approx_pieces_per_batch": 40
+      },
+      "plated_dessert": {
+        "portion": "1 warm madeleine per guest with event-menu sauce and garnish · Riviera 9% event buffer applies once",
+        "madeleines_per_guest": 1,
+        "toffee_sauce_ml_per_guest": 30,
+        "gelato_g_per_guest_optional": 50,
+        "premium_garnish_option": "Caramel shard, crushed pecan or edible flowers. Use 1 punnet edible flowers per 80 guests when selected.",
+        "note": "Base recipe is madeleine only. Sauce, gelato, custard and garnish follow the event menu/SOP.",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
+      },
+      "dessert_buffet": {
+        "portion": "1 madeleine per guest service target · Riviera 9% event buffer applies once",
+        "piece_count": 1,
+        "toffee_sauce_ml_per_guest": 25,
+        "premium_garnish_option": "Edible flowers or caramel crumb as optional premium finish.",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
+      },
+      "dessert_platter": {
+        "portion": "count by ordered madeleines",
+        "icing_sugar_g_per_40_pieces_optional": 10,
+        "premium_garnish_option": "Edible flowers, 1 punnet per 80 pieces as optional premium finish.",
+        "service_rule": "Best baked same day. Hold airtight only after fully cooled; warm only when service style allows.",
+        "status": "confirmed"
+      }
+    },
+    "charcuterie-board-classic": {
+      "recipe_id": "charcuterie-board-classic",
+      "platter": {
+        "portion": "1 board serves 10-12 as standalone or 15-20 as part of wider spread",
+        "service_count_standalone_min": 10,
+        "service_count_standalone_max": 12,
+        "service_count_wider_spread_min": 15,
+        "service_count_wider_spread_max": 20,
+        "standard_garnish": "grapes, dried fruit and dried citrus",
+        "premium_garnish_option": "Edible flowers, figs or premium grapes when event style supports it.",
+        "note": "Use platter/board format. For grazing tables use the separate grazing table standard, not this board standard.",
+        "status": "confirmed"
+      }
+    },
+    "nibble-platter-40": {
+      "recipe_id": "nibble-platter-40",
+      "platter": {
+        "portion": "48 mixed hot nibbles per platter, 12 each of 4 items",
+        "total_pieces": 48,
+        "items_per_type": 12,
+        "split": "12 sausage rolls, 12 spinach pizzinis, 12 beef pies, 12 quiche Lorraine",
+        "tomato_sauce_ml_per_platter": 80,
+        "mustard_ml_per_platter": 60,
+        "source_note": "Locked V13 kitchen production count is 48 pieces, 12 each of four items. The legacy 40-piece ID is retained only for stable links.",
+        "premium_garnish_option": "Flat parsley, micro herbs or edible flowers only if presentation needs lifting.",
+        "service_rule": "Reheat close to delivery/service and avoid covered long holding that softens pastry.",
+        "status": "confirmed"
+      }
+    },
+    "house-scones": {
+      "recipe_id": "house-scones",
+      "base_prep": {
+        "base_yield_pieces": 40,
+        "size_rule": "1,080 g scone mix + 600 ml water yields 40 small High Tea scones."
+      },
+      "high_tea": {
+        "portion": "1 small scone per confirmed guest · Fixed module; no automatic event buffer",
+        "pieces_per_guest": 1,
+        "automatic_event_buffer_multiplier": 1.0,
+        "buffer_rule": "Fixed module; do not apply an automatic event buffer.",
+        "ingredient_ordering_status": "NEEDS CONFIRMATION",
+        "ingredient_ordering_note": "The small-scone count and dough yield are confirmed. Exact per-guest jam, lemon-curd and whipped-cream order quantities are not locked.",
+        "source_note": "Locked High Tea count: one small scone per confirmed guest. One dough batch yields 40 small scones.",
+        "status": "confirmed"
+      }
+    },
+    "ribbon-sandwiches": {
+      "recipe_id": "ribbon-sandwiches",
+      "base_prep": {
+        "base_yield_pieces": 2,
+        "size_rule": "Per confirmed guest: 2 fingers — 1 cream-cheese-and-cucumber plus 1 curried-egg-and-lettuce."
+      },
+      "high_tea": {
+        "portion": "2 ribbon-sandwich fingers per confirmed guest · Fixed module; no automatic event buffer",
+        "pieces_per_guest": 2,
+        "automatic_event_buffer_multiplier": 1.0,
+        "buffer_rule": "Fixed module; do not apply an automatic event buffer.",
+        "split": "1 cream-cheese-and-cucumber finger; 1 curried-egg-and-lettuce finger",
+        "source_note": "Locked package-specific High Tea allocation. Filling gram weights and bread cutting yield still need confirmation.",
+        "status": "confirmed"
+      }
+    },
+    "sweet-petit-fours": {
+      "recipe_id": "sweet-petit-fours",
+      "base_prep": {
+        "base_yield_pieces": 2,
+        "size_rule": "Per confirmed guest: 2 petit fours when available; otherwise 1 pistachio slice plus 1 Cherry Ripe slice."
+      },
+      "high_tea": {
+        "portion": "2 small sweets per confirmed guest · Fixed module; no automatic event buffer",
+        "pieces_per_guest": 2,
+        "automatic_event_buffer_multiplier": 1.0,
+        "buffer_rule": "Fixed module; do not apply an automatic event buffer.",
+        "selection_rule": "Use petit fours when available; otherwise use 1 pistachio slice and 1 Cherry Ripe slice per guest.",
+        "source_note": "Locked package-specific High Tea count and fallback. Supplier availability and product allergen labels remain event confirmations.",
+        "status": "confirmed"
+      }
+    },
+    "platter-scones-chantilly-jam": {
+      "recipe_id": "platter-scones-chantilly-jam",
+      "platter": {
+        "portion": "12 scones per platter",
+        "total_pieces": 12,
+        "jam_g_per_piece": 10,
+        "chantilly_g_per_piece": 15,
+        "jam_g_per_platter": 120,
+        "chantilly_g_per_platter": 180,
+        "source_note": "Locked platter count is 12 scones. The 40-small-scone house batch is the High Tea production yield, not the normal platter count.",
+        "premium_garnish_option": "Edible flowers, strawberry halves or citrus zest as optional premium finish.",
+        "service_rule": "Cream and jam separate for delivery unless platter is for immediate service.",
+        "status": "confirmed"
+      }
+    },
+    "platter-sweet-slices-cakes": {
+      "recipe_id": "platter-sweet-slices-cakes",
+      "platter": {
+        "portion": "40 pieces per platter",
+        "total_pieces": 40,
+        "piece_count_per_guest_light": 1,
+        "premium_garnish_option": "Edible flowers, dried citrus, berries or gold-dusted crumb where appropriate.",
+        "service_rule": "Keep chilled where required; separate wet garnishes until service.",
+        "status": "confirmed"
+      }
+    },
+    "grazing-box-standard": {
+      "recipe_id": "grazing-box-standard",
+      "platter": {
+        "portion": "1 box serves 6-8 guests",
+        "service_count_min": 6,
+        "service_count_max": 8,
+        "standard_garnish": "grapes, dried fruit, crackers and dried citrus",
+        "premium_garnish_option": "Edible flowers, figs or premium grapes as optional premium finish.",
+        "note": "Use same ingredient family as Riviera grazing tables but scaled to box size. Keep cheeses and cured meats protected for delivery.",
+        "status": "confirmed"
+      }
+    },
+    "platter-ham-cheese-croissants": {
+      "recipe_id": "platter-ham-cheese-croissants",
+      "platter": {
+        "portion": "12 croissants per standard platter",
+        "total_pieces": 12,
+        "piece_count_per_guest_light": 1,
+        "source_note": "Locked default platter count is 12 croissants.",
+        "premium_garnish_option": "Micro herbs or edible flowers as optional premium finish.",
+        "service_rule": "Best served fresh or lightly warmed only when service timing allows. Do not seal hot croissants for long delivery.",
+        "status": "confirmed"
+      },
+      "grazing_add_on_40": {
+        "portion": "40 croissants only when the package item is explicitly named as a 40-piece grazing add-on",
+        "total_pieces": 40,
+        "source_note": "This is a named brochure grazing add-on exception. It does not change the 12-piece standard platter default.",
+        "status": "confirmed"
+      },
+      "corporate_boxed": {
+        "portion": "1 croissant per box when sold as a breakfast or lunch item",
+        "croissants_per_box": 1,
+        "premium_garnish_option": "Micro herbs as optional premium finish.",
+        "status": "confirmed"
+      }
+    },
+    "platter-sandwiches-standard": {
+      "recipe_id": "platter-sandwiches-standard",
+      "platter": {
+        "portion": "24 sandwich points per platter from 6 whole sandwiches",
+        "total_pieces": 24,
+        "whole_sandwiches": 6,
+        "piece_count_per_guest_light": 1,
+        "piece_count_per_guest_lunch": 2,
+        "source_note": "Locked default is 24 sandwich points from 6 whole sandwiches. The event prep sheet must still define the filling split.",
+        "standard_garnish": "neat cut faces, paper lining and restrained herbs",
+        "premium_garnish_option": "Micro herbs, edible flowers or premium fruit garnish when event style supports it.",
+        "service_rule": "Keep fillings defined by event prep sheet. Do not use chef's selection for kitchen-facing counts.",
+        "status": "confirmed"
+      },
+      "corporate_boxed": {
+        "portion": "2 sandwich pieces per box when part of a mixed corporate lunch box",
+        "pieces_per_box": 2,
+        "premium_garnish_option": "Micro herbs only where packing allows.",
+        "status": "confirmed"
+      }
+    },
+    "platter-wraps-premium": {
+      "recipe_id": "platter-wraps-premium",
+      "platter": {
+        "portion": "12 wrap pieces per platter",
+        "total_pieces": 12,
+        "piece_count_per_guest_light": 1,
+        "piece_count_per_guest_lunch": 2,
+        "source_note": "Locked default platter count is 12 wrap pieces.",
+        "premium_garnish_option": "Micro herbs or edible flowers as optional premium finish.",
+        "service_rule": "Cut cleanly, pack tight, and keep chilled. Avoid wet fillings against wrap edges for long holding.",
+        "status": "confirmed"
+      },
+      "corporate_boxed": {
+        "portion": "2 wrap pieces per box when part of a mixed corporate lunch box",
+        "pieces_per_box": 2,
+        "premium_garnish_option": "Micro herbs only where packing allows.",
+        "status": "confirmed"
+      }
+    },
+    "platter-filled-brioche-rolls": {
+      "recipe_id": "platter-filled-brioche-rolls",
+      "platter": {
+        "portion": "12 filled brioche rolls per platter",
+        "total_pieces": 12,
+        "pieces_per_guest_light": 1,
+        "source_note": "Locked default platter count is 12 filled brioche rolls.",
+        "premium_garnish_option": "Micro herbs, edible flowers or premium fruit garnish as optional finish.",
+        "service_rule": "Assemble close to delivery. Keep wet sauces controlled to protect brioche.",
+        "status": "confirmed"
+      },
+      "corporate_boxed": {
+        "portion": "1 filled brioche roll per box when part of a mixed lunch box",
+        "pieces_per_box": 1,
+        "premium_garnish_option": "Micro herbs where packing allows.",
+        "status": "confirmed"
+      }
+    },
+    "platter-roast-beef-beetroot-relish": {
+      "recipe_id": "platter-roast-beef-beetroot-relish",
+      "platter": {
+        "portion": "40 pieces per platter",
+        "total_pieces": 40,
+        "piece_count_per_guest_light": 1,
+        "premium_garnish_option": "Micro herbs, beetroot powder or edible flowers as optional premium finish.",
+        "service_rule": "Keep roast beef chilled and protected. Add wet relish cleanly so bread/wrap does not bleed before service.",
+        "status": "confirmed"
+      }
+    },
+    "platter-dietary-grazing": {
+      "recipe_id": "platter-dietary-grazing",
+      "platter": {
+        "portion": "1 platter serves 6-8 guests",
+        "service_count_min": 6,
+        "service_count_max": 8,
+        "standard_garnish": "dietary-safe fruit, crackers/bread and labelled dips",
+        "premium_garnish_option": "Dietary-safe edible flowers or premium fruit garnish if confirmed suitable.",
+        "service_rule": "Keep dietary platter physically isolated and clearly labelled. Do not share garnish/tongs with standard grazing.",
+        "status": "confirmed"
+      },
+      "dietary_single": {
+        "portion": "scale as one isolated dietary serve only when event requires it",
+        "service_rule": "Build from confirmed dietary-safe components only. Label guest name/dietary where supplied.",
+        "status": "confirmed"
+      }
+    },
+    "roving-cannoli-tiramisu": {
+      "recipe_id": "roving-cannoli-tiramisu",
+      "roving_dessert": {
+        "portion": "use built-in recipe yield: service for 40",
+        "service_count": 40,
+        "premium_garnish_option": "Edible flowers, cocoa dust, shaved chocolate or crushed hazelnut as suitable to the service style.",
+        "service_rule": "Keep chilled. Pass/refresh in small batches so cannoli shells and tiramisu texture hold.",
+        "status": "confirmed"
+      }
+    },
+    "duo-cannoli-pistachio-white-chocolate": {
+      "recipe_id": "duo-cannoli-pistachio-white-chocolate",
+      "dessert_platter": {
+        "portion": "40 pieces per platter, 20 of each flavour",
+        "total_pieces": 40,
+        "pieces_per_flavour": 20,
+        "premium_garnish_option": "Edible flowers or flavour-matched crumb/nut garnish as optional premium finish.",
+        "service_rule": "Fill close to service/pickup and avoid long sealed holding after filling.",
+        "status": "confirmed"
+      },
+      "dessert_buffet": {
+        "portion": "1 cannoli per guest service target · Riviera 9% event buffer applies once",
+        "piece_count": 1,
+        "premium_garnish_option": "Edible flowers, 1 punnet per 80 guests when used.",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
+      }
+    },
+    "strawberry-ricotta-cheesecake-plated": {
+      "recipe_id": "strawberry-ricotta-cheesecake-plated",
+      "plated_dessert": {
+        "portion": "1 plated dessert per guest",
+        "portion_count_per_guest": 1,
+        "berry_garnish_g_per_guest": 20,
+        "sauce_or_coulis_ml_per_guest_optional": 20,
+        "premium_garnish_option": "Edible flowers, strawberry fan or crisp garnish as optional premium finish.",
+        "status": "confirmed"
+      },
+      "dessert_buffet": {
+        "portion": "1 portion per guest only if pre-portioned for buffet · Riviera 9% event buffer applies once",
+        "portion_count_per_guest": 1,
+        "premium_garnish_option": "Edible flowers or berry garnish as optional premium finish.",
+        "service_rule": "Use pre-portioned cups/slices for buffet. Do not serve as open whole cheesecake unless staffed.",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
+      }
+    },
+    "riviera-tiramisu-biscotti-hazelnut": {
+      "recipe_id": "riviera-tiramisu-biscotti-hazelnut",
+      "plated_dessert": {
+        "portion": "1 plated dessert per guest",
+        "portion_count_per_guest": 1,
+        "cocoa_dust_g_per_guest": 1,
+        "hazelnut_g_per_guest_optional": 5,
+        "premium_garnish_option": "Chocolate shard, edible flower or gold-dusted hazelnut as optional premium finish.",
+        "status": "confirmed"
+      },
+      "dessert_buffet": {
+        "portion": "1 portion per guest · Riviera 9% event buffer applies once",
+        "portion_count_per_guest": 1,
+        "premium_garnish_option": "Chocolate shard, edible flowers or hazelnut crumb as optional premium finish.",
+        "service_rule": "Use cups or clean pre-portioned trays. Keep chilled and refresh in small batches.",
+        "status": "confirmed",
+        "automatic_event_buffer_multiplier": 1.09,
+        "buffer_rule": "Apply the Riviera 9% event buffer once to the unbuffered service target."
+      }
+    },
+    "house-baked-sausage-rolls": {
+      "recipe_id": "house-baked-sausage-rolls",
+      "platter": {
+        "portion": "24 pieces per single hot-nibble platter",
+        "total_pieces": 24,
+        "source_note": "Locked V13 single hot-nibble platter count. The recipe batch may yield more than one platter.",
+        "status": "confirmed"
+      }
+    },
+    "beef-party-pies": {
+      "recipe_id": "beef-party-pies",
+      "platter": {
+        "portion": "24 pieces per single hot-nibble platter",
+        "total_pieces": 24,
+        "source_note": "Locked V13 single hot-nibble platter count. The recipe batch may yield more than one platter.",
+        "status": "confirmed"
+      }
+    },
+    "mini-quiches-beetroot-balsamic": {
+      "recipe_id": "mini-quiches-beetroot-balsamic",
+      "platter": {
+        "portion": "24 pieces per single hot-nibble platter",
+        "total_pieces": 24,
+        "source_note": "Locked V13 single hot-nibble platter count. The recipe batch may yield more than one platter.",
+        "status": "confirmed"
+      }
+    },
+    "funeral-spinach-ricotta-pastizzi-platter": {
+      "recipe_id": "funeral-spinach-ricotta-pastizzi-platter",
+      "platter": {
+        "portion": "24 pieces per single hot-nibble platter",
+        "total_pieces": 24,
+        "piece_count_per_guest_light": 1,
+        "source_note": "Locked V13 single hot-nibble platter count. The recipe batch may yield more than one platter.",
+        "premium_garnish_option": "Flat parsley, micro herbs or edible flowers only if presentation needs lifting.",
+        "service_rule": "Reheat close to delivery/service and avoid covered long holding that softens pastry.",
+        "status": "confirmed"
+      }
+    },
+    "funeral-mixed-hot-nibbles-box": {
+      "recipe_id": "funeral-mixed-hot-nibbles-box",
+      "platter": {
+        "portion": "48 mixed hot nibbles per box/platter, 12 each of 4 items",
+        "total_pieces": 48,
+        "items_per_type": 12,
+        "piece_count_per_guest_light": 1,
+        "tomato_sauce_ml_per_box_optional": 80,
+        "mustard_ml_per_box_optional": 60,
+        "source_note": "Locked V13 kitchen production count is 48 pieces, 12 each of four items. The brochure 40–50 range remains sales reference only.",
+        "premium_garnish_option": "Flat parsley, micro herbs or edible flowers only if presentation needs lifting.",
+        "service_rule": "Pack hot nibbles by type where possible. Vent briefly before closing to protect pastry texture.",
+        "status": "confirmed"
+      }
+    },
+    "potato-pave": {
+      "recipe_id": "potato-pave",
+      "base_prep": {
+        "tray_yield_pieces": 36,
+        "cut_rule": "Cut a 3 × 6 grid, then cut each rectangle diagonally to make 36 triangles."
+      },
+      "plated_main": {
+        "portion": "1 triangular pavé serve unless the event menu specifies otherwise",
+        "pieces_per_serve": 1,
+        "pieces_per_tray": 36,
+        "status": "confirmed"
+      }
+    },
+    "baklava-cheesecake": {
+      "recipe_id": "baklava-cheesecake",
+      "base_prep": {
+        "production_portions": 100,
+        "full_gn_count": 2,
+        "portions_per_full_gn": 40,
+        "half_gn_count": 1,
+        "portions_per_half_gn": 20
+      },
+      "plated_dessert": {
+        "portion": "1 slice per guest",
+        "portion_count_per_guest": 1,
+        "production_portions": 100,
+        "status": "confirmed"
+      }
+    }
+  },
+  "buffer_policy": {
+    "releaseId": "RIV-KNOWLEDGE-2026-07-27-V13",
+    "eventMultiplier": 1.09,
+    "applyOnce": true,
+    "eventServiceKeys": [
+      "buffet",
+      "cocktail",
+      "dessert_buffet",
+      "plated_dessert",
+      "plated_entree",
+      "plated_main",
+      "roving_dessert"
+    ],
+    "fixedModuleMultiplier": 1.0,
+    "fixedModuleServiceKeys": [
+      "corporate_boxed",
+      "high_tea",
+      "platter"
+    ],
+    "excludedServiceKeys": [
+      "tapas"
+    ],
+    "note": "High Tea and Sunday Tapas have no automatic event buffer. Fixed High Tea, platter and corporate modules are not buffered unless an event-specific source says otherwise."
   }
 }

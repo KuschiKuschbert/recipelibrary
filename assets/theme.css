@@ -10652,6 +10652,24 @@ body.planner-list-open {
   color: var(--text3);
   line-height: 1.5;
 }
+.fn-planner__ops {
+  margin-top: 10px;
+  color: var(--text2);
+  font-size: 12px;
+  line-height: 1.45;
+}
+.fn-planner__ops summary {
+  cursor: pointer;
+  color: var(--gold-light);
+  font-weight: 750;
+}
+.fn-planner__ops ul {
+  margin: 7px 0 0;
+  padding-left: 20px;
+}
+.fn-planner__ops li + li {
+  margin-top: 3px;
+}
 .fn-planner__hint,
 .fn-planner__error {
   font-size: 13px;
@@ -10761,8 +10779,8 @@ body.planner-list-open {
   color: var(--gold-light);
 }
 .fn-dish-chip--no-recipe {
-  opacity: 0.55;
-  cursor: not-allowed;
+  border-color: rgba(201, 169, 110, 0.42);
+  cursor: pointer;
 }
 .fn-dish-chip__tag {
   display: inline-flex;
@@ -11229,6 +11247,13 @@ body.planner-list-open {
 }
 .planner-manifest__item:hover {
   color: var(--gold-light);
+}
+.planner-manifest__item--unlinked {
+  cursor: default;
+  color: var(--text3);
+}
+.planner-manifest__item--unlinked:hover {
+  color: var(--text3);
 }
 .planner-manifest__tags {
   font-size: 11px;

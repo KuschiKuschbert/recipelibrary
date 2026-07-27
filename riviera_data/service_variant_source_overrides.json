@@ -44,6 +44,12 @@
         "premium_garnish_option": "Micro herbs or edible flowers as optional premium finish.",
         "service_rule": "Best served fresh or lightly warmed only when service timing allows. Do not seal hot croissants for long delivery.",
         "status": "confirmed"
+      },
+      "grazing_add_on_40": {
+        "portion": "40 croissants only when the package item is explicitly named as a 40-piece grazing add-on",
+        "total_pieces": 40,
+        "source_note": "Named brochure grazing add-on exception. The normal croissant platter remains 12.",
+        "status": "confirmed"
       }
     },
     "platter-sandwiches-standard": {
