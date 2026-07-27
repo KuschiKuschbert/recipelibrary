@@ -247,9 +247,12 @@ function seedMenuMappings_(spreadsheet) {
   var menuSheet = spreadsheet.getSheetByName(RIVIERA.SHEETS.MENU_MAP);
   var menuRows = [
     [
-      "polpette", "Polpette", "polpette|meatballs|veal meatballs",
+      "polpette", "Polpette",
+      "polpette|meatballs|veal meatballs|slow cooked veal meatballs",
       "veal-meatballs", 3, 80, "pieces", 3, 1, "serve", true,
-      "ACTIVE", "Distinct from stuffed olives; 3 × 80 g meatballs per Tapas serve."
+      "LOCKED",
+      "User-confirmed; distinct from stuffed olives; " +
+      "3 × 80 g meatballs per Tapas serve."
     ],
     [
       "veal-prosciutto-stuffed-olives", "Veal & Prosciutto Stuffed Olives",
@@ -513,6 +516,7 @@ function migrateKnownTemplateSheet_(sheet, name, current, canonical) {
   if (name === RIVIERA.SHEETS.CONFIG) {
     var configRequiredIndex = canonical.indexOf("Required");
     var configKeyIndex = canonical.indexOf("Key");
+    var configValueIndex = canonical.indexOf("Value");
     var configRequiredByKey = {};
     CONFIG_ROWS.forEach(function (row) {
       configRequiredByKey[String(row[0])] = row[2];
@@ -520,6 +524,10 @@ function migrateKnownTemplateSheet_(sheet, name, current, canonical) {
     migratedRows.forEach(function (row) {
       var key = String(row[configKeyIndex] || "");
       row[configRequiredIndex] = configRequiredByKey[key] || "NO";
+      if (key === "RECIPE_GITHUB_COMMIT" &&
+          String(row[configValueIndex] || "").trim() === "SET AFTER MERGE") {
+        row[configValueIndex] = "";
+      }
     });
   }
   if (name === RIVIERA.SHEETS.POS_MAP) {
@@ -529,9 +537,27 @@ function migrateKnownTemplateSheet_(sheet, name, current, canonical) {
     });
   }
   if (name === RIVIERA.SHEETS.CHANGES) {
+    var receiptIndex = canonical.indexOf("Receipt ID");
     var scopeIndex = canonical.indexOf("Scope");
     var routeIndex = canonical.indexOf("Target Route");
-    migratedRows.forEach(function (row) {
+    var changeNotesIndex = canonical.indexOf("Notes");
+    var sourceConversationIndex = current.map(normalizeText_)
+      .indexOf("source conversation");
+    migratedRows.forEach(function (row, rowIndex) {
+      if (String(row[receiptIndex]) === "CHG-2026-07-27-TAPAS-IDS") {
+        row[scopeIndex] = "RECIPE-SPECIFIC STANDARD";
+      }
+      if (sourceConversationIndex !== -1) {
+        var sourceConversation = String(
+          sourceValues[rowIndex][sourceConversationIndex] || ""
+        ).trim();
+        if (sourceConversation) {
+          row[changeNotesIndex] = [
+            String(row[changeNotesIndex] || "").trim(),
+            "Source conversation: " + sourceConversation
+          ].filter(Boolean).join(" ");
+        }
+      }
       if (routeIndex !== -1 && !row[routeIndex] && row[scopeIndex]) {
         row[routeIndex] = scopeTargetRoute_(String(row[scopeIndex]).toUpperCase());
       }
@@ -541,10 +567,15 @@ function migrateKnownTemplateSheet_(sheet, name, current, canonical) {
   sheet.clearContents();
   sheet.getRange(1, 1, 1, canonical.length).setValues([canonical]);
   appendRows_(sheet, migratedRows);
-  sheet.getRange(1, 1).setNote(
+  var migrationNote =
     "Migrated automatically from the recognised Riviera v1 control " +
-    "workbook template on " + nowIso_() + "."
-  );
+    "workbook template on " + nowIso_() + ".";
+  if (name === RIVIERA.SHEETS.STOCK) {
+    migrationNote +=
+      " Blank 1 August placeholder counts remain COUNT REQUIRED and are " +
+      "not treated as observed stock.";
+  }
+  sheet.getRange(1, 1).setNote(migrationNote);
 }
 
 function mapControlHeadersStrictly_(name, current, canonical) {
@@ -822,7 +853,6 @@ function getExactKnownHeaderMigration_(name, current, canonical) {
       "Recipe Git Commit": 7,
       "Approved By": 15,
       "Approved At": 16,
-      "Published File ID": 13,
       "Message": 17
     }
   });
