@@ -173,6 +173,8 @@ def main() -> int:
         and riviera_network_route < cache_first_route
         and "fetch(e.request, { cache: 'no-store' })"
         in source[riviera_network_route:cache_first_route]
+        and "return cache.put(e.request, resp.clone())"
+        in source[riviera_network_route:cache_first_route]
     ):
         ok("Riviera operational data is network-first with offline fallback")
     else:
@@ -185,6 +187,8 @@ def main() -> int:
         navigation_start >= 0
         and navigation_end > navigation_start
         and "fetch(e.request, { cache: 'no-store' })"
+        in source[navigation_start:navigation_end]
+        and "return cache.put(e.request, resp.clone())"
         in source[navigation_start:navigation_end]
     ):
         ok("navigation refreshes online before using the offline cache")
