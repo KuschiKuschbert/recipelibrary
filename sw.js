@@ -87,8 +87,8 @@ self.addEventListener('fetch', (e) => {
     e.respondWith(
       caches.open(CACHE_NAME).then((cache) =>
         fetch(e.request, { cache: 'no-store' }).then((resp) => {
-          if (resp.ok) cache.put(e.request, resp.clone());
-          return resp;
+          if (!resp.ok) return resp;
+          return cache.put(e.request, resp.clone()).then(() => resp, () => resp);
         }).catch(() =>
           cache.match(e.request).then((hit) => hit || cache.match('./index.html'))
         )
@@ -104,8 +104,7 @@ self.addEventListener('fetch', (e) => {
       caches.open(CACHE_NAME).then((cache) =>
         fetch(e.request, { cache: 'no-store' }).then((resp) => {
           if (!resp.ok) throw new Error(`Riviera data fetch failed: ${resp.status}`);
-          cache.put(e.request, resp.clone());
-          return resp;
+          return cache.put(e.request, resp.clone()).then(() => resp, () => resp);
         }).catch(() =>
           cache.match(e.request).then((hit) => hit || Response.error())
         )
