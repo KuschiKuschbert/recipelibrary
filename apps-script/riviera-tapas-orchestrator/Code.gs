@@ -513,6 +513,18 @@ function migrateKnownTemplateSheet_(sheet, name, current, canonical) {
       return sourceIndex === undefined ? "" : sourceRow[sourceIndex];
     });
   });
+  if (name === RIVIERA.SHEETS.CONFIG) {
+    var configRequiredIndex = canonical.indexOf("Required");
+    var configKeyIndex = canonical.indexOf("Key");
+    var configRequiredByKey = {};
+    CONFIG_ROWS.forEach(function (row) {
+      configRequiredByKey[String(row[0])] = row[2];
+    });
+    migratedRows.forEach(function (row) {
+      var key = String(row[configKeyIndex] || "");
+      row[configRequiredIndex] = configRequiredByKey[key] || "NO";
+    });
+  }
   if (name === RIVIERA.SHEETS.CHANGES) {
     var scopeIndex = canonical.indexOf("Scope");
     var routeIndex = canonical.indexOf("Target Route");
@@ -581,6 +593,9 @@ function mapControlHeadersStrictly_(name, current, canonical) {
 
 function getExactKnownHeaderMigration_(name, current, canonical) {
   var signature = current.map(normalizeText_).join("|");
+  var configV1 = [
+    "key", "value", "description", "editable"
+  ].join("|");
   var menuV1 = [
     "menu item id", "display name", "recipe id", "recipe status",
     "items per serve", "unit", "service status", "no auto buffer",
@@ -593,7 +608,13 @@ function getExactKnownHeaderMigration_(name, current, canonical) {
     "chatgpt status", "approval status", "notes"
   ].join("|");
   var byTargetName = {};
-  if (name === RIVIERA.SHEETS.MENU_MAP && signature === menuV1) {
+  if (name === RIVIERA.SHEETS.CONFIG && signature === configV1) {
+    byTargetName = {
+      "Key": 0,
+      "Value": 1,
+      "Notes": 2
+    };
+  } else if (name === RIVIERA.SHEETS.MENU_MAP && signature === menuV1) {
     byTargetName = {
       "Menu Item ID": 0,
       "Menu Item Name": 1,
@@ -3016,13 +3037,19 @@ function runRivieraOrchestratorSelfTest() {
     assertTrue_(failedClosed, "Unknown equal-width template migrated by position");
   });
 
-  test("legacy Config description maps only to Notes", function () {
-    var mapping = mapControlHeadersStrictly_(
+  test("legacy Config template maps safely and drops Editable", function () {
+    var mapping = getExactKnownHeaderMigration_(
       RIVIERA.SHEETS.CONFIG,
-      ["Key", "Value", "Required", "Description"],
+      ["key", "value", "description", "editable"],
       RIVIERA.HEADERS.CONFIG
     );
-    assertEqual_(mapping[3], 3, "Config description did not map to Notes");
+    assertEqual_(mapping[0], 0, "Config key was not preserved");
+    assertEqual_(mapping[1], 1, "Config value was not preserved");
+    assertEqual_(mapping[3], 2, "Config description did not map to Notes");
+    assertTrue_(
+      mapping[2] === undefined,
+      "Legacy Editable must not be treated as canonical Required"
+    );
   });
 
   test("booking IDs dedupe safely without undercounting anonymous bookings", function () {
