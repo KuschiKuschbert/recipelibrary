@@ -98,6 +98,21 @@ function runRivieraOrchestratorSelfTest() {
     assertTrue_(failedClosed, "Unknown equal-width template migrated by position");
   });
 
+  test("legacy Config template maps safely and drops Editable", function () {
+    var mapping = getExactKnownHeaderMigration_(
+      RIVIERA.SHEETS.CONFIG,
+      ["key", "value", "description", "editable"],
+      RIVIERA.HEADERS.CONFIG
+    );
+    assertEqual_(mapping[0], 0, "Config key was not preserved");
+    assertEqual_(mapping[1], 1, "Config value was not preserved");
+    assertEqual_(mapping[3], 2, "Config description did not map to Notes");
+    assertTrue_(
+      mapping[2] === undefined,
+      "Legacy Editable must not be treated as canonical Required"
+    );
+  });
+
   test("booking IDs dedupe safely without undercounting anonymous bookings", function () {
     var headers = [
       "booking_id", "service_date", "booked_covers",
