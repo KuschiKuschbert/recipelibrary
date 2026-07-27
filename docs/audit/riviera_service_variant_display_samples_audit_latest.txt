@@ -23,10 +23,10 @@ Corporate croissant display
 corporate-savoury-croissants.corporate_boxed: 1 savoury croissant per guest or box · Minimum order pieces: 12 · Premium Garnish Option: Micro herbs or edible flowers as optional premium finish where packing allows. · Service Rule: Box by the dozen for corporate morning tea or individually only when requested. Fill split must be set on the event prep sheet.
 
 Base calamari buffet display
-calamari.buffet: 4 calamari strips + 1 baby octopus per guest service target with 1.2 production allowance · 1.2x production buffer · 30ml aioli per guest · Premium Garnish Option: Micro herbs, 1 punnet per 80 guests as optional premium finish. · Standard Garnish: deep fried capers and 1 lemon wedge
+calamari.buffet: 4 calamari strips + 1 baby octopus per guest service target · Riviera 9% event buffer applies once · 1.09x automatic event buffer · Buffer rule: Apply the Riviera 9% event buffer once to the unbuffered service target. · 30ml aioli per guest · Premium Garnish Option: Micro herbs, 1 punnet per 80 guests as optional premium finish. · Standard Garnish: deep fried capers and 1 lemon wedge
 
 Main course display
-beef-bourguignon.buffet: 180 g bourguignon per guest · 1.15x production buffer · Premium Garnish Option: Micro parsley, picked thyme or crisp lardon crumb. · Service Rule: Each scoop should include beef, sauce, mushroom, lardon and onion.
+beef-bourguignon.buffet: 180 g bourguignon per guest · Riviera 9% event buffer applies once · 1.09x automatic event buffer · Buffer rule: Apply the Riviera 9% event buffer once to the unbuffered service target. · Premium Garnish Option: Micro parsley, picked thyme or crisp lardon crumb. · Service Rule: Each scoop should include beef, sauce, mushroom, lardon and onion.
 
 ERRORS
 ------

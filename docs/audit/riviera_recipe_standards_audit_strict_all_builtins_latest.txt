@@ -1,15 +1,181 @@
 RIVIERA RECIPE STANDARDS AUDIT
 ====================================
-Built-in recipes: 147
-Service variant files: 4
+Built-in recipes: 156
+Service variant files: 5
 - riviera_data/service_variants.json
 - riviera_data/service_variants_canapes.json
 - riviera_data/service_variants_corporate.json
 - riviera_data/service_variants_mains_sides.json
-Service variant records: 89
-Canonical recipe groups: 10
-Recipe redirects: 2
+- riviera_data/service_variant_source_overrides.json
+Service variant records: 97
+Declared NEEDS CONFIRMATION backlog: 26
+Canonical recipe groups: 19
+Recipe redirects: 11
 Strict missing variant scope: all builtins
+
+RECIPE LIFECYCLE
+----------------
+locked: 22
+active working: 127
+trial only: 5
+retired: 2
+recipes_with_confirmation_flags: 156
+- arancini: 4
+- calamari: 4
+- oysters-kilpatrick: 4
+- veal-meatballs: 3
+- chicken-skewer: 4
+- chorizo-potatoes: 4
+- lamb-cutlet: 4
+- fish-slider: 4
+- romesco: 4
+- lemon-dill-aioli: 4
+- lemon-thyme-aioli: 4
+- vodka-sauce: 4
+- riviera-emulsion: 3
+- whipped-butter: 4
+- camembert-cigars: 4
+- beef-kofta: 4
+- peach-tartare: 4
+- house-scones: 3
+- potato-pave: 6
+- baklava-cheesecake: 6
+- house-focaccia: 3
+- burnt-butter-mash: 3
+- labneh-tzatziki: 4
+- pickled-cucumber-brine: 4
+- sweet-thyme-chicken-marinade: 4
+- lamb-citrus-herb-brine: 4
+- date-madeleines: 4
+- kilpatrick-sauce-house: 4
+- calamari-flour-mix: 4
+- house-chip-seasoning: 4
+- heritage-chip-seasoning: 4
+- reef-fish-batter: 4
+- mild-hot-honey: 4
+- charcuterie-board-classic: 4
+- nibble-platter-40: 4
+- bruschetta-rare-roast-beef: 4
+- spanner-crab-cannoli: 4
+- prawn-brioche-slider: 4
+- chicken-bacon-brioche-slider: 4
+- vintage-beef-brioche-slider: 4
+- mini-beefburger-canape: 4
+- beef-polpette-canape: 5
+- lamb-shoulder-provencale-composed: 4
+- beef-bourguignon: 4
+- creamy-lemon-caper-chicken: 4
+- natural-oysters-champagne-mignonette: 4
+- greek-spiced-roast-lamb: 4
+- creamy-potato-gratin: 4
+- garlic-herb-chat-potatoes-feta: 4
+- broccoli-cauliflower-gratin: 4
+- prosciutto-chicken-lemon-caper: 4
+- fillet-beef-tempranillo: 4
+- stuffed-mushroom-romesco: 4
+- roving-cannoli-tiramisu: 4
+- platter-scones-chantilly-jam: 4
+- platter-sweet-slices-cakes: 4
+- grazing-box-standard: 4
+- platter-ham-cheese-croissants: 4
+- platter-sandwiches-standard: 4
+- platter-wraps-premium: 4
+- platter-filled-brioche-rolls: 4
+- platter-roast-beef-beetroot-relish: 4
+- platter-dietary-grazing: 4
+- corporate-savoury-croissants: 4
+- corporate-sweet-croissants: 4
+- corporate-bircher-muesli-bowls: 4
+- corporate-chicken-caesar-bowl: 4
+- corporate-lamb-fattoush-bowl: 4
+- corporate-mediterranean-chicken-bowl: 4
+- corporate-beef-lasagne-side-salad: 4
+- corporate-breakfast-wraps: 4
+- corporate-gourmet-filled-cookies: 4
+- corporate-mixed-sandwiches: 4
+- corporate-roast-veg-salad-bowl: 4
+- chilli-garlic-prawns-chorizo-rocket: 4
+- slow-cooked-beef-albondigas-buffet: 5
+- heirloom-tomato-bruschetta-goats-cheese: 4
+- greek-style-pulled-beef-buffet: 4
+- chargrilled-lemon-thyme-chicken-buffet: 4
+- duo-cannoli-pistachio-white-chocolate: 4
+- strawberry-ricotta-cheesecake-plated: 4
+- riviera-tiramisu-biscotti-hazelnut: 4
+- kids-snack-pack: 4
+- kids-spaghetti-bolognese: 4
+- corporate-bacon-egg-muffins: 4
+- corporate-bacon-egg-paninis: 4
+- corporate-waffles-breakfast: 4
+- corporate-pesto-pasta-salad: 4
+- corporate-moroccan-couscous-salad: 4
+- corporate-pumpkin-feta-pepita-salad: 4
+- corporate-traditional-garden-salad: 4
+- corporate-creamy-potato-bacon-herb-salad: 4
+- funeral-spinach-ricotta-pastizzi-platter: 4
+- funeral-mixed-hot-nibbles-box: 4
+- lemon-caper-tartare: 4
+- tarragon-cream-sauce: 4
+- butterscotch-toffee-sauce: 4
+- crispy-capers: 4
+- cannoli-pistachio-filling: 4
+- cannoli-coffee-nutella-filling: 4
+- benedictine-caramel-custard: 4
+- roast-beef-thyme-garlic-carvery: 4
+- lemon-thyme-garlic-roast-chicken-carvery: 4
+- sicilian-roast-pork-apricot: 4
+- sous-vide-pork-loin-apricot: 4
+- herb-crusted-pork-cutlet-cider-mustard: 4
+- greek-green-bean-salad: 4
+- caesar-salad-buffet: 4
+- honey-thyme-roasted-carrots-pistachio: 4
+- mediterranean-rice-pilaf: 4
+- roast-root-veg-salad-cinnamon-maple: 4
+- roast-pumpkin-pepita-salad-balsamic: 4
+- roquette-parmesan-salad: 4
+- french-green-beans-shallots-mustard: 4
+- creamy-potato-bake: 4
+- garlic-lemon-potatoes: 4
+- dinner-rolls-butter: 4
+- pork-italian-herb-sausages: 4
+- house-baked-muffins: 4
+- house-baked-sausage-rolls: 4
+- beef-party-pies: 4
+- mini-quiches-beetroot-balsamic: 4
+- beef-cheeseburger-sliders: 4
+- gourmet-pizza-scrolls: 4
+- gourmet-brioche-sliders: 4
+- chilli-prawn-chorizo-casarecce: 4
+- cotoletta-pinsa: 4
+- maple-pumpkin-ravioli-burnt-butter: 4
+- souvlaki-gyros-assembly: 4
+- spiced-lamb-kofta-offsite: 4
+- grilled-halloumi-plain: 4
+- ribbon-sandwiches: 2
+- sweet-petit-fours: 2
+- spinach-feta-pastizzi-warm: 4
+- fruit-salad-yoghurt: 4
+- dessert-grazing-table-assembly: 4
+- roving-tiramisu-cups: 4
+- margherita-pizza: 4
+- pumpkin-soup: 4
+- stuffed-squid: 4
+- cannelloni-ricotta-spinach: 4
+- porchetta-salsa-verde: 4
+- cannellini-beans-pancetta-asparagus: 4
+- chicken-ballotine-stuffing: 4
+- rib-fillet-300: 4
+- oysters-florentine: 4
+- poached-salmon: 4
+- sweet-potato-topper: 4
+- white-bread-roll-dough: 4
+- riviera-blondies-working: 6
+- flourless-chocolate-torte-working: 7
+- natural-oysters-prosecco-fennel-orange: 3
+- warm-oysters-lemon-oregano-caper: 4
+- oyster-saganaki: 4
+- sicilian-gratin-oysters: 4
+- harissa-oysters-preserved-lemon: 4
 
 MEATBALL / POLPETTE CONTROL
 -------------------------------
@@ -56,36 +222,34 @@ not_recommended: 31
 
 ACTIVE FOOD RECIPES MISSING SERVICE VARIANTS
 -----------------------------------------------
-- house-scones: House Scones [Bakery] — yield: 12 regular · 40 small (high tea) per batch · scones box = 12 regular + jam + cream
-- benedictine-caramel-custard: Benedictine Caramel Custard [Dessert] — yield: 35 plated dessert serves — approx. 1.2–1.4 L finished custard
-- dinner-rolls-butter: Dinner Rolls & Butter [Bakery] — yield: 40 serves — 2 rolls per guest
-- house-baked-muffins: House Baked Muffins [Bakery] — yield: 40 muffins — 40 serves of 1 each, or 20 serves of 2
-- house-baked-sausage-rolls: House Baked Sausage Rolls [Platter] — yield: 40–48 pieces per platter — 20–24 serves of 2 each
-- beef-party-pies: Flaky Beef Party Pies [Platter] — yield: 48 pieces per platter — 24 serves of 2 each
-- mini-quiches-beetroot-balsamic: Mini Quiches with Beetroot Balsamic Relish [Platter] — yield: 48 pieces per platter — 24 serves of 2 each
-- beef-cheeseburger-sliders: Classic Beef Cheeseburger Sliders [Platter] — yield: 40 sliders — 20–40 serves depending on portion context
-- gourmet-pizza-scrolls: Gourmet Pizza Scrolls [Platter] — yield: 40 pieces
-- gourmet-brioche-sliders: Gourmet Brioche Sliders [Platter] — yield: 40 sliders
-- chilli-prawn-chorizo-casarecce: Chilli Prawn & Chorizo Casarecce [Canape] — yield: 40 substantial canapé serves
-- cotoletta-pinsa: Cotoletta Pinsa [Canape] — yield: 40 substantial canapé serves
-- maple-pumpkin-ravioli-burnt-butter: Maple Pumpkin Ravioli [Canape] — yield: 40 serves as canapé — 4 ravioli per serve; or 20 serves as an entrée
-- souvlaki-gyros-assembly: MYO Gyros Bar — Souvlaki Assembly [Buffet] — yield: 40 guests — each builds their own gyros
-- spiced-lamb-kofta-offsite: Spiced Lamb Kofta [Main] — yield: 40 serves — 2 kofta per guest
-- grilled-halloumi-plain: Grilled Halloumi [Main] — yield: 40 serves — 2 slices per guest
-- ribbon-sandwiches: Assorted Ribbon Sandwiches [Platter] — yield: 48 sandwich points (24 strips cut in half) — serves 12–16
-- sweet-petit-fours: Sweet Petit Fours [Bakery] — yield: 48 pieces — 12 serves of 4
-- spinach-feta-pastizzi-warm: Spinach & Feta Pastizzis with Tzatziki [Platter] — yield: 40–48 pieces
-- fruit-salad-yoghurt: Fruit Salad & Yoghurt [Corporate] — yield: 40 serves @ 150 g each
-- dessert-grazing-table-assembly: Dessert Grazing Table [Platter] — yield: 1 m table feeds 40 guests | 2 m table feeds 80–100 | 3 m table feeds 120–150
-- roving-tiramisu-cups: Roving Tiramisu Cups [Dessert] — yield: 40 individual 80–100 ml cups
-- margherita-pizza: Margherita Pizza [Main] — yield: 1 pizza · scale base batch for volume
-- pumpkin-soup: Pumpkin Soup [Starter] — yield: Approx. 4–5 L — 20–25 serves @ 200 ml
-- stuffed-squid: Stuffed Squid [Main] — yield: 1 serve — scale for Italian Long Lunch covers
-- cannelloni-ricotta-spinach: Cannelloni Ricotta & Spinach [Main] — yield: 2 shells per serve — scale batch for covers
-- porchetta-salsa-verde: Porchetta with Salsa Verde [Main] — yield: Approx. 12 kg rolled porchetta — 40–50 serves
-- cannellini-beans-pancetta-asparagus: Cannellini Beans with Pancetta & Asparagus [Side] — yield: Approx. 8–10 kg finished beans — 40 serves @ 200 g
-- rib-fillet-300: Rib Fillet 300 g [Main] — yield: 1 serve @ 300 g raw rib fillet
-- oysters-florentine: Oysters Florentine [Starter] — yield: 1 oyster per serve — scale for dozen orders
-- poached-salmon: Poached Salmon [Main] — yield: 1 serve @ 125 g salmon fillet
-- white-bread-roll-dough: White Bread Roll Dough [Bakery] — yield: 775 g dough batch — approx. 8–10 rolls
+- benedictine-caramel-custard: Benedictine Caramel Custard [Dessert] — yield: 35 plated dessert serves — approx. 1.2–1.4 L finished custard — DECLARED NEEDS CONFIRMATION
+- dinner-rolls-butter: Dinner Rolls & Butter [Bakery] — yield: 40 serves — 2 rolls per guest — DECLARED NEEDS CONFIRMATION
+- house-baked-muffins: House Baked Muffins [Bakery] — yield: 40 muffins — 40 serves of 1 each, or 20 serves of 2 — DECLARED NEEDS CONFIRMATION
+- beef-cheeseburger-sliders: Classic Beef Cheeseburger Sliders [Platter] — yield: 40 sliders — 20–40 serves depending on portion context — DECLARED NEEDS CONFIRMATION
+- gourmet-pizza-scrolls: Gourmet Pizza Scrolls [Platter] — yield: 40 pieces — DECLARED NEEDS CONFIRMATION
+- gourmet-brioche-sliders: Gourmet Brioche Sliders [Platter] — yield: 40 sliders — DECLARED NEEDS CONFIRMATION
+- chilli-prawn-chorizo-casarecce: Chilli Prawn & Chorizo Casarecce [Canape] — yield: 40 substantial canapé serves — DECLARED NEEDS CONFIRMATION
+- cotoletta-pinsa: Cotoletta Pinsa [Canape] — yield: 40 substantial canapé serves — DECLARED NEEDS CONFIRMATION
+- maple-pumpkin-ravioli-burnt-butter: Maple Pumpkin Ravioli [Canape] — yield: 40 serves as canapé — 4 ravioli per serve; or 20 serves as an entrée — DECLARED NEEDS CONFIRMATION
+- souvlaki-gyros-assembly: MYO Gyros Bar — Souvlaki Assembly [Buffet] — yield: 40 guests — each builds their own gyros — DECLARED NEEDS CONFIRMATION
+- spiced-lamb-kofta-offsite: Spiced Lamb Kofta [Main] — yield: 40 serves — 2 kofta per guest — DECLARED NEEDS CONFIRMATION
+- grilled-halloumi-plain: Grilled Halloumi [Main] — yield: 40 serves — 2 slices per guest — DECLARED NEEDS CONFIRMATION
+- spinach-feta-pastizzi-warm: Spinach & Feta Pastizzis with Tzatziki [Platter] — yield: 40–48 pieces — DECLARED NEEDS CONFIRMATION
+- fruit-salad-yoghurt: Fruit Salad & Yoghurt [Corporate] — yield: 40 serves @ 150 g each — DECLARED NEEDS CONFIRMATION
+- dessert-grazing-table-assembly: Dessert Grazing Table [Platter] — yield: 1 m table feeds 40 guests | 2 m table feeds 80–100 | 3 m table feeds 120–150 — DECLARED NEEDS CONFIRMATION
+- roving-tiramisu-cups: Roving Tiramisu Cups [Dessert] — yield: 40 individual 80–100 ml cups — DECLARED NEEDS CONFIRMATION
+- margherita-pizza: Margherita Pizza [Main] — yield: 1 pizza · scale base batch for volume — DECLARED NEEDS CONFIRMATION
+- pumpkin-soup: Pumpkin Soup [Starter] — yield: Approx. 4–5 L — 20–25 serves @ 200 ml — DECLARED NEEDS CONFIRMATION
+- stuffed-squid: Stuffed Squid [Main] — yield: 1 serve — scale for Italian Long Lunch covers — DECLARED NEEDS CONFIRMATION
+- cannelloni-ricotta-spinach: Cannelloni Ricotta & Spinach [Main] — yield: 2 shells per serve — scale batch for covers — DECLARED NEEDS CONFIRMATION
+- porchetta-salsa-verde: Porchetta with Salsa Verde [Main] — yield: Approx. 12 kg rolled porchetta — 40–50 serves — DECLARED NEEDS CONFIRMATION
+- cannellini-beans-pancetta-asparagus: Cannellini Beans with Pancetta & Asparagus [Side] — yield: Approx. 8–10 kg finished beans — 40 serves @ 200 g — DECLARED NEEDS CONFIRMATION
+- rib-fillet-300: Rib Fillet 300 g [Main] — yield: 1 serve @ 300 g raw rib fillet — DECLARED NEEDS CONFIRMATION
+- oysters-florentine: Oysters Florentine [Starter] — yield: 1 oyster per serve — scale for dozen orders — DECLARED NEEDS CONFIRMATION
+- poached-salmon: Poached Salmon [Main] — yield: 1 serve @ 125 g salmon fillet — DECLARED NEEDS CONFIRMATION
+- white-bread-roll-dough: White Bread Roll Dough [Bakery] — yield: 775 g dough batch — approx. 8–10 rolls — DECLARED NEEDS CONFIRMATION
+
+UNREGISTERED SERVICE-VARIANT GAPS
+---------------------------------
+None
 
