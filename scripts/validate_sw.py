@@ -163,6 +163,35 @@ def main() -> int:
     else:
         ok("CACHEABLE covers core data directories")
 
+    riviera_network_decl = source.find("const NETWORK_FIRST_RIVIERA_DATA")
+    riviera_network_route = source.find("if (NETWORK_FIRST_RIVIERA_DATA.test(url.pathname))")
+    cache_first_route = source.find("if (CACHEABLE.test(url.pathname))")
+    if (
+        riviera_network_decl >= 0
+        and riviera_network_route >= 0
+        and cache_first_route >= 0
+        and riviera_network_route < cache_first_route
+        and "fetch(e.request, { cache: 'no-store' })"
+        in source[riviera_network_route:cache_first_route]
+    ):
+        ok("Riviera operational data is network-first with offline fallback")
+    else:
+        errors += 1
+        fail("Riviera operational data must bypass cache-first handling")
+
+    navigation_start = source.find("if (e.request.mode === 'navigate')")
+    navigation_end = source.find("NETWORK_FIRST_RIVIERA_DATA.test", navigation_start)
+    if (
+        navigation_start >= 0
+        and navigation_end > navigation_start
+        and "fetch(e.request, { cache: 'no-store' })"
+        in source[navigation_start:navigation_end]
+    ):
+        ok("navigation refreshes online before using the offline cache")
+    else:
+        errors += 1
+        fail("navigation must be network-first with an offline cache fallback")
+
     if "self.skipWaiting()" in source and "self.clients.claim()" in source:
         ok("install/activate lifecycle claims clients")
     else:

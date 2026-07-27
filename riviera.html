@@ -1953,8 +1953,8 @@ async function loadRivieraBuiltinsFromNetwork() {
   const url = base + '/' + RIVIERA_BUILTINS_URL.replace(/^\/+/, '');
   const aliasesUrl = base + '/' + RIVIERA_ALIASES_URL.replace(/^\/+/, '');
   const [res, aliasesRes] = await Promise.all([
-    fetch(url),
-    fetch(aliasesUrl).catch(() => null)
+    fetch(url, { cache: 'no-store' }),
+    fetch(aliasesUrl, { cache: 'no-store' }).catch(() => null)
   ]);
   if (!res.ok) throw new Error('Could not load ' + RIVIERA_BUILTINS_URL + ' (' + res.status + ')');
   const data = await res.json();
