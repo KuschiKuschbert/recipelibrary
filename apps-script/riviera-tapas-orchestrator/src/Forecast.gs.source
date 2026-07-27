@@ -1,0 +1,512 @@
+function generateTapasDraft() {
+  var lock = LockService.getScriptLock();
+  if (!lock.tryLock(1000)) {
+    throw new Error("Another Riviera orchestrator run is active.");
+  }
+  var spreadsheet;
+  var runId = newRunId_("TAPAS-DRAFT");
+  try {
+    spreadsheet = getControlSpreadsheet_();
+    var config = getConfig_(spreadsheet);
+    validateRequiredConfig_(config, [
+      "RECIPE_RELEASE_ID",
+      "RECIPE_GITHUB_COMMIT",
+      "MAX_STOCK_AGE_DAYS"
+    ]);
+    startRun_(spreadsheet, runId, "TAPAS_FORECAST");
+
+    var bookings = readAuthoritativeBookings_(spreadsheet);
+    var target = resolveTargetService_(config, bookings);
+    var sales = readAuthoritativeSales_(spreadsheet);
+    var history = selectComparableSundays_(
+      sales,
+      bookings,
+      target.date,
+      13
+    );
+    if (!history.length) {
+      throw new Error(
+        "No comparable Sunday has both a sales report and covers. " +
+        "Upload genuine Tapas sales and booking/cover data first."
+      );
+    }
+
+    var menuMaps = buildMenuMaps_(spreadsheet);
+    var menuItems = Object.keys(menuMaps.byId)
+      .map(function (key) {
+        return menuMaps.byId[key];
+      })
+      .filter(function (item, index, array) {
+        return array.map(function (candidate) {
+          return candidate.menuItemId;
+        }).indexOf(item.menuItemId) === index;
+      })
+      .sort(function (a, b) {
+        return a.itemName.localeCompare(b.itemName);
+      });
+    var stockSnapshot = readLatestStockSnapshot_(
+      spreadsheet,
+      target.date
+    );
+    var maxStockAge = Number(config.MAX_STOCK_AGE_DAYS);
+    if (!isFinite(maxStockAge) || maxStockAge < 0) {
+      throw new Error("MAX_STOCK_AGE_DAYS must be a non-negative number.");
+    }
+
+    var rows = menuItems.map(function (item) {
+      return buildForecastRow_({
+        runId: runId,
+        item: item,
+        target: target,
+        history: history,
+        sales: sales,
+        stockSnapshot: stockSnapshot,
+        maxStockAge: maxStockAge,
+        deductPostStockSales: isTrue_(config.DEDUCT_POST_STOCK_SALES)
+      });
+    });
+    appendRows_(
+      spreadsheet.getSheetByName(RIVIERA.SHEETS.FORECAST),
+      rows
+    );
+    writeDraftSheet_(spreadsheet, runId, target, rows);
+
+    var blocked = rows.filter(function (row) {
+      return row[21] !== "READY";
+    }).length;
+    finishRun_(spreadsheet, runId, {
+      status: "DRAFT",
+      accepted: rows.length,
+      quarantined: blocked,
+      targetServiceDate: dateKey_(target.date),
+      bookedCovers: target.covers,
+      message:
+        "Draft only; no 9% buffer. " + blocked +
+        " row(s) require a count, history, mapping, or pull-unit action."
+    });
+    spreadsheet.toast(
+      "Draft created for " + dateKey_(target.date) +
+      ". " + blocked + " row(s) need attention.",
+      "Tapas draft",
+      8
+    );
+    return {
+      runId: runId,
+      targetServiceDate: dateKey_(target.date),
+      bookedCovers: target.covers,
+      rows: rows.length,
+      blocked: blocked
+    };
+  } catch (error) {
+    if (spreadsheet &&
+        spreadsheet.getSheetByName(RIVIERA.SHEETS.RUNS)) {
+      try {
+        finishRun_(spreadsheet, runId, {
+          status: "FAILED",
+          message: error.message
+        });
+      } catch (ignored) {
+        // Preserve original failure.
+      }
+    }
+    throw error;
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function resolveTargetService_(config, bookings) {
+  var override = parseDate_(config.TARGET_SERVICE_DATE);
+  if (config.TARGET_SERVICE_DATE && !override) {
+    throw new Error("TARGET_SERVICE_DATE must be YYYY-MM-DD.");
+  }
+  if (override && !isSunday_(override)) {
+    throw new Error("TARGET_SERVICE_DATE must be a Sunday.");
+  }
+  var today = parseDate_(dateKey_(new Date()));
+  var targetDate = override;
+  if (!targetDate) {
+    var future = Object.keys(bookings)
+      .map(parseDate_)
+      .filter(function (date) {
+        return date && date.getTime() >= today.getTime() &&
+          bookings[dateKey_(date)].covers >= 0;
+      })
+      .sort(function (a, b) {
+        return a.getTime() - b.getTime();
+      });
+    targetDate = future[0] || null;
+  }
+  if (!targetDate) {
+    throw new Error(
+      "No upcoming Sunday booking is available. Upload Tapas bookings " +
+      "or set TARGET_SERVICE_DATE."
+    );
+  }
+  var booking = bookings[dateKey_(targetDate)];
+  if (!booking) {
+    throw new Error(
+      "No booking report covers " + dateKey_(targetDate) +
+      ". A target date alone cannot invent booked covers."
+    );
+  }
+  return {
+    date: targetDate,
+    covers: booking.covers,
+    sourceHash: booking.hash,
+    importedAt: booking.importedAt
+  };
+}
+
+function readAuthoritativeSales_(spreadsheet) {
+  var rows = rowsAsObjects_(
+    spreadsheet.getSheetByName(RIVIERA.SHEETS.SALES)
+  );
+  var snapshots = {};
+  rows.forEach(function (row) {
+    var date = parseDate_(row["Service Date"]);
+    var hash = String(row["Source SHA-256"] || "");
+    var itemId = String(row["Menu Item ID"] || "").trim();
+    if (!date || !hash || !itemId) {
+      return;
+    }
+    var dateKey = dateKey_(date);
+    var snapshotKey = dateKey + "|" + hash;
+    if (!snapshots[snapshotKey]) {
+      snapshots[snapshotKey] = {
+        date: date,
+        dateKey: dateKey,
+        hash: hash,
+        importedAt: "",
+        covers: "",
+        items: {},
+        observed: {}
+      };
+    }
+    var snapshot = snapshots[snapshotKey];
+    snapshot.importedAt = maxText_(
+      snapshot.importedAt,
+      String(row["Imported At"] || "")
+    );
+    var covers = parseRequiredNumber_(row.Covers);
+    if (covers !== null) {
+      snapshot.covers = snapshot.covers === "" ?
+        covers : Math.max(snapshot.covers, covers);
+    }
+    snapshot.items[itemId] =
+      (snapshot.items[itemId] || 0) +
+      parseOptionalNumber_(row["Net Qty"], 0);
+    snapshot.observed[itemId] = true;
+  });
+
+  var authoritative = {};
+  Object.keys(snapshots).forEach(function (key) {
+    var candidate = snapshots[key];
+    var current = authoritative[candidate.dateKey];
+    if (!current || candidate.importedAt > current.importedAt) {
+      authoritative[candidate.dateKey] = candidate;
+    }
+  });
+  return authoritative;
+}
+
+function readAuthoritativeBookings_(spreadsheet) {
+  var rows = rowsAsObjects_(
+    spreadsheet.getSheetByName(RIVIERA.SHEETS.BOOKINGS)
+  );
+  var snapshots = {};
+  rows.forEach(function (row) {
+    var date = parseDate_(row["Service Date"]);
+    var hash = String(row["Source SHA-256"] || "");
+    if (!date || !hash) {
+      return;
+    }
+    var dateKey = dateKey_(date);
+    var snapshotKey = dateKey + "|" + hash;
+    if (!snapshots[snapshotKey]) {
+      snapshots[snapshotKey] = {
+        date: date,
+        dateKey: dateKey,
+        hash: hash,
+        importedAt: "",
+        covers: 0
+      };
+    }
+    var snapshot = snapshots[snapshotKey];
+    snapshot.importedAt = maxText_(
+      snapshot.importedAt,
+      String(row["Imported At"] || "")
+    );
+    var status = String(row.Status || "").trim().toUpperCase();
+    if (["CANCELLED", "CANCELED", "DECLINED", "NO SHOW"].indexOf(status) === -1) {
+      snapshot.covers += parseOptionalNumber_(row["Booked Covers"], 0);
+    }
+  });
+
+  var authoritative = {};
+  Object.keys(snapshots).forEach(function (key) {
+    var candidate = snapshots[key];
+    var current = authoritative[candidate.dateKey];
+    if (!current || candidate.importedAt > current.importedAt) {
+      authoritative[candidate.dateKey] = candidate;
+    }
+  });
+  return authoritative;
+}
+
+function selectComparableSundays_(sales, bookings, targetDate, limit) {
+  return Object.keys(sales)
+    .map(function (key) {
+      var service = sales[key];
+      var covers = service.covers;
+      if ((covers === "" || covers === null) && bookings[key]) {
+        covers = bookings[key].covers;
+      }
+      return {
+        date: service.date,
+        dateKey: key,
+        covers: covers,
+        items: service.items,
+        observed: service.observed
+      };
+    })
+    .filter(function (service) {
+      return isSunday_(service.date) &&
+        service.date.getTime() < targetDate.getTime() &&
+        service.covers !== "" &&
+        service.covers !== null &&
+        service.covers > 0;
+    })
+    .sort(function (a, b) {
+      return b.date.getTime() - a.date.getTime();
+    })
+    .slice(0, limit)
+    .sort(function (a, b) {
+      return a.date.getTime() - b.date.getTime();
+    });
+}
+
+function readLatestStockSnapshot_(spreadsheet, targetDate) {
+  var rows = rowsAsObjects_(
+    spreadsheet.getSheetByName(RIVIERA.SHEETS.STOCK)
+  );
+  var snapshots = {};
+  rows.forEach(function (row) {
+    var date = parseDate_(row["Stocktake Date"]);
+    var hash = String(row["Source SHA-256"] || "");
+    var itemId = String(row["Menu Item ID"] || "").trim();
+    if (!date || !hash || !itemId ||
+        date.getTime() > targetDate.getTime()) {
+      return;
+    }
+    var key = dateKey_(date) + "|" + hash;
+    if (!snapshots[key]) {
+      snapshots[key] = {
+        date: date,
+        hash: hash,
+        importedAt: "",
+        items: {}
+      };
+    }
+    snapshots[key].importedAt = maxText_(
+      snapshots[key].importedAt,
+      String(row["Imported At"] || "")
+    );
+    snapshots[key].items[itemId] = {
+      quantity: parseRequiredNumber_(row["On Hand Qty"]),
+      uom: normalizeText_(row.UOM)
+    };
+  });
+
+  var candidates = Object.keys(snapshots).map(function (key) {
+    return snapshots[key];
+  }).sort(function (a, b) {
+    var dateDifference = b.date.getTime() - a.date.getTime();
+    return dateDifference ||
+      b.importedAt.localeCompare(a.importedAt);
+  });
+  return candidates[0] || null;
+}
+
+function buildForecastRow_(context) {
+  var item = context.item;
+  var sampleCovers = context.history.reduce(function (sum, service) {
+    return sum + service.covers;
+  }, 0);
+  var sampleNet = context.history.reduce(function (sum, service) {
+    return sum + (service.items[item.menuItemId] || 0);
+  }, 0);
+  var observedSundays = context.history.filter(function (service) {
+    return service.observed[item.menuItemId];
+  }).length;
+  var ratio = observedSundays && sampleCovers ?
+    sampleNet / sampleCovers : null;
+  var grossTarget = ratio === null ?
+    null : Math.ceil(ratio * context.target.covers);
+
+  var stock = calculateStockPosition_(context, grossTarget);
+  var toPrep = grossTarget === null || stock.onHandServes === null ?
+    null : Math.max(0, grossTarget - stock.onHandServes);
+  var rounded = roundUpToUnit_(toPrep, item.pullUnitServes);
+  var readiness = "READY";
+  var notes = [];
+  if (!observedSundays) {
+    readiness = "HISTORY REQUIRED";
+    notes.push("Item is active but absent from the selected POS history.");
+  } else if (stock.onHandServes === null) {
+    readiness = stock.status;
+  } else if (!item.pullUnitServes) {
+    readiness = "PULL UNIT REQUIRED";
+  }
+  if (context.history.length < 13) {
+    notes.push(
+      "Only " + context.history.length +
+      " comparable Sunday(s) available; target is 13."
+    );
+  }
+  notes.push(stock.note);
+  notes.push("No automatic 9% Tapas buffer.");
+  if (item.notes) {
+    notes.push(item.notes);
+  }
+
+  return [
+    context.runId,
+    dateKey_(context.target.date),
+    context.target.covers,
+    item.menuItemId,
+    item.recipeId,
+    item.itemName,
+    context.history.length,
+    sampleCovers,
+    sampleNet,
+    ratio === null ? "" : formatNumber_(ratio, 4),
+    grossTarget === null ? "" : grossTarget,
+    stock.observedAt,
+    stock.observedQty === null ? "" : stock.observedQty,
+    stock.onHandServes === null ? "" : formatNumber_(stock.onHandServes, 2),
+    stock.status,
+    toPrep === null ? "" : formatNumber_(toPrep, 2),
+    item.piecesPerServe === null ? "" : item.piecesPerServe,
+    item.pullUnitServes === null ? "" : item.pullUnitServes,
+    rounded === null ? "" : formatNumber_(rounded, 2),
+    rounded === null || item.piecesPerServe === null ?
+      "" : Math.ceil(rounded * item.piecesPerServe),
+    0,
+    readiness,
+    notes.filter(Boolean).join(" "),
+    "DRAFT"
+  ];
+}
+
+function calculateStockPosition_(context) {
+  var snapshot = context.stockSnapshot;
+  if (!snapshot || !snapshot.items[context.item.menuItemId]) {
+    return {
+      observedAt: snapshot ? dateKey_(snapshot.date) : "",
+      observedQty: null,
+      onHandServes: null,
+      status: "COUNT REQUIRED",
+      note: snapshot ?
+        "Item is missing from the latest stocktake snapshot; no older count was substituted." :
+        "No stocktake snapshot is available; stock was not set to zero."
+    };
+  }
+  var stockRow = snapshot.items[context.item.menuItemId];
+  var ageDays = Math.floor(
+    (context.target.date.getTime() - snapshot.date.getTime()) /
+    (24 * 60 * 60 * 1000)
+  );
+  if (ageDays > context.maxStockAge) {
+    return {
+      observedAt: dateKey_(snapshot.date),
+      observedQty: stockRow.quantity,
+      onHandServes: null,
+      status: "STALE — COUNT REQUIRED",
+      note:
+        "Latest stocktake is " + ageDays +
+        " days before service; no quantity was assumed."
+    };
+  }
+
+  var unitsPerServe;
+  if (stockRow.uom === "serve" || stockRow.uom === "serves") {
+    unitsPerServe = 1;
+  } else {
+    unitsPerServe = context.item.stockUnitsPerServe;
+  }
+  if (!unitsPerServe || unitsPerServe <= 0) {
+    return {
+      observedAt: dateKey_(snapshot.date),
+      observedQty: stockRow.quantity,
+      onHandServes: null,
+      status: "STOCK CONVERSION REQUIRED",
+      note: "Stock units per serve are not confirmed in Menu Recipe Map."
+    };
+  }
+  var observedServes = stockRow.quantity / unitsPerServe;
+  var soldAfterCount = 0;
+  if (context.deductPostStockSales) {
+    Object.keys(context.sales).forEach(function (dateKey) {
+      var service = context.sales[dateKey];
+      if (service.date.getTime() > snapshot.date.getTime() &&
+          service.date.getTime() < context.target.date.getTime()) {
+        soldAfterCount += service.items[context.item.menuItemId] || 0;
+      }
+    });
+  }
+  var estimated = Math.max(0, observedServes - soldAfterCount);
+  return {
+    observedAt: dateKey_(snapshot.date),
+    observedQty: stockRow.quantity,
+    onHandServes: estimated,
+    status: context.deductPostStockSales ?
+      "ESTIMATED FROM MONTHLY BASELINE" : "OBSERVED BASELINE",
+    note: context.deductPostStockSales ?
+      "Observed stock converted to serves, less " +
+        formatNumber_(soldAfterCount, 2) +
+        " net serve(s) sold after the count. Production, waste and transfers " +
+        "must be recorded separately or checked before approval." :
+      "Observed monthly baseline used without post-count sales deduction."
+  };
+}
+
+function writeDraftSheet_(spreadsheet, runId, target, forecastRows) {
+  var sheet = spreadsheet.getSheetByName(RIVIERA.SHEETS.DRAFT);
+  sheet.clearContents();
+  sheet.clearFormats();
+  sheet.getRange(1, 1, 1, RIVIERA.HEADERS.DRAFT.length)
+    .setValues([RIVIERA.HEADERS.DRAFT]);
+  var rows = forecastRows.map(function (row) {
+    return [
+      row[5],
+      row[2],
+      row[10],
+      row[13],
+      row[18],
+      row[19],
+      row[21],
+      row[22]
+    ];
+  });
+  appendRows_(sheet, rows);
+  sheet.getRange(1, 1)
+    .setNote(
+      "DRAFT ONLY\nRun: " + runId +
+      "\nService: " + dateKey_(target.date) +
+      "\nBooked covers: " + target.covers +
+      "\nNo automatic 9% Tapas buffer."
+    );
+  sheet.getRange(1, 1, 1, RIVIERA.HEADERS.DRAFT.length)
+    .setBackground("#8a5a19")
+    .setFontColor("#ffffff")
+    .setFontWeight("bold")
+    .setWrap(true);
+  sheet.setFrozenRows(1);
+  sheet.autoResizeColumns(1, RIVIERA.HEADERS.DRAFT.length);
+}
+
+function maxText_(left, right) {
+  return String(left || "") > String(right || "") ?
+    String(left || "") : String(right || "");
+}

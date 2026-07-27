@@ -1,0 +1,606 @@
+function normalizeText_(value) {
+  return String(value === null || value === undefined ? "" : value)
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .replace(/\s+/g, " ");
+}
+
+function normalizeHeader_(value) {
+  return normalizeText_(value).replace(/\s+/g, "_");
+}
+
+function appendRows_(sheet, rows) {
+  if (!rows || !rows.length) {
+    return;
+  }
+  sheet.getRange(
+    sheet.getLastRow() + 1,
+    1,
+    rows.length,
+    rows[0].length
+  ).setValues(rows);
+}
+
+function rowsAsObjects_(sheet) {
+  if (!sheet || sheet.getLastRow() < 2) {
+    return [];
+  }
+  var values = sheet.getDataRange().getValues();
+  var headers = values[0].map(String);
+  return values.slice(1)
+    .filter(function (row) {
+      return row.some(function (value) {
+        return value !== "" && value !== null;
+      });
+    })
+    .map(function (row) {
+      var object = {};
+      headers.forEach(function (header, index) {
+        object[header] = row[index];
+      });
+      object.__rowNumber = values.indexOf(row) + 1;
+      return object;
+    });
+}
+
+function newRunId_(prefix) {
+  return [
+    prefix,
+    Utilities.formatDate(new Date(), RIVIERA.TIME_ZONE, "yyyyMMdd-HHmmss"),
+    Utilities.getUuid().slice(0, 8)
+  ].join("-");
+}
+
+function nowIso_() {
+  return Utilities.formatDate(
+    new Date(),
+    RIVIERA.TIME_ZONE,
+    "yyyy-MM-dd'T'HH:mm:ssXXX"
+  );
+}
+
+function dateKey_(date) {
+  return Utilities.formatDate(date, RIVIERA.TIME_ZONE, "yyyy-MM-dd");
+}
+
+function parseDate_(value) {
+  if (Object.prototype.toString.call(value) === "[object Date]" &&
+      !isNaN(value.getTime())) {
+    return new Date(value.getFullYear(), value.getMonth(), value.getDate());
+  }
+  var text = String(value || "").trim();
+  if (!text) {
+    return null;
+  }
+  var iso = text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if (iso) {
+    return validatedDate_(Number(iso[1]), Number(iso[2]), Number(iso[3]));
+  }
+  var au = text.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})/);
+  if (au) {
+    return validatedDate_(Number(au[3]), Number(au[2]), Number(au[1]));
+  }
+  var parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return new Date(parsed.getFullYear(), parsed.getMonth(), parsed.getDate());
+  }
+  return null;
+}
+
+function validatedDate_(year, month, day) {
+  var date = new Date(year, month - 1, day);
+  if (date.getFullYear() !== year ||
+      date.getMonth() !== month - 1 ||
+      date.getDate() !== day) {
+    return null;
+  }
+  return date;
+}
+
+function parseRequiredNumber_(value) {
+  if (value === null || value === undefined || String(value).trim() === "") {
+    return null;
+  }
+  var cleaned = String(value)
+    .replace(/[$,%\s]/g, "")
+    .replace(/,/g, "");
+  var number = Number(cleaned);
+  return isFinite(number) ? number : null;
+}
+
+function parseOptionalNumber_(value, fallback) {
+  var parsed = parseRequiredNumber_(value);
+  return parsed === null ? fallback : parsed;
+}
+
+function isTrue_(value) {
+  return ["true", "yes", "y", "1", "active", "offered", "current"].indexOf(
+    String(value || "").trim().toLowerCase()
+  ) !== -1;
+}
+
+function isSunday_(date) {
+  return date && date.getDay() === 0;
+}
+
+function roundUpToUnit_(quantity, unit) {
+  if (quantity === null || quantity === undefined ||
+      unit === null || unit === undefined ||
+      !isFinite(quantity) || !isFinite(unit) || unit <= 0) {
+    return null;
+  }
+  return Math.ceil((quantity - 1e-10) / unit) * unit;
+}
+
+function netSales_(sold, voided, refunded) {
+  return Number(sold) - Number(voided || 0) - Number(refunded || 0);
+}
+
+function computeSha256Hex_(value) {
+  var digest = Utilities.computeDigest(
+    Utilities.DigestAlgorithm.SHA_256,
+    String(value),
+    Utilities.Charset.UTF_8
+  );
+  return digest.map(function (byte) {
+    var unsigned = byte < 0 ? byte + 256 : byte;
+    return ("0" + unsigned.toString(16)).slice(-2);
+  }).join("");
+}
+
+function canonicalTableForHash_(kind, values) {
+  var normalized = values.map(function (row) {
+    return row.map(function (cell) {
+      if (Object.prototype.toString.call(cell) === "[object Date]") {
+        return dateKey_(cell);
+      }
+      return String(cell === null || cell === undefined ? "" : cell).trim();
+    });
+  });
+  return kind + "\n" + JSON.stringify(normalized);
+}
+
+function getHeaderAliases_(kind, config) {
+  var defaults = DEFAULT_HEADER_ALIASES[kind];
+  var key = "HEADER_ALIASES_" + kind;
+  var configured = config[key];
+  if (!configured) {
+    return defaults;
+  }
+  var parsed;
+  try {
+    parsed = JSON.parse(configured);
+  } catch (error) {
+    throw new Error(key + " must contain valid JSON: " + error.message);
+  }
+  var merged = {};
+  Object.keys(defaults).forEach(function (canonical) {
+    var additional = Array.isArray(parsed[canonical]) ?
+      parsed[canonical] : [];
+    merged[canonical] = defaults[canonical].concat(additional)
+      .map(normalizeHeader_)
+      .filter(function (value, index, array) {
+        return value && array.indexOf(value) === index;
+      });
+  });
+  Object.keys(parsed).forEach(function (canonical) {
+    if (!merged[canonical] && Array.isArray(parsed[canonical])) {
+      merged[canonical] = parsed[canonical].map(normalizeHeader_);
+    }
+  });
+  return merged;
+}
+
+function validateHeaders_(kind, headers, config) {
+  var aliases = getHeaderAliases_(kind, config || {});
+  var normalized = headers.map(normalizeHeader_);
+  var indexes = {};
+  var duplicateCanonical = [];
+
+  Object.keys(aliases).forEach(function (canonical) {
+    var matchingIndexes = [];
+    aliases[canonical].concat([canonical]).map(normalizeHeader_)
+      .forEach(function (alias) {
+        normalized.forEach(function (header, index) {
+          if (header === alias && matchingIndexes.indexOf(index) === -1) {
+            matchingIndexes.push(index);
+          }
+        });
+      });
+    if (matchingIndexes.length > 1) {
+      duplicateCanonical.push(canonical);
+    } else if (matchingIndexes.length === 1) {
+      indexes[canonical] = matchingIndexes[0];
+    }
+  });
+
+  var requiredByKind = {};
+  requiredByKind[RIVIERA.KINDS.SALES] = ["service_date", "sold_qty"];
+  requiredByKind[RIVIERA.KINDS.BOOKINGS] = ["service_date", "booked_covers"];
+  requiredByKind[RIVIERA.KINDS.STOCK] = ["stocktake_date", "on_hand_qty"];
+  requiredByKind[RIVIERA.KINDS.CHANGES] = [
+    "previous_rule", "new_rule", "scope", "affected_records"
+  ];
+  var missing = (requiredByKind[kind] || []).filter(function (canonical) {
+    return indexes[canonical] === undefined;
+  });
+  if ((kind === RIVIERA.KINDS.SALES || kind === RIVIERA.KINDS.STOCK) &&
+      indexes.item_id === undefined && indexes.item_name === undefined) {
+    missing.push("item_id OR item_name");
+  }
+
+  var duplicateHeaders = normalized.filter(function (header, index, array) {
+    return header && array.indexOf(header) !== index;
+  });
+  var knownHeaders = [];
+  Object.keys(aliases).forEach(function (canonical) {
+    knownHeaders = knownHeaders.concat(
+      aliases[canonical].concat([canonical]).map(normalizeHeader_)
+    );
+  });
+  var unknownHeaders = normalized.filter(function (header) {
+    return header && knownHeaders.indexOf(header) === -1;
+  });
+
+  return {
+    ok: !missing.length && !duplicateCanonical.length &&
+      !duplicateHeaders.length && !unknownHeaders.length,
+    indexes: indexes,
+    missing: missing,
+    duplicateCanonical: duplicateCanonical,
+    duplicateHeaders: duplicateHeaders,
+    unknownHeaders: unknownHeaders
+  };
+}
+
+function classifyHeaderFailure_(validation) {
+  if ((validation.duplicateCanonical || []).length ||
+      (validation.duplicateHeaders || []).length ||
+      (validation.unknownHeaders || []).length) {
+    return "SCHEMA_CHANGED";
+  }
+  if ((validation.missing || []).length) {
+    return "MISSING_HEADER";
+  }
+  return "SCHEMA_CHANGED";
+}
+
+function orchestratorError_(code, message, details) {
+  var error = new Error(message);
+  error.code = code;
+  error.details = details || null;
+  return error;
+}
+
+function cell_(row, indexes, canonical) {
+  var index = indexes[canonical];
+  return index === undefined ? "" : row[index];
+}
+
+function logException_(spreadsheet, details) {
+  var sheet = spreadsheet.getSheetByName(RIVIERA.SHEETS.EXCEPTIONS);
+  appendRows_(sheet, [[
+    nowIso_(),
+    details.runId || "",
+    details.kind || "",
+    details.fileId || "",
+    details.fileName || "",
+    details.sourceRow || "",
+    details.code || "UNCLASSIFIED",
+    details.message || "",
+    safeJson_(details.payload),
+    details.status || "OPEN"
+  ]]);
+}
+
+function safeJson_(value) {
+  if (value === undefined || value === null || value === "") {
+    return "";
+  }
+  try {
+    return JSON.stringify(value).slice(0, 45000);
+  } catch (error) {
+    return String(value).slice(0, 45000);
+  }
+}
+
+function logIntake_(spreadsheet, details) {
+  appendRows_(
+    spreadsheet.getSheetByName(RIVIERA.SHEETS.INTAKE_LOG),
+    [[
+      nowIso_(),
+      details.runId || "",
+      details.kind || "",
+      details.fileId || "",
+      details.fileName || "",
+      details.mimeType || "",
+      details.hash || "",
+      details.outcome || "",
+      details.accepted || 0,
+      details.quarantined || 0,
+      details.destinationFolderId || "",
+      details.message || ""
+    ]]
+  );
+}
+
+function startRun_(spreadsheet, runId, runType) {
+  appendRows_(spreadsheet.getSheetByName(RIVIERA.SHEETS.RUNS), [[
+    runId, runType, nowIso_(), "", "RUNNING", "", "", 0, 0, "", "",
+    getConfig_(spreadsheet).RECIPE_RELEASE_ID || "",
+    getConfig_(spreadsheet).RECIPE_GITHUB_COMMIT || "",
+    "", "", "", ""
+  ]]);
+}
+
+function finishRun_(spreadsheet, runId, details) {
+  var sheet = spreadsheet.getSheetByName(RIVIERA.SHEETS.RUNS);
+  var values = sheet.getDataRange().getValues();
+  for (var i = values.length - 1; i >= 1; i -= 1) {
+    if (String(values[i][0]) === runId) {
+      var row = i + 1;
+      var existing = values[i];
+      var updated = [
+        runId,
+        existing[1],
+        existing[2],
+        nowIso_(),
+        details.status || "COMPLETED",
+        details.sourceFileIds || existing[5] || "",
+        details.hashes || existing[6] || "",
+        details.accepted === undefined ? existing[7] : details.accepted,
+        details.quarantined === undefined ? existing[8] : details.quarantined,
+        details.targetServiceDate || existing[9] || "",
+        details.bookedCovers === undefined ? existing[10] : details.bookedCovers,
+        existing[11],
+        existing[12],
+        details.approvedBy || existing[13] || "",
+        details.approvedAt || existing[14] || "",
+        details.publishedFileId || existing[15] || "",
+        details.message || existing[16] || ""
+      ];
+      sheet.getRange(row, 1, 1, updated.length).setValues([updated]);
+      return;
+    }
+  }
+  throw new Error("Run receipt not found for " + runId);
+}
+
+function isDuplicateHash_(spreadsheet, kind, hash) {
+  var rows = rowsAsObjects_(
+    spreadsheet.getSheetByName(RIVIERA.SHEETS.INTAKE_LOG)
+  );
+  return rows.some(function (row) {
+    return String(row["Intake Kind"]) === kind &&
+      String(row["SHA-256"]) === hash &&
+      [
+        "PROCESSED",
+        "PROCESSED_WITH_EXCEPTIONS",
+        "PROCESSED_MOVE_FAILED",
+        "PROCESSED_WITH_EXCEPTIONS_MOVE_FAILED",
+        "DUPLICATE"
+      ].indexOf(
+        String(row["Outcome"])
+      ) !== -1;
+  });
+}
+
+function moveFileSafely_(file, folder) {
+  if (!folder) {
+    return "";
+  }
+  file.moveTo(folder);
+  return folder.getId();
+}
+
+function readInputTables_(file) {
+  var mimeType = file.getMimeType();
+  if (mimeType === MimeType.CSV || /\.csv$/i.test(file.getName())) {
+    return [{
+      name: file.getName(),
+      values: Utilities.parseCsv(file.getBlob().getDataAsString("UTF-8"))
+    }];
+  }
+  if (mimeType === MimeType.GOOGLE_SHEETS) {
+    var source = SpreadsheetApp.openById(file.getId());
+    return source.getSheets().map(function (sheet) {
+      return {
+        name: sheet.getName(),
+        values: trimEmptyTable_(sheet.getDataRange().getValues())
+      };
+    }).filter(function (table) {
+      return table.values.length > 0;
+    });
+  }
+  throw new Error(
+    "Unsupported file type '" + mimeType +
+    "'. Upload CSV or a native Google Sheet."
+  );
+}
+
+function trimEmptyTable_(values) {
+  var rows = values.filter(function (row) {
+    return row.some(function (cell) {
+      return cell !== "" && cell !== null;
+    });
+  });
+  if (!rows.length) {
+    return [];
+  }
+  var lastColumn = 0;
+  rows.forEach(function (row) {
+    for (var i = row.length - 1; i >= 0; i -= 1) {
+      if (row[i] !== "" && row[i] !== null) {
+        lastColumn = Math.max(lastColumn, i + 1);
+        break;
+      }
+    }
+  });
+  return rows.map(function (row) {
+    return row.slice(0, lastColumn);
+  });
+}
+
+function selectInputTable_(kind, tables, config) {
+  var structural = tables.map(function (table) {
+    var values = trimEmptyTable_(table.values);
+    return {
+      table: {name: table.name, values: values},
+      validation: values.length ?
+        validateHeaders_(kind, values[0], config) :
+        {
+          ok: false,
+          missing: ["header row"],
+          duplicateCanonical: [],
+          duplicateHeaders: [],
+          unknownHeaders: []
+        }
+    };
+  });
+  var matching = structural.filter(function (candidate) {
+    return candidate.validation.ok;
+  });
+  if (matching.length > 1) {
+    throw orchestratorError_(
+      "SCHEMA_CHANGED",
+      "More than one tab matches the " + kind +
+      " schema: " + matching.map(function (candidate) {
+        return candidate.table.name;
+      }).join(", ") + ". Keep one intake table per file.",
+      {matchingTabs: matching.map(function (candidate) {
+        return candidate.table.name;
+      })}
+    );
+  }
+  if (matching.length === 1) {
+    return matching[0];
+  }
+  var first = structural[0];
+  if (!first) {
+    throw orchestratorError_(
+      "MISSING_HEADER",
+      "The source file contains no header row."
+    );
+  }
+  var code = structural.some(function (candidate) {
+    return classifyHeaderFailure_(candidate.validation) === "SCHEMA_CHANGED";
+  }) ? "SCHEMA_CHANGED" : "MISSING_HEADER";
+  var tabSummary = structural.map(function (candidate) {
+    return {
+      tab: candidate.table.name,
+      missing: candidate.validation.missing || [],
+      ambiguousAliases: candidate.validation.duplicateCanonical || [],
+      duplicateHeaders: candidate.validation.duplicateHeaders || [],
+      unknownHeaders: candidate.validation.unknownHeaders || []
+    };
+  });
+  throw orchestratorError_(
+    code,
+    "No tab matches the " + kind + " schema. " +
+    tabSummary.map(function (summary) {
+      return "'" + summary.tab + "': missing [" +
+        summary.missing.join(", ") + "], ambiguous [" +
+        summary.ambiguousAliases.join(", ") + "], duplicate [" +
+        summary.duplicateHeaders.join(", ") + "], unknown [" +
+        summary.unknownHeaders.join(", ") + "]";
+    }).join(" | "),
+    {tabs: tabSummary}
+  );
+}
+
+function buildMenuMaps_(spreadsheet) {
+  var byId = {};
+  var byName = {};
+  rowsAsObjects_(spreadsheet.getSheetByName(RIVIERA.SHEETS.MENU_MAP))
+    .filter(function (row) {
+      return isTrue_(row.Active);
+    })
+    .forEach(function (row) {
+      var item = {
+        menuItemId: String(row["Menu Item ID"] || "").trim(),
+        itemName: String(row["Menu Item Name"] || "").trim(),
+        recipeId: String(row["Recipe ID"] || "").trim(),
+        piecesPerServe: parseRequiredNumber_(row["Pieces Per Serve"]),
+        pieceWeightG: parseRequiredNumber_(row["Piece Weight g"]),
+        stockUom: normalizeText_(row["Stock UOM"]),
+        stockUnitsPerServe: parseRequiredNumber_(row["Stock Units Per Serve"]),
+        pullUnitServes: parseRequiredNumber_(row["Pull Unit Serves"]),
+        pullUnitLabel: String(row["Pull Unit Label"] || "").trim(),
+        status: String(row.Status || "").trim(),
+        notes: String(row.Notes || "").trim()
+      };
+      if (!item.menuItemId) {
+        return;
+      }
+      byId[normalizeText_(item.menuItemId)] = item;
+      [item.itemName].concat(
+        String(row.Aliases || "").split("|")
+      ).forEach(function (name) {
+        var key = normalizeText_(name);
+        if (key) {
+          byName[key] = item;
+        }
+      });
+    });
+
+  var posById = {};
+  var posByName = {};
+  rowsAsObjects_(spreadsheet.getSheetByName(RIVIERA.SHEETS.POS_MAP))
+    .filter(function (row) {
+      return isTrue_(row.Active);
+    })
+    .forEach(function (row) {
+      var menuItemId = normalizeText_(row["Menu Item ID"]);
+      if (!byId[menuItemId]) {
+        return;
+      }
+      var posId = normalizeText_(row["POS Item ID"]);
+      var posName = normalizeText_(row["POS Item Name"]);
+      if (posId) {
+        posById[posId] = byId[menuItemId];
+      }
+      if (posName) {
+        posByName[posName] = byId[menuItemId];
+      }
+    });
+  return {
+    byId: byId,
+    byName: byName,
+    posById: posById,
+    posByName: posByName
+  };
+}
+
+function resolveMenuItem_(maps, itemId, itemName) {
+  var id = normalizeText_(itemId);
+  var name = normalizeText_(itemName);
+  if (id) {
+    return maps.posById[id] || maps.byId[id] || null;
+  }
+  return name ?
+    (maps.posByName[name] || maps.byName[name] || null) :
+    null;
+}
+
+function validateRequiredConfig_(config, keys) {
+  var missing = keys.filter(function (key) {
+    return !String(config[key] || "").trim();
+  });
+  if (missing.length) {
+    throw new Error(
+      "Missing required Config values: " + missing.join(", ")
+    );
+  }
+}
+
+function formatNumber_(value, digits) {
+  if (value === "" || value === null || value === undefined ||
+      !isFinite(Number(value))) {
+    return "";
+  }
+  return Number(Number(value).toFixed(digits === undefined ? 2 : digits));
+}

@@ -1,0 +1,733 @@
+/**
+ * Riviera Tapas Intake Orchestrator
+ *
+ * Drive-first and approval-gated. Operational data stays in the control
+ * workbook until a human approves publication of the current prep sheet.
+ */
+
+var RIVIERA = Object.freeze({
+  VERSION: "1.0.0",
+  TIME_ZONE: "Australia/Brisbane",
+  CURRENT_PREP_FILE_NAME: "Riviera — Current Sunday Tapas Prep Sheet",
+  SHEETS: Object.freeze({
+    CONFIG: "Config",
+    INTAKE_LOG: "Intake Log",
+    SALES: "Tapas Sales",
+    BOOKINGS: "Tapas Bookings",
+    STOCK: "Stock Baseline",
+    POS_MAP: "POS Recipe Map",
+    MENU_MAP: "Menu Recipe Map",
+    FORECAST: "Forecast & Prep",
+    DRAFT: "Tapas Prep — Draft",
+    EXCEPTIONS: "Exceptions",
+    CHANGES: "Change Receipts",
+    RUNS: "Run Receipts"
+  }),
+  KINDS: Object.freeze({
+    SALES: "TAPAS_SALES",
+    BOOKINGS: "TAPAS_BOOKINGS",
+    STOCK: "MONTHLY_STOCKTAKE",
+    CHANGES: "CONVERSATION_CHANGES"
+  }),
+  VALID_CHANGE_SCOPES: Object.freeze([
+    "PERMANENT RIVIERA STANDARD",
+    "PACKAGE-SPECIFIC STANDARD",
+    "RECIPE-SPECIFIC STANDARD",
+    "EVENT-SPECIFIC INSTRUCTION",
+    "WEEK-SPECIFIC INSTRUCTION"
+  ]),
+  HEADERS: Object.freeze({
+    CONFIG: ["Key", "Value", "Required", "Notes"],
+    INTAKE_LOG: [
+      "Processed At", "Run ID", "Intake Kind", "Source File ID",
+      "Source File Name", "Source MIME Type", "SHA-256", "Outcome",
+      "Rows Accepted", "Rows Quarantined", "Destination Folder ID", "Message"
+    ],
+    SALES: [
+      "Run ID", "Source SHA-256", "Source File ID", "Source File Name",
+      "Source Row", "Service Date", "Menu Item ID", "Recipe ID",
+      "Item Name", "Sold Qty", "Voided Qty", "Refunded Qty", "Net Qty",
+      "Covers", "Imported At"
+    ],
+    BOOKINGS: [
+      "Run ID", "Source SHA-256", "Source File ID", "Source File Name",
+      "Source Row", "Booking ID", "Service Date", "Booked Covers",
+      "Status", "Event Name", "Notes", "Imported At"
+    ],
+    STOCK: [
+      "Run ID", "Source SHA-256", "Source File ID", "Source File Name",
+      "Source Row", "Stocktake Date", "Menu Item ID", "Recipe ID",
+      "Item Name", "On Hand Qty", "UOM", "Imported At"
+    ],
+    POS_MAP: [
+      "POS Item ID", "POS Item Name", "Menu Item ID", "Active",
+      "Notes"
+    ],
+    MENU_MAP: [
+      "Menu Item ID", "Menu Item Name", "Aliases", "Recipe ID",
+      "Pieces Per Serve", "Piece Weight g", "Stock UOM",
+      "Stock Units Per Serve", "Pull Unit Serves", "Pull Unit Label",
+      "Active", "Status", "Notes"
+    ],
+    FORECAST: [
+      "Run ID", "Service Date", "Booked Covers", "Menu Item ID",
+      "Recipe ID", "Item Name", "Comparable Sundays", "Sample Covers",
+      "Sample Net Serves", "Serves Per Cover", "Gross Target Serves",
+      "Stock Observed At", "Observed Stock Qty", "Estimated On Hand Serves",
+      "Stock Status", "To Prep Serves", "Pieces Per Serve",
+      "Pull Unit Serves", "Rounded Pull Serves", "Rounded Pieces",
+      "Automatic Buffer %", "Readiness", "Notes", "Publication Status"
+    ],
+    DRAFT: [
+      "Menu Item", "Booked Covers", "Gross Target Serves",
+      "Estimated On Hand Serves", "Prep / Pull Serves", "Pieces",
+      "Readiness", "Notes"
+    ],
+    EXCEPTIONS: [
+      "Logged At", "Run ID", "Intake Kind", "Source File ID",
+      "Source File Name", "Source Row", "Exception Code", "Message",
+      "Payload", "Status"
+    ],
+    CHANGES: [
+      "Receipt ID", "Created At", "Source SHA-256", "Source File ID",
+      "Source Row", "Previous Rule", "New Rule", "Scope", "Target Route",
+      "Effective Date", "Expiry Date", "Affected Records", "Requested By",
+      "Drive Status", "GitHub Status", "ChatGPT Status",
+      "Approval Status", "Approved By", "Approved At", "Notes"
+    ],
+    RUNS: [
+      "Run ID", "Run Type", "Started At", "Finished At", "Status",
+      "Source File IDs", "Source SHA-256 Values", "Rows Accepted",
+      "Rows Quarantined", "Target Service Date", "Booked Covers",
+      "Recipe Release ID", "Recipe Git Commit", "Approved By",
+      "Approved At", "Published File ID", "Message"
+    ]
+  })
+});
+
+var DEFAULT_HEADER_ALIASES = Object.freeze({
+  TAPAS_SALES: {
+    service_date: ["service_date", "date", "sale_date", "business_date", "trading_date"],
+    item_id: ["item_id", "pos_item_id", "product_id", "sku", "plu"],
+    item_name: ["item_name", "product_name", "menu_item", "item", "description"],
+    sold_qty: ["sold_qty", "sold", "quantity", "qty", "units_sold", "sales_qty"],
+    voided_qty: ["voided_qty", "voided", "void_qty", "voids"],
+    refunded_qty: ["refunded_qty", "refunded", "refund_qty", "refunds"],
+    covers: ["covers", "guest_count", "guests", "pax"]
+  },
+  TAPAS_BOOKINGS: {
+    booking_id: ["booking_id", "reservation_id", "event_id", "reference", "ref"],
+    service_date: ["service_date", "booking_date", "event_date", "date"],
+    booked_covers: ["booked_covers", "covers", "guests", "pax", "guest_count"],
+    status: ["status", "booking_status"],
+    event_name: ["event_name", "booking_name", "function_name", "name"],
+    notes: ["notes", "comments", "special_requirements"]
+  },
+  MONTHLY_STOCKTAKE: {
+    stocktake_date: ["stocktake_date", "count_date", "date"],
+    item_id: ["item_id", "menu_item_id", "product_id", "sku"],
+    item_name: ["item_name", "product_name", "menu_item", "item", "description"],
+    on_hand_qty: ["on_hand_qty", "on_hand", "stock_qty", "quantity", "qty", "count"],
+    uom: ["uom", "unit", "units", "measure"],
+    notes: ["notes", "comments"]
+  },
+  CONVERSATION_CHANGES: {
+    previous_rule: ["previous_rule", "old_rule", "before"],
+    new_rule: ["new_rule", "correction", "after"],
+    scope: ["scope", "classification", "change_scope"],
+    effective_date: ["effective_date", "starts", "start_date"],
+    expiry_date: ["expiry_date", "expires", "end_date"],
+    affected_records: ["affected_records", "affected_sop", "records", "applies_to"],
+    requested_by: ["requested_by", "author", "user"],
+    notes: ["notes", "context"]
+  }
+});
+
+var CONFIG_ROWS = [
+  ["CONTROL_SPREADSHEET_ID", "", "YES", "Written automatically by setup."],
+  ["ROOT_FOLDER_ID", "1GNZivM18y2TvjJrHBoYCGVih0HA9koHj", "YES", "Riviera Ops Orchestrator parent Drive folder."],
+  ["SALES_INBOX_FOLDER_ID", "", "YES", "Tapas sales CSV / Google Sheets intake."],
+  ["BOOKINGS_INBOX_FOLDER_ID", "", "YES", "Tapas bookings CSV / Google Sheets intake."],
+  ["STOCK_INBOX_FOLDER_ID", "", "YES", "Monthly stocktake CSV / Google Sheets intake."],
+  ["CHANGES_INBOX_FOLDER_ID", "", "YES", "Conversation change-receipt intake."],
+  ["PROCESSED_FOLDER_ID", "", "YES", "Accepted source files are retained here."],
+  ["EXCEPTIONS_FOLDER_ID", "", "YES", "Structurally invalid source files are retained here."],
+  ["GENERATED_PREP_FOLDER_ID", "", "YES", "Approved current prep sheet and archives."],
+  ["CURRENT_PREP_SHEET_ID", "", "NO", "Set automatically on first approved publication."],
+  ["TARGET_SERVICE_DATE", "", "NO", "Optional YYYY-MM-DD override; otherwise next active booking."],
+  ["MAX_STOCK_AGE_DAYS", "31", "YES", "Older stock is COUNT REQUIRED, never assumed zero."],
+  ["DEDUCT_POST_STOCK_SALES", "TRUE", "YES", "Estimate on hand from baseline less later net sales."],
+  ["RECIPE_RELEASE_ID", "", "YES", "Release ID printed in run receipts."],
+  ["RECIPE_GITHUB_COMMIT", "", "YES", "Recipe database commit printed in run receipts."],
+  ["HEADER_ALIASES_TAPAS_SALES", JSON.stringify(DEFAULT_HEADER_ALIASES.TAPAS_SALES), "YES", "JSON; add aliases without changing code."],
+  ["HEADER_ALIASES_TAPAS_BOOKINGS", JSON.stringify(DEFAULT_HEADER_ALIASES.TAPAS_BOOKINGS), "YES", "JSON; add aliases without changing code."],
+  ["HEADER_ALIASES_MONTHLY_STOCKTAKE", JSON.stringify(DEFAULT_HEADER_ALIASES.MONTHLY_STOCKTAKE), "YES", "JSON; add aliases without changing code."],
+  ["HEADER_ALIASES_CONVERSATION_CHANGES", JSON.stringify(DEFAULT_HEADER_ALIASES.CONVERSATION_CHANGES), "YES", "JSON; add aliases without changing code."]
+];
+
+function onOpen() {
+  SpreadsheetApp.getUi()
+    .createMenu("Riviera Orchestrator")
+    .addItem("Set up / repair control workbook", "setupOrchestrator")
+    .addItem("Create Drive intake folders", "createRivieraIntakeFolders")
+    .addSeparator()
+    .addItem("Process all inboxes now", "processRivieraInbox")
+    .addItem("Generate Tapas draft", "generateTapasDraft")
+    .addItem("Approve & publish current prep", "approveAndPublishCurrentTapasPrep")
+    .addItem("Approve selected change receipt", "approveSelectedChangeReceipt")
+    .addSeparator()
+    .addItem("Install 5-minute inbox watcher", "installFiveMinuteWatcher")
+    .addItem("Remove inbox watcher", "removeInboxWatcher")
+    .addSeparator()
+    .addItem("Run self-test", "runRivieraOrchestratorSelfTest")
+    .addToUi();
+}
+
+/**
+ * One-click live setup. Safe to rerun: existing exact-name folders are reused,
+ * and duplicate exact-name folders are a stop condition.
+ */
+function setupOrchestrator() {
+  setupRivieraOrchestrator();
+  createRivieraIntakeFolders_();
+  return {
+    spreadsheetId: getControlSpreadsheet_().getId(),
+    rootFolderId: getConfig_(getControlSpreadsheet_()).ROOT_FOLDER_ID
+  };
+}
+
+function setupRivieraOrchestrator() {
+  var spreadsheet = getControlSpreadsheet_();
+  ensureSheet_(spreadsheet, RIVIERA.SHEETS.CONFIG, RIVIERA.HEADERS.CONFIG);
+  seedConfig_(spreadsheet);
+
+  var sheetHeaders = {};
+  sheetHeaders[RIVIERA.SHEETS.INTAKE_LOG] = RIVIERA.HEADERS.INTAKE_LOG;
+  sheetHeaders[RIVIERA.SHEETS.SALES] = RIVIERA.HEADERS.SALES;
+  sheetHeaders[RIVIERA.SHEETS.BOOKINGS] = RIVIERA.HEADERS.BOOKINGS;
+  sheetHeaders[RIVIERA.SHEETS.STOCK] = RIVIERA.HEADERS.STOCK;
+  sheetHeaders[RIVIERA.SHEETS.POS_MAP] = RIVIERA.HEADERS.POS_MAP;
+  sheetHeaders[RIVIERA.SHEETS.MENU_MAP] = RIVIERA.HEADERS.MENU_MAP;
+  sheetHeaders[RIVIERA.SHEETS.FORECAST] = RIVIERA.HEADERS.FORECAST;
+  sheetHeaders[RIVIERA.SHEETS.DRAFT] = RIVIERA.HEADERS.DRAFT;
+  sheetHeaders[RIVIERA.SHEETS.EXCEPTIONS] = RIVIERA.HEADERS.EXCEPTIONS;
+  sheetHeaders[RIVIERA.SHEETS.CHANGES] = RIVIERA.HEADERS.CHANGES;
+  sheetHeaders[RIVIERA.SHEETS.RUNS] = RIVIERA.HEADERS.RUNS;
+
+  Object.keys(sheetHeaders).forEach(function (name) {
+    ensureSheet_(spreadsheet, name, sheetHeaders[name]);
+  });
+
+  seedMenuMappings_(spreadsheet);
+  styleControlWorkbook_(spreadsheet);
+  setConfigValue_(spreadsheet, "CONTROL_SPREADSHEET_ID", spreadsheet.getId());
+  PropertiesService.getScriptProperties()
+    .setProperty("CONTROL_SPREADSHEET_ID", spreadsheet.getId());
+  spreadsheet.toast("Riviera orchestrator is ready.", "Setup", 5);
+}
+
+function seedConfig_(spreadsheet) {
+  var sheet = spreadsheet.getSheetByName(RIVIERA.SHEETS.CONFIG);
+  var existing = readKeyValueSheet_(sheet);
+  var rows = CONFIG_ROWS.filter(function (row) {
+    return !Object.prototype.hasOwnProperty.call(existing, row[0]);
+  });
+  appendRows_(sheet, rows);
+  if (!existing.ROOT_FOLDER_ID ||
+      existing.ROOT_FOLDER_ID === "1OcmoRMYGbRwyGYcnrz0Ej3MIwu9RaU9l") {
+    setConfigValue_(
+      spreadsheet,
+      "ROOT_FOLDER_ID",
+      "1GNZivM18y2TvjJrHBoYCGVih0HA9koHj"
+    );
+  }
+}
+
+function seedMenuMappings_(spreadsheet) {
+  var menuSheet = spreadsheet.getSheetByName(RIVIERA.SHEETS.MENU_MAP);
+  var menuRows = [
+    [
+      "polpette", "Polpette", "polpette|meatballs|veal meatballs",
+      "veal-meatballs", 3, 80, "pieces", 3, 1, "serve", true,
+      "ACTIVE", "Distinct from stuffed olives; 3 × 80 g meatballs per Tapas serve."
+    ],
+    [
+      "veal-prosciutto-stuffed-olives", "Veal & Prosciutto Stuffed Olives",
+      "veal olives|stuffed olives|veal and prosciutto crumbed olives",
+      "veal-prosciutto-stuffed-olives", 6, "", "pieces", 6, 1, "serve",
+      true, "ACTIVE WORKING", "Distinct from Polpette; 6 stuffed olives per Tapas serve."
+    ]
+  ];
+  upsertCanonicalRows_(menuSheet, "Menu Item ID", menuRows);
+
+  var posSheet = spreadsheet.getSheetByName(RIVIERA.SHEETS.POS_MAP);
+  var posRows = [
+    ["polpette", "Polpette", "polpette", true, "Canonical Riviera Tapas ID."],
+    [
+      "veal-prosciutto-stuffed-olives",
+      "Veal & Prosciutto Stuffed Olives",
+      "veal-prosciutto-stuffed-olives",
+      true,
+      "Canonical Riviera Tapas ID; 6 pieces per serve."
+    ]
+  ];
+  upsertCanonicalRows_(posSheet, "POS Item ID", posRows);
+}
+
+function upsertCanonicalRows_(sheet, idHeader, canonicalRows) {
+  var headers = sheet.getRange(
+    1, 1, 1, sheet.getLastColumn()
+  ).getDisplayValues()[0];
+  var idColumn = headers.indexOf(idHeader);
+  if (idColumn === -1) {
+    throw new Error(
+      "Cannot seed " + sheet.getName() + ": missing " + idHeader + "."
+    );
+  }
+  var values = sheet.getLastRow() > 1 ?
+    sheet.getRange(
+      2, 1, sheet.getLastRow() - 1, headers.length
+    ).getValues() : [];
+  canonicalRows.forEach(function (canonicalRow) {
+    var targetId = normalizeText_(canonicalRow[idColumn]);
+    var matchingRows = [];
+    values.forEach(function (existingRow, index) {
+      if (normalizeText_(existingRow[idColumn]) === targetId) {
+        matchingRows.push(index + 2);
+      }
+    });
+    if (matchingRows.length > 1) {
+      throw new Error(
+        "Duplicate canonical mapping '" + canonicalRow[idColumn] +
+        "' in " + sheet.getName() + ". Resolve it before setup."
+      );
+    }
+    if (matchingRows.length === 1) {
+      sheet.getRange(
+        matchingRows[0], 1, 1, canonicalRow.length
+      ).setValues([canonicalRow]);
+    } else {
+      appendRows_(sheet, [canonicalRow]);
+      values.push(canonicalRow);
+    }
+  });
+}
+
+function createRivieraIntakeFolders() {
+  setupRivieraOrchestrator();
+  createRivieraIntakeFolders_();
+}
+
+function createRivieraIntakeFolders_() {
+  var spreadsheet = getControlSpreadsheet_();
+  var config = getConfig_(spreadsheet);
+  if (!config.ROOT_FOLDER_ID) {
+    throw new Error("Set ROOT_FOLDER_ID in Config before creating intake folders.");
+  }
+  var root = DriveApp.getFolderById(config.ROOT_FOLDER_ID);
+  var sales = getOrCreateFolder_(root, "00 Inbox — Tapas Sales");
+  var bookings = getOrCreateFolder_(root, "00 Inbox — Tapas Bookings");
+  var stock = getOrCreateFolder_(root, "00 Inbox — Stocktakes");
+  var changes = getOrCreateFolder_(root, "00 Inbox — Conversation Changes");
+  var processed = getOrCreateFolder_(root, "10 Processed");
+  var exceptions = getOrCreateFolder_(root, "20 Exceptions");
+  var generated = getOrCreateFolder_(root, "30 Generated Prep Sheets");
+
+  setConfigValue_(spreadsheet, "SALES_INBOX_FOLDER_ID", sales.getId());
+  setConfigValue_(spreadsheet, "BOOKINGS_INBOX_FOLDER_ID", bookings.getId());
+  setConfigValue_(spreadsheet, "STOCK_INBOX_FOLDER_ID", stock.getId());
+  setConfigValue_(spreadsheet, "CHANGES_INBOX_FOLDER_ID", changes.getId());
+  setConfigValue_(spreadsheet, "PROCESSED_FOLDER_ID", processed.getId());
+  setConfigValue_(spreadsheet, "EXCEPTIONS_FOLDER_ID", exceptions.getId());
+  setConfigValue_(spreadsheet, "GENERATED_PREP_FOLDER_ID", generated.getId());
+  spreadsheet.toast("Drive intake folders created and linked.", "Riviera", 5);
+}
+
+function installFiveMinuteWatcher() {
+  removeInboxWatcher();
+  ScriptApp.newTrigger("processRivieraInbox")
+    .timeBased()
+    .everyMinutes(5)
+    .create();
+  getControlSpreadsheet_().toast("5-minute inbox watcher installed.", "Riviera", 5);
+}
+
+function removeInboxWatcher() {
+  ScriptApp.getProjectTriggers().forEach(function (trigger) {
+    if (trigger.getHandlerFunction() === "processRivieraInbox") {
+      ScriptApp.deleteTrigger(trigger);
+    }
+  });
+}
+
+function getControlSpreadsheet_() {
+  var active = SpreadsheetApp.getActiveSpreadsheet();
+  if (active) {
+    return active;
+  }
+  var id = PropertiesService.getScriptProperties()
+    .getProperty("CONTROL_SPREADSHEET_ID");
+  if (!id) {
+    throw new Error(
+      "No control workbook is active. Bind this script to the workbook or " +
+      "set CONTROL_SPREADSHEET_ID in Script Properties."
+    );
+  }
+  return SpreadsheetApp.openById(id);
+}
+
+function getConfig_(spreadsheet) {
+  var sheet = spreadsheet.getSheetByName(RIVIERA.SHEETS.CONFIG);
+  if (!sheet) {
+    throw new Error("Run setupRivieraOrchestrator first.");
+  }
+  return readKeyValueSheet_(sheet);
+}
+
+function setConfigValue_(spreadsheet, key, value) {
+  var sheet = spreadsheet.getSheetByName(RIVIERA.SHEETS.CONFIG);
+  var values = sheet.getDataRange().getValues();
+  for (var i = 1; i < values.length; i += 1) {
+    if (String(values[i][0]).trim() === key) {
+      sheet.getRange(i + 1, 2).setValue(value);
+      return;
+    }
+  }
+  sheet.appendRow([key, value, "NO", "Added by orchestrator."]);
+}
+
+function readKeyValueSheet_(sheet) {
+  var values = sheet.getDataRange().getValues();
+  var result = {};
+  for (var i = 1; i < values.length; i += 1) {
+    var key = String(values[i][0] || "").trim();
+    if (key) {
+      result[key] = values[i][1] === null ? "" : String(values[i][1]).trim();
+    }
+  }
+  return result;
+}
+
+function ensureSheet_(spreadsheet, name, headers) {
+  var sheet = spreadsheet.getSheetByName(name);
+  if (!sheet) {
+    sheet = spreadsheet.insertSheet(name);
+  }
+  var current = sheet.getLastColumn() ?
+    sheet.getRange(1, 1, 1, sheet.getLastColumn())
+      .getDisplayValues()[0] : [];
+  while (current.length && !String(current[current.length - 1]).trim()) {
+    current.pop();
+  }
+  var hasContent = current.some(function (value) {
+    return String(value).trim() !== "";
+  });
+  if (!hasContent) {
+    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+  } else {
+    var normalizedCurrent = current.map(String);
+    if (normalizedCurrent.join("\u001f") !== headers.join("\u001f")) {
+      migrateKnownTemplateSheet_(sheet, name, normalizedCurrent, headers);
+    }
+  }
+  sheet.setFrozenRows(1);
+  if (sheet.getFilter()) {
+    sheet.getFilter().remove();
+  }
+  var lastRow = Math.max(sheet.getLastRow(), 1);
+  sheet.getRange(1, 1, lastRow, headers.length).createFilter();
+  return sheet;
+}
+
+/**
+ * The first live workbook was created from a human-friendly v1 template.
+ * Recognised v1 headings are migrated once into the runtime schema. Every
+ * source heading must map unambiguously by name/synonym, unless the complete
+ * header signature has an explicit enumerated migration below. There is no
+ * positional fallback.
+ */
+function migrateKnownTemplateSheet_(sheet, name, current, canonical) {
+  var firstHeaderAliases = {};
+  firstHeaderAliases[RIVIERA.SHEETS.CONFIG] = ["key", "setting", "config key"];
+  firstHeaderAliases[RIVIERA.SHEETS.INTAKE_LOG] = [
+    "processed at", "timestamp", "received at", "intake id"
+  ];
+  firstHeaderAliases[RIVIERA.SHEETS.SALES] = [
+    "run id", "service date", "sale date", "date"
+  ];
+  firstHeaderAliases[RIVIERA.SHEETS.BOOKINGS] = [
+    "run id", "service date", "booking date", "date"
+  ];
+  firstHeaderAliases[RIVIERA.SHEETS.STOCK] = [
+    "run id", "stocktake date", "count date", "date"
+  ];
+  firstHeaderAliases[RIVIERA.SHEETS.POS_MAP] = [
+    "pos item id", "pos id", "pos item", "source item"
+  ];
+  firstHeaderAliases[RIVIERA.SHEETS.MENU_MAP] = [
+    "menu item id", "menu id", "riviera item id"
+  ];
+  firstHeaderAliases[RIVIERA.SHEETS.FORECAST] = [
+    "run id", "service date", "target service date"
+  ];
+  firstHeaderAliases[RIVIERA.SHEETS.DRAFT] = [
+    "menu item", "item", "item name"
+  ];
+  firstHeaderAliases[RIVIERA.SHEETS.EXCEPTIONS] = [
+    "logged at", "timestamp", "exception id"
+  ];
+  firstHeaderAliases[RIVIERA.SHEETS.CHANGES] = [
+    "receipt id", "change id", "created at", "previous rule"
+  ];
+  firstHeaderAliases[RIVIERA.SHEETS.RUNS] = [
+    "run id", "created at", "started at"
+  ];
+
+  var sourceValues = sheet.getLastRow() > 1 ?
+    sheet.getRange(2, 1, sheet.getLastRow() - 1, current.length).getValues() :
+    [];
+  var sourceIndexByCanonical = {};
+  var explicit = getExactKnownHeaderMigration_(name, current, canonical);
+  if (explicit) {
+    sourceIndexByCanonical = explicit;
+  } else {
+    var allowedFirst = firstHeaderAliases[name] || [];
+    var first = normalizeText_(current[0]);
+    if (allowedFirst.indexOf(first) === -1) {
+      throw new Error(
+        "Unrecognised header mismatch in control sheet '" + name +
+        "'. Existing first heading is '" + current[0] + "'."
+      );
+    }
+    sourceIndexByCanonical = mapControlHeadersStrictly_(
+      name, current, canonical
+    );
+  }
+
+  var migratedRows = sourceValues.map(function (sourceRow) {
+    return canonical.map(function (_targetHeader, targetIndex) {
+      var sourceIndex = sourceIndexByCanonical[targetIndex];
+      return sourceIndex === undefined ? "" : sourceRow[sourceIndex];
+    });
+  });
+  if (name === RIVIERA.SHEETS.CHANGES) {
+    var scopeIndex = canonical.indexOf("Scope");
+    var routeIndex = canonical.indexOf("Target Route");
+    migratedRows.forEach(function (row) {
+      if (routeIndex !== -1 && !row[routeIndex] && row[scopeIndex]) {
+        row[routeIndex] = scopeTargetRoute_(String(row[scopeIndex]).toUpperCase());
+      }
+    });
+  }
+
+  sheet.clearContents();
+  sheet.getRange(1, 1, 1, canonical.length).setValues([canonical]);
+  appendRows_(sheet, migratedRows);
+  sheet.getRange(1, 1).setNote(
+    "Migrated automatically from the recognised Riviera v1 control " +
+    "workbook template on " + nowIso_() + "."
+  );
+}
+
+function mapControlHeadersStrictly_(name, current, canonical) {
+  var synonyms = controlHeaderSynonyms_();
+  var mapping = {};
+  var usedTargets = {};
+  current.forEach(function (sourceHeader, sourceIndex) {
+    var sourceKey = normalizeText_(sourceHeader);
+    if (!sourceKey) {
+      throw new Error(
+        "Blank heading in '" + name + "' at column " + (sourceIndex + 1) + "."
+      );
+    }
+    var exact = [];
+    canonical.forEach(function (targetHeader, targetIndex) {
+      if (normalizeText_(targetHeader) === sourceKey) {
+        exact.push(targetIndex);
+      }
+    });
+    var candidates = exact;
+    if (!candidates.length) {
+      candidates = [];
+      canonical.forEach(function (targetHeader, targetIndex) {
+        var targetKey = normalizeText_(targetHeader);
+        if ((synonyms[targetKey] || []).indexOf(sourceKey) !== -1) {
+          candidates.push(targetIndex);
+        }
+      });
+    }
+    if (candidates.length !== 1) {
+      throw new Error(
+        "Heading '" + sourceHeader + "' in '" + name + "' maps to " +
+        candidates.length + " canonical columns; migration stopped."
+      );
+    }
+    var targetIndex = candidates[0];
+    if (usedTargets[targetIndex] !== undefined) {
+      throw new Error(
+        "Headings '" + current[usedTargets[targetIndex]] + "' and '" +
+        sourceHeader + "' both map to '" + canonical[targetIndex] +
+        "' in '" + name + "'."
+      );
+    }
+    usedTargets[targetIndex] = sourceIndex;
+    mapping[targetIndex] = sourceIndex;
+  });
+  return mapping;
+}
+
+function getExactKnownHeaderMigration_(name, current, canonical) {
+  var signature = current.map(normalizeText_).join("|");
+  var menuV1 = [
+    "menu item id", "display name", "recipe id", "recipe status",
+    "items per serve", "unit", "service status", "no auto buffer",
+    "source", "confirmation needed"
+  ].join("|");
+  var changesV1 = [
+    "change id", "created at", "source channel", "previous rule",
+    "new rule", "scope", "effective date", "expiry date",
+    "affected records", "drive status", "github status",
+    "chatgpt status", "approval status", "notes"
+  ].join("|");
+  var byTargetName = {};
+  if (name === RIVIERA.SHEETS.MENU_MAP && signature === menuV1) {
+    byTargetName = {
+      "Menu Item ID": 0,
+      "Menu Item Name": 1,
+      "Recipe ID": 2,
+      "Status": 3,
+      "Pieces Per Serve": 4,
+      "Stock UOM": 5,
+      "Stock Units Per Serve": 4,
+      "Active": 6,
+      "Notes": 8
+    };
+  } else if (name === RIVIERA.SHEETS.CHANGES &&
+             signature === changesV1) {
+    byTargetName = {
+      "Receipt ID": 0,
+      "Created At": 1,
+      "Previous Rule": 3,
+      "New Rule": 4,
+      "Scope": 5,
+      "Effective Date": 6,
+      "Expiry Date": 7,
+      "Affected Records": 8,
+      "Drive Status": 9,
+      "GitHub Status": 10,
+      "ChatGPT Status": 11,
+      "Approval Status": 12,
+      "Notes": 13
+    };
+  } else {
+    return null;
+  }
+  var mapping = {};
+  Object.keys(byTargetName).forEach(function (targetHeader) {
+    var targetIndex = canonical.indexOf(targetHeader);
+    if (targetIndex === -1) {
+      throw new Error(
+        "Known migration for '" + name + "' expects canonical column '" +
+        targetHeader + "'."
+      );
+    }
+    mapping[targetIndex] = byTargetName[targetHeader];
+  });
+  return mapping;
+}
+
+function controlHeaderSynonyms_() {
+  return {
+    "processed at": ["timestamp", "received at"],
+    "run id": ["intake id", "batch id"],
+    "intake kind": ["source type", "intake type"],
+    "source file id": ["file id"],
+    "source file name": ["file name", "source file"],
+    "source mime type": ["mime type", "file type"],
+    "sha 256": ["sha256", "content hash", "file hash"],
+    "outcome": ["status", "result"],
+    "rows accepted": ["accepted rows", "rows imported"],
+    "rows quarantined": ["quarantined rows", "error rows"],
+    "destination folder id": ["destination", "moved to"],
+    "service date": ["date", "sale date", "booking date"],
+    "menu item id": ["menu id", "riviera item id"],
+    "recipe id": ["recipe", "github recipe id"],
+    "item name": ["menu item", "product name"],
+    "menu item name": ["display name", "item name", "menu item"],
+    "sold qty": ["sold", "quantity sold", "units sold"],
+    "voided qty": ["voided", "voids"],
+    "refunded qty": ["refunded", "refunds"],
+    "net qty": ["net", "net sold"],
+    "booked covers": ["covers", "bookings", "pax"],
+    "booking id": ["reservation id", "event id", "reference", "ref"],
+    "event name": ["booking name", "function"],
+    "stocktake date": ["count date", "date"],
+    "on hand qty": ["on hand", "count", "quantity"],
+    "pos item id": ["pos id", "source item id"],
+    "pos item name": ["pos item", "source item name"],
+    "active": ["enabled", "use", "service status"],
+    "aliases": ["alias", "other names"],
+    "pieces per serve": ["pieces serve", "pieces", "items per serve"],
+    "piece weight g": ["piece weight", "weight g"],
+    "stock uom": ["stock unit", "uom", "unit"],
+    "stock units per serve": ["units per serve", "items per serve"],
+    "pull unit serves": ["pull unit", "batch serves"],
+    "pull unit label": ["pull label", "batch label"],
+    "automatic buffer": ["buffer", "buffer percent"],
+    "receipt id": ["change id"],
+    "created at": ["timestamp"],
+    "previous rule": ["old rule", "before"],
+    "new rule": ["correction", "after"],
+    "scope": ["classification"],
+    "target route": ["destination route", "source route"],
+    "effective date": ["starts", "start date"],
+    "expiry date": ["expires", "end date"],
+    "affected records": ["applies to", "affected sop"],
+    "requested by": ["author", "user"],
+    "status": ["recipe status"],
+    "notes": ["source", "comments"],
+    "approval status": ["approval", "status"],
+    "approved by": ["reviewer"],
+    "approved at": ["approval time"],
+    "started at": ["created at", "start time"],
+    "finished at": ["completed at", "finish time"],
+    "run type": ["type"],
+    "source file ids": ["files"],
+    "source sha 256 values": ["hashes"],
+    "target service date": ["service date"],
+    "recipe release id": ["release id"],
+    "recipe git commit": ["git commit", "commit"],
+    "published file id": ["output file id"]
+  };
+}
+
+function styleControlWorkbook_(spreadsheet) {
+  Object.keys(RIVIERA.SHEETS).forEach(function (key) {
+    var sheet = spreadsheet.getSheetByName(RIVIERA.SHEETS[key]);
+    if (!sheet) {
+      return;
+    }
+    var lastColumn = Math.max(sheet.getLastColumn(), 1);
+    sheet.getRange(1, 1, 1, lastColumn)
+      .setBackground("#233833")
+      .setFontColor("#ffffff")
+      .setFontWeight("bold")
+      .setWrap(true);
+    sheet.setFrozenRows(1);
+  });
+}
+
+function getOrCreateFolder_(parent, name) {
+  var matches = parent.getFoldersByName(name);
+  if (matches.hasNext()) {
+    var folder = matches.next();
+    if (matches.hasNext()) {
+      throw new Error(
+        "More than one folder named '" + name +
+        "' exists under " + parent.getName() + ". Resolve duplicates first."
+      );
+    }
+    return folder;
+  }
+  return parent.createFolder(name);
+}

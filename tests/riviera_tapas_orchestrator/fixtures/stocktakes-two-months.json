@@ -1,0 +1,18 @@
+[
+  {
+    "asOfDate": "2026-07-01",
+    "type": "MONTHLY_BASELINE",
+    "items": {
+      "polpette": 9,
+      "veal-prosciutto-stuffed-olives": 18
+    }
+  },
+  {
+    "asOfDate": "2026-08-01",
+    "type": "OPENING_BASELINE",
+    "items": {
+      "polpette": 12,
+      "veal-prosciutto-stuffed-olives": 24
+    }
+  }
+]

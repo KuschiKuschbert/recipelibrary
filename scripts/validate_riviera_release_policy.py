@@ -46,7 +46,7 @@ EXCLUDED_SERVICE_KEYS = {"tapas"}
 EXPECTED_BUFFERED_RECORDS = 69
 EXPECTED_LIFECYCLE_COUNTS = {
     "LOCKED": 22,
-    "ACTIVE WORKING": 127,
+    "ACTIVE WORKING": 128,
     "TRIAL ONLY": 5,
     "RETIRED": 2,
 }
@@ -676,7 +676,7 @@ def main() -> int:
 
     expect(packages.get("releaseId") == RELEASE_ID, "function package release ID drift", errors)
     expect(catalog.get("releaseId") == RELEASE_ID, "recipe catalog release ID drift", errors)
-    expect(len(recipes) == 156, f"expected 156 recipes, found {len(recipes)}", errors)
+    expect(len(recipes) == 157, f"expected 157 recipes, found {len(recipes)}", errors)
     lifecycle_counts = Counter(str(recipe.get("status")) for recipe in recipes.values())
     expect(
         dict(lifecycle_counts) == EXPECTED_LIFECYCLE_COUNTS,

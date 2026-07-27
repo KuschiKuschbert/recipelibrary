@@ -1,0 +1,402 @@
+function runRivieraOrchestratorSelfTest() {
+  var results = [];
+  function test(name, callback) {
+    try {
+      callback();
+      results.push({name: name, status: "PASS"});
+    } catch (error) {
+      results.push({
+        name: name,
+        status: "FAIL",
+        message: error.message
+      });
+    }
+  }
+
+  test("SHA-256 is deterministic", function () {
+    assertEqual_(
+      computeSha256Hex_("abc"),
+      "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "Unexpected SHA-256 digest"
+    );
+  });
+
+  test("sales headers accept configured aliases", function () {
+    var validation = validateHeaders_(
+      RIVIERA.KINDS.SALES,
+      ["Trading Date", "PLU", "Product Name", "Units Sold", "Voids", "Refunds"],
+      {}
+    );
+    assertTrue_(validation.ok, safeJson_(validation));
+    assertEqual_(validation.indexes.service_date, 0, "Date alias mismatch");
+    assertEqual_(validation.indexes.sold_qty, 3, "Sold alias mismatch");
+  });
+
+  test("ambiguous sales headers fail closed", function () {
+    var validation = validateHeaders_(
+      RIVIERA.KINDS.SALES,
+      ["Date", "Trading Date", "Item", "Qty"],
+      {}
+    );
+    assertTrue_(!validation.ok, "Ambiguous headers were accepted");
+  });
+
+  test("missing and changed schemas are classified distinctly", function () {
+    var missing = validateHeaders_(
+      RIVIERA.KINDS.SALES,
+      ["Trading Date", "PLU"],
+      {}
+    );
+    assertEqual_(
+      classifyHeaderFailure_(missing),
+      "MISSING_HEADER",
+      "Missing required heading was misclassified"
+    );
+    var changed = validateHeaders_(
+      RIVIERA.KINDS.SALES,
+      ["Trading Date", "PLU", "Units Sold", "Unmapped New Field"],
+      {}
+    );
+    assertEqual_(
+      classifyHeaderFailure_(changed),
+      "SCHEMA_CHANGED",
+      "Genuinely unknown heading was misclassified"
+    );
+  });
+
+  test("unknown item ID cannot fall back to a matching name", function () {
+    var mapped = {menuItemId: "polpette"};
+    var maps = {
+      posById: {},
+      byId: {},
+      posByName: {"polpette": mapped},
+      byName: {"polpette": mapped}
+    };
+    assertEqual_(
+      resolveMenuItem_(maps, "UNKNOWN-ID", "Polpette"),
+      null,
+      "Unknown supplied ID fell back to name"
+    );
+    assertEqual_(
+      resolveMenuItem_(maps, "", "Polpette"),
+      mapped,
+      "Blank ID did not permit exact name mapping"
+    );
+  });
+
+  test("control migration has no positional fallback", function () {
+    var failedClosed = false;
+    try {
+      mapControlHeadersStrictly_(
+        RIVIERA.SHEETS.POS_MAP,
+        ["POS Item ID", "Mystery Heading", "Menu Item ID", "Active", "Notes"],
+        RIVIERA.HEADERS.POS_MAP
+      );
+    } catch (error) {
+      failedClosed = true;
+    }
+    assertTrue_(failedClosed, "Unknown equal-width template migrated by position");
+  });
+
+  test("booking IDs dedupe safely without undercounting anonymous bookings", function () {
+    var headers = [
+      "booking_id", "service_date", "booked_covers",
+      "status", "event_name", "notes"
+    ];
+    var validation = validateHeaders_(
+      RIVIERA.KINDS.BOOKINGS,
+      headers,
+      {}
+    );
+    assertTrue_(validation.ok, safeJson_(validation));
+    var anonymousSheet = makeMemorySpreadsheet_();
+    var baseRow = [
+      "", "2026-08-02", 12, "CONFIRMED", "Table booking", ""
+    ];
+    var anonymous = processBookingRows_({
+      spreadsheet: anonymousSheet,
+      runId: "TEST-BOOKINGS",
+      kind: RIVIERA.KINDS.BOOKINGS,
+      hash: "hash",
+      file: makeFakeFile_(),
+      indexes: validation.indexes,
+      rows: [baseRow.slice(), baseRow.slice()]
+    });
+    assertEqual_(
+      anonymous.accepted,
+      2,
+      "Identical anonymous legitimate bookings were undercounted"
+    );
+
+    var identifiedSheet = makeMemorySpreadsheet_();
+    var identified = processBookingRows_({
+      spreadsheet: identifiedSheet,
+      runId: "TEST-BOOKINGS-ID",
+      kind: RIVIERA.KINDS.BOOKINGS,
+      hash: "hash",
+      file: makeFakeFile_(),
+      indexes: validation.indexes,
+      rows: [
+        ["B-001", "2026-08-02", 12, "CONFIRMED", "Table booking", ""],
+        ["B-001", "2026-08-02", 12, "CONFIRMED", "Table booking", ""]
+      ]
+    });
+    assertEqual_(identified.accepted, 1, "Duplicate booking ID was accepted");
+    assertEqual_(identified.quarantined, 1, "Duplicate booking ID was not flagged");
+  });
+
+  test("net sales deduct voids and refunds", function () {
+    assertEqual_(netSales_(12, 2, 1), 9, "Net sales formula mismatch");
+  });
+
+  test("blank stock never becomes zero", function () {
+    assertEqual_(
+      parseRequiredNumber_(""),
+      null,
+      "Blank stock was converted to a number"
+    );
+  });
+
+  test("pull quantity rounds up to the configured unit", function () {
+    assertEqual_(roundUpToUnit_(7.1, 2), 8, "Pull rounding mismatch");
+    assertEqual_(roundUpToUnit_(8, 2), 8, "Exact unit changed");
+  });
+
+  test("Australian dates parse and Sunday is recognised", function () {
+    var date = parseDate_("02/08/2026");
+    assertEqual_(dateKey_(date), "2026-08-02", "Date parse mismatch");
+    assertTrue_(isSunday_(date), "Expected Sunday");
+  });
+
+  test("latest 13 comparable Sundays are selected", function () {
+    var sales = {};
+    var bookings = {};
+    for (var index = 0; index < 14; index += 1) {
+      var date = new Date(2026, 3, 26 + index * 7);
+      var key = dateKey_(date);
+      sales[key] = {
+        date: date,
+        covers: 20 + index,
+        items: {polpette: index + 1},
+        observed: {polpette: true}
+      };
+      bookings[key] = {covers: 20 + index};
+    }
+    var selected = selectComparableSundays_(
+      sales,
+      bookings,
+      new Date(2026, 7, 9),
+      13
+    );
+    assertEqual_(selected.length, 13, "Wrong history window");
+    assertEqual_(
+      selected[0].dateKey,
+      dateKey_(new Date(2026, 4, 3)),
+      "Oldest of 14 Sundays was not dropped"
+    );
+  });
+
+  test("Polpette and stuffed olives remain distinct", function () {
+    var polpette = {
+      menuItemId: "polpette",
+      recipeId: "veal-meatballs",
+      piecesPerServe: 3,
+      pieceWeightG: 80
+    };
+    var olives = {
+      menuItemId: "veal-prosciutto-stuffed-olives",
+      recipeId: "veal-prosciutto-stuffed-olives",
+      piecesPerServe: 6
+    };
+    assertTrue_(
+      polpette.menuItemId !== olives.menuItemId,
+      "Menu IDs were merged"
+    );
+    assertEqual_(polpette.recipeId, "veal-meatballs", "Polpette recipe mismatch");
+    assertEqual_(polpette.piecesPerServe, 3, "Polpette serve mismatch");
+    assertEqual_(polpette.pieceWeightG, 80, "Polpette weight mismatch");
+    assertEqual_(olives.piecesPerServe, 6, "Stuffed olive serve mismatch");
+  });
+
+  test("forecast applies zero automatic Tapas buffer", function () {
+    var item = {
+      menuItemId: "polpette",
+      recipeId: "veal-meatballs",
+      itemName: "Polpette",
+      piecesPerServe: 3,
+      stockUnitsPerServe: 3,
+      pullUnitServes: 1,
+      notes: ""
+    };
+    var target = {date: new Date(2026, 7, 9), covers: 50};
+    var history = [{
+      date: new Date(2026, 7, 2),
+      dateKey: "2026-08-02",
+      covers: 50,
+      items: {polpette: 10},
+      observed: {polpette: true}
+    }];
+    var stockSnapshot = {
+      date: new Date(2026, 7, 8),
+      items: {polpette: {quantity: 9, uom: "pieces"}}
+    };
+    var row = buildForecastRow_({
+      runId: "TEST",
+      item: item,
+      target: target,
+      history: history,
+      sales: {},
+      stockSnapshot: stockSnapshot,
+      maxStockAge: 31,
+      deductPostStockSales: true
+    });
+    assertEqual_(row[10], 10, "Gross target mismatch");
+    assertEqual_(row[20], 0, "Unexpected automatic buffer");
+    assertEqual_(row[18], 7, "Prep target mismatch");
+    assertEqual_(row[19], 21, "Piece target mismatch");
+  });
+
+  test("missing stock blocks quantity without inventing zero", function () {
+    var result = calculateStockPosition_({
+      item: {menuItemId: "polpette"},
+      target: {date: new Date(2026, 7, 9)},
+      sales: {},
+      stockSnapshot: null,
+      maxStockAge: 31,
+      deductPostStockSales: true
+    });
+    assertEqual_(result.onHandServes, null, "Missing stock became a quantity");
+    assertEqual_(result.status, "COUNT REQUIRED", "Missing stock was not blocked");
+  });
+
+  test("change scopes are exactly the five approved classes", function () {
+    assertEqual_(
+      RIVIERA.VALID_CHANGE_SCOPES.length,
+      5,
+      "Scope count changed"
+    );
+    assertTrue_(
+      RIVIERA.VALID_CHANGE_SCOPES.indexOf(
+        "WEEK-SPECIFIC INSTRUCTION"
+      ) !== -1,
+      "Week-specific scope missing"
+    );
+  });
+
+  test("change scopes route to explicit non-publication targets", function () {
+    assertEqual_(
+      scopeTargetRoute_("PERMANENT RIVIERA STANDARD"),
+      "DRIVE_SOP_MASTER",
+      "Permanent route mismatch"
+    );
+    assertEqual_(
+      scopeTargetRoute_("PACKAGE-SPECIFIC STANDARD"),
+      "DRIVE_PACKAGE_REGISTER",
+      "Package route mismatch"
+    );
+    assertEqual_(
+      scopeTargetRoute_("RECIPE-SPECIFIC STANDARD"),
+      "GITHUB_RECIPE_RECORD; DRIVE_RECIPE_MASTER_IF_REPRESENTED",
+      "Recipe route mismatch"
+    );
+    assertEqual_(
+      scopeTargetRoute_("EVENT-SPECIFIC INSTRUCTION"),
+      "DRIVE_EVENT_WEEK_RECORD",
+      "Event route mismatch"
+    );
+  });
+
+  test("temporary changes require effective and expiry dates", function () {
+    var missing = changeDateErrors_(
+      "WEEK-SPECIFIC INSTRUCTION", "", null, "", null
+    );
+    assertTrue_(
+      missing.indexOf(
+        "event/week-specific changes require an effective date"
+      ) !== -1,
+      "Missing effective date was accepted"
+    );
+    assertTrue_(
+      missing.indexOf(
+        "event/week-specific changes require an expiry date"
+      ) !== -1,
+      "Missing expiry date was accepted"
+    );
+    var valid = changeDateErrors_(
+      "EVENT-SPECIFIC INSTRUCTION",
+      "2026-08-01",
+      parseDate_("2026-08-01"),
+      "2026-08-02",
+      parseDate_("2026-08-02")
+    );
+    assertEqual_(valid.length, 0, "Valid temporary dates were rejected");
+  });
+
+  var failures = results.filter(function (result) {
+    return result.status === "FAIL";
+  });
+  Logger.log(JSON.stringify(results, null, 2));
+  var message = failures.length ?
+    failures.length + " self-test(s) failed:\n" +
+      failures.map(function (failure) {
+        return failure.name + ": " + failure.message;
+      }).join("\n") :
+    results.length + " Riviera orchestrator self-tests passed.";
+  try {
+    SpreadsheetApp.getUi().alert(message);
+  } catch (ignored) {
+    // Self-test can also run headlessly.
+  }
+  if (failures.length) {
+    throw new Error(message);
+  }
+  return results;
+}
+
+function makeMemorySpreadsheet_() {
+  var written = {};
+  return {
+    written: written,
+    getSheetByName: function (name) {
+      return {
+        getLastRow: function () {
+          return (written[name] || []).length;
+        },
+        getRange: function () {
+          return {
+            setValues: function (rows) {
+              written[name] = (written[name] || []).concat(rows);
+              return this;
+            }
+          };
+        }
+      };
+    }
+  };
+}
+
+function makeFakeFile_() {
+  return {
+    getId: function () {
+      return "fake-file-id";
+    },
+    getName: function () {
+      return "fake-bookings.csv";
+    }
+  };
+}
+
+function assertEqual_(actual, expected, message) {
+  if (actual !== expected) {
+    throw new Error(
+      message + ": expected " + safeJson_(expected) +
+      ", received " + safeJson_(actual)
+    );
+  }
+}
+
+function assertTrue_(condition, message) {
+  if (!condition) {
+    throw new Error(message || "Assertion failed");
+  }
+}

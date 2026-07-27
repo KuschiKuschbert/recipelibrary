@@ -1,0 +1,18 @@
+{
+  "weekSpecific": {
+    "previousRule": "Friday orders and deliveries are normally permitted.",
+    "newRule": "Avoid Friday delivery for the wedding week; use Wednesday 29 July, with Thursday 30 July as fallback.",
+    "scope": "WEEK-SPECIFIC INSTRUCTION",
+    "effectiveDate": "2026-07-27",
+    "expiryDate": "2026-07-31",
+    "affectedRecord": "Wedding week 27–31 July 2026 event/order record"
+  },
+  "eventSpecific": {
+    "previousRule": "Use the standard supplier delivery schedule.",
+    "newRule": "Deliver produce before the wedding prep lockout.",
+    "scope": "EVENT-SPECIFIC INSTRUCTION",
+    "effectiveDate": "2026-07-27",
+    "expiryDate": "2026-07-31",
+    "affectedRecord": "Wedding event production record"
+  }
+}

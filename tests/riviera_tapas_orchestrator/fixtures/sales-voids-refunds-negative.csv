@@ -1,0 +1,4 @@
+service_date,pos_item_id,pos_item_name,sold_qty,voided_qty,refunded_qty
+2026-07-26,POLP-01,Polpette,10,2,1
+2026-07-26,OLIVE-01,Veal & Prosciutto Stuffed Olives,-2,0,0
+2026-07-26,OLIVE-01,Veal & Prosciutto Stuffed Olives,1,0,2

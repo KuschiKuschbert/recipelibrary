@@ -1,0 +1,26 @@
+[
+  {
+    "serviceDate": "2026-07-19",
+    "menuItemId": "polpette",
+    "covers": 20,
+    "netQty": 10
+  },
+  {
+    "serviceDate": "2026-07-26",
+    "menuItemId": "polpette",
+    "covers": 40,
+    "netQty": 20
+  },
+  {
+    "serviceDate": "2026-07-19",
+    "menuItemId": "veal-prosciutto-stuffed-olives",
+    "covers": 20,
+    "netQty": 5
+  },
+  {
+    "serviceDate": "2026-07-26",
+    "menuItemId": "veal-prosciutto-stuffed-olives",
+    "covers": 40,
+    "netQty": 10
+  }
+]

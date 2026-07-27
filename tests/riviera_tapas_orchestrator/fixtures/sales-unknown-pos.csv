@@ -1,0 +1,3 @@
+service_date,pos_item_id,pos_item_name,sold_qty,voided_qty,refunded_qty,covers
+2026-07-26,POLP-01,Polpette,10,0,0,60
+2026-07-26,MYSTERY-99,Mystery Tapas,3,0,0,60
