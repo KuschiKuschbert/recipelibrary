@@ -688,7 +688,7 @@ function controlHeaderSynonyms_() {
     "affected records": ["applies to", "affected sop"],
     "requested by": ["author", "user"],
     "status": ["recipe status"],
-    "notes": ["source", "comments"],
+    "notes": ["source", "comments", "description"],
     "approval status": ["approval", "status"],
     "approved by": ["reviewer"],
     "approved at": ["approval time"],
@@ -3014,6 +3014,15 @@ function runRivieraOrchestratorSelfTest() {
       failedClosed = true;
     }
     assertTrue_(failedClosed, "Unknown equal-width template migrated by position");
+  });
+
+  test("legacy Config description maps only to Notes", function () {
+    var mapping = mapControlHeadersStrictly_(
+      RIVIERA.SHEETS.CONFIG,
+      ["Key", "Value", "Required", "Description"],
+      RIVIERA.HEADERS.CONFIG
+    );
+    assertEqual_(mapping[3], 3, "Config description did not map to Notes");
   });
 
   test("booking IDs dedupe safely without undercounting anonymous bookings", function () {

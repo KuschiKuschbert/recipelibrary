@@ -685,7 +685,7 @@ function controlHeaderSynonyms_() {
     "affected records": ["applies to", "affected sop"],
     "requested by": ["author", "user"],
     "status": ["recipe status"],
-    "notes": ["source", "comments"],
+    "notes": ["source", "comments", "description"],
     "approval status": ["approval", "status"],
     "approved by": ["reviewer"],
     "approved at": ["approval time"],
