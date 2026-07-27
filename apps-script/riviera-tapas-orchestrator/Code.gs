@@ -232,6 +232,14 @@ function setupRivieraOrchestrator() {
 function seedConfig_(spreadsheet) {
   var sheet = spreadsheet.getSheetByName(RIVIERA.SHEETS.CONFIG);
   var existing = readKeyValueSheet_(sheet);
+  var sanitizedGitCommit = sanitizeConfigValue_(
+    "RECIPE_GITHUB_COMMIT",
+    existing.RECIPE_GITHUB_COMMIT
+  );
+  if (sanitizedGitCommit !== existing.RECIPE_GITHUB_COMMIT) {
+    setConfigValue_(spreadsheet, "RECIPE_GITHUB_COMMIT", sanitizedGitCommit);
+    existing.RECIPE_GITHUB_COMMIT = sanitizedGitCommit;
+  }
   var rows = CONFIG_ROWS.filter(function (row) {
     return !Object.prototype.hasOwnProperty.call(existing, row[0]);
   });
@@ -244,6 +252,14 @@ function seedConfig_(spreadsheet) {
       "1GNZivM18y2TvjJrHBoYCGVih0HA9koHj"
     );
   }
+}
+
+function sanitizeConfigValue_(key, value) {
+  if (key === "RECIPE_GITHUB_COMMIT" &&
+      String(value || "").trim() === "SET AFTER MERGE") {
+    return "";
+  }
+  return value;
 }
 
 function seedMenuMappings_(spreadsheet) {
@@ -527,10 +543,10 @@ function migrateKnownTemplateSheet_(sheet, name, current, canonical) {
     migratedRows.forEach(function (row) {
       var key = String(row[configKeyIndex] || "");
       row[configRequiredIndex] = configRequiredByKey[key] || "NO";
-      if (key === "RECIPE_GITHUB_COMMIT" &&
-          String(row[configValueIndex] || "").trim() === "SET AFTER MERGE") {
-        row[configValueIndex] = "";
-      }
+      row[configValueIndex] = sanitizeConfigValue_(
+        key,
+        row[configValueIndex]
+      );
     });
   }
   if (name === RIVIERA.SHEETS.POS_MAP) {
@@ -3276,6 +3292,19 @@ function runRivieraOrchestratorSelfTest() {
     assertTrue_(
       mapping[2] === undefined,
       "Legacy Editable must not be treated as canonical Required"
+    );
+  });
+
+  test("placeholder Git commit is never accepted as provenance", function () {
+    assertEqual_(
+      sanitizeConfigValue_("RECIPE_GITHUB_COMMIT", "SET AFTER MERGE"),
+      "",
+      "Placeholder Git commit was not cleared"
+    );
+    assertEqual_(
+      sanitizeConfigValue_("RECIPE_GITHUB_COMMIT", "27ac836"),
+      "27ac836",
+      "Real Git commit was altered"
     );
   });
 
