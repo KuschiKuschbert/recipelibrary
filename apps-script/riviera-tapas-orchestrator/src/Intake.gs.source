@@ -1,0 +1,635 @@
+function processRivieraInbox() {
+  var lock = LockService.getScriptLock();
+  if (!lock.tryLock(1000)) {
+    return {status: "SKIPPED", message: "Another Riviera intake run is active."};
+  }
+
+  var spreadsheet;
+  var runId = newRunId_("INTAKE");
+  try {
+    spreadsheet = getControlSpreadsheet_();
+    if (!spreadsheet.getSheetByName(RIVIERA.SHEETS.CONFIG)) {
+      setupRivieraOrchestrator();
+    }
+    var config = getConfig_(spreadsheet);
+    validateRequiredConfig_(config, [
+      "SALES_INBOX_FOLDER_ID",
+      "BOOKINGS_INBOX_FOLDER_ID",
+      "STOCK_INBOX_FOLDER_ID",
+      "CHANGES_INBOX_FOLDER_ID",
+      "PROCESSED_FOLDER_ID",
+      "EXCEPTIONS_FOLDER_ID"
+    ]);
+    startRun_(spreadsheet, runId, "INBOX_PROCESSING");
+
+    var processedFolder = DriveApp.getFolderById(config.PROCESSED_FOLDER_ID);
+    var exceptionsFolder = DriveApp.getFolderById(config.EXCEPTIONS_FOLDER_ID);
+    var lanes = [
+      [RIVIERA.KINDS.SALES, config.SALES_INBOX_FOLDER_ID],
+      [RIVIERA.KINDS.BOOKINGS, config.BOOKINGS_INBOX_FOLDER_ID],
+      [RIVIERA.KINDS.STOCK, config.STOCK_INBOX_FOLDER_ID],
+      [RIVIERA.KINDS.CHANGES, config.CHANGES_INBOX_FOLDER_ID]
+    ];
+    var totals = {
+      accepted: 0,
+      quarantined: 0,
+      fileIds: [],
+      hashes: [],
+      files: 0
+    };
+
+    lanes.forEach(function (lane) {
+      var kind = lane[0];
+      var files = DriveApp.getFolderById(lane[1]).getFiles();
+      while (files.hasNext()) {
+        var file = files.next();
+        if (file.getId() === spreadsheet.getId()) {
+          continue;
+        }
+        var result = processSourceFile_(
+          spreadsheet,
+          config,
+          runId,
+          kind,
+          file,
+          processedFolder,
+          exceptionsFolder
+        );
+        totals.files += 1;
+        totals.accepted += result.accepted || 0;
+        totals.quarantined += result.quarantined || 0;
+        totals.fileIds.push(file.getId());
+        if (result.hash) {
+          totals.hashes.push(result.hash);
+        }
+      }
+    });
+
+    finishRun_(spreadsheet, runId, {
+      status: totals.quarantined ? "COMPLETED_WITH_EXCEPTIONS" : "COMPLETED",
+      sourceFileIds: totals.fileIds.join(", "),
+      hashes: totals.hashes.join(", "),
+      accepted: totals.accepted,
+      quarantined: totals.quarantined,
+      message: totals.files ?
+        "Processed " + totals.files + " intake file(s)." :
+        "No intake files found."
+    });
+    spreadsheet.toast(
+      totals.files ?
+        "Accepted " + totals.accepted + " row(s); quarantined " +
+          totals.quarantined + "." :
+        "No new intake files.",
+      "Riviera intake",
+      6
+    );
+    return totals;
+  } catch (error) {
+    if (spreadsheet &&
+        spreadsheet.getSheetByName(RIVIERA.SHEETS.RUNS)) {
+      try {
+        finishRun_(spreadsheet, runId, {
+          status: "FAILED",
+          message: error.message
+        });
+      } catch (ignored) {
+        // Preserve the original failure.
+      }
+    }
+    throw error;
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function processSourceFile_(
+  spreadsheet,
+  config,
+  runId,
+  kind,
+  file,
+  processedFolder,
+  exceptionsFolder
+) {
+  var details = {
+    runId: runId,
+    kind: kind,
+    fileId: file.getId(),
+    fileName: file.getName(),
+    mimeType: file.getMimeType(),
+    accepted: 0,
+    quarantined: 0,
+    hash: ""
+  };
+
+  try {
+    var tables = readInputTables_(file);
+    var selected = selectInputTable_(kind, tables, config);
+    var values = trimEmptyTable_(selected.table.values);
+    if (values.length < 2) {
+      throw new Error("The matched intake table contains headers but no data rows.");
+    }
+    details.hash = computeSha256Hex_(
+      canonicalTableForHash_(kind, values)
+    );
+    if (isDuplicateHash_(spreadsheet, kind, details.hash)) {
+      details.outcome = "DUPLICATE";
+      details.destinationFolderId = moveFileSafely_(file, processedFolder);
+      details.message = "Content hash already processed; no rows re-imported.";
+      logIntake_(spreadsheet, details);
+      return details;
+    }
+
+    var context = {
+      spreadsheet: spreadsheet,
+      config: config,
+      runId: runId,
+      kind: kind,
+      file: file,
+      hash: details.hash,
+      indexes: selected.validation.indexes,
+      rows: values.slice(1),
+      menuMaps: buildMenuMaps_(spreadsheet)
+    };
+    var result;
+    if (kind === RIVIERA.KINDS.SALES) {
+      result = processSalesRows_(context);
+    } else if (kind === RIVIERA.KINDS.BOOKINGS) {
+      result = processBookingRows_(context);
+    } else if (kind === RIVIERA.KINDS.STOCK) {
+      result = processStockRows_(context);
+    } else if (kind === RIVIERA.KINDS.CHANGES) {
+      result = processChangeRows_(context);
+    } else {
+      throw new Error("No processor exists for intake kind " + kind);
+    }
+
+    details.accepted = result.accepted;
+    details.quarantined = result.quarantined;
+    if (!details.accepted && details.quarantined) {
+      details.outcome = "QUARANTINED";
+      details.destinationFolderId = moveProcessedFile_(
+        context,
+        file,
+        exceptionsFolder,
+        details
+      );
+      details.message = "No valid rows; source retained in Exceptions.";
+    } else {
+      details.outcome = details.quarantined ?
+        "PROCESSED_WITH_EXCEPTIONS" : "PROCESSED";
+      details.destinationFolderId = moveProcessedFile_(
+        context,
+        file,
+        processedFolder,
+        details
+      );
+      details.message = details.quarantined ?
+        "Valid rows imported; row exceptions are in the Exceptions tab." :
+        "All rows imported.";
+    }
+    logIntake_(spreadsheet, details);
+    return details;
+  } catch (error) {
+    var rejectionCode = error.code || "FILE_REJECTED";
+    details.outcome = rejectionCode;
+    details.quarantined = Math.max(details.quarantined, 1);
+    details.message = rejectionCode + ": " + error.message;
+    logException_(spreadsheet, {
+      runId: runId,
+      kind: kind,
+      fileId: file.getId(),
+      fileName: file.getName(),
+      code: rejectionCode,
+      message: error.message,
+      payload: {
+        mimeType: file.getMimeType(),
+        details: error.details || null
+      }
+    });
+    try {
+      details.destinationFolderId = moveFileSafely_(file, exceptionsFolder);
+    } catch (moveError) {
+      details.message += " File move also failed: " + moveError.message;
+    }
+    logIntake_(spreadsheet, details);
+    return details;
+  }
+}
+
+function moveProcessedFile_(context, file, folder, details) {
+  try {
+    return moveFileSafely_(file, folder);
+  } catch (error) {
+    details.outcome += "_MOVE_FAILED";
+    logException_(context.spreadsheet, {
+      runId: context.runId,
+      kind: context.kind,
+      fileId: file.getId(),
+      fileName: file.getName(),
+      code: "FILE_MOVE_FAILED",
+      message:
+        "Rows were already recorded, but the source file could not be moved: " +
+        error.message,
+      payload: {destinationFolderId: folder.getId()}
+    });
+    return "";
+  }
+}
+
+function processSalesRows_(context) {
+  var output = [];
+  var quarantined = 0;
+  var seenExactRows = {};
+
+  context.rows.forEach(function (row, index) {
+    var sourceRow = index + 2;
+    if (!row.some(function (value) {
+      return value !== "" && value !== null;
+    })) {
+      return;
+    }
+    var payload = row.map(function (value) {
+      return String(value);
+    });
+    var exactKey = JSON.stringify(payload);
+    if (seenExactRows[exactKey]) {
+      quarantined += 1;
+      rowException_(context, sourceRow, "DUPLICATE_SOURCE_ROW",
+        "Exact duplicate sales row.", payload);
+      return;
+    }
+    seenExactRows[exactKey] = true;
+
+    var serviceDate = parseDate_(
+      cell_(row, context.indexes, "service_date")
+    );
+    var sold = parseRequiredNumber_(
+      cell_(row, context.indexes, "sold_qty")
+    );
+    var voided = parseOptionalNumber_(
+      cell_(row, context.indexes, "voided_qty"), 0
+    );
+    var refunded = parseOptionalNumber_(
+      cell_(row, context.indexes, "refunded_qty"), 0
+    );
+    var coversRaw = cell_(row, context.indexes, "covers");
+    var covers = coversRaw === "" ? "" : parseRequiredNumber_(coversRaw);
+    var itemId = cell_(row, context.indexes, "item_id");
+    var itemName = cell_(row, context.indexes, "item_name");
+    var menuItem = resolveMenuItem_(
+      context.menuMaps, itemId, itemName
+    );
+    var errors = [];
+    if (!serviceDate) {
+      errors.push("invalid service date");
+    } else if (!isSunday_(serviceDate)) {
+      errors.push("Tapas service date is not a Sunday");
+    }
+    if (sold === null || sold < 0) {
+      errors.push("sold quantity must be a non-negative number");
+    }
+    if (voided < 0 || refunded < 0) {
+      errors.push("voided/refunded quantities must be non-negative");
+    }
+    var net = sold === null ? null : netSales_(sold, voided, refunded);
+    if (net !== null && net < 0) {
+      errors.push("net quantity is negative");
+    }
+    if (covers !== "" &&
+        (covers === null || covers < 0 || Math.floor(covers) !== covers)) {
+      errors.push("covers must be a non-negative whole number");
+    }
+    if (!menuItem) {
+      errors.push("unknown POS/menu item ID or name");
+    }
+    if (errors.length) {
+      quarantined += 1;
+      rowException_(context, sourceRow, "INVALID_SALES_ROW",
+        errors.join("; "), payload);
+      return;
+    }
+    output.push([
+      context.runId,
+      context.hash,
+      context.file.getId(),
+      context.file.getName(),
+      sourceRow,
+      dateKey_(serviceDate),
+      menuItem.menuItemId,
+      menuItem.recipeId,
+      menuItem.itemName,
+      sold,
+      voided,
+      refunded,
+      net,
+      covers,
+      nowIso_()
+    ]);
+  });
+  appendRows_(
+    context.spreadsheet.getSheetByName(RIVIERA.SHEETS.SALES),
+    output
+  );
+  return {accepted: output.length, quarantined: quarantined};
+}
+
+function processBookingRows_(context) {
+  var output = [];
+  var quarantined = 0;
+  var seenBookingIds = {};
+  context.rows.forEach(function (row, index) {
+    var sourceRow = index + 2;
+    if (!row.some(function (value) {
+      return value !== "" && value !== null;
+    })) {
+      return;
+    }
+    var serviceDate = parseDate_(
+      cell_(row, context.indexes, "service_date")
+    );
+    var bookingId = String(
+      cell_(row, context.indexes, "booking_id") || ""
+    ).trim();
+    var covers = parseRequiredNumber_(
+      cell_(row, context.indexes, "booked_covers")
+    );
+    var status = String(
+      cell_(row, context.indexes, "status") || "CONFIRMED"
+    ).trim().toUpperCase();
+    var eventName = String(
+      cell_(row, context.indexes, "event_name") || "Sunday Tapas"
+    ).trim();
+    var notes = String(cell_(row, context.indexes, "notes") || "").trim();
+    var errors = [];
+    if (!serviceDate) {
+      errors.push("invalid service date");
+    } else if (!isSunday_(serviceDate)) {
+      errors.push("Tapas booking date is not a Sunday");
+    }
+    if (covers === null || covers < 0 || Math.floor(covers) !== covers) {
+      errors.push("booked covers must be a non-negative whole number");
+    }
+    var normalizedBookingId = normalizeText_(bookingId);
+    if (normalizedBookingId && seenBookingIds[normalizedBookingId]) {
+      errors.push("duplicate booking_id '" + bookingId + "'");
+    }
+    if (errors.length) {
+      quarantined += 1;
+      rowException_(context, sourceRow, "INVALID_BOOKING_ROW",
+        errors.join("; "), row);
+      return;
+    }
+    if (normalizedBookingId) {
+      seenBookingIds[normalizedBookingId] = true;
+    }
+    output.push([
+      context.runId,
+      context.hash,
+      context.file.getId(),
+      context.file.getName(),
+      sourceRow,
+      bookingId,
+      dateKey_(serviceDate),
+      covers,
+      status,
+      eventName,
+      notes,
+      nowIso_()
+    ]);
+  });
+  appendRows_(
+    context.spreadsheet.getSheetByName(RIVIERA.SHEETS.BOOKINGS),
+    output
+  );
+  return {accepted: output.length, quarantined: quarantined};
+}
+
+function processStockRows_(context) {
+  var output = [];
+  var quarantined = 0;
+  var seenItems = {};
+  context.rows.forEach(function (row, index) {
+    var sourceRow = index + 2;
+    if (!row.some(function (value) {
+      return value !== "" && value !== null;
+    })) {
+      return;
+    }
+    var countDate = parseDate_(
+      cell_(row, context.indexes, "stocktake_date")
+    );
+    var onHand = parseRequiredNumber_(
+      cell_(row, context.indexes, "on_hand_qty")
+    );
+    var itemId = cell_(row, context.indexes, "item_id");
+    var itemName = cell_(row, context.indexes, "item_name");
+    var menuItem = resolveMenuItem_(
+      context.menuMaps, itemId, itemName
+    );
+    var inputUom = normalizeText_(
+      cell_(row, context.indexes, "uom")
+    );
+    var errors = [];
+    if (!countDate) {
+      errors.push("invalid stocktake date");
+    }
+    if (onHand === null) {
+      errors.push("on-hand quantity is blank or invalid; it was not set to zero");
+    } else if (onHand < 0) {
+      errors.push("on-hand quantity must be non-negative");
+    }
+    if (!menuItem) {
+      errors.push("unknown stock/menu item ID or name");
+    }
+    var uom = inputUom || (menuItem ? menuItem.stockUom : "");
+    if (!uom) {
+      errors.push("stock UOM is missing");
+    }
+    if (menuItem && menuItem.stockUom &&
+        uom !== menuItem.stockUom &&
+        !(uom === "serve" || uom === "serves")) {
+      errors.push(
+        "stock UOM '" + uom + "' does not match map UOM '" +
+        menuItem.stockUom + "'"
+      );
+    }
+    var key = countDate && menuItem ?
+      dateKey_(countDate) + "|" + menuItem.menuItemId :
+      "invalid-" + sourceRow;
+    if (seenItems[key]) {
+      errors.push("duplicate item in the same stocktake");
+    }
+    seenItems[key] = true;
+    if (errors.length) {
+      quarantined += 1;
+      rowException_(context, sourceRow, "INVALID_STOCK_ROW",
+        errors.join("; "), row);
+      return;
+    }
+    output.push([
+      context.runId,
+      context.hash,
+      context.file.getId(),
+      context.file.getName(),
+      sourceRow,
+      dateKey_(countDate),
+      menuItem.menuItemId,
+      menuItem.recipeId,
+      menuItem.itemName,
+      onHand,
+      uom,
+      nowIso_()
+    ]);
+  });
+  appendRows_(
+    context.spreadsheet.getSheetByName(RIVIERA.SHEETS.STOCK),
+    output
+  );
+  return {accepted: output.length, quarantined: quarantined};
+}
+
+function processChangeRows_(context) {
+  var output = [];
+  var quarantined = 0;
+  context.rows.forEach(function (row, index) {
+    var sourceRow = index + 2;
+    if (!row.some(function (value) {
+      return value !== "" && value !== null;
+    })) {
+      return;
+    }
+    var previousRule = String(
+      cell_(row, context.indexes, "previous_rule") || ""
+    ).trim();
+    var newRule = String(
+      cell_(row, context.indexes, "new_rule") || ""
+    ).trim();
+    var scope = String(
+      cell_(row, context.indexes, "scope") || ""
+    ).trim().toUpperCase();
+    var affected = String(
+      cell_(row, context.indexes, "affected_records") || ""
+    ).trim();
+    var requestedBy = String(
+      cell_(row, context.indexes, "requested_by") || ""
+    ).trim();
+    var notes = String(cell_(row, context.indexes, "notes") || "").trim();
+    var effectiveRaw = cell_(row, context.indexes, "effective_date");
+    var expiryRaw = cell_(row, context.indexes, "expiry_date");
+    var effectiveDate = effectiveRaw ? parseDate_(effectiveRaw) : null;
+    var expiryDate = expiryRaw ? parseDate_(expiryRaw) : null;
+    var errors = [];
+    if (!previousRule) {
+      errors.push("previous rule is required");
+    }
+    if (!newRule) {
+      errors.push("new rule is required");
+    }
+    if (RIVIERA.VALID_CHANGE_SCOPES.indexOf(scope) === -1) {
+      errors.push("scope is not one of the five approved classifications");
+    }
+    if (!affected) {
+      errors.push("affected records are required");
+    }
+    errors = errors.concat(changeDateErrors_(
+      scope,
+      effectiveRaw,
+      effectiveDate,
+      expiryRaw,
+      expiryDate
+    ));
+    if (errors.length) {
+      quarantined += 1;
+      rowException_(context, sourceRow, "INVALID_CHANGE_RECEIPT",
+        errors.join("; "), row);
+      return;
+    }
+    var githubStatus = scope === "RECIPE-SPECIFIC STANDARD" ?
+      "PENDING REVIEW" : "NOT APPLICABLE";
+    var targetRoute = scopeTargetRoute_(scope);
+    output.push([
+      "CHG-" + Utilities.getUuid(),
+      nowIso_(),
+      context.hash,
+      context.file.getId(),
+      sourceRow,
+      previousRule,
+      newRule,
+      scope,
+      targetRoute,
+      effectiveDate ? dateKey_(effectiveDate) : "",
+      expiryDate ? dateKey_(expiryDate) : "",
+      affected,
+      requestedBy,
+      "STAGED — NOT PUBLISHED",
+      githubStatus,
+      "PENDING RELEASE",
+      "AWAITING APPROVAL",
+      "",
+      "",
+      notes
+    ]);
+  });
+  appendRows_(
+    context.spreadsheet.getSheetByName(RIVIERA.SHEETS.CHANGES),
+    output
+  );
+  return {accepted: output.length, quarantined: quarantined};
+}
+
+function scopeTargetRoute_(scope) {
+  var routes = {};
+  routes["PERMANENT RIVIERA STANDARD"] = "DRIVE_SOP_MASTER";
+  routes["PACKAGE-SPECIFIC STANDARD"] = "DRIVE_PACKAGE_REGISTER";
+  routes["RECIPE-SPECIFIC STANDARD"] =
+    "GITHUB_RECIPE_RECORD; DRIVE_RECIPE_MASTER_IF_REPRESENTED";
+  routes["EVENT-SPECIFIC INSTRUCTION"] = "DRIVE_EVENT_WEEK_RECORD";
+  routes["WEEK-SPECIFIC INSTRUCTION"] = "DRIVE_EVENT_WEEK_RECORD";
+  return routes[String(scope || "").trim().toUpperCase()] || "";
+}
+
+function changeDateErrors_(
+  scope,
+  effectiveRaw,
+  effectiveDate,
+  expiryRaw,
+  expiryDate
+) {
+  var temporary = scope === "EVENT-SPECIFIC INSTRUCTION" ||
+    scope === "WEEK-SPECIFIC INSTRUCTION";
+  var errors = [];
+  if (effectiveRaw && !effectiveDate) {
+    errors.push("effective date is invalid");
+  }
+  if (expiryRaw && !expiryDate) {
+    errors.push("expiry date is invalid");
+  }
+  if (temporary && !effectiveRaw) {
+    errors.push("event/week-specific changes require an effective date");
+  }
+  if (temporary && !expiryRaw) {
+    errors.push("event/week-specific changes require an expiry date");
+  }
+  if (!temporary && expiryRaw) {
+    errors.push("an expiry date is only valid for event/week-specific changes");
+  }
+  if (effectiveDate && expiryDate &&
+      effectiveDate.getTime() > expiryDate.getTime()) {
+    errors.push("effective date is after expiry date");
+  }
+  return errors;
+}
+
+function rowException_(context, sourceRow, code, message, payload) {
+  logException_(context.spreadsheet, {
+    runId: context.runId,
+    kind: context.kind,
+    fileId: context.file.getId(),
+    fileName: context.file.getName(),
+    sourceRow: sourceRow,
+    code: code,
+    message: message,
+    payload: payload
+  });
+}

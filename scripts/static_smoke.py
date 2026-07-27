@@ -32,6 +32,7 @@ CRITICAL_JSON = (
     "riviera_data/builtins.json",
     "riviera_data/function_packages.json",
     "riviera_data/recipe_use_links.json",
+    "riviera_data/sunday_tapas_menu_map.json",
     "riviera_data/service_variant_backlog.json",
     "riviera_data/planner_pairing_hints.json",
     "riviera_data/planner_unit_costs.json",
@@ -157,6 +158,7 @@ def check_riviera_lifecycle(base: str) -> int:
         "flourless-chocolate-torte-working": "ACTIVE WORKING",
         "ribbon-sandwiches": "ACTIVE WORKING",
         "sweet-petit-fours": "ACTIVE WORKING",
+        "veal-prosciutto-stuffed-olives": "ACTIVE WORKING",
         "natural-oysters-prosecco-fennel-orange": "TRIAL ONLY",
         "warm-oysters-lemon-oregano-caper": "TRIAL ONLY",
         "oyster-saganaki": "TRIAL ONLY",
@@ -170,8 +172,8 @@ def check_riviera_lifecycle(base: str) -> int:
         for recipe in recipes
         if isinstance(recipe, dict) and recipe.get("id")
     }
-    if len(recipes) != 156:
-        fail(f"Riviera lifecycle catalog: expected 156 recipes, found {len(recipes)}")
+    if len(recipes) != 157:
+        fail(f"Riviera lifecycle catalog: expected 157 recipes, found {len(recipes)}")
         errors += 1
     for recipe_id, recipe in by_id.items():
         if recipe.get("status") not in allowed_statuses:
@@ -269,6 +271,33 @@ def check_riviera_lifecycle(base: str) -> int:
         "slow-cooked-beef-albondigas-buffet",
     } & sunday_ids:
         fail("Sunday Tapas backlinks are incomplete or include quarantined duplicates")
+        errors += 1
+    if not {"veal-meatballs", "veal-prosciutto-stuffed-olives"}.issubset(sunday_ids):
+        fail("Sunday Tapas backlinks must include distinct Polpette and stuffed-olive recipes")
+        errors += 1
+
+    tapas_map = json.loads(
+        fetch(base, "riviera_data/sunday_tapas_menu_map.json").decode("utf-8")
+    )
+    menu_items = {
+        str(item.get("menu_item_id")): item
+        for item in tapas_map.get("menu_items", [])
+        if isinstance(item, dict) and item.get("menu_item_id")
+    }
+    polpette_item = menu_items.get("polpette") or {}
+    olive_item = menu_items.get("veal-prosciutto-stuffed-olives") or {}
+    if (
+        tapas_map.get("no_auto_buffer") is not True
+        or tapas_map.get("service_window") != "Sunday 11:00-17:00"
+        or polpette_item.get("recipe_id") != "veal-meatballs"
+        or polpette_item.get("pieces_per_serve") != 3
+        or polpette_item.get("piece_weight_g") != 80
+        or olive_item.get("recipe_id") != "veal-prosciutto-stuffed-olives"
+        or olive_item.get("pieces_per_serve") != 6
+        or not polpette_item.get("active")
+        or not olive_item.get("active")
+    ):
+        fail("Sunday Tapas menu mapping drifted for Polpette or stuffed olives")
         errors += 1
     for recipe_id in (
         "arancini",

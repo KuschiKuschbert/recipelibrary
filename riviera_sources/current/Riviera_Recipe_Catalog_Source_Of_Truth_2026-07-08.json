@@ -922,6 +922,14 @@
             "sectionLabel": "Feasting — Shared to Table",
             "course": "Entrees",
             "item": "Beef Albondigas, Romesco Sugo with Toasted Turkish"
+          },
+          {
+            "packageId": "sunday-tapas",
+            "packageLabel": "Sunday Tapas",
+            "sectionId": "current-live-menu",
+            "sectionLabel": "Sunday Tapas",
+            "course": "Current Live Menu",
+            "item": "Beef & Pork Polpette"
           }
         ],
         "events": [
@@ -932,6 +940,10 @@
           {
             "eventTypeId": "offsite",
             "label": "Riviera Table"
+          },
+          {
+            "eventTypeId": "sunday-tapas",
+            "label": "Sunday Tapas"
           }
         ]
       },
@@ -4277,6 +4289,113 @@
         "notes": "No complete Rational program is confirmed in the current structured source."
       },
       "houseStandard": true
+    },
+    {
+      "id": "veal-prosciutto-stuffed-olives",
+      "name": "Veal & Prosciutto Crumbed Olives",
+      "subtitle": "Stuffed Olives · Lemon & Thyme Aioli",
+      "type": "Tapas",
+      "course": "Tapas",
+      "protein": [
+        "veal",
+        "pork"
+      ],
+      "diet": [],
+      "method": "Crumbed Stuffed Olive · Method Needs Confirmation",
+      "yield": "6 stuffed olives per Sunday Tapas serve; batch yield needs confirmation",
+      "label": "Veal Olives",
+      "elements": [
+        "Veal & Prosciutto Crumbed Olives",
+        "Lemon & Thyme Aioli"
+      ],
+      "ingredients": [],
+      "method_steps": [
+        "RECIPE HOLD: Recover and confirm the complete Riviera formula, piece weight and production method before producing from this record."
+      ],
+      "service": [
+        "Count 6 stuffed olives as one Sunday Tapas serve."
+      ],
+      "note": "Active Sunday Tapas menu item confirmed 27 July 2026. The stable record is intentionally limited to the confirmed menu identity and six-piece serve until the kitchen formula and controls are recovered.",
+      "status": "ACTIVE WORKING",
+      "version": "2026-07-27",
+      "provenance": {
+        "source": "Direct Riviera user corrections and Riviera Tapas Menu source digest",
+        "sourceDate": "2026-07-27",
+        "scope": "recipe-specific"
+      },
+      "confirmationFlags": [
+        "Recover and confirm the complete ingredient formula and batch yield.",
+        "Confirm the production method, piece weight and frying or reheating controls.",
+        "Confirm the live-menu sauce and garnish wording before final service-sheet publication.",
+        "Allergen declaration requires confirmation against current product labels and cross-contact controls.",
+        "Cooling, holding and packing controls require recipe-by-recipe confirmation.",
+        "Rational settings require recipe-by-recipe confirmation or an explicit NOT REQUIRED decision."
+      ],
+      "aliases": [
+        "veal olives",
+        "veal & prosciutto crumbed olives",
+        "veal and prosciutto crumbed olives",
+        "stuffed olives",
+        "Veal olives",
+        "Veal & prosciutto crumbed olives",
+        "Veal and prosciutto crumbed olives",
+        "Stuffed olives"
+      ],
+      "links": {
+        "packages": [
+          {
+            "packageId": "sunday-tapas",
+            "packageLabel": "Sunday Tapas",
+            "sectionId": "current-live-menu",
+            "sectionLabel": "Sunday Tapas",
+            "course": "Current Live Menu",
+            "item": "Veal & Prosciutto Crumbed Olives"
+          }
+        ],
+        "events": [
+          {
+            "eventTypeId": "sunday-tapas",
+            "label": "Sunday Tapas"
+          }
+        ]
+      },
+      "allergens": {
+        "status": "NEEDS CONFIRMATION",
+        "contains": [],
+        "mayContain": [],
+        "notes": "No allergen-free claim is made. Confirm the stuffing, crumb, cooking medium, aioli and cross-contact controls against current products."
+      },
+      "controls": {
+        "cooling": {
+          "status": "NEEDS CONFIRMATION",
+          "steps": []
+        },
+        "holding": {
+          "status": "NEEDS CONFIRMATION",
+          "steps": []
+        },
+        "packing": {
+          "status": "NEEDS CONFIRMATION",
+          "steps": []
+        },
+        "service": {
+          "status": "SOURCE RECORDED",
+          "steps": [
+            "Count 6 stuffed olives as one Sunday Tapas serve."
+          ]
+        }
+      },
+      "scalingBasis": {
+        "status": "SOURCE RECORDED",
+        "basis": "Scale the service count at six stuffed olives per Sunday Tapas serve. Do not infer a batch formula.",
+        "baseYield": "6 stuffed olives per Tapas serve; batch yield needs confirmation",
+        "notes": "The six-piece menu serve is confirmed. Piece weight, batch yield and ingredient scaling remain unconfirmed."
+      },
+      "rationalSettings": {
+        "status": "NEEDS CONFIRMATION",
+        "stages": [],
+        "notes": "Confirm whether a Rational stage is used or explicitly mark NOT REQUIRED after the production method is recovered."
+      }
     },
     {
       "id": "labneh-tzatziki",

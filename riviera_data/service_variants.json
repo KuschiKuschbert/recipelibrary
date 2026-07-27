@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-27-v23",
+  "version": "2026-07-27-v24",
   "status": "active_service_standard",
   "source_of_truth": "Riviera structured recipe catalog plus direct user-approved service-size corrections through 27 July 2026.",
   "rules": {
@@ -361,6 +361,7 @@
       },
       "tapas": {
         "portion": "3 meatballs with sauce",
+        "piece_count": 3,
         "piece_weight_g_pre_crumb": 80,
         "status": "confirmed"
       },
@@ -405,6 +406,22 @@
         "piece_weight_g_pre_crumb": 25,
         "note": "Older mini format is archive/reference only unless deliberately reactivated.",
         "status": "not_recommended"
+      }
+    },
+    "veal-prosciutto-stuffed-olives": {
+      "recipe_id": "veal-prosciutto-stuffed-olives",
+      "canonical_name": "Veal & Prosciutto Crumbed Olives",
+      "aliases": [
+        "veal olives",
+        "veal & prosciutto crumbed olives",
+        "veal and prosciutto crumbed olives",
+        "stuffed olives"
+      ],
+      "tapas": {
+        "portion": "6 stuffed olives",
+        "piece_count": 6,
+        "note": "The Sunday Tapas serve count is confirmed. Complete recipe formula, piece weight and production controls remain unconfirmed.",
+        "status": "confirmed"
       }
     },
     "fish-slider": {

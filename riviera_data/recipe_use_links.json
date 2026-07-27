@@ -28,11 +28,13 @@
         "whipped-butter",
         "charcuterie-board-classic",
         "date-madeleines",
-        "house-chip-seasoning"
+        "house-chip-seasoning",
+        "veal-meatballs",
+        "veal-prosciutto-stuffed-olives"
       ],
       "confirmationFlags": [
         "Spiced popcorn cauliflower, halloumi saganaki, cannoli trio, pistachio affogato and kids-menu recipe mappings still need confirmation.",
-        "Veal & Prosciutto Crumbed Olives is deliberately excluded until the legacy Veal olives/Polpette rows are mapped."
+        "The Veal & Prosciutto Crumbed Olives menu item is active and mapped, but its complete recipe formula and production controls still need confirmation."
       ]
     },
     {

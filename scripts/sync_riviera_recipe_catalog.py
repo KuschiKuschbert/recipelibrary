@@ -30,7 +30,7 @@ CURRENT_STANDARDS_ADDITIONS_PATH = (
 PDF_PATH = ROOT / "output" / "pdf" / "Riviera_Kitchen_Recipe_Card_Book_2026-07-08.pdf"
 HOUSE_STANDARDS_PDF_PATH = ROOT / "output" / "pdf" / "Riviera_House_Standards_Recipe_Manual_2026-07-08.pdf"
 
-EXPECTED_RECIPE_COUNT = 156
+EXPECTED_RECIPE_COUNT = 157
 ACTIVE_RELEASE_ID = "RIV-KNOWLEDGE-2026-07-27-V13"
 JULY_8_OVERLAY_IDS = [
     "arancini",

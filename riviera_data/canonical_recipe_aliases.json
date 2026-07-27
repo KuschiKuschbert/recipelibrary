@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-27-v5",
+  "version": "2026-07-27-v6",
   "status": "active_canonical_alias_map",
   "purpose": "Single source of truth for Riviera recipe naming where the same kitchen recipe appears under multiple menu names.",
   "canonical_recipes": {
@@ -28,11 +28,27 @@
         "spanish meatballs",
         "beef polpette"
       ],
-      "service_rule": "Use the Polpette recipe as the single kitchen base for meatballs, albondigas and polpette unless a future menu deliberately creates a separate recipe.",
+      "service_rule": "Use the Polpette recipe as the single kitchen base for meatballs, albondigas and polpette. Never map Veal olives or stuffed olives to this recipe.",
       "cocktail_size_rule": "80 g is the locked Beef & Pork Polpette piece weight for current Riviera service.",
       "duplicate_rule": "Do not use beef-polpette-canape or slow-cooked-beef-albondigas-buffet as separate active recipes. They are older service-format drafts and should redirect to the canonical Polpette recipe.",
       "notes": [
-        "Older 60 g and 25 g formats are retired/reference only unless deliberately reactivated."
+        "Older 60 g and 25 g formats are retired/reference only unless deliberately reactivated.",
+        "Veal olives are stuffed olives and are a separate active Sunday Tapas item."
+      ]
+    },
+    "veal-prosciutto-stuffed-olives": {
+      "canonical_id": "veal-prosciutto-stuffed-olives",
+      "canonical_name": "Veal & Prosciutto Crumbed Olives",
+      "aliases": [
+        "veal olives",
+        "veal & prosciutto crumbed olives",
+        "veal and prosciutto crumbed olives",
+        "stuffed olives"
+      ],
+      "service_rule": "Six stuffed olives make one Sunday Tapas serve. Do not map this item to Polpette.",
+      "notes": [
+        "The active menu identity and serve count are confirmed.",
+        "The complete recipe formula, piece weight and production controls remain NEEDS CONFIRMATION."
       ]
     },
     "arancini": {
@@ -223,6 +239,10 @@
     "slow cooked beef albondigas buffet": "polpette",
     "spanish meatballs": "polpette",
     "beef polpette": "polpette",
+    "veal olives": "veal-prosciutto-stuffed-olives",
+    "veal & prosciutto crumbed olives": "veal-prosciutto-stuffed-olives",
+    "veal and prosciutto crumbed olives": "veal-prosciutto-stuffed-olives",
+    "stuffed olives": "veal-prosciutto-stuffed-olives",
     "arancini": "arancini",
     "chorizo mozzarella arancini balls": "arancini",
     "chorizo mozzarella arancini tapas": "arancini",

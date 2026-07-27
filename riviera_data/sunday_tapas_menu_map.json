@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "release_id": "RIV-KNOWLEDGE-2026-07-27-V13",
+  "updated_at": "2026-07-27",
+  "status": "active",
+  "purpose": "Canonical GitHub mapping from active Sunday Tapas menu items and sales aliases to Riviera recipe records.",
+  "service_window": "Sunday 11:00-17:00",
+  "no_auto_buffer": true,
+  "menu_items": [
+    {
+      "menu_item_id": "polpette",
+      "display_name": "Polpette",
+      "recipe_id": "veal-meatballs",
+      "aliases": [
+        "Polpette",
+        "Beef Polpette",
+        "Beef & Pork Polpette",
+        "Meatballs",
+        "Veal Meatballs",
+        "Beef Albondigas"
+      ],
+      "pieces_per_serve": 3,
+      "piece_weight_g": 80,
+      "status": "LOCKED",
+      "active": true,
+      "confirmation_needed": []
+    },
+    {
+      "menu_item_id": "veal-prosciutto-stuffed-olives",
+      "display_name": "Veal & Prosciutto Crumbed Olives",
+      "recipe_id": "veal-prosciutto-stuffed-olives",
+      "aliases": [
+        "Veal olives",
+        "Veal & prosciutto crumbed olives",
+        "Veal and prosciutto crumbed olives",
+        "Stuffed olives"
+      ],
+      "pieces_per_serve": 6,
+      "piece_weight_g": null,
+      "status": "ACTIVE WORKING",
+      "active": true,
+      "confirmation_needed": [
+        "Confirm the complete ingredient formula and batch yield.",
+        "Confirm the production method, piece weight and frying or reheating controls.",
+        "Confirm allergens against current product labels and cross-contact controls.",
+        "Confirm cooling, holding and packing controls."
+      ]
+    }
+  ]
+}

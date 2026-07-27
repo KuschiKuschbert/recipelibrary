@@ -1,0 +1,409 @@
+function approveAndPublishCurrentTapasPrep() {
+  var spreadsheet = getControlSpreadsheet_();
+  var draftRun = getLatestDraftRun_(spreadsheet);
+  if (!draftRun) {
+    throw new Error("No unpublished Tapas draft is available.");
+  }
+  var forecastRows = forecastRowsForRun_(spreadsheet, draftRun.runId);
+  if (!forecastRows.length) {
+    throw new Error("The latest draft has no forecast rows.");
+  }
+  var blocked = forecastRows.filter(function (row) {
+    return String(row.Readiness) !== "READY";
+  });
+  var warning = blocked.length ?
+    "\n\n" + blocked.length +
+      " row(s) are not READY. They will publish with blank or visibly " +
+      "blocked quantities; stock will not be assumed as zero." :
+    "";
+  var ui = SpreadsheetApp.getUi();
+  var confirmation = ui.alert(
+    "Approve Sunday Tapas prep",
+    "Publish draft " + draftRun.runId + " for " +
+      draftRun.targetServiceDate + " (" + draftRun.bookedCovers +
+      " booked covers)?\n\nNo automatic 9% buffer is included." + warning,
+    ui.ButtonSet.YES_NO
+  );
+  if (confirmation !== ui.Button.YES) {
+    return {status: "CANCELLED"};
+  }
+  var email = Session.getActiveUser().getEmail();
+  var reviewer = email;
+  if (!reviewer) {
+    var prompt = ui.prompt(
+      "Approval receipt",
+      "Enter your name for the publication receipt:",
+      ui.ButtonSet.OK_CANCEL
+    );
+    if (prompt.getSelectedButton() !== ui.Button.OK ||
+        !prompt.getResponseText().trim()) {
+      return {status: "CANCELLED"};
+    }
+    reviewer = prompt.getResponseText().trim();
+  }
+  return publishTapasDraft_(spreadsheet, draftRun, reviewer);
+}
+
+function publishTapasDraft_(spreadsheet, draftRun, reviewer) {
+  var lock = LockService.getScriptLock();
+  if (!lock.tryLock(1000)) {
+    throw new Error("Another Riviera orchestrator run is active.");
+  }
+  var publishRunId = newRunId_("TAPAS-PUBLISH");
+  try {
+    var config = getConfig_(spreadsheet);
+    validateRequiredConfig_(config, [
+      "GENERATED_PREP_FOLDER_ID",
+      "RECIPE_RELEASE_ID",
+      "RECIPE_GITHUB_COMMIT"
+    ]);
+    startRun_(spreadsheet, publishRunId, "TAPAS_PUBLICATION");
+    var rows = forecastRowsForRun_(spreadsheet, draftRun.runId);
+    if (!rows.length) {
+      throw new Error("Forecast rows disappeared before publication.");
+    }
+    if (rows.some(function (row) {
+      return String(row["Publication Status"]) !== "DRAFT";
+    })) {
+      throw new Error(
+        "The selected draft is no longer entirely unpublished. Generate a new draft."
+      );
+    }
+
+    var generatedFolder = DriveApp.getFolderById(
+      config.GENERATED_PREP_FOLDER_ID
+    );
+    var target = getOrCreateCurrentPrepSpreadsheet_(
+      spreadsheet,
+      config,
+      generatedFolder
+    );
+    archiveCurrentPrep_(target, generatedFolder);
+    writePublishedPrep_(target, draftRun, rows, reviewer, config);
+    markForecastPublished_(spreadsheet, draftRun.runId);
+
+    var approvedAt = nowIso_();
+    finishRun_(spreadsheet, draftRun.runId, {
+      status: "PUBLISHED",
+      targetServiceDate: draftRun.targetServiceDate,
+      bookedCovers: draftRun.bookedCovers,
+      approvedBy: reviewer,
+      approvedAt: approvedAt,
+      publishedFileId: target.getId(),
+      message:
+        "Approved current Tapas prep published. Non-ready rows remain " +
+        "visible and no missing stock was converted to zero."
+    });
+    finishRun_(spreadsheet, publishRunId, {
+      status: "PUBLISHED",
+      accepted: rows.length,
+      quarantined: rows.filter(function (row) {
+        return String(row.Readiness) !== "READY";
+      }).length,
+      targetServiceDate: draftRun.targetServiceDate,
+      bookedCovers: draftRun.bookedCovers,
+      approvedBy: reviewer,
+      approvedAt: approvedAt,
+      publishedFileId: target.getId(),
+      message: "Stable current prep sheet updated; prior version archived."
+    });
+    spreadsheet.toast(
+      "Approved prep published for " + draftRun.targetServiceDate + ".",
+      "Riviera",
+      8
+    );
+    return {
+      status: "PUBLISHED",
+      runId: publishRunId,
+      publishedFileId: target.getId(),
+      url: target.getUrl()
+    };
+  } catch (error) {
+    try {
+      finishRun_(spreadsheet, publishRunId, {
+        status: "FAILED",
+        message: error.message
+      });
+    } catch (ignored) {
+      // Preserve the original failure.
+    }
+    throw error;
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function approveSelectedChangeReceipt() {
+  var spreadsheet = getControlSpreadsheet_();
+  var sheet = spreadsheet.getActiveSheet();
+  if (sheet.getName() !== RIVIERA.SHEETS.CHANGES ||
+      sheet.getActiveRange().getRow() < 2) {
+    throw new Error(
+      "Select one receipt row in the Change Receipts tab first."
+    );
+  }
+  var rowNumber = sheet.getActiveRange().getRow();
+  var headers = sheet.getRange(
+    1, 1, 1, sheet.getLastColumn()
+  ).getDisplayValues()[0];
+  var values = sheet.getRange(
+    rowNumber, 1, 1, sheet.getLastColumn()
+  ).getValues()[0];
+  var object = {};
+  headers.forEach(function (header, index) {
+    object[header] = values[index];
+  });
+  if (String(object["Approval Status"]) !== "AWAITING APPROVAL") {
+    throw new Error("This change receipt is not awaiting approval.");
+  }
+  var targetRoute = scopeTargetRoute_(String(object.Scope || ""));
+  if (!targetRoute) {
+    throw new Error(
+      "The receipt scope has no approved target route; approval stopped."
+    );
+  }
+  var ui = SpreadsheetApp.getUi();
+  var response = ui.alert(
+    "Approve source update",
+    "Approve receipt " + object["Receipt ID"] +
+      " for route " + targetRoute +
+      " for source update?\n\nThis does not claim Drive, GitHub or ChatGPT " +
+      "publication. Those statuses remain separate until verified.",
+    ui.ButtonSet.YES_NO
+  );
+  if (response !== ui.Button.YES) {
+    return;
+  }
+  var reviewer = Session.getActiveUser().getEmail() || "Manual approver";
+  setRowValueByHeader_(
+    sheet, rowNumber, headers, "Target Route", targetRoute
+  );
+  setRowValueByHeader_(
+    sheet, rowNumber, headers, "Approval Status",
+    "APPROVED FOR SOURCE UPDATE"
+  );
+  setRowValueByHeader_(sheet, rowNumber, headers, "Approved By", reviewer);
+  setRowValueByHeader_(sheet, rowNumber, headers, "Approved At", nowIso_());
+}
+
+function getLatestDraftRun_(spreadsheet) {
+  var rows = rowsAsObjects_(
+    spreadsheet.getSheetByName(RIVIERA.SHEETS.RUNS)
+  );
+  for (var i = rows.length - 1; i >= 0; i -= 1) {
+    if (String(rows[i]["Run Type"]) === "TAPAS_FORECAST" &&
+        String(rows[i].Status) === "DRAFT") {
+      return {
+        runId: String(rows[i]["Run ID"]),
+        targetServiceDate: String(rows[i]["Target Service Date"]),
+        bookedCovers: rows[i]["Booked Covers"]
+      };
+    }
+  }
+  return null;
+}
+
+function forecastRowsForRun_(spreadsheet, runId) {
+  return rowsAsObjects_(
+    spreadsheet.getSheetByName(RIVIERA.SHEETS.FORECAST)
+  ).filter(function (row) {
+    return String(row["Run ID"]) === runId;
+  });
+}
+
+function getOrCreateCurrentPrepSpreadsheet_(
+  controlSpreadsheet,
+  config,
+  generatedFolder
+) {
+  var target = null;
+  if (config.CURRENT_PREP_SHEET_ID) {
+    try {
+      target = SpreadsheetApp.openById(config.CURRENT_PREP_SHEET_ID);
+    } catch (error) {
+      throw new Error(
+        "CURRENT_PREP_SHEET_ID cannot be opened. Clear the ID only after " +
+        "confirming the file was intentionally removed. " + error.message
+      );
+    }
+  } else {
+    var matches = generatedFolder.getFilesByName(
+      RIVIERA.CURRENT_PREP_FILE_NAME
+    );
+    var files = [];
+    while (matches.hasNext()) {
+      files.push(matches.next());
+    }
+    if (files.length > 1) {
+      throw new Error(
+        "Multiple files use the stable current prep name. Resolve duplicates " +
+        "before publication."
+      );
+    }
+    if (files.length === 1) {
+      target = SpreadsheetApp.openById(files[0].getId());
+    }
+  }
+  if (!target) {
+    target = SpreadsheetApp.create(RIVIERA.CURRENT_PREP_FILE_NAME);
+    DriveApp.getFileById(target.getId()).moveTo(generatedFolder);
+  }
+  DriveApp.getFileById(target.getId())
+    .setName(RIVIERA.CURRENT_PREP_FILE_NAME);
+  setConfigValue_(
+    controlSpreadsheet,
+    "CURRENT_PREP_SHEET_ID",
+    target.getId()
+  );
+  return target;
+}
+
+function archiveCurrentPrep_(target, generatedFolder) {
+  var sheets = target.getSheets();
+  var hasPublishedContent = sheets.some(function (sheet) {
+    return sheet.getLastRow() > 1 ||
+      String(sheet.getRange(1, 1).getDisplayValue()).indexOf(
+        "Riviera Sunday Tapas"
+      ) !== -1;
+  });
+  if (!hasPublishedContent) {
+    return null;
+  }
+  var archiveName =
+    "Riviera — Sunday Tapas Prep Archive — " +
+    Utilities.formatDate(
+      new Date(), RIVIERA.TIME_ZONE, "yyyy-MM-dd HHmmss"
+    );
+  return DriveApp.getFileById(target.getId())
+    .makeCopy(archiveName, generatedFolder);
+}
+
+function writePublishedPrep_(target, draftRun, rows, reviewer, config) {
+  var sheets = target.getSheets();
+  var prep = sheets[0];
+  prep.setName("Prep Sheet");
+  for (var i = sheets.length - 1; i >= 1; i -= 1) {
+    target.deleteSheet(sheets[i]);
+  }
+  prep.clear();
+
+  var title = "Riviera Sunday Tapas — Approved Prep";
+  var metadata = [
+    ["Service date", draftRun.targetServiceDate],
+    ["Booked covers", draftRun.bookedCovers],
+    ["Approved by", reviewer],
+    ["Approved at", nowIso_()],
+    ["Forecast run", draftRun.runId],
+    ["Recipe release", config.RECIPE_RELEASE_ID],
+    ["Git commit", config.RECIPE_GITHUB_COMMIT],
+    ["Buffer", "0% automatic Tapas buffer"]
+  ];
+  var headers = [
+    "Menu Item", "Recipe ID", "Booked Covers", "Gross Target Serves",
+    "Stock Observed", "Estimated On Hand Serves", "Prep / Pull Serves",
+    "Pieces", "Readiness", "Notes"
+  ];
+  var outputRows = rows.sort(function (a, b) {
+    return String(a["Item Name"]).localeCompare(String(b["Item Name"]));
+  }).map(function (row) {
+    return [
+      row["Item Name"],
+      row["Recipe ID"],
+      row["Booked Covers"],
+      row["Gross Target Serves"],
+      row["Stock Observed At"] ?
+        row["Stock Observed At"] + " — " + row["Stock Status"] :
+        row["Stock Status"],
+      row["Estimated On Hand Serves"],
+      row["Rounded Pull Serves"],
+      row["Rounded Pieces"],
+      row.Readiness,
+      row.Notes
+    ];
+  });
+
+  prep.getRange(1, 1, 1, headers.length).merge()
+    .setValue(title)
+    .setBackground("#233833")
+    .setFontColor("#ffffff")
+    .setFontWeight("bold")
+    .setFontSize(16);
+  prep.getRange(2, 1, metadata.length, 2).setValues(metadata);
+  var headerRow = metadata.length + 3;
+  prep.getRange(headerRow, 1, 1, headers.length)
+    .setValues([headers])
+    .setBackground("#415e56")
+    .setFontColor("#ffffff")
+    .setFontWeight("bold")
+    .setWrap(true);
+  if (outputRows.length) {
+    prep.getRange(
+      headerRow + 1, 1, outputRows.length, headers.length
+    ).setValues(outputRows).setWrap(true);
+  }
+  prep.setFrozenRows(headerRow);
+  prep.setColumnWidth(1, 230);
+  prep.setColumnWidth(2, 190);
+  for (var col = 3; col <= 9; col += 1) {
+    prep.setColumnWidth(col, 125);
+  }
+  prep.setColumnWidth(10, 520);
+  prep.getDataRange().setVerticalAlignment("top");
+
+  var receipt = target.insertSheet("Run Receipt");
+  var receiptRows = [
+    ["Field", "Value"],
+    ["Forecast Run ID", draftRun.runId],
+    ["Service Date", draftRun.targetServiceDate],
+    ["Booked Covers", draftRun.bookedCovers],
+    ["Approved By", reviewer],
+    ["Approved At", nowIso_()],
+    ["Recipe Release ID", config.RECIPE_RELEASE_ID],
+    ["Recipe Git Commit", config.RECIPE_GITHUB_COMMIT],
+    ["Automatic Buffer %", 0],
+    [
+      "Safety",
+      "Missing/stale stock remains COUNT REQUIRED and was never set to zero."
+    ]
+  ];
+  receipt.getRange(1, 1, receiptRows.length, 2).setValues(receiptRows);
+  receipt.getRange(1, 1, 1, 2)
+    .setBackground("#233833")
+    .setFontColor("#ffffff")
+    .setFontWeight("bold");
+  receipt.setColumnWidth(1, 190);
+  receipt.setColumnWidth(2, 620);
+  receipt.getDataRange().setWrap(true).setVerticalAlignment("top");
+  receipt.setFrozenRows(1);
+}
+
+function markForecastPublished_(spreadsheet, runId) {
+  var sheet = spreadsheet.getSheetByName(RIVIERA.SHEETS.FORECAST);
+  var values = sheet.getDataRange().getValues();
+  var headers = values[0].map(String);
+  var runColumn = headers.indexOf("Run ID");
+  var statusColumn = headers.indexOf("Publication Status");
+  if (runColumn === -1 || statusColumn === -1) {
+    throw new Error("Forecast publication columns are missing.");
+  }
+  for (var i = 1; i < values.length; i += 1) {
+    if (String(values[i][runColumn]) === runId) {
+      sheet.getRange(i + 1, statusColumn + 1)
+        .setValue("APPROVED / PUBLISHED");
+    }
+  }
+}
+
+function setRowValueByHeader_(
+  sheet,
+  rowNumber,
+  headers,
+  header,
+  value
+) {
+  var index = headers.indexOf(header);
+  if (index === -1) {
+    throw new Error("Missing column '" + header + "'.");
+  }
+  sheet.getRange(rowNumber, index + 1).setValue(value);
+}

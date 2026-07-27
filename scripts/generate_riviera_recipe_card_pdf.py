@@ -48,7 +48,7 @@ SSOT_MANIFEST_PATH = ROOT / "riviera_sources" / "current" / "manifest.json"
 DEFAULT_OUTPUT = ROOT / "output" / "pdf" / "Riviera_Kitchen_Recipe_Card_Book_2026-07-08.pdf"
 HOUSE_STANDARDS_OUTPUT = ROOT / "output" / "pdf" / "Riviera_House_Standards_Recipe_Manual_2026-07-08.pdf"
 PROBE_OUTPUT = ROOT / "tmp" / "pdfs" / "_riviera_recipe_card_book_probe.pdf"
-EXPECTED_RECIPE_COUNT = 156
+EXPECTED_RECIPE_COUNT = 157
 
 BRAND_OLIVE = colors.HexColor("#5C6B3A")
 BRAND_GOLD = colors.HexColor("#C8A96E")
