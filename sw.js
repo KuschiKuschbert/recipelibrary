@@ -1,5 +1,5 @@
 'use strict';
-const CACHE_NAME = 'kuschi-kitchen-v250';
+const CACHE_NAME = 'kuschi-kitchen-v251';
 
 // Install shell: keep first-load precache focused on the main catalog.
 const SHELL_URLS = [
@@ -54,8 +54,10 @@ const RUNTIME_URLS = [
   './assets/qrcodejs-1.0.0.min.js',
 ];
 
-// Dynamic data: cache at runtime on first fetch, serve cache-first after
+// Dynamic data routing. Riviera operational JSON is handled network-first
+// below; larger reference datasets retain the cache-first offline strategy.
 const CACHEABLE = /\/(recipe_detail\/detail_[A-Z](_\d+)?\.json|alpha_catalog\/[^/]+\.json|claude_index\/claude_index_\d+.*\.json|aroma_data\/[a-z_]+\.json|combined_data\/ingredients_unified_modal\.json|riviera_data\/[a-z_]+\.json|flavour_data\/(flavour_knowledge_db_v1\.1\.json|toolkit_pass_static\.json|flavour_hints_by_id\.json)|pantry_data\/[a-z_]+\.json)$/;
+const NETWORK_FIRST_RIVIERA_DATA = /\/riviera_data\/[a-z_]+\.json$/;
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
@@ -80,23 +82,39 @@ self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
   const url = new URL(e.request.url);
 
-  // Navigation requests: serve from cache (shell), fallback to network, then index.html
+  // Navigation requests: refresh from the network, with an offline cache fallback.
   if (e.request.mode === 'navigate') {
     e.respondWith(
       caches.open(CACHE_NAME).then((cache) =>
-        cache.match(e.request).then((hit) => {
-          if (hit) return hit;
-          return fetch(e.request).then((resp) => {
-            if (resp.ok) cache.put(e.request, resp.clone());
-            return resp;
-          }).catch(() => cache.match('./index.html'));
-        })
+        fetch(e.request, { cache: 'no-store' }).then((resp) => {
+          if (resp.ok) cache.put(e.request, resp.clone());
+          return resp;
+        }).catch(() =>
+          cache.match(e.request).then((hit) => hit || cache.match('./index.html'))
+        )
       )
     );
     return;
   }
 
-  // Runtime data (recipes, catalog shards, aroma/riviera data): cache-first
+  // Riviera operational data must refresh when online so newly published
+  // recipes, packages and aliases cannot be masked by an older offline copy.
+  if (NETWORK_FIRST_RIVIERA_DATA.test(url.pathname)) {
+    e.respondWith(
+      caches.open(CACHE_NAME).then((cache) =>
+        fetch(e.request, { cache: 'no-store' }).then((resp) => {
+          if (!resp.ok) throw new Error(`Riviera data fetch failed: ${resp.status}`);
+          cache.put(e.request, resp.clone());
+          return resp;
+        }).catch(() =>
+          cache.match(e.request).then((hit) => hit || Response.error())
+        )
+      )
+    );
+    return;
+  }
+
+  // Other runtime data (catalog shards and reference data): cache-first.
   if (CACHEABLE.test(url.pathname)) {
     e.respondWith(
       caches.open(CACHE_NAME).then((cache) =>
