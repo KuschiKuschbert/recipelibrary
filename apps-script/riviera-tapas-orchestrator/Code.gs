@@ -525,6 +525,12 @@ function migrateKnownTemplateSheet_(sheet, name, current, canonical) {
       row[configRequiredIndex] = configRequiredByKey[key] || "NO";
     });
   }
+  if (name === RIVIERA.SHEETS.POS_MAP) {
+    var posIdIndex = canonical.indexOf("POS Item ID");
+    migratedRows = migratedRows.filter(function (row) {
+      return normalizeText_(row[posIdIndex]) !== "needs pos id";
+    });
+  }
   if (name === RIVIERA.SHEETS.CHANGES) {
     var scopeIndex = canonical.indexOf("Scope");
     var routeIndex = canonical.indexOf("Target Route");
@@ -593,29 +599,118 @@ function mapControlHeadersStrictly_(name, current, canonical) {
 
 function getExactKnownHeaderMigration_(name, current, canonical) {
   var signature = current.map(normalizeText_).join("|");
-  var configV1 = [
-    "key", "value", "description", "editable"
-  ].join("|");
-  var menuV1 = [
-    "menu item id", "display name", "recipe id", "recipe status",
-    "items per serve", "unit", "service status", "no auto buffer",
-    "source", "confirmation needed"
-  ].join("|");
-  var changesV1 = [
-    "change id", "created at", "source channel", "previous rule",
-    "new rule", "scope", "effective date", "expiry date",
-    "affected records", "drive status", "github status",
-    "chatgpt status", "approval status", "notes"
-  ].join("|");
-  var byTargetName = {};
-  if (name === RIVIERA.SHEETS.CONFIG && signature === configV1) {
-    byTargetName = {
+  var migrations = [];
+  migrations.push({
+    sheet: RIVIERA.SHEETS.CONFIG,
+    source: ["key", "value", "description", "editable"],
+    target: {
       "Key": 0,
       "Value": 1,
       "Notes": 2
-    };
-  } else if (name === RIVIERA.SHEETS.MENU_MAP && signature === menuV1) {
-    byTargetName = {
+    }
+  });
+  migrations.push({
+    sheet: RIVIERA.SHEETS.INTAKE_LOG,
+    source: [
+      "intake id", "received at", "source type", "source file id",
+      "source file name", "sha256", "status", "rows read",
+      "rows accepted", "rows quarantined", "processed at",
+      "processed by", "notes"
+    ],
+    target: {
+      "Processed At": 10,
+      "Run ID": 0,
+      "Intake Kind": 2,
+      "Source File ID": 3,
+      "Source File Name": 4,
+      "SHA-256": 5,
+      "Outcome": 6,
+      "Rows Accepted": 8,
+      "Rows Quarantined": 9,
+      "Message": 12
+    }
+  });
+  migrations.push({
+    sheet: RIVIERA.SHEETS.SALES,
+    source: [
+      "sale id", "service date", "service day", "pos item id",
+      "pos item name raw", "menu item id", "sold qty", "voided qty",
+      "refunded qty", "net serves", "net item units", "covers",
+      "source file id", "imported at", "validation status"
+    ],
+    target: {
+      "Run ID": 0,
+      "Source File ID": 12,
+      "Service Date": 1,
+      "Menu Item ID": 5,
+      "Item Name": 4,
+      "Sold Qty": 6,
+      "Voided Qty": 7,
+      "Refunded Qty": 8,
+      "Net Qty": 9,
+      "Covers": 11,
+      "Imported At": 13
+    }
+  });
+  migrations.push({
+    sheet: RIVIERA.SHEETS.BOOKINGS,
+    source: [
+      "booking id", "service date", "booked covers", "confirmed covers",
+      "booking status", "dietary summary", "source file id",
+      "imported at", "validation status"
+    ],
+    target: {
+      "Source File ID": 6,
+      "Booking ID": 0,
+      "Service Date": 1,
+      "Booked Covers": 2,
+      "Status": 4,
+      "Notes": 5,
+      "Imported At": 7
+    }
+  });
+  migrations.push({
+    sheet: RIVIERA.SHEETS.STOCK,
+    source: [
+      "stocktake id", "counted at", "baseline month", "menu item id",
+      "item name", "counted units", "unit", "source file id",
+      "is opening baseline", "validation status", "notes"
+    ],
+    target: {
+      "Run ID": 0,
+      "Source File ID": 7,
+      "Stocktake Date": 1,
+      "Menu Item ID": 3,
+      "Item Name": 4,
+      "On Hand Qty": 5,
+      "UOM": 6,
+      "Imported At": 1
+    }
+  });
+  migrations.push({
+    sheet: RIVIERA.SHEETS.POS_MAP,
+    source: [
+      "pos item id", "pos item name", "menu item id", "recipe id",
+      "mapping status", "items per tapas serve", "unit",
+      "pull rounding unit", "active sunday tapas", "aliases",
+      "confirmed source", "notes"
+    ],
+    target: {
+      "POS Item ID": 0,
+      "POS Item Name": 1,
+      "Menu Item ID": 2,
+      "Active": 8,
+      "Notes": 11
+    }
+  });
+  migrations.push({
+    sheet: RIVIERA.SHEETS.MENU_MAP,
+    source: [
+      "menu item id", "display name", "recipe id", "recipe status",
+      "items per serve", "unit", "service status", "no auto buffer",
+      "source", "confirmation needed"
+    ],
+    target: {
       "Menu Item ID": 0,
       "Menu Item Name": 1,
       "Recipe ID": 2,
@@ -625,27 +720,129 @@ function getExactKnownHeaderMigration_(name, current, canonical) {
       "Stock Units Per Serve": 4,
       "Active": 6,
       "Notes": 8
-    };
-  } else if (name === RIVIERA.SHEETS.CHANGES &&
-             signature === changesV1) {
-    byTargetName = {
+    }
+  });
+  migrations.push({
+    sheet: RIVIERA.SHEETS.FORECAST,
+    source: [
+      "service date", "booked covers", "menu item id", "display name",
+      "recipe id", "history sundays", "sold per cover",
+      "forecast serves", "items per serve", "target units",
+      "opening stock units", "production additions",
+      "sales units since count", "waste transfer units",
+      "available stock units", "pull make units", "pull make serves",
+      "next tier backup units", "stock status", "mapping status",
+      "approval status", "notes"
+    ],
+    target: {
+      "Service Date": 0,
+      "Booked Covers": 1,
+      "Menu Item ID": 2,
+      "Recipe ID": 4,
+      "Item Name": 3,
+      "Comparable Sundays": 5,
+      "Serves Per Cover": 6,
+      "Gross Target Serves": 7,
+      "Stock Status": 18,
+      "To Prep Serves": 16,
+      "Pieces Per Serve": 8,
+      "Rounded Pull Serves": 16,
+      "Rounded Pieces": 15,
+      "Readiness": 19,
+      "Notes": 21,
+      "Publication Status": 20
+    }
+  });
+  migrations.push({
+    sheet: RIVIERA.SHEETS.EXCEPTIONS,
+    source: [
+      "exception id", "raised at", "severity", "source type",
+      "source file id", "source row", "exception code", "raw value",
+      "suggested match", "resolution status", "resolution",
+      "resolved by", "resolved at"
+    ],
+    target: {
+      "Logged At": 1,
+      "Intake Kind": 3,
+      "Source File ID": 4,
+      "Source Row": 5,
+      "Exception Code": 6,
+      "Message": 7,
+      "Payload": 8,
+      "Status": 9
+    }
+  });
+  migrations.push({
+    sheet: RIVIERA.SHEETS.CHANGES,
+    source: [
+      "change id", "received at", "previous rule", "new rule",
+      "scope classification", "effective date", "expiry date",
+      "affected records", "drive status", "github status",
+      "chatgpt status", "approval status", "approved by",
+      "approved at", "source conversation", "notes"
+    ],
+    target: {
       "Receipt ID": 0,
       "Created At": 1,
-      "Previous Rule": 3,
-      "New Rule": 4,
-      "Scope": 5,
-      "Effective Date": 6,
-      "Expiry Date": 7,
-      "Affected Records": 8,
-      "Drive Status": 9,
-      "GitHub Status": 10,
-      "ChatGPT Status": 11,
-      "Approval Status": 12,
-      "Notes": 13
-    };
-  } else {
+      "Previous Rule": 2,
+      "New Rule": 3,
+      "Scope": 4,
+      "Effective Date": 5,
+      "Expiry Date": 6,
+      "Affected Records": 7,
+      "Drive Status": 8,
+      "GitHub Status": 9,
+      "ChatGPT Status": 10,
+      "Approval Status": 11,
+      "Approved By": 12,
+      "Approved At": 13,
+      "Notes": 15
+    }
+  });
+  migrations.push({
+    sheet: RIVIERA.SHEETS.RUNS,
+    source: [
+      "run id", "started at", "completed at", "run type",
+      "source file ids", "source hashes", "recipe release id",
+      "github commit", "service date", "booked covers",
+      "stock baseline at", "accepted rows", "quarantined rows",
+      "draft file id", "publication status", "approved by",
+      "approved at", "notes"
+    ],
+    target: {
+      "Run ID": 0,
+      "Run Type": 3,
+      "Started At": 1,
+      "Finished At": 2,
+      "Status": 14,
+      "Source File IDs": 4,
+      "Source SHA-256 Values": 5,
+      "Rows Accepted": 11,
+      "Rows Quarantined": 12,
+      "Target Service Date": 8,
+      "Booked Covers": 9,
+      "Recipe Release ID": 6,
+      "Recipe Git Commit": 7,
+      "Approved By": 15,
+      "Approved At": 16,
+      "Published File ID": 13,
+      "Message": 17
+    }
+  });
+
+  var exact = null;
+  migrations.some(function (candidate) {
+    if (candidate.sheet === name &&
+        candidate.source.join("|") === signature) {
+      exact = candidate;
+      return true;
+    }
+    return false;
+  });
+  if (!exact) {
     return null;
   }
+  var byTargetName = exact.target;
   var mapping = {};
   Object.keys(byTargetName).forEach(function (targetHeader) {
     var targetIndex = canonical.indexOf(targetHeader);
