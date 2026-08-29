@@ -200,15 +200,15 @@ def validate_feasting(packages: dict[str, Any], errors: list[str]) -> None:
     expect(feasting.get("status") == "LOCKED", "Feasting scaling standard must be LOCKED", errors)
     expect(feasting.get("sourceRef") == "FEAST-001 v1.2", "Feasting source reference drift", errors)
 
-    protein = feasting.get("selectedProteinPortions") or {}
+    protein = feasting.get("perSelectedProteinPortions") or {}
     expect(
         protein.get("formula") == "ceil(guestCount * 4 / 3)",
-        "Feasting selected-protein formula drift",
+        "Feasting per-selected-protein formula drift",
         errors,
     )
     expect(
         protein.get("example") == {"guestCount": 90, "portions": 120},
-        "Feasting 90-guest example must produce 120 portions",
+        "Feasting 90-guest example must produce 120 portions of each selected protein",
         errors,
     )
     expect(
@@ -241,8 +241,8 @@ def validate_feasting(packages: dict[str, Any], errors: list[str]) -> None:
     )
     lines = rules.get("displayLines") or []
     expect(
-        any("90 guests = 120 portions" in str(line) for line in lines),
-        "Feasting package must display the 90-to-120 example",
+        any("90 guests = 120 portions of each protein selection" in str(line) for line in lines),
+        "Feasting package must display the 90-to-120 per-selection example",
         errors,
     )
     expect(
