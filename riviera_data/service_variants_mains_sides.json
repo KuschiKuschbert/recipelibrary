@@ -419,7 +419,7 @@
     }
   },
   "buffer_policy": {
-    "releaseId": "RIV-KNOWLEDGE-2026-07-27-V13",
+    "releaseId": "RIV-KNOWLEDGE-V15.2",
     "eventMultiplier": 1.09,
     "applyOnce": true,
     "eventServiceKeys": [

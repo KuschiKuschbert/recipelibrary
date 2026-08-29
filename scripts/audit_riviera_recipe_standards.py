@@ -42,7 +42,7 @@ SERVICE_VARIANT_BACKLOG_PATH = ROOT / "riviera_data" / "service_variant_backlog.
 CANONICAL_ALIASES_PATH = ROOT / "riviera_data" / "canonical_recipe_aliases.json"
 FUNCTION_PACKAGES_PATH = ROOT / "riviera_data" / "function_packages.json"
 RECIPE_USE_LINKS_PATH = ROOT / "riviera_data" / "recipe_use_links.json"
-ACTIVE_RELEASE_ID = "RIV-KNOWLEDGE-2026-07-27-V13"
+ACTIVE_RELEASE_ID = "RIV-KNOWLEDGE-V15.2"
 
 ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,62}$")
 REQUIRED_TOP = (

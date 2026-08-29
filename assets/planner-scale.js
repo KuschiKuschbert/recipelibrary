@@ -14,6 +14,8 @@
     'sunday tapas': 'tapas',
     'afternoon tea': 'high_tea',
     'high tea': 'high_tea',
+    'shared feast': 'feasting',
+    'feasting / shared to table': 'feasting',
     corporate: 'corporate_boxed',
   };
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Apply/check Riviera V13 package-level operational controls."""
+"""Apply/check Riviera v15.2 package-level operational controls."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGES_PATH = ROOT / "riviera_data" / "function_packages.json"
-RELEASE_ID = "RIV-KNOWLEDGE-2026-07-27-V13"
+RELEASE_ID = "RIV-KNOWLEDGE-V15.2"
 
 PLATTER_SECTIONS = (
     ("parties", "platters"),
@@ -158,6 +158,35 @@ def focaccia_rules(*, included: bool, butter_label: str = "whipped butter") -> d
     }
 
 
+def feasting_scaling_rules() -> dict[str, Any]:
+    return {
+        "status": "LOCKED",
+        "scope": "package-specific",
+        "effectiveDate": "2026-08-29",
+        "sourceRef": "FEAST-001 v1.2",
+        "selectedProteinPortions": {
+            "formula": "ceil(guestCount * 4 / 3)",
+            "example": {"guestCount": 90, "portions": 120},
+            "standardEventBufferAlreadyIncluded": True,
+            "additionalStandardNinePercentBuffer": False,
+        },
+        "dietaryAlternatives": {
+            "basis": "exact confirmed count",
+            "includedInSelectedProteinPortions": False,
+        },
+        "frenchGreenBeans": {
+            "rawKgPerGuests": {"kilograms": 10, "guestCount": 90},
+            "equivalent": "1 kg raw per 9 guests",
+        },
+        "displayLines": [
+            "Selected feasting proteins: total portions = guests × 4 ÷ 3, rounded up (90 guests = 120 portions).",
+            "That feasting uplift is applied once; do not add the standard 9% event buffer again.",
+            "Dietary alternatives are produced to the exact confirmed count and sit outside the shared protein total.",
+            "French green beans: 10 kg raw per 90 guests (1 kg per 9 guests).",
+        ],
+    }
+
+
 def ensure_house_bread_course(section: dict[str, Any], *, butter_label: str) -> None:
     linked_rows: list[tuple[dict[str, Any], dict[str, Any]]] = []
     for course in section.get("courses") or []:
@@ -205,11 +234,16 @@ def apply_policy(payload: dict[str, Any]) -> dict[str, Any]:
     focaccia["excludedMyoDiySections"] = [
         f"{package_id}.{section_id}" for package_id, section_id in FOCACCIA_EXCLUDED_SECTIONS
     ]
+    payload.setdefault("operationalStandards", {})["feasting"] = feasting_scaling_rules()
 
     for package_id, section_id in FOCACCIA_INCLUDED_SECTIONS:
         section = find_section(payload, package_id, section_id)
         butter_label = "whipped herb butter" if (package_id, section_id) == ("weddings", "amalfi") else "whipped butter"
         section["operationalRules"] = focaccia_rules(included=True, butter_label=butter_label)
+        if (package_id, section_id) == ("offsite", "feasting"):
+            feast_rules = feasting_scaling_rules()
+            section["operationalRules"]["feastingScalingRef"] = "operationalStandards.feasting"
+            section["operationalRules"]["displayLines"].extend(feast_rules["displayLines"])
         ensure_house_bread_course(section, butter_label=butter_label)
 
     for package_id, section_id in FOCACCIA_EXCLUDED_SECTIONS:

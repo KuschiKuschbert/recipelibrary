@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate locked Riviera V13 package, buffer and recipe-release policy."""
+"""Validate locked Riviera v15.2 package, buffer and recipe-release policy."""
 
 from __future__ import annotations
 
@@ -30,7 +30,7 @@ SERVICE_VARIANT_PATHS = tuple(
     )
 )
 PLANNER_SCALE_PATH = ROOT / "assets" / "planner-scale.js"
-RELEASE_ID = "RIV-KNOWLEDGE-2026-07-27-V13"
+RELEASE_ID = "RIV-KNOWLEDGE-V15.2"
 
 EVENT_SERVICE_KEYS = {
     "buffet",
@@ -190,6 +190,71 @@ def validate_buffer_policy(errors: list[str]) -> None:
     expect(
         "production_buffer_multiplier" not in planner,
         "planner-scale.js still reads the obsolete production buffer",
+        errors,
+    )
+
+
+def validate_feasting(packages: dict[str, Any], errors: list[str]) -> None:
+    standards = packages.get("operationalStandards") or {}
+    feasting = standards.get("feasting") or {}
+    expect(feasting.get("status") == "LOCKED", "Feasting scaling standard must be LOCKED", errors)
+    expect(feasting.get("sourceRef") == "FEAST-001 v1.2", "Feasting source reference drift", errors)
+
+    protein = feasting.get("selectedProteinPortions") or {}
+    expect(
+        protein.get("formula") == "ceil(guestCount * 4 / 3)",
+        "Feasting selected-protein formula drift",
+        errors,
+    )
+    expect(
+        protein.get("example") == {"guestCount": 90, "portions": 120},
+        "Feasting 90-guest example must produce 120 portions",
+        errors,
+    )
+    expect(
+        protein.get("standardEventBufferAlreadyIncluded") is True
+        and protein.get("additionalStandardNinePercentBuffer") is False,
+        "Feasting uplift must replace, not stack with, the standard 9% buffer",
+        errors,
+    )
+
+    dietary = feasting.get("dietaryAlternatives") or {}
+    expect(
+        dietary.get("basis") == "exact confirmed count"
+        and dietary.get("includedInSelectedProteinPortions") is False,
+        "Feasting dietary alternatives must stay outside the shared protein total",
+        errors,
+    )
+    beans = feasting.get("frenchGreenBeans") or {}
+    expect(
+        beans.get("rawKgPerGuests") == {"kilograms": 10, "guestCount": 90},
+        "Feasting French-green-bean raw standard drift",
+        errors,
+    )
+
+    feast_section = section(packages, "offsite", "feasting")
+    rules = feast_section.get("operationalRules") or {}
+    expect(
+        rules.get("feastingScalingRef") == "operationalStandards.feasting",
+        "Offsite feasting package must reference the locked scaling standard",
+        errors,
+    )
+    lines = rules.get("displayLines") or []
+    expect(
+        any("90 guests = 120 portions" in str(line) for line in lines),
+        "Feasting package must display the 90-to-120 example",
+        errors,
+    )
+    expect(
+        any("do not add the standard 9%" in str(line) for line in lines),
+        "Feasting package must display the no-double-buffer control",
+        errors,
+    )
+
+    planner = PLANNER_SCALE_PATH.read_text(encoding="utf-8")
+    expect(
+        "'shared feast': 'feasting'" in planner,
+        "Shared-feast planner style must not fall back to buffered buffet scaling",
         errors,
     )
 
@@ -685,23 +750,24 @@ def main() -> int:
     )
 
     validate_buffer_policy(errors)
+    validate_feasting(packages, errors)
     validate_high_tea(packages, recipes, errors)
     validate_grazing_and_focaccia(packages, recipes, errors)
     validate_platter_counts(packages, recipes, errors)
     validate_no_placeholder_links(packages, recipes, errors)
 
     if errors:
-        print("RIVIERA V13 RELEASE POLICY: FAIL", file=sys.stderr)
+        print("RIVIERA V15.2 RELEASE POLICY: FAIL", file=sys.stderr)
         for error in errors:
             print(f"- {error}", file=sys.stderr)
         return 1
 
-    print("RIVIERA V13 RELEASE POLICY: OK")
+    print("RIVIERA V15.2 RELEASE POLICY: OK")
     print(f"- release: {RELEASE_ID}")
     print(f"- recipes: {len(recipes)}")
     print(f"- lifecycle: {dict(lifecycle_counts)}")
     print(f"- explicit planner buffer records: {EXPECTED_BUFFERED_RECORDS}")
-    print("- High Tea, platter, grazing and focaccia standards: locked and aligned")
+    print("- Feasting, High Tea, platter, grazing and focaccia standards: locked and aligned")
     return 0
 
 

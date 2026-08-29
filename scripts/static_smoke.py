@@ -146,7 +146,7 @@ def check_json(base: str, path: str) -> int:
 
 def check_riviera_lifecycle(base: str) -> int:
     errors = 0
-    release_id = "RIV-KNOWLEDGE-2026-07-27-V13"
+    release_id = "RIV-KNOWLEDGE-V15.2"
     allowed_statuses = {"LOCKED", "ACTIVE WORKING", "TRIAL ONLY", "RETIRED"}
     expected_statuses = {
         "arancini": "LOCKED",

@@ -31,7 +31,7 @@ PDF_PATH = ROOT / "output" / "pdf" / "Riviera_Kitchen_Recipe_Card_Book_2026-07-0
 HOUSE_STANDARDS_PDF_PATH = ROOT / "output" / "pdf" / "Riviera_House_Standards_Recipe_Manual_2026-07-08.pdf"
 
 EXPECTED_RECIPE_COUNT = 157
-ACTIVE_RELEASE_ID = "RIV-KNOWLEDGE-2026-07-27-V13"
+ACTIVE_RELEASE_ID = "RIV-KNOWLEDGE-V15.2"
 JULY_8_OVERLAY_IDS = [
     "arancini",
     "calamari",
@@ -339,11 +339,20 @@ def build_catalog_from_builtins() -> dict[str, Any]:
     return {
         "schemaVersion": 2,
         "status": "active",
-        "date": "2026-07-27",
+        "date": "2026-08-29",
         "releaseId": ACTIVE_RELEASE_ID,
         "description": "Canonical structured Riviera recipe database with lifecycle, provenance, aliases, package/event links, allergen review status, scaling basis, Rational settings and operational controls. Edit this file first, then sync riviera_data/builtins.json from it.",
         "authority": {
             "mergeDirection": "GitHub is canonical for structured recipe data; the July 8 overlay and later approved standards supersede historical ChatGPT recipe versions. Drive remains canonical for operations and ChatGPT receives a read-optimised release.",
+            "alignmentRecord": "riviera_sources/current/Riviera_V15_2_Alignment_2026-08-29.md",
+            "driveRecipeSourceAdapter": {
+                "documentId": "14ARSDcPNUFvMfVTzcUbrd4-51BKdAdhiGBj-yRsBgxE",
+                "costingWorkbookId": "1gThBJ-dWytj-1iUjl4bSdZmgCU3bbxvP",
+                "menuBuilderId": "1k380sC6o0XJj6pZN_bMtDac5_ZgtOHvd4KwzKB0F3Q4",
+                "matchingRule": "Use an exact recipe title and ACTIVE service module. Do not merge similarly named dishes or transfer yields between service formats.",
+                "conflictState": "WAITING",
+                "promotionRule": "Do not change LOCKED recipes or promote candidates without exact source identity and explicit approval.",
+            },
             "sourceOfTruth": rel(SOURCE_OF_TRUTH_PATH),
             "manifest": rel(MANIFEST_PATH),
             "overlay": rel(OVERLAY_PATH),

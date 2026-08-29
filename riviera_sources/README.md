@@ -33,7 +33,7 @@ Classify every proposed correction as a permanent Riviera standard, package-spec
 - `current/manifest.json` - source list, checksums, structured catalog path, and overlay recipe IDs.
 - `current/live_project_audit_2026-07-10.json` - authenticated parity proof for the 23 baseline sources and five legacy Project mirror artifacts.
 
-The `2026-07-08` names on the catalog, merged recipe bundle and PDF are retained as stable compatibility paths for existing site and audit tooling. They identify the historical provenance baseline, not the current release date. Always use the embedded `releaseId` and manifest `date` to identify the active release; the current ID is `RIV-KNOWLEDGE-2026-07-27-V13`.
+The `2026-07-08` names on the catalog, merged recipe bundle and PDF are retained as stable compatibility paths for existing site and audit tooling. They identify the historical provenance baseline, not the current release date. Always use the embedded `releaseId` and manifest `date` to identify the active release; the current ID is `RIV-KNOWLEDGE-V15.2`.
 
 ## One-command workflow
 
