@@ -1,5 +1,5 @@
 {
-  "releaseId": "RIV-KNOWLEDGE-2026-07-27-V13",
+  "releaseId": "RIV-KNOWLEDGE-V15.2",
   "version": "1.0",
   "status": "ACTIVE WORKING",
   "policy": "A listed recipe has no confirmed Riviera service-variant record in the active sources. Keep its recipe data available, show the gap as NEEDS CONFIRMATION, and do not invent a service quantity to satisfy coverage checks. Remove the backlog record when a sourced service variant is published.",

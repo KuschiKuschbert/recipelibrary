@@ -2,7 +2,7 @@
   "version": "2.0",
   "note": "Riviera package and catering register. Brochure prices, minimums, inclusions and availability remain sales-confirmation items; locked operational modules and counts follow the active Riviera release.",
   "operationalStandards": {
-    "releaseId": "RIV-KNOWLEDGE-2026-07-27-V13",
+    "releaseId": "RIV-KNOWLEDGE-V15.2",
     "eventBuffer": {
       "multiplier": 1.09,
       "appliesOnceTo": [
@@ -127,6 +127,38 @@
           "unit": "tray",
           "item": "House focaccia"
         }
+      ]
+    },
+    "feasting": {
+      "status": "LOCKED",
+      "scope": "package-specific",
+      "effectiveDate": "2026-08-29",
+      "sourceRef": "FEAST-001 v1.2",
+      "selectedProteinPortions": {
+        "formula": "ceil(guestCount * 4 / 3)",
+        "example": {
+          "guestCount": 90,
+          "portions": 120
+        },
+        "standardEventBufferAlreadyIncluded": true,
+        "additionalStandardNinePercentBuffer": false
+      },
+      "dietaryAlternatives": {
+        "basis": "exact confirmed count",
+        "includedInSelectedProteinPortions": false
+      },
+      "frenchGreenBeans": {
+        "rawKgPerGuests": {
+          "kilograms": 10,
+          "guestCount": 90
+        },
+        "equivalent": "1 kg raw per 9 guests"
+      },
+      "displayLines": [
+        "Selected feasting proteins: total portions = guests × 4 ÷ 3, rounded up (90 guests = 120 portions).",
+        "That feasting uplift is applied once; do not add the standard 9% event buffer again.",
+        "Dietary alternatives are produced to the exact confirmed count and sit outside the shared protein total.",
+        "French green beans: 10 kg raw per 90 guests (1 kg per 9 guests)."
       ]
     }
   },
@@ -3113,8 +3145,13 @@
             "automaticPlannerInclusion": true,
             "displayLines": [
               "House focaccia with whipped butter is included.",
-              "The house-focaccia recipe is automatically included in the planner."
-            ]
+              "The house-focaccia recipe is automatically included in the planner.",
+              "Selected feasting proteins: total portions = guests × 4 ÷ 3, rounded up (90 guests = 120 portions).",
+              "That feasting uplift is applied once; do not add the standard 9% event buffer again.",
+              "Dietary alternatives are produced to the exact confirmed count and sit outside the shared protein total.",
+              "French green beans: 10 kg raw per 90 guests (1 kg per 9 guests)."
+            ],
+            "feastingScalingRef": "operationalStandards.feasting"
           },
           "courses": [
             {
@@ -3435,7 +3472,7 @@
       ]
     }
   ],
-  "releaseId": "RIV-KNOWLEDGE-2026-07-27-V13",
+  "releaseId": "RIV-KNOWLEDGE-V15.2",
   "salesStatusDefault": "NEEDS CURRENT SALES CONFIRMATION",
   "sourceStatusDefault": "BROCHURE REFERENCE — VERIFY CURRENT PRICE, MINIMUMS, INCLUSIONS AND AVAILABILITY"
 }

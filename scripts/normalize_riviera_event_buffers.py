@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Normalise planner-consumed Riviera buffer fields to the V13 policy.
+"""Normalise planner-consumed Riviera buffer fields to the v15.2 policy.
 
 The planner previously mixed an already-buffered ``production_*`` quantity with
-another multiplier, which could apply an allowance twice.  V13 keeps the
+another multiplier, which could apply an allowance twice. The active policy keeps the
 service target as the base quantity and records one explicit automatic event
 buffer:
 
@@ -129,7 +129,7 @@ def main() -> int:
                     file_changed = True
 
         policy = {
-            "releaseId": "RIV-KNOWLEDGE-2026-07-27-V13",
+            "releaseId": "RIV-KNOWLEDGE-V15.2",
             "eventMultiplier": 1.09,
             "applyOnce": True,
             "eventServiceKeys": sorted(EVENT_KEYS),

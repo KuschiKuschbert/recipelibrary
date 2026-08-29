@@ -60,7 +60,7 @@ def main() -> int:
         ("planner acceptance smoke", [sys.executable, "scripts/planner_acceptance_smoke.py"]),
         ("service-worker validation", [sys.executable, "scripts/validate_sw.py"]),
         (
-            "Riviera V13 release policy",
+            "Riviera v15.2 release policy",
             [sys.executable, "scripts/validate_riviera_release_policy.py"],
         ),
         (

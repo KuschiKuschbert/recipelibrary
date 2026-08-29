@@ -71,7 +71,7 @@ CHECK_COMMANDS = (
         [sys.executable, "scripts/audit_riviera_frontend_service_variants.py"],
     ),
     (
-        "V13 release policy",
+        "v15.2 release policy",
         [sys.executable, "scripts/validate_riviera_release_policy.py"],
     ),
     ("static site", [sys.executable, "scripts/static_smoke.py"]),

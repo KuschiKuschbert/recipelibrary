@@ -1,10 +1,19 @@
 {
   "schemaVersion": 2,
   "status": "active",
-  "date": "2026-07-27",
+  "date": "2026-08-29",
   "description": "Canonical structured Riviera recipe database with lifecycle, provenance, confirmation flags, aliases, package/event links, allergen review status and operational controls. Edit this file first, then sync riviera_data/builtins.json from it.",
   "authority": {
     "mergeDirection": "GitHub is canonical for structured recipe data; the July 8 overlay and later approved standards supersede historical ChatGPT recipe versions. Drive remains canonical for operations and ChatGPT receives a read-optimised release.",
+    "alignmentRecord": "riviera_sources/current/Riviera_V15_2_Alignment_2026-08-29.md",
+    "driveRecipeSourceAdapter": {
+      "documentId": "14ARSDcPNUFvMfVTzcUbrd4-51BKdAdhiGBj-yRsBgxE",
+      "costingWorkbookId": "1gThBJ-dWytj-1iUjl4bSdZmgCU3bbxvP",
+      "menuBuilderId": "1k380sC6o0XJj6pZN_bMtDac5_ZgtOHvd4KwzKB0F3Q4",
+      "matchingRule": "Use an exact recipe title and ACTIVE service module. Do not merge similarly named dishes or transfer yields between service formats.",
+      "conflictState": "WAITING",
+      "promotionRule": "Do not change LOCKED recipes or promote candidates without exact source identity and explicit approval."
+    },
     "sourceOfTruth": "riviera_sources/current/Riviera_Source_Of_Truth_2026-07-08.md",
     "manifest": "riviera_sources/current/manifest.json",
     "overlay": "riviera_sources/current/Riviera_Tapas_House_Standards_Overlay_2026-07-08.md",
@@ -25592,5 +25601,5 @@
       }
     }
   ],
-  "releaseId": "RIV-KNOWLEDGE-2026-07-27-V13"
+  "releaseId": "RIV-KNOWLEDGE-V15.2"
 }

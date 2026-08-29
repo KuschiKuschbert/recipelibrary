@@ -1,12 +1,22 @@
 {
   "status": "active",
-  "date": "2026-07-27",
-  "releaseId": "RIV-KNOWLEDGE-2026-07-27-V13",
+  "date": "2026-08-29",
+  "releaseId": "RIV-KNOWLEDGE-V15.2",
   "mergeDirection": "GitHub is canonical for structured recipe data; the July 8 overlay and later approved standards supersede historical ChatGPT recipe versions. Drive remains canonical for operations and ChatGPT receives a read-optimised release.",
   "sourceOfTruth": "riviera_sources/current/Riviera_Source_Of_Truth_2026-07-08.md",
   "structuredRecipeCatalog": "riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json",
   "overlay": "riviera_sources/current/Riviera_Tapas_House_Standards_Overlay_2026-07-08.md",
   "currentHouseStandardsAdditions": "riviera_sources/current/Riviera_Current_House_Standards_Additions_2026-07-27.md",
+  "alignmentRecord": "riviera_sources/current/Riviera_V15_2_Alignment_2026-08-29.md",
+  "driveRelease": {
+    "status": "active",
+    "activeReleaseManifestId": "1gymFSa18m_CGVzm2aMBGQ5arA5OiQSNuVg6niLoF6lk",
+    "sourceMapId": "1mNd47CHbi704CqmZQeIt5WzykmVxW_TglNchQELYKv0",
+    "recipeSourceAdapterId": "14ARSDcPNUFvMfVTzcUbrd4-51BKdAdhiGBj-yRsBgxE",
+    "costingWorkbookId": "1gThBJ-dWytj-1iUjl4bSdZmgCU3bbxvP",
+    "menuBuilderId": "1k380sC6o0XJj6pZN_bMtDac5_ZgtOHvd4KwzKB0F3Q4",
+    "chatgptProjectRetrievalStatus": "PENDING"
+  },
   "chatgptSourceDir": "riviera_sources/chatgpt_project_sources_2026-07-08",
   "houseStandardOverlayRecipeIds": [
     "arancini",
