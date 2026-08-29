@@ -30,13 +30,13 @@ Recipe reconciliation uses exact recipe identity and the matching ACTIVE service
 
 `FEAST-001 v1.2` is represented as a locked package-specific operational standard:
 
-- selected shared-protein portions = `ceil(guest count × 4 ÷ 3)`;
-- 90 guests = 120 selected protein portions;
+- each selected protein target = `ceil(guest count × 4 ÷ 3)`;
+- 90 guests = 120 portions of each selected protein selection;
 - the uplift is applied once, with no additional standard 9% event buffer;
 - dietary alternatives are produced to the exact confirmed count outside the shared-protein total;
 - French green beans use 10 kg raw per 90 guests, equivalent to 1 kg per 9 guests.
 
-The planner recognises `Shared feast` as a distinct service style so it cannot silently fall back to the standard buffered buffet rule. Allocation of the shared-protein total across selected dishes still requires the confirmed menu selection.
+The planner recognises `Shared feast` as a distinct service style so it cannot silently fall back to the standard buffered buffet rule. Do not divide the guest count or FEAST target between selected proteins; every selected protein receives the full target.
 
 ## Publication And Verification
 

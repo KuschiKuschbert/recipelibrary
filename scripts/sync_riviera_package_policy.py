@@ -164,7 +164,7 @@ def feasting_scaling_rules() -> dict[str, Any]:
         "scope": "package-specific",
         "effectiveDate": "2026-08-29",
         "sourceRef": "FEAST-001 v1.2",
-        "selectedProteinPortions": {
+        "perSelectedProteinPortions": {
             "formula": "ceil(guestCount * 4 / 3)",
             "example": {"guestCount": 90, "portions": 120},
             "standardEventBufferAlreadyIncluded": True,
@@ -179,7 +179,7 @@ def feasting_scaling_rules() -> dict[str, Any]:
             "equivalent": "1 kg raw per 9 guests",
         },
         "displayLines": [
-            "Selected feasting proteins: total portions = guests × 4 ÷ 3, rounded up (90 guests = 120 portions).",
+            "Each selected feasting protein: portions = guests × 4 ÷ 3, rounded up (90 guests = 120 portions of each protein selection).",
             "That feasting uplift is applied once; do not add the standard 9% event buffer again.",
             "Dietary alternatives are produced to the exact confirmed count and sit outside the shared protein total.",
             "French green beans: 10 kg raw per 90 guests (1 kg per 9 guests).",
