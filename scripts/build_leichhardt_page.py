@@ -27,6 +27,7 @@ def render(data):
             )
         method = ''.join(f'<li>{esc(step)}</li>' for step in recipe['method'])
         points = ''.join(f'<li>{esc(point)}</li>' for point in recipe['key_points'])
+        plating_note = f'<p class="lc-description" style="padding: .75rem 1.4rem">{esc(recipe["plating_note"])}</p>' if recipe.get('plating_note') else ''
         cards.append(f'''
       <article class="lc-recipe" id="{esc(recipe['id'])}" aria-labelledby="{esc(recipe['id'])}-title">
         <div class="lc-recipe-heading">
@@ -38,6 +39,7 @@ def render(data):
         <svg class="lc-plating" viewBox="{esc(recipe['plating_viewbox'])}" role="img" aria-label="{esc(recipe['plating_alt'])}">
           <image href="{esc(data['plating_sheet'])}" width="1024" height="1536" />
         </svg>
+{plating_note}
         <details class="lc-details">
           <summary>Ingredients &amp; method<span class="lc-sr-only"> — {esc(recipe['name'])}</span></summary>
           <div class="lc-recipe-body">
@@ -74,7 +76,7 @@ def render(data):
   <main id="main" class="lc-shell">
     <header class="lc-header">
       <div><p class="lc-eyebrow">Kitchen recipes</p><h1>Leichhardt</h1></div>
-      <a class="lc-button" href="{esc(data['pdf'])}" download>Download one-page PDF</a>
+      <a class="lc-button" href="{esc(data['pdf'])}?v={esc(data.get('revision', 1))}" download>Download one-page PDF</a>
     </header>
     <nav class="lc-sections" aria-label="Leichhardt sections">
       <a href="#cook-off" aria-current="location">Cook Off</a>

@@ -2,6 +2,7 @@
   "venue": "Leichhardt",
   "collection": "Cook Off",
   "date": "2026-09-06",
+  "revision": 2,
   "source": "Daniel Kuschmierz's final trial-dishes sheet and agreed croquette-centre correction, 6 September 2026.",
   "pdf": "leichhardt_data/Leichhardt_Trial_Dishes_One_Page.pdf",
   "plating_sheet": "leichhardt_data/trial-dishes.png",
@@ -50,10 +51,11 @@
       "id": "eye-fillet",
       "name": "Eye Fillet",
       "subtitle": "Caramelised-Onion Potato Croquette",
-      "description": "Mushroom ragout, charred broccolini, roasted garlic-Parmesan butter and herb oil.",
+      "description": "Mushroom ragout, charred broccolini, roasted garlic-Parmesan butter, fried onion slices and herb oil.",
       "yield": "1 serve",
       "plating_viewbox": "520 225 504 414",
       "plating_alt": "Eye fillet with garlic-Parmesan butter, a golden potato croquette, mushroom ragout, charred broccolini and herb oil.",
+      "plating_note": "Plating reference: finish with the fried onion slices at service.",
       "components": [
         {"name": "Eye Fillet", "ingredients": [
           ["Eye fillet steak", "180 g"], ["Olive oil", "10 ml"], ["Salt", "2 g"], ["Black pepper", "1 g"]
@@ -76,20 +78,26 @@
         {"name": "Charred Broccolini", "ingredients": [
           ["Broccolini", "3–4 stems (60 g)"], ["Olive oil", "5 ml"], ["Salt and pepper", "To taste"]
         ]},
+        {"name": "Fried Onion Slices", "ingredients": [
+          ["Brown onion (peeled, thinly sliced)", "30 g"], ["Plain flour (for dusting)", "10 g"],
+          ["Neutral oil", "For frying"], ["Fine salt", "To taste"]
+        ]},
         {"name": "Jus (optional)", "ingredients": [["Beef or red-wine jus", "30 ml"]]},
         {"name": "Finishing", "ingredients": [["Herb oil", "5 ml"], ["Micro herbs", "To garnish"]]}
       ],
       "method": [
         "Mix cold mash with egg yolk and seasoning. Form a cylinder around the caramelised-onion centre. Coat in flour, beaten egg and breadcrumbs, then chill. Fry until golden and crisp.",
+        "For the fried onion garnish, cut onion into 1–2 mm rings or half-rings. Separate and pat dry. Dust lightly with flour and shake off excess. Fry in a small batch at 170°C for about 2–3 minutes, until golden and crisp. Drain well, season with fine salt and keep uncovered in a dry place until plating.",
         "Cook mushrooms, shallot and garlic in butter. Add cream, thyme and seasoning. Reduce to a ragout.",
         "Season eye fillet and sear in a hot pan to the desired doneness. Rest.",
         "Char broccolini in a hot pan with oil and season.",
         "Mix the roasted garlic-Parmesan butter ingredients, chill and slice a medallion.",
-        "Plate the mushroom ragout and place the steak on top with the butter. Add the croquette and broccolini. Finish with herb oil, micro herbs and jus if using."
+        "Plate the mushroom ragout and place the steak on top with the butter. Add the croquette and broccolini. Finish with herb oil, micro herbs and jus if using. Add a small nest of fried onion slices to the steak at the pass, keeping them clear of the ragout and jus so they stay crisp."
       ],
       "key_points": [
         "Keep the croquette cold before frying for a crisp exterior.",
         "Keep the caramelised onion inside the croquette.",
+        "Keep fried onion slices dry and uncovered; add them only at the pass.",
         "Rest the steak properly.",
         "Keep mushroom ragout rich but not too wet.",
         "Add the butter just before serving."
