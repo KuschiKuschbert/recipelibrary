@@ -38,6 +38,7 @@
   function _activePage() {
     const p = window.location.pathname;
     if (/riviera\.html/i.test(p))           return 'riviera';
+    if (/leichhardt\.html/i.test(p))        return 'leichhardt';
     if (/kitchen-book\.html/i.test(p))      return 'books';
     if (/pantry\.html/i.test(p))            return 'pantry';
     if (/flavor\.html/i.test(p))            return 'more';
@@ -146,6 +147,7 @@
     const items = [
       { key: 'library', href: _href('index.html'),         label: 'Library',  icon: ICONS.library },
       { key: 'riviera', href: _href('riviera.html'),        label: 'Riviera',  icon: ICONS.riviera },
+      { key: 'leichhardt', href: _href('leichhardt.html'), label: 'Leichhardt', icon: ICONS.riviera },
       { key: 'books',   href: '#books-sheet',               label: 'Books',    icon: ICONS.books   },
       { key: 'pantry',  href: _href('pantry.html'),         label: 'Pantry',   icon: ICONS.pantry  },
       { key: 'more',    href: '#more-sheet',                label: 'More',     icon: ICONS.more    },
@@ -249,6 +251,11 @@
   <span class="sheet-book-item__icon">${ICONS.riviera}</span>
   <span class="sheet-book-item__name">Riviera</span>
   <span class="sheet-book-item__sub">Prep chef set</span>
+</a>
+<a href="${_href('leichhardt.html')}" class="sheet-book-item">
+  <span class="sheet-book-item__icon">${ICONS.riviera}</span>
+  <span class="sheet-book-item__name">Leichhardt</span>
+  <span class="sheet-book-item__sub">Cook Off</span>
 </a>`;
 
     if (books.length) {

@@ -1,0 +1,99 @@
+{
+  "venue": "Leichhardt",
+  "collection": "Cook Off",
+  "date": "2026-09-06",
+  "source": "Daniel Kuschmierz's final trial-dishes sheet and agreed croquette-centre correction, 6 September 2026.",
+  "pdf": "leichhardt_data/Leichhardt_Trial_Dishes_One_Page.pdf",
+  "plating_sheet": "leichhardt_data/trial-dishes.png",
+  "recipes": [
+    {
+      "id": "crispy-skin-barramundi",
+      "name": "Crispy-Skin Barramundi",
+      "subtitle": "Brown-Rice Prawn Risotto",
+      "description": "Charred corn, peas, baby spinach, heirloom tomato, lemon and basil oil.",
+      "yield": "1 serve",
+      "plating_viewbox": "20 225 480 414",
+      "plating_alt": "Crispy-skin barramundi over prawn and brown-rice risotto, with blistered tomatoes, basil oil, micro herbs and lemon zest.",
+      "components": [
+        {"name": "Barramundi", "ingredients": [
+          ["Humpty Doo barramundi fillet (skin on)", "160–180 g"],
+          ["Olive oil", "10 ml"], ["Salt", "2 g"], ["Black pepper", "1 g"]
+        ]},
+        {"name": "Brown-Rice Risotto", "ingredients": [
+          ["Cooked brown rice (pre-cooked)", "120–140 g"],
+          ["Prawns (diced)", "2 each (40 g)"], ["Charred corn kernels", "30 g"],
+          ["Peas", "20–25 g"], ["Baby spinach", "15 g"],
+          ["Heirloom cherry tomatoes", "2 each (30 g)"],
+          ["Red onion (finely diced)", "15 g"], ["Garlic (minced)", "5 g"],
+          ["Parmesan (grated)", "15 g"], ["Butter", "15 g"],
+          ["Chicken or vegetable stock (hot)", "100–150 ml"], ["Salt and black pepper", "To taste"]
+        ]},
+        {"name": "Finishing", "ingredients": [
+          ["Lemon (zest and juice)", "½ lemon"], ["Basil oil", "5 ml"], ["Micro herbs", "To garnish"]
+        ]}
+      ],
+      "method": [
+        "Season barramundi with salt and pepper.",
+        "Cook skin-side down in a hot pan with oil until crispy, then finish in the oven or flip to cook through. Rest.",
+        "In a pan, sweat onion and garlic. Add cooked brown rice and hot stock; bring to the right consistency.",
+        "Add prawns, corn, peas and spinach. Finish with butter and Parmesan. Season to taste.",
+        "Halve and blister the cherry tomatoes.",
+        "Plate the risotto, top with barramundi skin-side up and arrange tomatoes. Finish with lemon, basil oil and micro herbs. Keep oil off the crisp skin."
+      ],
+      "key_points": [
+        "Use pre-cooked brown rice to save time.",
+        "Keep the risotto glossy and loose, not dry.",
+        "Do not overcook the fish."
+      ]
+    },
+    {
+      "id": "eye-fillet",
+      "name": "Eye Fillet",
+      "subtitle": "Caramelised-Onion Potato Croquette",
+      "description": "Mushroom ragout, charred broccolini, roasted garlic-Parmesan butter and herb oil.",
+      "yield": "1 serve",
+      "plating_viewbox": "520 225 504 414",
+      "plating_alt": "Eye fillet with garlic-Parmesan butter, a golden potato croquette, mushroom ragout, charred broccolini and herb oil.",
+      "components": [
+        {"name": "Eye Fillet", "ingredients": [
+          ["Eye fillet steak", "180 g"], ["Olive oil", "10 ml"], ["Salt", "2 g"], ["Black pepper", "1 g"]
+        ]},
+        {"name": "Caramelised-Onion Potato Croquette", "ingredients": [
+          ["Mashed potato (cold)", "125 g"], ["Caramelised onion (for the centre)", "20 g"],
+          ["Egg yolk", "1 each"], ["Plain flour", "15 g"], ["Beaten egg (for crumbing)", "As needed"],
+          ["Breadcrumbs", "30 g"], ["Salt and pepper", "To taste"], ["Oil", "For frying"]
+        ]},
+        {"name": "Mushroom Ragout", "ingredients": [
+          ["Mixed mushrooms (sliced)", "100 g"], ["Shallot (finely diced)", "15 g"],
+          ["Garlic (minced)", "5 g"], ["Butter", "10 g"], ["Cream", "30 ml"],
+          ["Thyme (if available)", "1 g"], ["Salt and black pepper", "To taste"]
+        ]},
+        {"name": "Roasted Garlic-Parmesan Butter", "ingredients": [
+          ["Unsalted butter (softened)", "25 g"], ["Roasted garlic (minced)", "5 g"],
+          ["Parmesan (grated)", "5 g"], ["Basil (finely chopped)", "2 g"],
+          ["Lemon zest", "1 g"], ["Salt and pepper", "To taste"]
+        ]},
+        {"name": "Charred Broccolini", "ingredients": [
+          ["Broccolini", "3–4 stems (60 g)"], ["Olive oil", "5 ml"], ["Salt and pepper", "To taste"]
+        ]},
+        {"name": "Jus (optional)", "ingredients": [["Beef or red-wine jus", "30 ml"]]},
+        {"name": "Finishing", "ingredients": [["Herb oil", "5 ml"], ["Micro herbs", "To garnish"]]}
+      ],
+      "method": [
+        "Mix cold mash with egg yolk and seasoning. Form a cylinder around the caramelised-onion centre. Coat in flour, beaten egg and breadcrumbs, then chill. Fry until golden and crisp.",
+        "Cook mushrooms, shallot and garlic in butter. Add cream, thyme and seasoning. Reduce to a ragout.",
+        "Season eye fillet and sear in a hot pan to the desired doneness. Rest.",
+        "Char broccolini in a hot pan with oil and season.",
+        "Mix the roasted garlic-Parmesan butter ingredients, chill and slice a medallion.",
+        "Plate the mushroom ragout and place the steak on top with the butter. Add the croquette and broccolini. Finish with herb oil, micro herbs and jus if using."
+      ],
+      "key_points": [
+        "Keep the croquette cold before frying for a crisp exterior.",
+        "Keep the caramelised onion inside the croquette.",
+        "Rest the steak properly.",
+        "Keep mushroom ragout rich but not too wet.",
+        "Add the butter just before serving."
+      ]
+    }
+  ]
+}

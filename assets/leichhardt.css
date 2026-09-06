@@ -1,0 +1,52 @@
+/* Leichhardt collection; shared colour and navigation tokens live in theme.css. */
+.leichhardt-page { margin: 0; background: var(--bg); color: var(--text); font-family: Inter, -apple-system, sans-serif; }
+.lc-shell { max-width: 1200px; margin: auto; padding: 2rem clamp(1rem, 3vw, 2.5rem) 3rem; }
+.lc-header, .lc-collection-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.lc-header { margin-bottom: 1.5rem; }
+.lc-eyebrow { color: var(--gold); font-size: .75rem; margin: 0 0 .6rem; font-weight: 600; }
+.lc-header h1, .lc-collection-heading h2, .lc-recipe h3 { font-family: 'Playfair Display', Georgia, serif; margin: 0; }
+.lc-header h1 { font-size: clamp(2.2rem, 5vw, 3.3rem); }
+.lc-button, .lc-sections a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: .65rem 1rem; border: 1px solid var(--gold); color: var(--gold); border-radius: .65rem; text-decoration: none; font-size: .875rem; }
+.lc-button:hover { background: var(--gold-dim); }
+.lc-sections { display: flex; gap: .75rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+.lc-sections a { background: var(--gold-dim); }
+.lc-collection-heading { padding: 1.75rem 0; }
+.lc-collection-heading h2 { font-size: 1.75rem; }
+.lc-collection-heading p, .lc-count { color: var(--text3); font-size: .875rem; }
+.lc-collection-heading p { margin: .45rem 0 0; }
+.lc-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; align-items: start; }
+.lc-recipe { min-width: 0; background: var(--bg2); border: 1px solid var(--border); border-radius: 1rem; overflow: hidden; scroll-margin-top: 1rem; }
+.lc-recipe-heading { padding: 1.4rem; min-height: 12rem; }
+.lc-recipe h3 { font-size: clamp(1.45rem, 2.3vw, 1.9rem); line-height: 1.25; }
+.lc-subtitle { font-size: .95rem; font-weight: 600; margin: .65rem 0; line-height: 1.5; }
+.lc-description { color: var(--text2); font-size: .875rem; line-height: 1.6; margin: 0; }
+.lc-plating { display: block; width: 100%; height: auto; overflow: hidden; background: white; }
+.lc-details summary { padding: 1.1rem 1.4rem; min-height: 48px; color: var(--gold); font-weight: 600; cursor: pointer; line-height: 1.5; }
+.lc-details[open] summary { border-bottom: 1px solid var(--border); }
+.lc-recipe-body { padding: .5rem 1.4rem 1.4rem; }
+.lc-recipe h4 { margin: 1.3rem 0 .8rem; font-size: 1.1rem; }
+.lc-ingredients { border-collapse: collapse; width: 100%; margin-bottom: 1.25rem; font-size: .875rem; line-height: 1.6; }
+.lc-ingredients caption { text-align: left; font-weight: 600; padding-bottom: .4rem; color: var(--gold); }
+.lc-ingredients th, .lc-ingredients td { border-bottom: 1px solid var(--border); padding: .5rem 0; vertical-align: top; }
+.lc-ingredients th { text-align: left; font-weight: 400; padding-right: 1rem; }
+.lc-ingredients td { text-align: right; width: 32%; color: var(--text2); }
+.lc-method, .lc-points { padding-left: 1.4rem; font-size: .95rem; line-height: 1.7; }
+.lc-method li, .lc-points li { padding-left: .25rem; margin-bottom: .65rem; }
+.lc-footer { padding-top: 2rem; color: var(--text3); font-size: .8rem; }
+.lc-footer a { color: var(--gold); display: inline-block; padding-block: .8rem; }
+.lc-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.lc-skip { position: fixed; top: -100px; left: 1rem; z-index: 10000; padding: 1rem; background: var(--bg); color: var(--gold); }
+.lc-skip:focus { top: 1rem; }
+.leichhardt-page :focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+@media (max-width: 700px) {
+  .lc-grid { grid-template-columns: 1fr; }
+  .lc-shell { padding-top: 1.5rem; }
+  .lc-recipe-heading { min-height: 0; }
+}
+@media print {
+  #appNavWrap, .lc-sections, .lc-button, .lc-skip { display: none !important; }
+  body.leichhardt-page { padding: 0 !important; background: white; color: black; }
+  .lc-shell { max-width: none; padding: 0; }
+  .lc-grid { grid-template-columns: 1fr; }
+  .lc-recipe { break-inside: avoid; background: white; }
+}

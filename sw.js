@@ -1,5 +1,5 @@
 'use strict';
-const CACHE_NAME = 'kuschi-kitchen-v251';
+const CACHE_NAME = 'kuschi-kitchen-v252';
 
 // Install shell: keep first-load precache focused on the main catalog.
 const SHELL_URLS = [
@@ -25,6 +25,10 @@ const SHELL_URLS = [
 
 // Secondary pages and feature helpers: cache on first use, but do not precache during startup.
 const RUNTIME_URLS = [
+  './leichhardt.html',
+  './assets/leichhardt.css',
+  './leichhardt_data/trial-dishes.png',
+  './leichhardt_data/Leichhardt_Trial_Dishes_One_Page.pdf',
   './riviera.html',
   './kitchen-book.html',
   './pantry.html',

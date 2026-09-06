@@ -16,6 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 CORE_PAGES = (
+    "leichhardt.html",
     "index.html",
     "riviera.html",
     "kitchen-book.html",
@@ -27,6 +28,7 @@ CORE_PAGES = (
 )
 
 CRITICAL_JSON = (
+    "leichhardt_data/cook_off.json",
     "alpha_catalog/manifest.json",
     "riviera_sources/current/Riviera_Recipe_Catalog_Source_Of_Truth_2026-07-08.json",
     "riviera_data/builtins.json",

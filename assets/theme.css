@@ -13727,3 +13727,8 @@ html.lenovo-tab-one-profile .ingredient-tool-status {
     color: #000;
   }
 }
+
+/* Six main destinations; keep the full venue name readable on narrow rails. */
+#appNav .nav-item { min-width: 0; }
+#appNav .nav-item[data-nav-key="leichhardt"] { padding-inline: 0; }
+#appNav [data-nav-key="leichhardt"] .nav-item__label { font-size: 10px; letter-spacing: 0; }

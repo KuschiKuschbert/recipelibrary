@@ -31,6 +31,10 @@ CRITICAL_SHELL = {
 }
 
 CRITICAL_RUNTIME = {
+    "./leichhardt.html",
+    "./assets/leichhardt.css",
+    "./leichhardt_data/trial-dishes.png",
+    "./leichhardt_data/Leichhardt_Trial_Dishes_One_Page.pdf",
     "./riviera.html",
     "./kitchen-book.html",
     "./pantry.html",
